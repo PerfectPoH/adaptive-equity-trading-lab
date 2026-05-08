@@ -98,6 +98,7 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 .\.venv-lab\Scripts\python.exe -m src.experiments.regime_filter_validation
 .\.venv-lab\Scripts\python.exe -m src.experiments.walk_forward_validation
 .\.venv-lab\Scripts\python.exe -m src.experiments.model_comparison
+.\.venv-lab\Scripts\python.exe -m src.experiments.feature_set_comparison
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
 
@@ -147,11 +148,23 @@ Model comparison:
 - runner: `src.experiments.model_comparison`;
 - modelli confrontati: `logistic_regression`, `random_forest`, `hist_gradient_boosting`;
 - min validation trades: 30, per evitare scelte su campioni minuscoli;
-- fold `wf_2023`: selezionato `random_forest`, raw threshold 0.45 -> test 2023 strategy return circa 7.64%;
-- fold `wf_2024`: selezionato `random_forest`, isotonic threshold 0.25 -> test 2024 strategy return circa 6.99%;
+- fold `wf_2023`: selezionato `baseline` + `random_forest`, raw threshold 0.45 -> test 2023 strategy return circa 7.64%;
+- fold `wf_2024`: selezionato `baseline` + `random_forest`, isotonic threshold 0.25 -> test 2024 strategy return circa 6.99%;
 - mean test strategy return circa 7.32%;
 - fold che battono buy-and-hold: 0/2;
 - decisione: non cambiare default modello; Random Forest resta default.
+
+Feature set comparison:
+
+- runner: `src.experiments.feature_set_comparison`;
+- feature set confrontati: `baseline`, `enhanced_context`;
+- enhanced context aggiunge momentum piu' lungo, slope EMA, range intraday, posizione nel range 20d, volume z-score, dollar-volume e contesto SPY;
+- min validation trades: 30;
+- fold `wf_2023`: selezionato `baseline`, raw threshold 0.45 -> test 2023 strategy return circa 7.64%;
+- fold `wf_2024`: selezionato `enhanced_context`, isotonic threshold 0.20 -> test 2024 strategy return circa 6.60%;
+- mean test strategy return circa 7.12%;
+- fold che battono buy-and-hold: 0/2;
+- decisione: non promuovere `enhanced_context`; nel fold 2024 viene scelto in validation ma peggiora il test rispetto al baseline default.
 
 Calibration:
 

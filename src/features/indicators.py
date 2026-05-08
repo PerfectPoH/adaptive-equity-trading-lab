@@ -45,6 +45,24 @@ def relative_volume(volume: pd.Series, window: int = 20) -> pd.Series:
     return volume / volume.rolling(window, min_periods=window).mean()
 
 
+def rolling_zscore(series: pd.Series, window: int = 20) -> pd.Series:
+    rolling_mean = series.rolling(window, min_periods=window).mean()
+    rolling_std = series.rolling(window, min_periods=window).std()
+    return (series - rolling_mean) / rolling_std.replace(0, np.nan)
+
+
 def distance_from_rolling_high(close: pd.Series, high: pd.Series, window: int = 20) -> pd.Series:
     rolling_high = high.rolling(window, min_periods=window).max()
     return (close / rolling_high) - 1
+
+
+def close_position_in_rolling_range(
+    close: pd.Series,
+    high: pd.Series,
+    low: pd.Series,
+    window: int = 20,
+) -> pd.Series:
+    rolling_high = high.rolling(window, min_periods=window).max()
+    rolling_low = low.rolling(window, min_periods=window).min()
+    range_width = (rolling_high - rolling_low).replace(0, np.nan)
+    return (close - rolling_low) / range_width

@@ -28,7 +28,7 @@ Implementazione MVP completata in prima versione.
 Risultato:
 
 ```text
-29 passed
+31 passed
 ```
 
 Pipeline:
@@ -78,6 +78,7 @@ Findings:
 - News ablation: `mixed_or_inconclusive`; no-news performa meglio nel backtest 2024 corrente.
 - Calibration: il modello raw e' overconfident; isotonic migliora Brier/errori e, con soglia 0.25, migliora strategy return.
 - Model comparison: Logistic Regression e HistGradientBoosting testati; Random Forest resta default sotto vincolo minimo di 30 trade validation.
+- Feature-set comparison: enhanced context testato; non promosso perche' il fold 2024 scende a circa 6.60% contro circa 6.99% del baseline default.
 - Trade-level: 140 trade chiusi, 73 win, 67 loss; nessun simbolo con media trade negativa.
 - Feature-regime: nessun bucket e' netto negativo; regimi piu' fragili legati a low rolling volatility, high distance-from-high e low calibrated probability.
 - Regime-filter validation: volume floor, pullback depth, ATR guard e combinato non battono il baseline per rendimento.

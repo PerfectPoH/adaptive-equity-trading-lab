@@ -153,7 +153,7 @@ hist_gradient_boosting
 Selection rule:
 
 ```text
-Choose model + probability variant + threshold on validation,
+Choose feature set + model + probability variant + threshold on validation,
 requiring at least 30 closed validation trades.
 Then evaluate only that selected combination on the next test year.
 ```
@@ -161,10 +161,10 @@ Then evaluate only that selected combination on the next test year.
 Latest result:
 
 ```text
-wf_2023 selected: random_forest raw threshold 0.45
+wf_2023 selected: baseline random_forest raw threshold 0.45
 wf_2023 test strategy return: ~7.64%
 
-wf_2024 selected: random_forest isotonic threshold 0.25
+wf_2024 selected: baseline random_forest isotonic threshold 0.25
 wf_2024 test strategy return: ~6.99%
 
 mean test strategy return: ~7.32%
@@ -176,6 +176,48 @@ Decision:
 ```text
 Keep random_forest as the default model.
 Do not promote hist_gradient_boosting yet; it did not win under the 30-trade validation floor.
+```
+
+## Feature Set Comparison
+
+```powershell
+.\.venv-lab\Scripts\python.exe -m src.experiments.feature_set_comparison
+```
+
+Outputs:
+
+```text
+experiments/feature_set_comparison_latest.json
+experiments/feature_set_comparison_latest.csv
+```
+
+Compared feature sets:
+
+```text
+baseline
+enhanced_context
+```
+
+Enhanced context adds longer momentum, EMA slopes, intraday range, close position in the 20-day range, volume z-score, dollar-volume context, and SPY context features. These columns are computed by the feature pipeline but are not part of the default training set.
+
+Latest result:
+
+```text
+wf_2023 selected: baseline raw threshold 0.45
+wf_2023 test strategy return: ~7.64%
+
+wf_2024 selected: enhanced_context isotonic threshold 0.20
+wf_2024 test strategy return: ~6.60%
+
+mean test strategy return: ~7.12%
+folds beating buy-and-hold: 0 / 2
+```
+
+Decision:
+
+```text
+Do not promote enhanced_context.
+It was selected on 2023 validation for the 2024 fold, but its 2024 test result was worse than the baseline default.
 ```
 
 ## Feature-Regime Analysis

@@ -22,43 +22,44 @@
     "random_forest"
   ],
   "feature_sets": [
-    "baseline"
+    "baseline",
+    "enhanced_context"
   ],
-  "min_validation_trades": 10,
+  "min_validation_trades": 30,
   "folds": [
     {
       "fold": "wf_2023",
       "selected_feature_set": "baseline",
       "selected_model_type": "random_forest",
       "selected_probability_variant": "raw",
-      "selected_threshold": 0.5,
-      "validation_strategy_return": -0.011589753805873102,
-      "validation_excess_return": 0.43091372519617394,
-      "validation_closed_trades": 14,
-      "test_strategy_return": 0.05532253831039587,
-      "test_excess_return": -0.9588343432957032,
-      "test_closed_trades": 71,
+      "selected_threshold": 0.45,
+      "validation_strategy_return": -0.018516474316181235,
+      "validation_excess_return": 0.4239870046858657,
+      "validation_closed_trades": 37,
+      "test_strategy_return": 0.07643523837830182,
+      "test_excess_return": -0.9377216432277973,
+      "test_closed_trades": 114,
       "test_beats_buy_and_hold": false
     },
     {
       "fold": "wf_2024",
-      "selected_feature_set": "baseline",
+      "selected_feature_set": "enhanced_context",
       "selected_model_type": "random_forest",
       "selected_probability_variant": "isotonic",
-      "selected_threshold": 0.25,
-      "validation_strategy_return": 0.09106203571155552,
-      "validation_excess_return": -0.9230948458945438,
+      "selected_threshold": 0.2,
+      "validation_strategy_return": 0.09121097835171679,
+      "validation_excess_return": -0.9229459032543824,
       "validation_closed_trades": 122,
-      "test_strategy_return": 0.06990964994883664,
-      "test_excess_return": -0.4105568949476752,
-      "test_closed_trades": 140,
+      "test_strategy_return": 0.06601767184754773,
+      "test_excess_return": -0.4144488730489641,
+      "test_closed_trades": 149,
       "test_beats_buy_and_hold": false
     }
   ],
   "summary": {
     "folds": 2,
-    "mean_test_strategy_return": 0.06261609412961626,
-    "mean_test_excess_return": -0.6846956191216892,
+    "mean_test_strategy_return": 0.07122645511292477,
+    "mean_test_excess_return": -0.6760852581383807,
     "folds_beating_buy_and_hold": 0,
     "verdict": "positive_but_under_benchmark"
   }

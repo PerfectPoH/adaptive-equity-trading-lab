@@ -64,7 +64,7 @@ Prossimi miglioramenti Milestone 1:
 - [x] Backtest threshold piu' ampio: 0.45-0.70 con selection su validation.
 - [ ] Valutare combined filters solo come modalita' risk-first dopo walk-forward.
 - [ ] Aggiungere fold walk-forward ulteriori quando ci saranno piu' anni/dati migliori.
-- [ ] Feature upgrade controllato dopo model comparison.
+- [x] Feature upgrade controllato dopo model comparison: enhanced context testato, non promosso.
 - [ ] Notebook `04_backtest_analysis.ipynb`.
 - [ ] Soglie scanner e modello versionate.
 

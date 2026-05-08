@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-from src.features.feature_pipeline import build_features
+from src.features.feature_pipeline import ENHANCED_FEATURE_COLUMNS, FEATURE_COLUMNS, build_features
 
 
 def make_price_frame(rows: int = 80) -> pd.DataFrame:
@@ -30,7 +30,19 @@ def test_feature_pipeline_is_point_in_time_when_future_changes() -> None:
     original_features = build_features(original)
     mutated_features = build_features(mutated)
 
-    columns = ["ema_20_ratio", "ema_50_ratio", "atr", "relative_volume_20d", "distance_from_20d_high"]
+    columns = [
+        "ema_20_ratio",
+        "ema_50_ratio",
+        "atr",
+        "relative_volume_20d",
+        "distance_from_20d_high",
+        "rolling_return_20d",
+        "ema_20_slope_5d",
+        "close_position_20d_range",
+        "volume_zscore_20d",
+        "spy_return_5d",
+        "spy_rolling_volatility_20d",
+    ]
     pd.testing.assert_frame_equal(
         original_features.loc[:cutoff, columns],
         mutated_features.loc[:cutoff, columns],
@@ -38,3 +50,9 @@ def test_feature_pipeline_is_point_in_time_when_future_changes() -> None:
         rtol=1e-12,
         atol=1e-12,
     )
+
+
+def test_enhanced_feature_columns_extend_baseline_without_changing_default() -> None:
+    assert "rolling_return_20d" not in FEATURE_COLUMNS
+    assert "rolling_return_20d" in ENHANCED_FEATURE_COLUMNS
+    assert set(FEATURE_COLUMNS).issubset(ENHANCED_FEATURE_COLUMNS)

@@ -23,10 +23,14 @@
     "random_forest",
     "hist_gradient_boosting"
   ],
+  "feature_sets": [
+    "baseline"
+  ],
   "min_validation_trades": 30,
   "folds": [
     {
       "fold": "wf_2023",
+      "selected_feature_set": "baseline",
       "selected_model_type": "random_forest",
       "selected_probability_variant": "raw",
       "selected_threshold": 0.45,
@@ -40,6 +44,7 @@
     },
     {
       "fold": "wf_2024",
+      "selected_feature_set": "baseline",
       "selected_model_type": "random_forest",
       "selected_probability_variant": "isotonic",
       "selected_threshold": 0.25,
