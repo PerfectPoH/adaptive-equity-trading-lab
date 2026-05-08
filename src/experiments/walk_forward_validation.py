@@ -30,6 +30,23 @@ DEFAULT_FEATURE_SETS = {"baseline": FEATURE_COLUMNS}
 
 
 @dataclass(frozen=True)
+class ModelConfig:
+    name: str
+    model_type: str
+    model_params: dict[str, Any] | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "name": self.name,
+            "model_type": self.model_type,
+            "model_params": self.model_params or {},
+        }
+
+
+DEFAULT_MODEL_CONFIGS = tuple(ModelConfig(name=model_type, model_type=model_type) for model_type in DEFAULT_MODEL_TYPES)
+
+
+@dataclass(frozen=True)
 class ModelObjectiveConfig:
     name: str
     label_column: str = "label"
@@ -125,6 +142,7 @@ def run_walk_forward_validation(
     thresholds: tuple[float, ...] = THRESHOLDS,
     calibrated_thresholds: tuple[float, ...] = CALIBRATED_THRESHOLDS,
     model_types: tuple[str, ...] = DEFAULT_MODEL_TYPES,
+    model_configs: tuple[ModelConfig, ...] | None = None,
     model_objective_configs: tuple[ModelObjectiveConfig, ...] = DEFAULT_MODEL_OBJECTIVE_CONFIGS,
     feature_sets: dict[str, list[str]] | None = None,
     target_exit_configs: tuple[TargetExitConfig, ...] = DEFAULT_TARGET_EXIT_CONFIGS,
@@ -137,12 +155,13 @@ def run_walk_forward_validation(
     output_csv: Path = OUTPUT_CSV,
 ) -> dict[str, Any]:
     feature_sets = feature_sets or DEFAULT_FEATURE_SETS
+    active_model_configs = model_configs or tuple(ModelConfig(name=model_type, model_type=model_type) for model_type in model_types)
     prepared_by_target = _prepare_frames(target_exit_configs)
 
     rows: list[dict[str, Any]] = []
     fold_summaries: list[dict[str, Any]] = []
     for fold in FOLDS:
-        frames_by_variant: dict[tuple[str, str, str, str, str], dict[str, pd.DataFrame]] = {}
+        frames_by_variant: dict[tuple[str, str, str, str, str, str], dict[str, pd.DataFrame]] = {}
         validation_rows = []
         for target_config in target_exit_configs:
             prepared = prepared_by_target[target_config.name]
@@ -160,9 +179,14 @@ def run_walk_forward_validation(
                 )
 
                 for feature_set_name, feature_columns in feature_sets.items():
-                    for model_type in model_types:
+                    for model_config in active_model_configs:
                         try:
-                            model = fit_model(train, model_type=model_type, feature_columns=feature_columns)
+                            model = fit_model(
+                                train,
+                                model_type=model_config.model_type,
+                                model_params=model_config.model_params,
+                                feature_columns=feature_columns,
+                            )
                         except ValueError:
                             continue
                         probability_models = {"raw": model}
@@ -177,7 +201,14 @@ def run_walk_forward_validation(
                             except ValueError:
                                 pass
                         model_frames = {
-                            (target_config.name, objective_config.name, feature_set_name, model_type, variant): {
+                            (
+                                target_config.name,
+                                objective_config.name,
+                                feature_set_name,
+                                model_config.name,
+                                model_config.model_type,
+                                variant,
+                            ): {
                                 symbol: add_model_probabilities(
                                     frame,
                                     probability_model,
@@ -193,6 +224,7 @@ def run_walk_forward_validation(
                             candidate_target_exit_config,
                             candidate_model_objective,
                             candidate_feature_set,
+                            candidate_model_config,
                             candidate_model_type,
                             variant,
                         ), frames_with_probabilities in model_frames.items():
@@ -206,6 +238,7 @@ def run_walk_forward_validation(
                                     timeout_bars=target_config.timeout_bars,
                                     model_objective_config=candidate_model_objective,
                                     feature_set=candidate_feature_set,
+                                    model_config=candidate_model_config,
                                     model_type=candidate_model_type,
                                     probability_variant=variant,
                                     signal_quality_config=quality_config.name,
@@ -247,6 +280,7 @@ def run_walk_forward_validation(
                     str(selected["target_exit_config"]),
                     str(selected["model_objective_config"]),
                     str(selected["feature_set"]),
+                    str(selected["model_config"]),
                     str(selected["model_type"]),
                     str(selected["probability_variant"]),
                 )
@@ -257,6 +291,7 @@ def run_walk_forward_validation(
             timeout_bars=selected_target_config.timeout_bars,
             model_objective_config=str(selected["model_objective_config"]),
             feature_set=str(selected["feature_set"]),
+            model_config=str(selected["model_config"]),
             model_type=str(selected["model_type"]),
             probability_variant=str(selected["probability_variant"]),
             signal_quality_config=str(selected["signal_quality_config"]),
@@ -277,6 +312,7 @@ def run_walk_forward_validation(
                 row["target_exit_config"] == selected["target_exit_config"]
                 and row["model_objective_config"] == selected["model_objective_config"]
                 and row["feature_set"] == selected["feature_set"]
+                and row["model_config"] == selected["model_config"]
                 and row["model_type"] == selected["model_type"]
                 and row["probability_variant"] == selected["probability_variant"]
                 and row["signal_quality_config"] == selected["signal_quality_config"]
@@ -292,6 +328,7 @@ def run_walk_forward_validation(
                 "selected_target_exit_config": str(selected["target_exit_config"]),
                 "selected_model_objective_config": str(selected["model_objective_config"]),
                 "selected_feature_set": str(selected["feature_set"]),
+                "selected_model_config": str(selected["model_config"]),
                 "selected_model_type": str(selected["model_type"]),
                 "selected_probability_variant": str(selected["probability_variant"]),
                 "selected_signal_quality_config": str(selected["signal_quality_config"]),
@@ -315,7 +352,8 @@ def run_walk_forward_validation(
             "raw": list(thresholds),
             "isotonic": list(calibrated_thresholds) if include_calibrated else [],
         },
-        "model_types": list(model_types),
+        "model_types": list(dict.fromkeys(config.model_type for config in active_model_configs)),
+        "model_configs": [config.to_dict() for config in active_model_configs],
         "model_objective_configs": [asdict(config) for config in model_objective_configs],
         "feature_sets": list(feature_sets.keys()),
         "target_exit_configs": [asdict(config) for config in target_exit_configs],
@@ -423,6 +461,7 @@ def _evaluate_threshold(
     timeout_bars: int,
     model_objective_config: str,
     feature_set: str,
+    model_config: str,
     model_type: str,
     probability_variant: str,
     signal_quality_config: str,
@@ -502,6 +541,7 @@ def _evaluate_threshold(
         "target_exit_config": target_exit_config,
         "model_objective_config": model_objective_config,
         "feature_set": feature_set,
+        "model_config": model_config,
         "model_type": model_type,
         "probability_variant": probability_variant,
         "signal_quality_config": signal_quality_config,

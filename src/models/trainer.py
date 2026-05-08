@@ -81,9 +81,11 @@ def training_rows(frame: pd.DataFrame, feature_columns: list[str] | None = None)
     return data.dropna(subset=[col for col in needed if col in data.columns], how="all")
 
 
-def build_model(model_type: str = "random_forest") -> Pipeline:
+def build_model(model_type: str = "random_forest", model_params: dict[str, Any] | None = None) -> Pipeline:
+    overrides = model_params or {}
     if model_type == "logistic_regression":
-        model = LogisticRegression(max_iter=1000, class_weight="balanced", random_state=42)
+        params = {"max_iter": 1000, "class_weight": "balanced", "random_state": 42, **overrides}
+        model = LogisticRegression(**params)
         return Pipeline(
             [
                 ("imputer", SimpleImputer(strategy="median")),
@@ -93,14 +95,16 @@ def build_model(model_type: str = "random_forest") -> Pipeline:
         )
 
     if model_type == "random_forest":
-        model = RandomForestClassifier(
-            n_estimators=200,
-            max_depth=6,
-            min_samples_leaf=20,
-            class_weight="balanced_subsample",
-            random_state=42,
-            n_jobs=-1,
-        )
+        params = {
+            "n_estimators": 200,
+            "max_depth": 6,
+            "min_samples_leaf": 20,
+            "class_weight": "balanced_subsample",
+            "random_state": 42,
+            "n_jobs": -1,
+            **overrides,
+        }
+        model = RandomForestClassifier(**params)
         return Pipeline(
             [
                 ("imputer", SimpleImputer(strategy="median")),
@@ -109,15 +113,17 @@ def build_model(model_type: str = "random_forest") -> Pipeline:
         )
 
     if model_type == "hist_gradient_boosting":
-        model = HistGradientBoostingClassifier(
-            max_iter=250,
-            learning_rate=0.04,
-            max_leaf_nodes=15,
-            min_samples_leaf=30,
-            l2_regularization=0.05,
-            class_weight="balanced",
-            random_state=42,
-        )
+        params = {
+            "max_iter": 250,
+            "learning_rate": 0.04,
+            "max_leaf_nodes": 15,
+            "min_samples_leaf": 30,
+            "l2_regularization": 0.05,
+            "class_weight": "balanced",
+            "random_state": 42,
+            **overrides,
+        }
+        model = HistGradientBoostingClassifier(**params)
         return Pipeline(
             [
                 ("imputer", SimpleImputer(strategy="median")),
@@ -132,6 +138,7 @@ def fit_model(
     train: pd.DataFrame,
     feature_columns: list[str] | None = None,
     model_type: str = "random_forest",
+    model_params: dict[str, Any] | None = None,
 ) -> Pipeline:
     features = feature_columns or FEATURE_COLUMNS
     rows = training_rows(train, features)
@@ -140,7 +147,7 @@ def fit_model(
     if rows["label"].nunique() < 2:
         raise ValueError("Training requires both positive and negative labels")
 
-    model = build_model(model_type)
+    model = build_model(model_type, model_params=model_params)
     x_train = rows[features].apply(pd.to_numeric, errors="coerce").replace({pd.NA: np.nan})
     model.fit(x_train, rows["label"].astype(int))
     return model
