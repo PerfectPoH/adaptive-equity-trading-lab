@@ -97,24 +97,28 @@ class WalkForwardFold:
     test_end: str
 
 
-FOLDS = (
-    WalkForwardFold(
-        name="wf_2023",
-        train_end="2021-12-31",
-        validation_start="2022-01-01",
-        validation_end="2022-12-31",
-        test_start="2023-01-01",
-        test_end="2023-12-31",
-    ),
-    WalkForwardFold(
-        name="wf_2024",
-        train_end="2022-12-31",
-        validation_start="2023-01-01",
-        validation_end="2023-12-31",
-        test_start="2024-01-01",
-        test_end="2024-12-31",
-    ),
-)
+def build_annual_walk_forward_folds(
+    first_validation_year: int,
+    last_test_year: int,
+) -> tuple[WalkForwardFold, ...]:
+    if last_test_year <= first_validation_year:
+        raise ValueError("last_test_year must be after first_validation_year")
+    return tuple(
+        WalkForwardFold(
+            name=f"wf_{test_year}",
+            train_end=f"{validation_year - 1}-12-31",
+            validation_start=f"{validation_year}-01-01",
+            validation_end=f"{validation_year}-12-31",
+            test_start=f"{test_year}-01-01",
+            test_end=f"{test_year}-12-31",
+        )
+        for validation_year, test_year in (
+            (year, year + 1) for year in range(first_validation_year, last_test_year)
+        )
+    )
+
+
+FOLDS = build_annual_walk_forward_folds(first_validation_year=2022, last_test_year=2024)
 
 
 def run_walk_forward_validation(
