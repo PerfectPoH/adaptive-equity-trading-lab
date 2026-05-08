@@ -21,6 +21,7 @@ from src.features.feature_pipeline import build_features
 from src.models.calibrator import fit_probability_calibrator
 from src.models.label_builder import build_trade_labels
 from src.models.predictor import add_model_probabilities
+from src.models.registry import register_model_artifact
 from src.models.trainer import evaluate_classifier, fit_model, temporal_split
 from src.news.gdelt_doc import load_or_download_market_news
 from src.risk.market_exposure import DEFAULT_MARKET_EXPOSURE_CONFIG, MarketExposureConfig, add_market_exposure_columns
@@ -39,6 +40,7 @@ DEFAULT_CALIBRATION_METHOD = "isotonic"
 DEFAULT_MIN_MODEL_PROBABILITY = 0.25
 RUNS_DIR = Path("experiments/runs")
 LOG_PATH = Path("experiments/log.csv")
+MODEL_REGISTRY_PATH = Path("experiments/model_registry.csv")
 
 
 def run_milestone_1(
@@ -90,6 +92,29 @@ def run_milestone_1(
     test_metrics = evaluate_classifier(probability_model, split.test)
     model_path = run_dir / "model.joblib"
     joblib.dump(probability_model, model_path)
+    model_metadata_path = register_model_artifact(
+        run_id=run_id,
+        model_path=model_path,
+        registry_path=MODEL_REGISTRY_PATH,
+        model_type=model_type,
+        calibration_method=calibration_method or "raw",
+        min_model_probability=min_model_probability,
+        feature_set="baseline",
+        train_period="2020-2022",
+        validation_period="2023",
+        test_period="2024",
+        params={
+            "use_news": use_news,
+            "min_scanner_score": min_scanner_score,
+            "max_gap_threshold": MAX_GAP_THRESHOLD,
+        },
+        metrics={
+            "raw_validation_metrics": raw_validation_metrics,
+            "raw_test_metrics": raw_test_metrics,
+            "validation_metrics": validation_metrics,
+            "test_metrics": test_metrics,
+        },
+    )
 
     signaled_frames: list[pd.DataFrame] = []
     processed_frames: list[pd.DataFrame] = []
@@ -232,6 +257,8 @@ def run_milestone_1(
             {
                 "run_id": run_id,
                 "model_path": str(model_path),
+                "model_metadata_path": str(model_metadata_path),
+                "model_registry_path": str(MODEL_REGISTRY_PATH),
                 "signal_config": {
                     "model_type": model_type,
                     "min_scanner_score": min_scanner_score,

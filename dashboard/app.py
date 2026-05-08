@@ -14,6 +14,7 @@ st.caption("Milestone 1 research dashboard. Results are prototype-only, not trad
 
 RUNS_DIR = Path("experiments/runs")
 LOG_PATH = Path("experiments/log.csv")
+MODEL_REGISTRY_PATH = Path("experiments/model_registry.csv")
 NEWS_ABLATION_PATH = Path("experiments/news_ablation_latest.csv")
 THRESHOLD_VALIDATION_PATH = Path("experiments/threshold_validation_latest.csv")
 CALIBRATION_COMPARISON_PATH = Path("experiments/calibration_comparison_latest.csv")
@@ -41,6 +42,11 @@ if LOG_PATH.exists():
     st.dataframe(log.tail(20), use_container_width=True)
 else:
     st.info("No experiment log yet. Run `python -m src.pipeline` first.")
+
+if MODEL_REGISTRY_PATH.exists():
+    st.subheader("Model Registry")
+    registry = pd.read_csv(MODEL_REGISTRY_PATH)
+    st.dataframe(registry.tail(20), use_container_width=True)
 
 if (
     NEWS_ABLATION_PATH.exists()

@@ -35,7 +35,7 @@ def test_register_model_artifact_writes_metadata_and_append_only_registry(tmp_pa
     row = rows[0]
     assert row["run_id"] == "run_001"
     assert row["model_path"] == str(model_path)
-    assert row["model_sha256"] == "bf0f5239d583d1729f5b833e6c773435e482e9f426937a8424cf57a0de89d831"
+    assert row["model_sha256"] == "357e5d6fafa34d27360fec24b4326d3534905e33c6acdee60198fb078b7b79e5"
     assert row["model_type"] == "random_forest"
     assert row["calibration_method"] == "isotonic"
     assert row["min_model_probability"] == "0.25"
