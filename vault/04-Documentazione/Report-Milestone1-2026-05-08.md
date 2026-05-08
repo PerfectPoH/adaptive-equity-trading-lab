@@ -37,20 +37,40 @@ Pipeline:
 .\.venv-lab\Scripts\python.exe -m src.pipeline
 ```
 
-Run principale:
+Run principale aggiornato:
 
 ```text
-20260508_164751
+20260508_170918
 ```
 
 ## Risultati backtest
 
 ```text
-strategy_return:       circa 0.5%
+strategy_return:       circa 0.29%
 buy_and_hold_return:   circa 48.0%
-excess_return:         circa -47.5%
+excess_return:         circa -47.8%
 beats_buy_and_hold:    false
 ```
+
+## Analisi del run
+
+```text
+symbols_analyzed:          10
+total_signals:             29
+total_executable_signals:  29
+total_skipped_signals:     0
+symbols_with_signals:      2
+symbols_with_trades:       2
+underperforming_symbols:   9
+outperforming_symbols:     1
+```
+
+Findings:
+
+- 9 simboli su 10 sottoperformano buy-and-hold.
+- I segnali sono concentrati in 2 simboli su 10.
+- NVDA produce la maggior parte dei segnali, ma resta sotto-esposta rispetto al trend enorme del 2024.
+- TSLA produce pochi segnali e ritorno negativo.
 
 ## Interpretazione
 
@@ -61,6 +81,7 @@ La pipeline funziona, ma la strategia baseline non e' competitiva. Questo e' un 
 - Dati `yfinance`, quindi non point-in-time.
 - Survivorship bias presente.
 - backtesting.py non e' un simulatore execution realistico.
+- Alcuni SL/TP su daily OHLC sono ambigui nella stessa candela dell'ingresso.
 - Nessun news filter.
 - Nessun walk-forward tuning.
 - Nessuna calibration.

@@ -16,8 +16,9 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 ### RISK-001 - Baseline non batte buy-and-hold
 
 - Priorita: P2.
-- Sintomo: il primo run 2024 produce circa 0.5% medio contro circa 48% buy-and-hold.
-- Causa probabile: filtri e soglie MVP troppo semplici; modello baseline non ancora calibrato; mercato 2024 molto forte per large-cap tech.
+- Sintomo: il run `20260508_170918` produce circa 0.29% medio contro circa 48% buy-and-hold.
+- Dettaglio: 29 segnali totali, concentrati in 2 simboli su 10; 9 simboli sotto benchmark.
+- Causa probabile: filtri e soglie MVP troppo selettivi; modello baseline non ancora calibrato; mercato 2024 molto forte per large-cap tech.
 - Azione: error analysis in Milestone 2.
 - Stato: aperto, documentato.
 
@@ -44,6 +45,14 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: mantenere `max_gap_threshold`, loggare skip e analizzare.
 - Stato: parzialmente mitigato.
 
+### RISK-005 - Ambiguita' daily OHLC su SL/TP nella stessa candela
+
+- Priorita: P2.
+- Sintomo: `backtesting.py` segnala che alcuni contingent SL/TP possono essere colpiti nella stessa barra daily dell'ingresso.
+- Impatto: con dati daily non conosciamo l'ordine intraday degli eventi; alcune metriche possono essere ottimistiche o pessimistiche.
+- Azione: documentare limite; in Milestone 6 passare a event-driven/intraday data prima del live serio.
+- Stato: limite noto.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
@@ -56,9 +65,9 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 ### TECH-DEBT-002 - Dashboard minima
 
 - Priorita: P3.
-- Sintomo: dashboard utile ma basica.
-- Azione: aggiungere equity curve aggregata, grafico drawdown e pannello warning piu' chiaro.
-- Stato: aperto.
+- Sintomo: dashboard utile ma ancora semplice.
+- Azione: equity curve aggregata e diagnosi per simbolo aggiunte; resta da migliorare drawdown e warning UX.
+- Stato: parzialmente risolto.
 
 ### TECH-DEBT-003 - Experiment log ancora semplice
 

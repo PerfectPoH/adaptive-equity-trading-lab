@@ -81,6 +81,8 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 - Dashboard minima.
 - Fallimento rispetto a buy-and-hold documentato invece di nascosto.
 - Vault separato e pulito, non copiato dal progetto Soresina.
+- Test anti-shift su `backtesting.py`: il trade deve entrare al next open.
+- Analisi per-run: distinguere strategia scarsa da strategia troppo selettiva.
 
 ## Comandi stabili
 
@@ -89,6 +91,17 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 .\.venv-lab\Scripts\python.exe -m src.pipeline
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
+
+## Risultato importante 2026-05-08
+
+Run `20260508_170918`:
+
+- 29 segnali totali nel 2024;
+- segnali concentrati in 2 simboli su 10;
+- 9 simboli su 10 sotto buy-and-hold;
+- media strategia circa 0.29%;
+- buy-and-hold medio circa 48%;
+- diagnosi: la baseline e' troppo selettiva e sotto-esposta al forte uptrend 2024.
 
 ## Convenzioni Vault
 

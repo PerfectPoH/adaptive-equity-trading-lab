@@ -3,6 +3,7 @@ from __future__ import annotations
 import pandas as pd
 
 from src.backtest.execution import add_execution_columns, planned_trade_for_signal
+from src.backtest.runner import run_backtest
 from src.models.label_builder import build_trade_labels
 
 
@@ -29,3 +30,29 @@ def test_signal_on_bar_two_executes_on_bar_three_next_open() -> None:
     assert plan["entry_date"] == idx[3]
     assert plan["entry_price"] == 103
     assert plan["position_size"] > 0
+
+
+def test_backtest_fills_precomputed_signal_at_next_open() -> None:
+    idx = pd.bdate_range("2024-01-01", periods=8)
+    frame = pd.DataFrame(
+        {
+            "Open": [100, 101, 150, 151, 152, 153, 154, 155],
+            "High": [101, 102, 151, 160, 161, 162, 163, 164],
+            "Low": [99, 100, 149, 150, 151, 152, 153, 154],
+            "Close": [100, 101, 149, 151, 152, 153, 154, 155],
+            "Volume": [1_000_000] * 8,
+            "atr": [2] * 8,
+            "signal": [False, True, False, False, False, False, False, False],
+        },
+        index=idx,
+    )
+
+    labeled = build_trade_labels(frame, max_gap_threshold=1.0)
+    executed = add_execution_columns(labeled, equity=100_000, max_gap_threshold=1.0)
+    stats, _summary = run_backtest(executed)
+    trades = stats["_trades"]
+
+    assert len(trades) == 1
+    assert int(trades.iloc[0]["EntryBar"]) == 2
+    assert trades.iloc[0]["EntryTime"] == idx[2]
+    assert trades.iloc[0]["EntryPrice"] == 150

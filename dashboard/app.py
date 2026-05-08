@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pandas as pd
@@ -36,6 +37,21 @@ st.subheader(f"Latest Run: {run_dir.name}")
 
 backtests_path = run_dir / "backtests.csv"
 signals_path = run_dir / "signals.csv"
+equity_path = run_dir / "equity_curves.csv"
+analysis_path = run_dir / "analysis.csv"
+analysis_summary_path = run_dir / "analysis_summary.json"
+
+if analysis_summary_path.exists():
+    summary = json.loads(analysis_summary_path.read_text(encoding="utf-8"))
+    st.subheader("Run Analysis")
+    c1, c2, c3, c4, c5 = st.columns(5)
+    c1.metric("Signals", summary.get("total_signals", 0))
+    c2.metric("Executable", summary.get("total_executable_signals", 0))
+    c3.metric("Symbols w/ Trades", summary.get("symbols_with_trades", 0))
+    c4.metric("Skipped", summary.get("total_skipped_signals", 0))
+    c5.metric("Underperformers", summary.get("underperforming_symbols", 0))
+    for finding in summary.get("primary_findings", []):
+        st.write(f"- {finding}")
 
 if backtests_path.exists():
     backtests = pd.read_csv(backtests_path)
@@ -51,6 +67,26 @@ if backtests_path.exists():
         )
         fig = px.bar(melted, x="symbol", y="return", color="series", barmode="group")
         st.plotly_chart(fig, use_container_width=True)
+
+if equity_path.exists():
+    equity = pd.read_csv(equity_path, parse_dates=["Date"])
+    if not equity.empty and {"Date", "symbol", "normalized_equity"}.issubset(equity.columns):
+        st.subheader("Normalized Equity Curves")
+        pivot = equity.pivot_table(index="Date", columns="symbol", values="normalized_equity")
+        aggregate = pivot.mean(axis=1).rename("equal_weight_strategy")
+        aggregate_frame = aggregate.reset_index()
+        fig = px.line(aggregate_frame, x="Date", y="equal_weight_strategy")
+        st.plotly_chart(fig, use_container_width=True)
+
+        with st.expander("Per-symbol equity curves"):
+            long_equity = pivot.reset_index().melt(id_vars="Date", var_name="symbol", value_name="normalized_equity")
+            fig = px.line(long_equity, x="Date", y="normalized_equity", color="symbol")
+            st.plotly_chart(fig, use_container_width=True)
+
+if analysis_path.exists():
+    analysis = pd.read_csv(analysis_path)
+    st.subheader("Per-Symbol Diagnosis")
+    st.dataframe(analysis, use_container_width=True)
 
 if signals_path.exists():
     signals = pd.read_csv(signals_path)

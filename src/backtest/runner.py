@@ -23,12 +23,15 @@ class PrecomputedSignalStrategy(Strategy):
         if size <= 0:
             return
 
+        entry_price = float(self.data.entry_price[-1])
         stop_loss = float(self.data.stop_loss[-1])
         take_profit = float(self.data.take_profit[-1])
-        if not stop_loss < float(self.data.entry_price[-1]) < take_profit:
+        if not stop_loss < entry_price < take_profit:
             return
 
-        self.buy(size=size, sl=stop_loss, tp=take_profit)
+        # Use the precomputed next-open entry as a marketable limit so
+        # backtesting.py validates contingent exits against the intended fill.
+        self.buy(size=size, limit=entry_price, sl=stop_loss, tp=take_profit)
 
 
 def run_backtest(
@@ -36,7 +39,19 @@ def run_backtest(
     cash: float = 100_000,
     commission: float = 0.001,
 ) -> tuple[pd.Series, dict[str, float | bool]]:
-    required = ["Open", "High", "Low", "Close", "Volume", "signal", "execution_valid", "position_size"]
+    required = [
+        "Open",
+        "High",
+        "Low",
+        "Close",
+        "Volume",
+        "signal",
+        "execution_valid",
+        "position_size",
+        "entry_price",
+        "stop_loss",
+        "take_profit",
+    ]
     missing = [col for col in required if col not in frame.columns]
     if missing:
         raise ValueError(f"Backtest frame missing columns: {missing}")

@@ -23,6 +23,8 @@ Live small != scaling
 - Logistic Regression / Random Forest baseline.
 - Precomputed signal columns.
 - Backtest with execution rules, slippage, commissions, and gap skips.
+- Per-run analysis for signal concentration, skipped trades, and benchmark underperformance.
+- Normalized equity curve export.
 - Experiment log.
 - Streamlit dashboard.
 - Anti-lookahead tests.

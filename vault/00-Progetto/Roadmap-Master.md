@@ -32,10 +32,11 @@ Definition of Done:
 
 Prossimi miglioramenti Milestone 1:
 
-- [ ] Rafforzare test anti-shift su backtesting.py.
-- [ ] Aggiungere grafico equity curve aggregata nella dashboard.
+- [x] Rafforzare test anti-shift su backtesting.py.
+- [x] Aggiungere grafico equity curve aggregata nella dashboard.
 - [ ] Ripulire o archiviare `.venv` parziale se Windows lo libera.
-- [ ] Documentare meglio perche' la prima baseline non batte buy-and-hold.
+- [x] Documentare meglio perche' la prima baseline non batte buy-and-hold.
+- [x] Aggiungere analisi per simbolo: segnali, trade, skip, diagnosi.
 
 ## Milestone 2 - Research Validation
 

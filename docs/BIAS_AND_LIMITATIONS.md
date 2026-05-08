@@ -26,3 +26,7 @@ Known limitations:
 ## Execution Limitations
 
 The MVP uses next-open execution with simple slippage and commissions. This is more realistic than same-close entry, but still far from live-market execution.
+
+`backtesting.py` is used as a prototyping engine. The strategy passes a precomputed next-open entry price as a limit order so the framework validates stop-loss and take-profit levels against the intended entry price, not the previous close. This is a simulation convenience, not a live-order recommendation.
+
+Daily OHLC bars cannot prove the exact intraday order of events. If an entry and its contingent stop/take-profit can interact inside the same daily candle, the result is ambiguous. This is one reason the institutional validation roadmap requires event-driven backtesting before real-money use.

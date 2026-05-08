@@ -8,7 +8,9 @@ from pathlib import Path
 import joblib
 import pandas as pd
 
+from src.analysis.error_analyzer import build_run_analysis
 from src.backtest.execution import add_execution_columns
+from src.backtest.metrics import equity_curve_to_frame
 from src.backtest.runner import run_backtest
 from src.data.downloader import download_universe
 from src.features.feature_pipeline import build_features
@@ -57,6 +59,7 @@ def run_milestone_1() -> Path:
 
     processed_frames: list[pd.DataFrame] = []
     backtest_rows: list[dict[str, object]] = []
+    equity_frames: list[pd.DataFrame] = []
 
     for symbol, frame in prepared.items():
         with_probs = add_model_probabilities(frame, model)
@@ -76,6 +79,9 @@ def run_milestone_1() -> Path:
 
         row = {"symbol": symbol, "trades": int(stats.get("# Trades", 0)), **summary}
         backtest_rows.append(row)
+        equity_curve = equity_curve_to_frame(stats, symbol)
+        if not equity_curve.empty:
+            equity_frames.append(equity_curve)
 
     signals = pd.concat(processed_frames).sort_index()
     signals.index.name = "Date"
@@ -83,6 +89,16 @@ def run_milestone_1() -> Path:
 
     backtests = pd.DataFrame(backtest_rows)
     backtests.to_csv(run_dir / "backtests.csv", index=False)
+
+    if equity_frames:
+        equity_curves = pd.concat(equity_frames, ignore_index=True)
+    else:
+        equity_curves = pd.DataFrame()
+    equity_curves.to_csv(run_dir / "equity_curves.csv", index=False)
+
+    analysis, analysis_summary = build_run_analysis(signals, backtests)
+    analysis.to_csv(run_dir / "analysis.csv", index=False)
+    (run_dir / "analysis_summary.json").write_text(json.dumps(analysis_summary, indent=2), encoding="utf-8")
 
     aggregate = _aggregate_backtests(backtests)
     _append_experiment_log(
@@ -105,6 +121,7 @@ def run_milestone_1() -> Path:
                 "validation_metrics": validation_metrics,
                 "test_metrics": test_metrics,
                 "aggregate_backtest": aggregate,
+                "analysis_summary": analysis_summary,
             },
             indent=2,
         ),

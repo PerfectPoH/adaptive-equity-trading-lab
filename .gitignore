@@ -16,6 +16,7 @@ experiments/runs/
 .env
 
 # OS / IDE
+/.obsidian/
 .vscode/
 .idea/
 Thumbs.db

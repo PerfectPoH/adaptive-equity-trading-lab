@@ -28,6 +28,23 @@ def stats_to_summary(stats: pd.Series, frame: pd.DataFrame) -> dict[str, float |
     }
 
 
+def equity_curve_to_frame(stats: pd.Series, symbol: str) -> pd.DataFrame:
+    curve = stats.get("_equity_curve")
+    if not isinstance(curve, pd.DataFrame) or curve.empty:
+        return pd.DataFrame()
+
+    output = curve.copy()
+    output.index.name = output.index.name or "Date"
+    output = output.reset_index()
+    if output.columns[0] != "Date":
+        output = output.rename(columns={output.columns[0]: "Date"})
+
+    output["symbol"] = symbol
+    if "Equity" in output.columns and output["Equity"].iloc[0] != 0:
+        output["normalized_equity"] = output["Equity"] / output["Equity"].iloc[0]
+    return output
+
+
 def _percent_to_decimal(value: object) -> float:
     parsed = _safe_float(value)
     return parsed / 100 if not math.isnan(parsed) else parsed

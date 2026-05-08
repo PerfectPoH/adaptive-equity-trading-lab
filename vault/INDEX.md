@@ -75,10 +75,11 @@ tags: [vault, index, obsidian, trading-lab]
 
 Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 
-- test: `7 passed`;
-- run pipeline: `20260508_164751`;
+- test: `9 passed`;
+- run pipeline: `20260508_170918`;
 - backtest out-of-sample 2024: non batte buy-and-hold;
-- fallimento documentato: la baseline e' funzionante ma non ancora competitiva.
+- fallimento documentato: la baseline e' funzionante ma non ancora competitiva;
+- diagnosi principale: segnali concentrati in 2 simboli su 10.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 
