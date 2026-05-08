@@ -16,6 +16,7 @@ RUNS_DIR = Path("experiments/runs")
 LOG_PATH = Path("experiments/log.csv")
 NEWS_ABLATION_PATH = Path("experiments/news_ablation_latest.csv")
 THRESHOLD_VALIDATION_PATH = Path("experiments/threshold_validation_latest.csv")
+CALIBRATION_COMPARISON_PATH = Path("experiments/calibration_comparison_latest.csv")
 
 
 def latest_run_dir() -> Path | None:
@@ -32,7 +33,7 @@ if LOG_PATH.exists():
 else:
     st.info("No experiment log yet. Run `python -m src.pipeline` first.")
 
-if NEWS_ABLATION_PATH.exists() or THRESHOLD_VALIDATION_PATH.exists():
+if NEWS_ABLATION_PATH.exists() or THRESHOLD_VALIDATION_PATH.exists() or CALIBRATION_COMPARISON_PATH.exists():
     st.subheader("Experiment Reports")
     if NEWS_ABLATION_PATH.exists():
         with st.expander("Latest News Ablation", expanded=False):
@@ -41,6 +42,9 @@ if NEWS_ABLATION_PATH.exists() or THRESHOLD_VALIDATION_PATH.exists():
         with st.expander("Latest Threshold Validation", expanded=True):
             threshold_report = pd.read_csv(THRESHOLD_VALIDATION_PATH)
             st.dataframe(threshold_report, use_container_width=True)
+    if CALIBRATION_COMPARISON_PATH.exists():
+        with st.expander("Latest Calibration Comparison", expanded=False):
+            st.dataframe(pd.read_csv(CALIBRATION_COMPARISON_PATH), use_container_width=True)
 
 if run_dir is None:
     st.stop()

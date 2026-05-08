@@ -17,7 +17,7 @@ experiments/runs/<run_id>/trade_analysis_summary.json
 Run:
 
 ```text
-20260508_174122
+20260508_175115
 ```
 
 Signal config:
@@ -72,9 +72,48 @@ predicted 0.70-0.80 -> observed success 0.0% on a tiny sample
 
 This means `model_probability > 0.55` should be treated as a ranking/filter score, not a literal probability of success.
 
+## Calibration Layer Experiment
+
+Runner:
+
+```powershell
+.\.venv-lab\Scripts\python.exe -m src.experiments.calibration_comparison
+```
+
+Latest comparison:
+
+```text
+raw threshold 0.55:
+  strategy return: ~3.21%
+  test Brier: ~0.208
+  test mean abs calibration error: ~0.212
+  signals: 119
+
+isotonic calibrated threshold 0.55:
+  strategy return: 0.00%
+  test Brier: ~0.169
+  test mean abs calibration error: ~0.018
+  signals: 0
+
+isotonic calibrated threshold 0.25:
+  strategy return: ~2.00%
+  test Brier: ~0.169
+  test mean abs calibration error: ~0.018
+  signals: 85
+```
+
+Decision:
+
+```text
+Calibration improves probability quality, but does not improve the current strategy return.
+Keep raw probabilities as the default signal filter for now.
+Use calibrated probabilities for risk interpretation and future threshold research.
+```
+
+Important detail: validation calibration metrics for isotonic are in-sample for the calibrator. The test calibration metrics are the meaningful out-of-sample check.
+
 ## Next Steps
 
-- Add probability calibration with validation-only fitting.
-- Compare raw Random Forest probabilities vs calibrated probabilities.
+- Run a broader calibrated-threshold sweep before changing the default.
 - Run trade-level error analysis by feature regime.
 - Investigate AMD losses and NVDA tail risk.

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Any
 
 import pandas as pd
 import numpy as np
@@ -90,7 +91,7 @@ def fit_model(
     return model
 
 
-def evaluate_classifier(model: Pipeline, frame: pd.DataFrame, feature_columns: list[str] | None = None) -> dict[str, float]:
+def evaluate_classifier(model: Any, frame: pd.DataFrame, feature_columns: list[str] | None = None) -> dict[str, float]:
     features = feature_columns or FEATURE_COLUMNS
     rows = training_rows(frame, features)
     if rows.empty:

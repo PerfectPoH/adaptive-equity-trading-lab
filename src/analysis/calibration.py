@@ -6,14 +6,13 @@ from typing import Any
 import numpy as np
 import pandas as pd
 from sklearn.metrics import brier_score_loss
-from sklearn.pipeline import Pipeline
 
 from src.features.feature_pipeline import FEATURE_COLUMNS
 from src.models.trainer import TemporalSplit, training_rows
 
 
 def build_calibration_report(
-    model: Pipeline,
+    model: Any,
     split: TemporalSplit,
     feature_columns: list[str] | None = None,
     bins: int = 10,
@@ -51,7 +50,7 @@ def summarize_calibration(calibration: pd.DataFrame) -> dict[str, Any]:
 
 
 def _calibration_for_period(
-    model: Pipeline,
+    model: Any,
     frame: pd.DataFrame,
     period: str,
     feature_columns: list[str],

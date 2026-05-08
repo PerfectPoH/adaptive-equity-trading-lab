@@ -1,0 +1,213 @@
+{
+  "raw_run": "experiments\\runs\\20260508_175015_raw",
+  "calibrated_default_run": "experiments\\runs\\20260508_175033_calibrated",
+  "calibrated_signal_run": "experiments\\runs\\20260508_175049_calibrated_thr25",
+  "raw": {
+    "variant": "raw",
+    "run_id": "20260508_175015_raw",
+    "signal_config": {
+      "min_scanner_score": 70,
+      "min_model_probability": 0.55,
+      "use_news": false,
+      "calibration_method": "raw"
+    },
+    "aggregate_backtest": {
+      "strategy_return": 0.03206899254367681,
+      "buy_and_hold_return": 0.4804665448965119,
+      "excess_return": -0.44839755235283507,
+      "max_drawdown": -0.014800029291102712,
+      "sharpe": 1.0675391464677588,
+      "profit_factor": 2.5388044478292957,
+      "win_rate": 0.665993265993266,
+      "beats_buy_and_hold": false,
+      "notes": "Mean of per-symbol 2024 backtests"
+    },
+    "validation_metrics": {
+      "accuracy": 0.5703125,
+      "roc_auc": 0.5079989228520241,
+      "rows": 2432.0
+    },
+    "test_metrics": {
+      "accuracy": 0.728369384359401,
+      "roc_auc": 0.6506938878386894,
+      "rows": 2404.0
+    },
+    "calibration_summary": {
+      "test": {
+        "rows": 2404,
+        "brier_score": 0.2082460661622692,
+        "mean_abs_calibration_error": 0.21224917129442356,
+        "max_abs_calibration_error": 0.2599608386962046
+      },
+      "validation": {
+        "rows": 2432,
+        "brier_score": 0.23802769048483072,
+        "mean_abs_calibration_error": 0.2194823515527383,
+        "max_abs_calibration_error": 0.7231396402287193
+      }
+    },
+    "analysis_summary": {
+      "symbols_analyzed": 10,
+      "total_signals": 119,
+      "total_executable_signals": 109,
+      "total_skipped_signals": 10,
+      "symbols_with_signals": 9,
+      "symbols_with_trades": 9,
+      "underperforming_symbols": 9,
+      "outperforming_symbols": 1,
+      "top_skip_reason": "entry_bar_exit_touch",
+      "mean_strategy_return": 0.03206899254367681,
+      "mean_buy_and_hold_return": 0.4804665448965119,
+      "mean_excess_return": -0.44839755235283507,
+      "primary_findings": [
+        "9 symbols underperformed buy-and-hold in the 2024 test window.",
+        "Signals were concentrated in 9 of 10 symbols.",
+        "10 of 119 signals were skipped by execution rules.",
+        "Most common execution skip reason: entry_bar_exit_touch."
+      ]
+    }
+  },
+  "calibrated_default_threshold": {
+    "variant": "calibrated_default_threshold",
+    "run_id": "20260508_175033_calibrated",
+    "signal_config": {
+      "min_scanner_score": 70,
+      "min_model_probability": 0.55,
+      "use_news": false,
+      "calibration_method": "isotonic"
+    },
+    "aggregate_backtest": {
+      "strategy_return": 0.0,
+      "buy_and_hold_return": 0.4804665448965119,
+      "excess_return": -0.4804665448965119,
+      "max_drawdown": 0.0,
+      "sharpe": NaN,
+      "profit_factor": NaN,
+      "win_rate": NaN,
+      "beats_buy_and_hold": false,
+      "notes": "Mean of per-symbol 2024 backtests"
+    },
+    "validation_metrics": {
+      "accuracy": 0.7557565789473685,
+      "roc_auc": 0.5305576622225153,
+      "rows": 2432.0
+    },
+    "test_metrics": {
+      "accuracy": 0.7799500831946755,
+      "roc_auc": 0.5892209199747953,
+      "rows": 2404.0
+    },
+    "calibration_summary": {
+      "test": {
+        "rows": 2404,
+        "brier_score": 0.1689038916816827,
+        "mean_abs_calibration_error": 0.017955340661423444,
+        "max_abs_calibration_error": 0.06707785401919882
+      },
+      "validation": {
+        "rows": 2432,
+        "brier_score": 0.18387128233463093,
+        "mean_abs_calibration_error": 9.632280353450166e-17,
+        "max_abs_calibration_error": 1.1102230246251565e-16
+      }
+    },
+    "analysis_summary": {
+      "symbols_analyzed": 10,
+      "total_signals": 0,
+      "total_executable_signals": 0,
+      "total_skipped_signals": 0,
+      "symbols_with_signals": 0,
+      "symbols_with_trades": 0,
+      "underperforming_symbols": 9,
+      "outperforming_symbols": 1,
+      "top_skip_reason": "",
+      "mean_strategy_return": 0.0,
+      "mean_buy_and_hold_return": 0.4804665448965119,
+      "mean_excess_return": -0.4804665448965119,
+      "primary_findings": [
+        "9 symbols underperformed buy-and-hold in the 2024 test window.",
+        "The scanner/model stack generated no test-window signals."
+      ]
+    }
+  },
+  "calibrated_signal_threshold": {
+    "variant": "calibrated_signal_threshold",
+    "run_id": "20260508_175049_calibrated_thr25",
+    "signal_config": {
+      "min_scanner_score": 70,
+      "min_model_probability": 0.25,
+      "use_news": false,
+      "calibration_method": "isotonic"
+    },
+    "aggregate_backtest": {
+      "strategy_return": 0.02003535986968437,
+      "buy_and_hold_return": 0.4804665448965119,
+      "excess_return": -0.46043118502682745,
+      "max_drawdown": -0.013133804212809463,
+      "sharpe": 0.7558720715892542,
+      "profit_factor": 2.319968044689905,
+      "win_rate": 0.5888257575757576,
+      "beats_buy_and_hold": false,
+      "notes": "Mean of per-symbol 2024 backtests"
+    },
+    "validation_metrics": {
+      "accuracy": 0.7557565789473685,
+      "roc_auc": 0.5307225318106711,
+      "rows": 2432.0
+    },
+    "test_metrics": {
+      "accuracy": 0.7799500831946755,
+      "roc_auc": 0.5892209199747953,
+      "rows": 2404.0
+    },
+    "calibration_summary": {
+      "test": {
+        "rows": 2404,
+        "brier_score": 0.16890389168168274,
+        "mean_abs_calibration_error": 0.0179553406614234,
+        "max_abs_calibration_error": 0.06707785401919882
+      },
+      "validation": {
+        "rows": 2432,
+        "brier_score": 0.18387128233463093,
+        "mean_abs_calibration_error": 9.999767826650515e-17,
+        "max_abs_calibration_error": 1.1102230246251565e-16
+      }
+    },
+    "analysis_summary": {
+      "symbols_analyzed": 10,
+      "total_signals": 85,
+      "total_executable_signals": 78,
+      "total_skipped_signals": 7,
+      "symbols_with_signals": 8,
+      "symbols_with_trades": 8,
+      "underperforming_symbols": 9,
+      "outperforming_symbols": 1,
+      "top_skip_reason": "entry_bar_exit_touch",
+      "mean_strategy_return": 0.02003535986968437,
+      "mean_buy_and_hold_return": 0.4804665448965119,
+      "mean_excess_return": -0.46043118502682745,
+      "primary_findings": [
+        "9 symbols underperformed buy-and-hold in the 2024 test window.",
+        "Signals were concentrated in 8 of 10 symbols.",
+        "7 of 85 signals were skipped by execution rules.",
+        "Most common execution skip reason: entry_bar_exit_touch."
+      ]
+    }
+  },
+  "comparison": {
+    "same_threshold": {
+      "strategy_return_delta": -0.03206899254367681,
+      "excess_return_delta": -0.032068992543676844,
+      "test_brier_delta": -0.039342174480586495,
+      "test_mean_abs_calibration_error_delta": -0.1942938306330001
+    },
+    "retuned_threshold": {
+      "strategy_return_delta": -0.01203363267399244,
+      "excess_return_delta": -0.012033632673992378,
+      "test_brier_delta": -0.03934217448058647,
+      "test_mean_abs_calibration_error_delta": -0.19429383063300015
+    },
+    "verdict": "calibration_improved_probabilities_but_not_strategy"
+  }
+}

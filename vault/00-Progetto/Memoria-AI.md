@@ -92,12 +92,13 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 .\.venv-lab\Scripts\python.exe -m src.pipeline
 .\.venv-lab\Scripts\python.exe -m src.experiments.news_ablation
 .\.venv-lab\Scripts\python.exe -m src.experiments.threshold_validation
+.\.venv-lab\Scripts\python.exe -m src.experiments.calibration_comparison
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
 
 ## Risultato importante 2026-05-08
 
-Run default `20260508_174122`:
+Run default `20260508_175115`:
 
 - config: `use_news=false`, `model_probability > 0.55`;
 - 119 segnali totali nel 2024;
@@ -117,7 +118,12 @@ Calibration:
 
 - il modello e' overconfident;
 - `model_probability > 0.55` funziona come filtro/ranking, non come probabilita' reale;
-- prossima priorita': calibration layer con fit solo su validation.
+- calibration layer isotonic fit solo su validation implementato;
+- test Brier migliora da circa 0.208 a circa 0.169;
+- test mean absolute calibration error migliora da circa 0.212 a circa 0.018;
+- soglia raw `0.55` con modello calibrato produce 0 segnali perche' cambia scala probabilistica;
+- soglia calibrata `0.25` produce segnali, ma strategy return scende a circa 2.00% contro 3.21% raw;
+- decisione: calibrazione utile per interpretazione del rischio, non default operativo.
 
 News ablation:
 

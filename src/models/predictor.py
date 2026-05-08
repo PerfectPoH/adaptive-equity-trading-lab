@@ -2,14 +2,14 @@ from __future__ import annotations
 
 import pandas as pd
 import numpy as np
-from sklearn.pipeline import Pipeline
+from typing import Any
 
 from src.features.feature_pipeline import FEATURE_COLUMNS
 
 
 def add_model_probabilities(
     frame: pd.DataFrame,
-    model: Pipeline,
+    model: Any,
     feature_columns: list[str] | None = None,
     output_column: str = "model_probability",
 ) -> pd.DataFrame:

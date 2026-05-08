@@ -17,6 +17,7 @@ from src.backtest.metrics import equity_curve_to_frame
 from src.backtest.runner import run_backtest
 from src.data.downloader import download_universe
 from src.features.feature_pipeline import build_features
+from src.models.calibrator import fit_probability_calibrator
 from src.models.label_builder import build_trade_labels
 from src.models.predictor import add_model_probabilities
 from src.models.trainer import evaluate_classifier, fit_model, temporal_split
@@ -41,6 +42,7 @@ def run_milestone_1(
     run_tag: str | None = None,
     min_scanner_score: float = 70,
     min_model_probability: float = DEFAULT_MIN_MODEL_PROBABILITY,
+    calibration_method: str | None = None,
 ) -> Path:
     base_run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_id = f"{base_run_id}_{run_tag}" if run_tag else base_run_id
@@ -66,11 +68,16 @@ def run_milestone_1(
     combined = pd.concat(prepared.values()).sort_index()
     split = temporal_split(combined)
     model = fit_model(split.train, model_type="random_forest")
-    model_path = run_dir / "model.joblib"
-    joblib.dump(model, model_path)
 
-    validation_metrics = evaluate_classifier(model, split.validation)
-    test_metrics = evaluate_classifier(model, split.test)
+    raw_validation_metrics = evaluate_classifier(model, split.validation)
+    raw_test_metrics = evaluate_classifier(model, split.test)
+    probability_model = model
+    if calibration_method:
+        probability_model = fit_probability_calibrator(model, split.validation, method=calibration_method)
+    validation_metrics = evaluate_classifier(probability_model, split.validation)
+    test_metrics = evaluate_classifier(probability_model, split.test)
+    model_path = run_dir / "model.joblib"
+    joblib.dump(probability_model, model_path)
 
     processed_frames: list[pd.DataFrame] = []
     backtest_rows: list[dict[str, object]] = []
@@ -78,7 +85,7 @@ def run_milestone_1(
     trade_frames: list[pd.DataFrame] = []
 
     for symbol, frame in prepared.items():
-        with_probs = add_model_probabilities(frame, model)
+        with_probs = add_model_probabilities(frame, probability_model)
         with_signals = add_signal_columns(
             with_probs,
             min_scanner_score=min_scanner_score,
@@ -153,7 +160,7 @@ def run_milestone_1(
         json.dumps(threshold_diagnostics_summary, indent=2),
         encoding="utf-8",
     )
-    calibration, calibration_summary = build_calibration_report(model, split)
+    calibration, calibration_summary = build_calibration_report(probability_model, split)
     calibration.to_csv(run_dir / "calibration.csv", index=False)
     (run_dir / "calibration_summary.json").write_text(json.dumps(calibration_summary, indent=2), encoding="utf-8")
 
@@ -166,7 +173,10 @@ def run_milestone_1(
             "max_gap_threshold": MAX_GAP_THRESHOLD,
             "min_scanner_score": min_scanner_score,
             "min_model_probability": min_model_probability,
+            "calibration_method": calibration_method or "raw",
             "news_features": "gdelt_market_news_lagged_1d" if use_news else "disabled",
+            "raw_validation_metrics": raw_validation_metrics,
+            "raw_test_metrics": raw_test_metrics,
             "validation_metrics": validation_metrics,
             "test_metrics": test_metrics,
         },
@@ -182,9 +192,12 @@ def run_milestone_1(
                     "min_scanner_score": min_scanner_score,
                     "min_model_probability": min_model_probability,
                     "use_news": use_news,
+                    "calibration_method": calibration_method or "raw",
                 },
                 "validation_metrics": validation_metrics,
                 "test_metrics": test_metrics,
+                "raw_validation_metrics": raw_validation_metrics,
+                "raw_test_metrics": raw_test_metrics,
                 "aggregate_backtest": aggregate,
                 "analysis_summary": analysis_summary,
                 "signal_diagnostics_summary": signal_diagnostics_summary,

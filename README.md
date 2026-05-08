@@ -39,10 +39,11 @@ Live small != scaling
 .\.venv-lab\Scripts\python.exe -m src.pipeline
 .\.venv-lab\Scripts\python.exe -m src.experiments.news_ablation
 .\.venv-lab\Scripts\python.exe -m src.experiments.threshold_validation
+.\.venv-lab\Scripts\python.exe -m src.experiments.calibration_comparison
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
 
-The current default research baseline is `use_news=False` with `model_probability > 0.55`. News features remain available for ablation tests, but the latest A/B result is mixed rather than clearly positive.
+The current default research baseline is `use_news=False`, raw model probabilities, and `model_probability > 0.55`. News features remain available for ablation tests, but the latest A/B result is mixed rather than clearly positive. Isotonic calibration improves probability calibration, but does not improve strategy return yet, so it is kept as an analysis tool rather than the default signal filter.
 
 ## Project Vault
 

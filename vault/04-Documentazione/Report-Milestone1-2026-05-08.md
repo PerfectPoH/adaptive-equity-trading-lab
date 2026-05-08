@@ -28,7 +28,7 @@ Implementazione MVP completata in prima versione.
 Risultato:
 
 ```text
-7 passed
+17 passed
 ```
 
 Pipeline:
@@ -40,7 +40,7 @@ Pipeline:
 Run principale aggiornato:
 
 ```text
-20260508_174122
+20260508_175115
 ```
 
 ## Risultati backtest
@@ -74,7 +74,8 @@ Findings:
 - 10 segnali sono stati saltati per `entry_bar_exit_touch`, evitando ambiguita' daily OHLC.
 - GDELT macro-news 2020-2024 e' collegato come feature sperimentale laggata, ma non default.
 - News ablation: `mixed_or_inconclusive`; no-news performa meglio nel backtest 2024 corrente.
-- Calibration: il modello e' overconfident; `model_probability` e' un ranking score, non una probabilita' reale.
+- Calibration: il modello raw e' overconfident; `model_probability` e' un ranking score, non una probabilita' reale.
+- Calibration layer: isotonic migliora Brier/errori probabilistici, ma non migliora il rendimento della strategia.
 - Trade-level: 36 trade chiusi, 23 win, 13 loss; AMD unico simbolo con media trade negativa.
 
 ## Interpretazione
@@ -89,13 +90,13 @@ La pipeline funziona, ma la strategia baseline non e' competitiva. Questo e' un 
 - Alcuni SL/TP su daily OHLC sono ambigui nella stessa candela dell'ingresso.
 - Primo connettore news presente; ablation corrente non supporta usarlo come default.
 - Nessun walk-forward tuning.
-- Calibration iniziale presente; manca calibration layer operativo.
+- Calibration layer presente, ma non default perche' non migliora ancora strategy return.
 - Nessuna validazione istituzionale.
 
 ## Prossime mosse
 
-1. Analizzare trade vincenti/perdenti.
-2. Rafforzare `test_pipeline_no_lookahead.py`.
+1. Fare feature-regime analysis sui trade perdenti.
+2. Eseguire sweep piu' ampio sulle soglie calibrate.
 3. Aggiungere walk-forward validation.
 4. Migliorare logging parametri.
 5. Solo dopo valutare scanner/model migliorati.

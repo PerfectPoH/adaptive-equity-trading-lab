@@ -75,14 +75,15 @@ tags: [vault, index, obsidian, trading-lab]
 
 Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 
-- test: `9 passed`;
-- run pipeline: `20260508_174122`;
+- test: `17 passed`;
+- run pipeline default: `20260508_175115`;
 - backtest out-of-sample 2024: non batte buy-and-hold;
 - fallimento documentato: la baseline e' funzionante ma non ancora competitiva;
-- default sperimentale corrente: `use_news=false`, `model_probability > 0.55`;
+- default sperimentale corrente: `use_news=false`, raw `model_probability > 0.55`;
 - diagnosi principale: 119 segnali su 9 simboli, ma ancora sotto buy-and-hold;
 - news GDELT macro 2020-2024 collegate come feature laggate sperimentali, non default.
-- nuova diagnosi: modello non ben calibrato; `model_probability` va trattato come ranking score.
+- calibrazione isotonic implementata e confrontata: migliora le probabilita', ma non il rendimento della strategia;
+- decisione: la calibrazione resta tool di analisi, non default operativo.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 
