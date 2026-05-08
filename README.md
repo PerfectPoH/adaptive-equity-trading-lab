@@ -30,12 +30,16 @@ Live small != scaling
 ## Run Locally
 
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\python -m pip install -r requirements.txt
-.\.venv\Scripts\python -m pytest
-.\.venv\Scripts\python -m src.pipeline
-.\.venv\Scripts\streamlit run dashboard/app.py
+.\.venv-lab\Scripts\python.exe -m pytest
+.\.venv-lab\Scripts\python.exe -m src.pipeline
+.\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
+
+## Project Vault
+
+The Obsidian-style project memory lives in `vault/`.
+
+Start from `vault/INDEX.md`, then read `vault/00-Progetto/Memoria-AI.md` and `vault/00-Progetto/Roadmap-Master.md` before making structural changes.
 
 ## Important Limits
 

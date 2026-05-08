@@ -1,0 +1,17 @@
+{
+  "nodes": [
+    {"id": "index", "type": "file", "file": "INDEX.md", "x": 0, "y": 0, "width": 380, "height": 260},
+    {"id": "architettura", "type": "file", "file": "00-Progetto/Architettura.md", "x": 520, "y": -260, "width": 360, "height": 240},
+    {"id": "roadmap", "type": "file", "file": "00-Progetto/Roadmap-Master.md", "x": 520, "y": 20, "width": 360, "height": 240},
+    {"id": "memoria", "type": "file", "file": "00-Progetto/Memoria-AI.md", "x": 520, "y": 300, "width": 360, "height": 240},
+    {"id": "backlog", "type": "file", "file": "03-Bug/backlog.md", "x": 980, "y": 20, "width": 360, "height": 240},
+    {"id": "report", "type": "file", "file": "04-Documentazione/Report-Milestone1-2026-05-08.md", "x": 980, "y": 300, "width": 360, "height": 240}
+  ],
+  "edges": [
+    {"id": "e-index-architettura", "fromNode": "index", "fromSide": "right", "toNode": "architettura", "toSide": "left"},
+    {"id": "e-index-roadmap", "fromNode": "index", "fromSide": "right", "toNode": "roadmap", "toSide": "left"},
+    {"id": "e-index-memoria", "fromNode": "index", "fromSide": "right", "toNode": "memoria", "toSide": "left"},
+    {"id": "e-roadmap-backlog", "fromNode": "roadmap", "fromSide": "right", "toNode": "backlog", "toSide": "left"},
+    {"id": "e-memoria-report", "fromNode": "memoria", "fromSide": "right", "toNode": "report", "toSide": "left"}
+  ]
+}
