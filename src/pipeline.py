@@ -8,8 +8,10 @@ from pathlib import Path
 import joblib
 import pandas as pd
 
+from src.analysis.calibration import build_calibration_report
 from src.analysis.error_analyzer import build_run_analysis, build_signal_diagnostics
 from src.analysis.threshold_analyzer import build_threshold_diagnostics
+from src.analysis.trade_analyzer import build_trade_analysis, trades_to_frame
 from src.backtest.execution import add_execution_columns
 from src.backtest.metrics import equity_curve_to_frame
 from src.backtest.runner import run_backtest
@@ -73,6 +75,7 @@ def run_milestone_1(
     processed_frames: list[pd.DataFrame] = []
     backtest_rows: list[dict[str, object]] = []
     equity_frames: list[pd.DataFrame] = []
+    trade_frames: list[pd.DataFrame] = []
 
     for symbol, frame in prepared.items():
         with_probs = add_model_probabilities(frame, model)
@@ -99,6 +102,9 @@ def run_milestone_1(
         equity_curve = equity_curve_to_frame(stats, symbol)
         if not equity_curve.empty:
             equity_frames.append(equity_curve)
+        trades = trades_to_frame(stats, test_frame, symbol)
+        if not trades.empty:
+            trade_frames.append(trades)
 
     signals = pd.concat(processed_frames).sort_index()
     signals.index.name = "Date"
@@ -112,6 +118,18 @@ def run_milestone_1(
     else:
         equity_curves = pd.DataFrame()
     equity_curves.to_csv(run_dir / "equity_curves.csv", index=False)
+
+    if trade_frames:
+        trades = pd.concat(trade_frames, ignore_index=True)
+    else:
+        trades = pd.DataFrame()
+    trades.to_csv(run_dir / "trades.csv", index=False)
+    trade_analysis_by_symbol, trade_analysis_summary = build_trade_analysis(trades)
+    trade_analysis_by_symbol.to_csv(run_dir / "trade_analysis_by_symbol.csv", index=False)
+    (run_dir / "trade_analysis_summary.json").write_text(
+        json.dumps(trade_analysis_summary, indent=2),
+        encoding="utf-8",
+    )
 
     analysis, analysis_summary = build_run_analysis(signals, backtests)
     analysis.to_csv(run_dir / "analysis.csv", index=False)
@@ -135,6 +153,9 @@ def run_milestone_1(
         json.dumps(threshold_diagnostics_summary, indent=2),
         encoding="utf-8",
     )
+    calibration, calibration_summary = build_calibration_report(model, split)
+    calibration.to_csv(run_dir / "calibration.csv", index=False)
+    (run_dir / "calibration_summary.json").write_text(json.dumps(calibration_summary, indent=2), encoding="utf-8")
 
     aggregate = _aggregate_backtests(backtests)
     _append_experiment_log(
@@ -168,6 +189,8 @@ def run_milestone_1(
                 "analysis_summary": analysis_summary,
                 "signal_diagnostics_summary": signal_diagnostics_summary,
                 "threshold_diagnostics_summary": threshold_diagnostics_summary,
+                "calibration_summary": calibration_summary,
+                "trade_analysis_summary": trade_analysis_summary,
             },
             indent=2,
         ),

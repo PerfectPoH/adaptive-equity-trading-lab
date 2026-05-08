@@ -48,10 +48,12 @@ Prossimi miglioramenti Milestone 1:
 - [ ] TimeSeriesSplit.
 - [ ] Tuning iperparametri su validation, non su test.
 - [ ] Model registry con `joblib`.
-- [ ] Calibration plot / reliability analysis.
-- [ ] Error analyzer per trade falliti.
+- [x] Calibration report / reliability analysis iniziale.
+- [x] Trade-level export e prima error analysis.
 - [x] Prima analisi soglia `model_probability`: default sperimentale portato a `0.55`.
 - [ ] Calibration plot / probability calibration vera.
+- [ ] Implementare calibration layer su validation-only.
+- [ ] Trade-level feature regime analysis.
 - [ ] Backtest threshold piu' ampio: 0.45-0.70 con selection su validation.
 - [ ] Notebook `04_backtest_analysis.ipynb`.
 - [ ] Soglie scanner e modello versionate.

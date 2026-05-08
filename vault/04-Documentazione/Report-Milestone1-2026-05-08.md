@@ -40,7 +40,7 @@ Pipeline:
 Run principale aggiornato:
 
 ```text
-20260508_173354
+20260508_174122
 ```
 
 ## Risultati backtest
@@ -61,6 +61,8 @@ total_executable_signals:  109
 total_skipped_signals:     10
 symbols_with_signals:      9
 symbols_with_trades:       9
+closed_trades:             36
+trade_win_rate:            circa 63.9%
 underperforming_symbols:   9
 outperforming_symbols:     1
 ```
@@ -72,6 +74,8 @@ Findings:
 - 10 segnali sono stati saltati per `entry_bar_exit_touch`, evitando ambiguita' daily OHLC.
 - GDELT macro-news 2020-2024 e' collegato come feature sperimentale laggata, ma non default.
 - News ablation: `mixed_or_inconclusive`; no-news performa meglio nel backtest 2024 corrente.
+- Calibration: il modello e' overconfident; `model_probability` e' un ranking score, non una probabilita' reale.
+- Trade-level: 36 trade chiusi, 23 win, 13 loss; AMD unico simbolo con media trade negativa.
 
 ## Interpretazione
 
@@ -85,7 +89,7 @@ La pipeline funziona, ma la strategia baseline non e' competitiva. Questo e' un 
 - Alcuni SL/TP su daily OHLC sono ambigui nella stessa candela dell'ingresso.
 - Primo connettore news presente; ablation corrente non supporta usarlo come default.
 - Nessun walk-forward tuning.
-- Nessuna calibration.
+- Calibration iniziale presente; manca calibration layer operativo.
 - Nessuna validazione istituzionale.
 
 ## Prossime mosse

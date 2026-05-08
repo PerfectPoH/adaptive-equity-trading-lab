@@ -97,7 +97,7 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 
 ## Risultato importante 2026-05-08
 
-Run default `20260508_173354`:
+Run default `20260508_174122`:
 
 - config: `use_news=false`, `model_probability > 0.55`;
 - 119 segnali totali nel 2024;
@@ -108,6 +108,16 @@ Run default `20260508_173354`:
 - media strategia circa 3.21%;
 - buy-and-hold medio circa 48%;
 - diagnosi: soglia 0.55 riduce il collo di bottiglia del modello, ma la strategia resta molto sotto buy-and-hold.
+- trade analysis: 36 trade chiusi, 23 vincenti, 13 perdenti, win rate trade circa 63.9%;
+- best trade: NVDA segnale 2024-02-22, circa +12.79%;
+- worst trade: NVDA segnale 2024-06-12, circa -6.89%;
+- AMD e' l'unico simbolo con media trade negativa nel run corrente.
+
+Calibration:
+
+- il modello e' overconfident;
+- `model_probability > 0.55` funziona come filtro/ranking, non come probabilita' reale;
+- prossima priorita': calibration layer con fit solo su validation.
 
 News ablation:
 

@@ -25,6 +25,8 @@ Live small != scaling
 - Precomputed signal columns.
 - Backtest with execution rules, slippage, commissions, and gap skips.
 - Per-run analysis for signal concentration, skipped trades, and benchmark underperformance.
+- Probability calibration reports.
+- Closed-trade error analysis.
 - Normalized equity curve export.
 - Experiment log.
 - Streamlit dashboard.

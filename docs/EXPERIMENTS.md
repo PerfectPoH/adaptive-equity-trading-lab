@@ -44,3 +44,17 @@ model_probability_threshold=0.55
 ```
 
 This produced more signals and better 2024 strategy return than the stricter `0.60` threshold, while still underperforming buy-and-hold.
+
+## Calibration And Trade Analysis
+
+Every pipeline run now exports:
+
+```text
+calibration.csv
+calibration_summary.json
+trades.csv
+trade_analysis_by_symbol.csv
+trade_analysis_summary.json
+```
+
+Current finding: the model is not well calibrated, so probabilities should be treated as ranking scores until a calibration layer is added.

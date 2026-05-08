@@ -61,6 +61,22 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: ablation eseguita; tenerle come feature sperimentali laggate, non default.
 - Stato: aperto; verdict `mixed_or_inconclusive`.
 
+### RISK-007 - Probabilita' modello non calibrate
+
+- Priorita: P1.
+- Sintomo: nei calibration bins, probabilita' predette alte non corrispondono a success rate osservati simili.
+- Impatto: usare `model_probability > 0.55` come se fosse una probabilita' reale puo' portare a size/risk decision sbagliate.
+- Azione: implementare calibration layer fit su validation, poi confrontare raw vs calibrated.
+- Stato: aperto.
+
+### RISK-008 - AMD negativo nel trade-level analysis
+
+- Priorita: P3.
+- Sintomo: nel run `20260508_174122`, AMD e' l'unico simbolo con media trade negativa.
+- Impatto: possibile incompatibilita' del setup con ticker piu' volatile/ciclico.
+- Azione: analisi per regime/feature, valutare blacklist temporanea solo dopo evidenze su piu' anni.
+- Stato: aperto.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

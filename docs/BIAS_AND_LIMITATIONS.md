@@ -29,6 +29,10 @@ The MVP uses GDELT DOC API macro-news features as broad market context. These fe
 
 Current news features should be treated as experimental research inputs, not as an execution trigger.
 
+## Probability Calibration Limitations
+
+The current Random Forest output is not a literal success probability. Calibration diagnostics show meaningful gaps between predicted probability bins and observed TP-before-SL success rates. Until a validation-only calibration step is implemented, `model_probability` should be interpreted as a ranking score.
+
 ## Execution Limitations
 
 The MVP uses next-open execution with simple slippage and commissions. This is more realistic than same-close entry, but still far from live-market execution.
