@@ -3,6 +3,7 @@ from __future__ import annotations
 import pandas as pd
 
 from src.experiments.walk_forward_validation import (
+    ModelConfig,
     ModelObjectiveConfig,
     SymbolSelectionConfig,
     _select_symbols,
@@ -49,6 +50,45 @@ def test_select_threshold_from_validation_can_choose_across_models() -> None:
 
     assert selected["model_type"] == "hist_gradient_boosting"
     assert selected["threshold"] == 0.30
+
+
+def test_select_threshold_from_validation_can_choose_across_model_configs() -> None:
+    rows = [
+        {
+            "model_config": "random_forest_default",
+            "model_type": "random_forest",
+            "threshold": 0.25,
+            "excess_return": 0.01,
+            "strategy_return": 0.06,
+            "closed_trades": 20,
+        },
+        {
+            "model_config": "random_forest_shallow",
+            "model_type": "random_forest",
+            "threshold": 0.25,
+            "excess_return": 0.04,
+            "strategy_return": 0.08,
+            "closed_trades": 20,
+        },
+    ]
+
+    selected = select_threshold_from_validation(rows, min_validation_trades=10)
+
+    assert selected["model_config"] == "random_forest_shallow"
+
+
+def test_model_config_serializes_params() -> None:
+    config = ModelConfig(
+        name="random_forest_shallow",
+        model_type="random_forest",
+        model_params={"max_depth": 4, "min_samples_leaf": 30},
+    )
+
+    assert config.to_dict() == {
+        "name": "random_forest_shallow",
+        "model_type": "random_forest",
+        "model_params": {"max_depth": 4, "min_samples_leaf": 30},
+    }
 
 
 def test_select_threshold_from_validation_can_choose_across_model_objectives() -> None:

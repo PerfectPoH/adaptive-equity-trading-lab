@@ -11,6 +11,14 @@ def test_supported_model_types_build_predict_proba_pipelines() -> None:
         assert hasattr(model, "predict_proba")
 
 
+def test_build_model_applies_random_forest_params() -> None:
+    model = build_model("random_forest", model_params={"max_depth": 4, "min_samples_leaf": 30})
+
+    estimator = model.named_steps["model"]
+    assert estimator.max_depth == 4
+    assert estimator.min_samples_leaf == 30
+
+
 def test_unsupported_model_type_raises() -> None:
     with pytest.raises(ValueError):
         build_model("not_a_model")
