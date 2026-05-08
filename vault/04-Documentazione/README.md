@@ -15,9 +15,21 @@ Questa cartella contiene documenti vivi:
 - analisi strategiche;
 - postmortem.
 
+Indice canonico: [[Documentazione-Index]].
+
+Struttura:
+
+| Cartella | Uso |
+|---|---|
+| `Reports/` | Report, analisi e postmortem |
+| `Handoff/` | Handoff lunghi per altre chat o agenti |
+| `_archive/` | Documenti superati da conservare |
+
 Quando un documento diventa vecchio, spostarlo in `04-Documentazione/_archive/` invece di cancellarlo.
 
 Documenti principali:
 
 - [[Report-Milestone1-2026-05-08]]
 - [[Project-Handoff]]
+
+Vedi anche [[Vault-Structure]].

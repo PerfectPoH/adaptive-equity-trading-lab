@@ -18,6 +18,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Protocollo-Collaborazione]]
 - [[Regole-Codice]]
 - [[Regole-Quant]]
+- [[Vault-Structure]]
 - [[backlog]]
 
 ## Feature
@@ -28,6 +29,8 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 
 ## Report e handoff
 
+- [[Devlog-Index]]
+- [[Documentazione-Index]]
 - [[Report-Milestone1-2026-05-08]]
 - [[Project-Handoff]]
 - [[README]]
@@ -39,4 +42,6 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Roadmap-Master]] -> [[graphify-vault-memory]]
 - [[Memoria-AI]] -> [[Regole-Quant]]
 - [[Protocollo-Collaborazione]] -> [[Regole-Codice]]
+- [[Vault-Structure]] -> [[Devlog-Index]]
+- [[Vault-Structure]] -> [[Documentazione-Index]]
 - [[backlog]] -> [[Report-Milestone1-2026-05-08]]

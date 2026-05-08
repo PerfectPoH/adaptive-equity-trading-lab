@@ -140,12 +140,14 @@ News ablation:
 
 ## Convenzioni Vault
 
+Prima di creare o spostare note, leggere [[Vault-Structure]].
+
 ### Devlog
 
 Percorso:
 
 ```text
-02-Devlog/YYYY-MM-DD-<agente>-<topic>.md
+02-Devlog/YYYY-MM/YYYY-MM-DD-<agente>-<topic>.md
 ```
 
 ### Bug report
@@ -157,7 +159,7 @@ Bug aperti in [[backlog]]. Usare `BUG-NNN`, `RISK-NNN` o `TECH-DEBT-NNN`.
 Percorso:
 
 ```text
-04-Documentazione/Report-<topic>-YYYY-MM-DD.md
+04-Documentazione/Reports/Report-<topic>-YYYY-MM-DD.md
 ```
 
 ## Routine ogni sessione

@@ -1,0 +1,38 @@
+---
+tipo: devlog-index
+progetto: adaptive-equity-trading-lab
+ultimo-aggiornamento: 2026-05-08
+tags: [devlog, index, cronologia]
+---
+
+# Devlog Index
+
+I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa e' stato fatto, test eseguiti, risultati e decisioni.
+
+## 2026-05
+
+- [[2026-05-08-codex-milestone1-vault-init]] - inizializzazione vault e Milestone 1.
+- [[2026-05-08-codex-analysis-dashboard-hardening]] - hardening dashboard e analisi run.
+- [[2026-05-08-codex-news-features-and-ambiguity-skip]] - news feature e skip conservativo daily OHLC.
+- [[2026-05-08-codex-ablation-threshold-validation]] - ablation news e threshold validation.
+- [[2026-05-08-codex-calibration-trade-analysis]] - calibration report e trade-level analysis.
+- [[2026-05-08-codex-calibration-layer-comparison]] - confronto raw vs calibrated.
+- [[2026-05-08-codex-feature-regime-analysis]] - feature-regime analysis sui trade.
+
+## Convenzione
+
+Nuovi devlog:
+
+```text
+02-Devlog/YYYY-MM/YYYY-MM-DD-<agente>-<topic>.md
+```
+
+Ogni devlog deve contenere:
+
+- contesto;
+- cosa e' cambiato;
+- verifiche;
+- risultati;
+- decisione o prossima mossa.
+
+Vedi [[Vault-Structure]].
