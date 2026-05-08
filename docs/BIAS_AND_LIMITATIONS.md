@@ -9,7 +9,7 @@ Rules:
 - No random train/test splits.
 - No scaler fit on validation or test data.
 - No centered rolling windows.
-- Labels may look forward, but features may not.
+- Labels may look forward inside their own period, but rows whose label horizon crosses a train/validation/test boundary must be purged.
 - If future prices are changed, past features and signals must remain unchanged.
 
 ## Data Limitations
@@ -31,7 +31,9 @@ Current news features should be treated as experimental research inputs, not as 
 
 ## Probability Calibration Limitations
 
-The current Random Forest output is not a literal success probability. Calibration diagnostics show meaningful gaps between predicted probability bins and observed TP-before-SL success rates. Until a validation-only calibration step is implemented, `model_probability` should be interpreted as a ranking score.
+The raw Random Forest output is not a literal success probability. Calibration diagnostics show meaningful gaps between predicted probability bins and observed TP-before-SL success rates.
+
+The current research default uses isotonic calibration fit on validation only, but it is still a prototype calibration layer. It improved the 2024 backtest, but it must be rechecked with broader walk-forward folds and better data before any live use.
 
 ## Execution Limitations
 

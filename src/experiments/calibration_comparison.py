@@ -6,14 +6,14 @@ from typing import Any
 
 import pandas as pd
 
-from src.pipeline import run_milestone_1
+from src.pipeline import DEFAULT_MIN_MODEL_PROBABILITY, run_milestone_1
 
 
 OUTPUT_JSON = Path("experiments/calibration_comparison_latest.json")
 OUTPUT_CSV = Path("experiments/calibration_comparison_latest.csv")
-RAW_THRESHOLD = 0.55
-CALIBRATED_DEFAULT_THRESHOLD = 0.55
-CALIBRATED_SIGNAL_THRESHOLD = 0.25
+RAW_THRESHOLD = 0.45
+CALIBRATED_DEFAULT_THRESHOLD = 0.45
+CALIBRATED_SIGNAL_THRESHOLD = DEFAULT_MIN_MODEL_PROBABILITY
 
 
 def run_calibration_comparison() -> dict[str, Any]:

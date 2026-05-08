@@ -28,7 +28,7 @@ Implementazione MVP completata in prima versione.
 Risultato:
 
 ```text
-21 passed
+26 passed
 ```
 
 Pipeline:
@@ -40,15 +40,15 @@ Pipeline:
 Run principale aggiornato:
 
 ```text
-20260508_181139
+20260508_185027
 ```
 
 ## Risultati backtest
 
 ```text
-strategy_return:       circa 3.21%
+strategy_return:       circa 6.99%
 buy_and_hold_return:   circa 48.0%
-excess_return:         circa -44.8%
+excess_return:         circa -41.1%
 beats_buy_and_hold:    false
 ```
 
@@ -56,13 +56,13 @@ beats_buy_and_hold:    false
 
 ```text
 symbols_analyzed:          10
-total_signals:             119
-total_executable_signals:  109
-total_skipped_signals:     10
-symbols_with_signals:      9
-symbols_with_trades:       9
-closed_trades:             36
-trade_win_rate:            circa 63.9%
+total_signals:             1093
+total_executable_signals:  1036
+total_skipped_signals:     57
+symbols_with_signals:      10
+symbols_with_trades:       10
+closed_trades:             140
+trade_win_rate:            circa 52.1%
 underperforming_symbols:   9
 outperforming_symbols:     1
 ```
@@ -70,16 +70,17 @@ outperforming_symbols:     1
 Findings:
 
 - 9 simboli su 10 sottoperformano buy-and-hold.
-- La soglia `0.55` aumenta copertura: segnali su 9 simboli.
-- 10 segnali sono stati saltati per `entry_bar_exit_touch`, evitando ambiguita' daily OHLC.
+- Default aggiornato a isotonic calibration con soglia `0.25`.
+- 57 segnali sono stati saltati per `entry_bar_exit_touch`, evitando ambiguita' daily OHLC.
+- Purged temporal split aggiunto: le label vicine ai confini train/validation/test non usano il futuro del periodo successivo.
+- Downloader fallback aggiunto: se `yfinance` fallisce, usa l'ultimo snapshot locale valido.
 - GDELT macro-news 2020-2024 e' collegato come feature sperimentale laggata, ma non default.
 - News ablation: `mixed_or_inconclusive`; no-news performa meglio nel backtest 2024 corrente.
-- Calibration: il modello raw e' overconfident; `model_probability` e' un ranking score, non una probabilita' reale.
-- Calibration layer: isotonic migliora Brier/errori probabilistici, ma non migliora il rendimento della strategia.
-- Trade-level: 36 trade chiusi, 23 win, 13 loss; AMD unico simbolo con media trade negativa.
-- Feature-regime: nessun bucket e' netto negativo; regimi piu' fragili legati a volume relativo basso, distanza dal massimo a 20 giorni mid/high e ATR% alto.
+- Calibration: il modello raw e' overconfident; isotonic migliora Brier/errori e, con soglia 0.25, migliora strategy return.
+- Trade-level: 140 trade chiusi, 73 win, 67 loss; nessun simbolo con media trade negativa.
+- Feature-regime: nessun bucket e' netto negativo; regimi piu' fragili legati a low rolling volatility, high distance-from-high e low calibrated probability.
 - Regime-filter validation: volume floor, pullback depth, ATR guard e combinato non battono il baseline per rendimento.
-- ATR guard migliora Sharpe e drawdown, ma riduce strategy return; resta una possibile modalita' risk-first futura.
+- Combined filters migliorano max drawdown, ma riducono troppo strategy return; resta possibile modalita' risk-first futura.
 
 ## Interpretazione
 
@@ -92,18 +93,18 @@ La pipeline funziona, ma la strategia baseline non e' competitiva. Questo e' un 
 - backtesting.py non e' un simulatore execution realistico.
 - Alcuni SL/TP su daily OHLC sono ambigui nella stessa candela dell'ingresso.
 - Primo connettore news presente; ablation corrente non supporta usarlo come default.
-- Nessun walk-forward tuning.
-- Calibration layer presente, ma non default perche' non migliora ancora strategy return.
-- Feature-regime analysis presente, ma ancora su campione piccolo di 36 trade.
+- Walk-forward tuning presente, ma solo su due fold.
+- Calibration layer default di ricerca, ma ancora non abbastanza validato per live.
+- Feature-regime analysis presente, ma ancora su campione piccolo di 140 trade.
 - Regime filters testati sullo stesso anno 2024; serve walk-forward prima di promuovere qualunque filtro.
 - Nessuna validazione istituzionale.
 
 ## Prossime mosse
 
-1. Aggiungere walk-forward validation.
-2. Eseguire sweep piu' ampio sulle soglie calibrate.
-3. Valutare `atr_guard` solo come modalita' risk-first dopo walk-forward.
-4. Migliorare logging parametri.
-5. Solo dopo valutare scanner/model migliorati.
+1. Aggiungere piu' fold walk-forward quando ci sono piu' anni/dati migliori.
+2. Migliorare feature/model oltre la soglia.
+3. Valutare combined filters solo come modalita' risk-first dopo walk-forward.
+4. Migliorare logging parametri e model registry.
+5. Solo dopo valutare paper trading.
 
 Vedi [[Roadmap-Master]], [[backlog]], [[mvp-core-pipeline]].

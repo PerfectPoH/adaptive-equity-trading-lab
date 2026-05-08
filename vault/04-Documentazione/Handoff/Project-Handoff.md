@@ -32,8 +32,9 @@ Live small != scaling
 - `yfinance` solo per prototipo.
 - `backtesting.py` solo per MVP.
 - Entry al next open.
-- Split temporale, niente random split.
+- Split temporale purgato, niente random split.
 - Label builder separato.
+- Default di ricerca corrente: isotonic calibration con `model_probability > 0.25`.
 - Experiment log obbligatorio.
 - Dashboard Streamlit minima.
 - News Engine, Graphify, Paper Trading e tool avanzati fuori dalla Milestone 1.
@@ -67,6 +68,7 @@ Market Data
   -> Temporal Split
   -> Label Builder
   -> ML Model
+  -> Validation Calibration
   -> Signal Engine
   -> Risk Manager
   -> Execution Simulator
@@ -81,6 +83,8 @@ Market Data
 ```powershell
 .\.venv-lab\Scripts\python.exe -m pytest
 .\.venv-lab\Scripts\python.exe -m src.pipeline
+.\.venv-lab\Scripts\python.exe -m src.experiments.walk_forward_validation
+.\.venv-lab\Scripts\python.exe -m src.experiments.calibration_comparison
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
 
@@ -98,7 +102,7 @@ Universo:
 AAPL, MSFT, NVDA, AMD, TSLA, META, AMZN, GOOGL, SPY, QQQ
 ```
 
-Limiti: non point-in-time, survivorship bias, qualita' dati non istituzionale, risultati non sufficienti per capitale reale.
+Limiti: non point-in-time, survivorship bias, qualita' dati non istituzionale, risultati non sufficienti per capitale reale. Se `yfinance` fallisce, il downloader puo' usare l'ultimo snapshot locale valido per tenere stabile l'universo degli esperimenti.
 
 ## Label
 
@@ -110,6 +114,8 @@ stop_loss = entry - 1.5 ATR
 take_profit = entry + 3 ATR
 timeout = 10 trading days
 ```
+
+Le ultime 10 barre di ogni periodo temporale vengono purgate quando la label userebbe prezzi oltre il confine train/validation/test.
 
 ## Risk MVP
 
@@ -124,7 +130,7 @@ no short
 
 ## Milestone 1 status
 
-Completa in prima versione. Il primo test out-of-sample 2024 non batte buy-and-hold. Questo e' documentato, quindi la Definition of Done resta soddisfatta.
+Completa in prima versione. Il run corrente `20260508_185027` usa `use_news=false`, isotonic calibration, `model_probability > 0.25`, no regime filters. Il test out-of-sample 2024 fa circa 6.99% medio contro circa 48% buy-and-hold. Non batte il benchmark; questo e' documentato, quindi la Definition of Done resta soddisfatta.
 
 ## Milestone future
 

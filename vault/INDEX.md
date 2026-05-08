@@ -87,17 +87,19 @@ tags: [vault, index, obsidian, trading-lab]
 
 Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 
-- test: `21 passed`;
-- run pipeline default: `20260508_181139`;
+- test: `26 passed`;
+- run pipeline default: `20260508_185027`;
 - backtest out-of-sample 2024: non batte buy-and-hold;
 - fallimento documentato: la baseline e' funzionante ma non ancora competitiva;
-- default sperimentale corrente: `use_news=false`, raw `model_probability > 0.55`;
-- diagnosi principale: 119 segnali su 9 simboli, ma ancora sotto buy-and-hold;
+- default sperimentale corrente: `use_news=false`, isotonic calibration, `model_probability > 0.25`;
+- diagnosi principale: 1093 segnali su 10 simboli, rendimento medio 2024 circa 6.99%, ma ancora sotto buy-and-hold;
+- split temporale purgato: le ultime barre di train/validation/test vengono rimosse quando la label a 10 giorni supererebbe il confine;
+- downloader robusto: se `yfinance` fallisce, usa l'ultimo snapshot locale valido;
 - news GDELT macro 2020-2024 collegate come feature laggate sperimentali, non default.
-- calibrazione isotonic implementata e confrontata: migliora le probabilita', ma non il rendimento della strategia;
-- decisione: la calibrazione resta tool di analisi, non default operativo.
-- feature-regime analysis aggiunta: volume relativo basso e distanza dal massimo a 20 giorni mid/high sono ipotesi di fragilita' da testare.
-- regime-filter validation completata: i filtri non migliorano strategy return; `atr_guard` resta solo candidata risk-first.
+- calibrazione isotonic implementata e promossa a default di ricerca dopo walk-forward;
+- feature-regime analysis aggiornata: low rolling volatility, high distance-from-high e low calibrated probability sono bucket fragili.
+- regime-filter validation aggiornata: i filtri non migliorano strategy return; combined filters migliorano drawdown ma tagliano troppo rendimento.
+- walk-forward validation completata: default aggiornato a isotonic `0.25`; verdict `positive_but_under_benchmark`.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 

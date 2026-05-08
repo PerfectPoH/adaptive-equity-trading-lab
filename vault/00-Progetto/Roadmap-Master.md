@@ -10,7 +10,7 @@ tags: [roadmap, milestone, checklist, trading-lab]
 
 ## Stato sintetico
 
-La Milestone 1 e' stata avviata con una pipeline funzionante end-to-end. I test passano, il primo esperimento e' loggato, ma la baseline 2024 non batte buy-and-hold. Questo non e' un fallimento: e' il primo risultato onesto da cui migliorare.
+La Milestone 1 e' una pipeline funzionante end-to-end. Il default corrente usa calibrazione isotonic e soglia `model_probability > 0.25`, scelta tramite walk-forward. Il backtest 2024 migliora fino a circa 6.99%, ma resta sotto buy-and-hold: risultato utile, non strategia pronta.
 
 ## Milestone 1 - MVP Core Pipeline
 
@@ -22,7 +22,9 @@ Definition of Done:
 - [x] Salva snapshot con hash.
 - [x] Calcola feature point-in-time.
 - [x] Crea label TP-before-SL con entry al next open.
+- [x] Purga le ultime barre di ogni split se la label forward supererebbe il confine temporale.
 - [x] Allena un modello baseline.
+- [x] Calibra probabilita' su validation-only.
 - [x] Genera segnali.
 - [x] Fa backtest.
 - [x] Mostra dashboard Streamlit.
@@ -40,23 +42,27 @@ Prossimi miglioramenti Milestone 1:
 - [x] Aggiungere conservative skip per daily-bar entry SL/TP ambiguity.
 - [x] Collegare GDELT macro-news storiche 2020-2024 come feature sperimentali.
 - [x] Eseguire news ablation con/senza GDELT.
-- [x] Eseguire threshold validation `0.55` vs `0.60`.
+- [x] Eseguire threshold validation ampia `0.45`-`0.60`.
+- [x] Aggiungere fallback agli snapshot locali quando `yfinance` fallisce.
 
 ## Milestone 2 - Research Validation
 
-- [ ] Walk-forward validation.
+- [x] Walk-forward validation iniziale.
 - [ ] TimeSeriesSplit.
 - [ ] Tuning iperparametri su validation, non su test.
 - [ ] Model registry con `joblib`.
 - [x] Calibration report / reliability analysis iniziale.
 - [x] Trade-level export e prima error analysis.
 - [x] Prima analisi soglia `model_probability`: default sperimentale portato a `0.55`.
+- [x] Walk-forward threshold selection: default aggiornato a `0.45`.
+- [x] Walk-forward raw vs isotonic: default aggiornato a isotonic `0.25`.
 - [x] Calibration plot / probability calibration vera.
 - [x] Implementare calibration layer su validation-only.
 - [x] Trade-level feature regime analysis.
 - [x] Regime-filter validation su volume, distance-from-high e ATR%.
-- [ ] Backtest threshold piu' ampio: 0.45-0.70 con selection su validation.
-- [ ] Valutare `atr_guard` solo come modalita' risk-first dopo walk-forward.
+- [x] Backtest threshold piu' ampio: 0.45-0.70 con selection su validation.
+- [ ] Valutare combined filters solo come modalita' risk-first dopo walk-forward.
+- [ ] Aggiungere fold walk-forward ulteriori quando ci saranno piu' anni/dati migliori.
 - [ ] Notebook `04_backtest_analysis.ipynb`.
 - [ ] Soglie scanner e modello versionate.
 

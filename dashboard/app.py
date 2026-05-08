@@ -18,6 +18,7 @@ NEWS_ABLATION_PATH = Path("experiments/news_ablation_latest.csv")
 THRESHOLD_VALIDATION_PATH = Path("experiments/threshold_validation_latest.csv")
 CALIBRATION_COMPARISON_PATH = Path("experiments/calibration_comparison_latest.csv")
 REGIME_FILTER_VALIDATION_PATH = Path("experiments/regime_filter_validation_latest.csv")
+WALK_FORWARD_VALIDATION_PATH = Path("experiments/walk_forward_validation_latest.csv")
 
 
 def latest_run_dir() -> Path | None:
@@ -39,6 +40,7 @@ if (
     or THRESHOLD_VALIDATION_PATH.exists()
     or CALIBRATION_COMPARISON_PATH.exists()
     or REGIME_FILTER_VALIDATION_PATH.exists()
+    or WALK_FORWARD_VALIDATION_PATH.exists()
 ):
     st.subheader("Experiment Reports")
     if NEWS_ABLATION_PATH.exists():
@@ -54,6 +56,9 @@ if (
     if REGIME_FILTER_VALIDATION_PATH.exists():
         with st.expander("Latest Regime Filter Validation", expanded=True):
             st.dataframe(pd.read_csv(REGIME_FILTER_VALIDATION_PATH), use_container_width=True)
+    if WALK_FORWARD_VALIDATION_PATH.exists():
+        with st.expander("Latest Walk-Forward Validation", expanded=True):
+            st.dataframe(pd.read_csv(WALK_FORWARD_VALIDATION_PATH), use_container_width=True)
 
 if run_dir is None:
     st.stop()
@@ -142,9 +147,10 @@ if signal_diagnostics_path.exists():
 
 if threshold_diagnostics_summary_path.exists():
     threshold_summary = json.loads(threshold_diagnostics_summary_path.read_text(encoding="utf-8"))
-    st.subheader("Probability Threshold Diagnostics")
-    st.metric("Recommended Threshold", threshold_summary.get("recommended_threshold"))
+    st.subheader("Label-Based Probability Threshold Diagnostics")
+    st.metric("Label Diagnostic Threshold", threshold_summary.get("recommended_threshold"))
     st.caption(threshold_summary.get("reason", ""))
+    st.caption("Operational defaults come from walk-forward validation, not from this label-only diagnostic.")
 
 if threshold_diagnostics_path.exists():
     threshold_diagnostics = pd.read_csv(threshold_diagnostics_path)

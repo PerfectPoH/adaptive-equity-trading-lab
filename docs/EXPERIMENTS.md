@@ -36,14 +36,14 @@ experiments/threshold_validation_latest.json
 experiments/threshold_validation_latest.csv
 ```
 
-Current best variant:
+Current best raw variant on the 2024 test-window sweep:
 
 ```text
 use_news=False
-model_probability_threshold=0.55
+model_probability_threshold=0.50
 ```
 
-This produced more signals and better 2024 strategy return than the stricter `0.60` threshold, while still underperforming buy-and-hold.
+This produced the best 2024 strategy return in a direct test-window sweep, but it is not promoted to default because selecting it would use test information. The default threshold is chosen by walk-forward validation instead.
 
 ## Calibration And Trade Analysis
 
@@ -78,23 +78,69 @@ experiments/calibration_comparison_latest.csv
 Current verdict:
 
 ```text
-calibration_improved_probabilities_but_not_strategy
+calibration_helped
 ```
 
-Isotonic calibration improved test Brier score and calibration error, but the calibrated probability scale needs a lower threshold. With threshold `0.25`, calibrated signals still underperformed the raw `0.55` baseline, so the default remains raw probabilities for now.
+Isotonic calibration improved test Brier score and calibration error. With a retuned threshold of `0.25`, the calibrated strategy improved the 2024 return from ~4.80% raw to ~6.99%. This is now the default research configuration, but it still underperforms buy-and-hold.
+
+## Walk-Forward Validation
+
+```powershell
+.\.venv-lab\Scripts\python.exe -m src.experiments.walk_forward_validation
+```
+
+Outputs:
+
+```text
+experiments/walk_forward_validation_latest.json
+experiments/walk_forward_validation_latest.csv
+```
+
+Current verdict:
+
+```text
+positive_but_under_benchmark
+```
+
+Fold results:
+
+```text
+wf_2023:
+  validation: 2022
+  selected variant: raw
+  selected threshold: 0.50
+  test year: 2023
+  test strategy return: ~5.53%
+  test excess return: ~-95.88%
+
+wf_2024:
+  validation: 2023
+  selected variant: isotonic
+  selected threshold: 0.25
+  test year: 2024
+  test strategy return: ~6.99%
+  test excess return: ~-41.06%
+```
+
+Decision:
+
+```text
+Promote default research configuration to isotonic calibration with model_probability threshold 0.25.
+Do not promote raw 0.50 even though it is better in a direct raw-only 2024 sweep, because that is test-window selection.
+```
 
 ## Feature-Regime Analysis
 
 Current default run:
 
 ```text
-20260508_181139
+20260508_185027
 ```
 
 Current finding:
 
 ```text
-No feature regime is net negative yet, but the weakest buckets are tied to mid/high distance-from-20d-high regimes, high ATR%, and lower relative volume.
+No feature regime is net negative yet. The weakest buckets in the current calibrated run are low rolling volatility, high distance-from-20d-high, and low calibrated model probability.
 ```
 
 Decision:
@@ -126,35 +172,31 @@ Latest variants:
 
 ```text
 baseline:
-  strategy return: ~3.21%
-  signals: 119
-  closed trades: 36
+  strategy return: ~6.99%
+  signals: 1093
+  closed trades: 140
 
 volume_floor:
-  strategy return: ~2.33%
-  signals: 65
-  closed trades: 26
+  strategy return: ~5.09%
+  signals: 441
 
 pullback_depth:
-  strategy return: ~2.27%
-  signals: 36
-  closed trades: 20
+  strategy return: ~5.21%
+  signals: 284
 
 atr_guard:
-  strategy return: ~2.85%
-  Sharpe: ~1.37
-  max drawdown: ~-1.04%
+  strategy return: ~5.84%
+  Sharpe: below baseline
   negative symbols: 0
 
 combined_filters:
-  strategy return: ~1.17%
-  signals: 13
-  closed trades: 9
+  strategy return: ~3.36%
+  signals: 102
 ```
 
 Decision:
 
 ```text
-Keep baseline as default. The filters reduce opportunity too much.
-ATR guard may be revisited later as a risk-first mode, not as the main strategy.
+Keep calibrated baseline as default. The filters reduce opportunity too much.
+Combined filters improve max drawdown, but sacrifice too much return for the main strategy.
 ```

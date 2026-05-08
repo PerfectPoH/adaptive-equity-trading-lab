@@ -8,7 +8,7 @@ from pathlib import Path
 import pandas as pd
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-from src.data.snapshot import save_snapshot
+from src.data.snapshot import latest_snapshot, save_snapshot
 
 
 REQUIRED_COLUMNS = ["Open", "High", "Low", "Close", "Volume"]
@@ -121,13 +121,39 @@ def download_universe(
                 LOGGER.warning("%s: %s", symbol, warning)
             if not validation.ok:
                 LOGGER.error("%s failed validation: %s", symbol, "; ".join(validation.errors))
+                fallback = load_latest_snapshot(symbol, snapshot_dir=snapshot_dir, min_bars=min_bars)
+                if fallback is not None:
+                    successful[symbol] = fallback
                 continue
 
             save_snapshot(symbol, frame, snapshot_dir=snapshot_dir)
             successful[symbol] = frame
         except Exception as exc:  # noqa: BLE001 - downloader should keep the universe moving.
             LOGGER.exception("Failed downloading %s: %s", symbol, exc)
+            fallback = load_latest_snapshot(symbol, snapshot_dir=snapshot_dir, min_bars=min_bars)
+            if fallback is not None:
+                successful[symbol] = fallback
         finally:
             time.sleep(pause_seconds)
 
     return successful
+
+
+def load_latest_snapshot(
+    symbol: str,
+    snapshot_dir: Path | str = "data/snapshots",
+    min_bars: int = 500,
+) -> pd.DataFrame | None:
+    path = latest_snapshot(symbol, snapshot_dir=snapshot_dir)
+    if path is None:
+        LOGGER.error("%s has no local snapshot fallback", symbol)
+        return None
+
+    frame = pd.read_csv(path, index_col=0, parse_dates=True)
+    frame = normalize_ohlcv(frame, symbol)
+    validation = validate_ohlcv(frame, min_bars=min_bars)
+    if not validation.ok:
+        LOGGER.error("%s snapshot fallback failed validation: %s", symbol, "; ".join(validation.errors))
+        return None
+    LOGGER.warning("%s loaded from local snapshot fallback: %s", symbol, path)
+    return frame

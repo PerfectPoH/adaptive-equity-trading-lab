@@ -52,11 +52,11 @@ atr_pct <= 0.0315
 ## Latest Result
 
 ```text
-baseline strategy return:          ~3.21%
-volume_floor strategy return:      ~2.33%
-pullback_depth strategy return:    ~2.27%
-atr_guard strategy return:         ~2.85%
-combined_filters strategy return:  ~1.17%
+baseline strategy return:          ~6.99%
+volume_floor strategy return:      ~5.09%
+pullback_depth strategy return:    ~5.21%
+atr_guard strategy return:         ~5.84%
+combined_filters strategy return:  ~3.36%
 ```
 
 Verdict:
@@ -69,16 +69,14 @@ filters_did_not_help
 
 The feature-regime analysis produced reasonable hypotheses, but those hypotheses did not survive direct validation as hard filters.
 
-`atr_guard` is the only interesting candidate:
+No return filter is good enough to promote. `combined_filters` is the only interesting risk candidate:
 
 ```text
-baseline Sharpe:  ~1.07
-atr_guard Sharpe: ~1.37
-baseline max DD:  ~-1.48%
-atr_guard max DD: ~-1.04%
+baseline max DD:         ~-4.36%
+combined_filters max DD: ~-2.92%
 ```
 
-However, `atr_guard` still reduces strategy return from ~3.21% to ~2.85%, so it should not replace the default.
+However, combined filters reduce strategy return from ~6.99% to ~3.36%, so they should not replace the default.
 
 ## Decision
 
@@ -86,9 +84,11 @@ Keep the default:
 
 ```text
 use_news = false
-raw probabilities
-model_probability > 0.55
+isotonic calibrated probabilities
+model_probability > 0.25
 no regime filters
 ```
 
-Future work may add `atr_guard` as an optional conservative/risk-first mode, but not before walk-forward validation.
+The filter conclusion still stands conceptually: do not add regime filters to the default until they pass their own walk-forward test.
+
+Future work may add combined filters as an optional conservative/risk-first mode, but only after dedicated walk-forward validation.

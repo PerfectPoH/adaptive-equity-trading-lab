@@ -20,46 +20,47 @@ experiments/runs/<run_id>/feature_regime_summary.json
 Run:
 
 ```text
-20260508_175115
+20260508_185027
 ```
 
 Signal config:
 
 ```text
 use_news = false
-model_probability_threshold = 0.55
+calibration_method = isotonic
+model_probability_threshold = 0.25
 ```
 
 Trade summary:
 
 ```text
-closed trades: 36
-wins: 23
-losses: 13
-trade win rate: ~63.9%
-avg trade return: ~3.08%
-positive symbols: 8
-negative symbols: 1
+closed trades: 140
+wins: 73
+losses: 67
+trade win rate: ~52.1%
+avg trade return: ~1.83%
+positive symbols: 10
+negative symbols: 0
 ```
 
 Worst trade:
 
 ```text
-NVDA
-signal date: 2024-06-12
-entry date: 2024-06-13
-exit date: 2024-06-24
-return: ~-6.89%
+META
+signal date: 2024-03-15
+entry date: 2024-03-18
+exit date: 2024-04-25
+return: ~-14.52%
 ```
 
 Best trade:
 
 ```text
-NVDA
-signal date: 2024-02-22
-entry date: 2024-02-23
-exit date: 2024-03-07
-return: ~12.79%
+TSLA
+signal date: 2024-11-06
+entry date: 2024-11-07
+exit date: 2024-11-11
+return: ~19.65%
 ```
 
 ## Calibration Finding
@@ -73,7 +74,7 @@ predicted 0.60-0.70 -> observed success ~25.3%
 predicted 0.70-0.80 -> observed success 0.0% on a tiny sample
 ```
 
-This means `model_probability > 0.55` should be treated as a ranking/filter score, not a literal probability of success.
+This means raw `model_probability` should be treated as a ranking/filter score, not a literal probability of success. The current default therefore uses an isotonic calibration layer fit on validation only.
 
 ## Calibration Layer Experiment
 
@@ -86,37 +87,37 @@ Runner:
 Latest comparison:
 
 ```text
-raw threshold 0.55:
-  strategy return: ~3.21%
+raw threshold 0.45:
+  strategy return: ~4.80%
   test Brier: ~0.208
-  test mean abs calibration error: ~0.212
-  signals: 119
+  test mean abs calibration error: ~0.207
+  signals: 616
 
-isotonic calibrated threshold 0.55:
+isotonic calibrated threshold 0.45:
   strategy return: 0.00%
-  test Brier: ~0.169
-  test mean abs calibration error: ~0.018
+  test Brier: ~0.172
+  test mean abs calibration error: ~0.042
   signals: 0
 
 isotonic calibrated threshold 0.25:
-  strategy return: ~2.00%
-  test Brier: ~0.169
-  test mean abs calibration error: ~0.018
-  signals: 85
+  strategy return: ~6.99%
+  test Brier: ~0.172
+  test mean abs calibration error: ~0.042
+  signals: 1093
 ```
 
 Decision:
 
 ```text
-Calibration improves probability quality, but does not improve the current strategy return.
-Keep raw probabilities as the default signal filter for now.
-Use calibrated probabilities for risk interpretation and future threshold research.
+Calibration improves probability quality and, after threshold retuning, improves strategy return.
+Promote isotonic calibration with threshold 0.25 as the current research default.
+Still treat this as a prototype: it remains far below buy-and-hold in 2024.
 ```
 
 Important detail: validation calibration metrics for isotonic are in-sample for the calibrator. The test calibration metrics are the meaningful out-of-sample check.
 
 ## Next Steps
 
-- Run a broader calibrated-threshold sweep before changing the default.
-- Run trade-level error analysis by feature regime.
-- Investigate AMD losses and NVDA tail risk.
+- Add a broader calibrated-threshold sweep inside walk-forward.
+- Investigate whether the broader calibrated signal set needs separate risk controls.
+- Add more years or a better point-in-time dataset before trusting the calibration result.

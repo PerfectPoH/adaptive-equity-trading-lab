@@ -41,32 +41,37 @@ win/loss feature contrasts
 Run:
 
 ```text
-20260508_181139
+20260508_185027
 ```
 
 Primary findings:
 
 ```text
 Weakest average-return regime:
-  signal_distance_from_20d_high = mid
-  avg return: ~0.30%
-  loss rate: 50%
-  trades: 12
+  signal_rolling_volatility_20d = low
+  avg return: ~0.38%
+  loss rate: ~53.2%
+  trades: 47
 
 Highest loss-rate regimes:
-  signal_distance_from_20d_high = mid/high
-  signal_atr_pct = high
-  loss rate: 50%
+  signal_distance_from_20d_high = high
+  signal_model_probability = low
+  signal_rolling_volatility_20d = low
+
+Best regimes:
+  signal_distance_from_20d_high = mid
+  calibrated signal_model_probability = high
+  calibrated signal_model_probability = mid
 
 Largest win/loss contrast:
-  losing trades had lower relative volume than winning trades.
+  losing trades had slightly higher relative volume than winning trades.
 ```
 
 Interpretation:
 
 ```text
 No feature bucket is net negative yet, so there is not enough evidence to add a hard filter.
-The strongest hypothesis is that low relative volume and weaker distance-from-high regimes make setups more fragile.
+The strongest current hypothesis is that setups too close to the 20-day high and low calibrated-probability buckets are more fragile.
 ```
 
 ## Decision
@@ -85,14 +90,14 @@ Result:
 filters_did_not_help
 ```
 
-None of the tested filters improved strategy return versus the raw baseline:
+None of the tested filters improved strategy return versus the calibrated baseline:
 
 ```text
-baseline:          ~3.21%
-volume_floor:      ~2.33%
-pullback_depth:    ~2.27%
-atr_guard:         ~2.85%
-combined_filters:  ~1.17%
+baseline:          ~6.99%
+volume_floor:      ~5.09%
+pullback_depth:    ~5.21%
+atr_guard:         ~5.84%
+combined_filters:  ~3.36%
 ```
 
-`atr_guard` improved Sharpe and drawdown, but gave up return. It can be revisited as a risk-first mode later, not as the default.
+No hard filter improved strategy return. Combined filters improved max drawdown, but gave up too much return. Any filter needs its own walk-forward validation before promotion.

@@ -1,48 +1,47 @@
 {
   "runs": [
     {
-      "run_dir": "experiments\\runs\\20260508_173143_no_news_thr55",
-      "run_id": "20260508_173143_no_news_thr55",
+      "run_dir": "experiments\\runs\\20260508_183233_no_news_thr45",
+      "run_id": "20260508_183233_no_news_thr45",
       "use_news": false,
-      "threshold": 0.55,
+      "threshold": 0.45,
       "aggregate_backtest": {
-        "strategy_return": 0.03206899254367681,
+        "strategy_return": 0.04797443979830465,
         "buy_and_hold_return": 0.4804665448965119,
-        "excess_return": -0.44839755235283507,
-        "max_drawdown": -0.014800029291102712,
-        "sharpe": 1.0675391464677588,
-        "profit_factor": 2.5388044478292957,
-        "win_rate": 0.665993265993266,
+        "excess_return": -0.4324921050982072,
+        "max_drawdown": -0.03643557874686042,
+        "sharpe": 0.9374212582558249,
+        "profit_factor": 2.1575494198298353,
+        "win_rate": 0.5164087301587301,
         "beats_buy_and_hold": false,
         "notes": "Mean of per-symbol 2024 backtests"
       },
       "validation_metrics": {
-        "accuracy": 0.5703125,
-        "roc_auc": 0.5079989228520241,
-        "rows": 2432.0
+        "accuracy": 0.580728051391863,
+        "roc_auc": 0.5141977175109705,
+        "rows": 2335.0
       },
       "test_metrics": {
-        "accuracy": 0.728369384359401,
-        "roc_auc": 0.6506938878386894,
-        "rows": 2404.0
+        "accuracy": 0.731401384083045,
+        "roc_auc": 0.6546308782294142,
+        "rows": 2312.0
       },
       "analysis_summary": {
         "symbols_analyzed": 10,
-        "total_signals": 119,
-        "total_executable_signals": 109,
-        "total_skipped_signals": 10,
-        "symbols_with_signals": 9,
-        "symbols_with_trades": 9,
+        "total_signals": 616,
+        "total_executable_signals": 578,
+        "total_skipped_signals": 38,
+        "symbols_with_signals": 10,
+        "symbols_with_trades": 10,
         "underperforming_symbols": 9,
         "outperforming_symbols": 1,
         "top_skip_reason": "entry_bar_exit_touch",
-        "mean_strategy_return": 0.03206899254367681,
+        "mean_strategy_return": 0.04797443979830466,
         "mean_buy_and_hold_return": 0.4804665448965119,
-        "mean_excess_return": -0.44839755235283507,
+        "mean_excess_return": -0.43249210509820724,
         "primary_findings": [
           "9 symbols underperformed buy-and-hold in the 2024 test window.",
-          "Signals were concentrated in 9 of 10 symbols.",
-          "10 of 119 signals were skipped by execution rules.",
+          "38 of 616 signals were skipped by execution rules.",
           "Most common execution skip reason: entry_bar_exit_touch."
         ]
       },
@@ -50,60 +49,178 @@
         "symbols_analyzed": 10,
         "symbols_with_scanner_pass": 10,
         "symbols_with_model_pass": 10,
-        "symbols_with_signals": 9,
+        "symbols_with_signals": 10,
         "total_scanner_pass_days": 1237,
-        "total_model_pass_days": 168,
-        "total_signal_days": 119,
+        "total_model_pass_days": 1038,
+        "total_signal_days": 616,
         "primary_bottlenecks": {
-          "passes_signal_stack": 9,
-          "scanner_model_misalignment": 1
+          "passes_signal_stack": 10
         }
       }
     },
     {
-      "run_dir": "experiments\\runs\\20260508_173200_no_news_thr60",
-      "run_id": "20260508_173200_no_news_thr60",
+      "run_dir": "experiments\\runs\\20260508_183251_no_news_thr50",
+      "run_id": "20260508_183251_no_news_thr50",
       "use_news": false,
-      "threshold": 0.6,
+      "threshold": 0.5,
       "aggregate_backtest": {
-        "strategy_return": 0.01042246212136773,
+        "strategy_return": 0.05030305834434033,
         "buy_and_hold_return": 0.4804665448965119,
-        "excess_return": -0.4700440827751441,
-        "max_drawdown": -0.002569248109423894,
-        "sharpe": 1.4548184771883932,
-        "profit_factor": 3.2251971586710475,
-        "win_rate": 0.7380952380952381,
+        "excess_return": -0.43016348655217157,
+        "max_drawdown": -0.02289109634355222,
+        "sharpe": 1.1707090733212928,
+        "profit_factor": 2.9615847986597914,
+        "win_rate": 0.6523809523809522,
         "beats_buy_and_hold": false,
         "notes": "Mean of per-symbol 2024 backtests"
       },
       "validation_metrics": {
-        "accuracy": 0.5703125,
-        "roc_auc": 0.5079989228520241,
-        "rows": 2432.0
+        "accuracy": 0.580728051391863,
+        "roc_auc": 0.5141977175109705,
+        "rows": 2335.0
       },
       "test_metrics": {
-        "accuracy": 0.728369384359401,
-        "roc_auc": 0.6506938878386894,
-        "rows": 2404.0
+        "accuracy": 0.731401384083045,
+        "roc_auc": 0.6546308782294142,
+        "rows": 2312.0
       },
       "analysis_summary": {
         "symbols_analyzed": 10,
-        "total_signals": 36,
-        "total_executable_signals": 32,
+        "total_signals": 334,
+        "total_executable_signals": 309,
+        "total_skipped_signals": 25,
+        "symbols_with_signals": 10,
+        "symbols_with_trades": 10,
+        "underperforming_symbols": 9,
+        "outperforming_symbols": 1,
+        "top_skip_reason": "entry_bar_exit_touch",
+        "mean_strategy_return": 0.05030305834434033,
+        "mean_buy_and_hold_return": 0.4804665448965119,
+        "mean_excess_return": -0.43016348655217146,
+        "primary_findings": [
+          "9 symbols underperformed buy-and-hold in the 2024 test window.",
+          "25 of 334 signals were skipped by execution rules.",
+          "Most common execution skip reason: entry_bar_exit_touch."
+        ]
+      },
+      "signal_diagnostics_summary": {
+        "symbols_analyzed": 10,
+        "symbols_with_scanner_pass": 10,
+        "symbols_with_model_pass": 10,
+        "symbols_with_signals": 10,
+        "total_scanner_pass_days": 1237,
+        "total_model_pass_days": 536,
+        "total_signal_days": 334,
+        "primary_bottlenecks": {
+          "passes_signal_stack": 10
+        }
+      }
+    },
+    {
+      "run_dir": "experiments\\runs\\20260508_183308_no_news_thr55",
+      "run_id": "20260508_183308_no_news_thr55",
+      "use_news": false,
+      "threshold": 0.55,
+      "aggregate_backtest": {
+        "strategy_return": 0.030281676144317243,
+        "buy_and_hold_return": 0.4804665448965119,
+        "excess_return": -0.4501848687521946,
+        "max_drawdown": -0.012476403232148348,
+        "sharpe": 1.1181899098720527,
+        "profit_factor": 2.41544716529253,
+        "win_rate": 0.6672619047619047,
+        "beats_buy_and_hold": false,
+        "notes": "Mean of per-symbol 2024 backtests"
+      },
+      "validation_metrics": {
+        "accuracy": 0.580728051391863,
+        "roc_auc": 0.5141977175109705,
+        "rows": 2335.0
+      },
+      "test_metrics": {
+        "accuracy": 0.731401384083045,
+        "roc_auc": 0.6546308782294142,
+        "rows": 2312.0
+      },
+      "analysis_summary": {
+        "symbols_analyzed": 10,
+        "total_signals": 113,
+        "total_executable_signals": 103,
+        "total_skipped_signals": 10,
+        "symbols_with_signals": 8,
+        "symbols_with_trades": 8,
+        "underperforming_symbols": 9,
+        "outperforming_symbols": 1,
+        "top_skip_reason": "entry_bar_exit_touch",
+        "mean_strategy_return": 0.030281676144317243,
+        "mean_buy_and_hold_return": 0.4804665448965119,
+        "mean_excess_return": -0.45018486875219466,
+        "primary_findings": [
+          "9 symbols underperformed buy-and-hold in the 2024 test window.",
+          "Signals were concentrated in 8 of 10 symbols.",
+          "10 of 113 signals were skipped by execution rules.",
+          "Most common execution skip reason: entry_bar_exit_touch."
+        ]
+      },
+      "signal_diagnostics_summary": {
+        "symbols_analyzed": 10,
+        "symbols_with_scanner_pass": 10,
+        "symbols_with_model_pass": 9,
+        "symbols_with_signals": 8,
+        "total_scanner_pass_days": 1237,
+        "total_model_pass_days": 161,
+        "total_signal_days": 113,
+        "primary_bottlenecks": {
+          "passes_signal_stack": 8,
+          "scanner_model_misalignment": 1,
+          "model_probability_filter": 1
+        }
+      }
+    },
+    {
+      "run_dir": "experiments\\runs\\20260508_183325_no_news_thr60",
+      "run_id": "20260508_183325_no_news_thr60",
+      "use_news": false,
+      "threshold": 0.6,
+      "aggregate_backtest": {
+        "strategy_return": 0.0075312272919288385,
+        "buy_and_hold_return": 0.4804665448965119,
+        "excess_return": -0.472935317604583,
+        "max_drawdown": -0.003665167455967999,
+        "sharpe": 1.0020200156942523,
+        "profit_factor": 1.9842222453213527,
+        "win_rate": 0.6904761904761904,
+        "beats_buy_and_hold": false,
+        "notes": "Mean of per-symbol 2024 backtests"
+      },
+      "validation_metrics": {
+        "accuracy": 0.580728051391863,
+        "roc_auc": 0.5141977175109705,
+        "rows": 2335.0
+      },
+      "test_metrics": {
+        "accuracy": 0.731401384083045,
+        "roc_auc": 0.6546308782294142,
+        "rows": 2312.0
+      },
+      "analysis_summary": {
+        "symbols_analyzed": 10,
+        "total_signals": 35,
+        "total_executable_signals": 31,
         "total_skipped_signals": 4,
         "symbols_with_signals": 4,
         "symbols_with_trades": 3,
         "underperforming_symbols": 9,
         "outperforming_symbols": 1,
         "top_skip_reason": "entry_bar_exit_touch",
-        "mean_strategy_return": 0.01042246212136773,
+        "mean_strategy_return": 0.007531227291928837,
         "mean_buy_and_hold_return": 0.4804665448965119,
-        "mean_excess_return": -0.4700440827751441,
+        "mean_excess_return": -0.472935317604583,
         "primary_findings": [
           "9 symbols underperformed buy-and-hold in the 2024 test window.",
           "Signals were concentrated in 4 of 10 symbols.",
           "Only 3 symbols produced closed trades.",
-          "4 of 36 signals were skipped by execution rules.",
+          "4 of 35 signals were skipped by execution rules.",
           "Most common execution skip reason: entry_bar_exit_touch."
         ]
       },
@@ -113,8 +230,8 @@
         "symbols_with_model_pass": 4,
         "symbols_with_signals": 4,
         "total_scanner_pass_days": 1237,
-        "total_model_pass_days": 40,
-        "total_signal_days": 36,
+        "total_model_pass_days": 39,
+        "total_signal_days": 35,
         "primary_bottlenecks": {
           "model_probability_filter": 6,
           "passes_signal_stack": 4
@@ -122,69 +239,186 @@
       }
     },
     {
-      "run_dir": "experiments\\runs\\20260508_173217_news_thr55",
-      "run_id": "20260508_173217_news_thr55",
+      "run_dir": "experiments\\runs\\20260508_183341_news_thr45",
+      "run_id": "20260508_183341_news_thr45",
       "use_news": true,
-      "threshold": 0.55,
+      "threshold": 0.45,
       "aggregate_backtest": {
-        "strategy_return": 0.006625208613441893,
+        "strategy_return": 0.040869384556899105,
         "buy_and_hold_return": 0.4804665448965119,
-        "excess_return": -0.47384133628307,
-        "max_drawdown": -0.003120167398932161,
-        "sharpe": 0.7483056261754458,
-        "profit_factor": 1.9543368743669567,
-        "win_rate": 0.35714285714285715,
+        "excess_return": -0.4395971603396127,
+        "max_drawdown": -0.020185831905652075,
+        "sharpe": 1.0970716774297773,
+        "profit_factor": 3.0694722707957047,
+        "win_rate": 0.6753479853479852,
         "beats_buy_and_hold": false,
         "notes": "Mean of per-symbol 2024 backtests"
       },
       "validation_metrics": {
-        "accuracy": 0.6932565789473685,
-        "roc_auc": 0.5455433918437183,
-        "rows": 2432.0
+        "accuracy": 0.6792291220556745,
+        "roc_auc": 0.5359478454357973,
+        "rows": 2335.0
       },
       "test_metrics": {
-        "accuracy": 0.7874376039933444,
-        "roc_auc": 0.6485383742911153,
-        "rows": 2404.0
+        "accuracy": 0.7798442906574394,
+        "roc_auc": 0.6447655129604658,
+        "rows": 2312.0
       },
       "analysis_summary": {
         "symbols_analyzed": 10,
-        "total_signals": 32,
-        "total_executable_signals": 30,
-        "total_skipped_signals": 2,
-        "symbols_with_signals": 2,
-        "symbols_with_trades": 2,
+        "total_signals": 255,
+        "total_executable_signals": 234,
+        "total_skipped_signals": 21,
+        "symbols_with_signals": 10,
+        "symbols_with_trades": 10,
         "underperforming_symbols": 9,
         "outperforming_symbols": 1,
         "top_skip_reason": "entry_bar_exit_touch",
-        "mean_strategy_return": 0.006625208613441893,
+        "mean_strategy_return": 0.04086938455689911,
         "mean_buy_and_hold_return": 0.4804665448965119,
-        "mean_excess_return": -0.4738413362830699,
+        "mean_excess_return": -0.4395971603396127,
         "primary_findings": [
           "9 symbols underperformed buy-and-hold in the 2024 test window.",
-          "Signals were concentrated in 2 of 10 symbols.",
-          "2 of 32 signals were skipped by execution rules.",
+          "21 of 255 signals were skipped by execution rules.",
           "Most common execution skip reason: entry_bar_exit_touch."
         ]
       },
       "signal_diagnostics_summary": {
         "symbols_analyzed": 10,
         "symbols_with_scanner_pass": 10,
-        "symbols_with_model_pass": 3,
-        "symbols_with_signals": 2,
+        "symbols_with_model_pass": 10,
+        "symbols_with_signals": 10,
         "total_scanner_pass_days": 1237,
-        "total_model_pass_days": 37,
-        "total_signal_days": 32,
+        "total_model_pass_days": 373,
+        "total_signal_days": 255,
         "primary_bottlenecks": {
-          "model_probability_filter": 7,
-          "passes_signal_stack": 2,
-          "scanner_model_misalignment": 1
+          "passes_signal_stack": 10
         }
       }
     },
     {
-      "run_dir": "experiments\\runs\\20260508_173235_news_thr60",
-      "run_id": "20260508_173235_news_thr60",
+      "run_dir": "experiments\\runs\\20260508_183358_news_thr50",
+      "run_id": "20260508_183358_news_thr50",
+      "use_news": true,
+      "threshold": 0.5,
+      "aggregate_backtest": {
+        "strategy_return": 0.026313572822207743,
+        "buy_and_hold_return": 0.4804665448965119,
+        "excess_return": -0.4541529720743041,
+        "max_drawdown": -0.010055270054695632,
+        "sharpe": 1.1001499416725904,
+        "profit_factor": 2.6634839847252954,
+        "win_rate": 0.7333333333333333,
+        "beats_buy_and_hold": false,
+        "notes": "Mean of per-symbol 2024 backtests"
+      },
+      "validation_metrics": {
+        "accuracy": 0.6792291220556745,
+        "roc_auc": 0.5359478454357973,
+        "rows": 2335.0
+      },
+      "test_metrics": {
+        "accuracy": 0.7798442906574394,
+        "roc_auc": 0.6447655129604658,
+        "rows": 2312.0
+      },
+      "analysis_summary": {
+        "symbols_analyzed": 10,
+        "total_signals": 77,
+        "total_executable_signals": 71,
+        "total_skipped_signals": 6,
+        "symbols_with_signals": 9,
+        "symbols_with_trades": 9,
+        "underperforming_symbols": 9,
+        "outperforming_symbols": 1,
+        "top_skip_reason": "entry_bar_exit_touch",
+        "mean_strategy_return": 0.026313572822207743,
+        "mean_buy_and_hold_return": 0.4804665448965119,
+        "mean_excess_return": -0.4541529720743041,
+        "primary_findings": [
+          "9 symbols underperformed buy-and-hold in the 2024 test window.",
+          "Signals were concentrated in 9 of 10 symbols.",
+          "6 of 77 signals were skipped by execution rules.",
+          "Most common execution skip reason: entry_bar_exit_touch."
+        ]
+      },
+      "signal_diagnostics_summary": {
+        "symbols_analyzed": 10,
+        "symbols_with_scanner_pass": 10,
+        "symbols_with_model_pass": 9,
+        "symbols_with_signals": 9,
+        "total_scanner_pass_days": 1237,
+        "total_model_pass_days": 108,
+        "total_signal_days": 77,
+        "primary_bottlenecks": {
+          "passes_signal_stack": 9,
+          "model_probability_filter": 1
+        }
+      }
+    },
+    {
+      "run_dir": "experiments\\runs\\20260508_183415_news_thr55",
+      "run_id": "20260508_183415_news_thr55",
+      "use_news": true,
+      "threshold": 0.55,
+      "aggregate_backtest": {
+        "strategy_return": 0.0076530686223753586,
+        "buy_and_hold_return": 0.4804665448965119,
+        "excess_return": -0.4728134762741366,
+        "max_drawdown": -0.0012246579840336613,
+        "sharpe": 2.1176996772496874,
+        "profit_factor": 3.9086737487339134,
+        "win_rate": 0.7142857142857143,
+        "beats_buy_and_hold": false,
+        "notes": "Mean of per-symbol 2024 backtests"
+      },
+      "validation_metrics": {
+        "accuracy": 0.6792291220556745,
+        "roc_auc": 0.5359478454357973,
+        "rows": 2335.0
+      },
+      "test_metrics": {
+        "accuracy": 0.7798442906574394,
+        "roc_auc": 0.6447655129604658,
+        "rows": 2312.0
+      },
+      "analysis_summary": {
+        "symbols_analyzed": 10,
+        "total_signals": 30,
+        "total_executable_signals": 28,
+        "total_skipped_signals": 2,
+        "symbols_with_signals": 1,
+        "symbols_with_trades": 1,
+        "underperforming_symbols": 9,
+        "outperforming_symbols": 1,
+        "top_skip_reason": "entry_bar_exit_touch",
+        "mean_strategy_return": 0.0076530686223753586,
+        "mean_buy_and_hold_return": 0.4804665448965119,
+        "mean_excess_return": -0.4728134762741365,
+        "primary_findings": [
+          "9 symbols underperformed buy-and-hold in the 2024 test window.",
+          "Signals were concentrated in 1 of 10 symbols.",
+          "2 of 30 signals were skipped by execution rules.",
+          "Most common execution skip reason: entry_bar_exit_touch."
+        ]
+      },
+      "signal_diagnostics_summary": {
+        "symbols_analyzed": 10,
+        "symbols_with_scanner_pass": 10,
+        "symbols_with_model_pass": 1,
+        "symbols_with_signals": 1,
+        "total_scanner_pass_days": 1237,
+        "total_model_pass_days": 34,
+        "total_signal_days": 30,
+        "primary_bottlenecks": {
+          "model_probability_filter": 9,
+          "passes_signal_stack": 1
+        }
+      }
+    },
+    {
+      "run_dir": "experiments\\runs\\20260508_183432_news_thr60",
+      "run_id": "20260508_183432_news_thr60",
       "use_news": true,
       "threshold": 0.6,
       "aggregate_backtest": {
@@ -199,14 +433,14 @@
         "notes": "Mean of per-symbol 2024 backtests"
       },
       "validation_metrics": {
-        "accuracy": 0.6932565789473685,
-        "roc_auc": 0.5455433918437183,
-        "rows": 2432.0
+        "accuracy": 0.6792291220556745,
+        "roc_auc": 0.5359478454357973,
+        "rows": 2335.0
       },
       "test_metrics": {
-        "accuracy": 0.7874376039933444,
-        "roc_auc": 0.6485383742911153,
-        "rows": 2404.0
+        "accuracy": 0.7798442906574394,
+        "roc_auc": 0.6447655129604658,
+        "rows": 2312.0
       },
       "analysis_summary": {
         "symbols_analyzed": 10,
@@ -234,7 +468,7 @@
         "symbols_with_model_pass": 1,
         "symbols_with_signals": 1,
         "total_scanner_pass_days": 1237,
-        "total_model_pass_days": 25,
+        "total_model_pass_days": 26,
         "total_signal_days": 23,
         "primary_bottlenecks": {
           "model_probability_filter": 9,
@@ -244,35 +478,35 @@
     }
   ],
   "best_by_strategy_return": {
-    "run_id": "20260508_173143_no_news_thr55",
+    "run_id": "20260508_183251_no_news_thr50",
     "use_news": false,
-    "threshold": 0.55,
-    "strategy_return": 0.03206899254367681,
+    "threshold": 0.5,
+    "strategy_return": 0.05030305834434033,
     "buy_and_hold_return": 0.4804665448965119,
-    "excess_return": -0.44839755235283507,
-    "max_drawdown": -0.014800029291102712,
-    "win_rate": 0.665993265993266,
-    "validation_roc_auc": 0.5079989228520241,
-    "test_roc_auc": 0.6506938878386894,
-    "total_signals": 119,
-    "executable_signals": 109,
-    "symbols_with_signals": 9,
+    "excess_return": -0.43016348655217157,
+    "max_drawdown": -0.02289109634355222,
+    "win_rate": 0.6523809523809522,
+    "validation_roc_auc": 0.5141977175109705,
+    "test_roc_auc": 0.6546308782294142,
+    "total_signals": 334,
+    "executable_signals": 309,
+    "symbols_with_signals": 10,
     "symbols_with_model_pass": 10
   },
   "best_by_excess_return": {
-    "run_id": "20260508_173143_no_news_thr55",
+    "run_id": "20260508_183251_no_news_thr50",
     "use_news": false,
-    "threshold": 0.55,
-    "strategy_return": 0.03206899254367681,
+    "threshold": 0.5,
+    "strategy_return": 0.05030305834434033,
     "buy_and_hold_return": 0.4804665448965119,
-    "excess_return": -0.44839755235283507,
-    "max_drawdown": -0.014800029291102712,
-    "win_rate": 0.665993265993266,
-    "validation_roc_auc": 0.5079989228520241,
-    "test_roc_auc": 0.6506938878386894,
-    "total_signals": 119,
-    "executable_signals": 109,
-    "symbols_with_signals": 9,
+    "excess_return": -0.43016348655217157,
+    "max_drawdown": -0.02289109634355222,
+    "win_rate": 0.6523809523809522,
+    "validation_roc_auc": 0.5141977175109705,
+    "test_roc_auc": 0.6546308782294142,
+    "total_signals": 334,
+    "executable_signals": 309,
+    "symbols_with_signals": 10,
     "symbols_with_model_pass": 10
   }
 }

@@ -22,17 +22,53 @@ class TemporalSplit:
     test: pd.DataFrame
 
 
+DEFAULT_LABEL_PURGE_BARS = 10
+
+
 def temporal_split(
     frame: pd.DataFrame,
     train_end: str = "2022-12-31",
     validation_end: str = "2023-12-31",
     test_end: str = "2024-12-31",
+    label_horizon_bars: int = DEFAULT_LABEL_PURGE_BARS,
 ) -> TemporalSplit:
     data = frame.sort_index()
-    train = data.loc[:train_end].copy()
-    validation = data.loc[pd.Timestamp(train_end) + pd.Timedelta(days=1) : validation_end].copy()
-    test = data.loc[pd.Timestamp(validation_end) + pd.Timedelta(days=1) : test_end].copy()
+    train = purge_label_boundary(data.loc[:train_end].copy(), label_horizon_bars=label_horizon_bars)
+    validation = purge_label_boundary(
+        data.loc[pd.Timestamp(train_end) + pd.Timedelta(days=1) : validation_end].copy(),
+        label_horizon_bars=label_horizon_bars,
+    )
+    test = purge_label_boundary(
+        data.loc[pd.Timestamp(validation_end) + pd.Timedelta(days=1) : test_end].copy(),
+        label_horizon_bars=label_horizon_bars,
+    )
     return TemporalSplit(train=train, validation=validation, test=test)
+
+
+def purge_label_boundary(
+    frame: pd.DataFrame,
+    label_horizon_bars: int = DEFAULT_LABEL_PURGE_BARS,
+    symbol_column: str = "symbol",
+) -> pd.DataFrame:
+    """Drop rows whose forward label horizon crosses a temporal split boundary."""
+    if label_horizon_bars <= 0 or frame.empty:
+        return frame.copy()
+
+    data = frame.sort_index().copy()
+    if symbol_column not in data.columns:
+        if len(data) <= label_horizon_bars:
+            return data.iloc[0:0].copy()
+        return data.iloc[:-label_horizon_bars].copy()
+
+    purged_groups = []
+    for _symbol, group in data.groupby(symbol_column, sort=False):
+        group = group.sort_index()
+        if len(group) > label_horizon_bars:
+            purged_groups.append(group.iloc[:-label_horizon_bars].copy())
+
+    if not purged_groups:
+        return data.iloc[0:0].copy()
+    return pd.concat(purged_groups).sort_index()
 
 
 def training_rows(frame: pd.DataFrame, feature_columns: list[str] | None = None) -> pd.DataFrame:

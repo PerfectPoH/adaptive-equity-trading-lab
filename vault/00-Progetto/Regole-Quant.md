@@ -16,6 +16,7 @@ Una pipeline che bara vale zero, anche se mostra performance alte. Un backtest o
 - `yfinance` e' solo per MVP.
 - Ogni snapshot deve avere hash.
 - Dataset vuoti o troncati vanno scartati.
+- Se un download fresco fallisce, usare solo snapshot locali gia' validati; non cambiare universo in modo silenzioso.
 - Per live serio servono dati point-in-time e survivorship-bias-free.
 
 ## 3. Feature
@@ -43,6 +44,8 @@ stop/take profit calcolati da entry effettiva
 
 Se nella stessa candela vengono toccati stop e take profit, usare scelta conservativa: label 0.
 
+Le label possono guardare avanti solo dentro lo stesso periodo temporale. Le ultime barre di train, validation e test vanno purgate se l'orizzonte della label supera il confine del periodo.
+
 ## 5. Split
 
 ```text
@@ -53,6 +56,8 @@ Forward: 2025+
 ```
 
 Vietato: random split, tuning su test, feature selection sul test, cambiare soglie dopo aver visto il test senza loggare.
+
+Ogni scelta di soglia/modello va promossa solo se selezionata su validation o walk-forward, non perche' migliora direttamente il test 2024.
 
 ## 6. Execution
 

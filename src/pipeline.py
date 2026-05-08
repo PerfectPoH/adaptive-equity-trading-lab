@@ -33,7 +33,8 @@ NEWS_START = "2020-01-01"
 NEWS_END = "2024-12-31"
 MAX_GAP_THRESHOLD = 0.05
 DEFAULT_USE_NEWS = False
-DEFAULT_MIN_MODEL_PROBABILITY = 0.55
+DEFAULT_CALIBRATION_METHOD = "isotonic"
+DEFAULT_MIN_MODEL_PROBABILITY = 0.25
 RUNS_DIR = Path("experiments/runs")
 LOG_PATH = Path("experiments/log.csv")
 
@@ -43,7 +44,7 @@ def run_milestone_1(
     run_tag: str | None = None,
     min_scanner_score: float = 70,
     min_model_probability: float = DEFAULT_MIN_MODEL_PROBABILITY,
-    calibration_method: str | None = None,
+    calibration_method: str | None = DEFAULT_CALIBRATION_METHOD,
     min_relative_volume: float | None = None,
     max_distance_from_20d_high: float | None = None,
     max_atr_pct: float | None = None,

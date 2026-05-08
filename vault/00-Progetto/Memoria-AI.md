@@ -82,8 +82,10 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 - Fallimento rispetto a buy-and-hold documentato invece di nascosto.
 - Vault separato e pulito, non copiato dal progetto Soresina.
 - Test anti-shift su `backtesting.py`: il trade deve entrare al next open.
+- Purged temporal split: eliminare le ultime barre dei periodi quando la label forward supererebbe il confine.
 - Analisi per-run: distinguere strategia scarsa da strategia troppo selettiva.
 - News GDELT laggate di un giorno: usare come contesto sperimentale, non come trigger.
+- Snapshot fallback: se `yfinance` fallisce, usare l'ultimo snapshot locale valido invece di cambiare universo in modo silenzioso.
 
 ## Comandi stabili
 
@@ -94,47 +96,61 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 .\.venv-lab\Scripts\python.exe -m src.experiments.threshold_validation
 .\.venv-lab\Scripts\python.exe -m src.experiments.calibration_comparison
 .\.venv-lab\Scripts\python.exe -m src.experiments.regime_filter_validation
+.\.venv-lab\Scripts\python.exe -m src.experiments.walk_forward_validation
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
 
 ## Risultato importante 2026-05-08
 
-Run default `20260508_181139`:
+Run default `20260508_185027`:
 
-- config: `use_news=false`, `model_probability > 0.55`;
-- 119 segnali totali nel 2024;
-- 109 segnali eseguibili;
-- 10 segnali saltati per `entry_bar_exit_touch`;
-- segnali su 9 simboli su 10;
+- config: `use_news=false`, isotonic calibration, `model_probability > 0.25`, no regime filters;
+- default scelto tramite walk-forward: raw 0.50 nel fold 2023, isotonic 0.25 nel fold 2024;
+- 1093 segnali totali nel 2024;
+- 1036 segnali eseguibili;
+- 57 segnali saltati per `entry_bar_exit_touch`;
+- segnali su 10 simboli su 10;
 - 9 simboli su 10 sotto buy-and-hold;
-- media strategia circa 3.21%;
+- media strategia circa 6.99%;
 - buy-and-hold medio circa 48%;
-- diagnosi: soglia 0.55 riduce il collo di bottiglia del modello, ma la strategia resta molto sotto buy-and-hold.
-- trade analysis: 36 trade chiusi, 23 vincenti, 13 perdenti, win rate trade circa 63.9%;
-- best trade: NVDA segnale 2024-02-22, circa +12.79%;
-- worst trade: NVDA segnale 2024-06-12, circa -6.89%;
-- AMD e' l'unico simbolo con media trade negativa nel run corrente.
+- diagnosi: calibrazione isotonic 0.25 migliora il rendimento rispetto al raw 0.45, ma resta molto sotto buy-and-hold;
+- trade analysis: 140 trade chiusi, 73 vincenti, 67 perdenti, win rate trade circa 52.1%;
+- best trade: TSLA segnale 2024-11-06, circa +19.65%;
+- worst trade: META segnale 2024-03-15, circa -14.52%;
+- nessun simbolo ha media trade negativa nel run corrente.
 - feature-regime analysis:
   - nessun bucket feature e' netto negativo;
-  - regime piu' debole: `signal_distance_from_20d_high = mid`, avg return circa 0.30%, loss rate 50%;
-  - altri regimi con loss rate 50%: `signal_distance_from_20d_high = high`, `signal_atr_pct = high`;
-  - contrasto principale: i trade perdenti hanno volume relativo piu' basso dei trade vincenti;
+  - regime piu' debole: `signal_rolling_volatility_20d = low`, avg return circa 0.38%, loss rate circa 53.2%;
+  - altri regimi fragili: `signal_distance_from_20d_high = high`, `signal_model_probability = low`;
+  - contrasto principale: i trade perdenti hanno volume relativo leggermente piu' alto dei trade vincenti;
   - esperimento separato su volume/distance/ATR eseguito;
   - verdict: `filters_did_not_help`;
-  - baseline resta migliore per strategy return: circa 3.21%;
-  - `atr_guard` migliora Sharpe/drawdown, ma scende a circa 2.85% strategy return;
-  - decisione: nessun regime filter diventa default; `atr_guard` solo possibile modalita' risk-first futura.
+  - baseline calibrata 0.25 resta migliore dei filtri hard provati in quell'esperimento;
+  - combined filters migliorano max drawdown ma scendono a circa 3.36% strategy return;
+  - decisione: nessun regime filter diventa default; combined filters solo possibile modalita' risk-first futura.
+
+Walk-forward:
+
+- runner: `src.experiments.walk_forward_validation`;
+- fold `wf_2023`: validation 2022 -> raw threshold 0.50 -> test 2023 strategy return circa 5.53%;
+- fold `wf_2024`: validation 2023 -> isotonic threshold 0.25 -> test 2024 strategy return circa 6.99%;
+- mean test strategy return circa 6.26%;
+- mean test excess return circa -68.47%;
+- fold che battono buy-and-hold: 0/2;
+- verdict: `positive_but_under_benchmark`;
+- decisione: default di ricerca promosso a isotonic threshold 0.25.
+- nota anti-overfit: raw threshold 0.50 e altri valori migliori nel test-window sweep non diventano default se non scelti in walk-forward.
 
 Calibration:
 
 - il modello e' overconfident;
-- `model_probability > 0.55` funziona come filtro/ranking, non come probabilita' reale;
+- raw `model_probability` funziona come filtro/ranking, non come probabilita' reale;
 - calibration layer isotonic fit solo su validation implementato;
-- test Brier migliora da circa 0.208 a circa 0.169;
-- test mean absolute calibration error migliora da circa 0.212 a circa 0.018;
-- soglia raw `0.55` con modello calibrato produce 0 segnali perche' cambia scala probabilistica;
-- soglia calibrata `0.25` produce segnali, ma strategy return scende a circa 2.00% contro 3.21% raw;
-- decisione: calibrazione utile per interpretazione del rischio, non default operativo.
+- test Brier migliora da circa 0.208 a circa 0.172;
+- test mean absolute calibration error migliora da circa 0.207 a circa 0.042;
+- soglia `0.45` con modello calibrato produce 0 segnali perche' cambia scala probabilistica;
+- soglia calibrata `0.25` produce 1093 segnali e strategy return circa 6.99% contro 4.80% raw;
+- decisione: calibrazione isotonic 0.25 e' default di ricerca, ma non prova di strategia pronta.
 
 News ablation:
 

@@ -1,0 +1,55 @@
+{
+  "thresholds": {
+    "raw": [
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7
+    ],
+    "isotonic": [
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45
+    ]
+  },
+  "min_validation_trades": 10,
+  "folds": [
+    {
+      "fold": "wf_2023",
+      "selected_probability_variant": "raw",
+      "selected_threshold": 0.5,
+      "validation_strategy_return": -0.011589753805873102,
+      "validation_excess_return": 0.43091372519617394,
+      "validation_closed_trades": 14,
+      "test_strategy_return": 0.05532253831039587,
+      "test_excess_return": -0.9588343432957032,
+      "test_closed_trades": 71,
+      "test_beats_buy_and_hold": false
+    },
+    {
+      "fold": "wf_2024",
+      "selected_probability_variant": "isotonic",
+      "selected_threshold": 0.25,
+      "validation_strategy_return": 0.09106203571155552,
+      "validation_excess_return": -0.9230948458945438,
+      "validation_closed_trades": 122,
+      "test_strategy_return": 0.06990964994883664,
+      "test_excess_return": -0.4105568949476752,
+      "test_closed_trades": 140,
+      "test_beats_buy_and_hold": false
+    }
+  ],
+  "summary": {
+    "folds": 2,
+    "mean_test_strategy_return": 0.06261609412961626,
+    "mean_test_excess_return": -0.6846956191216892,
+    "folds_beating_buy_and_hold": 0,
+    "verdict": "positive_but_under_benchmark"
+  }
+}

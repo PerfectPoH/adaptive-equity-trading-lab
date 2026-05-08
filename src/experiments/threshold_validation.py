@@ -13,13 +13,14 @@ OUTPUT_JSON = Path("experiments/threshold_validation_latest.json")
 OUTPUT_CSV = Path("experiments/threshold_validation_latest.csv")
 
 
-def run_threshold_validation(thresholds: tuple[float, ...] = (0.55, 0.60)) -> dict[str, Any]:
+def run_threshold_validation(thresholds: tuple[float, ...] = (0.45, 0.50, 0.55, 0.60)) -> dict[str, Any]:
     runs = []
     for use_news in (False, True):
         for threshold in thresholds:
             tag = f"{'news' if use_news else 'no_news'}_thr{int(threshold * 100):02d}"
             run_dir = run_milestone_1(
                 use_news=use_news,
+                calibration_method=None,
                 min_model_probability=threshold,
                 run_tag=tag,
             )

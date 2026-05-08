@@ -16,10 +16,10 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 ### RISK-001 - Baseline non batte buy-and-hold
 
 - Priorita: P2.
-- Sintomo: il run default `20260508_173354` produce circa 3.21% medio contro circa 48% buy-and-hold.
-- Dettaglio: 119 segnali totali, 109 eseguibili, su 9 simboli; 9 simboli sotto benchmark.
+- Sintomo: il run default `20260508_185027` produce circa 6.99% medio contro circa 48% buy-and-hold.
+- Dettaglio: 1093 segnali totali, 1036 eseguibili, su 10 simboli; 9 simboli sotto benchmark.
 - Causa probabile: edge ancora debole, target/feature baseline troppo semplici, mercato 2024 molto forte per large-cap tech.
-- Azione: error analysis in Milestone 2.
+- Azione: feature/model upgrade e validazione su piu' fold in Milestone 2.
 - Stato: aperto, documentato.
 
 ### RISK-002 - yfinance fragile e non point-in-time
@@ -64,18 +64,18 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 ### RISK-007 - Probabilita' modello non calibrate
 
 - Priorita: P1.
-- Sintomo: nei calibration bins, probabilita' predette alte non corrispondono a success rate osservati simili.
-- Impatto: usare `model_probability > 0.55` come se fosse una probabilita' reale puo' portare a size/risk decision sbagliate.
-- Azione: implementare calibration layer fit su validation, poi confrontare raw vs calibrated.
-- Stato: aperto.
+- Sintomo: il modello raw resta overconfident; isotonic calibration migliora le metriche ma e' ancora validata su pochi fold.
+- Impatto: usare `model_probability` come probabilita' reale puo' portare a size/risk decision sbagliate.
+- Azione: mantenere isotonic 0.25 come default di ricerca, ma validare su piu' fold/dati prima del live.
+- Stato: mitigato, non chiuso.
 
-### RISK-008 - AMD negativo nel trade-level analysis
+### RISK-008 - Simboli con media trade negativa possono cambiare tra run
 
 - Priorita: P3.
-- Sintomo: nel run `20260508_174122`, AMD e' l'unico simbolo con media trade negativa.
-- Impatto: possibile incompatibilita' del setup con ticker piu' volatile/ciclico.
-- Azione: analisi per regime/feature, valutare blacklist temporanea solo dopo evidenze su piu' anni.
-- Stato: aperto.
+- Sintomo: nel run `20260508_174122`, AMD era negativo; nel run default `20260508_185027` nessun simbolo ha media trade negativa.
+- Impatto: blacklist per singolo ticker rischia di essere overfit sul run.
+- Azione: niente blacklist finche' il pattern non si ripete su piu' fold o dati migliori.
+- Stato: mitigato.
 
 ## Tech debt
 

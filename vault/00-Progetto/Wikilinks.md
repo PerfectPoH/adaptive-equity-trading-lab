@@ -35,6 +35,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Project-Handoff]]
 - [[README]]
 - [[2026-05-08-codex-regime-filter-validation]]
+- [[2026-05-08-codex-purged-calibrated-walk-forward]]
 
 ## Relazioni principali
 
@@ -46,3 +47,4 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Vault-Structure]] -> [[Devlog-Index]]
 - [[Vault-Structure]] -> [[Documentazione-Index]]
 - [[backlog]] -> [[Report-Milestone1-2026-05-08]]
+- [[Memoria-AI]] -> [[2026-05-08-codex-purged-calibrated-walk-forward]]

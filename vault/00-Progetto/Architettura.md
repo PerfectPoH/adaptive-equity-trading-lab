@@ -9,7 +9,7 @@ tags: [architettura, trading, ml, backtest, streamlit]
 
 ## 1. Obiettivo tecnico
 
-Costruire un laboratorio personale di ricerca quantitativa su azioni USA. Il sistema deve scaricare dati storici, salvare snapshot, creare feature point-in-time, aggiungere contesto macro-news laggato, scannerizzare setup, creare label TP-before-SL con entry al next open, addestrare modelli baseline, generare segnali, simulare execution/risk, backtestare, registrare esperimenti e mostrare risultati in dashboard.
+Costruire un laboratorio personale di ricerca quantitativa su azioni USA. Il sistema deve scaricare dati storici, salvare snapshot, creare feature point-in-time, aggiungere contesto macro-news laggato, scannerizzare setup, creare label TP-before-SL con entry al next open, applicare split temporale purgato, addestrare modelli baseline, calibrare probabilita' su validation, generare segnali, simulare execution/risk, backtestare, registrare esperimenti e mostrare risultati in dashboard.
 
 Non e' un bot live. Non e' una prova di profittabilita'. La Milestone 1 serve a costruire una pipeline che non bara.
 
@@ -40,6 +40,7 @@ Market Data
   -> Temporal Split
   -> Label Builder
   -> ML Model
+  -> Probability Calibration
   -> Signal Engine
   -> Risk Manager
   -> Execution Simulator
@@ -77,6 +78,8 @@ dashboard/app.py
 - Il segnale nasce dopo il close.
 - L'entry simulata e' al next open.
 - Il test set non si usa per tuning.
+- Le ultime barre dei periodi vanno purgate quando la label forward supererebbe il confine temporale.
+- La calibrazione probabilistica si fitta su validation-only, non su test.
 - Ogni run deve avere un `run_id`.
 - Ogni esperimento va scritto in `experiments/log.csv`.
 - Se il backtest non batte buy-and-hold, il motivo va documentato.
@@ -108,6 +111,7 @@ Limiti noti:
 - survivorship bias presente;
 - qualita' non istituzionale;
 - dati potenzialmente instabili o ritoccati dal provider;
+- fallback locale su ultimo snapshot valido quando il download fresco fallisce;
 - nessuna garanzia di riproducibilita' perfetta nel lungo periodo.
 - GDELT macro-news non e' news finanziaria point-in-time broker-grade.
 
@@ -119,6 +123,8 @@ Validation: 2023
 Test:       2024
 Forward:    2025+
 ```
+
+Nota: ogni split rimuove le ultime 10 barre per simbolo quando quelle barre avrebbero bisogno di prezzi futuri oltre il confine della label.
 
 ## 8. Dashboard
 
@@ -132,6 +138,6 @@ Dashboard Streamlit minimale:
 
 ## 9. Evoluzione futura
 
-Le fasi successive aggiungono walk-forward validation, model registry, news risk filter, paper trading, slippage tracker, dati point-in-time, event-driven backtesting, Deflated Sharpe Ratio, CPCV, HRP e guardrail live.
+Le fasi successive aggiungono walk-forward piu' ampio, model registry, news risk filter, paper trading, slippage tracker, dati point-in-time, event-driven backtesting, Deflated Sharpe Ratio, CPCV, HRP e guardrail live.
 
 Vedi [[Roadmap-Master]] e [[Regole-Quant]].
