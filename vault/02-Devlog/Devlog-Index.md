@@ -23,6 +23,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-08-codex-model-comparison]] - confronto walk-forward tra Logistic Regression, Random Forest e HistGradientBoosting.
 - [[2026-05-08-codex-feature-set-comparison]] - confronto baseline feature set vs enhanced context.
 - [[2026-05-08-codex-target-exit-comparison]] - timeout coerente nel backtest e confronto target/exit ATR.
+- [[2026-05-08-codex-signal-quality-ranking]] - score qualita' segnale e confronto ranking giornaliero top-N.
 
 ## Convenzione
 

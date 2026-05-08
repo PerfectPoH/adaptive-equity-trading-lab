@@ -24,7 +24,7 @@ from src.models.predictor import add_model_probabilities
 from src.models.trainer import evaluate_classifier, fit_model, temporal_split
 from src.news.gdelt_doc import load_or_download_market_news
 from src.scanner.stock_scanner import add_scanner_columns
-from src.strategy.signal_engine import add_signal_columns
+from src.strategy.signal_engine import add_signal_columns, apply_daily_signal_rank_filter
 
 
 UNIVERSE = ["AAPL", "MSFT", "NVDA", "AMD", "TSLA", "META", "AMZN", "GOOGL", "SPY", "QQQ"]
@@ -50,6 +50,9 @@ def run_milestone_1(
     min_relative_volume: float | None = None,
     max_distance_from_20d_high: float | None = None,
     max_atr_pct: float | None = None,
+    min_signal_quality_score: float | None = None,
+    max_signals_per_day: int | None = None,
+    signal_rank_column: str = "signal_quality_score",
 ) -> Path:
     base_run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_id = f"{base_run_id}_{run_tag}" if run_tag else base_run_id
@@ -86,6 +89,7 @@ def run_milestone_1(
     model_path = run_dir / "model.joblib"
     joblib.dump(probability_model, model_path)
 
+    signaled_frames: list[pd.DataFrame] = []
     processed_frames: list[pd.DataFrame] = []
     backtest_rows: list[dict[str, object]] = []
     equity_frames: list[pd.DataFrame] = []
@@ -100,8 +104,18 @@ def run_milestone_1(
             min_relative_volume=min_relative_volume,
             max_distance_from_20d_high=max_distance_from_20d_high,
             max_atr_pct=max_atr_pct,
+            min_signal_quality_score=min_signal_quality_score,
         )
-        executable = add_execution_columns(with_signals, max_gap_threshold=MAX_GAP_THRESHOLD)
+        signaled_frames.append(with_signals)
+
+    ranked_signals = apply_daily_signal_rank_filter(
+        pd.concat(signaled_frames).sort_index(),
+        max_signals_per_day=max_signals_per_day,
+        rank_column=signal_rank_column,
+    )
+
+    for symbol, frame in ranked_signals.groupby("symbol", sort=False):
+        executable = add_execution_columns(frame.sort_index(), max_gap_threshold=MAX_GAP_THRESHOLD)
         processed_frames.append(executable)
 
         test_frame = executable.loc["2024-01-01":"2024-12-31"].copy()
@@ -196,6 +210,9 @@ def run_milestone_1(
                 min_relative_volume=min_relative_volume,
                 max_distance_from_20d_high=max_distance_from_20d_high,
                 max_atr_pct=max_atr_pct,
+                min_signal_quality_score=min_signal_quality_score,
+                max_signals_per_day=max_signals_per_day,
+                signal_rank_column=signal_rank_column if max_signals_per_day is not None else None,
             ),
             "news_features": "gdelt_market_news_lagged_1d" if use_news else "disabled",
             "raw_validation_metrics": raw_validation_metrics,
@@ -221,6 +238,9 @@ def run_milestone_1(
                         min_relative_volume=min_relative_volume,
                         max_distance_from_20d_high=max_distance_from_20d_high,
                         max_atr_pct=max_atr_pct,
+                        min_signal_quality_score=min_signal_quality_score,
+                        max_signals_per_day=max_signals_per_day,
+                        signal_rank_column=signal_rank_column if max_signals_per_day is not None else None,
                     ),
                 },
                 "validation_metrics": validation_metrics,
@@ -246,11 +266,17 @@ def _regime_filter_config(
     min_relative_volume: float | None,
     max_distance_from_20d_high: float | None,
     max_atr_pct: float | None,
-) -> dict[str, float]:
+    min_signal_quality_score: float | None = None,
+    max_signals_per_day: int | None = None,
+    signal_rank_column: str | None = None,
+) -> dict[str, object]:
     config = {
         "min_relative_volume": min_relative_volume,
         "max_distance_from_20d_high": max_distance_from_20d_high,
         "max_atr_pct": max_atr_pct,
+        "min_signal_quality_score": min_signal_quality_score,
+        "max_signals_per_day": max_signals_per_day,
+        "signal_rank_column": signal_rank_column,
     }
     return {key: value for key, value in config.items() if value is not None}
 

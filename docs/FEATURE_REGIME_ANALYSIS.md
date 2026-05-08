@@ -17,6 +17,7 @@ The analyzer groups closed trades into low/mid/high buckets for signal-time feat
 ```text
 model probability
 scanner score
+signal quality score
 ATR percentage
 relative volume
 distance from 20-day high
@@ -41,24 +42,25 @@ win/loss feature contrasts
 Run:
 
 ```text
-20260508_192713
+20260508_194750
 ```
 
 Primary findings:
 
 ```text
 Weakest average-return regime:
-  signal_distance_from_20d_high = high
-  avg return: ~0.35%
-  loss rate: ~54.0%
-  trades: 63
+  signal_signal_quality_score = mid
+  avg return: ~0.18%
+  loss rate: ~56.25%
+  trades: 64
 
 Highest loss-rate regimes:
+  signal_signal_quality_score = mid
   signal_distance_from_20d_high = high
   signal_relative_volume_20d = high
-  signal_model_probability = low
 
 Best regimes:
+  signal_signal_quality_score = low
   signal_distance_from_20d_high = mid
   calibrated signal_model_probability = high
   calibrated signal_model_probability = mid
@@ -71,7 +73,7 @@ Interpretation:
 
 ```text
 No feature bucket is net negative yet, so there is not enough evidence to add a hard filter.
-The strongest current hypothesis is that setups too close to the 20-day high and low calibrated-probability buckets are more fragile.
+The strongest current hypothesis is that setups too close to the 20-day high, high relative-volume spikes, and the current naive signal-quality score are fragile. Signal quality must stay diagnostic until validated out-of-sample.
 ```
 
 ## Decision

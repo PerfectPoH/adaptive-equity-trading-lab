@@ -262,18 +262,66 @@ Do not promote the balanced exit config yet.
 It is selected on validation for the 2024 fold, but its 2024 test return is slightly worse than the default 2024 run.
 ```
 
+## Signal Quality Comparison
+
+```powershell
+.\.venv-lab\Scripts\python.exe -m src.experiments.signal_quality_comparison
+```
+
+Outputs:
+
+```text
+experiments/signal_quality_comparison_latest.json
+experiments/signal_quality_comparison_latest.csv
+```
+
+Compared signal-quality configurations:
+
+```text
+no_quality_rank_filter
+top_3_daily_quality_score
+top_2_daily_quality_score
+top_1_daily_quality_score
+top_2_daily_model_probability
+top_2_daily_scanner_score
+top_2_daily_quality_0_50
+```
+
+Latest result:
+
+```text
+wf_2023 selected: top_2_daily_scanner_score raw threshold 0.45
+wf_2023 test strategy return: ~3.36%
+
+wf_2024 selected: no_quality_rank_filter isotonic threshold 0.25
+wf_2024 test strategy return: ~6.49%
+
+mean test strategy return: ~4.93%
+folds beating buy-and-hold: 0 / 2
+```
+
+Decision:
+
+```text
+Do not promote a daily rank filter yet.
+The ranking filters helped the 2022 validation fold by reducing exposure, but they underperformed badly in the 2023 test year.
+For the 2024 fold, validation selected the default no-rank configuration.
+Keep signal_quality_score and signal_rank columns as diagnostics only.
+```
+
 ## Feature-Regime Analysis
 
 Current default run:
 
 ```text
-20260508_192713
+20260508_194750
 ```
 
 Current finding:
 
 ```text
-No feature regime is net negative yet. The weakest buckets in the current calibrated run are low rolling volatility, high distance-from-20d-high, and low calibrated model probability.
+No feature regime is stable enough for a hard filter yet.
+The current calibrated run shows weak buckets around mid signal_quality_score, high distance-from-20d-high, high relative volume, and low calibrated model probability.
 ```
 
 Decision:

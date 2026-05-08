@@ -9,6 +9,7 @@ Market Data
 -> Label Builder
 -> ML Model
 -> Signal Engine
+-> Optional Signal Quality Rank Filter
 -> Risk Manager
 -> Execution Simulator
 -> Backtest

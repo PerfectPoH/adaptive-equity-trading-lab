@@ -10,7 +10,7 @@ tags: [roadmap, milestone, checklist, trading-lab]
 
 ## Stato sintetico
 
-La Milestone 1 e' una pipeline funzionante end-to-end. Il default corrente usa Random Forest, feature baseline, calibrazione isotonic, soglia `model_probability > 0.25`, stop `1.5 ATR`, take-profit `3 ATR` e timeout 10 giorni. Dopo timeout-consistent backtesting e finalizzazione dei trade a fine finestra, il backtest 2024 fa circa 6.49%, ma resta sotto buy-and-hold: risultato utile, non strategia pronta.
+La Milestone 1 e' una pipeline funzionante end-to-end. Il default corrente usa Random Forest, feature baseline, calibrazione isotonic, soglia `model_probability > 0.25`, stop `1.5 ATR`, take-profit `3 ATR`, timeout 10 giorni e nessun filtro ranking giornaliero. Dopo timeout-consistent backtesting e finalizzazione dei trade a fine finestra, il backtest 2024 fa circa 6.49%, ma resta sotto buy-and-hold: risultato utile, non strategia pronta.
 
 ## Milestone 1 - MVP Core Pipeline
 
@@ -66,6 +66,7 @@ Prossimi miglioramenti Milestone 1:
 - [ ] Aggiungere fold walk-forward ulteriori quando ci saranno piu' anni/dati migliori.
 - [x] Feature upgrade controllato dopo model comparison: enhanced context testato, non promosso.
 - [x] Target/exit comparison: timeout coerente nel backtest, varianti ATR testate, nessuna promossa.
+- [x] Signal-quality/ranking comparison: top-N giornaliero testato, nessuna variante promossa.
 - [ ] Notebook `04_backtest_analysis.ipynb`.
 - [ ] Soglie scanner e modello versionate.
 

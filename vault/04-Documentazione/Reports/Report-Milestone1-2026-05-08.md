@@ -28,7 +28,7 @@ Implementazione MVP completata in prima versione.
 Risultato:
 
 ```text
-33 passed
+37 passed
 ```
 
 Pipeline:
@@ -40,7 +40,7 @@ Pipeline:
 Run principale aggiornato:
 
 ```text
-20260508_192713
+20260508_194750
 ```
 
 ## Risultati backtest
@@ -80,6 +80,7 @@ Findings:
 - Model comparison: Logistic Regression e HistGradientBoosting testati; Random Forest resta default sotto vincolo minimo di 30 trade validation.
 - Feature-set comparison: enhanced context testato; baseline resta selezionato dopo timeout-consistent backtesting.
 - Target/exit comparison: varianti ATR testate; balanced migliora validation ma non supera il default 2024.
+- Signal-quality/ranking comparison: top-N giornaliero testato; nessuna variante viene promossa.
 - Trade-level: 193 trade chiusi, 105 win, 88 loss; nessun simbolo con media trade negativa.
 - Feature-regime: nessun bucket e' netto negativo; regimi piu' fragili legati a low rolling volatility, high distance-from-high e low calibrated probability.
 - Regime-filter validation: volume floor, pullback depth, ATR guard e combinato non battono il baseline per rendimento.

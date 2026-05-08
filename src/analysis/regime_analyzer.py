@@ -9,6 +9,7 @@ import pandas as pd
 REGIME_FEATURES = [
     "signal_model_probability",
     "signal_scanner_score",
+    "signal_signal_quality_score",
     "signal_atr_pct",
     "signal_relative_volume_20d",
     "signal_distance_from_20d_high",

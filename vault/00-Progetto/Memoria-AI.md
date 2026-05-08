@@ -100,14 +100,15 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 .\.venv-lab\Scripts\python.exe -m src.experiments.model_comparison
 .\.venv-lab\Scripts\python.exe -m src.experiments.feature_set_comparison
 .\.venv-lab\Scripts\python.exe -m src.experiments.target_exit_comparison
+.\.venv-lab\Scripts\python.exe -m src.experiments.signal_quality_comparison
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
 
 ## Risultato importante 2026-05-08
 
-Run default `20260508_192713`:
+Run default `20260508_194750`:
 
-- config: `use_news=false`, `model_type=random_forest`, feature set baseline, isotonic calibration, `model_probability > 0.25`, target/exit default `1.5 ATR stop / 3 ATR take-profit / 10d timeout`, no regime filters;
+- config: `use_news=false`, `model_type=random_forest`, feature set baseline, isotonic calibration, `model_probability > 0.25`, target/exit default `1.5 ATR stop / 3 ATR take-profit / 10d timeout`, no regime filters, no daily rank filter;
 - default scelto tramite walk-forward: raw 0.50 nel fold 2023, isotonic 0.25 nel fold 2024;
 - 1093 segnali totali nel 2024;
 - 1036 segnali eseguibili;
@@ -123,14 +124,25 @@ Run default `20260508_192713`:
 - nessun simbolo ha media trade negativa nel run corrente.
 - feature-regime analysis:
   - nessun bucket feature e' netto negativo;
-  - regime piu' debole: `signal_rolling_volatility_20d = low`, avg return circa 0.38%, loss rate circa 53.2%;
-  - altri regimi fragili: `signal_distance_from_20d_high = high`, `signal_model_probability = low`;
+  - regime piu' debole: `signal_signal_quality_score = mid`, avg return circa 0.18%, loss rate circa 56.25%;
+  - altri regimi fragili: `signal_distance_from_20d_high = high`, `signal_relative_volume_20d = high`;
   - contrasto principale: i trade perdenti hanno volume relativo leggermente piu' alto dei trade vincenti;
   - esperimento separato su volume/distance/ATR eseguito;
   - verdict: `filters_did_not_help`;
   - baseline calibrata 0.25 resta migliore dei filtri hard provati in quell'esperimento;
   - combined filters migliorano max drawdown ma scendono a circa 3.36% strategy return;
   - decisione: nessun regime filter diventa default; combined filters solo possibile modalita' risk-first futura.
+
+Signal quality / daily ranking:
+
+- runner: `src.experiments.signal_quality_comparison`;
+- configurazioni confrontate: nessun filtro, top 3/2/1 per `signal_quality_score`, top 2 per `model_probability`, top 2 per `scanner_score`, top 2 con quality floor 0.50;
+- fold `wf_2023`: selezionato `top_2_daily_scanner_score`, raw 0.45 -> test 2023 strategy return circa 3.36%;
+- fold `wf_2024`: selezionato `no_quality_rank_filter`, isotonic 0.25 -> test 2024 strategy return circa 6.49%;
+- mean test strategy return circa 4.93%;
+- fold che battono buy-and-hold: 0/2;
+- decisione: nessun ranking giornaliero diventa default; `signal_quality_score` e `signal_rank` restano diagnostici.
+- nota: lo score qualita' ingenuo non e' monotonicamente migliore; nella run corrente i trade perdenti hanno score leggermente piu' alto dei vincenti.
 
 Walk-forward:
 

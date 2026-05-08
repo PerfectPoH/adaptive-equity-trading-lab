@@ -99,6 +99,29 @@ def test_select_threshold_from_validation_can_choose_across_target_exit_configs(
     assert selected["threshold"] == 0.20
 
 
+def test_select_threshold_from_validation_can_choose_across_signal_quality_configs() -> None:
+    rows = [
+        {
+            "signal_quality_config": "no_quality_rank_filter",
+            "threshold": 0.25,
+            "excess_return": 0.01,
+            "strategy_return": 0.06,
+            "closed_trades": 20,
+        },
+        {
+            "signal_quality_config": "top_2_daily",
+            "threshold": 0.25,
+            "excess_return": 0.04,
+            "strategy_return": 0.08,
+            "closed_trades": 16,
+        },
+    ]
+
+    selected = select_threshold_from_validation(rows, min_validation_trades=10)
+
+    assert selected["signal_quality_config"] == "top_2_daily"
+
+
 def test_summarize_walk_forward_marks_positive_under_benchmark() -> None:
     summary = summarize_walk_forward(
         [

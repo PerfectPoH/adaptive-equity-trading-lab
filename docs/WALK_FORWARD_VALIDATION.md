@@ -39,9 +39,9 @@ isotonic: 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45
 Selection rule:
 
 ```text
-Choose the validation probability variant + threshold with the best excess return,
+Choose the validation target/exit + feature set + model + probability variant + threshold with the best excess return,
 requiring at least 10 closed validation trades.
-Then evaluate only that selected variant/threshold on the next test year.
+Then evaluate only that selected combination on the next test year.
 ```
 
 ## Latest Result
@@ -110,4 +110,5 @@ The algorithm improved, but the main weakness remains:
 The strategy captures positive returns, but it still underperforms strong buy-and-hold years.
 ```
 
-The next improvement should target signal ranking, universe selection, or exit/risk logic beyond simple ATR grids.
+Signal ranking has now been tested separately and is not promoted yet.
+The next improvement should target universe selection, market-regime exposure, or risk logic beyond simple ATR grids.

@@ -9,6 +9,10 @@ import pandas as pd
 SIGNAL_CONTEXT_COLUMNS = [
     "model_probability",
     "scanner_score",
+    "signal_quality_score",
+    "signal_rank",
+    "signal_before_rank",
+    "signal_rank_selected",
     "atr_pct",
     "relative_volume_20d",
     "distance_from_20d_high",

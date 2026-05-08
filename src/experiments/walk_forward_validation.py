@@ -17,7 +17,7 @@ from src.models.predictor import add_model_probabilities
 from src.models.trainer import fit_model, purge_label_boundary
 from src.pipeline import FEATURE_START, MAX_GAP_THRESHOLD, UNIVERSE, _aggregate_backtests
 from src.scanner.stock_scanner import add_scanner_columns
-from src.strategy.signal_engine import add_signal_columns
+from src.strategy.signal_engine import add_signal_columns, apply_daily_signal_rank_filter
 
 
 OUTPUT_JSON = Path("experiments/walk_forward_validation_latest.json")
@@ -43,6 +43,19 @@ DEFAULT_TARGET_EXIT_CONFIGS = (
         take_profit_atr_multiple=3.0,
         timeout_bars=10,
     ),
+)
+
+
+@dataclass(frozen=True)
+class SignalQualityConfig:
+    name: str
+    min_signal_quality_score: float | None = None
+    max_signals_per_day: int | None = None
+    rank_column: str = "signal_quality_score"
+
+
+DEFAULT_SIGNAL_QUALITY_CONFIGS = (
+    SignalQualityConfig(name="no_quality_rank_filter"),
 )
 
 
@@ -82,6 +95,7 @@ def run_walk_forward_validation(
     model_types: tuple[str, ...] = DEFAULT_MODEL_TYPES,
     feature_sets: dict[str, list[str]] | None = None,
     target_exit_configs: tuple[TargetExitConfig, ...] = DEFAULT_TARGET_EXIT_CONFIGS,
+    signal_quality_configs: tuple[SignalQualityConfig, ...] = DEFAULT_SIGNAL_QUALITY_CONFIGS,
     min_validation_trades: int = 10,
     include_calibrated: bool = True,
     output_json: Path = OUTPUT_JSON,
@@ -148,16 +162,25 @@ def run_walk_forward_validation(
                                 feature_set=candidate_feature_set,
                                 model_type=candidate_model_type,
                                 probability_variant=variant,
+                                signal_quality_config=quality_config.name,
+                                min_signal_quality_score=quality_config.min_signal_quality_score,
+                                max_signals_per_day=quality_config.max_signals_per_day,
+                                rank_column=quality_config.rank_column,
                                 start=fold.validation_start,
                                 end=fold.validation_end,
                                 threshold=threshold,
                             )
+                            for quality_config in signal_quality_configs
                             for threshold in variant_thresholds
                         )
         selected = select_threshold_from_validation(validation_rows, min_validation_trades=min_validation_trades)
         selected_target_config = _target_config_by_name(
             target_exit_configs,
             str(selected["target_exit_config"]),
+        )
+        selected_quality_config = _signal_quality_config_by_name(
+            signal_quality_configs,
+            str(selected["signal_quality_config"]),
         )
         test_row = _evaluate_threshold(
             frames_by_variant[
@@ -175,6 +198,10 @@ def run_walk_forward_validation(
             feature_set=str(selected["feature_set"]),
             model_type=str(selected["model_type"]),
             probability_variant=str(selected["probability_variant"]),
+            signal_quality_config=str(selected["signal_quality_config"]),
+            min_signal_quality_score=selected_quality_config.min_signal_quality_score,
+            max_signals_per_day=selected_quality_config.max_signals_per_day,
+            rank_column=selected_quality_config.rank_column,
             start=fold.test_start,
             end=fold.test_end,
             threshold=float(selected["threshold"]),
@@ -187,6 +214,7 @@ def run_walk_forward_validation(
                 and row["feature_set"] == selected["feature_set"]
                 and row["model_type"] == selected["model_type"]
                 and row["probability_variant"] == selected["probability_variant"]
+                and row["signal_quality_config"] == selected["signal_quality_config"]
                 and float(row["threshold"]) == float(selected["threshold"])
             )
         rows.extend(validation_rows)
@@ -198,6 +226,8 @@ def run_walk_forward_validation(
                 "selected_feature_set": str(selected["feature_set"]),
                 "selected_model_type": str(selected["model_type"]),
                 "selected_probability_variant": str(selected["probability_variant"]),
+                "selected_signal_quality_config": str(selected["signal_quality_config"]),
+                "selected_signal_rank_column": str(selected.get("signal_rank_column", "")),
                 "selected_threshold": float(selected["threshold"]),
                 "validation_strategy_return": selected["strategy_return"],
                 "validation_excess_return": selected["excess_return"],
@@ -217,6 +247,7 @@ def run_walk_forward_validation(
         "model_types": list(model_types),
         "feature_sets": list(feature_sets.keys()),
         "target_exit_configs": [asdict(config) for config in target_exit_configs],
+        "signal_quality_configs": [asdict(config) for config in signal_quality_configs],
         "min_validation_trades": min_validation_trades,
         "folds": fold_summaries,
         "summary": summarize_walk_forward(fold_summaries),
@@ -311,25 +342,47 @@ def _evaluate_threshold(
     feature_set: str,
     model_type: str,
     probability_variant: str,
+    signal_quality_config: str,
+    min_signal_quality_score: float | None,
+    max_signals_per_day: int | None,
+    rank_column: str,
     start: str,
     end: str,
     threshold: float,
 ) -> dict[str, Any]:
     backtest_rows: list[dict[str, Any]] = []
+    signal_frames: list[pd.DataFrame] = []
     total_signals = 0
+    total_signals_before_rank = 0
     executable_signals = 0
     closed_trades = 0
     symbols_with_signals = set()
 
     for symbol, frame in frames.items():
-        with_signals = add_signal_columns(frame, min_model_probability=threshold)
-        executable = add_execution_columns(with_signals, max_gap_threshold=MAX_GAP_THRESHOLD)
+        signal_frames.append(
+            add_signal_columns(
+                frame,
+                min_model_probability=threshold,
+                min_signal_quality_score=min_signal_quality_score,
+            )
+        )
+
+    ranked = apply_daily_signal_rank_filter(
+        pd.concat(signal_frames).sort_index(),
+        max_signals_per_day=max_signals_per_day,
+        rank_column=rank_column,
+    )
+
+    for symbol, frame in ranked.groupby("symbol", sort=False):
+        executable = add_execution_columns(frame.sort_index(), max_gap_threshold=MAX_GAP_THRESHOLD)
         window = executable.loc[start:end].copy()
         if len(window) < 50:
             continue
 
+        symbol_signals_before_rank = int(window["signal_before_rank"].fillna(False).sum())
         symbol_signals = int(window["signal"].fillna(False).sum())
         symbol_executable = int((window["signal"].fillna(False) & window["execution_valid"].fillna(False)).sum())
+        total_signals_before_rank += symbol_signals_before_rank
         total_signals += symbol_signals
         executable_signals += symbol_executable
         if symbol_signals > 0:
@@ -353,6 +406,8 @@ def _evaluate_threshold(
         "feature_set": feature_set,
         "model_type": model_type,
         "probability_variant": probability_variant,
+        "signal_quality_config": signal_quality_config,
+        "signal_rank_column": rank_column if max_signals_per_day is not None else "",
         "train_end": fold.train_end,
         "validation_start": fold.validation_start,
         "validation_end": fold.validation_end,
@@ -368,6 +423,8 @@ def _evaluate_threshold(
         "profit_factor": aggregate.get("profit_factor"),
         "win_rate": aggregate.get("win_rate"),
         "beats_buy_and_hold": aggregate.get("beats_buy_and_hold"),
+        "total_signals_before_rank": total_signals_before_rank,
+        "rank_filtered_signals": total_signals_before_rank - total_signals,
         "total_signals": total_signals,
         "executable_signals": executable_signals,
         "symbols_with_signals": len(symbols_with_signals),
@@ -383,6 +440,16 @@ def _target_config_by_name(
         if config.name == name:
             return config
     raise KeyError(f"Unknown target exit config: {name}")
+
+
+def _signal_quality_config_by_name(
+    signal_quality_configs: tuple[SignalQualityConfig, ...],
+    name: str,
+) -> SignalQualityConfig:
+    for config in signal_quality_configs:
+        if config.name == name:
+            return config
+    raise KeyError(f"Unknown signal quality config: {name}")
 
 
 def _safe_float(value: object) -> float:

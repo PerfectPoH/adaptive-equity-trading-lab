@@ -20,7 +20,7 @@ experiments/runs/<run_id>/feature_regime_summary.json
 Run:
 
 ```text
-20260508_192713
+20260508_194750
 ```
 
 Signal config:

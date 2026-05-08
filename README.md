@@ -48,10 +48,11 @@ Live small != scaling
 .\.venv-lab\Scripts\python.exe -m src.experiments.model_comparison
 .\.venv-lab\Scripts\python.exe -m src.experiments.feature_set_comparison
 .\.venv-lab\Scripts\python.exe -m src.experiments.target_exit_comparison
+.\.venv-lab\Scripts\python.exe -m src.experiments.signal_quality_comparison
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
 
-The current default research baseline is `use_news=False`, `model_type=random_forest`, baseline feature set, `1.5 ATR` stop, `3 ATR` take profit, `10` trading-day timeout, isotonic-calibrated model probabilities, no regime filters, and `model_probability > 0.25`. The 2024 default run returns ~6.49% versus ~48.05% buy-and-hold. Model, feature-set, and target/exit comparisons still keep Random Forest with baseline features as the default; news features, enhanced context features, regime filters, and alternative exits remain analysis tools rather than defaults.
+The current default research baseline is `use_news=False`, `model_type=random_forest`, baseline feature set, `1.5 ATR` stop, `3 ATR` take profit, `10` trading-day timeout, isotonic-calibrated model probabilities, no regime filters, no daily signal-rank filter, and `model_probability > 0.25`. The 2024 default run returns ~6.49% versus ~48.05% buy-and-hold. Model, feature-set, target/exit, and signal-quality comparisons still keep Random Forest with baseline features as the default; news features, enhanced context features, regime filters, daily ranking filters, and alternative exits remain analysis tools rather than defaults.
 
 ## Project Vault
 
