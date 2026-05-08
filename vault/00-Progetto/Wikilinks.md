@@ -43,6 +43,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-08-codex-market-exposure-comparison]]
 - [[2026-05-08-codex-universe-selection-comparison]]
 - [[2026-05-08-codex-benchmark-objective-comparison]]
+- [[2026-05-08-cascade-model-registry]]
 
 ## Relazioni principali
 
@@ -62,3 +63,4 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Roadmap-Master]] -> [[2026-05-08-codex-market-exposure-comparison]]
 - [[Roadmap-Master]] -> [[2026-05-08-codex-universe-selection-comparison]]
 - [[Roadmap-Master]] -> [[2026-05-08-codex-benchmark-objective-comparison]]
+- [[Roadmap-Master]] -> [[2026-05-08-cascade-model-registry]]

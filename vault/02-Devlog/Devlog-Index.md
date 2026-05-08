@@ -27,6 +27,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-08-codex-market-exposure-comparison]] - confronto risk fraction e scaling in regime SPY forte.
 - [[2026-05-08-codex-universe-selection-comparison]] - confronto universi selezionati solo da validation.
 - [[2026-05-08-codex-benchmark-objective-comparison]] - confronto obiettivi ML benchmark-aware.
+- [[2026-05-08-cascade-model-registry]] - registry append-only dei modelli joblib con hash e metadata.
 
 ## Convenzione
 
