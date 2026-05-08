@@ -61,6 +61,22 @@ DEFAULT_SIGNAL_QUALITY_CONFIGS = (
 
 
 @dataclass(frozen=True)
+class SymbolSelectionConfig:
+    name: str
+    mode: str = "all"
+    top_n: int | None = None
+    min_symbol_trades: int = 5
+    require_positive_strategy_return: bool = False
+    include_symbols: tuple[str, ...] = ()
+    exclude_symbols: tuple[str, ...] = ()
+
+
+DEFAULT_SYMBOL_SELECTION_CONFIGS = (
+    SymbolSelectionConfig(name="all_symbols"),
+)
+
+
+@dataclass(frozen=True)
 class WalkForwardFold:
     name: str
     train_end: str
@@ -98,6 +114,7 @@ def run_walk_forward_validation(
     target_exit_configs: tuple[TargetExitConfig, ...] = DEFAULT_TARGET_EXIT_CONFIGS,
     signal_quality_configs: tuple[SignalQualityConfig, ...] = DEFAULT_SIGNAL_QUALITY_CONFIGS,
     market_exposure_configs: tuple[MarketExposureConfig, ...] = (DEFAULT_MARKET_EXPOSURE_CONFIG,),
+    symbol_selection_configs: tuple[SymbolSelectionConfig, ...] = DEFAULT_SYMBOL_SELECTION_CONFIGS,
     min_validation_trades: int = 10,
     include_calibrated: bool = True,
     output_json: Path = OUTPUT_JSON,
@@ -169,12 +186,14 @@ def run_walk_forward_validation(
                                 max_signals_per_day=quality_config.max_signals_per_day,
                                 rank_column=quality_config.rank_column,
                                 market_exposure_config=market_exposure_config,
+                                symbol_selection_config=symbol_selection_config,
                                 start=fold.validation_start,
                                 end=fold.validation_end,
                                 threshold=threshold,
                             )
                             for quality_config in signal_quality_configs
                             for market_exposure_config in market_exposure_configs
+                            for symbol_selection_config in symbol_selection_configs
                             for threshold in variant_thresholds
                         )
         selected = select_threshold_from_validation(validation_rows, min_validation_trades=min_validation_trades)
@@ -190,6 +209,11 @@ def run_walk_forward_validation(
             market_exposure_configs,
             str(selected["market_exposure_config"]),
         )
+        selected_symbol_selection_config = _symbol_selection_config_by_name(
+            symbol_selection_configs,
+            str(selected["symbol_selection_config"]),
+        )
+        selected_symbols = _deserialize_symbols(str(selected.get("selected_symbols", "")))
         test_row = _evaluate_threshold(
             frames_by_variant[
                 (
@@ -211,6 +235,8 @@ def run_walk_forward_validation(
             max_signals_per_day=selected_quality_config.max_signals_per_day,
             rank_column=selected_quality_config.rank_column,
             market_exposure_config=selected_market_exposure_config,
+            symbol_selection_config=selected_symbol_selection_config,
+            forced_symbols=selected_symbols,
             start=fold.test_start,
             end=fold.test_end,
             threshold=float(selected["threshold"]),
@@ -225,6 +251,7 @@ def run_walk_forward_validation(
                 and row["probability_variant"] == selected["probability_variant"]
                 and row["signal_quality_config"] == selected["signal_quality_config"]
                 and row["market_exposure_config"] == selected["market_exposure_config"]
+                and row["symbol_selection_config"] == selected["symbol_selection_config"]
                 and float(row["threshold"]) == float(selected["threshold"])
             )
         rows.extend(validation_rows)
@@ -239,6 +266,8 @@ def run_walk_forward_validation(
                 "selected_signal_quality_config": str(selected["signal_quality_config"]),
                 "selected_signal_rank_column": str(selected.get("signal_rank_column", "")),
                 "selected_market_exposure_config": str(selected["market_exposure_config"]),
+                "selected_symbol_selection_config": str(selected["symbol_selection_config"]),
+                "selected_symbols": str(selected.get("selected_symbols", "")),
                 "selected_threshold": float(selected["threshold"]),
                 "validation_strategy_return": selected["strategy_return"],
                 "validation_excess_return": selected["excess_return"],
@@ -260,6 +289,7 @@ def run_walk_forward_validation(
         "target_exit_configs": [asdict(config) for config in target_exit_configs],
         "signal_quality_configs": [asdict(config) for config in signal_quality_configs],
         "market_exposure_configs": [asdict(config) for config in market_exposure_configs],
+        "symbol_selection_configs": [asdict(config) for config in symbol_selection_configs],
         "min_validation_trades": min_validation_trades,
         "folds": fold_summaries,
         "summary": summarize_walk_forward(fold_summaries),
@@ -359,17 +389,14 @@ def _evaluate_threshold(
     max_signals_per_day: int | None,
     rank_column: str,
     market_exposure_config: MarketExposureConfig,
+    symbol_selection_config: SymbolSelectionConfig,
     start: str,
     end: str,
     threshold: float,
+    forced_symbols: tuple[str, ...] | None = None,
 ) -> dict[str, Any]:
-    backtest_rows: list[dict[str, Any]] = []
+    symbol_rows: list[dict[str, Any]] = []
     signal_frames: list[pd.DataFrame] = []
-    total_signals = 0
-    total_signals_before_rank = 0
-    executable_signals = 0
-    closed_trades = 0
-    symbols_with_signals = set()
 
     for symbol, frame in frames.items():
         signal_frames.append(
@@ -396,23 +423,38 @@ def _evaluate_threshold(
         symbol_signals_before_rank = int(window["signal_before_rank"].fillna(False).sum())
         symbol_signals = int(window["signal"].fillna(False).sum())
         symbol_executable = int((window["signal"].fillna(False) & window["execution_valid"].fillna(False)).sum())
-        total_signals_before_rank += symbol_signals_before_rank
-        total_signals += symbol_signals
-        executable_signals += symbol_executable
-        if symbol_signals > 0:
-            symbols_with_signals.add(symbol)
 
         try:
             stats, summary = run_backtest(window, timeout_bars=timeout_bars)
         except Exception as exc:  # noqa: BLE001 - keep folds independent.
-            backtest_rows.append({"symbol": symbol, "error": str(exc)})
+            symbol_rows.append(
+                {
+                    "symbol": symbol,
+                    "error": str(exc),
+                    "total_signals_before_rank": symbol_signals_before_rank,
+                    "total_signals": symbol_signals,
+                    "executable_signals": symbol_executable,
+                    "strong_market_signals": _strong_market_signal_count(window, start, end),
+                }
+            )
             continue
 
         trades = int(stats.get("# Trades", 0))
-        closed_trades += trades
-        backtest_rows.append({"symbol": symbol, "trades": trades, **summary})
+        symbol_rows.append(
+            {
+                "symbol": symbol,
+                "trades": trades,
+                "total_signals_before_rank": symbol_signals_before_rank,
+                "total_signals": symbol_signals,
+                "executable_signals": symbol_executable,
+                "strong_market_signals": _strong_market_signal_count(window, start, end),
+                **summary,
+            }
+        )
 
-    aggregate = _aggregate_backtests(pd.DataFrame(backtest_rows))
+    selected_symbols = _select_symbols(symbol_rows, symbol_selection_config, forced_symbols=forced_symbols)
+    selected_rows = [row for row in symbol_rows if str(row.get("symbol")) in selected_symbols]
+    aggregate = _aggregate_backtests(pd.DataFrame(selected_rows))
     return {
         "fold": fold.name,
         "period": period,
@@ -423,6 +465,9 @@ def _evaluate_threshold(
         "signal_quality_config": signal_quality_config,
         "signal_rank_column": rank_column if max_signals_per_day is not None else "",
         "market_exposure_config": market_exposure_config.name,
+        "symbol_selection_config": symbol_selection_config.name,
+        "selected_symbols": ",".join(selected_symbols),
+        "selected_symbol_count": len(selected_symbols),
         "train_end": fold.train_end,
         "validation_start": fold.validation_start,
         "validation_end": fold.validation_end,
@@ -438,14 +483,20 @@ def _evaluate_threshold(
         "profit_factor": aggregate.get("profit_factor"),
         "win_rate": aggregate.get("win_rate"),
         "beats_buy_and_hold": aggregate.get("beats_buy_and_hold"),
-        "total_signals_before_rank": total_signals_before_rank,
-        "rank_filtered_signals": total_signals_before_rank - total_signals,
-        "total_signals": total_signals,
-        "executable_signals": executable_signals,
-        "avg_risk_fraction_on_signals": _avg_risk_fraction_on_signals(exposure_adjusted, start, end),
-        "strong_market_signals": _strong_market_signal_count(exposure_adjusted, start, end),
-        "symbols_with_signals": len(symbols_with_signals),
-        "closed_trades": closed_trades,
+        "total_signals_before_rank": _sum_selected(selected_rows, "total_signals_before_rank"),
+        "rank_filtered_signals": _sum_selected(selected_rows, "total_signals_before_rank")
+        - _sum_selected(selected_rows, "total_signals"),
+        "total_signals": _sum_selected(selected_rows, "total_signals"),
+        "executable_signals": _sum_selected(selected_rows, "executable_signals"),
+        "avg_risk_fraction_on_signals": _avg_risk_fraction_on_signals(
+            exposure_adjusted,
+            start,
+            end,
+            selected_symbols,
+        ),
+        "strong_market_signals": _sum_selected(selected_rows, "strong_market_signals"),
+        "symbols_with_signals": _symbols_with_selected_signals(selected_rows),
+        "closed_trades": _sum_selected(selected_rows, "trades"),
     }
 
 
@@ -479,10 +530,106 @@ def _market_exposure_config_by_name(
     raise KeyError(f"Unknown market exposure config: {name}")
 
 
-def _avg_risk_fraction_on_signals(frame: pd.DataFrame, start: str, end: str) -> float:
+def _symbol_selection_config_by_name(
+    symbol_selection_configs: tuple[SymbolSelectionConfig, ...],
+    name: str,
+) -> SymbolSelectionConfig:
+    for config in symbol_selection_configs:
+        if config.name == name:
+            return config
+    raise KeyError(f"Unknown symbol selection config: {name}")
+
+
+def _select_symbols(
+    symbol_rows: list[dict[str, Any]],
+    config: SymbolSelectionConfig,
+    forced_symbols: tuple[str, ...] | None = None,
+) -> tuple[str, ...]:
+    if forced_symbols is not None:
+        present = {str(row.get("symbol")) for row in symbol_rows if row.get("symbol") and "error" not in row}
+        forced = tuple(symbol for symbol in forced_symbols if symbol in present)
+        return forced or tuple(symbol for symbol in forced_symbols if symbol)
+
+    eligible = [row for row in symbol_rows if row.get("symbol") and "error" not in row]
+
+    if config.include_symbols:
+        include = set(config.include_symbols)
+        eligible = [row for row in eligible if str(row.get("symbol")) in include]
+    if config.exclude_symbols:
+        exclude = set(config.exclude_symbols)
+        eligible = [row for row in eligible if str(row.get("symbol")) not in exclude]
+
+    if config.mode == "all":
+        return tuple(sorted(str(row["symbol"]) for row in eligible if row.get("symbol")))
+
+    available = [row for row in eligible if int(row.get("trades", 0)) >= config.min_symbol_trades]
+
+    if config.require_positive_strategy_return:
+        positive = [row for row in available if _safe_float(row.get("strategy_return")) > 0]
+        if positive:
+            available = positive
+
+    if not available:
+        fallback = [str(row.get("symbol")) for row in eligible if row.get("symbol")]
+        return tuple(sorted(fallback))
+
+    if config.mode == "top_n_strategy_return":
+        selected = _top_n_symbols(available, "strategy_return", config.top_n)
+    elif config.mode == "top_n_excess_return":
+        selected = _top_n_symbols(available, "excess_return", config.top_n)
+    elif config.mode == "top_n_sharpe":
+        selected = _top_n_symbols(available, "sharpe", config.top_n)
+    elif config.mode == "positive_strategy_return":
+        selected = [row for row in available if _safe_float(row.get("strategy_return")) > 0] or available
+    else:
+        raise ValueError(f"Unsupported symbol selection mode: {config.mode}")
+
+    return tuple(sorted(str(row["symbol"]) for row in selected if row.get("symbol")))
+
+
+def _top_n_symbols(rows: list[dict[str, Any]], metric: str, top_n: int | None) -> list[dict[str, Any]]:
+    if top_n is None or top_n <= 0:
+        raise ValueError("top_n must be positive for top_n symbol selection modes")
+    return sorted(
+        rows,
+        key=lambda row: (
+            _sort_metric(row.get(metric)),
+            _sort_metric(row.get("strategy_return")),
+            int(row.get("trades", 0)),
+        ),
+        reverse=True,
+    )[:top_n]
+
+
+def _deserialize_symbols(value: str) -> tuple[str, ...]:
+    return tuple(symbol for symbol in value.split(",") if symbol)
+
+
+def _sum_selected(rows: list[dict[str, Any]], key: str) -> int:
+    total = 0
+    for row in rows:
+        try:
+            total += int(row.get(key, 0))
+        except (TypeError, ValueError):
+            continue
+    return total
+
+
+def _symbols_with_selected_signals(rows: list[dict[str, Any]]) -> int:
+    return sum(1 for row in rows if int(row.get("total_signals", 0)) > 0)
+
+
+def _avg_risk_fraction_on_signals(
+    frame: pd.DataFrame,
+    start: str,
+    end: str,
+    selected_symbols: tuple[str, ...],
+) -> float:
     window = frame.loc[start:end].copy()
     if window.empty or "risk_fraction" not in window.columns:
         return float("nan")
+    if selected_symbols and "symbol" in window.columns:
+        window = window[window["symbol"].astype(str).isin(selected_symbols)].copy()
     signal_mask = window.get("signal", False).fillna(False).astype(bool)
     if not signal_mask.any():
         return float("nan")
@@ -503,6 +650,13 @@ def _safe_float(value: object) -> float:
         return float(value)
     except (TypeError, ValueError):
         return float("nan")
+
+
+def _sort_metric(value: object) -> float:
+    parsed = _safe_float(value)
+    if pd.isna(parsed):
+        return float("-inf")
+    return parsed
 
 
 if __name__ == "__main__":

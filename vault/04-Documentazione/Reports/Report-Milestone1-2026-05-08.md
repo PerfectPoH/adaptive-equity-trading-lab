@@ -28,7 +28,7 @@ Implementazione MVP completata in prima versione.
 Risultato:
 
 ```text
-41 passed
+45 passed
 ```
 
 Pipeline:
@@ -82,6 +82,7 @@ Findings:
 - Target/exit comparison: varianti ATR testate; balanced migliora validation ma non supera il default 2024.
 - Signal-quality/ranking comparison: top-N giornaliero testato; nessuna variante viene promossa.
 - Market-exposure comparison: 2% risk migliora il 2024 ma non batte buy-and-hold; resta diagnostico.
+- Universe-selection comparison: large-cap-only e ETF-only selezionati in fold diversi; nessun subset promosso.
 - Trade-level: 193 trade chiusi, 105 win, 88 loss; nessun simbolo con media trade negativa.
 - Feature-regime: nessun bucket e' netto negativo; regimi piu' fragili legati a low rolling volatility, high distance-from-high e low calibrated probability.
 - Regime-filter validation: volume floor, pullback depth, ATR guard e combinato non battono il baseline per rendimento.

@@ -93,6 +93,14 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: mantenere default 1%; usare exposure comparison solo come diagnosi di sottoesposizione.
 - Stato: aperto, nessun aumento rischio promosso.
 
+### RISK-011 - Universe selection instabile tra fold
+
+- Priorita: P2.
+- Sintomo: `large_cap_stocks_only` viene scelto nel fold 2023, mentre `index_etfs_only` viene scelto nel fold 2024.
+- Impatto: scegliere ticker dal validation year rischia di inseguire il regime precedente senza creare edge robusto.
+- Azione: mantenere universo completo; riprovare solo con piu' anni, dati migliori o criteri fondamentali/settoriali point-in-time.
+- Stato: aperto, nessun subset promosso.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

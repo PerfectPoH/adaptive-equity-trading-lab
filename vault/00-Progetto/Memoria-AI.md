@@ -102,6 +102,7 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 .\.venv-lab\Scripts\python.exe -m src.experiments.target_exit_comparison
 .\.venv-lab\Scripts\python.exe -m src.experiments.signal_quality_comparison
 .\.venv-lab\Scripts\python.exe -m src.experiments.market_exposure_comparison
+.\.venv-lab\Scripts\python.exe -m src.experiments.universe_selection_comparison
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
 
@@ -109,7 +110,7 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 
 Run default `20260508_200621`:
 
-- config: `use_news=false`, `model_type=random_forest`, feature set baseline, isotonic calibration, `model_probability > 0.25`, target/exit default `1.5 ATR stop / 3 ATR take-profit / 10d timeout`, no regime filters, no daily rank filter, default market exposure `1%` risk per trade;
+- config: `use_news=false`, `model_type=random_forest`, full universe 10 simboli, feature set baseline, isotonic calibration, `model_probability > 0.25`, target/exit default `1.5 ATR stop / 3 ATR take-profit / 10d timeout`, no regime filters, no daily rank filter, default market exposure `1%` risk per trade;
 - default scelto tramite walk-forward: raw 0.50 nel fold 2023, isotonic 0.25 nel fold 2024;
 - 1093 segnali totali nel 2024;
 - 1036 segnali eseguibili;
@@ -154,6 +155,16 @@ Market exposure / risk fraction:
 - mean test strategy return circa 8.89%;
 - fold che battono buy-and-hold: 0/2;
 - decisione: non promuovere 2% risk; migliora il 2024 soprattutto per size maggiore, non per edge migliore o regime detection.
+
+Universe selection:
+
+- runner: `src.experiments.universe_selection_comparison`;
+- configurazioni confrontate: full universe, top 7/5/3 da validation, top 5 per excess, top 5 per Sharpe, positive validation, large-cap stocks only, index ETFs only;
+- fold `wf_2023`: selezionato `large_cap_stocks_only`, raw 0.45 -> test 2023 strategy return circa 5.59%;
+- fold `wf_2024`: selezionato `index_etfs_only`, isotonic 0.25 -> test 2024 strategy return circa 5.48%;
+- mean test strategy return circa 5.54%;
+- fold che battono buy-and-hold: 0/2;
+- decisione: non promuovere universi ridotti; le scelte sono instabili tra fold e non migliorano abbastanza.
 
 Walk-forward:
 

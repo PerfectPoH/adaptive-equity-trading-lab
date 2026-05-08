@@ -87,11 +87,11 @@ tags: [vault, index, obsidian, trading-lab]
 
 Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 
-- test: `41 passed`;
+- test: `45 passed`;
 - run pipeline default: `20260508_200621`;
 - backtest out-of-sample 2024: non batte buy-and-hold;
 - fallimento documentato: la baseline e' funzionante ma non ancora competitiva;
-- default sperimentale corrente: `use_news=false`, `model_type=random_forest`, feature set baseline, isotonic calibration, `model_probability > 0.25`, stop `1.5 ATR`, take-profit `3 ATR`, timeout 10 giorni, nessun daily rank filter, rischio 1% per trade;
+- default sperimentale corrente: `use_news=false`, `model_type=random_forest`, universo completo 10 simboli, feature set baseline, isotonic calibration, `model_probability > 0.25`, stop `1.5 ATR`, take-profit `3 ATR`, timeout 10 giorni, nessun daily rank filter, rischio 1% per trade;
 - diagnosi principale: 1093 segnali su 10 simboli, rendimento medio 2024 circa 6.49%, ma ancora sotto buy-and-hold;
 - split temporale purgato: le ultime barre di train/validation/test vengono rimosse quando la label a 10 giorni supererebbe il confine;
 - downloader robusto: se `yfinance` fallisce, usa l'ultimo snapshot locale valido;
@@ -105,6 +105,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - target/exit comparison completata: backtest ora rispetta timeout e finalizza trade aperti; nessuna variante ATR viene promossa.
 - signal-quality/ranking comparison completata: top-N giornaliero testato, ma nessun ranking viene promosso; score e rank restano diagnostici.
 - market-exposure comparison completata: 2% risk migliora il 2024 ma non batte buy-and-hold e non viene promosso.
+- universe-selection comparison completata: universi ridotti testati, ma nessun subset viene promosso.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 

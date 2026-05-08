@@ -355,6 +355,57 @@ The 2022 validation fold still selected the default 1% risk, and no exposure con
 Keep market exposure configs as research tools until risk-adjusted validation improves.
 ```
 
+## Universe Selection Comparison
+
+```powershell
+.\.venv-lab\Scripts\python.exe -m src.experiments.universe_selection_comparison
+```
+
+Outputs:
+
+```text
+experiments/universe_selection_comparison_latest.json
+experiments/universe_selection_comparison_latest.csv
+```
+
+Compared universe-selection configurations:
+
+```text
+all_symbols
+top_7_by_validation_strategy
+top_5_by_validation_strategy
+top_3_by_validation_strategy
+top_5_by_validation_excess
+top_5_by_validation_sharpe
+positive_validation_strategy
+large_cap_stocks_only
+index_etfs_only
+```
+
+Latest result:
+
+```text
+wf_2023 selected: large_cap_stocks_only raw threshold 0.45
+wf_2023 selected symbols: AAPL, AMD, AMZN, GOOGL, META, MSFT, NVDA, TSLA
+wf_2023 test strategy return: ~5.59%
+
+wf_2024 selected: index_etfs_only isotonic threshold 0.25
+wf_2024 selected symbols: QQQ, SPY
+wf_2024 test strategy return: ~5.48%
+
+mean test strategy return: ~5.54%
+folds beating buy-and-hold: 0 / 2
+```
+
+Decision:
+
+```text
+Do not promote a smaller universe yet.
+The selected subsets are unstable across folds and do not beat buy-and-hold.
+The ETF-only universe reduces excess underperformance in 2024 but also gives up too much absolute return versus the current default.
+Keep the full 10-symbol universe as the research baseline.
+```
+
 ## Feature-Regime Analysis
 
 Current default run:

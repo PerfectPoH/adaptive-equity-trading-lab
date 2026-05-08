@@ -5,6 +5,7 @@ Market Data
 -> Data Snapshots
 -> Feature Engineering
 -> Scanner
+-> Optional Validation-Only Universe Selection
 -> Temporal Split
 -> Label Builder
 -> ML Model

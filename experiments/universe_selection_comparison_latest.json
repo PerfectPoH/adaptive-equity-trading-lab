@@ -1,0 +1,198 @@
+{
+  "thresholds": {
+    "raw": [
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7
+    ],
+    "isotonic": [
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45
+    ]
+  },
+  "model_types": [
+    "random_forest"
+  ],
+  "feature_sets": [
+    "baseline"
+  ],
+  "target_exit_configs": [
+    {
+      "name": "default_1_5x_stop_3x_tp_10d",
+      "stop_atr_multiple": 1.5,
+      "take_profit_atr_multiple": 3.0,
+      "timeout_bars": 10
+    }
+  ],
+  "signal_quality_configs": [
+    {
+      "name": "no_quality_rank_filter",
+      "min_signal_quality_score": null,
+      "max_signals_per_day": null,
+      "rank_column": "signal_quality_score"
+    }
+  ],
+  "market_exposure_configs": [
+    {
+      "name": "default_1pct",
+      "base_risk_fraction": 0.01,
+      "strong_market_risk_fraction": null,
+      "weak_market_risk_fraction": null,
+      "strong_spy_ema_50_ratio": 0.02,
+      "strong_spy_return_5d": 0.0
+    }
+  ],
+  "symbol_selection_configs": [
+    {
+      "name": "all_symbols",
+      "mode": "all",
+      "top_n": null,
+      "min_symbol_trades": 5,
+      "require_positive_strategy_return": false,
+      "include_symbols": [],
+      "exclude_symbols": []
+    },
+    {
+      "name": "top_7_by_validation_strategy",
+      "mode": "top_n_strategy_return",
+      "top_n": 7,
+      "min_symbol_trades": 5,
+      "require_positive_strategy_return": false,
+      "include_symbols": [],
+      "exclude_symbols": []
+    },
+    {
+      "name": "top_5_by_validation_strategy",
+      "mode": "top_n_strategy_return",
+      "top_n": 5,
+      "min_symbol_trades": 5,
+      "require_positive_strategy_return": false,
+      "include_symbols": [],
+      "exclude_symbols": []
+    },
+    {
+      "name": "top_3_by_validation_strategy",
+      "mode": "top_n_strategy_return",
+      "top_n": 3,
+      "min_symbol_trades": 5,
+      "require_positive_strategy_return": false,
+      "include_symbols": [],
+      "exclude_symbols": []
+    },
+    {
+      "name": "top_5_by_validation_excess",
+      "mode": "top_n_excess_return",
+      "top_n": 5,
+      "min_symbol_trades": 5,
+      "require_positive_strategy_return": false,
+      "include_symbols": [],
+      "exclude_symbols": []
+    },
+    {
+      "name": "top_5_by_validation_sharpe",
+      "mode": "top_n_sharpe",
+      "top_n": 5,
+      "min_symbol_trades": 5,
+      "require_positive_strategy_return": false,
+      "include_symbols": [],
+      "exclude_symbols": []
+    },
+    {
+      "name": "positive_validation_strategy",
+      "mode": "positive_strategy_return",
+      "top_n": null,
+      "min_symbol_trades": 5,
+      "require_positive_strategy_return": false,
+      "include_symbols": [],
+      "exclude_symbols": []
+    },
+    {
+      "name": "large_cap_stocks_only",
+      "mode": "all",
+      "top_n": null,
+      "min_symbol_trades": 5,
+      "require_positive_strategy_return": false,
+      "include_symbols": [
+        "AAPL",
+        "MSFT",
+        "NVDA",
+        "AMD",
+        "TSLA",
+        "META",
+        "AMZN",
+        "GOOGL"
+      ],
+      "exclude_symbols": []
+    },
+    {
+      "name": "index_etfs_only",
+      "mode": "all",
+      "top_n": null,
+      "min_symbol_trades": 5,
+      "require_positive_strategy_return": false,
+      "include_symbols": [
+        "SPY",
+        "QQQ"
+      ],
+      "exclude_symbols": []
+    }
+  ],
+  "min_validation_trades": 20,
+  "folds": [
+    {
+      "fold": "wf_2023",
+      "selected_target_exit_config": "default_1_5x_stop_3x_tp_10d",
+      "selected_feature_set": "baseline",
+      "selected_model_type": "random_forest",
+      "selected_probability_variant": "raw",
+      "selected_signal_quality_config": "no_quality_rank_filter",
+      "selected_signal_rank_column": "",
+      "selected_market_exposure_config": "default_1pct",
+      "selected_symbol_selection_config": "large_cap_stocks_only",
+      "selected_symbols": "AAPL,AMD,AMZN,GOOGL,META,MSFT,NVDA,TSLA",
+      "selected_threshold": 0.45,
+      "validation_strategy_return": -0.010902510089530533,
+      "validation_excess_return": 0.47515986513384667,
+      "validation_closed_trades": 28,
+      "test_strategy_return": 0.055933978747180674,
+      "test_excess_return": -1.1121972244492955,
+      "test_closed_trades": 122,
+      "test_beats_buy_and_hold": false
+    },
+    {
+      "fold": "wf_2024",
+      "selected_target_exit_config": "default_1_5x_stop_3x_tp_10d",
+      "selected_feature_set": "baseline",
+      "selected_model_type": "random_forest",
+      "selected_probability_variant": "isotonic",
+      "selected_signal_quality_config": "no_quality_rank_filter",
+      "selected_signal_rank_column": "",
+      "selected_market_exposure_config": "default_1pct",
+      "selected_symbol_selection_config": "index_etfs_only",
+      "selected_symbols": "QQQ,SPY",
+      "selected_threshold": 0.25,
+      "validation_strategy_return": 0.10559240633281741,
+      "validation_excess_return": -0.292667188911774,
+      "validation_closed_trades": 45,
+      "test_strategy_return": 0.05476911470947256,
+      "test_excess_return": -0.20015093547585447,
+      "test_closed_trades": 51,
+      "test_beats_buy_and_hold": false
+    }
+  ],
+  "summary": {
+    "folds": 2,
+    "mean_test_strategy_return": 0.055351546728326616,
+    "mean_test_excess_return": -0.6561740799625749,
+    "folds_beating_buy_and_hold": 0,
+    "verdict": "positive_but_under_benchmark"
+  }
+}
