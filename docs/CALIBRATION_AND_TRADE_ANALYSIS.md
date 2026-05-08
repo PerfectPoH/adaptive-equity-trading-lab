@@ -10,6 +10,9 @@ experiments/runs/<run_id>/calibration_summary.json
 experiments/runs/<run_id>/trades.csv
 experiments/runs/<run_id>/trade_analysis_by_symbol.csv
 experiments/runs/<run_id>/trade_analysis_summary.json
+experiments/runs/<run_id>/feature_regime_analysis.csv
+experiments/runs/<run_id>/feature_regime_contrasts.csv
+experiments/runs/<run_id>/feature_regime_summary.json
 ```
 
 ## Current Default Run

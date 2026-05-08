@@ -10,6 +10,7 @@ import pandas as pd
 
 from src.analysis.calibration import build_calibration_report
 from src.analysis.error_analyzer import build_run_analysis, build_signal_diagnostics
+from src.analysis.regime_analyzer import build_feature_regime_analysis
 from src.analysis.threshold_analyzer import build_threshold_diagnostics
 from src.analysis.trade_analyzer import build_trade_analysis, trades_to_frame
 from src.backtest.execution import add_execution_columns
@@ -137,6 +138,13 @@ def run_milestone_1(
         json.dumps(trade_analysis_summary, indent=2),
         encoding="utf-8",
     )
+    regime_analysis, regime_contrasts, regime_summary = build_feature_regime_analysis(trades)
+    regime_analysis.to_csv(run_dir / "feature_regime_analysis.csv", index=False)
+    regime_contrasts.to_csv(run_dir / "feature_regime_contrasts.csv", index=False)
+    (run_dir / "feature_regime_summary.json").write_text(
+        json.dumps(regime_summary, indent=2),
+        encoding="utf-8",
+    )
 
     analysis, analysis_summary = build_run_analysis(signals, backtests)
     analysis.to_csv(run_dir / "analysis.csv", index=False)
@@ -204,6 +212,7 @@ def run_milestone_1(
                 "threshold_diagnostics_summary": threshold_diagnostics_summary,
                 "calibration_summary": calibration_summary,
                 "trade_analysis_summary": trade_analysis_summary,
+                "feature_regime_summary": regime_summary,
             },
             indent=2,
         ),

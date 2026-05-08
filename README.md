@@ -27,6 +27,7 @@ Live small != scaling
 - Per-run analysis for signal concentration, skipped trades, and benchmark underperformance.
 - Probability calibration reports.
 - Closed-trade error analysis.
+- Feature-regime diagnostics for closed trades.
 - Normalized equity curve export.
 - Experiment log.
 - Streamlit dashboard.

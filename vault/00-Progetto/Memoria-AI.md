@@ -98,7 +98,7 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 
 ## Risultato importante 2026-05-08
 
-Run default `20260508_175115`:
+Run default `20260508_175742`:
 
 - config: `use_news=false`, `model_probability > 0.55`;
 - 119 segnali totali nel 2024;
@@ -113,6 +113,12 @@ Run default `20260508_175115`:
 - best trade: NVDA segnale 2024-02-22, circa +12.79%;
 - worst trade: NVDA segnale 2024-06-12, circa -6.89%;
 - AMD e' l'unico simbolo con media trade negativa nel run corrente.
+- feature-regime analysis:
+  - nessun bucket feature e' netto negativo;
+  - regime piu' debole: `signal_distance_from_20d_high = mid`, avg return circa 0.30%, loss rate 50%;
+  - altri regimi con loss rate 50%: `signal_distance_from_20d_high = high`, `signal_atr_pct = high`;
+  - contrasto principale: i trade perdenti hanno volume relativo piu' basso dei trade vincenti;
+  - decisione: non aggiungere filtri hard ancora, prima fare esperimento separato su volume/distance/ATR.
 
 Calibration:
 

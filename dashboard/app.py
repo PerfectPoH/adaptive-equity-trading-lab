@@ -65,6 +65,9 @@ calibration_summary_path = run_dir / "calibration_summary.json"
 trades_path = run_dir / "trades.csv"
 trade_analysis_path = run_dir / "trade_analysis_by_symbol.csv"
 trade_analysis_summary_path = run_dir / "trade_analysis_summary.json"
+feature_regime_path = run_dir / "feature_regime_analysis.csv"
+feature_regime_contrasts_path = run_dir / "feature_regime_contrasts.csv"
+feature_regime_summary_path = run_dir / "feature_regime_summary.json"
 
 if analysis_summary_path.exists():
     summary = json.loads(analysis_summary_path.read_text(encoding="utf-8"))
@@ -181,6 +184,22 @@ if trades_path.exists():
     with st.expander("Closed trades"):
         trades = pd.read_csv(trades_path)
         st.dataframe(trades, use_container_width=True)
+
+if feature_regime_summary_path.exists():
+    regime_summary = json.loads(feature_regime_summary_path.read_text(encoding="utf-8"))
+    st.subheader("Feature-Regime Analysis")
+    for finding in regime_summary.get("primary_findings", []):
+        st.write(f"- {finding}")
+
+if feature_regime_path.exists():
+    feature_regimes = pd.read_csv(feature_regime_path)
+    if not feature_regimes.empty:
+        st.dataframe(feature_regimes, use_container_width=True)
+
+if feature_regime_contrasts_path.exists():
+    with st.expander("Win/loss feature contrasts"):
+        feature_contrasts = pd.read_csv(feature_regime_contrasts_path)
+        st.dataframe(feature_contrasts, use_container_width=True)
 
 if signals_path.exists():
     signals = pd.read_csv(signals_path)

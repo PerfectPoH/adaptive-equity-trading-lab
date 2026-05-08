@@ -75,8 +75,8 @@ tags: [vault, index, obsidian, trading-lab]
 
 Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 
-- test: `17 passed`;
-- run pipeline default: `20260508_175115`;
+- test: `19 passed`;
+- run pipeline default: `20260508_175742`;
 - backtest out-of-sample 2024: non batte buy-and-hold;
 - fallimento documentato: la baseline e' funzionante ma non ancora competitiva;
 - default sperimentale corrente: `use_news=false`, raw `model_probability > 0.55`;
@@ -84,6 +84,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - news GDELT macro 2020-2024 collegate come feature laggate sperimentali, non default.
 - calibrazione isotonic implementata e confrontata: migliora le probabilita', ma non il rendimento della strategia;
 - decisione: la calibrazione resta tool di analisi, non default operativo.
+- feature-regime analysis aggiunta: volume relativo basso e distanza dal massimo a 20 giorni mid/high sono ipotesi di fragilita' da testare.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 

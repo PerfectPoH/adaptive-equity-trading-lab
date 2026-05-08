@@ -28,7 +28,7 @@ Implementazione MVP completata in prima versione.
 Risultato:
 
 ```text
-17 passed
+19 passed
 ```
 
 Pipeline:
@@ -40,7 +40,7 @@ Pipeline:
 Run principale aggiornato:
 
 ```text
-20260508_175115
+20260508_175742
 ```
 
 ## Risultati backtest
@@ -77,6 +77,7 @@ Findings:
 - Calibration: il modello raw e' overconfident; `model_probability` e' un ranking score, non una probabilita' reale.
 - Calibration layer: isotonic migliora Brier/errori probabilistici, ma non migliora il rendimento della strategia.
 - Trade-level: 36 trade chiusi, 23 win, 13 loss; AMD unico simbolo con media trade negativa.
+- Feature-regime: nessun bucket e' netto negativo; regimi piu' fragili legati a volume relativo basso, distanza dal massimo a 20 giorni mid/high e ATR% alto.
 
 ## Interpretazione
 
@@ -91,11 +92,12 @@ La pipeline funziona, ma la strategia baseline non e' competitiva. Questo e' un 
 - Primo connettore news presente; ablation corrente non supporta usarlo come default.
 - Nessun walk-forward tuning.
 - Calibration layer presente, ma non default perche' non migliora ancora strategy return.
+- Feature-regime analysis presente, ma ancora su campione piccolo di 36 trade.
 - Nessuna validazione istituzionale.
 
 ## Prossime mosse
 
-1. Fare feature-regime analysis sui trade perdenti.
+1. Testare filtri su volume relativo, distance-from-high e ATR% come esperimento separato.
 2. Eseguire sweep piu' ampio sulle soglie calibrate.
 3. Aggiungere walk-forward validation.
 4. Migliorare logging parametri.
