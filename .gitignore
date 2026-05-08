@@ -1,0 +1,22 @@
+.venv*/
+__pycache__/
+*.pyc
+.pytest_cache/
+.streamlit/secrets.toml
+
+# Runtime outputs
+data/raw/
+data/processed/
+data/snapshots/*.csv
+data/snapshots/*.sha256
+experiments/runs/
+*.log
+
+# Local env
+.env
+
+# OS / IDE
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
