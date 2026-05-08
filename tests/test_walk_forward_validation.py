@@ -122,6 +122,29 @@ def test_select_threshold_from_validation_can_choose_across_signal_quality_confi
     assert selected["signal_quality_config"] == "top_2_daily"
 
 
+def test_select_threshold_from_validation_can_choose_across_market_exposure_configs() -> None:
+    rows = [
+        {
+            "market_exposure_config": "default_1pct",
+            "threshold": 0.25,
+            "excess_return": 0.01,
+            "strategy_return": 0.06,
+            "closed_trades": 20,
+        },
+        {
+            "market_exposure_config": "strong_market_2pct",
+            "threshold": 0.25,
+            "excess_return": 0.05,
+            "strategy_return": 0.11,
+            "closed_trades": 20,
+        },
+    ]
+
+    selected = select_threshold_from_validation(rows, min_validation_trades=10)
+
+    assert selected["market_exposure_config"] == "strong_market_2pct"
+
+
 def test_summarize_walk_forward_marks_positive_under_benchmark() -> None:
     summary = summarize_walk_forward(
         [

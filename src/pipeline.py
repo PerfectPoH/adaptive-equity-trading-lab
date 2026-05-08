@@ -23,6 +23,7 @@ from src.models.label_builder import build_trade_labels
 from src.models.predictor import add_model_probabilities
 from src.models.trainer import evaluate_classifier, fit_model, temporal_split
 from src.news.gdelt_doc import load_or_download_market_news
+from src.risk.market_exposure import DEFAULT_MARKET_EXPOSURE_CONFIG, MarketExposureConfig, add_market_exposure_columns
 from src.scanner.stock_scanner import add_scanner_columns
 from src.strategy.signal_engine import add_signal_columns, apply_daily_signal_rank_filter
 
@@ -53,6 +54,7 @@ def run_milestone_1(
     min_signal_quality_score: float | None = None,
     max_signals_per_day: int | None = None,
     signal_rank_column: str = "signal_quality_score",
+    market_exposure_config: MarketExposureConfig = DEFAULT_MARKET_EXPOSURE_CONFIG,
 ) -> Path:
     base_run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_id = f"{base_run_id}_{run_tag}" if run_tag else base_run_id
@@ -113,8 +115,9 @@ def run_milestone_1(
         max_signals_per_day=max_signals_per_day,
         rank_column=signal_rank_column,
     )
+    exposure_adjusted = add_market_exposure_columns(ranked_signals, market_exposure_config)
 
-    for symbol, frame in ranked_signals.groupby("symbol", sort=False):
+    for symbol, frame in exposure_adjusted.groupby("symbol", sort=False):
         executable = add_execution_columns(frame.sort_index(), max_gap_threshold=MAX_GAP_THRESHOLD)
         processed_frames.append(executable)
 
@@ -214,6 +217,7 @@ def run_milestone_1(
                 max_signals_per_day=max_signals_per_day,
                 signal_rank_column=signal_rank_column if max_signals_per_day is not None else None,
             ),
+            "market_exposure": market_exposure_config.__dict__,
             "news_features": "gdelt_market_news_lagged_1d" if use_news else "disabled",
             "raw_validation_metrics": raw_validation_metrics,
             "raw_test_metrics": raw_test_metrics,
@@ -242,6 +246,7 @@ def run_milestone_1(
                         max_signals_per_day=max_signals_per_day,
                         signal_rank_column=signal_rank_column if max_signals_per_day is not None else None,
                     ),
+                    "market_exposure": market_exposure_config.__dict__,
                 },
                 "validation_metrics": validation_metrics,
                 "test_metrics": test_metrics,

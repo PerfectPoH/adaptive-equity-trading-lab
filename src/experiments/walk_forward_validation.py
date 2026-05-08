@@ -16,6 +16,7 @@ from src.models.label_builder import build_trade_labels
 from src.models.predictor import add_model_probabilities
 from src.models.trainer import fit_model, purge_label_boundary
 from src.pipeline import FEATURE_START, MAX_GAP_THRESHOLD, UNIVERSE, _aggregate_backtests
+from src.risk.market_exposure import DEFAULT_MARKET_EXPOSURE_CONFIG, MarketExposureConfig, add_market_exposure_columns
 from src.scanner.stock_scanner import add_scanner_columns
 from src.strategy.signal_engine import add_signal_columns, apply_daily_signal_rank_filter
 
@@ -96,6 +97,7 @@ def run_walk_forward_validation(
     feature_sets: dict[str, list[str]] | None = None,
     target_exit_configs: tuple[TargetExitConfig, ...] = DEFAULT_TARGET_EXIT_CONFIGS,
     signal_quality_configs: tuple[SignalQualityConfig, ...] = DEFAULT_SIGNAL_QUALITY_CONFIGS,
+    market_exposure_configs: tuple[MarketExposureConfig, ...] = (DEFAULT_MARKET_EXPOSURE_CONFIG,),
     min_validation_trades: int = 10,
     include_calibrated: bool = True,
     output_json: Path = OUTPUT_JSON,
@@ -166,11 +168,13 @@ def run_walk_forward_validation(
                                 min_signal_quality_score=quality_config.min_signal_quality_score,
                                 max_signals_per_day=quality_config.max_signals_per_day,
                                 rank_column=quality_config.rank_column,
+                                market_exposure_config=market_exposure_config,
                                 start=fold.validation_start,
                                 end=fold.validation_end,
                                 threshold=threshold,
                             )
                             for quality_config in signal_quality_configs
+                            for market_exposure_config in market_exposure_configs
                             for threshold in variant_thresholds
                         )
         selected = select_threshold_from_validation(validation_rows, min_validation_trades=min_validation_trades)
@@ -181,6 +185,10 @@ def run_walk_forward_validation(
         selected_quality_config = _signal_quality_config_by_name(
             signal_quality_configs,
             str(selected["signal_quality_config"]),
+        )
+        selected_market_exposure_config = _market_exposure_config_by_name(
+            market_exposure_configs,
+            str(selected["market_exposure_config"]),
         )
         test_row = _evaluate_threshold(
             frames_by_variant[
@@ -202,6 +210,7 @@ def run_walk_forward_validation(
             min_signal_quality_score=selected_quality_config.min_signal_quality_score,
             max_signals_per_day=selected_quality_config.max_signals_per_day,
             rank_column=selected_quality_config.rank_column,
+            market_exposure_config=selected_market_exposure_config,
             start=fold.test_start,
             end=fold.test_end,
             threshold=float(selected["threshold"]),
@@ -215,6 +224,7 @@ def run_walk_forward_validation(
                 and row["model_type"] == selected["model_type"]
                 and row["probability_variant"] == selected["probability_variant"]
                 and row["signal_quality_config"] == selected["signal_quality_config"]
+                and row["market_exposure_config"] == selected["market_exposure_config"]
                 and float(row["threshold"]) == float(selected["threshold"])
             )
         rows.extend(validation_rows)
@@ -228,6 +238,7 @@ def run_walk_forward_validation(
                 "selected_probability_variant": str(selected["probability_variant"]),
                 "selected_signal_quality_config": str(selected["signal_quality_config"]),
                 "selected_signal_rank_column": str(selected.get("signal_rank_column", "")),
+                "selected_market_exposure_config": str(selected["market_exposure_config"]),
                 "selected_threshold": float(selected["threshold"]),
                 "validation_strategy_return": selected["strategy_return"],
                 "validation_excess_return": selected["excess_return"],
@@ -248,6 +259,7 @@ def run_walk_forward_validation(
         "feature_sets": list(feature_sets.keys()),
         "target_exit_configs": [asdict(config) for config in target_exit_configs],
         "signal_quality_configs": [asdict(config) for config in signal_quality_configs],
+        "market_exposure_configs": [asdict(config) for config in market_exposure_configs],
         "min_validation_trades": min_validation_trades,
         "folds": fold_summaries,
         "summary": summarize_walk_forward(fold_summaries),
@@ -346,6 +358,7 @@ def _evaluate_threshold(
     min_signal_quality_score: float | None,
     max_signals_per_day: int | None,
     rank_column: str,
+    market_exposure_config: MarketExposureConfig,
     start: str,
     end: str,
     threshold: float,
@@ -372,8 +385,9 @@ def _evaluate_threshold(
         max_signals_per_day=max_signals_per_day,
         rank_column=rank_column,
     )
+    exposure_adjusted = add_market_exposure_columns(ranked, market_exposure_config)
 
-    for symbol, frame in ranked.groupby("symbol", sort=False):
+    for symbol, frame in exposure_adjusted.groupby("symbol", sort=False):
         executable = add_execution_columns(frame.sort_index(), max_gap_threshold=MAX_GAP_THRESHOLD)
         window = executable.loc[start:end].copy()
         if len(window) < 50:
@@ -408,6 +422,7 @@ def _evaluate_threshold(
         "probability_variant": probability_variant,
         "signal_quality_config": signal_quality_config,
         "signal_rank_column": rank_column if max_signals_per_day is not None else "",
+        "market_exposure_config": market_exposure_config.name,
         "train_end": fold.train_end,
         "validation_start": fold.validation_start,
         "validation_end": fold.validation_end,
@@ -427,6 +442,8 @@ def _evaluate_threshold(
         "rank_filtered_signals": total_signals_before_rank - total_signals,
         "total_signals": total_signals,
         "executable_signals": executable_signals,
+        "avg_risk_fraction_on_signals": _avg_risk_fraction_on_signals(exposure_adjusted, start, end),
+        "strong_market_signals": _strong_market_signal_count(exposure_adjusted, start, end),
         "symbols_with_signals": len(symbols_with_signals),
         "closed_trades": closed_trades,
     }
@@ -450,6 +467,35 @@ def _signal_quality_config_by_name(
         if config.name == name:
             return config
     raise KeyError(f"Unknown signal quality config: {name}")
+
+
+def _market_exposure_config_by_name(
+    market_exposure_configs: tuple[MarketExposureConfig, ...],
+    name: str,
+) -> MarketExposureConfig:
+    for config in market_exposure_configs:
+        if config.name == name:
+            return config
+    raise KeyError(f"Unknown market exposure config: {name}")
+
+
+def _avg_risk_fraction_on_signals(frame: pd.DataFrame, start: str, end: str) -> float:
+    window = frame.loc[start:end].copy()
+    if window.empty or "risk_fraction" not in window.columns:
+        return float("nan")
+    signal_mask = window.get("signal", False).fillna(False).astype(bool)
+    if not signal_mask.any():
+        return float("nan")
+    return _safe_float(pd.to_numeric(window.loc[signal_mask, "risk_fraction"], errors="coerce").mean())
+
+
+def _strong_market_signal_count(frame: pd.DataFrame, start: str, end: str) -> int:
+    window = frame.loc[start:end].copy()
+    if window.empty or "market_regime_strong" not in window.columns:
+        return 0
+    signal_mask = window.get("signal", False).fillna(False).astype(bool)
+    strong_mask = window["market_regime_strong"].fillna(False).astype(bool)
+    return int((signal_mask & strong_mask).sum())
 
 
 def _safe_float(value: object) -> float:

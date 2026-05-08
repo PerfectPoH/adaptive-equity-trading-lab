@@ -40,6 +40,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-08-codex-feature-set-comparison]]
 - [[2026-05-08-codex-target-exit-comparison]]
 - [[2026-05-08-codex-signal-quality-ranking]]
+- [[2026-05-08-codex-market-exposure-comparison]]
 
 ## Relazioni principali
 
@@ -56,3 +57,4 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Roadmap-Master]] -> [[2026-05-08-codex-feature-set-comparison]]
 - [[Roadmap-Master]] -> [[2026-05-08-codex-target-exit-comparison]]
 - [[Roadmap-Master]] -> [[2026-05-08-codex-signal-quality-ranking]]
+- [[Roadmap-Master]] -> [[2026-05-08-codex-market-exposure-comparison]]

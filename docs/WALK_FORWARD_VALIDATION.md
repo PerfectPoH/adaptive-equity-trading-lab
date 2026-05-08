@@ -110,5 +110,5 @@ The algorithm improved, but the main weakness remains:
 The strategy captures positive returns, but it still underperforms strong buy-and-hold years.
 ```
 
-Signal ranking has now been tested separately and is not promoted yet.
-The next improvement should target universe selection, market-regime exposure, or risk logic beyond simple ATR grids.
+Signal ranking and market-exposure/risk fraction configs have now been tested separately and are not promoted yet.
+The next improvement should target universe selection, model edge, or broader data coverage rather than simply increasing risk.

@@ -16,7 +16,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 ### RISK-001 - Baseline non batte buy-and-hold
 
 - Priorita: P2.
-- Sintomo: il run default `20260508_194750` produce circa 6.49% medio contro circa 48% buy-and-hold.
+- Sintomo: il run default `20260508_200621` produce circa 6.49% medio contro circa 48% buy-and-hold.
 - Dettaglio: 1093 segnali totali, 1036 eseguibili, su 10 simboli; 9 simboli sotto benchmark.
 - Causa probabile: edge ancora debole, target/feature baseline troppo semplici, mercato 2024 molto forte per large-cap tech.
 - Azione: feature/model upgrade e validazione su piu' fold in Milestone 2.
@@ -72,7 +72,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 ### RISK-008 - Simboli con media trade negativa possono cambiare tra run
 
 - Priorita: P3.
-- Sintomo: nel run `20260508_174122`, AMD era negativo; nel run default `20260508_194750` nessun simbolo ha media trade negativa.
+- Sintomo: nel run `20260508_174122`, AMD era negativo; nel run default `20260508_200621` nessun simbolo ha media trade negativa.
 - Impatto: blacklist per singolo ticker rischia di essere overfit sul run.
 - Azione: niente blacklist finche' il pattern non si ripete su piu' fold o dati migliori.
 - Stato: mitigato.
@@ -84,6 +84,14 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Impatto: usare lo score come filtro live o sizing input rischia di introdurre overfit e tagliare esposizione utile.
 - Azione: mantenerlo diagnostico; riprogettare ranking solo con validazione out-of-sample e piu' anni.
 - Stato: aperto, nessun ranking promosso.
+
+### RISK-010 - Aumentare risk fraction non crea edge
+
+- Priorita: P2.
+- Sintomo: `fixed_2pct` migliora il fold 2024 fino a circa 11.27%, ma non batte buy-and-hold e aumenta l'esposizione.
+- Impatto: confondere aumento size con miglioramento strategico puo' portare a rischio reale eccessivo.
+- Azione: mantenere default 1%; usare exposure comparison solo come diagnosi di sottoesposizione.
+- Stato: aperto, nessun aumento rischio promosso.
 
 ## Tech debt
 

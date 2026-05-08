@@ -11,6 +11,7 @@ Market Data
 -> Signal Engine
 -> Optional Signal Quality Rank Filter
 -> Risk Manager
+-> Optional Market Exposure / Risk Fraction Adjustment
 -> Execution Simulator
 -> Backtest
 -> Metrics

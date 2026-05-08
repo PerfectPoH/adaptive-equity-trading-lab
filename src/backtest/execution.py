@@ -9,6 +9,7 @@ def add_execution_columns(
     frame: pd.DataFrame,
     equity: float = 100_000,
     risk_fraction: float = 0.01,
+    risk_fraction_column: str = "risk_fraction",
     max_gap_threshold: float = 0.05,
     skip_entry_bar_exit_touch: bool = True,
 ) -> pd.DataFrame:
@@ -20,6 +21,7 @@ def add_execution_columns(
     data["execution_valid"] = False
     data["execution_skip_reason"] = ""
     data["position_size"] = 0
+    data["risk_fraction_used"] = float(risk_fraction)
 
     for i in range(len(data)):
         if not bool(data["signal"].iat[i]):
@@ -32,7 +34,9 @@ def add_execution_columns(
 
         entry = float(data["entry_price"].iat[i])
         stop = float(data["stop_loss"].iat[i])
-        size = calculate_position_size(equity, entry, stop, risk_fraction)
+        row_risk_fraction = _risk_fraction_for_row(data, i, risk_fraction_column, risk_fraction)
+        data.iat[i, data.columns.get_loc("risk_fraction_used")] = row_risk_fraction
+        size = calculate_position_size(equity, entry, stop, row_risk_fraction)
         if size <= 0:
             data.iat[i, data.columns.get_loc("execution_skip_reason")] = "invalid_position_size"
             continue
@@ -57,6 +61,7 @@ def planned_trade_for_signal(frame: pd.DataFrame, signal_index: int) -> dict[str
         "stop_loss": row.get("stop_loss"),
         "take_profit": row.get("take_profit"),
         "position_size": int(row.get("position_size", 0)),
+        "risk_fraction_used": row.get("risk_fraction_used", None),
         "skip_reason": row.get("execution_skip_reason", ""),
     }
 
@@ -91,3 +96,17 @@ def _execution_skip_reason(
         if data["High"].iat[entry_bar] >= take or data["Low"].iat[entry_bar] <= stop:
             return "entry_bar_exit_touch"
     return ""
+
+
+def _risk_fraction_for_row(
+    data: pd.DataFrame,
+    i: int,
+    risk_fraction_column: str,
+    default_risk_fraction: float,
+) -> float:
+    if risk_fraction_column not in data.columns:
+        return float(default_risk_fraction)
+    value = pd.to_numeric(pd.Series([data[risk_fraction_column].iat[i]]), errors="coerce").iat[0]
+    if pd.isna(value) or value <= 0:
+        return float(default_risk_fraction)
+    return float(value)

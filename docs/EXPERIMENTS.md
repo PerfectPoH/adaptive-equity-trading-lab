@@ -309,12 +309,58 @@ For the 2024 fold, validation selected the default no-rank configuration.
 Keep signal_quality_score and signal_rank columns as diagnostics only.
 ```
 
+## Market Exposure Comparison
+
+```powershell
+.\.venv-lab\Scripts\python.exe -m src.experiments.market_exposure_comparison
+```
+
+Outputs:
+
+```text
+experiments/market_exposure_comparison_latest.json
+experiments/market_exposure_comparison_latest.csv
+```
+
+Compared market-exposure configurations:
+
+```text
+default_1pct
+fixed_1_5pct
+fixed_2pct
+strong_market_1_5pct
+strong_market_2pct
+weak_0_5pct_strong_1_5pct
+```
+
+Latest result:
+
+```text
+wf_2023 selected: default_1pct raw threshold 0.45
+wf_2023 test strategy return: ~6.50%
+
+wf_2024 selected: fixed_2pct isotonic threshold 0.25
+wf_2024 test strategy return: ~11.27%
+
+mean test strategy return: ~8.89%
+folds beating buy-and-hold: 0 / 2
+```
+
+Decision:
+
+```text
+Do not promote higher exposure yet.
+The 2024 improvement mostly comes from doubling risk to 2%, not from a better signal edge.
+The 2022 validation fold still selected the default 1% risk, and no exposure config beat buy-and-hold out-of-sample.
+Keep market exposure configs as research tools until risk-adjusted validation improves.
+```
+
 ## Feature-Regime Analysis
 
 Current default run:
 
 ```text
-20260508_194750
+20260508_200621
 ```
 
 Current finding:

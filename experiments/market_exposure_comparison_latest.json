@@ -1,0 +1,139 @@
+{
+  "thresholds": {
+    "raw": [
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7
+    ],
+    "isotonic": [
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45
+    ]
+  },
+  "model_types": [
+    "random_forest"
+  ],
+  "feature_sets": [
+    "baseline"
+  ],
+  "target_exit_configs": [
+    {
+      "name": "default_1_5x_stop_3x_tp_10d",
+      "stop_atr_multiple": 1.5,
+      "take_profit_atr_multiple": 3.0,
+      "timeout_bars": 10
+    }
+  ],
+  "signal_quality_configs": [
+    {
+      "name": "no_quality_rank_filter",
+      "min_signal_quality_score": null,
+      "max_signals_per_day": null,
+      "rank_column": "signal_quality_score"
+    }
+  ],
+  "market_exposure_configs": [
+    {
+      "name": "default_1pct",
+      "base_risk_fraction": 0.01,
+      "strong_market_risk_fraction": null,
+      "weak_market_risk_fraction": null,
+      "strong_spy_ema_50_ratio": 0.02,
+      "strong_spy_return_5d": 0.0
+    },
+    {
+      "name": "fixed_1_5pct",
+      "base_risk_fraction": 0.015,
+      "strong_market_risk_fraction": null,
+      "weak_market_risk_fraction": null,
+      "strong_spy_ema_50_ratio": 0.02,
+      "strong_spy_return_5d": 0.0
+    },
+    {
+      "name": "fixed_2pct",
+      "base_risk_fraction": 0.02,
+      "strong_market_risk_fraction": null,
+      "weak_market_risk_fraction": null,
+      "strong_spy_ema_50_ratio": 0.02,
+      "strong_spy_return_5d": 0.0
+    },
+    {
+      "name": "strong_market_1_5pct",
+      "base_risk_fraction": 0.01,
+      "strong_market_risk_fraction": 0.015,
+      "weak_market_risk_fraction": null,
+      "strong_spy_ema_50_ratio": 0.02,
+      "strong_spy_return_5d": 0.0
+    },
+    {
+      "name": "strong_market_2pct",
+      "base_risk_fraction": 0.01,
+      "strong_market_risk_fraction": 0.02,
+      "weak_market_risk_fraction": null,
+      "strong_spy_ema_50_ratio": 0.02,
+      "strong_spy_return_5d": 0.0
+    },
+    {
+      "name": "weak_0_5pct_strong_1_5pct",
+      "base_risk_fraction": 0.01,
+      "strong_market_risk_fraction": 0.015,
+      "weak_market_risk_fraction": 0.005,
+      "strong_spy_ema_50_ratio": 0.02,
+      "strong_spy_return_5d": 0.0
+    }
+  ],
+  "min_validation_trades": 30,
+  "folds": [
+    {
+      "fold": "wf_2023",
+      "selected_target_exit_config": "default_1_5x_stop_3x_tp_10d",
+      "selected_feature_set": "baseline",
+      "selected_model_type": "random_forest",
+      "selected_probability_variant": "raw",
+      "selected_signal_quality_config": "no_quality_rank_filter",
+      "selected_signal_rank_column": "",
+      "selected_market_exposure_config": "default_1pct",
+      "selected_threshold": 0.45,
+      "validation_strategy_return": -0.011811555090836364,
+      "validation_excess_return": 0.4306919239112107,
+      "validation_closed_trades": 42,
+      "test_strategy_return": 0.0650450448404449,
+      "test_excess_return": -0.9491118367656544,
+      "test_closed_trades": 163,
+      "test_beats_buy_and_hold": false
+    },
+    {
+      "fold": "wf_2024",
+      "selected_target_exit_config": "default_1_5x_stop_3x_tp_10d",
+      "selected_feature_set": "baseline",
+      "selected_model_type": "random_forest",
+      "selected_probability_variant": "isotonic",
+      "selected_signal_quality_config": "no_quality_rank_filter",
+      "selected_signal_rank_column": "",
+      "selected_market_exposure_config": "fixed_2pct",
+      "selected_threshold": 0.25,
+      "validation_strategy_return": 0.1369781777576006,
+      "validation_excess_return": -0.8771787038484986,
+      "validation_closed_trades": 164,
+      "test_strategy_return": 0.11267188277444133,
+      "test_excess_return": -0.3677946621220705,
+      "test_closed_trades": 159,
+      "test_beats_buy_and_hold": false
+    }
+  ],
+  "summary": {
+    "folds": 2,
+    "mean_test_strategy_return": 0.08885846380744311,
+    "mean_test_excess_return": -0.6584532494438624,
+    "folds_beating_buy_and_hold": 0,
+    "verdict": "positive_but_under_benchmark"
+  }
+}

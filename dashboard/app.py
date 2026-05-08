@@ -23,6 +23,7 @@ MODEL_COMPARISON_PATH = Path("experiments/model_comparison_latest.csv")
 FEATURE_SET_COMPARISON_PATH = Path("experiments/feature_set_comparison_latest.csv")
 TARGET_EXIT_COMPARISON_PATH = Path("experiments/target_exit_comparison_latest.csv")
 SIGNAL_QUALITY_COMPARISON_PATH = Path("experiments/signal_quality_comparison_latest.csv")
+MARKET_EXPOSURE_COMPARISON_PATH = Path("experiments/market_exposure_comparison_latest.csv")
 
 
 def latest_run_dir() -> Path | None:
@@ -49,6 +50,7 @@ if (
     or FEATURE_SET_COMPARISON_PATH.exists()
     or TARGET_EXIT_COMPARISON_PATH.exists()
     or SIGNAL_QUALITY_COMPARISON_PATH.exists()
+    or MARKET_EXPOSURE_COMPARISON_PATH.exists()
 ):
     st.subheader("Experiment Reports")
     if NEWS_ABLATION_PATH.exists():
@@ -79,6 +81,9 @@ if (
     if SIGNAL_QUALITY_COMPARISON_PATH.exists():
         with st.expander("Latest Signal Quality Comparison", expanded=True):
             st.dataframe(pd.read_csv(SIGNAL_QUALITY_COMPARISON_PATH), use_container_width=True)
+    if MARKET_EXPOSURE_COMPARISON_PATH.exists():
+        with st.expander("Latest Market Exposure Comparison", expanded=True):
+            st.dataframe(pd.read_csv(MARKET_EXPOSURE_COMPARISON_PATH), use_container_width=True)
 
 if run_dir is None:
     st.stop()
@@ -253,6 +258,9 @@ if signals_path.exists():
             "signal_quality_score",
             "signal_rank",
             "signal_filter_reason",
+            "risk_fraction",
+            "risk_fraction_reason",
+            "market_regime_strong",
         ]
         if col in signals.columns
     ]
