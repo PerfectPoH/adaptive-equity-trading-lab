@@ -25,6 +25,7 @@ TARGET_EXIT_COMPARISON_PATH = Path("experiments/target_exit_comparison_latest.cs
 SIGNAL_QUALITY_COMPARISON_PATH = Path("experiments/signal_quality_comparison_latest.csv")
 MARKET_EXPOSURE_COMPARISON_PATH = Path("experiments/market_exposure_comparison_latest.csv")
 UNIVERSE_SELECTION_COMPARISON_PATH = Path("experiments/universe_selection_comparison_latest.csv")
+BENCHMARK_OBJECTIVE_COMPARISON_PATH = Path("experiments/benchmark_objective_comparison_latest.csv")
 
 
 def latest_run_dir() -> Path | None:
@@ -53,6 +54,7 @@ if (
     or SIGNAL_QUALITY_COMPARISON_PATH.exists()
     or MARKET_EXPOSURE_COMPARISON_PATH.exists()
     or UNIVERSE_SELECTION_COMPARISON_PATH.exists()
+    or BENCHMARK_OBJECTIVE_COMPARISON_PATH.exists()
 ):
     st.subheader("Experiment Reports")
     if NEWS_ABLATION_PATH.exists():
@@ -89,6 +91,9 @@ if (
     if UNIVERSE_SELECTION_COMPARISON_PATH.exists():
         with st.expander("Latest Universe Selection Comparison", expanded=True):
             st.dataframe(pd.read_csv(UNIVERSE_SELECTION_COMPARISON_PATH), use_container_width=True)
+    if BENCHMARK_OBJECTIVE_COMPARISON_PATH.exists():
+        with st.expander("Latest Benchmark Objective Comparison", expanded=True):
+            st.dataframe(pd.read_csv(BENCHMARK_OBJECTIVE_COMPARISON_PATH), use_container_width=True)
 
 if run_dir is None:
     st.stop()

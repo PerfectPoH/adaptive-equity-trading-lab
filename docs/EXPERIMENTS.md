@@ -406,12 +406,59 @@ The ETF-only universe reduces excess underperformance in 2024 but also gives up 
 Keep the full 10-symbol universe as the research baseline.
 ```
 
+## Benchmark Objective Comparison
+
+```powershell
+.\.venv-lab\Scripts\python.exe -m src.experiments.benchmark_objective_comparison
+```
+
+Outputs:
+
+```text
+experiments/benchmark_objective_comparison_latest.json
+experiments/benchmark_objective_comparison_latest.csv
+```
+
+Compared model objectives:
+
+```text
+tp_before_sl
+trade_positive
+beats_horizon_return
+tp_and_beats_horizon
+```
+
+Latest result:
+
+```text
+wf_2023 selected: trade_positive raw threshold 0.50
+wf_2023 test strategy return: ~3.06%
+wf_2023 test excess return: ~-98.35%
+
+wf_2024 selected: tp_before_sl isotonic threshold 0.25
+wf_2024 test strategy return: ~6.49%
+wf_2024 test excess return: ~-41.56%
+
+mean test strategy return: ~4.78%
+mean test excess return: ~-69.96%
+folds beating buy-and-hold: 0 / 2
+```
+
+Decision:
+
+```text
+Do not promote benchmark-aware objectives yet.
+The 2022 validation fold preferred trade_positive because buy-and-hold was deeply negative,
+but that choice failed badly in the 2023 test year. The original TP-before-SL objective
+remains the default research target.
+```
+
 ## Feature-Regime Analysis
 
 Current default run:
 
 ```text
-20260508_200621
+20260508_203628
 ```
 
 Current finding:

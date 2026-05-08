@@ -8,6 +8,7 @@ Market Data
 -> Optional Validation-Only Universe Selection
 -> Temporal Split
 -> Label Builder
+-> Optional Model Objective Selection
 -> ML Model
 -> Signal Engine
 -> Optional Signal Quality Rank Filter

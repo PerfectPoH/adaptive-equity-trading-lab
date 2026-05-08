@@ -16,7 +16,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 ### RISK-001 - Baseline non batte buy-and-hold
 
 - Priorita: P2.
-- Sintomo: il run default `20260508_200621` produce circa 6.49% medio contro circa 48% buy-and-hold.
+- Sintomo: il run default `20260508_203628` produce circa 6.49% medio contro circa 48% buy-and-hold.
 - Dettaglio: 1093 segnali totali, 1036 eseguibili, su 10 simboli; 9 simboli sotto benchmark.
 - Causa probabile: edge ancora debole, target/feature baseline troppo semplici, mercato 2024 molto forte per large-cap tech.
 - Azione: feature/model upgrade e validazione su piu' fold in Milestone 2.
@@ -72,7 +72,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 ### RISK-008 - Simboli con media trade negativa possono cambiare tra run
 
 - Priorita: P3.
-- Sintomo: nel run `20260508_174122`, AMD era negativo; nel run default `20260508_200621` nessun simbolo ha media trade negativa.
+- Sintomo: nel run `20260508_174122`, AMD era negativo; nel run default `20260508_203628` nessun simbolo ha media trade negativa.
 - Impatto: blacklist per singolo ticker rischia di essere overfit sul run.
 - Azione: niente blacklist finche' il pattern non si ripete su piu' fold o dati migliori.
 - Stato: mitigato.
@@ -100,6 +100,14 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Impatto: scegliere ticker dal validation year rischia di inseguire il regime precedente senza creare edge robusto.
 - Azione: mantenere universo completo; riprovare solo con piu' anni, dati migliori o criteri fondamentali/settoriali point-in-time.
 - Stato: aperto, nessun subset promosso.
+
+### RISK-012 - Obiettivi benchmark-aware instabili
+
+- Priorita: P2.
+- Sintomo: `trade_positive` viene scelto nel fold 2023 perche' batte un benchmark 2022 molto negativo, ma poi nel test 2023 resta circa -98.35% sotto buy-and-hold.
+- Impatto: cambiare target ML puo' inseguire il regime di validation invece di creare edge robusto.
+- Azione: mantenere `tp_before_sl` come target default; riprovare obiettivi benchmark-aware solo con piu' fold, dati migliori e metrica di rischio piu' severa.
+- Stato: aperto, nessun objective alternativo promosso.
 
 ## Tech debt
 

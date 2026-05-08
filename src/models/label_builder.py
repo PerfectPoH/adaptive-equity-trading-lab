@@ -21,6 +21,13 @@ def build_trade_labels(
     data["stop_loss"] = data["entry_price"] - data["stop_distance"]
     data["take_profit"] = data["entry_price"] + data["take_profit_distance"]
     data["label"] = pd.NA
+    data["label_trade_return"] = pd.NA
+    data["label_horizon_return"] = pd.NA
+    data["label_excess_return"] = pd.NA
+    data["label_trade_positive"] = pd.NA
+    data["label_beats_horizon_return"] = pd.NA
+    data["label_tp_and_beats_horizon"] = pd.NA
+    data["label_exit_reason"] = ""
     data["label_executable"] = False
     data["label_skip_reason"] = ""
 
@@ -47,6 +54,8 @@ def build_trade_labels(
         data.iat[i, data.columns.get_loc("label_executable")] = True
         end_idx = min(n - 1, i + timeout_bars)
         label = 0
+        exit_price = data["Close"].iat[end_idx]
+        exit_reason = "timeout"
 
         for j in range(entry_idx, end_idx + 1):
             high = data["High"].iat[j]
@@ -58,17 +67,44 @@ def build_trade_labels(
             # Conservative rule: assume stop was hit first.
             if hit_stop and hit_take:
                 label = 0
+                exit_price = stop
+                exit_reason = "stop_and_take_same_bar"
                 break
             if hit_stop:
                 label = 0
+                exit_price = stop
+                exit_reason = "stop_loss"
                 break
             if hit_take:
                 label = 1
+                exit_price = take
+                exit_reason = "take_profit"
                 break
 
+        horizon_close = data["Close"].iat[end_idx]
+        trade_return = (exit_price / entry) - 1
+        horizon_return = (horizon_close / entry) - 1
+        excess_return = trade_return - horizon_return
         data.iat[i, data.columns.get_loc("label")] = label
+        data.iat[i, data.columns.get_loc("label_trade_return")] = trade_return
+        data.iat[i, data.columns.get_loc("label_horizon_return")] = horizon_return
+        data.iat[i, data.columns.get_loc("label_excess_return")] = excess_return
+        data.iat[i, data.columns.get_loc("label_trade_positive")] = int(trade_return > 0)
+        data.iat[i, data.columns.get_loc("label_beats_horizon_return")] = int(excess_return > 0)
+        data.iat[i, data.columns.get_loc("label_tp_and_beats_horizon")] = int(label == 1 and excess_return > 0)
+        data.iat[i, data.columns.get_loc("label_exit_reason")] = exit_reason
 
     data["label"] = pd.to_numeric(data["label"], errors="coerce")
+    numeric_label_columns = [
+        "label_trade_return",
+        "label_horizon_return",
+        "label_excess_return",
+        "label_trade_positive",
+        "label_beats_horizon_return",
+        "label_tp_and_beats_horizon",
+    ]
+    for column in numeric_label_columns:
+        data[column] = pd.to_numeric(data[column], errors="coerce")
     return data
 
 

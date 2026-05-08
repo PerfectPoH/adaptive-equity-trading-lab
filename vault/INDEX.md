@@ -87,8 +87,8 @@ tags: [vault, index, obsidian, trading-lab]
 
 Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 
-- test: `45 passed`;
-- run pipeline default: `20260508_200621`;
+- test: `48 passed`;
+- run pipeline default: `20260508_203628`;
 - backtest out-of-sample 2024: non batte buy-and-hold;
 - fallimento documentato: la baseline e' funzionante ma non ancora competitiva;
 - default sperimentale corrente: `use_news=false`, `model_type=random_forest`, universo completo 10 simboli, feature set baseline, isotonic calibration, `model_probability > 0.25`, stop `1.5 ATR`, take-profit `3 ATR`, timeout 10 giorni, nessun daily rank filter, rischio 1% per trade;
@@ -106,6 +106,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - signal-quality/ranking comparison completata: top-N giornaliero testato, ma nessun ranking viene promosso; score e rank restano diagnostici.
 - market-exposure comparison completata: 2% risk migliora il 2024 ma non batte buy-and-hold e non viene promosso.
 - universe-selection comparison completata: universi ridotti testati, ma nessun subset viene promosso.
+- benchmark-objective comparison completata: obiettivi `trade_positive`, `beats_horizon_return` e `tp_and_beats_horizon` testati, ma nessuno batte buy-and-hold out-of-sample.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 

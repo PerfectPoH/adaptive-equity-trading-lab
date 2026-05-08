@@ -69,6 +69,7 @@ Prossimi miglioramenti Milestone 1:
 - [x] Signal-quality/ranking comparison: top-N giornaliero testato, nessuna variante promossa.
 - [x] Market-exposure comparison: 1%, 1.5%, 2% e risk scaling SPY testati, nessuna variante promossa.
 - [x] Universe-selection comparison: top-N validation, stocks-only ed ETF-only testati, nessuna variante promossa.
+- [x] Benchmark-objective comparison: obiettivi piu' vicini al benchmark testati, nessuna variante promossa.
 - [ ] Notebook `04_backtest_analysis.ipynb`.
 - [ ] Soglie scanner e modello versionate.
 

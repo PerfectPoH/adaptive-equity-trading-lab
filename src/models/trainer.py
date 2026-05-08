@@ -137,6 +137,8 @@ def fit_model(
     rows = training_rows(train, features)
     if rows.empty:
         raise ValueError("No executable labeled rows available for training")
+    if rows["label"].nunique() < 2:
+        raise ValueError("Training requires both positive and negative labels")
 
     model = build_model(model_type)
     x_train = rows[features].apply(pd.to_numeric, errors="coerce").replace({pd.NA: np.nan})

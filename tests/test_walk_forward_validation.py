@@ -1,8 +1,12 @@
 from __future__ import annotations
 
+import pandas as pd
+
 from src.experiments.walk_forward_validation import (
+    ModelObjectiveConfig,
     SymbolSelectionConfig,
     _select_symbols,
+    _with_objective_label,
     select_threshold_from_validation,
     summarize_walk_forward,
 )
@@ -44,6 +48,29 @@ def test_select_threshold_from_validation_can_choose_across_models() -> None:
 
     assert selected["model_type"] == "hist_gradient_boosting"
     assert selected["threshold"] == 0.30
+
+
+def test_select_threshold_from_validation_can_choose_across_model_objectives() -> None:
+    rows = [
+        {
+            "model_objective_config": "tp_before_sl",
+            "threshold": 0.25,
+            "excess_return": 0.01,
+            "strategy_return": 0.06,
+            "closed_trades": 20,
+        },
+        {
+            "model_objective_config": "beats_horizon",
+            "threshold": 0.25,
+            "excess_return": 0.04,
+            "strategy_return": 0.09,
+            "closed_trades": 20,
+        },
+    ]
+
+    selected = select_threshold_from_validation(rows, min_validation_trades=10)
+
+    assert selected["model_objective_config"] == "beats_horizon"
 
 
 def test_select_threshold_from_validation_can_choose_across_feature_sets() -> None:
@@ -207,6 +234,14 @@ def test_select_symbols_all_mode_keeps_low_trade_symbols() -> None:
     selected = _select_symbols(rows, SymbolSelectionConfig(name="all_symbols", min_symbol_trades=5))
 
     assert selected == ("AAA", "BBB")
+
+
+def test_with_objective_label_replaces_default_label() -> None:
+    frame = pd.DataFrame({"label": [0, 0], "alt_label": [1, 0]})
+
+    result = _with_objective_label(frame, ModelObjectiveConfig(name="alt", label_column="alt_label").label_column)
+
+    assert result["label"].tolist() == [1, 0]
 
 
 def test_summarize_walk_forward_marks_positive_under_benchmark() -> None:

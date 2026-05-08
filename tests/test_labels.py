@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import pandas as pd
+import pytest
 
 from src.models.label_builder import build_trade_labels
 
@@ -59,3 +60,15 @@ def test_large_gap_skips_label() -> None:
     assert pd.isna(labeled["label"].iloc[0])
     assert bool(labeled["label_executable"].iloc[0]) is False
     assert labeled["label_skip_reason"].iloc[0] == "gap_too_large"
+
+
+def test_label_tracks_trade_return_and_benchmark_excess() -> None:
+    labeled = build_trade_labels(base_frame(), timeout_bars=3, max_gap_threshold=0.20)
+
+    assert labeled["label_exit_reason"].iloc[0] == "take_profit"
+    assert labeled["label_trade_return"].iloc[0] == pytest.approx(0.06)
+    assert labeled["label_horizon_return"].iloc[0] == pytest.approx(0.0)
+    assert labeled["label_excess_return"].iloc[0] == pytest.approx(0.06)
+    assert labeled["label_trade_positive"].iloc[0] == 1
+    assert labeled["label_beats_horizon_return"].iloc[0] == 1
+    assert labeled["label_tp_and_beats_horizon"].iloc[0] == 1

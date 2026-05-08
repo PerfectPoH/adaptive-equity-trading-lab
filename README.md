@@ -51,10 +51,12 @@ Live small != scaling
 .\.venv-lab\Scripts\python.exe -m src.experiments.signal_quality_comparison
 .\.venv-lab\Scripts\python.exe -m src.experiments.market_exposure_comparison
 .\.venv-lab\Scripts\python.exe -m src.experiments.universe_selection_comparison
+.\.venv-lab\Scripts\python.exe -m src.experiments.benchmark_objective_comparison
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
 
 The current default research baseline is `use_news=False`, `model_type=random_forest`, full 10-symbol universe, baseline feature set, `1.5 ATR` stop, `3 ATR` take profit, `10` trading-day timeout, isotonic-calibrated model probabilities, no regime filters, no daily signal-rank filter, `1%` risk per trade, and `model_probability > 0.25`. The 2024 default run returns ~6.49% versus ~48.05% buy-and-hold. Model, feature-set, target/exit, signal-quality, market-exposure, and universe-selection comparisons still keep Random Forest with baseline features, 1% risk, and the full universe as the default; news features, enhanced context features, regime filters, daily ranking filters, higher exposure, universe subsets, and alternative exits remain analysis tools rather than defaults.
+Benchmark-aware objective labels were also tested; they did not beat buy-and-hold out-of-sample and are not promoted.
 
 ## Project Vault
 

@@ -103,12 +103,13 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 .\.venv-lab\Scripts\python.exe -m src.experiments.signal_quality_comparison
 .\.venv-lab\Scripts\python.exe -m src.experiments.market_exposure_comparison
 .\.venv-lab\Scripts\python.exe -m src.experiments.universe_selection_comparison
+.\.venv-lab\Scripts\python.exe -m src.experiments.benchmark_objective_comparison
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
 
 ## Risultato importante 2026-05-08
 
-Run default `20260508_200621`:
+Run default `20260508_203628`:
 
 - config: `use_news=false`, `model_type=random_forest`, full universe 10 simboli, feature set baseline, isotonic calibration, `model_probability > 0.25`, target/exit default `1.5 ATR stop / 3 ATR take-profit / 10d timeout`, no regime filters, no daily rank filter, default market exposure `1%` risk per trade;
 - default scelto tramite walk-forward: raw 0.50 nel fold 2023, isotonic 0.25 nel fold 2024;
@@ -165,6 +166,18 @@ Universe selection:
 - mean test strategy return circa 5.54%;
 - fold che battono buy-and-hold: 0/2;
 - decisione: non promuovere universi ridotti; le scelte sono instabili tra fold e non migliorano abbastanza.
+
+Benchmark objective comparison:
+
+- runner: `src.experiments.benchmark_objective_comparison`;
+- obiettivi confrontati: `tp_before_sl`, `trade_positive`, `beats_horizon_return`, `tp_and_beats_horizon`;
+- fold `wf_2023`: selezionato `trade_positive`, raw 0.50 -> test 2023 strategy return circa 3.06%, excess circa -98.35%;
+- fold `wf_2024`: selezionato `tp_before_sl`, isotonic 0.25 -> test 2024 strategy return circa 6.49%, excess circa -41.56%;
+- mean test strategy return circa 4.78%;
+- mean test excess return circa -69.96%;
+- fold che battono buy-and-hold: 0/2;
+- decisione: non promuovere obiettivi benchmark-aware; `tp_before_sl` resta target default.
+- nota: il fold 2023 mostra una trappola reale: la validation 2022 premia `trade_positive` perche' buy-and-hold era molto negativo, ma il test 2023 lo punisce duramente.
 
 Walk-forward:
 

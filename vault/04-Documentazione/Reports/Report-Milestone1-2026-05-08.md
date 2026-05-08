@@ -28,7 +28,7 @@ Implementazione MVP completata in prima versione.
 Risultato:
 
 ```text
-45 passed
+48 passed
 ```
 
 Pipeline:
@@ -40,7 +40,7 @@ Pipeline:
 Run principale aggiornato:
 
 ```text
-20260508_200621
+20260508_203628
 ```
 
 ## Risultati backtest
@@ -83,6 +83,7 @@ Findings:
 - Signal-quality/ranking comparison: top-N giornaliero testato; nessuna variante viene promossa.
 - Market-exposure comparison: 2% risk migliora il 2024 ma non batte buy-and-hold; resta diagnostico.
 - Universe-selection comparison: large-cap-only e ETF-only selezionati in fold diversi; nessun subset promosso.
+- Benchmark-objective comparison: `trade_positive`, `beats_horizon_return` e `tp_and_beats_horizon` testati; nessun obiettivo alternativo promosso.
 - Trade-level: 193 trade chiusi, 105 win, 88 loss; nessun simbolo con media trade negativa.
 - Feature-regime: nessun bucket e' netto negativo; regimi piu' fragili legati a low rolling volatility, high distance-from-high e low calibrated probability.
 - Regime-filter validation: volume floor, pullback depth, ATR guard e combinato non battono il baseline per rendimento.
@@ -100,6 +101,7 @@ La pipeline funziona, ma la strategia baseline non e' competitiva. Questo e' un 
 - Alcuni SL/TP su daily OHLC sono ambigui nella stessa candela dell'ingresso.
 - Primo connettore news presente; ablation corrente non supporta usarlo come default.
 - Walk-forward tuning presente, ma solo su due fold.
+- Benchmark-aware objectives testati, ma instabili tra validation e test.
 - Calibration layer default di ricerca, ma ancora non abbastanza validato per live.
 - Feature-regime analysis presente, ma ancora su campione piccolo di 140 trade.
 - Regime filters testati sullo stesso anno 2024; serve walk-forward prima di promuovere qualunque filtro.
