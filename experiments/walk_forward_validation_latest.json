@@ -21,6 +21,12 @@
   "model_types": [
     "random_forest"
   ],
+  "model_objective_configs": [
+    {
+      "name": "tp_before_sl",
+      "label_column": "label"
+    }
+  ],
   "feature_sets": [
     "baseline"
   ],
@@ -32,43 +38,84 @@
       "timeout_bars": 10
     }
   ],
+  "signal_quality_configs": [
+    {
+      "name": "no_quality_rank_filter",
+      "min_signal_quality_score": null,
+      "max_signals_per_day": null,
+      "rank_column": "signal_quality_score"
+    }
+  ],
+  "market_exposure_configs": [
+    {
+      "name": "default_1pct",
+      "base_risk_fraction": 0.01,
+      "strong_market_risk_fraction": null,
+      "weak_market_risk_fraction": null,
+      "strong_spy_ema_50_ratio": 0.02,
+      "strong_spy_return_5d": 0.0
+    }
+  ],
+  "symbol_selection_configs": [
+    {
+      "name": "all_symbols",
+      "mode": "all",
+      "top_n": null,
+      "min_symbol_trades": 5,
+      "require_positive_strategy_return": false,
+      "include_symbols": [],
+      "exclude_symbols": []
+    }
+  ],
   "min_validation_trades": 10,
   "folds": [
     {
       "fold": "wf_2023",
       "selected_target_exit_config": "default_1_5x_stop_3x_tp_10d",
+      "selected_model_objective_config": "tp_before_sl",
       "selected_feature_set": "baseline",
       "selected_model_type": "random_forest",
       "selected_probability_variant": "raw",
+      "selected_signal_quality_config": "no_quality_rank_filter",
+      "selected_signal_rank_column": "",
+      "selected_market_exposure_config": "default_1pct",
+      "selected_symbol_selection_config": "all_symbols",
+      "selected_symbols": "AAPL,AMD,AMZN,GOOGL,META,MSFT,NVDA,QQQ,SPY,TSLA",
       "selected_threshold": 0.5,
       "validation_strategy_return": -0.010642801102463623,
       "validation_excess_return": 0.4318606778995834,
       "validation_closed_trades": 15,
-      "test_strategy_return": 0.03530248296980089,
-      "test_excess_return": -0.9788543986362981,
+      "test_strategy_return": 0.03530248296980088,
+      "test_excess_return": -0.9788543986362983,
       "test_closed_trades": 91,
       "test_beats_buy_and_hold": false
     },
     {
       "fold": "wf_2024",
       "selected_target_exit_config": "default_1_5x_stop_3x_tp_10d",
+      "selected_model_objective_config": "tp_before_sl",
       "selected_feature_set": "baseline",
       "selected_model_type": "random_forest",
       "selected_probability_variant": "isotonic",
+      "selected_signal_quality_config": "no_quality_rank_filter",
+      "selected_signal_rank_column": "",
+      "selected_market_exposure_config": "default_1pct",
+      "selected_symbol_selection_config": "all_symbols",
+      "selected_symbols": "AAPL,AMD,AMZN,GOOGL,META,MSFT,NVDA,QQQ,SPY,TSLA",
       "selected_threshold": 0.25,
-      "validation_strategy_return": 0.07930450732098422,
-      "validation_excess_return": -0.9348523742851148,
+      "validation_strategy_return": 0.07930450732098424,
+      "validation_excess_return": -0.9348523742851149,
       "validation_closed_trades": 183,
       "test_strategy_return": 0.06488966792151463,
-      "test_excess_return": -0.41557687697499723,
+      "test_excess_return": -0.4155768769749971,
       "test_closed_trades": 193,
       "test_beats_buy_and_hold": false
     }
   ],
   "summary": {
     "folds": 2,
-    "mean_test_strategy_return": 0.05009607544565776,
-    "mean_test_excess_return": -0.6972156378056477,
+    "mean_test_strategy_return": 0.05009607544565775,
+    "mean_test_excess_return": -0.6972156378056478,
     "folds_beating_buy_and_hold": 0,
     "verdict": "positive_but_under_benchmark"
   }

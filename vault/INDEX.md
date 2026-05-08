@@ -109,6 +109,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - benchmark-objective comparison completata: obiettivi `trade_positive`, `beats_horizon_return` e `tp_and_beats_horizon` testati, ma nessuno batte buy-and-hold out-of-sample.
 - model registry append-only aggiunto: ogni run salva `model.joblib`, `model_metadata.json` e una riga in `experiments/model_registry.csv` con hash SHA-256 e configurazione.
 - soglie scanner/modello versionate: default tracciato come `thresholds_v2026_05_08_isotonic_025` in summary, experiment log, metadata modello e registry.
+- TimeSeriesSplit/walk-forward fold builder completato: i fold annuali sono generati da `build_annual_walk_forward_folds`, mantenendo `wf_2023` e `wf_2024` equivalenti ai fold precedenti.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 

@@ -48,7 +48,7 @@ Prossimi miglioramenti Milestone 1:
 ## Milestone 2 - Research Validation
 
 - [x] Walk-forward validation iniziale.
-- [ ] TimeSeriesSplit.
+- [x] TimeSeriesSplit.
 - [ ] Tuning iperparametri su validation, non su test.
 - [x] Model registry con `joblib`.
 - [x] Calibration report / reliability analysis iniziale.
