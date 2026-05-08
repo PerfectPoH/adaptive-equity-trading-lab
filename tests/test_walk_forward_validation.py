@@ -7,6 +7,7 @@ from src.experiments.walk_forward_validation import (
     SymbolSelectionConfig,
     _select_symbols,
     _with_objective_label,
+    build_annual_walk_forward_folds,
     select_threshold_from_validation,
     summarize_walk_forward,
 )
@@ -255,3 +256,17 @@ def test_summarize_walk_forward_marks_positive_under_benchmark() -> None:
     assert summary["folds"] == 2
     assert summary["folds_beating_buy_and_hold"] == 0
     assert summary["verdict"] == "positive_but_under_benchmark"
+
+
+def test_build_annual_walk_forward_folds_creates_expanding_train_windows() -> None:
+    folds = build_annual_walk_forward_folds(first_validation_year=2022, last_test_year=2024)
+
+    assert [fold.name for fold in folds] == ["wf_2023", "wf_2024"]
+    assert folds[0].train_end == "2021-12-31"
+    assert folds[0].validation_start == "2022-01-01"
+    assert folds[0].validation_end == "2022-12-31"
+    assert folds[0].test_start == "2023-01-01"
+    assert folds[0].test_end == "2023-12-31"
+    assert folds[1].train_end == "2022-12-31"
+    assert folds[1].validation_start == "2023-01-01"
+    assert folds[1].test_start == "2024-01-01"
