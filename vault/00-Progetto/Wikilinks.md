@@ -36,6 +36,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[README]]
 - [[2026-05-08-codex-regime-filter-validation]]
 - [[2026-05-08-codex-purged-calibrated-walk-forward]]
+- [[2026-05-08-codex-model-comparison]]
 
 ## Relazioni principali
 
@@ -48,3 +49,4 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Vault-Structure]] -> [[Documentazione-Index]]
 - [[backlog]] -> [[Report-Milestone1-2026-05-08]]
 - [[Memoria-AI]] -> [[2026-05-08-codex-purged-calibrated-walk-forward]]
+- [[Roadmap-Master]] -> [[2026-05-08-codex-model-comparison]]

@@ -24,6 +24,7 @@ OUTPUT_JSON = Path("experiments/walk_forward_validation_latest.json")
 OUTPUT_CSV = Path("experiments/walk_forward_validation_latest.csv")
 THRESHOLDS = (0.45, 0.50, 0.55, 0.60, 0.65, 0.70)
 CALIBRATED_THRESHOLDS = (0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45)
+DEFAULT_MODEL_TYPES = ("random_forest",)
 
 
 @dataclass(frozen=True)
@@ -59,8 +60,11 @@ FOLDS = (
 def run_walk_forward_validation(
     thresholds: tuple[float, ...] = THRESHOLDS,
     calibrated_thresholds: tuple[float, ...] = CALIBRATED_THRESHOLDS,
+    model_types: tuple[str, ...] = DEFAULT_MODEL_TYPES,
     min_validation_trades: int = 10,
     include_calibrated: bool = True,
+    output_json: Path = OUTPUT_JSON,
+    output_csv: Path = OUTPUT_CSV,
 ) -> dict[str, Any]:
     prepared = _prepare_frames()
     combined = pd.concat(prepared.values()).sort_index()
@@ -72,46 +76,52 @@ def run_walk_forward_validation(
             combined.loc[: fold.train_end].copy(),
             label_horizon_bars=DEFAULT_LABEL_PURGE_BARS,
         )
-        model = fit_model(train, model_type="random_forest")
         validation_for_calibration = purge_label_boundary(
             combined.loc[fold.validation_start : fold.validation_end].copy(),
             label_horizon_bars=DEFAULT_LABEL_PURGE_BARS,
         )
-        probability_models = {"raw": model}
-        if include_calibrated:
-            probability_models["isotonic"] = fit_probability_calibrator(
-                model,
-                validation_for_calibration,
-                method="isotonic",
-            )
-        frames_by_variant = {
-            variant: {
-                symbol: add_model_probabilities(frame, probability_model)
-                for symbol, frame in prepared.items()
-            }
-            for variant, probability_model in probability_models.items()
-        }
 
+        frames_by_variant: dict[tuple[str, str], dict[str, pd.DataFrame]] = {}
         validation_rows = []
-        for variant, frames_with_probabilities in frames_by_variant.items():
-            variant_thresholds = calibrated_thresholds if variant == "isotonic" else thresholds
-            validation_rows.extend(
-                _evaluate_threshold(
-                    frames_with_probabilities,
-                    fold=fold,
-                    period="validation",
-                    probability_variant=variant,
-                    start=fold.validation_start,
-                    end=fold.validation_end,
-                    threshold=threshold,
+        for model_type in model_types:
+            model = fit_model(train, model_type=model_type)
+            probability_models = {"raw": model}
+            if include_calibrated:
+                probability_models["isotonic"] = fit_probability_calibrator(
+                    model,
+                    validation_for_calibration,
+                    method="isotonic",
                 )
-                for threshold in variant_thresholds
-            )
+            model_frames = {
+                (model_type, variant): {
+                    symbol: add_model_probabilities(frame, probability_model)
+                    for symbol, frame in prepared.items()
+                }
+                for variant, probability_model in probability_models.items()
+            }
+            frames_by_variant.update(model_frames)
+
+            for (candidate_model_type, variant), frames_with_probabilities in model_frames.items():
+                variant_thresholds = calibrated_thresholds if variant == "isotonic" else thresholds
+                validation_rows.extend(
+                    _evaluate_threshold(
+                        frames_with_probabilities,
+                        fold=fold,
+                        period="validation",
+                        model_type=candidate_model_type,
+                        probability_variant=variant,
+                        start=fold.validation_start,
+                        end=fold.validation_end,
+                        threshold=threshold,
+                    )
+                    for threshold in variant_thresholds
+                )
         selected = select_threshold_from_validation(validation_rows, min_validation_trades=min_validation_trades)
         test_row = _evaluate_threshold(
-            frames_by_variant[str(selected["probability_variant"])],
+            frames_by_variant[(str(selected["model_type"]), str(selected["probability_variant"]))],
             fold=fold,
             period="test",
+            model_type=str(selected["model_type"]),
             probability_variant=str(selected["probability_variant"]),
             start=fold.test_start,
             end=fold.test_end,
@@ -121,7 +131,8 @@ def run_walk_forward_validation(
 
         for row in validation_rows:
             row["selected_for_test"] = (
-                row["probability_variant"] == selected["probability_variant"]
+                row["model_type"] == selected["model_type"]
+                and row["probability_variant"] == selected["probability_variant"]
                 and float(row["threshold"]) == float(selected["threshold"])
             )
         rows.extend(validation_rows)
@@ -129,6 +140,7 @@ def run_walk_forward_validation(
         fold_summaries.append(
             {
                 "fold": fold.name,
+                "selected_model_type": str(selected["model_type"]),
                 "selected_probability_variant": str(selected["probability_variant"]),
                 "selected_threshold": float(selected["threshold"]),
                 "validation_strategy_return": selected["strategy_return"],
@@ -146,12 +158,13 @@ def run_walk_forward_validation(
             "raw": list(thresholds),
             "isotonic": list(calibrated_thresholds) if include_calibrated else [],
         },
+        "model_types": list(model_types),
         "min_validation_trades": min_validation_trades,
         "folds": fold_summaries,
         "summary": summarize_walk_forward(fold_summaries),
     }
-    OUTPUT_JSON.write_text(json.dumps(report, indent=2), encoding="utf-8")
-    pd.DataFrame(rows).to_csv(OUTPUT_CSV, index=False)
+    output_json.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    pd.DataFrame(rows).to_csv(output_csv, index=False)
     return report
 
 
@@ -223,6 +236,7 @@ def _evaluate_threshold(
     frames: dict[str, pd.DataFrame],
     fold: WalkForwardFold,
     period: str,
+    model_type: str,
     probability_variant: str,
     start: str,
     end: str,
@@ -262,6 +276,7 @@ def _evaluate_threshold(
     return {
         "fold": fold.name,
         "period": period,
+        "model_type": model_type,
         "probability_variant": probability_variant,
         "train_end": fold.train_end,
         "validation_start": fold.validation_start,

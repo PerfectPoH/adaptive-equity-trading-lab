@@ -56,6 +56,7 @@ Prossimi miglioramenti Milestone 1:
 - [x] Prima analisi soglia `model_probability`: default sperimentale portato a `0.55`.
 - [x] Walk-forward threshold selection: default aggiornato a `0.45`.
 - [x] Walk-forward raw vs isotonic: default aggiornato a isotonic `0.25`.
+- [x] Model comparison iniziale: logistic regression vs random forest vs hist gradient boosting.
 - [x] Calibration plot / probability calibration vera.
 - [x] Implementare calibration layer su validation-only.
 - [x] Trade-level feature regime analysis.
@@ -63,6 +64,7 @@ Prossimi miglioramenti Milestone 1:
 - [x] Backtest threshold piu' ampio: 0.45-0.70 con selection su validation.
 - [ ] Valutare combined filters solo come modalita' risk-first dopo walk-forward.
 - [ ] Aggiungere fold walk-forward ulteriori quando ci saranno piu' anni/dati migliori.
+- [ ] Feature upgrade controllato dopo model comparison.
 - [ ] Notebook `04_backtest_analysis.ipynb`.
 - [ ] Soglie scanner e modello versionate.
 

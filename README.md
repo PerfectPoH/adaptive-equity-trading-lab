@@ -45,10 +45,11 @@ Live small != scaling
 .\.venv-lab\Scripts\python.exe -m src.experiments.calibration_comparison
 .\.venv-lab\Scripts\python.exe -m src.experiments.regime_filter_validation
 .\.venv-lab\Scripts\python.exe -m src.experiments.walk_forward_validation
+.\.venv-lab\Scripts\python.exe -m src.experiments.model_comparison
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
 
-The current default research baseline is `use_news=False`, isotonic-calibrated model probabilities, no regime filters, and `model_probability > 0.25`. Walk-forward validation selected the calibrated `0.25` variant for the 2024 test fold and improved the default 2024 strategy return to ~6.99%, while still underperforming buy-and-hold. News features and regime filters remain analysis tools rather than defaults.
+The current default research baseline is `use_news=False`, `model_type=random_forest`, isotonic-calibrated model probabilities, no regime filters, and `model_probability > 0.25`. Walk-forward validation selected the calibrated `0.25` variant for the 2024 test fold and improved the default 2024 strategy return to ~6.99%, while still underperforming buy-and-hold. Model comparison currently keeps Random Forest as the default; news features and regime filters remain analysis tools rather than defaults.
 
 ## Project Vault
 

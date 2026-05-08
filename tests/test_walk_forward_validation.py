@@ -15,6 +15,32 @@ def test_select_threshold_from_validation_prefers_viable_excess_return() -> None
     assert selected["threshold"] == 0.55
 
 
+def test_select_threshold_from_validation_can_choose_across_models() -> None:
+    rows = [
+        {
+            "model_type": "random_forest",
+            "probability_variant": "isotonic",
+            "threshold": 0.25,
+            "excess_return": 0.01,
+            "strategy_return": 0.06,
+            "closed_trades": 20,
+        },
+        {
+            "model_type": "hist_gradient_boosting",
+            "probability_variant": "isotonic",
+            "threshold": 0.30,
+            "excess_return": 0.03,
+            "strategy_return": 0.08,
+            "closed_trades": 18,
+        },
+    ]
+
+    selected = select_threshold_from_validation(rows, min_validation_trades=10)
+
+    assert selected["model_type"] == "hist_gradient_boosting"
+    assert selected["threshold"] == 0.30
+
+
 def test_summarize_walk_forward_marks_positive_under_benchmark() -> None:
     summary = summarize_walk_forward(
         [

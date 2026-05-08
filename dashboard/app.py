@@ -19,6 +19,7 @@ THRESHOLD_VALIDATION_PATH = Path("experiments/threshold_validation_latest.csv")
 CALIBRATION_COMPARISON_PATH = Path("experiments/calibration_comparison_latest.csv")
 REGIME_FILTER_VALIDATION_PATH = Path("experiments/regime_filter_validation_latest.csv")
 WALK_FORWARD_VALIDATION_PATH = Path("experiments/walk_forward_validation_latest.csv")
+MODEL_COMPARISON_PATH = Path("experiments/model_comparison_latest.csv")
 
 
 def latest_run_dir() -> Path | None:
@@ -41,6 +42,7 @@ if (
     or CALIBRATION_COMPARISON_PATH.exists()
     or REGIME_FILTER_VALIDATION_PATH.exists()
     or WALK_FORWARD_VALIDATION_PATH.exists()
+    or MODEL_COMPARISON_PATH.exists()
 ):
     st.subheader("Experiment Reports")
     if NEWS_ABLATION_PATH.exists():
@@ -59,6 +61,9 @@ if (
     if WALK_FORWARD_VALIDATION_PATH.exists():
         with st.expander("Latest Walk-Forward Validation", expanded=True):
             st.dataframe(pd.read_csv(WALK_FORWARD_VALIDATION_PATH), use_container_width=True)
+    if MODEL_COMPARISON_PATH.exists():
+        with st.expander("Latest Model Comparison", expanded=True):
+            st.dataframe(pd.read_csv(MODEL_COMPARISON_PATH), use_container_width=True)
 
 if run_dir is None:
     st.stop()

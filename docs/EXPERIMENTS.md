@@ -129,12 +129,61 @@ Promote default research configuration to isotonic calibration with model_probab
 Do not promote raw 0.50 even though it is better in a direct raw-only 2024 sweep, because that is test-window selection.
 ```
 
+## Model Comparison
+
+```powershell
+.\.venv-lab\Scripts\python.exe -m src.experiments.model_comparison
+```
+
+Outputs:
+
+```text
+experiments/model_comparison_latest.json
+experiments/model_comparison_latest.csv
+```
+
+Compared models:
+
+```text
+logistic_regression
+random_forest
+hist_gradient_boosting
+```
+
+Selection rule:
+
+```text
+Choose model + probability variant + threshold on validation,
+requiring at least 30 closed validation trades.
+Then evaluate only that selected combination on the next test year.
+```
+
+Latest result:
+
+```text
+wf_2023 selected: random_forest raw threshold 0.45
+wf_2023 test strategy return: ~7.64%
+
+wf_2024 selected: random_forest isotonic threshold 0.25
+wf_2024 test strategy return: ~6.99%
+
+mean test strategy return: ~7.32%
+folds beating buy-and-hold: 0 / 2
+```
+
+Decision:
+
+```text
+Keep random_forest as the default model.
+Do not promote hist_gradient_boosting yet; it did not win under the 30-trade validation floor.
+```
+
 ## Feature-Regime Analysis
 
 Current default run:
 
 ```text
-20260508_185027
+20260508_190512
 ```
 
 Current finding:

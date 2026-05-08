@@ -48,11 +48,13 @@ Then evaluate only that selected variant/threshold on the next test year.
 
 ```text
 wf_2023 selected variant: raw
+wf_2023 selected model: random_forest
 wf_2023 selected threshold: 0.50
 wf_2023 test strategy return: ~5.53%
 wf_2023 test excess return: ~-95.88%
 
 wf_2024 selected variant: isotonic
+wf_2024 selected model: random_forest
 wf_2024 selected threshold: 0.25
 wf_2024 test strategy return: ~6.99%
 wf_2024 test excess return: ~-41.06%

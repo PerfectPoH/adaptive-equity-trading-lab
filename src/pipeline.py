@@ -33,6 +33,7 @@ NEWS_START = "2020-01-01"
 NEWS_END = "2024-12-31"
 MAX_GAP_THRESHOLD = 0.05
 DEFAULT_USE_NEWS = False
+DEFAULT_MODEL_TYPE = "random_forest"
 DEFAULT_CALIBRATION_METHOD = "isotonic"
 DEFAULT_MIN_MODEL_PROBABILITY = 0.25
 RUNS_DIR = Path("experiments/runs")
@@ -42,6 +43,7 @@ LOG_PATH = Path("experiments/log.csv")
 def run_milestone_1(
     use_news: bool = DEFAULT_USE_NEWS,
     run_tag: str | None = None,
+    model_type: str = DEFAULT_MODEL_TYPE,
     min_scanner_score: float = 70,
     min_model_probability: float = DEFAULT_MIN_MODEL_PROBABILITY,
     calibration_method: str | None = DEFAULT_CALIBRATION_METHOD,
@@ -72,7 +74,7 @@ def run_milestone_1(
 
     combined = pd.concat(prepared.values()).sort_index()
     split = temporal_split(combined)
-    model = fit_model(split.train, model_type="random_forest")
+    model = fit_model(split.train, model_type=model_type)
 
     raw_validation_metrics = evaluate_classifier(model, split.validation)
     raw_test_metrics = evaluate_classifier(model, split.test)
@@ -183,9 +185,10 @@ def run_milestone_1(
     _append_experiment_log(
         run_id=run_id,
         dataset_snapshot="data/snapshots/*",
-        model="random_forest",
+        model=model_type,
         params={
             "max_gap_threshold": MAX_GAP_THRESHOLD,
+            "model_type": model_type,
             "min_scanner_score": min_scanner_score,
             "min_model_probability": min_model_probability,
             "calibration_method": calibration_method or "raw",
@@ -209,6 +212,7 @@ def run_milestone_1(
                 "run_id": run_id,
                 "model_path": str(model_path),
                 "signal_config": {
+                    "model_type": model_type,
                     "min_scanner_score": min_scanner_score,
                     "min_model_probability": min_model_probability,
                     "use_news": use_news,

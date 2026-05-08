@@ -5,7 +5,7 @@ from typing import Any
 
 import pandas as pd
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import HistGradientBoostingClassifier, RandomForestClassifier
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, roc_auc_score
@@ -100,6 +100,23 @@ def build_model(model_type: str = "random_forest") -> Pipeline:
             class_weight="balanced_subsample",
             random_state=42,
             n_jobs=-1,
+        )
+        return Pipeline(
+            [
+                ("imputer", SimpleImputer(strategy="median")),
+                ("model", model),
+            ]
+        )
+
+    if model_type == "hist_gradient_boosting":
+        model = HistGradientBoostingClassifier(
+            max_iter=250,
+            learning_rate=0.04,
+            max_leaf_nodes=15,
+            min_samples_leaf=30,
+            l2_regularization=0.05,
+            class_weight="balanced",
+            random_state=42,
         )
         return Pipeline(
             [

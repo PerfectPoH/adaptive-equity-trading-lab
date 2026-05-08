@@ -23,7 +23,7 @@ Definition of done:
 
 ## Later Milestones
 
-- Research validation: calibrated walk-forward folds, feature/model upgrades, model registry, optional risk-first modes.
+- Research validation: calibrated walk-forward folds, model comparison, feature upgrades, model registry, optional risk-first modes.
 - News/context: news risk filter, Graphify, manual Markdown vault.
 - Paper trading: Alpaca/IBKR paper with manual confirmation.
 - Realism upgrade: better data, spread checks, volume limits, tax-aware returns.

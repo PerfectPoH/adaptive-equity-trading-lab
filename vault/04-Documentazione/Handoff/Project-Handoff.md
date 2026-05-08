@@ -34,7 +34,7 @@ Live small != scaling
 - Entry al next open.
 - Split temporale purgato, niente random split.
 - Label builder separato.
-- Default di ricerca corrente: isotonic calibration con `model_probability > 0.25`.
+- Default di ricerca corrente: `random_forest`, isotonic calibration con `model_probability > 0.25`.
 - Experiment log obbligatorio.
 - Dashboard Streamlit minima.
 - News Engine, Graphify, Paper Trading e tool avanzati fuori dalla Milestone 1.
@@ -85,6 +85,7 @@ Market Data
 .\.venv-lab\Scripts\python.exe -m src.pipeline
 .\.venv-lab\Scripts\python.exe -m src.experiments.walk_forward_validation
 .\.venv-lab\Scripts\python.exe -m src.experiments.calibration_comparison
+.\.venv-lab\Scripts\python.exe -m src.experiments.model_comparison
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
 
@@ -130,7 +131,7 @@ no short
 
 ## Milestone 1 status
 
-Completa in prima versione. Il run corrente `20260508_185027` usa `use_news=false`, isotonic calibration, `model_probability > 0.25`, no regime filters. Il test out-of-sample 2024 fa circa 6.99% medio contro circa 48% buy-and-hold. Non batte il benchmark; questo e' documentato, quindi la Definition of Done resta soddisfatta.
+Completa in prima versione. Il run corrente `20260508_190512` usa `use_news=false`, `model_type=random_forest`, isotonic calibration, `model_probability > 0.25`, no regime filters. Il test out-of-sample 2024 fa circa 6.99% medio contro circa 48% buy-and-hold. Non batte il benchmark; questo e' documentato, quindi la Definition of Done resta soddisfatta.
 
 ## Milestone future
 

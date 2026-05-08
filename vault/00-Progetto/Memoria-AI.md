@@ -97,12 +97,13 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 .\.venv-lab\Scripts\python.exe -m src.experiments.calibration_comparison
 .\.venv-lab\Scripts\python.exe -m src.experiments.regime_filter_validation
 .\.venv-lab\Scripts\python.exe -m src.experiments.walk_forward_validation
+.\.venv-lab\Scripts\python.exe -m src.experiments.model_comparison
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
 
 ## Risultato importante 2026-05-08
 
-Run default `20260508_185027`:
+Run default `20260508_190512`:
 
 - config: `use_news=false`, isotonic calibration, `model_probability > 0.25`, no regime filters;
 - default scelto tramite walk-forward: raw 0.50 nel fold 2023, isotonic 0.25 nel fold 2024;
@@ -140,6 +141,17 @@ Walk-forward:
 - verdict: `positive_but_under_benchmark`;
 - decisione: default di ricerca promosso a isotonic threshold 0.25.
 - nota anti-overfit: raw threshold 0.50 e altri valori migliori nel test-window sweep non diventano default se non scelti in walk-forward.
+
+Model comparison:
+
+- runner: `src.experiments.model_comparison`;
+- modelli confrontati: `logistic_regression`, `random_forest`, `hist_gradient_boosting`;
+- min validation trades: 30, per evitare scelte su campioni minuscoli;
+- fold `wf_2023`: selezionato `random_forest`, raw threshold 0.45 -> test 2023 strategy return circa 7.64%;
+- fold `wf_2024`: selezionato `random_forest`, isotonic threshold 0.25 -> test 2024 strategy return circa 6.99%;
+- mean test strategy return circa 7.32%;
+- fold che battono buy-and-hold: 0/2;
+- decisione: non cambiare default modello; Random Forest resta default.
 
 Calibration:
 

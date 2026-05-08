@@ -87,11 +87,11 @@ tags: [vault, index, obsidian, trading-lab]
 
 Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 
-- test: `26 passed`;
-- run pipeline default: `20260508_185027`;
+- test: `29 passed`;
+- run pipeline default: `20260508_190512`;
 - backtest out-of-sample 2024: non batte buy-and-hold;
 - fallimento documentato: la baseline e' funzionante ma non ancora competitiva;
-- default sperimentale corrente: `use_news=false`, isotonic calibration, `model_probability > 0.25`;
+- default sperimentale corrente: `use_news=false`, `model_type=random_forest`, isotonic calibration, `model_probability > 0.25`;
 - diagnosi principale: 1093 segnali su 10 simboli, rendimento medio 2024 circa 6.99%, ma ancora sotto buy-and-hold;
 - split temporale purgato: le ultime barre di train/validation/test vengono rimosse quando la label a 10 giorni supererebbe il confine;
 - downloader robusto: se `yfinance` fallisce, usa l'ultimo snapshot locale valido;
@@ -100,6 +100,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - feature-regime analysis aggiornata: low rolling volatility, high distance-from-high e low calibrated probability sono bucket fragili.
 - regime-filter validation aggiornata: i filtri non migliorano strategy return; combined filters migliorano drawdown ma tagliano troppo rendimento.
 - walk-forward validation completata: default aggiornato a isotonic `0.25`; verdict `positive_but_under_benchmark`.
+- model comparison completata: Logistic Regression e HistGradientBoosting non battono Random Forest sotto vincolo minimo di 30 trade validation.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 
