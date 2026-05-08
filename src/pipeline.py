@@ -44,6 +44,9 @@ def run_milestone_1(
     min_scanner_score: float = 70,
     min_model_probability: float = DEFAULT_MIN_MODEL_PROBABILITY,
     calibration_method: str | None = None,
+    min_relative_volume: float | None = None,
+    max_distance_from_20d_high: float | None = None,
+    max_atr_pct: float | None = None,
 ) -> Path:
     base_run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_id = f"{base_run_id}_{run_tag}" if run_tag else base_run_id
@@ -91,6 +94,9 @@ def run_milestone_1(
             with_probs,
             min_scanner_score=min_scanner_score,
             min_model_probability=min_model_probability,
+            min_relative_volume=min_relative_volume,
+            max_distance_from_20d_high=max_distance_from_20d_high,
+            max_atr_pct=max_atr_pct,
         )
         executable = add_execution_columns(with_signals, max_gap_threshold=MAX_GAP_THRESHOLD)
         processed_frames.append(executable)
@@ -182,6 +188,11 @@ def run_milestone_1(
             "min_scanner_score": min_scanner_score,
             "min_model_probability": min_model_probability,
             "calibration_method": calibration_method or "raw",
+            "regime_filters": _regime_filter_config(
+                min_relative_volume=min_relative_volume,
+                max_distance_from_20d_high=max_distance_from_20d_high,
+                max_atr_pct=max_atr_pct,
+            ),
             "news_features": "gdelt_market_news_lagged_1d" if use_news else "disabled",
             "raw_validation_metrics": raw_validation_metrics,
             "raw_test_metrics": raw_test_metrics,
@@ -201,6 +212,11 @@ def run_milestone_1(
                     "min_model_probability": min_model_probability,
                     "use_news": use_news,
                     "calibration_method": calibration_method or "raw",
+                    "regime_filters": _regime_filter_config(
+                        min_relative_volume=min_relative_volume,
+                        max_distance_from_20d_high=max_distance_from_20d_high,
+                        max_atr_pct=max_atr_pct,
+                    ),
                 },
                 "validation_metrics": validation_metrics,
                 "test_metrics": test_metrics,
@@ -219,6 +235,19 @@ def run_milestone_1(
         encoding="utf-8",
     )
     return run_dir
+
+
+def _regime_filter_config(
+    min_relative_volume: float | None,
+    max_distance_from_20d_high: float | None,
+    max_atr_pct: float | None,
+) -> dict[str, float]:
+    config = {
+        "min_relative_volume": min_relative_volume,
+        "max_distance_from_20d_high": max_distance_from_20d_high,
+        "max_atr_pct": max_atr_pct,
+    }
+    return {key: value for key, value in config.items() if value is not None}
 
 
 def _aggregate_backtests(backtests: pd.DataFrame) -> dict[str, object]:

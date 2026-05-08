@@ -41,7 +41,7 @@ win/loss feature contrasts
 Run:
 
 ```text
-20260508_175742
+20260508_181139
 ```
 
 Primary findings:
@@ -73,12 +73,26 @@ The strongest hypothesis is that low relative volume and weaker distance-from-hi
 
 Do not change the strategy yet.
 
-Next step is to run a filter experiment:
+The filter experiment was run:
 
 ```text
-relative_volume_20d > 1.0
-distance_from_20d_high < -0.021 or avoid the mid bucket
-optional guard on high ATR%
+.\.venv-lab\Scripts\python.exe -m src.experiments.regime_filter_validation
 ```
 
-That experiment must be logged separately and compared against the raw baseline before changing defaults.
+Result:
+
+```text
+filters_did_not_help
+```
+
+None of the tested filters improved strategy return versus the raw baseline:
+
+```text
+baseline:          ~3.21%
+volume_floor:      ~2.33%
+pullback_depth:    ~2.27%
+atr_guard:         ~2.85%
+combined_filters:  ~1.17%
+```
+
+`atr_guard` improved Sharpe and drawdown, but gave up return. It can be revisited as a risk-first mode later, not as the default.

@@ -28,7 +28,7 @@ Implementazione MVP completata in prima versione.
 Risultato:
 
 ```text
-19 passed
+21 passed
 ```
 
 Pipeline:
@@ -40,7 +40,7 @@ Pipeline:
 Run principale aggiornato:
 
 ```text
-20260508_175742
+20260508_181139
 ```
 
 ## Risultati backtest
@@ -78,6 +78,8 @@ Findings:
 - Calibration layer: isotonic migliora Brier/errori probabilistici, ma non migliora il rendimento della strategia.
 - Trade-level: 36 trade chiusi, 23 win, 13 loss; AMD unico simbolo con media trade negativa.
 - Feature-regime: nessun bucket e' netto negativo; regimi piu' fragili legati a volume relativo basso, distanza dal massimo a 20 giorni mid/high e ATR% alto.
+- Regime-filter validation: volume floor, pullback depth, ATR guard e combinato non battono il baseline per rendimento.
+- ATR guard migliora Sharpe e drawdown, ma riduce strategy return; resta una possibile modalita' risk-first futura.
 
 ## Interpretazione
 
@@ -93,13 +95,14 @@ La pipeline funziona, ma la strategia baseline non e' competitiva. Questo e' un 
 - Nessun walk-forward tuning.
 - Calibration layer presente, ma non default perche' non migliora ancora strategy return.
 - Feature-regime analysis presente, ma ancora su campione piccolo di 36 trade.
+- Regime filters testati sullo stesso anno 2024; serve walk-forward prima di promuovere qualunque filtro.
 - Nessuna validazione istituzionale.
 
 ## Prossime mosse
 
-1. Testare filtri su volume relativo, distance-from-high e ATR% come esperimento separato.
+1. Aggiungere walk-forward validation.
 2. Eseguire sweep piu' ampio sulle soglie calibrate.
-3. Aggiungere walk-forward validation.
+3. Valutare `atr_guard` solo come modalita' risk-first dopo walk-forward.
 4. Migliorare logging parametri.
 5. Solo dopo valutare scanner/model migliorati.
 

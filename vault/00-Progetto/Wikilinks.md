@@ -34,6 +34,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Report-Milestone1-2026-05-08]]
 - [[Project-Handoff]]
 - [[README]]
+- [[2026-05-08-codex-regime-filter-validation]]
 
 ## Relazioni principali
 

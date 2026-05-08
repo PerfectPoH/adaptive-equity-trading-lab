@@ -51,10 +51,12 @@ Prossimi miglioramenti Milestone 1:
 - [x] Calibration report / reliability analysis iniziale.
 - [x] Trade-level export e prima error analysis.
 - [x] Prima analisi soglia `model_probability`: default sperimentale portato a `0.55`.
-- [ ] Calibration plot / probability calibration vera.
-- [ ] Implementare calibration layer su validation-only.
-- [ ] Trade-level feature regime analysis.
+- [x] Calibration plot / probability calibration vera.
+- [x] Implementare calibration layer su validation-only.
+- [x] Trade-level feature regime analysis.
+- [x] Regime-filter validation su volume, distance-from-high e ATR%.
 - [ ] Backtest threshold piu' ampio: 0.45-0.70 con selection su validation.
+- [ ] Valutare `atr_guard` solo come modalita' risk-first dopo walk-forward.
 - [ ] Notebook `04_backtest_analysis.ipynb`.
 - [ ] Soglie scanner e modello versionate.
 

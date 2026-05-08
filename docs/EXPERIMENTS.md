@@ -88,7 +88,7 @@ Isotonic calibration improved test Brier score and calibration error, but the ca
 Current default run:
 
 ```text
-20260508_175742
+20260508_181139
 ```
 
 Current finding:
@@ -101,4 +101,60 @@ Decision:
 
 ```text
 Do not add a hard filter yet. Test relative-volume and distance-from-high filters as a separate logged experiment first.
+```
+
+## Regime Filter Validation
+
+```powershell
+.\.venv-lab\Scripts\python.exe -m src.experiments.regime_filter_validation
+```
+
+Outputs:
+
+```text
+experiments/regime_filter_validation_latest.json
+experiments/regime_filter_validation_latest.csv
+```
+
+Current verdict:
+
+```text
+filters_did_not_help
+```
+
+Latest variants:
+
+```text
+baseline:
+  strategy return: ~3.21%
+  signals: 119
+  closed trades: 36
+
+volume_floor:
+  strategy return: ~2.33%
+  signals: 65
+  closed trades: 26
+
+pullback_depth:
+  strategy return: ~2.27%
+  signals: 36
+  closed trades: 20
+
+atr_guard:
+  strategy return: ~2.85%
+  Sharpe: ~1.37
+  max drawdown: ~-1.04%
+  negative symbols: 0
+
+combined_filters:
+  strategy return: ~1.17%
+  signals: 13
+  closed trades: 9
+```
+
+Decision:
+
+```text
+Keep baseline as default. The filters reduce opportunity too much.
+ATR guard may be revisited later as a risk-first mode, not as the main strategy.
 ```

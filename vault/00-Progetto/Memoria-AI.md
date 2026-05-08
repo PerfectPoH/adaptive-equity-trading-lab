@@ -93,12 +93,13 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 .\.venv-lab\Scripts\python.exe -m src.experiments.news_ablation
 .\.venv-lab\Scripts\python.exe -m src.experiments.threshold_validation
 .\.venv-lab\Scripts\python.exe -m src.experiments.calibration_comparison
+.\.venv-lab\Scripts\python.exe -m src.experiments.regime_filter_validation
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
 
 ## Risultato importante 2026-05-08
 
-Run default `20260508_175742`:
+Run default `20260508_181139`:
 
 - config: `use_news=false`, `model_probability > 0.55`;
 - 119 segnali totali nel 2024;
@@ -118,7 +119,11 @@ Run default `20260508_175742`:
   - regime piu' debole: `signal_distance_from_20d_high = mid`, avg return circa 0.30%, loss rate 50%;
   - altri regimi con loss rate 50%: `signal_distance_from_20d_high = high`, `signal_atr_pct = high`;
   - contrasto principale: i trade perdenti hanno volume relativo piu' basso dei trade vincenti;
-  - decisione: non aggiungere filtri hard ancora, prima fare esperimento separato su volume/distance/ATR.
+  - esperimento separato su volume/distance/ATR eseguito;
+  - verdict: `filters_did_not_help`;
+  - baseline resta migliore per strategy return: circa 3.21%;
+  - `atr_guard` migliora Sharpe/drawdown, ma scende a circa 2.85% strategy return;
+  - decisione: nessun regime filter diventa default; `atr_guard` solo possibile modalita' risk-first futura.
 
 Calibration:
 
