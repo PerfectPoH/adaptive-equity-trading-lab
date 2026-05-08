@@ -27,6 +27,7 @@ from src.news.gdelt_doc import load_or_download_market_news
 from src.risk.market_exposure import DEFAULT_MARKET_EXPOSURE_CONFIG, MarketExposureConfig, add_market_exposure_columns
 from src.scanner.stock_scanner import add_scanner_columns
 from src.strategy.signal_engine import add_signal_columns, apply_daily_signal_rank_filter
+from src.strategy.threshold_config import DEFAULT_THRESHOLD_CONFIG
 
 
 UNIVERSE = ["AAPL", "MSFT", "NVDA", "AMD", "TSLA", "META", "AMZN", "GOOGL", "SPY", "QQQ"]
@@ -35,9 +36,10 @@ NEWS_START = "2020-01-01"
 NEWS_END = "2024-12-31"
 MAX_GAP_THRESHOLD = 0.05
 DEFAULT_USE_NEWS = False
-DEFAULT_MODEL_TYPE = "random_forest"
-DEFAULT_CALIBRATION_METHOD = "isotonic"
-DEFAULT_MIN_MODEL_PROBABILITY = 0.25
+DEFAULT_MODEL_TYPE = DEFAULT_THRESHOLD_CONFIG.model_type
+DEFAULT_CALIBRATION_METHOD = DEFAULT_THRESHOLD_CONFIG.calibration_method
+DEFAULT_MIN_SCANNER_SCORE = DEFAULT_THRESHOLD_CONFIG.min_scanner_score
+DEFAULT_MIN_MODEL_PROBABILITY = DEFAULT_THRESHOLD_CONFIG.min_model_probability
 RUNS_DIR = Path("experiments/runs")
 LOG_PATH = Path("experiments/log.csv")
 MODEL_REGISTRY_PATH = Path("experiments/model_registry.csv")
@@ -47,7 +49,7 @@ def run_milestone_1(
     use_news: bool = DEFAULT_USE_NEWS,
     run_tag: str | None = None,
     model_type: str = DEFAULT_MODEL_TYPE,
-    min_scanner_score: float = 70,
+    min_scanner_score: float = DEFAULT_MIN_SCANNER_SCORE,
     min_model_probability: float = DEFAULT_MIN_MODEL_PROBABILITY,
     calibration_method: str | None = DEFAULT_CALIBRATION_METHOD,
     min_relative_volume: float | None = None,
@@ -104,6 +106,7 @@ def run_milestone_1(
         validation_period="2023",
         test_period="2024",
         params={
+            "threshold_config": DEFAULT_THRESHOLD_CONFIG.to_dict(),
             "use_news": use_news,
             "min_scanner_score": min_scanner_score,
             "max_gap_threshold": MAX_GAP_THRESHOLD,
@@ -229,6 +232,7 @@ def run_milestone_1(
         dataset_snapshot="data/snapshots/*",
         model=model_type,
         params={
+            "threshold_config": DEFAULT_THRESHOLD_CONFIG.to_dict(),
             "max_gap_threshold": MAX_GAP_THRESHOLD,
             "model_type": model_type,
             "min_scanner_score": min_scanner_score,
@@ -260,6 +264,7 @@ def run_milestone_1(
                 "model_metadata_path": str(model_metadata_path),
                 "model_registry_path": str(MODEL_REGISTRY_PATH),
                 "signal_config": {
+                    "threshold_config": DEFAULT_THRESHOLD_CONFIG.to_dict(),
                     "model_type": model_type,
                     "min_scanner_score": min_scanner_score,
                     "min_model_probability": min_model_probability,
