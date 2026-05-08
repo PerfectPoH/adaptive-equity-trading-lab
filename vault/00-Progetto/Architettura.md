@@ -9,7 +9,7 @@ tags: [architettura, trading, ml, backtest, streamlit]
 
 ## 1. Obiettivo tecnico
 
-Costruire un laboratorio personale di ricerca quantitativa su azioni USA. Il sistema deve scaricare dati storici, salvare snapshot, creare feature point-in-time, scannerizzare setup, creare label TP-before-SL con entry al next open, addestrare modelli baseline, generare segnali, simulare execution/risk, backtestare, registrare esperimenti e mostrare risultati in dashboard.
+Costruire un laboratorio personale di ricerca quantitativa su azioni USA. Il sistema deve scaricare dati storici, salvare snapshot, creare feature point-in-time, aggiungere contesto macro-news laggato, scannerizzare setup, creare label TP-before-SL con entry al next open, addestrare modelli baseline, generare segnali, simulare execution/risk, backtestare, registrare esperimenti e mostrare risultati in dashboard.
 
 Non e' un bot live. Non e' una prova di profittabilita'. La Milestone 1 serve a costruire una pipeline che non bara.
 
@@ -27,6 +27,7 @@ Non e' un bot live. Non e' una prova di profittabilita'. La Milestone 1 serve a 
 - tenacity
 - joblib
 - python-dotenv
+- GDELT DOC API come sorgente news sperimentale
 
 ## 3. Flusso del sistema
 
@@ -34,6 +35,7 @@ Non e' un bot live. Non e' una prova di profittabilita'. La Milestone 1 serve a 
 Market Data
   -> Data Snapshots
   -> Feature Engineering
+  -> Lagged News Context
   -> Scanner
   -> Temporal Split
   -> Label Builder
@@ -54,6 +56,8 @@ src/data/downloader.py       download, retry, validazione OHLCV
 src/data/snapshot.py         salvataggio CSV + sha256
 src/features/indicators.py   RSI, EMA, MACD, ATR e helper
 src/features/feature_pipeline.py
+src/features/news_features.py
+src/news/gdelt_doc.py
 src/scanner/stock_scanner.py
 src/models/label_builder.py
 src/models/trainer.py
@@ -86,6 +90,12 @@ Fonte MVP:
 yfinance, daily OHLCV
 ```
 
+Fonte news MVP:
+
+```text
+GDELT DOC API, macro-news daily aggregate, lag 1 giorno
+```
+
 Universo iniziale:
 
 ```text
@@ -99,6 +109,7 @@ Limiti noti:
 - qualita' non istituzionale;
 - dati potenzialmente instabili o ritoccati dal provider;
 - nessuna garanzia di riproducibilita' perfetta nel lungo periodo.
+- GDELT macro-news non e' news finanziaria point-in-time broker-grade.
 
 ## 7. Split temporale
 

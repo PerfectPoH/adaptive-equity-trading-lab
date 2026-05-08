@@ -40,6 +40,8 @@ signals_path = run_dir / "signals.csv"
 equity_path = run_dir / "equity_curves.csv"
 analysis_path = run_dir / "analysis.csv"
 analysis_summary_path = run_dir / "analysis_summary.json"
+signal_diagnostics_path = run_dir / "signal_diagnostics.csv"
+signal_diagnostics_summary_path = run_dir / "signal_diagnostics_summary.json"
 
 if analysis_summary_path.exists():
     summary = json.loads(analysis_summary_path.read_text(encoding="utf-8"))
@@ -87,6 +89,21 @@ if analysis_path.exists():
     analysis = pd.read_csv(analysis_path)
     st.subheader("Per-Symbol Diagnosis")
     st.dataframe(analysis, use_container_width=True)
+
+if signal_diagnostics_summary_path.exists():
+    diagnostics_summary = json.loads(signal_diagnostics_summary_path.read_text(encoding="utf-8"))
+    st.subheader("Signal Bottlenecks")
+    d1, d2, d3 = st.columns(3)
+    d1.metric("Scanner Pass Symbols", diagnostics_summary.get("symbols_with_scanner_pass", 0))
+    d2.metric("Model Pass Symbols", diagnostics_summary.get("symbols_with_model_pass", 0))
+    d3.metric("Signal Symbols", diagnostics_summary.get("symbols_with_signals", 0))
+    bottlenecks = diagnostics_summary.get("primary_bottlenecks", {})
+    if bottlenecks:
+        st.write("Bottleneck counts:", bottlenecks)
+
+if signal_diagnostics_path.exists():
+    diagnostics = pd.read_csv(signal_diagnostics_path)
+    st.dataframe(diagnostics, use_container_width=True)
 
 if signals_path.exists():
     signals = pd.read_csv(signals_path)

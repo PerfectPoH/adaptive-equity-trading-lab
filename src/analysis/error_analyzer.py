@@ -51,6 +51,73 @@ def build_run_analysis(
     return analysis, summary
 
 
+def build_signal_diagnostics(
+    signals: pd.DataFrame,
+    start: str = "2024-01-01",
+    end: str = "2024-12-31",
+    min_scanner_score: float = 70,
+    min_model_probability: float = 0.60,
+) -> tuple[pd.DataFrame, dict[str, Any]]:
+    dates = pd.to_datetime(signals.index)
+    date_mask = (dates >= pd.Timestamp(start)) & (dates <= pd.Timestamp(end))
+    test_signals = signals.loc[date_mask].copy()
+    rows: list[dict[str, Any]] = []
+
+    symbols = sorted(set(test_signals.get("symbol", pd.Series(dtype=str)).dropna().astype(str)))
+    for symbol in symbols:
+        symbol_rows = test_signals[test_signals["symbol"] == symbol]
+        scanner_score = pd.to_numeric(symbol_rows.get("scanner_score"), errors="coerce")
+        probability = pd.to_numeric(symbol_rows.get("model_probability"), errors="coerce")
+        scanner_pass = scanner_score > min_scanner_score
+        model_pass = probability > min_model_probability
+        market_pass = symbol_rows.get("spy_trend_positive", False).fillna(False).astype(bool)
+        signal = symbol_rows.get("signal", False).fillna(False).astype(bool)
+
+        row = {
+            "symbol": symbol,
+            "bars": int(len(symbol_rows)),
+            "scanner_pass_days": int(scanner_pass.sum()),
+            "model_pass_days": int(model_pass.sum()),
+            "market_pass_days": int(market_pass.sum()),
+            "scanner_and_model_days": int((scanner_pass & model_pass).sum()),
+            "signal_days": int(signal.sum()),
+            "scanner_score_mean": _safe_number(scanner_score.mean()),
+            "scanner_score_p90": _safe_number(scanner_score.quantile(0.90)),
+            "scanner_score_max": _safe_number(scanner_score.max()),
+            "model_probability_mean": _safe_number(probability.mean()),
+            "model_probability_p90": _safe_number(probability.quantile(0.90)),
+            "model_probability_max": _safe_number(probability.max()),
+        }
+        row["bottleneck"] = _diagnose_signal_bottleneck(row)
+        rows.append(row)
+
+    diagnostics = pd.DataFrame(rows)
+    return diagnostics, summarize_signal_diagnostics(diagnostics)
+
+
+def summarize_signal_diagnostics(diagnostics: pd.DataFrame) -> dict[str, Any]:
+    if diagnostics.empty:
+        return {
+            "symbols_analyzed": 0,
+            "symbols_with_scanner_pass": 0,
+            "symbols_with_model_pass": 0,
+            "symbols_with_signals": 0,
+            "primary_bottlenecks": [],
+        }
+
+    bottlenecks = diagnostics["bottleneck"].astype(str).value_counts().to_dict()
+    return {
+        "symbols_analyzed": int(len(diagnostics)),
+        "symbols_with_scanner_pass": int((diagnostics["scanner_pass_days"] > 0).sum()),
+        "symbols_with_model_pass": int((diagnostics["model_pass_days"] > 0).sum()),
+        "symbols_with_signals": int((diagnostics["signal_days"] > 0).sum()),
+        "total_scanner_pass_days": int(diagnostics["scanner_pass_days"].sum()),
+        "total_model_pass_days": int(diagnostics["model_pass_days"].sum()),
+        "total_signal_days": int(diagnostics["signal_days"].sum()),
+        "primary_bottlenecks": bottlenecks,
+    }
+
+
 def summarize_analysis(analysis: pd.DataFrame) -> dict[str, Any]:
     if analysis.empty:
         return {
@@ -157,3 +224,17 @@ def _diagnose(row: dict[str, Any]) -> str:
     if row["buy_and_hold_return"] > 0 and row["excess_return"] < 0:
         return "underexposed_to_strong_uptrend"
     return "flat_or_inconclusive"
+
+
+def _diagnose_signal_bottleneck(row: dict[str, Any]) -> str:
+    if row["scanner_pass_days"] == 0:
+        return "scanner_filter"
+    if row["model_pass_days"] == 0:
+        return "model_probability_filter"
+    if row["market_pass_days"] == 0:
+        return "market_trend_filter"
+    if row["scanner_and_model_days"] == 0:
+        return "scanner_model_misalignment"
+    if row["signal_days"] == 0:
+        return "combined_filter"
+    return "passes_signal_stack"

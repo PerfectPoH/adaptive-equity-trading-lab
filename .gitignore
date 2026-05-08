@@ -9,6 +9,7 @@ data/raw/
 data/processed/
 data/snapshots/*.csv
 data/snapshots/*.sha256
+data/news/*.csv
 experiments/runs/
 *.log
 

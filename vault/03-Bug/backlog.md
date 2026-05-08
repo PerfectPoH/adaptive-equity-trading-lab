@@ -16,9 +16,9 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 ### RISK-001 - Baseline non batte buy-and-hold
 
 - Priorita: P2.
-- Sintomo: il run `20260508_170918` produce circa 0.29% medio contro circa 48% buy-and-hold.
-- Dettaglio: 29 segnali totali, concentrati in 2 simboli su 10; 9 simboli sotto benchmark.
-- Causa probabile: filtri e soglie MVP troppo selettivi; modello baseline non ancora calibrato; mercato 2024 molto forte per large-cap tech.
+- Sintomo: il run `20260508_171849` produce circa 0.38% medio contro circa 48% buy-and-hold.
+- Dettaglio: 23 segnali totali, 21 eseguibili, concentrati in 1 simbolo su 10; 9 simboli sotto benchmark.
+- Causa probabile: soglia/probabilita' modello troppo restrittiva; mercato 2024 molto forte per large-cap tech; strategia sotto-esposta.
 - Azione: error analysis in Milestone 2.
 - Stato: aperto, documentato.
 
@@ -50,8 +50,16 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Priorita: P2.
 - Sintomo: `backtesting.py` segnala che alcuni contingent SL/TP possono essere colpiti nella stessa barra daily dell'ingresso.
 - Impatto: con dati daily non conosciamo l'ordine intraday degli eventi; alcune metriche possono essere ottimistiche o pessimistiche.
-- Azione: documentare limite; in Milestone 6 passare a event-driven/intraday data prima del live serio.
-- Stato: limite noto.
+- Azione: skip conservativo `entry_bar_exit_touch` aggiunto; in Milestone 6 passare a event-driven/intraday data prima del live serio.
+- Stato: mitigato nel MVP, limite ancora noto.
+
+### RISK-006 - News GDELT non sono news finanziarie point-in-time
+
+- Priorita: P2.
+- Sintomo: GDELT macro-news daily aggregate e' utile come contesto, ma non sostituisce feed finanziari, earnings calendars o company-specific news.
+- Impatto: il modello puo' imparare correlazioni macro rumorose o non causali.
+- Azione: tenerle come feature sperimentali laggate; misurare ablation con/senza news in Milestone 2.
+- Stato: aperto.
 
 ## Tech debt
 

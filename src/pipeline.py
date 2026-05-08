@@ -8,7 +8,7 @@ from pathlib import Path
 import joblib
 import pandas as pd
 
-from src.analysis.error_analyzer import build_run_analysis
+from src.analysis.error_analyzer import build_run_analysis, build_signal_diagnostics
 from src.backtest.execution import add_execution_columns
 from src.backtest.metrics import equity_curve_to_frame
 from src.backtest.runner import run_backtest
@@ -17,12 +17,15 @@ from src.features.feature_pipeline import build_features
 from src.models.label_builder import build_trade_labels
 from src.models.predictor import add_model_probabilities
 from src.models.trainer import evaluate_classifier, fit_model, temporal_split
+from src.news.gdelt_doc import load_or_download_market_news
 from src.scanner.stock_scanner import add_scanner_columns
 from src.strategy.signal_engine import add_signal_columns
 
 
 UNIVERSE = ["AAPL", "MSFT", "NVDA", "AMD", "TSLA", "META", "AMZN", "GOOGL", "SPY", "QQQ"]
 FEATURE_START = "2018-01-01"
+NEWS_START = "2020-01-01"
+NEWS_END = "2024-12-31"
 MAX_GAP_THRESHOLD = 0.05
 RUNS_DIR = Path("experiments/runs")
 LOG_PATH = Path("experiments/log.csv")
@@ -40,9 +43,10 @@ def run_milestone_1() -> Path:
         raise RuntimeError("Not enough tickers downloaded successfully")
 
     spy = raw["SPY"]
+    market_news = load_or_download_market_news(NEWS_START, NEWS_END)
     prepared: dict[str, pd.DataFrame] = {}
     for symbol, frame in raw.items():
-        featured = build_features(frame, spy)
+        featured = build_features(frame, spy, market_news=market_news)
         featured["symbol"] = symbol
         scanned = add_scanner_columns(featured)
         labeled = build_trade_labels(scanned, max_gap_threshold=MAX_GAP_THRESHOLD)
@@ -99,6 +103,12 @@ def run_milestone_1() -> Path:
     analysis, analysis_summary = build_run_analysis(signals, backtests)
     analysis.to_csv(run_dir / "analysis.csv", index=False)
     (run_dir / "analysis_summary.json").write_text(json.dumps(analysis_summary, indent=2), encoding="utf-8")
+    signal_diagnostics, signal_diagnostics_summary = build_signal_diagnostics(signals)
+    signal_diagnostics.to_csv(run_dir / "signal_diagnostics.csv", index=False)
+    (run_dir / "signal_diagnostics_summary.json").write_text(
+        json.dumps(signal_diagnostics_summary, indent=2),
+        encoding="utf-8",
+    )
 
     aggregate = _aggregate_backtests(backtests)
     _append_experiment_log(
@@ -107,6 +117,7 @@ def run_milestone_1() -> Path:
         model="random_forest",
         params={
             "max_gap_threshold": MAX_GAP_THRESHOLD,
+            "news_features": "gdelt_market_news_lagged_1d",
             "validation_metrics": validation_metrics,
             "test_metrics": test_metrics,
         },
@@ -122,6 +133,7 @@ def run_milestone_1() -> Path:
                 "test_metrics": test_metrics,
                 "aggregate_backtest": aggregate,
                 "analysis_summary": analysis_summary,
+                "signal_diagnostics_summary": signal_diagnostics_summary,
             },
             indent=2,
         ),

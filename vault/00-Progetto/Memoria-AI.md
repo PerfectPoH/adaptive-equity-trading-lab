@@ -83,6 +83,7 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 - Vault separato e pulito, non copiato dal progetto Soresina.
 - Test anti-shift su `backtesting.py`: il trade deve entrare al next open.
 - Analisi per-run: distinguere strategia scarsa da strategia troppo selettiva.
+- News GDELT laggate di un giorno: usare come contesto sperimentale, non come trigger.
 
 ## Comandi stabili
 
@@ -94,14 +95,17 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 
 ## Risultato importante 2026-05-08
 
-Run `20260508_170918`:
+Run `20260508_171849`:
 
-- 29 segnali totali nel 2024;
-- segnali concentrati in 2 simboli su 10;
+- news GDELT macro 2020-2024 collegate;
+- 23 segnali totali nel 2024;
+- 21 segnali eseguibili;
+- 2 segnali saltati per `entry_bar_exit_touch`;
+- segnali concentrati in 1 simbolo su 10;
 - 9 simboli su 10 sotto buy-and-hold;
-- media strategia circa 0.29%;
+- media strategia circa 0.38%;
 - buy-and-hold medio circa 48%;
-- diagnosi: la baseline e' troppo selettiva e sotto-esposta al forte uptrend 2024.
+- diagnosi: il collo di bottiglia e' il filtro `model_probability`; lo scanner passa su tutti i simboli, ma il modello supera la soglia solo su NVDA.
 
 ## Convenzioni Vault
 

@@ -23,6 +23,12 @@ Known limitations:
 - missing sessions or throttled downloads;
 - no delisted-symbol coverage.
 
+## News Feature Limitations
+
+The MVP uses GDELT DOC API macro-news features as broad market context. These features are lagged by one day to reduce lookahead risk, but they are not a substitute for point-in-time financial news feeds, earnings calendars, or company-specific event data.
+
+Current news features should be treated as experimental research inputs, not as an execution trigger.
+
 ## Execution Limitations
 
 The MVP uses next-open execution with simple slippage and commissions. This is more realistic than same-close entry, but still far from live-market execution.
@@ -30,3 +36,5 @@ The MVP uses next-open execution with simple slippage and commissions. This is m
 `backtesting.py` is used as a prototyping engine. The strategy passes a precomputed next-open entry price as a limit order so the framework validates stop-loss and take-profit levels against the intended entry price, not the previous close. This is a simulation convenience, not a live-order recommendation.
 
 Daily OHLC bars cannot prove the exact intraday order of events. If an entry and its contingent stop/take-profit can interact inside the same daily candle, the result is ambiguous. This is one reason the institutional validation roadmap requires event-driven backtesting before real-money use.
+
+The current conservative MVP skips trades where the entry bar itself touches stop-loss or take-profit levels, reducing ambiguous daily-bar fills at the cost of fewer trades.

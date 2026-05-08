@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import pandas as pd
 
+from src.features.news_features import NEWS_FEATURE_COLUMNS, add_market_news_features
 from src.features.indicators import (
     atr,
     distance_from_rolling_high,
@@ -26,10 +27,15 @@ FEATURE_COLUMNS = [
     "relative_volume_20d",
     "distance_from_20d_high",
     "spy_trend_positive",
+    *NEWS_FEATURE_COLUMNS,
 ]
 
 
-def build_features(frame: pd.DataFrame, spy_frame: pd.DataFrame | None = None) -> pd.DataFrame:
+def build_features(
+    frame: pd.DataFrame,
+    spy_frame: pd.DataFrame | None = None,
+    market_news: pd.DataFrame | None = None,
+) -> pd.DataFrame:
     data = frame.copy().sort_index()
 
     data["return_1d"] = data["Close"].pct_change()
@@ -59,4 +65,5 @@ def build_features(frame: pd.DataFrame, spy_frame: pd.DataFrame | None = None) -
         data["spy_trend_positive"] = data["Close"] > ema_50
 
     data["spy_trend_positive"] = data["spy_trend_positive"].astype(bool)
+    data = add_market_news_features(data, market_news)
     return data

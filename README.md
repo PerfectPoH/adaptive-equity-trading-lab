@@ -18,6 +18,7 @@ Live small != scaling
 - `yfinance` daily OHLCV data for a small US equity universe.
 - Snapshot files with SHA-256 hashes.
 - Point-in-time technical features.
+- Lagged GDELT market-news context features.
 - Temporal split, no random split.
 - TP-before-SL labels with next-open execution.
 - Logistic Regression / Random Forest baseline.
@@ -46,6 +47,7 @@ Start from `vault/INDEX.md`, then read `vault/00-Progetto/Memoria-AI.md` and `va
 ## Important Limits
 
 - `yfinance` is suitable for prototyping, not institutional validation.
+- GDELT news features are experimental macro-context features, lagged by one day to reduce leakage risk.
 - The MVP has survivorship bias.
 - The MVP is not sufficient evidence for real capital allocation.
 - All signals are research outputs, not financial advice.

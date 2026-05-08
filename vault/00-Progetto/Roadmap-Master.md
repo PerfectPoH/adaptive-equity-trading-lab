@@ -37,6 +37,8 @@ Prossimi miglioramenti Milestone 1:
 - [ ] Ripulire o archiviare `.venv` parziale se Windows lo libera.
 - [x] Documentare meglio perche' la prima baseline non batte buy-and-hold.
 - [x] Aggiungere analisi per simbolo: segnali, trade, skip, diagnosi.
+- [x] Aggiungere conservative skip per daily-bar entry SL/TP ambiguity.
+- [x] Collegare GDELT macro-news storiche 2020-2024 come feature sperimentali.
 
 ## Milestone 2 - Research Validation
 
@@ -46,12 +48,13 @@ Prossimi miglioramenti Milestone 1:
 - [ ] Model registry con `joblib`.
 - [ ] Calibration plot / reliability analysis.
 - [ ] Error analyzer per trade falliti.
+- [ ] Analisi soglia `model_probability` e calibrazione per ridurre collo di bottiglia.
 - [ ] Notebook `04_backtest_analysis.ipynb`.
 - [ ] Soglie scanner e modello versionate.
 
 ## Milestone 3 - News + Context
 
-- [ ] News API iniziale.
+- [x] Primo connettore GDELT macro-news daily laggato.
 - [ ] Event classifier: earnings, macro, politica, shock.
 - [ ] `news_risk_filter`: block, reduce size, warning.
 - [ ] Fallback se news API non risponde.

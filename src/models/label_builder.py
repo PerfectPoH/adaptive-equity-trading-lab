@@ -9,6 +9,7 @@ def build_trade_labels(
     take_profit_atr_multiple: float = 3.0,
     timeout_bars: int = 10,
     max_gap_threshold: float = 0.05,
+    skip_entry_bar_exit_touch: bool = True,
 ) -> pd.DataFrame:
     data = frame.copy().sort_index()
     n = len(data)
@@ -36,6 +37,9 @@ def build_trade_labels(
         take = data["take_profit"].iat[i]
 
         skip_reason = _skip_reason(entry, atr, gap, stop, take, max_gap_threshold)
+        if not skip_reason and skip_entry_bar_exit_touch:
+            if _entry_bar_touches_exit(data, entry_idx, stop, take):
+                skip_reason = "entry_bar_exit_touch"
         if skip_reason:
             data.iat[i, data.columns.get_loc("label_skip_reason")] = skip_reason
             continue
@@ -66,6 +70,12 @@ def build_trade_labels(
 
     data["label"] = pd.to_numeric(data["label"], errors="coerce")
     return data
+
+
+def _entry_bar_touches_exit(data: pd.DataFrame, entry_idx: int, stop: float, take: float) -> bool:
+    high = data["High"].iat[entry_idx]
+    low = data["Low"].iat[entry_idx]
+    return bool(high >= take or low <= stop)
 
 
 def _skip_reason(

@@ -1,12 +1,25 @@
 ---
 tipo: feature-spec
 progetto: adaptive-equity-trading-lab
-stato: futuro
+stato: parziale
 ultimo-aggiornamento: 2026-05-08
 tags: [news, risk, events, roadmap]
 ---
 
 # Feature - News Risk Engine
+
+## Stato attuale
+
+Implementato un primo connettore **GDELT macro-news daily** per il periodo 2020-2024.
+
+Questa non e' ancora la versione completa del News Risk Engine:
+
+- non classifica earnings;
+- non classifica politica/eventi straordinari;
+- non blocca trade;
+- non usa news specifiche per ogni ticker.
+
+Pero' aggiunge prime feature macro-news laggate al modello.
 
 ## Obiettivo
 
@@ -40,8 +53,8 @@ Il motore news puo' bloccare trade con rischio evento alto, ridurre size, aggiun
 - Non usare news future in backtest.
 - Ogni filtro news deve essere misurato.
 
-## Stato
+## Stato futuro
 
-Fuori dalla Milestone 1. Prima servono pipeline, test e analisi errori.
+La parte risk-filter resta fuori dalla Milestone 1. Prima servono ablation test con/senza news, calibrazione modello e analisi errori.
 
 Vedi [[Roadmap-Master]] e [[Regole-Quant]].

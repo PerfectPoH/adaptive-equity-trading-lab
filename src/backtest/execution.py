@@ -10,6 +10,7 @@ def add_execution_columns(
     equity: float = 100_000,
     risk_fraction: float = 0.01,
     max_gap_threshold: float = 0.05,
+    skip_entry_bar_exit_touch: bool = True,
 ) -> pd.DataFrame:
     data = frame.copy().sort_index()
 
@@ -24,7 +25,7 @@ def add_execution_columns(
         if not bool(data["signal"].iat[i]):
             continue
 
-        reason = _execution_skip_reason(data, i, max_gap_threshold)
+        reason = _execution_skip_reason(data, i, max_gap_threshold, skip_entry_bar_exit_touch)
         if reason:
             data.iat[i, data.columns.get_loc("execution_skip_reason")] = reason
             continue
@@ -60,7 +61,12 @@ def planned_trade_for_signal(frame: pd.DataFrame, signal_index: int) -> dict[str
     }
 
 
-def _execution_skip_reason(data: pd.DataFrame, i: int, max_gap_threshold: float) -> str:
+def _execution_skip_reason(
+    data: pd.DataFrame,
+    i: int,
+    max_gap_threshold: float,
+    skip_entry_bar_exit_touch: bool,
+) -> str:
     if i + 1 >= len(data):
         return "no_next_open"
 
@@ -80,4 +86,8 @@ def _execution_skip_reason(data: pd.DataFrame, i: int, max_gap_threshold: float)
         return "missing_exit_levels"
     if not stop < entry < take:
         return "invalid_risk_reward"
+    if skip_entry_bar_exit_touch:
+        entry_bar = i + 1
+        if data["High"].iat[entry_bar] >= take or data["Low"].iat[entry_bar] <= stop:
+            return "entry_bar_exit_touch"
     return ""
