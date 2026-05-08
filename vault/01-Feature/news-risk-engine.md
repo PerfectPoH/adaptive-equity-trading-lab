@@ -21,6 +21,16 @@ Questa non e' ancora la versione completa del News Risk Engine:
 
 Pero' aggiunge prime feature macro-news laggate al modello.
 
+## Risultato ablation
+
+Ultimo verdict:
+
+```text
+mixed_or_inconclusive
+```
+
+Le news migliorano la validation ROC AUC ma peggiorano leggermente il return 2024 e il test ROC AUC. Decisione corrente: news disponibili per ricerca, non attive nel default baseline.
+
 ## Obiettivo
 
 Aggiungere un filtro news/eventi che protegge il sistema da contesti anomali. Non deve essere un generatore autonomo di segnali buy/sell nella prima versione.

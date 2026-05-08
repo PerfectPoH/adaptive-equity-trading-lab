@@ -90,22 +90,31 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 ```powershell
 .\.venv-lab\Scripts\python.exe -m pytest
 .\.venv-lab\Scripts\python.exe -m src.pipeline
+.\.venv-lab\Scripts\python.exe -m src.experiments.news_ablation
+.\.venv-lab\Scripts\python.exe -m src.experiments.threshold_validation
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
 
 ## Risultato importante 2026-05-08
 
-Run `20260508_171849`:
+Run default `20260508_173354`:
 
-- news GDELT macro 2020-2024 collegate;
-- 23 segnali totali nel 2024;
-- 21 segnali eseguibili;
-- 2 segnali saltati per `entry_bar_exit_touch`;
-- segnali concentrati in 1 simbolo su 10;
+- config: `use_news=false`, `model_probability > 0.55`;
+- 119 segnali totali nel 2024;
+- 109 segnali eseguibili;
+- 10 segnali saltati per `entry_bar_exit_touch`;
+- segnali su 9 simboli su 10;
 - 9 simboli su 10 sotto buy-and-hold;
-- media strategia circa 0.38%;
+- media strategia circa 3.21%;
 - buy-and-hold medio circa 48%;
-- diagnosi: il collo di bottiglia e' il filtro `model_probability`; lo scanner passa su tutti i simboli, ma il modello supera la soglia solo su NVDA.
+- diagnosi: soglia 0.55 riduce il collo di bottiglia del modello, ma la strategia resta molto sotto buy-and-hold.
+
+News ablation:
+
+- `no_news` batte `news` nel backtest 2024 corrente;
+- news migliora validation ROC AUC, ma peggiora leggermente test ROC AUC e strategy return;
+- verdict: `mixed_or_inconclusive`;
+- decisione: tenere news come feature sperimentale, non default.
 
 ## Convenzioni Vault
 

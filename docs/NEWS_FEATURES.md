@@ -50,3 +50,13 @@ The cache is ignored by git because it is generated data.
 - Tone is an aggregate media tone metric, not a trading signal.
 - Macro news features are shared across all symbols.
 - Company-specific news, earnings calendars, and event classification belong in later milestones.
+
+## Current Ablation Result
+
+The latest A/B run is mixed:
+
+- GDELT features improved validation ROC AUC.
+- GDELT features slightly reduced 2024 test ROC AUC.
+- GDELT features reduced the 2024 strategy return in the current baseline.
+
+Verdict: keep news available, but do not treat it as a default alpha source yet.

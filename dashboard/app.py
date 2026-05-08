@@ -14,6 +14,8 @@ st.caption("Milestone 1 research dashboard. Results are prototype-only, not trad
 
 RUNS_DIR = Path("experiments/runs")
 LOG_PATH = Path("experiments/log.csv")
+NEWS_ABLATION_PATH = Path("experiments/news_ablation_latest.csv")
+THRESHOLD_VALIDATION_PATH = Path("experiments/threshold_validation_latest.csv")
 
 
 def latest_run_dir() -> Path | None:
@@ -30,6 +32,16 @@ if LOG_PATH.exists():
 else:
     st.info("No experiment log yet. Run `python -m src.pipeline` first.")
 
+if NEWS_ABLATION_PATH.exists() or THRESHOLD_VALIDATION_PATH.exists():
+    st.subheader("Experiment Reports")
+    if NEWS_ABLATION_PATH.exists():
+        with st.expander("Latest News Ablation", expanded=False):
+            st.dataframe(pd.read_csv(NEWS_ABLATION_PATH), use_container_width=True)
+    if THRESHOLD_VALIDATION_PATH.exists():
+        with st.expander("Latest Threshold Validation", expanded=True):
+            threshold_report = pd.read_csv(THRESHOLD_VALIDATION_PATH)
+            st.dataframe(threshold_report, use_container_width=True)
+
 if run_dir is None:
     st.stop()
 
@@ -42,6 +54,8 @@ analysis_path = run_dir / "analysis.csv"
 analysis_summary_path = run_dir / "analysis_summary.json"
 signal_diagnostics_path = run_dir / "signal_diagnostics.csv"
 signal_diagnostics_summary_path = run_dir / "signal_diagnostics_summary.json"
+threshold_diagnostics_path = run_dir / "threshold_diagnostics.csv"
+threshold_diagnostics_summary_path = run_dir / "threshold_diagnostics_summary.json"
 
 if analysis_summary_path.exists():
     summary = json.loads(analysis_summary_path.read_text(encoding="utf-8"))
@@ -104,6 +118,16 @@ if signal_diagnostics_summary_path.exists():
 if signal_diagnostics_path.exists():
     diagnostics = pd.read_csv(signal_diagnostics_path)
     st.dataframe(diagnostics, use_container_width=True)
+
+if threshold_diagnostics_summary_path.exists():
+    threshold_summary = json.loads(threshold_diagnostics_summary_path.read_text(encoding="utf-8"))
+    st.subheader("Probability Threshold Diagnostics")
+    st.metric("Recommended Threshold", threshold_summary.get("recommended_threshold"))
+    st.caption(threshold_summary.get("reason", ""))
+
+if threshold_diagnostics_path.exists():
+    threshold_diagnostics = pd.read_csv(threshold_diagnostics_path)
+    st.dataframe(threshold_diagnostics, use_container_width=True)
 
 if signals_path.exists():
     signals = pd.read_csv(signals_path)

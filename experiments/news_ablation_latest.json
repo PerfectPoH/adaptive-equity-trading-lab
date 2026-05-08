@@ -1,0 +1,142 @@
+{
+  "no_news_run": "experiments\\runs\\20260508_173007_no_news",
+  "news_run": "experiments\\runs\\20260508_173026_news",
+  "no_news": {
+    "run_id": "20260508_173007_no_news",
+    "aggregate_backtest": {
+      "strategy_return": 0.01042246212136773,
+      "buy_and_hold_return": 0.4804665448965119,
+      "excess_return": -0.4700440827751441,
+      "max_drawdown": -0.002569248109423894,
+      "sharpe": 1.4548184771883932,
+      "profit_factor": 3.2251971586710475,
+      "win_rate": 0.7380952380952381,
+      "beats_buy_and_hold": false,
+      "notes": "Mean of per-symbol 2024 backtests"
+    },
+    "validation_metrics": {
+      "accuracy": 0.5703125,
+      "roc_auc": 0.5079989228520241,
+      "rows": 2432.0
+    },
+    "test_metrics": {
+      "accuracy": 0.728369384359401,
+      "roc_auc": 0.6506938878386894,
+      "rows": 2404.0
+    },
+    "analysis_summary": {
+      "symbols_analyzed": 10,
+      "total_signals": 36,
+      "total_executable_signals": 32,
+      "total_skipped_signals": 4,
+      "symbols_with_signals": 4,
+      "symbols_with_trades": 3,
+      "underperforming_symbols": 9,
+      "outperforming_symbols": 1,
+      "top_skip_reason": "entry_bar_exit_touch",
+      "mean_strategy_return": 0.01042246212136773,
+      "mean_buy_and_hold_return": 0.4804665448965119,
+      "mean_excess_return": -0.4700440827751441,
+      "primary_findings": [
+        "9 symbols underperformed buy-and-hold in the 2024 test window.",
+        "Signals were concentrated in 4 of 10 symbols.",
+        "Only 3 symbols produced closed trades.",
+        "4 of 36 signals were skipped by execution rules.",
+        "Most common execution skip reason: entry_bar_exit_touch."
+      ]
+    },
+    "signal_diagnostics_summary": {
+      "symbols_analyzed": 10,
+      "symbols_with_scanner_pass": 10,
+      "symbols_with_model_pass": 4,
+      "symbols_with_signals": 4,
+      "total_scanner_pass_days": 1237,
+      "total_model_pass_days": 40,
+      "total_signal_days": 36,
+      "primary_bottlenecks": {
+        "model_probability_filter": 6,
+        "passes_signal_stack": 4
+      }
+    },
+    "threshold_diagnostics_summary": {
+      "recommended_threshold": 0.55,
+      "validation_signal_days": 199,
+      "validation_success_rate": 0.27461139896373055,
+      "validation_symbols_with_signals": 9,
+      "reason": "Selected highest validation success rate among thresholds with enough validation signals."
+    }
+  },
+  "news": {
+    "run_id": "20260508_173026_news",
+    "aggregate_backtest": {
+      "strategy_return": 0.0037653621297333447,
+      "buy_and_hold_return": 0.4804665448965119,
+      "excess_return": -0.47670118276677853,
+      "max_drawdown": -0.0019585474261352267,
+      "sharpe": 1.418087217223307,
+      "profit_factor": 2.3365670276358643,
+      "win_rate": 0.6,
+      "beats_buy_and_hold": false,
+      "notes": "Mean of per-symbol 2024 backtests"
+    },
+    "validation_metrics": {
+      "accuracy": 0.6932565789473685,
+      "roc_auc": 0.5455433918437183,
+      "rows": 2432.0
+    },
+    "test_metrics": {
+      "accuracy": 0.7874376039933444,
+      "roc_auc": 0.6485383742911153,
+      "rows": 2404.0
+    },
+    "analysis_summary": {
+      "symbols_analyzed": 10,
+      "total_signals": 23,
+      "total_executable_signals": 21,
+      "total_skipped_signals": 2,
+      "symbols_with_signals": 1,
+      "symbols_with_trades": 1,
+      "underperforming_symbols": 9,
+      "outperforming_symbols": 1,
+      "top_skip_reason": "entry_bar_exit_touch",
+      "mean_strategy_return": 0.0037653621297333447,
+      "mean_buy_and_hold_return": 0.4804665448965119,
+      "mean_excess_return": -0.47670118276677853,
+      "primary_findings": [
+        "9 symbols underperformed buy-and-hold in the 2024 test window.",
+        "Signals were concentrated in 1 of 10 symbols.",
+        "2 of 23 signals were skipped by execution rules.",
+        "Most common execution skip reason: entry_bar_exit_touch."
+      ]
+    },
+    "signal_diagnostics_summary": {
+      "symbols_analyzed": 10,
+      "symbols_with_scanner_pass": 10,
+      "symbols_with_model_pass": 1,
+      "symbols_with_signals": 1,
+      "total_scanner_pass_days": 1237,
+      "total_model_pass_days": 25,
+      "total_signal_days": 23,
+      "primary_bottlenecks": {
+        "model_probability_filter": 9,
+        "passes_signal_stack": 1
+      }
+    },
+    "threshold_diagnostics_summary": {
+      "recommended_threshold": 0.55,
+      "validation_signal_days": 97,
+      "validation_success_rate": 0.41304347826086957,
+      "validation_symbols_with_signals": 8,
+      "reason": "Selected highest validation success rate among thresholds with enough validation signals."
+    }
+  },
+  "comparison": {
+    "strategy_return_delta": -0.006657099991634385,
+    "excess_return_delta": -0.006657099991634441,
+    "max_drawdown_delta": 0.0006107006832886674,
+    "win_rate_delta": -0.13809523809523816,
+    "validation_roc_auc_delta": 0.03754446899169417,
+    "test_roc_auc_delta": -0.0021555135475741505,
+    "verdict": "mixed_or_inconclusive"
+  }
+}

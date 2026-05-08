@@ -16,9 +16,9 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 ### RISK-001 - Baseline non batte buy-and-hold
 
 - Priorita: P2.
-- Sintomo: il run `20260508_171849` produce circa 0.38% medio contro circa 48% buy-and-hold.
-- Dettaglio: 23 segnali totali, 21 eseguibili, concentrati in 1 simbolo su 10; 9 simboli sotto benchmark.
-- Causa probabile: soglia/probabilita' modello troppo restrittiva; mercato 2024 molto forte per large-cap tech; strategia sotto-esposta.
+- Sintomo: il run default `20260508_173354` produce circa 3.21% medio contro circa 48% buy-and-hold.
+- Dettaglio: 119 segnali totali, 109 eseguibili, su 9 simboli; 9 simboli sotto benchmark.
+- Causa probabile: edge ancora debole, target/feature baseline troppo semplici, mercato 2024 molto forte per large-cap tech.
 - Azione: error analysis in Milestone 2.
 - Stato: aperto, documentato.
 
@@ -58,8 +58,8 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Priorita: P2.
 - Sintomo: GDELT macro-news daily aggregate e' utile come contesto, ma non sostituisce feed finanziari, earnings calendars o company-specific news.
 - Impatto: il modello puo' imparare correlazioni macro rumorose o non causali.
-- Azione: tenerle come feature sperimentali laggate; misurare ablation con/senza news in Milestone 2.
-- Stato: aperto.
+- Azione: ablation eseguita; tenerle come feature sperimentali laggate, non default.
+- Stato: aperto; verdict `mixed_or_inconclusive`.
 
 ## Tech debt
 

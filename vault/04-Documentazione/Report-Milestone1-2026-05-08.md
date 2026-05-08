@@ -40,15 +40,15 @@ Pipeline:
 Run principale aggiornato:
 
 ```text
-20260508_171849
+20260508_173354
 ```
 
 ## Risultati backtest
 
 ```text
-strategy_return:       circa 0.38%
+strategy_return:       circa 3.21%
 buy_and_hold_return:   circa 48.0%
-excess_return:         circa -47.7%
+excess_return:         circa -44.8%
 beats_buy_and_hold:    false
 ```
 
@@ -56,11 +56,11 @@ beats_buy_and_hold:    false
 
 ```text
 symbols_analyzed:          10
-total_signals:             23
-total_executable_signals:  21
-total_skipped_signals:     2
-symbols_with_signals:      1
-symbols_with_trades:       1
+total_signals:             119
+total_executable_signals:  109
+total_skipped_signals:     10
+symbols_with_signals:      9
+symbols_with_trades:       9
 underperforming_symbols:   9
 outperforming_symbols:     1
 ```
@@ -68,10 +68,10 @@ outperforming_symbols:     1
 Findings:
 
 - 9 simboli su 10 sottoperformano buy-and-hold.
-- I segnali sono concentrati in 1 simbolo su 10.
-- Lo scanner passa su tutti i simboli almeno una volta, ma il modello supera la soglia solo su NVDA.
-- 2 segnali sono stati saltati per `entry_bar_exit_touch`, evitando ambiguita' daily OHLC.
-- GDELT macro-news 2020-2024 e' ora collegato come feature sperimentale laggata.
+- La soglia `0.55` aumenta copertura: segnali su 9 simboli.
+- 10 segnali sono stati saltati per `entry_bar_exit_touch`, evitando ambiguita' daily OHLC.
+- GDELT macro-news 2020-2024 e' collegato come feature sperimentale laggata, ma non default.
+- News ablation: `mixed_or_inconclusive`; no-news performa meglio nel backtest 2024 corrente.
 
 ## Interpretazione
 
@@ -83,7 +83,7 @@ La pipeline funziona, ma la strategia baseline non e' competitiva. Questo e' un 
 - Survivorship bias presente.
 - backtesting.py non e' un simulatore execution realistico.
 - Alcuni SL/TP su daily OHLC sono ambigui nella stessa candela dell'ingresso.
-- Primo connettore news presente, ma non ancora validato con ablation test.
+- Primo connettore news presente; ablation corrente non supporta usarlo come default.
 - Nessun walk-forward tuning.
 - Nessuna calibration.
 - Nessuna validazione istituzionale.

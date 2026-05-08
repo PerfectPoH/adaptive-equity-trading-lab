@@ -39,6 +39,8 @@ Prossimi miglioramenti Milestone 1:
 - [x] Aggiungere analisi per simbolo: segnali, trade, skip, diagnosi.
 - [x] Aggiungere conservative skip per daily-bar entry SL/TP ambiguity.
 - [x] Collegare GDELT macro-news storiche 2020-2024 come feature sperimentali.
+- [x] Eseguire news ablation con/senza GDELT.
+- [x] Eseguire threshold validation `0.55` vs `0.60`.
 
 ## Milestone 2 - Research Validation
 
@@ -48,7 +50,9 @@ Prossimi miglioramenti Milestone 1:
 - [ ] Model registry con `joblib`.
 - [ ] Calibration plot / reliability analysis.
 - [ ] Error analyzer per trade falliti.
-- [ ] Analisi soglia `model_probability` e calibrazione per ridurre collo di bottiglia.
+- [x] Prima analisi soglia `model_probability`: default sperimentale portato a `0.55`.
+- [ ] Calibration plot / probability calibration vera.
+- [ ] Backtest threshold piu' ampio: 0.45-0.70 con selection su validation.
 - [ ] Notebook `04_backtest_analysis.ipynb`.
 - [ ] Soglie scanner e modello versionate.
 

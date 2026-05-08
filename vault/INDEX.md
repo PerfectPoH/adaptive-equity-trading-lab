@@ -76,11 +76,12 @@ tags: [vault, index, obsidian, trading-lab]
 Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 
 - test: `9 passed`;
-- run pipeline: `20260508_171849`;
+- run pipeline: `20260508_173354`;
 - backtest out-of-sample 2024: non batte buy-and-hold;
 - fallimento documentato: la baseline e' funzionante ma non ancora competitiva;
-- diagnosi principale: segnali concentrati in 1 simbolo su 10;
-- news GDELT macro 2020-2024 collegate come feature laggate sperimentali.
+- default sperimentale corrente: `use_news=false`, `model_probability > 0.55`;
+- diagnosi principale: 119 segnali su 9 simboli, ma ancora sotto buy-and-hold;
+- news GDELT macro 2020-2024 collegate come feature laggate sperimentali, non default.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 
