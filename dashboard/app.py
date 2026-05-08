@@ -21,6 +21,7 @@ CALIBRATION_COMPARISON_PATH = Path("experiments/calibration_comparison_latest.cs
 REGIME_FILTER_VALIDATION_PATH = Path("experiments/regime_filter_validation_latest.csv")
 WALK_FORWARD_VALIDATION_PATH = Path("experiments/walk_forward_validation_latest.csv")
 MODEL_COMPARISON_PATH = Path("experiments/model_comparison_latest.csv")
+HYPERPARAMETER_COMPARISON_PATH = Path("experiments/hyperparameter_comparison_latest.csv")
 FEATURE_SET_COMPARISON_PATH = Path("experiments/feature_set_comparison_latest.csv")
 TARGET_EXIT_COMPARISON_PATH = Path("experiments/target_exit_comparison_latest.csv")
 SIGNAL_QUALITY_COMPARISON_PATH = Path("experiments/signal_quality_comparison_latest.csv")
@@ -55,6 +56,7 @@ if (
     or REGIME_FILTER_VALIDATION_PATH.exists()
     or WALK_FORWARD_VALIDATION_PATH.exists()
     or MODEL_COMPARISON_PATH.exists()
+    or HYPERPARAMETER_COMPARISON_PATH.exists()
     or FEATURE_SET_COMPARISON_PATH.exists()
     or TARGET_EXIT_COMPARISON_PATH.exists()
     or SIGNAL_QUALITY_COMPARISON_PATH.exists()
@@ -82,6 +84,9 @@ if (
     if MODEL_COMPARISON_PATH.exists():
         with st.expander("Latest Model Comparison", expanded=True):
             st.dataframe(pd.read_csv(MODEL_COMPARISON_PATH), use_container_width=True)
+    if HYPERPARAMETER_COMPARISON_PATH.exists():
+        with st.expander("Latest Hyperparameter Comparison", expanded=True):
+            st.dataframe(pd.read_csv(HYPERPARAMETER_COMPARISON_PATH), use_container_width=True)
     if FEATURE_SET_COMPARISON_PATH.exists():
         with st.expander("Latest Feature Set Comparison", expanded=True):
             st.dataframe(pd.read_csv(FEATURE_SET_COMPARISON_PATH), use_container_width=True)
