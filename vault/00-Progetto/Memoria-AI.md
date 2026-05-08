@@ -99,26 +99,27 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 .\.venv-lab\Scripts\python.exe -m src.experiments.walk_forward_validation
 .\.venv-lab\Scripts\python.exe -m src.experiments.model_comparison
 .\.venv-lab\Scripts\python.exe -m src.experiments.feature_set_comparison
+.\.venv-lab\Scripts\python.exe -m src.experiments.target_exit_comparison
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
 
 ## Risultato importante 2026-05-08
 
-Run default `20260508_190512`:
+Run default `20260508_192713`:
 
-- config: `use_news=false`, isotonic calibration, `model_probability > 0.25`, no regime filters;
+- config: `use_news=false`, `model_type=random_forest`, feature set baseline, isotonic calibration, `model_probability > 0.25`, target/exit default `1.5 ATR stop / 3 ATR take-profit / 10d timeout`, no regime filters;
 - default scelto tramite walk-forward: raw 0.50 nel fold 2023, isotonic 0.25 nel fold 2024;
 - 1093 segnali totali nel 2024;
 - 1036 segnali eseguibili;
 - 57 segnali saltati per `entry_bar_exit_touch`;
 - segnali su 10 simboli su 10;
 - 9 simboli su 10 sotto buy-and-hold;
-- media strategia circa 6.99%;
+- media strategia circa 6.49%;
 - buy-and-hold medio circa 48%;
-- diagnosi: calibrazione isotonic 0.25 migliora il rendimento rispetto al raw 0.45, ma resta molto sotto buy-and-hold;
-- trade analysis: 140 trade chiusi, 73 vincenti, 67 perdenti, win rate trade circa 52.1%;
+- diagnosi: timeout e finalizzazione dei trade a fine finestra sono ora coerenti col target; resta molto sotto buy-and-hold;
+- trade analysis: 193 trade chiusi, 105 vincenti, 88 perdenti, win rate trade circa 54.4%;
 - best trade: TSLA segnale 2024-11-06, circa +19.65%;
-- worst trade: META segnale 2024-03-15, circa -14.52%;
+- worst trade: TSLA segnale 2024-07-12, circa -12.12%;
 - nessun simbolo ha media trade negativa nel run corrente.
 - feature-regime analysis:
   - nessun bucket feature e' netto negativo;
@@ -134,10 +135,10 @@ Run default `20260508_190512`:
 Walk-forward:
 
 - runner: `src.experiments.walk_forward_validation`;
-- fold `wf_2023`: validation 2022 -> raw threshold 0.50 -> test 2023 strategy return circa 5.53%;
-- fold `wf_2024`: validation 2023 -> isotonic threshold 0.25 -> test 2024 strategy return circa 6.99%;
-- mean test strategy return circa 6.26%;
-- mean test excess return circa -68.47%;
+- fold `wf_2023`: validation 2022 -> raw threshold 0.50 -> test 2023 strategy return circa 3.48%;
+- fold `wf_2024`: validation 2023 -> isotonic threshold 0.25 -> test 2024 strategy return circa 6.49%;
+- mean test strategy return circa 5.01%;
+- mean test excess return circa -69.72%;
 - fold che battono buy-and-hold: 0/2;
 - verdict: `positive_but_under_benchmark`;
 - decisione: default di ricerca promosso a isotonic threshold 0.25.
@@ -148,9 +149,9 @@ Model comparison:
 - runner: `src.experiments.model_comparison`;
 - modelli confrontati: `logistic_regression`, `random_forest`, `hist_gradient_boosting`;
 - min validation trades: 30, per evitare scelte su campioni minuscoli;
-- fold `wf_2023`: selezionato `baseline` + `random_forest`, raw threshold 0.45 -> test 2023 strategy return circa 7.64%;
-- fold `wf_2024`: selezionato `baseline` + `random_forest`, isotonic threshold 0.25 -> test 2024 strategy return circa 6.99%;
-- mean test strategy return circa 7.32%;
+- fold `wf_2023`: selezionato default target/exit + `baseline` + `random_forest`, raw threshold 0.45 -> test 2023 strategy return circa 6.50%;
+- fold `wf_2024`: selezionato default target/exit + `baseline` + `random_forest`, isotonic threshold 0.25 -> test 2024 strategy return circa 6.49%;
+- mean test strategy return circa 6.50%;
 - fold che battono buy-and-hold: 0/2;
 - decisione: non cambiare default modello; Random Forest resta default.
 
@@ -160,11 +161,21 @@ Feature set comparison:
 - feature set confrontati: `baseline`, `enhanced_context`;
 - enhanced context aggiunge momentum piu' lungo, slope EMA, range intraday, posizione nel range 20d, volume z-score, dollar-volume e contesto SPY;
 - min validation trades: 30;
-- fold `wf_2023`: selezionato `baseline`, raw threshold 0.45 -> test 2023 strategy return circa 7.64%;
-- fold `wf_2024`: selezionato `enhanced_context`, isotonic threshold 0.20 -> test 2024 strategy return circa 6.60%;
-- mean test strategy return circa 7.12%;
+- fold `wf_2023`: selezionato `baseline`, raw threshold 0.45 -> test 2023 strategy return circa 6.50%;
+- fold `wf_2024`: selezionato `baseline`, isotonic threshold 0.25 -> test 2024 strategy return circa 6.49%;
+- mean test strategy return circa 6.50%;
 - fold che battono buy-and-hold: 0/2;
-- decisione: non promuovere `enhanced_context`; nel fold 2024 viene scelto in validation ma peggiora il test rispetto al baseline default.
+- decisione: non promuovere `enhanced_context`; baseline resta selezionato dopo timeout-consistent backtesting.
+
+Target/exit comparison:
+
+- runner: `src.experiments.target_exit_comparison`;
+- configurazioni confrontate: default `1.5x/3x/10d`, fast `1x/2x/5d`, balanced `1.5x/2.25x/10d`, patient `2x/4x/15d`;
+- fold `wf_2023`: selezionato default raw 0.45 -> test 2023 strategy return circa 6.50%;
+- fold `wf_2024`: selezionato balanced isotonic 0.35 -> test 2024 strategy return circa 6.36%;
+- mean test strategy return circa 6.43%;
+- fold che battono buy-and-hold: 0/2;
+- decisione: non promuovere `balanced`; viene scelto in validation ma resta leggermente sotto il default 2024.
 
 Calibration:
 
@@ -174,7 +185,7 @@ Calibration:
 - test Brier migliora da circa 0.208 a circa 0.172;
 - test mean absolute calibration error migliora da circa 0.207 a circa 0.042;
 - soglia `0.45` con modello calibrato produce 0 segnali perche' cambia scala probabilistica;
-- soglia calibrata `0.25` produce 1093 segnali e strategy return circa 6.99% contro 4.80% raw;
+- soglia calibrata `0.25` produce 1093 segnali e strategy return circa 6.49% dopo timeout-consistent backtesting;
 - decisione: calibrazione isotonic 0.25 e' default di ricerca, ma non prova di strategia pronta.
 
 News ablation:

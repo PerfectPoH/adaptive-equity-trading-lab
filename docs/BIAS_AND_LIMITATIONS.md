@@ -44,3 +44,5 @@ The MVP uses next-open execution with simple slippage and commissions. This is m
 Daily OHLC bars cannot prove the exact intraday order of events. If an entry and its contingent stop/take-profit can interact inside the same daily candle, the result is ambiguous. This is one reason the institutional validation roadmap requires event-driven backtesting before real-money use.
 
 The current conservative MVP skips trades where the entry bar itself touches stop-loss or take-profit levels, reducing ambiguous daily-bar fills at the cost of fewer trades.
+
+The backtest now closes positions after the same timeout horizon used by the label builder and finalizes positions still open at the end of the evaluation window. This keeps training labels and simulated exits closer, but it is still daily-bar simulation rather than realistic execution.

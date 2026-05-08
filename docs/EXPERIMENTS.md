@@ -81,7 +81,7 @@ Current verdict:
 calibration_helped
 ```
 
-Isotonic calibration improved test Brier score and calibration error. With a retuned threshold of `0.25`, the calibrated strategy improved the 2024 return from ~4.80% raw to ~6.99%. This is now the default research configuration, but it still underperforms buy-and-hold.
+Isotonic calibration improved test Brier score and calibration error. With a retuned threshold of `0.25`, the calibrated strategy improved the 2024 return versus the raw baseline. After adding timeout-consistent backtesting and finalizing end-of-window trades, the default 2024 run is ~6.49%. This is the default research configuration, but it still underperforms buy-and-hold.
 
 ## Walk-Forward Validation
 
@@ -110,16 +110,16 @@ wf_2023:
   selected variant: raw
   selected threshold: 0.50
   test year: 2023
-  test strategy return: ~5.53%
-  test excess return: ~-95.88%
+  test strategy return: ~3.48%
+  test excess return: ~-97.94%
 
 wf_2024:
   validation: 2023
   selected variant: isotonic
   selected threshold: 0.25
   test year: 2024
-  test strategy return: ~6.99%
-  test excess return: ~-41.06%
+  test strategy return: ~6.49%
+  test excess return: ~-41.56%
 ```
 
 Decision:
@@ -161,13 +161,13 @@ Then evaluate only that selected combination on the next test year.
 Latest result:
 
 ```text
-wf_2023 selected: baseline random_forest raw threshold 0.45
-wf_2023 test strategy return: ~7.64%
+wf_2023 selected: default exit + baseline random_forest raw threshold 0.45
+wf_2023 test strategy return: ~6.50%
 
-wf_2024 selected: baseline random_forest isotonic threshold 0.25
-wf_2024 test strategy return: ~6.99%
+wf_2024 selected: default exit + baseline random_forest isotonic threshold 0.25
+wf_2024 test strategy return: ~6.49%
 
-mean test strategy return: ~7.32%
+mean test strategy return: ~6.50%
 folds beating buy-and-hold: 0 / 2
 ```
 
@@ -204,12 +204,12 @@ Latest result:
 
 ```text
 wf_2023 selected: baseline raw threshold 0.45
-wf_2023 test strategy return: ~7.64%
+wf_2023 test strategy return: ~6.50%
 
-wf_2024 selected: enhanced_context isotonic threshold 0.20
-wf_2024 test strategy return: ~6.60%
+wf_2024 selected: baseline isotonic threshold 0.25
+wf_2024 test strategy return: ~6.49%
 
-mean test strategy return: ~7.12%
+mean test strategy return: ~6.50%
 folds beating buy-and-hold: 0 / 2
 ```
 
@@ -217,7 +217,49 @@ Decision:
 
 ```text
 Do not promote enhanced_context.
-It was selected on 2023 validation for the 2024 fold, but its 2024 test result was worse than the baseline default.
+After timeout-consistent backtesting, baseline remains selected in both folds.
+```
+
+## Target/Exit Comparison
+
+```powershell
+.\.venv-lab\Scripts\python.exe -m src.experiments.target_exit_comparison
+```
+
+Outputs:
+
+```text
+experiments/target_exit_comparison_latest.json
+experiments/target_exit_comparison_latest.csv
+```
+
+Compared target/exit configurations:
+
+```text
+default_1_5x_stop_3x_tp_10d
+fast_1x_stop_2x_tp_5d
+balanced_1_5x_stop_2_25x_tp_10d
+patient_2x_stop_4x_tp_15d
+```
+
+Latest result:
+
+```text
+wf_2023 selected: default_1_5x_stop_3x_tp_10d raw threshold 0.45
+wf_2023 test strategy return: ~6.50%
+
+wf_2024 selected: balanced_1_5x_stop_2_25x_tp_10d isotonic threshold 0.35
+wf_2024 test strategy return: ~6.36%
+
+mean test strategy return: ~6.43%
+folds beating buy-and-hold: 0 / 2
+```
+
+Decision:
+
+```text
+Do not promote the balanced exit config yet.
+It is selected on validation for the 2024 fold, but its 2024 test return is slightly worse than the default 2024 run.
 ```
 
 ## Feature-Regime Analysis
@@ -225,7 +267,7 @@ It was selected on 2023 validation for the 2024 fold, but its 2024 test result w
 Current default run:
 
 ```text
-20260508_190512
+20260508_192713
 ```
 
 Current finding:
@@ -261,9 +303,11 @@ filters_did_not_help
 
 Latest variants:
 
+Note: this regime-filter report was generated before timeout-consistent backtesting. The current default run is ~6.49%; rerun this experiment before promoting any filter.
+
 ```text
 baseline:
-  strategy return: ~6.99%
+  strategy return: ~6.99% in the previous backtest semantics
   signals: 1093
   closed trades: 140
 

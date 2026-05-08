@@ -24,41 +24,51 @@
   "feature_sets": [
     "baseline"
   ],
+  "target_exit_configs": [
+    {
+      "name": "default_1_5x_stop_3x_tp_10d",
+      "stop_atr_multiple": 1.5,
+      "take_profit_atr_multiple": 3.0,
+      "timeout_bars": 10
+    }
+  ],
   "min_validation_trades": 10,
   "folds": [
     {
       "fold": "wf_2023",
+      "selected_target_exit_config": "default_1_5x_stop_3x_tp_10d",
       "selected_feature_set": "baseline",
       "selected_model_type": "random_forest",
       "selected_probability_variant": "raw",
       "selected_threshold": 0.5,
-      "validation_strategy_return": -0.011589753805873102,
-      "validation_excess_return": 0.43091372519617394,
-      "validation_closed_trades": 14,
-      "test_strategy_return": 0.05532253831039587,
-      "test_excess_return": -0.9588343432957032,
-      "test_closed_trades": 71,
+      "validation_strategy_return": -0.010642801102463623,
+      "validation_excess_return": 0.4318606778995834,
+      "validation_closed_trades": 15,
+      "test_strategy_return": 0.03530248296980089,
+      "test_excess_return": -0.9788543986362981,
+      "test_closed_trades": 91,
       "test_beats_buy_and_hold": false
     },
     {
       "fold": "wf_2024",
+      "selected_target_exit_config": "default_1_5x_stop_3x_tp_10d",
       "selected_feature_set": "baseline",
       "selected_model_type": "random_forest",
       "selected_probability_variant": "isotonic",
       "selected_threshold": 0.25,
-      "validation_strategy_return": 0.09106203571155552,
-      "validation_excess_return": -0.9230948458945438,
-      "validation_closed_trades": 122,
-      "test_strategy_return": 0.06990964994883664,
-      "test_excess_return": -0.4105568949476752,
-      "test_closed_trades": 140,
+      "validation_strategy_return": 0.07930450732098422,
+      "validation_excess_return": -0.9348523742851148,
+      "validation_closed_trades": 183,
+      "test_strategy_return": 0.06488966792151463,
+      "test_excess_return": -0.41557687697499723,
+      "test_closed_trades": 193,
       "test_beats_buy_and_hold": false
     }
   ],
   "summary": {
     "folds": 2,
-    "mean_test_strategy_return": 0.06261609412961626,
-    "mean_test_excess_return": -0.6846956191216892,
+    "mean_test_strategy_return": 0.05009607544565776,
+    "mean_test_excess_return": -0.6972156378056477,
     "folds_beating_buy_and_hold": 0,
     "verdict": "positive_but_under_benchmark"
   }

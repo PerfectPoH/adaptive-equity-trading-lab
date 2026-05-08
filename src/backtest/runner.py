@@ -7,10 +7,13 @@ from src.backtest.metrics import stats_to_summary
 
 
 class PrecomputedSignalStrategy(Strategy):
+    timeout_bars = 10
+
     def init(self) -> None:
         pass
 
     def next(self) -> None:
+        self._close_timed_out_trades()
         if self.position:
             return
 
@@ -33,11 +36,23 @@ class PrecomputedSignalStrategy(Strategy):
         # backtesting.py validates contingent exits against the intended fill.
         self.buy(size=size, limit=entry_price, sl=stop_loss, tp=take_profit)
 
+    def _close_timed_out_trades(self) -> None:
+        if self.timeout_bars <= 0:
+            return
+
+        current_bar = len(self.data) - 1
+        for trade in list(self.trades):
+            # The label checks bars from entry through the timeout horizon.
+            # Closing here exits at the next market price after that window.
+            if current_bar - trade.entry_bar >= self.timeout_bars - 1:
+                trade.close()
+
 
 def run_backtest(
     frame: pd.DataFrame,
     cash: float = 100_000,
     commission: float = 0.001,
+    timeout_bars: int = 10,
 ) -> tuple[pd.Series, dict[str, float | bool]]:
     required = [
         "Open",
@@ -64,6 +79,7 @@ def run_backtest(
         commission=commission,
         trade_on_close=False,
         exclusive_orders=True,
+        finalize_trades=True,
     )
-    stats = bt.run()
+    stats = bt.run(timeout_bars=timeout_bars)
     return stats, stats_to_summary(stats, data)

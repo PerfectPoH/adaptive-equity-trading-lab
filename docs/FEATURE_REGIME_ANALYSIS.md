@@ -41,22 +41,22 @@ win/loss feature contrasts
 Run:
 
 ```text
-20260508_190512
+20260508_192713
 ```
 
 Primary findings:
 
 ```text
 Weakest average-return regime:
-  signal_rolling_volatility_20d = low
-  avg return: ~0.38%
-  loss rate: ~53.2%
-  trades: 47
+  signal_distance_from_20d_high = high
+  avg return: ~0.35%
+  loss rate: ~54.0%
+  trades: 63
 
 Highest loss-rate regimes:
   signal_distance_from_20d_high = high
+  signal_relative_volume_20d = high
   signal_model_probability = low
-  signal_rolling_volatility_20d = low
 
 Best regimes:
   signal_distance_from_20d_high = mid
@@ -93,7 +93,7 @@ filters_did_not_help
 None of the tested filters improved strategy return versus the calibrated baseline:
 
 ```text
-baseline:          ~6.99%
+baseline:          ~6.49% after timeout-consistent backtesting
 volume_floor:      ~5.09%
 pullback_depth:    ~5.21%
 atr_guard:         ~5.84%

@@ -131,7 +131,7 @@ no short
 
 ## Milestone 1 status
 
-Completa in prima versione. Il run corrente `20260508_190512` usa `use_news=false`, `model_type=random_forest`, feature set baseline, isotonic calibration, `model_probability > 0.25`, no regime filters. Il test out-of-sample 2024 fa circa 6.99% medio contro circa 48% buy-and-hold. Non batte il benchmark; questo e' documentato, quindi la Definition of Done resta soddisfatta.
+Completa in prima versione. Il run corrente `20260508_192713` usa `use_news=false`, `model_type=random_forest`, feature set baseline, isotonic calibration, `model_probability > 0.25`, stop `1.5 ATR`, take-profit `3 ATR`, timeout 10 giorni, no regime filters. Il test out-of-sample 2024 fa circa 6.49% medio contro circa 48% buy-and-hold. Non batte il benchmark; questo e' documentato, quindi la Definition of Done resta soddisfatta.
 
 ## Milestone future
 

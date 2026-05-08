@@ -48,21 +48,23 @@ Then evaluate only that selected variant/threshold on the next test year.
 
 ```text
 wf_2023 selected variant: raw
+wf_2023 selected target/exit: default_1_5x_stop_3x_tp_10d
 wf_2023 selected feature set: baseline
 wf_2023 selected model: random_forest
 wf_2023 selected threshold: 0.50
-wf_2023 test strategy return: ~5.53%
-wf_2023 test excess return: ~-95.88%
+wf_2023 test strategy return: ~3.48%
+wf_2023 test excess return: ~-97.94%
 
 wf_2024 selected variant: isotonic
+wf_2024 selected target/exit: default_1_5x_stop_3x_tp_10d
 wf_2024 selected feature set: baseline
 wf_2024 selected model: random_forest
 wf_2024 selected threshold: 0.25
-wf_2024 test strategy return: ~6.99%
-wf_2024 test excess return: ~-41.06%
+wf_2024 test strategy return: ~6.49%
+wf_2024 test excess return: ~-41.56%
 
-mean test strategy return: ~6.26%
-mean test excess return: ~-68.47%
+mean test strategy return: ~5.01%
+mean test excess return: ~-69.72%
 folds beating buy-and-hold: 0 / 2
 ```
 
@@ -89,8 +91,8 @@ isotonic calibrated model_probability > 0.25
 Reason:
 
 ```text
-The calibrated 0.25 variant was selected on 2023 validation and improved the 2024 test result
-from ~4.80% raw to ~6.99% without using 2024 to choose the variant.
+The calibrated 0.25 variant was selected on 2023 validation. After timeout-consistent backtesting
+and finalizing open end-of-window trades, the 2024 default run is ~6.49%.
 ```
 
 Important caution:
@@ -108,4 +110,4 @@ The algorithm improved, but the main weakness remains:
 The strategy captures positive returns, but it still underperforms strong buy-and-hold years.
 ```
 
-The next improvement should target feature/model quality or the label definition, not just threshold tuning.
+The next improvement should target signal ranking, universe selection, or exit/risk logic beyond simple ATR grids.

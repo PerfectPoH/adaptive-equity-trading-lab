@@ -51,8 +51,10 @@ atr_pct <= 0.0315
 
 ## Latest Result
 
+This report was generated before timeout-consistent backtesting was added. The qualitative decision still stands, but the numeric baseline has since moved to ~6.49%.
+
 ```text
-baseline strategy return:          ~6.99%
+baseline strategy return:          ~6.99% in the previous backtest semantics
 volume_floor strategy return:      ~5.09%
 pullback_depth strategy return:    ~5.21%
 atr_guard strategy return:         ~5.84%
@@ -76,7 +78,7 @@ baseline max DD:         ~-4.36%
 combined_filters max DD: ~-2.92%
 ```
 
-However, combined filters reduce strategy return from ~6.99% to ~3.36%, so they should not replace the default.
+However, combined filters reduced strategy return materially in that validation, so they should not replace the default without a fresh walk-forward rerun.
 
 ## Decision
 

@@ -38,6 +38,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-08-codex-purged-calibrated-walk-forward]]
 - [[2026-05-08-codex-model-comparison]]
 - [[2026-05-08-codex-feature-set-comparison]]
+- [[2026-05-08-codex-target-exit-comparison]]
 
 ## Relazioni principali
 
@@ -52,3 +53,4 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Memoria-AI]] -> [[2026-05-08-codex-purged-calibrated-walk-forward]]
 - [[Roadmap-Master]] -> [[2026-05-08-codex-model-comparison]]
 - [[Roadmap-Master]] -> [[2026-05-08-codex-feature-set-comparison]]
+- [[Roadmap-Master]] -> [[2026-05-08-codex-target-exit-comparison]]

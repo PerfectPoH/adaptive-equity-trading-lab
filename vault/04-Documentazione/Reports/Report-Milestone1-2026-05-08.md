@@ -28,7 +28,7 @@ Implementazione MVP completata in prima versione.
 Risultato:
 
 ```text
-31 passed
+33 passed
 ```
 
 Pipeline:
@@ -40,15 +40,15 @@ Pipeline:
 Run principale aggiornato:
 
 ```text
-20260508_190512
+20260508_192713
 ```
 
 ## Risultati backtest
 
 ```text
-strategy_return:       circa 6.99%
+strategy_return:       circa 6.49%
 buy_and_hold_return:   circa 48.0%
-excess_return:         circa -41.1%
+excess_return:         circa -41.6%
 beats_buy_and_hold:    false
 ```
 
@@ -61,8 +61,8 @@ total_executable_signals:  1036
 total_skipped_signals:     57
 symbols_with_signals:      10
 symbols_with_trades:       10
-closed_trades:             140
-trade_win_rate:            circa 52.1%
+closed_trades:             193
+trade_win_rate:            circa 54.4%
 underperforming_symbols:   9
 outperforming_symbols:     1
 ```
@@ -78,8 +78,9 @@ Findings:
 - News ablation: `mixed_or_inconclusive`; no-news performa meglio nel backtest 2024 corrente.
 - Calibration: il modello raw e' overconfident; isotonic migliora Brier/errori e, con soglia 0.25, migliora strategy return.
 - Model comparison: Logistic Regression e HistGradientBoosting testati; Random Forest resta default sotto vincolo minimo di 30 trade validation.
-- Feature-set comparison: enhanced context testato; non promosso perche' il fold 2024 scende a circa 6.60% contro circa 6.99% del baseline default.
-- Trade-level: 140 trade chiusi, 73 win, 67 loss; nessun simbolo con media trade negativa.
+- Feature-set comparison: enhanced context testato; baseline resta selezionato dopo timeout-consistent backtesting.
+- Target/exit comparison: varianti ATR testate; balanced migliora validation ma non supera il default 2024.
+- Trade-level: 193 trade chiusi, 105 win, 88 loss; nessun simbolo con media trade negativa.
 - Feature-regime: nessun bucket e' netto negativo; regimi piu' fragili legati a low rolling volatility, high distance-from-high e low calibrated probability.
 - Regime-filter validation: volume floor, pullback depth, ATR guard e combinato non battono il baseline per rendimento.
 - Combined filters migliorano max drawdown, ma riducono troppo strategy return; resta possibile modalita' risk-first futura.

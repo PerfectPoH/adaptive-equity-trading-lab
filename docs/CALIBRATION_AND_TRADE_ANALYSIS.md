@@ -20,7 +20,7 @@ experiments/runs/<run_id>/feature_regime_summary.json
 Run:
 
 ```text
-20260508_190512
+20260508_192713
 ```
 
 Signal config:
@@ -34,11 +34,11 @@ model_probability_threshold = 0.25
 Trade summary:
 
 ```text
-closed trades: 140
-wins: 73
-losses: 67
-trade win rate: ~52.1%
-avg trade return: ~1.83%
+closed trades: 193
+wins: 105
+losses: 88
+trade win rate: ~54.4%
+avg trade return: ~1.13%
 positive symbols: 10
 negative symbols: 0
 ```
@@ -46,11 +46,11 @@ negative symbols: 0
 Worst trade:
 
 ```text
-META
-signal date: 2024-03-15
-entry date: 2024-03-18
-exit date: 2024-04-25
-return: ~-14.52%
+TSLA
+signal date: 2024-07-12
+entry date: 2024-07-15
+exit date: 2024-07-24
+return: ~-12.12%
 ```
 
 Best trade:
@@ -100,7 +100,7 @@ isotonic calibrated threshold 0.45:
   signals: 0
 
 isotonic calibrated threshold 0.25:
-  strategy return: ~6.99%
+  strategy return: ~6.49% after timeout-consistent backtesting
   test Brier: ~0.172
   test mean abs calibration error: ~0.042
   signals: 1093

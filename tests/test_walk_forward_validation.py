@@ -69,6 +69,36 @@ def test_select_threshold_from_validation_can_choose_across_feature_sets() -> No
     assert selected["threshold"] == 0.45
 
 
+def test_select_threshold_from_validation_can_choose_across_target_exit_configs() -> None:
+    rows = [
+        {
+            "target_exit_config": "default",
+            "feature_set": "baseline",
+            "model_type": "random_forest",
+            "probability_variant": "isotonic",
+            "threshold": 0.25,
+            "excess_return": 0.01,
+            "strategy_return": 0.06,
+            "closed_trades": 20,
+        },
+        {
+            "target_exit_config": "balanced",
+            "feature_set": "baseline",
+            "model_type": "random_forest",
+            "probability_variant": "isotonic",
+            "threshold": 0.20,
+            "excess_return": 0.05,
+            "strategy_return": 0.10,
+            "closed_trades": 22,
+        },
+    ]
+
+    selected = select_threshold_from_validation(rows, min_validation_trades=10)
+
+    assert selected["target_exit_config"] == "balanced"
+    assert selected["threshold"] == 0.20
+
+
 def test_summarize_walk_forward_marks_positive_under_benchmark() -> None:
     summary = summarize_walk_forward(
         [

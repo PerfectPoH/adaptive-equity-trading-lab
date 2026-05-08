@@ -78,3 +78,28 @@ def test_backtest_fills_precomputed_signal_at_next_open() -> None:
     assert int(trades.iloc[0]["EntryBar"]) == 2
     assert trades.iloc[0]["EntryTime"] == idx[2]
     assert trades.iloc[0]["EntryPrice"] == 150
+
+
+def test_backtest_closes_trade_after_timeout_window() -> None:
+    idx = pd.bdate_range("2024-01-01", periods=8)
+    frame = pd.DataFrame(
+        {
+            "Open": [100, 101, 102, 103, 104, 105, 106, 107],
+            "High": [101, 102, 103, 104, 105, 106, 107, 108],
+            "Low": [99, 100, 101, 102, 103, 104, 105, 106],
+            "Close": [100, 101, 102, 103, 104, 105, 106, 107],
+            "Volume": [1_000_000] * 8,
+            "atr": [20] * 8,
+            "signal": [False, True, False, False, False, False, False, False],
+        },
+        index=idx,
+    )
+
+    labeled = build_trade_labels(frame, timeout_bars=3, max_gap_threshold=0.10)
+    executed = add_execution_columns(labeled, equity=100_000, max_gap_threshold=0.10)
+    stats, _summary = run_backtest(executed, timeout_bars=3)
+    trades = stats["_trades"]
+
+    assert len(trades) == 1
+    assert int(trades.iloc[0]["EntryBar"]) == 2
+    assert int(trades.iloc[0]["ExitBar"]) == 5

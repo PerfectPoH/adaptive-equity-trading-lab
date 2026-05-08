@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
@@ -14,7 +14,7 @@ from src.features.feature_pipeline import FEATURE_COLUMNS, build_features
 from src.models.calibrator import fit_probability_calibrator
 from src.models.label_builder import build_trade_labels
 from src.models.predictor import add_model_probabilities
-from src.models.trainer import DEFAULT_LABEL_PURGE_BARS, fit_model, purge_label_boundary
+from src.models.trainer import fit_model, purge_label_boundary
 from src.pipeline import FEATURE_START, MAX_GAP_THRESHOLD, UNIVERSE, _aggregate_backtests
 from src.scanner.stock_scanner import add_scanner_columns
 from src.strategy.signal_engine import add_signal_columns
@@ -26,6 +26,24 @@ THRESHOLDS = (0.45, 0.50, 0.55, 0.60, 0.65, 0.70)
 CALIBRATED_THRESHOLDS = (0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45)
 DEFAULT_MODEL_TYPES = ("random_forest",)
 DEFAULT_FEATURE_SETS = {"baseline": FEATURE_COLUMNS}
+
+
+@dataclass(frozen=True)
+class TargetExitConfig:
+    name: str
+    stop_atr_multiple: float = 1.5
+    take_profit_atr_multiple: float = 3.0
+    timeout_bars: int = 10
+
+
+DEFAULT_TARGET_EXIT_CONFIGS = (
+    TargetExitConfig(
+        name="default_1_5x_stop_3x_tp_10d",
+        stop_atr_multiple=1.5,
+        take_profit_atr_multiple=3.0,
+        timeout_bars=10,
+    ),
+)
 
 
 @dataclass(frozen=True)
@@ -63,77 +81,88 @@ def run_walk_forward_validation(
     calibrated_thresholds: tuple[float, ...] = CALIBRATED_THRESHOLDS,
     model_types: tuple[str, ...] = DEFAULT_MODEL_TYPES,
     feature_sets: dict[str, list[str]] | None = None,
+    target_exit_configs: tuple[TargetExitConfig, ...] = DEFAULT_TARGET_EXIT_CONFIGS,
     min_validation_trades: int = 10,
     include_calibrated: bool = True,
     output_json: Path = OUTPUT_JSON,
     output_csv: Path = OUTPUT_CSV,
 ) -> dict[str, Any]:
     feature_sets = feature_sets or DEFAULT_FEATURE_SETS
-    prepared = _prepare_frames()
-    combined = pd.concat(prepared.values()).sort_index()
+    prepared_by_target = _prepare_frames(target_exit_configs)
 
     rows: list[dict[str, Any]] = []
     fold_summaries: list[dict[str, Any]] = []
     for fold in FOLDS:
-        train = purge_label_boundary(
-            combined.loc[: fold.train_end].copy(),
-            label_horizon_bars=DEFAULT_LABEL_PURGE_BARS,
-        )
-        validation_for_calibration = purge_label_boundary(
-            combined.loc[fold.validation_start : fold.validation_end].copy(),
-            label_horizon_bars=DEFAULT_LABEL_PURGE_BARS,
-        )
-
-        frames_by_variant: dict[tuple[str, str, str], dict[str, pd.DataFrame]] = {}
+        frames_by_variant: dict[tuple[str, str, str, str], dict[str, pd.DataFrame]] = {}
         validation_rows = []
-        for feature_set_name, feature_columns in feature_sets.items():
-            for model_type in model_types:
-                model = fit_model(train, model_type=model_type, feature_columns=feature_columns)
-                probability_models = {"raw": model}
-                if include_calibrated:
-                    probability_models["isotonic"] = fit_probability_calibrator(
-                        model,
-                        validation_for_calibration,
-                        feature_columns=feature_columns,
-                        method="isotonic",
-                    )
-                model_frames = {
-                    (feature_set_name, model_type, variant): {
-                        symbol: add_model_probabilities(
-                            frame,
-                            probability_model,
-                            feature_columns=feature_columns,
-                        )
-                        for symbol, frame in prepared.items()
-                    }
-                    for variant, probability_model in probability_models.items()
-                }
-                frames_by_variant.update(model_frames)
+        for target_config in target_exit_configs:
+            prepared = prepared_by_target[target_config.name]
+            combined = pd.concat(prepared.values()).sort_index()
+            train = purge_label_boundary(
+                combined.loc[: fold.train_end].copy(),
+                label_horizon_bars=target_config.timeout_bars,
+            )
+            validation_for_calibration = purge_label_boundary(
+                combined.loc[fold.validation_start : fold.validation_end].copy(),
+                label_horizon_bars=target_config.timeout_bars,
+            )
 
-                for (
-                    candidate_feature_set,
-                    candidate_model_type,
-                    variant,
-                ), frames_with_probabilities in model_frames.items():
-                    variant_thresholds = calibrated_thresholds if variant == "isotonic" else thresholds
-                    validation_rows.extend(
-                        _evaluate_threshold(
-                            frames_with_probabilities,
-                            fold=fold,
-                            period="validation",
-                            feature_set=candidate_feature_set,
-                            model_type=candidate_model_type,
-                            probability_variant=variant,
-                            start=fold.validation_start,
-                            end=fold.validation_end,
-                            threshold=threshold,
+            for feature_set_name, feature_columns in feature_sets.items():
+                for model_type in model_types:
+                    model = fit_model(train, model_type=model_type, feature_columns=feature_columns)
+                    probability_models = {"raw": model}
+                    if include_calibrated:
+                        probability_models["isotonic"] = fit_probability_calibrator(
+                            model,
+                            validation_for_calibration,
+                            feature_columns=feature_columns,
+                            method="isotonic",
                         )
-                        for threshold in variant_thresholds
-                    )
+                    model_frames = {
+                        (target_config.name, feature_set_name, model_type, variant): {
+                            symbol: add_model_probabilities(
+                                frame,
+                                probability_model,
+                                feature_columns=feature_columns,
+                            )
+                            for symbol, frame in prepared.items()
+                        }
+                        for variant, probability_model in probability_models.items()
+                    }
+                    frames_by_variant.update(model_frames)
+
+                    for (
+                        candidate_target_exit_config,
+                        candidate_feature_set,
+                        candidate_model_type,
+                        variant,
+                    ), frames_with_probabilities in model_frames.items():
+                        variant_thresholds = calibrated_thresholds if variant == "isotonic" else thresholds
+                        validation_rows.extend(
+                            _evaluate_threshold(
+                                frames_with_probabilities,
+                                fold=fold,
+                                period="validation",
+                                target_exit_config=candidate_target_exit_config,
+                                timeout_bars=target_config.timeout_bars,
+                                feature_set=candidate_feature_set,
+                                model_type=candidate_model_type,
+                                probability_variant=variant,
+                                start=fold.validation_start,
+                                end=fold.validation_end,
+                                threshold=threshold,
+                            )
+                            for threshold in variant_thresholds
+                        )
         selected = select_threshold_from_validation(validation_rows, min_validation_trades=min_validation_trades)
+        selected_target_config = _target_config_by_name(
+            target_exit_configs,
+            str(selected["target_exit_config"]),
+        )
         test_row = _evaluate_threshold(
             frames_by_variant[
                 (
+                    str(selected["target_exit_config"]),
                     str(selected["feature_set"]),
                     str(selected["model_type"]),
                     str(selected["probability_variant"]),
@@ -141,6 +170,8 @@ def run_walk_forward_validation(
             ],
             fold=fold,
             period="test",
+            target_exit_config=str(selected["target_exit_config"]),
+            timeout_bars=selected_target_config.timeout_bars,
             feature_set=str(selected["feature_set"]),
             model_type=str(selected["model_type"]),
             probability_variant=str(selected["probability_variant"]),
@@ -152,7 +183,8 @@ def run_walk_forward_validation(
 
         for row in validation_rows:
             row["selected_for_test"] = (
-                row["feature_set"] == selected["feature_set"]
+                row["target_exit_config"] == selected["target_exit_config"]
+                and row["feature_set"] == selected["feature_set"]
                 and row["model_type"] == selected["model_type"]
                 and row["probability_variant"] == selected["probability_variant"]
                 and float(row["threshold"]) == float(selected["threshold"])
@@ -162,6 +194,7 @@ def run_walk_forward_validation(
         fold_summaries.append(
             {
                 "fold": fold.name,
+                "selected_target_exit_config": str(selected["target_exit_config"]),
                 "selected_feature_set": str(selected["feature_set"]),
                 "selected_model_type": str(selected["model_type"]),
                 "selected_probability_variant": str(selected["probability_variant"]),
@@ -183,6 +216,7 @@ def run_walk_forward_validation(
         },
         "model_types": list(model_types),
         "feature_sets": list(feature_sets.keys()),
+        "target_exit_configs": [asdict(config) for config in target_exit_configs],
         "min_validation_trades": min_validation_trades,
         "folds": fold_summaries,
         "summary": summarize_walk_forward(fold_summaries),
@@ -239,7 +273,7 @@ def summarize_walk_forward(fold_summaries: list[dict[str, Any]]) -> dict[str, An
     }
 
 
-def _prepare_frames() -> dict[str, pd.DataFrame]:
+def _prepare_frames(target_exit_configs: tuple[TargetExitConfig, ...]) -> dict[str, dict[str, pd.DataFrame]]:
     raw = download_universe(UNIVERSE, start=FEATURE_START, pause_seconds=0.4)
     if "SPY" not in raw:
         raise RuntimeError("SPY data is required for the market trend filter")
@@ -247,19 +281,33 @@ def _prepare_frames() -> dict[str, pd.DataFrame]:
         raise RuntimeError("Not enough tickers downloaded successfully")
 
     spy = raw["SPY"]
-    prepared: dict[str, pd.DataFrame] = {}
+    scanned_frames: dict[str, pd.DataFrame] = {}
     for symbol, frame in raw.items():
         featured = build_features(frame, spy, market_news=None)
         featured["symbol"] = symbol
-        scanned = add_scanner_columns(featured)
-        prepared[symbol] = build_trade_labels(scanned, max_gap_threshold=MAX_GAP_THRESHOLD)
-    return prepared
+        scanned_frames[symbol] = add_scanner_columns(featured)
+
+    prepared_by_target: dict[str, dict[str, pd.DataFrame]] = {}
+    for config in target_exit_configs:
+        prepared_by_target[config.name] = {
+            symbol: build_trade_labels(
+                scanned,
+                stop_atr_multiple=config.stop_atr_multiple,
+                take_profit_atr_multiple=config.take_profit_atr_multiple,
+                timeout_bars=config.timeout_bars,
+                max_gap_threshold=MAX_GAP_THRESHOLD,
+            )
+            for symbol, scanned in scanned_frames.items()
+        }
+    return prepared_by_target
 
 
 def _evaluate_threshold(
     frames: dict[str, pd.DataFrame],
     fold: WalkForwardFold,
     period: str,
+    target_exit_config: str,
+    timeout_bars: int,
     feature_set: str,
     model_type: str,
     probability_variant: str,
@@ -288,7 +336,7 @@ def _evaluate_threshold(
             symbols_with_signals.add(symbol)
 
         try:
-            stats, summary = run_backtest(window)
+            stats, summary = run_backtest(window, timeout_bars=timeout_bars)
         except Exception as exc:  # noqa: BLE001 - keep folds independent.
             backtest_rows.append({"symbol": symbol, "error": str(exc)})
             continue
@@ -301,6 +349,7 @@ def _evaluate_threshold(
     return {
         "fold": fold.name,
         "period": period,
+        "target_exit_config": target_exit_config,
         "feature_set": feature_set,
         "model_type": model_type,
         "probability_variant": probability_variant,
@@ -324,6 +373,16 @@ def _evaluate_threshold(
         "symbols_with_signals": len(symbols_with_signals),
         "closed_trades": closed_trades,
     }
+
+
+def _target_config_by_name(
+    target_exit_configs: tuple[TargetExitConfig, ...],
+    name: str,
+) -> TargetExitConfig:
+    for config in target_exit_configs:
+        if config.name == name:
+            return config
+    raise KeyError(f"Unknown target exit config: {name}")
 
 
 def _safe_float(value: object) -> float:

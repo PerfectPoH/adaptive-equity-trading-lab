@@ -42,7 +42,7 @@ Implementare la prima pipeline completa del trading lab senza scope creep.
 
 ## Stato
 
-Implementato in prima versione. Il default corrente usa isotonic calibration con soglia 0.25 e produce circa 6.99% medio nel 2024 contro circa 48% buy-and-hold. Non batte il benchmark, quindi la prossima fase deve concentrarsi su feature/model upgrade e validazione, non su live trading.
+Implementato in prima versione. Il default corrente usa isotonic calibration con soglia 0.25, timeout coerente nel backtest e produce circa 6.49% medio nel 2024 contro circa 48% buy-and-hold. Non batte il benchmark, quindi la prossima fase deve concentrarsi su ranking, universo, target/exit e validazione, non su live trading.
 
 ## File principali
 

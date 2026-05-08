@@ -16,7 +16,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 ### RISK-001 - Baseline non batte buy-and-hold
 
 - Priorita: P2.
-- Sintomo: il run default `20260508_190512` produce circa 6.99% medio contro circa 48% buy-and-hold.
+- Sintomo: il run default `20260508_192713` produce circa 6.49% medio contro circa 48% buy-and-hold.
 - Dettaglio: 1093 segnali totali, 1036 eseguibili, su 10 simboli; 9 simboli sotto benchmark.
 - Causa probabile: edge ancora debole, target/feature baseline troppo semplici, mercato 2024 molto forte per large-cap tech.
 - Azione: feature/model upgrade e validazione su piu' fold in Milestone 2.
@@ -72,7 +72,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 ### RISK-008 - Simboli con media trade negativa possono cambiare tra run
 
 - Priorita: P3.
-- Sintomo: nel run `20260508_174122`, AMD era negativo; nel run default `20260508_190512` nessun simbolo ha media trade negativa.
+- Sintomo: nel run `20260508_174122`, AMD era negativo; nel run default `20260508_192713` nessun simbolo ha media trade negativa.
 - Impatto: blacklist per singolo ticker rischia di essere overfit sul run.
 - Azione: niente blacklist finche' il pattern non si ripete su piu' fold o dati migliori.
 - Stato: mitigato.

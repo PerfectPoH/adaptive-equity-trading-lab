@@ -87,12 +87,12 @@ tags: [vault, index, obsidian, trading-lab]
 
 Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 
-- test: `31 passed`;
-- run pipeline default: `20260508_190512`;
+- test: `33 passed`;
+- run pipeline default: `20260508_192713`;
 - backtest out-of-sample 2024: non batte buy-and-hold;
 - fallimento documentato: la baseline e' funzionante ma non ancora competitiva;
-- default sperimentale corrente: `use_news=false`, `model_type=random_forest`, feature set baseline, isotonic calibration, `model_probability > 0.25`;
-- diagnosi principale: 1093 segnali su 10 simboli, rendimento medio 2024 circa 6.99%, ma ancora sotto buy-and-hold;
+- default sperimentale corrente: `use_news=false`, `model_type=random_forest`, feature set baseline, isotonic calibration, `model_probability > 0.25`, stop `1.5 ATR`, take-profit `3 ATR`, timeout 10 giorni;
+- diagnosi principale: 1093 segnali su 10 simboli, rendimento medio 2024 circa 6.49%, ma ancora sotto buy-and-hold;
 - split temporale purgato: le ultime barre di train/validation/test vengono rimosse quando la label a 10 giorni supererebbe il confine;
 - downloader robusto: se `yfinance` fallisce, usa l'ultimo snapshot locale valido;
 - news GDELT macro 2020-2024 collegate come feature laggate sperimentali, non default.
@@ -102,6 +102,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - walk-forward validation completata: default aggiornato a isotonic `0.25`; verdict `positive_but_under_benchmark`.
 - model comparison completata: Logistic Regression e HistGradientBoosting non battono Random Forest sotto vincolo minimo di 30 trade validation.
 - feature-set comparison completata: `enhanced_context` non viene promosso perche' peggiora il test 2024 rispetto al baseline default.
+- target/exit comparison completata: backtest ora rispetta timeout e finalizza trade aperti; nessuna variante ATR viene promossa.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 

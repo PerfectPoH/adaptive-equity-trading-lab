@@ -19,9 +19,7 @@
     ]
   },
   "model_types": [
-    "logistic_regression",
-    "random_forest",
-    "hist_gradient_boosting"
+    "random_forest"
   ],
   "feature_sets": [
     "baseline"
@@ -32,6 +30,24 @@
       "stop_atr_multiple": 1.5,
       "take_profit_atr_multiple": 3.0,
       "timeout_bars": 10
+    },
+    {
+      "name": "fast_1x_stop_2x_tp_5d",
+      "stop_atr_multiple": 1.0,
+      "take_profit_atr_multiple": 2.0,
+      "timeout_bars": 5
+    },
+    {
+      "name": "balanced_1_5x_stop_2_25x_tp_10d",
+      "stop_atr_multiple": 1.5,
+      "take_profit_atr_multiple": 2.25,
+      "timeout_bars": 10
+    },
+    {
+      "name": "patient_2x_stop_4x_tp_15d",
+      "stop_atr_multiple": 2.0,
+      "take_profit_atr_multiple": 4.0,
+      "timeout_bars": 15
     }
   ],
   "min_validation_trades": 30,
@@ -53,24 +69,24 @@
     },
     {
       "fold": "wf_2024",
-      "selected_target_exit_config": "default_1_5x_stop_3x_tp_10d",
+      "selected_target_exit_config": "balanced_1_5x_stop_2_25x_tp_10d",
       "selected_feature_set": "baseline",
       "selected_model_type": "random_forest",
       "selected_probability_variant": "isotonic",
-      "selected_threshold": 0.25,
-      "validation_strategy_return": 0.07930450732098422,
-      "validation_excess_return": -0.9348523742851148,
-      "validation_closed_trades": 183,
-      "test_strategy_return": 0.06488966792151463,
-      "test_excess_return": -0.41557687697499723,
-      "test_closed_trades": 193,
+      "selected_threshold": 0.35,
+      "validation_strategy_return": 0.08071925841113047,
+      "validation_excess_return": -0.9334376231949685,
+      "validation_closed_trades": 197,
+      "test_strategy_return": 0.06355678112452548,
+      "test_excess_return": -0.41690976377198635,
+      "test_closed_trades": 211,
       "test_beats_buy_and_hold": false
     }
   ],
   "summary": {
     "folds": 2,
-    "mean_test_strategy_return": 0.06496735638097977,
-    "mean_test_excess_return": -0.6823443568703256,
+    "mean_test_strategy_return": 0.06430091298248519,
+    "mean_test_excess_return": -0.6830108002688202,
     "folds_beating_buy_and_hold": 0,
     "verdict": "positive_but_under_benchmark"
   }
