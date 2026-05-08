@@ -44,6 +44,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-08-codex-universe-selection-comparison]]
 - [[2026-05-08-codex-benchmark-objective-comparison]]
 - [[2026-05-08-cascade-model-registry]]
+- [[2026-05-08-cascade-threshold-config]]
 
 ## Relazioni principali
 
@@ -64,3 +65,4 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Roadmap-Master]] -> [[2026-05-08-codex-universe-selection-comparison]]
 - [[Roadmap-Master]] -> [[2026-05-08-codex-benchmark-objective-comparison]]
 - [[Roadmap-Master]] -> [[2026-05-08-cascade-model-registry]]
+- [[Roadmap-Master]] -> [[2026-05-08-cascade-threshold-config]]

@@ -71,7 +71,7 @@ Prossimi miglioramenti Milestone 1:
 - [x] Universe-selection comparison: top-N validation, stocks-only ed ETF-only testati, nessuna variante promossa.
 - [x] Benchmark-objective comparison: obiettivi piu' vicini al benchmark testati, nessuna variante promossa.
 - [ ] Notebook `04_backtest_analysis.ipynb`.
-- [ ] Soglie scanner e modello versionate.
+- [x] Soglie scanner e modello versionate.
 
 ## Milestone 3 - News + Context
 
