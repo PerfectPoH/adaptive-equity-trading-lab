@@ -25,6 +25,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 
 - [[mvp-core-pipeline]]
 - [[news-risk-engine]]
+- [[small-cap-swing-research-spec]]
 - [[graphify-vault-memory]]
 
 ## Report e handoff
@@ -49,12 +50,14 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-08-cascade-hyperparameter-comparison]]
 - [[2026-05-09-cascade-temporal-embargo]]
 - [[2026-05-09-cascade-backtest-analysis]]
+- [[2026-05-09-cascade-small-cap-pivot]]
 - [[Quant-Research-Priorities-2026-05-09]]
 
 ## Relazioni principali
 
 - [[Architettura]] -> [[mvp-core-pipeline]]
 - [[Roadmap-Master]] -> [[news-risk-engine]]
+- [[Roadmap-Master]] -> [[small-cap-swing-research-spec]]
 - [[Roadmap-Master]] -> [[graphify-vault-memory]]
 - [[Memoria-AI]] -> [[Regole-Quant]]
 - [[Protocollo-Collaborazione]] -> [[Regole-Codice]]
@@ -75,5 +78,6 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Roadmap-Master]] -> [[2026-05-08-cascade-hyperparameter-comparison]]
 - [[Roadmap-Master]] -> [[2026-05-09-cascade-temporal-embargo]]
 - [[Roadmap-Master]] -> [[2026-05-09-cascade-backtest-analysis]]
+- [[Roadmap-Master]] -> [[2026-05-09-cascade-small-cap-pivot]]
 - [[Roadmap-Master]] -> [[Quant-Research-Priorities-2026-05-09]]
 - [[Regole-Quant]] -> [[Quant-Research-Priorities-2026-05-09]]

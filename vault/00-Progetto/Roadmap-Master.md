@@ -10,7 +10,7 @@ tags: [roadmap, milestone, checklist, trading-lab]
 
 ## Stato sintetico
 
-La Milestone 1 e' una pipeline funzionante end-to-end. Il default corrente usa Random Forest, universo completo da 10 simboli, feature baseline, calibrazione isotonic, soglia `model_probability > 0.25`, stop `1.5 ATR`, take-profit `3 ATR`, timeout 10 giorni, nessun filtro ranking giornaliero e rischio default 1% per trade. Dopo timeout-consistent backtesting e finalizzazione dei trade a fine finestra, il backtest 2024 fa circa 6.49%, ma resta sotto buy-and-hold: risultato utile, non strategia pronta.
+La Milestone 1 e' una pipeline funzionante end-to-end. Il default corrente usa Random Forest, universo completo da 10 simboli, feature baseline, calibrazione isotonic, soglia `model_probability > 0.25`, stop `1.5 ATR`, take-profit `3 ATR`, timeout 10 giorni, nessun filtro ranking giornaliero e rischio default 1% per trade. Dopo timeout-consistent backtesting e finalizzazione dei trade a fine finestra, il backtest 2024 fa circa 6.49%, ma resta sotto buy-and-hold: risultato utile, non strategia pronta. La baseline large-cap ML e' ora congelata come controllo negativo; la nuova research track proposta e' long-only small/mid-cap swing.
 
 ## Milestone 1 - MVP Core Pipeline
 
@@ -84,6 +84,18 @@ Prossimi miglioramenti Milestone 1:
 - [ ] Specifica approccio cross-sectional: label ranking relativo, portfolio construction e metriche dedicate.
 
 Vedi [[news-risk-engine]].
+
+## Milestone 3B - Small-Cap Swing Research Track
+
+- [x] Scrivere spec long-only small/mid-cap swing.
+- [ ] Universe builder small/mid-cap con filtri liquidita', prezzo e dollar volume.
+- [ ] Data-quality report per small/mid-cap candidate.
+- [ ] Scanner rule-based long-only: panic reversal, breakout continuation, post-gap drift.
+- [ ] Execution assumptions dedicate: no naive next-open, spread/slippage conservativi, no fill se liquidita' insufficiente.
+- [ ] Capacity constraint: size massima come percentuale del dollar volume medio.
+- [ ] Benchmark coerenti: IWM, equal-weight universe, random-entry baseline, ticker holding-window benchmark.
+
+Vedi [[small-cap-swing-research-spec]].
 
 ## Milestone 4 - Paper Trading
 

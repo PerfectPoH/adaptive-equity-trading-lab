@@ -125,6 +125,30 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: fermare sweep non motivati; prima completare notebook diagnostico, embargo e specifica cross-sectional.
 - Stato: aperto.
 
+### RISK-015 - Small-cap backtest puo' mentire su spread, slippage e fill
+
+- Priorita: P1.
+- Sintomo: small/mid-cap possono avere spread larghi, book sottile e gap premarket/after-hours estremi.
+- Impatto: una strategia apparentemente profittevole puo' sparire dopo costi reali o mancati fill.
+- Azione: nuova research track solo long-only, con spread/slippage conservativi, no market-order assumption ingenua e filtri liquidita'.
+- Stato: aperto.
+
+### RISK-016 - Dilution/offering risk su small-cap
+
+- Priorita: P1.
+- Sintomo: molte small/micro-cap emettono azioni, ATM o warrant quando il prezzo spicca.
+- Impatto: breakout tecnici possono fallire per pressione di nuova offerta non visibile nei dati OHLCV gratuiti.
+- Azione: aggiungere proxy tipo float rotation e data-quality/corporate-action warning prima di promuovere setup small-cap.
+- Stato: aperto.
+
+### RISK-017 - Capacity constraint su strategie small-cap
+
+- Priorita: P1.
+- Sintomo: strategie su titoli piccoli possono saturare con capitali retail relativamente bassi.
+- Impatto: il backtest sovrastima ritorni se assume size non realistiche rispetto al dollar volume.
+- Azione: introdurre limite di posizione, ad esempio `position_notional <= 1%` del dollar volume medio a 5 giorni.
+- Stato: aperto.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
