@@ -35,6 +35,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-09-cascade-backtest-analysis]] - notebook/report per diagnosi della sottoperformance backtest.
 - [[2026-05-09-cascade-small-cap-pivot]] - pivot strategico verso research track long-only small/mid-cap swing.
 - [[2026-05-09-cascade-small-cap-universe-builder]] - universe builder con filtri hard-coded e diagnostica rejection reasons.
+- [[2026-05-09-cascade-small-cap-data-quality]] - report qualita' dati OHLCV per candidati small/mid-cap.
 
 ## Convenzione
 

@@ -89,7 +89,7 @@ Vedi [[news-risk-engine]].
 
 - [x] Scrivere spec long-only small/mid-cap swing.
 - [x] Universe builder small/mid-cap con filtri liquidita', prezzo e dollar volume.
-- [ ] Data-quality report per small/mid-cap candidate.
+- [x] Data-quality report per small/mid-cap candidate.
 - [ ] Market-regime guardrail per IWM EMA 50/200, VIX e breadth prima dello scanner.
 - [ ] Scanner rule-based long-only: panic reversal, breakout continuation, post-gap drift.
 - [ ] Execution assumptions dedicate: no naive next-open, skip gap apertura >8-10%, spread/slippage conservativi, no fill se liquidita' insufficiente.

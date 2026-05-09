@@ -116,6 +116,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - backtest analysis completata: notebook/report riproducibile conferma sottoperformance vs buy-and-hold e identifica peggiori excess return su NVDA, META, TSLA, AMZN e GOOGL.
 - pivot strategico proposto: congelare la baseline large-cap ML come controllo negativo e aprire research track long-only small/mid-cap swing, senza short nella prima fase.
 - universe builder small/mid-cap aggiunto: `SmallCapUniverseConfig` e `build_small_cap_universe` filtrano market cap, prezzo, volume, dollar volume ed ETF con rejection reasons.
+- data-quality report small-cap aggiunto: `SmallCapDataQualityConfig` e `build_small_cap_data_quality_report` segnalano dati mancanti, OHLCV invalidi, zero-volume ed extreme price jumps.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 
