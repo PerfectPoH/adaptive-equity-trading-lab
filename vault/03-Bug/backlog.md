@@ -149,6 +149,30 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: introdurre limite di posizione, ad esempio `position_notional <= 1%` del dollar volume medio a 5 giorni.
 - Stato: aperto.
 
+### RISK-018 - Regime di mercato small-cap non modellato
+
+- Priorita: P1.
+- Sintomo: panic reversal e breakout small-cap cambiano comportamento in bull, bear e stress regime.
+- Impatto: un backtest 2020-2024 puo' mescolare regimi incompatibili e nascondere drawdown strutturali.
+- Azione: aggiungere filtri/report per IWM EMA 50/200, VIX, breadth e regime SPY/IWM prima dello scanner.
+- Stato: aperto.
+
+### RISK-019 - Survivorship bias estremo su small-cap
+
+- Priorita: P1.
+- Sintomo: yfinance tende a mostrare sopravvissuti; delisting, fallimenti e reverse split sono frequenti nelle small-cap.
+- Impatto: panic reversal su aziende destinate a fallire possono apparire come opportunita' nel backtest.
+- Azione: data-quality report deve flaggare delisting risk, reverse split, storico incompleto e limiti del provider.
+- Stato: aperto.
+
+### RISK-020 - Float e short-interest non affidabili o ritardati
+
+- Priorita: P2.
+- Sintomo: float non affidabile su yfinance; short interest FINRA e' ritardato e non simula disponibilita' reale.
+- Impatto: setup squeeze possono essere validati su dati non disponibili o non accurati in tempo reale.
+- Azione: fase iniziale long-only senza short-interest; usare float rotation solo come proxy e dichiarare data limits.
+- Stato: aperto.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

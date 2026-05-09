@@ -49,7 +49,24 @@ Criteri candidati da validare:
 - volume medio minimo;
 - esclusione ETF;
 - esclusione strumenti con dati chiaramente rotti;
-- esclusione opzionale ADR e biotech troppo binarie nella prima versione.
+- esclusione opzionale ADR e biotech troppo binarie nella prima versione;
+- esclusione o flag severo per ticker con reverse split frequenti, delisting risk o storico dati incompleto.
+
+## Market regime filter obbligatorio
+
+I setup small-cap non vanno valutati senza regime di mercato. Panic reversal, breakout e post-gap drift cambiano comportamento in modo radicale tra bull market, bear market e stress regime.
+
+Feature/regole candidate:
+
+- IWM sopra/sotto EMA 50;
+- IWM sopra/sotto EMA 200;
+- VIX in range accettabile;
+- breadth di mercato small-cap se disponibile;
+- regime SPY/IWM relativo;
+- no-trade o size ridotta in bear/stress regime;
+- analisi separata dei risultati per regime.
+
+Il backtest non deve mescolare 2020-2024 come un unico ambiente omogeneo senza report per regime.
 
 ## Setup iniziali
 
@@ -104,7 +121,7 @@ Prima versione conservative:
 - long-only;
 - niente market order simulati ingenuamente;
 - simulare spread/slippage conservativo;
-- filtrare trade se gap di apertura supera soglia massima;
+- skip trade se gap di apertura supera 8-10% rispetto al close del segnale;
 - valutare entry MOC o next-day limit logic;
 - no fill se volume/dollar volume insufficiente;
 - max position size vincolata alla liquidita'.
@@ -126,6 +143,18 @@ Proxy iniziali:
 - aumento volume senza continuita' prezzo;
 - gap/spike e close debole;
 - esclusione settori/ticker con pattern di dilution se noto.
+
+### Float e short interest data limits
+
+I dati sul float non sono affidabili su `yfinance`. Per squeeze participation e volume anomalo, il float e' una variabile critica ma difficile da automatizzare gratis.
+
+Fonti candidate:
+
+- Finviz per screening manuale;
+- Nasdaq website per float ufficiale/manual check;
+- provider API a pagamento o semi-gratuiti per automazione.
+
+Lo short interest non viene usato nella prima fase. I dati FINRA arrivano con ritardo e non bastano per simulare squeeze in tempo reale. Ogni setup squeeze iniziale deve essere long-only e basato su volume/price action, non su short-interest storico ritardato.
 
 ### Capacity constraint
 
@@ -171,7 +200,7 @@ Da progettare dopo scanner e data audit:
 
 Rischi:
 
-- survivorship bias;
+- survivorship bias, molto piu' grave che sulle large-cap;
 - delisted ticker mancanti;
 - reverse split non affidabili;
 - corporate actions incomplete;
@@ -182,11 +211,20 @@ Rischi:
 
 Provider da valutare in futuro:
 
-- Polygon;
 - Tiingo;
+- Polygon;
 - Alpaca data;
 - Nasdaq Data Link;
 - Databento per intraday piu' serio.
+
+Step intermedio consigliato: valutare Tiingo prima di passare a provider piu' costosi, per migliorare affidabilita' small-cap rispetto a `yfinance`.
+
+## Risorse research
+
+- SSRN: cercare `small cap momentum`, `reversal anomaly`, `post-earnings drift small cap`.
+- Alpha Architect: sintesi leggibili di paper quantitativi.
+- Ernie Chan, `Quantitative Trading` e `Algorithmic Trading`.
+- Marcos Lopez de Prado, `Advances in Financial Machine Learning`.
 
 ## Prima milestone tecnica proposta
 
