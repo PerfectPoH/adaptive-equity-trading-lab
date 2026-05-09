@@ -96,6 +96,7 @@ Vedi [[news-risk-engine]].
 - [x] Capacity constraint: size massima come percentuale del dollar volume medio.
 - [x] Candidate export giornaliero con diagnostica universe, data-quality, scanner, regime ed execution.
 - [x] Benchmark coerenti: IWM, equal-weight universe, random-entry baseline, ticker holding-window benchmark.
+- [x] Backtest/report proxy small-cap dedicato con diagnostica setup, regime ed execution.
 
 Vedi [[small-cap-swing-research-spec]].
 

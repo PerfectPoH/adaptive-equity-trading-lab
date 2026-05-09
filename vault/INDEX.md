@@ -122,6 +122,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - execution planner small-cap aggiunto: `SmallCapExecutionConfig` e `add_small_cap_execution_columns` applicano gap guardrail, spread/slippage, stop/target ATR e capacity cap al 1% del dollar volume.
 - candidate export small-cap aggiunto: `SmallCapCandidateExportConfig`, `build_small_cap_candidate_export` e `write_small_cap_candidate_export` producono candidati operativi e diagnostica per rigetti.
 - benchmark report small-cap aggiunto: `SmallCapBenchmarkConfig` e `build_small_cap_benchmark_report` calcolano cash, IWM proxy, equal-weight universe, random-entry baseline e ticker holding-window.
+- backtest/report proxy small-cap aggiunto: `build_small_cap_backtest_report` e `write_small_cap_backtest_report_markdown` confrontano il proxy holding-window con il benchmark primario e aggregano diagnostica setup/regime/execution.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 
