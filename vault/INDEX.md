@@ -120,6 +120,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - market-regime guardrail aggiunto: `MarketRegimeGuardrailConfig` e `add_market_regime_guardrail_columns` bloccano segnali/trade quando IWM < EMA 50, VIX > 35 o i dati regime mancano.
 - scanner small-cap rule-based aggiunto: `SmallCapSwingScannerConfig` e `add_small_cap_swing_scanner_columns` classificano panic reversal, breakout continuation e post-gap drift senza ML.
 - execution planner small-cap aggiunto: `SmallCapExecutionConfig` e `add_small_cap_execution_columns` applicano gap guardrail, spread/slippage, stop/target ATR e capacity cap al 1% del dollar volume.
+- candidate export small-cap aggiunto: `SmallCapCandidateExportConfig`, `build_small_cap_candidate_export` e `write_small_cap_candidate_export` producono candidati operativi e diagnostica per rigetti.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 

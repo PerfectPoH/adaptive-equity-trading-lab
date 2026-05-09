@@ -94,6 +94,7 @@ Vedi [[news-risk-engine]].
 - [x] Scanner rule-based long-only: panic reversal, breakout continuation, post-gap drift.
 - [x] Execution assumptions dedicate: no naive next-open, skip gap apertura >8-10%, spread/slippage conservativi, no fill se liquidita' insufficiente.
 - [x] Capacity constraint: size massima come percentuale del dollar volume medio.
+- [x] Candidate export giornaliero con diagnostica universe, data-quality, scanner, regime ed execution.
 - [ ] Benchmark coerenti: IWM, equal-weight universe, random-entry baseline, ticker holding-window benchmark.
 
 Vedi [[small-cap-swing-research-spec]].
