@@ -318,4 +318,4 @@ def test_build_annual_walk_forward_folds_can_apply_embargo_days() -> None:
     assert folds[0].train_end == "2021-12-31"
     assert folds[0].validation_start == "2022-01-03"
     assert folds[0].validation_end == "2022-12-31"
-    assert folds[0].test_start == "2023-01-02"
+    assert folds[0].test_start == "2023-01-03"

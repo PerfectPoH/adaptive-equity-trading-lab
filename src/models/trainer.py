@@ -31,15 +31,20 @@ def temporal_split(
     validation_end: str = "2023-12-31",
     test_end: str = "2024-12-31",
     label_horizon_bars: int = DEFAULT_LABEL_PURGE_BARS,
+    embargo_days: int = 0,
 ) -> TemporalSplit:
+    if embargo_days < 0:
+        raise ValueError("embargo_days must be non-negative")
     data = frame.sort_index()
     train = purge_label_boundary(data.loc[:train_end].copy(), label_horizon_bars=label_horizon_bars)
+    validation_start = pd.Timestamp(train_end) + pd.Timedelta(days=1 + embargo_days)
+    test_start = pd.Timestamp(validation_end) + pd.Timedelta(days=1 + embargo_days)
     validation = purge_label_boundary(
-        data.loc[pd.Timestamp(train_end) + pd.Timedelta(days=1) : validation_end].copy(),
+        data.loc[validation_start:validation_end].copy(),
         label_horizon_bars=label_horizon_bars,
     )
     test = purge_label_boundary(
-        data.loc[pd.Timestamp(validation_end) + pd.Timedelta(days=1) : test_end].copy(),
+        data.loc[test_start:test_end].copy(),
         label_horizon_bars=label_horizon_bars,
     )
     return TemporalSplit(train=train, validation=validation, test=test)

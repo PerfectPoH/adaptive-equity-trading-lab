@@ -117,16 +117,21 @@ class WalkForwardFold:
 def build_annual_walk_forward_folds(
     first_validation_year: int,
     last_test_year: int,
+    embargo_days: int = 0,
 ) -> tuple[WalkForwardFold, ...]:
     if last_test_year <= first_validation_year:
         raise ValueError("last_test_year must be after first_validation_year")
+    if embargo_days < 0:
+        raise ValueError("embargo_days must be non-negative")
     return tuple(
         WalkForwardFold(
             name=f"wf_{test_year}",
             train_end=f"{validation_year - 1}-12-31",
-            validation_start=f"{validation_year}-01-01",
+            validation_start=str(
+                (pd.Timestamp(f"{validation_year}-01-01") + pd.Timedelta(days=embargo_days)).date()
+            ),
             validation_end=f"{validation_year}-12-31",
-            test_start=f"{test_year}-01-01",
+            test_start=str((pd.Timestamp(f"{test_year}-01-01") + pd.Timedelta(days=embargo_days)).date()),
             test_end=f"{test_year}-12-31",
         )
         for validation_year, test_year in (
