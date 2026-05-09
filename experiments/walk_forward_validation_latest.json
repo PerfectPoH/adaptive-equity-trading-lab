@@ -21,6 +21,13 @@
   "model_types": [
     "random_forest"
   ],
+  "model_configs": [
+    {
+      "name": "random_forest",
+      "model_type": "random_forest",
+      "model_params": {}
+    }
+  ],
   "model_objective_configs": [
     {
       "name": "tp_before_sl",
@@ -74,6 +81,7 @@
       "selected_target_exit_config": "default_1_5x_stop_3x_tp_10d",
       "selected_model_objective_config": "tp_before_sl",
       "selected_feature_set": "baseline",
+      "selected_model_config": "random_forest",
       "selected_model_type": "random_forest",
       "selected_probability_variant": "raw",
       "selected_signal_quality_config": "no_quality_rank_filter",
@@ -95,6 +103,7 @@
       "selected_target_exit_config": "default_1_5x_stop_3x_tp_10d",
       "selected_model_objective_config": "tp_before_sl",
       "selected_feature_set": "baseline",
+      "selected_model_config": "random_forest",
       "selected_model_type": "random_forest",
       "selected_probability_variant": "isotonic",
       "selected_signal_quality_config": "no_quality_rank_filter",

@@ -31,6 +31,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-08-cascade-threshold-config]] - soglie scanner/modello versionate e tracciate nei log.
 - [[2026-05-08-cascade-walk-forward-fold-builder]] - generatore riusabile di fold annuali walk-forward.
 - [[2026-05-08-cascade-hyperparameter-comparison]] - confronto iperparametri Random Forest selezionati solo su validation.
+- [[2026-05-09-cascade-temporal-embargo]] - embargo configurabile per split temporali e fold walk-forward.
 
 ## Convenzione
 

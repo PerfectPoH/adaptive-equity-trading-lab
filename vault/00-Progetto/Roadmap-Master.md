@@ -64,7 +64,7 @@ Prossimi miglioramenti Milestone 1:
 - [x] Backtest threshold piu' ampio: 0.45-0.70 con selection su validation.
 - [ ] Valutare combined filters solo come modalita' risk-first dopo walk-forward.
 - [ ] Aggiungere fold walk-forward ulteriori quando ci saranno piu' anni/dati migliori.
-- [ ] Aggiungere embargo esplicito ai temporal split/walk-forward fold.
+- [x] Aggiungere embargo esplicito ai temporal split/walk-forward fold.
 - [x] Feature upgrade controllato dopo model comparison: enhanced context testato, non promosso.
 - [x] Target/exit comparison: timeout coerente nel backtest, varianti ATR testate, nessuna promossa.
 - [x] Signal-quality/ranking comparison: top-N giornaliero testato, nessuna variante promossa.

@@ -115,7 +115,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: gli split temporali hanno purging sulle label forward, ma non ancora un embargo esplicito dopo i confini temporali.
 - Impatto: feature autocorrelate o reazioni ritardate del mercato possono ridurre la separazione effettiva tra periodi.
 - Azione: aggiungere embargo configurabile ai temporal split/walk-forward fold in Milestone 2.
-- Stato: aperto.
+- Stato: mitigato; `embargo_days` disponibile con default `0`.
 
 ### RISK-014 - Sweep incrementali su baseline possono diventare data-mining
 
