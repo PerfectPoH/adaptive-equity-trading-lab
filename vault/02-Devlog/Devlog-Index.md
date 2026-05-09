@@ -38,6 +38,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-09-cascade-small-cap-data-quality]] - report qualita' dati OHLCV per candidati small/mid-cap.
 - [[2026-05-09-cascade-market-regime-guardrail]] - no-trade guardrail operativo per IWM, VIX e breadth.
 - [[2026-05-09-cascade-small-cap-swing-scanner]] - scanner rule-based long-only per panic reversal, breakout continuation e post-gap drift.
+- [[2026-05-09-cascade-small-cap-execution]] - execution planner conservativo con gap, costi e liquidity cap.
 
 ## Convenzione
 
