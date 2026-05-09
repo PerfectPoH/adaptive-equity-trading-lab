@@ -46,6 +46,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-08-cascade-model-registry]]
 - [[2026-05-08-cascade-threshold-config]]
 - [[2026-05-08-cascade-walk-forward-fold-builder]]
+- [[2026-05-08-cascade-hyperparameter-comparison]]
 
 ## Relazioni principali
 
@@ -68,3 +69,4 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Roadmap-Master]] -> [[2026-05-08-cascade-model-registry]]
 - [[Roadmap-Master]] -> [[2026-05-08-cascade-threshold-config]]
 - [[Roadmap-Master]] -> [[2026-05-08-cascade-walk-forward-fold-builder]]
+- [[Roadmap-Master]] -> [[2026-05-08-cascade-hyperparameter-comparison]]

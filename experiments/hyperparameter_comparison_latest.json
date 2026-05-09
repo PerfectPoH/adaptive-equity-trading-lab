@@ -1,0 +1,147 @@
+{
+  "thresholds": {
+    "raw": [
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7
+    ],
+    "isotonic": [
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45
+    ]
+  },
+  "model_types": [
+    "random_forest"
+  ],
+  "model_configs": [
+    {
+      "name": "random_forest_default",
+      "model_type": "random_forest",
+      "model_params": {}
+    },
+    {
+      "name": "random_forest_shallow",
+      "model_type": "random_forest",
+      "model_params": {
+        "max_depth": 4,
+        "min_samples_leaf": 30
+      }
+    },
+    {
+      "name": "random_forest_deeper",
+      "model_type": "random_forest",
+      "model_params": {
+        "max_depth": 8,
+        "min_samples_leaf": 15
+      }
+    }
+  ],
+  "model_objective_configs": [
+    {
+      "name": "tp_before_sl",
+      "label_column": "label"
+    }
+  ],
+  "feature_sets": [
+    "baseline"
+  ],
+  "target_exit_configs": [
+    {
+      "name": "default_1_5x_stop_3x_tp_10d",
+      "stop_atr_multiple": 1.5,
+      "take_profit_atr_multiple": 3.0,
+      "timeout_bars": 10
+    }
+  ],
+  "signal_quality_configs": [
+    {
+      "name": "no_quality_rank_filter",
+      "min_signal_quality_score": null,
+      "max_signals_per_day": null,
+      "rank_column": "signal_quality_score"
+    }
+  ],
+  "market_exposure_configs": [
+    {
+      "name": "default_1pct",
+      "base_risk_fraction": 0.01,
+      "strong_market_risk_fraction": null,
+      "weak_market_risk_fraction": null,
+      "strong_spy_ema_50_ratio": 0.02,
+      "strong_spy_return_5d": 0.0
+    }
+  ],
+  "symbol_selection_configs": [
+    {
+      "name": "all_symbols",
+      "mode": "all",
+      "top_n": null,
+      "min_symbol_trades": 5,
+      "require_positive_strategy_return": false,
+      "include_symbols": [],
+      "exclude_symbols": []
+    }
+  ],
+  "min_validation_trades": 30,
+  "folds": [
+    {
+      "fold": "wf_2023",
+      "selected_target_exit_config": "default_1_5x_stop_3x_tp_10d",
+      "selected_model_objective_config": "tp_before_sl",
+      "selected_feature_set": "baseline",
+      "selected_model_config": "random_forest_default",
+      "selected_model_type": "random_forest",
+      "selected_probability_variant": "raw",
+      "selected_signal_quality_config": "no_quality_rank_filter",
+      "selected_signal_rank_column": "",
+      "selected_market_exposure_config": "default_1pct",
+      "selected_symbol_selection_config": "all_symbols",
+      "selected_symbols": "AAPL,AMD,AMZN,GOOGL,META,MSFT,NVDA,QQQ,SPY,TSLA",
+      "selected_threshold": 0.45,
+      "validation_strategy_return": -0.011811555090836364,
+      "validation_excess_return": 0.4306919239112107,
+      "validation_closed_trades": 42,
+      "test_strategy_return": 0.0650450448404449,
+      "test_excess_return": -0.9491118367656544,
+      "test_closed_trades": 163,
+      "test_beats_buy_and_hold": false
+    },
+    {
+      "fold": "wf_2024",
+      "selected_target_exit_config": "default_1_5x_stop_3x_tp_10d",
+      "selected_model_objective_config": "tp_before_sl",
+      "selected_feature_set": "baseline",
+      "selected_model_config": "random_forest_shallow",
+      "selected_model_type": "random_forest",
+      "selected_probability_variant": "isotonic",
+      "selected_signal_quality_config": "no_quality_rank_filter",
+      "selected_signal_rank_column": "",
+      "selected_market_exposure_config": "default_1pct",
+      "selected_symbol_selection_config": "all_symbols",
+      "selected_symbols": "AAPL,AMD,AMZN,GOOGL,META,MSFT,NVDA,QQQ,SPY,TSLA",
+      "selected_threshold": 0.2,
+      "validation_strategy_return": 0.0796521192535829,
+      "validation_excess_return": -0.9345047623525163,
+      "validation_closed_trades": 188,
+      "test_strategy_return": 0.06474385336402985,
+      "test_excess_return": -0.415722691532482,
+      "test_closed_trades": 201,
+      "test_beats_buy_and_hold": false
+    }
+  ],
+  "summary": {
+    "folds": 2,
+    "mean_test_strategy_return": 0.06489444910223738,
+    "mean_test_excess_return": -0.6824172641490682,
+    "folds_beating_buy_and_hold": 0,
+    "verdict": "positive_but_under_benchmark"
+  }
+}

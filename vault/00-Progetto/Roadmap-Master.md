@@ -49,7 +49,7 @@ Prossimi miglioramenti Milestone 1:
 
 - [x] Walk-forward validation iniziale.
 - [x] TimeSeriesSplit.
-- [ ] Tuning iperparametri su validation, non su test.
+- [x] Tuning iperparametri su validation, non su test.
 - [x] Model registry con `joblib`.
 - [x] Calibration report / reliability analysis iniziale.
 - [x] Trade-level export e prima error analysis.
