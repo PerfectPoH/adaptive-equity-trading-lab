@@ -109,6 +109,22 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: mantenere `tp_before_sl` come target default; riprovare obiettivi benchmark-aware solo con piu' fold, dati migliori e metrica di rischio piu' severa.
 - Stato: aperto, nessun objective alternativo promosso.
 
+### RISK-013 - Validation senza embargo esplicito
+
+- Priorita: P2.
+- Sintomo: gli split temporali hanno purging sulle label forward, ma non ancora un embargo esplicito dopo i confini temporali.
+- Impatto: feature autocorrelate o reazioni ritardate del mercato possono ridurre la separazione effettiva tra periodi.
+- Azione: aggiungere embargo configurabile ai temporal split/walk-forward fold in Milestone 2.
+- Stato: aperto.
+
+### RISK-014 - Sweep incrementali su baseline possono diventare data-mining
+
+- Priorita: P2.
+- Sintomo: threshold, model comparison, feature set, target/exit, signal ranking, market exposure, universe selection, benchmark objective e hyperparameter comparison sono gia' stati testati.
+- Impatto: continuare a ruotare configurazioni sulla stessa baseline aumenta il rischio di overfitting senza creare edge predittivo.
+- Azione: fermare sweep non motivati; prima completare notebook diagnostico, embargo e specifica cross-sectional.
+- Stato: aperto.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

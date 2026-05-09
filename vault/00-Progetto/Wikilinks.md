@@ -47,6 +47,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-08-cascade-threshold-config]]
 - [[2026-05-08-cascade-walk-forward-fold-builder]]
 - [[2026-05-08-cascade-hyperparameter-comparison]]
+- [[Quant-Research-Priorities-2026-05-09]]
 
 ## Relazioni principali
 
@@ -70,3 +71,5 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Roadmap-Master]] -> [[2026-05-08-cascade-threshold-config]]
 - [[Roadmap-Master]] -> [[2026-05-08-cascade-walk-forward-fold-builder]]
 - [[Roadmap-Master]] -> [[2026-05-08-cascade-hyperparameter-comparison]]
+- [[Roadmap-Master]] -> [[Quant-Research-Priorities-2026-05-09]]
+- [[Regole-Quant]] -> [[Quant-Research-Priorities-2026-05-09]]

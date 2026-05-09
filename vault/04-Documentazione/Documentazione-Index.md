@@ -12,6 +12,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 ## Reports
 
 - [[Report-Milestone1-2026-05-08]] - stato tecnico e risultati della prima pipeline.
+- [[Quant-Research-Priorities-2026-05-09]] - valutazione consigli esterni e priorita' research validation.
 
 ## Handoff
 
