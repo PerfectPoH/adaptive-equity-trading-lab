@@ -29,22 +29,22 @@ def _candidate_metadata() -> pd.DataFrame:
 
 
 def _frames() -> dict[str, pd.DataFrame]:
-    index = pd.bdate_range("2024-01-01", periods=3)
+    index = pd.bdate_range("2024-01-01", periods=4)
     good = pd.DataFrame(
         {
-            "Open": [10.0, 10.1, 10.2],
-            "High": [10.2, 10.6, 11.2],
-            "Low": [9.8, 10.0, 10.1],
-            "Close": [10.0, 10.5, 11.1],
-            "Volume": [800_000, 900_000, 1_000_000],
-            "atr": [0.5, 0.5, 0.5],
-            "atr_pct": [0.05, 0.05, 0.05],
-            "relative_volume_20d": [1.2, 1.4, 2.0],
-            "distance_from_20d_high": [-0.05, -0.02, 0.0],
-            "rolling_volatility_20d": [0.03, 0.03, 0.03],
-            "iwm_close": [210.0, 210.0, 210.0],
-            "iwm_ema_50": [200.0, 200.0, 200.0],
-            "vix_close": [18.0, 18.0, 18.0],
+            "Open": [10.0, 10.1, 10.2, 10.3],
+            "High": [10.2, 10.6, 11.2, 10.7],
+            "Low": [9.8, 10.0, 10.1, 10.2],
+            "Close": [10.0, 10.5, 11.1, 10.6],
+            "Volume": [800_000, 900_000, 1_000_000, 950_000],
+            "atr": [0.5, 0.5, 0.5, 0.5],
+            "atr_pct": [0.05, 0.05, 0.05, 0.05],
+            "relative_volume_20d": [1.2, 1.4, 2.0, 1.6],
+            "distance_from_20d_high": [-0.05, -0.02, 0.0, -0.03],
+            "rolling_volatility_20d": [0.03, 0.03, 0.03, 0.03],
+            "iwm_close": [210.0, 210.0, 210.0, 210.0],
+            "iwm_ema_50": [200.0, 200.0, 200.0, 200.0],
+            "vix_close": [18.0, 18.0, 18.0, 18.0],
         },
         index=index,
     )
