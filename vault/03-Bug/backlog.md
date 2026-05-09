@@ -154,7 +154,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Priorita: P1.
 - Sintomo: panic reversal e breakout small-cap cambiano comportamento in bull, bear e stress regime.
 - Impatto: un backtest 2020-2024 puo' mescolare regimi incompatibili e nascondere drawdown strutturali.
-- Azione: aggiungere filtri/report per IWM EMA 50/200, VIX, breadth e regime SPY/IWM prima dello scanner.
+- Azione: aggiungere guardrail operativi: se IWM < EMA 50 lo scanner non genera segnali, se VIX > 35 tutti i trade sono bloccati, se dati regime mancanti no-trade.
 - Stato: aperto.
 
 ### RISK-019 - Survivorship bias estremo su small-cap

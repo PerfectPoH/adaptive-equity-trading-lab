@@ -63,8 +63,15 @@ Feature/regole candidate:
 - VIX in range accettabile;
 - breadth di mercato small-cap se disponibile;
 - regime SPY/IWM relativo;
-- no-trade o size ridotta in bear/stress regime;
 - analisi separata dei risultati per regime.
+
+Regole operative iniziali:
+
+```text
+Se IWM < EMA 50: scanner gira, ma non genera segnali operativi.
+Se VIX > 35: tutti i trade vengono bloccati.
+Se dati regime mancanti: no-trade, non fallback ottimistico.
+```
 
 Il backtest non deve mescolare 2020-2024 come un unico ambiente omogeneo senza report per regime.
 
