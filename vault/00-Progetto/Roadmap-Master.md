@@ -88,7 +88,7 @@ Vedi [[news-risk-engine]].
 ## Milestone 3B - Small-Cap Swing Research Track
 
 - [x] Scrivere spec long-only small/mid-cap swing.
-- [ ] Universe builder small/mid-cap con filtri liquidita', prezzo e dollar volume.
+- [x] Universe builder small/mid-cap con filtri liquidita', prezzo e dollar volume.
 - [ ] Data-quality report per small/mid-cap candidate.
 - [ ] Market-regime guardrail per IWM EMA 50/200, VIX e breadth prima dello scanner.
 - [ ] Scanner rule-based long-only: panic reversal, breakout continuation, post-gap drift.

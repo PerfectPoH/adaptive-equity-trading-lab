@@ -115,6 +115,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - embargo temporale configurabile aggiunto: `embargo_days` disponibile in `temporal_split` e nel builder walk-forward, con default `0` per non alterare la baseline.
 - backtest analysis completata: notebook/report riproducibile conferma sottoperformance vs buy-and-hold e identifica peggiori excess return su NVDA, META, TSLA, AMZN e GOOGL.
 - pivot strategico proposto: congelare la baseline large-cap ML come controllo negativo e aprire research track long-only small/mid-cap swing, senza short nella prima fase.
+- universe builder small/mid-cap aggiunto: `SmallCapUniverseConfig` e `build_small_cap_universe` filtrano market cap, prezzo, volume, dollar volume ed ETF con rejection reasons.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 

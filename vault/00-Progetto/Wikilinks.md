@@ -51,6 +51,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-09-cascade-temporal-embargo]]
 - [[2026-05-09-cascade-backtest-analysis]]
 - [[2026-05-09-cascade-small-cap-pivot]]
+- [[2026-05-09-cascade-small-cap-universe-builder]]
 - [[Quant-Research-Priorities-2026-05-09]]
 
 ## Relazioni principali
@@ -79,5 +80,6 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Roadmap-Master]] -> [[2026-05-09-cascade-temporal-embargo]]
 - [[Roadmap-Master]] -> [[2026-05-09-cascade-backtest-analysis]]
 - [[Roadmap-Master]] -> [[2026-05-09-cascade-small-cap-pivot]]
+- [[Roadmap-Master]] -> [[2026-05-09-cascade-small-cap-universe-builder]]
 - [[Roadmap-Master]] -> [[Quant-Research-Priorities-2026-05-09]]
 - [[Regole-Quant]] -> [[Quant-Research-Priorities-2026-05-09]]
