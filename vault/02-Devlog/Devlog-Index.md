@@ -40,6 +40,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-09-cascade-small-cap-swing-scanner]] - scanner rule-based long-only per panic reversal, breakout continuation e post-gap drift.
 - [[2026-05-09-cascade-small-cap-execution]] - execution planner conservativo con gap, costi e liquidity cap.
 - [[2026-05-09-cascade-small-cap-candidate-export]] - export candidati giornalieri con diagnostica operativa.
+- [[2026-05-09-cascade-small-cap-benchmarks]] - benchmark coerenti per small-cap: IWM, equal-weight, random baseline, holding-window e cash.
 
 ## Convenzione
 
