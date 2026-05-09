@@ -113,6 +113,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - hyperparameter comparison completata: Random Forest default/shallow/deeper confrontati con selezione su validation; nessuna configurazione viene promossa perche' resta sotto buy-and-hold.
 - priorita' research aggiornate: aggiungere embargo prima di nuove modifiche strutturali; cross-sectional va specificato separatamente; DSR, CPCV, point-in-time data, event-driven e market impact restano gate istituzionali.
 - embargo temporale configurabile aggiunto: `embargo_days` disponibile in `temporal_split` e nel builder walk-forward, con default `0` per non alterare la baseline.
+- backtest analysis completata: notebook/report riproducibile conferma sottoperformance vs buy-and-hold e identifica peggiori excess return su NVDA, META, TSLA, AMZN e GOOGL.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 
