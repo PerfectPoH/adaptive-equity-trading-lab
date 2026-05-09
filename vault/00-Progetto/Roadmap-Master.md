@@ -97,6 +97,7 @@ Vedi [[news-risk-engine]].
 - [x] Candidate export giornaliero con diagnostica universe, data-quality, scanner, regime ed execution.
 - [x] Benchmark coerenti: IWM, equal-weight universe, random-entry baseline, ticker holding-window benchmark.
 - [x] Backtest/report proxy small-cap dedicato con diagnostica setup, regime ed execution.
+- [x] Runner storico small-cap end-to-end con export candidati, benchmark report e markdown report.
 
 Vedi [[small-cap-swing-research-spec]].
 

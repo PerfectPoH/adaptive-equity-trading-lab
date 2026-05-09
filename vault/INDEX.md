@@ -123,6 +123,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - candidate export small-cap aggiunto: `SmallCapCandidateExportConfig`, `build_small_cap_candidate_export` e `write_small_cap_candidate_export` producono candidati operativi e diagnostica per rigetti.
 - benchmark report small-cap aggiunto: `SmallCapBenchmarkConfig` e `build_small_cap_benchmark_report` calcolano cash, IWM proxy, equal-weight universe, random-entry baseline e ticker holding-window.
 - backtest/report proxy small-cap aggiunto: `build_small_cap_backtest_report` e `write_small_cap_backtest_report_markdown` confrontano il proxy holding-window con il benchmark primario e aggregano diagnostica setup/regime/execution.
+- historical runner small-cap aggiunto: `SmallCapHistoricalRunConfig` e `run_small_cap_historical_report` producono `candidate_export.csv`, `benchmark_report.csv` e `small_cap_backtest_report.md` per finestre storiche.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 
