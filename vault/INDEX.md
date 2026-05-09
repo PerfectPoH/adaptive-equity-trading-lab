@@ -118,6 +118,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - universe builder small/mid-cap aggiunto: `SmallCapUniverseConfig` e `build_small_cap_universe` filtrano market cap, prezzo, volume, dollar volume ed ETF con rejection reasons.
 - data-quality report small-cap aggiunto: `SmallCapDataQualityConfig` e `build_small_cap_data_quality_report` segnalano dati mancanti, OHLCV invalidi, zero-volume ed extreme price jumps.
 - market-regime guardrail aggiunto: `MarketRegimeGuardrailConfig` e `add_market_regime_guardrail_columns` bloccano segnali/trade quando IWM < EMA 50, VIX > 35 o i dati regime mancano.
+- scanner small-cap rule-based aggiunto: `SmallCapSwingScannerConfig` e `add_small_cap_swing_scanner_columns` classificano panic reversal, breakout continuation e post-gap drift senza ML.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 

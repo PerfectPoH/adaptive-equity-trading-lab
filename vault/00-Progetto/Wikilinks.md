@@ -54,6 +54,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-09-cascade-small-cap-universe-builder]]
 - [[2026-05-09-cascade-small-cap-data-quality]]
 - [[2026-05-09-cascade-market-regime-guardrail]]
+- [[2026-05-09-cascade-small-cap-swing-scanner]]
 - [[Quant-Research-Priorities-2026-05-09]]
 
 ## Relazioni principali
@@ -85,5 +86,6 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Roadmap-Master]] -> [[2026-05-09-cascade-small-cap-universe-builder]]
 - [[Roadmap-Master]] -> [[2026-05-09-cascade-small-cap-data-quality]]
 - [[Roadmap-Master]] -> [[2026-05-09-cascade-market-regime-guardrail]]
+- [[Roadmap-Master]] -> [[2026-05-09-cascade-small-cap-swing-scanner]]
 - [[Roadmap-Master]] -> [[Quant-Research-Priorities-2026-05-09]]
 - [[Regole-Quant]] -> [[Quant-Research-Priorities-2026-05-09]]
