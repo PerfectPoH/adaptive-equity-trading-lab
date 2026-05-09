@@ -69,3 +69,21 @@ def test_temporal_split_purges_rows_whose_labels_cross_boundaries() -> None:
 
         assert split.train[split.train["symbol"] == symbol].index.max() == expected_train_last
         assert split.validation[split.validation["symbol"] == symbol].index.max() == expected_validation_last
+
+
+def test_temporal_split_applies_embargo_after_boundaries() -> None:
+    idx = pd.date_range("2023-01-01", periods=10)
+    data = pd.DataFrame({"feature": range(len(idx)), "label": 1, "label_executable": True}, index=idx)
+
+    split = temporal_split(
+        data,
+        train_end="2023-01-03",
+        validation_end="2023-01-06",
+        test_end="2023-01-10",
+        label_horizon_bars=0,
+        embargo_days=2,
+    )
+
+    assert split.train.index.max() == pd.Timestamp("2023-01-03")
+    assert split.validation.index.min() == pd.Timestamp("2023-01-06")
+    assert split.test.index.min() == pd.Timestamp("2023-01-09")

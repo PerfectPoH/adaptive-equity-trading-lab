@@ -310,3 +310,12 @@ def test_build_annual_walk_forward_folds_creates_expanding_train_windows() -> No
     assert folds[1].train_end == "2022-12-31"
     assert folds[1].validation_start == "2023-01-01"
     assert folds[1].test_start == "2024-01-01"
+
+
+def test_build_annual_walk_forward_folds_can_apply_embargo_days() -> None:
+    folds = build_annual_walk_forward_folds(first_validation_year=2022, last_test_year=2023, embargo_days=2)
+
+    assert folds[0].train_end == "2021-12-31"
+    assert folds[0].validation_start == "2022-01-03"
+    assert folds[0].validation_end == "2022-12-31"
+    assert folds[0].test_start == "2023-01-02"
