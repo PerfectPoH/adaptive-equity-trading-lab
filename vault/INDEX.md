@@ -130,6 +130,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - one-shot experiment small-cap aggiunta: `run_small_cap_watchlist_experiment` e `src.experiments.small_cap_experiment_cli` senza `--metadata-path` generano metadata e report storico partendo da `--symbols`.
 - smoke run reali small-cap eseguiti: primo run negativo con watchlist fuori range market cap; secondo run su BBAI/LUNR/OPEN/OUST con 32 candidati operativi e verdict proxy positivo vs equal-weight universe.
 - report diagnostics small-cap migliorate: markdown e dict report includono universe rejection reasons, scanner reject reasons, metadata diagnostics end-to-end e operational-only notional.
+- execution planner core small-cap aggiunto: `SmallCapExecutionPlanner` e `SmallCapExecutionDecision` pianificano decisioni atomiche con next-open gap reject, capacity cap, cash cap e costi/slippage.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 

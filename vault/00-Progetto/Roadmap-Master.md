@@ -104,6 +104,7 @@ Vedi [[news-risk-engine]].
 - [x] Modalita' one-shot CLI da watchlist ticker a metadata CSV e historical report.
 - [x] Smoke run reali one-shot su watchlist small-cap controllate con diagnostica e report storico.
 - [x] Report diagnostics small-cap migliorate: universe rejects, scanner rejects, metadata diagnostics e notional operativo.
+- [x] Execution planner core small-cap per decisioni atomiche candidate + next open + cash.
 
 Vedi [[small-cap-swing-research-spec]].
 

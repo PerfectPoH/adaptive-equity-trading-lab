@@ -49,6 +49,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-10-cascade-small-cap-one-shot-experiment]] - modalita' CLI one-shot da watchlist ticker a metadata CSV e report storico.
 - [[2026-05-10-cascade-small-cap-smoke-runs]] - primi smoke run reali one-shot con diagnostica metadata, candidati e benchmark.
 - [[2026-05-10-cascade-small-cap-report-diagnostics]] - report small-cap arricchito con universe/scanner/metadata diagnostics end-to-end.
+- [[2026-05-10-cascade-small-cap-execution-planner-core]] - planner atomico candidate + next open + cash per execution reale.
 
 ## Convenzione
 
