@@ -93,6 +93,59 @@ python -m pytest
 
 I prossimi smoke run sono piu' interpretabili: si distingue tra esclusioni universe, reject scanner, blocchi regime, skip execution e problemi provider metadata.
 
+## Smoke rerun diagnostico
+
+Eseguito rerun one-shot sulla watchlist:
+
+```text
+LUNR,BLDE,BBAI,OPEN,OUST
+```
+
+Comando:
+
+```powershell
+.\.venv-lab\Scripts\python.exe -m src.experiments.small_cap_experiment_cli `
+  --symbols LUNR,BLDE,BBAI,OPEN,OUST `
+  --metadata-output-path data/small_cap_metadata_smoke2_diag_20260510.csv `
+  --metadata-diagnostics-path data/small_cap_metadata_smoke2_diag_20260510_diagnostics.csv `
+  --output-dir experiments/runs/small_cap_smoke2_diag_20260510 `
+  --start 2024-01-01 `
+  --end 2024-12-31
+```
+
+Output report:
+
+```text
+verdict: beats_primary_benchmark
+rows: 1000
+operational_candidates: 32
+conversion_rate: 0.032
+total_position_notional: 398219.88615000003
+operational_position_notional: 290775.57105
+```
+
+Nuove sezioni verificate:
+
+```text
+Universe Rejection Reasons:
+- price_below_min: 250
+
+Scanner Reject Reasons:
+- relative_volume_below_min: 776
+- missing_relative_volume_20d: 76
+- missing_atr_pct: 52
+- atr_pct_above_max: 27
+- gap_above_max: 19
+- missing_previous_close: 4
+- missing_gap_pct: 4
+
+Metadata Diagnostics:
+- missing_market_cap: 1
+- BLDE: status=fail, reason=missing_market_cap
+```
+
+Conclusione: il report arricchito e' leggibile e distingue correttamente universe reject, scanner reject e problemi provider metadata.
+
 ## Limite ancora aperto
 
 Il report resta un proxy holding-window: non e' ancora un portfolio backtest completo con cash allocation, overlapping positions e lifecycle ordini.
