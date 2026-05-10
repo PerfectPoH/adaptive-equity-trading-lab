@@ -14,7 +14,10 @@ def _candidate_export() -> pd.DataFrame:
                 "as_of": "2024-01-01",
                 "symbol": "AAA",
                 "operational_candidate": True,
+                "passes_universe_filter": True,
+                "universe_rejection_reasons": "",
                 "small_cap_setup": "breakout_continuation",
+                "small_cap_scanner_reject_reason": "",
                 "market_regime_trade_allowed": True,
                 "market_regime_block_reason": "",
                 "small_cap_execution_valid": True,
@@ -25,18 +28,24 @@ def _candidate_export() -> pd.DataFrame:
                 "as_of": "2024-01-01",
                 "symbol": "BBB",
                 "operational_candidate": False,
+                "passes_universe_filter": False,
+                "universe_rejection_reasons": "market_cap_above_max;dollar_volume_below_min",
                 "small_cap_setup": "",
+                "small_cap_scanner_reject_reason": "relative_volume_below_min;atr_pct_above_max",
                 "market_regime_trade_allowed": False,
                 "market_regime_block_reason": "vix_above_max",
                 "small_cap_execution_valid": False,
                 "small_cap_execution_skip_reason": "",
-                "small_cap_position_notional": 0.0,
+                "small_cap_position_notional": 2_500.0,
             },
             {
                 "as_of": "2024-01-02",
                 "symbol": "CCC",
                 "operational_candidate": False,
+                "passes_universe_filter": True,
+                "universe_rejection_reasons": "",
                 "small_cap_setup": "post_gap_drift",
+                "small_cap_scanner_reject_reason": "gap_above_max",
                 "market_regime_trade_allowed": True,
                 "market_regime_block_reason": "",
                 "small_cap_execution_valid": False,
@@ -69,7 +78,8 @@ def test_build_small_cap_backtest_report_summarizes_candidates_and_verdict() -> 
         "unique_symbols": 3,
         "candidate_dates": 2,
         "conversion_rate": 1 / 3,
-        "total_position_notional": 1_000.0,
+        "total_position_notional": 3_500.0,
+        "operational_position_notional": 1_000.0,
     }
     assert report["primary_benchmark"] == "equal_weight_universe"
     assert report["strategy_proxy_return"] == 0.08
@@ -83,6 +93,21 @@ def test_build_small_cap_backtest_report_includes_diagnostics() -> None:
     assert report["setup_counts"] == {"breakout_continuation": 1}
     assert report["regime_block_reasons"] == {"vix_above_max": 1}
     assert report["execution_skip_reasons"] == {"gap_above_max": 1}
+    assert report["universe_rejection_reasons"] == {"dollar_volume_below_min": 1, "market_cap_above_max": 1}
+    assert report["scanner_reject_reasons"] == {
+        "atr_pct_above_max": 1,
+        "gap_above_max": 1,
+        "relative_volume_below_min": 1,
+    }
+
+
+def test_build_small_cap_backtest_report_includes_metadata_diagnostics() -> None:
+    metadata_diagnostics = pd.DataFrame([{"symbol": "BLDE", "status": "fail", "reason": "missing_market_cap"}])
+
+    report = build_small_cap_backtest_report(_candidate_export(), _benchmark_report(), metadata_diagnostics=metadata_diagnostics)
+
+    assert report["metadata_diagnostics"] == [{"symbol": "BLDE", "status": "fail", "reason": "missing_market_cap"}]
+    assert report["metadata_diagnostic_reasons"] == {"missing_market_cap": 1}
 
 
 def test_build_small_cap_backtest_report_handles_insufficient_benchmark_data() -> None:
@@ -102,7 +127,9 @@ def test_build_small_cap_backtest_report_handles_insufficient_benchmark_data() -
 def test_write_small_cap_backtest_report_markdown_includes_verdict(tmp_path: Path) -> None:
     output_path = tmp_path / "small_cap_report.md"
 
-    report = write_small_cap_backtest_report_markdown(_candidate_export(), _benchmark_report(), output_path)
+    metadata_diagnostics = pd.DataFrame([{"symbol": "BLDE", "status": "fail", "reason": "missing_market_cap"}])
+
+    report = write_small_cap_backtest_report_markdown(_candidate_export(), _benchmark_report(), output_path, metadata_diagnostics=metadata_diagnostics)
 
     content = output_path.read_text(encoding="utf-8")
     assert report["verdict"] == "beats_primary_benchmark"
@@ -110,3 +137,7 @@ def test_write_small_cap_backtest_report_markdown_includes_verdict(tmp_path: Pat
     assert "beats_primary_benchmark" in content
     assert "equal_weight_universe" in content
     assert "gap_above_max" in content
+    assert "## Universe Rejection Reasons" in content
+    assert "## Scanner Reject Reasons" in content
+    assert "## Metadata Diagnostics" in content
+    assert "missing_market_cap" in content
