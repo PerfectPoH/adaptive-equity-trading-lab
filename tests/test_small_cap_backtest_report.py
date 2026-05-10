@@ -133,6 +133,21 @@ def test_build_small_cap_backtest_report_includes_portfolio_summary() -> None:
     assert report["portfolio_rejection_summary"] == {"insufficient_funds": 1}
 
 
+def test_build_small_cap_backtest_report_includes_portfolio_diagnostics() -> None:
+    outlier_breakdown = {"top_3_pnl_contribution_pct": 0.75, "outlier_concentration_alert": True}
+    score_profile = pd.DataFrame([{"score_bucket": "Q1", "trade_count": 2, "avg_return_pct": 0.05}])
+
+    report = build_small_cap_backtest_report(
+        _candidate_export(),
+        _benchmark_report(),
+        portfolio_outlier_breakdown=outlier_breakdown,
+        portfolio_score_profile=score_profile,
+    )
+
+    assert report["portfolio_outlier_breakdown"] == outlier_breakdown
+    assert report["portfolio_score_profile"] == [{"score_bucket": "Q1", "trade_count": 2, "avg_return_pct": 0.05}]
+
+
 def test_build_small_cap_backtest_report_handles_insufficient_benchmark_data() -> None:
     benchmark_report = pd.DataFrame(
         [
@@ -159,6 +174,8 @@ def test_write_small_cap_backtest_report_markdown_includes_verdict(tmp_path: Pat
         metadata_diagnostics=metadata_diagnostics,
         portfolio_summary={"return_pct": 0.04, "total_trades": 1, "ending_cash": 104_000.0},
         portfolio_rejection_summary={"insufficient_funds": 1},
+        portfolio_outlier_breakdown={"top_3_pnl_contribution_pct": 0.75, "outlier_concentration_alert": True},
+        portfolio_score_profile=pd.DataFrame([{"score_bucket": "Q1", "trade_count": 2, "avg_return_pct": 0.05}]),
     )
 
     content = output_path.read_text(encoding="utf-8")
@@ -175,3 +192,7 @@ def test_write_small_cap_backtest_report_markdown_includes_verdict(tmp_path: Pat
     assert "return_pct: 0.04" in content
     assert "## Portfolio Rejection Summary" in content
     assert "insufficient_funds" in content
+    assert "## Portfolio Outlier Breakdown" in content
+    assert "top_3_pnl_contribution_pct: 0.75" in content
+    assert "## Score Profile Report" in content
+    assert "Q1" in content

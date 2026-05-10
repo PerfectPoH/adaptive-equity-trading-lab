@@ -111,3 +111,12 @@ def test_portfolio_backtester_builds_equity_curve() -> None:
     assert result.equity_curve["date"].tolist() == [pd.Timestamp("2024-01-01"), pd.Timestamp("2024-01-04")]
     assert result.equity_curve.iloc[0]["cash"] == 80_000.0
     assert result.equity_curve.iloc[-1]["equity"] == 104_000.0
+
+
+def test_portfolio_backtester_preserves_scanner_score_in_trade_log() -> None:
+    frames = {"AAA": _frame([10.0, 10.0, 11.0, 12.0, 13.0])}
+    candidates = pd.DataFrame([_candidate("AAA", "2024-01-01", score=87.5)])
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=_config())
+
+    assert result.trade_log.iloc[0]["small_cap_scanner_score"] == 87.5
