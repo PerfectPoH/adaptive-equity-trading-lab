@@ -105,6 +105,7 @@ Vedi [[news-risk-engine]].
 - [x] Smoke run reali one-shot su watchlist small-cap controllate con diagnostica e report storico.
 - [x] Report diagnostics small-cap migliorate: universe rejects, scanner rejects, metadata diagnostics e notional operativo.
 - [x] Execution planner core small-cap per decisioni atomiche candidate + next open + cash.
+- [x] Portfolio backtester core small-cap con cash ledger, trade log, equity curve e rejection summary.
 
 Vedi [[small-cap-swing-research-spec]].
 
