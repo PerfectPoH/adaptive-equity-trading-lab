@@ -132,6 +132,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - report diagnostics small-cap migliorate: markdown e dict report includono universe rejection reasons, scanner reject reasons, metadata diagnostics end-to-end e operational-only notional.
 - execution planner core small-cap aggiunto: `SmallCapExecutionPlanner` e `SmallCapExecutionDecision` pianificano decisioni atomiche con next-open gap reject, capacity cap, cash cap e costi/slippage.
 - portfolio backtester core small-cap aggiunto: `run_small_cap_portfolio_backtest` produce trade log, equity curve, summary e rejection summary con cash bloccato/liberato sulle posizioni.
+- portfolio report integration small-cap aggiunta: il runner storico scrive `portfolio_trade_log.csv`, `portfolio_equity_curve.csv`, `portfolio_rejections.csv`, `portfolio_summary.csv` e il markdown include sezioni portfolio.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 

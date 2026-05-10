@@ -106,6 +106,7 @@ Vedi [[news-risk-engine]].
 - [x] Report diagnostics small-cap migliorate: universe rejects, scanner rejects, metadata diagnostics e notional operativo.
 - [x] Execution planner core small-cap per decisioni atomiche candidate + next open + cash.
 - [x] Portfolio backtester core small-cap con cash ledger, trade log, equity curve e rejection summary.
+- [x] Integrazione portfolio nel report storico small-cap con artefatti `portfolio_*.csv`.
 
 Vedi [[small-cap-swing-research-spec]].
 

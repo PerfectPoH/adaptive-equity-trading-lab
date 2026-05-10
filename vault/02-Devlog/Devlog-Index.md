@@ -51,6 +51,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-10-cascade-small-cap-report-diagnostics]] - report small-cap arricchito con universe/scanner/metadata diagnostics end-to-end.
 - [[2026-05-10-cascade-small-cap-execution-planner-core]] - planner atomico candidate + next open + cash per execution reale.
 - [[2026-05-10-cascade-small-cap-portfolio-backtester-core]] - portfolio backtester core con cash ledger, trade log, equity curve e rejection summary.
+- [[2026-05-10-cascade-small-cap-portfolio-report-integration]] - integrazione portfolio nel runner/report storico con artefatti CSV e sezioni markdown.
 
 ## Convenzione
 
