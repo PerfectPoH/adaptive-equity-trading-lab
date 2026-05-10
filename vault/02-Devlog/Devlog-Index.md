@@ -47,6 +47,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-10-cascade-small-cap-experiment-cli]] - orchestratore CLI per metadata CSV, download OHLCV/IWM/VIX, preparer e historical runner.
 - [[2026-05-10-cascade-small-cap-metadata-builder]] - builder CSV metadata small-cap da watchlist ticker con provider yfinance e diagnostica.
 - [[2026-05-10-cascade-small-cap-one-shot-experiment]] - modalita' CLI one-shot da watchlist ticker a metadata CSV e report storico.
+- [[2026-05-10-cascade-small-cap-smoke-runs]] - primi smoke run reali one-shot con diagnostica metadata, candidati e benchmark.
 
 ## Convenzione
 
