@@ -129,6 +129,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - metadata builder small-cap aggiunto: `build_small_cap_metadata`, `write_small_cap_metadata_csv` e `python -m src.data.small_cap_metadata_builder` generano il CSV `symbol,market_cap,is_etf` da watchlist ticker con diagnostica.
 - one-shot experiment small-cap aggiunta: `run_small_cap_watchlist_experiment` e `src.experiments.small_cap_experiment_cli` senza `--metadata-path` generano metadata e report storico partendo da `--symbols`.
 - smoke run reali small-cap eseguiti: primo run negativo con watchlist fuori range market cap; secondo run su BBAI/LUNR/OPEN/OUST con 32 candidati operativi e verdict proxy positivo vs equal-weight universe.
+- report diagnostics small-cap migliorate: markdown e dict report includono universe rejection reasons, scanner reject reasons, metadata diagnostics end-to-end e operational-only notional.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 

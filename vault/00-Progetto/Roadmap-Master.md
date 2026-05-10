@@ -103,6 +103,7 @@ Vedi [[news-risk-engine]].
 - [x] Metadata builder small-cap da watchlist ticker a CSV `symbol,market_cap,is_etf` con diagnostica.
 - [x] Modalita' one-shot CLI da watchlist ticker a metadata CSV e historical report.
 - [x] Smoke run reali one-shot su watchlist small-cap controllate con diagnostica e report storico.
+- [x] Report diagnostics small-cap migliorate: universe rejects, scanner rejects, metadata diagnostics e notional operativo.
 
 Vedi [[small-cap-swing-research-spec]].
 
