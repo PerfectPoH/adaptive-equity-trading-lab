@@ -99,6 +99,7 @@ Vedi [[news-risk-engine]].
 - [x] Backtest/report proxy small-cap dedicato con diagnostica setup, regime ed execution.
 - [x] Runner storico small-cap end-to-end con export candidati, benchmark report e markdown report.
 - [x] Data preparer small-cap per convertire OHLCV + metadata statici in input compatibili con runner storico.
+- [x] Orchestratore/CLI small-cap per metadata CSV, download OHLCV/IWM/VIX, data preparer e historical runner.
 
 Vedi [[small-cap-swing-research-spec]].
 

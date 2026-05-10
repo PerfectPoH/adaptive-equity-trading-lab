@@ -125,6 +125,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - backtest/report proxy small-cap aggiunto: `build_small_cap_backtest_report` e `write_small_cap_backtest_report_markdown` confrontano il proxy holding-window con il benchmark primario e aggregano diagnostica setup/regime/execution.
 - historical runner small-cap aggiunto: `SmallCapHistoricalRunConfig` e `run_small_cap_historical_report` producono `candidate_export.csv`, `benchmark_report.csv` e `small_cap_backtest_report.md` per finestre storiche.
 - data preparer small-cap aggiunto: `SmallCapPreparedData` e `prepare_small_cap_historical_data` convertono OHLCV + metadata statici in `candidate_metadata`, frame feature-ready, IWM proxy e diagnostica.
+- experiment CLI small-cap aggiunta: `run_small_cap_historical_experiment` e `python -m src.experiments.small_cap_experiment_cli` collegano metadata CSV, download OHLCV/IWM/VIX, data preparer e historical runner.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 
