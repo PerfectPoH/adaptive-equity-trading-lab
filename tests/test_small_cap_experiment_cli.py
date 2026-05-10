@@ -4,7 +4,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from src.experiments.small_cap_experiment_cli import run_small_cap_historical_experiment
+from src.experiments import small_cap_experiment_cli
+from src.experiments.small_cap_experiment_cli import main, run_small_cap_historical_experiment, run_small_cap_watchlist_experiment
 
 
 def _ohlcv(start: float) -> pd.DataFrame:
@@ -94,3 +95,63 @@ def test_run_small_cap_historical_experiment_requires_metadata_file(tmp_path: Pa
         assert "metadata_path not found" in str(exc)
     else:
         raise AssertionError("Expected FileNotFoundError")
+
+
+def test_run_small_cap_watchlist_experiment_builds_metadata_then_runs(tmp_path: Path) -> None:
+    downloaded: list[str] = []
+
+    def metadata_provider(symbol: str) -> dict[str, object]:
+        return {"market_cap": 500_000_000 if symbol == "AAA" else 900_000_000, "is_etf": False}
+
+    def fake_downloader(symbol: str, start: str, end: str | None = None) -> pd.DataFrame:
+        downloaded.append(symbol)
+        if symbol == "IWM":
+            return _ohlcv(200.0)
+        if symbol == "^VIX":
+            frame = _ohlcv(18.0)
+            frame["Close"] = 18.0
+            return frame
+        return _ohlcv(10.0 if symbol == "AAA" else 20.0)
+
+    result = run_small_cap_watchlist_experiment(
+        symbols=["AAA", "BBB"],
+        metadata_output_path=tmp_path / "metadata.csv",
+        metadata_diagnostics_path=tmp_path / "metadata_diagnostics.csv",
+        output_dir=tmp_path / "run",
+        start="2024-01-01",
+        end="2024-02-15",
+        metadata_provider=metadata_provider,
+        downloader=fake_downloader,
+    )
+
+    assert downloaded == ["AAA", "BBB", "IWM", "^VIX"]
+    assert result["metadata_result"].metadata_path.exists()
+    assert result["experiment_result"]["run_result"]["paths"]["backtest_report"].exists()
+    assert pd.read_csv(tmp_path / "metadata.csv")["symbol"].tolist() == ["AAA", "BBB"]
+
+
+def test_small_cap_experiment_cli_main_supports_one_shot_symbols(tmp_path: Path, monkeypatch) -> None:
+    calls: dict[str, object] = {}
+
+    def fake_run(**kwargs):
+        calls.update(kwargs)
+        return {}
+
+    monkeypatch.setattr(small_cap_experiment_cli, "run_small_cap_watchlist_experiment", fake_run)
+
+    exit_code = main(
+        [
+            "--symbols",
+            "AAA,BBB",
+            "--metadata-output-path",
+            str(tmp_path / "metadata.csv"),
+            "--output-dir",
+            str(tmp_path / "run"),
+            "--start",
+            "2024-01-01",
+        ]
+    )
+
+    assert exit_code == 0
+    assert calls["symbols"] == ["AAA", "BBB"]
+    assert calls["metadata_output_path"] == str(tmp_path / "metadata.csv")
