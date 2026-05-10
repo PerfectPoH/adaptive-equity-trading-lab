@@ -134,6 +134,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - portfolio backtester core small-cap aggiunto: `run_small_cap_portfolio_backtest` produce trade log, equity curve, summary e rejection summary con cash bloccato/liberato sulle posizioni.
 - portfolio report integration small-cap aggiunta: il runner storico scrive `portfolio_trade_log.csv`, `portfolio_equity_curve.csv`, `portfolio_rejections.csv`, `portfolio_summary.csv` e il markdown include sezioni portfolio.
 - roadmap critica small-cap aggiornata: prima di sector cap/random delay/survivorship sensitivity servono Outlier P&L Breakdown, Score Profile Report e run manifest con config hash.
+- portfolio diagnostics report small-cap aggiunto: `portfolio_outlier_breakdown.csv`, `portfolio_score_profile.csv`, sezioni markdown outlier/score e `small_cap_scanner_score` preservato nel trade log.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 
