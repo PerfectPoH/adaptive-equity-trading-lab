@@ -63,6 +63,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-10-cascade-small-cap-data-preparer]]
 - [[2026-05-10-cascade-small-cap-experiment-cli]]
 - [[2026-05-10-cascade-small-cap-metadata-builder]]
+- [[2026-05-10-cascade-small-cap-one-shot-experiment]]
 - [[Quant-Research-Priorities-2026-05-09]]
 
 ## Relazioni principali
@@ -103,5 +104,6 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Roadmap-Master]] -> [[2026-05-10-cascade-small-cap-data-preparer]]
 - [[Roadmap-Master]] -> [[2026-05-10-cascade-small-cap-experiment-cli]]
 - [[Roadmap-Master]] -> [[2026-05-10-cascade-small-cap-metadata-builder]]
+- [[Roadmap-Master]] -> [[2026-05-10-cascade-small-cap-one-shot-experiment]]
 - [[Roadmap-Master]] -> [[Quant-Research-Priorities-2026-05-09]]
 - [[Regole-Quant]] -> [[Quant-Research-Priorities-2026-05-09]]
