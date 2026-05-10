@@ -8,6 +8,7 @@ import pandas as pd
 
 from src.analysis.small_cap_backtest_report import write_small_cap_backtest_report_markdown
 from src.analysis.small_cap_benchmarks import SmallCapBenchmarkConfig, build_small_cap_benchmark_report
+from src.backtest.small_cap_portfolio_backtester import SmallCapPortfolioBacktestConfig, run_small_cap_portfolio_backtest
 from src.experiments.small_cap_candidate_export import SmallCapCandidateExportConfig, build_small_cap_candidate_export
 
 
@@ -17,6 +18,7 @@ class SmallCapHistoricalRunConfig:
     end: str | pd.Timestamp | None = None
     candidate_export: SmallCapCandidateExportConfig = SmallCapCandidateExportConfig()
     benchmark: SmallCapBenchmarkConfig = SmallCapBenchmarkConfig()
+    portfolio: SmallCapPortfolioBacktestConfig = SmallCapPortfolioBacktestConfig()
     primary_benchmark: str = "equal_weight_universe"
     include_diagnostics: bool = True
 
@@ -51,27 +53,43 @@ def run_small_cap_historical_report(
         iwm_frame=iwm_frame,
         config=config.benchmark,
     )
+    portfolio_backtest = run_small_cap_portfolio_backtest(candidate_export, frames, config=config.portfolio)
 
     candidate_path = output_path / "candidate_export.csv"
     benchmark_path = output_path / "benchmark_report.csv"
+    portfolio_trade_log_path = output_path / "portfolio_trade_log.csv"
+    portfolio_equity_curve_path = output_path / "portfolio_equity_curve.csv"
+    portfolio_rejections_path = output_path / "portfolio_rejections.csv"
+    portfolio_summary_path = output_path / "portfolio_summary.csv"
     report_path = output_path / "small_cap_backtest_report.md"
     candidate_export.to_csv(candidate_path, index=False)
     benchmark_report.to_csv(benchmark_path, index=False)
+    portfolio_backtest.trade_log.to_csv(portfolio_trade_log_path, index=False)
+    portfolio_backtest.equity_curve.to_csv(portfolio_equity_curve_path, index=False)
+    portfolio_backtest.rejections.to_csv(portfolio_rejections_path, index=False)
+    pd.DataFrame([portfolio_backtest.summary]).to_csv(portfolio_summary_path, index=False)
     backtest_report = write_small_cap_backtest_report_markdown(
         candidate_export,
         benchmark_report,
         report_path,
         primary_benchmark=config.primary_benchmark,
         metadata_diagnostics=metadata_diagnostics,
+        portfolio_summary=portfolio_backtest.summary,
+        portfolio_rejection_summary=portfolio_backtest.rejection_summary,
     )
 
     return {
         "candidate_export": candidate_export,
         "benchmark_report": benchmark_report,
+        "portfolio_backtest": portfolio_backtest,
         "backtest_report": backtest_report,
         "paths": {
             "candidate_export": candidate_path,
             "benchmark_report": benchmark_path,
+            "portfolio_trade_log": portfolio_trade_log_path,
+            "portfolio_equity_curve": portfolio_equity_curve_path,
+            "portfolio_rejections": portfolio_rejections_path,
+            "portfolio_summary": portfolio_summary_path,
             "backtest_report": report_path,
         },
     }

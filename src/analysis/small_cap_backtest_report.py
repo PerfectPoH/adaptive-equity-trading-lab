@@ -16,6 +16,8 @@ def build_small_cap_backtest_report(
     benchmark_report: pd.DataFrame,
     primary_benchmark: str = PRIMARY_BENCHMARK,
     metadata_diagnostics: pd.DataFrame | None = None,
+    portfolio_summary: dict[str, Any] | None = None,
+    portfolio_rejection_summary: dict[str, int] | None = None,
 ) -> dict[str, Any]:
     strategy_return = _benchmark_return(benchmark_report, STRATEGY_PROXY_BENCHMARK)
     primary_return = _benchmark_return(benchmark_report, primary_benchmark)
@@ -36,6 +38,9 @@ def build_small_cap_backtest_report(
         "scanner_reject_reasons": _reason_counts(candidate_export, "small_cap_scanner_reject_reason"),
         "metadata_diagnostics": _records(metadata_diagnostics) if metadata_diagnostics is not None else [],
         "metadata_diagnostic_reasons": _metadata_diagnostic_reasons(metadata_diagnostics),
+        "portfolio_summary": portfolio_summary or {},
+        "portfolio_return": _portfolio_return(portfolio_summary),
+        "portfolio_rejection_summary": portfolio_rejection_summary or {},
         "decision": _decision(verdict),
     }
 
@@ -46,12 +51,16 @@ def write_small_cap_backtest_report_markdown(
     output_path: Path,
     primary_benchmark: str = PRIMARY_BENCHMARK,
     metadata_diagnostics: pd.DataFrame | None = None,
+    portfolio_summary: dict[str, Any] | None = None,
+    portfolio_rejection_summary: dict[str, int] | None = None,
 ) -> dict[str, Any]:
     report = build_small_cap_backtest_report(
         candidate_export,
         benchmark_report,
         primary_benchmark=primary_benchmark,
         metadata_diagnostics=metadata_diagnostics,
+        portfolio_summary=portfolio_summary,
+        portfolio_rejection_summary=portfolio_rejection_summary,
     )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(_to_markdown(report), encoding="utf-8")
@@ -167,6 +176,12 @@ def _metadata_diagnostic_reasons(metadata_diagnostics: pd.DataFrame | None) -> d
     return dict(sorted(counts.items()))
 
 
+def _portfolio_return(portfolio_summary: dict[str, Any] | None) -> float:
+    if not portfolio_summary:
+        return float("nan")
+    return _safe_float(portfolio_summary.get("return_pct"))
+
+
 def _records(frame: pd.DataFrame) -> list[dict[str, Any]]:
     records = []
     for record in frame.to_dict(orient="records"):
@@ -211,6 +226,10 @@ def _to_markdown(report: dict[str, Any]) -> str:
     lines.extend(_dict_lines(report["metadata_diagnostic_reasons"]))
     for row in report["metadata_diagnostics"]:
         lines.append(f"- {row.get('symbol')}: status={row.get('status')}, reason={row.get('reason')}")
+    lines.extend(["", "## Portfolio Backtest"])
+    lines.extend(_value_lines(report["portfolio_summary"]))
+    lines.extend(["", "## Portfolio Rejection Summary"])
+    lines.extend(_dict_lines(report["portfolio_rejection_summary"]))
     lines.extend(["", "## Benchmarks"])
     for row in report["benchmark_report"]:
         lines.append(f"- {row.get('benchmark')}: return={row.get('return')}, observations={row.get('observations')}")
@@ -219,6 +238,12 @@ def _to_markdown(report: dict[str, Any]) -> str:
 
 
 def _dict_lines(values: dict[str, int]) -> list[str]:
+    if not values:
+        return ["- none: 0"]
+    return [f"- {key}: {value}" for key, value in values.items()]
+
+
+def _value_lines(values: dict[str, Any]) -> list[str]:
     if not values:
         return ["- none: 0"]
     return [f"- {key}: {value}" for key, value in values.items()]
