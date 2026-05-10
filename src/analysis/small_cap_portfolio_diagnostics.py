@@ -74,8 +74,12 @@ def build_score_profile_report(
     if data.empty:
         return pd.DataFrame(columns=SCORE_PROFILE_COLUMNS)
 
-    bucket_count = min(int(bins), len(data))
-    data["score_bucket"] = [f"Q{min((i * bucket_count) // len(data) + 1, bucket_count)}" for i in range(len(data))]
+    unique_scores = sorted(data[score_column].unique())
+    bucket_count = min(int(bins), len(unique_scores))
+    score_to_bucket = {
+        score: f"Q{min((i * bucket_count) // len(unique_scores) + 1, bucket_count)}" for i, score in enumerate(unique_scores)
+    }
+    data["score_bucket"] = data[score_column].map(score_to_bucket)
     rows: list[dict[str, Any]] = []
     for bucket, group in data.groupby("score_bucket", sort=False):
         returns = group["return_pct"]

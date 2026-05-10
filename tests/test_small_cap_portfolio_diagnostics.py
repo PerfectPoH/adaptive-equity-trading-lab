@@ -70,3 +70,21 @@ def test_score_profile_report_returns_empty_schema_when_score_missing() -> None:
         "avg_pnl",
         "simple_trade_sharpe",
     ]
+
+
+def test_score_profile_report_keeps_identical_scores_in_same_bucket() -> None:
+    trade_log = pd.DataFrame(
+        [
+            {"symbol": "A", "small_cap_scanner_score": 80.0, "return_pct": 0.10, "pnl": 10.0},
+            {"symbol": "B", "small_cap_scanner_score": 80.0, "return_pct": -0.10, "pnl": -10.0},
+            {"symbol": "C", "small_cap_scanner_score": 100.0, "return_pct": 0.20, "pnl": 20.0},
+            {"symbol": "D", "small_cap_scanner_score": 100.0, "return_pct": -0.20, "pnl": -20.0},
+        ]
+    )
+
+    profile = build_score_profile_report(trade_log, bins=10)
+
+    assert profile["score_bucket"].tolist() == ["Q1", "Q2"]
+    assert profile["min_score"].tolist() == [80.0, 100.0]
+    assert profile["max_score"].tolist() == [80.0, 100.0]
+    assert profile["trade_count"].tolist() == [2, 2]
