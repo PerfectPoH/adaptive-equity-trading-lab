@@ -135,6 +135,12 @@ Prima versione conservative:
 
 ## Risk controls obbligatori
 
+### Fail-closed
+
+Regola fondativa: in caso di dati mancanti, ambiguita' di execution, regime non verificabile, liquidita' insufficiente o cash non disponibile, il sistema deve scartare il trade.
+
+Lo scarto deve essere tracciato con una reason leggibile. Non sono ammessi fallback ottimistici.
+
 ### Spread e slippage
 
 Ogni backtest deve includere haircut conservativo. Se l'edge medio per trade e' inferiore allo spread/slippage stimato, il setup non e' valido.
@@ -176,6 +182,58 @@ Se la size teorica supera il limite, il backtest deve troncare la size o saltare
 ### Overnight/catalyst risk
 
 Small-cap possono fare offering o news after-hours. La strategia deve distinguere setup overnight-safe da setup da chiudere prima della sessione successiva.
+
+### Outlier risk sui rendimenti
+
+Le small-cap possono produrre equity curve apparentemente eccellenti grazie a pochi trade esplosivi. Un sistema non va promosso se il rendimento dipende da una manciata di outlier.
+
+Metriche obbligatorie post-run:
+
+```text
+top_1_pnl_contribution_pct
+top_3_pnl_contribution_pct
+top_5_pnl_contribution_pct
+top_10_pnl_contribution_pct
+max_single_trade_contribution_pct
+outlier_concentration_alert
+```
+
+Soglia iniziale proposta:
+
+```text
+top_3_pnl_contribution_pct > 0.40 => alert
+```
+
+### Monotonicita' dello scanner score
+
+Il portfolio backtester fa triage dei candidati usando `small_cap_scanner_score`. Questa scelta e' valida solo se il punteggio e' monotono rispetto alla performance realizzata.
+
+Il report post-run deve raggruppare i trade per decili di score e calcolare:
+
+```text
+trade_count
+avg_return_pct
+median_return_pct
+win_rate
+total_pnl
+avg_pnl
+simple_trade_sharpe
+```
+
+Se i decili alti non migliorano rispetto ai decili bassi, lo score resta diagnostico e non va usato per allocation, sizing o filtri live.
+
+### Gate prima di nuovi vincoli portfolio
+
+Non introdurre penalizzazioni settoriali, factor caps, random delay, survivorship sensitivity o opening regime check prima di misurare:
+
+```text
+raw portfolio_return
+raw outlier concentration
+raw score monotonicity
+raw rejection_summary
+```
+
+Prima si misura la qualita' del segnale grezzo, poi si aggiungono controlli di diversificazione e realismo.
 
 ## Benchmark corretti
 
@@ -241,8 +299,22 @@ Step intermedio consigliato: valutare Tiingo prima di passare a provider piu' co
 4. Esportare candidati giornalieri e diagnostica.
 5. Solo dopo, definire label e backtest dedicato.
 
+## Milestone tecnica corrente
+
+Il portfolio backtester e' integrato nel runner storico. Il prossimo blocco deve essere il `Portfolio Diagnostics Report`:
+
+```text
+portfolio_outlier_breakdown.csv
+portfolio_score_profile.csv
+markdown sections:
+- Portfolio Outlier Breakdown
+- Score Profile Report
+```
+
+Questa milestone e' bloccante prima di nuovi affinamenti architetturali.
+
 ## Regola di stop ricerca
 
-Se un setup non supera costi conservativi, random baseline e benchmark small-cap coerente, non va ottimizzato ulteriormente.
+Se un setup non supera costi conservativi, random baseline, benchmark small-cap coerente, outlier concentration gate e score monotonicity gate, non va ottimizzato ulteriormente.
 
-Vedi [[Roadmap-Master]], [[Quant-Research-Priorities-2026-05-09]], [[2026-05-09-cascade-backtest-analysis]].
+Vedi [[Roadmap-Master]], [[Quant-Research-Priorities-2026-05-09]], [[2026-05-09-cascade-backtest-analysis]], [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]].

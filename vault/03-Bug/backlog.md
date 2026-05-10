@@ -147,7 +147,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: strategie su titoli piccoli possono saturare con capitali retail relativamente bassi.
 - Impatto: il backtest sovrastima ritorni se assume size non realistiche rispetto al dollar volume.
 - Azione: introdurre limite di posizione, ad esempio `position_notional <= 1%` del dollar volume medio a 5 giorni.
-- Stato: aperto.
+- Stato: mitigato nel core; `SmallCapExecutionPlanner` e `SmallCapPortfolioBacktester` applicano capacity/cash cap, ma resta da validare su smoke reali.
 
 ### RISK-018 - Regime di mercato small-cap non modellato
 
@@ -155,7 +155,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: panic reversal e breakout small-cap cambiano comportamento in bull, bear e stress regime.
 - Impatto: un backtest 2020-2024 puo' mescolare regimi incompatibili e nascondere drawdown strutturali.
 - Azione: aggiungere guardrail operativi: se IWM < EMA 50 lo scanner non genera segnali, se VIX > 35 tutti i trade sono bloccati, se dati regime mancanti no-trade.
-- Stato: aperto.
+- Stato: parzialmente mitigato; guardrail IWM/VIX implementato sui dati disponibili, ma opening regime check resta futuro.
 
 ### RISK-019 - Survivorship bias estremo su small-cap
 
@@ -172,6 +172,30 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Impatto: setup squeeze possono essere validati su dati non disponibili o non accurati in tempo reale.
 - Azione: fase iniziale long-only senza short-interest; usare float rotation solo come proxy e dichiarare data limits.
 - Stato: aperto.
+
+### RISK-021 - Scanner score non monotono
+
+- Priorita: P1.
+- Sintomo: il portfolio backtester usa `small_cap_scanner_score` per ordinare i candidati giornalieri, ma non e' ancora dimostrato che score piu' alti producano performance migliori.
+- Impatto: il triage puo' allocare capitale ai trade peggiori pur sembrando disciplinato.
+- Azione: implementare Score Profile Report per decili di score, con trade count, win rate, P&L, return medio/mediano e monotonicity check.
+- Stato: aperto; bloccante prima di usare lo score per sizing, filtri live o penalita' settoriali.
+
+### RISK-022 - Outlier risk sui rendimenti small-cap
+
+- Priorita: P1.
+- Sintomo: pochi trade esplosivi possono generare la maggior parte del P&L.
+- Impatto: una equity curve positiva puo' rappresentare una lotteria storica, non un edge replicabile. In live basta perdere uno degli outlier per ribaltare il risultato.
+- Azione: implementare Outlier P&L Breakdown con contributo top 1/3/5/10 trade, max single-trade contribution e alert se top 3 trade superano il 40% del P&L totale.
+- Stato: aperto; bloccante prima di promuovere qualunque setup small-cap.
+
+### RISK-023 - Overfitting manuale nei run small-cap
+
+- Priorita: P1.
+- Sintomo: con scanner rule-based e molte soglie, anche modifiche manuali apparentemente ragionevoli possono diventare sweep non tracciati.
+- Impatto: impossibile calcolare in futuro Deflated Sharpe Ratio o Probability of Backtest Overfitting se i tentativi non sono registrati.
+- Azione: aggiungere run manifest small-cap con `run_id`, config hash, timestamp, date range, simboli e parametri completi.
+- Stato: aperto; da implementare prima di sweep estesi su scanner/execution/portfolio.
 
 ## Tech debt
 
