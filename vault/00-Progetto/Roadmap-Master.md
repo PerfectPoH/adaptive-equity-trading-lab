@@ -98,6 +98,7 @@ Vedi [[news-risk-engine]].
 - [x] Benchmark coerenti: IWM, equal-weight universe, random-entry baseline, ticker holding-window benchmark.
 - [x] Backtest/report proxy small-cap dedicato con diagnostica setup, regime ed execution.
 - [x] Runner storico small-cap end-to-end con export candidati, benchmark report e markdown report.
+- [x] Data preparer small-cap per convertire OHLCV + metadata statici in input compatibili con runner storico.
 
 Vedi [[small-cap-swing-research-spec]].
 

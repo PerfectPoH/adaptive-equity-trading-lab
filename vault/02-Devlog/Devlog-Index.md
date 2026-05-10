@@ -43,6 +43,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-09-cascade-small-cap-benchmarks]] - benchmark coerenti per small-cap: IWM, equal-weight, random baseline, holding-window e cash.
 - [[2026-05-09-cascade-small-cap-backtest-report]] - report/proxy small-cap con verdict vs benchmark primario e diagnostica setup/regime/execution.
 - [[2026-05-09-cascade-small-cap-historical-runner]] - runner storico end-to-end per candidate export, benchmark report e markdown report.
+- [[2026-05-10-cascade-small-cap-data-preparer]] - preparer deterministico da OHLCV + metadata statici a input compatibili col runner storico.
 
 ## Convenzione
 
