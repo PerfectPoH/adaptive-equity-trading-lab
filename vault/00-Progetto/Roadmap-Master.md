@@ -100,6 +100,7 @@ Vedi [[news-risk-engine]].
 - [x] Runner storico small-cap end-to-end con export candidati, benchmark report e markdown report.
 - [x] Data preparer small-cap per convertire OHLCV + metadata statici in input compatibili con runner storico.
 - [x] Orchestratore/CLI small-cap per metadata CSV, download OHLCV/IWM/VIX, data preparer e historical runner.
+- [x] Metadata builder small-cap da watchlist ticker a CSV `symbol,market_cap,is_etf` con diagnostica.
 
 Vedi [[small-cap-swing-research-spec]].
 

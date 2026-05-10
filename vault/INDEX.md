@@ -126,6 +126,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - historical runner small-cap aggiunto: `SmallCapHistoricalRunConfig` e `run_small_cap_historical_report` producono `candidate_export.csv`, `benchmark_report.csv` e `small_cap_backtest_report.md` per finestre storiche.
 - data preparer small-cap aggiunto: `SmallCapPreparedData` e `prepare_small_cap_historical_data` convertono OHLCV + metadata statici in `candidate_metadata`, frame feature-ready, IWM proxy e diagnostica.
 - experiment CLI small-cap aggiunta: `run_small_cap_historical_experiment` e `python -m src.experiments.small_cap_experiment_cli` collegano metadata CSV, download OHLCV/IWM/VIX, data preparer e historical runner.
+- metadata builder small-cap aggiunto: `build_small_cap_metadata`, `write_small_cap_metadata_csv` e `python -m src.data.small_cap_metadata_builder` generano il CSV `symbol,market_cap,is_etf` da watchlist ticker con diagnostica.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 
