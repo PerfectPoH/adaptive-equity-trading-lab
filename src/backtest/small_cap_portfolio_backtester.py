@@ -76,6 +76,7 @@ def run_small_cap_portfolio_backtest(
                     "max_liquidity_notional": decision.max_liquidity_notional,
                     "next_open_gap_pct": decision.next_open_gap_pct,
                     "estimated_cost_pct": decision.estimated_cost_pct,
+                    "small_cap_scanner_score": _candidate_score(candidate, "small_cap_scanner_score"),
                     "cash_after_entry": cash,
                 }
             )
@@ -222,6 +223,13 @@ def _rejection_summary(rejections: pd.DataFrame) -> dict[str, int]:
     if rejections.empty or "reject_reason" not in rejections.columns:
         return {}
     return {str(key): int(value) for key, value in rejections["reject_reason"].value_counts().sort_index().items()}
+
+
+def _candidate_score(candidate: pd.Series, column: str) -> float | None:
+    value = pd.to_numeric(pd.Series([candidate.get(column)]), errors="coerce").iat[0]
+    if pd.isna(value):
+        return None
+    return float(value)
 
 
 def _nearest_index_on_or_before(frame: pd.DataFrame, date: pd.Timestamp) -> pd.Timestamp | None:

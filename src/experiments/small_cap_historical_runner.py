@@ -8,6 +8,7 @@ import pandas as pd
 
 from src.analysis.small_cap_backtest_report import write_small_cap_backtest_report_markdown
 from src.analysis.small_cap_benchmarks import SmallCapBenchmarkConfig, build_small_cap_benchmark_report
+from src.analysis.small_cap_portfolio_diagnostics import build_portfolio_outlier_breakdown, build_score_profile_report
 from src.backtest.small_cap_portfolio_backtester import SmallCapPortfolioBacktestConfig, run_small_cap_portfolio_backtest
 from src.experiments.small_cap_candidate_export import SmallCapCandidateExportConfig, build_small_cap_candidate_export
 
@@ -54,6 +55,8 @@ def run_small_cap_historical_report(
         config=config.benchmark,
     )
     portfolio_backtest = run_small_cap_portfolio_backtest(candidate_export, frames, config=config.portfolio)
+    portfolio_outlier_breakdown = build_portfolio_outlier_breakdown(portfolio_backtest.trade_log)
+    portfolio_score_profile = build_score_profile_report(portfolio_backtest.trade_log)
 
     candidate_path = output_path / "candidate_export.csv"
     benchmark_path = output_path / "benchmark_report.csv"
@@ -61,6 +64,8 @@ def run_small_cap_historical_report(
     portfolio_equity_curve_path = output_path / "portfolio_equity_curve.csv"
     portfolio_rejections_path = output_path / "portfolio_rejections.csv"
     portfolio_summary_path = output_path / "portfolio_summary.csv"
+    portfolio_outlier_breakdown_path = output_path / "portfolio_outlier_breakdown.csv"
+    portfolio_score_profile_path = output_path / "portfolio_score_profile.csv"
     report_path = output_path / "small_cap_backtest_report.md"
     candidate_export.to_csv(candidate_path, index=False)
     benchmark_report.to_csv(benchmark_path, index=False)
@@ -68,6 +73,8 @@ def run_small_cap_historical_report(
     portfolio_backtest.equity_curve.to_csv(portfolio_equity_curve_path, index=False)
     portfolio_backtest.rejections.to_csv(portfolio_rejections_path, index=False)
     pd.DataFrame([portfolio_backtest.summary]).to_csv(portfolio_summary_path, index=False)
+    pd.DataFrame([portfolio_outlier_breakdown]).to_csv(portfolio_outlier_breakdown_path, index=False)
+    portfolio_score_profile.to_csv(portfolio_score_profile_path, index=False)
     backtest_report = write_small_cap_backtest_report_markdown(
         candidate_export,
         benchmark_report,
@@ -76,12 +83,16 @@ def run_small_cap_historical_report(
         metadata_diagnostics=metadata_diagnostics,
         portfolio_summary=portfolio_backtest.summary,
         portfolio_rejection_summary=portfolio_backtest.rejection_summary,
+        portfolio_outlier_breakdown=portfolio_outlier_breakdown,
+        portfolio_score_profile=portfolio_score_profile,
     )
 
     return {
         "candidate_export": candidate_export,
         "benchmark_report": benchmark_report,
         "portfolio_backtest": portfolio_backtest,
+        "portfolio_outlier_breakdown": portfolio_outlier_breakdown,
+        "portfolio_score_profile": portfolio_score_profile,
         "backtest_report": backtest_report,
         "paths": {
             "candidate_export": candidate_path,
@@ -90,6 +101,8 @@ def run_small_cap_historical_report(
             "portfolio_equity_curve": portfolio_equity_curve_path,
             "portfolio_rejections": portfolio_rejections_path,
             "portfolio_summary": portfolio_summary_path,
+            "portfolio_outlier_breakdown": portfolio_outlier_breakdown_path,
+            "portfolio_score_profile": portfolio_score_profile_path,
             "backtest_report": report_path,
         },
     }

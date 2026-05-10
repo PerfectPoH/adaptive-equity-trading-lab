@@ -18,6 +18,8 @@ def build_small_cap_backtest_report(
     metadata_diagnostics: pd.DataFrame | None = None,
     portfolio_summary: dict[str, Any] | None = None,
     portfolio_rejection_summary: dict[str, int] | None = None,
+    portfolio_outlier_breakdown: dict[str, Any] | None = None,
+    portfolio_score_profile: pd.DataFrame | None = None,
 ) -> dict[str, Any]:
     strategy_return = _benchmark_return(benchmark_report, STRATEGY_PROXY_BENCHMARK)
     primary_return = _benchmark_return(benchmark_report, primary_benchmark)
@@ -41,6 +43,8 @@ def build_small_cap_backtest_report(
         "portfolio_summary": portfolio_summary or {},
         "portfolio_return": _portfolio_return(portfolio_summary),
         "portfolio_rejection_summary": portfolio_rejection_summary or {},
+        "portfolio_outlier_breakdown": portfolio_outlier_breakdown or {},
+        "portfolio_score_profile": _records(portfolio_score_profile) if portfolio_score_profile is not None else [],
         "decision": _decision(verdict),
     }
 
@@ -53,6 +57,8 @@ def write_small_cap_backtest_report_markdown(
     metadata_diagnostics: pd.DataFrame | None = None,
     portfolio_summary: dict[str, Any] | None = None,
     portfolio_rejection_summary: dict[str, int] | None = None,
+    portfolio_outlier_breakdown: dict[str, Any] | None = None,
+    portfolio_score_profile: pd.DataFrame | None = None,
 ) -> dict[str, Any]:
     report = build_small_cap_backtest_report(
         candidate_export,
@@ -61,6 +67,8 @@ def write_small_cap_backtest_report_markdown(
         metadata_diagnostics=metadata_diagnostics,
         portfolio_summary=portfolio_summary,
         portfolio_rejection_summary=portfolio_rejection_summary,
+        portfolio_outlier_breakdown=portfolio_outlier_breakdown,
+        portfolio_score_profile=portfolio_score_profile,
     )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(_to_markdown(report), encoding="utf-8")
@@ -230,6 +238,10 @@ def _to_markdown(report: dict[str, Any]) -> str:
     lines.extend(_value_lines(report["portfolio_summary"]))
     lines.extend(["", "## Portfolio Rejection Summary"])
     lines.extend(_dict_lines(report["portfolio_rejection_summary"]))
+    lines.extend(["", "## Portfolio Outlier Breakdown"])
+    lines.extend(_value_lines(report["portfolio_outlier_breakdown"]))
+    lines.extend(["", "## Score Profile Report"])
+    lines.extend(_record_lines(report["portfolio_score_profile"]))
     lines.extend(["", "## Benchmarks"])
     for row in report["benchmark_report"]:
         lines.append(f"- {row.get('benchmark')}: return={row.get('return')}, observations={row.get('observations')}")
@@ -247,6 +259,12 @@ def _value_lines(values: dict[str, Any]) -> list[str]:
     if not values:
         return ["- none: 0"]
     return [f"- {key}: {value}" for key, value in values.items()]
+
+
+def _record_lines(records: list[dict[str, Any]]) -> list[str]:
+    if not records:
+        return ["- none: 0"]
+    return ["- " + ", ".join(f"{key}={value}" for key, value in row.items()) for row in records]
 
 
 def _safe_float(value: object) -> float:
