@@ -110,6 +110,29 @@ def test_build_small_cap_backtest_report_includes_metadata_diagnostics() -> None
     assert report["metadata_diagnostic_reasons"] == {"missing_market_cap": 1}
 
 
+def test_build_small_cap_backtest_report_includes_portfolio_summary() -> None:
+    portfolio_summary = {
+        "initial_cash": 100_000.0,
+        "ending_cash": 104_000.0,
+        "total_pnl": 4_000.0,
+        "return_pct": 0.04,
+        "total_trades": 1,
+        "total_rejections": 1,
+    }
+    portfolio_rejection_summary = {"insufficient_funds": 1}
+
+    report = build_small_cap_backtest_report(
+        _candidate_export(),
+        _benchmark_report(),
+        portfolio_summary=portfolio_summary,
+        portfolio_rejection_summary=portfolio_rejection_summary,
+    )
+
+    assert report["portfolio_summary"] == portfolio_summary
+    assert report["portfolio_return"] == 0.04
+    assert report["portfolio_rejection_summary"] == {"insufficient_funds": 1}
+
+
 def test_build_small_cap_backtest_report_handles_insufficient_benchmark_data() -> None:
     benchmark_report = pd.DataFrame(
         [
@@ -129,7 +152,14 @@ def test_write_small_cap_backtest_report_markdown_includes_verdict(tmp_path: Pat
 
     metadata_diagnostics = pd.DataFrame([{"symbol": "BLDE", "status": "fail", "reason": "missing_market_cap"}])
 
-    report = write_small_cap_backtest_report_markdown(_candidate_export(), _benchmark_report(), output_path, metadata_diagnostics=metadata_diagnostics)
+    report = write_small_cap_backtest_report_markdown(
+        _candidate_export(),
+        _benchmark_report(),
+        output_path,
+        metadata_diagnostics=metadata_diagnostics,
+        portfolio_summary={"return_pct": 0.04, "total_trades": 1, "ending_cash": 104_000.0},
+        portfolio_rejection_summary={"insufficient_funds": 1},
+    )
 
     content = output_path.read_text(encoding="utf-8")
     assert report["verdict"] == "beats_primary_benchmark"
@@ -141,3 +171,7 @@ def test_write_small_cap_backtest_report_markdown_includes_verdict(tmp_path: Pat
     assert "## Scanner Reject Reasons" in content
     assert "## Metadata Diagnostics" in content
     assert "missing_market_cap" in content
+    assert "## Portfolio Backtest" in content
+    assert "return_pct: 0.04" in content
+    assert "## Portfolio Rejection Summary" in content
+    assert "insufficient_funds" in content

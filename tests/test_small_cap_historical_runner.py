@@ -5,6 +5,7 @@ from pathlib import Path
 import pandas as pd
 
 from src.analysis.small_cap_benchmarks import SmallCapBenchmarkConfig
+from src.backtest.small_cap_portfolio_backtester import SmallCapPortfolioBacktestConfig
 from src.experiments.small_cap_historical_runner import SmallCapHistoricalRunConfig, run_small_cap_historical_report
 
 
@@ -70,12 +71,20 @@ def test_small_cap_historical_runner_writes_expected_artifacts(tmp_path: Path) -
             start="2024-01-02",
             end="2024-01-03",
             benchmark=SmallCapBenchmarkConfig(holding_period_bars=1, random_seed=3),
+            portfolio=SmallCapPortfolioBacktestConfig(holding_period_bars=1),
         ),
     )
 
     assert result["paths"]["candidate_export"].exists()
     assert result["paths"]["benchmark_report"].exists()
     assert result["paths"]["backtest_report"].exists()
+    assert result["paths"]["portfolio_trade_log"].exists()
+    assert result["paths"]["portfolio_equity_curve"].exists()
+    assert result["paths"]["portfolio_rejections"].exists()
+    assert result["paths"]["portfolio_summary"].exists()
+    assert "portfolio_backtest" in result
+    assert "portfolio_summary" in result["backtest_report"]
+    assert "## Portfolio Backtest" in result["paths"]["backtest_report"].read_text(encoding="utf-8")
     assert result["candidate_export"]["as_of"].tolist() == ["2024-01-02", "2024-01-02", "2024-01-03", "2024-01-03"]
     assert set(result["benchmark_report"]["benchmark"]) == {
         "cash_flat",
