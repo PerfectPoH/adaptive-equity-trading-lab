@@ -4,7 +4,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from src.data.small_cap_metadata_builder import build_small_cap_metadata, write_small_cap_metadata_csv
+from src.data import small_cap_metadata_builder
+from src.data.small_cap_metadata_builder import build_small_cap_metadata, main, write_small_cap_metadata_csv
 
 
 def test_build_small_cap_metadata_uses_provider_and_sorts_symbols() -> None:
@@ -62,3 +63,16 @@ def test_write_small_cap_metadata_csv_writes_metadata_and_diagnostics(tmp_path: 
     assert pd.read_csv(diagnostics_path).to_dict(orient="records") == [
         {"symbol": "MISS", "status": "fail", "reason": "missing_market_cap"}
     ]
+
+
+def test_small_cap_metadata_builder_main_writes_from_symbol_list(tmp_path: Path, monkeypatch) -> None:
+    def provider(symbol: str) -> dict[str, object]:
+        return {"market_cap": 500_000_000, "is_etf": False}
+
+    monkeypatch.setattr(small_cap_metadata_builder, "yfinance_metadata_provider", provider)
+    output_path = tmp_path / "metadata.csv"
+
+    exit_code = main(["--symbols", "AAA,BBB", "--output-path", str(output_path)])
+
+    assert exit_code == 0
+    assert pd.read_csv(output_path)["symbol"].tolist() == ["AAA", "BBB"]
