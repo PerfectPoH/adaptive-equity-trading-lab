@@ -15,6 +15,7 @@ def build_small_cap_backtest_report(
     candidate_export: pd.DataFrame,
     benchmark_report: pd.DataFrame,
     primary_benchmark: str = PRIMARY_BENCHMARK,
+    metadata_diagnostics: pd.DataFrame | None = None,
 ) -> dict[str, Any]:
     strategy_return = _benchmark_return(benchmark_report, STRATEGY_PROXY_BENCHMARK)
     primary_return = _benchmark_return(benchmark_report, primary_benchmark)
@@ -31,6 +32,10 @@ def build_small_cap_backtest_report(
         "setup_counts": _counts(candidate_export, "small_cap_setup", operational_only=True),
         "regime_block_reasons": _reason_counts(candidate_export, "market_regime_block_reason"),
         "execution_skip_reasons": _reason_counts(candidate_export, "small_cap_execution_skip_reason"),
+        "universe_rejection_reasons": _reason_counts(candidate_export, "universe_rejection_reasons"),
+        "scanner_reject_reasons": _reason_counts(candidate_export, "small_cap_scanner_reject_reason"),
+        "metadata_diagnostics": _records(metadata_diagnostics) if metadata_diagnostics is not None else [],
+        "metadata_diagnostic_reasons": _metadata_diagnostic_reasons(metadata_diagnostics),
         "decision": _decision(verdict),
     }
 
@@ -40,8 +45,14 @@ def write_small_cap_backtest_report_markdown(
     benchmark_report: pd.DataFrame,
     output_path: Path,
     primary_benchmark: str = PRIMARY_BENCHMARK,
+    metadata_diagnostics: pd.DataFrame | None = None,
 ) -> dict[str, Any]:
-    report = build_small_cap_backtest_report(candidate_export, benchmark_report, primary_benchmark=primary_benchmark)
+    report = build_small_cap_backtest_report(
+        candidate_export,
+        benchmark_report,
+        primary_benchmark=primary_benchmark,
+        metadata_diagnostics=metadata_diagnostics,
+    )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(_to_markdown(report), encoding="utf-8")
     return report
@@ -56,6 +67,7 @@ def _candidate_summary(candidate_export: pd.DataFrame) -> dict[str, Any]:
             "candidate_dates": 0,
             "conversion_rate": 0.0,
             "total_position_notional": 0.0,
+            "operational_position_notional": 0.0,
         }
     rows = int(len(candidate_export))
     operational = _operational_mask(candidate_export)
@@ -67,6 +79,7 @@ def _candidate_summary(candidate_export: pd.DataFrame) -> dict[str, Any]:
         "candidate_dates": _candidate_date_count(candidate_export),
         "conversion_rate": float(operational_count / rows) if rows else 0.0,
         "total_position_notional": _numeric_sum(candidate_export, "small_cap_position_notional"),
+        "operational_position_notional": _numeric_sum(candidate_export[operational].copy(), "small_cap_position_notional"),
     }
 
 
@@ -143,6 +156,17 @@ def _reason_counts(candidate_export: pd.DataFrame, column: str) -> dict[str, int
     return dict(sorted(counts.items()))
 
 
+def _metadata_diagnostic_reasons(metadata_diagnostics: pd.DataFrame | None) -> dict[str, int]:
+    if metadata_diagnostics is None or metadata_diagnostics.empty or "reason" not in metadata_diagnostics.columns:
+        return {}
+    counts: dict[str, int] = {}
+    for reason in metadata_diagnostics["reason"].fillna("").astype(str):
+        reason = reason.strip()
+        if reason:
+            counts[reason] = counts.get(reason, 0) + 1
+    return dict(sorted(counts.items()))
+
+
 def _records(frame: pd.DataFrame) -> list[dict[str, Any]]:
     records = []
     for record in frame.to_dict(orient="records"):
@@ -175,10 +199,18 @@ def _to_markdown(report: dict[str, Any]) -> str:
         ]
     )
     lines.extend(_dict_lines(report["setup_counts"]))
+    lines.extend(["", "## Universe Rejection Reasons"])
+    lines.extend(_dict_lines(report["universe_rejection_reasons"]))
+    lines.extend(["", "## Scanner Reject Reasons"])
+    lines.extend(_dict_lines(report["scanner_reject_reasons"]))
     lines.extend(["", "## Regime Block Reasons"])
     lines.extend(_dict_lines(report["regime_block_reasons"]))
     lines.extend(["", "## Execution Skip Reasons"])
     lines.extend(_dict_lines(report["execution_skip_reasons"]))
+    lines.extend(["", "## Metadata Diagnostics"])
+    lines.extend(_dict_lines(report["metadata_diagnostic_reasons"]))
+    for row in report["metadata_diagnostics"]:
+        lines.append(f"- {row.get('symbol')}: status={row.get('status')}, reason={row.get('reason')}")
     lines.extend(["", "## Benchmarks"])
     for row in report["benchmark_report"]:
         lines.append(f"- {row.get('benchmark')}: return={row.get('return')}, observations={row.get('observations')}")

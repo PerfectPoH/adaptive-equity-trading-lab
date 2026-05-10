@@ -130,6 +130,37 @@ def test_run_small_cap_watchlist_experiment_builds_metadata_then_runs(tmp_path: 
     assert pd.read_csv(tmp_path / "metadata.csv")["symbol"].tolist() == ["AAA", "BBB"]
 
 
+def test_run_small_cap_watchlist_experiment_forwards_metadata_diagnostics(tmp_path: Path) -> None:
+    def metadata_provider(symbol: str) -> dict[str, object]:
+        if symbol == "BAD":
+            return {"market_cap": None, "is_etf": False}
+        return {"market_cap": 500_000_000, "is_etf": False}
+
+    def fake_downloader(symbol: str, start: str, end: str | None = None) -> pd.DataFrame:
+        if symbol == "IWM":
+            return _ohlcv(200.0)
+        if symbol == "^VIX":
+            frame = _ohlcv(18.0)
+            frame["Close"] = 18.0
+            return frame
+        return _ohlcv(10.0)
+
+    result = run_small_cap_watchlist_experiment(
+        symbols=["AAA", "BAD"],
+        metadata_output_path=tmp_path / "metadata.csv",
+        metadata_diagnostics_path=tmp_path / "metadata_diagnostics.csv",
+        output_dir=tmp_path / "run",
+        start="2024-01-01",
+        end="2024-02-15",
+        metadata_provider=metadata_provider,
+        downloader=fake_downloader,
+    )
+
+    report = result["experiment_result"]["run_result"]["backtest_report"]
+    assert report["metadata_diagnostic_reasons"] == {"missing_market_cap": 1}
+    assert "missing_market_cap" in (tmp_path / "run" / "small_cap_backtest_report.md").read_text(encoding="utf-8")
+
+
 def test_small_cap_experiment_cli_main_supports_one_shot_symbols(tmp_path: Path, monkeypatch) -> None:
     calls: dict[str, object] = {}
 

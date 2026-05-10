@@ -102,6 +102,24 @@ def test_small_cap_historical_runner_honors_explicit_as_of_dates(tmp_path: Path)
     assert loaded["as_of"].unique().tolist() == ["2024-01-03"]
 
 
+def test_small_cap_historical_runner_includes_metadata_diagnostics_in_report(tmp_path: Path) -> None:
+    metadata_diagnostics = pd.DataFrame([{"symbol": "BLDE", "status": "fail", "reason": "missing_market_cap"}])
+
+    result = run_small_cap_historical_report(
+        _candidate_metadata(),
+        _frames(),
+        output_dir=tmp_path,
+        iwm_frame=_iwm(),
+        as_of_dates=["2024-01-03"],
+        metadata_diagnostics=metadata_diagnostics,
+        config=SmallCapHistoricalRunConfig(benchmark=SmallCapBenchmarkConfig(holding_period_bars=1)),
+    )
+
+    content = (tmp_path / "small_cap_backtest_report.md").read_text(encoding="utf-8")
+    assert result["backtest_report"]["metadata_diagnostic_reasons"] == {"missing_market_cap": 1}
+    assert "missing_market_cap" in content
+
+
 def test_small_cap_historical_runner_fails_when_no_dates_available(tmp_path: Path) -> None:
     try:
         run_small_cap_historical_report(

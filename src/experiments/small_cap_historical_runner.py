@@ -29,6 +29,7 @@ def run_small_cap_historical_report(
     as_of_dates: list[str | pd.Timestamp] | None = None,
     start: str | pd.Timestamp | None = None,
     end: str | pd.Timestamp | None = None,
+    metadata_diagnostics: pd.DataFrame | None = None,
     config: SmallCapHistoricalRunConfig = SmallCapHistoricalRunConfig(),
 ) -> dict[str, Any]:
     output_path = Path(output_dir)
@@ -61,6 +62,7 @@ def run_small_cap_historical_report(
         benchmark_report,
         report_path,
         primary_benchmark=config.primary_benchmark,
+        metadata_diagnostics=metadata_diagnostics,
     )
 
     return {

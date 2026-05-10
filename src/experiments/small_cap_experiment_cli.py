@@ -24,6 +24,7 @@ def run_small_cap_historical_experiment(
     iwm_symbol: str = "IWM",
     vix_symbol: str | None = "^VIX",
     downloader: Downloader = download_ticker,
+    metadata_diagnostics: pd.DataFrame | None = None,
     run_config: SmallCapHistoricalRunConfig = SmallCapHistoricalRunConfig(),
 ) -> dict[str, Any]:
     static_metadata = _load_metadata(metadata_path)
@@ -46,6 +47,7 @@ def run_small_cap_historical_experiment(
         iwm_frame=prepared_data.iwm_frame,
         start=run_config.start or start,
         end=run_config.end or end,
+        metadata_diagnostics=metadata_diagnostics,
         config=run_config,
     )
     return {"prepared_data": prepared_data, "run_result": run_result}
@@ -78,6 +80,7 @@ def run_small_cap_watchlist_experiment(
         iwm_symbol=iwm_symbol,
         vix_symbol=vix_symbol,
         downloader=downloader,
+        metadata_diagnostics=pd.DataFrame(metadata_result.diagnostics),
         run_config=run_config,
     )
     return {"metadata_result": metadata_result, "experiment_result": experiment_result}
