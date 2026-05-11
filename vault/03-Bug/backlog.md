@@ -246,6 +246,12 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: split H1/H2 su soglie congelate mostra che `open_to_close_return>=0.10` e' forte in H2 (`return_pct=+71.03%`, 7 trade, ex-top3 +14.4k, benchmark filtrato +19.55% vs random +4.17%) ma H1 ha solo 3 trade e non valida robustezza.
 - Impatto: la migliore ipotesi resta valida, ma potrebbe essere regime-specific o selection bias; non basta per ranking definitivo o paper trading.
 - Stato: confermato. Prossimo passo: dati multi-year o rolling/walk-forward con soglie congelate `>=0.08` e `>=0.10`.
+### RISK-031 - Multi-year edge resta 2024-driven
+
+- Priorita: P1.
+- Sintomo: run 2022-2024 con `open_to_close_return>=0.10` produce 43 trade, `return_pct=+135.07%`, `pnl_excluding_top_3=+44.6k`, ma annual breakdown: 2022 -0.75k, 2023 -29.7k, 2024 +165.5k.
+- Impatto: l'ipotesi sopravvive al multi-year e non e' puro H2-2024, ma il P&L e' dominato da regime favorevole 2024; 2023 mostra falsi breakout.
+- Stato: confermato. Prossimo passo: diagnostica regime passiva su IWM/VIX (`iwm_close`, `iwm_ema_50`, `iwm_ema_200`, `vix_close`) prima di qualsiasi ranking o paper trading.
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
