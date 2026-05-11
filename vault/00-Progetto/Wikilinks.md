@@ -76,6 +76,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-11-cascade-small-cap-wide-smoke-diagnostics]]
 - [[2026-05-11-cascade-small-cap-cash-starvation-diagnostics]]
 - [[2026-05-11-cascade-small-cap-setup-disentangler-diagnostics]]
+- [[2026-05-11-cascade-small-cap-setup-feature-diagnostics]]
 - [[Quant-Research-Priorities-2026-05-09]]
 
 ## Relazioni principali
@@ -129,6 +130,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Roadmap-Master]] -> [[2026-05-11-cascade-small-cap-wide-smoke-diagnostics]]
 - [[Roadmap-Master]] -> [[2026-05-11-cascade-small-cap-cash-starvation-diagnostics]]
 - [[Roadmap-Master]] -> [[2026-05-11-cascade-small-cap-setup-disentangler-diagnostics]]
+- [[Roadmap-Master]] -> [[2026-05-11-cascade-small-cap-setup-feature-diagnostics]]
 - [[backlog]] -> [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]]
 - [[backlog]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-report]]
 - [[backlog]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-smoke]]
@@ -136,6 +138,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[backlog]] -> [[2026-05-11-cascade-small-cap-wide-smoke-diagnostics]]
 - [[backlog]] -> [[2026-05-11-cascade-small-cap-cash-starvation-diagnostics]]
 - [[backlog]] -> [[2026-05-11-cascade-small-cap-setup-disentangler-diagnostics]]
+- [[backlog]] -> [[2026-05-11-cascade-small-cap-setup-feature-diagnostics]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-report]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-smoke]]
@@ -143,5 +146,6 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[small-cap-swing-research-spec]] -> [[2026-05-11-cascade-small-cap-wide-smoke-diagnostics]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-11-cascade-small-cap-cash-starvation-diagnostics]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-11-cascade-small-cap-setup-disentangler-diagnostics]]
+- [[small-cap-swing-research-spec]] -> [[2026-05-11-cascade-small-cap-setup-feature-diagnostics]]
 - [[Roadmap-Master]] -> [[Quant-Research-Priorities-2026-05-09]]
 - [[Regole-Quant]] -> [[Quant-Research-Priorities-2026-05-09]]

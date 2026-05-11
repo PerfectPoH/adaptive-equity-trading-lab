@@ -212,6 +212,15 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Impatto: il triage seleziona male candidati e puo' amplificare setup strutturalmente negativi.
 - Azione: aggiunta diagnostica passiva per `small_cap_setup`: summary, score profile e cash starvation per setup.
 - Stato: confermato. Wide smoke: `breakout_continuation` +3.7k P&L, `post_gap_drift` -22.8k P&L, `panic_reversal` -3.1k P&L; score 100 peggiora rispetto ai bucket inferiori nei setup principali. Prossimo passo: feature-level diagnostics per setup, non paper trading.
+
+### RISK-026 - Soglie feature mischiano regioni opposte dentro lo stesso setup
+
+- Priorita: P1.
+- Sintomo: la feature-profile per setup mostra bucket feature con performance opposte all'interno dello stesso `small_cap_setup`.
+- Impatto: lo score booleano aggregato promuove trade da regioni feature pessime insieme a trade promettenti, impedendo monotonicita' del ranking.
+- Azione: aggiunta `portfolio_setup_feature_profile.csv` e sezione report `Setup Feature Profile Report`.
+- Stato: confermato. Esempi: `breakout_continuation/open_to_close_return` Q4 +25.8k P&L vs Q2 -12.1k; `post_gap_drift/gap_pct` Q4 -28.4k vs Q3 +20.6k; `post_gap_drift/intraday_range_pct` Q4 -28.1k vs Q2 +33.4k. Prossimo passo: rule ablation passiva per filtri feature, non paper trading.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
