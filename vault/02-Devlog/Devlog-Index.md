@@ -66,6 +66,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-11-cascade-small-cap-open-to-close-sensitivity]] - sensitivity soglie arrotondate: `open_to_close_return>=0.10` e' ipotesi primaria ma sample-small.
 - [[2026-05-11-cascade-small-cap-temporal-split-validation]] - split H1/H2: edge `>=0.10` forte in H2 ma time-concentrated.
 - [[2026-05-11-cascade-small-cap-multiyear-validation]] - multi-year 2022-2024: `>=0.10` sopravvive ex-top3 ma resta 2024-driven.
+- [[2026-05-11-cascade-small-cap-regime-diagnostics]] - regime diagnostics passiva: IWM sopra EMA200 discrimina, EMA50/VIX no.
 
 ## Convenzione
 

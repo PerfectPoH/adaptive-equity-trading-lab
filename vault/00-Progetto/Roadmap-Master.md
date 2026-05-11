@@ -121,8 +121,9 @@ Vedi [[news-risk-engine]].
 - [x] Open-to-close sensitivity: soglie arrotondate `>=0.08` e `>=0.10`; `>=0.10` produce +177.99%, 15 trade, `pnl_excluding_top_3=+74.6k`, benchmark filtrato ticker +12.82% vs random +7.94%.
 - [x] Temporal split validation: H2 conferma `open_to_close_return>=0.10` (+71.03%, 7 trade, ex-top3 +14.4k), H1 troppo scarso; edge time-concentrated, serve multi-year/rolling.
 - [x] Multi-year validation 2022-2024: `>=0.10` produce +135.07%, 43 trade, ex-top3 +44.6k; sopravvive ma P&L e' 2024-driven e 2023 e' negativo.
+- [x] Passive regime diagnostics: `portfolio_regime_profile.csv`; EMA50 non discrimina, IWM sopra EMA200 e' il candidate gate (+153.3k vs -18.3k), VIX non e' filtro ovvio.
 
-Gate metodologico corrente: run manifest, stress test ex-outlier, smoke ampia, cash starvation diagnostics, setup disentangler passivo, feature diagnostics per setup, breakout-only ablation, feature filter ablation e open-to-close sensitivity e temporal split validation e multi-year validation sono implementati; non aggiungere sector cap, random delay, survivorship sensitivity o opening regime check prima di ripensare scanner/ranking/triage. La smoke ampia ha prodotto `portfolio_return=-22.16%`, score profile non monotono e missed opportunities mediane negative.
+Gate metodologico corrente: run manifest, stress test ex-outlier, smoke ampia, cash starvation diagnostics, setup disentangler passivo, feature diagnostics per setup, breakout-only ablation, feature filter ablation e open-to-close sensitivity e temporal split validation e multi-year validation e passive regime diagnostics sono implementati; non aggiungere sector cap, random delay, survivorship sensitivity o opening regime check prima di ripensare scanner/ranking/triage. La smoke ampia ha prodotto `portfolio_return=-22.16%`, score profile non monotono e missed opportunities mediane negative.
 
 Vedi [[small-cap-swing-research-spec]].
 

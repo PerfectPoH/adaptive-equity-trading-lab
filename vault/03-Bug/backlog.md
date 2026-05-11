@@ -252,6 +252,12 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: run 2022-2024 con `open_to_close_return>=0.10` produce 43 trade, `return_pct=+135.07%`, `pnl_excluding_top_3=+44.6k`, ma annual breakdown: 2022 -0.75k, 2023 -29.7k, 2024 +165.5k.
 - Impatto: l'ipotesi sopravvive al multi-year e non e' puro H2-2024, ma il P&L e' dominato da regime favorevole 2024; 2023 mostra falsi breakout.
 - Stato: confermato. Prossimo passo: diagnostica regime passiva su IWM/VIX (`iwm_close`, `iwm_ema_50`, `iwm_ema_200`, `vix_close`) prima di qualsiasi ranking o paper trading.
+### RISK-032 - Regime filter EMA200 non ancora validato come filtro esecutivo
+
+- Priorita: P1.
+- Sintomo: diagnostica passiva su `open_to_close_return>=0.10` multi-year mostra `iwm_above_ema_200=False`: 12 trade, -18.3k, win rate 25%, mediana -5.47%; `True`: 31 trade, +153.3k, win rate 61.29%, mediana +3.38%.
+- Impatto: EMA200 e' il primo regime candidate gate convincente, ma non e' ancora stato testato come filtro configurabile con rejection metadata e manifest.
+- Stato: confermato. Prossimo passo: TDD per `regime_filters` o `require_iwm_above_ema_200`, poi run 2022-2024 con annual breakdown/ex-top3/benchmark filtrato.
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
