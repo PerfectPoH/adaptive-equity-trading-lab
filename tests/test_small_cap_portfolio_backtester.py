@@ -265,6 +265,44 @@ def test_portfolio_backtester_can_reject_candidates_below_feature_filter() -> No
     assert rejection["filter_min_value"] == 0.08
 
 
+def test_portfolio_backtester_can_reject_candidates_by_regime_filter() -> None:
+    frames = {
+        "AAA": _frame([10.0, 10.0, 11.0, 12.0]),
+        "BBB": _frame([10.0, 10.0, 11.0, 12.0]),
+    }
+    candidates = pd.DataFrame(
+        [
+            {**_candidate("AAA", "2024-01-01", score=100.0), "iwm_close": 210.0, "iwm_ema_200": 200.0},
+            {**_candidate("BBB", "2024-01-01", score=90.0), "iwm_close": 195.0, "iwm_ema_200": 200.0},
+        ]
+    )
+    config = SmallCapPortfolioBacktestConfig(
+        initial_cash=100_000.0,
+        holding_period_bars=2,
+        regime_filters=(
+            {
+                "feature": "iwm_close",
+                "operator": ">",
+                "threshold_feature": "iwm_ema_200",
+            },
+        ),
+        execution=SmallCapExecutionConfig(spread_bps=0.0, slippage_bps=0.0, min_trade_notional=100.0),
+    )
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=config)
+
+    assert result.trade_log["symbol"].tolist() == ["AAA"]
+    assert result.rejection_summary == {"regime_filtered": 1}
+    rejection = result.rejections.iloc[0]
+    assert rejection["symbol"] == "BBB"
+    assert rejection["reject_reason"] == "regime_filtered"
+    assert rejection["regime_filter_feature"] == "iwm_close"
+    assert rejection["regime_filter_operator"] == ">"
+    assert rejection["regime_filter_value"] == 195.0
+    assert rejection["regime_filter_threshold_feature"] == "iwm_ema_200"
+    assert rejection["regime_filter_threshold_value"] == 200.0
+
+
 def test_filter_small_cap_portfolio_candidates_applies_setup_and_feature_filters() -> None:
     candidates = pd.DataFrame(
         [
@@ -288,3 +326,25 @@ def test_filter_small_cap_portfolio_candidates_applies_setup_and_feature_filters
 
     assert filtered["symbol"].tolist() == ["AAA"]
     assert "as_of_ts" not in filtered.columns
+
+
+def test_filter_small_cap_portfolio_candidates_applies_regime_filters() -> None:
+    candidates = pd.DataFrame(
+        [
+            {**_candidate("AAA", "2024-01-01"), "iwm_close": 210.0, "iwm_ema_200": 200.0},
+            {**_candidate("BBB", "2024-01-01"), "iwm_close": 195.0, "iwm_ema_200": 200.0},
+        ]
+    )
+    config = SmallCapPortfolioBacktestConfig(
+        regime_filters=(
+            {
+                "feature": "iwm_close",
+                "operator": ">",
+                "threshold_feature": "iwm_ema_200",
+            },
+        ),
+    )
+
+    filtered = filter_small_cap_portfolio_candidates(candidates, config)
+
+    assert filtered["symbol"].tolist() == ["AAA"]

@@ -50,6 +50,7 @@ def _frames() -> dict[str, pd.DataFrame]:
             "rolling_volatility_20d": [0.03, 0.03, 0.03, 0.03, 0.03],
             "iwm_close": [210.0, 210.0, 210.0, 210.0, 210.0],
             "iwm_ema_50": [200.0, 200.0, 200.0, 200.0, 200.0],
+            "iwm_ema_200": [200.0, 220.0, 200.0, 200.0, 200.0],
             "vix_close": [18.0, 18.0, 18.0, 18.0, 18.0],
         },
         index=index,
@@ -342,6 +343,44 @@ def test_small_cap_historical_runner_records_feature_filters_in_manifest_and_rej
     assert "relative_volume_20d" in rejections["filter_feature"].tolist()
 
 
+def test_small_cap_historical_runner_records_regime_filters_in_manifest_and_rejections(tmp_path: Path) -> None:
+    config = SmallCapHistoricalRunConfig(
+        benchmark=SmallCapBenchmarkConfig(holding_period_bars=1),
+        portfolio=SmallCapPortfolioBacktestConfig(
+            holding_period_bars=1,
+            regime_filters=(
+                {
+                    "feature": "iwm_close",
+                    "operator": ">",
+                    "threshold_feature": "iwm_ema_200",
+                },
+            ),
+        ),
+    )
+
+    result = run_small_cap_historical_report(
+        _candidate_metadata(),
+        _frames(),
+        output_dir=tmp_path,
+        iwm_frame=_iwm(),
+        as_of_dates=["2024-01-02", "2024-01-03"],
+        config=config,
+        run_id="regime_filter_test",
+        created_at="2026-05-11T00:00:00+00:00",
+        git_commit="abc123",
+        host="testhost",
+    )
+
+    payload = json.loads((tmp_path / "run_manifest.json").read_text(encoding="utf-8"))
+    assert payload["config"]["portfolio"]["regime_filters"] == [
+        {"feature": "iwm_close", "operator": ">", "threshold_feature": "iwm_ema_200"}
+    ]
+    rejections = pd.read_csv(tmp_path / "portfolio_rejections.csv")
+    assert result["portfolio_backtest"].rejection_summary.get("regime_filtered", 0) >= 1
+    assert "regime_filtered" in rejections["reject_reason"].tolist()
+    assert "iwm_close" in rejections["regime_filter_feature"].tolist()
+
+
 def test_small_cap_historical_runner_benchmarks_portfolio_filtered_candidate_subset(tmp_path: Path) -> None:
     config = SmallCapHistoricalRunConfig(
         benchmark=SmallCapBenchmarkConfig(holding_period_bars=1),
@@ -373,6 +412,35 @@ def test_small_cap_historical_runner_benchmarks_portfolio_filtered_candidate_sub
     assert (tmp_path / "portfolio_filtered_benchmark_report.csv").exists()
     assert result["backtest_report"]["portfolio_filtered_candidate_summary"]["rows"] == len(filtered)
     assert "## Portfolio-Filtered Benchmark Comparison" in (tmp_path / "small_cap_backtest_report.md").read_text(encoding="utf-8")
+
+
+def test_small_cap_historical_runner_benchmarks_regime_filtered_candidate_subset(tmp_path: Path) -> None:
+    config = SmallCapHistoricalRunConfig(
+        benchmark=SmallCapBenchmarkConfig(holding_period_bars=1),
+        portfolio=SmallCapPortfolioBacktestConfig(
+            holding_period_bars=1,
+            regime_filters=(
+                {
+                    "feature": "iwm_close",
+                    "operator": ">",
+                    "threshold_feature": "iwm_ema_200",
+                },
+            ),
+        ),
+    )
+
+    result = run_small_cap_historical_report(
+        _candidate_metadata(),
+        _frames(),
+        output_dir=tmp_path,
+        iwm_frame=_iwm(),
+        as_of_dates=["2024-01-02", "2024-01-03"],
+        config=config,
+    )
+
+    filtered = result["portfolio_filtered_candidate_export"]
+    assert (filtered["iwm_close"] > filtered["iwm_ema_200"]).all()
+    assert result["backtest_report"]["portfolio_filtered_candidate_summary"]["rows"] == len(filtered)
 
 
 def test_small_cap_historical_runner_fails_when_no_dates_available(tmp_path: Path) -> None:
