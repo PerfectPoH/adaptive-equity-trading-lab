@@ -179,7 +179,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: il portfolio backtester usa `small_cap_scanner_score` per ordinare i candidati giornalieri, ma non e' ancora dimostrato che score piu' alti producano performance migliori.
 - Impatto: il triage puo' allocare capitale ai trade peggiori pur sembrando disciplinato.
 - Azione: implementare Score Profile Report per decili di score, con trade count, win rate, P&L, return medio/mediano e monotonicity check.
-- Stato: mitigato nel tooling; `portfolio_score_profile.csv` e sezione markdown disponibili, da validare su smoke reale prima di usare lo score per sizing, filtri live o penalita' settoriali.
+- Stato: smoke inconclusiva; `portfolio_score_profile.csv` aggrega correttamente score identici, ma il campione reale ha solo tre bucket e non giustifica sizing o filtri live.
 
 ### RISK-022 - Outlier risk sui rendimenti small-cap
 
@@ -187,7 +187,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: pochi trade esplosivi possono generare la maggior parte del P&L.
 - Impatto: una equity curve positiva puo' rappresentare una lotteria storica, non un edge replicabile. In live basta perdere uno degli outlier per ribaltare il risultato.
 - Azione: implementare Outlier P&L Breakdown con contributo top 1/3/5/10 trade, max single-trade contribution e alert se top 3 trade superano il 40% del P&L totale.
-- Stato: mitigato nel tooling; `portfolio_outlier_breakdown.csv` e alert top-3 disponibili, da validare su smoke reale prima di promuovere qualunque setup small-cap.
+- Stato: confermato dalla smoke; `top_3_pnl_contribution_pct=1.0086` e `outlier_concentration_alert=True`, quindi setup non promuovibile.
 
 ### RISK-023 - Overfitting manuale nei run small-cap
 

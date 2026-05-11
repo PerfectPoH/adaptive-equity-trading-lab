@@ -71,6 +71,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-10-cascade-small-cap-portfolio-report-integration]]
 - [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]]
 - [[2026-05-10-cascade-small-cap-portfolio-diagnostics-report]]
+- [[2026-05-10-cascade-small-cap-portfolio-diagnostics-smoke]]
 - [[Quant-Research-Priorities-2026-05-09]]
 
 ## Relazioni principali
@@ -119,9 +120,12 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Roadmap-Master]] -> [[2026-05-10-cascade-small-cap-portfolio-report-integration]]
 - [[Roadmap-Master]] -> [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]]
 - [[Roadmap-Master]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-report]]
+- [[Roadmap-Master]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-smoke]]
 - [[backlog]] -> [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]]
 - [[backlog]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-report]]
+- [[backlog]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-smoke]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-report]]
+- [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-smoke]]
 - [[Roadmap-Master]] -> [[Quant-Research-Priorities-2026-05-09]]
 - [[Regole-Quant]] -> [[Quant-Research-Priorities-2026-05-09]]

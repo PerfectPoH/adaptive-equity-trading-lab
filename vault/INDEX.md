@@ -135,6 +135,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - portfolio report integration small-cap aggiunta: il runner storico scrive `portfolio_trade_log.csv`, `portfolio_equity_curve.csv`, `portfolio_rejections.csv`, `portfolio_summary.csv` e il markdown include sezioni portfolio.
 - roadmap critica small-cap aggiornata: prima di sector cap/random delay/survivorship sensitivity servono Outlier P&L Breakdown, Score Profile Report e run manifest con config hash.
 - portfolio diagnostics report small-cap aggiunto: `portfolio_outlier_breakdown.csv`, `portfolio_score_profile.csv`, sezioni markdown outlier/score e `small_cap_scanner_score` preservato nel trade log.
+- smoke portfolio diagnostics completata: portfolio +74.25% ma `top_3_pnl_contribution_pct=1.0086` e `outlier_concentration_alert=True`; verdetto `NON PROMUOVERE`.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 

@@ -54,6 +54,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-10-cascade-small-cap-portfolio-report-integration]] - integrazione portfolio nel runner/report storico con artefatti CSV e sezioni markdown.
 - [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]] - gate critico su outlier risk, score monotonicity e distinzione implementato/roadmap.
 - [[2026-05-10-cascade-small-cap-portfolio-diagnostics-report]] - outlier P&L breakdown e score profile report integrati nel runner/report.
+- [[2026-05-10-cascade-small-cap-portfolio-diagnostics-smoke]] - smoke reale con portfolio +74.25% ma verdetto non promuovere per outlier concentration.
 
 ## Convenzione
 
