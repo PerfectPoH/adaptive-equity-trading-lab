@@ -197,6 +197,14 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: aggiungere run manifest small-cap con `run_id`, config hash, timestamp, date range, simboli e parametri completi.
 - Stato: mitigato. `src/experiments/run_manifest.py` produce `run_manifest.json` accanto agli altri artefatti del runner storico small-cap, con `run_id` univoco, `config_hash` SHA-256 deterministico sulla `SmallCapHistoricalRunConfig`, `created_at`, `schema_version`, `universe`, periodo, `git_commit` e `host`. Il markdown del report ora include la sezione `## Run Manifest` in testa. Verifica: 13 test isolati e 3 di integrazione nel runner (148 passed totali). Resta da estendere il manifest agli altri runner non small-cap se entreranno in sweep tracciati.
 
+### RISK-024 - Cash starvation fraintesa come edge perso
+
+- Priorita: P1.
+- Sintomo: molte rejection `insufficient_funds` possono sembrare opportunita' perse e spingere ad aumentare capitale/concurrency senza prova.
+- Impatto: si rischia di scalare un ranking non monotono e aumentare drawdown invece di recuperare edge.
+- Azione: aggiungere `portfolio_cash_starvation.csv` e summary con return ipotetico dei trade rifiutati per cash.
+- Stato: mitigato nel tooling; sulla smoke ampia 142/142 rejection valutabili hanno `median_missed_return_pct=-4.75%` e `missed_win_rate=38.03%`, quindi non giustificano piu' capitale/concurrency.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

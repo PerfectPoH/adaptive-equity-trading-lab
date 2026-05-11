@@ -139,6 +139,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - stress test ex-outlier aggiunto: senza top 3 trade vincenti il portfolio passa a -0.64%, `sign_flip_excluding_top_3=True`.
 - run manifest small-cap implementato: `src/experiments/run_manifest.py` produce `run_manifest.json` accanto agli altri artefatti del runner storico, con `run_id` univoco, `config_hash` SHA-256 deterministico sulla `SmallCapHistoricalRunConfig`, `created_at`, `schema_version`, `universe`, periodo, `git_commit` e `host`; il markdown del report include la sezione `## Run Manifest` in testa; suite a 148 passed; RISK-023 passa a mitigato.
 - smoke ampia small-cap completata: 30 ticker eleggibili, 40 trade, `portfolio_return=-22.16%`, score profile non monotono; verdetto `NON PROMUOVERE`.
+- cash starvation diagnostics aggiunta: `portfolio_cash_starvation.csv` e summary; sulla smoke ampia missed median return -4.75% e missed win rate 38.03%, quindi le rejection cash non giustificano piu' capitale/concurrency.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 
