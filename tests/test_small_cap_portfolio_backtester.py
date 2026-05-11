@@ -187,3 +187,39 @@ def test_portfolio_backtester_can_reject_disallowed_setups_without_spending_cash
     assert result.rejection_summary == {"setup_excluded": 1}
     assert result.rejections.iloc[0]["symbol"] == "AAA"
     assert result.rejections.iloc[0]["small_cap_setup"] == "post_gap_drift"
+
+
+def test_portfolio_backtester_can_reject_candidates_below_feature_filter() -> None:
+    frames = {
+        "AAA": _frame([10.0, 10.0, 11.0, 12.0]),
+        "BBB": _frame([10.0, 10.0, 11.0, 12.0]),
+    }
+    candidates = pd.DataFrame(
+        [
+            {**_candidate("AAA", "2024-01-01", score=100.0), "open_to_close_return": 0.12},
+            {**_candidate("BBB", "2024-01-01", score=90.0), "open_to_close_return": 0.04},
+        ]
+    )
+    config = SmallCapPortfolioBacktestConfig(
+        initial_cash=100_000.0,
+        holding_period_bars=2,
+        feature_filters=(
+            {
+                "setup": "breakout_continuation",
+                "feature": "open_to_close_return",
+                "min_value": 0.08,
+            },
+        ),
+        execution=SmallCapExecutionConfig(spread_bps=0.0, slippage_bps=0.0, min_trade_notional=100.0),
+    )
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=config)
+
+    assert result.trade_log["symbol"].tolist() == ["AAA"]
+    assert result.rejection_summary == {"feature_filtered": 1}
+    rejection = result.rejections.iloc[0]
+    assert rejection["symbol"] == "BBB"
+    assert rejection["reject_reason"] == "feature_filtered"
+    assert rejection["filter_feature"] == "open_to_close_return"
+    assert rejection["filter_value"] == 0.04
+    assert rejection["filter_min_value"] == 0.08

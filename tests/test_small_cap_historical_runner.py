@@ -290,6 +290,44 @@ def test_small_cap_historical_runner_records_setup_ablation_in_manifest_and_reje
     assert "setup_excluded" in pd.read_csv(tmp_path / "portfolio_rejections.csv")["reject_reason"].tolist()
 
 
+def test_small_cap_historical_runner_records_feature_filters_in_manifest_and_rejections(tmp_path: Path) -> None:
+    config = SmallCapHistoricalRunConfig(
+        benchmark=SmallCapBenchmarkConfig(holding_period_bars=1),
+        portfolio=SmallCapPortfolioBacktestConfig(
+            holding_period_bars=1,
+            feature_filters=(
+                {
+                    "setup": "breakout_continuation",
+                    "feature": "relative_volume_20d",
+                    "min_value": 2.1,
+                },
+            ),
+        ),
+    )
+
+    result = run_small_cap_historical_report(
+        _candidate_metadata(),
+        _frames(),
+        output_dir=tmp_path,
+        iwm_frame=_iwm(),
+        as_of_dates=["2024-01-02", "2024-01-03"],
+        config=config,
+        run_id="feature_filter_test",
+        created_at="2026-05-11T00:00:00+00:00",
+        git_commit="abc123",
+        host="testhost",
+    )
+
+    payload = json.loads((tmp_path / "run_manifest.json").read_text(encoding="utf-8"))
+    assert payload["config"]["portfolio"]["feature_filters"] == [
+        {"feature": "relative_volume_20d", "min_value": 2.1, "setup": "breakout_continuation"}
+    ]
+    rejections = pd.read_csv(tmp_path / "portfolio_rejections.csv")
+    assert result["portfolio_backtest"].rejection_summary.get("feature_filtered", 0) >= 1
+    assert "feature_filtered" in rejections["reject_reason"].tolist()
+    assert "relative_volume_20d" in rejections["filter_feature"].tolist()
+
+
 def test_small_cap_historical_runner_fails_when_no_dates_available(tmp_path: Path) -> None:
     try:
         run_small_cap_historical_report(
