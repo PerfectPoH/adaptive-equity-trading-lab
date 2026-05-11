@@ -9,7 +9,12 @@ import pandas as pd
 
 from src.analysis.small_cap_backtest_report import write_small_cap_backtest_report_markdown
 from src.analysis.small_cap_benchmarks import SmallCapBenchmarkConfig, build_small_cap_benchmark_report
-from src.analysis.small_cap_portfolio_diagnostics import build_portfolio_outlier_breakdown, build_score_profile_report
+from src.analysis.small_cap_portfolio_diagnostics import (
+    build_cash_starvation_report,
+    build_portfolio_outlier_breakdown,
+    build_score_profile_report,
+    summarize_cash_starvation_report,
+)
 from src.backtest.small_cap_portfolio_backtester import SmallCapPortfolioBacktestConfig, run_small_cap_portfolio_backtest
 from src.experiments.run_manifest import build_run_manifest, manifest_to_dict, write_run_manifest_json
 from src.experiments.small_cap_candidate_export import SmallCapCandidateExportConfig, build_small_cap_candidate_export
@@ -82,6 +87,15 @@ def run_small_cap_historical_report(
         initial_cash=portfolio_backtest.summary.get("initial_cash"),
     )
     portfolio_score_profile = build_score_profile_report(portfolio_backtest.trade_log)
+    portfolio_cash_starvation = build_cash_starvation_report(
+        portfolio_backtest.rejections,
+        frames,
+        holding_period_bars=config.portfolio.holding_period_bars,
+    )
+    portfolio_cash_starvation_summary = summarize_cash_starvation_report(
+        portfolio_cash_starvation,
+        total_insufficient_funds_rejections=portfolio_backtest.rejection_summary.get("insufficient_funds", 0),
+    )
 
     candidate_path = output_path / "candidate_export.csv"
     benchmark_path = output_path / "benchmark_report.csv"
@@ -91,6 +105,8 @@ def run_small_cap_historical_report(
     portfolio_summary_path = output_path / "portfolio_summary.csv"
     portfolio_outlier_breakdown_path = output_path / "portfolio_outlier_breakdown.csv"
     portfolio_score_profile_path = output_path / "portfolio_score_profile.csv"
+    portfolio_cash_starvation_path = output_path / "portfolio_cash_starvation.csv"
+    portfolio_cash_starvation_summary_path = output_path / "portfolio_cash_starvation_summary.csv"
     run_manifest_path = output_path / "run_manifest.json"
     report_path = output_path / "small_cap_backtest_report.md"
     candidate_export.to_csv(candidate_path, index=False)
@@ -101,6 +117,8 @@ def run_small_cap_historical_report(
     pd.DataFrame([portfolio_backtest.summary]).to_csv(portfolio_summary_path, index=False)
     pd.DataFrame([portfolio_outlier_breakdown]).to_csv(portfolio_outlier_breakdown_path, index=False)
     portfolio_score_profile.to_csv(portfolio_score_profile_path, index=False)
+    portfolio_cash_starvation.to_csv(portfolio_cash_starvation_path, index=False)
+    pd.DataFrame([portfolio_cash_starvation_summary]).to_csv(portfolio_cash_starvation_summary_path, index=False)
     write_run_manifest_json(manifest, run_manifest_path)
     backtest_report = write_small_cap_backtest_report_markdown(
         candidate_export,
@@ -112,6 +130,7 @@ def run_small_cap_historical_report(
         portfolio_rejection_summary=portfolio_backtest.rejection_summary,
         portfolio_outlier_breakdown=portfolio_outlier_breakdown,
         portfolio_score_profile=portfolio_score_profile,
+        portfolio_cash_starvation_summary=portfolio_cash_starvation_summary,
         run_manifest=manifest_dict,
     )
 
@@ -121,6 +140,8 @@ def run_small_cap_historical_report(
         "portfolio_backtest": portfolio_backtest,
         "portfolio_outlier_breakdown": portfolio_outlier_breakdown,
         "portfolio_score_profile": portfolio_score_profile,
+        "portfolio_cash_starvation": portfolio_cash_starvation,
+        "portfolio_cash_starvation_summary": portfolio_cash_starvation_summary,
         "run_manifest": manifest_dict,
         "backtest_report": backtest_report,
         "paths": {
@@ -132,6 +153,8 @@ def run_small_cap_historical_report(
             "portfolio_summary": portfolio_summary_path,
             "portfolio_outlier_breakdown": portfolio_outlier_breakdown_path,
             "portfolio_score_profile": portfolio_score_profile_path,
+            "portfolio_cash_starvation": portfolio_cash_starvation_path,
+            "portfolio_cash_starvation_summary": portfolio_cash_starvation_summary_path,
             "run_manifest": run_manifest_path,
             "backtest_report": report_path,
         },

@@ -19,6 +19,17 @@ SCORE_PROFILE_COLUMNS = [
     "simple_trade_sharpe",
 ]
 
+CASH_STARVATION_COLUMNS = [
+    "symbol",
+    "as_of",
+    "entry_date",
+    "exit_date",
+    "available_cash",
+    "entry_price",
+    "exit_price",
+    "missed_return_pct",
+]
+
 
 def build_portfolio_outlier_breakdown(
     trade_log: pd.DataFrame,
@@ -104,6 +115,77 @@ def build_score_profile_report(
     return pd.DataFrame(rows, columns=SCORE_PROFILE_COLUMNS)
 
 
+def build_cash_starvation_report(
+    rejections: pd.DataFrame,
+    frames: dict[str, pd.DataFrame],
+    holding_period_bars: int,
+) -> pd.DataFrame:
+    if holding_period_bars <= 0:
+        raise ValueError("holding_period_bars must be positive")
+    if rejections.empty or "reject_reason" not in rejections.columns:
+        return pd.DataFrame(columns=CASH_STARVATION_COLUMNS)
+
+    rows: list[dict[str, Any]] = []
+    rejected = rejections[rejections["reject_reason"].fillna("").astype(str) == "insufficient_funds"]
+    for _, rejection in rejected.iterrows():
+        symbol = str(rejection.get("symbol", ""))
+        entry = _entry_and_exit(frames.get(symbol), rejection.get("as_of"), holding_period_bars)
+        if entry is None:
+            continue
+        entry_date, entry_price, exit_date, exit_price = entry
+        rows.append(
+            {
+                "symbol": symbol,
+                "as_of": pd.to_datetime(rejection.get("as_of"), errors="coerce"),
+                "entry_date": entry_date,
+                "exit_date": exit_date,
+                "available_cash": _safe_float(rejection.get("available_cash")),
+                "entry_price": entry_price,
+                "exit_price": exit_price,
+                "missed_return_pct": float((exit_price / entry_price) - 1) if entry_price else 0.0,
+            }
+        )
+    return pd.DataFrame(rows, columns=CASH_STARVATION_COLUMNS)
+
+
+def summarize_cash_starvation_report(
+    cash_starvation: pd.DataFrame,
+    total_insufficient_funds_rejections: int,
+) -> dict[str, Any]:
+    if cash_starvation.empty or "missed_return_pct" not in cash_starvation.columns:
+        return {
+            "insufficient_funds_rejections": int(total_insufficient_funds_rejections),
+            "evaluable_missed_trades": 0,
+            "avg_missed_return_pct": float("nan"),
+            "median_missed_return_pct": float("nan"),
+            "missed_win_rate": float("nan"),
+            "best_missed_symbol": None,
+            "best_missed_return_pct": float("nan"),
+            "worst_missed_symbol": None,
+            "worst_missed_return_pct": float("nan"),
+        }
+
+    data = cash_starvation.copy()
+    data["missed_return_pct"] = pd.to_numeric(data["missed_return_pct"], errors="coerce")
+    data = data.dropna(subset=["missed_return_pct"])
+    if data.empty:
+        return summarize_cash_starvation_report(pd.DataFrame(), total_insufficient_funds_rejections)
+
+    best = data.sort_values("missed_return_pct", ascending=False).iloc[0]
+    worst = data.sort_values("missed_return_pct", ascending=True).iloc[0]
+    return {
+        "insufficient_funds_rejections": int(total_insufficient_funds_rejections),
+        "evaluable_missed_trades": int(len(data)),
+        "avg_missed_return_pct": float(data["missed_return_pct"].mean()),
+        "median_missed_return_pct": float(data["missed_return_pct"].median()),
+        "missed_win_rate": float((data["missed_return_pct"] > 0).sum() / len(data)),
+        "best_missed_symbol": _symbol(best),
+        "best_missed_return_pct": float(best["missed_return_pct"]),
+        "worst_missed_symbol": _symbol(worst),
+        "worst_missed_return_pct": float(worst["missed_return_pct"]),
+    }
+
+
 def _empty_outlier_breakdown() -> dict[str, Any]:
     breakdown: dict[str, Any] = {
         "total_trades": 0,
@@ -160,6 +242,41 @@ def _top_contribution(winners: pd.DataFrame, n: int, total_pnl: float) -> float:
     if winners.empty or total_pnl == 0:
         return float("nan")
     return float(winners.head(n)["pnl"].sum() / total_pnl)
+
+
+def _entry_and_exit(
+    frame: pd.DataFrame | None,
+    as_of: object,
+    holding_period_bars: int,
+) -> tuple[pd.Timestamp, float, pd.Timestamp, float] | None:
+    if frame is None or frame.empty or "Open" not in frame.columns or "Close" not in frame.columns:
+        return None
+    data = frame.copy().sort_index()
+    as_of_ts = pd.to_datetime(as_of, errors="coerce")
+    if pd.isna(as_of_ts):
+        return None
+    signal_date = _nearest_index_on_or_before(data, pd.Timestamp(as_of_ts).normalize())
+    if signal_date is None:
+        return None
+    signal_position = data.index.get_loc(signal_date)
+    entry_position = signal_position + 1
+    exit_position = entry_position + holding_period_bars
+    if exit_position >= len(data):
+        return None
+    entry_date = data.index[entry_position]
+    exit_date = data.index[exit_position]
+    entry_price = pd.to_numeric(pd.Series([data.loc[entry_date, "Open"]]), errors="coerce").iat[0]
+    exit_price = pd.to_numeric(pd.Series([data.loc[exit_date, "Close"]]), errors="coerce").iat[0]
+    if pd.isna(entry_price) or pd.isna(exit_price):
+        return None
+    return pd.Timestamp(entry_date), float(entry_price), pd.Timestamp(exit_date), float(exit_price)
+
+
+def _nearest_index_on_or_before(frame: pd.DataFrame, date: pd.Timestamp) -> pd.Timestamp | None:
+    candidates = frame.index[frame.index <= date]
+    if len(candidates) == 0:
+        return None
+    return candidates[-1]
 
 
 def _simple_sharpe(returns: pd.Series) -> float:

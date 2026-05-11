@@ -20,6 +20,7 @@ def build_small_cap_backtest_report(
     portfolio_rejection_summary: dict[str, int] | None = None,
     portfolio_outlier_breakdown: dict[str, Any] | None = None,
     portfolio_score_profile: pd.DataFrame | None = None,
+    portfolio_cash_starvation_summary: dict[str, Any] | None = None,
     run_manifest: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     strategy_return = _benchmark_return(benchmark_report, STRATEGY_PROXY_BENCHMARK)
@@ -46,6 +47,7 @@ def build_small_cap_backtest_report(
         "portfolio_rejection_summary": portfolio_rejection_summary or {},
         "portfolio_outlier_breakdown": portfolio_outlier_breakdown or {},
         "portfolio_score_profile": _records(portfolio_score_profile) if portfolio_score_profile is not None else [],
+        "portfolio_cash_starvation_summary": portfolio_cash_starvation_summary or {},
         "run_manifest": run_manifest or {},
         "decision": _decision(verdict),
     }
@@ -61,6 +63,7 @@ def write_small_cap_backtest_report_markdown(
     portfolio_rejection_summary: dict[str, int] | None = None,
     portfolio_outlier_breakdown: dict[str, Any] | None = None,
     portfolio_score_profile: pd.DataFrame | None = None,
+    portfolio_cash_starvation_summary: dict[str, Any] | None = None,
     run_manifest: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     report = build_small_cap_backtest_report(
@@ -72,6 +75,7 @@ def write_small_cap_backtest_report_markdown(
         portfolio_rejection_summary=portfolio_rejection_summary,
         portfolio_outlier_breakdown=portfolio_outlier_breakdown,
         portfolio_score_profile=portfolio_score_profile,
+        portfolio_cash_starvation_summary=portfolio_cash_starvation_summary,
         run_manifest=run_manifest,
     )
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -254,6 +258,8 @@ def _to_markdown(report: dict[str, Any]) -> str:
     lines.extend(_value_lines(report["portfolio_outlier_breakdown"]))
     lines.extend(["", "## Score Profile Report"])
     lines.extend(_record_lines(report["portfolio_score_profile"]))
+    lines.extend(["", "## Cash Starvation Diagnostics"])
+    lines.extend(_value_lines(report["portfolio_cash_starvation_summary"]))
     lines.extend(["", "## Benchmarks"])
     for row in report["benchmark_report"]:
         lines.append(f"- {row.get('benchmark')}: return={row.get('return')}, observations={row.get('observations')}")
