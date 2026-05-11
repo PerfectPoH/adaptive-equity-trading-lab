@@ -79,6 +79,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-11-cascade-small-cap-setup-feature-diagnostics]]
 - [[2026-05-11-cascade-small-cap-breakout-only-ablation]]
 - [[2026-05-11-cascade-small-cap-feature-filter-ablation]]
+- [[2026-05-11-cascade-small-cap-open-to-close-sensitivity]]
 - [[Quant-Research-Priorities-2026-05-09]]
 
 ## Relazioni principali
@@ -135,6 +136,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Roadmap-Master]] -> [[2026-05-11-cascade-small-cap-setup-feature-diagnostics]]
 - [[Roadmap-Master]] -> [[2026-05-11-cascade-small-cap-breakout-only-ablation]]
 - [[Roadmap-Master]] -> [[2026-05-11-cascade-small-cap-feature-filter-ablation]]
+- [[Roadmap-Master]] -> [[2026-05-11-cascade-small-cap-open-to-close-sensitivity]]
 - [[backlog]] -> [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]]
 - [[backlog]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-report]]
 - [[backlog]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-smoke]]
@@ -145,6 +147,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[backlog]] -> [[2026-05-11-cascade-small-cap-setup-feature-diagnostics]]
 - [[backlog]] -> [[2026-05-11-cascade-small-cap-breakout-only-ablation]]
 - [[backlog]] -> [[2026-05-11-cascade-small-cap-feature-filter-ablation]]
+- [[backlog]] -> [[2026-05-11-cascade-small-cap-open-to-close-sensitivity]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-report]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-smoke]]
@@ -155,5 +158,6 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[small-cap-swing-research-spec]] -> [[2026-05-11-cascade-small-cap-setup-feature-diagnostics]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-11-cascade-small-cap-breakout-only-ablation]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-11-cascade-small-cap-feature-filter-ablation]]
+- [[small-cap-swing-research-spec]] -> [[2026-05-11-cascade-small-cap-open-to-close-sensitivity]]
 - [[Roadmap-Master]] -> [[Quant-Research-Priorities-2026-05-09]]
 - [[Regole-Quant]] -> [[Quant-Research-Priorities-2026-05-09]]

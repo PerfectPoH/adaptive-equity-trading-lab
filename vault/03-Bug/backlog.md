@@ -234,6 +234,12 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: `open_to_close_return>=0.084459` su `breakout_continuation` produce 22 trade, `return_pct=+140.77%`, `pnl_excluding_top_3=+46.0k` e `sign_flip_excluding_top_3=False`.
 - Impatto: e' la prima regione feature che resta positiva senza top 3 winner, ma la soglia deriva ancora da bucket in-sample e non va promossa direttamente a live rule.
 - Stato: confermato. Prossimo passo: benchmark sul sottoinsieme filtrato e sensitivity con soglie arrotondate (`>=0.08`, `>=0.10`) prima di costruire ranking breakout-specifico.
+### RISK-029 - Open-to-close threshold richiede validazione temporale
+
+- Priorita: P1.
+- Sintomo: `open_to_close_return>=0.10` su `breakout_continuation` produce 15 trade, `return_pct=+177.99%`, win rate 80%, mediana +11.33%, `pnl_excluding_top_3=+74.6k`, e benchmark filtrato ticker +12.82% vs random +7.94%.
+- Impatto: e' la migliore ipotesi primaria, ma il campione e' piccolo e ancora in-sample; rischio elevato di selection bias.
+- Stato: confermato. Prossimo passo: validazione temporale/walk-forward su soglie congelate `>=0.08` e `>=0.10`, prima di ranking breakout-specifico o paper trading.
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

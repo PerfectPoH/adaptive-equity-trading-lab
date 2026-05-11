@@ -63,6 +63,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-11-cascade-small-cap-setup-feature-diagnostics]] - feature-level diagnostics per setup: regioni feature opposte e prossimo rule ablation passivo.
 - [[2026-05-11-cascade-small-cap-breakout-only-ablation]] - ablation `allowed_setups=[breakout_continuation]`: +37.97% ma ancora outlier-driven.
 - [[2026-05-11-cascade-small-cap-feature-filter-ablation]] - feature filters dentro breakout: `open_to_close_return>=0.084459` resta positivo senza top 3 winner.
+- [[2026-05-11-cascade-small-cap-open-to-close-sensitivity]] - sensitivity soglie arrotondate: `open_to_close_return>=0.10` e' ipotesi primaria ma sample-small.
 
 ## Convenzione
 
