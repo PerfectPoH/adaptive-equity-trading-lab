@@ -27,6 +27,18 @@ class SmallCapPortfolioBacktestResult:
     summary: dict[str, float | int]
 
 
+SCANNER_FEATURE_COLUMNS = (
+    "gap_pct",
+    "open_to_close_return",
+    "close_position_daily_range",
+    "intraday_range_pct",
+    "relative_volume_20d",
+    "atr_pct",
+    "distance_from_20d_high",
+    "rolling_volatility_20d",
+)
+
+
 def run_small_cap_portfolio_backtest(
     candidate_export: pd.DataFrame,
     frames: dict[str, pd.DataFrame],
@@ -78,6 +90,7 @@ def run_small_cap_portfolio_backtest(
                     "estimated_cost_pct": decision.estimated_cost_pct,
                     "small_cap_scanner_score": _candidate_score(candidate, "small_cap_scanner_score"),
                     "small_cap_setup": _candidate_setup(candidate),
+                    **_candidate_feature_values(candidate),
                     "cash_after_entry": cash,
                 }
             )
@@ -199,6 +212,7 @@ def _rejection_row(candidate: pd.Series, reason: str, available_cash: float) -> 
         "as_of": pd.to_datetime(candidate.get("as_of"), errors="coerce"),
         "reject_reason": reason,
         "small_cap_setup": _candidate_setup(candidate),
+        **_candidate_feature_values(candidate),
         "available_cash": float(available_cash),
     }
 
@@ -239,6 +253,10 @@ def _candidate_setup(candidate: pd.Series) -> str:
     if pd.isna(value):
         return ""
     return str(value)
+
+
+def _candidate_feature_values(candidate: pd.Series) -> dict[str, float | None]:
+    return {column: _candidate_score(candidate, column) for column in SCANNER_FEATURE_COLUMNS}
 
 
 def _nearest_index_on_or_before(frame: pd.DataFrame, date: pd.Timestamp) -> pd.Timestamp | None:

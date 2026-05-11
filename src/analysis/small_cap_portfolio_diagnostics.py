@@ -47,6 +47,32 @@ SETUP_CASH_STARVATION_COLUMNS = [
     "worst_missed_return_pct",
 ]
 
+SETUP_FEATURE_PROFILE_COLUMNS = [
+    "setup_type",
+    "feature",
+    "feature_bucket",
+    "min_feature_value",
+    "max_feature_value",
+    "trade_count",
+    "avg_return_pct",
+    "median_return_pct",
+    "win_rate",
+    "total_pnl",
+    "avg_pnl",
+    "simple_trade_sharpe",
+]
+
+SCANNER_FEATURE_COLUMNS = [
+    "gap_pct",
+    "open_to_close_return",
+    "close_position_daily_range",
+    "intraday_range_pct",
+    "relative_volume_20d",
+    "atr_pct",
+    "distance_from_20d_high",
+    "rolling_volatility_20d",
+]
+
 CASH_STARVATION_COLUMNS = [
     "symbol",
     "as_of",
@@ -199,6 +225,61 @@ def build_setup_score_profile_report(
     if not rows:
         return pd.DataFrame(columns=SETUP_SCORE_PROFILE_COLUMNS)
     return pd.concat(rows, ignore_index=True)[SETUP_SCORE_PROFILE_COLUMNS]
+
+
+def build_setup_feature_profile_report(
+    trade_log: pd.DataFrame,
+    features: list[str] | tuple[str, ...] = tuple(SCANNER_FEATURE_COLUMNS),
+    setup_column: str = "small_cap_setup",
+    bins: int = 4,
+) -> pd.DataFrame:
+    if bins <= 0:
+        raise ValueError("bins must be positive")
+    if trade_log.empty or setup_column not in trade_log.columns or "return_pct" not in trade_log.columns or "pnl" not in trade_log.columns:
+        return pd.DataFrame(columns=SETUP_FEATURE_PROFILE_COLUMNS)
+    data = _with_setup_type(trade_log, setup_column)
+    data["return_pct"] = pd.to_numeric(data["return_pct"], errors="coerce")
+    data["pnl"] = pd.to_numeric(data["pnl"], errors="coerce")
+    data = data.dropna(subset=["return_pct", "pnl"])
+    if data.empty:
+        return pd.DataFrame(columns=SETUP_FEATURE_PROFILE_COLUMNS)
+
+    rows: list[dict[str, Any]] = []
+    for setup_type, setup_group in data.groupby("setup_type", sort=True):
+        for feature in features:
+            if feature not in setup_group.columns:
+                continue
+            feature_group = setup_group.copy()
+            feature_group[feature] = pd.to_numeric(feature_group[feature], errors="coerce")
+            feature_group = feature_group.dropna(subset=[feature])
+            if feature_group.empty:
+                continue
+            unique_values = sorted(feature_group[feature].unique())
+            bucket_count = min(int(bins), len(unique_values))
+            value_to_bucket = {
+                value: f"Q{min((i * bucket_count) // len(unique_values) + 1, bucket_count)}" for i, value in enumerate(unique_values)
+            }
+            feature_group["feature_bucket"] = feature_group[feature].map(value_to_bucket)
+            for bucket, bucket_group in feature_group.groupby("feature_bucket", sort=False):
+                returns = bucket_group["return_pct"]
+                pnl = bucket_group["pnl"]
+                rows.append(
+                    {
+                        "setup_type": setup_type,
+                        "feature": feature,
+                        "feature_bucket": bucket,
+                        "min_feature_value": float(bucket_group[feature].min()),
+                        "max_feature_value": float(bucket_group[feature].max()),
+                        "trade_count": int(len(bucket_group)),
+                        "avg_return_pct": float(returns.mean()),
+                        "median_return_pct": float(returns.median()),
+                        "win_rate": float((returns > 0).sum() / len(bucket_group)),
+                        "total_pnl": float(pnl.sum()),
+                        "avg_pnl": float(pnl.mean()),
+                        "simple_trade_sharpe": _simple_sharpe(returns),
+                    }
+                )
+    return pd.DataFrame(rows, columns=SETUP_FEATURE_PROFILE_COLUMNS)
 
 
 def build_cash_starvation_report(
