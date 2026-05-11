@@ -12,6 +12,7 @@ from src.analysis.small_cap_benchmarks import SmallCapBenchmarkConfig, build_sma
 from src.analysis.small_cap_portfolio_diagnostics import (
     build_cash_starvation_report,
     build_portfolio_outlier_breakdown,
+    build_regime_profile_report,
     build_score_profile_report,
     build_setup_cash_starvation_summary,
     build_setup_feature_profile_report,
@@ -115,6 +116,7 @@ def run_small_cap_historical_report(
     portfolio_setup_score_profile = build_setup_score_profile_report(portfolio_backtest.trade_log)
     portfolio_setup_cash_starvation_summary = build_setup_cash_starvation_summary(portfolio_cash_starvation)
     portfolio_setup_feature_profile = build_setup_feature_profile_report(portfolio_backtest.trade_log)
+    portfolio_regime_profile = build_regime_profile_report(portfolio_backtest.trade_log)
 
     candidate_path = output_path / "candidate_export.csv"
     benchmark_path = output_path / "benchmark_report.csv"
@@ -132,6 +134,7 @@ def run_small_cap_historical_report(
     portfolio_setup_score_profile_path = output_path / "portfolio_setup_score_profile.csv"
     portfolio_setup_cash_starvation_summary_path = output_path / "portfolio_setup_cash_starvation_summary.csv"
     portfolio_setup_feature_profile_path = output_path / "portfolio_setup_feature_profile.csv"
+    portfolio_regime_profile_path = output_path / "portfolio_regime_profile.csv"
     run_manifest_path = output_path / "run_manifest.json"
     report_path = output_path / "small_cap_backtest_report.md"
     candidate_export.to_csv(candidate_path, index=False)
@@ -150,6 +153,7 @@ def run_small_cap_historical_report(
     portfolio_setup_score_profile.to_csv(portfolio_setup_score_profile_path, index=False)
     portfolio_setup_cash_starvation_summary.to_csv(portfolio_setup_cash_starvation_summary_path, index=False)
     portfolio_setup_feature_profile.to_csv(portfolio_setup_feature_profile_path, index=False)
+    portfolio_regime_profile.to_csv(portfolio_regime_profile_path, index=False)
     write_run_manifest_json(manifest, run_manifest_path)
     backtest_report = write_small_cap_backtest_report_markdown(
         candidate_export,
@@ -168,6 +172,7 @@ def run_small_cap_historical_report(
         portfolio_setup_score_profile=portfolio_setup_score_profile,
         portfolio_setup_cash_starvation_summary=portfolio_setup_cash_starvation_summary,
         portfolio_setup_feature_profile=portfolio_setup_feature_profile,
+        portfolio_regime_profile=portfolio_regime_profile,
         run_manifest=manifest_dict,
     )
 
@@ -185,6 +190,7 @@ def run_small_cap_historical_report(
         "portfolio_setup_score_profile": portfolio_setup_score_profile,
         "portfolio_setup_cash_starvation_summary": portfolio_setup_cash_starvation_summary,
         "portfolio_setup_feature_profile": portfolio_setup_feature_profile,
+        "portfolio_regime_profile": portfolio_regime_profile,
         "run_manifest": manifest_dict,
         "backtest_report": backtest_report,
         "paths": {
@@ -204,6 +210,7 @@ def run_small_cap_historical_report(
             "portfolio_setup_score_profile": portfolio_setup_score_profile_path,
             "portfolio_setup_cash_starvation_summary": portfolio_setup_cash_starvation_summary_path,
             "portfolio_setup_feature_profile": portfolio_setup_feature_profile_path,
+            "portfolio_regime_profile": portfolio_regime_profile_path,
             "run_manifest": run_manifest_path,
             "backtest_report": report_path,
         },

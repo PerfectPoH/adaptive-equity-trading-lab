@@ -62,6 +62,18 @@ SETUP_FEATURE_PROFILE_COLUMNS = [
     "simple_trade_sharpe",
 ]
 
+REGIME_PROFILE_COLUMNS = [
+    "regime_feature",
+    "regime_value",
+    "trade_count",
+    "avg_return_pct",
+    "median_return_pct",
+    "win_rate",
+    "total_pnl",
+    "avg_pnl",
+    "simple_trade_sharpe",
+]
+
 SCANNER_FEATURE_COLUMNS = [
     "gap_pct",
     "open_to_close_return",
@@ -282,6 +294,23 @@ def build_setup_feature_profile_report(
     return pd.DataFrame(rows, columns=SETUP_FEATURE_PROFILE_COLUMNS)
 
 
+def build_regime_profile_report(trade_log: pd.DataFrame) -> pd.DataFrame:
+    if trade_log.empty or "return_pct" not in trade_log.columns or "pnl" not in trade_log.columns:
+        return pd.DataFrame(columns=REGIME_PROFILE_COLUMNS)
+    data = trade_log.copy()
+    data["return_pct"] = pd.to_numeric(data["return_pct"], errors="coerce")
+    data["pnl"] = pd.to_numeric(data["pnl"], errors="coerce")
+    data = data.dropna(subset=["return_pct", "pnl"])
+    if data.empty:
+        return pd.DataFrame(columns=REGIME_PROFILE_COLUMNS)
+
+    rows: list[dict[str, Any]] = []
+    rows.extend(_binary_regime_rows(data, "iwm_above_ema_50", "iwm_close", "iwm_ema_50"))
+    rows.extend(_binary_regime_rows(data, "iwm_above_ema_200", "iwm_close", "iwm_ema_200"))
+    rows.extend(_vix_regime_rows(data))
+    return pd.DataFrame(rows, columns=REGIME_PROFILE_COLUMNS)
+
+
 def build_cash_starvation_report(
     rejections: pd.DataFrame,
     frames: dict[str, pd.DataFrame],
@@ -385,6 +414,56 @@ def build_setup_cash_starvation_summary(
             }
         )
     return pd.DataFrame(rows, columns=SETUP_CASH_STARVATION_COLUMNS)
+
+
+def _binary_regime_rows(data: pd.DataFrame, regime_feature: str, lhs_column: str, rhs_column: str) -> list[dict[str, Any]]:
+    if lhs_column not in data.columns or rhs_column not in data.columns:
+        return []
+    regime_data = data.copy()
+    regime_data[lhs_column] = pd.to_numeric(regime_data[lhs_column], errors="coerce")
+    regime_data[rhs_column] = pd.to_numeric(regime_data[rhs_column], errors="coerce")
+    regime_data = regime_data.dropna(subset=[lhs_column, rhs_column])
+    if regime_data.empty:
+        return []
+    regime_data["_regime_value"] = (regime_data[lhs_column] > regime_data[rhs_column]).astype(str)
+    rows = []
+    for value in sorted(regime_data["_regime_value"].unique()):
+        rows.append(_regime_summary_row(regime_feature, value, regime_data[regime_data["_regime_value"] == value]))
+    return rows
+
+
+def _vix_regime_rows(data: pd.DataFrame) -> list[dict[str, Any]]:
+    if "vix_close" not in data.columns:
+        return []
+    regime_data = data.copy()
+    regime_data["vix_close"] = pd.to_numeric(regime_data["vix_close"], errors="coerce")
+    regime_data = regime_data.dropna(subset=["vix_close"])
+    if regime_data.empty:
+        return []
+    median_vix = float(regime_data["vix_close"].median())
+    regime_data["_regime_value"] = ["low" if value <= median_vix else "high" for value in regime_data["vix_close"]]
+    rows = []
+    for value in ("low", "high"):
+        bucket = regime_data[regime_data["_regime_value"] == value]
+        if not bucket.empty:
+            rows.append(_regime_summary_row("vix_bucket", value, bucket))
+    return rows
+
+
+def _regime_summary_row(regime_feature: str, regime_value: str, group: pd.DataFrame) -> dict[str, Any]:
+    returns = group["return_pct"]
+    pnl = group["pnl"]
+    return {
+        "regime_feature": regime_feature,
+        "regime_value": regime_value,
+        "trade_count": int(len(group)),
+        "avg_return_pct": float(returns.mean()),
+        "median_return_pct": float(returns.median()),
+        "win_rate": float((returns > 0).sum() / len(group)),
+        "total_pnl": float(pnl.sum()),
+        "avg_pnl": float(pnl.mean()),
+        "simple_trade_sharpe": _simple_sharpe(returns),
+    }
 
 
 def _empty_outlier_breakdown() -> dict[str, Any]:

@@ -41,6 +41,14 @@ SCANNER_FEATURE_COLUMNS = (
 )
 
 
+REGIME_FEATURE_COLUMNS = (
+    "iwm_close",
+    "iwm_ema_50",
+    "iwm_ema_200",
+    "vix_close",
+)
+
+
 def filter_small_cap_portfolio_candidates(
     candidate_export: pd.DataFrame,
     config: SmallCapPortfolioBacktestConfig = SmallCapPortfolioBacktestConfig(),
@@ -117,6 +125,7 @@ def run_small_cap_portfolio_backtest(
                     "small_cap_scanner_score": _candidate_score(candidate, "small_cap_scanner_score"),
                     "small_cap_setup": _candidate_setup(candidate),
                     **_candidate_feature_values(candidate),
+                    **_candidate_regime_values(candidate),
                     "cash_after_entry": cash,
                 }
             )
@@ -239,6 +248,7 @@ def _rejection_row(candidate: pd.Series, reason: str, available_cash: float, ext
         "reject_reason": reason,
         "small_cap_setup": _candidate_setup(candidate),
         **_candidate_feature_values(candidate),
+        **_candidate_regime_values(candidate),
         "available_cash": float(available_cash),
     }
     if extra:
@@ -286,6 +296,10 @@ def _candidate_setup(candidate: pd.Series) -> str:
 
 def _candidate_feature_values(candidate: pd.Series) -> dict[str, float | None]:
     return {column: _candidate_score(candidate, column) for column in SCANNER_FEATURE_COLUMNS}
+
+
+def _candidate_regime_values(candidate: pd.Series) -> dict[str, float | None]:
+    return {column: _candidate_score(candidate, column) for column in REGIME_FEATURE_COLUMNS}
 
 
 def _normalise_allowed_setups(allowed_setups: tuple[str, ...] | None) -> set[str] | None:
