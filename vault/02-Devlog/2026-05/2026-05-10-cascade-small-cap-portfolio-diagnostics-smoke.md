@@ -145,9 +145,9 @@ Motivi:
 
 ## Prossime azioni
 
-1. Implementare run manifest con `run_id`, config hash, timestamp, periodo, simboli e parametri.
-2. Ripetere smoke su watchlist piu' ampia e piu' periodi.
-3. Aggiungere confronto ex-outlier: performance senza top 1/top 3 trade.
+1. Run manifest implementato: usare `run_manifest.json` e `config_hash` nelle prossime smoke.
+2. Ex-outlier stress test implementato: senza top 3 winner il portfolio passa a -0.64%.
+3. Ripetere smoke su watchlist piu' ampia e piu' periodi.
 4. Solo dopo valutare sector cap, random delay, survivorship sensitivity e opening regime check.
 
 Vedi [[Roadmap-Master]], [[small-cap-swing-research-spec]], [[2026-05-10-cascade-small-cap-portfolio-diagnostics-report]], [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]].

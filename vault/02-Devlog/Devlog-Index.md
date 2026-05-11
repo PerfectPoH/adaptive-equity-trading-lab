@@ -55,6 +55,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]] - gate critico su outlier risk, score monotonicity e distinzione implementato/roadmap.
 - [[2026-05-10-cascade-small-cap-portfolio-diagnostics-report]] - outlier P&L breakdown e score profile report integrati nel runner/report.
 - [[2026-05-10-cascade-small-cap-portfolio-diagnostics-smoke]] - smoke reale con portfolio +74.25% ma verdetto non promuovere per outlier concentration.
+- [[2026-05-11-cascade-small-cap-ex-outlier-stress-test]] - metriche ex-outlier: senza top 3 winner il portfolio passa a -0.64%.
 - [[2026-05-11-claude-small-cap-run-manifest]] - run manifest small-cap con `run_id`, config hash SHA-256, periodo, universo e markdown section; chiude il gate per sweep tracciabili (RISK-023 mitigato).
 
 ## Convenzione

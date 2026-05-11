@@ -136,6 +136,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - roadmap critica small-cap aggiornata: prima di sector cap/random delay/survivorship sensitivity servono Outlier P&L Breakdown, Score Profile Report e run manifest con config hash.
 - portfolio diagnostics report small-cap aggiunto: `portfolio_outlier_breakdown.csv`, `portfolio_score_profile.csv`, sezioni markdown outlier/score e `small_cap_scanner_score` preservato nel trade log.
 - smoke portfolio diagnostics completata: portfolio +74.25% ma `top_3_pnl_contribution_pct=1.0086` e `outlier_concentration_alert=True`; verdetto `NON PROMUOVERE`.
+- stress test ex-outlier aggiunto: senza top 3 trade vincenti il portfolio passa a -0.64%, `sign_flip_excluding_top_3=True`.
 - run manifest small-cap implementato: `src/experiments/run_manifest.py` produce `run_manifest.json` accanto agli altri artefatti del runner storico, con `run_id` univoco, `config_hash` SHA-256 deterministico sulla `SmallCapHistoricalRunConfig`, `created_at`, `schema_version`, `universe`, periodo, `git_commit` e `host`; il markdown del report include la sezione `## Run Manifest` in testa; suite a 148 passed; RISK-023 passa a mitigato.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.

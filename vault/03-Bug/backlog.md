@@ -187,7 +187,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: pochi trade esplosivi possono generare la maggior parte del P&L.
 - Impatto: una equity curve positiva puo' rappresentare una lotteria storica, non un edge replicabile. In live basta perdere uno degli outlier per ribaltare il risultato.
 - Azione: implementare Outlier P&L Breakdown con contributo top 1/3/5/10 trade, max single-trade contribution e alert se top 3 trade superano il 40% del P&L totale.
-- Stato: confermato dalla smoke; `top_3_pnl_contribution_pct=1.0086` e `outlier_concentration_alert=True`, quindi setup non promuovibile.
+- Stato: confermato dalla smoke e dallo stress ex-outlier; `top_3_pnl_contribution_pct=1.0086`, `outlier_concentration_alert=True` e `sign_flip_excluding_top_3=True`, quindi setup non promuovibile.
 
 ### RISK-023 - Overfitting manuale nei run small-cap
 
