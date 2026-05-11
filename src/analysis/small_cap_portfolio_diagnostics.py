@@ -19,12 +19,41 @@ SCORE_PROFILE_COLUMNS = [
     "simple_trade_sharpe",
 ]
 
+SETUP_SUMMARY_COLUMNS = [
+    "setup_type",
+    "trade_count",
+    "total_pnl",
+    "avg_pnl",
+    "avg_return_pct",
+    "median_return_pct",
+    "win_rate",
+    "best_trade_symbol",
+    "best_trade_return_pct",
+    "worst_trade_symbol",
+    "worst_trade_return_pct",
+]
+
+SETUP_SCORE_PROFILE_COLUMNS = ["setup_type", *SCORE_PROFILE_COLUMNS]
+
+SETUP_CASH_STARVATION_COLUMNS = [
+    "setup_type",
+    "evaluable_missed_trades",
+    "avg_missed_return_pct",
+    "median_missed_return_pct",
+    "missed_win_rate",
+    "best_missed_symbol",
+    "best_missed_return_pct",
+    "worst_missed_symbol",
+    "worst_missed_return_pct",
+]
+
 CASH_STARVATION_COLUMNS = [
     "symbol",
     "as_of",
     "entry_date",
     "exit_date",
     "available_cash",
+    "small_cap_setup",
     "entry_price",
     "exit_price",
     "missed_return_pct",
@@ -115,6 +144,63 @@ def build_score_profile_report(
     return pd.DataFrame(rows, columns=SCORE_PROFILE_COLUMNS)
 
 
+def build_setup_summary_report(
+    trade_log: pd.DataFrame,
+    setup_column: str = "small_cap_setup",
+) -> pd.DataFrame:
+    if trade_log.empty or setup_column not in trade_log.columns or "return_pct" not in trade_log.columns or "pnl" not in trade_log.columns:
+        return pd.DataFrame(columns=SETUP_SUMMARY_COLUMNS)
+    data = _with_setup_type(trade_log, setup_column)
+    data["return_pct"] = pd.to_numeric(data["return_pct"], errors="coerce")
+    data["pnl"] = pd.to_numeric(data["pnl"], errors="coerce")
+    data = data.dropna(subset=["return_pct", "pnl"])
+    if data.empty:
+        return pd.DataFrame(columns=SETUP_SUMMARY_COLUMNS)
+
+    rows: list[dict[str, Any]] = []
+    for setup_type, group in data.groupby("setup_type", sort=True):
+        returns = group["return_pct"]
+        pnl = group["pnl"]
+        best = group.sort_values("return_pct", ascending=False).iloc[0]
+        worst = group.sort_values("return_pct", ascending=True).iloc[0]
+        rows.append(
+            {
+                "setup_type": setup_type,
+                "trade_count": int(len(group)),
+                "total_pnl": float(pnl.sum()),
+                "avg_pnl": float(pnl.mean()),
+                "avg_return_pct": float(returns.mean()),
+                "median_return_pct": float(returns.median()),
+                "win_rate": float((returns > 0).sum() / len(group)),
+                "best_trade_symbol": _symbol(best),
+                "best_trade_return_pct": float(best["return_pct"]),
+                "worst_trade_symbol": _symbol(worst),
+                "worst_trade_return_pct": float(worst["return_pct"]),
+            }
+        )
+    return pd.DataFrame(rows, columns=SETUP_SUMMARY_COLUMNS)
+
+
+def build_setup_score_profile_report(
+    trade_log: pd.DataFrame,
+    setup_column: str = "small_cap_setup",
+    score_column: str = "small_cap_scanner_score",
+    bins: int = 10,
+) -> pd.DataFrame:
+    if trade_log.empty or setup_column not in trade_log.columns:
+        return pd.DataFrame(columns=SETUP_SCORE_PROFILE_COLUMNS)
+    rows: list[pd.DataFrame] = []
+    for setup_type, group in _with_setup_type(trade_log, setup_column).groupby("setup_type", sort=True):
+        profile = build_score_profile_report(group, score_column=score_column, bins=bins)
+        if profile.empty:
+            continue
+        profile.insert(0, "setup_type", setup_type)
+        rows.append(profile)
+    if not rows:
+        return pd.DataFrame(columns=SETUP_SCORE_PROFILE_COLUMNS)
+    return pd.concat(rows, ignore_index=True)[SETUP_SCORE_PROFILE_COLUMNS]
+
+
 def build_cash_starvation_report(
     rejections: pd.DataFrame,
     frames: dict[str, pd.DataFrame],
@@ -140,6 +226,7 @@ def build_cash_starvation_report(
                 "entry_date": entry_date,
                 "exit_date": exit_date,
                 "available_cash": _safe_float(rejection.get("available_cash")),
+                "small_cap_setup": _setup_type(rejection.get("small_cap_setup")),
                 "entry_price": entry_price,
                 "exit_price": exit_price,
                 "missed_return_pct": float((exit_price / entry_price) - 1) if entry_price else 0.0,
@@ -184,6 +271,39 @@ def summarize_cash_starvation_report(
         "worst_missed_symbol": _symbol(worst),
         "worst_missed_return_pct": float(worst["missed_return_pct"]),
     }
+
+
+def build_setup_cash_starvation_summary(
+    cash_starvation: pd.DataFrame,
+    setup_column: str = "small_cap_setup",
+) -> pd.DataFrame:
+    if cash_starvation.empty or setup_column not in cash_starvation.columns or "missed_return_pct" not in cash_starvation.columns:
+        return pd.DataFrame(columns=SETUP_CASH_STARVATION_COLUMNS)
+    data = _with_setup_type(cash_starvation, setup_column)
+    data["missed_return_pct"] = pd.to_numeric(data["missed_return_pct"], errors="coerce")
+    data = data.dropna(subset=["missed_return_pct"])
+    if data.empty:
+        return pd.DataFrame(columns=SETUP_CASH_STARVATION_COLUMNS)
+
+    rows: list[dict[str, Any]] = []
+    for setup_type, group in data.groupby("setup_type", sort=True):
+        returns = group["missed_return_pct"]
+        best = group.sort_values("missed_return_pct", ascending=False).iloc[0]
+        worst = group.sort_values("missed_return_pct", ascending=True).iloc[0]
+        rows.append(
+            {
+                "setup_type": setup_type,
+                "evaluable_missed_trades": int(len(group)),
+                "avg_missed_return_pct": float(returns.mean()),
+                "median_missed_return_pct": float(returns.median()),
+                "missed_win_rate": float((returns > 0).sum() / len(group)),
+                "best_missed_symbol": _symbol(best),
+                "best_missed_return_pct": float(best["missed_return_pct"]),
+                "worst_missed_symbol": _symbol(worst),
+                "worst_missed_return_pct": float(worst["missed_return_pct"]),
+            }
+        )
+    return pd.DataFrame(rows, columns=SETUP_CASH_STARVATION_COLUMNS)
 
 
 def _empty_outlier_breakdown() -> dict[str, Any]:
@@ -294,6 +414,20 @@ def _safe_float(value: object) -> float:
     except (TypeError, ValueError):
         return float("nan")
     return parsed if math.isfinite(parsed) else float("nan")
+
+
+def _with_setup_type(frame: pd.DataFrame, setup_column: str) -> pd.DataFrame:
+    data = frame.copy()
+    data["setup_type"] = data[setup_column].map(_setup_type)
+    data = data[data["setup_type"] != "unknown"].copy()
+    return data
+
+
+def _setup_type(value: object) -> str:
+    if pd.isna(value):
+        return "unknown"
+    setup = str(value).strip()
+    return setup if setup else "unknown"
 
 
 def _symbol(row: pd.Series) -> str | None:

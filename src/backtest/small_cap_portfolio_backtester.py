@@ -77,6 +77,7 @@ def run_small_cap_portfolio_backtest(
                     "next_open_gap_pct": decision.next_open_gap_pct,
                     "estimated_cost_pct": decision.estimated_cost_pct,
                     "small_cap_scanner_score": _candidate_score(candidate, "small_cap_scanner_score"),
+                    "small_cap_setup": _candidate_setup(candidate),
                     "cash_after_entry": cash,
                 }
             )
@@ -197,6 +198,7 @@ def _rejection_row(candidate: pd.Series, reason: str, available_cash: float) -> 
         "symbol": str(candidate.get("symbol", "")),
         "as_of": pd.to_datetime(candidate.get("as_of"), errors="coerce"),
         "reject_reason": reason,
+        "small_cap_setup": _candidate_setup(candidate),
         "available_cash": float(available_cash),
     }
 
@@ -230,6 +232,13 @@ def _candidate_score(candidate: pd.Series, column: str) -> float | None:
     if pd.isna(value):
         return None
     return float(value)
+
+
+def _candidate_setup(candidate: pd.Series) -> str:
+    value = candidate.get("small_cap_setup", "")
+    if pd.isna(value):
+        return ""
+    return str(value)
 
 
 def _nearest_index_on_or_before(frame: pd.DataFrame, date: pd.Timestamp) -> pd.Timestamp | None:

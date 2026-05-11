@@ -21,6 +21,9 @@ def build_small_cap_backtest_report(
     portfolio_outlier_breakdown: dict[str, Any] | None = None,
     portfolio_score_profile: pd.DataFrame | None = None,
     portfolio_cash_starvation_summary: dict[str, Any] | None = None,
+    portfolio_setup_summary: pd.DataFrame | None = None,
+    portfolio_setup_score_profile: pd.DataFrame | None = None,
+    portfolio_setup_cash_starvation_summary: pd.DataFrame | None = None,
     run_manifest: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     strategy_return = _benchmark_return(benchmark_report, STRATEGY_PROXY_BENCHMARK)
@@ -48,6 +51,11 @@ def build_small_cap_backtest_report(
         "portfolio_outlier_breakdown": portfolio_outlier_breakdown or {},
         "portfolio_score_profile": _records(portfolio_score_profile) if portfolio_score_profile is not None else [],
         "portfolio_cash_starvation_summary": portfolio_cash_starvation_summary or {},
+        "portfolio_setup_summary": _records(portfolio_setup_summary) if portfolio_setup_summary is not None else [],
+        "portfolio_setup_score_profile": _records(portfolio_setup_score_profile) if portfolio_setup_score_profile is not None else [],
+        "portfolio_setup_cash_starvation_summary": _records(portfolio_setup_cash_starvation_summary)
+        if portfolio_setup_cash_starvation_summary is not None
+        else [],
         "run_manifest": run_manifest or {},
         "decision": _decision(verdict),
     }
@@ -64,6 +72,9 @@ def write_small_cap_backtest_report_markdown(
     portfolio_outlier_breakdown: dict[str, Any] | None = None,
     portfolio_score_profile: pd.DataFrame | None = None,
     portfolio_cash_starvation_summary: dict[str, Any] | None = None,
+    portfolio_setup_summary: pd.DataFrame | None = None,
+    portfolio_setup_score_profile: pd.DataFrame | None = None,
+    portfolio_setup_cash_starvation_summary: pd.DataFrame | None = None,
     run_manifest: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     report = build_small_cap_backtest_report(
@@ -76,6 +87,9 @@ def write_small_cap_backtest_report_markdown(
         portfolio_outlier_breakdown=portfolio_outlier_breakdown,
         portfolio_score_profile=portfolio_score_profile,
         portfolio_cash_starvation_summary=portfolio_cash_starvation_summary,
+        portfolio_setup_summary=portfolio_setup_summary,
+        portfolio_setup_score_profile=portfolio_setup_score_profile,
+        portfolio_setup_cash_starvation_summary=portfolio_setup_cash_starvation_summary,
         run_manifest=run_manifest,
     )
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -260,6 +274,12 @@ def _to_markdown(report: dict[str, Any]) -> str:
     lines.extend(_record_lines(report["portfolio_score_profile"]))
     lines.extend(["", "## Cash Starvation Diagnostics"])
     lines.extend(_value_lines(report["portfolio_cash_starvation_summary"]))
+    lines.extend(["", "## Setup Diagnostics"])
+    lines.extend(_record_lines(report["portfolio_setup_summary"]))
+    lines.extend(["", "## Setup Score Profile Report"])
+    lines.extend(_record_lines(report["portfolio_setup_score_profile"]))
+    lines.extend(["", "## Setup Cash Starvation Diagnostics"])
+    lines.extend(_record_lines(report["portfolio_setup_cash_starvation_summary"]))
     lines.extend(["", "## Benchmarks"])
     for row in report["benchmark_report"]:
         lines.append(f"- {row.get('benchmark')}: return={row.get('return')}, observations={row.get('observations')}")
