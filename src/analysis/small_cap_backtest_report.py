@@ -20,6 +20,7 @@ def build_small_cap_backtest_report(
     portfolio_rejection_summary: dict[str, int] | None = None,
     portfolio_outlier_breakdown: dict[str, Any] | None = None,
     portfolio_score_profile: pd.DataFrame | None = None,
+    run_manifest: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     strategy_return = _benchmark_return(benchmark_report, STRATEGY_PROXY_BENCHMARK)
     primary_return = _benchmark_return(benchmark_report, primary_benchmark)
@@ -45,6 +46,7 @@ def build_small_cap_backtest_report(
         "portfolio_rejection_summary": portfolio_rejection_summary or {},
         "portfolio_outlier_breakdown": portfolio_outlier_breakdown or {},
         "portfolio_score_profile": _records(portfolio_score_profile) if portfolio_score_profile is not None else [],
+        "run_manifest": run_manifest or {},
         "decision": _decision(verdict),
     }
 
@@ -59,6 +61,7 @@ def write_small_cap_backtest_report_markdown(
     portfolio_rejection_summary: dict[str, int] | None = None,
     portfolio_outlier_breakdown: dict[str, Any] | None = None,
     portfolio_score_profile: pd.DataFrame | None = None,
+    run_manifest: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     report = build_small_cap_backtest_report(
         candidate_export,
@@ -69,6 +72,7 @@ def write_small_cap_backtest_report_markdown(
         portfolio_rejection_summary=portfolio_rejection_summary,
         portfolio_outlier_breakdown=portfolio_outlier_breakdown,
         portfolio_score_profile=portfolio_score_profile,
+        run_manifest=run_manifest,
     )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(_to_markdown(report), encoding="utf-8")
@@ -198,15 +202,23 @@ def _records(frame: pd.DataFrame) -> list[dict[str, Any]]:
 
 
 def _to_markdown(report: dict[str, Any]) -> str:
-    lines = [
+    lines: list[str] = [
         "# Small-Cap Backtest Report",
         "",
-        f"Verdict: `{report['verdict']}`",
-        "",
-        f"Decision: {report['decision']}",
-        "",
-        "## Candidate Summary",
     ]
+    manifest_lines = _manifest_lines(report.get("run_manifest"))
+    if manifest_lines:
+        lines.extend(manifest_lines)
+        lines.append("")
+    lines.extend(
+        [
+            f"Verdict: `{report['verdict']}`",
+            "",
+            f"Decision: {report['decision']}",
+            "",
+            "## Candidate Summary",
+        ]
+    )
     for key, value in report["candidate_summary"].items():
         lines.append(f"- {key}: {value}")
     lines.extend(
@@ -247,6 +259,30 @@ def _to_markdown(report: dict[str, Any]) -> str:
         lines.append(f"- {row.get('benchmark')}: return={row.get('return')}, observations={row.get('observations')}")
     lines.append("")
     return "\n".join(lines)
+
+
+def _manifest_lines(manifest: dict[str, Any] | None) -> list[str]:
+    if not manifest:
+        return []
+    period = manifest.get("period") or {}
+    universe = manifest.get("universe") or []
+    if isinstance(universe, (list, tuple)):
+        universe_repr = ", ".join(str(item) for item in universe) if universe else "n/a"
+    else:
+        universe_repr = str(universe)
+    lines = ["## Run Manifest"]
+    lines.append(f"- run_id: {manifest.get('run_id', 'n/a')}")
+    lines.append(f"- config_hash: {manifest.get('config_hash', 'n/a')}")
+    lines.append(f"- schema_version: {manifest.get('schema_version', 'n/a')}")
+    lines.append(f"- created_at: {manifest.get('created_at', 'n/a')}")
+    lines.append(f"- period_start: {period.get('start', 'n/a')}")
+    lines.append(f"- period_end: {period.get('end', 'n/a')}")
+    lines.append(f"- universe: {universe_repr}")
+    git_commit = manifest.get("git_commit")
+    lines.append(f"- git_commit: {git_commit if git_commit else 'n/a'}")
+    host = manifest.get("host")
+    lines.append(f"- host: {host if host else 'n/a'}")
+    return lines
 
 
 def _dict_lines(values: dict[str, int]) -> list[str]:

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -10,6 +11,7 @@ from src.analysis.small_cap_backtest_report import write_small_cap_backtest_repo
 from src.analysis.small_cap_benchmarks import SmallCapBenchmarkConfig, build_small_cap_benchmark_report
 from src.analysis.small_cap_portfolio_diagnostics import build_portfolio_outlier_breakdown, build_score_profile_report
 from src.backtest.small_cap_portfolio_backtester import SmallCapPortfolioBacktestConfig, run_small_cap_portfolio_backtest
+from src.experiments.run_manifest import build_run_manifest, manifest_to_dict, write_run_manifest_json
 from src.experiments.small_cap_candidate_export import SmallCapCandidateExportConfig, build_small_cap_candidate_export
 
 
@@ -34,6 +36,11 @@ def run_small_cap_historical_report(
     end: str | pd.Timestamp | None = None,
     metadata_diagnostics: pd.DataFrame | None = None,
     config: SmallCapHistoricalRunConfig = SmallCapHistoricalRunConfig(),
+    run_id: str | None = None,
+    created_at: str | datetime | None = None,
+    git_commit: str | None = None,
+    host: str | None = None,
+    extras: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
@@ -46,6 +53,21 @@ def run_small_cap_historical_report(
     )
     if not selected_dates:
         raise ValueError("No historical as_of dates available for the requested range")
+
+    universe_symbols = _extract_universe(candidate_metadata)
+    period_start, period_end = _format_period(selected_dates)
+    manifest = build_run_manifest(
+        config,
+        universe=universe_symbols,
+        period_start=period_start,
+        period_end=period_end,
+        run_id=run_id,
+        created_at=created_at,
+        git_commit=git_commit,
+        host=host,
+        extras=extras,
+    )
+    manifest_dict = manifest_to_dict(manifest)
 
     candidate_export = _build_historical_candidate_export(candidate_metadata, frames, selected_dates, config)
     benchmark_report = build_small_cap_benchmark_report(
@@ -66,6 +88,7 @@ def run_small_cap_historical_report(
     portfolio_summary_path = output_path / "portfolio_summary.csv"
     portfolio_outlier_breakdown_path = output_path / "portfolio_outlier_breakdown.csv"
     portfolio_score_profile_path = output_path / "portfolio_score_profile.csv"
+    run_manifest_path = output_path / "run_manifest.json"
     report_path = output_path / "small_cap_backtest_report.md"
     candidate_export.to_csv(candidate_path, index=False)
     benchmark_report.to_csv(benchmark_path, index=False)
@@ -75,6 +98,7 @@ def run_small_cap_historical_report(
     pd.DataFrame([portfolio_backtest.summary]).to_csv(portfolio_summary_path, index=False)
     pd.DataFrame([portfolio_outlier_breakdown]).to_csv(portfolio_outlier_breakdown_path, index=False)
     portfolio_score_profile.to_csv(portfolio_score_profile_path, index=False)
+    write_run_manifest_json(manifest, run_manifest_path)
     backtest_report = write_small_cap_backtest_report_markdown(
         candidate_export,
         benchmark_report,
@@ -85,6 +109,7 @@ def run_small_cap_historical_report(
         portfolio_rejection_summary=portfolio_backtest.rejection_summary,
         portfolio_outlier_breakdown=portfolio_outlier_breakdown,
         portfolio_score_profile=portfolio_score_profile,
+        run_manifest=manifest_dict,
     )
 
     return {
@@ -93,6 +118,7 @@ def run_small_cap_historical_report(
         "portfolio_backtest": portfolio_backtest,
         "portfolio_outlier_breakdown": portfolio_outlier_breakdown,
         "portfolio_score_profile": portfolio_score_profile,
+        "run_manifest": manifest_dict,
         "backtest_report": backtest_report,
         "paths": {
             "candidate_export": candidate_path,
@@ -103,9 +129,33 @@ def run_small_cap_historical_report(
             "portfolio_summary": portfolio_summary_path,
             "portfolio_outlier_breakdown": portfolio_outlier_breakdown_path,
             "portfolio_score_profile": portfolio_score_profile_path,
+            "run_manifest": run_manifest_path,
             "backtest_report": report_path,
         },
     }
+
+
+def _extract_universe(candidate_metadata: pd.DataFrame) -> list[str]:
+    if "symbol" not in candidate_metadata.columns:
+        return []
+    symbols = candidate_metadata["symbol"].astype(str).str.strip()
+    symbols = [s for s in symbols.tolist() if s]
+    seen: set[str] = set()
+    ordered: list[str] = []
+    for symbol in symbols:
+        if symbol in seen:
+            continue
+        seen.add(symbol)
+        ordered.append(symbol)
+    return ordered
+
+
+def _format_period(selected_dates: list[pd.Timestamp]) -> tuple[str | None, str | None]:
+    if not selected_dates:
+        return None, None
+    start = selected_dates[0]
+    end = selected_dates[-1]
+    return start.date().isoformat(), end.date().isoformat()
 
 
 def _build_historical_candidate_export(

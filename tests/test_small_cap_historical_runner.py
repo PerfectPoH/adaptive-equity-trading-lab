@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pandas as pd
 
 from src.analysis.small_cap_benchmarks import SmallCapBenchmarkConfig
 from src.backtest.small_cap_portfolio_backtester import SmallCapPortfolioBacktestConfig
+from src.experiments.run_manifest import SCHEMA_VERSION, compute_config_hash
 from src.experiments.small_cap_historical_runner import SmallCapHistoricalRunConfig, run_small_cap_historical_report
 
 
@@ -134,6 +136,116 @@ def test_small_cap_historical_runner_includes_metadata_diagnostics_in_report(tmp
     content = (tmp_path / "small_cap_backtest_report.md").read_text(encoding="utf-8")
     assert result["backtest_report"]["metadata_diagnostic_reasons"] == {"missing_market_cap": 1}
     assert "missing_market_cap" in content
+
+
+def test_small_cap_historical_runner_writes_run_manifest(tmp_path: Path) -> None:
+    config = SmallCapHistoricalRunConfig(
+        benchmark=SmallCapBenchmarkConfig(holding_period_bars=1),
+        portfolio=SmallCapPortfolioBacktestConfig(holding_period_bars=1),
+    )
+    result = run_small_cap_historical_report(
+        _candidate_metadata(),
+        _frames(),
+        output_dir=tmp_path,
+        iwm_frame=_iwm(),
+        as_of_dates=["2024-01-02", "2024-01-03"],
+        config=config,
+        run_id="run_manifest_test",
+        created_at="2026-05-11T00:00:00+00:00",
+        git_commit="abc123",
+        host="testhost",
+    )
+
+    manifest_path = tmp_path / "run_manifest.json"
+    assert manifest_path.exists()
+    assert result["paths"]["run_manifest"] == manifest_path
+
+    payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+    assert payload["run_id"] == "run_manifest_test"
+    assert payload["schema_version"] == SCHEMA_VERSION
+    assert payload["config_hash"] == compute_config_hash(config)
+    assert payload["created_at"] == "2026-05-11T00:00:00+00:00"
+    assert payload["git_commit"] == "abc123"
+    assert payload["host"] == "testhost"
+    assert payload["universe"] == ["AAA", "BBB"]
+    assert payload["period"]["start"] == "2024-01-02"
+    assert payload["period"]["end"] == "2024-01-03"
+
+    assert result["run_manifest"]["config_hash"] == payload["config_hash"]
+    report_text = result["paths"]["backtest_report"].read_text(encoding="utf-8")
+    assert "## Run Manifest" in report_text
+    assert "run_manifest_test" in report_text
+    assert payload["config_hash"] in report_text
+
+
+def test_small_cap_historical_runner_manifest_hash_is_deterministic(tmp_path: Path) -> None:
+    config = SmallCapHistoricalRunConfig(
+        benchmark=SmallCapBenchmarkConfig(holding_period_bars=1),
+        portfolio=SmallCapPortfolioBacktestConfig(holding_period_bars=1),
+    )
+    first = run_small_cap_historical_report(
+        _candidate_metadata(),
+        _frames(),
+        output_dir=tmp_path / "first",
+        iwm_frame=_iwm(),
+        as_of_dates=["2024-01-03"],
+        config=config,
+        run_id="run_a",
+        created_at="2026-05-11T00:00:00+00:00",
+        git_commit="commit_a",
+        host="host_a",
+    )
+    second = run_small_cap_historical_report(
+        _candidate_metadata(),
+        _frames(),
+        output_dir=tmp_path / "second",
+        iwm_frame=_iwm(),
+        as_of_dates=["2024-01-03"],
+        config=config,
+        run_id="run_b",
+        created_at="2026-05-11T01:00:00+00:00",
+        git_commit="commit_a",
+        host="host_a",
+    )
+    assert first["run_manifest"]["config_hash"] == second["run_manifest"]["config_hash"]
+    assert first["run_manifest"]["run_id"] != second["run_manifest"]["run_id"]
+
+
+def test_small_cap_historical_runner_manifest_hash_changes_with_config(tmp_path: Path) -> None:
+    base_config = SmallCapHistoricalRunConfig(
+        benchmark=SmallCapBenchmarkConfig(holding_period_bars=1),
+        portfolio=SmallCapPortfolioBacktestConfig(holding_period_bars=1),
+    )
+    tweaked_config = SmallCapHistoricalRunConfig(
+        benchmark=SmallCapBenchmarkConfig(holding_period_bars=1),
+        portfolio=SmallCapPortfolioBacktestConfig(holding_period_bars=1),
+        primary_benchmark="ticker_holding_window",
+    )
+    base = run_small_cap_historical_report(
+        _candidate_metadata(),
+        _frames(),
+        output_dir=tmp_path / "base",
+        iwm_frame=_iwm(),
+        as_of_dates=["2024-01-03"],
+        config=base_config,
+        run_id="run_base",
+        created_at="2026-05-11T00:00:00+00:00",
+        git_commit="commit",
+        host="host",
+    )
+    tweaked = run_small_cap_historical_report(
+        _candidate_metadata(),
+        _frames(),
+        output_dir=tmp_path / "tweaked",
+        iwm_frame=_iwm(),
+        as_of_dates=["2024-01-03"],
+        config=tweaked_config,
+        run_id="run_tweaked",
+        created_at="2026-05-11T00:00:00+00:00",
+        git_commit="commit",
+        host="host",
+    )
+    assert base["run_manifest"]["config_hash"] != tweaked["run_manifest"]["config_hash"]
 
 
 def test_small_cap_historical_runner_fails_when_no_dates_available(tmp_path: Path) -> None:

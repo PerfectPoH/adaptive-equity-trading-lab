@@ -1,7 +1,7 @@
 ---
 tipo: bug-tracker
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-08
+ultimo-aggiornamento: 2026-05-11
 tags: [bug, backlog, tech-debt, risk]
 ---
 
@@ -195,7 +195,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: con scanner rule-based e molte soglie, anche modifiche manuali apparentemente ragionevoli possono diventare sweep non tracciati.
 - Impatto: impossibile calcolare in futuro Deflated Sharpe Ratio o Probability of Backtest Overfitting se i tentativi non sono registrati.
 - Azione: aggiungere run manifest small-cap con `run_id`, config hash, timestamp, date range, simboli e parametri completi.
-- Stato: aperto; da implementare prima di sweep estesi su scanner/execution/portfolio.
+- Stato: mitigato. `src/experiments/run_manifest.py` produce `run_manifest.json` accanto agli altri artefatti del runner storico small-cap, con `run_id` univoco, `config_hash` SHA-256 deterministico sulla `SmallCapHistoricalRunConfig`, `created_at`, `schema_version`, `universe`, periodo, `git_commit` e `host`. Il markdown del report ora include la sezione `## Run Manifest` in testa. Verifica: 13 test isolati e 3 di integrazione nel runner (148 passed totali). Resta da estendere il manifest agli altri runner non small-cap se entreranno in sweep tracciati.
 
 ## Tech debt
 

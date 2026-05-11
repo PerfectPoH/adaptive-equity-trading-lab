@@ -2,7 +2,7 @@
 tipo: roadmap-master
 progetto: adaptive-equity-trading-lab
 data: 2026-05-08
-ultimo-aggiornamento: 2026-05-08
+ultimo-aggiornamento: 2026-05-11
 tags: [roadmap, milestone, checklist, trading-lab]
 ---
 
@@ -109,10 +109,10 @@ Vedi [[news-risk-engine]].
 - [x] Integrazione portfolio nel report storico small-cap con artefatti `portfolio_*.csv`.
 - [x] Portfolio diagnostics report: outlier P&L breakdown e concentrazione top-N trade.
 - [x] Score profile report: decili di `small_cap_scanner_score`, monotonicita', win rate e P&L per bucket.
-- [ ] Run manifest small-cap: `run_id`, config hash, timestamp e parametri completi prima di sweep estesi.
+- [x] Run manifest small-cap: `run_id`, config hash, timestamp e parametri completi prima di sweep estesi.
 - [x] Smoke run reale con confronto `portfolio_return` vs `strategy_proxy_return` vs `equal_weight_universe`: `portfolio_return` +74.25%, ma `outlier_concentration_alert=True`, quindi non promuovere.
 
-Gate metodologico corrente: non aggiungere sector cap, random delay, survivorship sensitivity o opening regime check prima di run manifest e stress test ex-outlier; la smoke portfolio diagnostics ha misurato outlier concentration e score profile ma ha prodotto verdetto `NON PROMUOVERE`.
+Gate metodologico corrente: run manifest small-cap ora implementato (`run_manifest.json` + sezione markdown del report storico, hash deterministico SHA-256 sulla `SmallCapHistoricalRunConfig`); prossimo gate prima di sector cap, random delay, survivorship sensitivity o opening regime check e' lo stress test ex-outlier su watchlist piu' ampia. La smoke portfolio diagnostics ha misurato outlier concentration e score profile ma ha prodotto verdetto `NON PROMUOVERE`.
 
 Vedi [[small-cap-swing-research-spec]].
 
