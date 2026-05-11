@@ -136,16 +136,19 @@ def test_build_small_cap_backtest_report_includes_portfolio_summary() -> None:
 def test_build_small_cap_backtest_report_includes_portfolio_diagnostics() -> None:
     outlier_breakdown = {"top_3_pnl_contribution_pct": 0.75, "outlier_concentration_alert": True}
     score_profile = pd.DataFrame([{"score_bucket": "Q1", "trade_count": 2, "avg_return_pct": 0.05}])
+    cash_starvation_summary = {"insufficient_funds_rejections": 3, "avg_missed_return_pct": -0.04}
 
     report = build_small_cap_backtest_report(
         _candidate_export(),
         _benchmark_report(),
         portfolio_outlier_breakdown=outlier_breakdown,
         portfolio_score_profile=score_profile,
+        portfolio_cash_starvation_summary=cash_starvation_summary,
     )
 
     assert report["portfolio_outlier_breakdown"] == outlier_breakdown
     assert report["portfolio_score_profile"] == [{"score_bucket": "Q1", "trade_count": 2, "avg_return_pct": 0.05}]
+    assert report["portfolio_cash_starvation_summary"] == cash_starvation_summary
 
 
 def test_build_small_cap_backtest_report_handles_insufficient_benchmark_data() -> None:
@@ -176,6 +179,7 @@ def test_write_small_cap_backtest_report_markdown_includes_verdict(tmp_path: Pat
         portfolio_rejection_summary={"insufficient_funds": 1},
         portfolio_outlier_breakdown={"top_3_pnl_contribution_pct": 0.75, "outlier_concentration_alert": True},
         portfolio_score_profile=pd.DataFrame([{"score_bucket": "Q1", "trade_count": 2, "avg_return_pct": 0.05}]),
+        portfolio_cash_starvation_summary={"insufficient_funds_rejections": 1, "avg_missed_return_pct": -0.04},
     )
 
     content = output_path.read_text(encoding="utf-8")
@@ -196,3 +200,5 @@ def test_write_small_cap_backtest_report_markdown_includes_verdict(tmp_path: Pat
     assert "top_3_pnl_contribution_pct: 0.75" in content
     assert "## Score Profile Report" in content
     assert "Q1" in content
+    assert "## Cash Starvation Diagnostics" in content
+    assert "avg_missed_return_pct: -0.04" in content

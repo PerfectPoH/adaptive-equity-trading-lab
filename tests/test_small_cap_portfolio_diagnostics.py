@@ -4,7 +4,12 @@ import math
 
 import pandas as pd
 
-from src.analysis.small_cap_portfolio_diagnostics import build_portfolio_outlier_breakdown, build_score_profile_report
+from src.analysis.small_cap_portfolio_diagnostics import (
+    build_cash_starvation_report,
+    build_portfolio_outlier_breakdown,
+    build_score_profile_report,
+    summarize_cash_starvation_report,
+)
 
 
 def test_portfolio_outlier_breakdown_flags_concentrated_pnl() -> None:
@@ -174,3 +179,48 @@ def test_score_profile_report_keeps_identical_scores_in_same_bucket() -> None:
     assert profile["min_score"].tolist() == [80.0, 100.0]
     assert profile["max_score"].tolist() == [80.0, 100.0]
     assert profile["trade_count"].tolist() == [2, 2]
+
+
+def test_cash_starvation_report_scores_insufficient_funds_rejections() -> None:
+    rejections = pd.DataFrame(
+        [
+            {"symbol": "AAA", "as_of": "2024-01-01", "reject_reason": "insufficient_funds", "available_cash": 500.0},
+            {"symbol": "BBB", "as_of": "2024-01-01", "reject_reason": "gap_above_max", "available_cash": 500.0},
+            {"symbol": "CCC", "as_of": "2024-01-01", "reject_reason": "insufficient_funds", "available_cash": 200.0},
+        ]
+    )
+    frames = {
+        "AAA": pd.DataFrame(
+            {"Open": [10.0, 11.0, 12.0], "Close": [10.0, 11.0, 13.0]},
+            index=pd.bdate_range("2024-01-01", periods=3),
+        ),
+        "CCC": pd.DataFrame(
+            {"Open": [20.0, 20.0, 18.0], "Close": [20.0, 20.0, 18.0]},
+            index=pd.bdate_range("2024-01-01", periods=3),
+        ),
+    }
+
+    report = build_cash_starvation_report(rejections, frames, holding_period_bars=1)
+
+    assert report["symbol"].tolist() == ["AAA", "CCC"]
+    assert report["missed_return_pct"].tolist() == [13.0 / 11.0 - 1.0, 18.0 / 20.0 - 1.0]
+    assert report["available_cash"].tolist() == [500.0, 200.0]
+
+
+def test_cash_starvation_summary_quantifies_missed_opportunity_quality() -> None:
+    report = pd.DataFrame(
+        [
+            {"symbol": "AAA", "missed_return_pct": 0.10},
+            {"symbol": "BBB", "missed_return_pct": -0.05},
+            {"symbol": "CCC", "missed_return_pct": 0.20},
+        ]
+    )
+
+    summary = summarize_cash_starvation_report(report, total_insufficient_funds_rejections=5)
+
+    assert summary["insufficient_funds_rejections"] == 5
+    assert summary["evaluable_missed_trades"] == 3
+    assert summary["missed_win_rate"] == 2 / 3
+    assert summary["avg_missed_return_pct"] == (0.10 - 0.05 + 0.20) / 3
+    assert summary["best_missed_symbol"] == "CCC"
+    assert summary["worst_missed_symbol"] == "BBB"
