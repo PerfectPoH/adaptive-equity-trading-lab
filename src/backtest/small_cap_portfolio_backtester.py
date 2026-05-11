@@ -17,6 +17,7 @@ class SmallCapPortfolioBacktestConfig:
     execution: SmallCapExecutionConfig = SmallCapExecutionConfig()
     rank_column: str = "small_cap_scanner_score"
     allowed_setups: tuple[str, ...] | None = None
+    feature_filters: tuple[dict[str, Any], ...] | None = None
 
 
 @dataclass(frozen=True)
@@ -59,12 +60,17 @@ def run_small_cap_portfolio_backtest(
 
     candidates = _operational_candidates(candidate_export)
     allowed_setups = _normalise_allowed_setups(config.allowed_setups)
+    feature_filters = _normalise_feature_filters(config.feature_filters)
     for as_of, day_candidates in candidates.groupby("as_of_ts", sort=True):
         cash = _close_due_positions(as_of, cash, open_positions, trade_rows)
         for _, candidate in _rank_candidates(day_candidates, config.rank_column).iterrows():
             symbol = str(candidate.get("symbol", ""))
             if not _setup_allowed(candidate, allowed_setups):
                 rejection_rows.append(_rejection_row(candidate, "setup_excluded", cash))
+                continue
+            feature_rejection = _feature_filter_rejection(candidate, feature_filters)
+            if feature_rejection is not None:
+                rejection_rows.append(_rejection_row(candidate, "feature_filtered", cash, feature_rejection))
                 continue
             if len(open_positions) >= config.max_concurrent_positions:
                 rejection_rows.append(_rejection_row(candidate, "max_concurrent_positions", cash))
@@ -211,8 +217,8 @@ def _close_due_positions(
     return cash
 
 
-def _rejection_row(candidate: pd.Series, reason: str, available_cash: float) -> dict[str, Any]:
-    return {
+def _rejection_row(candidate: pd.Series, reason: str, available_cash: float, extra: dict[str, Any] | None = None) -> dict[str, Any]:
+    row = {
         "symbol": str(candidate.get("symbol", "")),
         "as_of": pd.to_datetime(candidate.get("as_of"), errors="coerce"),
         "reject_reason": reason,
@@ -220,6 +226,9 @@ def _rejection_row(candidate: pd.Series, reason: str, available_cash: float) -> 
         **_candidate_feature_values(candidate),
         "available_cash": float(available_cash),
     }
+    if extra:
+        row.update(extra)
+    return row
 
 
 def _equity_row(
@@ -274,6 +283,59 @@ def _setup_allowed(candidate: pd.Series, allowed_setups: set[str] | None) -> boo
     if allowed_setups is None:
         return True
     return _candidate_setup(candidate) in allowed_setups
+
+
+def _normalise_feature_filters(feature_filters: tuple[dict[str, Any], ...] | None) -> list[dict[str, Any]]:
+    if feature_filters is None:
+        return []
+    normalised: list[dict[str, Any]] = []
+    for feature_filter in feature_filters:
+        feature = str(feature_filter.get("feature", "")).strip()
+        if not feature:
+            continue
+        setup = str(feature_filter.get("setup", "")).strip()
+        normalised.append(
+            {
+                "setup": setup,
+                "feature": feature,
+                "min_value": _numeric_or_none(feature_filter.get("min_value")),
+                "max_value": _numeric_or_none(feature_filter.get("max_value")),
+            }
+        )
+    return normalised
+
+
+def _feature_filter_rejection(candidate: pd.Series, feature_filters: list[dict[str, Any]]) -> dict[str, Any] | None:
+    candidate_setup = _candidate_setup(candidate)
+    for feature_filter in feature_filters:
+        filter_setup = feature_filter["setup"]
+        if filter_setup and filter_setup != candidate_setup:
+            continue
+        feature = feature_filter["feature"]
+        value = _candidate_score(candidate, feature)
+        min_value = feature_filter["min_value"]
+        max_value = feature_filter["max_value"]
+        rejected = value is None
+        if value is not None and min_value is not None and value < min_value:
+            rejected = True
+        if value is not None and max_value is not None and value > max_value:
+            rejected = True
+        if rejected:
+            return {
+                "filter_setup": filter_setup,
+                "filter_feature": feature,
+                "filter_value": value,
+                "filter_min_value": min_value,
+                "filter_max_value": max_value,
+            }
+    return None
+
+
+def _numeric_or_none(value: Any) -> float | None:
+    numeric = pd.to_numeric(pd.Series([value]), errors="coerce").iat[0]
+    if pd.isna(numeric):
+        return None
+    return float(numeric)
 
 
 def _nearest_index_on_or_before(frame: pd.DataFrame, date: pd.Timestamp) -> pd.Timestamp | None:
