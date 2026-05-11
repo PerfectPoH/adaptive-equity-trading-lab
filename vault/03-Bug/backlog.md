@@ -228,6 +228,12 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Impatto: il solo setup breakout e' promettente, ma non e' ancora una strategia robusta; resta dipendente da pochi winner.
 - Azione: aggiunto filtro configurabile `allowed_setups` nel portfolio backtester, con rejection `setup_excluded` e manifest tracciato.
 - Stato: confermato. Prossimo passo: rule ablation passiva dentro breakout su `open_to_close_return`, `intraday_range_pct` e `relative_volume_20d`; non paper trading.
+### RISK-028 - Soglia open_to_close_return ancora in-sample
+
+- Priorita: P1.
+- Sintomo: `open_to_close_return>=0.084459` su `breakout_continuation` produce 22 trade, `return_pct=+140.77%`, `pnl_excluding_top_3=+46.0k` e `sign_flip_excluding_top_3=False`.
+- Impatto: e' la prima regione feature che resta positiva senza top 3 winner, ma la soglia deriva ancora da bucket in-sample e non va promossa direttamente a live rule.
+- Stato: confermato. Prossimo passo: benchmark sul sottoinsieme filtrato e sensitivity con soglie arrotondate (`>=0.08`, `>=0.10`) prima di costruire ranking breakout-specifico.
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

@@ -143,6 +143,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - setup disentangler passivo aggiunto: summary/score/cash starvation per `small_cap_setup`; breakout_continuation e' l'unico setup positivo nel campione, post_gap_drift e' la zavorra principale, score 100 non monotono.
 - feature-level diagnostics per setup aggiunta: `portfolio_setup_feature_profile.csv`; mostra regioni feature opposte dentro lo stesso setup, quindi prossimo passo e' rule ablation passivo.
 - breakout-only ablation aggiunta: `allowed_setups=["breakout_continuation"]` produce +37.97%, ma resta outlier-driven (`sign_flip_excluding_top_3=True`); prossimo passo rule ablation feature dentro breakout.
+- feature filter ablation aggiunta: `open_to_close_return>=0.084459` su breakout produce +140.77%, 22 trade e resta positivo senza top 3 winner; soglia ancora in-sample.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 
