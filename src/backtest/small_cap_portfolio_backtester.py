@@ -16,6 +16,7 @@ class SmallCapPortfolioBacktestConfig:
     max_concurrent_positions: int = 5
     execution: SmallCapExecutionConfig = SmallCapExecutionConfig()
     rank_column: str = "small_cap_scanner_score"
+    allowed_setups: tuple[str, ...] | None = None
 
 
 @dataclass(frozen=True)
@@ -57,10 +58,14 @@ def run_small_cap_portfolio_backtest(
     equity_rows: list[dict[str, Any]] = []
 
     candidates = _operational_candidates(candidate_export)
+    allowed_setups = _normalise_allowed_setups(config.allowed_setups)
     for as_of, day_candidates in candidates.groupby("as_of_ts", sort=True):
         cash = _close_due_positions(as_of, cash, open_positions, trade_rows)
         for _, candidate in _rank_candidates(day_candidates, config.rank_column).iterrows():
             symbol = str(candidate.get("symbol", ""))
+            if not _setup_allowed(candidate, allowed_setups):
+                rejection_rows.append(_rejection_row(candidate, "setup_excluded", cash))
+                continue
             if len(open_positions) >= config.max_concurrent_positions:
                 rejection_rows.append(_rejection_row(candidate, "max_concurrent_positions", cash))
                 continue
@@ -257,6 +262,18 @@ def _candidate_setup(candidate: pd.Series) -> str:
 
 def _candidate_feature_values(candidate: pd.Series) -> dict[str, float | None]:
     return {column: _candidate_score(candidate, column) for column in SCANNER_FEATURE_COLUMNS}
+
+
+def _normalise_allowed_setups(allowed_setups: tuple[str, ...] | None) -> set[str] | None:
+    if allowed_setups is None:
+        return None
+    return {str(setup).strip() for setup in allowed_setups if str(setup).strip()}
+
+
+def _setup_allowed(candidate: pd.Series, allowed_setups: set[str] | None) -> bool:
+    if allowed_setups is None:
+        return True
+    return _candidate_setup(candidate) in allowed_setups
 
 
 def _nearest_index_on_or_before(frame: pd.DataFrame, date: pd.Timestamp) -> pd.Timestamp | None:

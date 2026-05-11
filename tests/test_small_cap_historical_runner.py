@@ -268,7 +268,7 @@ def test_small_cap_historical_runner_manifest_hash_changes_with_config(tmp_path:
 def test_small_cap_historical_runner_records_setup_ablation_in_manifest_and_rejections(tmp_path: Path) -> None:
     config = SmallCapHistoricalRunConfig(
         benchmark=SmallCapBenchmarkConfig(holding_period_bars=1),
-        portfolio=SmallCapPortfolioBacktestConfig(holding_period_bars=1, allowed_setups=("breakout_continuation",)),
+        portfolio=SmallCapPortfolioBacktestConfig(holding_period_bars=1, allowed_setups=("panic_reversal",)),
     )
 
     result = run_small_cap_historical_report(
@@ -285,7 +285,7 @@ def test_small_cap_historical_runner_records_setup_ablation_in_manifest_and_reje
     )
 
     payload = json.loads((tmp_path / "run_manifest.json").read_text(encoding="utf-8"))
-    assert payload["config"]["portfolio"]["allowed_setups"] == ["breakout_continuation"]
+    assert payload["config"]["portfolio"]["allowed_setups"] == ["panic_reversal"]
     assert result["portfolio_backtest"].rejection_summary.get("setup_excluded", 0) >= 1
     assert "setup_excluded" in pd.read_csv(tmp_path / "portfolio_rejections.csv")["reject_reason"].tolist()
 
