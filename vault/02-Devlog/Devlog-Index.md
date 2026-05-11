@@ -61,6 +61,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-11-cascade-small-cap-cash-starvation-diagnostics]] - missed opportunities sulle rejection cash: mediana -4.75%, win rate 38.03%.
 - [[2026-05-11-cascade-small-cap-setup-disentangler-diagnostics]] - setup-level diagnostics passiva: breakout positivo, post-gap zavorra, score 100 non monotono.
 - [[2026-05-11-cascade-small-cap-setup-feature-diagnostics]] - feature-level diagnostics per setup: regioni feature opposte e prossimo rule ablation passivo.
+- [[2026-05-11-cascade-small-cap-breakout-only-ablation]] - ablation `allowed_setups=[breakout_continuation]`: +37.97% ma ancora outlier-driven.
 
 ## Convenzione
 

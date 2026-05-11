@@ -142,6 +142,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - cash starvation diagnostics aggiunta: `portfolio_cash_starvation.csv` e summary; sulla smoke ampia missed median return -4.75% e missed win rate 38.03%, quindi le rejection cash non giustificano piu' capitale/concurrency.
 - setup disentangler passivo aggiunto: summary/score/cash starvation per `small_cap_setup`; breakout_continuation e' l'unico setup positivo nel campione, post_gap_drift e' la zavorra principale, score 100 non monotono.
 - feature-level diagnostics per setup aggiunta: `portfolio_setup_feature_profile.csv`; mostra regioni feature opposte dentro lo stesso setup, quindi prossimo passo e' rule ablation passivo.
+- breakout-only ablation aggiunta: `allowed_setups=["breakout_continuation"]` produce +37.97%, ma resta outlier-driven (`sign_flip_excluding_top_3=True`); prossimo passo rule ablation feature dentro breakout.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 

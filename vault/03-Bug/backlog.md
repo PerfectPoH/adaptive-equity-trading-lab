@@ -221,6 +221,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: aggiunta `portfolio_setup_feature_profile.csv` e sezione report `Setup Feature Profile Report`.
 - Stato: confermato. Esempi: `breakout_continuation/open_to_close_return` Q4 +25.8k P&L vs Q2 -12.1k; `post_gap_drift/gap_pct` Q4 -28.4k vs Q3 +20.6k; `post_gap_drift/intraday_range_pct` Q4 -28.1k vs Q2 +33.4k. Prossimo passo: rule ablation passiva per filtri feature, non paper trading.
 
+### RISK-027 - Breakout-only ancora outlier-driven
+
+- Priorita: P1.
+- Sintomo: l'ablazione `allowed_setups=["breakout_continuation"]` produce `return_pct=+37.97%`, ma `top_3_pnl_contribution_pct=152.36%` e `sign_flip_excluding_top_3=True`.
+- Impatto: il solo setup breakout e' promettente, ma non e' ancora una strategia robusta; resta dipendente da pochi winner.
+- Azione: aggiunto filtro configurabile `allowed_setups` nel portfolio backtester, con rejection `setup_excluded` e manifest tracciato.
+- Stato: confermato. Prossimo passo: rule ablation passiva dentro breakout su `open_to_close_return`, `intraday_range_pct` e `relative_volume_20d`; non paper trading.
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
