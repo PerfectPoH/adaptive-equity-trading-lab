@@ -179,7 +179,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: il portfolio backtester usa `small_cap_scanner_score` per ordinare i candidati giornalieri, ma non e' ancora dimostrato che score piu' alti producano performance migliori.
 - Impatto: il triage puo' allocare capitale ai trade peggiori pur sembrando disciplinato.
 - Azione: implementare Score Profile Report per decili di score, con trade count, win rate, P&L, return medio/mediano e monotonicity check.
-- Stato: smoke inconclusiva; `portfolio_score_profile.csv` aggrega correttamente score identici, ma il campione reale ha solo tre bucket e non giustifica sizing o filtri live.
+- Stato: confermato dalla smoke ampia; `portfolio_score_profile.csv` mostra bucket score 100 negativo e peggiore del bucket intermedio, quindi lo score non e' monotono e non va usato per sizing/ranking live.
 
 ### RISK-022 - Outlier risk sui rendimenti small-cap
 

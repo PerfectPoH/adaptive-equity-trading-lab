@@ -112,8 +112,9 @@ Vedi [[news-risk-engine]].
 - [x] Run manifest small-cap: `run_id`, config hash, timestamp e parametri completi prima di sweep estesi.
 - [x] Smoke run reale con confronto `portfolio_return` vs `strategy_proxy_return` vs `equal_weight_universe`: `portfolio_return` +74.25%, ma `outlier_concentration_alert=True`, quindi non promuovere.
 - [x] Ex-outlier stress test: senza top 3 winner il portfolio passa da +74.25% a -0.64%, `sign_flip_excluding_top_3=True`.
+- [x] Smoke ampia su 30 ticker small-cap eleggibili: 40 trade, `portfolio_return=-22.16%`, score non monotono, verdetto `NON PROMUOVERE`.
 
-Gate metodologico corrente: run manifest e stress test ex-outlier sono implementati; non aggiungere sector cap, random delay, survivorship sensitivity o opening regime check prima di ripetere la diagnostica su watchlist piu' ampia. La smoke portfolio diagnostics e lo stress test ex-outlier hanno prodotto verdetto `NON PROMUOVERE`.
+Gate metodologico corrente: run manifest, stress test ex-outlier e smoke ampia sono implementati; non aggiungere sector cap, random delay, survivorship sensitivity o opening regime check prima di ripensare scanner/ranking/triage. La smoke ampia ha prodotto `portfolio_return=-22.16%` e score profile non monotono.
 
 Vedi [[small-cap-swing-research-spec]].
 
