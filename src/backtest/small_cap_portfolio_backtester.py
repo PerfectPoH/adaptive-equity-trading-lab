@@ -18,6 +18,7 @@ class SmallCapPortfolioBacktestConfig:
     rank_column: str = "small_cap_scanner_score"
     allowed_setups: tuple[str, ...] | None = None
     feature_filters: tuple[dict[str, Any], ...] | None = None
+    regime_filters: tuple[dict[str, Any], ...] | None = None
 
 
 @dataclass(frozen=True)
@@ -56,11 +57,16 @@ def filter_small_cap_portfolio_candidates(
     candidates = _operational_candidates(candidate_export)
     allowed_setups = _normalise_allowed_setups(config.allowed_setups)
     feature_filters = _normalise_feature_filters(config.feature_filters)
+    regime_filters = _normalise_regime_filters(config.regime_filters)
     if candidates.empty:
         return candidates.drop(columns=["as_of_ts"], errors="ignore").reset_index(drop=True)
     accepted = []
     for _, candidate in candidates.iterrows():
-        accepted.append(_setup_allowed(candidate, allowed_setups) and _feature_filter_rejection(candidate, feature_filters) is None)
+        accepted.append(
+            _setup_allowed(candidate, allowed_setups)
+            and _feature_filter_rejection(candidate, feature_filters) is None
+            and _regime_filter_rejection(candidate, regime_filters) is None
+        )
     return candidates.loc[accepted].drop(columns=["as_of_ts"], errors="ignore").reset_index(drop=True)
 
 
@@ -84,6 +90,7 @@ def run_small_cap_portfolio_backtest(
     candidates = _operational_candidates(candidate_export)
     allowed_setups = _normalise_allowed_setups(config.allowed_setups)
     feature_filters = _normalise_feature_filters(config.feature_filters)
+    regime_filters = _normalise_regime_filters(config.regime_filters)
     for as_of, day_candidates in candidates.groupby("as_of_ts", sort=True):
         cash = _close_due_positions(as_of, cash, open_positions, trade_rows)
         for _, candidate in _rank_candidates(day_candidates, config.rank_column).iterrows():
@@ -94,6 +101,10 @@ def run_small_cap_portfolio_backtest(
             feature_rejection = _feature_filter_rejection(candidate, feature_filters)
             if feature_rejection is not None:
                 rejection_rows.append(_rejection_row(candidate, "feature_filtered", cash, feature_rejection))
+                continue
+            regime_rejection = _regime_filter_rejection(candidate, regime_filters)
+            if regime_rejection is not None:
+                rejection_rows.append(_rejection_row(candidate, "regime_filtered", cash, regime_rejection))
                 continue
             if len(open_positions) >= config.max_concurrent_positions:
                 rejection_rows.append(_rejection_row(candidate, "max_concurrent_positions", cash))
@@ -358,6 +369,63 @@ def _feature_filter_rejection(candidate: pd.Series, feature_filters: list[dict[s
                 "filter_max_value": max_value,
             }
     return None
+
+
+def _normalise_regime_filters(regime_filters: tuple[dict[str, Any], ...] | None) -> list[dict[str, Any]]:
+    if regime_filters is None:
+        return []
+    normalised: list[dict[str, Any]] = []
+    for regime_filter in regime_filters:
+        feature = str(regime_filter.get("feature", "")).strip()
+        operator = str(regime_filter.get("operator", "")).strip()
+        if not feature or operator not in {">", ">=", "<", "<=", "=="}:
+            continue
+        threshold_feature = str(regime_filter.get("threshold_feature", "")).strip()
+        threshold_value = _numeric_or_none(regime_filter.get("threshold_value"))
+        normalised.append(
+            {
+                "feature": feature,
+                "operator": operator,
+                "threshold_feature": threshold_feature,
+                "threshold_value": threshold_value,
+            }
+        )
+    return normalised
+
+
+def _regime_filter_rejection(candidate: pd.Series, regime_filters: list[dict[str, Any]]) -> dict[str, Any] | None:
+    for regime_filter in regime_filters:
+        feature = regime_filter["feature"]
+        operator = regime_filter["operator"]
+        threshold_feature = regime_filter["threshold_feature"]
+        value = _candidate_score(candidate, feature)
+        threshold_value = regime_filter["threshold_value"]
+        if threshold_feature:
+            threshold_value = _candidate_score(candidate, threshold_feature)
+        passed = value is not None and threshold_value is not None and _compare(value, threshold_value, operator)
+        if not passed:
+            return {
+                "regime_filter_feature": feature,
+                "regime_filter_operator": operator,
+                "regime_filter_value": value,
+                "regime_filter_threshold_feature": threshold_feature,
+                "regime_filter_threshold_value": threshold_value,
+            }
+    return None
+
+
+def _compare(value: float, threshold_value: float, operator: str) -> bool:
+    if operator == ">":
+        return value > threshold_value
+    if operator == ">=":
+        return value >= threshold_value
+    if operator == "<":
+        return value < threshold_value
+    if operator == "<=":
+        return value <= threshold_value
+    if operator == "==":
+        return value == threshold_value
+    return False
 
 
 def _numeric_or_none(value: Any) -> float | None:
