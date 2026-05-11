@@ -79,6 +79,8 @@ def test_small_cap_historical_runner_writes_expected_artifacts(tmp_path: Path) -
 
     assert result["paths"]["candidate_export"].exists()
     assert result["paths"]["benchmark_report"].exists()
+    assert result["paths"]["portfolio_filtered_candidate_export"].exists()
+    assert result["paths"]["portfolio_filtered_benchmark_report"].exists()
     assert result["paths"]["backtest_report"].exists()
     assert result["paths"]["portfolio_trade_log"].exists()
     assert result["paths"]["portfolio_equity_curve"].exists()
@@ -93,6 +95,8 @@ def test_small_cap_historical_runner_writes_expected_artifacts(tmp_path: Path) -
     assert result["paths"]["portfolio_setup_cash_starvation_summary"].exists()
     assert result["paths"]["portfolio_setup_feature_profile"].exists()
     assert "portfolio_backtest" in result
+    assert "portfolio_filtered_candidate_export" in result
+    assert "portfolio_filtered_benchmark_report" in result
     assert "portfolio_outlier_breakdown" in result
     assert "portfolio_score_profile" in result
     assert "portfolio_cash_starvation" in result
@@ -113,6 +117,13 @@ def test_small_cap_historical_runner_writes_expected_artifacts(tmp_path: Path) -
     assert "## Setup Feature Profile Report" in content
     assert result["candidate_export"]["as_of"].tolist() == ["2024-01-02", "2024-01-02", "2024-01-03", "2024-01-03"]
     assert set(result["benchmark_report"]["benchmark"]) == {
+        "cash_flat",
+        "iwm_proxy",
+        "equal_weight_universe",
+        "random_entry_baseline",
+        "ticker_holding_window",
+    }
+    assert set(result["portfolio_filtered_benchmark_report"]["benchmark"]) == {
         "cash_flat",
         "iwm_proxy",
         "equal_weight_universe",
@@ -326,6 +337,39 @@ def test_small_cap_historical_runner_records_feature_filters_in_manifest_and_rej
     assert result["portfolio_backtest"].rejection_summary.get("feature_filtered", 0) >= 1
     assert "feature_filtered" in rejections["reject_reason"].tolist()
     assert "relative_volume_20d" in rejections["filter_feature"].tolist()
+
+
+def test_small_cap_historical_runner_benchmarks_portfolio_filtered_candidate_subset(tmp_path: Path) -> None:
+    config = SmallCapHistoricalRunConfig(
+        benchmark=SmallCapBenchmarkConfig(holding_period_bars=1),
+        portfolio=SmallCapPortfolioBacktestConfig(
+            holding_period_bars=1,
+            allowed_setups=("breakout_continuation",),
+            feature_filters=(
+                {
+                    "setup": "breakout_continuation",
+                    "feature": "relative_volume_20d",
+                    "min_value": 2.1,
+                },
+            ),
+        ),
+    )
+
+    result = run_small_cap_historical_report(
+        _candidate_metadata(),
+        _frames(),
+        output_dir=tmp_path,
+        iwm_frame=_iwm(),
+        as_of_dates=["2024-01-02", "2024-01-03"],
+        config=config,
+    )
+
+    filtered = result["portfolio_filtered_candidate_export"]
+    assert filtered["relative_volume_20d"].min() >= 2.1
+    assert (tmp_path / "portfolio_filtered_candidate_export.csv").exists()
+    assert (tmp_path / "portfolio_filtered_benchmark_report.csv").exists()
+    assert result["backtest_report"]["portfolio_filtered_candidate_summary"]["rows"] == len(filtered)
+    assert "## Portfolio-Filtered Benchmark Comparison" in (tmp_path / "small_cap_backtest_report.md").read_text(encoding="utf-8")
 
 
 def test_small_cap_historical_runner_fails_when_no_dates_available(tmp_path: Path) -> None:

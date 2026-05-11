@@ -133,6 +133,29 @@ def test_build_small_cap_backtest_report_includes_portfolio_summary() -> None:
     assert report["portfolio_rejection_summary"] == {"insufficient_funds": 1}
 
 
+def test_build_small_cap_backtest_report_includes_portfolio_filtered_benchmarks() -> None:
+    filtered_candidates = _candidate_export().iloc[[0]].copy()
+    filtered_benchmark_report = pd.DataFrame(
+        [
+            {"benchmark": "random_entry_baseline", "return": 0.01, "observations": 1, "description": "Filtered random"},
+            {"benchmark": "ticker_holding_window", "return": 0.12, "observations": 1, "description": "Filtered candidates"},
+        ]
+    )
+
+    report = build_small_cap_backtest_report(
+        _candidate_export(),
+        _benchmark_report(),
+        portfolio_filtered_candidate_export=filtered_candidates,
+        portfolio_filtered_benchmark_report=filtered_benchmark_report,
+    )
+
+    assert report["portfolio_filtered_candidate_summary"]["rows"] == 1
+    assert report["portfolio_filtered_benchmark_report"] == [
+        {"benchmark": "random_entry_baseline", "return": 0.01, "observations": 1, "description": "Filtered random"},
+        {"benchmark": "ticker_holding_window", "return": 0.12, "observations": 1, "description": "Filtered candidates"},
+    ]
+
+
 def test_build_small_cap_backtest_report_includes_portfolio_diagnostics() -> None:
     outlier_breakdown = {"top_3_pnl_contribution_pct": 0.75, "outlier_concentration_alert": True}
     score_profile = pd.DataFrame([{"score_bucket": "Q1", "trade_count": 2, "avg_return_pct": 0.05}])
@@ -202,6 +225,8 @@ def test_write_small_cap_backtest_report_markdown_includes_verdict(tmp_path: Pat
         portfolio_setup_feature_profile=pd.DataFrame(
             [{"setup_type": "panic_reversal", "feature": "relative_volume_20d", "feature_bucket": "Q1", "trade_count": 2}]
         ),
+        portfolio_filtered_candidate_export=_candidate_export().iloc[[0]].copy(),
+        portfolio_filtered_benchmark_report=pd.DataFrame([{"benchmark": "ticker_holding_window", "return": 0.12, "observations": 1}]),
     )
 
     content = output_path.read_text(encoding="utf-8")
@@ -230,3 +255,5 @@ def test_write_small_cap_backtest_report_markdown_includes_verdict(tmp_path: Pat
     assert "## Setup Cash Starvation Diagnostics" in content
     assert "## Setup Feature Profile Report" in content
     assert "relative_volume_20d" in content
+    assert "## Portfolio-Filtered Benchmark Comparison" in content
+    assert "ticker_holding_window" in content

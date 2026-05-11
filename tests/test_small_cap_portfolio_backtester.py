@@ -3,7 +3,11 @@ from __future__ import annotations
 import pandas as pd
 
 from src.backtest.small_cap_execution import SmallCapExecutionConfig
-from src.backtest.small_cap_portfolio_backtester import SmallCapPortfolioBacktestConfig, run_small_cap_portfolio_backtest
+from src.backtest.small_cap_portfolio_backtester import (
+    SmallCapPortfolioBacktestConfig,
+    filter_small_cap_portfolio_candidates,
+    run_small_cap_portfolio_backtest,
+)
 
 
 def _frame(closes: list[float], opens: list[float] | None = None) -> pd.DataFrame:
@@ -223,3 +227,28 @@ def test_portfolio_backtester_can_reject_candidates_below_feature_filter() -> No
     assert rejection["filter_feature"] == "open_to_close_return"
     assert rejection["filter_value"] == 0.04
     assert rejection["filter_min_value"] == 0.08
+
+
+def test_filter_small_cap_portfolio_candidates_applies_setup_and_feature_filters() -> None:
+    candidates = pd.DataFrame(
+        [
+            {**_candidate("AAA", "2024-01-01", setup="breakout_continuation"), "open_to_close_return": 0.12},
+            {**_candidate("BBB", "2024-01-01", setup="breakout_continuation"), "open_to_close_return": 0.04},
+            {**_candidate("CCC", "2024-01-01", setup="post_gap_drift"), "open_to_close_return": 0.20},
+        ]
+    )
+    config = SmallCapPortfolioBacktestConfig(
+        allowed_setups=("breakout_continuation",),
+        feature_filters=(
+            {
+                "setup": "breakout_continuation",
+                "feature": "open_to_close_return",
+                "min_value": 0.08,
+            },
+        ),
+    )
+
+    filtered = filter_small_cap_portfolio_candidates(candidates, config)
+
+    assert filtered["symbol"].tolist() == ["AAA"]
+    assert "as_of_ts" not in filtered.columns
