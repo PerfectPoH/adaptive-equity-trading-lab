@@ -137,6 +137,9 @@ def test_build_small_cap_backtest_report_includes_portfolio_diagnostics() -> Non
     outlier_breakdown = {"top_3_pnl_contribution_pct": 0.75, "outlier_concentration_alert": True}
     score_profile = pd.DataFrame([{"score_bucket": "Q1", "trade_count": 2, "avg_return_pct": 0.05}])
     cash_starvation_summary = {"insufficient_funds_rejections": 3, "avg_missed_return_pct": -0.04}
+    setup_summary = pd.DataFrame([{"setup_type": "panic_reversal", "trade_count": 2, "total_pnl": 50.0}])
+    setup_score_profile = pd.DataFrame([{"setup_type": "panic_reversal", "score_bucket": "Q1", "trade_count": 2}])
+    setup_cash_starvation_summary = pd.DataFrame([{"setup_type": "panic_reversal", "evaluable_missed_trades": 2}])
 
     report = build_small_cap_backtest_report(
         _candidate_export(),
@@ -144,11 +147,17 @@ def test_build_small_cap_backtest_report_includes_portfolio_diagnostics() -> Non
         portfolio_outlier_breakdown=outlier_breakdown,
         portfolio_score_profile=score_profile,
         portfolio_cash_starvation_summary=cash_starvation_summary,
+        portfolio_setup_summary=setup_summary,
+        portfolio_setup_score_profile=setup_score_profile,
+        portfolio_setup_cash_starvation_summary=setup_cash_starvation_summary,
     )
 
     assert report["portfolio_outlier_breakdown"] == outlier_breakdown
     assert report["portfolio_score_profile"] == [{"score_bucket": "Q1", "trade_count": 2, "avg_return_pct": 0.05}]
     assert report["portfolio_cash_starvation_summary"] == cash_starvation_summary
+    assert report["portfolio_setup_summary"] == [{"setup_type": "panic_reversal", "trade_count": 2, "total_pnl": 50.0}]
+    assert report["portfolio_setup_score_profile"] == [{"setup_type": "panic_reversal", "score_bucket": "Q1", "trade_count": 2}]
+    assert report["portfolio_setup_cash_starvation_summary"] == [{"setup_type": "panic_reversal", "evaluable_missed_trades": 2}]
 
 
 def test_build_small_cap_backtest_report_handles_insufficient_benchmark_data() -> None:
@@ -180,6 +189,9 @@ def test_write_small_cap_backtest_report_markdown_includes_verdict(tmp_path: Pat
         portfolio_outlier_breakdown={"top_3_pnl_contribution_pct": 0.75, "outlier_concentration_alert": True},
         portfolio_score_profile=pd.DataFrame([{"score_bucket": "Q1", "trade_count": 2, "avg_return_pct": 0.05}]),
         portfolio_cash_starvation_summary={"insufficient_funds_rejections": 1, "avg_missed_return_pct": -0.04},
+        portfolio_setup_summary=pd.DataFrame([{"setup_type": "panic_reversal", "trade_count": 2, "total_pnl": 50.0}]),
+        portfolio_setup_score_profile=pd.DataFrame([{"setup_type": "panic_reversal", "score_bucket": "Q1", "trade_count": 2}]),
+        portfolio_setup_cash_starvation_summary=pd.DataFrame([{"setup_type": "panic_reversal", "evaluable_missed_trades": 2}]),
     )
 
     content = output_path.read_text(encoding="utf-8")
@@ -202,3 +214,7 @@ def test_write_small_cap_backtest_report_markdown_includes_verdict(tmp_path: Pat
     assert "Q1" in content
     assert "## Cash Starvation Diagnostics" in content
     assert "avg_missed_return_pct: -0.04" in content
+    assert "## Setup Diagnostics" in content
+    assert "panic_reversal" in content
+    assert "## Setup Score Profile Report" in content
+    assert "## Setup Cash Starvation Diagnostics" in content

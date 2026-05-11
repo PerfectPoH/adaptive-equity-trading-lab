@@ -23,12 +23,13 @@ def _frame(closes: list[float], opens: list[float] | None = None) -> pd.DataFram
     )
 
 
-def _candidate(symbol: str, as_of: str, score: float = 100.0) -> dict[str, object]:
+def _candidate(symbol: str, as_of: str, score: float = 100.0, setup: str = "breakout_continuation") -> dict[str, object]:
     return {
         "symbol": symbol,
         "as_of": as_of,
         "operational_candidate": True,
         "small_cap_scanner_score": score,
+        "small_cap_setup": setup,
     }
 
 
@@ -120,3 +121,21 @@ def test_portfolio_backtester_preserves_scanner_score_in_trade_log() -> None:
     result = run_small_cap_portfolio_backtest(candidates, frames, config=_config())
 
     assert result.trade_log.iloc[0]["small_cap_scanner_score"] == 87.5
+
+
+def test_portfolio_backtester_preserves_setup_in_trade_and_rejection_logs() -> None:
+    frames = {
+        "AAA": _frame([10.0, 10.0, 11.0, 12.0]),
+        "BBB": _frame([10.0, 10.0, 11.0, 12.0]),
+    }
+    candidates = pd.DataFrame(
+        [
+            _candidate("AAA", "2024-01-01", score=100.0, setup="panic_reversal"),
+            _candidate("BBB", "2024-01-01", score=90.0, setup="post_gap_drift"),
+        ]
+    )
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=_config(initial_cash=15_000.0))
+
+    assert result.trade_log.iloc[0]["small_cap_setup"] == "panic_reversal"
+    assert result.rejections.iloc[0]["small_cap_setup"] == "post_gap_drift"

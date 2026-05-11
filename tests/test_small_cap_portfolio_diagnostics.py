@@ -8,6 +8,9 @@ from src.analysis.small_cap_portfolio_diagnostics import (
     build_cash_starvation_report,
     build_portfolio_outlier_breakdown,
     build_score_profile_report,
+    build_setup_cash_starvation_summary,
+    build_setup_score_profile_report,
+    build_setup_summary_report,
     summarize_cash_starvation_report,
 )
 
@@ -224,3 +227,53 @@ def test_cash_starvation_summary_quantifies_missed_opportunity_quality() -> None
     assert summary["avg_missed_return_pct"] == (0.10 - 0.05 + 0.20) / 3
     assert summary["best_missed_symbol"] == "CCC"
     assert summary["worst_missed_symbol"] == "BBB"
+
+
+def test_setup_summary_report_groups_trade_quality_by_setup() -> None:
+    trade_log = pd.DataFrame(
+        [
+            {"symbol": "AAA", "small_cap_setup": "panic_reversal", "pnl": 100.0, "return_pct": 0.10},
+            {"symbol": "BBB", "small_cap_setup": "panic_reversal", "pnl": -50.0, "return_pct": -0.05},
+            {"symbol": "CCC", "small_cap_setup": "post_gap_drift", "pnl": -20.0, "return_pct": -0.02},
+        ]
+    )
+
+    summary = build_setup_summary_report(trade_log, setup_column="small_cap_setup")
+
+    assert summary["setup_type"].tolist() == ["panic_reversal", "post_gap_drift"]
+    assert summary["trade_count"].tolist() == [2, 1]
+    assert summary["total_pnl"].tolist() == [50.0, -20.0]
+    assert summary["win_rate"].tolist() == [0.5, 0.0]
+
+
+def test_setup_score_profile_report_profiles_scores_inside_each_setup() -> None:
+    trade_log = pd.DataFrame(
+        [
+            {"symbol": "AAA", "small_cap_setup": "panic_reversal", "small_cap_scanner_score": 70.0, "pnl": -10.0, "return_pct": -0.10},
+            {"symbol": "BBB", "small_cap_setup": "panic_reversal", "small_cap_scanner_score": 90.0, "pnl": 30.0, "return_pct": 0.30},
+            {"symbol": "CCC", "small_cap_setup": "post_gap_drift", "small_cap_scanner_score": 80.0, "pnl": 20.0, "return_pct": 0.20},
+        ]
+    )
+
+    profile = build_setup_score_profile_report(trade_log, setup_column="small_cap_setup", bins=2)
+
+    assert profile["setup_type"].tolist() == ["panic_reversal", "panic_reversal", "post_gap_drift"]
+    assert profile["score_bucket"].tolist() == ["Q1", "Q2", "Q1"]
+    assert profile["total_pnl"].tolist() == [-10.0, 30.0, 20.0]
+
+
+def test_setup_cash_starvation_summary_groups_missed_opportunities_by_setup() -> None:
+    cash_starvation = pd.DataFrame(
+        [
+            {"symbol": "AAA", "small_cap_setup": "panic_reversal", "missed_return_pct": 0.10},
+            {"symbol": "BBB", "small_cap_setup": "panic_reversal", "missed_return_pct": -0.05},
+            {"symbol": "CCC", "small_cap_setup": "post_gap_drift", "missed_return_pct": -0.20},
+        ]
+    )
+
+    summary = build_setup_cash_starvation_summary(cash_starvation, setup_column="small_cap_setup")
+
+    assert summary["setup_type"].tolist() == ["panic_reversal", "post_gap_drift"]
+    assert summary["evaluable_missed_trades"].tolist() == [2, 1]
+    assert summary["avg_missed_return_pct"].tolist() == [0.025, -0.20]
+    assert summary["missed_win_rate"].tolist() == [0.5, 0.0]
