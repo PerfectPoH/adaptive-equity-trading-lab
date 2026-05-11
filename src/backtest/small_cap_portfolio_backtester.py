@@ -41,6 +41,21 @@ SCANNER_FEATURE_COLUMNS = (
 )
 
 
+def filter_small_cap_portfolio_candidates(
+    candidate_export: pd.DataFrame,
+    config: SmallCapPortfolioBacktestConfig = SmallCapPortfolioBacktestConfig(),
+) -> pd.DataFrame:
+    candidates = _operational_candidates(candidate_export)
+    allowed_setups = _normalise_allowed_setups(config.allowed_setups)
+    feature_filters = _normalise_feature_filters(config.feature_filters)
+    if candidates.empty:
+        return candidates.drop(columns=["as_of_ts"], errors="ignore").reset_index(drop=True)
+    accepted = []
+    for _, candidate in candidates.iterrows():
+        accepted.append(_setup_allowed(candidate, allowed_setups) and _feature_filter_rejection(candidate, feature_filters) is None)
+    return candidates.loc[accepted].drop(columns=["as_of_ts"], errors="ignore").reset_index(drop=True)
+
+
 def run_small_cap_portfolio_backtest(
     candidate_export: pd.DataFrame,
     frames: dict[str, pd.DataFrame],

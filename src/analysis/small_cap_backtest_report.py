@@ -25,6 +25,8 @@ def build_small_cap_backtest_report(
     portfolio_setup_score_profile: pd.DataFrame | None = None,
     portfolio_setup_cash_starvation_summary: pd.DataFrame | None = None,
     portfolio_setup_feature_profile: pd.DataFrame | None = None,
+    portfolio_filtered_candidate_export: pd.DataFrame | None = None,
+    portfolio_filtered_benchmark_report: pd.DataFrame | None = None,
     run_manifest: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     strategy_return = _benchmark_return(benchmark_report, STRATEGY_PROXY_BENCHMARK)
@@ -58,6 +60,12 @@ def build_small_cap_backtest_report(
         if portfolio_setup_cash_starvation_summary is not None
         else [],
         "portfolio_setup_feature_profile": _records(portfolio_setup_feature_profile) if portfolio_setup_feature_profile is not None else [],
+        "portfolio_filtered_candidate_summary": _candidate_summary(portfolio_filtered_candidate_export)
+        if portfolio_filtered_candidate_export is not None
+        else {},
+        "portfolio_filtered_benchmark_report": _records(portfolio_filtered_benchmark_report)
+        if portfolio_filtered_benchmark_report is not None
+        else [],
         "run_manifest": run_manifest or {},
         "decision": _decision(verdict),
     }
@@ -78,6 +86,8 @@ def write_small_cap_backtest_report_markdown(
     portfolio_setup_score_profile: pd.DataFrame | None = None,
     portfolio_setup_cash_starvation_summary: pd.DataFrame | None = None,
     portfolio_setup_feature_profile: pd.DataFrame | None = None,
+    portfolio_filtered_candidate_export: pd.DataFrame | None = None,
+    portfolio_filtered_benchmark_report: pd.DataFrame | None = None,
     run_manifest: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     report = build_small_cap_backtest_report(
@@ -94,6 +104,8 @@ def write_small_cap_backtest_report_markdown(
         portfolio_setup_score_profile=portfolio_setup_score_profile,
         portfolio_setup_cash_starvation_summary=portfolio_setup_cash_starvation_summary,
         portfolio_setup_feature_profile=portfolio_setup_feature_profile,
+        portfolio_filtered_candidate_export=portfolio_filtered_candidate_export,
+        portfolio_filtered_benchmark_report=portfolio_filtered_benchmark_report,
         run_manifest=run_manifest,
     )
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -286,6 +298,11 @@ def _to_markdown(report: dict[str, Any]) -> str:
     lines.extend(_record_lines(report["portfolio_setup_cash_starvation_summary"]))
     lines.extend(["", "## Setup Feature Profile Report"])
     lines.extend(_record_lines(report["portfolio_setup_feature_profile"]))
+    lines.extend(["", "## Portfolio-Filtered Candidate Summary"])
+    lines.extend(_value_lines(report["portfolio_filtered_candidate_summary"]))
+    lines.extend(["", "## Portfolio-Filtered Benchmark Comparison"])
+    for row in report["portfolio_filtered_benchmark_report"]:
+        lines.append(f"- {row.get('benchmark')}: return={row.get('return')}, observations={row.get('observations')}")
     lines.extend(["", "## Benchmarks"])
     for row in report["benchmark_report"]:
         lines.append(f"- {row.get('benchmark')}: return={row.get('return')}, observations={row.get('observations')}")

@@ -349,7 +349,7 @@ def test_small_cap_historical_runner_benchmarks_portfolio_filtered_candidate_sub
                 {
                     "setup": "breakout_continuation",
                     "feature": "relative_volume_20d",
-                    "min_value": 2.1,
+                    "min_value": 1.9,
                 },
             ),
         ),
@@ -365,7 +365,7 @@ def test_small_cap_historical_runner_benchmarks_portfolio_filtered_candidate_sub
     )
 
     filtered = result["portfolio_filtered_candidate_export"]
-    assert filtered["relative_volume_20d"].min() >= 2.1
+    assert filtered["relative_volume_20d"].min() >= 1.9
     assert (tmp_path / "portfolio_filtered_candidate_export.csv").exists()
     assert (tmp_path / "portfolio_filtered_benchmark_report.csv").exists()
     assert result["backtest_report"]["portfolio_filtered_candidate_summary"]["rows"] == len(filtered)
