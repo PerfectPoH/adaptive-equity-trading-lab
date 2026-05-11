@@ -167,6 +167,42 @@ def test_portfolio_backtester_preserves_scanner_features_in_trade_and_rejection_
     assert result.rejections.iloc[0]["relative_volume_20d"] == 1.7
 
 
+def test_portfolio_backtester_preserves_regime_features_in_trade_and_rejection_logs() -> None:
+    frames = {
+        "AAA": _frame([10.0, 10.0, 11.0, 12.0]),
+        "BBB": _frame([10.0, 10.0, 11.0, 12.0]),
+    }
+    candidates = pd.DataFrame(
+        [
+            {
+                **_candidate("AAA", "2024-01-01", score=100.0),
+                "iwm_close": 210.0,
+                "iwm_ema_50": 200.0,
+                "iwm_ema_200": 190.0,
+                "vix_close": 18.0,
+            },
+            {
+                **_candidate("BBB", "2024-01-01", score=90.0),
+                "iwm_close": 195.0,
+                "iwm_ema_50": 200.0,
+                "iwm_ema_200": 205.0,
+                "vix_close": 28.0,
+            },
+        ]
+    )
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=_config(initial_cash=15_000.0))
+
+    assert result.trade_log.iloc[0]["iwm_close"] == 210.0
+    assert result.trade_log.iloc[0]["iwm_ema_50"] == 200.0
+    assert result.trade_log.iloc[0]["iwm_ema_200"] == 190.0
+    assert result.trade_log.iloc[0]["vix_close"] == 18.0
+    assert result.rejections.iloc[0]["iwm_close"] == 195.0
+    assert result.rejections.iloc[0]["iwm_ema_50"] == 200.0
+    assert result.rejections.iloc[0]["iwm_ema_200"] == 205.0
+    assert result.rejections.iloc[0]["vix_close"] == 28.0
+
+
 def test_portfolio_backtester_can_reject_disallowed_setups_without_spending_cash() -> None:
     frames = {
         "AAA": _frame([10.0, 10.0, 11.0, 12.0]),

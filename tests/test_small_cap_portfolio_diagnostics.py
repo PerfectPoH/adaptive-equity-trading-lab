@@ -7,6 +7,7 @@ import pandas as pd
 from src.analysis.small_cap_portfolio_diagnostics import (
     build_cash_starvation_report,
     build_portfolio_outlier_breakdown,
+    build_regime_profile_report,
     build_score_profile_report,
     build_setup_cash_starvation_summary,
     build_setup_feature_profile_report,
@@ -296,3 +297,21 @@ def test_setup_feature_profile_report_buckets_feature_quality_inside_setup() -> 
     assert profile["feature_bucket"].tolist() == ["Q1", "Q2", "Q1"]
     assert profile["trade_count"].tolist() == [1, 1, 1]
     assert profile["total_pnl"].tolist() == [-10.0, 30.0, -20.0]
+
+
+def test_regime_profile_report_groups_trade_quality_by_market_regime() -> None:
+    trade_log = pd.DataFrame(
+        [
+            {"symbol": "AAA", "iwm_close": 210.0, "iwm_ema_50": 200.0, "iwm_ema_200": 190.0, "vix_close": 18.0, "pnl": 30.0, "return_pct": 0.30},
+            {"symbol": "BBB", "iwm_close": 195.0, "iwm_ema_50": 200.0, "iwm_ema_200": 205.0, "vix_close": 28.0, "pnl": -10.0, "return_pct": -0.10},
+            {"symbol": "CCC", "iwm_close": 220.0, "iwm_ema_50": 210.0, "iwm_ema_200": 215.0, "vix_close": 16.0, "pnl": 20.0, "return_pct": 0.20},
+        ]
+    )
+
+    profile = build_regime_profile_report(trade_log)
+
+    assert profile["regime_feature"].tolist() == ["iwm_above_ema_50", "iwm_above_ema_50", "iwm_above_ema_200", "iwm_above_ema_200", "vix_bucket", "vix_bucket"]
+    assert profile["regime_value"].tolist() == ["False", "True", "False", "True", "low", "high"]
+    assert profile["trade_count"].tolist() == [1, 2, 1, 2, 2, 1]
+    assert profile["total_pnl"].tolist() == [-10.0, 50.0, -10.0, 50.0, 50.0, -10.0]
+    assert profile["win_rate"].tolist() == [0.0, 1.0, 0.0, 1.0, 1.0, 0.0]

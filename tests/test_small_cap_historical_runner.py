@@ -94,6 +94,7 @@ def test_small_cap_historical_runner_writes_expected_artifacts(tmp_path: Path) -
     assert result["paths"]["portfolio_setup_score_profile"].exists()
     assert result["paths"]["portfolio_setup_cash_starvation_summary"].exists()
     assert result["paths"]["portfolio_setup_feature_profile"].exists()
+    assert result["paths"]["portfolio_regime_profile"].exists()
     assert "portfolio_backtest" in result
     assert "portfolio_filtered_candidate_export" in result
     assert "portfolio_filtered_benchmark_report" in result
@@ -105,6 +106,7 @@ def test_small_cap_historical_runner_writes_expected_artifacts(tmp_path: Path) -
     assert "portfolio_setup_score_profile" in result
     assert "portfolio_setup_cash_starvation_summary" in result
     assert "portfolio_setup_feature_profile" in result
+    assert "portfolio_regime_profile" in result
     assert "portfolio_summary" in result["backtest_report"]
     content = result["paths"]["backtest_report"].read_text(encoding="utf-8")
     assert "## Portfolio Backtest" in content
@@ -115,6 +117,7 @@ def test_small_cap_historical_runner_writes_expected_artifacts(tmp_path: Path) -
     assert "## Setup Score Profile Report" in content
     assert "## Setup Cash Starvation Diagnostics" in content
     assert "## Setup Feature Profile Report" in content
+    assert "## Regime Profile Report" in content
     assert result["candidate_export"]["as_of"].tolist() == ["2024-01-02", "2024-01-02", "2024-01-03", "2024-01-03"]
     assert set(result["benchmark_report"]["benchmark"]) == {
         "cash_flat",

@@ -67,6 +67,9 @@ def test_build_small_cap_candidate_export_returns_latest_operational_candidate()
     assert export.iloc[0]["atr_pct"] == 0.05
     assert export.iloc[0]["distance_from_20d_high"] == 0.0
     assert export.iloc[0]["rolling_volatility_20d"] == 0.03
+    assert export.iloc[0]["iwm_close"] == 210.0
+    assert export.iloc[0]["iwm_ema_50"] == 200.0
+    assert export.iloc[0]["vix_close"] == 18.0
     assert export.iloc[0]["market_regime_trade_allowed"] is True
     assert export.iloc[0]["small_cap_execution_valid"] is True
     assert export.iloc[0]["operational_candidate"] is True

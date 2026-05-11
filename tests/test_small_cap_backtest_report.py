@@ -166,6 +166,7 @@ def test_build_small_cap_backtest_report_includes_portfolio_diagnostics() -> Non
     setup_feature_profile = pd.DataFrame(
         [{"setup_type": "panic_reversal", "feature": "relative_volume_20d", "feature_bucket": "Q1", "trade_count": 2}]
     )
+    regime_profile = pd.DataFrame([{"regime_feature": "iwm_above_ema_50", "regime_value": "True", "trade_count": 2, "total_pnl": 50.0}])
 
     report = build_small_cap_backtest_report(
         _candidate_export(),
@@ -177,6 +178,7 @@ def test_build_small_cap_backtest_report_includes_portfolio_diagnostics() -> Non
         portfolio_setup_score_profile=setup_score_profile,
         portfolio_setup_cash_starvation_summary=setup_cash_starvation_summary,
         portfolio_setup_feature_profile=setup_feature_profile,
+        portfolio_regime_profile=regime_profile,
     )
 
     assert report["portfolio_outlier_breakdown"] == outlier_breakdown
@@ -187,6 +189,9 @@ def test_build_small_cap_backtest_report_includes_portfolio_diagnostics() -> Non
     assert report["portfolio_setup_cash_starvation_summary"] == [{"setup_type": "panic_reversal", "evaluable_missed_trades": 2}]
     assert report["portfolio_setup_feature_profile"] == [
         {"setup_type": "panic_reversal", "feature": "relative_volume_20d", "feature_bucket": "Q1", "trade_count": 2}
+    ]
+    assert report["portfolio_regime_profile"] == [
+        {"regime_feature": "iwm_above_ema_50", "regime_value": "True", "trade_count": 2, "total_pnl": 50.0}
     ]
 
 
@@ -225,6 +230,9 @@ def test_write_small_cap_backtest_report_markdown_includes_verdict(tmp_path: Pat
         portfolio_setup_feature_profile=pd.DataFrame(
             [{"setup_type": "panic_reversal", "feature": "relative_volume_20d", "feature_bucket": "Q1", "trade_count": 2}]
         ),
+        portfolio_regime_profile=pd.DataFrame(
+            [{"regime_feature": "iwm_above_ema_50", "regime_value": "True", "trade_count": 2, "total_pnl": 50.0}]
+        ),
         portfolio_filtered_candidate_export=_candidate_export().iloc[[0]].copy(),
         portfolio_filtered_benchmark_report=pd.DataFrame([{"benchmark": "ticker_holding_window", "return": 0.12, "observations": 1}]),
     )
@@ -255,5 +263,7 @@ def test_write_small_cap_backtest_report_markdown_includes_verdict(tmp_path: Pat
     assert "## Setup Cash Starvation Diagnostics" in content
     assert "## Setup Feature Profile Report" in content
     assert "relative_volume_20d" in content
+    assert "## Regime Profile Report" in content
+    assert "iwm_above_ema_50" in content
     assert "## Portfolio-Filtered Benchmark Comparison" in content
     assert "ticker_holding_window" in content
