@@ -24,6 +24,7 @@ def build_portfolio_outlier_breakdown(
     trade_log: pd.DataFrame,
     alert_top_n: int = 3,
     alert_threshold: float = 0.40,
+    initial_cash: float | None = None,
 ) -> dict[str, Any]:
     if trade_log.empty or "pnl" not in trade_log.columns:
         return _empty_outlier_breakdown()
@@ -39,6 +40,7 @@ def build_portfolio_outlier_breakdown(
     worst = data.sort_values("pnl", ascending=True).iloc[0]
     top_contributions = {f"top_{n}_pnl_contribution_pct": _top_contribution(winners, n, total_pnl) for n in (1, 3, 5, 10)}
     alert_value = top_contributions.get(f"top_{alert_top_n}_pnl_contribution_pct", float("nan"))
+    ex_outlier = _ex_outlier_metrics(winners, total_pnl, initial_cash)
     return {
         "total_trades": int(len(data)),
         "total_pnl": total_pnl,
@@ -47,6 +49,7 @@ def build_portfolio_outlier_breakdown(
         **top_contributions,
         "max_single_trade_contribution_pct": _top_contribution(winners, 1, total_pnl),
         "outlier_concentration_alert": bool(pd.notna(alert_value) and alert_value > alert_threshold),
+        **ex_outlier,
         "best_trade_symbol": _symbol(best),
         "best_trade_pnl": float(best.get("pnl", 0.0)),
         "best_trade_return_pct": _safe_float(best.get("return_pct")),
@@ -102,7 +105,7 @@ def build_score_profile_report(
 
 
 def _empty_outlier_breakdown() -> dict[str, Any]:
-    return {
+    breakdown: dict[str, Any] = {
         "total_trades": 0,
         "total_pnl": 0.0,
         "gross_profit": 0.0,
@@ -120,6 +123,37 @@ def _empty_outlier_breakdown() -> dict[str, Any]:
         "worst_trade_pnl": float("nan"),
         "worst_trade_return_pct": float("nan"),
     }
+    for n in (1, 3, 5):
+        breakdown[f"pnl_excluding_top_{n}"] = 0.0
+        breakdown[f"sign_flip_excluding_top_{n}"] = False
+        breakdown[f"portfolio_return_excluding_top_{n}"] = float("nan")
+    return breakdown
+
+
+def _ex_outlier_metrics(
+    winners: pd.DataFrame,
+    total_pnl: float,
+    initial_cash: float | None,
+) -> dict[str, Any]:
+    """Compute P&L and portfolio return after stripping the top N winners.
+
+    The check answers RISK-022: if removing the top N winning trades flips the
+    portfolio from net positive to net non-positive, the equity curve is a
+    lottery on a handful of outliers and the setup is not promotable, no matter
+    how large ``return_pct`` looks.
+    """
+    metrics: dict[str, Any] = {}
+    has_initial_cash = initial_cash is not None and float(initial_cash) > 0
+    for n in (1, 3, 5):
+        top_pnl = float(winners.head(n)["pnl"].sum()) if not winners.empty else 0.0
+        excluded_pnl = total_pnl - top_pnl
+        metrics[f"pnl_excluding_top_{n}"] = excluded_pnl
+        metrics[f"sign_flip_excluding_top_{n}"] = bool(total_pnl > 0 and excluded_pnl <= 0)
+        if has_initial_cash:
+            metrics[f"portfolio_return_excluding_top_{n}"] = excluded_pnl / float(initial_cash)
+        else:
+            metrics[f"portfolio_return_excluding_top_{n}"] = float("nan")
+    return metrics
 
 
 def _top_contribution(winners: pd.DataFrame, n: int, total_pnl: float) -> float:

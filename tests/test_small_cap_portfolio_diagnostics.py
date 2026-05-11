@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import math
+
 import pandas as pd
 
 from src.analysis.small_cap_portfolio_diagnostics import build_portfolio_outlier_breakdown, build_score_profile_report
@@ -33,6 +35,90 @@ def test_portfolio_outlier_breakdown_handles_empty_trade_log() -> None:
     assert breakdown["total_trades"] == 0
     assert breakdown["total_pnl"] == 0.0
     assert breakdown["outlier_concentration_alert"] is False
+    for n in (1, 3, 5):
+        assert breakdown[f"pnl_excluding_top_{n}"] == 0.0
+        assert breakdown[f"sign_flip_excluding_top_{n}"] is False
+        assert math.isnan(breakdown[f"portfolio_return_excluding_top_{n}"])
+
+
+def test_portfolio_outlier_breakdown_exposes_ex_outlier_pnl_without_initial_cash() -> None:
+    trade_log = pd.DataFrame(
+        [
+            {"symbol": "AAA", "pnl": 50.0, "return_pct": 0.50},
+            {"symbol": "BBB", "pnl": 30.0, "return_pct": 0.30},
+            {"symbol": "CCC", "pnl": 20.0, "return_pct": 0.20},
+            {"symbol": "DDD", "pnl": -10.0, "return_pct": -0.10},
+        ]
+    )
+
+    breakdown = build_portfolio_outlier_breakdown(trade_log)
+
+    # total_pnl = 90, top winners = [50, 30, 20]
+    assert breakdown["pnl_excluding_top_1"] == 40.0
+    assert breakdown["pnl_excluding_top_3"] == -10.0
+    assert breakdown["pnl_excluding_top_5"] == -10.0  # only 3 winners available
+    assert math.isnan(breakdown["portfolio_return_excluding_top_1"])
+    assert math.isnan(breakdown["portfolio_return_excluding_top_3"])
+
+
+def test_portfolio_outlier_breakdown_computes_portfolio_return_when_initial_cash_provided() -> None:
+    trade_log = pd.DataFrame(
+        [
+            {"symbol": "AAA", "pnl": 50.0, "return_pct": 0.50},
+            {"symbol": "BBB", "pnl": 30.0, "return_pct": 0.30},
+            {"symbol": "CCC", "pnl": 20.0, "return_pct": 0.20},
+            {"symbol": "DDD", "pnl": -10.0, "return_pct": -0.10},
+        ]
+    )
+
+    breakdown = build_portfolio_outlier_breakdown(trade_log, initial_cash=1000.0)
+
+    assert breakdown["portfolio_return_excluding_top_1"] == 40.0 / 1000.0
+    assert breakdown["portfolio_return_excluding_top_3"] == -10.0 / 1000.0
+    assert breakdown["portfolio_return_excluding_top_5"] == -10.0 / 1000.0
+
+
+def test_portfolio_outlier_breakdown_flags_sign_flip_when_top_winners_dominate() -> None:
+    """Reproduces the 2026-05-10 smoke verdict: top 3 trades supplied 100.86% of net P&L,
+    so stripping them turns the equity curve negative. RISK-022 in the backlog."""
+    trade_log = pd.DataFrame(
+        [
+            {"symbol": "LUNR", "pnl": 49931.0, "return_pct": 0.17},
+            {"symbol": "BBAI", "pnl": 24443.0, "return_pct": 0.16},
+            {"symbol": "OUST", "pnl": 26383.0, "return_pct": 0.42},
+            {"symbol": "OUST", "pnl": -9879.0, "return_pct": -0.12},
+            {"symbol": "BBAI", "pnl": -8000.0, "return_pct": -0.10},
+            {"symbol": "LUNR", "pnl": -7000.0, "return_pct": -0.09},
+            {"symbol": "BBAI", "pnl": -1630.0, "return_pct": -0.02},
+        ]
+    )
+
+    breakdown = build_portfolio_outlier_breakdown(trade_log, initial_cash=100_000.0)
+
+    assert breakdown["total_pnl"] > 0
+    assert breakdown["pnl_excluding_top_3"] < 0
+    assert breakdown["sign_flip_excluding_top_3"] is True
+    assert breakdown["portfolio_return_excluding_top_3"] < 0
+
+
+def test_portfolio_outlier_breakdown_sign_flip_false_when_winners_diversified() -> None:
+    trade_log = pd.DataFrame(
+        [
+            {"symbol": "AAA", "pnl": 10.0, "return_pct": 0.10},
+            {"symbol": "BBB", "pnl": 10.0, "return_pct": 0.10},
+            {"symbol": "CCC", "pnl": 10.0, "return_pct": 0.10},
+            {"symbol": "DDD", "pnl": 10.0, "return_pct": 0.10},
+            {"symbol": "EEE", "pnl": 10.0, "return_pct": 0.10},
+            {"symbol": "FFF", "pnl": 10.0, "return_pct": 0.10},
+            {"symbol": "GGG", "pnl": -2.0, "return_pct": -0.02},
+        ]
+    )
+
+    breakdown = build_portfolio_outlier_breakdown(trade_log, initial_cash=1000.0)
+
+    assert breakdown["pnl_excluding_top_3"] == 58.0 - 30.0
+    assert breakdown["sign_flip_excluding_top_3"] is False
+    assert breakdown["portfolio_return_excluding_top_3"] > 0
 
 
 def test_score_profile_report_groups_trades_by_score_decile() -> None:

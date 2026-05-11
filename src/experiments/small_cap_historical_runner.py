@@ -77,7 +77,10 @@ def run_small_cap_historical_report(
         config=config.benchmark,
     )
     portfolio_backtest = run_small_cap_portfolio_backtest(candidate_export, frames, config=config.portfolio)
-    portfolio_outlier_breakdown = build_portfolio_outlier_breakdown(portfolio_backtest.trade_log)
+    portfolio_outlier_breakdown = build_portfolio_outlier_breakdown(
+        portfolio_backtest.trade_log,
+        initial_cash=portfolio_backtest.summary.get("initial_cash"),
+    )
     portfolio_score_profile = build_score_profile_report(portfolio_backtest.trade_log)
 
     candidate_path = output_path / "candidate_export.csv"
