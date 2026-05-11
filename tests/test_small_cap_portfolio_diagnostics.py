@@ -9,6 +9,7 @@ from src.analysis.small_cap_portfolio_diagnostics import (
     build_portfolio_outlier_breakdown,
     build_score_profile_report,
     build_setup_cash_starvation_summary,
+    build_setup_feature_profile_report,
     build_setup_score_profile_report,
     build_setup_summary_report,
     summarize_cash_starvation_report,
@@ -277,3 +278,21 @@ def test_setup_cash_starvation_summary_groups_missed_opportunities_by_setup() ->
     assert summary["evaluable_missed_trades"].tolist() == [2, 1]
     assert summary["avg_missed_return_pct"].tolist() == [0.025, -0.20]
     assert summary["missed_win_rate"].tolist() == [0.5, 0.0]
+
+
+def test_setup_feature_profile_report_buckets_feature_quality_inside_setup() -> None:
+    trade_log = pd.DataFrame(
+        [
+            {"symbol": "AAA", "small_cap_setup": "breakout_continuation", "relative_volume_20d": 1.6, "pnl": -10.0, "return_pct": -0.10},
+            {"symbol": "BBB", "small_cap_setup": "breakout_continuation", "relative_volume_20d": 3.0, "pnl": 30.0, "return_pct": 0.30},
+            {"symbol": "CCC", "small_cap_setup": "post_gap_drift", "relative_volume_20d": 2.0, "pnl": -20.0, "return_pct": -0.20},
+        ]
+    )
+
+    profile = build_setup_feature_profile_report(trade_log, features=["relative_volume_20d"], setup_column="small_cap_setup", bins=2)
+
+    assert profile["setup_type"].tolist() == ["breakout_continuation", "breakout_continuation", "post_gap_drift"]
+    assert profile["feature"].tolist() == ["relative_volume_20d", "relative_volume_20d", "relative_volume_20d"]
+    assert profile["feature_bucket"].tolist() == ["Q1", "Q2", "Q1"]
+    assert profile["trade_count"].tolist() == [1, 1, 1]
+    assert profile["total_pnl"].tolist() == [-10.0, 30.0, -20.0]

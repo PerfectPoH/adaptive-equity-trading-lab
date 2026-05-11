@@ -30,6 +30,8 @@ def _candidate(symbol: str, as_of: str, score: float = 100.0, setup: str = "brea
         "operational_candidate": True,
         "small_cap_scanner_score": score,
         "small_cap_setup": setup,
+        "gap_pct": 0.02,
+        "relative_volume_20d": 2.5,
     }
 
 
@@ -139,3 +141,23 @@ def test_portfolio_backtester_preserves_setup_in_trade_and_rejection_logs() -> N
 
     assert result.trade_log.iloc[0]["small_cap_setup"] == "panic_reversal"
     assert result.rejections.iloc[0]["small_cap_setup"] == "post_gap_drift"
+
+
+def test_portfolio_backtester_preserves_scanner_features_in_trade_and_rejection_logs() -> None:
+    frames = {
+        "AAA": _frame([10.0, 10.0, 11.0, 12.0]),
+        "BBB": _frame([10.0, 10.0, 11.0, 12.0]),
+    }
+    candidates = pd.DataFrame(
+        [
+            {**_candidate("AAA", "2024-01-01", score=100.0), "gap_pct": 0.04, "relative_volume_20d": 3.0},
+            {**_candidate("BBB", "2024-01-01", score=90.0), "gap_pct": -0.03, "relative_volume_20d": 1.7},
+        ]
+    )
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=_config(initial_cash=15_000.0))
+
+    assert result.trade_log.iloc[0]["gap_pct"] == 0.04
+    assert result.trade_log.iloc[0]["relative_volume_20d"] == 3.0
+    assert result.rejections.iloc[0]["gap_pct"] == -0.03
+    assert result.rejections.iloc[0]["relative_volume_20d"] == 1.7

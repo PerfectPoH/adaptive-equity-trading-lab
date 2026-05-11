@@ -140,6 +140,9 @@ def test_build_small_cap_backtest_report_includes_portfolio_diagnostics() -> Non
     setup_summary = pd.DataFrame([{"setup_type": "panic_reversal", "trade_count": 2, "total_pnl": 50.0}])
     setup_score_profile = pd.DataFrame([{"setup_type": "panic_reversal", "score_bucket": "Q1", "trade_count": 2}])
     setup_cash_starvation_summary = pd.DataFrame([{"setup_type": "panic_reversal", "evaluable_missed_trades": 2}])
+    setup_feature_profile = pd.DataFrame(
+        [{"setup_type": "panic_reversal", "feature": "relative_volume_20d", "feature_bucket": "Q1", "trade_count": 2}]
+    )
 
     report = build_small_cap_backtest_report(
         _candidate_export(),
@@ -150,6 +153,7 @@ def test_build_small_cap_backtest_report_includes_portfolio_diagnostics() -> Non
         portfolio_setup_summary=setup_summary,
         portfolio_setup_score_profile=setup_score_profile,
         portfolio_setup_cash_starvation_summary=setup_cash_starvation_summary,
+        portfolio_setup_feature_profile=setup_feature_profile,
     )
 
     assert report["portfolio_outlier_breakdown"] == outlier_breakdown
@@ -158,6 +162,9 @@ def test_build_small_cap_backtest_report_includes_portfolio_diagnostics() -> Non
     assert report["portfolio_setup_summary"] == [{"setup_type": "panic_reversal", "trade_count": 2, "total_pnl": 50.0}]
     assert report["portfolio_setup_score_profile"] == [{"setup_type": "panic_reversal", "score_bucket": "Q1", "trade_count": 2}]
     assert report["portfolio_setup_cash_starvation_summary"] == [{"setup_type": "panic_reversal", "evaluable_missed_trades": 2}]
+    assert report["portfolio_setup_feature_profile"] == [
+        {"setup_type": "panic_reversal", "feature": "relative_volume_20d", "feature_bucket": "Q1", "trade_count": 2}
+    ]
 
 
 def test_build_small_cap_backtest_report_handles_insufficient_benchmark_data() -> None:
@@ -192,6 +199,9 @@ def test_write_small_cap_backtest_report_markdown_includes_verdict(tmp_path: Pat
         portfolio_setup_summary=pd.DataFrame([{"setup_type": "panic_reversal", "trade_count": 2, "total_pnl": 50.0}]),
         portfolio_setup_score_profile=pd.DataFrame([{"setup_type": "panic_reversal", "score_bucket": "Q1", "trade_count": 2}]),
         portfolio_setup_cash_starvation_summary=pd.DataFrame([{"setup_type": "panic_reversal", "evaluable_missed_trades": 2}]),
+        portfolio_setup_feature_profile=pd.DataFrame(
+            [{"setup_type": "panic_reversal", "feature": "relative_volume_20d", "feature_bucket": "Q1", "trade_count": 2}]
+        ),
     )
 
     content = output_path.read_text(encoding="utf-8")
@@ -218,3 +228,5 @@ def test_write_small_cap_backtest_report_markdown_includes_verdict(tmp_path: Pat
     assert "panic_reversal" in content
     assert "## Setup Score Profile Report" in content
     assert "## Setup Cash Starvation Diagnostics" in content
+    assert "## Setup Feature Profile Report" in content
+    assert "relative_volume_20d" in content

@@ -59,6 +59,14 @@ def test_build_small_cap_candidate_export_returns_latest_operational_candidate()
     assert export.iloc[0]["as_of"] == "2024-01-03"
     assert export.iloc[0]["small_cap_setup"] == "breakout_continuation"
     assert export.iloc[0]["small_cap_scanner_pass"] is True
+    assert export.iloc[0]["gap_pct"] == 10.2 / 10.5 - 1
+    assert export.iloc[0]["open_to_close_return"] == 11.1 / 10.2 - 1
+    assert export.iloc[0]["close_position_daily_range"] == (11.1 - 10.1) / (11.2 - 10.1)
+    assert export.iloc[0]["intraday_range_pct"] == (11.2 - 10.1) / 11.1
+    assert export.iloc[0]["relative_volume_20d"] == 2.0
+    assert export.iloc[0]["atr_pct"] == 0.05
+    assert export.iloc[0]["distance_from_20d_high"] == 0.0
+    assert export.iloc[0]["rolling_volatility_20d"] == 0.03
     assert export.iloc[0]["market_regime_trade_allowed"] is True
     assert export.iloc[0]["small_cap_execution_valid"] is True
     assert export.iloc[0]["operational_candidate"] is True
