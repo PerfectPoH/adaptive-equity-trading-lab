@@ -161,3 +161,29 @@ def test_portfolio_backtester_preserves_scanner_features_in_trade_and_rejection_
     assert result.trade_log.iloc[0]["relative_volume_20d"] == 3.0
     assert result.rejections.iloc[0]["gap_pct"] == -0.03
     assert result.rejections.iloc[0]["relative_volume_20d"] == 1.7
+
+
+def test_portfolio_backtester_can_reject_disallowed_setups_without_spending_cash() -> None:
+    frames = {
+        "AAA": _frame([10.0, 10.0, 11.0, 12.0]),
+        "BBB": _frame([10.0, 10.0, 11.0, 12.0]),
+    }
+    candidates = pd.DataFrame(
+        [
+            _candidate("AAA", "2024-01-01", score=100.0, setup="post_gap_drift"),
+            _candidate("BBB", "2024-01-01", score=90.0, setup="breakout_continuation"),
+        ]
+    )
+    config = SmallCapPortfolioBacktestConfig(
+        initial_cash=15_000.0,
+        holding_period_bars=2,
+        allowed_setups=("breakout_continuation",),
+        execution=SmallCapExecutionConfig(spread_bps=0.0, slippage_bps=0.0, min_trade_notional=100.0),
+    )
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=config)
+
+    assert result.trade_log["symbol"].tolist() == ["BBB"]
+    assert result.rejection_summary == {"setup_excluded": 1}
+    assert result.rejections.iloc[0]["symbol"] == "AAA"
+    assert result.rejections.iloc[0]["small_cap_setup"] == "post_gap_drift"

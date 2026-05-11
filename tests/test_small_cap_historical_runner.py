@@ -265,6 +265,31 @@ def test_small_cap_historical_runner_manifest_hash_changes_with_config(tmp_path:
     assert base["run_manifest"]["config_hash"] != tweaked["run_manifest"]["config_hash"]
 
 
+def test_small_cap_historical_runner_records_setup_ablation_in_manifest_and_rejections(tmp_path: Path) -> None:
+    config = SmallCapHistoricalRunConfig(
+        benchmark=SmallCapBenchmarkConfig(holding_period_bars=1),
+        portfolio=SmallCapPortfolioBacktestConfig(holding_period_bars=1, allowed_setups=("breakout_continuation",)),
+    )
+
+    result = run_small_cap_historical_report(
+        _candidate_metadata(),
+        _frames(),
+        output_dir=tmp_path,
+        iwm_frame=_iwm(),
+        as_of_dates=["2024-01-02", "2024-01-03"],
+        config=config,
+        run_id="setup_ablation_test",
+        created_at="2026-05-11T00:00:00+00:00",
+        git_commit="abc123",
+        host="testhost",
+    )
+
+    payload = json.loads((tmp_path / "run_manifest.json").read_text(encoding="utf-8"))
+    assert payload["config"]["portfolio"]["allowed_setups"] == ["breakout_continuation"]
+    assert result["portfolio_backtest"].rejection_summary.get("setup_excluded", 0) >= 1
+    assert "setup_excluded" in pd.read_csv(tmp_path / "portfolio_rejections.csv")["reject_reason"].tolist()
+
+
 def test_small_cap_historical_runner_fails_when_no_dates_available(tmp_path: Path) -> None:
     try:
         run_small_cap_historical_report(
