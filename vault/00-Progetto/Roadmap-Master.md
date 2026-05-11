@@ -114,8 +114,9 @@ Vedi [[news-risk-engine]].
 - [x] Ex-outlier stress test: senza top 3 winner il portfolio passa da +74.25% a -0.64%, `sign_flip_excluding_top_3=True`.
 - [x] Smoke ampia su 30 ticker small-cap eleggibili: 40 trade, `portfolio_return=-22.16%`, score non monotono, verdetto `NON PROMUOVERE`.
 - [x] Cash starvation diagnostics: 142 rejection valutabili, missed median return -4.75%, missed win rate 38.03%; non giustifica piu' capitale/concurrency.
+- [x] Setup disentangler passivo: `small_cap_setup` propagato nei log e diagnostiche per setup; breakout positivo nel campione, post-gap zavorra, score 100 non monotono.
 
-Gate metodologico corrente: run manifest, stress test ex-outlier, smoke ampia e cash starvation diagnostics sono implementati; non aggiungere sector cap, random delay, survivorship sensitivity o opening regime check prima di ripensare scanner/ranking/triage. La smoke ampia ha prodotto `portfolio_return=-22.16%`, score profile non monotono e missed opportunities mediane negative.
+Gate metodologico corrente: run manifest, stress test ex-outlier, smoke ampia, cash starvation diagnostics e setup disentangler passivo sono implementati; non aggiungere sector cap, random delay, survivorship sensitivity o opening regime check prima di ripensare scanner/ranking/triage. La smoke ampia ha prodotto `portfolio_return=-22.16%`, score profile non monotono e missed opportunities mediane negative.
 
 Vedi [[small-cap-swing-research-spec]].
 

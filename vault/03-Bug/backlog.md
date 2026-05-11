@@ -205,6 +205,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: aggiungere `portfolio_cash_starvation.csv` e summary con return ipotetico dei trade rifiutati per cash.
 - Stato: mitigato nel tooling; sulla smoke ampia 142/142 rejection valutabili hanno `median_missed_return_pct=-4.75%` e `missed_win_rate=38.03%`, quindi non giustificano piu' capitale/concurrency.
 
+### RISK-025 - Setup aggregation prematura nello score small-cap
+
+- Priorita: P1.
+- Sintomo: `small_cap_scanner_score` aggrega setup diversi e score 100 non e' monotono neanche dentro i setup principali.
+- Impatto: il triage seleziona male candidati e puo' amplificare setup strutturalmente negativi.
+- Azione: aggiunta diagnostica passiva per `small_cap_setup`: summary, score profile e cash starvation per setup.
+- Stato: confermato. Wide smoke: `breakout_continuation` +3.7k P&L, `post_gap_drift` -22.8k P&L, `panic_reversal` -3.1k P&L; score 100 peggiora rispetto ai bucket inferiori nei setup principali. Prossimo passo: feature-level diagnostics per setup, non paper trading.
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
