@@ -240,6 +240,12 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: `open_to_close_return>=0.10` su `breakout_continuation` produce 15 trade, `return_pct=+177.99%`, win rate 80%, mediana +11.33%, `pnl_excluding_top_3=+74.6k`, e benchmark filtrato ticker +12.82% vs random +7.94%.
 - Impatto: e' la migliore ipotesi primaria, ma il campione e' piccolo e ancora in-sample; rischio elevato di selection bias.
 - Stato: confermato. Prossimo passo: validazione temporale/walk-forward su soglie congelate `>=0.08` e `>=0.10`, prima di ranking breakout-specifico o paper trading.
+### RISK-030 - Edge open-to-close time-concentrated
+
+- Priorita: P1.
+- Sintomo: split H1/H2 su soglie congelate mostra che `open_to_close_return>=0.10` e' forte in H2 (`return_pct=+71.03%`, 7 trade, ex-top3 +14.4k, benchmark filtrato +19.55% vs random +4.17%) ma H1 ha solo 3 trade e non valida robustezza.
+- Impatto: la migliore ipotesi resta valida, ma potrebbe essere regime-specific o selection bias; non basta per ranking definitivo o paper trading.
+- Stato: confermato. Prossimo passo: dati multi-year o rolling/walk-forward con soglie congelate `>=0.08` e `>=0.10`.
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

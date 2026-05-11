@@ -119,8 +119,9 @@ Vedi [[news-risk-engine]].
 - [x] Breakout-only ablation: `allowed_setups=["breakout_continuation"]`, return +37.97% ma `sign_flip_excluding_top_3=True`; promettente ma non promuovibile.
 - [x] Feature filter ablation: `open_to_close_return>=0.084459` su breakout produce +140.77%, 22 trade, `pnl_excluding_top_3=+46.0k`, primo filtro non outlier-only.
 - [x] Open-to-close sensitivity: soglie arrotondate `>=0.08` e `>=0.10`; `>=0.10` produce +177.99%, 15 trade, `pnl_excluding_top_3=+74.6k`, benchmark filtrato ticker +12.82% vs random +7.94%.
+- [x] Temporal split validation: H2 conferma `open_to_close_return>=0.10` (+71.03%, 7 trade, ex-top3 +14.4k), H1 troppo scarso; edge time-concentrated, serve multi-year/rolling.
 
-Gate metodologico corrente: run manifest, stress test ex-outlier, smoke ampia, cash starvation diagnostics, setup disentangler passivo, feature diagnostics per setup, breakout-only ablation, feature filter ablation e open-to-close sensitivity sono implementati; non aggiungere sector cap, random delay, survivorship sensitivity o opening regime check prima di ripensare scanner/ranking/triage. La smoke ampia ha prodotto `portfolio_return=-22.16%`, score profile non monotono e missed opportunities mediane negative.
+Gate metodologico corrente: run manifest, stress test ex-outlier, smoke ampia, cash starvation diagnostics, setup disentangler passivo, feature diagnostics per setup, breakout-only ablation, feature filter ablation e open-to-close sensitivity e temporal split validation sono implementati; non aggiungere sector cap, random delay, survivorship sensitivity o opening regime check prima di ripensare scanner/ranking/triage. La smoke ampia ha prodotto `portfolio_return=-22.16%`, score profile non monotono e missed opportunities mediane negative.
 
 Vedi [[small-cap-swing-research-spec]].
 

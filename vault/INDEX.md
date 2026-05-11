@@ -145,6 +145,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - breakout-only ablation aggiunta: `allowed_setups=["breakout_continuation"]` produce +37.97%, ma resta outlier-driven (`sign_flip_excluding_top_3=True`); prossimo passo rule ablation feature dentro breakout.
 - feature filter ablation aggiunta: `open_to_close_return>=0.084459` su breakout produce +140.77%, 22 trade e resta positivo senza top 3 winner; soglia ancora in-sample.
 - open-to-close sensitivity aggiunta: `>=0.08` e `>=0.10`; `>=0.10` e' piu' forte (+177.99%, 15 trade, ex-top3 +74.6k) ma richiede validazione temporale.
+- temporal split validation aggiunta: `>=0.10` resta forte in H2 (+71.03%, 7 trade, ex-top3 +14.4k) ma H1 e' troppo scarso; edge time-concentrated.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 
