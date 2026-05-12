@@ -264,6 +264,12 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: run attiva con `regime_filters=[iwm_close > iwm_ema_200]` migliora a +169.21% e `pnl_excluding_top_3=+67.5k`, ma annual breakdown resta 2022 -4.4k, 2023 -15.5k, 2024 +189.1k.
 - Impatto: il gate EMA200 e' utile e tracciato, ma non basta per dichiarare strategia pronta; edge ancora concentrato nel regime 2024.
 - Stato: confermato. Prossimo passo: annual outlier diagnostics / DSR trial accounting prima di ranking o paper trading.
+### RISK-034 - Whipsaw filter tentante ma non validato
+
+- Priorita: P1.
+- Sintomo: error analysis 2023 mostra perdenti dopo rally IWM rapidi sopra EMA200 (`IWM 5d +3.76%`, `20d +8.33%`, distance EMA200 +5.19%), ma il pattern non e' abbastanza robusto per diventare filtro.
+- Impatto: creare un filtro anti-melt-up ora sarebbe overfitting macro sul 2023.
+- Stato: confermato. Prossimo passo: OOS congelato H1 2025 con le regole gia' scelte, senza Relative Strength e senza nuovi filtri.
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

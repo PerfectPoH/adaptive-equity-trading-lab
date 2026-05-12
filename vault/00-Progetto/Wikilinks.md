@@ -84,6 +84,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-11-cascade-small-cap-multiyear-validation]]
 - [[2026-05-11-cascade-small-cap-regime-diagnostics]]
 - [[2026-05-12-cascade-small-cap-ema200-regime-gate-ablation]]
+- [[2026-05-12-cascade-small-cap-2023-false-positive-error-analysis]]
 - [[Quant-Research-Priorities-2026-05-09]]
 
 ## Relazioni principali
@@ -145,6 +146,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Roadmap-Master]] -> [[2026-05-11-cascade-small-cap-multiyear-validation]]
 - [[Roadmap-Master]] -> [[2026-05-11-cascade-small-cap-regime-diagnostics]]
 - [[Roadmap-Master]] -> [[2026-05-12-cascade-small-cap-ema200-regime-gate-ablation]]
+- [[Roadmap-Master]] -> [[2026-05-12-cascade-small-cap-2023-false-positive-error-analysis]]
 - [[backlog]] -> [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]]
 - [[backlog]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-report]]
 - [[backlog]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-smoke]]
@@ -160,6 +162,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[backlog]] -> [[2026-05-11-cascade-small-cap-multiyear-validation]]
 - [[backlog]] -> [[2026-05-11-cascade-small-cap-regime-diagnostics]]
 - [[backlog]] -> [[2026-05-12-cascade-small-cap-ema200-regime-gate-ablation]]
+- [[backlog]] -> [[2026-05-12-cascade-small-cap-2023-false-positive-error-analysis]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-report]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-smoke]]
@@ -175,5 +178,6 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[small-cap-swing-research-spec]] -> [[2026-05-11-cascade-small-cap-multiyear-validation]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-11-cascade-small-cap-regime-diagnostics]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-12-cascade-small-cap-ema200-regime-gate-ablation]]
+- [[small-cap-swing-research-spec]] -> [[2026-05-12-cascade-small-cap-2023-false-positive-error-analysis]]
 - [[Roadmap-Master]] -> [[Quant-Research-Priorities-2026-05-09]]
 - [[Regole-Quant]] -> [[Quant-Research-Priorities-2026-05-09]]
