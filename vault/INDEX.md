@@ -1,7 +1,7 @@
 ---
 tipo: index
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-11
+ultimo-aggiornamento: 2026-05-12
 tags: [vault, index, obsidian, trading-lab]
 ---
 
@@ -26,6 +26,7 @@ tags: [vault, index, obsidian, trading-lab]
 - [[Vault-Structure]] - regole per tenere ordinato il vault.
 - [[backlog]] - bug, rischi aperti e tech debt.
 - [[Report-Milestone1-2026-05-08]] - primo report operativo.
+- [[Report-Small-Cap-Research-Status-2026-05-12]] - stato aggiornato track small-cap.
 - [[Project-Handoff]] - handoff completo per altre chat o agenti.
 - [[Devlog-Index]] - cronologia ordinata delle sessioni.
 - [[Documentazione-Index]] - report e handoff ordinati.
@@ -78,6 +79,7 @@ tags: [vault, index, obsidian, trading-lab]
 
 - [[Documentazione-Index]] - indice report e handoff.
 - [[Report-Milestone1-2026-05-08]] - stato della prima implementazione.
+- [[Report-Small-Cap-Research-Status-2026-05-12]] - stato della research track small-cap.
 - [[Project-Handoff]] - riepilogo completo trasferibile ad altri agenti.
 - [[README]] - note sulla cartella documentazione.
 

@@ -1,7 +1,7 @@
 ---
 tipo: documentazione-index
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-08
+ultimo-aggiornamento: 2026-05-12
 tags: [documentazione, index, report, handoff]
 ---
 
@@ -13,10 +13,11 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 
 - [[Report-Milestone1-2026-05-08]] - stato tecnico e risultati della prima pipeline.
 - [[Quant-Research-Priorities-2026-05-09]] - valutazione consigli esterni e priorita' research validation.
+- [[Report-Small-Cap-Research-Status-2026-05-12]] - stato aggiornato della track small-cap dopo OOS 2025 e fix risk-based sizing.
 
 ## Handoff
 
-- [[Project-Handoff]] - riepilogo completo per altre chat o agenti.
+- [[Project-Handoff]] - handoff aggiornato per altre chat o agenti, con stato small-cap corrente.
 
 ## Regole
 

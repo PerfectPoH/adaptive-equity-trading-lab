@@ -1,8 +1,8 @@
 ---
 tipo: feature-spec
-stato: proposed
+stato: active-research
 progetto: adaptive-equity-trading-lab
-data: 2026-05-09
+data: 2026-05-12
 tags: [feature, research-track, small-cap, swing, long-only]
 ---
 
@@ -301,20 +301,52 @@ Step intermedio consigliato: valutare Tiingo prima di passare a provider piu' co
 
 ## Milestone tecnica corrente
 
-Il portfolio backtester e' integrato nel runner storico. Il prossimo blocco deve essere il `Portfolio Diagnostics Report`:
+La track ha superato la fase di scaffolding. Sono gia' implementati:
 
 ```text
-portfolio_outlier_breakdown.csv
-portfolio_score_profile.csv
-markdown sections:
-- Portfolio Outlier Breakdown
-- Score Profile Report
+universe builder
+data-quality report
+scanner rule-based
+candidate export
+historical runner
+portfolio backtester
+benchmark coerenti
+outlier diagnostics
+score profile
+cash starvation diagnostics
+setup/feature diagnostics
+run manifest
+regime filters
+risk-based sizing
 ```
 
-Questa milestone e' bloccante prima di nuovi affinamenti architetturali.
+Ipotesi corrente:
+
+```text
+setup = breakout_continuation
+open_to_close_return >= 0.10
+regime_filter = iwm_close > iwm_ema_200
+holding_period_bars = 5
+```
+
+Stato:
+
+```text
+OOS 2025 non valida la strategia.
+Risk-based sizing fix promosso.
+Strategia non promossa.
+```
+
+Prossimo blocco obbligatorio:
+
+```text
+rerun 2022-2024 multi-year EMA200 gate con risk-based sizing corretto
+```
+
+Non aggiungere nuovi filtri, ranking o paper trading prima di quel confronto.
 
 ## Regola di stop ricerca
 
 Se un setup non supera costi conservativi, random baseline, benchmark small-cap coerente, outlier concentration gate e score monotonicity gate, non va ottimizzato ulteriormente.
 
-Vedi [[Roadmap-Master]], [[Quant-Research-Priorities-2026-05-09]], [[2026-05-09-cascade-backtest-analysis]], [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]].
+Vedi [[Roadmap-Master]], [[Report-Small-Cap-Research-Status-2026-05-12]], [[2026-05-12-cascade-small-cap-risk-based-sizing-fix]], [[2026-05-12-cascade-small-cap-portfolio-mechanics-audit]].

@@ -1,7 +1,7 @@
 ---
 tipo: wikilinks
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-08
+ultimo-aggiornamento: 2026-05-12
 tags: [graph, wikilinks, obsidian]
 ---
 
@@ -34,6 +34,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Documentazione-Index]]
 - [[Report-Milestone1-2026-05-08]]
 - [[Project-Handoff]]
+- [[Report-Small-Cap-Research-Status-2026-05-12]]
 - [[README]]
 - [[2026-05-08-codex-regime-filter-validation]]
 - [[2026-05-08-codex-purged-calibrated-walk-forward]]
@@ -155,6 +156,9 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Roadmap-Master]] -> [[2026-05-12-cascade-small-cap-oos-2025-full-validation]]
 - [[Roadmap-Master]] -> [[2026-05-12-cascade-small-cap-portfolio-mechanics-audit]]
 - [[Roadmap-Master]] -> [[2026-05-12-cascade-small-cap-risk-based-sizing-fix]]
+- [[Roadmap-Master]] -> [[Report-Small-Cap-Research-Status-2026-05-12]]
+- [[Project-Handoff]] -> [[Report-Small-Cap-Research-Status-2026-05-12]]
+- [[small-cap-swing-research-spec]] -> [[Report-Small-Cap-Research-Status-2026-05-12]]
 - [[backlog]] -> [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]]
 - [[backlog]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-report]]
 - [[backlog]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-smoke]]

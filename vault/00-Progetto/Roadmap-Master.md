@@ -2,7 +2,7 @@
 tipo: roadmap-master
 progetto: adaptive-equity-trading-lab
 data: 2026-05-08
-ultimo-aggiornamento: 2026-05-11
+ultimo-aggiornamento: 2026-05-12
 tags: [roadmap, milestone, checklist, trading-lab]
 ---
 
@@ -128,6 +128,7 @@ Vedi [[news-risk-engine]].
 - [x] OOS full-year 2025: 15 trade, -15.91%; ticker holding window +3.05% e random +3.92%, quindi problema di portfolio path/sizing/selezione; validation gate fallito.
 - [x] Portfolio mechanics audit: 18 candidati filtrati saltati per cash con return mediana +4.63%; planner usa quasi tutto il cash e ignora `risk_fraction`, serve fix TDD sizing.
 - [x] Risk-based sizing fix: `risk_fraction` applicata nel planner, suite 174 passed; OOS 2025 passa da -15.91% a +0.92% ma ex-top3 e' negativo, quindi strategia ancora non validata.
+- [ ] Rerun 2022-2024 EMA200 gate con risk-based sizing corretto per verificare se il vecchio +169% sopravvive senza sizing quasi all-in.
 
 Gate metodologico corrente: run manifest, stress test ex-outlier, smoke ampia, cash starvation diagnostics, setup disentangler passivo, feature diagnostics per setup, breakout-only ablation, feature filter ablation e open-to-close sensitivity e temporal split validation e multi-year validation e passive regime diagnostics sono implementati; non aggiungere sector cap, random delay, survivorship sensitivity o opening regime check prima di ripensare scanner/ranking/triage. La smoke ampia ha prodotto `portfolio_return=-22.16%`, score profile non monotono e missed opportunities mediane negative.
 

@@ -1,7 +1,7 @@
 ---
 tipo: documentazione
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-08
+ultimo-aggiornamento: 2026-05-12
 tags: [documentazione, report]
 ---
 
@@ -30,6 +30,7 @@ Quando un documento diventa vecchio, spostarlo in `04-Documentazione/_archive/` 
 Documenti principali:
 
 - [[Report-Milestone1-2026-05-08]]
+- [[Report-Small-Cap-Research-Status-2026-05-12]]
 - [[Project-Handoff]]
 
 Vedi anche [[Vault-Structure]].

@@ -1,8 +1,8 @@
 ---
 tipo: handoff
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-08
-tags: [handoff, progetto, agenti]
+ultimo-aggiornamento: 2026-05-12
+tags: [handoff, progetto, agenti, small-cap]
 ---
 
 # Project Handoff - Adaptive Equity Trading Lab
@@ -11,11 +11,9 @@ tags: [handoff, progetto, agenti]
 
 Adaptive Equity Trading Lab.
 
-## Obiettivo
+## Stato in una frase
 
-Costruire un laboratorio personale di trading quantitativo su azioni USA. Il sistema scarica dati storici, crea feature, scannerizza candidati, genera segnali con ML, fa backtest riproducibili, registra esperimenti e mostra risultati in dashboard.
-
-Non e' un bot che fa soldi. E' una piattaforma di ricerca per capire se una strategia ha senso, misurare rischio, evitare bias e documentare decisioni.
+La baseline large-cap ML e' congelata come controllo negativo; il lavoro attivo e' la research track **small/mid-cap swing long-only**, ma nessuna strategia e' validata per paper trading o capitale reale.
 
 ## Principio guida
 
@@ -28,127 +26,204 @@ Live small != scaling
 
 ## Decisioni chiave
 
-- MVP piccolo e costruibile.
-- `yfinance` solo per prototipo.
-- `backtesting.py` solo per MVP.
-- Entry al next open.
-- Split temporale purgato, niente random split.
-- Label builder separato.
-- Default di ricerca corrente: `random_forest`, isotonic calibration con `model_probability > 0.25`.
-- Experiment log obbligatorio.
-- Dashboard Streamlit minima.
-- News Engine, Graphify, Paper Trading e tool avanzati fuori dalla Milestone 1.
-- Vault manuale in Markdown.
-- Prima del live serio serve una Institutional Validation Gate.
+- Large-cap ML: pipeline tecnica riuscita, edge insufficiente, non ottimizzare ancora soglie/feature a caso.
+- Small-cap swing: track principale attuale, long-only, no short, no leva, no live.
+- `yfinance`: solo prototipo, non dati point-in-time.
+- Ogni sweep deve avere manifest/config hash e risultare riproducibile.
+- Ogni risultato positivo small-cap deve superare benchmark coerenti, outlier stress, OOS e diagnostica sizing.
+- Non aggiungere nuovi filtri per riparare il 2025 senza prima rifare i run con il sizing corretto.
 
-## Stack MVP
+## Baseline Large-Cap
+
+Run di riferimento:
 
 ```text
-Python
-yfinance
-pandas
-numpy
-scikit-learn
-backtesting.py
-streamlit
-plotly
-pytest
-tenacity
-joblib
-python-dotenv
+20260508_203628
 ```
 
-## Architettura MVP
+Config:
 
 ```text
-Market Data
-  -> Data Snapshots
-  -> Feature Engineering
-  -> Scanner
-  -> Optional Validation-Only Universe Selection
-  -> Temporal Split
-  -> Label Builder
-  -> Optional Model Objective Selection
-  -> ML Model
-  -> Validation Calibration
-  -> Signal Engine
-  -> Optional Signal Quality Rank Filter
-  -> Risk Manager
-  -> Optional Market Exposure / Risk Fraction Adjustment
-  -> Execution Simulator
-  -> Backtest
-  -> Metrics
-  -> Experiment Log
-  -> Streamlit Dashboard
+use_news=false
+model_type=random_forest
+feature_set=baseline
+target=tp_before_sl
+isotonic calibration
+model_probability > 0.25
+stop=1.5 ATR
+take_profit=3 ATR
+timeout=10 giorni
+risk=1% per trade
 ```
 
-## Comandi
+Risultato 2024:
+
+```text
+strategy_return ~6.49%
+buy_and_hold_return ~48.05%
+verdict: positive_but_under_benchmark
+```
+
+Decisione: usarla come controllo negativo e memoria metodologica, non come area principale di ottimizzazione.
+
+## Track Small-Cap Attiva
+
+Obiettivo: trovare setup swing long-only su small/mid-cap liquide dove un trader retail possa avere un vantaggio comportamentale, con execution e risk controls piu' conservativi della baseline large-cap.
+
+Tooling gia' implementato:
+
+- universe builder small-cap;
+- metadata builder da watchlist;
+- data-quality report;
+- scanner rule-based;
+- market-regime guardrail;
+- candidate export;
+- historical runner;
+- benchmark report coerenti;
+- execution planner;
+- portfolio backtester;
+- outlier diagnostics;
+- score profile;
+- cash starvation diagnostics;
+- setup/feature diagnostics;
+- run manifest con config hash;
+- regime filters configurabili;
+- risk-based sizing fix nel portfolio planner.
+
+## Ipotesi Primaria Corrente
+
+Regole congelate piu' recenti:
+
+```text
+setup = breakout_continuation
+feature_filter = open_to_close_return >= 0.10
+regime_filter = iwm_close > iwm_ema_200
+holding_period_bars = 5
+```
+
+Prima del fix sizing, questa ipotesi sembrava forte nel 2022-2024:
+
+```text
+return ~169.21%
+pnl_excluding_top_3 positivo
+ma 2022/2023 ancora negativi e P&L molto 2024-driven
+```
+
+OOS 2025 ha bloccato la promozione:
+
+```text
+H1 2025: negativo
+full-year 2025 vecchio sizing: -15.91%
+full-year 2025 risk-based sizing: +0.92%
+```
+
+Il fix del sizing e' promosso, la strategia no.
+
+## Fix Critico Recente
+
+Bug risolto:
+
+```text
+BUG-037 - Portfolio planner ignora risk_fraction
+```
+
+Vecchia logica:
+
+```text
+allocava quasi tutto il cash disponibile su un singolo trade
+```
+
+Nuova logica:
+
+```text
+risk_size = calculate_position_size(available_cash, entry_price, stop_loss, risk_fraction)
+liquidity_size = floor(max_liquidity_notional / entry_price)
+cash_size = floor(available_cash / entry_price)
+position_size = min(risk_size, liquidity_size, cash_size)
+```
+
+Verifica riportata:
+
+```text
+pytest -> 174 passed
+```
+
+Effetto su OOS 2025:
+
+```text
+old return: -15.91%
+new return: +0.92%
+insufficient_funds: 18 -> 0
+avg notional: 80.3k -> 8.5k
+```
+
+Ma:
+
+```text
+pnl_excluding_top_3 = -6.97k
+sign_flip_excluding_top_3 = true
+strategy still below ticker_holding_window and random_entry_baseline
+```
+
+## Prossimo Passo Canonico
+
+Rerun obbligatorio:
+
+```text
+2022-2024 multi-year
+setup = breakout_continuation
+open_to_close_return >= 0.10
+iwm_close > iwm_ema_200
+risk-based sizing corretto
+```
+
+Domanda da risolvere:
+
+```text
+Il vecchio +169% era edge del segnale o era gonfiato dal sizing quasi all-in?
+```
+
+Finche' questo non e' chiaro:
+
+```text
+no paper trading
+no ranking production
+no nuovi filtri in-sample sul 2025
+```
+
+## Rischi Aperti Piu' Importanti
+
+- RISK-015: small-cap backtest puo' mentire su spread, slippage e fill.
+- RISK-019: survivorship bias estremo su small-cap.
+- RISK-021: scanner score non monotono.
+- RISK-022: outlier risk sui rendimenti small-cap.
+- RISK-031/RISK-033: edge ancora 2024-driven.
+- RISK-035/RISK-036: OOS 2025 non valida la strategia.
+- RISK-038: OOS positivo dopo sizing ma ancora outlier-dependent.
+
+## File Da Leggere Prima Di Lavorare
+
+Ordine consigliato:
+
+1. [[INDEX]]
+2. [[Roadmap-Master]]
+3. [[Memoria-AI]]
+4. [[backlog]]
+5. [[small-cap-swing-research-spec]]
+6. [[2026-05-12-cascade-small-cap-risk-based-sizing-fix]]
+7. [[2026-05-12-cascade-small-cap-portfolio-mechanics-audit]]
+8. [[2026-05-12-cascade-small-cap-oos-2025-full-validation]]
+
+## Comandi Base
 
 ```powershell
 .\.venv-lab\Scripts\python.exe -m pytest
 .\.venv-lab\Scripts\python.exe -m src.pipeline
-.\.venv-lab\Scripts\python.exe -m src.experiments.walk_forward_validation
-.\.venv-lab\Scripts\python.exe -m src.experiments.calibration_comparison
-.\.venv-lab\Scripts\python.exe -m src.experiments.model_comparison
-.\.venv-lab\Scripts\python.exe -m src.experiments.benchmark_objective_comparison
-.\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
+.\.venv-lab\Scripts\python.exe -m src.experiments.small_cap_experiment_cli
 ```
 
-## Dati
+Nota: per i run small-cap reali controllare sempre il manifest e i parametri usati nei devlog recenti prima di rilanciare.
 
-Fonte MVP:
+## Regola Finale
 
-```text
-yfinance, daily OHLCV
-```
-
-Universo:
-
-```text
-AAPL, MSFT, NVDA, AMD, TSLA, META, AMZN, GOOGL, SPY, QQQ
-```
-
-Limiti: non point-in-time, survivorship bias, qualita' dati non istituzionale, risultati non sufficienti per capitale reale. Se `yfinance` fallisce, il downloader puo' usare l'ultimo snapshot locale valido per tenere stabile l'universo degli esperimenti.
-
-## Label
-
-```text
-features al close di oggi
-segnale dopo close
-entry al next open
-stop_loss = entry - 1.5 ATR
-take_profit = entry + 3 ATR
-timeout = 10 trading days
-```
-
-Le ultime 10 barre di ogni periodo temporale vengono purgate quando la label userebbe prezzi oltre il confine train/validation/test.
-
-## Risk MVP
-
-```text
-max 1% rischio per trade
-max 3 posizioni
-stop obbligatorio
-no averaging down
-no leva
-no short
-```
-
-## Milestone 1 status
-
-Completa in prima versione. Il run corrente `20260508_203628` usa `use_news=false`, `model_type=random_forest`, universo completo 10 simboli, feature set baseline, target `tp_before_sl`, isotonic calibration, `model_probability > 0.25`, stop `1.5 ATR`, take-profit `3 ATR`, timeout 10 giorni, no regime filters, no daily rank filter, default risk 1% per trade. Il test out-of-sample 2024 fa circa 6.49% medio contro circa 48% buy-and-hold. Non batte il benchmark; questo e' documentato, quindi la Definition of Done resta soddisfatta. Obiettivi benchmark-aware sono stati testati e non promossi.
-
-## Milestone future
-
-- Milestone 2: Research Validation.
-- Milestone 3: News + Context.
-- Milestone 4: Paper Trading.
-- Milestone 5: Realism Upgrade.
-- Milestone 6: Institutional Validation Gate.
-- Milestone 7: Small Live Manual.
-
-## Regola finale
-
-Costruire solo la fase corrente. Tutto il resto va nel vault e resta in roadmap.
-
-Vedi [[INDEX]], [[Roadmap-Master]], [[Memoria-AI]], [[Regole-Quant]].
+Il progetto non e' bloccato: e' in una fase sana di ricerca. La prossima mossa non e' "aggiungere intelligenza", ma togliere ambiguita' dal risultato con sizing corretto e confronto multi-year riproducibile.

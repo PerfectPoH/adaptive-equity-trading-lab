@@ -1,7 +1,7 @@
 ---
 tipo: redirect
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-08
+ultimo-aggiornamento: 2026-05-12
 tags: [roadmap]
 ---
 

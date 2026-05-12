@@ -1,7 +1,7 @@
 ---
 tipo: regole-quant
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-08
+ultimo-aggiornamento: 2026-05-12
 tags: [quant, backtest, risk, bias, ml]
 ---
 
@@ -93,5 +93,18 @@ no short
 ## 9. Gate prima del live serio
 
 Obbligatorio: dati point-in-time, survivorship-bias-free, event-driven backtester, Deflated Sharpe Ratio, CPCV, PBO, dynamic slippage, fiscalita' netta, slippage/paper-vs-live tracking.
+
+## 10. Regole Small-Cap
+
+- La track small-cap e' long-only finche' non esiste infrastruttura hard-to-borrow/locate.
+- Ogni run small-cap deve avere manifest e config hash.
+- Ogni trade deve passare execution/capacity guardrail; fail-closed se mancano dati.
+- Il portfolio planner deve usare risk-based sizing, non cash all-in.
+- `risk_fraction` va rispettata e poi cappata da liquidita' e cash disponibile.
+- I risultati vanno confrontati almeno con IWM, equal-weight universe, random entry e ticker holding-window.
+- Outlier stress obbligatorio: se togliendo top 3 winner il risultato cambia segno, niente promozione.
+- Score profile obbligatorio: se il punteggio non e' monotono, niente ranking/sizing basato sullo score.
+- Non aggiungere filtri per riparare un OOS fallito prima di rifare i run storici con meccanica corretta.
+- OOS 2025 non e' superato: no paper trading.
 
 Vedi [[Roadmap-Master]].

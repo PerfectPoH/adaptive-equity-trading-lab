@@ -1,7 +1,7 @@
 ---
 tipo: struttura-vault
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-08
+ultimo-aggiornamento: 2026-05-12
 tags: [vault, struttura, organizzazione]
 ---
 

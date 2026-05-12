@@ -1,7 +1,7 @@
 ---
 tipo: architettura
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-08
+ultimo-aggiornamento: 2026-05-12
 tags: [architettura, trading, ml, backtest, streamlit]
 ---
 
@@ -12,6 +12,8 @@ tags: [architettura, trading, ml, backtest, streamlit]
 Costruire un laboratorio personale di ricerca quantitativa su azioni USA. Il sistema deve scaricare dati storici, salvare snapshot, creare feature point-in-time, aggiungere contesto macro-news laggato, scannerizzare setup, creare label TP-before-SL con entry al next open, applicare split temporale purgato, addestrare modelli baseline, calibrare probabilita' su validation, generare segnali, simulare execution/risk, backtestare, registrare esperimenti e mostrare risultati in dashboard.
 
 Non e' un bot live. Non e' una prova di profittabilita'. La Milestone 1 serve a costruire una pipeline che non bara.
+
+Stato corrente: la pipeline large-cap ML e' un controllo negativo. L'architettura attiva e' la track small/mid-cap swing long-only con runner storico, portfolio backtester, manifest, diagnostiche e risk-based sizing.
 
 ## 2. Stack MVP
 
@@ -31,6 +33,8 @@ Non e' un bot live. Non e' una prova di profittabilita'. La Milestone 1 serve a 
 
 ## 3. Flusso del sistema
 
+### Large-cap ML baseline
+
 ```text
 Market Data
   -> Data Snapshots
@@ -48,6 +52,25 @@ Market Data
   -> Metrics
   -> Experiment Log
   -> Streamlit Dashboard
+```
+
+### Small-cap swing research track
+
+```text
+Watchlist / Metadata
+  -> Small-Cap Universe Builder
+  -> OHLCV + IWM/VIX Data
+  -> Data Quality Report
+  -> Feature-Ready Frames
+  -> Market Regime Columns
+  -> Rule-Based Scanner
+  -> Candidate Export
+  -> Execution Planner
+  -> Portfolio Backtester
+  -> Benchmark Reports
+  -> Outlier / Score / Cash Diagnostics
+  -> Run Manifest
+  -> Markdown Research Report
 ```
 
 ## 4. Moduli implementati
@@ -72,6 +95,25 @@ src/pipeline.py
 dashboard/app.py
 ```
 
+Moduli small-cap principali:
+
+```text
+src/data/small_cap_metadata_builder.py
+src/small_cap/universe.py
+src/small_cap/data_quality.py
+src/small_cap/market_regime.py
+src/small_cap/scanner.py
+src/small_cap/execution.py
+src/small_cap/candidate_export.py
+src/small_cap/benchmarks.py
+src/small_cap/backtest_report.py
+src/small_cap/historical_runner.py
+src/small_cap/data_preparer.py
+src/small_cap/portfolio_backtester.py
+src/experiments/run_manifest.py
+src/experiments/small_cap_experiment_cli.py
+```
+
 ## 5. Invarianti architetturali
 
 - Le feature non devono usare dati futuri.
@@ -82,7 +124,10 @@ dashboard/app.py
 - La calibrazione probabilistica si fitta su validation-only, non su test.
 - Ogni run deve avere un `run_id`.
 - Ogni esperimento va scritto in `experiments/log.csv`.
+- Ogni run small-cap deve avere `run_manifest.json` con config hash.
 - Se il backtest non batte buy-and-hold, il motivo va documentato.
+- Se un risultato small-cap dipende dai top 3 winner, non e' promuovibile.
+- Se lo score non e' monotono nei bucket, non usarlo per ranking/sizing live.
 - I risultati MVP non autorizzano live trading.
 
 ## 6. Dati
@@ -103,6 +148,15 @@ Universo iniziale:
 
 ```text
 AAPL, MSFT, NVDA, AMD, TSLA, META, AMZN, GOOGL, SPY, QQQ
+```
+
+Track small-cap:
+
+```text
+watchlist small/mid-cap US
+metadata statici symbol, market_cap, is_etf
+IWM come regime proxy
+VIX come stress proxy
 ```
 
 Limiti noti:
@@ -137,6 +191,8 @@ Dashboard Streamlit minimale:
 - warning sui limiti.
 
 ## 9. Evoluzione futura
+
+La prossima evoluzione immediata non e' paper trading: e' il rerun 2022-2024 della strategia small-cap EMA200 gate con risk-based sizing corretto.
 
 Le fasi successive aggiungono walk-forward piu' ampio, model registry, news risk filter, paper trading, slippage tracker, dati point-in-time, event-driven backtesting, Deflated Sharpe Ratio, CPCV, HRP e guardrail live.
 

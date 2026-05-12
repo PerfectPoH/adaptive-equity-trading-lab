@@ -1,7 +1,7 @@
 ---
 tipo: memoria-ai
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-08
+ultimo-aggiornamento: 2026-05-12
 tags: [memoria, anti-pattern, best-practice, agenti]
 ---
 
@@ -16,6 +16,62 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 - Il primo backtest 2024 non batte buy-and-hold.
 - Questo risultato e' accettabile perche' la pipeline dimostra onesta' metodologica.
 - Qualsiasi agente deve separare prototipo, ricerca, paper trading e live trading.
+- La baseline large-cap ML e' ora un controllo negativo, non la track principale.
+- La track attiva e' small/mid-cap swing long-only.
+- La strategia small-cap corrente non e' validata: OOS 2025 non passa il gate.
+
+## Stato operativo 2026-05-12
+
+Regole small-cap correnti da trattare come ipotesi, non come strategia:
+
+```text
+setup = breakout_continuation
+open_to_close_return >= 0.10
+regime_filter = iwm_close > iwm_ema_200
+holding_period_bars = 5
+```
+
+Fatto importante:
+
+```text
+BUG-037 risolto: SmallCapExecutionPlanner ora usa risk_fraction per il sizing.
+```
+
+Effetto del fix:
+
+```text
+OOS 2025 vecchio sizing: -15.91%
+OOS 2025 risk-based sizing: +0.92%
+insufficient_funds: 18 -> 0
+```
+
+Ma il risultato resta fragile:
+
+```text
+pnl_excluding_top_3 = -6.97k
+sign_flip_excluding_top_3 = true
+portfolio sotto ticker_holding_window e random_entry_baseline
+```
+
+Decisione:
+
+```text
+no paper trading
+no ranking production
+no nuovi filtri per riparare il 2025
+```
+
+Prossimo passo canonico:
+
+```text
+rerun 2022-2024 EMA200 gate con risk-based sizing corretto
+```
+
+Domanda da risolvere:
+
+```text
+il vecchio +169% era edge o era gonfiato dal sizing quasi all-in?
+```
 
 ## Errori da NON ripetere
 
@@ -53,6 +109,9 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 - Non rimuovere stop loss.
 - Non aumentare size per recuperare perdite.
 - Non confondere paper trading con live trading.
+- Non promuovere una strategia small-cap se diventa negativa senza top 3 winner.
+- Non usare lo score small-cap per ranking/sizing se il profile report non e' monotono.
+- Non aggiungere filtri in-sample sul 2025 prima di rifare i run storici con sizing corretto.
 
 ### Codice e ambiente
 
@@ -104,6 +163,7 @@ Questo file serve a non rifare gli stessi errori. Prima di modificare codice, st
 .\.venv-lab\Scripts\python.exe -m src.experiments.market_exposure_comparison
 .\.venv-lab\Scripts\python.exe -m src.experiments.universe_selection_comparison
 .\.venv-lab\Scripts\python.exe -m src.experiments.benchmark_objective_comparison
+.\.venv-lab\Scripts\python.exe -m src.experiments.small_cap_experiment_cli
 .\.venv-lab\Scripts\streamlit.exe run dashboard/app.py
 ```
 
