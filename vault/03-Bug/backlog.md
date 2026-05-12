@@ -276,6 +276,12 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: run OOS congelata H1 2025 con `breakout_continuation`, `open_to_close_return>=0.10`, `iwm_close>iwm_ema_200` produce solo 2 trade, -16.09%, ticker holding window -6.77% vs random +5.43%.
 - Impatto: blocca paper trading e ranking production; il sistema resta ipotesi in-sample/multi-year, non strategia validata.
 - Stato: confermato. Prossimo passo: broader OOS / universe robustness / trial accounting DSR prima di nuove feature.
+### RISK-036 - Portfolio OOS sottoperforma benchmark filtrato
+
+- Priorita: P0.
+- Sintomo: OOS full-year 2025 con regole congelate produce 15 trade e -15.91%, mentre `ticker_holding_window` sul subset filtrato e' +3.05% e random entry +3.92%.
+- Impatto: il problema non e' solo il segnale, ma la meccanica portfolio: path, sizing, capitale disponibile e selezione tra candidati concorrenti.
+- Stato: confermato. Prossimo passo: portfolio mechanics audit e trial accounting/DSR; non aggiungere filtri in-sample per riparare il 2025.
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

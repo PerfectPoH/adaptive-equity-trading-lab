@@ -151,6 +151,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - EMA200 regime gate attivo: `regime_filters` migliora a +169.21% e ex-top3 +67.5k, ma 2022/2023 restano negativi; niente paper trading.
 - 2023 false-positive error analysis: pattern whipsaw IWM sopra EMA200, ma nessun nuovo filtro; prossimo step OOS H1 2025 congelato.
 - OOS H1 2025 congelato: solo 2 trade, -16.09%, benchmark filtrato sotto random; strategia non validata fuori campione.
+- OOS full-year 2025: 15 trade, -15.91%; benchmark filtrato positivo ma portfolio negativo, indicando problema di path/sizing/selezione.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 

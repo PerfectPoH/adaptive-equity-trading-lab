@@ -125,6 +125,7 @@ Vedi [[news-risk-engine]].
 - [x] Active EMA200 regime gate: `regime_filters` produce +169.21%, 33 trade, ex-top3 +67.5k; migliora P&L ma resta negativo in 2022/2023, quindi no paper trading.
 - [x] 2023 false-positive error analysis: perdenti associati a whipsaw/melt-up IWM sopra EMA200; non creare nuovo filtro, prossimo step OOS H1 2025 congelato.
 - [x] OOS H1 2025 congelato: solo 2 trade, -16.09%, ticker holding window -6.77% vs random +5.43%; validation gate non superato.
+- [x] OOS full-year 2025: 15 trade, -15.91%; ticker holding window +3.05% e random +3.92%, quindi problema di portfolio path/sizing/selezione; validation gate fallito.
 
 Gate metodologico corrente: run manifest, stress test ex-outlier, smoke ampia, cash starvation diagnostics, setup disentangler passivo, feature diagnostics per setup, breakout-only ablation, feature filter ablation e open-to-close sensitivity e temporal split validation e multi-year validation e passive regime diagnostics sono implementati; non aggiungere sector cap, random delay, survivorship sensitivity o opening regime check prima di ripensare scanner/ranking/triage. La smoke ampia ha prodotto `portfolio_return=-22.16%`, score profile non monotono e missed opportunities mediane negative.
 
