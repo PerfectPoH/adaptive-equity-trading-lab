@@ -71,6 +71,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-12-cascade-small-cap-2023-false-positive-error-analysis]] - falsi positivi 2023: whipsaw IWM, nessun nuovo filtro, prossimo OOS congelato.
 - [[2026-05-12-cascade-small-cap-oos-2025-h1-validation]] - OOS H1 2025 congelato: solo 2 trade, negativo, validation gate non superato.
 - [[2026-05-12-cascade-small-cap-oos-2025-full-validation]] - OOS full-year 2025: 15 trade, ancora negativo, portfolio sotto benchmark filtrato.
+- [[2026-05-12-cascade-small-cap-portfolio-mechanics-audit]] - audit sizing/cash: planner ignora risk_fraction, cash starvation salta candidati positivi.
 
 ## Convenzione
 

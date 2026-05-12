@@ -282,6 +282,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: OOS full-year 2025 con regole congelate produce 15 trade e -15.91%, mentre `ticker_holding_window` sul subset filtrato e' +3.05% e random entry +3.92%.
 - Impatto: il problema non e' solo il segnale, ma la meccanica portfolio: path, sizing, capitale disponibile e selezione tra candidati concorrenti.
 - Stato: confermato. Prossimo passo: portfolio mechanics audit e trial accounting/DSR; non aggiungere filtri in-sample per riparare il 2025.
+### BUG-037 - Portfolio planner ignora risk_fraction
+
+- Priorita: P0.
+- Sintomo: audit OOS full-year 2025 mostra 15 trade eseguiti e 18 candidati filtrati saltati per `insufficient_funds`; i missed trades hanno mediana +4.63% e win rate 61.11%.
+- Root cause: `SmallCapExecutionPlanner.plan_trade` usa `target_notional = min(available_cash, max_liquidity_notional)`, quindi puo' allocare quasi tutto il cash su un singolo trade e non usa `risk_fraction`/stop risk sizing.
+- Impatto: portfolio P&L non e' interpretabile come strategia pura; path/sizing/cash starvation distorcono OOS e multi-year.
+- Stato: confermato. Prossimo passo: RED test e fix affinche' il planner portfolio rispetti risk-based sizing capped by liquidity and cash.
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
