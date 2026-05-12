@@ -46,7 +46,7 @@ def test_execution_planner_caps_notional_by_dollar_volume_capacity() -> None:
 
 
 def test_execution_planner_caps_notional_by_available_cash() -> None:
-    config = SmallCapExecutionConfig(min_trade_notional=100.0, spread_bps=0.0, slippage_bps=0.0)
+    config = SmallCapExecutionConfig(min_trade_notional=100.0, spread_bps=0.0, slippage_bps=0.0, risk_fraction=1.0)
     planner = SmallCapExecutionPlanner(config)
 
     decision = planner.plan_trade(_candidate(), next_open=10.0, available_cash=1_500.0)
@@ -54,6 +54,27 @@ def test_execution_planner_caps_notional_by_available_cash() -> None:
     assert decision.accepted is True
     assert decision.position_notional <= 1_500.0
     assert decision.position_size == 150
+
+
+def test_execution_planner_uses_risk_fraction_position_sizing_before_cash_or_liquidity_caps() -> None:
+    config = SmallCapExecutionConfig(
+        min_trade_notional=100.0,
+        spread_bps=0.0,
+        slippage_bps=0.0,
+        risk_fraction=0.01,
+        stop_atr_multiple=1.5,
+        max_position_dollar_volume_fraction=0.01,
+    )
+    planner = SmallCapExecutionPlanner(config)
+
+    decision = planner.plan_trade(_candidate(avg_dollar_volume_20d=2_000_000.0), next_open=10.0, available_cash=100_000.0)
+
+    assert decision.accepted is True
+    assert decision.stop_loss == 9.25
+    assert decision.position_size == 1333
+    assert decision.position_notional == 13_330.0
+    assert decision.position_notional < decision.max_liquidity_notional
+    assert decision.position_notional < decision.available_cash
 
 
 def test_execution_planner_applies_entry_cost_haircut() -> None:
