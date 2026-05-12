@@ -270,6 +270,12 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: error analysis 2023 mostra perdenti dopo rally IWM rapidi sopra EMA200 (`IWM 5d +3.76%`, `20d +8.33%`, distance EMA200 +5.19%), ma il pattern non e' abbastanza robusto per diventare filtro.
 - Impatto: creare un filtro anti-melt-up ora sarebbe overfitting macro sul 2023.
 - Stato: confermato. Prossimo passo: OOS congelato H1 2025 con le regole gia' scelte, senza Relative Strength e senza nuovi filtri.
+### RISK-035 - OOS H1 2025 non valida la strategia
+
+- Priorita: P0.
+- Sintomo: run OOS congelata H1 2025 con `breakout_continuation`, `open_to_close_return>=0.10`, `iwm_close>iwm_ema_200` produce solo 2 trade, -16.09%, ticker holding window -6.77% vs random +5.43%.
+- Impatto: blocca paper trading e ranking production; il sistema resta ipotesi in-sample/multi-year, non strategia validata.
+- Stato: confermato. Prossimo passo: broader OOS / universe robustness / trial accounting DSR prima di nuove feature.
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
