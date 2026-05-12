@@ -61,9 +61,9 @@ def test_portfolio_backtester_opens_and_closes_trade_with_cash_ledger() -> None:
     assert trade["exit_date"] == pd.Timestamp("2024-01-04")
     assert trade["entry_price"] == 10.0
     assert trade["exit_price"] == 12.0
-    assert trade["position_notional"] == 20_000.0
-    assert trade["pnl"] == 4_000.0
-    assert result.summary["ending_cash"] == 104_000.0
+    assert trade["position_notional"] == 13_330.0
+    assert trade["pnl"] == 2_666.0
+    assert result.summary["ending_cash"] == 102_666.0
     assert result.summary["total_trades"] == 1
 
 
@@ -73,8 +73,13 @@ def test_portfolio_backtester_rejects_candidate_when_cash_is_locked() -> None:
         "BBB": _frame([10.0, 10.0, 11.0, 12.0]),
     }
     candidates = pd.DataFrame([_candidate("AAA", "2024-01-01", score=100.0), _candidate("BBB", "2024-01-01", score=90.0)])
+    config = SmallCapPortfolioBacktestConfig(
+        initial_cash=15_000.0,
+        holding_period_bars=2,
+        execution=SmallCapExecutionConfig(spread_bps=0.0, slippage_bps=0.0, min_trade_notional=100.0, risk_fraction=1.0),
+    )
 
-    result = run_small_cap_portfolio_backtest(candidates, frames, config=_config(initial_cash=15_000.0))
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=config)
 
     assert result.trade_log["symbol"].tolist() == ["AAA"]
     assert result.rejection_summary == {"insufficient_funds": 1}
@@ -116,8 +121,8 @@ def test_portfolio_backtester_builds_equity_curve() -> None:
     result = run_small_cap_portfolio_backtest(candidates, frames, config=_config())
 
     assert result.equity_curve["date"].tolist() == [pd.Timestamp("2024-01-01"), pd.Timestamp("2024-01-04")]
-    assert result.equity_curve.iloc[0]["cash"] == 80_000.0
-    assert result.equity_curve.iloc[-1]["equity"] == 104_000.0
+    assert result.equity_curve.iloc[0]["cash"] == 86_670.0
+    assert result.equity_curve.iloc[-1]["equity"] == 102_666.0
 
 
 def test_portfolio_backtester_preserves_scanner_score_in_trade_log() -> None:
@@ -141,7 +146,9 @@ def test_portfolio_backtester_preserves_setup_in_trade_and_rejection_logs() -> N
         ]
     )
 
-    result = run_small_cap_portfolio_backtest(candidates, frames, config=_config(initial_cash=15_000.0))
+    config = _config(initial_cash=15_000.0, max_concurrent_positions=1)
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=config)
 
     assert result.trade_log.iloc[0]["small_cap_setup"] == "panic_reversal"
     assert result.rejections.iloc[0]["small_cap_setup"] == "post_gap_drift"
@@ -159,7 +166,9 @@ def test_portfolio_backtester_preserves_scanner_features_in_trade_and_rejection_
         ]
     )
 
-    result = run_small_cap_portfolio_backtest(candidates, frames, config=_config(initial_cash=15_000.0))
+    config = _config(initial_cash=15_000.0, max_concurrent_positions=1)
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=config)
 
     assert result.trade_log.iloc[0]["gap_pct"] == 0.04
     assert result.trade_log.iloc[0]["relative_volume_20d"] == 3.0
@@ -191,7 +200,9 @@ def test_portfolio_backtester_preserves_regime_features_in_trade_and_rejection_l
         ]
     )
 
-    result = run_small_cap_portfolio_backtest(candidates, frames, config=_config(initial_cash=15_000.0))
+    config = _config(initial_cash=15_000.0, max_concurrent_positions=1)
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=config)
 
     assert result.trade_log.iloc[0]["iwm_close"] == 210.0
     assert result.trade_log.iloc[0]["iwm_ema_50"] == 200.0

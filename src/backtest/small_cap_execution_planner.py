@@ -7,6 +7,7 @@ from typing import Any
 import pandas as pd
 
 from src.backtest.small_cap_execution import SmallCapExecutionConfig
+from src.risk.risk_manager import calculate_position_size
 
 
 @dataclass(frozen=True)
@@ -83,8 +84,10 @@ class SmallCapExecutionPlanner:
                 max_liquidity_notional=max_liquidity_notional,
             )
 
-        target_notional = min(float(available_cash), max_liquidity_notional)
-        position_size = math.floor(target_notional / entry_price)
+        risk_size = calculate_position_size(float(available_cash), entry_price, stop_loss, self.config.risk_fraction)
+        liquidity_size = math.floor(max_liquidity_notional / entry_price)
+        cash_size = math.floor(float(available_cash) / entry_price)
+        position_size = min(risk_size, liquidity_size, cash_size)
         position_notional = float(position_size * entry_price)
         if position_size <= 0 or position_notional < self.config.min_trade_notional:
             return self._reject(
