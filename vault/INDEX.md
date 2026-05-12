@@ -148,6 +148,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - temporal split validation aggiunta: `>=0.10` resta forte in H2 (+71.03%, 7 trade, ex-top3 +14.4k) ma H1 e' troppo scarso; edge time-concentrated.
 - multi-year validation aggiunta: `>=0.10` su 2022-2024 produce +135.07%, 43 trade, ex-top3 +44.6k; sopravvive ma resta 2024-driven, prossimo gate regime diagnostics.
 - regime diagnostics aggiunta: EMA50 non discrimina, IWM sopra EMA200 separa i trade (+153.3k vs -18.3k), VIX non e' filtro ovvio; prossimo gate regime filter configurabile.
+- EMA200 regime gate attivo: `regime_filters` migliora a +169.21% e ex-top3 +67.5k, ma 2022/2023 restano negativi; niente paper trading.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 

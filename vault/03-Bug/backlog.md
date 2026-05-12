@@ -258,6 +258,12 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: diagnostica passiva su `open_to_close_return>=0.10` multi-year mostra `iwm_above_ema_200=False`: 12 trade, -18.3k, win rate 25%, mediana -5.47%; `True`: 31 trade, +153.3k, win rate 61.29%, mediana +3.38%.
 - Impatto: EMA200 e' il primo regime candidate gate convincente, ma non e' ancora stato testato come filtro configurabile con rejection metadata e manifest.
 - Stato: confermato. Prossimo passo: TDD per `regime_filters` o `require_iwm_above_ema_200`, poi run 2022-2024 con annual breakdown/ex-top3/benchmark filtrato.
+### RISK-033 - EMA200 gate ancora 2024-driven
+
+- Priorita: P1.
+- Sintomo: run attiva con `regime_filters=[iwm_close > iwm_ema_200]` migliora a +169.21% e `pnl_excluding_top_3=+67.5k`, ma annual breakdown resta 2022 -4.4k, 2023 -15.5k, 2024 +189.1k.
+- Impatto: il gate EMA200 e' utile e tracciato, ma non basta per dichiarare strategia pronta; edge ancora concentrato nel regime 2024.
+- Stato: confermato. Prossimo passo: annual outlier diagnostics / DSR trial accounting prima di ranking o paper trading.
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
