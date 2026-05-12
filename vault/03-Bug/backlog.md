@@ -288,7 +288,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: audit OOS full-year 2025 mostra 15 trade eseguiti e 18 candidati filtrati saltati per `insufficient_funds`; i missed trades hanno mediana +4.63% e win rate 61.11%.
 - Root cause: `SmallCapExecutionPlanner.plan_trade` usa `target_notional = min(available_cash, max_liquidity_notional)`, quindi puo' allocare quasi tutto il cash su un singolo trade e non usa `risk_fraction`/stop risk sizing.
 - Impatto: portfolio P&L non e' interpretabile come strategia pura; path/sizing/cash starvation distorcono OOS e multi-year.
-- Stato: confermato. Prossimo passo: RED test e fix affinche' il planner portfolio rispetti risk-based sizing capped by liquidity and cash.
+- Stato: risolto con TDD. `SmallCapExecutionPlanner` usa risk-based sizing capped by liquidity/cash; suite 174 passed.
+### RISK-038 - OOS positivo dopo sizing ma outlier-dependent
+
+- Priorita: P0.
+- Sintomo: dopo risk-based sizing, OOS full-year 2025 migliora da -15.91% a +0.92% e rimuove `insufficient_funds`, ma `pnl_excluding_top_3=-6.97k` e `sign_flip_excluding_top_3=true`.
+- Impatto: il fix infrastrutturale e' valido, ma la strategia resta non validata; il portfolio sottoperforma ancora ticker holding window (+3.05%) e random entry (+3.92%).
+- Stato: confermato. Prossimo passo: rerun 2022-2024 EMA200 gate con sizing corretto; non fare paper trading o ranking.
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

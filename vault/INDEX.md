@@ -153,6 +153,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - OOS H1 2025 congelato: solo 2 trade, -16.09%, benchmark filtrato sotto random; strategia non validata fuori campione.
 - OOS full-year 2025: 15 trade, -15.91%; benchmark filtrato positivo ma portfolio negativo, indicando problema di path/sizing/selezione.
 - Portfolio mechanics audit: planner portfolio usa quasi tutto il cash e ignora `risk_fraction`; 18 cash-starved missed trades hanno mediana +4.63%, serve fix sizing TDD.
+- Risk-based sizing fix: OOS 2025 migliora a +0.92% senza cash starvation, ma ex-top3 resta negativo; validazione strategia ancora fallita.
 
 Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
 

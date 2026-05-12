@@ -88,6 +88,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-12-cascade-small-cap-oos-2025-h1-validation]]
 - [[2026-05-12-cascade-small-cap-oos-2025-full-validation]]
 - [[2026-05-12-cascade-small-cap-portfolio-mechanics-audit]]
+- [[2026-05-12-cascade-small-cap-risk-based-sizing-fix]]
 - [[Quant-Research-Priorities-2026-05-09]]
 
 ## Relazioni principali
@@ -153,6 +154,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Roadmap-Master]] -> [[2026-05-12-cascade-small-cap-oos-2025-h1-validation]]
 - [[Roadmap-Master]] -> [[2026-05-12-cascade-small-cap-oos-2025-full-validation]]
 - [[Roadmap-Master]] -> [[2026-05-12-cascade-small-cap-portfolio-mechanics-audit]]
+- [[Roadmap-Master]] -> [[2026-05-12-cascade-small-cap-risk-based-sizing-fix]]
 - [[backlog]] -> [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]]
 - [[backlog]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-report]]
 - [[backlog]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-smoke]]
@@ -172,6 +174,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[backlog]] -> [[2026-05-12-cascade-small-cap-oos-2025-h1-validation]]
 - [[backlog]] -> [[2026-05-12-cascade-small-cap-oos-2025-full-validation]]
 - [[backlog]] -> [[2026-05-12-cascade-small-cap-portfolio-mechanics-audit]]
+- [[backlog]] -> [[2026-05-12-cascade-small-cap-risk-based-sizing-fix]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-report]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-smoke]]
@@ -191,5 +194,6 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[small-cap-swing-research-spec]] -> [[2026-05-12-cascade-small-cap-oos-2025-h1-validation]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-12-cascade-small-cap-oos-2025-full-validation]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-12-cascade-small-cap-portfolio-mechanics-audit]]
+- [[small-cap-swing-research-spec]] -> [[2026-05-12-cascade-small-cap-risk-based-sizing-fix]]
 - [[Roadmap-Master]] -> [[Quant-Research-Priorities-2026-05-09]]
 - [[Regole-Quant]] -> [[Quant-Research-Priorities-2026-05-09]]
