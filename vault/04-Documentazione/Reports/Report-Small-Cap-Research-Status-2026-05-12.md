@@ -157,3 +157,13 @@ Interpretazione attesa:
 ## Nota Finale
 
 Questo e' progresso vero: il progetto ha smesso di cercare un numero bello e sta isolando le cause del risultato. La prossima verifica deve essere chirurgica, non creativa.
+## Update 2026-05-12 - Multi-year risk-sizing rerun
+
+Il rerun 2022-2024 EMA200 con sizing corretto ha declassato il vecchio risultato +169.21% a +3.60%.
+
+- Old sizing: 33 trade, +169,213.93 PnL, +169.21%, 8 `insufficient_funds`, avg notional 69.5k.
+- Risk sizing: 41 trade, +3,601.29 PnL, +3.60%, zero `insufficient_funds`, avg notional 9.5k.
+- Benchmark filtrati: ticker holding window +5.42%, random entry +4.16%.
+- Ex-top3: -5,339.52, `sign_flip_excluding_top_3=true`.
+
+Verdetto: il fix sizing e' confermato, ma il setup non e' validato come portfolio strategy. Nessun paper trading/ranking. Prossima scelta: archiviazione oppure track separato ranking/uscite con trial accounting esplicito.

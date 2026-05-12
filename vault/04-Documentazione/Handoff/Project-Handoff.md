@@ -227,3 +227,6 @@ Nota: per i run small-cap reali controllare sempre il manifest e i parametri usa
 ## Regola Finale
 
 Il progetto non e' bloccato: e' in una fase sana di ricerca. La prossima mossa non e' "aggiungere intelligenza", ma togliere ambiguita' dal risultato con sizing corretto e confronto multi-year riproducibile.
+## Latest update - Multi-year risk-sizing rerun
+
+The 2022-2024 EMA200 gate rerun with corrected risk-based sizing reduced the old +169.21% result to +3.60%. Cash starvation is fixed, but the strategy remains below filtered benchmarks and fails ex-top3 robustness. Do not move to paper trading or production ranking. Next decision: archive this portfolio setup or open a separate ranking/exits research track with explicit trial accounting.

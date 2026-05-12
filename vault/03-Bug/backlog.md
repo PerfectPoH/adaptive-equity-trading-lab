@@ -294,7 +294,14 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Priorita: P0.
 - Sintomo: dopo risk-based sizing, OOS full-year 2025 migliora da -15.91% a +0.92% e rimuove `insufficient_funds`, ma `pnl_excluding_top_3=-6.97k` e `sign_flip_excluding_top_3=true`.
 - Impatto: il fix infrastrutturale e' valido, ma la strategia resta non validata; il portfolio sottoperforma ancora ticker holding window (+3.05%) e random entry (+3.92%).
-- Stato: confermato. Prossimo passo: rerun 2022-2024 EMA200 gate con sizing corretto; non fare paper trading o ranking.
+- Stato: chiuso come non promozione. Rerun 2022-2024 con sizing corretto produce +3.60%, sotto ticker holding window (+5.42%) e random entry (+4.16%), con sign flip ex-top3.
+### RISK-039 - Vecchio multi-year EMA200 era leverage/path artifact
+
+- Priorita: P0.
+- Sintomo: il vecchio EMA200 multi-year 2022-2024 mostrava +169.21%, ma dopo sizing risk-based corretto scende a +3.60%.
+- Impatto: il setup resta debolmente positivo ma sottoperforma ticker holding window (+5.42%) e random entry (+4.16%) e fallisce ex-top3 (`pnl_excluding_top_3=-5.34k`, sign flip true).
+- Stato: confermato. Non promuovere; decidere se archiviare come portfolio strategy o aprire ranking/uscite come track separato con trial accounting.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
