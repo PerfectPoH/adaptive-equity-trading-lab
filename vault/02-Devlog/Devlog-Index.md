@@ -74,6 +74,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-12-cascade-small-cap-portfolio-mechanics-audit]] - audit sizing/cash: planner ignora risk_fraction, cash starvation salta candidati positivi.
 - [[2026-05-12-cascade-small-cap-risk-based-sizing-fix]] - fix TDD sizing risk-based: OOS 2025 migliora ma resta outlier-dependent.
 - [[2026-05-12-cascade-small-cap-multiyear-risk-sizing-rerun]] - rerun 2022-2024 EMA200 con sizing corretto: vecchio +169% crolla a +3.60%.
+- [[2026-05-13-cascade-small-cap-setup-archive-decision]] - decisione finale: setup breakout EMA200 archiviato, ranking/uscite solo come track separato.
 
 ## Convenzione
 

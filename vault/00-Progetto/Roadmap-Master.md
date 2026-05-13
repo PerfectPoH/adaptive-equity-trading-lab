@@ -129,7 +129,8 @@ Vedi [[news-risk-engine]].
 - [x] Portfolio mechanics audit: 18 candidati filtrati saltati per cash con return mediana +4.63%; planner usa quasi tutto il cash e ignora `risk_fraction`, serve fix TDD sizing.
 - [x] Risk-based sizing fix: `risk_fraction` applicata nel planner, suite 174 passed; OOS 2025 passa da -15.91% a +0.92% ma ex-top3 e' negativo, quindi strategia ancora non validata.
 - [x] Rerun 2022-2024 EMA200 gate con risk-based sizing corretto: vecchio +169.21% crolla a +3.60%, sotto benchmark e con sign flip ex-top3; setup non validato come portfolio strategy.
-- [ ] Decidere se archiviare il setup portfolio o aprire un track separato ranking/uscite con trial accounting esplicito.
+- [x] Decisione finale small-cap breakout EMA200: setup archiviato come portfolio strategy non promuovibile; eventuale ranking/uscite solo come track separato con trial accounting esplicito.
+- [ ] Valutare se aprire un nuovo track ranking/uscite separato, senza riusare il vecchio +169% come prova di edge.
 
 Gate metodologico corrente: run manifest, stress test ex-outlier, smoke ampia, cash starvation diagnostics, setup disentangler passivo, feature diagnostics per setup, breakout-only ablation, feature filter ablation e open-to-close sensitivity e temporal split validation e multi-year validation e passive regime diagnostics sono implementati; non aggiungere sector cap, random delay, survivorship sensitivity o opening regime check prima di ripensare scanner/ranking/triage. La smoke ampia ha prodotto `portfolio_return=-22.16%`, score profile non monotono e missed opportunities mediane negative.
 

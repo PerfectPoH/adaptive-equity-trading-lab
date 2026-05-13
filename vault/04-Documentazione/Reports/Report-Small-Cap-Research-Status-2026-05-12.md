@@ -167,3 +167,19 @@ Il rerun 2022-2024 EMA200 con sizing corretto ha declassato il vecchio risultato
 - Ex-top3: -5,339.52, `sign_flip_excluding_top_3=true`.
 
 Verdetto: il fix sizing e' confermato, ma il setup non e' validato come portfolio strategy. Nessun paper trading/ranking. Prossima scelta: archiviazione oppure track separato ranking/uscite con trial accounting esplicito.
+## Update 2026-05-13 - Final archive decision
+
+La track `breakout_continuation + open_to_close_return>=0.10 + IWM>EMA200` viene archiviata come portfolio strategy non promuovibile.
+
+Motivo: dopo il fix risk-based sizing, sia OOS 2025 sia multi-year 2022-2024 restano sotto benchmark filtrati e falliscono l'ex-top3 robustness gate.
+
+Stato operativo:
+
+```text
+ARCHIVED / NOT PROMOTED
+No paper trading
+No ranking production
+No nuovi filtri in-sample
+```
+
+Un eventuale lavoro su ranking/uscite deve essere un nuovo track separato, con trial accounting esplicito e senza riusare il vecchio +169% come prova di edge.

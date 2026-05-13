@@ -157,8 +157,9 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - Portfolio mechanics audit: planner portfolio usa quasi tutto il cash e ignora `risk_fraction`; 18 cash-starved missed trades hanno mediana +4.63%, serve fix sizing TDD.
 - Risk-based sizing fix: OOS 2025 migliora a +0.92% senza cash starvation, ma ex-top3 resta negativo; validazione strategia ancora fallita.
 - Multi-year risk-sizing rerun: EMA200 2022-2024 passa da +169.21% old sizing a +3.60% risk sizing; sotto benchmark e con sign flip ex-top3, quindi vecchio edge declassato a leverage/path artifact.
+- Decisione finale: setup `breakout_continuation + open_to_close_return>=0.10 + IWM>EMA200` archiviato come portfolio strategy non promuovibile; ranking/uscite solo in eventuale track separato con trial accounting.
 
-Conclusione: il progetto ha una base tecnica valida, ma i risultati non vanno interpretati come strategia pronta per capitale reale.
+Conclusione: il progetto ha una base tecnica valida, ma la specifica strategia small-cap breakout EMA200 e' archiviata come non promuovibile per capitale reale.
 
 ---
 

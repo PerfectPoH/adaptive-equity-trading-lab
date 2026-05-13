@@ -300,7 +300,14 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Priorita: P0.
 - Sintomo: il vecchio EMA200 multi-year 2022-2024 mostrava +169.21%, ma dopo sizing risk-based corretto scende a +3.60%.
 - Impatto: il setup resta debolmente positivo ma sottoperforma ticker holding window (+5.42%) e random entry (+4.16%) e fallisce ex-top3 (`pnl_excluding_top_3=-5.34k`, sign flip true).
-- Stato: confermato. Non promuovere; decidere se archiviare come portfolio strategy o aprire ranking/uscite come track separato con trial accounting.
+- Stato: chiuso. Setup archiviato come portfolio strategy non promuovibile; ranking/uscite solo come eventuale track separato con trial accounting esplicito.
+
+### RESEARCH-040 - Track separato ranking/uscite small-cap
+
+- Priorita: P2.
+- Sintomo: il segnale filtrato contiene valore lordo in alcuni subset, ma il portfolio corretto non batte benchmark e fallisce ex-top3.
+- Vincolo: non e' continuazione/promozione del setup archiviato; deve avere trial accounting nuovo, benchmark ticker/random/equal-weight, ex-topN, OOS/universe robustness e nessun paper trading fino a nuova validazione.
+- Stato: opzionale, non avviato.
 
 ## Tech debt
 

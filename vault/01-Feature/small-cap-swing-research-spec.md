@@ -334,16 +334,17 @@ Stato:
 ```text
 OOS 2025 non valida la strategia.
 Risk-based sizing fix promosso.
-Strategia non promossa.
+Multi-year risk-sizing rerun non batte benchmark e fallisce ex-top3.
+Strategia archiviata come portfolio strategy non promuovibile.
 ```
 
 Prossimo blocco obbligatorio:
 
 ```text
-rerun 2022-2024 multi-year EMA200 gate con risk-based sizing corretto
+nessun rerun obbligatorio sulla track corrente; eventuale ranking/uscite richiede nuovo track separato e trial accounting esplicito
 ```
 
-Non aggiungere nuovi filtri, ranking o paper trading prima di quel confronto.
+Non aggiungere nuovi filtri, ranking o paper trading su questa track archiviata.
 
 ## Regola di stop ricerca
 

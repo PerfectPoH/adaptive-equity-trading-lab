@@ -91,6 +91,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-12-cascade-small-cap-portfolio-mechanics-audit]]
 - [[2026-05-12-cascade-small-cap-risk-based-sizing-fix]]
 - [[2026-05-12-cascade-small-cap-multiyear-risk-sizing-rerun]]
+- [[2026-05-13-cascade-small-cap-setup-archive-decision]]
 - [[Quant-Research-Priorities-2026-05-09]]
 
 ## Relazioni principali
@@ -158,6 +159,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Roadmap-Master]] -> [[2026-05-12-cascade-small-cap-portfolio-mechanics-audit]]
 - [[Roadmap-Master]] -> [[2026-05-12-cascade-small-cap-risk-based-sizing-fix]]
 - [[Roadmap-Master]] -> [[2026-05-12-cascade-small-cap-multiyear-risk-sizing-rerun]]
+- [[Roadmap-Master]] -> [[2026-05-13-cascade-small-cap-setup-archive-decision]]
 - [[Roadmap-Master]] -> [[Report-Small-Cap-Research-Status-2026-05-12]]
 - [[Project-Handoff]] -> [[Report-Small-Cap-Research-Status-2026-05-12]]
 - [[small-cap-swing-research-spec]] -> [[Report-Small-Cap-Research-Status-2026-05-12]]
@@ -182,6 +184,7 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[backlog]] -> [[2026-05-12-cascade-small-cap-portfolio-mechanics-audit]]
 - [[backlog]] -> [[2026-05-12-cascade-small-cap-risk-based-sizing-fix]]
 - [[backlog]] -> [[2026-05-12-cascade-small-cap-multiyear-risk-sizing-rerun]]
+- [[backlog]] -> [[2026-05-13-cascade-small-cap-setup-archive-decision]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-critical-diagnostics-roadmap]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-report]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-10-cascade-small-cap-portfolio-diagnostics-smoke]]
@@ -203,5 +206,6 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[small-cap-swing-research-spec]] -> [[2026-05-12-cascade-small-cap-portfolio-mechanics-audit]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-12-cascade-small-cap-risk-based-sizing-fix]]
 - [[small-cap-swing-research-spec]] -> [[2026-05-12-cascade-small-cap-multiyear-risk-sizing-rerun]]
+- [[small-cap-swing-research-spec]] -> [[2026-05-13-cascade-small-cap-setup-archive-decision]]
 - [[Roadmap-Master]] -> [[Quant-Research-Priorities-2026-05-09]]
 - [[Regole-Quant]] -> [[Quant-Research-Priorities-2026-05-09]]
