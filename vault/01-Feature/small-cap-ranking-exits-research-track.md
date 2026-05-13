@@ -127,7 +127,7 @@ Ogni esperimento deve registrare almeno:
 |---|---|---|---|
 | TRIAL-INFRA-001 | risk-based sizing fix | chiuso/promosso | trial infrastrutturale, non edge trial |
 | TRIAL-ARCHIVE-001 | breakout/open_to_close/EMA200 corrected validation | chiuso/non promosso | setup archiviato |
-| TRIAL-RANKEX-001 | ranking/exits track design | aperto/design-only | nessun codice, nessun backtest ancora |
+| TRIAL-RANKEX-001 | ranking/exits track design | aperto/design-only | manifest trial accounting implementato; nessun backtest ancora |
 
 ## Baseline obbligatorie
 
@@ -158,13 +158,13 @@ Una variante puo' avanzare solo se supera tutti questi gate:
 
 ## Primo passo consentito
 
-Prima del codice:
+Prima di qualunque backtest o sweep:
 
 ```text
-progettare un trial ledger minimale e un formato manifest per ranking/exits experiments
+pre-registrare `TRIAL-RANKEX-001` usando il campo top-level `trial_accounting` del `run_manifest.json`
 ```
 
-Poi, solo se necessario, implementare TDD una piccola estensione del runner per salvare campi trial accounting nei manifest.
+Il supporto manifest e' gia' implementato con TDD; ora manca la pre-registrazione del trial.
 
 ## Stato operativo
 

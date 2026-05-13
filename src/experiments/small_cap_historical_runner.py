@@ -54,6 +54,7 @@ def run_small_cap_historical_report(
     created_at: str | datetime | None = None,
     git_commit: str | None = None,
     host: str | None = None,
+    trial_accounting: dict[str, Any] | None = None,
     extras: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     output_path = Path(output_dir)
@@ -79,6 +80,7 @@ def run_small_cap_historical_report(
         created_at=created_at,
         git_commit=git_commit,
         host=host,
+        trial_accounting=trial_accounting,
         extras=extras,
     )
     manifest_dict = manifest_to_dict(manifest)

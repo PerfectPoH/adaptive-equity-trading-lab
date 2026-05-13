@@ -131,7 +131,8 @@ Vedi [[news-risk-engine]].
 - [x] Rerun 2022-2024 EMA200 gate con risk-based sizing corretto: vecchio +169.21% crolla a +3.60%, sotto benchmark e con sign flip ex-top3; setup non validato come portfolio strategy.
 - [x] Decisione finale small-cap breakout EMA200: setup archiviato come portfolio strategy non promuovibile; eventuale ranking/uscite solo come track separato con trial accounting esplicito.
 - [x] Aprire nuovo track ranking/uscite separato come proposta di ricerca design-only, senza riusare il vecchio +169% come prova di edge.
-- [ ] Definire/implementare trial accounting manifest per ranking/uscite prima di qualunque backtest o sweep.
+- [x] Implementare trial accounting top-level nel `run_manifest.json`, separato dal `config_hash`; test suite 176 passed.
+- [ ] Pre-registrare `TRIAL-RANKEX-001` con finestre, baseline e decision rule prima di qualunque backtest o sweep.
 
 Gate metodologico corrente: run manifest, stress test ex-outlier, smoke ampia, cash starvation diagnostics, setup disentangler passivo, feature diagnostics per setup, breakout-only ablation, feature filter ablation e open-to-close sensitivity e temporal split validation e multi-year validation e passive regime diagnostics sono implementati; non aggiungere sector cap, random delay, survivorship sensitivity o opening regime check prima di ripensare scanner/ranking/triage. La smoke ampia ha prodotto `portfolio_return=-22.16%`, score profile non monotono e missed opportunities mediane negative.
 

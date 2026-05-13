@@ -45,6 +45,7 @@ class RunManifest:
     period: dict[str, str | None]
     git_commit: str | None
     host: str | None
+    trial_accounting: dict[str, Any] = field(default_factory=dict)
     extras: dict[str, Any] = field(default_factory=dict)
 
 
@@ -120,6 +121,7 @@ def build_run_manifest(
     created_at: str | datetime | None = None,
     git_commit: str | None = None,
     host: str | None = None,
+    trial_accounting: dict[str, Any] | None = None,
     extras: dict[str, Any] | None = None,
     repo_path: Path | str | None = None,
     detect_git: bool = True,
@@ -157,6 +159,7 @@ def build_run_manifest(
         period={"start": period_start, "end": period_end},
         git_commit=resolved_git,
         host=resolved_host,
+        trial_accounting=_to_jsonable(trial_accounting) if trial_accounting else {},
         extras=dict(extras) if extras else {},
     )
 

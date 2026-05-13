@@ -119,6 +119,30 @@ def test_build_run_manifest_keeps_explicit_extras() -> None:
     assert manifest.extras == {"note": "smoke"}
 
 
+def test_build_run_manifest_keeps_trial_accounting_top_level_without_changing_config_hash() -> None:
+    first = _build_test_manifest(
+        trial_accounting={
+            "trial_id": "TRIAL-RANKEX-001",
+            "research_question": "ranking_intra_candidate",
+            "hypothesis_family": "ranking",
+            "decision": "design_only",
+        }
+    )
+    second = _build_test_manifest(
+        trial_accounting={
+            "trial_id": "TRIAL-RANKEX-002",
+            "research_question": "exit_management",
+            "hypothesis_family": "exits",
+            "decision": "design_only",
+        }
+    )
+
+    assert first.config_hash == second.config_hash
+    assert first.trial_accounting["trial_id"] == "TRIAL-RANKEX-001"
+    assert first.trial_accounting["research_question"] == "ranking_intra_candidate"
+    assert "trial_accounting" not in first.config
+
+
 def test_manifest_to_dict_is_round_trip_safe() -> None:
     manifest = _build_test_manifest(universe=["AAA"], period_start="2024-01-01", period_end="2024-01-31")
     payload = manifest_to_dict(manifest)

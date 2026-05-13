@@ -210,6 +210,41 @@ def test_small_cap_historical_runner_writes_run_manifest(tmp_path: Path) -> None
     assert payload["config_hash"] in report_text
 
 
+def test_small_cap_historical_runner_writes_trial_accounting_to_run_manifest(tmp_path: Path) -> None:
+    config = SmallCapHistoricalRunConfig(
+        benchmark=SmallCapBenchmarkConfig(holding_period_bars=1),
+        portfolio=SmallCapPortfolioBacktestConfig(holding_period_bars=1),
+    )
+    trial_accounting = {
+        "trial_id": "TRIAL-RANKEX-001",
+        "research_question": "ranking_intra_candidate",
+        "hypothesis_family": "ranking",
+        "decision": "design_only",
+        "notes_on_multiple_testing": "registered before any ranking backtest",
+    }
+
+    result = run_small_cap_historical_report(
+        _candidate_metadata(),
+        _frames(),
+        output_dir=tmp_path,
+        iwm_frame=_iwm(),
+        as_of_dates=["2024-01-02", "2024-01-03"],
+        config=config,
+        run_id="run_trial_accounting_test",
+        created_at="2026-05-13T00:00:00+00:00",
+        git_commit="abc123",
+        host="testhost",
+        trial_accounting=trial_accounting,
+    )
+
+    payload = json.loads((tmp_path / "run_manifest.json").read_text(encoding="utf-8"))
+    assert payload["config_hash"] == compute_config_hash(config)
+    assert payload["trial_accounting"]["trial_id"] == "TRIAL-RANKEX-001"
+    assert payload["trial_accounting"]["research_question"] == "ranking_intra_candidate"
+    assert "trial_accounting" not in payload["config"]
+    assert result["run_manifest"]["trial_accounting"]["decision"] == "design_only"
+
+
 def test_small_cap_historical_runner_manifest_hash_is_deterministic(tmp_path: Path) -> None:
     config = SmallCapHistoricalRunConfig(
         benchmark=SmallCapBenchmarkConfig(holding_period_bars=1),

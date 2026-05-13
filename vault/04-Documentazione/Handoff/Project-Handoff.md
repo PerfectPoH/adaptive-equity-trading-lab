@@ -236,3 +236,6 @@ The current small-cap breakout EMA200 portfolio setup is archived as not promota
 ## Latest update - Ranking/exits track opened
 
 A separate small-cap ranking/exits research track is now open as design-only: [[small-cap-ranking-exits-research-track]]. The archived breakout EMA200 setup remains not promotable. The next step is trial accounting manifest/ledger definition, not a backtest or sweep.
+## Latest update - Trial accounting manifest implemented
+
+The small-cap runner manifest now supports top-level `trial_accounting`, separate from `config_hash`. Tests passed: targeted manifest/runner suite 27 passed and full suite 176 passed. No ranking/exits backtest has been run. Next step: pre-register `TRIAL-RANKEX-001` with windows, baselines and decision rule.

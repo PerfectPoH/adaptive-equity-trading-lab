@@ -196,3 +196,17 @@ PROPOSED / NOT IMPLEMENTED / NOT PROMOTED
 ```
 
 Next allowed step is trial accounting manifest/ledger definition. No ranking backtest, sweep, paper trading or production promotion is authorized yet.
+## Update 2026-05-13 - Trial accounting manifest implemented
+
+`run_manifest.json` now supports top-level `trial_accounting`, passed through `build_run_manifest` and `run_small_cap_historical_report`.
+
+Important invariant: `trial_accounting` is governance metadata and does not enter strategy config or change `config_hash`.
+
+Verification:
+
+```text
+pytest tests/test_run_manifest.py tests/test_small_cap_historical_runner.py -q -> 27 passed
+pytest -q -> 176 passed
+```
+
+Next allowed step remains pre-registration of `TRIAL-RANKEX-001`, not a ranking/exits backtest.
