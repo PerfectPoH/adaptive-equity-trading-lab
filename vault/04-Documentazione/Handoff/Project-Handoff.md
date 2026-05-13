@@ -239,3 +239,6 @@ A separate small-cap ranking/exits research track is now open as design-only: [[
 ## Latest update - Trial accounting manifest implemented
 
 The small-cap runner manifest now supports top-level `trial_accounting`, separate from `config_hash`. Tests passed: targeted manifest/runner suite 27 passed and full suite 176 passed. No ranking/exits backtest has been run. Next step: pre-register `TRIAL-RANKEX-001` with windows, baselines and decision rule.
+## Latest update - TRIAL-RANKEX-001 pre-registered
+
+`TRIAL-RANKEX-001` has been pre-registered before any ranking/exits run. It authorizes only deterministic intra-candidate ranking by existing `small_cap_scanner_score` descending, with tie-breakers `relative_volume_20d`, `open_to_close_return`, and symbol order. No experiment has been run. Next step: TDD implementation of the ranking policy and trial_accounting payload wiring.

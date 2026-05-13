@@ -210,3 +210,16 @@ pytest -q -> 176 passed
 ```
 
 Next allowed step remains pre-registration of `TRIAL-RANKEX-001`, not a ranking/exits backtest.
+## Update 2026-05-13 - TRIAL-RANKEX-001 pre-registered
+
+`TRIAL-RANKEX-001` is now pre-registered in [[Report-Small-Cap-RankEx-Trial-001-Preregistration-2026-05-13]].
+
+Scope: ranking intra-candidate only, using existing `small_cap_scanner_score` descending with pre-registered tie-breakers.
+
+Status:
+
+```text
+PRE-REGISTERED / NOT RUN / NOT PROMOTED
+```
+
+No experiment, sweep or paper-trading step has been run. Next step is TDD implementation of the deterministic ranking policy.

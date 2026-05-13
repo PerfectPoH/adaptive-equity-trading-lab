@@ -77,6 +77,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-13-cascade-small-cap-setup-archive-decision]] - decisione finale: setup breakout EMA200 archiviato, ranking/uscite solo come track separato.
 - [[2026-05-13-cascade-small-cap-ranking-exits-track-opened]] - apertura design-only del track ranking/uscite con trial accounting obbligatorio.
 - [[2026-05-13-cascade-small-cap-trial-accounting-manifest]] - TDD: trial_accounting top-level nel run_manifest, separato dal config_hash.
+- [[2026-05-13-cascade-small-cap-rankex-trial-001-preregistration]] - pre-registrazione TRIAL-RANKEX-001: ranking by scanner score, non run.
 
 ## Convenzione
 
