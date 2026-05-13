@@ -233,3 +233,6 @@ The 2022-2024 EMA200 gate rerun with corrected risk-based sizing reduced the old
 ## Latest update - Final small-cap archive decision
 
 The current small-cap breakout EMA200 portfolio setup is archived as not promotable. The infrastructure and risk-based sizing fix are valid, but the corrected strategy underperforms filtered benchmarks and fails ex-top3 robustness. Do not proceed to paper trading or production ranking. Any ranking/exits work must be a separate research track with explicit trial accounting.
+## Latest update - Ranking/exits track opened
+
+A separate small-cap ranking/exits research track is now open as design-only: [[small-cap-ranking-exits-research-track]]. The archived breakout EMA200 setup remains not promotable. The next step is trial accounting manifest/ledger definition, not a backtest or sweep.

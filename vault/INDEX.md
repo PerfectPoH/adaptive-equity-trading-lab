@@ -27,6 +27,7 @@ tags: [vault, index, obsidian, trading-lab]
 - [[backlog]] - bug, rischi aperti e tech debt.
 - [[Report-Milestone1-2026-05-08]] - primo report operativo.
 - [[Report-Small-Cap-Research-Status-2026-05-12]] - stato aggiornato track small-cap.
+- [[small-cap-ranking-exits-research-track]] - track separato ranking/uscite design-only con trial accounting obbligatorio.
 - [[Project-Handoff]] - handoff completo per altre chat o agenti.
 - [[Devlog-Index]] - cronologia ordinata delle sessioni.
 - [[Documentazione-Index]] - report e handoff ordinati.
@@ -158,6 +159,7 @@ Milestone 1 e' stata scaffoldata e la pipeline gira end-to-end:
 - Risk-based sizing fix: OOS 2025 migliora a +0.92% senza cash starvation, ma ex-top3 resta negativo; validazione strategia ancora fallita.
 - Multi-year risk-sizing rerun: EMA200 2022-2024 passa da +169.21% old sizing a +3.60% risk sizing; sotto benchmark e con sign flip ex-top3, quindi vecchio edge declassato a leverage/path artifact.
 - Decisione finale: setup `breakout_continuation + open_to_close_return>=0.10 + IWM>EMA200` archiviato come portfolio strategy non promuovibile; ranking/uscite solo in eventuale track separato con trial accounting.
+- Track ranking/uscite aperto: stato `PROPOSED / NOT IMPLEMENTED / NOT PROMOTED`; prossimo passo e' trial accounting manifest/ledger, non backtest.
 
 Conclusione: il progetto ha una base tecnica valida, ma la specifica strategia small-cap breakout EMA200 e' archiviata come non promuovibile per capitale reale.
 

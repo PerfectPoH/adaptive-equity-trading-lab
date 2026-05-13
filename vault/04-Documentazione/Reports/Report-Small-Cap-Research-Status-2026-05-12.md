@@ -183,3 +183,16 @@ No nuovi filtri in-sample
 ```
 
 Un eventuale lavoro su ranking/uscite deve essere un nuovo track separato, con trial accounting esplicito e senza riusare il vecchio +169% come prova di edge.
+## Update 2026-05-13 - Ranking/exits track opened
+
+A new separate research track has been opened: [[small-cap-ranking-exits-research-track]].
+
+Scope: ranking intra-candidate, exit management and portfolio construction only as a design-governed research track.
+
+Status:
+
+```text
+PROPOSED / NOT IMPLEMENTED / NOT PROMOTED
+```
+
+Next allowed step is trial accounting manifest/ledger definition. No ranking backtest, sweep, paper trading or production promotion is authorized yet.

@@ -351,3 +351,6 @@ Non aggiungere nuovi filtri, ranking o paper trading su questa track archiviata.
 Se un setup non supera costi conservativi, random baseline, benchmark small-cap coerente, outlier concentration gate e score monotonicity gate, non va ottimizzato ulteriormente.
 
 Vedi [[Roadmap-Master]], [[Report-Small-Cap-Research-Status-2026-05-12]], [[2026-05-12-cascade-small-cap-risk-based-sizing-fix]], [[2026-05-12-cascade-small-cap-portfolio-mechanics-audit]].
+## Track derivato ranking/uscite
+
+Il setup breakout EMA200 resta archiviato. L'unico lavoro futuro consentito su ranking, exits o portfolio construction vive nel track separato [[small-cap-ranking-exits-research-track]], con trial accounting esplicito e senza paper trading.
