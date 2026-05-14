@@ -282,7 +282,7 @@ Provider da valutare in futuro:
 - Nasdaq Data Link;
 - Databento per intraday piu' serio.
 
-Step intermedio consigliato: valutare Tiingo prima di passare a provider piu' costosi, per migliorare affidabilita' small-cap rispetto a `yfinance`.
+Step intermedio obbligatorio prima di nuovi trial small-cap: audit empirico minimale di `yfinance` su 5-10 ticker/eventi noti, includendo delisting, reverse split, halt e corporate action. Valutare Tiingo prima di passare a provider piu' costosi, per migliorare affidabilita' small-cap rispetto a `yfinance`.
 
 ## Risorse research
 

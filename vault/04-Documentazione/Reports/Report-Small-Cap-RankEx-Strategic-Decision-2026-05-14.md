@@ -116,7 +116,7 @@ Un eventuale nuovo trial deve:
 ```text
 TRIAL-RANKEX-001: CLOSED / FAILED VALIDATION / NOT PROMOTED
 SIMPLE SCANNER-SCORE RANKING: CLOSED
-NEXT ALLOWED WORK: draft a preregistered Cross-Sectional Momentum research spec, no run
+NEXT ALLOWED WORK: draft Data Quality + Methodology gate, no run
 ```
 
-Vedi [[Report-Small-Cap-RankEx-Trial-001-Validation-2026-05-14]], [[small-cap-ranking-exits-research-track]], [[Roadmap-Master]], [[backlog]], [[Project-Handoff]].
+Vedi [[Report-Small-Cap-RankEx-Trial-001-Validation-2026-05-14]], [[Report-Small-Cap-Data-Quality-Gate-Decision-2026-05-14]], [[small-cap-ranking-exits-research-track]], [[Roadmap-Master]], [[backlog]], [[Project-Handoff]].

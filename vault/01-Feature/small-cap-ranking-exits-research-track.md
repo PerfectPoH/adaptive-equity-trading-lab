@@ -164,7 +164,7 @@ Prima di qualunque backtest o sweep:
 non eseguire OOS 2025 per `TRIAL-RANKEX-001`; eventuali nuove ipotesi richiedono nuovo trial ID e nuova pre-registrazione
 ```
 
-La validation di `TRIAL-RANKEX-001` e' fallita sul gate ex-top3; il ranking semplice e' chiuso. Non eseguire OOS, paper trading o sweep discrezionali su questo trial. La prossima direzione ammessa e' solo una nuova specifica pre-registrata, preferibilmente cross-sectional momentum vs IWM.
+La validation di `TRIAL-RANKEX-001` e' fallita sul gate ex-top3; il ranking semplice e' chiuso. Non eseguire OOS, paper trading o sweep discrezionali su questo trial. La direzione preferita resta cross-sectional momentum vs IWM, ma prima serve un gate documentale data-quality/methodology: yfinance audit, universe as-of, random bootstrap, multiple-testing ledger e backtester audit.
 
 ## Stato operativo
 
@@ -172,7 +172,7 @@ La validation di `TRIAL-RANKEX-001` e' fallita sul gate ex-top3; il ranking semp
 Sotto-track ranking semplice chiuso.
 TRIAL-RANKEX-001 fallito in validation.
 Nessuna strategia promossa.
-Prossimo lavoro ammesso: specifica documentale cross-sectional momentum, senza run.
+Prossimo lavoro ammesso: specifica gate Data Quality + Methodology, senza run.
 ```
 
 Vedi [[2026-05-13-cascade-small-cap-setup-archive-decision]], [[small-cap-swing-research-spec]], [[Roadmap-Master]], [[backlog]].

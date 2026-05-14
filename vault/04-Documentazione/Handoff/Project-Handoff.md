@@ -256,4 +256,7 @@ The deterministic ranking policy for `TRIAL-RANKEX-001` is implemented with TDD:
 `TRIAL-RANKEX-001` validation was executed once using the preconfigured command. Result: portfolio +5.62% vs ticker_holding_window +2.54% and random +1.94%, but ex-top3 robustness failed (`pnl_excluding_top_3=-6282.54`, sign flip true). Status: `VALIDATION FAILED / STOP / NOT PROMOTED`. Do not run OOS 2025, paper trading or discretionary sweeps for this trial.
 ## Latest update - RankEx strategic decision
 
-After reviewing the `TRIAL-RANKEX-001` validation failure, the simple scanner-score ranking track is closed as not promotable. Do not reuse `TRIAL-RANKEX-001`, do not open `TRIAL-RANKEX-002` as an immediate salvage attempt, and do not run OOS/paper trading/sweeps. Next allowed work: draft a new pre-registered cross-sectional momentum vs IWM specification only.
+After reviewing the `TRIAL-RANKEX-001` validation failure, the simple scanner-score ranking track is closed as not promotable. Do not reuse `TRIAL-RANKEX-001`, do not open `TRIAL-RANKEX-002` as an immediate salvage attempt, and do not run OOS/paper trading/sweeps. This was later tightened by the data-quality gate decision below.
+## Latest update - Small-cap data quality gate decision
+
+Before any new small-cap trial, including cross-sectional momentum vs IWM, the project must define a Data Quality + Methodology gate. Required scope: yfinance audit on known small-cap events, universe as-of/survivorship review, random baseline bootstrap, multiple-testing ledger, and `SmallCapPortfolioBacktester` audit. Do not preregister `TRIAL-XMOM-001`, run backtests, or perform sweeps before this gate is documented.

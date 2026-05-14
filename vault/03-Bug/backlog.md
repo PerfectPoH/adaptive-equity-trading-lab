@@ -163,7 +163,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: yfinance tende a mostrare sopravvissuti; delisting, fallimenti e reverse split sono frequenti nelle small-cap.
 - Impatto: panic reversal su aziende destinate a fallire possono apparire come opportunita' nel backtest.
 - Azione: data-quality report deve flaggare delisting risk, reverse split, storico incompleto e limiti del provider.
-- Stato: aperto.
+- Stato: aperto; elevato a gate prerequisito prima di qualunque nuovo trial small-cap dopo RankEx.
 
 ### RISK-020 - Float e short-interest non affidabili o ritardati
 
@@ -307,7 +307,39 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Priorita: P2.
 - Sintomo: il segnale filtrato contiene valore lordo in alcuni subset, ma il portfolio corretto non batte benchmark e fallisce ex-top3.
 - Vincolo: non e' continuazione/promozione del setup archiviato; deve avere trial accounting nuovo, benchmark ticker/random/equal-weight, ex-topN, OOS/universe robustness e nessun paper trading fino a nuova validazione.
-- Stato: chiuso/non promosso. `TRIAL-RANKEX-001` batte ticker/random nominalmente ma fallisce ex-top3 (`pnl_excluding_top_3=-6282.54`, sign flip true); decisione strategica: chiudere il ranking semplice, non aprire `TRIAL-RANKEX-002` ora, prossima ipotesi preferita cross-sectional momentum solo come nuova pre-registrazione.
+- Stato: chiuso/non promosso. `TRIAL-RANKEX-001` batte ticker/random nominalmente ma fallisce ex-top3 (`pnl_excluding_top_3=-6282.54`, sign flip true); decisione strategica: chiudere il ranking semplice. Cross-sectional momentum resta direzione preferita, ma e' bloccata finche' non viene redatto un gate data-quality/methodology.
+
+### RISK-041 - Random baseline trattata come punto singolo
+
+- Priorita: P1.
+- Sintomo: `random_entry_baseline` viene confrontato come singolo numero seedato.
+- Impatto: una strategia puo' sembrare superiore al random pur essendo dentro la distribuzione attesa di baseline casuali.
+- Azione: introdurre bootstrap random baseline con N run, percentili e confronto contro distribuzione.
+- Stato: gate prerequisito prima del prossimo trial small-cap.
+
+### RISK-042 - Multiple testing ledger insufficiente
+
+- Priorita: P1.
+- Sintomo: sweep, ablation e trial small-cap consumano gradi di liberta' anche se documentati.
+- Impatto: un futuro gate superato puo' riflettere accumulo di tentativi, non edge reale.
+- Azione: creare ledger per famiglia ipotesi con trial/ablation count e soglia corretta almeno in modo ingenuo.
+- Stato: gate prerequisito prima del prossimo trial small-cap.
+
+### RISK-043 - Audit backtester incompleto dopo bug sizing
+
+- Priorita: P1.
+- Sintomo: BUG-037 ha mostrato che una singola assunzione del planner cambiava radicalmente i risultati.
+- Impatto: cash release timing, slippage, costi, chiusura trade a fine periodo o calendario possono introdurre bias residui.
+- Azione: mini-audit documentale/TDD di `SmallCapPortfolioBacktester` prima di nuove interpretazioni strategiche.
+- Stato: gate prerequisito prima del prossimo trial small-cap.
+
+### RISK-044 - Universo retro-ricostruito non as-of
+
+- Priorita: P1.
+- Sintomo: file universe creati oggi possono essere applicati retroattivamente a date storiche.
+- Impatto: survivorship e look-ahead bias, soprattutto su cross-sectional momentum.
+- Azione: dichiarare e testare universe construction as-of prima di pre-registrare momentum small-cap.
+- Stato: gate prerequisito prima del prossimo trial small-cap.
 
 ## Tech debt
 
