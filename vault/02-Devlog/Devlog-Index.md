@@ -80,6 +80,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-13-cascade-small-cap-rankex-trial-001-preregistration]] - pre-registrazione TRIAL-RANKEX-001: ranking by scanner score, non run.
 - [[2026-05-14-cascade-small-cap-rankex-trial-001-ranking-policy]] - TDD ranking policy TRIAL-RANKEX-001: tie-breaker deterministici, non run.
 - [[2026-05-14-cascade-small-cap-rankex-trial-001-accounting-wiring]] - TDD payload trial_accounting canonico TRIAL-RANKEX-001 e forwarding, non run.
+- [[2026-05-14-cascade-small-cap-rankex-trial-001-validation-command]] - comando validation preconfigurato TRIAL-RANKEX-001, non run.
 
 ## Convenzione
 

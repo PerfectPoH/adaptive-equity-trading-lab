@@ -248,3 +248,6 @@ The deterministic ranking policy for `TRIAL-RANKEX-001` is implemented with TDD:
 ## Latest update - TRIAL-RANKEX-001 accounting wiring ready
 
 `TRIAL-RANKEX-001` now has canonical `trial_accounting` payload wiring via `build_rankex_trial_001_accounting()`, and experiment functions forward that payload to the runner manifest. Verification passed: targeted payload/forwarding/CLI tests 3 passed, related suite 36 passed, full suite 180 passed. No historical experiment, sweep, OOS evaluation or paper-trading step has been run. Next allowed step: prepare a validation run script/config or report template, without discretionary sweep.
+## Latest update - TRIAL-RANKEX-001 validation command prepared
+
+`TRIAL-RANKEX-001` now has a non-executing validation command builder in `src/experiments/small_cap_rankex_trial_001.py`. It prepares the pre-registered validation window only, `2024-01-02..2024-12-31`, with `--trial-id TRIAL-RANKEX-001`. Verification passed: rankex command tests 3 passed, related suite 39 passed, full suite 183 passed. No historical experiment, sweep, OOS evaluation or paper-trading step has been run. Next allowed step only if explicitly authorized: execute validation and evaluate the pre-registered gates.

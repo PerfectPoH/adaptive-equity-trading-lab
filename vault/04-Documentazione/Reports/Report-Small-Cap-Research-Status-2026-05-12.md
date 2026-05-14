@@ -261,3 +261,22 @@ WIRING READY / NOT RUN / NOT PROMOTED
 ```
 
 No historical experiment, sweep, OOS evaluation or paper-trading step has been run.
+## Update 2026-05-14 - TRIAL-RANKEX-001 validation command prepared
+
+`TRIAL-RANKEX-001` now has a non-executing validation command builder in `src/experiments/small_cap_rankex_trial_001.py`. It prepares the pre-registered validation window only: `2024-01-02..2024-12-31`, with `--trial-id TRIAL-RANKEX-001`.
+
+Verification:
+
+```text
+pytest tests/test_small_cap_rankex_trial_001.py -q -> 3 passed
+pytest tests/test_small_cap_rankex_trial_001.py tests/test_small_cap_experiment_cli.py tests/test_small_cap_historical_runner.py tests/test_run_manifest.py -q -> 39 passed
+pytest -q -> 183 passed
+```
+
+Status remains:
+
+```text
+VALIDATION COMMAND PREPARED / NOT RUN / NOT PROMOTED
+```
+
+No historical experiment, sweep, OOS evaluation or paper-trading step has been run.

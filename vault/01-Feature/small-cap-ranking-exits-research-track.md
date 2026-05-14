@@ -127,7 +127,7 @@ Ogni esperimento deve registrare almeno:
 |---|---|---|---|
 | TRIAL-INFRA-001 | risk-based sizing fix | chiuso/promosso | trial infrastrutturale, non edge trial |
 | TRIAL-ARCHIVE-001 | breakout/open_to_close/EMA200 corrected validation | chiuso/non promosso | setup archiviato |
-| TRIAL-RANKEX-001 | ranking intra-candidate by existing scanner score | wiring-ready/not run | payload in `build_rankex_trial_001_accounting()`; no experiment run |
+| TRIAL-RANKEX-001 | ranking intra-candidate by existing scanner score | validation-command-ready/not run | command builder in `small_cap_rankex_trial_001.py`; no experiment run |
 
 ## Baseline obbligatorie
 
@@ -161,10 +161,10 @@ Una variante puo' avanzare solo se supera tutti questi gate:
 Prima di qualunque backtest o sweep:
 
 ```text
-preparare script/config di validation run autorizzata oppure report template per `TRIAL-RANKEX-001`
+eseguire la validation run preconfigurata di `TRIAL-RANKEX-001` solo se autorizzata esplicitamente
 ```
 
-La pre-registrazione, la ranking policy TDD e il wiring del payload sono completati; non eseguire sweep o backtest discrezionali fuori dalla policy registrata.
+La pre-registrazione, la ranking policy TDD, il wiring del payload e il comando validation sono completati; non eseguire sweep o backtest discrezionali fuori dalla policy registrata.
 
 ## Stato operativo
 

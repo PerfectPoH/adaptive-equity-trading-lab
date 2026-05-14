@@ -307,7 +307,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Priorita: P2.
 - Sintomo: il segnale filtrato contiene valore lordo in alcuni subset, ma il portfolio corretto non batte benchmark e fallisce ex-top3.
 - Vincolo: non e' continuazione/promozione del setup archiviato; deve avere trial accounting nuovo, benchmark ticker/random/equal-weight, ex-topN, OOS/universe robustness e nessun paper trading fino a nuova validazione.
-- Stato: wiring pronto. `TRIAL-RANKEX-001` ha payload canonico `build_rankex_trial_001_accounting()` e forwarding al manifest; prossimo passo: script/config validation run autorizzata o report template, non sweep discrezionale.
+- Stato: comando validation pronto/non eseguito. `TRIAL-RANKEX-001` ha builder `build_rankex_trial_001_validation_powershell_command()`; prossimo passo solo se autorizzato: eseguire validation e valutare gate, non sweep discrezionale.
 
 ## Tech debt
 

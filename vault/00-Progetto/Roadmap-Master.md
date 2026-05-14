@@ -135,7 +135,8 @@ Vedi [[news-risk-engine]].
 - [x] Pre-registrare `TRIAL-RANKEX-001` con finestre, baseline e decision rule; stato PRE-REGISTERED / NOT RUN.
 - [x] TDD ranking policy deterministica per `TRIAL-RANKEX-001` senza eseguire sweep o backtest discrezionali; test suite 177 passed.
 - [x] Wiring esplicito payload `trial_accounting` per futura run autorizzata `TRIAL-RANKEX-001`, senza esecuzione sweep; test suite 179 passed.
-- [ ] Preparare script/config di validation run autorizzata oppure report template, senza sweep discrezionali.
+- [x] Preparare script/config di validation run autorizzata oppure report template, senza sweep discrezionali; comando validation pronto ma non eseguito, test suite 183 passed.
+- [ ] Solo se autorizzato: eseguire validation run `TRIAL-RANKEX-001` e valutare gate pre-registrati.
 
 Gate metodologico corrente: run manifest, stress test ex-outlier, smoke ampia, cash starvation diagnostics, setup disentangler passivo, feature diagnostics per setup, breakout-only ablation, feature filter ablation e open-to-close sensitivity e temporal split validation e multi-year validation e passive regime diagnostics sono implementati; non aggiungere sector cap, random delay, survivorship sensitivity o opening regime check prima di ripensare scanner/ranking/triage. La smoke ampia ha prodotto `portfolio_return=-22.16%`, score profile non monotono e missed opportunities mediane negative.
 
