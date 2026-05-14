@@ -245,3 +245,6 @@ The small-cap runner manifest now supports top-level `trial_accounting`, separat
 ## Latest update - TRIAL-RANKEX-001 ranking policy implemented
 
 The deterministic ranking policy for `TRIAL-RANKEX-001` is implemented with TDD: `small_cap_scanner_score` desc, `relative_volume_20d` desc, `open_to_close_return` desc, `symbol` asc. Verification passed: targeted test 1 passed, portfolio backtester suite 15 passed, full suite 177 passed. No historical experiment, sweep, OOS evaluation or paper-trading step has been run. Next allowed step: explicit `trial_accounting` payload wiring for a future authorized run.
+## Latest update - TRIAL-RANKEX-001 accounting wiring ready
+
+`TRIAL-RANKEX-001` now has canonical `trial_accounting` payload wiring via `build_rankex_trial_001_accounting()`, and experiment functions forward that payload to the runner manifest. Verification passed: targeted payload/forwarding/CLI tests 3 passed, related suite 36 passed, full suite 180 passed. No historical experiment, sweep, OOS evaluation or paper-trading step has been run. Next allowed step: prepare a validation run script/config or report template, without discretionary sweep.

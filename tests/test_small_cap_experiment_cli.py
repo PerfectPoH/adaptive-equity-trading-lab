@@ -5,6 +5,7 @@ from pathlib import Path
 import pandas as pd
 
 from src.experiments import small_cap_experiment_cli
+from src.experiments.small_cap_trial_accounting import build_rankex_trial_001_accounting
 from src.experiments.small_cap_experiment_cli import main, run_small_cap_historical_experiment, run_small_cap_watchlist_experiment
 
 
@@ -60,6 +61,48 @@ def test_run_small_cap_historical_experiment_downloads_prepares_and_writes_repor
     assert result["run_result"]["paths"]["candidate_export"].exists()
     assert result["run_result"]["paths"]["benchmark_report"].exists()
     assert result["run_result"]["paths"]["backtest_report"].exists()
+
+
+def test_build_rankex_trial_001_accounting_payload_matches_preregistration() -> None:
+    payload = build_rankex_trial_001_accounting()
+
+    assert payload["trial_id"] == "TRIAL-RANKEX-001"
+    assert payload["research_question"] == "ranking_intra_candidate"
+    assert payload["hypothesis_family"] == "ranking"
+    assert payload["status"] == "implementation_ready_not_run"
+    assert payload["train_or_design_window"] == "2022-01-03..2023-12-29"
+    assert payload["validation_window"] == "2024-01-02..2024-12-31"
+    assert payload["oos_window"] == "2025-01-02..2025-12-29"
+    assert payload["candidate_run_id"] is None
+    assert payload["ranking_policy"] == {
+        "rank_column": "small_cap_scanner_score",
+        "ascending": False,
+        "tie_breakers": [
+            {"column": "relative_volume_20d", "ascending": False},
+            {"column": "open_to_close_return", "ascending": False},
+            {"column": "symbol", "ascending": True},
+        ],
+    }
+
+
+def test_run_small_cap_historical_experiment_forwards_trial_accounting(tmp_path: Path) -> None:
+    def fake_downloader(symbol: str, start: str, end: str | None = None) -> pd.DataFrame:
+        return _ohlcv(200.0 if symbol == "IWM" else 10.0)
+
+    trial_accounting = build_rankex_trial_001_accounting()
+
+    result = run_small_cap_historical_experiment(
+        metadata_path=_metadata_path(tmp_path),
+        output_dir=tmp_path / "run",
+        start="2024-01-01",
+        end="2024-02-15",
+        vix_symbol=None,
+        downloader=fake_downloader,
+        trial_accounting=trial_accounting,
+    )
+
+    assert result["run_result"]["run_manifest"]["trial_accounting"]["trial_id"] == "TRIAL-RANKEX-001"
+    assert result["run_result"]["run_manifest"]["trial_accounting"]["candidate_run_id"] is None
 
 
 def test_run_small_cap_historical_experiment_allows_symbol_subset(tmp_path: Path) -> None:
@@ -186,3 +229,30 @@ def test_small_cap_experiment_cli_main_supports_one_shot_symbols(tmp_path: Path,
     assert exit_code == 0
     assert calls["symbols"] == ["AAA", "BBB"]
     assert calls["metadata_output_path"] == str(tmp_path / "metadata.csv")
+
+
+def test_small_cap_experiment_cli_main_passes_rankex_trial_accounting(tmp_path: Path, monkeypatch) -> None:
+    calls: dict[str, object] = {}
+
+    def fake_run(**kwargs):
+        calls.update(kwargs)
+        return {}
+
+    monkeypatch.setattr(small_cap_experiment_cli, "run_small_cap_historical_experiment", fake_run)
+
+    exit_code = main(
+        [
+            "--metadata-path",
+            str(tmp_path / "metadata.csv"),
+            "--output-dir",
+            str(tmp_path / "run"),
+            "--start",
+            "2024-01-01",
+            "--trial-id",
+            "TRIAL-RANKEX-001",
+        ]
+    )
+
+    assert exit_code == 0
+    assert calls["trial_accounting"]["trial_id"] == "TRIAL-RANKEX-001"
+    assert calls["trial_accounting"]["candidate_run_id"] is None

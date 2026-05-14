@@ -242,3 +242,22 @@ IMPLEMENTATION READY / NOT RUN / NOT PROMOTED
 ```
 
 No historical experiment, sweep, OOS evaluation or paper-trading step has been run.
+## Update 2026-05-14 - TRIAL-RANKEX-001 accounting wiring ready
+
+`TRIAL-RANKEX-001` now has a canonical `trial_accounting` payload via `build_rankex_trial_001_accounting()` and experiment-level forwarding into the runner manifest.
+
+Verification:
+
+```text
+pytest tests/test_small_cap_experiment_cli.py::test_small_cap_experiment_cli_main_passes_rankex_trial_accounting tests/test_small_cap_experiment_cli.py::test_build_rankex_trial_001_accounting_payload_matches_preregistration tests/test_small_cap_experiment_cli.py::test_run_small_cap_historical_experiment_forwards_trial_accounting -q -> 3 passed
+pytest tests/test_small_cap_experiment_cli.py tests/test_small_cap_historical_runner.py tests/test_run_manifest.py -q -> 36 passed
+pytest -q -> 180 passed
+```
+
+Status remains:
+
+```text
+WIRING READY / NOT RUN / NOT PROMOTED
+```
+
+No historical experiment, sweep, OOS evaluation or paper-trading step has been run.

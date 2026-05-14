@@ -251,3 +251,8 @@ symbol asc
 ```
 
 Status remains `IMPLEMENTATION READY / NOT RUN / NOT PROMOTED`. No experiment, sweep, OOS evaluation or paper-trading step has been run.
+## Accounting wiring update 2026-05-14
+
+The canonical `trial_accounting` payload for `TRIAL-RANKEX-001` is implemented in `src/experiments/small_cap_trial_accounting.py` as `build_rankex_trial_001_accounting()`. `run_small_cap_historical_experiment` and `run_small_cap_watchlist_experiment` now accept `trial_accounting` and forward it to the runner manifest.
+
+Status remains `WIRING READY / NOT RUN / NOT PROMOTED`. No experiment, sweep, OOS evaluation or paper-trading step has been run.

@@ -11,6 +11,7 @@ from src.data.downloader import download_ticker
 from src.data.small_cap_data_preparer import SmallCapPreparedData, prepare_small_cap_historical_data
 from src.data.small_cap_metadata_builder import MetadataProvider, write_small_cap_metadata_csv, yfinance_metadata_provider
 from src.experiments.small_cap_historical_runner import SmallCapHistoricalRunConfig, run_small_cap_historical_report
+from src.experiments.small_cap_trial_accounting import build_rankex_trial_001_accounting
 
 Downloader = Callable[[str, str, str | None], pd.DataFrame]
 
@@ -26,6 +27,7 @@ def run_small_cap_historical_experiment(
     downloader: Downloader = download_ticker,
     metadata_diagnostics: pd.DataFrame | None = None,
     run_config: SmallCapHistoricalRunConfig = SmallCapHistoricalRunConfig(),
+    trial_accounting: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     static_metadata = _load_metadata(metadata_path)
     selected_metadata = _select_metadata(static_metadata, symbols)
@@ -49,6 +51,7 @@ def run_small_cap_historical_experiment(
         end=run_config.end or end,
         metadata_diagnostics=metadata_diagnostics,
         config=run_config,
+        trial_accounting=trial_accounting,
     )
     return {"prepared_data": prepared_data, "run_result": run_result}
 
@@ -65,6 +68,7 @@ def run_small_cap_watchlist_experiment(
     metadata_provider: MetadataProvider = yfinance_metadata_provider,
     downloader: Downloader = download_ticker,
     run_config: SmallCapHistoricalRunConfig = SmallCapHistoricalRunConfig(),
+    trial_accounting: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     metadata_result = write_small_cap_metadata_csv(
         symbols,
@@ -82,6 +86,7 @@ def run_small_cap_watchlist_experiment(
         downloader=downloader,
         metadata_diagnostics=pd.DataFrame(metadata_result.diagnostics),
         run_config=run_config,
+        trial_accounting=trial_accounting,
     )
     return {"metadata_result": metadata_result, "experiment_result": experiment_result}
 
@@ -89,6 +94,7 @@ def run_small_cap_watchlist_experiment(
 def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     symbols = _parse_symbols(args.symbols)
+    trial_accounting = _resolve_trial_accounting(args.trial_id)
     if args.metadata_path:
         run_small_cap_historical_experiment(
             metadata_path=args.metadata_path,
@@ -98,6 +104,7 @@ def main(argv: list[str] | None = None) -> int:
             symbols=symbols,
             iwm_symbol=args.iwm_symbol,
             vix_symbol=args.vix_symbol,
+            trial_accounting=trial_accounting,
         )
     else:
         if not symbols:
@@ -113,6 +120,7 @@ def main(argv: list[str] | None = None) -> int:
             end=args.end,
             iwm_symbol=args.iwm_symbol,
             vix_symbol=args.vix_symbol,
+            trial_accounting=trial_accounting,
         )
     return 0
 
@@ -128,6 +136,7 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--symbols", default=None, help="Optional comma-separated symbol subset.")
     parser.add_argument("--iwm-symbol", default="IWM", help="IWM/Russell 2000 proxy ticker.")
     parser.add_argument("--vix-symbol", default="^VIX", help="VIX ticker. Use an empty string to disable.")
+    parser.add_argument("--trial-id", default=None, help="Optional pre-registered trial ID to write into run_manifest.json.")
     return parser
 
 
@@ -165,6 +174,14 @@ def _parse_symbols(raw: str | None) -> list[str] | None:
         return None
     symbols = [symbol.strip() for symbol in raw.split(",") if symbol.strip()]
     return symbols or None
+
+
+def _resolve_trial_accounting(trial_id: str | None) -> dict[str, Any] | None:
+    if trial_id is None:
+        return None
+    if trial_id == "TRIAL-RANKEX-001":
+        return build_rankex_trial_001_accounting()
+    raise ValueError(f"unsupported trial_id: {trial_id}")
 
 
 if __name__ == "__main__":
