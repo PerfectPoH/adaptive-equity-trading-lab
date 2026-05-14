@@ -1,6 +1,6 @@
 ---
 tipo: feature-spec
-stato: proposed-research-track
+stato: closed-simple-ranking-not-promoted
 progetto: adaptive-equity-trading-lab
 data: 2026-05-13
 tags: [feature, research-track, small-cap, ranking, exits, trial-accounting]
@@ -11,10 +11,10 @@ tags: [feature, research-track, small-cap, ranking, exits, trial-accounting]
 ## Stato
 
 ```text
-PROPOSED / NOT IMPLEMENTED / NOT PROMOTED
+SIMPLE RANKING CLOSED / NOT PROMOTED
 ```
 
-Questo documento apre un track separato di ricerca su ranking intra-candidate, gestione uscite e portfolio construction per small-cap long-only.
+Questo documento registra il track separato di ricerca su ranking intra-candidate, gestione uscite e portfolio construction per small-cap long-only. Dopo `TRIAL-RANKEX-001`, il sotto-track ranking semplice basato su `small_cap_scanner_score` e' chiuso come non promuovibile.
 
 Non e' una continuazione promozionale del setup archiviato:
 
@@ -127,7 +127,7 @@ Ogni esperimento deve registrare almeno:
 |---|---|---|---|
 | TRIAL-INFRA-001 | risk-based sizing fix | chiuso/promosso | trial infrastrutturale, non edge trial |
 | TRIAL-ARCHIVE-001 | breakout/open_to_close/EMA200 corrected validation | chiuso/non promosso | setup archiviato |
-| TRIAL-RANKEX-001 | ranking intra-candidate by existing scanner score | validation-failed/stop | vedi [[Report-Small-Cap-RankEx-Trial-001-Validation-2026-05-14]]; no OOS/no promotion |
+| TRIAL-RANKEX-001 | ranking intra-candidate by existing scanner score | closed/failed validation/not promoted | vedi [[Report-Small-Cap-RankEx-Trial-001-Validation-2026-05-14]] e [[Report-Small-Cap-RankEx-Strategic-Decision-2026-05-14]]; no OOS/no promotion |
 
 ## Baseline obbligatorie
 
@@ -164,14 +164,15 @@ Prima di qualunque backtest o sweep:
 non eseguire OOS 2025 per `TRIAL-RANKEX-001`; eventuali nuove ipotesi richiedono nuovo trial ID e nuova pre-registrazione
 ```
 
-La validation di `TRIAL-RANKEX-001` e' fallita sul gate ex-top3; non eseguire OOS, paper trading o sweep discrezionali su questo trial.
+La validation di `TRIAL-RANKEX-001` e' fallita sul gate ex-top3; il ranking semplice e' chiuso. Non eseguire OOS, paper trading o sweep discrezionali su questo trial. La prossima direzione ammessa e' solo una nuova specifica pre-registrata, preferibilmente cross-sectional momentum vs IWM.
 
 ## Stato operativo
 
 ```text
-Track aperto come proposta di ricerca.
-Nessun esperimento eseguito.
+Sotto-track ranking semplice chiuso.
+TRIAL-RANKEX-001 fallito in validation.
 Nessuna strategia promossa.
+Prossimo lavoro ammesso: specifica documentale cross-sectional momentum, senza run.
 ```
 
 Vedi [[2026-05-13-cascade-small-cap-setup-archive-decision]], [[small-cap-swing-research-spec]], [[Roadmap-Master]], [[backlog]].

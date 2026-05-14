@@ -307,7 +307,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Priorita: P2.
 - Sintomo: il segnale filtrato contiene valore lordo in alcuni subset, ma il portfolio corretto non batte benchmark e fallisce ex-top3.
 - Vincolo: non e' continuazione/promozione del setup archiviato; deve avere trial accounting nuovo, benchmark ticker/random/equal-weight, ex-topN, OOS/universe robustness e nessun paper trading fino a nuova validazione.
-- Stato: validation fallita/stop. `TRIAL-RANKEX-001` batte ticker/random nominalmente ma fallisce ex-top3 (`pnl_excluding_top_3=-6282.54`, sign flip true); no OOS, no paper trading, no promotion.
+- Stato: chiuso/non promosso. `TRIAL-RANKEX-001` batte ticker/random nominalmente ma fallisce ex-top3 (`pnl_excluding_top_3=-6282.54`, sign flip true); decisione strategica: chiudere il ranking semplice, non aprire `TRIAL-RANKEX-002` ora, prossima ipotesi preferita cross-sectional momentum solo come nuova pre-registrazione.
 
 ## Tech debt
 

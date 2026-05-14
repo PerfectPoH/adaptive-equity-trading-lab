@@ -137,7 +137,8 @@ Vedi [[news-risk-engine]].
 - [x] Wiring esplicito payload `trial_accounting` per futura run autorizzata `TRIAL-RANKEX-001`, senza esecuzione sweep; test suite 179 passed.
 - [x] Preparare script/config di validation run autorizzata oppure report template, senza sweep discrezionali; comando validation pronto ma non eseguito, test suite 183 passed.
 - [x] Eseguire validation run `TRIAL-RANKEX-001` autorizzata e valutare gate pre-registrati: fallita ex-top3, stop/no OOS/no promotion.
-- [ ] Decidere se chiudere il track ranking semplice o pre-registrare un trial separato per ipotesi diversa, senza sweep discrezionale.
+- [x] Decidere se chiudere il track ranking semplice o pre-registrare un trial separato: ranking semplice chiuso; non aprire `TRIAL-RANKEX-002` ora.
+- [ ] Redigere nuova specifica pre-registrata per cross-sectional momentum vs IWM, senza run e senza riuso di `TRIAL-RANKEX-001`.
 
 Gate metodologico corrente: run manifest, stress test ex-outlier, smoke ampia, cash starvation diagnostics, setup disentangler passivo, feature diagnostics per setup, breakout-only ablation, feature filter ablation e open-to-close sensitivity e temporal split validation e multi-year validation e passive regime diagnostics sono implementati; non aggiungere sector cap, random delay, survivorship sensitivity o opening regime check prima di ripensare scanner/ranking/triage. La smoke ampia ha prodotto `portfolio_return=-22.16%`, score profile non monotono e missed opportunities mediane negative.
 

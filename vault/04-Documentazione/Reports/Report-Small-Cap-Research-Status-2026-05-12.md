@@ -306,3 +306,6 @@ NO DISCRETIONARY SWEEP
 ```
 
 See [[Report-Small-Cap-RankEx-Trial-001-Validation-2026-05-14]].
+## Update 2026-05-14 - RankEx strategic decision
+
+Post-validation decision: close the simple `small_cap_scanner_score` ranking track. `TRIAL-RANKEX-001` remains failed/closed and must not be reused. Do not open `TRIAL-RANKEX-002` as a salvage attempt. Preferred next research direction is a separate, pre-registered cross-sectional momentum vs IWM specification, with no run before preregistration. See [[Report-Small-Cap-RankEx-Strategic-Decision-2026-05-14]].
