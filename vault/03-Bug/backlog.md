@@ -307,7 +307,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Priorita: P2.
 - Sintomo: il segnale filtrato contiene valore lordo in alcuni subset, ma il portfolio corretto non batte benchmark e fallisce ex-top3.
 - Vincolo: non e' continuazione/promozione del setup archiviato; deve avere trial accounting nuovo, benchmark ticker/random/equal-weight, ex-topN, OOS/universe robustness e nessun paper trading fino a nuova validazione.
-- Stato: pre-registrato. `TRIAL-RANKEX-001` definisce ranking by `small_cap_scanner_score` con tie-breaker pre-registrati; prossimo passo: TDD ranking policy deterministica, non sweep discrezionale.
+- Stato: policy implementata con TDD. `TRIAL-RANKEX-001` ordina by `small_cap_scanner_score`, poi `relative_volume_20d`, `open_to_close_return`, `symbol`; prossimo passo: wiring payload `trial_accounting` per futura run autorizzata, non sweep discrezionale.
 
 ## Tech debt
 

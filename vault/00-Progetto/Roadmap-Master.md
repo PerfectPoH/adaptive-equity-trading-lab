@@ -133,7 +133,8 @@ Vedi [[news-risk-engine]].
 - [x] Aprire nuovo track ranking/uscite separato come proposta di ricerca design-only, senza riusare il vecchio +169% come prova di edge.
 - [x] Implementare trial accounting top-level nel `run_manifest.json`, separato dal `config_hash`; test suite 176 passed.
 - [x] Pre-registrare `TRIAL-RANKEX-001` con finestre, baseline e decision rule; stato PRE-REGISTERED / NOT RUN.
-- [ ] TDD ranking policy deterministica per `TRIAL-RANKEX-001` senza eseguire sweep o backtest discrezionali.
+- [x] TDD ranking policy deterministica per `TRIAL-RANKEX-001` senza eseguire sweep o backtest discrezionali; test suite 177 passed.
+- [ ] Wiring esplicito payload `trial_accounting` per futura run autorizzata `TRIAL-RANKEX-001`, senza esecuzione sweep.
 
 Gate metodologico corrente: run manifest, stress test ex-outlier, smoke ampia, cash starvation diagnostics, setup disentangler passivo, feature diagnostics per setup, breakout-only ablation, feature filter ablation e open-to-close sensitivity e temporal split validation e multi-year validation e passive regime diagnostics sono implementati; non aggiungere sector cap, random delay, survivorship sensitivity o opening regime check prima di ripensare scanner/ranking/triage. La smoke ampia ha prodotto `portfolio_return=-22.16%`, score profile non monotono e missed opportunities mediane negative.
 

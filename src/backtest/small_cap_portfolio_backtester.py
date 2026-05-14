@@ -50,6 +50,9 @@ REGIME_FEATURE_COLUMNS = (
 )
 
 
+RANKEX_TIE_BREAK_COLUMNS = ("relative_volume_20d", "open_to_close_return")
+
+
 def filter_small_cap_portfolio_candidates(
     candidate_export: pd.DataFrame,
     config: SmallCapPortfolioBacktestConfig = SmallCapPortfolioBacktestConfig(),
@@ -182,6 +185,11 @@ def _operational_candidates(candidate_export: pd.DataFrame) -> pd.DataFrame:
 def _rank_candidates(candidates: pd.DataFrame, rank_column: str) -> pd.DataFrame:
     if rank_column not in candidates.columns:
         return candidates.sort_values("symbol").copy()
+    if rank_column == "small_cap_scanner_score":
+        tie_break_columns = [column for column in RANKEX_TIE_BREAK_COLUMNS if column in candidates.columns]
+        sort_columns = [rank_column, *tie_break_columns, "symbol"]
+        ascending = [False, *([False] * len(tie_break_columns)), True]
+        return candidates.sort_values(sort_columns, ascending=ascending).copy()
     return candidates.sort_values([rank_column, "symbol"], ascending=[False, True]).copy()
 
 

@@ -242,3 +242,6 @@ The small-cap runner manifest now supports top-level `trial_accounting`, separat
 ## Latest update - TRIAL-RANKEX-001 pre-registered
 
 `TRIAL-RANKEX-001` has been pre-registered before any ranking/exits run. It authorizes only deterministic intra-candidate ranking by existing `small_cap_scanner_score` descending, with tie-breakers `relative_volume_20d`, `open_to_close_return`, and symbol order. No experiment has been run. Next step: TDD implementation of the ranking policy and trial_accounting payload wiring.
+## Latest update - TRIAL-RANKEX-001 ranking policy implemented
+
+The deterministic ranking policy for `TRIAL-RANKEX-001` is implemented with TDD: `small_cap_scanner_score` desc, `relative_volume_20d` desc, `open_to_close_return` desc, `symbol` asc. Verification passed: targeted test 1 passed, portfolio backtester suite 15 passed, full suite 177 passed. No historical experiment, sweep, OOS evaluation or paper-trading step has been run. Next allowed step: explicit `trial_accounting` payload wiring for a future authorized run.

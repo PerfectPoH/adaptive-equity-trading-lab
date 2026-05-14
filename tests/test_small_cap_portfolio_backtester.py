@@ -134,6 +134,28 @@ def test_portfolio_backtester_preserves_scanner_score_in_trade_log() -> None:
     assert result.trade_log.iloc[0]["small_cap_scanner_score"] == 87.5
 
 
+def test_portfolio_backtester_uses_preregistered_rankex_tie_breakers() -> None:
+    frames = {
+        "AAA": _frame([10.0, 10.0, 11.0, 12.0]),
+        "BBB": _frame([10.0, 10.0, 11.0, 12.0]),
+        "CCC": _frame([10.0, 10.0, 11.0, 12.0]),
+        "DDD": _frame([10.0, 10.0, 11.0, 12.0]),
+    }
+    candidates = pd.DataFrame(
+        [
+            {**_candidate("AAA", "2024-01-01", score=100.0), "relative_volume_20d": 2.0, "open_to_close_return": 0.50},
+            {**_candidate("BBB", "2024-01-01", score=100.0), "relative_volume_20d": 3.0, "open_to_close_return": 0.10},
+            {**_candidate("DDD", "2024-01-01", score=100.0), "relative_volume_20d": 3.0, "open_to_close_return": 0.20},
+            {**_candidate("CCC", "2024-01-01", score=100.0), "relative_volume_20d": 3.0, "open_to_close_return": 0.20},
+        ]
+    )
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=_config(max_concurrent_positions=1))
+
+    assert result.trade_log["symbol"].tolist() == ["CCC"]
+    assert result.rejections["symbol"].tolist() == ["DDD", "BBB", "AAA"]
+
+
 def test_portfolio_backtester_preserves_setup_in_trade_and_rejection_logs() -> None:
     frames = {
         "AAA": _frame([10.0, 10.0, 11.0, 12.0]),

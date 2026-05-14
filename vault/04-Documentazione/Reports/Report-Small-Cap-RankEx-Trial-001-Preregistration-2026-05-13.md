@@ -237,3 +237,17 @@ Next action may be TDD implementation of deterministic ranking policy and manife
 ```
 
 Vedi [[small-cap-ranking-exits-research-track]], [[2026-05-13-cascade-small-cap-trial-accounting-manifest]], [[Roadmap-Master]], [[backlog]].
+## Implementation update 2026-05-14
+
+The pre-registered deterministic ranking policy has been implemented with TDD in `src/backtest/small_cap_portfolio_backtester.py`.
+
+Ordering:
+
+```text
+small_cap_scanner_score desc
+relative_volume_20d desc
+open_to_close_return desc
+symbol asc
+```
+
+Status remains `IMPLEMENTATION READY / NOT RUN / NOT PROMOTED`. No experiment, sweep, OOS evaluation or paper-trading step has been run.

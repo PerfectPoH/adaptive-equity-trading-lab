@@ -223,3 +223,22 @@ PRE-REGISTERED / NOT RUN / NOT PROMOTED
 ```
 
 No experiment, sweep or paper-trading step has been run. Next step is TDD implementation of the deterministic ranking policy.
+## Update 2026-05-14 - TRIAL-RANKEX-001 ranking policy implemented
+
+The deterministic ranking policy for `TRIAL-RANKEX-001` is implemented with TDD. Ordering now uses `small_cap_scanner_score` descending, then `relative_volume_20d` descending, `open_to_close_return` descending, and `symbol` ascending.
+
+Verification:
+
+```text
+pytest tests/test_small_cap_portfolio_backtester.py::test_portfolio_backtester_uses_preregistered_rankex_tie_breakers -q -> 1 passed
+pytest tests/test_small_cap_portfolio_backtester.py -q -> 15 passed
+pytest -q -> 177 passed
+```
+
+Status remains:
+
+```text
+IMPLEMENTATION READY / NOT RUN / NOT PROMOTED
+```
+
+No historical experiment, sweep, OOS evaluation or paper-trading step has been run.
