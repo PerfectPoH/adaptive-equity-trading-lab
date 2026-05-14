@@ -138,10 +138,13 @@ Vedi [[news-risk-engine]].
 - [x] Preparare script/config di validation run autorizzata oppure report template, senza sweep discrezionali; comando validation pronto ma non eseguito, test suite 183 passed.
 - [x] Eseguire validation run `TRIAL-RANKEX-001` autorizzata e valutare gate pre-registrati: fallita ex-top3, stop/no OOS/no promotion.
 - [x] Decidere se chiudere il track ranking semplice o pre-registrare un trial separato: ranking semplice chiuso; non aprire `TRIAL-RANKEX-002` ora.
-- [ ] Redigere gate documentale Data Quality + Methodology per small-cap prima di qualunque `TRIAL-XMOM-001`: yfinance audit, universe as-of, random bootstrap, multiple-testing ledger, backtester audit.
+- [x] Redigere prima sub-spec del gate Data Quality: `yfinance` small-cap audit spec pre-registrata, senza esecuzione.
+- [ ] Eseguire audit empirico minimale `yfinance` solo dopo congelamento lista eventi indipendente; produrre verdict `usable` / `usable_with_caveats` / `not_usable`.
+- [ ] Redigere Methodology Gate: random bootstrap, multiple-testing ledger, category trial budget.
+- [ ] Redigere Backtester Audit Plan per `SmallCapPortfolioBacktester`.
 - [ ] Solo dopo gate: valutare nuova specifica pre-registrata cross-sectional momentum vs IWM, senza run preventiva.
 
-Gate metodologico corrente: run manifest, stress test ex-outlier, smoke ampia, cash starvation diagnostics, setup disentangler passivo, feature diagnostics per setup, breakout-only ablation, feature filter ablation, open-to-close sensitivity, temporal split validation, multi-year validation e passive regime diagnostics sono implementati. Dopo RankEx, il prossimo collo di bottiglia primario e' data-quality/methodology: non pre-registrare nuovi trial small-cap finche' non esiste un gate per yfinance audit, universe as-of, random bootstrap, multiple-testing ledger e backtester audit. La smoke ampia ha prodotto `portfolio_return=-22.16%`, score profile non monotono e missed opportunities mediane negative.
+Gate metodologico corrente: run manifest, stress test ex-outlier, smoke ampia, cash starvation diagnostics, setup disentangler passivo, feature diagnostics per setup, breakout-only ablation, feature filter ablation, open-to-close sensitivity, temporal split validation, multi-year validation e passive regime diagnostics sono implementati. Dopo RankEx, il prossimo collo di bottiglia primario e' data-quality/methodology: non pre-registrare nuovi trial small-cap finche' non sono completati data-quality audit result, methodology gate e backtester audit plan. La smoke ampia ha prodotto `portfolio_return=-22.16%`, score profile non monotono e missed opportunities mediane negative.
 
 Vedi [[small-cap-swing-research-spec]] e [[small-cap-ranking-exits-research-track]].
 

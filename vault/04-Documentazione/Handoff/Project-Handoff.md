@@ -260,3 +260,6 @@ After reviewing the `TRIAL-RANKEX-001` validation failure, the simple scanner-sc
 ## Latest update - Small-cap data quality gate decision
 
 Before any new small-cap trial, including cross-sectional momentum vs IWM, the project must define a Data Quality + Methodology gate. Required scope: yfinance audit on known small-cap events, universe as-of/survivorship review, random baseline bootstrap, multiple-testing ledger, and `SmallCapPortfolioBacktester` audit. Do not preregister `TRIAL-XMOM-001`, run backtests, or perform sweeps before this gate is documented.
+## Latest update - Small-cap data quality audit spec
+
+The first sub-gate is now pre-registered: [[Report-Small-Cap-Data-Quality-Audit-Spec-2026-05-14]]. It defines independent event selection, required event categories, yfinance properties to verify, and pre-registered verdict thresholds (`usable`, `usable_with_caveats`, `not_usable`). The audit itself has not been executed. Next allowed work: compile the independent event list and execute only the data-quality audit; no strategy backtest, no XMOM preregistration, no OOS, no sweep.

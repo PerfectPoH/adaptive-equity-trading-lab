@@ -129,3 +129,6 @@ NEXT ALLOWED WORK: data-quality audit spec / random baseline bootstrap spec / mu
 ```
 
 Vedi [[Report-Small-Cap-RankEx-Strategic-Decision-2026-05-14]], [[small-cap-ranking-exits-research-track]], [[small-cap-swing-research-spec]], [[Roadmap-Master]], [[backlog]], [[Project-Handoff]].
+## Update 2026-05-14 - Data Quality Audit Spec preregistered
+
+The first sub-gate is now specified in [[Report-Small-Cap-Data-Quality-Audit-Spec-2026-05-14]]. Status: `SPEC PRE-REGISTERED / NOT EXECUTED / NO TRIAL UNLOCKED`. Next allowed work is compiling an independent event list and executing only the data-quality audit. `TRIAL-XMOM-001` remains not authorized.

@@ -84,6 +84,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-14-cascade-small-cap-rankex-trial-001-validation-result]] - validation TRIAL-RANKEX-001 fallita ex-top3, stop/no OOS.
 - [[2026-05-14-cascade-small-cap-rankex-strategic-decision]] - chiusura ranking semplice e prossima direzione cross-sectional momentum spec-only.
 - [[2026-05-14-cascade-small-cap-data-quality-gate-decision]] - gate data-quality/methodology prima di nuovi trial small-cap.
+- [[2026-05-14-cascade-small-cap-data-quality-audit-spec]] - spec audit yfinance small-cap pre-registrata, non eseguita.
 
 ## Convenzione
 

@@ -312,3 +312,6 @@ Post-validation decision: close the simple `small_cap_scanner_score` ranking tra
 ## Update 2026-05-14 - Data quality gate before new small-cap trials
 
 Post-RankEx methodology decision: before any new small-cap trial, the project must define a Data Quality + Methodology gate. Cross-sectional momentum vs IWM remains the preferred future direction, but it is blocked until yfinance/data survivorship, universe as-of construction, random baseline bootstrap, multiple-testing ledger and `SmallCapPortfolioBacktester` audit are specified. See [[Report-Small-Cap-Data-Quality-Gate-Decision-2026-05-14]].
+## Update 2026-05-14 - Small-cap data-quality audit spec
+
+The first Data Quality + Methodology sub-gate is now pre-registered: [[Report-Small-Cap-Data-Quality-Audit-Spec-2026-05-14]]. It defines independent event selection, mandatory event categories, yfinance checks and verdict thresholds. It has not been executed and does not unlock `TRIAL-XMOM-001`.
