@@ -261,3 +261,8 @@ Status remains `WIRING READY / NOT RUN / NOT PROMOTED`. No experiment, sweep, OO
 A non-executing validation command builder is implemented in `src/experiments/small_cap_rankex_trial_001.py`. It prepares the validation run arguments for `2024-01-02..2024-12-31` with `--trial-id TRIAL-RANKEX-001`.
 
 Status remains `VALIDATION COMMAND PREPARED / NOT RUN / NOT PROMOTED`. No experiment, sweep, OOS evaluation or paper-trading step has been run.
+## Validation result update 2026-05-14
+
+`TRIAL-RANKEX-001` validation was executed once and failed the pre-registered ex-top3 robustness gate. Portfolio return was +5.62% and beat ticker/random baselines, but `pnl_excluding_top_3=-6282.54` with `sign_flip_excluding_top_3=true`.
+
+Status: `VALIDATION FAILED / STOP / NOT PROMOTED`. No OOS 2025, no paper trading and no discretionary sweep for this trial. See [[Report-Small-Cap-RankEx-Trial-001-Validation-2026-05-14]].

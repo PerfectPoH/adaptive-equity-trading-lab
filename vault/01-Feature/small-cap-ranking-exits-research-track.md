@@ -127,7 +127,7 @@ Ogni esperimento deve registrare almeno:
 |---|---|---|---|
 | TRIAL-INFRA-001 | risk-based sizing fix | chiuso/promosso | trial infrastrutturale, non edge trial |
 | TRIAL-ARCHIVE-001 | breakout/open_to_close/EMA200 corrected validation | chiuso/non promosso | setup archiviato |
-| TRIAL-RANKEX-001 | ranking intra-candidate by existing scanner score | validation-command-ready/not run | command builder in `small_cap_rankex_trial_001.py`; no experiment run |
+| TRIAL-RANKEX-001 | ranking intra-candidate by existing scanner score | validation-failed/stop | vedi [[Report-Small-Cap-RankEx-Trial-001-Validation-2026-05-14]]; no OOS/no promotion |
 
 ## Baseline obbligatorie
 
@@ -161,10 +161,10 @@ Una variante puo' avanzare solo se supera tutti questi gate:
 Prima di qualunque backtest o sweep:
 
 ```text
-eseguire la validation run preconfigurata di `TRIAL-RANKEX-001` solo se autorizzata esplicitamente
+non eseguire OOS 2025 per `TRIAL-RANKEX-001`; eventuali nuove ipotesi richiedono nuovo trial ID e nuova pre-registrazione
 ```
 
-La pre-registrazione, la ranking policy TDD, il wiring del payload e il comando validation sono completati; non eseguire sweep o backtest discrezionali fuori dalla policy registrata.
+La validation di `TRIAL-RANKEX-001` e' fallita sul gate ex-top3; non eseguire OOS, paper trading o sweep discrezionali su questo trial.
 
 ## Stato operativo
 

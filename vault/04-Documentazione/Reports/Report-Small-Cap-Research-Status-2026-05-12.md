@@ -280,3 +280,29 @@ VALIDATION COMMAND PREPARED / NOT RUN / NOT PROMOTED
 ```
 
 No historical experiment, sweep, OOS evaluation or paper-trading step has been run.
+## Update 2026-05-14 - TRIAL-RANKEX-001 validation failed
+
+`TRIAL-RANKEX-001` validation was executed once using the preconfigured command. Output dir: `experiments/runs/small_cap_rankex_trial_001_validation_2024`; run_id: `run_36e6d2dc2421`; period: `2024-01-02..2024-12-27`.
+
+Headline:
+
+```text
+portfolio_return: 5.62%
+ticker_holding_window: 2.54%
+random_entry_baseline: 1.94%
+pnl_excluding_top_1: 1189.50
+pnl_excluding_top_3: -6282.54
+sign_flip_excluding_top_3: true
+insufficient_funds: 0
+```
+
+Decision:
+
+```text
+VALIDATION FAILED / STOP / NOT PROMOTED
+NO OOS 2025
+NO PAPER TRADING
+NO DISCRETIONARY SWEEP
+```
+
+See [[Report-Small-Cap-RankEx-Trial-001-Validation-2026-05-14]].

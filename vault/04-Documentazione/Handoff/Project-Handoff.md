@@ -251,3 +251,6 @@ The deterministic ranking policy for `TRIAL-RANKEX-001` is implemented with TDD:
 ## Latest update - TRIAL-RANKEX-001 validation command prepared
 
 `TRIAL-RANKEX-001` now has a non-executing validation command builder in `src/experiments/small_cap_rankex_trial_001.py`. It prepares the pre-registered validation window only, `2024-01-02..2024-12-31`, with `--trial-id TRIAL-RANKEX-001`. Verification passed: rankex command tests 3 passed, related suite 39 passed, full suite 183 passed. No historical experiment, sweep, OOS evaluation or paper-trading step has been run. Next allowed step only if explicitly authorized: execute validation and evaluate the pre-registered gates.
+## Latest update - TRIAL-RANKEX-001 validation failed
+
+`TRIAL-RANKEX-001` validation was executed once using the preconfigured command. Result: portfolio +5.62% vs ticker_holding_window +2.54% and random +1.94%, but ex-top3 robustness failed (`pnl_excluding_top_3=-6282.54`, sign flip true). Status: `VALIDATION FAILED / STOP / NOT PROMOTED`. Do not run OOS 2025, paper trading or discretionary sweeps for this trial.
