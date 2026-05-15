@@ -132,3 +132,6 @@ Vedi [[Report-Small-Cap-RankEx-Strategic-Decision-2026-05-14]], [[small-cap-rank
 ## Update 2026-05-14 - Data Quality Audit Spec preregistered
 
 The first sub-gate is now specified in [[Report-Small-Cap-Data-Quality-Audit-Spec-2026-05-14]]. Status: `SPEC PRE-REGISTERED / NOT EXECUTED / NO TRIAL UNLOCKED`. Next allowed work is compiling an independent event list and executing only the data-quality audit. `TRIAL-XMOM-001` remains not authorized.
+## Update 2026-05-15 - Data Quality Audit Result
+
+The pre-registered data-quality audit was executed in [[Report-Small-Cap-Data-Quality-Audit-Result-2026-05-15]]. Verdict: `NOT_USABLE_FOR_SMALL_CAP_TRIALS_WITH_YFINANCE_DAILY_ALONE`. `TRIAL-XMOM-001` remains not authorized; no new small-cap trial should use the current `yfinance` daily/free-data pipeline as primary evidence.

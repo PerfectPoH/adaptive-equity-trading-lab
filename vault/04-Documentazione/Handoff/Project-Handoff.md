@@ -263,3 +263,6 @@ Before any new small-cap trial, including cross-sectional momentum vs IWM, the p
 ## Latest update - Small-cap data quality audit spec
 
 The first sub-gate is now pre-registered: [[Report-Small-Cap-Data-Quality-Audit-Spec-2026-05-14]]. It defines independent event selection, required event categories, yfinance properties to verify, and pre-registered verdict thresholds (`usable`, `usable_with_caveats`, `not_usable`). The audit itself has not been executed. Next allowed work: compile the independent event list and execute only the data-quality audit; no strategy backtest, no XMOM preregistration, no OOS, no sweep.
+## Latest update - Small-cap data quality audit result
+
+The frozen independent-event audit was executed only for data quality. Verdict: `NOT_USABLE_FOR_SMALL_CAP_TRIALS_WITH_YFINANCE_DAILY_ALONE`. `TUP` and `MULN` were not downloadable from `yfinance` in their critical event windows; `CNGL` downloaded but halt representation was only implicit/unclear with high zero-volume fraction. Do not open `TRIAL-XMOM-001` or any new small-cap trial using the current `yfinance` daily/free-data pipeline as primary evidence. Next allowed work: provider replacement / point-in-time dataset evaluation, or methodological negative control on a more reliable universe.

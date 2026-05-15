@@ -341,6 +341,14 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: dichiarare e testare universe construction as-of prima di pre-registrare momentum small-cap.
 - Stato: gate prerequisito prima del prossimo trial small-cap.
 
+### RISK-045 - Yfinance daily alone non utilizzabile per nuovi trial small-cap
+
+- Priorita: P0.
+- Sintomo: audit pre-registrato su eventi indipendenti mostra `TUP` e `MULN` non scaricabili da `yfinance` nelle finestre critiche; `CNGL` scaricabile ma halt non esplicito e zero-volume elevato.
+- Impatto: survivorship/provider availability puo' rimuovere proprio gli eventi distressed/corporate-action-heavy che dominano il rischio small-cap.
+- Azione: non aprire nuovi trial small-cap con `yfinance` daily alone come fonte primaria; valutare provider con delisted symbols/corporate actions o universo metodologico piu' affidabile.
+- Stato: aperto/bloccante per `TRIAL-XMOM-001`.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

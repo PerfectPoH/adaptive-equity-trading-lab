@@ -315,3 +315,6 @@ Post-RankEx methodology decision: before any new small-cap trial, the project mu
 ## Update 2026-05-14 - Small-cap data-quality audit spec
 
 The first Data Quality + Methodology sub-gate is now pre-registered: [[Report-Small-Cap-Data-Quality-Audit-Spec-2026-05-14]]. It defines independent event selection, mandatory event categories, yfinance checks and verdict thresholds. It has not been executed and does not unlock `TRIAL-XMOM-001`.
+## Update 2026-05-15 - Small-cap data-quality audit result
+
+The pre-registered yfinance event audit is complete: [[Report-Small-Cap-Data-Quality-Audit-Result-2026-05-15]]. Verdict: `NOT_USABLE_FOR_SMALL_CAP_TRIALS_WITH_YFINANCE_DAILY_ALONE`. This blocks `TRIAL-XMOM-001` and any new small-cap trial using the current free-data pipeline as primary evidence.

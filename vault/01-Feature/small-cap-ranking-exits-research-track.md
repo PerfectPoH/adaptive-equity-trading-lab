@@ -172,7 +172,7 @@ La validation di `TRIAL-RANKEX-001` e' fallita sul gate ex-top3; il ranking semp
 Sotto-track ranking semplice chiuso.
 TRIAL-RANKEX-001 fallito in validation.
 Nessuna strategia promossa.
-Data Quality Audit Spec pre-registrata; prossimo lavoro ammesso: compilare lista eventi indipendente ed eseguire solo audit dati, non strategia.
+Data Quality Audit completato: `yfinance` daily alone non e' utilizzabile come fonte primaria per nuovi trial small-cap; prossimo lavoro ammesso: provider replacement/point-in-time data o universo metodologico piu' affidabile.
 ```
 
 Vedi [[2026-05-13-cascade-small-cap-setup-archive-decision]], [[small-cap-swing-research-spec]], [[Roadmap-Master]], [[backlog]].
