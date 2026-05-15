@@ -172,7 +172,7 @@ La validation di `TRIAL-RANKEX-001` e' fallita sul gate ex-top3; il ranking semp
 Sotto-track ranking semplice chiuso.
 TRIAL-RANKEX-001 fallito in validation.
 Nessuna strategia promossa.
-Data Quality Audit completato: `yfinance` daily alone non e' utilizzabile come fonte primaria per nuovi trial small-cap. Lessons Learned completato: lavoro small-cap 2026-05-09..2026-05-14 riclassificato come stress test metodologico/infrastrutturale. Scaffolding check per negative control fixed large-cap/ETF completato con `TECHNICAL_PASS`; prossimo lavoro ammesso: preregistrazione `TRIAL-NCTRL-001` property-based, non esecuzione.
+Data Quality Audit completato: `yfinance` daily alone non e' utilizzabile come fonte primaria per nuovi trial small-cap. Lessons Learned completato: lavoro small-cap 2026-05-09..2026-05-14 riclassificato come stress test metodologico/infrastrutturale. Scaffolding check per negative control fixed large-cap/ETF completato con `TECHNICAL_PASS`; `TRIAL-NCTRL-001` pre-registrato come property-based negative control ma non eseguibile finche' P5/P6/P4/reporting/accounting non sono implementati con TDD.
 ```
 
 Vedi [[2026-05-13-cascade-small-cap-setup-archive-decision]], [[small-cap-swing-research-spec]], [[Roadmap-Master]], [[backlog]].

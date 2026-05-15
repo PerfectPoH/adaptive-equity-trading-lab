@@ -357,6 +357,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: eseguire scaffolding check tecnico su universo fixed large-cap/ETF per verificare che candidate export, manifest, benchmark, backtester e diagnostiche girino senza tuning.
 - Stato: completato con `TECHNICAL_PASS`; output `experiments/runs/nctrl_scaffolding_2024_20260515`, `run_id=run_nctrl_scaffolding_20260515`, `config_hash=732bce85161b9a00c3799206c081e2a999b7e7ef4053581ce8aa3d0e47b9ecab`. Prossimo passo ammesso: preregistrazione `TRIAL-NCTRL-001`, non esecuzione.
 
+### RESEARCH-047 - Implementare infrastruttura property-check per TRIAL-NCTRL-001
+
+- Priorita: P1.
+- Sintomo: `TRIAL-NCTRL-001` e' pre-registrato, ma non e' eseguibile finche' non esistono P5/P6/P4/reporting/accounting wiring.
+- Azione: implementare con TDD bootstrap random baseline N=1000, random-entry simulator che preserva execution/portfolio/risk_fraction, fixture cash-ledger timing, property-check report writer e trial accounting wiring.
+- Stato: prerequisito bloccante prima dell'esecuzione singola `TRIAL-NCTRL-001`.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

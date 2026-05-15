@@ -141,3 +141,6 @@ The project now has [[Report-Small-Cap-Lessons-Learned-Data-Quality-2026-05-15]]
 ## Update 2026-05-15 - NCTRL scaffolding check
 
 The fixed large-cap/ETF negative-control scaffolding check is completed in [[Report-Negative-Control-Scaffolding-Check-2026-05-15]] with `TECHNICAL_PASS`. This confirms technical end-to-end pipeline compatibility after universe-scope config changes only. It does not open `TRIAL-NCTRL-001`; the next allowed step is a single-document property-based preregistration.
+## Update 2026-05-15 - TRIAL-NCTRL-001 preregistration
+
+`TRIAL-NCTRL-001` is now pre-registered in [[Report-Negative-Control-Trial-001-Preregistration-2026-05-15]] as a property-based negative control. It is not run and not implementation-complete; execution is blocked until P5/P6/P4/property-reporting/accounting infrastructure is implemented with TDD. This does not unlock small-cap trials with `yfinance` daily alone.
