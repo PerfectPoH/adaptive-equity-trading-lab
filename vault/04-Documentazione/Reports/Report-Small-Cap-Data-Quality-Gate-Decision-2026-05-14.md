@@ -138,3 +138,6 @@ The pre-registered data-quality audit was executed in [[Report-Small-Cap-Data-Qu
 ## Update 2026-05-15 - Lessons Learned
 
 The project now has [[Report-Small-Cap-Lessons-Learned-Data-Quality-2026-05-15]]. It reclassifies prior small-cap runs as methodology/infrastructure stress tests rather than edge evidence and makes the next allowed step a fixed large-cap/ETF negative-control scaffolding check, not a new strategy trial.
+## Update 2026-05-15 - NCTRL scaffolding check
+
+The fixed large-cap/ETF negative-control scaffolding check is completed in [[Report-Negative-Control-Scaffolding-Check-2026-05-15]] with `TECHNICAL_PASS`. This confirms technical end-to-end pipeline compatibility after universe-scope config changes only. It does not open `TRIAL-NCTRL-001`; the next allowed step is a single-document property-based preregistration.

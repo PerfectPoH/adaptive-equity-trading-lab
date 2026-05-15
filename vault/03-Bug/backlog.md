@@ -355,7 +355,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Sintomo: dopo il data-quality audit, la pipeline deve essere provata su dati piu' affidabili senza aprire un trial strategico.
 - Vincolo: modificabili solo parametri universe-scope (`max_market_cap`, `exclude_etfs`, eventuale `min_market_cap`); non modificare soglie scanner, execution, portfolio, regime guardrail.
 - Azione: eseguire scaffolding check tecnico su universo fixed large-cap/ETF per verificare che candidate export, manifest, benchmark, backtester e diagnostiche girino senza tuning.
-- Stato: prossimo lavoro ammesso prima di qualunque preregistrazione `TRIAL-NCTRL-001`.
+- Stato: completato con `TECHNICAL_PASS`; output `experiments/runs/nctrl_scaffolding_2024_20260515`, `run_id=run_nctrl_scaffolding_20260515`, `config_hash=732bce85161b9a00c3799206c081e2a999b7e7ef4053581ce8aa3d0e47b9ecab`. Prossimo passo ammesso: preregistrazione `TRIAL-NCTRL-001`, non esecuzione.
 
 ## Tech debt
 
