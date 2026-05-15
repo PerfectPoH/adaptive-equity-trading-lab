@@ -86,6 +86,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-14-cascade-small-cap-data-quality-gate-decision]] - gate data-quality/methodology prima di nuovi trial small-cap.
 - [[2026-05-14-cascade-small-cap-data-quality-audit-spec]] - spec audit yfinance small-cap pre-registrata, non eseguita.
 - [[2026-05-15-cascade-small-cap-data-quality-audit-result]] - audit yfinance small-cap eseguito; verdict not usable for small-cap trials with yfinance daily alone.
+- [[2026-05-15-cascade-small-cap-lessons-learned-data-quality]] - lessons learned data-quality; old small-cap work reclassified as methodology/infrastructure stress test.
 
 ## Convenzione
 

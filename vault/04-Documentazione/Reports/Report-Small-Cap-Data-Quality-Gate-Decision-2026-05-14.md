@@ -135,3 +135,6 @@ The first sub-gate is now specified in [[Report-Small-Cap-Data-Quality-Audit-Spe
 ## Update 2026-05-15 - Data Quality Audit Result
 
 The pre-registered data-quality audit was executed in [[Report-Small-Cap-Data-Quality-Audit-Result-2026-05-15]]. Verdict: `NOT_USABLE_FOR_SMALL_CAP_TRIALS_WITH_YFINANCE_DAILY_ALONE`. `TRIAL-XMOM-001` remains not authorized; no new small-cap trial should use the current `yfinance` daily/free-data pipeline as primary evidence.
+## Update 2026-05-15 - Lessons Learned
+
+The project now has [[Report-Small-Cap-Lessons-Learned-Data-Quality-2026-05-15]]. It reclassifies prior small-cap runs as methodology/infrastructure stress tests rather than edge evidence and makes the next allowed step a fixed large-cap/ETF negative-control scaffolding check, not a new strategy trial.

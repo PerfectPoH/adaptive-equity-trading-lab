@@ -349,6 +349,14 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: non aprire nuovi trial small-cap con `yfinance` daily alone come fonte primaria; valutare provider con delisted symbols/corporate actions o universo metodologico piu' affidabile.
 - Stato: aperto/bloccante per `TRIAL-XMOM-001`.
 
+### RESEARCH-046 - Negative control scaffolding check su universo fixed large-cap/ETF
+
+- Priorita: P1.
+- Sintomo: dopo il data-quality audit, la pipeline deve essere provata su dati piu' affidabili senza aprire un trial strategico.
+- Vincolo: modificabili solo parametri universe-scope (`max_market_cap`, `exclude_etfs`, eventuale `min_market_cap`); non modificare soglie scanner, execution, portfolio, regime guardrail.
+- Azione: eseguire scaffolding check tecnico su universo fixed large-cap/ETF per verificare che candidate export, manifest, benchmark, backtester e diagnostiche girino senza tuning.
+- Stato: prossimo lavoro ammesso prima di qualunque preregistrazione `TRIAL-NCTRL-001`.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
