@@ -99,6 +99,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-17-cascade-backtester-audit-result]] - TDD backtester auditability fix; trade/rejection logs now preserve planner diagnostics.
 - [[2026-05-17-cascade-data-provider-event-panel]] - provider evaluation event panel frozen before any provider query or selection.
 - [[2026-05-17-cascade-data-provider-event-panel-expansion]] - provider event panel expansion slots filled and verified; `CCB` rejected, `ICU` substituted.
+- [[2026-05-17-cascade-provider-evaluation-execution-checklist]] - provider evaluation execution checklist created; no provider query or selection.
 
 ## Convenzione
 

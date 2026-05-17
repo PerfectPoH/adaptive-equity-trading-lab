@@ -420,6 +420,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: verificare fonti pubbliche/issuer/exchange per secondo delisting/suspension, secondo reverse split, secondo halt, secondo offering/dilution e ticker change/merger.
 - Stato: completato in [[Report-Small-Cap-Data-Provider-Event-Panel-Expansion-2026-05-17]]. Slot riempiti con `FSR`, `PHUN`, `GH`, `ICU`, `DWAC -> DJT`; proposta `CCB` respinta per mismatch temporale. Nessun provider selezionato/query, nessun trial aperto.
 
+### RESEARCH-056 - Creare provider evaluation execution checklist
+
+- Priorita: P1.
+- Sintomo: dopo panel freeze/expansion serve una checklist operativa per evitare provider shopping, costi impliciti, query non riproducibili o selezione basata su marketing.
+- Azione: creare checklist per candidate provider, pre-execution gate, manifest, artifact layout, query plan, audit fields, verdict rules e stop rules.
+- Stato: completato in [[Report-Small-Cap-Provider-Evaluation-Execution-Checklist-2026-05-17]] come `CHECKLIST_READY / PROVIDER_QUERY_NOT_EXECUTED`. Nessun provider selezionato/query, nessun costo autorizzato, nessun trial aperto.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

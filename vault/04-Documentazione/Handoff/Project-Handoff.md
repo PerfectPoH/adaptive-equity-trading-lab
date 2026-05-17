@@ -305,3 +305,6 @@ Created [[Report-Small-Cap-Data-Provider-Event-Panel-2026-05-17]] as `EVENT_PANE
 ## Latest update - Data provider event panel expansion filled
 
 Created [[Report-Small-Cap-Data-Provider-Event-Panel-Expansion-2026-05-17]] after checking public issuer/exchange sources. Expansion slots are now filled: `FSR`, `PHUN`, `GH`, `ICU`, and `DWAC -> DJT`. The proposed `CCB` July 2024 offering was rejected because retrieved public sources indicated a December 2024 offering, not July; `ICU` SeaStar Medical was substituted with verified July 10, 2024 offering evidence. Status: `EXPANSION_SLOTS_FILLED / PROVIDER_QUERY_NOT_EXECUTED`; still no provider selected, no API query, no trial.
+## Latest update - Provider evaluation execution checklist
+
+Created [[Report-Small-Cap-Provider-Evaluation-Execution-Checklist-2026-05-17]] as `CHECKLIST_READY / PROVIDER_QUERY_NOT_EXECUTED`. It turns the provider plan and frozen 10-event panel into an execution checklist with candidate provider notes, pre-execution gates, artifact layout, manifest fields, per-event audit fields, verdict rules and stop rules. Databento, Intrinio and Massive/Polygon have current public/free-trial signals; Tiingo and IEX Cloud remain direct-verification items. No provider is selected or queried, no cost is authorized, and no strategy trial is opened.
