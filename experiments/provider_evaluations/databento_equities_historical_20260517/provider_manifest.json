@@ -1,0 +1,23 @@
+{
+  "provider_name": "Databento Equities Historical",
+  "provider_slug": "databento_equities_historical",
+  "account_type": "free_credits_no_card_preflight",
+  "payment_authorized": false,
+  "payment_cap_usd": 0,
+  "execution_date": "2026-05-17",
+  "operator": "cascade_preflight",
+  "frozen_panel_report": "vault/04-Documentazione/Reports/Report-Small-Cap-Data-Provider-Event-Panel-2026-05-17.md",
+  "panel_expansion_report": "vault/04-Documentazione/Reports/Report-Small-Cap-Data-Provider-Event-Panel-Expansion-2026-05-17.md",
+  "terms_url": "https://databento.com/terms",
+  "license_storage_verdict": "unclear",
+  "data_retention_allowed": "unclear",
+  "dataset_names": [
+    "EQUS.MINI"
+  ],
+  "api_versions": [
+    "Databento Historical Python client"
+  ],
+  "query_budget_estimate_usd": 0,
+  "actual_query_cost_usd": 0,
+  "provider_query_executed": false
+}

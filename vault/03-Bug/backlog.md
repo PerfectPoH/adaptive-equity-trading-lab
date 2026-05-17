@@ -469,6 +469,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: creare script `experiments/intrinio_probe_one_event.py`, eseguire un solo probe `DPE-006 / FSR` senza raw retention e con `payment_cap_usd=0`.
 - Stato: bloccato in [[Report-Intrinio-One-Event-Probe-Result-2026-05-17]] da `HTTP_ERROR_401 / Unauthorized`. Provider data non valutati; directory artifact ancora validator-pass `failed=0`, `passed=21`; prossimo step: verificare attivazione key/auth/trial endpoint prima di una seconda query.
 
+### RESEARCH-063 - Databento equities historical preflight
+
+- Priorita: P1.
+- Sintomo: Intrinio e' bloccato da subscription non attiva; serve preparare secondo provider candidato senza query/costi.
+- Azione: creare `experiments/provider_evaluations/databento_equities_historical_20260517/` da template, aggiornare manifest/license/cost/event audit senza segreti e validare col CLI.
+- Stato: completato in [[Report-Databento-Provider-Evaluation-Preflight-2026-05-17]] come `PREFLIGHT_READY / PROVIDER_QUERY_NOT_EXECUTED`. Validator pass `failed=0`, `passed=21`; user reports `125 USD` free credits, no card attached, equities historical selected. API key pasted in chat must be treated as exposed; no key stored.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

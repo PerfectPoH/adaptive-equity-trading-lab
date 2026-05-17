@@ -1,0 +1,8 @@
+path,sha256
+provider_manifest.json,DRY_RUN_TEMPLATE_NO_HASH
+provider_requirement_table.csv,DRY_RUN_TEMPLATE_NO_HASH
+provider_event_audit_table.csv,DRY_RUN_TEMPLATE_NO_HASH
+license_notes.md,DRY_RUN_TEMPLATE_NO_HASH
+query_cost_estimate.md,DRY_RUN_TEMPLATE_NO_HASH
+raw_responses_manifest.csv,DRY_RUN_TEMPLATE_NO_HASH
+provider_evaluation_summary.md,DRY_RUN_TEMPLATE_NO_HASH

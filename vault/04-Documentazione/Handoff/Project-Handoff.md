@@ -326,3 +326,7 @@ Created [[Report-Quant-Research-Architecture-Upgrade-Plan-2026-05-17]] from the 
 ## Latest update - Intrinio one-event probe result
 
 Created `experiments/intrinio_probe_one_event.py` and attempted a single Intrinio probe for `DPE-006 / FSR` with `payment_cap_usd=0`, no credit card attached, and no raw response retention. The endpoint returned `HTTP_ERROR_401 / Unauthorized`; recorded redacted error artifact `experiments/provider_evaluations/intrinio_starter_event_panel_20260517/DPE-006_intrinio_probe_error.json`. Report: [[Report-Intrinio-One-Event-Probe-Result-2026-05-17]]. Provider data were not evaluated; status is `INTRINIO_EVALUATION_BLOCKED_BY_AUTHENTICATION`. Verify key activation/auth method/trial endpoint before any second query.
+
+## Latest update - Databento provider evaluation preflight
+
+Created `experiments/provider_evaluations/databento_equities_historical_20260517/` from the dry-run template and updated Databento pre-query artifacts without storing or using any API key. User reports `125 USD` free credits, no credit card attached, and equities historical selected. Validator passed with `failed=0`, `passed=21`. Report: [[Report-Databento-Provider-Evaluation-Preflight-2026-05-17]]. A Databento API key was pasted in chat and must be treated as exposed; rotate/replace it before any real API query. Current status: `PREFLIGHT_READY / PROVIDER_QUERY_NOT_EXECUTED`; no cost observed, no provider response captured, no trial/backtest/OOS/sweep opened.
