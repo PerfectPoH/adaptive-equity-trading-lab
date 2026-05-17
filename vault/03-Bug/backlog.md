@@ -406,6 +406,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: definire piano audit per risk sizing, cash ledger, entry/exit bars, cost model, concurrent candidates, filters/regime gates, rejection ledger ed equity reconciliation.
 - Stato: audit mirato eseguito con TDD in [[Report-Backtester-Audit-Result-2026-05-17]]. Fixata auditability: trade log conserva `entry_reference_price`, rejection planner conserva diagnostiche. Verdict `TECHNICAL_PASS_WITH_LIMITATIONS`; nessun trial aperto.
 
+### RESEARCH-054 - Congelare provider evaluation event panel
+
+- Priorita: P1.
+- Sintomo: prima di valutare provider/dataset serve congelare il pannello eventi avversariali per evitare selection bias dopo query provider.
+- Azione: creare event panel con seed event obbligatori e expansion slots da riempire prima dell'esecuzione provider.
+- Stato: completato in [[Report-Small-Cap-Data-Provider-Event-Panel-2026-05-17]] come `EVENT_PANEL_FROZEN / PROVIDER_QUERY_NOT_EXECUTED`. Nessun provider selezionato/query, nessun trial aperto.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

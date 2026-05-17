@@ -97,6 +97,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-17-cascade-methodology-gate-ledger]] - baseline multiple-testing/methodology ledger created; no new trial opened.
 - [[2026-05-17-cascade-backtester-audit-plan]] - spec-only TDD audit plan for portfolio backtester mechanics after sizing bug.
 - [[2026-05-17-cascade-backtester-audit-result]] - TDD backtester auditability fix; trade/rejection logs now preserve planner diagnostics.
+- [[2026-05-17-cascade-data-provider-event-panel]] - provider evaluation event panel frozen before any provider query or selection.
 
 ## Convenzione
 

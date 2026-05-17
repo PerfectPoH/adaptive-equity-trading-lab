@@ -299,3 +299,6 @@ Created [[Report-Backtester-Audit-Plan-2026-05-17]] as `SPEC_ONLY_NOT_EXECUTED`.
 ## Latest update - Backtester audit result
 
 Executed the targeted TDD audit in [[Report-Backtester-Audit-Result-2026-05-17]]. RED tests showed accepted trade rows did not preserve `entry_reference_price` and planner rejection rows did not preserve diagnostics. Fixed `src/backtest/small_cap_portfolio_backtester.py` to write `entry_reference_price` to trade rows and forward planner diagnostics into rejection rows. Targeted tests passed (`28 passed`). Verdict: `TECHNICAL_PASS_WITH_LIMITATIONS`. This improves auditability only; it does not open small-cap trials.
+## Latest update - Data provider event panel frozen
+
+Created [[Report-Small-Cap-Data-Provider-Event-Panel-2026-05-17]] as `EVENT_PANEL_FROZEN / PROVIDER_QUERY_NOT_EXECUTED`. It freezes the mandatory seed events `TUP`, `MULN`, `CNGL`, `ABAT`, `WEYS` and five expansion slots for the future provider evaluation. No provider is selected or queried, no pricing decision is made, and no strategy trial is opened. Every future provider candidate must be tested against the same frozen panel; events cannot be replaced after provider query results are known.
