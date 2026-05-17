@@ -448,6 +448,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: creare runbook con preconditions, secret handling, directory copy da template, query sequence, raw response capture, hashing, validator gate, verdict rules, stop rules, git rules e post-execution documentation.
 - Stato: completato in [[Report-Provider-Evaluation-Runbook-2026-05-17]] come `RUNBOOK_READY / PROVIDER_QUERY_NOT_EXECUTED`. Nessun provider selezionato/query, nessun costo autorizzato, nessun trial aperto.
 
+### RESEARCH-060 - Intrinio provider evaluation preflight
+
+- Priorita: P1.
+- Sintomo: prima della prima provider query reale serve preparare artifact Intrinio, registrare il security incident della API key incollata e validare il directory schema.
+- Azione: creare `experiments/provider_evaluations/intrinio_starter_event_panel_20260517/` da template, aggiornare manifest/license/cost/event audit senza segreti e validare col CLI.
+- Stato: completato in [[Report-Intrinio-Provider-Evaluation-Preflight-2026-05-17]] come `PREFLIGHT_READY / PROVIDER_QUERY_NOT_EXECUTED`. Validator pass `failed=0`, `passed=21`; API key non usata e non salvata; richiede rotazione/sostituzione prima di query reale.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

@@ -103,6 +103,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-17-cascade-provider-evaluation-artifact-validator]] - TDD provider evaluation artifact validator CLI added for future provider-evaluation outputs.
 - [[2026-05-17-cascade-provider-evaluation-dry-run-template]] - dry-run provider evaluation artifact template created and validator-pass verified.
 - [[2026-05-17-cascade-provider-evaluation-runbook]] - provider evaluation runbook created for future one-provider execution day.
+- [[2026-05-17-cascade-intrinio-provider-evaluation-preflight]] - Intrinio Starter Plan preflight artifacts created and validator-pass verified; no API query executed.
 
 ## Convenzione
 

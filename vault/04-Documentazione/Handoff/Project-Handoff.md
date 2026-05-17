@@ -317,3 +317,6 @@ Created `experiments/provider_evaluations/example_provider_event_panel_20260517/
 ## Latest update - Provider evaluation runbook
 
 Created [[Report-Provider-Evaluation-Runbook-2026-05-17]] as `RUNBOOK_READY / PROVIDER_QUERY_NOT_EXECUTED`. It defines the day-of-execution workflow for one real provider at a time: preconditions, secret handling, directory creation from the dry-run template, pre-query edits, frozen `DPE-001..DPE-010` query sequence, raw-response capture, snapshot hashing, audit row completion, validator gate, provider summary, verdict rules, stop rules, git rules and post-execution documentation. No provider is selected or queried, no cost is authorized, and no trial is opened.
+## Latest update - Intrinio provider evaluation preflight
+
+Created `experiments/provider_evaluations/intrinio_starter_event_panel_20260517/` from the dry-run template and updated Intrinio pre-query artifacts without storing or using any API key. Validator passed with `failed=0`, `passed=21`. Report: [[Report-Intrinio-Provider-Evaluation-Preflight-2026-05-17]]. An API key was pasted into chat and must be treated as exposed; rotate/replace it before any real API query. Current status: `PREFLIGHT_READY / PROVIDER_QUERY_NOT_EXECUTED`; no cost authorized, no provider response captured, no trial/backtest/OOS/sweep opened.
