@@ -2,7 +2,7 @@
 tipo: provider-evaluation-probe-result
 progetto: adaptive-equity-trading-lab
 data: 2026-05-17
-status: AUTHENTICATION_FAILED_PROVIDER_DATA_NOT_EVALUATED
+status: NO_ACTIVE_SUBSCRIPTION_PROVIDER_DATA_NOT_EVALUATED
 provider: Intrinio Starter Plan
 event_id: DPE-006
 ---
@@ -12,7 +12,8 @@ event_id: DPE-006
 ## Status
 
 ```text
-AUTHENTICATION FAILED
+AUTHENTICATION REACHED
+NO ACTIVE SUBSCRIPTION
 PROVIDER DATA NOT EVALUATED
 NO RAW RESPONSE RETAINED
 NO COST OBSERVED
@@ -79,6 +80,24 @@ It only means the current API credential/session/account state did not authorize
 
 Because both documented private-key authentication methods returned `401`, this is more consistent with an invalid/inactive/provisioning issue for the key/account than with a missing market-data entitlement. Per Intrinio documentation, missing subscription should normally return `403 Forbidden`, not `401 Unauthorized`.
 
+Follow-up official tutorial smoke test:
+
+```powershell
+$url = "https://api-v2.intrinio.com/companies/AAPL?api_key=$env:INTRINIO_API_KEY"
+$response = Invoke-RestMethod -Uri $url -Method Get
+```
+
+PowerShell returned a JSON error body:
+
+```json
+{
+  "human": "No active subscription(s).",
+  "message": "An active subscription is required to view this data."
+}
+```
+
+This changes the working interpretation: the key reached Intrinio, but the account has no active subscription provisioned for the tutorial sample endpoint. Intrinio data quality still cannot be evaluated.
+
 Possible causes include:
 
 - invalid key;
@@ -101,12 +120,12 @@ total: 21
 
 ## Next allowed steps
 
-Before any second query:
+Before any second provider-data query:
 
-1. Confirm Intrinio dashboard shows the key as active.
-2. Confirm the exact authentication method expected by Intrinio API v2.
-3. Confirm the free trial includes historical security prices.
-4. Prefer a zero-cost account/status endpoint or documented sample endpoint before probing market data again.
+1. Confirm the free trial subscription is actually active in the Intrinio Account page.
+2. Confirm at least one data feed subscription is attached to the key/account.
+3. Confirm whether the Starter Plan trial must be manually activated after account creation.
+4. Confirm whether `companies/AAPL` should be accessible under the current trial.
 5. Keep `payment_authorized=false` and `payment_cap_usd=0` unless explicitly changed by the user.
 
 ## Governance consequence
@@ -116,5 +135,5 @@ No provider verdict can be assigned.
 Current provider status:
 
 ```text
-INTRINIO_EVALUATION_BLOCKED_BY_AUTHENTICATION
+INTRINIO_EVALUATION_BLOCKED_BY_NO_ACTIVE_SUBSCRIPTION
 ```
