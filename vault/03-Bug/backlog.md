@@ -392,6 +392,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: implementare CLI `src.experiments.run_artifact_validator` con controlli su manifest, file richiesti, CSV/JSON/markdown e exit code.
 - Stato: completato con TDD; smoke read-only su `experiments/runs/nctrl_trial_001_2024_20260517` passato con `failed=0`.
 
+### RESEARCH-052 - Creare methodology gate ledger
+
+- Priorita: P1.
+- Sintomo: RISK-042 richiedeva un ledger esplicito per famiglie, trial, ablation e sweep gia' consumati prima di qualunque nuovo trial small-cap.
+- Azione: creare baseline ledger con famiglie chiuse/bloccate, gradi di liberta' consumati, gate minimi, trial IDs bloccati e policy conservativa anti multiple-testing.
+- Stato: completato come spec-only in [[Report-Methodology-Gate-Ledger-2026-05-17]]. Nessun trial aperto, nessun backtest/OOS/sweep.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

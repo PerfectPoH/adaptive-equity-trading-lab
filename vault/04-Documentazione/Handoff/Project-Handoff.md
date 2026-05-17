@@ -290,3 +290,6 @@ Created [[Report-Small-Cap-Data-Provider-Evaluation-Plan-2026-05-17]] as `SPEC_O
 ## Latest update - Run artifact validator
 
 Implemented `src.experiments.run_artifact_validator` as a tooling-hardening CLI. Usage: `python -m src.experiments.run_artifact_validator --run-dir <run_dir>`. It validates required run artifacts, manifest fields, CSV/JSON/markdown readability and returns exit code `0` on pass / `1` on fail. TDD coverage added in `tests/test_run_artifact_validator.py`; smoke read-only on `experiments/runs/nctrl_trial_001_2024_20260517` passed with `failed=0`. Full report: [[Report-Run-Artifact-Validator-2026-05-17]].
+## Latest update - Methodology gate ledger
+
+Created [[Report-Methodology-Gate-Ledger-2026-05-17]] as the baseline multiple-testing/methodology ledger. It records closed or blocked families, consumed degrees of freedom, required gates before any new small-cap trial, blocked trial IDs and a conservative anti-sweep policy. Status: `SPEC_ONLY / LEDGER BASELINE`; no trial opened, no backtest/OOS/sweep. Future trial-family openings, closures or material changes must update this ledger or explicitly state why no update is required.
