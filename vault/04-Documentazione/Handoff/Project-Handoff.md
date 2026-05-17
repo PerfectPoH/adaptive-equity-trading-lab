@@ -302,3 +302,6 @@ Executed the targeted TDD audit in [[Report-Backtester-Audit-Result-2026-05-17]]
 ## Latest update - Data provider event panel frozen
 
 Created [[Report-Small-Cap-Data-Provider-Event-Panel-2026-05-17]] as `EVENT_PANEL_FROZEN / PROVIDER_QUERY_NOT_EXECUTED`. It freezes the mandatory seed events `TUP`, `MULN`, `CNGL`, `ABAT`, `WEYS` and five expansion slots for the future provider evaluation. No provider is selected or queried, no pricing decision is made, and no strategy trial is opened. Every future provider candidate must be tested against the same frozen panel; events cannot be replaced after provider query results are known.
+## Latest update - Data provider event panel expansion filled
+
+Created [[Report-Small-Cap-Data-Provider-Event-Panel-Expansion-2026-05-17]] after checking public issuer/exchange sources. Expansion slots are now filled: `FSR`, `PHUN`, `GH`, `ICU`, and `DWAC -> DJT`. The proposed `CCB` July 2024 offering was rejected because retrieved public sources indicated a December 2024 offering, not July; `ICU` SeaStar Medical was substituted with verified July 10, 2024 offering evidence. Status: `EXPANSION_SLOTS_FILLED / PROVIDER_QUERY_NOT_EXECUTED`; still no provider selected, no API query, no trial.

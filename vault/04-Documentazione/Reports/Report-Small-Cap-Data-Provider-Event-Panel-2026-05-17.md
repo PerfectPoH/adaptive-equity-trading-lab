@@ -146,3 +146,17 @@ TRIAL-XMOM-001: NOT AUTHORIZED
 ```
 
 A future provider evaluation may use this panel, but a provider pass remains necessary and not sufficient. A separate methodology gate is still required before any small-cap strategy trial.
+
+## Update 2026-05-17 - Expansion slots filled
+
+Expansion slots `DPE-006..DPE-010` are now filled in [[Report-Small-Cap-Data-Provider-Event-Panel-Expansion-2026-05-17]].
+
+Final expansion set:
+
+- `FSR`
+- `PHUN`
+- `GH`
+- `ICU`
+- `DWAC -> DJT`
+
+The proposed `CCB` July 2024 offering was rejected during verification because retrieved public sources indicated a December 2024 offering, not July. `ICU` / SeaStar Medical was substituted with verified July 10, 2024 registered-direct-offering evidence.

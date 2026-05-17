@@ -413,6 +413,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: creare event panel con seed event obbligatori e expansion slots da riempire prima dell'esecuzione provider.
 - Stato: completato in [[Report-Small-Cap-Data-Provider-Event-Panel-2026-05-17]] come `EVENT_PANEL_FROZEN / PROVIDER_QUERY_NOT_EXECUTED`. Nessun provider selezionato/query, nessun trial aperto.
 
+### RESEARCH-055 - Riempire provider event panel expansion slots
+
+- Priorita: P1.
+- Sintomo: il provider event panel aveva 5 expansion slots `DPE-006..DPE-010` da riempire con fonti indipendenti prima di qualunque provider evaluation completa.
+- Azione: verificare fonti pubbliche/issuer/exchange per secondo delisting/suspension, secondo reverse split, secondo halt, secondo offering/dilution e ticker change/merger.
+- Stato: completato in [[Report-Small-Cap-Data-Provider-Event-Panel-Expansion-2026-05-17]]. Slot riempiti con `FSR`, `PHUN`, `GH`, `ICU`, `DWAC -> DJT`; proposta `CCB` respinta per mismatch temporale. Nessun provider selezionato/query, nessun trial aperto.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
