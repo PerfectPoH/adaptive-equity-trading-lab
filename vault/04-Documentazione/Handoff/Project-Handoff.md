@@ -296,3 +296,6 @@ Created [[Report-Methodology-Gate-Ledger-2026-05-17]] as the baseline multiple-t
 ## Latest update - Backtester audit plan
 
 Created [[Report-Backtester-Audit-Plan-2026-05-17]] as `SPEC_ONLY_NOT_EXECUTED`. It defines a TDD audit plan for `SmallCapPortfolioBacktester` mechanics after `BUG-037`: risk-fraction sizing, cash ledger timing, entry/exit bars, costs, concurrent candidates, filters/regime gates, rejection ledger integrity and equity-curve reconciliation. No strategy trial, backtest, OOS or sweep is opened. Before any new small-cap trial, execute this audit or document why that trial does not depend on the portfolio backtester.
+## Latest update - Backtester audit result
+
+Executed the targeted TDD audit in [[Report-Backtester-Audit-Result-2026-05-17]]. RED tests showed accepted trade rows did not preserve `entry_reference_price` and planner rejection rows did not preserve diagnostics. Fixed `src/backtest/small_cap_portfolio_backtester.py` to write `entry_reference_price` to trade rows and forward planner diagnostics into rejection rows. Targeted tests passed (`28 passed`). Verdict: `TECHNICAL_PASS_WITH_LIMITATIONS`. This improves auditability only; it does not open small-cap trials.

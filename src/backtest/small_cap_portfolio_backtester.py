@@ -120,7 +120,7 @@ def run_small_cap_portfolio_backtest(
             entry_date, next_open, exit_date, exit_price = entry
             decision = planner.plan_trade(plan_input, next_open=next_open, available_cash=cash)
             if not decision.accepted:
-                rejection_rows.append(_rejection_row(candidate, decision.reject_reason, cash))
+                rejection_rows.append(_rejection_row(candidate, decision.reject_reason, cash, _decision_diagnostics(decision)))
                 continue
             cash -= decision.position_notional
             open_positions.append(
@@ -129,6 +129,7 @@ def run_small_cap_portfolio_backtest(
                     "signal_date": as_of,
                     "entry_date": entry_date,
                     "exit_date": exit_date,
+                    "entry_reference_price": decision.entry_reference_price,
                     "entry_price": float(decision.entry_price),
                     "exit_price": float(exit_price),
                     "position_size": int(decision.position_size),
@@ -273,6 +274,20 @@ def _rejection_row(candidate: pd.Series, reason: str, available_cash: float, ext
     if extra:
         row.update(extra)
     return row
+
+
+def _decision_diagnostics(decision: Any) -> dict[str, Any]:
+    return {
+        "entry_reference_price": decision.entry_reference_price,
+        "entry_price": decision.entry_price,
+        "estimated_cost_pct": decision.estimated_cost_pct,
+        "next_open_gap_pct": decision.next_open_gap_pct,
+        "stop_loss": decision.stop_loss,
+        "take_profit": decision.take_profit,
+        "max_liquidity_notional": decision.max_liquidity_notional,
+        "position_size": decision.position_size,
+        "position_notional": decision.position_notional,
+    }
 
 
 def _equity_row(

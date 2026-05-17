@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import pandas as pd
+import pytest
 
 from src.backtest.small_cap_execution import SmallCapExecutionConfig
 from src.backtest.small_cap_portfolio_backtester import (
@@ -178,6 +179,43 @@ def test_portfolio_backtester_gap_rejection_does_not_spend_cash() -> None:
     assert result.rejections.iloc[0]["available_cash"] == 15_000.0
     assert result.summary["ending_cash"] == 15_000.0
     assert result.equity_curve.iloc[0]["cash"] == 15_000.0
+
+
+def test_portfolio_backtester_trade_log_records_entry_reference_and_cost_model() -> None:
+    frames = {"AAA": _frame([10.0, 10.0, 12.0, 12.0], opens=[10.0, 10.0, 12.0, 12.0])}
+    candidates = pd.DataFrame([_candidate("AAA", "2024-01-01")])
+    config = SmallCapPortfolioBacktestConfig(
+        initial_cash=100_000.0,
+        holding_period_bars=1,
+        execution=SmallCapExecutionConfig(spread_bps=40.0, slippage_bps=60.0, min_trade_notional=100.0),
+    )
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=config)
+
+    trade = result.trade_log.iloc[0]
+    assert trade["entry_reference_price"] == 10.0
+    assert trade["estimated_cost_pct"] == 0.01
+    assert trade["entry_price"] == 10.1
+    assert trade["position_notional"] == 13_463.3
+    assert trade["pnl"] == pytest.approx(2_532.7)
+
+
+def test_portfolio_backtester_rejection_log_records_planner_diagnostics() -> None:
+    frames = {"AAA": _frame([10.0, 12.0, 12.0, 12.0], opens=[10.0, 12.0, 12.0, 12.0])}
+    candidates = pd.DataFrame([_candidate("AAA", "2024-01-01")])
+    config = SmallCapPortfolioBacktestConfig(
+        initial_cash=15_000.0,
+        holding_period_bars=1,
+        execution=SmallCapExecutionConfig(spread_bps=0.0, slippage_bps=0.0, max_next_open_gap=0.10, min_trade_notional=100.0),
+    )
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=config)
+
+    rejection = result.rejections.iloc[0]
+    assert rejection["reject_reason"] == "gap_above_max"
+    assert rejection["entry_reference_price"] == 12.0
+    assert rejection["next_open_gap_pct"] == pytest.approx(0.2)
+    assert rejection["available_cash"] == 15_000.0
 
 
 def test_portfolio_backtester_open_position_equity_keeps_cash_locked_before_exit() -> None:

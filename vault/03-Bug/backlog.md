@@ -404,7 +404,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Priorita: P1.
 - Sintomo: RISK-043 richiede un audit documentale/TDD del `SmallCapPortfolioBacktester` dopo il bug `risk_fraction`.
 - Azione: definire piano audit per risk sizing, cash ledger, entry/exit bars, cost model, concurrent candidates, filters/regime gates, rejection ledger ed equity reconciliation.
-- Stato: completato come spec-only in [[Report-Backtester-Audit-Plan-2026-05-17]]. Non eseguito; nessun trial aperto.
+- Stato: audit mirato eseguito con TDD in [[Report-Backtester-Audit-Result-2026-05-17]]. Fixata auditability: trade log conserva `entry_reference_price`, rejection planner conserva diagnostiche. Verdict `TECHNICAL_PASS_WITH_LIMITATIONS`; nessun trial aperto.
 
 ## Tech debt
 
