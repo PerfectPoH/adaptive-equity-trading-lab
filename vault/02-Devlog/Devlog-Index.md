@@ -92,6 +92,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-17-cascade-nctrl-trial-001-property-check-result]] - TRIAL-NCTRL-001 executed once as property check; P1-P8 pass, no strategy promotion.
 - [[2026-05-17-cascade-nctrl-program-status]] - NCTRL program closed as technical/methodology pass; next work is data/infra, not alpha sweep.
 - [[2026-05-17-cascade-untracked-audit]] - audited `.windsurf/` and `data/`; small archival metadata/workflow files versioned, no strategy reopening.
+- [[2026-05-17-cascade-data-provider-evaluation-plan]] - spec-only provider/data evaluation gate for future small-cap work; no provider selected or trial opened.
 
 ## Convenzione
 

@@ -378,6 +378,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: creare decision note finale del programma NCTRL con stato, limiti e prossime direzioni ammesse.
 - Stato: completato; programma NCTRL chiuso come `CLOSED / TECHNICAL PASS`. Prossimi lavori ammessi: data/provider evaluation, hardening tooling, o nuova track non-small-cap pre-registrata. Vietati alpha sweep e promozione strategica.
 
+### RESEARCH-050 - Specificare gate valutazione data provider small-cap
+
+- Priorita: P1.
+- Sintomo: `yfinance` daily alone e' `NOT_USABLE_FOR_SMALL_CAP_TRIALS`; prima di riaprire small-cap serve un piano provider/dataset, non un nuovo trial.
+- Azione: definire requisiti hard/soft per provider su point-in-time universe, delisted symbols, corporate actions, raw/adjusted prices, halt/suspension, riproducibilita' e licensing.
+- Stato: completato come spec-only in [[Report-Small-Cap-Data-Provider-Evaluation-Plan-2026-05-17]]. Nessun provider selezionato, nessun backtest autorizzato, nessun trial aperto.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

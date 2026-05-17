@@ -284,3 +284,6 @@ A Lessons Learned report was created: [[Report-Small-Cap-Lessons-Learned-Data-Qu
 ## Latest update - NCTRL program closed
 
 The NCTRL program is formally closed as `CLOSED / TECHNICAL PASS`. Final status report: [[Report-Negative-Control-Program-Status-2026-05-17]]. This consolidates `RESEARCH-046` technical scaffolding, `RESEARCH-047` property-check infrastructure, and `RESEARCH-048 / TRIAL-NCTRL-001` property-check pass. The next valid work is data/provider evaluation, point-in-time/delisted/corporate-action methodology, or tooling hardening. Do not proceed to alpha sweeps, paper trading, production ranking, `TRIAL-RANKEX-002`, or `TRIAL-XMOM-001` under the current yfinance-daily small-cap data regime.
+## Latest update - Small-cap data provider evaluation plan
+
+Created [[Report-Small-Cap-Data-Provider-Evaluation-Plan-2026-05-17]] as `SPEC_ONLY_NOT_EXECUTED`. It defines hard gates for point-in-time universe support, delisted symbols, corporate actions, raw/adjusted prices, halt/suspension representation, reproducibility and licensing/storage. No provider is selected, no backtest is authorized, and no small-cap trial is opened. Even a future provider pass is necessary but not sufficient: a separate methodology gate is still required before any small-cap trial.
