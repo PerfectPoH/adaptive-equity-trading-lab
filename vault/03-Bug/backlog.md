@@ -399,6 +399,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: creare baseline ledger con famiglie chiuse/bloccate, gradi di liberta' consumati, gate minimi, trial IDs bloccati e policy conservativa anti multiple-testing.
 - Stato: completato come spec-only in [[Report-Methodology-Gate-Ledger-2026-05-17]]. Nessun trial aperto, nessun backtest/OOS/sweep.
 
+### RESEARCH-053 - Specificare backtester audit plan
+
+- Priorita: P1.
+- Sintomo: RISK-043 richiede un audit documentale/TDD del `SmallCapPortfolioBacktester` dopo il bug `risk_fraction`.
+- Azione: definire piano audit per risk sizing, cash ledger, entry/exit bars, cost model, concurrent candidates, filters/regime gates, rejection ledger ed equity reconciliation.
+- Stato: completato come spec-only in [[Report-Backtester-Audit-Plan-2026-05-17]]. Non eseguito; nessun trial aperto.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

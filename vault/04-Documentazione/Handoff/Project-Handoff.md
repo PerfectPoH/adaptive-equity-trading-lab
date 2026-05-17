@@ -293,3 +293,6 @@ Implemented `src.experiments.run_artifact_validator` as a tooling-hardening CLI.
 ## Latest update - Methodology gate ledger
 
 Created [[Report-Methodology-Gate-Ledger-2026-05-17]] as the baseline multiple-testing/methodology ledger. It records closed or blocked families, consumed degrees of freedom, required gates before any new small-cap trial, blocked trial IDs and a conservative anti-sweep policy. Status: `SPEC_ONLY / LEDGER BASELINE`; no trial opened, no backtest/OOS/sweep. Future trial-family openings, closures or material changes must update this ledger or explicitly state why no update is required.
+## Latest update - Backtester audit plan
+
+Created [[Report-Backtester-Audit-Plan-2026-05-17]] as `SPEC_ONLY_NOT_EXECUTED`. It defines a TDD audit plan for `SmallCapPortfolioBacktester` mechanics after `BUG-037`: risk-fraction sizing, cash ledger timing, entry/exit bars, costs, concurrent candidates, filters/regime gates, rejection ledger integrity and equity-curve reconciliation. No strategy trial, backtest, OOS or sweep is opened. Before any new small-cap trial, execute this audit or document why that trial does not depend on the portfolio backtester.
