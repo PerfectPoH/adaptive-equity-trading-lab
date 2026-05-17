@@ -31,6 +31,7 @@ class IntrinioProbeConfig:
     end_date: str
     dry_run: bool
     retain_raw_response: bool
+    auth_method: str
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -43,6 +44,7 @@ def main(argv: list[str] | None = None) -> int:
         end_date=args.end_date,
         dry_run=args.dry_run,
         retain_raw_response=args.retain_raw_response,
+        auth_method=args.auth_method,
     )
     api_key = os.environ.get("INTRINIO_API_KEY")
     if not api_key:
@@ -50,8 +52,8 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     if config.dry_run:
-        endpoint = _historical_prices_endpoint(config, api_key="REDACTED")
-        print(json.dumps({"status": "dry_run", "endpoint": endpoint, "api_key": "REDACTED"}, indent=2, sort_keys=True))
+        endpoint = _historical_prices_endpoint(config, api_key="REDACTED", include_api_key=config.auth_method == "url_param")
+        print(json.dumps({"status": "dry_run", "endpoint": endpoint, "api_key": "REDACTED", "auth_method": config.auth_method}, indent=2, sort_keys=True))
         return 0
 
     if not config.evaluation_dir.exists():
@@ -59,7 +61,7 @@ def main(argv: list[str] | None = None) -> int:
         return 3
 
     try:
-        response = _fetch_json(_historical_prices_endpoint(config, api_key=api_key))
+        response = _fetch_json(config, api_key)
     except HTTPError as exc:
         _write_error_artifact(config, f"HTTP_ERROR_{exc.code}", exc.reason)
         print(f"HTTP_ERROR_{exc.code}", file=sys.stderr)
@@ -87,24 +89,29 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--end-date", default=DEFAULT_END_DATE)
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--retain-raw-response", action="store_true")
+    parser.add_argument("--auth-method", choices=["url_param", "bearer"], default="url_param")
     return parser
 
 
-def _historical_prices_endpoint(config: IntrinioProbeConfig, api_key: str) -> str:
-    query = urlencode(
-        {
-            "api_key": api_key,
+def _historical_prices_endpoint(config: IntrinioProbeConfig, api_key: str, include_api_key: bool) -> str:
+    query_params = {
             "start_date": config.start_date,
             "end_date": config.end_date,
             "frequency": "daily",
             "page_size": 100,
-        }
-    )
+    }
+    if include_api_key:
+        query_params["api_key"] = api_key
+    query = urlencode(query_params)
     return f"{INTRINIO_BASE_URL}/securities/{config.identifier}/prices?{query}"
 
 
-def _fetch_json(url: str) -> dict:
-    request = Request(url, headers={"Accept": "application/json", "User-Agent": "adaptive-equity-trading-lab-provider-eval"})
+def _fetch_json(config: IntrinioProbeConfig, api_key: str) -> dict:
+    headers = {"Accept": "application/json", "User-Agent": "adaptive-equity-trading-lab-provider-eval"}
+    if config.auth_method == "bearer":
+        headers["Authorization"] = f"Bearer {api_key}"
+    url = _historical_prices_endpoint(config, api_key=api_key, include_api_key=config.auth_method == "url_param")
+    request = Request(url, headers=headers)
     with urlopen(request, timeout=30) as response:
         payload = response.read().decode("utf-8")
     return json.loads(payload)

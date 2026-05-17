@@ -52,6 +52,13 @@ HTTP_ERROR_401
 Unauthorized
 ```
 
+After reviewing Intrinio authentication documentation, both supported private-key methods were tried by the user from local PowerShell with a newly generated key:
+
+```text
+--auth-method url_param -> HTTP_ERROR_401
+--auth-method bearer -> HTTP_ERROR_401
+```
+
 Recorded artifact:
 
 ```text
@@ -69,6 +76,8 @@ api_key: REDACTED
 This result does not evaluate Intrinio data quality.
 
 It only means the current API credential/session/account state did not authorize the tested historical prices endpoint.
+
+Because both documented private-key authentication methods returned `401`, this is more consistent with an invalid/inactive/provisioning issue for the key/account than with a missing market-data entitlement. Per Intrinio documentation, missing subscription should normally return `403 Forbidden`, not `401 Unauthorized`.
 
 Possible causes include:
 
