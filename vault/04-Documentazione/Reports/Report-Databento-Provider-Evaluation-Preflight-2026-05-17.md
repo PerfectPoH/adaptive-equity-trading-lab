@@ -2,7 +2,7 @@
 tipo: provider-evaluation-preflight
 progetto: adaptive-equity-trading-lab
 data: 2026-05-17
-status: PREFLIGHT_READY_PROVIDER_QUERY_NOT_EXECUTED
+status: MICRO_PROBE_AUTHENTICATION_FAILED_PROVIDER_DATA_NOT_EVALUATED
 provider: Databento Equities Historical
 ---
 
@@ -11,8 +11,9 @@ provider: Databento Equities Historical
 ## Status
 
 ```text
-PREFLIGHT READY
-PROVIDER QUERY NOT EXECUTED
+MICRO PROBE ATTEMPTED
+AUTHENTICATION FAILED
+PROVIDER DATA NOT EVALUATED
 NO RAW RESPONSE RETAINED
 NO COST OBSERVED
 NO STRATEGY TRIAL OPENED
@@ -91,14 +92,55 @@ passed: 21
 total: 21
 ```
 
+## Micro-probe result
+
+After user authorization to use up to `125 USD` of Databento free credits, a single micro-probe script was created and executed:
+
+```text
+script: experiments/databento_probe_one_event.py
+dataset: EQUS.MINI
+schema: trades
+symbol: FSR
+window: 2024-03-20T14:30..2024-03-20T14:35
+limit: 10
+raw_retention: false
+```
+
+Result:
+
+```text
+DATABENTO_ERROR:BentoClientError
+401 auth_authentication_failed
+Authentication failed.
+```
+
+Recorded artifact:
+
+```text
+experiments/provider_evaluations/databento_equities_historical_20260517/DPE-006_databento_probe_error.json
+```
+
+The error artifact redacts the API key:
+
+```text
+api_key: REDACTED
+```
+
+Interpretation:
+
+```text
+DATABENTO_EVALUATION_BLOCKED_BY_AUTHENTICATION
+PROVIDER_DATA_NOT_EVALUATED
+```
+
 ## Governance constraints
 
-No Databento query has been executed by this preflight.
+No Databento data payload has been retained.
 
-Before any real Databento query:
+Before any second Databento query:
 
-1. Rotate the pasted Databento API key or confirm it is disposable.
-2. Keep key only in local environment variable `DATABENTO_API_KEY`.
+1. Confirm the current Databento key is valid in the portal.
+2. Confirm the key has historical API access attached.
 3. Confirm account-specific license and raw-response retention rights.
 4. Confirm exact cost preview for one tiny historical query.
 5. Avoid `ALL_SYMBOLS` for first probe.
@@ -107,7 +149,7 @@ Before any real Databento query:
 
 ## Next allowed step
 
-The next allowed step is a single Databento smoke/micro-probe only after explicit user authorization.
+The next allowed step is not another market-data query. First verify key activation/API access in the Databento portal or with a documented account/status/auth smoke test.
 
 Recommended shape:
 

@@ -474,7 +474,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Priorita: P1.
 - Sintomo: Intrinio e' bloccato da subscription non attiva; serve preparare secondo provider candidato senza query/costi.
 - Azione: creare `experiments/provider_evaluations/databento_equities_historical_20260517/` da template, aggiornare manifest/license/cost/event audit senza segreti e validare col CLI.
-- Stato: completato in [[Report-Databento-Provider-Evaluation-Preflight-2026-05-17]] come `PREFLIGHT_READY / PROVIDER_QUERY_NOT_EXECUTED`. Validator pass `failed=0`, `passed=21`; user reports `125 USD` free credits, no card attached, equities historical selected. API key pasted in chat must be treated as exposed; no key stored.
+- Stato: micro-probe tentato in [[Report-Databento-Provider-Evaluation-Preflight-2026-05-17]] dopo autorizzazione user a usare fino a `125 USD` free credits. Risultato `BentoClientError / 401 auth_authentication_failed`; provider data non valutati; raw response non trattenuta; validator pass `failed=0`, `passed=21`. Prossimo step: verificare key/API access nel portale Databento prima di ulteriori query.
 
 ## Tech debt
 

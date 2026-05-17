@@ -74,3 +74,32 @@ Una Databento API key e' stata incollata in chat durante setup e deve essere tra
 ## Prossimo step
 
 Prima query ammessa solo dopo autorizzazione esplicita: one-provider, one-event, one-symbol, tiny window, low limit, no raw retention fino a conferma licenza/storage.
+
+## Micro-probe result
+
+User authorized use of up to `125 USD` free credits. Created `experiments/databento_probe_one_event.py`, installed `databento>=0.78.0`, and attempted one micro-probe:
+
+```text
+dataset: EQUS.MINI
+schema: trades
+symbol: FSR
+window: 2024-03-20T14:30..2024-03-20T14:35
+limit: 10
+raw_retention: false
+```
+
+Result:
+
+```text
+DATABENTO_ERROR:BentoClientError
+401 auth_authentication_failed
+Authentication failed.
+```
+
+Artifact:
+
+```text
+experiments/provider_evaluations/databento_equities_historical_20260517/DPE-006_databento_probe_error.json
+```
+
+Provider data not evaluated.

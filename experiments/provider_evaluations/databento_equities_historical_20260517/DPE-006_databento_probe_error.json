@@ -1,0 +1,9 @@
+{
+  "api_key": "REDACTED",
+  "code": "BentoClientError",
+  "dataset": "EQUS.MINI",
+  "detail": "401 auth_authentication_failed\nAuthentication failed.\ndocumentation: https://databento.com/docs/portal/api-keys",
+  "event_id": "DPE-006",
+  "schema": "trades",
+  "symbol": "FSR"
+}
