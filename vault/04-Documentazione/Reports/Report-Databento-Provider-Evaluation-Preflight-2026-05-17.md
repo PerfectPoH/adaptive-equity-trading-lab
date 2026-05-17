@@ -126,6 +126,49 @@ The error artifact redacts the API key:
 api_key: REDACTED
 ```
 
+## Metadata smoke-test and key-source diagnostic update
+
+After a user-side manual smoke-test indicated that `EQUS.MINI` is visible from the Databento Historical account, the probe script was hardened to avoid silent API-key source confusion.
+
+The script now supports:
+
+```text
+--api-key-source auto|environment|env-file
+--env-file .env
+```
+
+Behavior:
+
+```text
+auto:
+  use process environment if only process environment is set
+  use env file if only env file is set
+  stop if both are set and fingerprints differ
+environment:
+  use only the process DATABENTO_API_KEY
+env-file:
+  use only DATABENTO_API_KEY from the selected env file
+```
+
+The rerun with `--api-key-source env-file` confirmed:
+
+```text
+api_key_source_resolved: env-file
+environment_key_present: false
+env_file_key_present: true
+api_key_fingerprint: 8cecabc817e0
+metadata_smoke_test_result: BentoClientError / 401 auth_authentication_failed
+```
+
+Interpretation:
+
+```text
+The current repository .env key is the failing credential in this Codex shell.
+The failure is not yet evidence against EQUS.MINI availability.
+If the user's manual smoke-test passed, the .env key must be updated to the same working Historical key,
+or the script must be run from the shell that contains the working key with --api-key-source environment.
+```
+
 Interpretation:
 
 ```text
@@ -141,11 +184,13 @@ Before any second Databento query:
 
 1. Confirm the current Databento key is valid in the portal.
 2. Confirm the key has historical API access attached.
-3. Confirm account-specific license and raw-response retention rights.
-4. Confirm exact cost preview for one tiny historical query.
-5. Avoid `ALL_SYMBOLS` for first probe.
-6. Use one frozen event, one symbol, tiny time window and very low record limit.
-7. Keep `payment_authorized=false` and `payment_cap_usd=0` unless explicitly changed.
+3. Confirm whether the working key is in `.env` or only in the interactive shell.
+4. Run the probe with explicit `--api-key-source environment` or `--api-key-source env-file`.
+5. Confirm account-specific license and raw-response retention rights.
+6. Confirm exact cost preview for one tiny historical query.
+7. Avoid `ALL_SYMBOLS` for first probe.
+8. Use one frozen event, one symbol, tiny time window and very low record limit.
+9. Keep `payment_authorized=false` and `payment_cap_usd=0` unless explicitly changed.
 
 ## Next allowed step
 

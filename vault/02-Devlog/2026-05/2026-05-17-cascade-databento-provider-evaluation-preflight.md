@@ -103,3 +103,32 @@ experiments/provider_evaluations/databento_equities_historical_20260517/DPE-006_
 ```
 
 Provider data not evaluated.
+
+## Key-source diagnostic follow-up
+
+After a user-side manual Historical metadata smoke-test passed for `EQUS.MINI`, the probe script was hardened to disambiguate which key is being used.
+
+Added explicit key source selection:
+
+```text
+--api-key-source auto|environment|env-file
+--env-file .env
+```
+
+Current Codex-shell rerun with `--api-key-source env-file`:
+
+```text
+api_key_source_resolved: env-file
+environment_key_present: false
+env_file_key_present: true
+api_key_fingerprint: 8cecabc817e0
+result: BentoClientError / 401 auth_authentication_failed
+```
+
+Interpretation:
+
+```text
+The .env key visible to this repo shell is the failing credential.
+This does not disprove EQUS.MINI availability.
+If the manual smoke-test used a different working key, update .env or rerun with --api-key-source environment.
+```

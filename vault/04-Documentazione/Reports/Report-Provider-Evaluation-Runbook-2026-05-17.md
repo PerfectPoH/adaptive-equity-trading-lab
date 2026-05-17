@@ -93,6 +93,22 @@ TIINGO_API_KEY
 
 Only define the variable for the provider currently being evaluated.
 
+For provider scripts that also support `.env`, make the source explicit before any paid or quota-consuming query:
+
+```text
+--api-key-source environment
+--api-key-source env-file
+```
+
+If the script supports `auto`, it must fail closed when the process environment and `.env` both define different redacted fingerprints. Do not continue until the intended source is explicit.
+
+Databento pre-query examples:
+
+```powershell
+.\.venv-lab\Scripts\python.exe experiments\databento_probe_one_event.py --dry-run --api-key-source env-file
+.\.venv-lab\Scripts\python.exe experiments\databento_probe_one_event.py --metadata-smoke-test --dataset EQUS.MINI --api-key-source env-file
+```
+
 ## Directory creation
 
 For a real provider, create a new directory from the dry-run template:

@@ -474,7 +474,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Priorita: P1.
 - Sintomo: Intrinio e' bloccato da subscription non attiva; serve preparare secondo provider candidato senza query/costi.
 - Azione: creare `experiments/provider_evaluations/databento_equities_historical_20260517/` da template, aggiornare manifest/license/cost/event audit senza segreti e validare col CLI.
-- Stato: micro-probe tentato in [[Report-Databento-Provider-Evaluation-Preflight-2026-05-17]] dopo autorizzazione user a usare fino a `125 USD` free credits. Risultato `BentoClientError / 401 auth_authentication_failed`; provider data non valutati; raw response non trattenuta; validator pass `failed=0`, `passed=21`. Prossimo step: verificare key/API access nel portale Databento prima di ulteriori query.
+- Stato: micro-probe tentato in [[Report-Databento-Provider-Evaluation-Preflight-2026-05-17]] dopo autorizzazione user a usare fino a `125 USD` free credits. Risultato `BentoClientError / 401 auth_authentication_failed`; provider data non valutati; raw response non trattenuta; validator pass `failed=0`, `passed=21`. Follow-up: script hardenato con `--api-key-source auto|environment|env-file`; in Codex shell la `.env` fingerprint `8cecabc817e0` e' la credential che fallisce, mentre la process env key e' assente. Prossimo step: aggiornare `.env` con la working Historical key o rerun dalla shell corretta con `--api-key-source environment`, poi solo metadata smoke-test prima di market-data query.
 
 ## Tech debt
 
