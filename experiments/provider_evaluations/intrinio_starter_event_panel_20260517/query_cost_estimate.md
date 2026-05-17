@@ -25,3 +25,12 @@ payment_cap_usd: 0
 ```
 
 If any query would incur cost, stop until explicit user approval.
+
+User-confirmed pre-probe state:
+
+```text
+trial_type: free_trial
+credit_card_attached: false
+payment_authorized: false
+payment_cap_usd: 0
+```

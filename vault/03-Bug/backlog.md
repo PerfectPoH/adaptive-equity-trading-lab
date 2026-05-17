@@ -462,6 +462,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: creare piano spec-only con roadmap per validation integrity, execution realism, strategy lifecycle tracking ed event-driven architecture, evitando rewrite/microservizi prematuri.
 - Stato: completato in [[Report-Quant-Research-Architecture-Upgrade-Plan-2026-05-17]]. Prossimo candidato: `RESEARCH-062` purged temporal split + embargo validator con TDD synthetic fixtures; nessun trial/query/backtest autorizzato.
 
+### RESEARCH-062 - Intrinio one-event provider probe
+
+- Priorita: P1.
+- Sintomo: dopo il preflight serve verificare se l'accesso Intrinio consente almeno una query minima su un evento frozen senza costi.
+- Azione: creare script `experiments/intrinio_probe_one_event.py`, eseguire un solo probe `DPE-006 / FSR` senza raw retention e con `payment_cap_usd=0`.
+- Stato: bloccato in [[Report-Intrinio-One-Event-Probe-Result-2026-05-17]] da `HTTP_ERROR_401 / Unauthorized`. Provider data non valutati; directory artifact ancora validator-pass `failed=0`, `passed=21`; prossimo step: verificare attivazione key/auth/trial endpoint prima di una seconda query.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

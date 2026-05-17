@@ -1,0 +1,7 @@
+{
+  "api_key": "REDACTED",
+  "code": "HTTP_ERROR_401",
+  "detail": "Unauthorized",
+  "event_id": "DPE-006",
+  "identifier": "FSR"
+}

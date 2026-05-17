@@ -105,6 +105,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-17-cascade-provider-evaluation-runbook]] - provider evaluation runbook created for future one-provider execution day.
 - [[2026-05-17-cascade-intrinio-provider-evaluation-preflight]] - Intrinio Starter Plan preflight artifacts created and validator-pass verified; no API query executed.
 - [[2026-05-17-cascade-quant-research-architecture-upgrade-plan]] - spec-only architecture upgrade roadmap for validation integrity, execution realism, lifecycle tracking and event-driven design.
+- [[2026-05-17-cascade-intrinio-one-event-probe-result]] - Intrinio one-event probe attempted; blocked by HTTP 401 authentication, provider data not evaluated.
 
 ## Convenzione
 
