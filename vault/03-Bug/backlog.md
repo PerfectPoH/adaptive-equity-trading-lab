@@ -371,6 +371,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: eseguire `TRIAL-NCTRL-001`, generare bootstrap baseline, random-entry sign-flip report e property report P1-P8.
 - Stato: completato con `PROPERTY_CHECK_PASS`; output `experiments/runs/nctrl_trial_001_2024_20260517`, `run_id=run_nctrl_trial_001_20260517`, `config_hash=732bce85161b9a00c3799206c081e2a999b7e7ef4053581ce8aa3d0e47b9ecab`. Nessuna promozione strategica.
 
+### RESEARCH-049 - Chiudere programma NCTRL e fissare prossimi binari ammessi
+
+- Priorita: P1.
+- Sintomo: dopo il pass di `TRIAL-NCTRL-001`, serviva separare esplicitamente technical pass da strategy promotion.
+- Azione: creare decision note finale del programma NCTRL con stato, limiti e prossime direzioni ammesse.
+- Stato: completato; programma NCTRL chiuso come `CLOSED / TECHNICAL PASS`. Prossimi lavori ammessi: data/provider evaluation, hardening tooling, o nuova track non-small-cap pre-registrata. Vietati alpha sweep e promozione strategica.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
