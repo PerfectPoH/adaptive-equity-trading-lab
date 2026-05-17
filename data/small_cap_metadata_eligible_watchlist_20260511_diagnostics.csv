@@ -1,0 +1,4 @@
+symbol,status,reason
+BLDE,fail,missing_market_cap
+LAZR,fail,missing_market_cap
+VLD,fail,missing_market_cap
