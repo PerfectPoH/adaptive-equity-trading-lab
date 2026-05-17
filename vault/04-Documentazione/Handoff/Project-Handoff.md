@@ -278,3 +278,6 @@ A Lessons Learned report was created: [[Report-Small-Cap-Lessons-Learned-Data-Qu
 ## Latest update - TRIAL-NCTRL-001 infrastructure complete
 
 `RESEARCH-047` is completed as TDD infrastructure only: P4 cash-ledger fixtures, P5 bootstrap random baseline (`N=1000`, `base_seed=700`), P6 deterministic random-entry candidate simulator (`seed=701`), P7/P8 property-check report writer, and `TRIAL-NCTRL-001` trial-accounting wiring are implemented. Verification: 43 targeted tests passed. `TRIAL-NCTRL-001` has not been executed in this step; next allowed step is one preregistered execution/reporting pass, not strategy promotion.
+## Latest update - TRIAL-NCTRL-001 property check result
+
+`TRIAL-NCTRL-001` was executed once as a methodology negative-control property check. Output dir: `experiments/runs/nctrl_trial_001_2024_20260517`. Run ID: `run_nctrl_trial_001_20260517`. Config hash: `732bce85161b9a00c3799206c081e2a999b7e7ef4053581ce8aa3d0e47b9ecab`. Manifest period: `2024-01-02..2024-12-27`, accepted as actual last candidate/trading-day representation. Property report verdict: `PROPERTY_CHECK_PASS`; P1-P8 all pass. Portfolio had 32 trades, but this is not strategy evidence. Full report: [[Report-Negative-Control-Trial-001-Property-Check-Result-2026-05-17]]. No paper trading, no production ranking, and no small-cap trial unlock.

@@ -7,6 +7,7 @@ from src.backtest.small_cap_portfolio_backtester import SmallCapPortfolioBacktes
 from src.experiments.nctrl_random_entry_simulator import (
     NctrlRandomEntrySimulatorConfig,
     build_nctrl_random_entry_candidate_export,
+    build_nctrl_random_entry_sign_flip_report,
 )
 
 
@@ -87,3 +88,26 @@ def test_nctrl_random_entry_config_defaults_are_fixed_for_trial_infrastructure()
     assert default.seed == 701
     assert default.candidates_per_day == 1
     assert default.setup_label == "nctrl_random_entry"
+
+
+def test_nctrl_random_entry_sign_flip_report_uses_portfolio_backtester() -> None:
+    portfolio_config = SmallCapPortfolioBacktestConfig(
+        initial_cash=20_000.0,
+        holding_period_bars=1,
+        max_concurrent_positions=1,
+        execution=SmallCapExecutionConfig(spread_bps=0.0, slippage_bps=0.0, min_trade_notional=100.0),
+    )
+
+    report = build_nctrl_random_entry_sign_flip_report(
+        _frames(),
+        ["2024-01-02", "2024-01-03"],
+        portfolio_config=portfolio_config,
+        simulations=5,
+        base_seed=701,
+    )
+
+    assert report["simulations"] == 5
+    assert report["base_seed"] == 701
+    assert report["valid_simulations"] > 0
+    assert 0.0 <= report["sign_flip_excluding_top_3_frequency"] <= 1.0
+    assert report["preserves_execution_mechanics"] is True

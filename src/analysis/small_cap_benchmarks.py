@@ -76,12 +76,9 @@ def build_bootstrap_random_baseline_report(
 
     returns: list[float] = []
     observations: list[int] = []
+    candidate_dates, symbols, return_lookup = _precompute_random_entry_returns(candidate_export, frames, config.holding_period_bars)
     for seed in range(config.base_seed, config.base_seed + config.simulations):
-        value, count = _random_entry_return(
-            candidate_export,
-            frames,
-            SmallCapBenchmarkConfig(holding_period_bars=config.holding_period_bars, random_seed=seed),
-        )
+        value, count = _random_entry_return_from_lookup(candidate_dates, symbols, return_lookup, seed)
         if pd.notna(value):
             returns.append(float(value))
         observations.append(int(count))
@@ -126,6 +123,43 @@ def _row(benchmark: str, benchmark_return: float, observations: int, description
         "observations": int(observations),
         "description": description,
     }
+
+
+def _precompute_random_entry_returns(
+    candidate_export: pd.DataFrame,
+    frames: dict[str, pd.DataFrame],
+    holding_period_bars: int,
+) -> tuple[list[pd.Timestamp], list[str], dict[tuple[pd.Timestamp, str], float]]:
+    if candidate_export.empty or "as_of" not in candidate_export.columns or not frames:
+        return [], [], {}
+    candidate_dates = [date.normalize() for date in pd.to_datetime(candidate_export["as_of"], errors="coerce").dropna().tolist()]
+    symbols = sorted(frames)
+    unique_dates = sorted(set(candidate_dates))
+    return_lookup: dict[tuple[pd.Timestamp, str], float] = {}
+    for date in unique_dates:
+        for symbol in symbols:
+            return_lookup[(date, symbol)] = _holding_return(frames[symbol], date, holding_period_bars)
+    return candidate_dates, symbols, return_lookup
+
+
+def _random_entry_return_from_lookup(
+    candidate_dates: list[pd.Timestamp],
+    symbols: list[str],
+    return_lookup: dict[tuple[pd.Timestamp, str], float],
+    random_seed: int,
+) -> tuple[float, int]:
+    if not candidate_dates or not symbols:
+        return float("nan"), 0
+    rng = random.Random(random_seed)
+    returns: list[float] = []
+    for as_of in candidate_dates:
+        symbol = rng.choice(symbols)
+        value = return_lookup.get((as_of, symbol), float("nan"))
+        if pd.notna(value):
+            returns.append(float(value))
+    if not returns:
+        return float("nan"), 0
+    return float(sum(returns) / len(returns)), len(returns)
 
 
 def _candidate_dates(candidate_export: pd.DataFrame) -> list[pd.Timestamp]:

@@ -2,7 +2,14 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from src.analysis.nctrl_property_report import NctrlPropertyCheckResult, build_nctrl_property_check_report, write_nctrl_property_check_report_markdown
+import json
+
+from src.analysis.nctrl_property_report import (
+    NctrlPropertyCheckResult,
+    build_nctrl_property_check_report,
+    write_nctrl_property_check_report_artifacts,
+    write_nctrl_property_check_report_markdown,
+)
 
 
 def test_build_nctrl_property_check_report_preserves_property_order_and_binary_status() -> None:
@@ -30,6 +37,17 @@ def test_build_nctrl_property_check_report_marks_insufficient_evidence_without_p
     assert report["properties"][0]["status"] == "insufficient_evidence"
 
 
+def test_build_nctrl_property_check_report_allows_sample_size_override() -> None:
+    checks = [
+        NctrlPropertyCheckResult(property_id="P1", status="pass", evidence="artifacts present"),
+        NctrlPropertyCheckResult(property_id="P7", status="fail", evidence="closed_trades=12"),
+    ]
+
+    report = build_nctrl_property_check_report("TRIAL-NCTRL-001", checks, overall_status="insufficient_evidence")
+
+    assert report["overall_status"] == "insufficient_evidence"
+
+
 def test_write_nctrl_property_check_report_markdown_includes_required_table(tmp_path: Path) -> None:
     output_path = tmp_path / "nctrl_property_report.md"
     checks = [NctrlPropertyCheckResult(property_id="P4", status="pass", evidence="cash ledger fixtures green", notes="29 targeted tests")]
@@ -41,3 +59,14 @@ def test_write_nctrl_property_check_report_markdown_includes_required_table(tmp_
     assert "# TRIAL-NCTRL-001 Property Check Report" in content
     assert "| Property | Status | Evidence | Notes |" in content
     assert "| P4 | pass | cash ledger fixtures green | 29 targeted tests |" in content
+
+
+def test_write_nctrl_property_check_report_artifacts_writes_json_and_markdown(tmp_path: Path) -> None:
+    checks = [NctrlPropertyCheckResult(property_id="P1", status="pass", evidence="artifacts present")]
+
+    report = write_nctrl_property_check_report_artifacts("TRIAL-NCTRL-001", checks, tmp_path)
+
+    assert (tmp_path / "property_check_report.md").exists()
+    assert (tmp_path / "property_check_report.json").exists()
+    payload = json.loads((tmp_path / "property_check_report.json").read_text(encoding="utf-8"))
+    assert payload == report

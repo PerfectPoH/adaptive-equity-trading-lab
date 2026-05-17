@@ -89,6 +89,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-15-cascade-small-cap-lessons-learned-data-quality]] - lessons learned data-quality; old small-cap work reclassified as methodology/infrastructure stress test.
 - [[2026-05-15-cascade-nctrl-scaffolding-check]] - technical negative-control scaffolding check completed on fixed large-cap/ETF universe.
 - [[2026-05-17-cascade-nctrl-property-check-infrastructure]] - TDD infrastructure complete for TRIAL-NCTRL-001 property checks, not executed.
+- [[2026-05-17-cascade-nctrl-trial-001-property-check-result]] - TRIAL-NCTRL-001 executed once as property check; P1-P8 pass, no strategy promotion.
 
 ## Convenzione
 

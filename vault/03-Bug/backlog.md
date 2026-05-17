@@ -364,6 +364,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: implementare con TDD bootstrap random baseline N=1000, random-entry simulator che preserva execution/portfolio/risk_fraction, fixture cash-ledger timing, property-check report writer e trial accounting wiring.
 - Stato: completato come infrastruttura TDD; verificati 43 test mirati passati. `TRIAL-NCTRL-001` non eseguito in questo step.
 
+### RESEARCH-048 - Eseguire TRIAL-NCTRL-001 come property-based negative control
+
+- Priorita: P1.
+- Sintomo: dopo `RESEARCH-047`, il trial era pronto per una singola esecuzione pre-registrata come property check, non come strategia.
+- Azione: eseguire `TRIAL-NCTRL-001`, generare bootstrap baseline, random-entry sign-flip report e property report P1-P8.
+- Stato: completato con `PROPERTY_CHECK_PASS`; output `experiments/runs/nctrl_trial_001_2024_20260517`, `run_id=run_nctrl_trial_001_20260517`, `config_hash=732bce85161b9a00c3799206c081e2a999b7e7ef4053581ce8aa3d0e47b9ecab`. Nessuna promozione strategica.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire

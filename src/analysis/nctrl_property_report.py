@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal
@@ -15,7 +16,11 @@ class NctrlPropertyCheckResult:
     notes: str = ""
 
 
-def build_nctrl_property_check_report(trial_id: str, checks: list[NctrlPropertyCheckResult]) -> dict[str, object]:
+def build_nctrl_property_check_report(
+    trial_id: str,
+    checks: list[NctrlPropertyCheckResult],
+    overall_status: PropertyStatus | None = None,
+) -> dict[str, object]:
     properties = [
         {
             "property": str(check.property_id),
@@ -27,7 +32,7 @@ def build_nctrl_property_check_report(trial_id: str, checks: list[NctrlPropertyC
     ]
     return {
         "trial_id": str(trial_id),
-        "overall_status": _overall_status(checks),
+        "overall_status": str(overall_status) if overall_status is not None else _overall_status(checks),
         "properties": properties,
     }
 
@@ -36,11 +41,30 @@ def write_nctrl_property_check_report_markdown(
     trial_id: str,
     checks: list[NctrlPropertyCheckResult],
     output_path: str | Path,
+    overall_status: PropertyStatus | None = None,
 ) -> dict[str, object]:
-    report = build_nctrl_property_check_report(trial_id, checks)
+    report = build_nctrl_property_check_report(trial_id, checks, overall_status=overall_status)
     path = Path(output_path)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(_to_markdown(report), encoding="utf-8")
+    return report
+
+
+def write_nctrl_property_check_report_artifacts(
+    trial_id: str,
+    checks: list[NctrlPropertyCheckResult],
+    output_dir: str | Path,
+    overall_status: PropertyStatus | None = None,
+) -> dict[str, object]:
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+    report = write_nctrl_property_check_report_markdown(
+        trial_id,
+        checks,
+        output_path / "property_check_report.md",
+        overall_status=overall_status,
+    )
+    (output_path / "property_check_report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return report
 
 

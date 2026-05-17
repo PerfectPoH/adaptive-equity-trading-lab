@@ -5,6 +5,8 @@ from dataclasses import dataclass
 
 import pandas as pd
 
+from src.analysis.small_cap_portfolio_diagnostics import build_portfolio_outlier_breakdown
+from src.backtest.small_cap_portfolio_backtester import SmallCapPortfolioBacktestConfig, run_small_cap_portfolio_backtest
 from src.experiments.small_cap_candidate_export import EXPORT_COLUMNS
 
 
@@ -40,6 +42,47 @@ def build_nctrl_random_entry_candidate_export(
         if column not in export.columns:
             export[column] = pd.NA
     return export[EXPORT_COLUMNS].reset_index(drop=True)
+
+
+def build_nctrl_random_entry_sign_flip_report(
+    frames: dict[str, pd.DataFrame],
+    as_of_dates: list[str | pd.Timestamp],
+    portfolio_config: SmallCapPortfolioBacktestConfig,
+    simulations: int = 1000,
+    base_seed: int = 701,
+) -> dict[str, object]:
+    if simulations <= 0:
+        raise ValueError("simulations must be positive")
+    sign_flips = 0
+    valid_simulations = 0
+    trade_counts: list[int] = []
+    for seed in range(base_seed, base_seed + simulations):
+        candidates = build_nctrl_random_entry_candidate_export(
+            frames,
+            as_of_dates,
+            config=NctrlRandomEntrySimulatorConfig(seed=seed, candidates_per_day=1),
+        )
+        result = run_small_cap_portfolio_backtest(candidates, frames, config=portfolio_config)
+        if result.trade_log.empty:
+            trade_counts.append(0)
+            continue
+        breakdown = build_portfolio_outlier_breakdown(result.trade_log, initial_cash=portfolio_config.initial_cash)
+        valid_simulations += 1
+        trade_counts.append(int(result.summary.get("total_trades", 0)))
+        if bool(breakdown.get("sign_flip_excluding_top_3", False)):
+            sign_flips += 1
+    return {
+        "simulations": int(simulations),
+        "base_seed": int(base_seed),
+        "seed_start": int(base_seed),
+        "seed_end": int(base_seed + simulations - 1),
+        "valid_simulations": int(valid_simulations),
+        "sign_flip_excluding_top_3_count": int(sign_flips),
+        "sign_flip_excluding_top_3_frequency": float(sign_flips / valid_simulations) if valid_simulations else float("nan"),
+        "min_trades": int(min(trade_counts)) if trade_counts else 0,
+        "max_trades": int(max(trade_counts)) if trade_counts else 0,
+        "preserves_execution_mechanics": True,
+    }
 
 
 def _sample_symbols(symbols: list[str], candidates_per_day: int, rng: random.Random) -> list[str]:
