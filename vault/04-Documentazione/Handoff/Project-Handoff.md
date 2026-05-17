@@ -287,3 +287,6 @@ The NCTRL program is formally closed as `CLOSED / TECHNICAL PASS`. Final status 
 ## Latest update - Small-cap data provider evaluation plan
 
 Created [[Report-Small-Cap-Data-Provider-Evaluation-Plan-2026-05-17]] as `SPEC_ONLY_NOT_EXECUTED`. It defines hard gates for point-in-time universe support, delisted symbols, corporate actions, raw/adjusted prices, halt/suspension representation, reproducibility and licensing/storage. No provider is selected, no backtest is authorized, and no small-cap trial is opened. Even a future provider pass is necessary but not sufficient: a separate methodology gate is still required before any small-cap trial.
+## Latest update - Run artifact validator
+
+Implemented `src.experiments.run_artifact_validator` as a tooling-hardening CLI. Usage: `python -m src.experiments.run_artifact_validator --run-dir <run_dir>`. It validates required run artifacts, manifest fields, CSV/JSON/markdown readability and returns exit code `0` on pass / `1` on fail. TDD coverage added in `tests/test_run_artifact_validator.py`; smoke read-only on `experiments/runs/nctrl_trial_001_2024_20260517` passed with `failed=0`. Full report: [[Report-Run-Artifact-Validator-2026-05-17]].

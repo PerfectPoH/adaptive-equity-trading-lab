@@ -385,6 +385,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: definire requisiti hard/soft per provider su point-in-time universe, delisted symbols, corporate actions, raw/adjusted prices, halt/suspension, riproducibilita' e licensing.
 - Stato: completato come spec-only in [[Report-Small-Cap-Data-Provider-Evaluation-Plan-2026-05-17]]. Nessun provider selezionato, nessun backtest autorizzato, nessun trial aperto.
 
+### RESEARCH-051 - Implementare run artifact validator CLI
+
+- Priorita: P2.
+- Sintomo: dopo molte run/documenti, mancava un comando riusabile per validare integrita' artifact post-run senza interpretare strategia.
+- Azione: implementare CLI `src.experiments.run_artifact_validator` con controlli su manifest, file richiesti, CSV/JSON/markdown e exit code.
+- Stato: completato con TDD; smoke read-only su `experiments/runs/nctrl_trial_001_2024_20260517` passato con `failed=0`.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
