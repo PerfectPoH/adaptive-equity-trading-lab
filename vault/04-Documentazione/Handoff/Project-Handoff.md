@@ -308,3 +308,6 @@ Created [[Report-Small-Cap-Data-Provider-Event-Panel-Expansion-2026-05-17]] afte
 ## Latest update - Provider evaluation execution checklist
 
 Created [[Report-Small-Cap-Provider-Evaluation-Execution-Checklist-2026-05-17]] as `CHECKLIST_READY / PROVIDER_QUERY_NOT_EXECUTED`. It turns the provider plan and frozen 10-event panel into an execution checklist with candidate provider notes, pre-execution gates, artifact layout, manifest fields, per-event audit fields, verdict rules and stop rules. Databento, Intrinio and Massive/Polygon have current public/free-trial signals; Tiingo and IEX Cloud remain direct-verification items. No provider is selected or queried, no cost is authorized, and no strategy trial is opened.
+## Latest update - Provider evaluation artifact validator
+
+Implemented `src.experiments.provider_evaluation_artifact_validator` with TDD. CLI: `python -m src.experiments.provider_evaluation_artifact_validator --evaluation-dir <provider_eval_dir>`. It validates required provider-evaluation files, `provider_manifest.json` fields, payment authorization guardrail, CSV/Markdown readability, required provider-event audit columns and exact frozen panel coverage `DPE-001..DPE-010`. Report: [[Report-Provider-Evaluation-Artifact-Validator-2026-05-17]]. This is tooling only: no provider query, no provider selected, no cost authorized, no trial opened.

@@ -427,6 +427,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: creare checklist per candidate provider, pre-execution gate, manifest, artifact layout, query plan, audit fields, verdict rules e stop rules.
 - Stato: completato in [[Report-Small-Cap-Provider-Evaluation-Execution-Checklist-2026-05-17]] come `CHECKLIST_READY / PROVIDER_QUERY_NOT_EXECUTED`. Nessun provider selezionato/query, nessun costo autorizzato, nessun trial aperto.
 
+### RESEARCH-057 - Implementare provider evaluation artifact validator
+
+- Priorita: P1.
+- Sintomo: una futura provider evaluation deve produrre artifact verificabili prima dell'interpretazione, evitando directory incomplete o panel non allineati.
+- Azione: implementare CLI TDD `src.experiments.provider_evaluation_artifact_validator` per validare manifest, required files, CSV/Markdown readability, payment guardrail e copertura `DPE-001..DPE-010`.
+- Stato: completato in [[Report-Provider-Evaluation-Artifact-Validator-2026-05-17]]. RED/GREEN TDD validato; nessun provider selezionato/query, nessun costo autorizzato, nessun trial aperto.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
