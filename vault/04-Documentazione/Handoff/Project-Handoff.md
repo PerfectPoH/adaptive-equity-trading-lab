@@ -314,3 +314,6 @@ Implemented `src.experiments.provider_evaluation_artifact_validator` with TDD. C
 ## Latest update - Provider evaluation dry-run template
 
 Created `experiments/provider_evaluations/example_provider_event_panel_20260517/` as a versioned dry-run provider-evaluation artifact template. It contains placeholder manifest, requirement table, event audit table, license notes, cost estimate, raw-response manifest, snapshot hashes and summary. The new validator passes on this template with `failed=0`, `passed=21`. Report: [[Report-Provider-Evaluation-Dry-Run-Template-2026-05-17]]. This is schema/scaffold verification only: no provider query, no provider selected, no cost authorized, no trial opened.
+## Latest update - Provider evaluation runbook
+
+Created [[Report-Provider-Evaluation-Runbook-2026-05-17]] as `RUNBOOK_READY / PROVIDER_QUERY_NOT_EXECUTED`. It defines the day-of-execution workflow for one real provider at a time: preconditions, secret handling, directory creation from the dry-run template, pre-query edits, frozen `DPE-001..DPE-010` query sequence, raw-response capture, snapshot hashing, audit row completion, validator gate, provider summary, verdict rules, stop rules, git rules and post-execution documentation. No provider is selected or queried, no cost is authorized, and no trial is opened.

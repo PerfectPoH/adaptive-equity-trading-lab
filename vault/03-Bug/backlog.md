@@ -441,6 +441,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: creare `experiments/provider_evaluations/example_provider_event_panel_20260517/` con artifact placeholder dry-run e validarla col CLI.
 - Stato: completato in [[Report-Provider-Evaluation-Dry-Run-Template-2026-05-17]]. Validator pass `failed=0`, `passed=21`; nessun provider selezionato/query, nessun costo autorizzato, nessun trial aperto.
 
+### RESEARCH-059 - Creare provider evaluation runbook
+
+- Priorita: P1.
+- Sintomo: prima di testare un provider reale serve un runbook giorno-esecuzione per evitare leak di segreti, costi non autorizzati, artifact non validati o provider shopping.
+- Azione: creare runbook con preconditions, secret handling, directory copy da template, query sequence, raw response capture, hashing, validator gate, verdict rules, stop rules, git rules e post-execution documentation.
+- Stato: completato in [[Report-Provider-Evaluation-Runbook-2026-05-17]] come `RUNBOOK_READY / PROVIDER_QUERY_NOT_EXECUTED`. Nessun provider selezionato/query, nessun costo autorizzato, nessun trial aperto.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
