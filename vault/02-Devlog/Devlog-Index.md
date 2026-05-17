@@ -101,6 +101,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-17-cascade-data-provider-event-panel-expansion]] - provider event panel expansion slots filled and verified; `CCB` rejected, `ICU` substituted.
 - [[2026-05-17-cascade-provider-evaluation-execution-checklist]] - provider evaluation execution checklist created; no provider query or selection.
 - [[2026-05-17-cascade-provider-evaluation-artifact-validator]] - TDD provider evaluation artifact validator CLI added for future provider-evaluation outputs.
+- [[2026-05-17-cascade-provider-evaluation-dry-run-template]] - dry-run provider evaluation artifact template created and validator-pass verified.
 
 ## Convenzione
 

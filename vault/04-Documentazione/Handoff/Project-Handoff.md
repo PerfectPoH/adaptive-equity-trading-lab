@@ -311,3 +311,6 @@ Created [[Report-Small-Cap-Provider-Evaluation-Execution-Checklist-2026-05-17]] 
 ## Latest update - Provider evaluation artifact validator
 
 Implemented `src.experiments.provider_evaluation_artifact_validator` with TDD. CLI: `python -m src.experiments.provider_evaluation_artifact_validator --evaluation-dir <provider_eval_dir>`. It validates required provider-evaluation files, `provider_manifest.json` fields, payment authorization guardrail, CSV/Markdown readability, required provider-event audit columns and exact frozen panel coverage `DPE-001..DPE-010`. Report: [[Report-Provider-Evaluation-Artifact-Validator-2026-05-17]]. This is tooling only: no provider query, no provider selected, no cost authorized, no trial opened.
+## Latest update - Provider evaluation dry-run template
+
+Created `experiments/provider_evaluations/example_provider_event_panel_20260517/` as a versioned dry-run provider-evaluation artifact template. It contains placeholder manifest, requirement table, event audit table, license notes, cost estimate, raw-response manifest, snapshot hashes and summary. The new validator passes on this template with `failed=0`, `passed=21`. Report: [[Report-Provider-Evaluation-Dry-Run-Template-2026-05-17]]. This is schema/scaffold verification only: no provider query, no provider selected, no cost authorized, no trial opened.

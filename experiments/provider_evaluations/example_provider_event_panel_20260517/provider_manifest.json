@@ -1,0 +1,23 @@
+{
+  "provider_name": "Example Provider Dry Run",
+  "provider_slug": "example_provider_dry_run",
+  "account_type": "dry_run_template",
+  "payment_authorized": false,
+  "payment_cap_usd": 0,
+  "execution_date": "2026-05-17",
+  "operator": "template",
+  "frozen_panel_report": "vault/04-Documentazione/Reports/Report-Small-Cap-Data-Provider-Event-Panel-2026-05-17.md",
+  "panel_expansion_report": "vault/04-Documentazione/Reports/Report-Small-Cap-Data-Provider-Event-Panel-Expansion-2026-05-17.md",
+  "terms_url": "DRY_RUN_TEMPLATE_NO_PROVIDER_TERMS",
+  "license_storage_verdict": "unclear",
+  "data_retention_allowed": "unclear",
+  "dataset_names": [
+    "DRY_RUN_TEMPLATE_NO_DATASET"
+  ],
+  "api_versions": [
+    "DRY_RUN_TEMPLATE_NO_API"
+  ],
+  "query_budget_estimate_usd": 0,
+  "actual_query_cost_usd": 0,
+  "provider_query_executed": false
+}

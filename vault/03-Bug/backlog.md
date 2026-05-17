@@ -434,6 +434,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: implementare CLI TDD `src.experiments.provider_evaluation_artifact_validator` per validare manifest, required files, CSV/Markdown readability, payment guardrail e copertura `DPE-001..DPE-010`.
 - Stato: completato in [[Report-Provider-Evaluation-Artifact-Validator-2026-05-17]]. RED/GREEN TDD validato; nessun provider selezionato/query, nessun costo autorizzato, nessun trial aperto.
 
+### RESEARCH-058 - Creare provider evaluation dry-run template
+
+- Priorita: P2.
+- Sintomo: prima di usare provider reali serve una directory esempio copiabile che dimostri che lo schema artifact e il validator sono compatibili.
+- Azione: creare `experiments/provider_evaluations/example_provider_event_panel_20260517/` con artifact placeholder dry-run e validarla col CLI.
+- Stato: completato in [[Report-Provider-Evaluation-Dry-Run-Template-2026-05-17]]. Validator pass `failed=0`, `passed=21`; nessun provider selezionato/query, nessun costo autorizzato, nessun trial aperto.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
