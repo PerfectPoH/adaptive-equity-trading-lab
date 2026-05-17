@@ -11,7 +11,7 @@ from src.data.downloader import download_ticker
 from src.data.small_cap_data_preparer import SmallCapPreparedData, prepare_small_cap_historical_data
 from src.data.small_cap_metadata_builder import MetadataProvider, write_small_cap_metadata_csv, yfinance_metadata_provider
 from src.experiments.small_cap_historical_runner import SmallCapHistoricalRunConfig, run_small_cap_historical_report
-from src.experiments.small_cap_trial_accounting import build_rankex_trial_001_accounting
+from src.experiments.small_cap_trial_accounting import build_nctrl_trial_001_accounting, build_rankex_trial_001_accounting
 
 Downloader = Callable[[str, str, str | None], pd.DataFrame]
 
@@ -181,6 +181,8 @@ def _resolve_trial_accounting(trial_id: str | None) -> dict[str, Any] | None:
         return None
     if trial_id == "TRIAL-RANKEX-001":
         return build_rankex_trial_001_accounting()
+    if trial_id == "TRIAL-NCTRL-001":
+        return build_nctrl_trial_001_accounting()
     raise ValueError(f"unsupported trial_id: {trial_id}")
 
 

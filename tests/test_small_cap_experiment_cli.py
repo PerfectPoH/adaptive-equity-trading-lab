@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 
 from src.experiments import small_cap_experiment_cli
-from src.experiments.small_cap_trial_accounting import build_rankex_trial_001_accounting
+from src.experiments.small_cap_trial_accounting import build_nctrl_trial_001_accounting, build_rankex_trial_001_accounting
 from src.experiments.small_cap_experiment_cli import main, run_small_cap_historical_experiment, run_small_cap_watchlist_experiment
 
 
@@ -83,6 +83,23 @@ def test_build_rankex_trial_001_accounting_payload_matches_preregistration() -> 
             {"column": "symbol", "ascending": True},
         ],
     }
+
+
+def test_build_nctrl_trial_001_accounting_payload_matches_preregistration() -> None:
+    payload = build_nctrl_trial_001_accounting()
+
+    assert payload["trial_id"] == "TRIAL-NCTRL-001"
+    assert payload["research_question"] == "property_based_negative_control"
+    assert payload["hypothesis_family"] == "negative_control"
+    assert payload["status"] == "implementation_ready_not_run"
+    assert payload["validation_window"] == "2024-01-02..2024-12-31"
+    assert payload["universe"] == ["AAPL", "MSFT", "NVDA", "AMD", "TSLA", "META", "AMZN", "GOOGL", "SPY", "QQQ"]
+    assert payload["sample_size_stop_rule"] == "closed_trades < 30 => insufficient_evidence"
+    assert payload["bootstrap_random_baseline"]["simulations"] == 1000
+    assert payload["bootstrap_random_baseline"]["base_seed"] == 700
+    assert payload["random_entry_simulator"]["seed"] == 701
+    assert payload["execution_gate"] == "do_not_execute_until_property_check_infrastructure_complete"
+    assert payload["candidate_run_id"] is None
 
 
 def test_run_small_cap_historical_experiment_forwards_trial_accounting(tmp_path: Path) -> None:
@@ -255,4 +272,31 @@ def test_small_cap_experiment_cli_main_passes_rankex_trial_accounting(tmp_path: 
 
     assert exit_code == 0
     assert calls["trial_accounting"]["trial_id"] == "TRIAL-RANKEX-001"
+    assert calls["trial_accounting"]["candidate_run_id"] is None
+
+
+def test_small_cap_experiment_cli_main_passes_nctrl_trial_accounting(tmp_path: Path, monkeypatch) -> None:
+    calls: dict[str, object] = {}
+
+    def fake_run(**kwargs):
+        calls.update(kwargs)
+        return {}
+
+    monkeypatch.setattr(small_cap_experiment_cli, "run_small_cap_historical_experiment", fake_run)
+
+    exit_code = main(
+        [
+            "--metadata-path",
+            str(tmp_path / "metadata.csv"),
+            "--output-dir",
+            str(tmp_path / "run"),
+            "--start",
+            "2024-01-01",
+            "--trial-id",
+            "TRIAL-NCTRL-001",
+        ]
+    )
+
+    assert exit_code == 0
+    assert calls["trial_accounting"]["trial_id"] == "TRIAL-NCTRL-001"
     assert calls["trial_accounting"]["candidate_run_id"] is None

@@ -362,7 +362,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Priorita: P1.
 - Sintomo: `TRIAL-NCTRL-001` e' pre-registrato, ma non e' eseguibile finche' non esistono P5/P6/P4/reporting/accounting wiring.
 - Azione: implementare con TDD bootstrap random baseline N=1000, random-entry simulator che preserva execution/portfolio/risk_fraction, fixture cash-ledger timing, property-check report writer e trial accounting wiring.
-- Stato: prerequisito bloccante prima dell'esecuzione singola `TRIAL-NCTRL-001`.
+- Stato: completato come infrastruttura TDD; verificati 43 test mirati passati. `TRIAL-NCTRL-001` non eseguito in questo step.
 
 ## Tech debt
 

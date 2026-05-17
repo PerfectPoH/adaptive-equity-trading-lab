@@ -4,7 +4,12 @@ import math
 
 import pandas as pd
 
-from src.analysis.small_cap_benchmarks import SmallCapBenchmarkConfig, build_small_cap_benchmark_report
+from src.analysis.small_cap_benchmarks import (
+    SmallCapBenchmarkConfig,
+    SmallCapBootstrapRandomBaselineConfig,
+    build_bootstrap_random_baseline_report,
+    build_small_cap_benchmark_report,
+)
 
 
 def _frames() -> dict[str, pd.DataFrame]:
@@ -89,3 +94,28 @@ def test_small_cap_benchmark_report_handles_missing_iwm() -> None:
 
     assert math.isnan(report.loc["iwm_proxy", "return"])
     assert report.loc["iwm_proxy", "observations"] == 0
+
+
+def test_bootstrap_random_baseline_report_is_distribution_aware_and_reproducible() -> None:
+    config = SmallCapBootstrapRandomBaselineConfig(simulations=1000, base_seed=700, holding_period_bars=2)
+
+    first = build_bootstrap_random_baseline_report(_candidate_export(), _frames(), config=config)
+    second = build_bootstrap_random_baseline_report(_candidate_export(), _frames(), config=config)
+
+    assert first == second
+    assert first["simulations"] == 1000
+    assert first["base_seed"] == 700
+    assert first["seed_start"] == 700
+    assert first["seed_end"] == 1699
+    assert first["observations_per_simulation_min"] == 2
+    assert first["observations_per_simulation_max"] == 2
+    assert first["p05_return"] <= first["median_return"] <= first["p95_return"]
+    assert math.isfinite(first["mean_return"])
+
+
+def test_bootstrap_random_baseline_config_changes_are_explicit() -> None:
+    default = SmallCapBootstrapRandomBaselineConfig()
+
+    assert default.simulations == 1000
+    assert default.base_seed == 700
+    assert default.holding_period_bars == 5

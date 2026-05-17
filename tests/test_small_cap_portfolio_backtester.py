@@ -101,6 +101,110 @@ def test_portfolio_backtester_releases_cash_before_later_candidate() -> None:
     assert result.summary["ending_cash"] > 15_000.0
 
 
+def test_portfolio_backtester_cash_stays_locked_until_exit_date() -> None:
+    frames = {
+        "AAA": _frame([10.0, 10.0, 11.0, 12.0, 13.0]),
+        "BBB": _frame([10.0, 10.0, 11.0, 12.0, 13.0]),
+        "CCC": _frame([10.0, 10.0, 11.0, 12.0, 13.0]),
+    }
+    candidates = pd.DataFrame(
+        [
+            _candidate("AAA", "2024-01-01", score=100.0),
+            _candidate("BBB", "2024-01-02", score=90.0),
+            _candidate("CCC", "2024-01-03", score=80.0),
+        ]
+    )
+    config = SmallCapPortfolioBacktestConfig(
+        initial_cash=15_000.0,
+        holding_period_bars=1,
+        execution=SmallCapExecutionConfig(spread_bps=0.0, slippage_bps=0.0, min_trade_notional=100.0, risk_fraction=1.0),
+    )
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=config)
+
+    assert result.trade_log["symbol"].tolist() == ["AAA", "CCC"]
+    assert result.rejections["symbol"].tolist() == ["BBB"]
+    assert result.rejections.iloc[0]["reject_reason"] == "insufficient_funds"
+    assert result.rejections.iloc[0]["available_cash"] == 0.0
+    assert result.trade_log.iloc[0]["cash_after_exit"] == 16_500.0
+
+
+def test_portfolio_backtester_releases_exit_cash_before_same_day_candidate() -> None:
+    frames = {
+        "AAA": _frame([10.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0]),
+        "BBB": _frame([10.0, 10.0, 10.0, 11.0, 11.0, 12.0, 13.0]),
+    }
+    candidates = pd.DataFrame([_candidate("AAA", "2024-01-01", score=100.0), _candidate("BBB", "2024-01-04", score=90.0)])
+    config = SmallCapPortfolioBacktestConfig(
+        initial_cash=15_000.0,
+        holding_period_bars=2,
+        execution=SmallCapExecutionConfig(spread_bps=0.0, slippage_bps=0.0, min_trade_notional=100.0, risk_fraction=1.0),
+    )
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=config)
+
+    assert result.trade_log["symbol"].tolist() == ["AAA", "BBB"]
+    assert result.trade_log.iloc[0]["exit_date"] == pd.Timestamp("2024-01-04")
+    assert result.trade_log.iloc[1]["entry_date"] == pd.Timestamp("2024-01-05")
+    assert result.trade_log.iloc[1]["cash_after_entry"] == 4.0
+    assert result.rejection_summary == {}
+
+
+def test_portfolio_backtester_rejects_when_holding_window_cannot_close_position() -> None:
+    frames = {"AAA": _frame([10.0, 10.0])}
+    candidates = pd.DataFrame([_candidate("AAA", "2024-01-01")])
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=_config(holding_period_bars=1))
+
+    assert result.trade_log.empty
+    assert result.rejection_summary == {"missing_price_path": 1}
+    assert result.summary["ending_cash"] == 100_000.0
+    assert result.equity_curve.iloc[0]["open_positions"] == 0
+
+
+def test_portfolio_backtester_gap_rejection_does_not_spend_cash() -> None:
+    frames = {"AAA": _frame([10.0, 12.0, 12.0, 12.0], opens=[10.0, 12.0, 12.0, 12.0])}
+    candidates = pd.DataFrame([_candidate("AAA", "2024-01-01")])
+    config = SmallCapPortfolioBacktestConfig(
+        initial_cash=15_000.0,
+        holding_period_bars=1,
+        execution=SmallCapExecutionConfig(spread_bps=0.0, slippage_bps=0.0, max_next_open_gap=0.10, min_trade_notional=100.0),
+    )
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=config)
+
+    assert result.trade_log.empty
+    assert result.rejection_summary == {"gap_above_max": 1}
+    assert result.rejections.iloc[0]["available_cash"] == 15_000.0
+    assert result.summary["ending_cash"] == 15_000.0
+    assert result.equity_curve.iloc[0]["cash"] == 15_000.0
+
+
+def test_portfolio_backtester_open_position_equity_keeps_cash_locked_before_exit() -> None:
+    frames = {
+        "AAA": _frame([10.0, 10.0, 11.0, 12.0, 13.0]),
+        "BBB": _frame([10.0, 10.0, 11.0, 12.0, 13.0]),
+    }
+    candidates = pd.DataFrame([_candidate("AAA", "2024-01-01", score=100.0), _candidate("BBB", "2024-01-02", score=90.0)])
+    config = SmallCapPortfolioBacktestConfig(
+        initial_cash=15_000.0,
+        holding_period_bars=2,
+        execution=SmallCapExecutionConfig(spread_bps=0.0, slippage_bps=0.0, min_trade_notional=100.0, risk_fraction=1.0),
+    )
+
+    result = run_small_cap_portfolio_backtest(candidates, frames, config=config)
+
+    first_open_row = result.equity_curve[result.equity_curve["date"].eq(pd.Timestamp("2024-01-01"))].iloc[0]
+    second_open_row = result.equity_curve[result.equity_curve["date"].eq(pd.Timestamp("2024-01-02"))].iloc[0]
+    final_row = result.equity_curve.iloc[-1]
+    assert first_open_row["cash"] == 0.0
+    assert second_open_row["cash"] == 0.0
+    assert second_open_row["open_positions"] == 1
+    assert second_open_row["open_position_notional"] == 15_000.0
+    assert final_row["cash"] == result.summary["ending_cash"]
+    assert final_row["open_positions"] == 0
+
+
 def test_portfolio_backtester_respects_max_concurrent_positions() -> None:
     frames = {
         "AAA": _frame([10.0, 10.0, 11.0, 12.0]),

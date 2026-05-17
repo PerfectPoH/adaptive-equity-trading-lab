@@ -12,6 +12,13 @@ class SmallCapBenchmarkConfig:
     random_seed: int = 42
 
 
+@dataclass(frozen=True)
+class SmallCapBootstrapRandomBaselineConfig:
+    simulations: int = 1000
+    base_seed: int = 700
+    holding_period_bars: int = 5
+
+
 BENCHMARK_ORDER = [
     "cash_flat",
     "iwm_proxy",
@@ -55,6 +62,61 @@ def build_small_cap_benchmark_report(
     ]
     report = pd.DataFrame(rows)
     return report.sort_values("benchmark", key=lambda series: series.map({name: i for i, name in enumerate(BENCHMARK_ORDER)})).reset_index(drop=True)
+
+
+def build_bootstrap_random_baseline_report(
+    candidate_export: pd.DataFrame,
+    frames: dict[str, pd.DataFrame],
+    config: SmallCapBootstrapRandomBaselineConfig = SmallCapBootstrapRandomBaselineConfig(),
+) -> dict[str, float | int]:
+    if config.simulations <= 0:
+        raise ValueError("simulations must be positive")
+    if config.holding_period_bars <= 0:
+        raise ValueError("holding_period_bars must be positive")
+
+    returns: list[float] = []
+    observations: list[int] = []
+    for seed in range(config.base_seed, config.base_seed + config.simulations):
+        value, count = _random_entry_return(
+            candidate_export,
+            frames,
+            SmallCapBenchmarkConfig(holding_period_bars=config.holding_period_bars, random_seed=seed),
+        )
+        if pd.notna(value):
+            returns.append(float(value))
+        observations.append(int(count))
+
+    series = pd.Series(returns, dtype=float)
+    obs_series = pd.Series(observations, dtype=int)
+    if series.empty:
+        return {
+            "simulations": int(config.simulations),
+            "base_seed": int(config.base_seed),
+            "seed_start": int(config.base_seed),
+            "seed_end": int(config.base_seed + config.simulations - 1),
+            "mean_return": float("nan"),
+            "median_return": float("nan"),
+            "std_return": float("nan"),
+            "p05_return": float("nan"),
+            "p95_return": float("nan"),
+            "observations_per_simulation_min": int(obs_series.min()) if not obs_series.empty else 0,
+            "observations_per_simulation_max": int(obs_series.max()) if not obs_series.empty else 0,
+            "valid_simulations": 0,
+        }
+    return {
+        "simulations": int(config.simulations),
+        "base_seed": int(config.base_seed),
+        "seed_start": int(config.base_seed),
+        "seed_end": int(config.base_seed + config.simulations - 1),
+        "mean_return": float(series.mean()),
+        "median_return": float(series.median()),
+        "std_return": float(series.std(ddof=1)) if len(series) > 1 else float("nan"),
+        "p05_return": float(series.quantile(0.05)),
+        "p95_return": float(series.quantile(0.95)),
+        "observations_per_simulation_min": int(obs_series.min()) if not obs_series.empty else 0,
+        "observations_per_simulation_max": int(obs_series.max()) if not obs_series.empty else 0,
+        "valid_simulations": int(len(series)),
+    }
 
 
 def _row(benchmark: str, benchmark_return: float, observations: int, description: str) -> dict[str, object]:

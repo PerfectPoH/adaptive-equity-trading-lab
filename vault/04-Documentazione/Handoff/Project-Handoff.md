@@ -275,3 +275,6 @@ A Lessons Learned report was created: [[Report-Small-Cap-Lessons-Learned-Data-Qu
 ## Latest update - TRIAL-NCTRL-001 preregistration
 
 `TRIAL-NCTRL-001` is pre-registered in [[Report-Negative-Control-Trial-001-Preregistration-2026-05-15]] as a property-based negative control, not a strategy test. Status: `PRE-REGISTERED / NOT RUN / NOT IMPLEMENTATION-COMPLETE`. Universe: AAPL, MSFT, NVDA, AMD, TSLA, META, AMZN, GOOGL, SPY, QQQ. Window: 2024-01-02..2024-12-31 with download warmup from 2023-01-03. Sample-size rule: closed trades < 30 => `insufficient_evidence`. Execution is blocked until TDD implementation of P5 bootstrap random baseline N=1000, P6 random-entry simulator, P4 cash ledger fixture tests, property-check report writer, and trial accounting wiring.
+## Latest update - TRIAL-NCTRL-001 infrastructure complete
+
+`RESEARCH-047` is completed as TDD infrastructure only: P4 cash-ledger fixtures, P5 bootstrap random baseline (`N=1000`, `base_seed=700`), P6 deterministic random-entry candidate simulator (`seed=701`), P7/P8 property-check report writer, and `TRIAL-NCTRL-001` trial-accounting wiring are implemented. Verification: 43 targeted tests passed. `TRIAL-NCTRL-001` has not been executed in this step; next allowed step is one preregistered execution/reporting pass, not strategy promotion.
