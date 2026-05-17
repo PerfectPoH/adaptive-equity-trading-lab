@@ -455,6 +455,13 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Azione: creare `experiments/provider_evaluations/intrinio_starter_event_panel_20260517/` da template, aggiornare manifest/license/cost/event audit senza segreti e validare col CLI.
 - Stato: completato in [[Report-Intrinio-Provider-Evaluation-Preflight-2026-05-17]] come `PREFLIGHT_READY / PROVIDER_QUERY_NOT_EXECUTED`. Validator pass `failed=0`, `passed=21`; API key non usata e non salvata; richiede rotazione/sostituzione prima di query reale.
 
+### RESEARCH-061 - Quant research architecture upgrade plan
+
+- Priorita: P1.
+- Sintomo: analisi critica esterna identifica tre gap sistemici: meta-overfitting del framework, execution realism insufficiente e validazione finita ancora migliorabile.
+- Azione: creare piano spec-only con roadmap per validation integrity, execution realism, strategy lifecycle tracking ed event-driven architecture, evitando rewrite/microservizi prematuri.
+- Stato: completato in [[Report-Quant-Research-Architecture-Upgrade-Plan-2026-05-17]]. Prossimo candidato: `RESEARCH-062` purged temporal split + embargo validator con TDD synthetic fixtures; nessun trial/query/backtest autorizzato.
+
 ## Tech debt
 
 ### TECH-DEBT-001 - `.venv` parziale da ripulire
