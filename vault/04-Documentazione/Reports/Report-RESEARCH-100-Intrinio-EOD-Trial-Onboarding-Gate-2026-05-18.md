@@ -126,3 +126,37 @@ Validator after provider answers:
 intrinio onboarding validator: 42/42 pass
 targeted tests: 12/12 pass
 ```
+
+## Credential replacement recorded
+
+The user stated that the Intrinio API key was changed and placed in local `.env` as:
+
+```text
+INTRINIO_API_KEY
+```
+
+A presence-only credential preflight was run against `.env`:
+
+```text
+status: pass
+source: env-file
+provider_query_performed: false
+network_call_performed: false
+secret_values_disclosed: false
+value_disclosed: false
+```
+
+Updated gate status:
+
+```text
+SPEC_ONLY_INTRINIO_CREDENTIAL_READY_NOT_QUERIED
+INTRINIO_EOD_TRIAL_READY_FOR_ONE_PROBE_APPROVAL_NOT_EXECUTED
+```
+
+Remaining hard blockers:
+
+```text
+separate_probe_approval_missing: unresolved
+output_directory_not_created: unresolved
+trial_ledger_entry_not_created: unresolved
+```

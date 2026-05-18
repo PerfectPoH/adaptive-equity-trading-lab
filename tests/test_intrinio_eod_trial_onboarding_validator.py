@@ -173,5 +173,42 @@ def test_validate_intrinio_eod_trial_onboarding_accepts_answered_provider_questi
     report = validate_intrinio_eod_trial_onboarding(artifact)
 
     assert report["status"] == "pass"
-    assert any(check["name"] == "blockers_critical_probe_guards_unresolved" and check["status"] == "pass" for check in report["checks"])
+    assert any(check["name"] == "blockers_probe_approval_still_unresolved" and check["status"] == "pass" for check in report["checks"])
+
+
+def test_validate_intrinio_eod_trial_onboarding_accepts_credential_ready_state(tmp_path: Path) -> None:
+    artifact = _write_valid_gate(tmp_path)
+    manifest_path = artifact / "intrinio_eod_trial_onboarding_manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["status"] = "SPEC_ONLY_INTRINIO_CREDENTIAL_READY_NOT_QUERIED"
+    manifest["decision"] = "INTRINIO_EOD_TRIAL_READY_FOR_ONE_PROBE_APPROVAL_NOT_EXECUTED"
+    manifest["credential_rotation_required"] = False
+    manifest["credential_rotation_status"] = "resolved_by_user_replaced_key"
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    (artifact / "intrinio_credential_policy.csv").write_text(
+        "policy,status,requirement\n"
+        "credential_source,env_file_or_environment_only,INTRINIO_API_KEY only\n"
+        "credential_disclosure,forbidden,no disclosure\n"
+        "prior_key_rotation,resolved_by_user_replaced_key,user replaced key\n"
+        "credential_preflight,pass_env_file_presence_only,presence only\n"
+        "account_page_access,user_only,user retrieves keys\n",
+        encoding="utf-8",
+    )
+    (artifact / "intrinio_blocker_register.csv").write_text(
+        "blocker,severity,status,resolution_required\n"
+        "prior_key_exposed_in_chat,critical,resolved,rotated\n"
+        "terms_for_derived_artifacts_unknown,high,resolved,derived only\n"
+        "endpoint_not_confirmed,high,resolved,docs\n"
+        "rate_limits_unknown,medium,resolved,2k/min\n"
+        "separate_probe_approval_missing,critical,unresolved,approve one probe\n"
+        "output_directory_not_created,medium,unresolved,create output\n"
+        "trial_ledger_entry_not_created,medium,unresolved,create ledger\n",
+        encoding="utf-8",
+    )
+
+    report = validate_intrinio_eod_trial_onboarding(artifact)
+
+    assert report["status"] == "pass"
+    assert any(check["name"] == "manifest_credential_rotation_state_valid" and check["status"] == "pass" for check in report["checks"])
+    assert any(check["name"] == "blockers_probe_approval_still_unresolved" and check["status"] == "pass" for check in report["checks"])
 

@@ -96,8 +96,8 @@ def main(argv: list[str] | None = None) -> int:
 
 
 def _validate_manifest(manifest: dict[str, Any], checks: list[dict[str, str]]) -> None:
-    status_ok = manifest.get("status") in {"SPEC_ONLY_INTRINIO_TRIAL_ACTIVE_NOT_QUERIED", "SPEC_ONLY_INTRINIO_TRIAL_INFO_RESOLVED_NOT_QUERIED"}
-    decision_ok = manifest.get("decision") in {"INTRINIO_EOD_TRIAL_ONBOARDING_DEFINED_NOT_EXECUTED", "INTRINIO_EOD_TRIAL_READY_FOR_ONE_PROBE_PREPARATION_NOT_APPROVED"}
+    status_ok = manifest.get("status") in {"SPEC_ONLY_INTRINIO_TRIAL_ACTIVE_NOT_QUERIED", "SPEC_ONLY_INTRINIO_TRIAL_INFO_RESOLVED_NOT_QUERIED", "SPEC_ONLY_INTRINIO_CREDENTIAL_READY_NOT_QUERIED"}
+    decision_ok = manifest.get("decision") in {"INTRINIO_EOD_TRIAL_ONBOARDING_DEFINED_NOT_EXECUTED", "INTRINIO_EOD_TRIAL_READY_FOR_ONE_PROBE_PREPARATION_NOT_APPROVED", "INTRINIO_EOD_TRIAL_READY_FOR_ONE_PROBE_APPROVAL_NOT_EXECUTED"}
     no_execution = (
         manifest.get("provider_query_performed") is False
         and manifest.get("network_call_performed") is False
@@ -107,13 +107,13 @@ def _validate_manifest(manifest: dict[str, Any], checks: list[dict[str, str]]) -
     )
     safety = manifest.get("raw_payload_retention_allowed") is False and manifest.get("secret_values_disclosed") is False
     approval_gate = manifest.get("separate_probe_approval_required") is True
-    rotation = manifest.get("credential_rotation_required") is True
+    rotation = manifest.get("credential_rotation_required") in {True, False}
     budget = manifest.get("max_first_probe_symbols") == 1 and manifest.get("max_first_probe_provider_calls") == 1
     _add_check(checks, "manifest_status_spec_only", status_ok and decision_ok, f"status={manifest.get('status')}; decision={manifest.get('decision')}")
     _add_check(checks, "manifest_no_execution_flags", no_execution, f"no_execution={no_execution}")
     _add_check(checks, "manifest_safety_flags", safety, f"safety={safety}")
     _add_check(checks, "manifest_separate_probe_approval_required", approval_gate, f"approval={manifest.get('separate_probe_approval_required')}")
-    _add_check(checks, "manifest_credential_rotation_required", rotation, f"credential_rotation_required={manifest.get('credential_rotation_required')}")
+    _add_check(checks, "manifest_credential_rotation_state_valid", rotation, f"credential_rotation_required={manifest.get('credential_rotation_required')}; status={manifest.get('credential_rotation_status')}")
     _add_check(checks, "manifest_first_probe_budget_bounded", budget, f"symbols={manifest.get('max_first_probe_symbols')}; calls={manifest.get('max_first_probe_provider_calls')}")
     _add_check(checks, "manifest_env_var_declared", manifest.get("required_env_var") == "INTRINIO_API_KEY", f"required_env_var={manifest.get('required_env_var')}")
 
@@ -146,7 +146,8 @@ def _validate_credentials(frame: pd.DataFrame, checks: list[dict[str, str]]) -> 
     disclosure = frame[frame["policy"].astype(str).eq("credential_disclosure")] if not missing_columns else pd.DataFrame()
     _add_check(checks, "credential_required_columns", not missing_columns, f"missing={missing_columns}")
     _add_check(checks, "credential_required_policies", REQUIRED_CREDENTIAL_POLICIES.issubset(policies), f"missing={sorted(REQUIRED_CREDENTIAL_POLICIES - policies)}")
-    _add_check(checks, "credential_rotation_required", len(rotation) == 1 and str(rotation.iloc[0]["status"]) == "required_before_query", f"rotation_rows={len(rotation)}")
+    rotation_status_ok = len(rotation) == 1 and str(rotation.iloc[0]["status"]) in {"required_before_query", "resolved_by_user_replaced_key"}
+    _add_check(checks, "credential_rotation_state_valid", rotation_status_ok, f"rotation_rows={len(rotation)}; status={str(rotation.iloc[0]['status']) if len(rotation) == 1 else ''}")
     _add_check(checks, "credential_disclosure_forbidden", len(disclosure) == 1 and str(disclosure.iloc[0]["status"]) == "forbidden", f"disclosure_rows={len(disclosure)}")
 
 
@@ -170,13 +171,13 @@ def _validate_blockers(frame: pd.DataFrame, checks: list[dict[str, str]]) -> Non
     blockers = set(frame["blocker"].astype(str)) if not missing_columns else set()
     statuses = {str(row["blocker"]): str(row["status"]).lower() for _, row in frame.iterrows()} if not missing_columns else {}
     critical = frame.loc[frame["severity"].astype(str).str.lower().eq("critical"), "blocker"].astype(str).tolist() if not missing_columns else []
-    critical_unresolved = statuses.get("prior_key_exposed_in_chat") == "unresolved" and statuses.get("separate_probe_approval_missing") == "unresolved"
+    critical_unresolved = statuses.get("prior_key_exposed_in_chat") in {"unresolved", "resolved"} and statuses.get("separate_probe_approval_missing") == "unresolved"
     allowed_statuses = all(status in {"unresolved", "resolved"} for status in statuses.values())
     _add_check(checks, "blockers_required_columns", not missing_columns, f"missing={missing_columns}")
     _add_check(checks, "blockers_required_items", REQUIRED_BLOCKERS.issubset(blockers), f"missing={sorted(REQUIRED_BLOCKERS - blockers)}")
     _add_check(checks, "blockers_statuses_unresolved_or_resolved", allowed_statuses, f"statuses={statuses}")
     _add_check(checks, "blockers_critical_probe_guards_present", {"prior_key_exposed_in_chat", "separate_probe_approval_missing"}.issubset(set(critical)), f"critical={critical}")
-    _add_check(checks, "blockers_critical_probe_guards_unresolved", critical_unresolved, f"statuses={statuses}")
+    _add_check(checks, "blockers_probe_approval_still_unresolved", critical_unresolved, f"statuses={statuses}")
 
 
 def _read_json(path: Path, checks: list[dict[str, str]]) -> dict[str, Any] | None:

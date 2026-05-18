@@ -1,5 +1,5 @@
 blocker,severity,status,resolution_required
-prior_key_exposed_in_chat,critical,unresolved,rotate_or_replace_intrinio_key_before_any_query
+prior_key_exposed_in_chat,critical,resolved,user replaced key and presence-only env-file preflight passed
 terms_for_derived_artifacts_unknown,high,resolved,provider answered yes for research validation; retain only derived metrics/hash summaries
 endpoint_not_confirmed,high,resolved,provider supplied stock_prices_v2 and security_historical_data_v2 docs
 rate_limits_unknown,medium,resolved,provider stated 2000 calls per minute
