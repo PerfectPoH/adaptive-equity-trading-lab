@@ -1,0 +1,10 @@
+field,value,status
+max_new_provider_queries,3,blocked_until_separate_approval
+max_total_panel_candidates,4,defined
+databento_dataset,EQUS.MINI,defined
+databento_schema,ohlcv-1d,defined
+polygon_scope,ticker_reference_only,defined
+raw_payload_retention,false,required
+sleep_seconds_between_candidates,13,required
+output_dir,experiments/provider_aware_research/execution_outputs/MINIPANEL-PREREG-PA-SMALLCAP-001-001,not_created
+trial_ledger_entries,not_created,blocked_until_separate_approval

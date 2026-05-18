@@ -1,0 +1,7 @@
+gate,status,requirement
+separate_user_approval,not_granted,explicit approval required before any mini-panel query
+output_directory,not_created,create immutable mini-panel output dir after approval
+trial_ledger_entries,not_created,create entries for proposed new queries after approval
+credential_presence,pass,env-file credentials already presence-checked without disclosure
+single_candidate_limit_removed,not_implemented,runner must be extended to bounded mini-panel mode
+strategy_promotion,blocked,no promotion from diagnostic panel

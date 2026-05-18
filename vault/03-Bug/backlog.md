@@ -708,3 +708,9 @@ Recorded user approval artifact, created immutable output directory for `RUN-PRE
 Stato: `APPROVED_SINGLE_DIAGNOSTIC_COMPLETED / STRATEGY_PROMOTION_REMAINS_BLOCKED`.
 
 Executed one approved diagnostic for `CRMD` under `RUN-PREREG-PA-SMALLCAP-001-001`. Provider query performed, no raw payload retention, no backtest, no sweep, no promotion. Databento status `pass`, Polygon status `OK`, sensitivity class `provider_stable_for_selected_fields`. Result is evidence for this candidate only.
+
+### RESEARCH-098 - Mini-panel approval gate
+
+Stato: `MINI_PANEL_DEFINED_NOT_EXECUTED / SPEC_ONLY_AWAITING_SEPARATE_APPROVAL`.
+
+Created a 4-candidate mini-panel approval gate with CRMD as executed anchor and IOVA/CABA/IOVA-2025-12 as proposed new queries. Validator passes 36/36. No provider query, backtest, sweep, promotion, output directory creation, or mini-panel ledger entry was performed. Separate approval and bounded runner support are required before execution.

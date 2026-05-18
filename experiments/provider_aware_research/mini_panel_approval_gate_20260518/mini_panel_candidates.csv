@@ -1,0 +1,5 @@
+panel_slot,candidate_role,reference_run,symbol,signal_date,entry_date,exit_date,entry_price,exit_price,return_pct,execution_status,provider_query_allowed_without_new_approval
+1,executed_anchor,multiyear_2022_2024_risk_sizing,CRMD,2024-04-11,2024-04-12,2024-04-19,6.5044,5.28000020980835,-0.1882417732906418,already_executed_single_diagnostic,no
+2,proposed_new_query,oos_2025_risk_sizing,IOVA,2025-07-16,2025-07-17,2025-07-24,2.2826,3.289999961853028,0.4413388074358308,not_executed,no
+3,proposed_new_query,multiyear_2022_2024_risk_sizing,CABA,2022-08-10,2022-08-11,2022-08-18,1.3736,1.4199999570846558,0.0337798173301222,not_executed,no
+4,proposed_new_query,oos_2025_risk_sizing,IOVA,2025-12-17,2025-12-18,2025-12-26,2.6058,2.8499999046325684,0.0937139859669078,not_executed,no

@@ -1,0 +1,24 @@
+{
+  "approval_status": "not_granted_for_mini_panel",
+  "artifact_id": "MINI-PANEL-APPROVAL-GATE-PREREG-PA-SMALLCAP-001-20260518",
+  "backtest_performed": false,
+  "candidate_count": 4,
+  "decision": "MINI_PANEL_DEFINED_NOT_EXECUTED",
+  "max_total_panel_candidates": 5,
+  "new_provider_query_count_proposed": 3,
+  "panel_id": "MINIPANEL-PREREG-PA-SMALLCAP-001-001",
+  "preregistration_id": "PREREG-PA-SMALLCAP-001",
+  "previously_executed_anchor_count": 1,
+  "provider_query_performed": false,
+  "raw_payload_retention_allowed": false,
+  "required_tables": [
+    "mini_panel_candidates.csv",
+    "mini_panel_query_plan.csv",
+    "mini_panel_stop_rules.csv",
+    "mini_panel_approval_checklist.csv"
+  ],
+  "research_stage": "new_signal_research",
+  "separate_approval_required": true,
+  "status": "SPEC_ONLY_AWAITING_SEPARATE_APPROVAL",
+  "strategy_promotion_performed": false
+}
