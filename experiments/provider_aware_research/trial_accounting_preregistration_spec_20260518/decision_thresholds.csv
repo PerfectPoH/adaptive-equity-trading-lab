@@ -1,0 +1,4 @@
+threshold_id,stage,primary_metric,go_condition,stop_condition,caveat_condition
+TH-001,new_signal_research,predeclared_primary_metric,metric clears threshold with no critical governance failure,critical governance failure or exhausted trial budget,minor provider/policy caveats require diagnostic-only status
+TH-002,portfolio_backtest,predeclared_portfolio_metric,policy gates passed and metric clears threshold,policy gate failure or first run fails threshold,performance cannot be promoted without separate gate
+TH-003,OOS,predeclared_oos_metric,OOS clears threshold after in-sample freeze,OOS fails threshold or any holdout leakage,requires caveat if provider warning present

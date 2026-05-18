@@ -1,0 +1,16 @@
+{
+  "decision": "TRIAL_ACCOUNTING_AND_PREREGISTRATION_REQUIRED_BEFORE_SIGNAL_RESEARCH",
+  "no_backtest": true,
+  "no_provider_query": true,
+  "no_strategy_promotion": true,
+  "purpose": "Prevent p-hacking, continuation bias, and silent trial reuse before any new signal research or performance run.",
+  "required_tables": [
+    "preregistration_template.csv",
+    "trial_budget_policy.csv",
+    "decision_thresholds.csv",
+    "trial_ledger_template.csv",
+    "research_stage_enforcement.csv"
+  ],
+  "scope": "Provider-aware small-cap research track",
+  "status": "SPEC_ONLY_NOT_EXECUTED"
+}

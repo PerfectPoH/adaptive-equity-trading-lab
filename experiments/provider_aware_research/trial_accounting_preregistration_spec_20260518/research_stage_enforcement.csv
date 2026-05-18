@@ -1,0 +1,7 @@
+research_stage,preregistration_required,trial_ledger_required,trial_budget_required,promotion_allowed
+data_quality_diagnostic,recommended,recommended,no,no
+fixed_signal_replay,recommended,recommended,no,no
+new_signal_research,yes,yes,yes,no
+portfolio_backtest,yes,yes,yes,no_until_separate_promotion_gate
+OOS,yes,yes,yes,no_until_separate_promotion_gate
+paper_live,yes,yes,yes,conditional

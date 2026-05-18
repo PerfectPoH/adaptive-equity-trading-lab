@@ -1,0 +1,2 @@
+trial_id,preregistration_id,stage,executed_at,code_commit,artifact_dir,trial_number,within_budget,result_status,decision,notes
+TRIAL-TEMPLATE-001,PREREG-TEMPLATE-001,new_signal_research,not_executed,commit_required,artifact_dir_required,1,yes,not_executed,not_decided,template row only

@@ -1,0 +1,5 @@
+trial_budget_id,stage,max_trials,what_counts_as_trial,reset_allowed,notes
+TB-001,new_signal_research,3,any executed candidate signal definition against frozen sample,no,Changing features/parameters after seeing results consumes or invalidates trial budget.
+TB-002,portfolio_backtest,1,first full portfolio construction and performance run,no,Requires provider coverage and adjustment/tradability gates first.
+TB-003,OOS,1,first run on holdout/OOS window,no,Requires preregistered holdout and in-sample freeze.
+TB-004,paper_live,1,first paper/live promotion attempt,no,Requires separate promotion gate.

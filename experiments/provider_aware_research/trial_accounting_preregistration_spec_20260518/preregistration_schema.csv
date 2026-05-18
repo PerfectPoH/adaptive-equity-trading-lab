@@ -1,0 +1,17 @@
+field,required,allowed_or_format,description
+preregistration_id,yes,string,Unique preregistration identifier before execution.
+research_question,yes,string,Question being tested.
+hypothesis,yes,string,Directional hypothesis fixed before execution.
+provider_contract_id,yes,string,Linked provider coverage contract.
+adjustment_tradability_policy_id,yes,string,Linked adjustment/tradability policy.
+sample_definition,yes,frozen_list_or_rule,Exact sample or rule frozen before execution.
+in_sample_window,yes,date_range,Training/research window fixed before execution.
+holdout_window,conditional,date_range_or_not_used,Holdout window if OOS is planned.
+features_allowed,yes,frozen_list,Feature list fixed before execution.
+parameters_allowed,yes,frozen_grid_or_singleton,Allowed parameters fixed before execution.
+primary_metric,yes,single_metric,Primary decision metric.
+secondary_metrics,yes,list,Secondary diagnostics only unless preregistered.
+trial_budget_id,yes,string,Linked trial budget policy.
+stop_go_threshold_id,yes,string,Linked decision threshold.
+forbidden_changes_after_execution,yes,list,Changes that force a new preregistration.
+raw_data_retention_policy,yes,derived_only_or_licensed,Retention stance.
