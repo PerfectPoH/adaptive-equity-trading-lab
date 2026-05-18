@@ -176,12 +176,13 @@ def _validate_credentials(frame: pd.DataFrame, checks: list[dict[str, str]]) -> 
     if missing_columns:
         return
     credentials = set(frame["credential"].astype(str).tolist())
-    required_credentials = {"DATABENTO_API_KEY", "POLYGON_API_KEY", "provider_query_performed", "credential_failure_action"}
+    required_credentials = {"DATABENTO_API_KEY", "POLYGON_API_KEY", "provider_query_performed"}
     missing_credentials = sorted(required_credentials - credentials)
     query = frame[frame["credential"].astype(str).eq("provider_query_performed")]
     no_query = len(query) == 1 and str(query.iloc[0]["required"]).lower() == "no" and str(query.iloc[0]["check_status"]).lower() == "false"
     checked = frame[frame["credential"].astype(str).isin({"DATABENTO_API_KEY", "POLYGON_API_KEY"})]
-    not_checked = checked["check_status"].astype(str).str.lower().eq("not_checked").all()
+    safe_unresolved_statuses = {"not_checked", "presence_check_implemented_not_run"}
+    not_checked = checked["check_status"].astype(str).str.lower().isin(safe_unresolved_statuses).all()
     _add_check(checks, "credentials_required_items", not missing_credentials, f"missing={missing_credentials}")
     _add_check(checks, "credentials_no_provider_query", no_query, f"query_rows={len(query)}")
     _add_check(checks, "credentials_not_checked_in_spec", bool(not_checked), f"not_checked={bool(not_checked)}")

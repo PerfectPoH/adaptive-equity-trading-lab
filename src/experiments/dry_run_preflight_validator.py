@@ -184,6 +184,7 @@ def _validate_inputs(frame: pd.DataFrame, checks: list[dict[str, str]]) -> bool:
         "reviewed_dry_only",
         "real_runner_gated",
         "reviewed_gated_real_runner",
+        "presence_check_implemented_not_run",
     }
     unresolved = frame["current_status"].astype(str).str.lower().isin(unresolved_statuses)
     unresolved_block = frame.loc[unresolved, "blocks_execution"].astype(str).str.lower().eq("yes").all()

@@ -666,3 +666,9 @@ Implemented dry-only runner module and tests. The runner requires `--dry-run`, r
 Stato: `PROVIDER_SENSITIVITY_REAL_RUNNER_GATED_IMPLEMENTED / REAL_RUN_BLOCKED_BY_GATES`.
 
 Added a blocked `--real-run` gate report mode. It reports unresolved gates and guarantees no provider query, no backtest, no trial consumption, no output creation, and no strategy promotion. Manual and dry-run preflight artifacts updated to `real_runner_gated`; aggregate preflight remains blocked.
+
+### RESEARCH-091 - Provider credential preflight no query
+
+Stato: `PROVIDER_CREDENTIAL_PREFLIGHT_NO_QUERY_IMPLEMENTED / PRESENCE_CHECK_IMPLEMENTED_NOT_RUN`.
+
+Implemented local credential environment presence checker without provider queries and without secret disclosure. Updated manual/dry preflight artifacts to `presence_check_implemented_not_run`; aggregate preflight remains blocked. Added Intrinio access note recommending EOD historical equities plus adjustment/corporate-action/security-master/coverage metadata.
