@@ -534,3 +534,9 @@ Created derived feature table, event-window availability matrix and corporate-ac
 Stato: `USABLE_FOR_DATA_QUALITY_AUDIT_WITH_CAVEATS / NOT_USABLE_FOR_STRATEGY_PERFORMANCE_CLAIMS / TRIALS_REMAIN_BLOCKED`.
 
 Interpretation executed from derived DPE layer. Databento+Polygon recovers event-window evidence for all DPE events, but all 10 rows remain caveat and 7/10 are critical/high caveats. Added downstream warning policy; strategy trials/backtests/OOS/sweeps/live/paper remain blocked.
+
+### RESEARCH-069 - Provider join feasibility
+
+Stato: `JOIN_FEASIBLE_FOR_DATA_QUALITY_METADATA_ONLY / NOT_FEASIBLE_FOR_PERFORMANCE_DATASET`.
+
+Databento Historical and Polygon Free can be joined at DPE event level for metadata/availability/corporate-action cross-check only. Join does not solve adjustment factors, PIT universe, security-master continuity, halt/tradability validation, offering metadata or raw storage rights. Strategy dataset join remains not approved.

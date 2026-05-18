@@ -1,0 +1,11 @@
+field,required,description
+event_id,yes,Frozen DPE event ID; primary join key across derived artifacts
+symbol,yes,Historical symbol or symbol pair at event date
+event_date,yes,Official event date from frozen panel
+provider_source,yes,"Databento Historical, Polygon Free, or joined derived evidence"
+data_role,yes,"ohlcv, trades, split_reference, dividend_reference, ticker_details, definition_status"
+availability_flag,yes,yes/no/partial/not_tested
+caveat_flag,yes,Machine-readable caveat required for downstream warning propagation
+raw_payload_path,yes,Must remain RAW_RESPONSE_RETENTION_NOT_ENABLED unless license changes
+allowed_use,yes,Data-quality audit or provider-join feasibility only
+blocked_use,yes,Any performance/strategy claim blocked by this row

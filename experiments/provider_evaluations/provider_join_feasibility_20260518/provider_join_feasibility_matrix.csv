@@ -1,0 +1,11 @@
+event_id,symbol,join_key_primary,databento_inputs,polygon_inputs,join_status,required_caveat_flag,allowed_use,blocked_use
+DPE-001,TUP,event_id+symbol+event_date,Databento OHLCV daily,none,single_provider_only,delisting_reference_partial,availability audit,performance claim
+DPE-002,MULN,event_id+symbol+event_date,Databento OHLCV minute,Polygon split reference,join_feasible_limited,adjustment_factor_missing,corporate-action crosscheck,adjusted return claim
+DPE-003,CNGL,event_id+symbol+event_date,Databento OHLCV daily + definition partial,none,single_provider_only,halt_feed_missing,halt visibility caveat,tradability claim
+DPE-004,ABAT,event_id+symbol+event_date,Databento OHLCV minute,none,single_provider_only,offering_metadata_missing,event window availability,offering metadata claim
+DPE-005,WEYS,event_id+symbol+event_date,Databento OHLCV daily,Polygon dividend reference,join_feasible_limited,adjusted_dividend_coherence_missing,dividend crosscheck,adjusted return claim
+DPE-006,FSR,event_id+symbol+event_date,Databento trades+OHLCV minute,Polygon ticker details,join_feasible_limited,security_master_missing,delisting availability crosscheck,full delisting continuity claim
+DPE-007,PHUN,event_id+symbol+event_date,Databento OHLCV minute,none,single_provider_only,split_reference_not_probed,availability audit,adjusted split claim
+DPE-008,GH,event_id+symbol+event_date,Databento OHLCV daily + definition partial,none,single_provider_only,halt_feed_missing,halt availability caveat,tradability claim
+DPE-009,ICU,event_id+symbol+event_date,Databento OHLCV minute,none,single_provider_only,offering_metadata_missing,event window availability,offering metadata claim
+DPE-010,DWAC_DJT,event_id+symbol_pair+event_date,Databento DWAC/DJT OHLCV,Polygon DJT ticker details,join_feasible_limited,pit_security_master_missing,ticker-change crosscheck,full identifier continuity claim
