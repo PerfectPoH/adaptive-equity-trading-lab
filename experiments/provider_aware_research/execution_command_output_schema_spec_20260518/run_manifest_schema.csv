@@ -1,0 +1,10 @@
+field,required,allowed_values_or_format,notes
+run_id,yes,RUN-PREREG-PA-SMALLCAP-001-001,Fixed first future run id.
+preregistration_id,yes,PREREG-PA-SMALLCAP-001,Must match plan.
+authorization_id,yes,AUTH-PREREG-PA-SMALLCAP-001-001,Must match authorization artifact.
+git_sha,yes,40_hex_or_short_sha,Code revision at execution time.
+execution_started_at_utc,yes,ISO-8601,Only populated if executed.
+execution_completed_at_utc,yes,ISO-8601,Only populated if executed.
+execution_status,yes,not_started|completed|failed|aborted,Current spec remains not_started.
+raw_payload_retained,yes,false,Must remain false.
+strategy_promotion,yes,false,Must remain false.

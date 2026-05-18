@@ -624,3 +624,9 @@ Finalized metric, hypothesis, features, parameters, sample policy, and decision 
 Stato: `EXPLICIT_EXECUTION_AUTHORIZATION_DEFINED_NOT_RUN / VALIDATOR_PASS`.
 
 Created a spec-only execution authorization artifact for one future controlled diagnostic execution of `PREREG-PA-SMALLCAP-001`. Authorization is defined but not granted: explicit user approval, execution command, output directory, and trial ledger entry remain missing. Validator passes 36/36. No provider query, backtest, sweep, or strategy run was performed.
+
+### RESEARCH-084 - Execution command and output schema spec
+
+Stato: `EXECUTION_COMMAND_AND_OUTPUT_SCHEMA_DEFINED_NOT_RUN / VALIDATOR_PASS`.
+
+Created spec-only command boundary and output artifact schema for one future controlled diagnostic execution of `PREREG-PA-SMALLCAP-001`. Validator passes 40/40. Remaining blockers intentionally include output directory placeholder, execution module not final, explicit approval missing, credentials not checked, and trial ledger not created. No provider query, backtest, sweep, or strategy run was performed.

@@ -1,0 +1,7 @@
+blocker,current_status,failure_action
+output_dir_placeholder,present,block_execution
+execution_module_not_final,present,block_execution
+explicit_user_approval_missing,present,block_execution
+provider_credentials_not_checked,present,block_execution
+trial_ledger_not_created,present,block_execution
+raw_payload_retention_forbidden,enforced,block_raw_retention

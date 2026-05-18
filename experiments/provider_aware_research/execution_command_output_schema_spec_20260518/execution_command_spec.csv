@@ -1,0 +1,8 @@
+field,value,status,notes
+command_id,CMD-PREREG-PA-SMALLCAP-001,defined,Identifier only; not executed.
+command_type,future_controlled_diagnostic_execution,defined,Not a backtest promotion command.
+module,to_be_implemented_or_selected,not_final,Must be reviewed before execution.
+arguments,--preregistration-id PREREG-PA-SMALLCAP-001 --trial-id TRIAL-001 --output-dir <future_output_dir>,template_only,Placeholder output dir blocks execution.
+max_execution_count,1,defined,Consumes one trial if executed later.
+allowed_providers,databento;polygon;yfinance_reference,defined,Only minimum required scoped calls if approved later.
+forbidden_flags,--all-symbols;--sweep;--promote;--paper;--live,defined,These flags must not appear.

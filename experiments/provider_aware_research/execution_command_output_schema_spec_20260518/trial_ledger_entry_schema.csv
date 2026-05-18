@@ -1,0 +1,7 @@
+field,required,current_planned_value,notes
+trial_id,yes,TRIAL-001,First trial only.
+preregistration_id,yes,PREREG-PA-SMALLCAP-001,Must match plan.
+trial_consumed,yes,false_until_execution,Set true only if future execution starts.
+trial_budget_remaining_after_run,yes,2_if_executed,Max trials 3.
+result_status,yes,not_run,No result yet.
+notes,yes,spec_only_no_execution,No provider query/backtest performed.

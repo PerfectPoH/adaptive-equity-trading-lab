@@ -1,0 +1,7 @@
+artifact_name,required,format,schema_status,notes
+execution_manifest,yes,json,defined,"Exact command, git SHA, provider scope, timestamps."
+provider_coverage_audit,yes,csv,defined,Missingness/caveats by provider/symbol/date.
+derived_event_panel,yes,csv,defined,Derived features only; no raw provider payloads.
+diagnostic_summary,yes,csv,defined,Primary/secondary metrics and caveats.
+interpretation_report,yes,md,defined,"Diagnostic only, no promotion."
+trial_ledger_update,yes,csv,defined,Records trial consumption.
