@@ -1,0 +1,7 @@
+evidence_item,required,current_status,source
+plan_validation_report,yes,available,preregistered_research_plan_validator
+gate_validation_report,yes,available,research_run_gate_validator
+explicit_user_approval,yes,missing,chat/user decision required
+execution_command,yes,missing,must be defined before run
+artifact_output_directory,yes,missing,must be defined before run
+trial_ledger_entry,yes,missing,must be created before run

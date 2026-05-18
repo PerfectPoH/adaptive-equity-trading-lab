@@ -1,0 +1,6 @@
+artifact_requirement,required,notes
+execution_manifest,yes,"Must record exact command, code revision, provider scope, and timestamps."
+trial_ledger_update,yes,Must consume one trial if execution occurs.
+derived_results_only,yes,No raw payload retention.
+provider_coverage_audit,yes,Must report missingness and caveats.
+interpretation_report,yes,"Must state diagnostic only, no promotion."

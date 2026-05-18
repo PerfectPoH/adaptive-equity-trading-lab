@@ -618,3 +618,9 @@ Created first provider-aware research plan artifact and validator. Plan is inten
 Stato: `FIRST_PROVIDER_AWARE_RESEARCH_PLAN_PREREGISTERED_PRE_RUN_FIELDS_FINALIZED_NOT_RUN / VALIDATOR_PASS`.
 
 Finalized metric, hypothesis, features, parameters, sample policy, and decision rules for `PREREG-PA-SMALLCAP-001`. Validator now checks primary metric declaration, finalized parameter values, and final/required feature statuses. Plan remains not executed and no provider query, backtest, sweep, or strategy run was performed.
+
+### RESEARCH-083 - Explicit execution authorization spec
+
+Stato: `EXPLICIT_EXECUTION_AUTHORIZATION_DEFINED_NOT_RUN / VALIDATOR_PASS`.
+
+Created a spec-only execution authorization artifact for one future controlled diagnostic execution of `PREREG-PA-SMALLCAP-001`. Authorization is defined but not granted: explicit user approval, execution command, output directory, and trial ledger entry remain missing. Validator passes 36/36. No provider query, backtest, sweep, or strategy run was performed.

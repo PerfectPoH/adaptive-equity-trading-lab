@@ -1,0 +1,7 @@
+blocked_action,severity,reason
+ALL_SYMBOLS_query,critical,Avoid uncontrolled provider use and universe expansion.
+parameter_sweep,critical,Would violate preregistration and trial accounting.
+strategy_promotion,critical,Requires separate promotion gate.
+OOS_claim,critical,This authorization is not OOS validation.
+paper_or_live_trading,critical,Requires separate trading authorization.
+raw_payload_retention,critical,Blocked unless licensed separately.

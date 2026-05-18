@@ -1,0 +1,6 @@
+scope_item,allowed,limit,notes
+preregistration_id,yes,PREREG-PA-SMALLCAP-001,Only this preregistered plan.
+execution_count,yes,1,One controlled diagnostic execution only.
+research_stage,yes,new_signal_research,No promotion stage.
+provider_data_access,conditional,minimum required symbols/date window only,No ALL_SYMBOLS query.
+output_retention,yes,derived artifacts only,No raw provider payload retention.
