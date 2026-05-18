@@ -187,3 +187,26 @@ available_schemas: mbp-1,tbbo,trades,bbo-1s,bbo-1m,ohlcv-1s,ohlcv-1m,ohlcv-1h,oh
 ```
 
 Interpretation: `EQUS.MINI` is usable for the tested FSR micro-window at metadata/symbology level, and OHLCV schemas are available for future tiny bar probes.
+
+## Successful OHLCV micro-probe
+
+Executed a tiny OHLCV probe on the same event:
+
+```text
+command: .\.venv-lab\Scripts\python.exe experiments\databento_probe_one_event.py --api-key-source env-file --schema ohlcv-1m --limit 10
+dataset: EQUS.MINI
+schema: ohlcv-1m
+symbol: FSR
+window: 2024-03-20T14:30..2024-03-20T14:35
+limit: 10
+raw_retention: false
+```
+
+Result:
+
+```text
+status: pass
+records_returned: 5
+```
+
+Interpretation: one-minute OHLCV bars are available for the tested FSR micro-window. Provider data remain partially evaluated for one event only.

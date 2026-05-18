@@ -274,6 +274,37 @@ COST_PREVIEW_AVAILABLE_AND_TINY_FOR_LIMIT_10
 OHLCV_SCHEMAS_AVAILABLE_FOR_FUTURE_LOW_COST_BAR_PROBES
 ```
 
+## Successful one-event OHLCV micro-probe
+
+Because `ohlcv-1m` was available and is closer to the existing daily-bar research pipeline than raw trade events, a tiny OHLCV probe was executed on the same frozen event:
+
+```text
+command: .\.venv-lab\Scripts\python.exe experiments\databento_probe_one_event.py --api-key-source env-file --schema ohlcv-1m --limit 10
+dataset: EQUS.MINI
+schema: ohlcv-1m
+symbol: FSR
+window: 2024-03-20T14:30..2024-03-20T14:35
+limit: 10
+api_key_source_resolved: env-file
+raw_retention: false
+```
+
+Result:
+
+```text
+status: pass
+records_returned: 5
+raw_response_path: RAW_RESPONSE_RETENTION_NOT_ENABLED
+```
+
+Interpretation:
+
+```text
+DATABENTO_ONE_EVENT_OHLCV_1M_MICRO_PROBE_PASS
+RAW_AND_BAR_DATA_AVAILABLE_FOR_TESTED_FSR_WINDOW
+PROVIDER_DATA_STILL_PARTIALLY_EVALUATED_ONE_EVENT_ONLY
+```
+
 ## Governance constraints
 
 No Databento data payload has been retained.
