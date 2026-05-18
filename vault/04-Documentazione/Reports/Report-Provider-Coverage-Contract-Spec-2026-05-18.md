@@ -89,3 +89,17 @@ IMPLEMENT_PROVIDER_COVERAGE_CONTRACT_VALIDATOR
 ```
 
 The validator should check CSV completeness and block any future strategy run artifact that lacks a valid coverage contract.
+
+## Validator implementation update
+
+```text
+IMPLEMENT_PROVIDER_COVERAGE_CONTRACT_VALIDATOR_COMPLETE
+validator_module: src/experiments/provider_coverage_contract_validator.py
+test_module: tests/test_provider_coverage_contract_validator.py
+pytest_target: tests/test_provider_coverage_contract_validator.py
+pytest_result: 5 passed
+real_contract_validation: pass
+real_contract_checks: 25 passed / 0 failed
+```
+
+The validator checks required files, manifest fields, no-execution flags, contract schema fields, template required columns and populated values, validation checklist coverage, and enforcement policy use cases.

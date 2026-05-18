@@ -582,3 +582,9 @@ Created spec for any future small-cap strategy research after archiving old yfin
 Stato: `SPEC_ONLY_NOT_EXECUTED / PROVIDER_COVERAGE_CONTRACT_REQUIRED_BEFORE_STRATEGY_RUN`.
 
 Created provider coverage contract spec with schema, template, validation checklist, and enforcement policy. No provider query or backtest executed. Recommended next work: implement provider coverage contract validator.
+
+### RESEARCH-077 - Provider coverage contract validator
+
+Stato: `IMPLEMENT_PROVIDER_COVERAGE_CONTRACT_VALIDATOR_COMPLETE / VALIDATOR_PASS`.
+
+Implemented CLI validator for provider coverage contract artifacts with tests. Real contract spec validates pass with 25/25 checks and pytest target passes 5/5. No provider query or strategy run executed.
