@@ -1,9 +1,9 @@
 {
   "artifact_id": "PRE-EXEC-OUTPUT-LEDGER-GATE-20260518",
   "backtest_performed": false,
-  "decision": "OUTPUT_LEDGER_GATES_DEFINED_EXECUTION_BLOCKED",
-  "execution_approval_status": "not_granted",
-  "output_directory_created": false,
+  "decision": "OUTPUT_LEDGER_GATES_PREPARED_EXECUTION_PENDING",
+  "execution_approval_status": "granted_for_single_diagnostic_run",
+  "output_directory_created": true,
   "planned_output_dir": "experiments/provider_aware_research/execution_outputs/RUN-PREREG-PA-SMALLCAP-001-001",
   "preregistration_id": "PREREG-PA-SMALLCAP-001",
   "provider_query_performed": false,
@@ -14,9 +14,9 @@
   ],
   "research_stage": "new_signal_research",
   "run_id": "RUN-PREREG-PA-SMALLCAP-001-001",
-  "status": "SPEC_ONLY_NOT_EXECUTED",
+  "status": "PRE_EXECUTION_PREPARED_NOT_EXECUTED",
   "strategy_promotion_performed": false,
   "trial_consumed": false,
   "trial_id": "TRIAL-001",
-  "trial_ledger_entry_created": false
+  "trial_ledger_entry_created": true
 }

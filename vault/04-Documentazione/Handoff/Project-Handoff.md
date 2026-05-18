@@ -404,3 +404,5 @@ Pre-execution output ledger gate added. Artifact: `experiments/provider_aware_re
 Credential preflight env-file pass recorded. `DATABENTO_API_KEY` and `POLYGON_API_KEY` are present in `.env` according to redacted presence-only inspection. No secrets disclosed, no provider query, no network call. Aggregate dry-run preflight remains blocked by explicit approval, output directory, ledger, and final command review.
 
 Final command review spec added. Artifact: `experiments/provider_aware_research/final_command_review_spec_20260518/`; validator: `src/experiments/final_command_review_validator.py`; result: pass 29/29. Integrated as eighth dry-run preflight component. Aggregate preflight remains blocked 40/40 due to approval, gated runner, output directory, and ledger gates.
+
+Explicit approval recorded and pre-execution artifacts prepared. Output directory `experiments/provider_aware_research/execution_outputs/RUN-PREREG-PA-SMALLCAP-001-001/` and pre-execution ledger entry were created. Trial remains not consumed and no provider query/backtest occurred. Aggregate preflight remains blocked due to `real_runner_gated`.

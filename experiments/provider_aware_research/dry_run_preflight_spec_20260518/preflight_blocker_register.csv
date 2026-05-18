@@ -1,7 +1,7 @@
 blocker,severity,current_status,required_response
-explicit_user_execution_approval_not_granted,critical,present,obtain explicit approval before actual execution
-execution_module_real_runner_gated,critical,present,replace gate report with approved execution path only after approval
-output_directory_specified_not_created,critical,present,create output directory only after approval
-trial_ledger_entry_planned_not_created,critical,present,create ledger entry before actual execution
+explicit_user_execution_approval,info,resolved,approval artifact recorded
+output_directory,info,resolved,created
+trial_ledger_entry,info,resolved,created_pre_execution
 provider_credentials_presence_check,info,resolved,required credentials present in .env without disclosure
 final_command_review,info,resolved,command review artifact passed
+execution_module_real_runner_gated,critical,present,replace gate report with approved execution path

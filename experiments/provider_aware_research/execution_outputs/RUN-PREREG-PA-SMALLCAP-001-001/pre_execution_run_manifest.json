@@ -1,0 +1,13 @@
+{
+  "backtest_performed": false,
+  "created_at_utc": "2026-05-18T16:21:15.864629+00:00",
+  "execution_approval_artifact": "experiments/provider_aware_research/explicit_run_approval_20260518",
+  "git_sha": "b90310d",
+  "preregistration_id": "PREREG-PA-SMALLCAP-001",
+  "provider_query_performed": false,
+  "raw_payload_retained": false,
+  "run_id": "RUN-PREREG-PA-SMALLCAP-001-001",
+  "status": "prepared_not_executed",
+  "strategy_promotion": false,
+  "trial_id": "TRIAL-001"
+}

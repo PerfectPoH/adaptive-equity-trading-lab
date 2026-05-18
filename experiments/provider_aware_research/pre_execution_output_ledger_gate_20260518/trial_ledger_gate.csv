@@ -1,7 +1,7 @@
 field,value,status
-trial_id,TRIAL-001,planned_not_created
-preregistration_id,PREREG-PA-SMALLCAP-001,planned
-trial_consumed,false,required_before_execution
+trial_id,TRIAL-001,prepared
+preregistration_id,PREREG-PA-SMALLCAP-001,prepared
+trial_consumed,false,not_consumed_until_provider_query
 trial_budget_remaining_after_run,pending,blocked_until_execution
-ledger_entry_created,false,blocks_execution
-result_status,not_run,required
+ledger_entry_created,true,prepared_not_executed
+result_status,prepared_not_executed,required

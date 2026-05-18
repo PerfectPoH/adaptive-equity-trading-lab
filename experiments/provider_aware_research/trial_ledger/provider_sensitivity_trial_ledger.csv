@@ -1,0 +1,2 @@
+trial_id,preregistration_id,stage,executed_at,code_commit,artifact_dir,trial_number,within_budget,result_status,decision,notes
+TRIAL-001,PREREG-PA-SMALLCAP-001,new_signal_research,prepared_not_executed,b90310d,experiments\provider_aware_research\execution_outputs\RUN-PREREG-PA-SMALLCAP-001-001,1,yes,prepared_not_executed,pending_execution,pre_execution_ledger_entry_created_after_explicit_approval

@@ -1,6 +1,6 @@
 blocker,severity,current_status,required_response
-explicit_user_execution_approval_not_granted,critical,present,obtain explicit approval before output dir creation or ledger creation
-output_directory_not_created,critical,present,create immutable output directory only after approval
-trial_ledger_entry_not_created,critical,present,create ledger entry before actual execution
-trial_not_consumed,critical,present,consume trial only as part of approved execution
-credentials_missing_required_env,critical,present,set required env vars and rerun local preflight
+explicit_user_execution_approval,info,resolved,approval artifact recorded
+output_directory,info,resolved,created immutable output directory
+trial_ledger_entry,info,resolved,created pre-execution ledger entry
+trial_not_consumed,critical,present,consume trial only with actual provider query execution
+runner_still_gated,critical,present,replace gate report with approved execution path

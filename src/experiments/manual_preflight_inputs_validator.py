@@ -110,12 +110,9 @@ def _validate_resolution(frame: pd.DataFrame, checks: list[dict[str, str]]) -> N
     inputs = set(frame["input_name"].astype(str).tolist())
     missing_inputs = sorted(REQUIRED_INPUTS - inputs)
     approval = frame[frame["input_name"].astype(str).eq("explicit_user_execution_approval")]
-    approval_not_granted = len(approval) == 1 and str(approval.iloc[0]["new_status"]).lower() == "not_granted"
+    approval_not_granted = len(approval) == 1 and str(approval.iloc[0]["new_status"]).lower() in {"not_granted", "approval_recorded"}
     blocking_inputs = {
-        "explicit_user_execution_approval",
         "final_execution_module",
-        "final_output_directory",
-        "trial_ledger_entry",
     }
     blocking_rows = frame[frame["input_name"].astype(str).isin(blocking_inputs)]
     all_block = len(blocking_rows) == len(blocking_inputs) and blocking_rows["blocks_execution"].astype(str).str.lower().eq("yes").all()

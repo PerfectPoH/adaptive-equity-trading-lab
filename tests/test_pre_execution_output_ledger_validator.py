@@ -77,7 +77,7 @@ def test_validate_pre_execution_output_ledger_fails_if_trial_consumed(tmp_path: 
     report = validate_pre_execution_output_ledger(artifact)
 
     assert report["status"] == "fail"
-    assert any(check["name"] == "manifest_no_execution_side_effects" and check["status"] == "fail" for check in report["checks"])
+    assert any(check["name"] == "manifest_no_provider_execution_side_effects" and check["status"] == "fail" for check in report["checks"])
 
 
 def test_validate_pre_execution_output_ledger_fails_if_output_creation_allowed(tmp_path: Path) -> None:

@@ -1,6 +1,6 @@
 field,value,status
-planned_output_dir,experiments/provider_aware_research/execution_outputs/RUN-PREREG-PA-SMALLCAP-001-001,specified_not_created
-directory_creation_allowed,false,blocks_until_approval
+planned_output_dir,experiments/provider_aware_research/execution_outputs/RUN-PREREG-PA-SMALLCAP-001-001,created
+directory_creation_allowed,true,approved_and_completed
 raw_payload_retention,false,required
-immutable_run_manifest_required,true,pending
-write_test_performed,false,not_performed
+immutable_run_manifest_required,true,created_pre_execution
+write_test_performed,true,manifest_written

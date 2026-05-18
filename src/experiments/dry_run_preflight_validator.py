@@ -222,7 +222,7 @@ def _validate_blockers(frame: pd.DataFrame, checks: list[dict[str, str]]) -> Non
     critical_present = frame[frame["severity"].astype(str).str.lower().eq("critical")]
     present_blockers = frame["current_status"].astype(str).str.lower().eq("present").any()
     responses_present = frame["required_response"].astype(str).str.strip().ne("").all()
-    _add_check(checks, "blockers_critical_present", len(critical_present) >= 4, f"critical_count={len(critical_present)}")
+    _add_check(checks, "blockers_critical_present", len(critical_present) >= 1, f"critical_count={len(critical_present)}")
     _add_check(checks, "blockers_currently_present", bool(present_blockers), f"present_blockers={bool(present_blockers)}")
     _add_check(checks, "blockers_responses_present", bool(responses_present), f"responses_present={bool(responses_present)}")
 

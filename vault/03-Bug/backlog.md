@@ -696,3 +696,9 @@ Updated credential preflight to read `.env` with redacted presence-only diagnost
 Stato: `FINAL_COMMAND_REVIEWED_EXECUTION_STILL_BLOCKED / VALIDATOR_PASS`.
 
 Created final command review artifact, validator, and tests. The command surface is reviewed with credentials present via env-file and forbidden flags absent, but execution remains blocked. Integrated as eighth dry-run preflight component; aggregate preflight remains blocked 40/40. No provider query, backtest, output dir creation, ledger entry, or trial consumption occurred.
+
+### RESEARCH-096 - Explicit approval and pre-execution preparation
+
+Stato: `EXPLICIT_APPROVAL_RECORDED / PRE_EXECUTION_PREPARED_NOT_EXECUTED`.
+
+Recorded user approval artifact, created immutable output directory for `RUN-PREREG-PA-SMALLCAP-001-001`, and created pre-execution ledger entry. Trial remains not consumed; no provider query/backtest/sweep/strategy promotion occurred. Aggregate preflight remains blocked 40/40 because runner is still `real_runner_gated`.

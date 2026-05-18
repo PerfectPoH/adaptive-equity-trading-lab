@@ -1,0 +1,25 @@
+{
+  "approval_text": "User stated: ti do la mia approvazione",
+  "approval_timestamp_utc": "2026-05-18T16:20:46.634631+00:00",
+  "artifact_id": "EXPLICIT-RUN-APPROVAL-PREREG-PA-SMALLCAP-001-20260518",
+  "backtest_performed": false,
+  "forbidden_actions": [
+    "all_symbols",
+    "sweep",
+    "promote",
+    "paper_trading",
+    "live_trading",
+    "raw_payload_retention"
+  ],
+  "max_execution_count": 1,
+  "output_directory_creation_authorized": true,
+  "preregistration_id": "PREREG-PA-SMALLCAP-001",
+  "provider_query_authorized_after_final_preflight": true,
+  "provider_query_performed": false,
+  "run_id": "RUN-PREREG-PA-SMALLCAP-001-001",
+  "scope": "single_provider_sensitivity_diagnostic_run",
+  "status": "APPROVAL_GRANTED_FOR_PRE_EXECUTION_PREPARATION",
+  "strategy_promotion_performed": false,
+  "trial_id": "TRIAL-001",
+  "trial_ledger_entry_creation_authorized": true
+}

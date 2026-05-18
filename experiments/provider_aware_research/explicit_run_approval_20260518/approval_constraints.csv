@@ -1,0 +1,8 @@
+constraint,value,status
+max_execution_count,1,approved
+raw_payload_retention,false,required
+all_symbols,false,forbidden
+sweep,false,forbidden
+promote,false,forbidden
+paper_trading,false,forbidden
+live_trading,false,forbidden
