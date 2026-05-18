@@ -1,6 +1,6 @@
 decision_item,status,rule
 gate_precondition,required,research_run_gate_validator must pass for new_signal_research before execution
-primary_metric,not_final,must be set to one metric before execution
-go_rule,not_final,must be defined before execution and cannot be changed after seeing results
-stop_rule,required,critical governance failure or trial budget exhaustion stops research
-promotion_rule,blocked,no promotion from this plan; separate promotion gate required
+primary_metric,final,median_next_session_open_to_close_return
+go_rule,final,diagnostic may proceed to one preregistered execution only if gate passes and no critical governance validator fails
+stop_rule,required,"critical governance failure, provider coverage failure, adjustment/tradability failure, preregistration failure, or trial budget exhaustion stops research"
+promotion_rule,blocked,"no strategy promotion, OOS, paper, or live trading from this plan; separate promotion gate required"

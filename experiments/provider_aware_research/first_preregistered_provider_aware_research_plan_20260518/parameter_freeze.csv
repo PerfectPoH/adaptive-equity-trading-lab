@@ -1,5 +1,7 @@
 parameter_name,status,allowed_values,change_after_execution_policy,notes
-event_window,placeholder_not_final,single_value_required_before_execution,new_preregistration_required,No sweep until explicitly budgeted.
-minimum_price,placeholder_not_final,single_value_required_before_execution,new_preregistration_required,Must be justified by tradability policy.
-minimum_dollar_volume,placeholder_not_final,single_value_required_before_execution,new_preregistration_required,Must be set before execution.
+event_window,final,next_session_open_to_close,new_preregistration_required,No window sweep allowed.
+minimum_gap,final,0.10,new_preregistration_required,Prior close-to-open gap threshold.
+minimum_price,final,2.00,new_preregistration_required,Minimum event-session opening price.
+minimum_dollar_volume,final,1000000,new_preregistration_required,Minimum event-session dollar volume.
+market_regime_lookback,final,EMA200,new_preregistration_required,IWM close > EMA200.
 max_trials,fixed,3,no_reset_allowed,Inherited from TB-001.

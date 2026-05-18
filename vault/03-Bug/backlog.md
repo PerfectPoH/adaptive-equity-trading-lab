@@ -612,3 +612,9 @@ Created aggregate gate spec and CLI validator that invokes provider coverage con
 Stato: `FIRST_PROVIDER_AWARE_RESEARCH_PLAN_PREREGISTERED_NOT_RUN / PLAN_VALIDATOR_PASS`.
 
 Created first provider-aware research plan artifact and validator. Plan is intentionally not executed and blocked until primary metric, features, parameters, sample definition, trial ledger, and gate pass are finalized. Plan validates 41/41, gate validates 31/31 for `new_signal_research`, and pytest target passes 25/25. No provider query or strategy run executed.
+
+### RESEARCH-082 - Finalize first preregistered plan pre-run fields
+
+Stato: `FIRST_PROVIDER_AWARE_RESEARCH_PLAN_PREREGISTERED_PRE_RUN_FIELDS_FINALIZED_NOT_RUN / VALIDATOR_PASS`.
+
+Finalized metric, hypothesis, features, parameters, sample policy, and decision rules for `PREREG-PA-SMALLCAP-001`. Validator now checks primary metric declaration, finalized parameter values, and final/required feature statuses. Plan remains not executed and no provider query, backtest, sweep, or strategy run was performed.

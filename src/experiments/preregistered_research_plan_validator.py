@@ -58,6 +58,15 @@ REQUIRED_PRE_RUN_CHECKS = [
     "raw_retention_policy_confirmed",
 ]
 
+BLOCKED_FINAL_VALUES = {
+    "",
+    "unknown",
+    "tbd",
+    "todo",
+    "to_be_declared_before_execution",
+    "single_value_required_before_execution",
+}
+
 
 def validate_preregistered_research_plan(plan_dir: str | Path) -> dict[str, Any]:
     path = Path(plan_dir)
@@ -115,12 +124,15 @@ def _validate_manifest(manifest: dict[str, Any], checks: list[dict[str, str]]) -
     missing = [field for field in REQUIRED_MANIFEST_FIELDS if field not in manifest]
     tables_ok = isinstance(manifest.get("required_tables"), list) and bool(manifest.get("required_tables"))
     execution_blocked_ok = manifest.get("status") == "PLAN_ONLY_NOT_EXECUTED" and manifest.get("execution_status") == "not_executed"
+    pre_run_fields_status = manifest.get("pre_run_fields_status")
+    pre_run_status_ok = pre_run_fields_status in {None, "finalized"}
     no_provider_query_ok = manifest.get("no_provider_query") is True
     no_backtest_ok = manifest.get("no_backtest") is True
     no_strategy_promotion_ok = manifest.get("no_strategy_promotion") is True
     stage_ok = manifest.get("research_stage") == "new_signal_research"
     _add_check(checks, "manifest_required_fields", not missing and tables_ok, f"missing={missing}; required_tables_ok={tables_ok}")
     _add_check(checks, "manifest_plan_not_executed", execution_blocked_ok, f"status={manifest.get('status')}; execution_status={manifest.get('execution_status')}")
+    _add_check(checks, "manifest_pre_run_fields_status_allowed", pre_run_status_ok, f"pre_run_fields_status={pre_run_fields_status}")
     _add_check(checks, "manifest_stage_new_signal_research", stage_ok, f"research_stage={manifest.get('research_stage')}")
     _add_check(
         checks,
@@ -142,9 +154,11 @@ def _validate_plan(frame: pd.DataFrame, checks: list[dict[str, str]]) -> None:
     execution_status_ok = str(row["execution_status"]).lower() == "not_executed"
     stage_ok = str(row["research_stage"]) == "new_signal_research"
     ids_present = all(bool(str(row[column]).strip()) for column in ["preregistration_id", "provider_contract_id", "adjustment_tradability_policy_id", "trial_budget_id", "stop_go_threshold_id"])
+    primary_metric_final = str(row["primary_metric"]).strip().lower() not in BLOCKED_FINAL_VALUES
     _add_check(checks, "plan_execution_not_executed", execution_status_ok, f"execution_status={row['execution_status']}")
     _add_check(checks, "plan_stage_new_signal_research", stage_ok, f"research_stage={row['research_stage']}")
     _add_check(checks, "plan_required_ids_present", ids_present, "required ids populated")
+    _add_check(checks, "plan_primary_metric_declared", primary_metric_final, f"primary_metric={row['primary_metric']}")
 
 
 def _validate_features(frame: pd.DataFrame, checks: list[dict[str, str]]) -> None:
@@ -154,7 +168,9 @@ def _validate_features(frame: pd.DataFrame, checks: list[dict[str, str]]) -> Non
     if missing_columns:
         return
     change_policy_ok = frame["change_after_execution_policy"].astype(str).str.lower().eq("new_preregistration_required").all()
+    final_or_required = frame["status"].astype(str).str.lower().isin({"final", "required"}).all()
     _add_check(checks, "features_changes_require_new_preregistration", bool(change_policy_ok), f"change_policy_ok={bool(change_policy_ok)}")
+    _add_check(checks, "features_final_or_required", bool(final_or_required), f"final_or_required={bool(final_or_required)}")
 
 
 def _validate_parameters(frame: pd.DataFrame, checks: list[dict[str, str]]) -> None:
@@ -164,9 +180,11 @@ def _validate_parameters(frame: pd.DataFrame, checks: list[dict[str, str]]) -> N
     if missing_columns:
         return
     reset_blocked = frame["change_after_execution_policy"].astype(str).str.lower().isin({"new_preregistration_required", "no_reset_allowed"}).all()
+    no_blocked_values = ~frame["allowed_values"].astype(str).str.lower().isin(BLOCKED_FINAL_VALUES)
     max_trials_rows = frame[frame["parameter_name"].astype(str).eq("max_trials")]
     max_trials_ok = len(max_trials_rows) == 1 and str(max_trials_rows.iloc[0]["allowed_values"]) == "3"
     _add_check(checks, "parameters_changes_blocked_or_preregistered", bool(reset_blocked), f"reset_blocked={bool(reset_blocked)}")
+    _add_check(checks, "parameters_values_finalized", bool(no_blocked_values.all()), f"values_finalized={bool(no_blocked_values.all())}")
     _add_check(checks, "parameters_max_trials_fixed", max_trials_ok, f"max_trials_rows={len(max_trials_rows)}")
 
 

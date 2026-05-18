@@ -32,12 +32,12 @@ def _valid_plan_dir(tmp_path: Path) -> Path:
     )
     (plan_dir / "feature_freeze.csv").write_text(
         "feature_name,status,allowed_before_execution,change_after_execution_policy,notes\n"
-        "provider_quality_flag,required,yes,new_preregistration_required,notes\n",
+        "provider_quality_flag,final,yes,new_preregistration_required,notes\n",
         encoding="utf-8",
     )
     (plan_dir / "parameter_freeze.csv").write_text(
         "parameter_name,status,allowed_values,change_after_execution_policy,notes\n"
-        "event_window,placeholder,single_value_required_before_execution,new_preregistration_required,notes\n"
+        "event_window,final,next_session_open_to_close,new_preregistration_required,notes\n"
         "max_trials,fixed,3,no_reset_allowed,notes\n",
         encoding="utf-8",
     )

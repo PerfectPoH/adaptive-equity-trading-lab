@@ -1,5 +1,6 @@
 feature_name,status,allowed_before_execution,change_after_execution_policy,notes
-event_return_open_to_close,candidate_placeholder,yes,new_preregistration_required,Derived only; exact formula must be frozen before execution.
-market_regime_filter,candidate_placeholder,yes,new_preregistration_required,"If used, benchmark and lookback must be frozen before execution."
-liquidity_filter,required_placeholder,yes,new_preregistration_required,Must be compatible with provider coverage and tradability policy.
-provider_quality_flag,required,yes,new_preregistration_required,"Warnings/degraded data must be captured as a feature/caveat, not ignored."
+prior_close_to_open_gap,final,yes,new_preregistration_required,Computed as event_session_open / prior_session_close - 1 using derived bars only.
+next_session_open_to_close_return,final,yes,new_preregistration_required,Primary outcome metric computed as next_session_close / next_session_open - 1.
+market_regime_filter,final,yes,new_preregistration_required,IWM close greater than EMA200 on signal date; source must respect provider coverage and no raw retention policy.
+liquidity_filter,final,yes,new_preregistration_required,Minimum event-session dollar volume threshold fixed in parameter_freeze.csv.
+provider_quality_flag,final,yes,new_preregistration_required,Provider warnings/degraded days captured as caveat flags and cannot be ignored.

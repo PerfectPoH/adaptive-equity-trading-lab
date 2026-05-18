@@ -1,6 +1,6 @@
 sample_element,status,policy,blocked_until_resolved
-symbol_universe,not_final,frozen list or explicit rule required before execution,yes
-date_window,not_final,in-sample date range required before execution,yes
+symbol_universe,final,frozen provider-covered small-cap candidate set only; no ALL_SYMBOLS query,no
+date_window,final,2023-03-28_to_2026-05-18 coverage-aware in-sample window only,no
 provider_coverage,linked,must pass provider coverage contract validator,no
-PIT_claim,blocked,no universe-wide PIT claim unless PIT support is added,yes
-raw_data_retention,derived_only,no raw payload retention unless licensed,no
+PIT_claim,blocked,no universe-wide PIT claim; frozen candidate panel only,yes
+raw_data_retention,derived_only,no raw payload retention unless separately licensed,no

@@ -1,5 +1,5 @@
 {
-  "decision": "FIRST_PROVIDER_AWARE_RESEARCH_PLAN_PREREGISTERED_NOT_RUN",
+  "decision": "FIRST_PROVIDER_AWARE_RESEARCH_PLAN_PREREGISTERED_PRE_RUN_FIELDS_FINALIZED_NOT_RUN",
   "execution_status": "not_executed",
   "linked_adjustment_tradability_policy": "experiments/provider_aware_research/adjustment_tradability_policy_spec_20260518",
   "linked_gate_spec": "experiments/provider_aware_research/research_run_gate_spec_20260518",
@@ -8,6 +8,7 @@
   "no_backtest": true,
   "no_provider_query": true,
   "no_strategy_promotion": true,
+  "pre_run_fields_status": "finalized",
   "required_tables": [
     "preregistered_research_plan.csv",
     "feature_freeze.csv",
