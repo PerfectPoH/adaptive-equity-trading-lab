@@ -1,0 +1,4 @@
+gate_result,meaning,allowed_action,blocked_action
+pass,All required component validators pass for requested stage.,Proceed only with preregistered allowed action.,Any action outside preregistration or promotion gate.
+fail,At least one required component validator fails or is missing.,Fix governance artifacts only.,Provider query;backtest;signal research;OOS;paper_live;strategy_promotion.
+not_applicable,Stage not mapped or intentionally unsupported.,Document reason and define gate first.,Run execution.

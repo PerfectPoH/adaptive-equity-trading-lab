@@ -600,3 +600,9 @@ Created policy artifact and CLI validator for adjustment, corporate actions, hal
 Stato: `TRIAL_ACCOUNTING_AND_PREREGISTRATION_REQUIRED_BEFORE_SIGNAL_RESEARCH / VALIDATOR_PASS`.
 
 Created preregistration schema/template, trial budget policy, decision thresholds, trial ledger template, enforcement matrix, CLI validator, and tests. Real spec validates 36/36 and pytest target passes 15/15. No provider query or strategy run executed.
+
+### RESEARCH-080 - Research run gate validator
+
+Stato: `RESEARCH_RUN_GATE_REQUIRED_BEFORE_ANY_PROVIDER_AWARE_RUN / VALIDATOR_PASS`.
+
+Created aggregate gate spec and CLI validator that invokes provider coverage contract, adjustment/tradability policy, and trial accounting/preregistration validators according to requested research stage. Real gate validates 31/31 for `new_signal_research`; component validators pass 25/25, 23/23, and 36/36. No provider query or strategy run executed.
