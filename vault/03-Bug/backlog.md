@@ -564,3 +564,9 @@ Coverage-aware expansion checked 8 old yfinance trade candidates within Databent
 Stato: `OLD_SIGNAL_RETURNS_PROVIDER_SENSITIVE_FULL_COVERAGE_REPLAY / STRATEGY_PROMOTION_REMAINS_BLOCKED`.
 
 Fixed-signal Databento price replay executed on 66 old yfinance trades inside Databento coverage. Databento passed 66/66; 25 stable, 35 minor delta, 6 material delta >5%, max_abs_return_delta about 20.85%. This confirms old yfinance-era results require provider-sensitivity warning and should be archived rather than backtested/promoted.
+
+### RESEARCH-074 - Old strategy archive provider-sensitive
+
+Stato: `OLD_YFINANCE_STRATEGY_RESULTS_ARCHIVED_AS_PROVIDER_SENSITIVE / OLD_STRATEGY_TRACK_CLOSED_NOT_PROMOTABLE`.
+
+Formal archive decision recorded. Old breakout_continuation + open_to_close_return>=0.10 + IWM>EMA200 yfinance-era results cannot be used as performance evidence due provider sensitivity. Required warning added; future strategy work must restart as a provider-aware research track with explicit trial accounting.

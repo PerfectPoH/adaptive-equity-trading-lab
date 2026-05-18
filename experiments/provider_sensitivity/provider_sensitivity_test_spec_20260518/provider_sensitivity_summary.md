@@ -92,3 +92,13 @@ strategy_promotion_allowed: no
 ```
 
 Verdict: `OLD_SIGNAL_RETURNS_PROVIDER_SENSITIVE_FULL_COVERAGE_REPLAY`. The old yfinance-era signals are replayable on Databento-covered dates, but provider deltas are material in 6/66 rows. This supports archiving old strategy results as provider-sensitive, not running a portfolio backtest.
+
+## Archive decision update
+
+```text
+OLD_YFINANCE_STRATEGY_RESULTS_ARCHIVED_AS_PROVIDER_SENSITIVE
+ARCHIVED_PROVIDER_SENSITIVE_NOT_PROMOTABLE
+OLD_STRATEGY_TRACK_CLOSED_NOT_PROMOTABLE
+```
+
+Required warning: old yfinance-era small-cap strategy results are provider-sensitive and cannot be used as performance evidence or promotion basis. Future strategy work must restart as a provider-aware research track with explicit trial accounting.

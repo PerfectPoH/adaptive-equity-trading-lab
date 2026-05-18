@@ -1,0 +1,7 @@
+policy_area,status,decision,required_warning
+old_yfinance_results,archived,Do not use as performance evidence,Old yfinance-era small-cap strategy results are provider-sensitive and not safe for promotion.
+old_strategy_track,closed_not_promotable,Do not continue as if validated,Any future work must be a new provider-aware research track.
+backtest_or_oos,blocked,Do not run continuation backtest/OOS from old track,Databento/Polygon provider foundation is not performance-ready and old yfinance returns are provider-sensitive.
+paper_or_live_trading,blocked,No paper/live trading,No validated provider-aware strategy evidence exists.
+methodology_reuse,allowed_with_warning,Infrastructure and diagnostics may be reused,Reuse code/infrastructure only; do not reuse old performance claims.
+provider_research,allowed_with_warning,Provider sensitivity and data quality work may continue,Must keep no-raw-retention and provider caveats.

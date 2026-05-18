@@ -1,0 +1,20 @@
+{
+  "backtest_continuation_allowed": false,
+  "databento_pass": 66,
+  "decision": "OLD_YFINANCE_STRATEGY_RESULTS_ARCHIVED_AS_PROVIDER_SENSITIVE",
+  "evidence_commits": [
+    "6e86030",
+    "8c2e94d",
+    "7a0077c"
+  ],
+  "material_price_or_return_delta": 6,
+  "max_abs_return_delta": 0.2084676744010346,
+  "median_abs_return_delta": 0.0108600878613564,
+  "paper_trading_allowed": false,
+  "primary_evidence": "OLD_SIGNAL_PRICE_REPLAY_FULL_COVERAGE_DIAGNOSTIC",
+  "raw_retention_used": false,
+  "replay_candidates": 66,
+  "status": "ARCHIVED_PROVIDER_SENSITIVE_NOT_PROMOTABLE",
+  "strategy_promotion_allowed": false,
+  "strategy_reference": "breakout_continuation + open_to_close_return>=0.10 + IWM close > EMA200 + corrected risk_fraction sizing"
+}
