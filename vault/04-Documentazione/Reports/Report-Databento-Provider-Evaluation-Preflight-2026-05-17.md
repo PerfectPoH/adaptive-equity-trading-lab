@@ -383,3 +383,34 @@ one_symbol: one frozen DPE event symbol
 one_time_window: tiny
 raw_retention: false until license confirmed
 ```
+
+## Controlled full-panel evaluation verdict
+
+A derived full-panel evaluation artifact was created without retaining raw provider payloads:
+
+```text
+artifact: experiments/provider_evaluations/databento_equities_historical_20260517/full_panel_derived_evaluation.csv
+events: DPE-001..DPE-010
+raw_response_retention: disabled
+provider_symbol_resolves: yes for all 10 events
+event_window_available: yes for all 10 events
+raw_ohlcv_available: yes for all 10 events
+```
+
+Requirement verdict:
+
+```text
+pass: api_reproducibility, cost_limits
+partial_pass: delisted_symbols, raw_and_adjusted_prices, volume_integrity
+caveat: point_in_time_universe, corporate_actions, halt_suspension_representation, licensing_storage
+```
+
+Decision:
+
+```text
+CONTROLLED_FULL_PANEL_EVALUATION_EXECUTED
+DATABENTO_CAN_PROCEED_TO_NEXT_FULL_PANEL_STEP
+PROVIDER_VERDICT: CAVEAT_NOT_FINAL_PASS
+```
+
+This is sufficient to continue Databento full-panel work under governance. It is not sufficient for strategy trials, backtests, OOS, sweeps, live trading or paper trading.

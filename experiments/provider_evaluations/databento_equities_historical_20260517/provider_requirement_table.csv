@@ -1,10 +1,10 @@
 requirement,status,notes
-point_in_time_universe,not_executed,DRY_RUN_TEMPLATE_NO_PROVIDER_QUERY
-delisted_symbols,not_executed,DRY_RUN_TEMPLATE_NO_PROVIDER_QUERY
-corporate_actions,not_executed,DRY_RUN_TEMPLATE_NO_PROVIDER_QUERY
-raw_and_adjusted_prices,not_executed,DRY_RUN_TEMPLATE_NO_PROVIDER_QUERY
-halt_suspension_representation,not_executed,DRY_RUN_TEMPLATE_NO_PROVIDER_QUERY
-volume_integrity,not_executed,DRY_RUN_TEMPLATE_NO_PROVIDER_QUERY
-api_reproducibility,not_executed,DRY_RUN_TEMPLATE_NO_PROVIDER_QUERY
-licensing_storage,not_executed,DRY_RUN_TEMPLATE_NO_PROVIDER_QUERY
-cost_limits,not_executed,DRY_RUN_TEMPLATE_NO_PROVIDER_QUERY
+point_in_time_universe,caveat,Not directly tested; Databento symbol resolution works for all DPE events but PIT universe membership remains unverified.
+delisted_symbols,partial_pass,TUP and FSR delisting/suspension cases resolve and return historical OHLCV windows; delisting metadata/storage rights remain caveated.
+corporate_actions,caveat,"Reverse split/dividend/ticker-change events have OHLCV availability, but corporate-action metadata and adjusted/raw coherence are not fully tested."
+raw_and_adjusted_prices,partial_pass,Raw-style OHLCV availability observed for DPE-001..DPE-010; adjusted OHLCV availability remains not tested.
+halt_suspension_representation,caveat,"Halt/suspension event windows return OHLCV where expected, including daily windows for hard events; explicit halt metadata not tested."
+volume_integrity,partial_pass,OHLCV schemas include volume and returned bars for all events; no deep volume reconciliation performed.
+api_reproducibility,pass,"Queries use pinned script, explicit api-key-source env-file, fixed event IDs, symbols, schemas, windows and no ALL_SYMBOLS."
+licensing_storage,caveat,Raw response retention disabled; license/storage rights remain unclear.
+cost_limits,pass,All probes stayed within authorized 125 USD free-credit cap; observed estimates were tiny and no card/payment authorization is recorded.

@@ -1,0 +1,11 @@
+event_id,symbol,category,schemas_tested,records_observed,symbol_resolves,event_window_available,raw_ohlcv_available,adjusted_ohlcv_available,corporate_action_metadata_available,halt_or_suspension_visible,delisted_history_available,point_in_time_universe_supported,verdict,notes
+DPE-001,TUP,delisting_suspension_bankruptcy_like,ohlcv-1d,2,yes,yes,yes,not_tested,not_tested,not_tested,partial,not_tested,caveat,daily OHLCV evidence around suspension/delisting; raw retention disabled
+DPE-002,MULN,reverse_split,ohlcv-1m,5,yes,yes,yes,not_tested,not_tested,not_tested,not_applicable,not_tested,caveat,post-split OHLCV evidence; adjusted/raw split handling not fully tested
+DPE-003,CNGL,trading_halt_additional_information,ohlcv-1d,4,yes,yes,yes,not_tested,not_tested,not_tested,not_applicable,not_tested,caveat,daily OHLCV evidence around halt; halt metadata not tested
+DPE-004,ABAT,offering_dilution,ohlcv-1m,5,yes,yes,yes,not_tested,not_tested,not_tested,not_applicable,not_tested,caveat,minute OHLCV evidence around offering event; offering metadata not tested
+DPE-005,WEYS,special_dividend_corporate_action,ohlcv-1d,8,yes,yes,yes,not_tested,not_tested,not_tested,not_applicable,not_tested,caveat,daily OHLCV evidence around dividend; dividend metadata and adjusted/raw coherence not tested
+DPE-006,FSR,second_delisting_suspension,trades+ohlcv-1m,10+5,yes,yes,yes,not_tested,not_tested,not_tested,partial,not_tested,caveat,trades and minute OHLCV evidence around delisting proceedings; raw retention disabled
+DPE-007,PHUN,second_reverse_split,ohlcv-1m,5,yes,yes,yes,not_tested,not_tested,not_tested,not_applicable,not_tested,caveat,post-split minute OHLCV evidence; adjusted/raw split handling not fully tested
+DPE-008,GH,second_trading_halt,ohlcv-1d,6,yes,yes,yes,not_tested,not_tested,not_tested,not_applicable,not_tested,caveat,daily OHLCV evidence around halt; halt metadata not tested
+DPE-009,ICU,second_offering_dilution,ohlcv-1m,2,yes,yes,yes,not_tested,not_tested,not_tested,not_applicable,not_tested,caveat,minute OHLCV evidence around offering event; offering metadata not tested
+DPE-010,DWAC_DJT,ticker_change_spac_merger,ohlcv-1d+ohlcv-1m,3+5,yes,yes,yes,not_tested,not_tested,not_tested,not_applicable,not_tested,caveat,DWAC pre-switch daily and DJT switch-day minute evidence; identifier continuity partial only

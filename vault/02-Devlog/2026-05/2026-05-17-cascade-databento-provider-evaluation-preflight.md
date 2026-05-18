@@ -236,3 +236,20 @@ NOT_A_FINAL_PROVIDER_PASS
 ```
 
 All DPE rows now have minimal symbol resolution, event-window availability and raw OHLCV availability evidence. Remaining caveats: adjusted OHLCV, corporate-action metadata, halt/suspension metadata, PIT universe and license/storage rights.
+
+## Controlled full-panel evaluation verdict
+
+Created `full_panel_derived_evaluation.csv` and updated provider requirement table from dry-run statuses.
+
+```text
+CONTROLLED_FULL_PANEL_EVALUATION_EXECUTED
+DATABENTO_CAN_PROCEED_TO_NEXT_FULL_PANEL_STEP
+PROVIDER_VERDICT: CAVEAT_NOT_FINAL_PASS
+raw_response_retention: disabled
+```
+
+Pass requirements: `api_reproducibility`, `cost_limits`.
+
+Partial pass requirements: `delisted_symbols`, `raw_and_adjusted_prices`, `volume_integrity`.
+
+Caveat requirements: `point_in_time_universe`, `corporate_actions`, `halt_suspension_representation`, `licensing_storage`.

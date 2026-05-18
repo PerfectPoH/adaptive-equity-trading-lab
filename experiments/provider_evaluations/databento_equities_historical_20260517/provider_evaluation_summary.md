@@ -72,3 +72,20 @@ All frozen DPE events now have minimal Databento symbol resolution and OHLCV/eve
 This is sufficient to proceed to a controlled full-panel evaluation pass.
 
 This is not a final provider pass because adjusted OHLCV, corporate-action metadata, halt/suspension metadata, point-in-time universe support and license/storage rights remain caveated or untested.
+
+## Controlled full-panel evaluation verdict
+
+```text
+CONTROLLED_FULL_PANEL_EVALUATION_EXECUTED
+READY_FOR_NEXT_FULL_PANEL_STEP: yes
+PROVIDER_VERDICT: CAVEAT_NOT_FINAL_PASS
+RAW_RESPONSE_RETENTION: disabled
+FULL_PANEL_DERIVED_ARTIFACT: full_panel_derived_evaluation.csv
+VALIDATED_REQUIREMENTS: api_reproducibility, cost_limits
+PARTIAL_PASS_REQUIREMENTS: delisted_symbols, raw_and_adjusted_prices, volume_integrity
+CAVEAT_REQUIREMENTS: point_in_time_universe, corporate_actions, halt_suspension_representation, licensing_storage
+```
+
+Databento is now suitable for a controlled full-panel evaluation workflow using derived summaries and no raw retention.
+
+It is not yet a final provider pass because adjusted OHLCV, corporate-action metadata, halt/suspension metadata, point-in-time universe support and licensing/storage rights remain unresolved.
