@@ -684,3 +684,9 @@ Local no-query credential preflight found `DATABENTO_API_KEY` and `POLYGON_API_K
 Stato: `OUTPUT_LEDGER_GATES_DEFINED_EXECUTION_BLOCKED / VALIDATOR_PASS`.
 
 Created pre-execution output directory and trial ledger gate artifact plus validator/tests. The gate defines planned run/output/ledger identifiers while confirming no directory created, no ledger entry created, no trial consumed, and no provider query/backtest. Integrated into dry-run preflight as seventh component; aggregate preflight remains blocked.
+
+### RESEARCH-094 - Credential preflight env-file pass
+
+Stato: `CREDENTIAL_PREFLIGHT_ENV_FILE_PASS`.
+
+Updated credential preflight to read `.env` with redacted presence-only diagnostics. `DATABENTO_API_KEY` and `POLYGON_API_KEY` are present via env-file. No secret values disclosed, no network call, no provider query. Manual preflight validates 39/39 and aggregate dry-run preflight remains blocked 39/39 due to approval/output/ledger/final-review gates.

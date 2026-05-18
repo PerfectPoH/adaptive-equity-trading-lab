@@ -3,5 +3,5 @@ explicit_user_execution_approval_not_granted,critical,present,obtain explicit ap
 execution_module_real_runner_gated,critical,present,acknowledge all real-run gates before execution implementation
 output_directory_specified_not_created,critical,present,create output directory only after approval
 trial_ledger_entry_planned_not_created,critical,present,create ledger entry before actual execution
-provider_credentials_missing_required_env,critical,present,set DATABENTO_API_KEY and POLYGON_API_KEY then rerun local no-query check
+provider_credentials_presence_check,info,resolved,required credentials present in .env without disclosure
 command_template_reviewed_gated_real_runner,high,present,final command review after approval

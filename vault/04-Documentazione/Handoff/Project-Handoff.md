@@ -400,3 +400,5 @@ Provider credential preflight no-query implemented. Module: `src/experiments/pro
 Credential preflight local result recorded. Status: `CREDENTIAL_PREFLIGHT_LOCAL_ONLY_BLOCKED`; `DATABENTO_API_KEY` and `POLYGON_API_KEY` are missing in the current shell environment. No secrets disclosed, no provider query, no network call. Aggregate dry-run preflight remains blocked.
 
 Pre-execution output ledger gate added. Artifact: `experiments/provider_aware_research/pre_execution_output_ledger_gate_20260518/`; validator: `src/experiments/pre_execution_output_ledger_validator.py`. It passes 29/29 and is now a seventh component in dry-run preflight. Aggregate preflight remains blocked at 39/39. No output directory, ledger entry, trial consumption, provider query, or backtest performed.
+
+Credential preflight env-file pass recorded. `DATABENTO_API_KEY` and `POLYGON_API_KEY` are present in `.env` according to redacted presence-only inspection. No secrets disclosed, no provider query, no network call. Aggregate dry-run preflight remains blocked by explicit approval, output directory, ledger, and final command review.

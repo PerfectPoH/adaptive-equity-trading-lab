@@ -111,7 +111,15 @@ def _validate_resolution(frame: pd.DataFrame, checks: list[dict[str, str]]) -> N
     missing_inputs = sorted(REQUIRED_INPUTS - inputs)
     approval = frame[frame["input_name"].astype(str).eq("explicit_user_execution_approval")]
     approval_not_granted = len(approval) == 1 and str(approval.iloc[0]["new_status"]).lower() == "not_granted"
-    all_block = frame["blocks_execution"].astype(str).str.lower().eq("yes").all()
+    blocking_inputs = {
+        "explicit_user_execution_approval",
+        "final_execution_module",
+        "final_output_directory",
+        "trial_ledger_entry",
+        "command_dry_review",
+    }
+    blocking_rows = frame[frame["input_name"].astype(str).isin(blocking_inputs)]
+    all_block = len(blocking_rows) == len(blocking_inputs) and blocking_rows["blocks_execution"].astype(str).str.lower().eq("yes").all()
     _add_check(checks, "resolution_required_inputs", not missing_inputs, f"missing={missing_inputs}")
     _add_check(checks, "resolution_approval_not_granted", approval_not_granted, f"approval_rows={len(approval)}")
     _add_check(checks, "resolution_all_block_execution", bool(all_block), f"all_block={bool(all_block)}")
@@ -181,8 +189,8 @@ def _validate_credentials(frame: pd.DataFrame, checks: list[dict[str, str]]) -> 
     query = frame[frame["credential"].astype(str).eq("provider_query_performed")]
     no_query = len(query) == 1 and str(query.iloc[0]["required"]).lower() == "no" and str(query.iloc[0]["check_status"]).lower() == "false"
     checked = frame[frame["credential"].astype(str).isin({"DATABENTO_API_KEY", "POLYGON_API_KEY"})]
-    safe_unresolved_statuses = {"not_checked", "presence_check_implemented_not_run", "missing_local_env"}
-    not_checked = checked["check_status"].astype(str).str.lower().isin(safe_unresolved_statuses).all()
+    safe_credential_statuses = {"not_checked", "presence_check_implemented_not_run", "missing_local_env", "present_env_file_no_disclosure"}
+    not_checked = checked["check_status"].astype(str).str.lower().isin(safe_credential_statuses).all()
     _add_check(checks, "credentials_required_items", not missing_credentials, f"missing={missing_credentials}")
     _add_check(checks, "credentials_no_provider_query", no_query, f"query_rows={len(query)}")
     _add_check(checks, "credentials_not_checked_in_spec", bool(not_checked), f"not_checked={bool(not_checked)}")
