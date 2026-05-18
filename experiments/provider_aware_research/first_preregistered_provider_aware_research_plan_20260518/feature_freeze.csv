@@ -1,0 +1,5 @@
+feature_name,status,allowed_before_execution,change_after_execution_policy,notes
+event_return_open_to_close,candidate_placeholder,yes,new_preregistration_required,Derived only; exact formula must be frozen before execution.
+market_regime_filter,candidate_placeholder,yes,new_preregistration_required,"If used, benchmark and lookback must be frozen before execution."
+liquidity_filter,required_placeholder,yes,new_preregistration_required,Must be compatible with provider coverage and tradability policy.
+provider_quality_flag,required,yes,new_preregistration_required,"Warnings/degraded data must be captured as a feature/caveat, not ignored."

@@ -1,0 +1,6 @@
+sample_element,status,policy,blocked_until_resolved
+symbol_universe,not_final,frozen list or explicit rule required before execution,yes
+date_window,not_final,in-sample date range required before execution,yes
+provider_coverage,linked,must pass provider coverage contract validator,no
+PIT_claim,blocked,no universe-wide PIT claim unless PIT support is added,yes
+raw_data_retention,derived_only,no raw payload retention unless licensed,no

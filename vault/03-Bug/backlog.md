@@ -606,3 +606,9 @@ Created preregistration schema/template, trial budget policy, decision threshold
 Stato: `RESEARCH_RUN_GATE_REQUIRED_BEFORE_ANY_PROVIDER_AWARE_RUN / VALIDATOR_PASS`.
 
 Created aggregate gate spec and CLI validator that invokes provider coverage contract, adjustment/tradability policy, and trial accounting/preregistration validators according to requested research stage. Real gate validates 31/31 for `new_signal_research`; component validators pass 25/25, 23/23, and 36/36. No provider query or strategy run executed.
+
+### RESEARCH-081 - First preregistered provider-aware research plan
+
+Stato: `FIRST_PROVIDER_AWARE_RESEARCH_PLAN_PREREGISTERED_NOT_RUN / PLAN_VALIDATOR_PASS`.
+
+Created first provider-aware research plan artifact and validator. Plan is intentionally not executed and blocked until primary metric, features, parameters, sample definition, trial ledger, and gate pass are finalized. Plan validates 41/41, gate validates 31/31 for `new_signal_research`, and pytest target passes 25/25. No provider query or strategy run executed.

@@ -1,0 +1,22 @@
+{
+  "decision": "FIRST_PROVIDER_AWARE_RESEARCH_PLAN_PREREGISTERED_NOT_RUN",
+  "execution_status": "not_executed",
+  "linked_adjustment_tradability_policy": "experiments/provider_aware_research/adjustment_tradability_policy_spec_20260518",
+  "linked_gate_spec": "experiments/provider_aware_research/research_run_gate_spec_20260518",
+  "linked_provider_coverage_contract": "experiments/provider_aware_research/provider_coverage_contract_spec_20260518",
+  "linked_trial_accounting_preregistration": "experiments/provider_aware_research/trial_accounting_preregistration_spec_20260518",
+  "no_backtest": true,
+  "no_provider_query": true,
+  "no_strategy_promotion": true,
+  "required_tables": [
+    "preregistered_research_plan.csv",
+    "feature_freeze.csv",
+    "parameter_freeze.csv",
+    "sample_definition_policy.csv",
+    "decision_rule.csv",
+    "pre_run_checklist.csv"
+  ],
+  "research_stage": "new_signal_research",
+  "scope": "Provider-aware small-cap research track",
+  "status": "PLAN_ONLY_NOT_EXECUTED"
+}

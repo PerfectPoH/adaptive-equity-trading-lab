@@ -1,0 +1,5 @@
+parameter_name,status,allowed_values,change_after_execution_policy,notes
+event_window,placeholder_not_final,single_value_required_before_execution,new_preregistration_required,No sweep until explicitly budgeted.
+minimum_price,placeholder_not_final,single_value_required_before_execution,new_preregistration_required,Must be justified by tradability policy.
+minimum_dollar_volume,placeholder_not_final,single_value_required_before_execution,new_preregistration_required,Must be set before execution.
+max_trials,fixed,3,no_reset_allowed,Inherited from TB-001.
