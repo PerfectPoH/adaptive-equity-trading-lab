@@ -1,0 +1,10 @@
+requirement,status,notes
+point_in_time_universe,caveat,Ticker details support historical date parameter; PIT universe semantics not fully verified and no all-symbol query used.
+delisted_symbols,partial_pass,FSR ticker details returned for historical date; full delisted-history continuity not tested.
+corporate_actions,pass_limited_scope,Splits endpoint returned 1 MULN reverse split row and dividends endpoint returned 2 WEYS dividend rows on free plan.
+raw_and_adjusted_prices,blocked_or_not_available,Minute aggregate probe for DJT returned HTTP 403 on current free key; OHLCV not established for Polygon free.
+halt_suspension_representation,not_tested,No halt/suspension endpoint probe executed in this micro-probe.
+volume_integrity,not_tested,Aggregate/OHLCV access was not established because minute aggregate probe returned HTTP 403.
+api_reproducibility,pass,"Scripted urllib probe with env-file key source, fixed endpoints/symbols/windows, 13s delay between calls, no ALL_SYMBOLS."
+licensing_storage,caveat,Raw response retention disabled; storage rights require terms review.
+cost_limits,pass,Stocks Basic Free 0 USD/month; 5 calls executed within 5 calls/min style pacing; no payment authorized.

@@ -504,3 +504,9 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 Usare ID progressivo `BUG-NNN`; per limiti metodologici usare `RISK-NNN`; per debito tecnico usare `TECH-DEBT-NNN`.
 
 Vedi [[Memoria-AI]] per template completo.
+
+### RESEARCH-064 - Polygon Stocks Basic Free secondary reference preflight
+
+Stato: `POLYGON_FREE_USEFUL_SECONDARY_REFERENCE_PROVIDER / NOT_FULL_OHLCV_PROVIDER_PASS`.
+
+Micro-probe controllato con 5 chiamate e no raw retention. Pass: MULN split reference, WEYS dividend reference, DJT ticker details, FSR historical ticker details. Fail/caveat: DJT minute aggregate returned HTTP 403; 2-year historical limit and PIT semantics remain caveats.

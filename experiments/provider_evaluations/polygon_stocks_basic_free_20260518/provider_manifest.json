@@ -1,0 +1,24 @@
+{
+  "account_type": "free",
+  "actual_query_cost_usd": 0,
+  "api_versions": [
+    "v2",
+    "v3"
+  ],
+  "data_retention_allowed": "unclear",
+  "dataset_names": [
+    "Stocks Basic Free"
+  ],
+  "execution_date": "2026-05-18",
+  "frozen_panel_report": "Report-Small-Cap-Data-Provider-Event-Panel-2026-05-17",
+  "license_storage_verdict": "unclear",
+  "operator": "local",
+  "panel_expansion_report": "Report-Small-Cap-Data-Provider-Event-Panel-Expansion-2026-05-17",
+  "payment_authorized": false,
+  "payment_cap_usd": 0,
+  "provider_name": "Polygon.io Stocks Basic Free",
+  "provider_query_executed": true,
+  "provider_slug": "polygon_stocks_basic_free",
+  "query_budget_estimate_usd": 0,
+  "terms_url": "https://polygon.io/terms"
+}
