@@ -720,3 +720,9 @@ Created a 4-candidate mini-panel approval gate with CRMD as executed anchor and 
 Stato: `APPROVED_MINI_PANEL_DIAGNOSTIC_COMPLETED`.
 
 Executed bounded mini-panel `MINIPANEL-PREREG-PA-SMALLCAP-001-001` on commit `586f579` after preflight passed 17/17. Three new provider queries were performed: IOVA 2025-07, CABA 2022-08, and IOVA 2025-12. Results: IOVA cases classified as `minor_price_or_return_delta`; CABA classified as `provider_unavailable` due to Databento `BentoClientError` with Polygon OK. No raw payload retention, no backtest, no sweep, no strategy promotion, no paper/live.
+
+### RESEARCH-062 - Purged temporal split and embargo validator
+
+Stato: `PURGED_TEMPORAL_SPLIT_EMBARGO_VALIDATED`.
+
+Implemented a synthetic-only validator for purge/embargo temporal split invariants. It validates temporal ordering, split row-key isolation, validation/test embargo floors, and label-horizon purging by symbol. Validator report: `experiments/validation/research_062_purged_temporal_split_embargo_report.json`, 10/10 checks passing. Targeted tests passed 8/8. No market data download, provider query, backtest, sweep, strategy promotion, paper/live.

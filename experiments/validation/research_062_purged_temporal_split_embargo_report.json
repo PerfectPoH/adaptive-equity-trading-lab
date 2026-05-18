@@ -1,0 +1,83 @@
+{
+  "backtest_performed": false,
+  "checks": [
+    {
+      "detail": "rows=225",
+      "name": "input_synthetic_only",
+      "status": "pass"
+    },
+    {
+      "detail": "rows=57",
+      "name": "train_non_empty",
+      "status": "pass"
+    },
+    {
+      "detail": "rows=57",
+      "name": "validation_non_empty",
+      "status": "pass"
+    },
+    {
+      "detail": "rows=45",
+      "name": "test_non_empty",
+      "status": "pass"
+    },
+    {
+      "detail": "train_max=2022-12-27 00:00:00; validation_min=2023-01-02 00:00:00; validation_max=2023-01-26 00:00:00; test_min=2023-02-03 00:00:00",
+      "name": "split_temporal_order",
+      "status": "pass"
+    },
+    {
+      "detail": "train=57; validation=57; test=45",
+      "name": "split_row_keys_do_not_overlap",
+      "status": "pass"
+    },
+    {
+      "detail": "min=2023-01-02 00:00:00; floor=2023-01-02 00:00:00",
+      "name": "validation_embargo_respected",
+      "status": "pass"
+    },
+    {
+      "detail": "min=2023-02-03 00:00:00; floor=2023-02-03 00:00:00",
+      "name": "test_embargo_respected",
+      "status": "pass"
+    },
+    {
+      "detail": "label_horizon_bars=3",
+      "name": "train_label_horizon_purged_by_symbol",
+      "status": "pass"
+    },
+    {
+      "detail": "label_horizon_bars=3",
+      "name": "validation_label_horizon_purged_by_symbol",
+      "status": "pass"
+    }
+  ],
+  "config": {
+    "embargo_days": 2,
+    "label_horizon_bars": 3,
+    "symbols": [
+      "AAA",
+      "BBB",
+      "CCC"
+    ],
+    "test_end": "2023-02-28",
+    "train_end": "2022-12-30",
+    "validation_end": "2023-01-31"
+  },
+  "decision": "PURGED_TEMPORAL_SPLIT_EMBARGO_VALIDATED",
+  "market_data_downloaded": false,
+  "provider_query_performed": false,
+  "research_id": "RESEARCH-062",
+  "split_rows": {
+    "test": 45,
+    "train": 57,
+    "validation": 57
+  },
+  "status": "pass",
+  "strategy_promotion_performed": false,
+  "summary": {
+    "failed": 0,
+    "passed": 10,
+    "total": 10
+  }
+}
