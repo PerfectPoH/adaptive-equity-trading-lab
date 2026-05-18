@@ -1,0 +1,17 @@
+field,required,allowed_or_format,description
+contract_id,yes,string,Unique identifier for the coverage contract
+provider_combo,yes,string,Provider roles and versions used by the experiment
+dataset_or_endpoint,yes,string,Dataset/schema/endpoint used for OHLCV/reference data
+coverage_start,yes,YYYY-MM-DD,Earliest date allowed for sampling
+coverage_end,yes,YYYY-MM-DD or open,Latest date allowed for sampling
+symbol_scope,yes,frozen_list|event_panel|other_predeclared,How symbols enter the sample
+missingness_policy,yes,fail|drop_with_log|caveat,Treatment of missing provider windows
+adjustment_policy,yes,raw|adjusted|mixed_caveated|unknown_blocked,Price adjustment assumption
+corporate_action_policy,yes,validated|crosscheck_only|unknown_blocked,Treatment of splits/dividends/etc.
+halt_tradability_policy,yes,validated|caveated|unknown_blocked,Treatment of halt/suspension/tradability metadata
+PIT_universe_policy,yes,validated|frozen_sample_only|unknown_blocked,Point-in-time universe assumption
+licensing_retention_policy,yes,derived_only|raw_retention_allowed|unknown_blocked,What can be stored
+provider_quality_warnings,yes,string,Known degraded days/provider warnings/caveats
+stop_conditions,yes,string,Conditions that stop execution or invalidate interpretation
+approved_uses,yes,string,Allowed downstream uses
+blocked_uses,yes,string,Blocked downstream uses

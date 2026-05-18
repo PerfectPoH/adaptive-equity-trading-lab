@@ -1,0 +1,20 @@
+{
+  "decision": "PROVIDER_COVERAGE_CONTRACT_REQUIRED_BEFORE_STRATEGY_RUN",
+  "minimum_contract_tables": [
+    "coverage_contract_template.csv",
+    "coverage_contract_schema.csv",
+    "coverage_validation_checklist.csv"
+  ],
+  "no_backtest": true,
+  "no_provider_query": true,
+  "purpose": "Require explicit coverage, availability, adjustment, tradability, and licensing assumptions before any strategy execution.",
+  "required_for": [
+    "new_signal_research",
+    "fixed_signal_replay",
+    "portfolio_backtest",
+    "OOS",
+    "paper_trading_gate"
+  ],
+  "scope": "Small-cap provider-aware research track",
+  "status": "SPEC_ONLY_NOT_EXECUTED"
+}

@@ -1,0 +1,11 @@
+check,severity,pass_condition,failure_action
+coverage_dates_declared,critical,coverage_start and coverage_end are explicit,block execution
+symbol_scope_frozen,critical,symbols are predeclared before provider query,block execution
+missingness_policy_declared,critical,missing data handling is predeclared,block execution
+adjustment_policy_declared,critical,raw/adjusted/mixed assumption explicit,block performance interpretation
+corporate_action_policy_declared,high,corporate action coverage/crosscheck explicit,add caveat or block
+halt_tradability_policy_declared,high,halt/tradability caveat explicit,add caveat or block
+PIT_universe_policy_declared,critical,PIT or frozen-sample semantics explicit,block universe claims
+licensing_policy_declared,critical,raw retention/derived-only policy explicit,block storage violation
+provider_warning_capture,high,provider quality warnings logged as derived caveats,block silent use
+stop_conditions_declared,critical,stop conditions predeclared,block execution

@@ -576,3 +576,9 @@ Formal archive decision recorded. Old breakout_continuation + open_to_close_retu
 Stato: `SPEC_ONLY_NOT_EXECUTED / NEW_PROVIDER_AWARE_RESEARCH_TRACK_REQUIRED`.
 
 Created spec for any future small-cap strategy research after archiving old yfinance results as provider-sensitive. No provider query or backtest executed. Next recommended work: implement provider coverage contract spec and adjustment/tradability policies before any strategy run.
+
+### RESEARCH-076 - Provider coverage contract spec
+
+Stato: `SPEC_ONLY_NOT_EXECUTED / PROVIDER_COVERAGE_CONTRACT_REQUIRED_BEFORE_STRATEGY_RUN`.
+
+Created provider coverage contract spec with schema, template, validation checklist, and enforcement policy. No provider query or backtest executed. Recommended next work: implement provider coverage contract validator.
