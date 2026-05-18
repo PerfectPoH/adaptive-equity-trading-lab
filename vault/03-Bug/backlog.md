@@ -510,3 +510,9 @@ Vedi [[Memoria-AI]] per template completo.
 Stato: `POLYGON_FREE_USEFUL_SECONDARY_REFERENCE_PROVIDER / NOT_FULL_OHLCV_PROVIDER_PASS`.
 
 Micro-probe controllato con 5 chiamate e no raw retention. Pass: MULN split reference, WEYS dividend reference, DJT ticker details, FSR historical ticker details. Fail/caveat: DJT minute aggregate returned HTTP 403; 2-year historical limit and PIT semantics remain caveats.
+
+### RESEARCH-065 - Databento Reference subscription cost decision
+
+Stato: `DATABENTO_REFERENCE_SUBSCRIPTION_DECLINED_FOR_NOW`.
+
+User-reported Databento response: Reference API subscription costs approximately `300 USD/month`. Decision: do not subscribe during preflight. Keep Databento Historical as OHLCV candidate and Polygon Stocks Basic Free as recent reference/corporate-actions secondary provider. Final provider pass remains blocked for full PIT/reference/security-master coverage and storage rights.

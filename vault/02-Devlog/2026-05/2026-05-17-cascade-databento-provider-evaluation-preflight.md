@@ -269,3 +269,7 @@ provider_verdict: CAVEAT_NOT_FINAL_PASS
 ## Reference API documentation and subscription-gate update
 
 Checked Databento docs/SDK for remaining caveats. The SDK exposes `db.Reference.adjustment_factors`, `db.Reference.corporate_actions`, and `db.Reference.security_master`. `corporate_actions.get_range` includes `pit=True`. Diagnostics with the current key returned `403 license_reference_dataset_no_subscription` for adjustment factors, corporate actions and security master. Artifact: `reference_api_diagnostics.csv`.
+
+## Reference API cost decision
+
+User reported Databento support confirmed Reference API subscription price at approximately `300 USD/month`. Decision recorded: decline Databento Reference for now; keep Databento Historical as OHLCV candidate and use Polygon Stocks Basic Free as recent reference/corporate-actions cross-check.

@@ -1,0 +1,12 @@
+capability,primary_provider,secondary_provider,status,notes
+historical_ohlcv,Databento Historical,none,usable_candidate,Databento EQUS.MINI OHLCV probes passed across DPE-001..DPE-010
+trades_microstructure,Databento Historical,none,partial_pass,Databento trades probe passed for FSR limited scope
+recent_corporate_actions,Polygon Stocks Basic Free,Databento Reference if paid,usable_secondary,Polygon free returned MULN split and WEYS dividend rows; Databento Reference requires 300 USD/month
+recent_ticker_reference,Polygon Stocks Basic Free,Databento Historical symbology,usable_secondary,Polygon returned DJT and FSR ticker details; Databento symbology resolves panel symbols
+adjustment_factors,none,Databento Reference if paid,blocked,Databento Reference adjustment_factors exists but requires 300 USD/month subscription
+point_in_time_reference,none,Databento Reference if paid,caveat_blocked,Databento corporate_actions pit=True exists but requires paid Reference subscription; Polygon PIT semantics unclear
+security_master,none,Databento Reference if paid,caveat_blocked,Databento security_master exists but requires paid Reference subscription; Polygon ticker details partial only
+halt_suspension_metadata,Databento Historical definition,none,partial_pass,Databento definition/status fields and counts provide partial path; no dedicated halt feed validated
+minute_aggregates,Databento Historical,Polygon free if available,databento_preferred,Databento OHLCV minute probes passed; Polygon DJT minute aggregate returned HTTP 403
+license_storage,none,none,caveat,No raw retention; storage rights require terms/support confirmation
+cost_profile,Databento Historical + Polygon Free,Databento Reference declined,accepted_for_preflight,No paid subscription authorized; Databento Reference 300 USD/month declined for now

@@ -116,3 +116,15 @@ provider_verdict: CAPABILITY_EXISTS_BUT_REFERENCE_SUBSCRIPTION_REQUIRED
 ```
 
 Conclusion: the answers are in Databento documentation/SDK via the Reference API, not in the already-accessible EQUS.MINI Historical package alone. Databento remains usable for Historical OHLCV, but final provider pass requires enabling/subscribing to Reference datasets or obtaining support confirmation.
+
+## Reference API cost decision
+
+```text
+DATABENTO_REFERENCE_SUBSCRIPTION_PRICE: 300_USD_PER_MONTH
+DATABENTO_REFERENCE_SUBSCRIPTION_DECISION: DECLINED_FOR_NOW
+DATABENTO_CURRENT_ROLE: HISTORICAL_OHLCV_PROVIDER_CANDIDATE
+REFERENCE_DATA_STATUS: BLOCKED_BY_PAID_SUBSCRIPTION
+FINAL_PROVIDER_PASS: no
+```
+
+User-reported Databento support response confirms the remaining Reference API capabilities require a paid subscription. The subscription is not justified during current provider preflight, so Databento remains an OHLCV historical candidate rather than a full reference/PIT provider.

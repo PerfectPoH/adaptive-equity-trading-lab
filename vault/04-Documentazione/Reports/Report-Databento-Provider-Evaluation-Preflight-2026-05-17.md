@@ -470,3 +470,24 @@ CAPABILITY_EXISTS_BUT_REFERENCE_SUBSCRIPTION_REQUIRED
 HISTORICAL_OHLCV_ACCESS_WORKS
 FINAL_PROVIDER_PASS_BLOCKED_BY_REFERENCE_SUBSCRIPTION_OR_SUPPORT_CONFIRMATION
 ```
+
+## Reference API cost decision
+
+User-reported Databento support response: Reference API access requires an approximately `300 USD/month` subscription.
+
+Decision:
+
+```text
+DATABENTO_REFERENCE_SUBSCRIPTION_DECLINED_FOR_NOW
+DATABENTO_CURRENT_ROLE: HISTORICAL_OHLCV_PROVIDER_CANDIDATE
+REFERENCE_DATA_STATUS: BLOCKED_BY_PAID_SUBSCRIPTION
+FINAL_PROVIDER_PASS: no
+```
+
+Operational plan:
+
+```text
+Databento Historical = OHLCV historical candidate
+Polygon Stocks Basic Free = recent corporate-actions/reference cross-check
+Databento Reference = revisit only if full PIT/reference coverage justifies 300 USD/month
+```

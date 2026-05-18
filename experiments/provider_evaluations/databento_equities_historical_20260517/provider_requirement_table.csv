@@ -1,10 +1,10 @@
 requirement,status,notes
-point_in_time_universe,partial_pass_blocked_by_subscription,"Reference API exposes corporate_actions.get_range(... pit=True) and security_master methods, but current key returns 403 license_reference_dataset_no_subscription."
+point_in_time_universe,blocked_by_paid_reference_subscription,"Reference API exposes corporate_actions.get_range(... pit=True) and security_master methods, but current key returns 403 license_reference_dataset_no_subscription. User-reported Databento response: Reference API subscription costs approximately 300 USD/month; declined for now."
 delisted_symbols,partial_pass,Historical symbology/OHLCV works for TUP and FSR; Reference security_master path exists but current key lacks subscription.
-corporate_actions,partial_pass_blocked_by_subscription,Databento Reference API exposes corporate_actions.get_range; current key returns 403 license_reference_dataset_no_subscription.
-raw_and_adjusted_prices,partial_pass_blocked_by_subscription,Raw-style OHLCV works for all DPE events; Reference adjustment_factors.get_range exists but current key returns 403 license_reference_dataset_no_subscription.
+corporate_actions,blocked_by_paid_reference_subscription,Databento Reference API exposes corporate_actions.get_range; current key returns 403 license_reference_dataset_no_subscription. User-reported Databento response: Reference API subscription costs approximately 300 USD/month; declined for now.
+raw_and_adjusted_prices,blocked_by_paid_reference_subscription,Raw-style OHLCV works for all DPE events; Reference adjustment_factors.get_range exists but current key returns 403 license_reference_dataset_no_subscription. User-reported Databento response: Reference API subscription costs approximately 300 USD/month; declined for now.
 halt_suspension_representation,partial_pass,Historical definition/status paths exist and definition counts were observed; dedicated Reference security_master path exists but current key lacks subscription.
 volume_integrity,partial_pass,OHLCV schemas include volume and returned bars for all events; no deep volume reconciliation performed.
 api_reproducibility,pass,"Queries use pinned script/API paths, explicit api-key-source env-file, fixed event IDs/symbols/schemas/windows and no ALL_SYMBOLS."
-licensing_storage,caveat,Raw response retention disabled; account-specific license/storage rights still require portal/support confirmation.
+licensing_storage,caveat,Raw response retention disabled; account-specific license/storage rights still require portal/support confirmation. Reference subscription not purchased; raw retention remains disabled.
 cost_limits,pass,Historical probes stayed within authorized 125 USD free-credit cap; Reference API diagnostics stopped at subscription gate.
