@@ -148,7 +148,7 @@ Added explicit key source selection:
 --env-file .env
 ```
 
-Current Codex-shell rerun with `--api-key-source env-file`:
+Earlier Codex-shell rerun with `--api-key-source env-file`:
 
 ```text
 api_key_source_resolved: env-file
@@ -161,7 +161,29 @@ result: BentoClientError / 401 auth_authentication_failed
 Interpretation:
 
 ```text
-The .env key visible to this repo shell is the failing credential.
+The .env key visible to this repo shell at that time was the failing credential.
 This does not disprove EQUS.MINI availability.
 If the manual smoke-test used a different working key, update .env or rerun with --api-key-source environment.
 ```
+
+After `.env` was corrected, metadata smoke-test passed and the one-event market-data micro-probe returned `records=10`.
+
+## Dataset diagnostics result
+
+Executed metadata/symbology/cost diagnostics:
+
+```text
+command: .\.venv-lab\Scripts\python.exe experiments\databento_probe_one_event.py --dataset-diagnostics --api-key-source env-file
+status: dataset_diagnostics_pass
+dataset: EQUS.MINI
+schema: trades
+schema_available: true
+record_count: 10
+estimated_cost_usd: 0.000002682209
+symbol: FSR
+symbology_status: OK
+symbology_instrument_id: 6354
+available_schemas: mbp-1,tbbo,trades,bbo-1s,bbo-1m,ohlcv-1s,ohlcv-1m,ohlcv-1h,ohlcv-1d,definition
+```
+
+Interpretation: `EQUS.MINI` is usable for the tested FSR micro-window at metadata/symbology level, and OHLCV schemas are available for future tiny bar probes.

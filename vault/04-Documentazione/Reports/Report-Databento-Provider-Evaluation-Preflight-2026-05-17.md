@@ -217,6 +217,63 @@ PROVIDER_DATA_PARTIALLY_EVALUATED_ONE_EVENT_ONLY
 RAW_PROVIDER_PAYLOAD_NOT_RETAINED
 ```
 
+## Dataset diagnostics
+
+After the one-event market-data probe passed, a metadata/symbology/cost diagnostic was executed without raw payload retention:
+
+```text
+command: .\.venv-lab\Scripts\python.exe experiments\databento_probe_one_event.py --dataset-diagnostics --api-key-source env-file
+status: dataset_diagnostics_pass
+dataset: EQUS.MINI
+dataset_available: true
+dataset_count: 29
+schema: trades
+schema_available: true
+record_count: 10
+estimated_cost_usd: 0.000002682209
+symbol: FSR
+symbology_status: OK
+symbology_stype_out: instrument_id
+symbology_instrument_id: 6354
+```
+
+Available schemas reported for `EQUS.MINI`:
+
+```text
+mbp-1
+tbbo
+trades
+bbo-1s
+bbo-1m
+ohlcv-1s
+ohlcv-1m
+ohlcv-1h
+ohlcv-1d
+definition
+```
+
+Fields preview for `trades` confirms event-level price/size fields plus timestamps and sequence metadata:
+
+```text
+instrument_id
+ts_event
+price
+size
+action
+side
+flags
+ts_recv
+sequence
+```
+
+Interpretation:
+
+```text
+DATABENTO_EQUS_MINI_SCHEMA_AND_SYMBOLOGY_OK_FOR_FSR_MICRO_WINDOW
+COST_PREVIEW_AVAILABLE_AND_TINY_FOR_LIMIT_10
+OHLCV_SCHEMAS_AVAILABLE_FOR_FUTURE_LOW_COST_BAR_PROBES
+```
+
 ## Governance constraints
 
 No Databento data payload has been retained.

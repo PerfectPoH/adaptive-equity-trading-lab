@@ -7,7 +7,7 @@ import json
 import os
 import sys
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 from dotenv import dotenv_values
@@ -36,6 +36,7 @@ class DatabentoProbeConfig:
     limit: int
     dry_run: bool
     metadata_smoke_test: bool
+    dataset_diagnostics: bool
     retain_raw_response: bool
     api_key_source: str
     env_file: Path
@@ -61,6 +62,7 @@ def main(argv: list[str] | None = None) -> int:
         limit=args.limit,
         dry_run=args.dry_run,
         metadata_smoke_test=args.metadata_smoke_test,
+        dataset_diagnostics=args.dataset_diagnostics,
         retain_raw_response=args.retain_raw_response,
         api_key_source=args.api_key_source,
         env_file=Path(args.env_file),
@@ -108,6 +110,26 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 0 if config.dataset in datasets else 6
 
+    if config.dataset_diagnostics:
+        try:
+            diagnostics = _run_dataset_diagnostics(config, api_key)
+        except ImportError:
+            _write_error_artifact(config, "DATABENTO_PACKAGE_MISSING", "Install databento in the active Python environment.", key_diagnostics)
+            print("DATABENTO_PACKAGE_MISSING", file=sys.stderr)
+            return 4
+        except Exception as exc:
+            _write_error_artifact(config, exc.__class__.__name__, str(exc), key_diagnostics)
+            print(f"DATABENTO_ERROR:{exc.__class__.__name__}", file=sys.stderr)
+            return 5
+        output = {
+            "status": "dataset_diagnostics_pass",
+            "api_key": "REDACTED",
+            **key_diagnostics,
+            **diagnostics,
+        }
+        print(json.dumps(output, indent=2, sort_keys=True))
+        return 0
+
     if not config.evaluation_dir.exists():
         print(f"EVALUATION_DIR_MISSING: {config.evaluation_dir}", file=sys.stderr)
         return 3
@@ -144,6 +166,7 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--limit", type=int, default=DEFAULT_LIMIT)
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--metadata-smoke-test", action="store_true")
+    parser.add_argument("--dataset-diagnostics", action="store_true")
     parser.add_argument("--retain-raw-response", action="store_true")
     parser.add_argument("--api-key-source", choices=["auto", "environment", "env-file"], default="auto")
     parser.add_argument("--env-file", default=".env")
@@ -213,6 +236,56 @@ def _list_databento_datasets(api_key: str) -> list[str]:
     return list(client.metadata.list_datasets())
 
 
+def _run_dataset_diagnostics(config: DatabentoProbeConfig, api_key: str) -> dict[str, object]:
+    import databento as db
+
+    client = db.Historical(api_key)
+    datasets = list(client.metadata.list_datasets())
+    schemas = list(client.metadata.list_schemas(config.dataset))
+    fields = client.metadata.list_fields(config.schema, "dbn")
+    cost = client.metadata.get_cost(
+        dataset=config.dataset,
+        schema=config.schema,
+        symbols=config.symbol,
+        start=config.start,
+        end=config.end,
+        limit=config.limit,
+    )
+    record_count = client.metadata.get_record_count(
+        dataset=config.dataset,
+        schema=config.schema,
+        symbols=config.symbol,
+        start=config.start,
+        end=config.end,
+        limit=config.limit,
+    )
+    symbology = client.symbology.resolve(
+        dataset=config.dataset,
+        symbols=config.symbol,
+        stype_in="raw_symbol",
+        stype_out="instrument_id",
+        start_date=config.start[:10],
+        end_date=_next_date(config.end[:10]),
+    )
+    return {
+        "dataset": config.dataset,
+        "dataset_available": config.dataset in datasets,
+        "dataset_count": len(datasets),
+        "schema": config.schema,
+        "schema_available": config.schema in schemas,
+        "schemas": schemas,
+        "field_count": len(fields),
+        "fields_preview": fields[:20],
+        "symbol": config.symbol,
+        "start": config.start,
+        "end": config.end,
+        "limit": config.limit,
+        "estimated_cost_usd": cost,
+        "record_count": record_count,
+        "symbology_result": symbology,
+    }
+
+
 def _fetch_databento_records(config: DatabentoProbeConfig, api_key: str) -> list[dict[str, str]]:
     import databento as db
 
@@ -229,6 +302,10 @@ def _fetch_databento_records(config: DatabentoProbeConfig, api_key: str) -> list
     if frame is None or frame.empty:
         return []
     return json.loads(frame.reset_index().astype(str).to_json(orient="records"))
+
+
+def _next_date(date_text: str) -> str:
+    return (datetime.fromisoformat(date_text) + timedelta(days=1)).date().isoformat()
 
 
 def _write_raw_response(config: DatabentoProbeConfig, response: list[dict[str, str]]) -> Path:
