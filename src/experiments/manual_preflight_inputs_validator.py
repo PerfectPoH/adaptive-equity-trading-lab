@@ -130,7 +130,8 @@ def _validate_command(frame: pd.DataFrame, checks: list[dict[str, str]]) -> None
     approval_blocks = len(approval) == 1 and str(approval.iloc[0]["value"]).lower() == "not_granted" and str(approval.iloc[0]["status"]).lower() == "blocks_execution"
     forbidden = frame[frame["field"].astype(str).eq("forbidden_flags_absent")]
     forbidden_ok = len(forbidden) == 1 and str(forbidden.iloc[0]["status"]).lower() == "pass"
-    not_executed = frame["status"].astype(str).str.lower().str.contains("executed").sum() == 0 or frame["status"].astype(str).str.lower().str.contains("not_executed").any()
+    statuses = frame["status"].astype(str).str.lower()
+    not_executed = not statuses.isin({"executed", "completed", "run"}).any()
     _add_check(checks, "command_required_fields", not missing_fields, f"missing={missing_fields}")
     _add_check(checks, "command_approval_blocks_execution", approval_blocks, f"approval_rows={len(approval)}")
     _add_check(checks, "command_forbidden_flags_absent", forbidden_ok, f"forbidden_rows={len(forbidden)}")

@@ -1,7 +1,7 @@
 input_name,required,current_status,blocks_execution,resolution_required
 explicit_user_execution_approval,yes,not_granted,yes,user must explicitly approve actual run
-final_execution_module,yes,specified_not_implemented,yes,implement exact module before execution
+final_execution_module,yes,dry_only_implemented,yes,real execution module still unsupported
 final_output_directory,yes,specified_not_created,yes,create immutable output directory only after approval
 trial_ledger_entry,yes,planned_not_created,yes,create trial ledger entry before execution
 provider_credentials_check,yes,policy_defined_not_checked,yes,check env availability without provider query
-command_dry_review,yes,reviewed_template_only,yes,final review after implementation and approval
+command_dry_review,yes,reviewed_dry_only,yes,final review after approval

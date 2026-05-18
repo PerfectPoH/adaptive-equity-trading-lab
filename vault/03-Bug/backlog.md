@@ -654,3 +654,9 @@ Created spec-only manual preflight input resolution artifact and validator. It d
 Stato: `DRY_RUN_PREFLIGHT_UPDATED_WITH_MANUAL_INPUT_RESOLUTION_BLOCKED_NOT_RUN / VALIDATOR_BLOCKED_PASS`.
 
 Updated dry-run preflight to include manual input resolution as a sixth component. Component validates 39/39, aggregate preflight validates 38/38 and remains `blocked` because execution approval is not granted and run implementation/output/ledger/credential checks are unresolved. No provider query, backtest, sweep, or strategy run was performed.
+
+### RESEARCH-089 - Provider sensitivity diagnostic runner dry-only
+
+Stato: `PROVIDER_SENSITIVITY_DIAGNOSTIC_RUNNER_DRY_ONLY_IMPLEMENTED / NO_EXECUTION`.
+
+Implemented dry-only runner module and tests. The runner requires `--dry-run`, rejects `--execute`, and blocks forbidden flags. Manual preflight artifacts updated to `dry_only_implemented`; aggregate preflight remains `blocked`. No provider query, backtest, sweep, or strategy run was performed.
