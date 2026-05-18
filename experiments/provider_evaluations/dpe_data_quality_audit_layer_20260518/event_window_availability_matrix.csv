@@ -1,0 +1,11 @@
+event_id,symbol,databento_window_available,databento_schema,databento_records,polygon_reference_available,polygon_aggregate_available,combined_window_status,notes
+DPE-001,TUP,yes,ohlcv-1d,2,not_tested,not_tested,available_with_caveats,Databento daily bars available; delisting history partial; no reference confirmation
+DPE-002,MULN,yes,ohlcv-1m,5,yes,not_tested,available_with_caveats,Polygon split row present but Databento adjusted/raw split handling blocked by Reference subscription
+DPE-003,CNGL,yes,ohlcv-1d,4,not_tested,not_tested,available_with_caveats,OHLCV available but halt metadata not validated
+DPE-004,ABAT,yes,ohlcv-1m,5,not_tested,not_tested,available_with_caveats,OHLCV event window available; offering metadata not covered by current providers
+DPE-005,WEYS,yes,ohlcv-1d,8,yes,not_tested,available_with_caveats,Polygon dividend rows present but adjusted/raw dividend coherence blocked by Reference subscription
+DPE-006,FSR,yes,trades+ohlcv-1m,10+5,yes,not_tested,available_with_caveats,Databento trades/OHLCV and Polygon ticker details available; delisting/security-master still partial
+DPE-007,PHUN,yes,ohlcv-1m,5,not_tested,not_tested,available_with_caveats,OHLCV available; split reference not probed in Polygon micro-probe and adjusted factors blocked
+DPE-008,GH,yes,ohlcv-1d,6,not_tested,not_tested,available_with_caveats,OHLCV available around halt; no dedicated halt feed validated
+DPE-009,ICU,yes,ohlcv-1m,2,not_tested,not_tested,available_with_caveats,OHLCV window sparse but available; offering metadata not covered
+DPE-010,DWAC_DJT,yes,ohlcv-1d+ohlcv-1m,3+5,yes,no,available_with_caveats,DWAC/DJT OHLCV and DJT ticker details present; full identifier continuity remains partial

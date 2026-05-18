@@ -522,3 +522,9 @@ User-reported Databento response: Reference API subscription costs approximately
 Stato: `PROVIDER_COMBO_GATE_APPROVED_FOR_DATA_QUALITY_AUDIT / NOT_APPROVED_FOR_STRATEGY_TRIALS_OR_BACKTESTS`.
 
 Databento Historical is approved as OHLCV candidate and Polygon Stocks Basic Free as recent reference/corporate-actions cross-check. Databento Reference remains declined due 300 USD/month subscription. Next allowed phase: data-quality audit artifacts only; no backtest, OOS, sweep, live, paper, raw retention or ALL_SYMBOLS.
+
+### RESEARCH-067 - DPE data-quality audit layer
+
+Stato: `DATA_QUALITY_AUDIT_LAYER_READY_FOR_INTERPRETATION / STRATEGY_TRIALS_REMAIN_BLOCKED`.
+
+Created derived feature table, event-window availability matrix and corporate-action crosscheck matrix using existing Databento/Polygon provider evidence only. No new provider query, no raw retention, no backtest/OOS/sweep/live/paper. All DPE rows remain caveat due adjusted/PIT/security-master/halt/offering/storage blockers.

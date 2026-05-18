@@ -1,0 +1,7 @@
+event_id,symbol,event_type,crosscheck_provider,crosscheck_status,derived_evidence,remaining_gap
+DPE-002,MULN,reverse_split,Polygon splits,pass_limited,1 split row observed,adjustment factor not available without paid Databento Reference
+DPE-005,WEYS,special_dividend,Polygon dividends,pass_limited,2 dividend rows observed,adjusted/raw dividend coherence not verified
+DPE-007,PHUN,reverse_split,none_current,not_tested,not probed in Polygon micro-probe,needs future narrow split endpoint probe if still within free limits
+DPE-010,DWAC_DJT,ticker_change,Polygon ticker details + Databento symbology,partial,DJT ticker details and Databento DWAC/DJT OHLCV observed,full security-master/PIT continuity blocked
+DPE-004,ABAT,offering_dilution,none_current,not_available,OHLCV only,offering metadata not a confirmed provider capability
+DPE-009,ICU,offering_dilution,none_current,not_available,OHLCV only,offering metadata not a confirmed provider capability
