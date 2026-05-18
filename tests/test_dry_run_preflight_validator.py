@@ -28,7 +28,8 @@ def _valid_artifact(tmp_path: Path) -> Path:
         "execution_authorization,missing,missing,missing,pass,pass\n"
         "execution_command_output_schema,missing,missing,missing,pass,pass\n"
         "governance_calibration,missing,missing,missing,pass,pass\n"
-        "manual_preflight_inputs,missing,missing,missing,pass,pass\n",
+        "manual_preflight_inputs,missing,missing,missing,pass,pass\n"
+        "pre_execution_output_ledger,missing,missing,missing,pass,pass\n",
         encoding="utf-8",
     )
     (artifact / "preflight_required_inputs.csv").write_text(

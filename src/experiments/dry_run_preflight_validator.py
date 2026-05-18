@@ -36,6 +36,7 @@ REQUIRED_COMPONENTS = {
     "execution_command_output_schema",
     "governance_calibration",
     "manual_preflight_inputs",
+    "pre_execution_output_ledger",
 }
 
 REQUIRED_INPUTS = {
@@ -108,6 +109,7 @@ def _validate_manifest(manifest: dict[str, Any], checks: list[dict[str, str]]) -
     spec_only_ok = manifest.get("status") == "SPEC_ONLY_NOT_EXECUTED" and manifest.get("preflight_decision") in {
         "blocked_until_manual_execution_inputs_resolved",
         "blocked_until_explicit_execution_approval_and_implementation",
+        "blocked_until_explicit_execution_approval_credentials_output_ledger",
     }
     stage_ok = manifest.get("research_stage") == "new_signal_research"
     flags_ok = manifest.get("no_provider_query") is True and manifest.get("no_backtest") is True and manifest.get("no_strategy_promotion") is True

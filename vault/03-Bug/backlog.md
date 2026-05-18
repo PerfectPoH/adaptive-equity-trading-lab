@@ -678,3 +678,9 @@ Implemented local credential environment presence checker without provider queri
 Stato: `CREDENTIAL_PREFLIGHT_LOCAL_ONLY_BLOCKED`.
 
 Local no-query credential preflight found `DATABENTO_API_KEY` and `POLYGON_API_KEY` missing in the current shell environment. No secret values disclosed, no network call, no provider query. Updated manual/dry-run preflight artifacts; aggregate preflight remains blocked.
+
+### RESEARCH-093 - Pre-execution output ledger gate
+
+Stato: `OUTPUT_LEDGER_GATES_DEFINED_EXECUTION_BLOCKED / VALIDATOR_PASS`.
+
+Created pre-execution output directory and trial ledger gate artifact plus validator/tests. The gate defines planned run/output/ledger identifiers while confirming no directory created, no ledger entry created, no trial consumed, and no provider query/backtest. Integrated into dry-run preflight as seventh component; aggregate preflight remains blocked.
