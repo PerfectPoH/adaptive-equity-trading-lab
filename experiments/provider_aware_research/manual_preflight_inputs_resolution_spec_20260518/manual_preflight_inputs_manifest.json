@@ -1,0 +1,18 @@
+{
+  "decision": "MANUAL_PREFLIGHT_INPUTS_PARTIALLY_RESOLVED_RUN_NOT_APPROVED",
+  "execution_approval_status": "not_granted",
+  "linked_preflight": "experiments/provider_aware_research/dry_run_preflight_spec_20260518",
+  "no_backtest": true,
+  "no_provider_query": true,
+  "no_strategy_promotion": true,
+  "required_tables": [
+    "manual_input_resolution.csv",
+    "final_command_review.csv",
+    "output_directory_plan.csv",
+    "trial_ledger_planned_entry.csv",
+    "credential_check_policy.csv"
+  ],
+  "research_stage": "new_signal_research",
+  "scope": "Resolve dry-run preflight manual inputs that can be specified without executing provider queries",
+  "status": "SPEC_ONLY_NOT_EXECUTED"
+}

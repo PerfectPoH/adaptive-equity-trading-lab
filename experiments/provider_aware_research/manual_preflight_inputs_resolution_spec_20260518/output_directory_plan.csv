@@ -1,0 +1,6 @@
+field,value,status
+planned_output_dir,experiments/provider_aware_research/execution_outputs/RUN-PREREG-PA-SMALLCAP-001-001,specified_not_created
+run_id,RUN-PREREG-PA-SMALLCAP-001-001,specified
+retention_policy,derived_outputs_only,specified
+raw_payload_retention,false,enforced
+directory_creation,not_performed,blocks_execution_until_approval

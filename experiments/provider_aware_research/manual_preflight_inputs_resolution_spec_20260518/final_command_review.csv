@@ -1,0 +1,7 @@
+field,value,status
+command_id,CMD-PREREG-PA-SMALLCAP-001,reviewed_template_only
+module,src.experiments.provider_sensitivity_diagnostic_runner,specified_not_implemented
+entrypoint,python -m src.experiments.provider_sensitivity_diagnostic_runner,specified_not_executed
+arguments,--preregistration-id PREREG-PA-SMALLCAP-001 --trial-id TRIAL-001 --output-dir experiments/provider_aware_research/execution_outputs/RUN-PREREG-PA-SMALLCAP-001-001,template_only
+forbidden_flags_absent,--all-symbols;--sweep;--promote;--paper;--live,pass
+execution_approval,not_granted,blocks_execution

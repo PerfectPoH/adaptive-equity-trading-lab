@@ -642,3 +642,9 @@ Created spec-only calibration artifact to ensure governance does not make every 
 Stato: `DRY_RUN_PREFLIGHT_DEFINED_BLOCKED_NOT_RUN / VALIDATOR_BLOCKED_PASS`.
 
 Created aggregate dry-run preflight artifact and validator. Components pass: gate 31/31, preregistered plan 45/45, authorization 36/36, command schema 40/40, governance calibration 38/38. Preflight status is correctly `blocked` because explicit user approval, final execution module, output directory, trial ledger entry, credentials check, and command dry review remain unresolved. No provider query, backtest, sweep, or strategy run was performed.
+
+### RESEARCH-087 - Manual preflight inputs resolution spec
+
+Stato: `MANUAL_PREFLIGHT_INPUTS_PARTIALLY_RESOLVED_RUN_NOT_APPROVED / VALIDATOR_PASS`.
+
+Created spec-only manual preflight input resolution artifact and validator. It defines future module path, command template, output directory plan, planned trial ledger entry, and credential policy while keeping approval not granted, output directory not created, ledger not consumed, credentials not checked, and provider queries forbidden. No provider query, backtest, sweep, or strategy run was performed.

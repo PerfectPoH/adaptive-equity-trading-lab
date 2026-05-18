@@ -1,0 +1,7 @@
+field,planned_value,status
+trial_id,TRIAL-001,planned
+preregistration_id,PREREG-PA-SMALLCAP-001,planned
+trial_consumed,false,not_consumed
+trial_budget_remaining_after_run,2_if_executed,planned
+result_status,not_run,not_run
+ledger_write_status,not_created,blocks_execution_until_approval
