@@ -714,3 +714,9 @@ Executed one approved diagnostic for `CRMD` under `RUN-PREREG-PA-SMALLCAP-001-00
 Stato: `MINI_PANEL_DEFINED_NOT_EXECUTED / SPEC_ONLY_AWAITING_SEPARATE_APPROVAL`.
 
 Created a 4-candidate mini-panel approval gate with CRMD as executed anchor and IOVA/CABA/IOVA-2025-12 as proposed new queries. Validator passes 36/36. No provider query, backtest, sweep, promotion, output directory creation, or mini-panel ledger entry was performed. Separate approval and bounded runner support are required before execution.
+
+### RESEARCH-099 - Approved mini-panel provider sensitivity diagnostic
+
+Stato: `APPROVED_MINI_PANEL_DIAGNOSTIC_COMPLETED`.
+
+Executed bounded mini-panel `MINIPANEL-PREREG-PA-SMALLCAP-001-001` on commit `586f579` after preflight passed 17/17. Three new provider queries were performed: IOVA 2025-07, CABA 2022-08, and IOVA 2025-12. Results: IOVA cases classified as `minor_price_or_return_delta`; CABA classified as `provider_unavailable` due to Databento `BentoClientError` with Polygon OK. No raw payload retention, no backtest, no sweep, no strategy promotion, no paper/live.

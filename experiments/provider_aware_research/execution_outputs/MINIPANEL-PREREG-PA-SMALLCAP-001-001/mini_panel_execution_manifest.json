@@ -1,0 +1,20 @@
+{
+  "backtest_performed": false,
+  "batch_trial_id": "MINIPANEL-TRIAL-001",
+  "candidate_count": 4,
+  "candidate_symbols": [
+    "IOVA",
+    "CABA",
+    "IOVA"
+  ],
+  "execution_completed_at_utc": "2026-05-18T17:06:57.104614+00:00",
+  "execution_started_at_utc": "2026-05-18T17:06:45.851047+00:00",
+  "execution_status": "completed",
+  "git_sha": "586f579",
+  "new_provider_query_count": 3,
+  "panel_id": "MINIPANEL-PREREG-PA-SMALLCAP-001-001",
+  "preregistration_id": "PREREG-PA-SMALLCAP-001",
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "strategy_promotion": false
+}
