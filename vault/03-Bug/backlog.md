@@ -516,3 +516,9 @@ Micro-probe controllato con 5 chiamate e no raw retention. Pass: MULN split refe
 Stato: `DATABENTO_REFERENCE_SUBSCRIPTION_DECLINED_FOR_NOW`.
 
 User-reported Databento response: Reference API subscription costs approximately `300 USD/month`. Decision: do not subscribe during preflight. Keep Databento Historical as OHLCV candidate and Polygon Stocks Basic Free as recent reference/corporate-actions secondary provider. Final provider pass remains blocked for full PIT/reference/security-master coverage and storage rights.
+
+### RESEARCH-066 - Provider combo gate Databento plus Polygon
+
+Stato: `PROVIDER_COMBO_GATE_APPROVED_FOR_DATA_QUALITY_AUDIT / NOT_APPROVED_FOR_STRATEGY_TRIALS_OR_BACKTESTS`.
+
+Databento Historical is approved as OHLCV candidate and Polygon Stocks Basic Free as recent reference/corporate-actions cross-check. Databento Reference remains declined due 300 USD/month subscription. Next allowed phase: data-quality audit artifacts only; no backtest, OOS, sweep, live, paper, raw retention or ALL_SYMBOLS.
