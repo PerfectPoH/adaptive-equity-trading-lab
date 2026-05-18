@@ -4,4 +4,4 @@ final_execution_module,dry_only_implemented,real_runner_gated,yes,Real-run gate 
 final_output_directory,placeholder,specified_not_created,yes,Output directory path specified but not created for execution.
 trial_ledger_entry,missing,planned_not_created,yes,Ledger entry planned but not consumed/created as run artifact.
 provider_credentials_check,local_check_blocked_missing_required_env,local_env_file_check_pass,no,Local .env presence check found required credentials; no secret disclosure or provider query.
-command_dry_review,reviewed_dry_only,reviewed_gated_real_runner,yes,Gated real-run command surface reviewed; still no executable approval.
+command_dry_review,reviewed_dry_only,final_command_review_passed,no,Final command review artifact passed; execution still blocked by approval/output/ledger.

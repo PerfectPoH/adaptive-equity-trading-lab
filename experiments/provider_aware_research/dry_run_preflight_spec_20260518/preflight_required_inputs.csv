@@ -4,4 +4,4 @@ final_execution_module,yes,real_runner_gated,yes,real run remains blocked until 
 final_output_directory,yes,specified_not_created,yes,create immutable output directory only after approval
 trial_ledger_entry,yes,planned_not_created,yes,create trial ledger entry before execution
 provider_credentials_check,yes,local_env_file_check_pass,no,credential presence satisfied without provider query
-command_dry_review,yes,reviewed_gated_real_runner,yes,final review after approval
+command_dry_review,yes,final_command_review_passed,no,final command reviewed; execution still blocked by approval/output/ledger

@@ -690,3 +690,9 @@ Created pre-execution output directory and trial ledger gate artifact plus valid
 Stato: `CREDENTIAL_PREFLIGHT_ENV_FILE_PASS`.
 
 Updated credential preflight to read `.env` with redacted presence-only diagnostics. `DATABENTO_API_KEY` and `POLYGON_API_KEY` are present via env-file. No secret values disclosed, no network call, no provider query. Manual preflight validates 39/39 and aggregate dry-run preflight remains blocked 39/39 due to approval/output/ledger/final-review gates.
+
+### RESEARCH-095 - Final command review spec
+
+Stato: `FINAL_COMMAND_REVIEWED_EXECUTION_STILL_BLOCKED / VALIDATOR_PASS`.
+
+Created final command review artifact, validator, and tests. The command surface is reviewed with credentials present via env-file and forbidden flags absent, but execution remains blocked. Integrated as eighth dry-run preflight component; aggregate preflight remains blocked 40/40. No provider query, backtest, output dir creation, ledger entry, or trial consumption occurred.

@@ -1,0 +1,8 @@
+check,status,detail
+single_preregistered_run,pass,run_id fixed to RUN-PREREG-PA-SMALLCAP-001-001
+provider_credentials_present,pass,presence checked via .env without disclosure
+no_raw_payload_retention,pass,raw payload retention remains false
+output_directory_not_created,pass,directory not created before approval
+trial_not_consumed,pass,trial remains unconsumed
+execution_approval_not_granted,pass,execution still blocked
+provider_query_not_performed,pass,no provider endpoint contacted

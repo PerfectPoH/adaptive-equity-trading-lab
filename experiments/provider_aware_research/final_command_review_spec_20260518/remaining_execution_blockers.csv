@@ -1,0 +1,5 @@
+blocker,severity,current_status,required_response
+explicit_user_execution_approval_not_granted,critical,present,user must explicitly approve actual execution
+output_directory_not_created,critical,present,create immutable output directory only after approval
+trial_ledger_entry_not_created,critical,present,create ledger entry before actual execution
+real_runner_gate_report_only,critical,present,replace blocked gate report with approved execution path only after approval

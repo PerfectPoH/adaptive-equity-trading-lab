@@ -1,0 +1,7 @@
+flag,status,reason
+--all-symbols,forbidden_absent,prevents universe-scale query
+--sweep,forbidden_absent,prevents parameter sweep
+--promote,forbidden_absent,prevents strategy promotion
+--paper,forbidden_absent,prevents paper trading
+--live,forbidden_absent,prevents live trading
+--retain-raw-response,forbidden_absent,prevents raw payload retention

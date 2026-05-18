@@ -1,0 +1,22 @@
+{
+  "artifact_id": "FINAL-COMMAND-REVIEW-PREREG-PA-SMALLCAP-001-20260518",
+  "backtest_performed": false,
+  "command_id": "CMD-PREREG-PA-SMALLCAP-001",
+  "decision": "FINAL_COMMAND_REVIEWED_EXECUTION_STILL_BLOCKED",
+  "execution_approval_status": "not_granted",
+  "output_directory_created": false,
+  "preregistration_id": "PREREG-PA-SMALLCAP-001",
+  "provider_query_performed": false,
+  "required_tables": [
+    "command_review.csv",
+    "command_gate_checks.csv",
+    "forbidden_flags.csv",
+    "remaining_execution_blockers.csv"
+  ],
+  "research_stage": "new_signal_research",
+  "run_id": "RUN-PREREG-PA-SMALLCAP-001-001",
+  "status": "SPEC_ONLY_NOT_EXECUTED",
+  "strategy_promotion_performed": false,
+  "trial_consumed": false,
+  "trial_id": "TRIAL-001"
+}

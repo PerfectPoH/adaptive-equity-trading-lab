@@ -116,7 +116,6 @@ def _validate_resolution(frame: pd.DataFrame, checks: list[dict[str, str]]) -> N
         "final_execution_module",
         "final_output_directory",
         "trial_ledger_entry",
-        "command_dry_review",
     }
     blocking_rows = frame[frame["input_name"].astype(str).isin(blocking_inputs)]
     all_block = len(blocking_rows) == len(blocking_inputs) and blocking_rows["blocks_execution"].astype(str).str.lower().eq("yes").all()
