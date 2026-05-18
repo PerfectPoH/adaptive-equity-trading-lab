@@ -672,3 +672,9 @@ Added a blocked `--real-run` gate report mode. It reports unresolved gates and g
 Stato: `PROVIDER_CREDENTIAL_PREFLIGHT_NO_QUERY_IMPLEMENTED / PRESENCE_CHECK_IMPLEMENTED_NOT_RUN`.
 
 Implemented local credential environment presence checker without provider queries and without secret disclosure. Updated manual/dry preflight artifacts to `presence_check_implemented_not_run`; aggregate preflight remains blocked. Added Intrinio access note recommending EOD historical equities plus adjustment/corporate-action/security-master/coverage metadata.
+
+### RESEARCH-092 - Credential preflight local result
+
+Stato: `CREDENTIAL_PREFLIGHT_LOCAL_ONLY_BLOCKED`.
+
+Local no-query credential preflight found `DATABENTO_API_KEY` and `POLYGON_API_KEY` missing in the current shell environment. No secret values disclosed, no network call, no provider query. Updated manual/dry-run preflight artifacts; aggregate preflight remains blocked.

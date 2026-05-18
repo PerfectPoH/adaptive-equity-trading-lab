@@ -3,5 +3,5 @@ explicit_user_execution_approval,yes,not_granted,yes,user must explicitly approv
 final_execution_module,yes,real_runner_gated,yes,real run remains blocked until all gates acknowledged
 final_output_directory,yes,specified_not_created,yes,create immutable output directory only after approval
 trial_ledger_entry,yes,planned_not_created,yes,create trial ledger entry before execution
-provider_credentials_check,yes,presence_check_implemented_not_run,yes,run env presence check before execution without provider query
+provider_credentials_check,yes,local_check_blocked_missing_required_env,yes,set required provider env vars and rerun local preflight without provider query
 command_dry_review,yes,reviewed_gated_real_runner,yes,final review after approval
