@@ -104,6 +104,39 @@ experiments/provider_evaluations/databento_equities_historical_20260517/DPE-006_
 
 Provider data not evaluated.
 
+## Successful market-data micro-probe
+
+After `.env` was corrected and user authorized the controlled query, the one-event probe was rerun with explicit key source:
+
+```text
+command: .\.venv-lab\Scripts\python.exe experiments\databento_probe_one_event.py --api-key-source env-file
+dataset: EQUS.MINI
+schema: trades
+symbol: FSR
+window: 2024-03-20T14:30..2024-03-20T14:35
+limit: 10
+api_key_source_resolved: env-file
+raw_retention: false
+```
+
+Result:
+
+```text
+status: pass
+records_returned: 10
+```
+
+Artifact validator after the probe:
+
+```text
+status: pass
+failed: 0
+passed: 21
+total: 21
+```
+
+Provider data are only partially evaluated for one event. No raw provider payload was retained.
+
 ## Key-source diagnostic follow-up
 
 After a user-side manual Historical metadata smoke-test passed for `EQUS.MINI`, the probe script was hardened to disambiguate which key is being used.

@@ -176,11 +176,52 @@ DATABENTO_EVALUATION_BLOCKED_BY_AUTHENTICATION
 PROVIDER_DATA_NOT_EVALUATED
 ```
 
+## Successful one-event market-data micro-probe
+
+After key-source diagnostics were hardened and `.env` was corrected, the controlled one-event micro-probe was rerun:
+
+```text
+command: .\.venv-lab\Scripts\python.exe experiments\databento_probe_one_event.py --api-key-source env-file
+dataset: EQUS.MINI
+schema: trades
+symbol: FSR
+window: 2024-03-20T14:30..2024-03-20T14:35
+limit: 10
+api_key_source_resolved: env-file
+api_key_fingerprint: 6f592453be79
+raw_retention: false
+```
+
+Result:
+
+```text
+status: pass
+records_returned: 10
+raw_response_path: RAW_RESPONSE_RETENTION_NOT_ENABLED
+```
+
+Artifact updates:
+
+```text
+provider_manifest.json: provider_query_executed=true
+provider_event_audit_table.csv: DPE-006 symbol resolves yes, event window available yes
+raw_responses_manifest.csv: DPE-006 hash recorded, raw payload not retained
+provider_evaluation_summary.md: one-event micro-probe update appended
+```
+
+Interpretation:
+
+```text
+DATABENTO_ONE_EVENT_MICRO_PROBE_PASS
+PROVIDER_DATA_PARTIALLY_EVALUATED_ONE_EVENT_ONLY
+RAW_PROVIDER_PAYLOAD_NOT_RETAINED
+```
+
 ## Governance constraints
 
 No Databento data payload has been retained.
 
-Before any second Databento query:
+Before any next Databento query:
 
 1. Confirm the current Databento key is valid in the portal.
 2. Confirm the key has historical API access attached.
@@ -194,7 +235,7 @@ Before any second Databento query:
 
 ## Next allowed step
 
-The next allowed step is not another market-data query. First verify key activation/API access in the Databento portal or with a documented account/status/auth smoke test.
+The next allowed step is not a broad provider run. If continuing, execute only the next frozen event or a documented schema/symbology check with explicit `--api-key-source env-file`, no `ALL_SYMBOLS`, and no raw retention until licensing/storage rights are confirmed.
 
 Recommended shape:
 

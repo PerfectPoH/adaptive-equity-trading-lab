@@ -474,7 +474,7 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Priorita: P1.
 - Sintomo: Intrinio e' bloccato da subscription non attiva; serve preparare secondo provider candidato senza query/costi.
 - Azione: creare `experiments/provider_evaluations/databento_equities_historical_20260517/` da template, aggiornare manifest/license/cost/event audit senza segreti e validare col CLI.
-- Stato: micro-probe tentato in [[Report-Databento-Provider-Evaluation-Preflight-2026-05-17]] dopo autorizzazione user a usare fino a `125 USD` free credits. Risultato `BentoClientError / 401 auth_authentication_failed`; provider data non valutati; raw response non trattenuta; validator pass `failed=0`, `passed=21`. Follow-up: script hardenato con `--api-key-source auto|environment|env-file`; in Codex shell la `.env` fingerprint `8cecabc817e0` e' la credential che fallisce, mentre la process env key e' assente. Prossimo step: aggiornare `.env` con la working Historical key o rerun dalla shell corretta con `--api-key-source environment`, poi solo metadata smoke-test prima di market-data query.
+- Stato: one-event market-data micro-probe passato in [[Report-Databento-Provider-Evaluation-Preflight-2026-05-17]] dopo autorizzazione user a usare fino a `125 USD` free credits. Primo tentativo falli' con `BentoClientError / 401 auth_authentication_failed`; follow-up: script hardenato con `--api-key-source auto|environment|env-file`; dopo correzione `.env`, metadata smoke-test passa e il probe `EQUS.MINI / trades / FSR / 2024-03-20T14:30..14:35 / limit=10` restituisce `records=10`. Raw payload non trattenuto; validator pass `failed=0`, `passed=21`. Provider data solo parzialmente valutati su un evento.
 
 ## Tech debt
 
