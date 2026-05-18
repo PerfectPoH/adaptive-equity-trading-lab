@@ -64,6 +64,20 @@ def main(argv: list[str] | None = None) -> int:
         if index > 0:
             time.sleep(config.sleep_seconds)
         results.append(_check_candidate(candidate, databento_key, polygon_key, skip_polygon=config.skip_polygon))
+        _write_results(config.spec_dir, results, config.output_prefix)
+        print(
+            json.dumps(
+                {
+                    "status": "progress",
+                    "completed": len(results),
+                    "total": len(candidates),
+                    "symbol": candidate.get("symbol", ""),
+                    "raw_retention": "disabled",
+                },
+                sort_keys=True,
+            ),
+            flush=True,
+        )
     _write_results(config.spec_dir, results, config.output_prefix)
     print(json.dumps({"status": "completed", "candidates_checked": len(results), "raw_retention": "disabled", "results": results}, indent=2, sort_keys=True))
     return 0

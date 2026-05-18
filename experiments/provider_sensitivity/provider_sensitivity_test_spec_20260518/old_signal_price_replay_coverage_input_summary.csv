@@ -1,0 +1,8 @@
+metric,value
+total_reference_trades,71
+coverage_start,2023-03-28
+covered_replay_candidates,66
+reference_runs,multiyear_2022_2024_risk_sizing;oos_2025_risk_sizing
+replay_type,fixed_old_signals_price_replay_only
+provider_query_authorized,yes_diagnostic_only
+strategy_backtest_authorized,no

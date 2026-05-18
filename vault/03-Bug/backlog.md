@@ -558,3 +558,9 @@ Executed 4-candidate provider-sensitivity micro-check with no raw retention. Dat
 Stato: `OLD_YFINANCE_RESULTS_PROVIDER_SENSITIVE_ON_COVERAGE_AWARE_SAMPLE / STRATEGY_PROMOTION_REMAINS_BLOCKED`.
 
 Coverage-aware expansion checked 8 old yfinance trade candidates within Databento/EQUS.MINI coverage. Databento returned all 8 windows; 2/8 showed material price/return deltas above 5%, 3/8 minor deltas, 2/8 stable. Old yfinance-era strategy results require provider-sensitivity warning and must not be promoted.
+
+### RESEARCH-073 - Old signal price replay full coverage
+
+Stato: `OLD_SIGNAL_RETURNS_PROVIDER_SENSITIVE_FULL_COVERAGE_REPLAY / STRATEGY_PROMOTION_REMAINS_BLOCKED`.
+
+Fixed-signal Databento price replay executed on 66 old yfinance trades inside Databento coverage. Databento passed 66/66; 25 stable, 35 minor delta, 6 material delta >5%, max_abs_return_delta about 20.85%. This confirms old yfinance-era results require provider-sensitivity warning and should be archived rather than backtested/promoted.

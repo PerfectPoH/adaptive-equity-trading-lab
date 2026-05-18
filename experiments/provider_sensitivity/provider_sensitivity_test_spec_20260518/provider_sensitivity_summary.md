@@ -73,3 +73,22 @@ strategy_promotion_allowed: no
 ```
 
 Interpretation: after filtering to the Databento/EQUS.MINI coverage window, Databento returned all selected windows, but 2/8 selected trades show material price/return deltas above the pre-declared 5% threshold. This is enough to classify old yfinance-era outputs as provider-sensitive on this coverage-aware sample. It is still not strategy evidence and does not authorize backtests or promotion.
+
+## Old signal price replay full coverage update
+
+```text
+OLD_SIGNAL_PRICE_REPLAY_FULL_COVERAGE_DIAGNOSTIC_EXECUTED
+replay_candidates: 66
+databento_pass: 66
+databento_unavailable_or_error: 0
+provider_stable_for_selected_fields: 25
+minor_price_or_return_delta: 35
+material_price_or_return_delta: 6
+provider_unavailable: 0
+max_abs_return_delta: 0.2084676744010346
+median_abs_return_delta: 0.0108600878613564
+raw_response_retention: disabled
+strategy_promotion_allowed: no
+```
+
+Verdict: `OLD_SIGNAL_RETURNS_PROVIDER_SENSITIVE_FULL_COVERAGE_REPLAY`. The old yfinance-era signals are replayable on Databento-covered dates, but provider deltas are material in 6/66 rows. This supports archiving old strategy results as provider-sensitive, not running a portfolio backtest.

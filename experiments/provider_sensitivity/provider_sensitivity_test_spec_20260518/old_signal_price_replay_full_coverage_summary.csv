@@ -1,0 +1,15 @@
+metric,value
+replay_candidates,66
+databento_pass,66
+databento_unavailable_or_error,0
+provider_stable_for_selected_fields,25
+minor_price_or_return_delta,35
+material_price_or_return_delta,6
+provider_unavailable,0
+max_abs_entry_delta_pct,0.0738547538964422
+max_abs_exit_delta_pct,0.1457489745829387
+max_abs_return_delta,0.2084676744010346
+median_abs_return_delta,0.0108600878613564
+material_delta_symbols,AEHR;AMPX;ARRY;BBAI;NVTS;SANA
+verdict,OLD_SIGNAL_RETURNS_PROVIDER_SENSITIVE_FULL_COVERAGE_REPLAY
+strategy_promotion_allowed,no
