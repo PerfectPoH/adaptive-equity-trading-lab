@@ -1,0 +1,7 @@
+metric,value
+total_reference_trades,71
+coverage_start,2023-03-28
+coverage_eligible_trades,66
+selected_candidates,8
+selection_rule,per_run_largest_loss;per_run_largest_win;per_run_median_abs_pnl;global_earliest;global_latest;deduplicated;max8
+provider_query_authorized,yes_micro_check_only

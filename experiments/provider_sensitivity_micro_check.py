@@ -30,6 +30,9 @@ class SensitivityConfig:
     api_key_source: str
     sleep_seconds: float
     max_candidates: int
+    candidates_file: str
+    output_prefix: str
+    skip_polygon: bool
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -40,16 +43,19 @@ def main(argv: list[str] | None = None) -> int:
         api_key_source=args.api_key_source,
         sleep_seconds=args.sleep_seconds,
         max_candidates=args.max_candidates,
+        candidates_file=args.candidates_file,
+        output_prefix=args.output_prefix,
+        skip_polygon=args.skip_polygon,
     )
     databento_key = _resolve_key(DATABENTO_ENV, config)
     polygon_key = _resolve_key(POLYGON_ENV, config)
     if not databento_key:
         print("DATABENTO_API_KEY_MISSING", file=sys.stderr)
         return 2
-    if not polygon_key:
+    if not polygon_key and not config.skip_polygon:
         print("POLYGON_API_KEY_MISSING", file=sys.stderr)
         return 2
-    candidates = _read_candidates(config.spec_dir)[: config.max_candidates]
+    candidates = _read_candidates(config.spec_dir, config.candidates_file)[: config.max_candidates]
     if not candidates:
         print("NO_CANDIDATES", file=sys.stderr)
         return 3
@@ -57,8 +63,8 @@ def main(argv: list[str] | None = None) -> int:
     for index, candidate in enumerate(candidates):
         if index > 0:
             time.sleep(config.sleep_seconds)
-        results.append(_check_candidate(candidate, databento_key, polygon_key))
-    _write_results(config.spec_dir, results)
+        results.append(_check_candidate(candidate, databento_key, polygon_key, skip_polygon=config.skip_polygon))
+    _write_results(config.spec_dir, results, config.output_prefix)
     print(json.dumps({"status": "completed", "candidates_checked": len(results), "raw_retention": "disabled", "results": results}, indent=2, sort_keys=True))
     return 0
 
@@ -70,6 +76,9 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--api-key-source", choices=["env-file", "environment"], default="env-file")
     parser.add_argument("--sleep-seconds", type=float, default=13.0)
     parser.add_argument("--max-candidates", type=int, default=4)
+    parser.add_argument("--candidates-file", default="overlap_selection_candidates.csv")
+    parser.add_argument("--output-prefix", default="provider_sensitivity_micro_check")
+    parser.add_argument("--skip-polygon", action="store_true")
     return parser
 
 
@@ -81,18 +90,18 @@ def _resolve_key(name: str, config: SensitivityConfig) -> str:
     return str(dotenv_values(config.env_file).get(name) or "")
 
 
-def _read_candidates(spec_dir: Path) -> list[dict[str, str]]:
-    path = spec_dir / "overlap_selection_candidates.csv"
+def _read_candidates(spec_dir: Path, candidates_file: str) -> list[dict[str, str]]:
+    path = spec_dir / candidates_file
     with path.open(newline="", encoding="utf-8") as handle:
         return list(csv.DictReader(handle))
 
 
-def _check_candidate(candidate: dict[str, str], databento_key: str, polygon_key: str) -> dict[str, object]:
+def _check_candidate(candidate: dict[str, str], databento_key: str, polygon_key: str, *, skip_polygon: bool) -> dict[str, object]:
     y_entry = _to_float(candidate.get("entry_price"))
     y_exit = _to_float(candidate.get("exit_price"))
     y_return = _to_float(candidate.get("return_pct"))
     db_result = _databento_ohlcv_summary(candidate, databento_key)
-    polygon_result = _polygon_ticker_summary(candidate, polygon_key)
+    polygon_result = _polygon_ticker_summary(candidate, polygon_key) if not skip_polygon else _polygon_skipped_summary()
     db_entry_open = _to_float(db_result.get("entry_date_open"))
     db_exit_close = _to_float(db_result.get("exit_date_close"))
     db_return = None
@@ -174,10 +183,20 @@ def _polygon_ticker_summary(candidate: dict[str, str], api_key: str) -> dict[str
         return {"polygon_status": "URL_ERROR", "polygon_result_count": 0, "polygon_active": "", "polygon_primary_exchange": "", "polygon_payload_sha256": _sha256_json({"error": str(exc.reason)})}
 
 
+def _polygon_skipped_summary() -> dict[str, object]:
+    return {
+        "polygon_status": "skipped",
+        "polygon_result_count": 0,
+        "polygon_active": "",
+        "polygon_primary_exchange": "",
+        "polygon_payload_sha256": _sha256_json({"skipped": True}),
+    }
+
+
 def _classify_sensitivity(db_result: dict[str, object], polygon_result: dict[str, object], entry_delta: float | None, exit_delta: float | None, return_delta: float | None) -> str:
     if db_result.get("databento_status") != "pass":
         return "provider_unavailable"
-    if polygon_result.get("polygon_result_count") == 0:
+    if polygon_result.get("polygon_status") != "skipped" and polygon_result.get("polygon_result_count") == 0:
         return "reference_unavailable_caveat"
     deltas = [abs(value) for value in (entry_delta, exit_delta, return_delta) if value is not None]
     if not deltas:
@@ -219,8 +238,8 @@ def _next_day(date_text: str) -> str:
     return (pd.Timestamp(date_text) + pd.Timedelta(days=1)).date().isoformat()
 
 
-def _write_results(spec_dir: Path, results: list[dict[str, object]]) -> None:
-    path = spec_dir / "provider_sensitivity_micro_check_results.csv"
+def _write_results(spec_dir: Path, results: list[dict[str, object]], output_prefix: str) -> None:
+    path = spec_dir / f"{output_prefix}_results.csv"
     fields = [
         "reference_run",
         "symbol",

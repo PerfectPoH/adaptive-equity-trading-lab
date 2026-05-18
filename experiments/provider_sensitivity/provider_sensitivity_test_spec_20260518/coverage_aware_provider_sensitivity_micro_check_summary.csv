@@ -1,0 +1,11 @@
+metric,value
+candidates_checked,8
+databento_pass,8
+databento_unavailable_or_error,0
+polygon_reference,skipped_for_rate_limit_and_reference_scope
+provider_stable_for_selected_fields,3
+minor_price_or_return_delta,3
+material_price_or_return_delta,2
+provider_unavailable,0
+verdict,OLD_YFINANCE_RESULTS_PROVIDER_SENSITIVE_ON_COVERAGE_AWARE_SAMPLE
+strategy_promotion_allowed,no

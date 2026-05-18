@@ -55,3 +55,21 @@ strategy_promotion_allowed: no
 ```
 
 Interpretation: selected comparable cases do not show material price/return deltas above the pre-declared 5% threshold, but one 2022 CABA case is unavailable from Databento/EQUS.MINI because the product coverage begins later than that trade window. This is a provider-coverage caveat, not strategy evidence.
+
+## Coverage-aware expansion update
+
+```text
+COVERAGE_AWARE_PROVIDER_SENSITIVITY_MICRO_CHECK_EXECUTED
+candidates_checked: 8
+databento_pass: 8
+databento_unavailable_or_error: 0
+polygon_reference: skipped_for_rate_limit_and_reference_scope
+provider_stable_for_selected_fields: 2
+minor_price_or_return_delta: 3
+material_price_or_return_delta: 2
+provider_unavailable: 0
+raw_response_retention: disabled
+strategy_promotion_allowed: no
+```
+
+Interpretation: after filtering to the Databento/EQUS.MINI coverage window, Databento returned all selected windows, but 2/8 selected trades show material price/return deltas above the pre-declared 5% threshold. This is enough to classify old yfinance-era outputs as provider-sensitive on this coverage-aware sample. It is still not strategy evidence and does not authorize backtests or promotion.
