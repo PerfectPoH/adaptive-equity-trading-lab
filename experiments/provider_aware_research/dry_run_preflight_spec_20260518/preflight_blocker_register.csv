@@ -1,7 +1,7 @@
 blocker,severity,current_status,required_response
-explicit_user_execution_approval_missing,critical,present,obtain explicit approval before actual execution
-execution_module_not_final,critical,present,finalize module before actual execution
-output_directory_placeholder,critical,present,define output directory before actual execution
-trial_ledger_entry_missing,critical,present,create ledger entry before actual execution
-provider_credentials_not_checked,high,present,check credentials before actual execution
-command_not_reviewed,high,present,review exact command before actual execution
+explicit_user_execution_approval_not_granted,critical,present,obtain explicit approval before actual execution
+execution_module_specified_not_implemented,critical,present,implement and review module before actual execution
+output_directory_specified_not_created,critical,present,create output directory only after approval
+trial_ledger_entry_planned_not_created,critical,present,create ledger entry before actual execution
+provider_credentials_policy_defined_not_checked,high,present,check credentials before actual execution without provider query
+command_template_reviewed_not_final,high,present,final command review after implementation and approval

@@ -35,6 +35,7 @@ REQUIRED_COMPONENTS = {
     "execution_authorization",
     "execution_command_output_schema",
     "governance_calibration",
+    "manual_preflight_inputs",
 }
 
 REQUIRED_INPUTS = {
@@ -104,7 +105,10 @@ def _build_parser() -> argparse.ArgumentParser:
 def _validate_manifest(manifest: dict[str, Any], checks: list[dict[str, str]]) -> None:
     missing = [field for field in REQUIRED_MANIFEST_FIELDS if field not in manifest]
     tables_ok = isinstance(manifest.get("required_tables"), list) and bool(manifest.get("required_tables"))
-    spec_only_ok = manifest.get("status") == "SPEC_ONLY_NOT_EXECUTED" and manifest.get("preflight_decision") == "blocked_until_manual_execution_inputs_resolved"
+    spec_only_ok = manifest.get("status") == "SPEC_ONLY_NOT_EXECUTED" and manifest.get("preflight_decision") in {
+        "blocked_until_manual_execution_inputs_resolved",
+        "blocked_until_explicit_execution_approval_and_implementation",
+    }
     stage_ok = manifest.get("research_stage") == "new_signal_research"
     flags_ok = manifest.get("no_provider_query") is True and manifest.get("no_backtest") is True and manifest.get("no_strategy_promotion") is True
     _add_check(checks, "manifest_required_fields", not missing and tables_ok, f"missing={missing}; required_tables_ok={tables_ok}")
@@ -164,7 +168,20 @@ def _validate_inputs(frame: pd.DataFrame, checks: list[dict[str, str]]) -> bool:
     inputs = set(frame["input_name"].astype(str).tolist())
     missing_inputs = sorted(REQUIRED_INPUTS - inputs)
     all_required = frame["required"].astype(str).str.lower().eq("yes").all()
-    unresolved = frame["current_status"].astype(str).str.lower().isin({"missing", "not_final", "placeholder", "not_checked", "not_reviewed"})
+    unresolved_statuses = {
+        "missing",
+        "not_final",
+        "placeholder",
+        "not_checked",
+        "not_reviewed",
+        "not_granted",
+        "specified_not_implemented",
+        "specified_not_created",
+        "planned_not_created",
+        "policy_defined_not_checked",
+        "reviewed_template_only",
+    }
+    unresolved = frame["current_status"].astype(str).str.lower().isin(unresolved_statuses)
     unresolved_block = frame.loc[unresolved, "blocks_execution"].astype(str).str.lower().eq("yes").all()
     _add_check(checks, "inputs_required_items", not missing_inputs, f"missing={missing_inputs}")
     _add_check(checks, "inputs_all_required", bool(all_required), f"all_required={bool(all_required)}")

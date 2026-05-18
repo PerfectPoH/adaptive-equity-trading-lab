@@ -1,9 +1,10 @@
 {
-  "decision": "DRY_RUN_PREFLIGHT_DEFINED_BLOCKED_NOT_RUN",
+  "decision": "DRY_RUN_PREFLIGHT_UPDATED_WITH_MANUAL_INPUT_RESOLUTION_BLOCKED_NOT_RUN",
+  "manual_preflight_inputs": "experiments/provider_aware_research/manual_preflight_inputs_resolution_spec_20260518",
   "no_backtest": true,
   "no_provider_query": true,
   "no_strategy_promotion": true,
-  "preflight_decision": "blocked_until_manual_execution_inputs_resolved",
+  "preflight_decision": "blocked_until_explicit_execution_approval_and_implementation",
   "required_tables": [
     "preflight_components.csv",
     "preflight_required_inputs.csv",

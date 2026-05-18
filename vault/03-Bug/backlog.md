@@ -648,3 +648,9 @@ Created aggregate dry-run preflight artifact and validator. Components pass: gat
 Stato: `MANUAL_PREFLIGHT_INPUTS_PARTIALLY_RESOLVED_RUN_NOT_APPROVED / VALIDATOR_PASS`.
 
 Created spec-only manual preflight input resolution artifact and validator. It defines future module path, command template, output directory plan, planned trial ledger entry, and credential policy while keeping approval not granted, output directory not created, ledger not consumed, credentials not checked, and provider queries forbidden. No provider query, backtest, sweep, or strategy run was performed.
+
+### RESEARCH-088 - Update dry-run preflight with manual input resolution
+
+Stato: `DRY_RUN_PREFLIGHT_UPDATED_WITH_MANUAL_INPUT_RESOLUTION_BLOCKED_NOT_RUN / VALIDATOR_BLOCKED_PASS`.
+
+Updated dry-run preflight to include manual input resolution as a sixth component. Component validates 39/39, aggregate preflight validates 38/38 and remains `blocked` because execution approval is not granted and run implementation/output/ledger/credential checks are unresolved. No provider query, backtest, sweep, or strategy run was performed.
