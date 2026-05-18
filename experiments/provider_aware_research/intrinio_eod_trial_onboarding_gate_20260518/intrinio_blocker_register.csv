@@ -1,0 +1,8 @@
+blocker,severity,status,resolution_required
+prior_key_exposed_in_chat,critical,unresolved,rotate_or_replace_intrinio_key_before_any_query
+terms_for_derived_artifacts_unknown,high,unresolved,confirm derived metrics/hash retention rights
+endpoint_not_confirmed,high,unresolved,confirm endpoint from Intrinio docs/provider
+rate_limits_unknown,medium,unresolved,confirm call limits before probe
+separate_probe_approval_missing,critical,unresolved,user must approve first one-call probe separately
+output_directory_not_created,medium,unresolved,create immutable first-probe output dir only after approval
+trial_ledger_entry_not_created,medium,unresolved,create first-probe ledger entry only after approval

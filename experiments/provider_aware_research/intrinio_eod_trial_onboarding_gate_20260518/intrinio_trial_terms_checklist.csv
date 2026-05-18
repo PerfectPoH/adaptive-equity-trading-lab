@@ -1,0 +1,9 @@
+item,status,requirement
+trial_active,confirmed_by_provider,trial added to account and expires two weeks from provider reply
+eod_one_year_history,confirmed_by_provider,EOD with one year of history for a trial
+us_small_cap_coverage,unresolved,confirm NASDAQ/NYSE/AMEX small-cap EOD support
+delisted_symbol_coverage,unresolved,confirm active-only versus delisted support
+adjustment_policy,unresolved,confirm adjusted/unadjusted/split/dividend handling
+raw_retention_rights,unresolved,confirm derived metrics and hashes may be stored without raw payload retention
+rate_limits,unresolved,confirm trial limits before any probe
+endpoint_selection,unresolved,confirm exact EOD historical prices endpoint

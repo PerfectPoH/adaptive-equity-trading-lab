@@ -726,3 +726,9 @@ Executed bounded mini-panel `MINIPANEL-PREREG-PA-SMALLCAP-001-001` on commit `58
 Stato: `PURGED_TEMPORAL_SPLIT_EMBARGO_VALIDATED`.
 
 Implemented a synthetic-only validator for purge/embargo temporal split invariants. It validates temporal ordering, split row-key isolation, validation/test embargo floors, and label-horizon purging by symbol. Validator report: `experiments/validation/research_062_purged_temporal_split_embargo_report.json`, 10/10 checks passing. Targeted tests passed 8/8. No market data download, provider query, backtest, sweep, strategy promotion, paper/live.
+
+### RESEARCH-100 - Intrinio EOD trial onboarding gate
+
+Stato: `SPEC_ONLY_INTRINIO_TRIAL_ACTIVE_NOT_QUERIED`.
+
+Created a spec-only onboarding gate for the active Intrinio EOD trial. Intrinio confirmed the trial was added to the account and expires two weeks from the provider reply; available data is EOD with one year of history. The gate blocks all API usage until endpoint, adjustments, small-cap coverage, delisted coverage, raw/derived retention rights and rate limits are clarified. Critical blocker: prior Intrinio key exposure in chat requires rotated/replaced key before any query. Validator passes 41/41; targeted tests pass 16/16. No API call, network call, market data download, backtest, sweep, strategy promotion, paper/live, raw retention or secret disclosure occurred.

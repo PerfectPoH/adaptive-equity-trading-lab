@@ -1,0 +1,33 @@
+{
+  "api_docs_location": "user_account_page_not_accessed_by_agent",
+  "api_key_location": "user_account_page_not_accessed_by_agent",
+  "artifact_id": "RESEARCH-100-INTRINIO-EOD-TRIAL-ONBOARDING-GATE-20260518",
+  "backtest_performed": false,
+  "credential_rotation_required": true,
+  "decision": "INTRINIO_EOD_TRIAL_ONBOARDING_DEFINED_NOT_EXECUTED",
+  "market_data_downloaded": false,
+  "max_first_probe_provider_calls": 1,
+  "max_first_probe_symbols": 1,
+  "network_call_performed": false,
+  "offered_data": "EOD with one year of history for a trial",
+  "provider": "Intrinio",
+  "provider_query_performed": false,
+  "raw_payload_retention_allowed": false,
+  "reason_credential_rotation_required": "prior_intrinio_key_was_pasted_into_chat_per_2026-05-17_preflight_report",
+  "required_env_var": "INTRINIO_API_KEY",
+  "required_tables": [
+    "intrinio_trial_terms_checklist.csv",
+    "intrinio_eod_endpoint_questions.csv",
+    "intrinio_credential_policy.csv",
+    "intrinio_probe_budget.csv",
+    "intrinio_blocker_register.csv"
+  ],
+  "research_id": "RESEARCH-100",
+  "secret_values_disclosed": false,
+  "separate_probe_approval_required": true,
+  "status": "SPEC_ONLY_INTRINIO_TRIAL_ACTIVE_NOT_QUERIED",
+  "strategy_promotion_performed": false,
+  "trial_duration_days": 14,
+  "trial_start_context_date": "2026-05-18",
+  "trial_status": "active_time_limited"
+}
