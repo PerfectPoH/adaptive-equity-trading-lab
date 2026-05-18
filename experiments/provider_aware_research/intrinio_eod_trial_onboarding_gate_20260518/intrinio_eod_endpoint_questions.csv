@@ -1,8 +1,8 @@
-question_id,question,status
-Q1,Which endpoint should be used for one-year EOD OHLCV history for US equities?,open
-Q2,"Are OHLCV prices adjusted, unadjusted, or both available?",open
-Q3,Does the trial include US small-cap equities listed on NASDAQ/NYSE/AMEX?,open
-Q4,Are delisted symbols included or only currently active tickers?,open
-Q5,"May we store derived metrics, row counts, field names, and payload hashes while avoiding raw payload retention?",open
-Q6,What are the trial API rate limits and daily/monthly call caps?,open
-Q7,Can the trial be used for internal research/backtesting validation only?,open
+question_id,question,status,provider_answer
+Q1,Which endpoint should be used for one-year EOD OHLCV history for US equities?,answered,stock_prices_v2 and security_historical_data_v2 docs provided
+Q2,"Are OHLCV prices adjusted, unadjusted, or both available?",answered,Includes both
+Q3,Does the trial include US small-cap equities listed on NASDAQ/NYSE/AMEX?,answered,Yes
+Q4,Are delisted symbols included or only currently active tickers?,answered,"Yes, delisted included"
+Q5,"May we store derived metrics, row counts, field names, and payload hashes while avoiding raw payload retention?",answered,Yes it can; local policy still forbids raw retention
+Q6,What are the trial API rate limits and daily/monthly call caps?,answered,2000 calls per minute
+Q7,Can the trial be used for internal research/backtesting validation only?,answered,Yes it can

@@ -87,3 +87,42 @@ targeted tests: 16/16 pass
 ## Interpretation
 
 The trial is active and time-limited, but this commit does not consume it. The next safe step is to resolve the open provider questions and rotate or replace the Intrinio key, then create a separate one-call probe approval gate.
+
+## Provider follow-up answers recorded
+
+Intrinio answered the open questions:
+
+```text
+US small-cap EOD coverage: yes
+Adjusted and unadjusted data: includes both
+US exchange support: yes
+Delisted symbols: yes
+Rate limit: 2000 calls per minute
+Suggested docs/endpoints:
+  - stock_prices_v2
+  - security_historical_data_v2
+Internal research/backtesting validation use: yes
+```
+
+Updated gate status:
+
+```text
+SPEC_ONLY_INTRINIO_TRIAL_INFO_RESOLVED_NOT_QUERIED
+INTRINIO_EOD_TRIAL_READY_FOR_ONE_PROBE_PREPARATION_NOT_APPROVED
+```
+
+Remaining hard blockers before any query:
+
+```text
+prior_key_exposed_in_chat: unresolved
+separate_probe_approval_missing: unresolved
+output_directory_not_created: unresolved
+trial_ledger_entry_not_created: unresolved
+```
+
+Validator after provider answers:
+
+```text
+intrinio onboarding validator: 42/42 pass
+targeted tests: 12/12 pass
+```

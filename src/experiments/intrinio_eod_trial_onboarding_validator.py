@@ -96,8 +96,8 @@ def main(argv: list[str] | None = None) -> int:
 
 
 def _validate_manifest(manifest: dict[str, Any], checks: list[dict[str, str]]) -> None:
-    status_ok = manifest.get("status") == "SPEC_ONLY_INTRINIO_TRIAL_ACTIVE_NOT_QUERIED"
-    decision_ok = manifest.get("decision") == "INTRINIO_EOD_TRIAL_ONBOARDING_DEFINED_NOT_EXECUTED"
+    status_ok = manifest.get("status") in {"SPEC_ONLY_INTRINIO_TRIAL_ACTIVE_NOT_QUERIED", "SPEC_ONLY_INTRINIO_TRIAL_INFO_RESOLVED_NOT_QUERIED"}
+    decision_ok = manifest.get("decision") in {"INTRINIO_EOD_TRIAL_ONBOARDING_DEFINED_NOT_EXECUTED", "INTRINIO_EOD_TRIAL_READY_FOR_ONE_PROBE_PREPARATION_NOT_APPROVED"}
     no_execution = (
         manifest.get("provider_query_performed") is False
         and manifest.get("network_call_performed") is False
@@ -122,18 +122,19 @@ def _validate_terms(frame: pd.DataFrame, checks: list[dict[str, str]]) -> None:
     required_columns = {"item", "status", "requirement"}
     missing_columns = sorted(required_columns - set(frame.columns))
     items = set(frame["item"].astype(str)) if not missing_columns else set()
-    unresolved = set(frame.loc[frame["status"].astype(str).str.lower().eq("unresolved"), "item"].astype(str)) if not missing_columns else set()
+    statuses = {str(row["item"]): str(row["status"]).lower() for _, row in frame.iterrows()} if not missing_columns else {}
+    open_or_resolved_ok = all(statuses.get(item) in {"unresolved", "confirmed_by_provider", "resolved_for_derived_use_only"} for item in REQUIRED_TERMS_ITEMS)
     _add_check(checks, "terms_required_columns", not missing_columns, f"missing={missing_columns}")
     _add_check(checks, "terms_required_items", REQUIRED_TERMS_ITEMS.issubset(items), f"missing={sorted(REQUIRED_TERMS_ITEMS - items)}")
-    _add_check(checks, "terms_open_items_are_unresolved_not_missing", {"us_small_cap_coverage", "raw_retention_rights", "rate_limits", "endpoint_selection"}.issubset(unresolved), f"unresolved={sorted(unresolved)}")
+    _add_check(checks, "terms_items_open_or_resolved", open_or_resolved_ok, f"statuses={statuses}")
 
 
 def _validate_questions(frame: pd.DataFrame, checks: list[dict[str, str]]) -> None:
     required_columns = {"question_id", "question", "status"}
     missing_columns = sorted(required_columns - set(frame.columns))
-    statuses_open = frame["status"].astype(str).str.lower().eq("open").all() if not missing_columns else False
+    allowed_statuses = frame["status"].astype(str).str.lower().isin({"open", "answered"}).all() if not missing_columns else False
     _add_check(checks, "questions_required_columns", not missing_columns, f"missing={missing_columns}")
-    _add_check(checks, "questions_all_open_pre_query", bool(statuses_open), f"all_open={bool(statuses_open)}")
+    _add_check(checks, "questions_open_or_answered_pre_query", bool(allowed_statuses), f"allowed_statuses={bool(allowed_statuses)}")
     _add_check(checks, "questions_minimum_count", len(frame) >= 6, f"count={len(frame)}")
 
 
@@ -167,12 +168,15 @@ def _validate_blockers(frame: pd.DataFrame, checks: list[dict[str, str]]) -> Non
     required_columns = {"blocker", "severity", "status", "resolution_required"}
     missing_columns = sorted(required_columns - set(frame.columns))
     blockers = set(frame["blocker"].astype(str)) if not missing_columns else set()
-    all_unresolved = frame["status"].astype(str).str.lower().eq("unresolved").all() if not missing_columns else False
+    statuses = {str(row["blocker"]): str(row["status"]).lower() for _, row in frame.iterrows()} if not missing_columns else {}
     critical = frame.loc[frame["severity"].astype(str).str.lower().eq("critical"), "blocker"].astype(str).tolist() if not missing_columns else []
+    critical_unresolved = statuses.get("prior_key_exposed_in_chat") == "unresolved" and statuses.get("separate_probe_approval_missing") == "unresolved"
+    allowed_statuses = all(status in {"unresolved", "resolved"} for status in statuses.values())
     _add_check(checks, "blockers_required_columns", not missing_columns, f"missing={missing_columns}")
     _add_check(checks, "blockers_required_items", REQUIRED_BLOCKERS.issubset(blockers), f"missing={sorted(REQUIRED_BLOCKERS - blockers)}")
-    _add_check(checks, "blockers_all_unresolved_pre_query", bool(all_unresolved), f"all_unresolved={bool(all_unresolved)}")
+    _add_check(checks, "blockers_statuses_unresolved_or_resolved", allowed_statuses, f"statuses={statuses}")
     _add_check(checks, "blockers_critical_probe_guards_present", {"prior_key_exposed_in_chat", "separate_probe_approval_missing"}.issubset(set(critical)), f"critical={critical}")
+    _add_check(checks, "blockers_critical_probe_guards_unresolved", critical_unresolved, f"statuses={statuses}")
 
 
 def _read_json(path: Path, checks: list[dict[str, str]]) -> dict[str, Any] | None:

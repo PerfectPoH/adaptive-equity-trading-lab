@@ -132,3 +132,46 @@ def test_main_exits_zero_for_valid_gate(tmp_path: Path, capsys) -> None:
     report = json.loads(captured.out)
     assert code == 0
     assert report["decision"] == "INTRINIO_EOD_TRIAL_ONBOARDING_GATE_VALID"
+
+
+def test_validate_intrinio_eod_trial_onboarding_accepts_answered_provider_questions(tmp_path: Path) -> None:
+    artifact = _write_valid_gate(tmp_path)
+    manifest_path = artifact / "intrinio_eod_trial_onboarding_manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["status"] = "SPEC_ONLY_INTRINIO_TRIAL_INFO_RESOLVED_NOT_QUERIED"
+    manifest["decision"] = "INTRINIO_EOD_TRIAL_READY_FOR_ONE_PROBE_PREPARATION_NOT_APPROVED"
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    (artifact / "intrinio_trial_terms_checklist.csv").write_text(
+        "item,status,requirement\n"
+        "trial_active,confirmed_by_provider,trial enabled\n"
+        "eod_one_year_history,confirmed_by_provider,one year EOD\n"
+        "us_small_cap_coverage,confirmed_by_provider,yes\n"
+        "delisted_symbol_coverage,confirmed_by_provider,yes\n"
+        "adjustment_policy,confirmed_by_provider,both\n"
+        "raw_retention_rights,resolved_for_derived_use_only,derived only\n"
+        "rate_limits,confirmed_by_provider,2k/min\n"
+        "endpoint_selection,confirmed_by_provider,docs provided\n",
+        encoding="utf-8",
+    )
+    (artifact / "intrinio_eod_endpoint_questions.csv").write_text(
+        "question_id,question,status,provider_answer\n"
+        "Q1,endpoint?,answered,docs\nQ2,adjusted?,answered,both\nQ3,small cap?,answered,yes\nQ4,delisted?,answered,yes\nQ5,retention?,answered,derived only\nQ6,rate limits?,answered,2k/min\n",
+        encoding="utf-8",
+    )
+    (artifact / "intrinio_blocker_register.csv").write_text(
+        "blocker,severity,status,resolution_required\n"
+        "prior_key_exposed_in_chat,critical,unresolved,rotate key\n"
+        "terms_for_derived_artifacts_unknown,high,resolved,derived only\n"
+        "endpoint_not_confirmed,high,resolved,docs\n"
+        "rate_limits_unknown,medium,resolved,2k/min\n"
+        "separate_probe_approval_missing,critical,unresolved,approve one probe\n"
+        "output_directory_not_created,medium,unresolved,create output\n"
+        "trial_ledger_entry_not_created,medium,unresolved,create ledger\n",
+        encoding="utf-8",
+    )
+
+    report = validate_intrinio_eod_trial_onboarding(artifact)
+
+    assert report["status"] == "pass"
+    assert any(check["name"] == "blockers_critical_probe_guards_unresolved" and check["status"] == "pass" for check in report["checks"])
+

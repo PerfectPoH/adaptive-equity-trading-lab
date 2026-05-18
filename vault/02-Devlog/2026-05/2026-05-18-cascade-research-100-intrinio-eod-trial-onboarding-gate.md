@@ -19,3 +19,14 @@ Validation:
 intrinio onboarding validator: 41/41 pass
 targeted tests: 16/16 pass
 ```
+
+## Provider answers update
+
+Recorded Intrinio follow-up answers resolving endpoint, coverage, adjustment, delisted-symbol, rate-limit and research-use questions. Gate remains no-query because key rotation/replacement and separate one-call probe approval are still unresolved.
+
+```text
+validator: 42/42 pass
+targeted tests: 12/12 pass
+NO_API_CALL
+NO_MARKET_DATA_DOWNLOAD
+```

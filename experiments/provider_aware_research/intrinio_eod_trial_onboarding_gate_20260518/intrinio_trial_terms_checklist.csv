@@ -1,9 +1,9 @@
 item,status,requirement
 trial_active,confirmed_by_provider,trial added to account and expires two weeks from provider reply
 eod_one_year_history,confirmed_by_provider,EOD with one year of history for a trial
-us_small_cap_coverage,unresolved,confirm NASDAQ/NYSE/AMEX small-cap EOD support
-delisted_symbol_coverage,unresolved,confirm active-only versus delisted support
-adjustment_policy,unresolved,confirm adjusted/unadjusted/split/dividend handling
-raw_retention_rights,unresolved,confirm derived metrics and hashes may be stored without raw payload retention
-rate_limits,unresolved,confirm trial limits before any probe
-endpoint_selection,unresolved,confirm exact EOD historical prices endpoint
+us_small_cap_coverage,confirmed_by_provider,provider answered yes
+delisted_symbol_coverage,confirmed_by_provider,provider answered yes
+adjustment_policy,confirmed_by_provider,includes both adjusted and unadjusted
+raw_retention_rights,resolved_for_derived_use_only,provider confirmed internal research/backtesting validation; raw retention remains disabled by local policy
+rate_limits,confirmed_by_provider,2000 calls per minute
+endpoint_selection,confirmed_by_provider,stock_prices_v2 and security_historical_data_v2 docs provided
