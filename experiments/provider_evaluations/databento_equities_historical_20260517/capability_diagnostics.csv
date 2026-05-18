@@ -1,0 +1,9 @@
+capability,databento_native_path,evidence,status,remaining_gap
+raw_ohlcv,ohlcv-1m/ohlcv-1d,DPE-001..DPE-010 all returned OHLCV bars in event windows,pass,No raw payload retained by governance
+adjusted_ohlcv,none_confirmed_in_historical_sdk,Schemas list includes OHLCV but no adjusted OHLCV schema or adjustment endpoint observed,caveat,Need Databento docs/support confirmation or explicit adjusted data product
+corporate_actions,definition_schema_partial,definition schema includes reference/status fields and definition record counts returned for MULN PHUN WEYS DJT,partial_pass,No dedicated split/dividend/corporate-action endpoint verified
+halt_suspension_representation,definition_schema_partial,definition fields include md_security_trading_status/security_update_action and definition counts returned for TUP CNGL FSR GH,partial_pass,No dedicated halt feed/status endpoint verified and no raw definition payload retained
+point_in_time_universe,none_confirmed_in_historical_sdk,Symbology resolves historical symbols but no PIT universe membership endpoint observed,caveat,Need Databento docs/support confirmation or separate universe product
+licensing_storage,terms_manual_review_required,Raw retention remains disabled and no account-specific storage permission captured,caveat,Need account/license confirmation before retaining raw payloads
+cost_limits,metadata_get_cost_and_unit_prices,Unit prices available and micro-query costs tiny under 125 USD free credits,pass,Continue explicit source/no ALL_SYMBOLS controls
+api_reproducibility,scripted_cli,Fixed script arguments event IDs symbols schemas windows and explicit api-key-source env-file,pass,None for derived evaluation

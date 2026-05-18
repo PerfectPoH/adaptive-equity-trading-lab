@@ -253,3 +253,15 @@ Pass requirements: `api_reproducibility`, `cost_limits`.
 Partial pass requirements: `delisted_symbols`, `raw_and_adjusted_prices`, `volume_integrity`.
 
 Caveat requirements: `point_in_time_universe`, `corporate_actions`, `halt_suspension_representation`, `licensing_storage`.
+
+## Capability diagnostics update
+
+Executed non-raw Databento capability diagnostics.
+
+```text
+capability_diagnostics.csv created
+definition_counts: TUP=4 MULN=7 CNGL=7 WEYS=8 FSR=4 PHUN=6 GH=7 DJT=3
+upgraded_to_partial_pass: corporate_actions, halt_suspension_representation
+still_caveat: point_in_time_universe, licensing_storage
+provider_verdict: CAVEAT_NOT_FINAL_PASS
+```

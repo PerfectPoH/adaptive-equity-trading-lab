@@ -414,3 +414,31 @@ PROVIDER_VERDICT: CAVEAT_NOT_FINAL_PASS
 ```
 
 This is sufficient to continue Databento full-panel work under governance. It is not sufficient for strategy trials, backtests, OOS, sweeps, live trading or paper trading.
+
+## Capability diagnostics update
+
+Native Databento Historical SDK capability diagnostics were executed without raw payload retention.
+
+```text
+artifact: experiments/provider_evaluations/databento_equities_historical_20260517/capability_diagnostics.csv
+definition_schema_fields_include: md_security_trading_status, security_update_action
+definition_record_counts: TUP=4 MULN=7 CNGL=7 WEYS=8 FSR=4 PHUN=6 GH=7 DJT=3
+unit_prices_available: yes
+dataset_condition_available: yes
+```
+
+Updated requirement verdict:
+
+```text
+pass: api_reproducibility, cost_limits
+partial_pass: delisted_symbols, corporate_actions, raw_and_adjusted_prices, halt_suspension_representation, volume_integrity
+caveat: point_in_time_universe, licensing_storage
+```
+
+Provider verdict remains:
+
+```text
+CAVEAT_NOT_FINAL_PASS
+```
+
+The remaining blockers are not micro-query blockers. They require either Databento documentation/support/account confirmation or explicit product capability confirmation for adjusted OHLCV, PIT universe and license/storage rights.

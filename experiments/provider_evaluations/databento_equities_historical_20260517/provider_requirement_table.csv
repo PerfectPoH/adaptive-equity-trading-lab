@@ -1,10 +1,10 @@
 requirement,status,notes
-point_in_time_universe,caveat,Not directly tested; Databento symbol resolution works for all DPE events but PIT universe membership remains unverified.
-delisted_symbols,partial_pass,TUP and FSR delisting/suspension cases resolve and return historical OHLCV windows; delisting metadata/storage rights remain caveated.
-corporate_actions,caveat,"Reverse split/dividend/ticker-change events have OHLCV availability, but corporate-action metadata and adjusted/raw coherence are not fully tested."
-raw_and_adjusted_prices,partial_pass,Raw-style OHLCV availability observed for DPE-001..DPE-010; adjusted OHLCV availability remains not tested.
-halt_suspension_representation,caveat,"Halt/suspension event windows return OHLCV where expected, including daily windows for hard events; explicit halt metadata not tested."
+point_in_time_universe,caveat,"Symbology resolves historical symbols, but no PIT universe membership endpoint observed in Historical SDK."
+delisted_symbols,partial_pass,TUP and FSR delisting/suspension cases resolve and return historical OHLCV windows; definition counts available; delisting metadata/storage rights remain caveated.
+corporate_actions,partial_pass,"Reverse split/dividend/ticker-change events have OHLCV availability; definition schema/counts provide partial reference-data path, but no dedicated split/dividend corporate-action endpoint verified."
+raw_and_adjusted_prices,partial_pass,Raw-style OHLCV availability observed for DPE-001..DPE-010; adjusted OHLCV schema/endpoint not confirmed.
+halt_suspension_representation,partial_pass,Definition schema includes md_security_trading_status/security_update_action and definition counts exist for halt/suspension events; no dedicated halt feed/status endpoint verified.
 volume_integrity,partial_pass,OHLCV schemas include volume and returned bars for all events; no deep volume reconciliation performed.
 api_reproducibility,pass,"Queries use pinned script, explicit api-key-source env-file, fixed event IDs, symbols, schemas, windows and no ALL_SYMBOLS."
-licensing_storage,caveat,Raw response retention disabled; license/storage rights remain unclear.
-cost_limits,pass,All probes stayed within authorized 125 USD free-credit cap; observed estimates were tiny and no card/payment authorization is recorded.
+licensing_storage,caveat,Raw response retention disabled; account-specific license/storage rights remain unclear.
+cost_limits,pass,Metadata unit prices/cost previews available; all probes stayed within authorized 125 USD free-credit cap and no card/payment authorization is recorded.

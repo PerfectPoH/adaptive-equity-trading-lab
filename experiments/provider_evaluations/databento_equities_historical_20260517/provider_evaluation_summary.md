@@ -89,3 +89,16 @@ CAVEAT_REQUIREMENTS: point_in_time_universe, corporate_actions, halt_suspension_
 Databento is now suitable for a controlled full-panel evaluation workflow using derived summaries and no raw retention.
 
 It is not yet a final provider pass because adjusted OHLCV, corporate-action metadata, halt/suspension metadata, point-in-time universe support and licensing/storage rights remain unresolved.
+
+## Capability diagnostics update
+
+```text
+CAPABILITY_DIAGNOSTICS_EXECUTED
+artifact: capability_diagnostics.csv
+definition_counts: TUP=4 MULN=7 CNGL=7 WEYS=8 FSR=4 PHUN=6 GH=7 DJT=3
+upgraded_to_partial_pass: corporate_actions, halt_suspension_representation
+still_caveat: adjusted_ohlcv, point_in_time_universe, licensing_storage
+provider_verdict: CAVEAT_NOT_FINAL_PASS
+```
+
+Databento has enough native `definition` schema evidence to support partial corporate-action and halt/suspension diagnostics, but no dedicated adjusted OHLCV, corporate-action endpoint, halt feed, PIT universe endpoint, or license/storage grant has been verified.
