@@ -265,3 +265,7 @@ upgraded_to_partial_pass: corporate_actions, halt_suspension_representation
 still_caveat: point_in_time_universe, licensing_storage
 provider_verdict: CAVEAT_NOT_FINAL_PASS
 ```
+
+## Reference API documentation and subscription-gate update
+
+Checked Databento docs/SDK for remaining caveats. The SDK exposes `db.Reference.adjustment_factors`, `db.Reference.corporate_actions`, and `db.Reference.security_master`. `corporate_actions.get_range` includes `pit=True`. Diagnostics with the current key returned `403 license_reference_dataset_no_subscription` for adjustment factors, corporate actions and security master. Artifact: `reference_api_diagnostics.csv`.

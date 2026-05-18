@@ -442,3 +442,31 @@ CAVEAT_NOT_FINAL_PASS
 ```
 
 The remaining blockers are not micro-query blockers. They require either Databento documentation/support/account confirmation or explicit product capability confirmation for adjusted OHLCV, PIT universe and license/storage rights.
+
+## Reference API documentation and subscription-gate update
+
+The remaining capability questions were checked against Databento docs/SDK surface.
+
+```text
+Reference client: db.Reference
+adjustment factors path: db.Reference.adjustment_factors.get_range
+corporate actions path: db.Reference.corporate_actions.get_range
+corporate actions PIT parameter: pit=True present in SDK signature
+security master path: db.Reference.security_master.get_range / get_last
+```
+
+Live diagnostics with the current key did not retain raw payloads and returned subscription gates:
+
+```text
+adjustment_factors: 403 license_reference_dataset_no_subscription
+corporate_actions: 403 license_reference_dataset_no_subscription
+security_master: 403 license_reference_dataset_no_subscription
+```
+
+Decision update:
+
+```text
+CAPABILITY_EXISTS_BUT_REFERENCE_SUBSCRIPTION_REQUIRED
+HISTORICAL_OHLCV_ACCESS_WORKS
+FINAL_PROVIDER_PASS_BLOCKED_BY_REFERENCE_SUBSCRIPTION_OR_SUPPORT_CONFIRMATION
+```

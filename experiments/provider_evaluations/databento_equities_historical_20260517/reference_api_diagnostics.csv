@@ -1,0 +1,8 @@
+capability,databento_doc_or_sdk_path,diagnostic_result,status,interpretation
+adjustment_factors,db.Reference.adjustment_factors.get_range,403 license_reference_dataset_no_subscription,available_but_not_subscribed,Databento exposes adjustment factors via Reference API but current key lacks subscription
+corporate_actions,db.Reference.corporate_actions.get_range,403 license_reference_dataset_no_subscription,available_but_not_subscribed,Databento exposes corporate actions via Reference API but current key lacks subscription
+corporate_actions_pit,db.Reference.corporate_actions.get_range(... pit=True),method_signature_supports_pit_parameter,available_but_not_subscribed,Corporate-actions API supports point-in-time mode in SDK signature but current key lacks subscription
+security_master,db.Reference.security_master.get_range/get_last,403 license_reference_dataset_no_subscription,available_but_not_subscribed,Databento exposes security master via Reference API but current key lacks subscription
+historical_symbology,db.Historical.symbology.resolve,previous probes resolved all DPE symbols,pass,Historical symbology works for frozen panel symbols
+raw_ohlcv,db.Historical.timeseries.get_range with ohlcv schemas,previous probes returned OHLCV for all DPE events,pass,EQUS.MINI OHLCV access works for derived full-panel evaluation
+license_storage,portal/account terms required,not resolved by docs/API probe,caveat,Need account terms or support confirmation before retaining raw payloads

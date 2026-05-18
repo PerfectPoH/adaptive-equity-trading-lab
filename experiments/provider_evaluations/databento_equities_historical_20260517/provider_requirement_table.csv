@@ -1,10 +1,10 @@
 requirement,status,notes
-point_in_time_universe,caveat,"Symbology resolves historical symbols, but no PIT universe membership endpoint observed in Historical SDK."
-delisted_symbols,partial_pass,TUP and FSR delisting/suspension cases resolve and return historical OHLCV windows; definition counts available; delisting metadata/storage rights remain caveated.
-corporate_actions,partial_pass,"Reverse split/dividend/ticker-change events have OHLCV availability; definition schema/counts provide partial reference-data path, but no dedicated split/dividend corporate-action endpoint verified."
-raw_and_adjusted_prices,partial_pass,Raw-style OHLCV availability observed for DPE-001..DPE-010; adjusted OHLCV schema/endpoint not confirmed.
-halt_suspension_representation,partial_pass,Definition schema includes md_security_trading_status/security_update_action and definition counts exist for halt/suspension events; no dedicated halt feed/status endpoint verified.
+point_in_time_universe,partial_pass_blocked_by_subscription,"Reference API exposes corporate_actions.get_range(... pit=True) and security_master methods, but current key returns 403 license_reference_dataset_no_subscription."
+delisted_symbols,partial_pass,Historical symbology/OHLCV works for TUP and FSR; Reference security_master path exists but current key lacks subscription.
+corporate_actions,partial_pass_blocked_by_subscription,Databento Reference API exposes corporate_actions.get_range; current key returns 403 license_reference_dataset_no_subscription.
+raw_and_adjusted_prices,partial_pass_blocked_by_subscription,Raw-style OHLCV works for all DPE events; Reference adjustment_factors.get_range exists but current key returns 403 license_reference_dataset_no_subscription.
+halt_suspension_representation,partial_pass,Historical definition/status paths exist and definition counts were observed; dedicated Reference security_master path exists but current key lacks subscription.
 volume_integrity,partial_pass,OHLCV schemas include volume and returned bars for all events; no deep volume reconciliation performed.
-api_reproducibility,pass,"Queries use pinned script, explicit api-key-source env-file, fixed event IDs, symbols, schemas, windows and no ALL_SYMBOLS."
-licensing_storage,caveat,Raw response retention disabled; account-specific license/storage rights remain unclear.
-cost_limits,pass,Metadata unit prices/cost previews available; all probes stayed within authorized 125 USD free-credit cap and no card/payment authorization is recorded.
+api_reproducibility,pass,"Queries use pinned script/API paths, explicit api-key-source env-file, fixed event IDs/symbols/schemas/windows and no ALL_SYMBOLS."
+licensing_storage,caveat,Raw response retention disabled; account-specific license/storage rights still require portal/support confirmation.
+cost_limits,pass,Historical probes stayed within authorized 125 USD free-credit cap; Reference API diagnostics stopped at subscription gate.

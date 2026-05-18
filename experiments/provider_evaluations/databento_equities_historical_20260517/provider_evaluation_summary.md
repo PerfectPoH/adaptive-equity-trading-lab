@@ -102,3 +102,17 @@ provider_verdict: CAVEAT_NOT_FINAL_PASS
 ```
 
 Databento has enough native `definition` schema evidence to support partial corporate-action and halt/suspension diagnostics, but no dedicated adjusted OHLCV, corporate-action endpoint, halt feed, PIT universe endpoint, or license/storage grant has been verified.
+
+## Reference API documentation and subscription-gate update
+
+```text
+REFERENCE_API_DIAGNOSTICS_EXECUTED
+artifact: reference_api_diagnostics.csv
+adjustment_factors: SDK path exists; current key returned 403 license_reference_dataset_no_subscription
+corporate_actions: SDK path exists; current key returned 403 license_reference_dataset_no_subscription
+corporate_actions_pit: SDK signature supports pit=True; current key lacks subscription
+security_master: SDK path exists; current key returned 403 license_reference_dataset_no_subscription
+provider_verdict: CAPABILITY_EXISTS_BUT_REFERENCE_SUBSCRIPTION_REQUIRED
+```
+
+Conclusion: the answers are in Databento documentation/SDK via the Reference API, not in the already-accessible EQUS.MINI Historical package alone. Databento remains usable for Historical OHLCV, but final provider pass requires enabling/subscribing to Reference datasets or obtaining support confirmation.
