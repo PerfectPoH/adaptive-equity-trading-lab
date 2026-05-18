@@ -1,0 +1,10 @@
+gate,status,requirement,reason
+provider_coverage_contract,required,Declare symbols/date coverage and allowed missingness before sampling,Avoid yfinance-style hidden coverage drift
+adjustment_policy,required,Predeclare raw vs adjusted OHLCV handling and corporate-action caveats,Avoid split/dividend distortions
+PIT_universe_policy,required,Define point-in-time universe source or block universe claims,Avoid survivorship bias
+halt_tradability_policy,required,Define halt/suspension/tradability handling,Small-cap signals can be dominated by untradeable events
+trial_accounting,required,Assign new trial ID before execution,Prevent continuation/rescue of archived old track
+hypothesis_preregistration,required,"State signal, period, sample, benchmarks, and stop rules before run",Prevent post-hoc fitting
+negative_control,required,Include random or null comparator,Keep methodology falsifiable
+provider_sensitivity_check,required,Run fixed-signal/provider comparison as part of validation,Provider effects already observed
+promotion_policy,required,Predefine pass/fail/promote/archive outcomes,Avoid narrative promotion

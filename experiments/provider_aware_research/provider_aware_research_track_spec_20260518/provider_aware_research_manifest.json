@@ -1,0 +1,19 @@
+{
+  "decision": "NEW_PROVIDER_AWARE_RESEARCH_TRACK_REQUIRED",
+  "no_backtest": true,
+  "no_provider_query": true,
+  "no_strategy_promotion": true,
+  "objective": "Define conditions for future small-cap strategy research using provider-aware data controls from the start.",
+  "provider_baseline": "Databento Historical + Polygon Free currently metadata/data-quality caveated only, not performance-ready",
+  "required_before_execution": [
+    "provider_coverage_contract",
+    "adjustment_policy",
+    "tradability_halt_policy",
+    "PIT_universe_policy",
+    "trial_accounting",
+    "pre_registered_hypothesis",
+    "artifact_validator"
+  ],
+  "status": "SPEC_ONLY_NOT_EXECUTED",
+  "supersedes": "old_yfinance_strategy_track_archived_provider_sensitive"
+}

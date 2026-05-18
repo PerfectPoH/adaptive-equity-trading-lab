@@ -1,0 +1,7 @@
+component,minimum_requirement
+hypothesis,"One new provider-aware signal hypothesis, not old-track continuation"
+sample,Small predeclared Databento-covered ticker/date panel with known caveats
+provider_inputs,"OHLCV source, reference source, adjustment policy, coverage policy"
+benchmarks,Random/null baseline and simple holding-window comparator
+outputs,"Candidate export, provider caveat matrix, fixed-signal replay, benchmark report, archive/promote verdict"
+blocked_outputs,"Paper/live recommendation, production ranking, performance marketing claim"

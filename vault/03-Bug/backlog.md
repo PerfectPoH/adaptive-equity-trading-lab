@@ -570,3 +570,9 @@ Fixed-signal Databento price replay executed on 66 old yfinance trades inside Da
 Stato: `OLD_YFINANCE_STRATEGY_RESULTS_ARCHIVED_AS_PROVIDER_SENSITIVE / OLD_STRATEGY_TRACK_CLOSED_NOT_PROMOTABLE`.
 
 Formal archive decision recorded. Old breakout_continuation + open_to_close_return>=0.10 + IWM>EMA200 yfinance-era results cannot be used as performance evidence due provider sensitivity. Required warning added; future strategy work must restart as a provider-aware research track with explicit trial accounting.
+
+### RESEARCH-075 - New provider-aware research track spec
+
+Stato: `SPEC_ONLY_NOT_EXECUTED / NEW_PROVIDER_AWARE_RESEARCH_TRACK_REQUIRED`.
+
+Created spec for any future small-cap strategy research after archiving old yfinance results as provider-sensitive. No provider query or backtest executed. Next recommended work: implement provider coverage contract spec and adjustment/tradability policies before any strategy run.

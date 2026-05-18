@@ -1,0 +1,9 @@
+work_item,status,notes
+specification,allowed,Current artifact only
+provider_data_quality_work,allowed_with_caveats,No raw retention and no ALL_SYMBOLS
+new_strategy_hypothesis_design,allowed_with_caveats,Must not reuse old yfinance performance claim
+small_sample_diagnostic,allowed_after_gate,Only after preregistered provider-aware inputs
+portfolio_backtest,blocked_until_gates_pass,Requires provider performance dataset gate and trial accounting
+OOS_or_parameter_sweep,blocked,No OOS/sweep before new in-sample research track exists
+paper_or_live_trading,blocked,No validated provider-aware strategy
+old_track_rescue,blocked,Archived provider-sensitive track cannot be rescued by filters
