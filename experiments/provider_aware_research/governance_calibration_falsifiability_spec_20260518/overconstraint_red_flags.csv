@@ -1,0 +1,7 @@
+red_flag,severity,meaning,required_response
+no_execution_path_even_with_approval,critical,governance is impossible to satisfy,relax/process-fix before research
+validators_require_positive_return,critical,governance leaks into performance conclusion,remove performance requirement from validator
+all_parameter_changes_permanently_forbidden,high,research cannot learn,allow changes through preregistration
+coverage_requirement_demands_perfect_data,high,real providers will always fail,allow caveat/degraded status policy
+trial_budget_zero,critical,no empirical test can occur,set finite nonzero budget
+promotion_block_used_as_research_block,medium,diagnostics improperly blocked,separate diagnostic from promotion gates

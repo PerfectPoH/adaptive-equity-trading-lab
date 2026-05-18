@@ -1,0 +1,9 @@
+constraint,constraint_type,may_block_execution,may_block_positive_result,rationale
+no_raw_payload_retention,hard_governance,yes,no,"Blocks unsafe retention, not signal profitability."
+no_ALL_SYMBOLS_query,hard_governance,yes,no,"Blocks uncontrolled universe queries, not frozen sample tests."
+provider_coverage_required,hard_data_quality,yes,no,"Requires caveats/coverage, does not require positive performance."
+trial_budget_limit,hard_research_process,yes,no,"Limits p-hacking, does not force negative result."
+primary_metric_predeclared,hard_research_process,yes,no,"Prevents metric shopping, does not prescribe metric value."
+minimum_gap_threshold,research_design,no,yes,Can affect result and must be justified/preregistered.
+minimum_liquidity_threshold,research_design,no,yes,Can affect opportunity set and must remain adjustable through new preregistration.
+market_regime_filter,research_design,no,yes,"Empirical design choice, not governance hard stop."

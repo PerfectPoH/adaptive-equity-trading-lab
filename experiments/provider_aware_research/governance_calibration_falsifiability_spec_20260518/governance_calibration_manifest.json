@@ -1,0 +1,16 @@
+{
+  "decision": "GOVERNANCE_CALIBRATION_FALSIFIABILITY_DEFINED_NOT_RUN",
+  "no_backtest": true,
+  "no_provider_query": true,
+  "no_strategy_promotion": true,
+  "purpose": "Separate safety/governance constraints from empirical performance criteria and preserve legitimate failure/success paths",
+  "required_tables": [
+    "constraint_taxonomy.csv",
+    "falsifiability_checks.csv",
+    "allowed_research_flexibility.csv",
+    "overconstraint_red_flags.csv",
+    "calibration_decision_policy.csv"
+  ],
+  "scope": "Check whether provider-aware governance is falsifiable and not overconstraining all strategies by construction",
+  "status": "SPEC_ONLY_NOT_EXECUTED"
+}

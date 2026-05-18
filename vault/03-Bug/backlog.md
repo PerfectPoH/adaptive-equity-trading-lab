@@ -630,3 +630,9 @@ Created a spec-only execution authorization artifact for one future controlled d
 Stato: `EXECUTION_COMMAND_AND_OUTPUT_SCHEMA_DEFINED_NOT_RUN / VALIDATOR_PASS`.
 
 Created spec-only command boundary and output artifact schema for one future controlled diagnostic execution of `PREREG-PA-SMALLCAP-001`. Validator passes 40/40. Remaining blockers intentionally include output directory placeholder, execution module not final, explicit approval missing, credentials not checked, and trial ledger not created. No provider query, backtest, sweep, or strategy run was performed.
+
+### RESEARCH-085 - Governance calibration falsifiability spec
+
+Stato: `GOVERNANCE_CALIBRATION_FALSIFIABILITY_DEFINED_NOT_RUN / VALIDATOR_PASS`.
+
+Created spec-only calibration artifact to ensure governance does not make every strategy fail by construction. Validator checks that hard governance constraints are not performance requirements, positive/negative outcomes are both representable, research-design changes can happen through new preregistration, and overconstraint red flags are explicit. Real artifact validates 38/38. No provider query, backtest, sweep, or strategy run was performed.

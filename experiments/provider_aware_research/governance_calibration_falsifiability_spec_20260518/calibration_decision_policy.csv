@@ -1,0 +1,5 @@
+decision,condition,action
+calibrated,all falsifiability checks pass and no critical red flags present,continue to dry-run preflight spec
+overconstrained,any critical red flag present,revise governance before execution
+needs_review,any high red flag present,manual review before execution
+not_alpha_evidence,governance passes but no empirical run exists,do not claim performance

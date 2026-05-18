@@ -1,0 +1,6 @@
+check_id,check,required,pass_condition,interpretation
+FAL-001,At least one allowed execution path exists after approval/preflight,yes,hard blockers can be resolved without changing hypothesis,governance is not impossible by construction
+FAL-002,Positive and negative empirical outcomes are both representable,yes,decision policy includes go/caveat/stop interpretations,system is falsifiable
+FAL-003,Performance thresholds are not embedded in provider validators,yes,validators check structure/coverage/process only,validators do not force failure
+FAL-004,Research-design parameters can change via new preregistration,yes,change policy is new_preregistration_required not permanently forbidden,learning remains possible
+FAL-005,At least one synthetic compliant artifact could pass validators without real alpha,yes,validators pass based on governance completeness,governance pass is separate from alpha claim

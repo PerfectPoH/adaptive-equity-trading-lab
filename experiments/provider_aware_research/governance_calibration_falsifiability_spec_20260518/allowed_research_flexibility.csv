@@ -1,0 +1,7 @@
+flexibility_item,allowed,mechanism,guardrail
+new_signal_hypothesis,yes,new preregistration,trial budget applies
+feature_set_change,yes,new preregistration,no post-result mutation
+parameter_change,yes,new preregistration,counts against research process
+provider_addition,yes,coverage contract update,must pass provider validator
+metric_change,yes,new preregistration before execution,cannot change after seeing result
+sample_window_change,yes,new preregistration,must preserve provider coverage rationale
