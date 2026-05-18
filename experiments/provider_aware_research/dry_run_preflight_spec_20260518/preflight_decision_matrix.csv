@@ -1,0 +1,5 @@
+preflight_result,condition,allowed_action,blocked_action
+pass,all components pass and all required inputs resolved,allow separately approved controlled execution,none
+blocked,any required input unresolved,continue spec-only preparation,provider_query;backtest;execution
+fail,any component validator fails,revise artifacts,provider_query;backtest;execution
+not_alpha_evidence,preflight passes without execution,do not claim performance,strategy_promotion

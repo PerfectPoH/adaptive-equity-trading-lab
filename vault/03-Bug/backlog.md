@@ -636,3 +636,9 @@ Created spec-only command boundary and output artifact schema for one future con
 Stato: `GOVERNANCE_CALIBRATION_FALSIFIABILITY_DEFINED_NOT_RUN / VALIDATOR_PASS`.
 
 Created spec-only calibration artifact to ensure governance does not make every strategy fail by construction. Validator checks that hard governance constraints are not performance requirements, positive/negative outcomes are both representable, research-design changes can happen through new preregistration, and overconstraint red flags are explicit. Real artifact validates 38/38. No provider query, backtest, sweep, or strategy run was performed.
+
+### RESEARCH-086 - Dry-run preflight validator spec
+
+Stato: `DRY_RUN_PREFLIGHT_DEFINED_BLOCKED_NOT_RUN / VALIDATOR_BLOCKED_PASS`.
+
+Created aggregate dry-run preflight artifact and validator. Components pass: gate 31/31, preregistered plan 45/45, authorization 36/36, command schema 40/40, governance calibration 38/38. Preflight status is correctly `blocked` because explicit user approval, final execution module, output directory, trial ledger entry, credentials check, and command dry review remain unresolved. No provider query, backtest, sweep, or strategy run was performed.

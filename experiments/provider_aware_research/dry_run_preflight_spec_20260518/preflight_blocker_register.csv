@@ -1,0 +1,7 @@
+blocker,severity,current_status,required_response
+explicit_user_execution_approval_missing,critical,present,obtain explicit approval before actual execution
+execution_module_not_final,critical,present,finalize module before actual execution
+output_directory_placeholder,critical,present,define output directory before actual execution
+trial_ledger_entry_missing,critical,present,create ledger entry before actual execution
+provider_credentials_not_checked,high,present,check credentials before actual execution
+command_not_reviewed,high,present,review exact command before actual execution
