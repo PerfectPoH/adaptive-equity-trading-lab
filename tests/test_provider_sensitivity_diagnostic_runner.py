@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from src.experiments.provider_sensitivity_diagnostic_runner import build_dry_run_plan, build_real_run_block_report, main, run_approved_single_diagnostic
+from src.experiments.provider_sensitivity_diagnostic_runner import build_dry_run_plan, build_real_run_block_report, main, run_approved_mini_panel_diagnostic, run_approved_single_diagnostic
 
 
 def test_build_dry_run_plan_is_non_executing() -> None:
@@ -190,3 +190,113 @@ def test_run_approved_single_diagnostic_blocks_wrong_identity(tmp_path: Path) ->
     assert report["status"] == "blocked"
     assert report["error"] == "unexpected_run_identity"
     assert report["provider_query_performed"] is False
+
+
+def test_run_approved_mini_panel_diagnostic_uses_only_proposed_candidates_without_raw_retention(tmp_path: Path) -> None:
+    gate_dir = tmp_path / "gate"
+    gate_dir.mkdir()
+    (gate_dir / "mini_panel_candidates.csv").write_text(
+        "panel_slot,candidate_role,reference_run,symbol,signal_date,entry_date,exit_date,entry_price,exit_price,return_pct,execution_status,provider_query_allowed_without_new_approval\n"
+        "1,executed_anchor,ref,CRMD,2024-04-11,2024-04-12,2024-04-19,6.5,5.28,-0.18,already_executed_single_diagnostic,no\n"
+        "2,proposed_new_query,ref,IOVA,2025-07-16,2025-07-17,2025-07-24,2.28,3.28,0.44,not_executed,no\n"
+        "3,proposed_new_query,ref,CABA,2022-08-10,2022-08-11,2022-08-18,1.37,1.42,0.03,not_executed,no\n"
+        "4,proposed_new_query,ref,IOVA,2025-12-17,2025-12-18,2025-12-26,2.60,2.85,0.09,not_executed,no\n",
+        encoding="utf-8",
+    )
+    approval_dir = tmp_path / "approval"
+    approval_dir.mkdir()
+    (approval_dir / "mini_panel_explicit_approval_manifest.json").write_text(json.dumps({
+        "status": "APPROVAL_GRANTED_FOR_MINI_PANEL_PREPARATION",
+        "panel_id": "MINIPANEL-PREREG-PA-SMALLCAP-001-001",
+        "preregistration_id": "PREREG-PA-SMALLCAP-001",
+        "max_new_provider_queries": 3,
+        "max_total_panel_candidates": 4,
+        "provider_query_performed": False,
+        "backtest_performed": False,
+        "strategy_promotion_performed": False,
+        "raw_payload_retention_allowed": False,
+        "output_directory_created": True,
+        "trial_ledger_entries_created": True,
+    }), encoding="utf-8")
+    env_file = tmp_path / ".env"
+    env_file.write_text("DATABENTO_API_KEY=databento-secret\nPOLYGON_API_KEY=polygon-secret\n", encoding="utf-8")
+    output_dir = tmp_path / "MINIPANEL-PREREG-PA-SMALLCAP-001-001"
+    output_dir.mkdir()
+    ledger_path = tmp_path / "mini-ledger.csv"
+    seen_symbols: list[str] = []
+
+    def fake_checker(candidate: dict[str, str], databento_key: str, polygon_key: str, *, skip_polygon: bool) -> dict[str, object]:
+        assert databento_key == "databento-secret"
+        assert polygon_key == "polygon-secret"
+        seen_symbols.append(candidate["symbol"])
+        return {
+            "reference_run": candidate["reference_run"],
+            "symbol": candidate["symbol"],
+            "databento_status": "pass",
+            "polygon_status": "OK",
+            "sensitivity_class": "provider_stable_for_selected_fields",
+            "raw_response_path": "RAW_RESPONSE_RETENTION_NOT_ENABLED",
+        }
+
+    report = run_approved_mini_panel_diagnostic(
+        "PREREG-PA-SMALLCAP-001",
+        "MINIPANEL-TRIAL-001",
+        output_dir,
+        gate_dir=gate_dir,
+        approval_dir=approval_dir,
+        env_file=env_file,
+        ledger_path=ledger_path,
+        candidate_checker=fake_checker,
+    )
+
+    assert report["status"] == "completed"
+    assert report["candidate_count"] == 4
+    assert report["new_provider_query_count"] == 3
+    assert report["provider_query_performed"] is True
+    assert report["backtest_performed"] is False
+    assert report["strategy_promotion_performed"] is False
+    assert report["raw_payload_retained"] is False
+    assert seen_symbols == ["IOVA", "CABA", "IOVA"]
+    assert (output_dir / "mini_panel_execution_manifest.json").exists()
+    assert (output_dir / "provider_sensitivity_mini_panel_results.csv").exists()
+    assert "completed" in ledger_path.read_text(encoding="utf-8")
+    assert "databento-secret" not in (output_dir / "mini_panel_diagnostic_summary.json").read_text(encoding="utf-8")
+    assert "polygon-secret" not in (output_dir / "mini_panel_diagnostic_summary.json").read_text(encoding="utf-8")
+
+
+def test_run_approved_mini_panel_diagnostic_blocks_missing_approval(tmp_path: Path) -> None:
+    output_dir = tmp_path / "MINIPANEL-PREREG-PA-SMALLCAP-001-001"
+    output_dir.mkdir()
+    gate_dir = tmp_path / "gate"
+    gate_dir.mkdir()
+    (gate_dir / "mini_panel_candidates.csv").write_text(
+        "panel_slot,candidate_role,reference_run,symbol,signal_date,entry_date,exit_date,entry_price,exit_price,return_pct,execution_status,provider_query_allowed_without_new_approval\n"
+        "1,executed_anchor,ref,CRMD,2024-04-11,2024-04-12,2024-04-19,6.5,5.28,-0.18,already_executed_single_diagnostic,no\n"
+        "2,proposed_new_query,ref,IOVA,2025-07-16,2025-07-17,2025-07-24,2.28,3.28,0.44,not_executed,no\n"
+        "3,proposed_new_query,ref,CABA,2022-08-10,2022-08-11,2022-08-18,1.37,1.42,0.03,not_executed,no\n",
+        encoding="utf-8",
+    )
+
+    report = run_approved_mini_panel_diagnostic(
+        "PREREG-PA-SMALLCAP-001",
+        "MINIPANEL-TRIAL-001",
+        output_dir,
+        gate_dir=gate_dir,
+        approval_dir=tmp_path / "missing-approval",
+    )
+
+    assert report["status"] == "blocked"
+    assert report["error"] == "mini_panel_approval_not_granted"
+    assert report["provider_query_performed"] is False
+
+
+def test_run_approved_mini_panel_diagnostic_blocks_wrong_identity(tmp_path: Path) -> None:
+    output_dir = tmp_path / "MINIPANEL-PREREG-PA-SMALLCAP-001-001"
+    output_dir.mkdir()
+
+    report = run_approved_mini_panel_diagnostic("OTHER", "MINIPANEL-TRIAL-001", output_dir)
+
+    assert report["status"] == "blocked"
+    assert report["error"] == "unexpected_mini_panel_identity"
+    assert report["provider_query_performed"] is False
+

@@ -1,0 +1,8 @@
+constraint,value,status
+max_new_provider_queries,3,approved
+max_total_panel_candidates,4,approved
+raw_payload_retention,false,required
+backtest,false,forbidden
+sweep,false,forbidden
+strategy_promotion,false,forbidden
+paper_live,false,forbidden

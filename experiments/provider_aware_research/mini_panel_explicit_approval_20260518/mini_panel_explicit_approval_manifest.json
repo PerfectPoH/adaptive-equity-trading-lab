@@ -1,0 +1,16 @@
+{
+  "approval_text": "User stated: ok fai pure after prior approval 'ti do l approvazione'",
+  "approval_timestamp_utc": "2026-05-18T16:58:58.749977+00:00",
+  "artifact_id": "MINI-PANEL-EXPLICIT-APPROVAL-20260518",
+  "backtest_performed": false,
+  "max_new_provider_queries": 3,
+  "max_total_panel_candidates": 4,
+  "output_directory_created": true,
+  "panel_id": "MINIPANEL-PREREG-PA-SMALLCAP-001-001",
+  "preregistration_id": "PREREG-PA-SMALLCAP-001",
+  "provider_query_performed": false,
+  "raw_payload_retention_allowed": false,
+  "status": "APPROVAL_GRANTED_FOR_MINI_PANEL_PREPARATION",
+  "strategy_promotion_performed": false,
+  "trial_ledger_entries_created": true
+}
