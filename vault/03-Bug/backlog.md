@@ -660,3 +660,9 @@ Updated dry-run preflight to include manual input resolution as a sixth componen
 Stato: `PROVIDER_SENSITIVITY_DIAGNOSTIC_RUNNER_DRY_ONLY_IMPLEMENTED / NO_EXECUTION`.
 
 Implemented dry-only runner module and tests. The runner requires `--dry-run`, rejects `--execute`, and blocks forbidden flags. Manual preflight artifacts updated to `dry_only_implemented`; aggregate preflight remains `blocked`. No provider query, backtest, sweep, or strategy run was performed.
+
+### RESEARCH-090 - Provider sensitivity real runner gated
+
+Stato: `PROVIDER_SENSITIVITY_REAL_RUNNER_GATED_IMPLEMENTED / REAL_RUN_BLOCKED_BY_GATES`.
+
+Added a blocked `--real-run` gate report mode. It reports unresolved gates and guarantees no provider query, no backtest, no trial consumption, no output creation, and no strategy promotion. Manual and dry-run preflight artifacts updated to `real_runner_gated`; aggregate preflight remains blocked.

@@ -1,7 +1,7 @@
 input_name,previous_status,new_status,blocks_execution,resolution_detail
 explicit_user_execution_approval,missing,not_granted,yes,User has not explicitly approved actual execution.
-final_execution_module,specified_not_implemented,dry_only_implemented,yes,Dry-only module exists; real execution remains unsupported.
+final_execution_module,dry_only_implemented,real_runner_gated,yes,Real-run gate report exists but execution path remains blocked and non-executing.
 final_output_directory,placeholder,specified_not_created,yes,Output directory path specified but not created for execution.
 trial_ledger_entry,missing,planned_not_created,yes,Ledger entry planned but not consumed/created as run artifact.
 provider_credentials_check,not_checked,policy_defined_not_checked,yes,Credential names defined; environment not inspected and no provider call made.
-command_dry_review,not_reviewed,reviewed_dry_only,yes,Dry-only command template reviewed; no executable approval.
+command_dry_review,reviewed_dry_only,reviewed_gated_real_runner,yes,Gated real-run command surface reviewed; still no executable approval.

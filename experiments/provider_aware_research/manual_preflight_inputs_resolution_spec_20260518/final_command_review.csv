@@ -1,7 +1,7 @@
 field,value,status
-command_id,CMD-PREREG-PA-SMALLCAP-001,reviewed_dry_only
-module,src.experiments.provider_sensitivity_diagnostic_runner,dry_only_implemented
-entrypoint,python -m src.experiments.provider_sensitivity_diagnostic_runner,dry_only_not_executed
-arguments,--dry-run --preregistration-id PREREG-PA-SMALLCAP-001 --trial-id TRIAL-001 --output-dir experiments/provider_aware_research/execution_outputs/RUN-PREREG-PA-SMALLCAP-001-001,dry_only_template
+command_id,CMD-PREREG-PA-SMALLCAP-001,reviewed_gated_real_runner
+module,src.experiments.provider_sensitivity_diagnostic_runner,real_runner_gated
+entrypoint,python -m src.experiments.provider_sensitivity_diagnostic_runner,real_run_gate_report_only
+arguments,--real-run --preregistration-id PREREG-PA-SMALLCAP-001 --trial-id TRIAL-001 --output-dir experiments/provider_aware_research/execution_outputs/RUN-PREREG-PA-SMALLCAP-001-001,blocked_gate_report_template
 forbidden_flags_absent,--all-symbols;--sweep;--promote;--paper;--live,pass
 execution_approval,not_granted,blocks_execution

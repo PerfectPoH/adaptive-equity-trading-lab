@@ -1,7 +1,7 @@
 blocker,severity,current_status,required_response
 explicit_user_execution_approval_not_granted,critical,present,obtain explicit approval before actual execution
-execution_module_dry_only_no_real_execution,critical,present,implement real execution path only after explicit approval
+execution_module_real_runner_gated,critical,present,acknowledge all real-run gates before execution implementation
 output_directory_specified_not_created,critical,present,create output directory only after approval
 trial_ledger_entry_planned_not_created,critical,present,create ledger entry before actual execution
 provider_credentials_policy_defined_not_checked,high,present,check credentials before actual execution without provider query
-command_template_reviewed_dry_only,high,present,final command review after approval
+command_template_reviewed_gated_real_runner,high,present,final command review after approval
