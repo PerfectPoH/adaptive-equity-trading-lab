@@ -540,3 +540,9 @@ Interpretation executed from derived DPE layer. Databento+Polygon recovers event
 Stato: `JOIN_FEASIBLE_FOR_DATA_QUALITY_METADATA_ONLY / NOT_FEASIBLE_FOR_PERFORMANCE_DATASET`.
 
 Databento Historical and Polygon Free can be joined at DPE event level for metadata/availability/corporate-action cross-check only. Join does not solve adjustment factors, PIT universe, security-master continuity, halt/tradability validation, offering metadata or raw storage rights. Strategy dataset join remains not approved.
+
+### RESEARCH-070 - Provider sensitivity test spec
+
+Stato: `SPEC_ONLY_NOT_EXECUTED / READY_FOR_USER_REVIEW_BEFORE_EXECUTION`.
+
+Prepared provider sensitivity test spec for old yfinance strategy outputs vs Databento/Polygon provider evidence. Created deterministic overlap selection and redacted query plan from local old run artifacts only. No provider query, no raw retention, no strategy backtest/trial/promotion.

@@ -1,0 +1,10 @@
+gate,status,requirement,notes
+provider_data_foundation,not_ready,Performance-ready Databento/Polygon OHLCV dataset for old strategy universe,"Current join is metadata-only; Databento DPE evidence is narrow event-window, not broad strategy universe"
+old_run_reference,ready,Risk-sizing corrected yfinance reference runs identified,2022-2024 multiyear and 2025 OOS risk-sizing runs available
+comparison_scope,ready,"Compare provider sensitivity only, not strategy validity",Question is whether old results are provider-sensitive
+raw_retention,ready,No raw payload retention,All provider payloads remain disabled unless licensing changes
+universe_scope,not_ready,Frozen limited ticker/date set for first execution,Must derive a tiny overlap set from existing trade logs/candidate export before any query
+databento_query_plan,not_ready,Narrow Databento windows for exact old trades only,No ALL_SYMBOLS; no full universe panel
+polygon_query_plan,not_ready,Reference cross-check only where corporate actions overlap,5 calls/min free limit must be respected
+success_metric,ready,Feature/return deltas and dropout classification,No PnL promotion metric allowed
+stop_rule,ready,Stop if paid upgrade/raw retention/full universe query needed,Do not bypass provider gates

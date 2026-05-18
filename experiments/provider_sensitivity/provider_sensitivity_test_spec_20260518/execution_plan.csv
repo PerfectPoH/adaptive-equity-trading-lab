@@ -1,0 +1,7 @@
+phase,status,description
+P0_spec,complete,Define provider sensitivity as non-promotional methodology/data audit
+P1_overlap_selection,pending,"Select tiny deterministic sample from old yfinance trade logs: DPE-overlap symbols first, then at most 5 old executed trades"
+P2_query_plan,pending,"For each selected trade, define Databento exact daily/minute windows and Polygon reference endpoints if needed"
+P3_dry_run,pending,Produce redacted query plan and estimated API calls/cost before execution
+P4_execute_if_authorized,blocked,Only execute after P1-P3 are committed and user confirms; no backtest
+P5_interpret,blocked,Classify provider sensitivity: stable/caveated/sensitive/unusable

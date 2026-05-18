@@ -1,0 +1,14 @@
+{
+  "all_symbols_allowed": false,
+  "execution_authorized": false,
+  "objective": "Measure old-strategy sensitivity to yfinance vs Databento/Polygon provider evidence without promoting strategy performance.",
+  "old_strategy_reference": "breakout_continuation + open_to_close_return>=0.10 + IWM close > EMA200 + risk_fraction sizing",
+  "provider_combo_status": "JOIN_FEASIBLE_FOR_DATA_QUALITY_METADATA_ONLY_NOT_PERFORMANCE_DATASET",
+  "raw_retention_allowed": false,
+  "reference_runs": [
+    "experiments/runs/small_cap_multiyear_open_to_close_010_iwm_ema200_2022_2024_risk_sizing_20260512",
+    "experiments/runs/small_cap_oos_open_to_close_010_iwm_ema200_2025_full_risk_sizing_20260512"
+  ],
+  "status": "SPEC_ONLY_NOT_EXECUTED",
+  "strategy_promotion_allowed": false
+}

@@ -1,0 +1,9 @@
+provider,endpoint_or_sdk,symbol,start,end,schema,purpose,retain_raw,authorized
+Databento Historical,Historical.timeseries.get_range,CRMD,2024-04-11,2024-04-19,ohlcv-1d,compare daily OHLCV and old-trade return inputs,no,no
+Polygon Stocks Basic Free,/v3/reference/tickers/{symbol},CRMD,2024-04-11,2024-04-11,ticker_details_reference,reference status sanity check only if needed,no,no
+Databento Historical,Historical.timeseries.get_range,IOVA,2025-07-16,2025-07-24,ohlcv-1d,compare daily OHLCV and old-trade return inputs,no,no
+Polygon Stocks Basic Free,/v3/reference/tickers/{symbol},IOVA,2025-07-16,2025-07-16,ticker_details_reference,reference status sanity check only if needed,no,no
+Databento Historical,Historical.timeseries.get_range,CABA,2022-08-10,2022-08-18,ohlcv-1d,compare daily OHLCV and old-trade return inputs,no,no
+Polygon Stocks Basic Free,/v3/reference/tickers/{symbol},CABA,2022-08-10,2022-08-10,ticker_details_reference,reference status sanity check only if needed,no,no
+Databento Historical,Historical.timeseries.get_range,IOVA,2025-12-17,2025-12-26,ohlcv-1d,compare daily OHLCV and old-trade return inputs,no,no
+Polygon Stocks Basic Free,/v3/reference/tickers/{symbol},IOVA,2025-12-17,2025-12-17,ticker_details_reference,reference status sanity check only if needed,no,no

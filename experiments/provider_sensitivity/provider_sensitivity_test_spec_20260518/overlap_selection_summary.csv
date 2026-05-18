@@ -1,0 +1,7 @@
+metric,value
+total_reference_trades,71
+multiyear_trades,41
+oos_2025_trades,30
+selected_candidates,4
+selection_rule,largest_loss;largest_win;earliest;latest;median_abs_pnl;deduplicated
+provider_query_authorized,no
