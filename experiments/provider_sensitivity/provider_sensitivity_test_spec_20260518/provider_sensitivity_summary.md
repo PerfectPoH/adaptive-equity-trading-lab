@@ -37,3 +37,21 @@ overlap_selection_candidates.csv
 overlap_selection_summary.csv
 redacted_query_plan.csv
 ```
+
+## Micro-check execution update
+
+```text
+PROVIDER_SENSITIVITY_MICRO_CHECK_EXECUTED
+candidates_checked: 4
+databento_pass: 3
+databento_unavailable_or_error: 1
+polygon_reference_pass: 4
+provider_stable_for_selected_fields: 1
+minor_price_or_return_delta: 2
+provider_unavailable: 1
+material_price_or_return_delta: 0
+raw_response_retention: disabled
+strategy_promotion_allowed: no
+```
+
+Interpretation: selected comparable cases do not show material price/return deltas above the pre-declared 5% threshold, but one 2022 CABA case is unavailable from Databento/EQUS.MINI because the product coverage begins later than that trade window. This is a provider-coverage caveat, not strategy evidence.

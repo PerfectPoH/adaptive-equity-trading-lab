@@ -1,0 +1,11 @@
+metric,value
+candidates_checked,4
+databento_pass,3
+databento_unavailable_or_error,1
+polygon_reference_pass,4
+provider_stable_for_selected_fields,1
+minor_price_or_return_delta,2
+material_price_or_return_delta,0
+provider_unavailable,1
+verdict,PROVIDER_SENSITIVITY_MICRO_CHECK_CAVEATED
+strategy_promotion_allowed,no

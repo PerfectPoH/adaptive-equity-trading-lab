@@ -546,3 +546,9 @@ Databento Historical and Polygon Free can be joined at DPE event level for metad
 Stato: `SPEC_ONLY_NOT_EXECUTED / READY_FOR_USER_REVIEW_BEFORE_EXECUTION`.
 
 Prepared provider sensitivity test spec for old yfinance strategy outputs vs Databento/Polygon provider evidence. Created deterministic overlap selection and redacted query plan from local old run artifacts only. No provider query, no raw retention, no strategy backtest/trial/promotion.
+
+### RESEARCH-071 - Provider sensitivity micro-check result
+
+Stato: `PROVIDER_SENSITIVITY_MICRO_CHECK_CAVEATED / STRATEGY_PROMOTION_REMAINS_BLOCKED`.
+
+Executed 4-candidate provider-sensitivity micro-check with no raw retention. Databento passed 3 comparable cases and failed/unavailable on 1 CABA 2022 case due coverage/date caveat; Polygon ticker reference passed 4/4. No material >5% price/return deltas among comparable rows. This does not prove old strategy stability or validity.
