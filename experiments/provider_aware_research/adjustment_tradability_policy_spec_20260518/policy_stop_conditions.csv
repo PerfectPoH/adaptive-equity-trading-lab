@@ -1,0 +1,7 @@
+stop_condition,severity,blocked_work,resolution_required
+adjustment_policy_unknown_and_performance_requested,critical,portfolio_backtest;OOS;paper_live;performance_claim,validate adjustment source or restrict hypothesis to raw-price diagnostics
+corporate_action_source_missing_for_adjusted_claim,critical,adjusted_return_claim;performance_claim,add corporate action source or mark caveat non-promotable
+halt_tradability_unknown_for_small_cap_execution,critical,execution_realism_claim;paper_live,add halt/tradability source or explicit exclusion policy
+PIT_universe_missing_for_universe_claim,critical,universe_backtest_claim;screening_edge_claim,use PIT universe or frozen sample only
+raw_retention_required_without_license,critical,raw_payload_storage;replay_requiring_raw,obtain license or store derived metrics only
+provider_quality_warning_ignored,high,performance_claim;promotion,capture warning and classify caveat

@@ -1,0 +1,14 @@
+{
+  "decision": "ADJUSTMENT_TRADABILITY_POLICY_REQUIRED_BEFORE_PERFORMANCE_RESEARCH",
+  "no_backtest": true,
+  "no_provider_query": true,
+  "no_strategy_promotion": true,
+  "purpose": "Define how raw/adjusted prices, corporate actions, halt/tradability, and PIT universe assumptions gate future strategy research.",
+  "required_policy_tables": [
+    "adjustment_tradability_policy.csv",
+    "policy_stop_conditions.csv",
+    "policy_enforcement_matrix.csv"
+  ],
+  "scope": "Provider-aware small-cap research track",
+  "status": "SPEC_ONLY_NOT_EXECUTED"
+}

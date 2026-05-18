@@ -588,3 +588,9 @@ Created provider coverage contract spec with schema, template, validation checkl
 Stato: `IMPLEMENT_PROVIDER_COVERAGE_CONTRACT_VALIDATOR_COMPLETE / VALIDATOR_PASS`.
 
 Implemented CLI validator for provider coverage contract artifacts with tests. Real contract spec validates pass with 25/25 checks and pytest target passes 5/5. No provider query or strategy run executed.
+
+### RESEARCH-078 - Adjustment tradability policy spec
+
+Stato: `ADJUSTMENT_TRADABILITY_POLICY_REQUIRED_BEFORE_PERFORMANCE_RESEARCH / VALIDATOR_PASS`.
+
+Created policy artifact and CLI validator for adjustment, corporate actions, halt/tradability, PIT universe, licensing retention, and provider warning gates. Real policy validates 23/23 and pytest target passes 10/10. No provider query or strategy run executed.

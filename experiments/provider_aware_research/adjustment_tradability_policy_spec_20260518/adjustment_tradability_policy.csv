@@ -1,0 +1,7 @@
+policy_area,current_status,allowed_for_diagnostics,allowed_for_performance,required_before_performance,notes
+price_adjustment,raw_or_unknown_caveated,yes,no,validated adjustment factor source or explicit raw-price-only hypothesis,Databento EQUS.MINI OHLCV treated as raw/unknown caveated until validated.
+corporate_actions,crosscheck_only,yes,no,split/dividend/action source with event-date handling,Material yfinance/Databento deltas can be corporate-action-related.
+halt_tradability,unknown_blocked,limited,no,halt/suspension/tradability source or explicit exclusion policy,Small-cap events can be dominated by untradeable conditions.
+PIT_universe,frozen_sample_only,yes,no,point-in-time universe or no-universe-claim frozen panel,No broad universe claim allowed without PIT support.
+licensing_retention,derived_only,yes,conditional,raw retention license or derived-only workflow,No raw provider payload retention by default.
+provider_quality_warnings,must_capture_as_caveat,yes,conditional,warning capture and degraded-day handling,Degraded provider days cannot be silently used for performance claims.
