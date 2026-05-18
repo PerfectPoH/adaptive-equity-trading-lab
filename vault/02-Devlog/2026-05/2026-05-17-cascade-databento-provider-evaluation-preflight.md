@@ -210,3 +210,29 @@ records_returned: 5
 ```
 
 Interpretation: one-minute OHLCV bars are available for the tested FSR micro-window. Provider data remain partially evaluated for one event only.
+
+## Minimal full-panel readiness
+
+Executed tiny OHLCV probes across the frozen DPE panel without raw retention.
+
+```text
+DPE-001 TUP records=2
+DPE-002 MULN records=5
+DPE-003 CNGL records=4
+DPE-004 ABAT records=5
+DPE-005 WEYS records=8
+DPE-006 FSR records=10+5
+DPE-007 PHUN records=5
+DPE-008 GH records=6
+DPE-009 ICU records=2
+DPE-010 DWAC/DJT records=3+5
+```
+
+Conclusion:
+
+```text
+READY_FOR_CONTROLLED_FULL_PANEL_EVALUATION
+NOT_A_FINAL_PROVIDER_PASS
+```
+
+All DPE rows now have minimal symbol resolution, event-window availability and raw OHLCV availability evidence. Remaining caveats: adjusted OHLCV, corporate-action metadata, halt/suspension metadata, PIT universe and license/storage rights.

@@ -305,6 +305,54 @@ RAW_AND_BAR_DATA_AVAILABLE_FOR_TESTED_FSR_WINDOW
 PROVIDER_DATA_STILL_PARTIALLY_EVALUATED_ONE_EVENT_ONLY
 ```
 
+
+
+## Minimal full-panel readiness result
+
+After the one-event trades/OHLCV probes and dataset diagnostics passed, the remaining frozen DPE events were probed with tiny OHLCV requests and no raw payload retention.
+
+Result summary:
+
+```text
+DPE-001 TUP       ohlcv-1d            records=2
+DPE-002 MULN      ohlcv-1m            records=5
+DPE-003 CNGL      ohlcv-1d            records=4
+DPE-004 ABAT      ohlcv-1m            records=5
+DPE-005 WEYS      ohlcv-1d            records=8
+DPE-006 FSR       trades+ohlcv-1m     records=10+5
+DPE-007 PHUN      ohlcv-1m            records=5
+DPE-008 GH        ohlcv-1d            records=6
+DPE-009 ICU       ohlcv-1m            records=2
+DPE-010 DWAC/DJT  ohlcv-1d+ohlcv-1m   records=3+5
+```
+
+Audit table conclusion:
+
+```text
+provider_symbol_resolves: yes for DPE-001..DPE-010
+event_window_available: yes for DPE-001..DPE-010
+raw_ohlcv_available: yes for DPE-001..DPE-010
+raw_response_retention: disabled
+provider_verdict: caveat for DPE-001..DPE-010
+```
+
+Decision:
+
+```text
+READY_FOR_CONTROLLED_FULL_PANEL_EVALUATION
+NOT_A_FINAL_PROVIDER_PASS
+```
+
+Remaining caveats before provider pass:
+
+```text
+adjusted_ohlcv_available: not_tested
+corporate_action_metadata_available: not_tested
+halt_or_suspension_visible: not_tested
+point_in_time_universe_supported: not_tested
+licensing_allows_research_storage: unclear
+```
+
 ## Governance constraints
 
 No Databento data payload has been retained.

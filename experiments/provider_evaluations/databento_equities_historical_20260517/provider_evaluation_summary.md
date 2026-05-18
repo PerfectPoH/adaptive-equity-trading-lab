@@ -49,3 +49,26 @@ limit: 10
 records_returned: 5
 raw_response_path: RAW_RESPONSE_RETENTION_NOT_ENABLED
 ```
+
+## Minimal full-panel readiness probe
+
+```text
+MINIMAL_FULL_PANEL_MICRO_PROBES_EXECUTED
+DPE-001 TUP  ohlcv-1d  records=2
+DPE-002 MULN ohlcv-1m  records=5
+DPE-003 CNGL ohlcv-1d  records=4
+DPE-004 ABAT ohlcv-1m  records=5
+DPE-005 WEYS ohlcv-1d  records=8
+DPE-006 FSR  trades+ohlcv-1m records=10+5
+DPE-007 PHUN ohlcv-1m  records=5
+DPE-008 GH   ohlcv-1d  records=6
+DPE-009 ICU  ohlcv-1m  records=2
+DPE-010 DWAC/DJT ohlcv-1d+ohlcv-1m records=3+5
+raw_response_path: RAW_RESPONSE_RETENTION_NOT_ENABLED
+```
+
+All frozen DPE events now have minimal Databento symbol resolution and OHLCV/event-window evidence.
+
+This is sufficient to proceed to a controlled full-panel evaluation pass.
+
+This is not a final provider pass because adjusted OHLCV, corporate-action metadata, halt/suspension metadata, point-in-time universe support and license/storage rights remain caveated or untested.
