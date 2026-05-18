@@ -1,6 +1,6 @@
 input_name,previous_status,new_status,blocks_execution,resolution_detail
 explicit_user_execution_approval,not_granted,approval_recorded,no,User approval artifact recorded.
-final_execution_module,real_runner_gated,real_runner_gated,yes,Runner still reports gates instead of executing provider query.
+final_execution_module,real_runner_gated,approved_single_run_path_implemented,no,Approved single-run execution path implemented.
 final_output_directory,specified_not_created,created,no,Immutable output directory created.
 trial_ledger_entry,planned_not_created,created_pre_execution,no,Pre-execution ledger entry created; trial not consumed.
 provider_credentials_check,local_check_blocked_missing_required_env,local_env_file_check_pass,no,Local .env presence check found required credentials; no secret disclosure or provider query.

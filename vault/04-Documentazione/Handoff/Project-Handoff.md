@@ -406,3 +406,5 @@ Credential preflight env-file pass recorded. `DATABENTO_API_KEY` and `POLYGON_AP
 Final command review spec added. Artifact: `experiments/provider_aware_research/final_command_review_spec_20260518/`; validator: `src/experiments/final_command_review_validator.py`; result: pass 29/29. Integrated as eighth dry-run preflight component. Aggregate preflight remains blocked 40/40 due to approval, gated runner, output directory, and ledger gates.
 
 Explicit approval recorded and pre-execution artifacts prepared. Output directory `experiments/provider_aware_research/execution_outputs/RUN-PREREG-PA-SMALLCAP-001-001/` and pre-execution ledger entry were created. Trial remains not consumed and no provider query/backtest occurred. Aggregate preflight remains blocked due to `real_runner_gated`.
+
+Approved single provider sensitivity diagnostic completed. Run `RUN-PREREG-PA-SMALLCAP-001-001`, trial `TRIAL-001`, symbol `CRMD`. Provider query performed exactly once through the approved runner path; no raw payload retained, no backtest/sweep/promotion/paper/live. Sensitivity class `provider_stable_for_selected_fields` for the selected candidate only.

@@ -1,11 +1,11 @@
 # Final command review
 
 ```text
-FINAL_COMMAND_REVIEWED_EXECUTION_STILL_BLOCKED
-SPEC_ONLY_NOT_EXECUTED
-NO_PROVIDER_QUERY
+FINAL_COMMAND_REVIEWED_APPROVED_SINGLE_RUN_READY
+PRE_EXECUTION_READY_APPROVED_NOT_EXECUTED
+NO_PROVIDER_QUERY_YET
 NO_BACKTEST
 NO_STRATEGY_PROMOTION
 ```
 
-The final command surface for the first provider sensitivity diagnostic run has been reviewed at the specification level. Credentials are present via `.env` with no secret disclosure. The command remains blocked because explicit execution approval has not been granted, the output directory has not been created, the trial ledger entry has not been created, and the runner remains gated.
+The final command surface for one approved provider sensitivity diagnostic run has been reviewed. Credentials are present via `.env` with no secret disclosure. The output directory and pre-execution ledger entry exist. The runner now has an approved single-run path. No provider query has been executed yet by this artifact update.

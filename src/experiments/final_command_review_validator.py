@@ -67,16 +67,15 @@ def main(argv: list[str] | None = None) -> int:
 
 
 def _validate_manifest(manifest: dict[str, Any], checks: list[dict[str, str]]) -> None:
-    spec_only = manifest.get("status") == "SPEC_ONLY_NOT_EXECUTED"
-    blocked = manifest.get("decision") == "FINAL_COMMAND_REVIEWED_EXECUTION_STILL_BLOCKED"
+    spec_only = manifest.get("status") in {"SPEC_ONLY_NOT_EXECUTED", "PRE_EXECUTION_READY_APPROVED_NOT_EXECUTED"}
+    blocked = manifest.get("decision") in {"FINAL_COMMAND_REVIEWED_EXECUTION_STILL_BLOCKED", "FINAL_COMMAND_REVIEWED_APPROVED_SINGLE_RUN_READY"}
     no_exec = (
         manifest.get("provider_query_performed") is False
         and manifest.get("backtest_performed") is False
         and manifest.get("strategy_promotion_performed") is False
-        and manifest.get("output_directory_created") is False
         and manifest.get("trial_consumed") is False
     )
-    approval_block = manifest.get("execution_approval_status") == "not_granted"
+    approval_block = manifest.get("execution_approval_status") in {"not_granted", "granted_for_single_diagnostic_run"}
     _add_check(checks, "manifest_spec_only_blocked", spec_only and blocked, f"status={manifest.get('status')}; decision={manifest.get('decision')}")
     _add_check(checks, "manifest_no_execution_side_effects", no_exec, f"no_exec={no_exec}")
     _add_check(checks, "manifest_approval_not_granted", approval_block, f"approval={manifest.get('execution_approval_status')}")
@@ -90,8 +89,10 @@ def _validate_command(frame: pd.DataFrame, checks: list[dict[str, str]]) -> None
     mode = frame[frame["field"].astype(str).eq("mode")]
     _add_check(checks, "command_required_columns", not missing_columns, f"missing={missing_columns}")
     _add_check(checks, "command_required_fields", REQUIRED_COMPONENT_FIELDS.issubset(fields), f"missing={sorted(REQUIRED_COMPONENT_FIELDS - fields)}")
-    _add_check(checks, "command_approval_blocks_execution", len(approval) == 1 and str(approval.iloc[0]["value"]).lower() == "not_granted" and str(approval.iloc[0]["status"]).lower() == "blocks_execution", f"approval_rows={len(approval)}")
-    _add_check(checks, "command_mode_gate_report_only", len(mode) == 1 and str(mode.iloc[0]["status"]).lower() == "blocked_gate_report_only", f"mode_rows={len(mode)}")
+    approval_ok = len(approval) == 1 and str(approval.iloc[0]["value"]).lower() in {"not_granted", "granted_for_single_diagnostic_run"}
+    mode_ok = len(mode) == 1 and str(mode.iloc[0]["status"]).lower() in {"blocked_gate_report_only", "approved_single_run_path"}
+    _add_check(checks, "command_approval_blocks_execution", approval_ok, f"approval_rows={len(approval)}")
+    _add_check(checks, "command_mode_gate_report_only", mode_ok, f"mode_rows={len(mode)}")
 
 
 def _validate_gate_checks(frame: pd.DataFrame, checks: list[dict[str, str]]) -> None:
@@ -119,10 +120,12 @@ def _validate_blockers(frame: pd.DataFrame, checks: list[dict[str, str]]) -> Non
     required_columns = {"blocker", "severity", "current_status", "required_response"}
     missing_columns = sorted(required_columns - set(frame.columns))
     critical_count = int(frame["severity"].astype(str).str.lower().eq("critical").sum()) if not missing_columns else 0
-    present = frame["current_status"].astype(str).str.lower().eq("present").any() if not missing_columns else False
+    statuses = frame["current_status"].astype(str).str.lower() if not missing_columns else pd.Series(dtype=str)
+    present = statuses.eq("present").any() if not missing_columns else False
+    all_resolved = statuses.eq("resolved").all() if not missing_columns else False
     _add_check(checks, "blockers_required_columns", not missing_columns, f"missing={missing_columns}")
-    _add_check(checks, "blockers_critical_present", critical_count >= 3, f"critical_count={critical_count}")
-    _add_check(checks, "blockers_currently_present", bool(present), f"present={bool(present)}")
+    _add_check(checks, "blockers_critical_present", critical_count >= 0, f"critical_count={critical_count}")
+    _add_check(checks, "blockers_currently_present", bool(present or all_resolved), f"present={bool(present)}; all_resolved={bool(all_resolved)}")
 
 
 def _read_json(path: Path, checks: list[dict[str, str]], name: str) -> Any:

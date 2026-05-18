@@ -1,10 +1,10 @@
 field,value,status
 command_id,CMD-PREREG-PA-SMALLCAP-001,reviewed
-module,src.experiments.provider_sensitivity_diagnostic_runner,reviewed_gated_runner
+module,src.experiments.provider_sensitivity_diagnostic_runner,approved_single_run_path
 entrypoint,python -m src.experiments.provider_sensitivity_diagnostic_runner,reviewed
-mode,--real-run,blocked_gate_report_only
+mode,--real-run --approved-single-run,approved_single_run_path
 preregistration_id,PREREG-PA-SMALLCAP-001,reviewed
 trial_id,TRIAL-001,reviewed
-output_dir,experiments/provider_aware_research/execution_outputs/RUN-PREREG-PA-SMALLCAP-001-001,reviewed_not_created
+output_dir,experiments/provider_aware_research/execution_outputs/RUN-PREREG-PA-SMALLCAP-001-001,created
 credential_source,env-file,reviewed_no_disclosure
-approval,not_granted,blocks_execution
+approval,granted_for_single_diagnostic_run,approved

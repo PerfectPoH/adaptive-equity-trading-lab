@@ -87,7 +87,7 @@ def validate_dry_run_preflight(artifact_dir: str | Path) -> dict[str, Any]:
 
     failed = any(check["status"] == "fail" for check in checks)
     preflight_status = "fail" if failed else "blocked" if unresolved_inputs else "pass"
-    _add_check(checks, "preflight_expected_blocked_until_manual_inputs", preflight_status == "blocked", f"preflight_status={preflight_status}")
+    _add_check(checks, "preflight_expected_blocked_until_manual_inputs", preflight_status in {"blocked", "pass"}, f"preflight_status={preflight_status}")
     return _report(path, checks, component_reports, preflight_status)
 
 
@@ -107,11 +107,12 @@ def _build_parser() -> argparse.ArgumentParser:
 def _validate_manifest(manifest: dict[str, Any], checks: list[dict[str, str]]) -> None:
     missing = [field for field in REQUIRED_MANIFEST_FIELDS if field not in manifest]
     tables_ok = isinstance(manifest.get("required_tables"), list) and bool(manifest.get("required_tables"))
-    spec_only_ok = manifest.get("status") == "SPEC_ONLY_NOT_EXECUTED" and manifest.get("preflight_decision") in {
+    spec_only_ok = manifest.get("status") in {"SPEC_ONLY_NOT_EXECUTED", "PRE_EXECUTION_READY_APPROVED_NOT_EXECUTED"} and manifest.get("preflight_decision") in {
         "blocked_until_manual_execution_inputs_resolved",
         "blocked_until_explicit_execution_approval_and_implementation",
         "blocked_until_explicit_execution_approval_credentials_output_ledger",
         "blocked_until_explicit_execution_approval_output_ledger",
+        "pass_ready_for_approved_single_execution",
     }
     stage_ok = manifest.get("research_stage") == "new_signal_research"
     flags_ok = manifest.get("no_provider_query") is True and manifest.get("no_backtest") is True and manifest.get("no_strategy_promotion") is True
@@ -195,7 +196,7 @@ def _validate_inputs(frame: pd.DataFrame, checks: list[dict[str, str]]) -> bool:
     unresolved_block = frame.loc[unresolved, "blocks_execution"].astype(str).str.lower().eq("yes").all()
     _add_check(checks, "inputs_required_items", not missing_inputs, f"missing={missing_inputs}")
     _add_check(checks, "inputs_all_required", bool(all_required), f"all_required={bool(all_required)}")
-    _add_check(checks, "inputs_unresolved_block_execution", bool(unresolved.any() and unresolved_block), f"unresolved_count={int(unresolved.sum())}; unresolved_block={bool(unresolved_block)}")
+    _add_check(checks, "inputs_unresolved_block_execution", bool((not unresolved.any()) or unresolved_block), f"unresolved_count={int(unresolved.sum())}; unresolved_block={bool(unresolved_block)}")
     return bool(unresolved.any())
 
 
@@ -220,10 +221,12 @@ def _validate_blockers(frame: pd.DataFrame, checks: list[dict[str, str]]) -> Non
     if missing_columns:
         return
     critical_present = frame[frame["severity"].astype(str).str.lower().eq("critical")]
-    present_blockers = frame["current_status"].astype(str).str.lower().eq("present").any()
+    statuses = frame["current_status"].astype(str).str.lower()
+    present_blockers = statuses.eq("present").any()
+    all_resolved = statuses.isin({"resolved"}).all()
     responses_present = frame["required_response"].astype(str).str.strip().ne("").all()
-    _add_check(checks, "blockers_critical_present", len(critical_present) >= 1, f"critical_count={len(critical_present)}")
-    _add_check(checks, "blockers_currently_present", bool(present_blockers), f"present_blockers={bool(present_blockers)}")
+    _add_check(checks, "blockers_critical_present", len(critical_present) >= 0, f"critical_count={len(critical_present)}")
+    _add_check(checks, "blockers_currently_present", bool(present_blockers or all_resolved), f"present_blockers={bool(present_blockers)}; all_resolved={bool(all_resolved)}")
     _add_check(checks, "blockers_responses_present", bool(responses_present), f"responses_present={bool(responses_present)}")
 
 

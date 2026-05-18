@@ -1,0 +1,29 @@
+{
+  "result": {
+    "databento_fields": "ts_event|rtype|publisher_id|instrument_id|open|high|low|close|volume|symbol",
+    "databento_payload_sha256": "3fe62d2348ab5cc64347232b094be403a3831c8238bbb14e9115a21782ea560e",
+    "databento_rows": 7,
+    "databento_status": "pass",
+    "entry_date": "2024-04-12",
+    "entry_date_open": 6.45,
+    "entry_delta_pct": -0.008363569276182314,
+    "exit_date": "2024-04-19",
+    "exit_date_close": 5.27,
+    "exit_delta_pct": -0.0018939790551093516,
+    "polygon_active": "True",
+    "polygon_payload_sha256": "9ef585bdcc5b4448f3441cc61998547930590343c4e737b2beaf7b05ebfb2f8f",
+    "polygon_primary_exchange": "XNAS",
+    "polygon_result_count": 1,
+    "polygon_status": "OK",
+    "raw_response_path": "RAW_RESPONSE_RETENTION_NOT_ENABLED",
+    "reference_run": "multiyear_2022_2024_risk_sizing",
+    "return_delta": 0.005296036856533182,
+    "sensitivity_class": "provider_stable_for_selected_fields",
+    "signal_date": "2024-04-11",
+    "symbol": "CRMD",
+    "yfinance_entry_price": 6.5044,
+    "yfinance_exit_price": 5.28000020980835,
+    "yfinance_return_pct": -0.1882417732906418
+  },
+  "status": "completed"
+}

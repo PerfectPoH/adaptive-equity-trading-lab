@@ -1,12 +1,12 @@
 {
-  "decision": "DRY_RUN_PREFLIGHT_UPDATED_WITH_FINAL_COMMAND_REVIEW_BLOCKED_NOT_RUN",
+  "decision": "DRY_RUN_PREFLIGHT_PASS_READY_FOR_APPROVED_SINGLE_EXECUTION",
   "final_command_review": "experiments/provider_aware_research/final_command_review_spec_20260518",
   "manual_preflight_inputs": "experiments/provider_aware_research/manual_preflight_inputs_resolution_spec_20260518",
   "no_backtest": true,
   "no_provider_query": true,
   "no_strategy_promotion": true,
   "pre_execution_output_ledger_gate": "experiments/provider_aware_research/pre_execution_output_ledger_gate_20260518",
-  "preflight_decision": "blocked_until_explicit_execution_approval_output_ledger",
+  "preflight_decision": "pass_ready_for_approved_single_execution",
   "required_tables": [
     "preflight_components.csv",
     "preflight_required_inputs.csv",
@@ -15,5 +15,5 @@
   ],
   "research_stage": "new_signal_research",
   "scope": "Aggregate dry-run preflight for future controlled diagnostic execution of PREREG-PA-SMALLCAP-001",
-  "status": "SPEC_ONLY_NOT_EXECUTED"
+  "status": "PRE_EXECUTION_READY_APPROVED_NOT_EXECUTED"
 }

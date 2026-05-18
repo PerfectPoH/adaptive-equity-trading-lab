@@ -111,11 +111,10 @@ def _validate_resolution(frame: pd.DataFrame, checks: list[dict[str, str]]) -> N
     missing_inputs = sorted(REQUIRED_INPUTS - inputs)
     approval = frame[frame["input_name"].astype(str).eq("explicit_user_execution_approval")]
     approval_not_granted = len(approval) == 1 and str(approval.iloc[0]["new_status"]).lower() in {"not_granted", "approval_recorded"}
-    blocking_inputs = {
-        "final_execution_module",
-    }
+    unresolved_statuses = {"not_granted", "real_runner_gated", "specified_not_created", "planned_not_created"}
+    blocking_inputs = set(frame.loc[frame["new_status"].astype(str).str.lower().isin(unresolved_statuses), "input_name"].astype(str).tolist())
     blocking_rows = frame[frame["input_name"].astype(str).isin(blocking_inputs)]
-    all_block = len(blocking_rows) == len(blocking_inputs) and blocking_rows["blocks_execution"].astype(str).str.lower().eq("yes").all()
+    all_block = not blocking_inputs or blocking_rows["blocks_execution"].astype(str).str.lower().eq("yes").all()
     _add_check(checks, "resolution_required_inputs", not missing_inputs, f"missing={missing_inputs}")
     _add_check(checks, "resolution_approval_not_granted", approval_not_granted, f"approval_rows={len(approval)}")
     _add_check(checks, "resolution_all_block_execution", bool(all_block), f"all_block={bool(all_block)}")

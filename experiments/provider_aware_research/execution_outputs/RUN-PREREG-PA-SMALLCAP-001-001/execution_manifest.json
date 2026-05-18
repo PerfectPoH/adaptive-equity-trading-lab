@@ -1,0 +1,15 @@
+{
+  "backtest_performed": false,
+  "candidate_count": 1,
+  "candidate_symbol": "CRMD",
+  "execution_completed_at_utc": "2026-05-18T16:37:40.648556+00:00",
+  "execution_started_at_utc": "2026-05-18T16:37:27.179780+00:00",
+  "execution_status": "completed",
+  "git_sha": "2ace16c",
+  "preregistration_id": "PREREG-PA-SMALLCAP-001",
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "run_id": "RUN-PREREG-PA-SMALLCAP-001-001",
+  "strategy_promotion": false,
+  "trial_id": "TRIAL-001"
+}

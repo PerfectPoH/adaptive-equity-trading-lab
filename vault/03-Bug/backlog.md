@@ -702,3 +702,9 @@ Created final command review artifact, validator, and tests. The command surface
 Stato: `EXPLICIT_APPROVAL_RECORDED / PRE_EXECUTION_PREPARED_NOT_EXECUTED`.
 
 Recorded user approval artifact, created immutable output directory for `RUN-PREREG-PA-SMALLCAP-001-001`, and created pre-execution ledger entry. Trial remains not consumed; no provider query/backtest/sweep/strategy promotion occurred. Aggregate preflight remains blocked 40/40 because runner is still `real_runner_gated`.
+
+### RESEARCH-097 - Approved single provider sensitivity diagnostic
+
+Stato: `APPROVED_SINGLE_DIAGNOSTIC_COMPLETED / STRATEGY_PROMOTION_REMAINS_BLOCKED`.
+
+Executed one approved diagnostic for `CRMD` under `RUN-PREREG-PA-SMALLCAP-001-001`. Provider query performed, no raw payload retention, no backtest, no sweep, no promotion. Databento status `pass`, Polygon status `OK`, sensitivity class `provider_stable_for_selected_fields`. Result is evidence for this candidate only.

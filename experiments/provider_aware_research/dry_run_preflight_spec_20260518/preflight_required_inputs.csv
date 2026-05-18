@@ -1,6 +1,6 @@
 input_name,required,current_status,blocks_execution,resolution_required
 explicit_user_execution_approval,yes,approval_recorded,no,approval artifact recorded
-final_execution_module,yes,real_runner_gated,yes,replace gate report with approved execution path
+final_execution_module,yes,approved_single_run_path_implemented,no,approved single-run execution path implemented
 final_output_directory,yes,created,no,output directory created
 trial_ledger_entry,yes,created_pre_execution,no,pre-execution ledger entry created
 provider_credentials_check,yes,local_env_file_check_pass,no,credential presence satisfied without provider query
