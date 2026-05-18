@@ -528,3 +528,9 @@ Databento Historical is approved as OHLCV candidate and Polygon Stocks Basic Fre
 Stato: `DATA_QUALITY_AUDIT_LAYER_READY_FOR_INTERPRETATION / STRATEGY_TRIALS_REMAIN_BLOCKED`.
 
 Created derived feature table, event-window availability matrix and corporate-action crosscheck matrix using existing Databento/Polygon provider evidence only. No new provider query, no raw retention, no backtest/OOS/sweep/live/paper. All DPE rows remain caveat due adjusted/PIT/security-master/halt/offering/storage blockers.
+
+### RESEARCH-068 - DPE data-quality audit interpretation
+
+Stato: `USABLE_FOR_DATA_QUALITY_AUDIT_WITH_CAVEATS / NOT_USABLE_FOR_STRATEGY_PERFORMANCE_CLAIMS / TRIALS_REMAIN_BLOCKED`.
+
+Interpretation executed from derived DPE layer. Databento+Polygon recovers event-window evidence for all DPE events, but all 10 rows remain caveat and 7/10 are critical/high caveats. Added downstream warning policy; strategy trials/backtests/OOS/sweeps/live/paper remain blocked.

@@ -1,0 +1,13 @@
+downstream_use,status,required_warning,allowed_next_step
+provider_join_feasibility,allowed,Databento+Polygon combo is caveated and cannot establish adjusted/PIT/security-master completeness,Proceed with derived metadata only
+data_quality_interpretation,allowed,All DPE rows are caveat not pass; conclusions must be about data limitations not strategy performance,Proceed with report-level interpretation
+feature_engineering_design,allowed_with_warning,Features may use Databento OHLCV availability but must carry provider_caveat flags,Design only no training or backtest
+methodology_gate_inputs,allowed_with_warning,Any methodology gate must state final provider pass is not achieved,Prepare gate draft only
+small_cap_strategy_trial,blocked,Provider combo does not support performance claims,Do not run
+backtest,blocked,Adjusted/PIT/reference blockers remain,Do not run
+oos_validation,blocked,No validated data foundation for OOS,Do not run
+parameter_sweep,blocked,No performance experiment authorized,Do not run
+paper_trading,blocked,No validated provider foundation,Do not run
+live_trading,blocked,No validated provider foundation,Do not run
+raw_payload_storage,blocked,Storage rights unclear,Do not retain raw provider payloads
+all_symbols_screening,blocked,Panel-governance prohibits ALL_SYMBOLS during this phase,Do not query
