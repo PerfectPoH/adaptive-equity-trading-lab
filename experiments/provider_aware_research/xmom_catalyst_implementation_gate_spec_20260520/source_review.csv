@@ -1,0 +1,7 @@
+source_id,source_type,status,use_case,url
+dellavigna_pollet_jf,academic_primary,accepted,investor_attention_and_catalyst_lag,https://ideas.repec.org/a/bla/jfinan/v64y2009i2p709-749.html
+dellavigna_pollet_nber,academic_working_paper,accepted,investor_attention_and_friday_announcements,https://www.nber.org/papers/w11683
+sadka_jfe,academic_primary,accepted,liquidity_risk_momentum_and_pead,https://ideas.repec.org/a/eee/jfinec/v80y2006i2p309-349.html
+bailey_ldp_dsr,academic_working_paper,accepted,deflated_sharpe_ratio,https://www.davidhbailey.com/dhbpapers/deflated-sharpe.pdf
+ldp_otr,academic_working_paper,accepted,optimal_trading_rules_without_backtesting,https://arxiv.org/abs/1408.1159
+youtube_or_forum,informal,blocked_for_primary,idea_discovery_only,not_primary_evidence

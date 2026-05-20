@@ -1,0 +1,23 @@
+{
+  "status": "SPEC_ONLY_NOT_EXECUTABLE",
+  "gate_id": "IMPL-GATE-XMOM-CATALYST-001",
+  "trial_id": "TRIAL-XMOM-CATALYST-001",
+  "preregistration_id": "PREREG-XMOM-CATALYST-001",
+  "purpose": "Define the two-phase validation protocol before any catalyst-aware XMOM execution.",
+  "no_provider_query": true,
+  "no_oos_execution": true,
+  "no_parameter_sweep": true,
+  "no_paper_trading": true,
+  "no_live_trading": true,
+  "no_strategy_promotion": true,
+  "phase_1_required": true,
+  "phase_2_single_pass_required": true,
+  "blind_threshold_selection_required": true,
+  "cpcv_required": true,
+  "purging_required": true,
+  "embargo_required": true,
+  "trial_accounting_required": true,
+  "dsr_required": true,
+  "dsr_minimum_confidence": 0.95,
+  "effective_trial_count_required": true
+}

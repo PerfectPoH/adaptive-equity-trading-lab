@@ -314,3 +314,5 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-20-codex-xmom-catalyst-preregistration-validator]] -> [[Report-XMOM-Catalyst-Preregistration-Validator-2026-05-20]]
 - [[Report-XMOM-Catalyst-Preregistration-Validator-2026-05-20]] -> [[Report-XMOM-Catalyst-Feature-Rationale-2026-05-20]]
 - [[2026-05-20-codex-xmom-catalyst-feature-rationale]] -> [[Report-XMOM-Catalyst-Feature-Rationale-2026-05-20]]
+- [[Report-XMOM-Catalyst-Feature-Rationale-2026-05-20]] -> [[Report-XMOM-Catalyst-Implementation-Gate-Spec-2026-05-20]]
+- [[2026-05-20-codex-xmom-catalyst-implementation-gate-spec]] -> [[Report-XMOM-Catalyst-Implementation-Gate-Spec-2026-05-20]]

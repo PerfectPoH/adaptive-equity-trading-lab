@@ -1,0 +1,11 @@
+action,status,reason
+execute_oos,blocked,No signed threshold manifest exists.
+query_oos_provider_data,blocked,Implementation gate is spec-only.
+select_thresholds_from_oos_pnl,blocked,OOS must remain clean.
+select_thresholds_from_xmom_001_pnl,blocked,Would recycle failed trial outcomes.
+select_thresholds_from_crmd_aehr_winners,blocked,Would overfit to known outliers.
+run_parameter_sweep_after_oos,blocked,Would convert OOS into in-sample.
+manual_override_dsr_failure,blocked,DSR kill switch has no manual override.
+paper_trading,blocked,No executable strategy exists.
+live_trading,blocked,No executable strategy exists.
+strategy_promotion,blocked,DSR and robustness gates have not run.

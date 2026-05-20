@@ -1,0 +1,247 @@
+﻿{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520",
+      "name": "spec_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\implementation_gate_spec.md",
+      "name": "required_file:implementation_gate_spec.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\implementation_gate_manifest.json",
+      "name": "required_file:implementation_gate_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\phase_contract.csv",
+      "name": "required_file:phase_contract.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\blind_threshold_policy.csv",
+      "name": "required_file:blind_threshold_policy.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\validation_math_policy.csv",
+      "name": "required_file:validation_math_policy.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\source_review.csv",
+      "name": "required_file:source_review.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\README.md: chars=1075",
+      "name": "markdown_readable:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\implementation_gate_spec.md: chars=3949",
+      "name": "markdown_readable:implementation_gate_spec.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\implementation_gate_manifest.json",
+      "name": "json_readable:implementation_gate_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\phase_contract.csv: rows=5; columns=5",
+      "name": "csv_readable:phase_contract.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\blind_threshold_policy.csv: rows=5; columns=6",
+      "name": "csv_readable:blind_threshold_policy.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\validation_math_policy.csv: rows=9; columns=5",
+      "name": "csv_readable:validation_math_policy.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\blocked_actions.csv: rows=10; columns=3",
+      "name": "csv_readable:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\source_review.csv: rows=6; columns=5",
+      "name": "csv_readable:source_review.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "SPEC_ONLY_NOT_EXECUTABLE present",
+      "name": "markdown_status_spec_only",
+      "status": "pass"
+    },
+    {
+      "detail": "trial and gate ids present",
+      "name": "markdown_trial_identity",
+      "status": "pass"
+    },
+    {
+      "detail": "two phases present",
+      "name": "markdown_two_phase_protocol",
+      "status": "pass"
+    },
+    {
+      "detail": "blind ECDF threshold rule present",
+      "name": "markdown_blind_threshold_rule",
+      "status": "pass"
+    },
+    {
+      "detail": "DSR kill switch present",
+      "name": "markdown_dsr_kill_switch",
+      "status": "pass"
+    },
+    {
+      "detail": "no authorization language",
+      "name": "markdown_no_authorization_language",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "manifest_required_fields",
+      "status": "pass"
+    },
+    {
+      "detail": "status=SPEC_ONLY_NOT_EXECUTABLE",
+      "name": "manifest_status_spec_only",
+      "status": "pass"
+    },
+    {
+      "detail": "no_execution_flags=True",
+      "name": "manifest_no_execution_flags",
+      "status": "pass"
+    },
+    {
+      "detail": "required_methods=True",
+      "name": "manifest_required_methods_enabled",
+      "status": "pass"
+    },
+    {
+      "detail": "dsr_minimum_confidence=0.95",
+      "name": "manifest_dsr_threshold_at_least_095",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "phase_contract_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "phase_contract_required_phases",
+      "status": "pass"
+    },
+    {
+      "detail": "blocked_actions=['no_leaky_kfold', 'no_manual_override', 'no_oos_access', 'no_second_oos_pass', 'no_unlogged_trials']",
+      "name": "phase_contract_blocks_second_oos_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "threshold_policy_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "threshold_policy_required_families",
+      "status": "pass"
+    },
+    {
+      "detail": "not_final=True",
+      "name": "threshold_policy_candidates_not_final",
+      "status": "pass"
+    },
+    {
+      "detail": "blind=True",
+      "name": "threshold_policy_candidates_blind_to_returns",
+      "status": "pass"
+    },
+    {
+      "detail": "not_executable=True",
+      "name": "threshold_policy_candidates_not_executable",
+      "status": "pass"
+    },
+    {
+      "detail": "governance_rows=1",
+      "name": "threshold_policy_dsr_governance_locked",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "math_policy_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "math_policy_required_methods",
+      "status": "pass"
+    },
+    {
+      "detail": "all_required=True",
+      "name": "math_policy_all_required",
+      "status": "pass"
+    },
+    {
+      "detail": "dsr_rows=1",
+      "name": "math_policy_dsr_kill_switch",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_actions_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_actions_required_set",
+      "status": "pass"
+    },
+    {
+      "detail": "all_blocked=True",
+      "name": "blocked_actions_all_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "source_review_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "accepted=['bailey_ldp_dsr', 'dellavigna_pollet_jf', 'dellavigna_pollet_nber', 'ldp_otr', 'sadka_jfe']",
+      "name": "source_review_required_primary_sources",
+      "status": "pass"
+    },
+    {
+      "detail": "informal_rows=1",
+      "name": "source_review_informal_not_primary",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "IMPLEMENTATION_GATE_SPEC_PASS",
+  "spec_dir": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 47,
+    "total": 47
+  }
+}

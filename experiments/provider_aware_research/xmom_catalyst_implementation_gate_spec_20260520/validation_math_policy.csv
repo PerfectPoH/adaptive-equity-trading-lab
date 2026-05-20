@@ -1,0 +1,10 @@
+method,status,required,gate_role,failure_response
+purging,required,yes,remove label-window overlap between train and validation,block_phase_2
+embargoing,required,yes,remove post-validation autocorrelation buffer,block_phase_2
+CPCV,required,yes,generate purged and embargoed validation paths,block_phase_2
+trial_accounting,required,yes,record every explored variant,block_phase_2
+effective_trial_count,required,yes,estimate independent N by ONC or conservative fallback,block_phase_2
+PSR,required,yes,correct Sharpe inference for non-normality,block_promotion
+DSR,required,yes,penalize for selection bias and multiple testing,kill_switch_reject_if_below_0_95
+outlier_stress,required,yes,prevent top-trade dependency,block_promotion
+post_run_validation,required,yes,verify accounting and execution consistency,block_promotion

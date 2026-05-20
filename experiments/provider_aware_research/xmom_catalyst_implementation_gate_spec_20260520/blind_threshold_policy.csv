@@ -1,0 +1,6 @@
+parameter_family,status,selection_method,return_visibility,execution_policy,notes
+volume_decay_rate,not_final,ECDF_percentile_from_in_sample_features_only,blind_to_returns,not_executable,No numeric threshold frozen yet.
+catalyst_lag,not_final,ECDF_percentile_from_in_sample_features_only,blind_to_returns,not_executable,No numeric threshold frozen yet.
+price_digestion,not_final,ECDF_percentile_from_in_sample_features_only,blind_to_returns,not_executable,No numeric threshold frozen yet.
+liquidity_participation,not_final,predefined_guardrail_or_distributional_cap,blind_to_returns,not_executable,Must not weaken existing impact and participation rules.
+minimum_dsr_confidence,final,governance_rule,not_applicable,locked,0.95 minimum for any future promotion discussion.

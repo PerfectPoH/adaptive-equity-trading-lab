@@ -156,7 +156,8 @@ Regole operative:
 - validator strutturale della spec completato: `SPEC_VALIDATION_PASS`, 58/58;
 - review teorica feature/soglie completata: catalyst lag, volume persistence/decay e price digestion;
 - rationale artifacts inclusi nel validator: soglie operative restano `TBD / not_final / not_executable`;
-- prossimo lavoro ammesso: implementation gate spec o independent threshold-selection design, non esecuzione.
+- implementation gate spec completata: `IMPLEMENTATION_GATE_SPEC_PASS`, 47/47;
+- prossimo lavoro ammesso: implementare utility DSR/PSR, CPCV e trial-count estimator con test sintetici, non esecuzione.
 
 ## Ipotesi Primaria Corrente
 
