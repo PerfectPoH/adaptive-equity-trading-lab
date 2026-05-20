@@ -150,7 +150,8 @@ Regole operative:
 - non promuovere XMOM a paper trading;
 - non fare tuning post-hoc su `TRIAL-XMOM-001`;
 - non trattare il +109.36% come edge validato;
-- prossimo lavoro ammesso: interpretazione indipendente, diagnostica robustness non parametrica o nuova preregistrazione separata.
+- interpretazione forense iniziale completata: top 3 winner sono AEHR 2025-09 e CRMD 2025-04/05, vicini a catalyst pubblici company-specific;
+- prossimo lavoro ammesso: catalyst classification sui 11 trade, diagnostica robustness non parametrica o nuova preregistrazione separata.
 
 ## Ipotesi Primaria Corrente
 

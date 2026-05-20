@@ -304,3 +304,5 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[Project-Handoff]] -> [[Report-XMOM-Trial-001-Execution-2026-05-20]]
 - [[Report-XMOM-Real-Data-Ingestion-2026-05-20]] -> [[Report-XMOM-Trial-001-Execution-2026-05-20]]
 - [[2026-05-20-codex-xmom-trial-001-execution]] -> [[Report-XMOM-Trial-001-Execution-2026-05-20]]
+- [[Report-XMOM-Trial-001-Execution-2026-05-20]] -> [[Report-XMOM-Trial-001-Forensic-Interpretation-2026-05-20]]
+- [[2026-05-20-codex-xmom-trial-001-forensics]] -> [[Report-XMOM-Trial-001-Forensic-Interpretation-2026-05-20]]

@@ -1,0 +1,93 @@
+{
+  "interpretation": "Positive headline P&L is concentrated in the top 3 trades. The remaining 8 trades are negative, so this is forensic evidence, not a promotable edge.",
+  "loser_count": 6,
+  "loser_diagnostics": {
+    "avg_impact_bps": 4.490651916492085,
+    "avg_participation_rate": 0.024660542411199634,
+    "avg_rank_score": 1.0840670179983891,
+    "avg_return_pct": -0.11986115020077694,
+    "avg_volatility_20d": 0.06031444677366262,
+    "count": 6
+  },
+  "rest_pnl": -50085.31884226238,
+  "run_dir": "experiments\\runs\\xmom_trial_001_20260520",
+  "sign_flip_excluding_top_n": true,
+  "symbol_concentration": [
+    {
+      "avg_dollar_volume_20d": 5902628.19525,
+      "avg_rank_score": 0.6228233194787405,
+      "avg_return_pct": 0.12774257587935445,
+      "avg_volatility_20d": 0.05229736205751439,
+      "symbol": "CRMD",
+      "total_pnl": 90469.55859324874,
+      "trades": 8
+    },
+    {
+      "avg_dollar_volume_20d": 11053610.114666669,
+      "avg_rank_score": 1.3857579853374624,
+      "avg_return_pct": 0.052234863197361446,
+      "avg_volatility_20d": 0.07339585156175037,
+      "symbol": "AEHR",
+      "total_pnl": 18893.694304499793,
+      "trades": 3
+    }
+  ],
+  "top_n": 3,
+  "top_n_contribution_pct": 1.4579721022845828,
+  "top_n_pnl": 159448.57174001093,
+  "top_trades": [
+    {
+      "avg_dollar_volume_20d": 10986224.36,
+      "entry_date": "2025-09-02",
+      "exit_date": "2025-10-01",
+      "momentum_12m": 0.6974219810040705,
+      "momentum_3m": 1.6226415094339623,
+      "momentum_6m": 1.5927461139896373,
+      "pnl": 66657.14080187082,
+      "rank_aggregate_score": 1.3042698681425566,
+      "return_pct": 0.3499632017939722,
+      "rolling_volatility_20d": 0.1020410076049848,
+      "signal_date": "2025-08-29",
+      "symbol": "AEHR"
+    },
+    {
+      "avg_dollar_volume_20d": 3675610.906,
+      "entry_date": "2025-05-01",
+      "exit_date": "2025-06-02",
+      "momentum_12m": 0.7306967984934087,
+      "momentum_3m": -0.1860053144375553,
+      "momentum_6m": -0.2930769230769231,
+      "pnl": 46861.70337253189,
+      "rank_aggregate_score": 0.0838715203263101,
+      "return_pct": 0.3845204924025052,
+      "rolling_volatility_20d": 0.034146899431687,
+      "signal_date": "2025-04-30",
+      "symbol": "CRMD"
+    },
+    {
+      "avg_dollar_volume_20d": 5124377.033000001,
+      "entry_date": "2025-04-01",
+      "exit_date": "2025-05-01",
+      "momentum_12m": 0.4951923076923075,
+      "momentum_3m": -0.2682352941176471,
+      "momentum_6m": -0.2442284325637911,
+      "pnl": 45929.72756560821,
+      "rank_aggregate_score": -0.0057571396630435,
+      "return_pct": 0.604815031807317,
+      "rolling_volatility_20d": 0.0862190792315909,
+      "signal_date": "2025-03-31",
+      "symbol": "CRMD"
+    }
+  ],
+  "total_pnl": 109363.25289774853,
+  "total_trades": 11,
+  "winner_count": 5,
+  "winner_diagnostics": {
+    "avg_impact_bps": 3.9364971234387576,
+    "avg_participation_rate": 0.02432591614412974,
+    "avg_rank_score": 0.5270916807703954,
+    "avg_return_pct": 0.3795624195663163,
+    "avg_volatility_20d": 0.0553359541006781,
+    "count": 5
+  }
+}
