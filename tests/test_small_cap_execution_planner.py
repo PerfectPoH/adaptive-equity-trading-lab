@@ -96,3 +96,23 @@ def test_execution_planner_rejects_when_cash_is_below_min_notional() -> None:
 
     assert decision.accepted is False
     assert decision.reject_reason == "insufficient_funds"
+
+
+def test_execution_planner_adds_square_root_impact_when_volatility_available() -> None:
+    config = SmallCapExecutionConfig(
+        spread_bps=0.0,
+        slippage_bps=0.0,
+        impact_coefficient_bps=50.0,
+        min_trade_notional=100.0,
+    )
+    planner = SmallCapExecutionPlanner(config)
+
+    decision = planner.plan_trade(
+        _candidate(avg_dollar_volume_20d=200_000.0, rolling_volatility_20d=0.04),
+        next_open=10.0,
+        available_cash=100_000.0,
+    )
+
+    assert decision.accepted is True
+    assert decision.impact_cost_pct > 0.0
+    assert decision.estimated_cost_pct > 0.0

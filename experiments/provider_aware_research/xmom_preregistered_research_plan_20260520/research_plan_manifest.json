@@ -1,0 +1,23 @@
+{
+  "status": "PLAN_ONLY_NOT_EXECUTED",
+  "decision": "TRIAL_XMOM_001_PREREGISTERED_SPEC_ONLY_NOT_EXECUTED",
+  "scope": "Cross-sectional momentum versus IWM provider-aware research track",
+  "research_stage": "new_signal_research",
+  "linked_gate_spec": "experiments/provider_aware_research/research_run_gate_spec_20260518",
+  "linked_provider_coverage_contract": "experiments/provider_aware_research/provider_coverage_contract_spec_20260518",
+  "linked_adjustment_tradability_policy": "experiments/provider_aware_research/adjustment_tradability_policy_spec_20260518",
+  "linked_trial_accounting_preregistration": "experiments/provider_aware_research/trial_accounting_preregistration_spec_20260518",
+  "no_provider_query": true,
+  "no_backtest": true,
+  "no_strategy_promotion": true,
+  "execution_status": "not_executed",
+  "pre_run_fields_status": "finalized",
+  "required_tables": [
+    "preregistered_research_plan.csv",
+    "feature_freeze.csv",
+    "parameter_freeze.csv",
+    "sample_definition_policy.csv",
+    "decision_rule.csv",
+    "pre_run_checklist.csv"
+  ]
+}

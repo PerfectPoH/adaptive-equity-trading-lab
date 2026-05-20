@@ -53,6 +53,8 @@ EXPORT_COLUMNS = [
     "small_cap_execution_skip_reason",
     "small_cap_entry_reference_price",
     "small_cap_entry_price",
+    "small_cap_static_cost_pct",
+    "small_cap_impact_cost_pct",
     "small_cap_position_size",
     "small_cap_position_notional",
     "small_cap_max_liquidity_notional",

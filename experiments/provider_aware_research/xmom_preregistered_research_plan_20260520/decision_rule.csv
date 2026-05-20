@@ -1,0 +1,6 @@
+decision_item,status,rule
+gate_precondition,required,research_run_gate_validator must pass for new_signal_research before any execution attempt
+primary_metric,final,excess_return_vs_iwm_net_of_costs
+go_rule,final,Proceed only if primary metric is positive on holdout and no critical governance or data quality blockers are active
+stop_rule,required,Stop if gate fails provider warnings are critical trial budget is exhausted or execution diagnostics indicate invalid assumptions
+promotion_rule,blocked,No promotion to paper trading until a separate promotion gate validates robustness and capacity diagnostics

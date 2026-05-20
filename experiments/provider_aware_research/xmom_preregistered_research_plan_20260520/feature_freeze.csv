@@ -1,0 +1,7 @@
+feature_name,status,allowed_before_execution,change_after_execution_policy,notes
+momentum_3m,final,yes,new_preregistration_required,Cross-sectional rank input from 3-month total return on provider-aware derived prices.
+momentum_6m,final,yes,new_preregistration_required,Cross-sectional rank input from 6-month total return on provider-aware derived prices.
+momentum_12m,final,yes,new_preregistration_required,Cross-sectional rank input from 12-month total return on provider-aware derived prices.
+rank_aggregate_score,final,yes,new_preregistration_required,Equal-weight aggregate rank from 3m 6m 12m momentum components.
+benchmark_iwm_excess_return,final,yes,new_preregistration_required,Primary metric computed versus IWM over matching holding window.
+execution_impact_diagnostics,required,yes,new_preregistration_required,Trade-level impact_bps and participation diagnostics required for interpretation.

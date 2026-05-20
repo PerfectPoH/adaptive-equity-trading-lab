@@ -81,3 +81,19 @@ def test_small_cap_execution_fails_closed_on_no_next_open() -> None:
 
     assert result.iloc[2]["small_cap_execution_valid"] is False
     assert result.iloc[2]["small_cap_execution_skip_reason"] == "no_next_open"
+
+
+def test_small_cap_execution_computes_impact_cost_with_volatility_proxy() -> None:
+    frame = _frame(rolling_volatility_20d=[0.04, 0.04, 0.04])
+    config = SmallCapExecutionConfig(
+        spread_bps=0.0,
+        slippage_bps=0.0,
+        impact_coefficient_bps=50.0,
+        risk_fraction=0.01,
+    )
+
+    result = add_small_cap_execution_columns(frame, equity=100_000, config=config)
+
+    assert result.iloc[0]["small_cap_execution_valid"] is True
+    assert result.iloc[0]["small_cap_impact_cost_pct"] > 0.0
+    assert result.iloc[0]["small_cap_estimated_cost_pct"] == result.iloc[0]["small_cap_impact_cost_pct"]

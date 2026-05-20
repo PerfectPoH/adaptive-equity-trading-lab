@@ -137,6 +137,7 @@ def run_small_cap_portfolio_backtest(
                     "max_liquidity_notional": decision.max_liquidity_notional,
                     "next_open_gap_pct": decision.next_open_gap_pct,
                     "estimated_cost_pct": decision.estimated_cost_pct,
+                    "impact_cost_pct": decision.impact_cost_pct,
                     "small_cap_scanner_score": _candidate_score(candidate, "small_cap_scanner_score"),
                     "small_cap_setup": _candidate_setup(candidate),
                     **_candidate_feature_values(candidate),
@@ -207,6 +208,8 @@ def _planner_candidate(candidate: pd.Series, frame: pd.DataFrame | None, as_of: 
         "as_of": as_of,
         "Close": row.get("Close"),
         "atr": row.get("atr"),
+        "rolling_volatility_20d": candidate.get("rolling_volatility_20d", row.get("rolling_volatility_20d")),
+        "atr_pct": candidate.get("atr_pct", row.get("atr_pct")),
         "avg_dollar_volume_20d": candidate.get("avg_dollar_volume_20d", row.get("avg_dollar_volume_20d")),
     }
 
@@ -281,6 +284,7 @@ def _decision_diagnostics(decision: Any) -> dict[str, Any]:
         "entry_reference_price": decision.entry_reference_price,
         "entry_price": decision.entry_price,
         "estimated_cost_pct": decision.estimated_cost_pct,
+        "impact_cost_pct": decision.impact_cost_pct,
         "next_open_gap_pct": decision.next_open_gap_pct,
         "stop_loss": decision.stop_loss,
         "take_profit": decision.take_profit,

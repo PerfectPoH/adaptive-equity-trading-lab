@@ -1,0 +1,6 @@
+sample_element,status,policy,blocked_until_resolved
+symbol_universe,linked,Point-in-time eligible small-cap liquid universe built from provider-aware contract and no retrospective symbol injection,no
+date_window,final,in_sample_2022_01_01_to_2024_12_31_and_holdout_2025_01_01_to_2025_12_31,no
+provider_coverage,linked,must pass provider coverage contract and adjustment tradability validators,no
+PIT_claim,blocked,No full market PIT claim until security master continuity and delisted coverage are explicitly validated,yes
+raw_data_retention,derived_only,No raw payload retention unless licensing is explicitly confirmed,no

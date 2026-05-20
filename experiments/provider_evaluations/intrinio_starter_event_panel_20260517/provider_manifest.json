@@ -1,23 +1,23 @@
 {
-  "provider_name": "Intrinio Starter Plan",
-  "provider_slug": "intrinio_starter",
   "account_type": "free_trial",
-  "payment_authorized": false,
-  "payment_cap_usd": 0,
-  "execution_date": "2026-05-17",
-  "operator": "local",
-  "frozen_panel_report": "vault/04-Documentazione/Reports/Report-Small-Cap-Data-Provider-Event-Panel-2026-05-17.md",
-  "panel_expansion_report": "vault/04-Documentazione/Reports/Report-Small-Cap-Data-Provider-Event-Panel-Expansion-2026-05-17.md",
-  "terms_url": "https://intrinio.com/guides/starter-plan",
-  "license_storage_verdict": "unclear",
+  "actual_query_cost_usd": 0,
+  "api_versions": [
+    "Intrinio API v2"
+  ],
   "data_retention_allowed": "unclear",
   "dataset_names": [
     "Intrinio Starter Plan"
   ],
-  "api_versions": [
-    "Intrinio API v2"
-  ],
+  "execution_date": "2026-05-17",
+  "frozen_panel_report": "vault/04-Documentazione/Reports/Report-Small-Cap-Data-Provider-Event-Panel-2026-05-17.md",
+  "license_storage_verdict": "unclear",
+  "operator": "local",
+  "panel_expansion_report": "vault/04-Documentazione/Reports/Report-Small-Cap-Data-Provider-Event-Panel-Expansion-2026-05-17.md",
+  "payment_authorized": false,
+  "payment_cap_usd": 0,
+  "provider_name": "Intrinio Starter Plan",
+  "provider_query_executed": true,
+  "provider_slug": "intrinio_starter",
   "query_budget_estimate_usd": 0,
-  "actual_query_cost_usd": 0,
-  "provider_query_executed": false
+  "terms_url": "https://intrinio.com/guides/starter-plan"
 }

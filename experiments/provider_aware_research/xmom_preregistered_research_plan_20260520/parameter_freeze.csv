@@ -1,0 +1,10 @@
+parameter_name,status,allowed_values,change_after_execution_policy,notes
+rebalance_frequency,final,monthly,new_preregistration_required,No frequency sweep in this trial.
+holding_window,final,21_trading_days,new_preregistration_required,Fixed holding horizon for signal and benchmark comparability.
+top_bucket_selection,final,top_decile,new_preregistration_required,Cross-sectional selection rule frozen at top decile.
+minimum_price,final,2.00,new_preregistration_required,Tradability floor preserved from provider-aware policy.
+minimum_dollar_volume,final,1000000,new_preregistration_required,Liquidity floor preserved from provider-aware policy.
+impact_coefficient_bps,final,500,new_preregistration_required,Capacity-aware execution cost stress default from infrastructure trials.
+max_position_dollar_volume_fraction,final,0.20,new_preregistration_required,Liquidity fraction aligned with participation cap for capacity-aware simulation.
+impact_participation_cap,final,0.20,new_preregistration_required,Hard participation guardrail for execution.
+max_trials,fixed,3,no_reset_allowed,Inherited from TB-001.
