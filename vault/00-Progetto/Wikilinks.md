@@ -316,3 +316,5 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-20-codex-xmom-catalyst-feature-rationale]] -> [[Report-XMOM-Catalyst-Feature-Rationale-2026-05-20]]
 - [[Report-XMOM-Catalyst-Feature-Rationale-2026-05-20]] -> [[Report-XMOM-Catalyst-Implementation-Gate-Spec-2026-05-20]]
 - [[2026-05-20-codex-xmom-catalyst-implementation-gate-spec]] -> [[Report-XMOM-Catalyst-Implementation-Gate-Spec-2026-05-20]]
+- [[Report-XMOM-Catalyst-Implementation-Gate-Spec-2026-05-20]] -> [[Report-DSR-PSR-Utilities-2026-05-20]]
+- [[2026-05-20-codex-dsr-psr-utilities]] -> [[Report-DSR-PSR-Utilities-2026-05-20]]

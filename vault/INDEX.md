@@ -38,6 +38,7 @@ tags: [vault, index, obsidian, trading-lab]
 - [[Report-XMOM-Catalyst-Preregistration-Validator-2026-05-20]] - validator strutturale della spec catalyst-aware, 58/58 pass.
 - [[Report-XMOM-Catalyst-Feature-Rationale-2026-05-20]] - review teorica feature/soglie catalyst-aware, soglie operative ancora TBD/non eseguibili.
 - [[Report-XMOM-Catalyst-Implementation-Gate-Spec-2026-05-20]] - gate spec DSR/CPCV per scegliere soglie blind-to-returns, 47/47 pass, non eseguibile.
+- [[Report-DSR-PSR-Utilities-2026-05-20]] - utility matematiche PSR/DSR implementate e testate, non collegate al trial.
 - [[small-cap-ranking-exits-research-track]] - track separato ranking/uscite design-only con trial accounting obbligatorio.
 - [[Project-Handoff]] - handoff completo per altre chat o agenti.
 - [[Devlog-Index]] - cronologia ordinata delle sessioni.

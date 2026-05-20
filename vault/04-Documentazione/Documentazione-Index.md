@@ -25,6 +25,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-XMOM-Catalyst-Preregistration-Validator-2026-05-20]] - validator strutturale della preregistration catalyst-aware; 58 controlli passati.
 - [[Report-XMOM-Catalyst-Feature-Rationale-2026-05-20]] - review teorica delle feature catalyst-aware; soglie operative non ancora finali.
 - [[Report-XMOM-Catalyst-Implementation-Gate-Spec-2026-05-20]] - spec di implementazione DSR/CPCV per soglie blind-to-returns; non eseguibile.
+- [[Report-DSR-PSR-Utilities-2026-05-20]] - utility PSR/DSR implementate e testate; non collegate al trial.
 
 ## Handoff
 

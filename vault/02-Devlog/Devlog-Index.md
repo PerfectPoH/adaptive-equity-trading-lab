@@ -117,6 +117,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-20-codex-xmom-catalyst-preregistration-spec]] - spec-only preregistration for `TRIAL-XMOM-CATALYST-001`, no execution.
 - [[2026-05-20-codex-xmom-catalyst-preregistration-validator]] - structural validator for catalyst preregistration passes 58/58, including non-executable threshold rationale.
 - [[2026-05-20-codex-xmom-catalyst-implementation-gate-spec]] - implementation gate spec for DSR/CPCV and blind threshold selection passes 47/47.
+- [[2026-05-20-codex-dsr-psr-utilities]] - PSR/DSR math utilities implemented with Pearson kurtosis convention and targeted tests.
 - [[2026-05-20-codex-xmom-catalyst-feature-rationale]] - theory review for catalyst lag, volume persistence and price digestion; thresholds remain TBD/non-executable.
 
 ## Convenzione
