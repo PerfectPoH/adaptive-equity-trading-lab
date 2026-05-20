@@ -159,7 +159,8 @@ Regole operative:
 - implementation gate spec completata: `IMPLEMENTATION_GATE_SPEC_PASS`, 47/47;
 - utility DSR/PSR implementate e testate, non collegate al trial;
 - utility CPCV con purging/embargo implementate e testate, non collegate al trial;
-- prossimo lavoro ammesso: implementare effective trial-count estimator con test sintetici, non esecuzione.
+- effective trial-count estimator implementato e testato, non collegato al trial;
+- prossimo lavoro ammesso: creare un harness sintetico che collega DSR + CPCV + N_eff senza dati OOS/provider, non esecuzione.
 
 ## Ipotesi Primaria Corrente
 
