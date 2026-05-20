@@ -152,7 +152,8 @@ Regole operative:
 - non trattare il +109.36% come edge validato;
 - interpretazione forense iniziale completata: top 3 winner sono AEHR 2025-09 e CRMD 2025-04/05, vicini a catalyst pubblici company-specific;
 - catalyst classification completata sugli 11 trade: domanda aggiornata a `post-catalyst continuation vs post-catalyst fade`;
-- prossimo lavoro ammesso: preregistration spec catalyst-aware, non esecuzione.
+- preregistration spec catalyst-aware creata come `TRIAL-XMOM-CATALYST-001 / PREREG-XMOM-CATALYST-001`;
+- prossimo lavoro ammesso: validator strutturale o review manuale della spec, non esecuzione.
 
 ## Ipotesi Primaria Corrente
 

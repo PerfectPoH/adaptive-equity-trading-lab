@@ -1,0 +1,11 @@
+decision_item,status,rule
+execution_precondition,required,A separate implementation gate and explicit user authorization are required before any execution.
+data_precondition,required,Data ingestion validation must pass and catalyst source timestamps must be recorded before signal evaluation.
+primary_metric,proposed,excess_return_vs_iwm_net_of_costs_after_catalyst_filters
+secondary_metric,proposed,pnl_excluding_top_3_and_sign_flip_status
+robustness_gate,required,No promotion if sign_flip_excluding_top_3 is true or top_3 contribution exceeds 100 percent of total PnL.
+sample_size_gate,required,No promotion if accepted trade count is below 30 unless report explicitly labels result as exploratory only.
+catalyst_gate,required,No candidate may be accepted if catalyst timestamp is not observable before entry under source hierarchy.
+go_rule,proposed,Proceed to a separate replication spec only if primary metric positive robustness gate passes and catalyst features were frozen before execution.
+promotion_rule,blocked,No paper or live trading from this trial; promotion requires separate promotion gate with larger sample and independent period.
+stop_rule,required,Stop if source timestamps are ambiguous if data gate fails if trial budget exhausted or if post-run validation fails.

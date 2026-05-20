@@ -1,0 +1,11 @@
+action,status,reason
+execute_backtest,blocked,Spec-only artifact; execution requires separate implementation and approval.
+run_parameter_sweep,blocked,Would convert forensic insight into p-hacking.
+change_xmom_001_results,blocked,TRIAL-XMOM-001 is closed and versioned.
+markov_hmm_patch,blocked,Regime patch after seeing outlier failure would be post-hoc rescue.
+paper_trading,blocked,No strategy validated.
+live_trading,blocked,No strategy validated.
+strategy_promotion,blocked,Catalyst exposure has not been shown to distinguish continuation from fade.
+use_future_news,blocked,Violates point-in-time catalyst logic.
+select_thresholds_from_xmom_001_pnl,blocked,Would overfit to CRMD/AEHR outcomes.
+merge_fda_with_commercial_rollout,blocked,Regulatory and commercial catalysts have different risk structures.

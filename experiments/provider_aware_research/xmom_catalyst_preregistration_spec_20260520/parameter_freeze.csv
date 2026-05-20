@@ -1,0 +1,16 @@
+parameter_name,status,value,change_after_execution_policy,notes
+trial_status,frozen,SPEC_ONLY_NOT_EXECUTED,new_preregistration_required,This artifact does not authorize execution.
+base_trial_reference,frozen,TRIAL-XMOM-001,new_preregistration_required,Only used as forensic parent; no parameter inheritance means promotion.
+candidate_universe,frozen,AEHR;ARRY;CABA;CRMD;IOVA,new_preregistration_required,Same Databento-covered non-IWM names for first diagnostic spec if executed later.
+benchmark_symbol,frozen,IWM,new_preregistration_required,Benchmark proxy remains IWM.
+holding_window,frozen,21_trading_days,new_preregistration_required,Keep comparable to TRIAL-XMOM-001 unless a new spec changes it.
+minimum_price,frozen,2.00,new_preregistration_required,Preserve tradability floor.
+minimum_dollar_volume,frozen,1000000,new_preregistration_required,Preserve liquidity floor.
+impact_coefficient_bps,frozen,500,new_preregistration_required,Preserve conservative square-root impact stress.
+max_position_dollar_volume_fraction,frozen,0.20,new_preregistration_required,Preserve liquidity guardrail.
+impact_participation_cap,frozen,0.20,new_preregistration_required,Preserve participation cap.
+min_catalyst_lag_trading_days,proposed,2,new_preregistration_required,Prevents same-day catalyst chasing; diagnostic only until implementation spec.
+max_catalyst_lag_trading_days,proposed,30,new_preregistration_required,Prevents stale catalyst attribution; diagnostic only until implementation spec.
+volume_persistence_threshold,proposed,TBD_IN_FUTURE_SPEC,new_preregistration_required,Do not select threshold from TRIAL-XMOM-001 outcomes.
+price_digestion_threshold,proposed,TBD_IN_FUTURE_SPEC,new_preregistration_required,Do not select threshold from TRIAL-XMOM-001 outcomes.
+max_trials_increment,frozen,1,no_reset_allowed,If executed later this consumes a new trial number and cannot be hidden as an extension of XMOM-001.

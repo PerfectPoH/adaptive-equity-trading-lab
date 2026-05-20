@@ -1,0 +1,11 @@
+catalyst_type,status,description,initial_handling
+earnings_results,frozen,Quarterly or annual financial results from issuer release,allowed_if_timestamp_observable_before_entry_or_during_trade_logged
+guidance_preliminary_results,frozen,Preliminary revenue EBITDA guidance raise/lower or updated outlook,allowed_if_timestamp_observable_before_entry
+commercial_rollout,frozen,Customer implementation product launch utilization or rollout progress,allowed_if_observable_before_entry
+contract_order,frozen,Customer order contract award production order or evaluation order,allowed_if_observable_before_entry
+m_and_a,frozen,Acquisition divestiture merger or strategic transaction,log_only_initially
+offering_dilution,frozen,Equity offering convertibles warrant exercise or financing dilution,block_or_reduce_candidate_in_future_spec
+regulatory_fda,frozen,FDA regulatory approval CRL trial halt clinical readout or label event,log_separately_do_not_merge_with_commercial_rollout
+analyst_action,frozen,Analyst upgrade downgrade price target or coverage initiation,log_only_initially
+earnings_calendar,frozen,Known scheduled earnings date without result yet,allowed_as_risk_context_not_positive_signal
+no_obvious_catalyst,frozen,No public catalyst found in manual source hierarchy,eligible_only_as_control_bucket

@@ -1,0 +1,12 @@
+feature_name,status,definition,lookahead_policy,notes
+catalyst_known_before_entry,final,Boolean that at least one source-hierarchy catalyst timestamp is before signal_date close or before entry decision,strict_pre_entry,Required for catalyst-aware candidate eligibility.
+catalyst_lag_trading_days,final,Trading days from most recent qualifying catalyst date to signal_date,strict_pre_entry,Used to avoid same-day event chaos and stale catalysts.
+volume_persistence_ratio_3d,final,Mean dollar volume over first three post-catalyst sessions divided by pre-catalyst 20-day ADV,strict_pre_entry_if_signal_after_window,If signal occurs before the 3-day window is complete candidate is not eligible for this feature.
+volume_persistence_ratio_5d,final,Mean dollar volume over first five post-catalyst sessions divided by pre-catalyst 20-day ADV,strict_pre_entry_if_signal_after_window,Initial diagnostic only unless spec later chooses 3d or 5d.
+volume_decay_ratio,final,Post-catalyst later-window volume divided by immediate post-catalyst volume,strict_pre_entry,Lower values indicate possible exhausted attention.
+price_digestion_hold_ratio,final,Signal close divided by catalyst-day close or first post-catalyst close,strict_pre_entry,Tests whether price held above catalyst reference.
+post_catalyst_max_retrace_pct,final,Max drawdown from post-catalyst high to signal close,strict_pre_entry,Large retrace indicates possible fade.
+gap_hold_flag,final,Boolean price remains above catalyst-day open/close reference after event gap,strict_pre_entry,Only when catalyst produced measurable gap.
+xmom_rank_aggregate_score,carryover,Frozen XMOM rank score from prior trial,strict_pre_entry,May be used as base ranking input but not refit post hoc.
+rolling_volatility_20d,carryover,20-day rolling volatility before signal,strict_pre_entry,Risk diagnostic and possible rejection if extreme under frozen threshold.
+avg_dollar_volume_20d,carryover,20-day pre-signal average dollar volume,strict_pre_entry,Execution/liquidity gating.

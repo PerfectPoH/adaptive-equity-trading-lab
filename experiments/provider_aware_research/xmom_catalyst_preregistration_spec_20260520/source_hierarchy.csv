@@ -1,0 +1,8 @@
+source_rank,source_type,status,use_case,notes
+1,issuer_press_release,preferred,Primary catalyst timestamp and issuer narrative,Use official investor relations press release when available.
+2,sec_edgar_filing,preferred,8-K 10-Q 10-K S-3 offering M&A validation,Use filing timestamp where release timing is ambiguous.
+3,exchange_or_regulatory_notice,preferred,Halts regulatory status or market structure events,Use for tradability interruptions.
+4,earnings_calendar,allowed,Earnings date risk context,Calendar alone is not a bullish catalyst.
+5,broker_analyst_news,allowed_with_caveat,Analyst action context,Must not override issuer/SEC facts.
+6,news_api_aggregate,allowed_with_caveat,Secondary discovery source,Requires source URL and timestamp validation.
+7,forum_social_media,blocked_for_primary,Only qualitative context,Not accepted as primary catalyst evidence.

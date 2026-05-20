@@ -114,6 +114,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-20-codex-xmom-trial-001-execution]] - first preregistered XMOM execution completed; primary metric positive but outlier stress blocks promotion.
 - [[2026-05-20-codex-xmom-trial-001-forensics]] - independent forensics of top winners; CRMD/AEHR winners look catalyst-adjacent, no strategy promotion.
 - [[2026-05-20-codex-xmom-catalyst-classification]] - all 11 XMOM trades manually classified for catalyst context; next question is continuation vs fade.
+- [[2026-05-20-codex-xmom-catalyst-preregistration-spec]] - spec-only preregistration for `TRIAL-XMOM-CATALYST-001`, no execution.
 
 ## Convenzione
 
