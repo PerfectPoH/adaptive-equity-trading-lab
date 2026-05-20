@@ -1,0 +1,40 @@
+{
+  "api_configuration": {
+    "adjustment": "synthetic_none",
+    "end": "2024-01-08",
+    "schema": "synthetic_ohlcv_1d",
+    "start": "2024-01-02",
+    "symbols": [
+      "AAA",
+      "BBB"
+    ]
+  },
+  "created_at_utc": "2026-05-20T00:00:00Z",
+  "data_files": [
+    {
+      "path": "prices.csv",
+      "role": "ohlcv",
+      "sha256": "c97518845bc67f301988f2af50f1c25864bb483d8e105489403e4806b846b6e1"
+    }
+  ],
+  "dataset_id": "xmom_synthetic_dry_run_20260520",
+  "date_range": {
+    "end": "2024-01-08",
+    "start": "2024-01-02"
+  },
+  "expected_symbols": [
+    "AAA",
+    "BBB"
+  ],
+  "immutable_after_validation": true,
+  "price_adjustment_policy": "synthetic_no_adjustments",
+  "provider": "Synthetic",
+  "provider_dataset": "synthetic_unit_test_ohlcv",
+  "raw_payload_retention": false,
+  "requested_by": "codex_dry_run",
+  "sanity_thresholds": {
+    "max_abs_close_to_close_return": 5.0,
+    "max_intraday_range_pct": 5.0
+  },
+  "timezone": "UTC"
+}

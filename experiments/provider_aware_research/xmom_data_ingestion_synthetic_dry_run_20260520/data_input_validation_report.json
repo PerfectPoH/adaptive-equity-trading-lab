@@ -1,0 +1,92 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_data_ingestion_synthetic_dry_run_20260520",
+      "name": "data_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_data_ingestion_synthetic_dry_run_20260520\\dataset_manifest.json",
+      "name": "required_file:dataset_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_data_ingestion_synthetic_dry_run_20260520\\dataset_manifest.json",
+      "name": "manifest_json",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]; expected_symbols_ok=True; data_files_ok=True; date_range_ok=True; thresholds_ok=True; api_config_ok=True; immutable_ok=True; raw_retention_ok=True",
+      "name": "manifest_required_fields",
+      "status": "pass"
+    },
+    {
+      "detail": "path=prices.csv; path_ok=True; hash_ok=True; role=ohlcv",
+      "name": "data_file_entry:0",
+      "status": "pass"
+    },
+    {
+      "detail": "rows=10; columns=8",
+      "name": "csv_readable:prices.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "price_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]; unexpected=[]",
+      "name": "symbols_match_manifest",
+      "status": "pass"
+    },
+    {
+      "detail": "dates_parse_ok=True; within_range=True",
+      "name": "dates_parse_and_within_range",
+      "status": "pass"
+    },
+    {
+      "detail": "duplicate_count=0",
+      "name": "no_duplicate_symbol_date",
+      "status": "pass"
+    },
+    {
+      "detail": "bad_rows=0",
+      "name": "prices_finite",
+      "status": "pass"
+    },
+    {
+      "detail": "bad_rows=0",
+      "name": "prices_positive",
+      "status": "pass"
+    },
+    {
+      "detail": "bad_rows=0",
+      "name": "volume_non_negative",
+      "status": "pass"
+    },
+    {
+      "detail": "bad_rows=0",
+      "name": "ohlc_relationships_valid",
+      "status": "pass"
+    },
+    {
+      "detail": "max_intraday_range_pct=0.057142857142857106; threshold=5.0",
+      "name": "intraday_range_within_sanity_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "max_abs_return=0.02941176470588247; threshold=5.0",
+      "name": "close_to_close_return_within_sanity_threshold",
+      "status": "pass"
+    }
+  ],
+  "data_dir": "experiments\\provider_aware_research\\xmom_data_ingestion_synthetic_dry_run_20260520",
+  "gate_decision": "DATA_INPUT_VALIDATION_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 16,
+    "total": 16
+  }
+}
