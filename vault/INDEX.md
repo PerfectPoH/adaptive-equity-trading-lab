@@ -30,6 +30,7 @@ tags: [vault, index, obsidian, trading-lab]
 - [[Report-Post-Run-Validation-Gate-2026-05-20]] - gate post-run per coerenza artifact ed execution guardrails.
 - [[Report-XMOM-Data-Ingestion-Gate-2026-05-20]] - gate data-ingestion XMOM prima dello sblocco pre-run.
 - [[Report-XMOM-Data-Ingestion-Synthetic-Dry-Run-2026-05-20]] - dry run sintetico isolato del data-ingestion gate.
+- [[Report-XMOM-Real-Data-Ingestion-2026-05-20]] - ingestione reale Databento XMOM con pre-run gate pronto.
 - [[small-cap-ranking-exits-research-track]] - track separato ranking/uscite design-only con trial accounting obbligatorio.
 - [[Project-Handoff]] - handoff completo per altre chat o agenti.
 - [[Devlog-Index]] - cronologia ordinata delle sessioni.

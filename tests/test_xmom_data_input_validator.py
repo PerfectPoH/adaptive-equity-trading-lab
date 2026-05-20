@@ -41,7 +41,12 @@ def _valid_data_dir(tmp_path: Path) -> Path:
         "immutable_after_validation": True,
         "expected_symbols": ["AAA", "BBB"],
         "date_range": {"start": "2024-01-02", "end": "2024-01-03"},
-        "sanity_thresholds": {"max_abs_close_to_close_return": 5.0, "max_intraday_range_pct": 5.0},
+        "sanity_thresholds": {
+            "max_abs_close_to_close_return": 5.0,
+            "max_intraday_range_pct": 5.0,
+            "max_start_gap_days": 7,
+            "max_end_gap_days": 7,
+        },
         "data_files": [{"path": "prices.csv", "sha256": _sha256(prices), "role": "ohlcv"}],
     }
     (data_dir / "dataset_manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
@@ -111,6 +116,18 @@ def test_xmom_data_input_validator_fails_invalid_prices(tmp_path: Path) -> None:
     assert report["status"] == "fail"
     assert any(check["name"] == "prices_positive" and check["status"] == "fail" for check in report["checks"])
     assert any(check["name"] == "ohlc_relationships_valid" and check["status"] == "fail" for check in report["checks"])
+
+
+def test_xmom_data_input_validator_fails_partial_date_coverage(tmp_path: Path) -> None:
+    data_dir = _valid_data_dir(tmp_path)
+    manifest = json.loads((data_dir / "dataset_manifest.json").read_text(encoding="utf-8"))
+    manifest["date_range"] = {"start": "2023-01-01", "end": "2024-01-03"}
+    (data_dir / "dataset_manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+
+    report = validate_xmom_data_input(data_dir)
+
+    assert report["status"] == "fail"
+    assert any(check["name"] == "symbol_date_coverage_matches_manifest" and check["status"] == "fail" for check in report["checks"])
 
 
 def test_xmom_data_input_validator_cli_writes_report(tmp_path: Path) -> None:

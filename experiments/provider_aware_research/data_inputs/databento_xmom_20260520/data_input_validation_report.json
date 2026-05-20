@@ -1,0 +1,97 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\data_inputs\\databento_xmom_20260520",
+      "name": "data_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\data_inputs\\databento_xmom_20260520\\dataset_manifest.json",
+      "name": "required_file:dataset_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\data_inputs\\databento_xmom_20260520\\dataset_manifest.json",
+      "name": "manifest_json",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]; expected_symbols_ok=True; data_files_ok=True; date_range_ok=True; thresholds_ok=True; api_config_ok=True; immutable_ok=True; raw_retention_ok=True",
+      "name": "manifest_required_fields",
+      "status": "pass"
+    },
+    {
+      "detail": "path=prices.csv; path_ok=True; hash_ok=True; role=ohlcv",
+      "name": "data_file_entry:0",
+      "status": "pass"
+    },
+    {
+      "detail": "rows=6012; columns=9",
+      "name": "csv_readable:prices.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "price_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]; unexpected=[]",
+      "name": "symbols_match_manifest",
+      "status": "pass"
+    },
+    {
+      "detail": "dates_parse_ok=True; within_range=True",
+      "name": "dates_parse_and_within_range",
+      "status": "pass"
+    },
+    {
+      "detail": "max_start_gap_days=7; max_end_gap_days=7; AEHR:start_gap=2;end_gap=1 | ARRY:start_gap=2;end_gap=1 | CABA:start_gap=2;end_gap=1 | CRMD:start_gap=2;end_gap=1 | IOVA:start_gap=2;end_gap=1 | IWM:start_gap=2;end_gap=1",
+      "name": "symbol_date_coverage_matches_manifest",
+      "status": "pass"
+    },
+    {
+      "detail": "duplicate_count=0",
+      "name": "no_duplicate_symbol_date",
+      "status": "pass"
+    },
+    {
+      "detail": "bad_rows=0",
+      "name": "prices_finite",
+      "status": "pass"
+    },
+    {
+      "detail": "bad_rows=0",
+      "name": "prices_positive",
+      "status": "pass"
+    },
+    {
+      "detail": "bad_rows=0",
+      "name": "volume_non_negative",
+      "status": "pass"
+    },
+    {
+      "detail": "bad_rows=0",
+      "name": "ohlc_relationships_valid",
+      "status": "pass"
+    },
+    {
+      "detail": "max_intraday_range_pct=1.7441860465116281; threshold=5.0",
+      "name": "intraday_range_within_sanity_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "max_abs_return=0.6793893129770994; threshold=5.0",
+      "name": "close_to_close_return_within_sanity_threshold",
+      "status": "pass"
+    }
+  ],
+  "data_dir": "experiments\\provider_aware_research\\data_inputs\\databento_xmom_20260520",
+  "gate_decision": "DATA_INPUT_VALIDATION_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 17,
+    "total": 17
+  }
+}

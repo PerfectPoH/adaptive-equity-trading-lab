@@ -59,6 +59,7 @@ The manifest must declare:
 - OHLCV schema contains `symbol,date,open,high,low,close,volume`;
 - observed symbols match `expected_symbols`;
 - dates parse and stay inside the declared range;
+- each expected symbol covers the declared start/end within configured trading-calendar tolerances;
 - no duplicate `symbol/date`;
 - prices are finite and positive;
 - volume is finite and non-negative;

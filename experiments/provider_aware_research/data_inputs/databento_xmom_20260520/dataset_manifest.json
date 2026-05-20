@@ -1,0 +1,75 @@
+{
+  "api_configuration": {
+    "adjustment": "provider_schema_default_not_independently_verified",
+    "end": "2025-12-31",
+    "manifest_start": "2022-01-01",
+    "query_start": "2022-01-03",
+    "schema": "ohlcv-1d",
+    "stype_in": "raw_symbol",
+    "symbol_datasets": {
+      "AEHR": "XNAS.ITCH",
+      "ARRY": "XNAS.ITCH",
+      "CABA": "XNAS.ITCH",
+      "CRMD": "XNAS.ITCH",
+      "IOVA": "XNAS.ITCH",
+      "IWM": "ARCX.PILLAR"
+    },
+    "symbols": [
+      "AEHR",
+      "ARRY",
+      "CABA",
+      "CRMD",
+      "IOVA",
+      "IWM"
+    ]
+  },
+  "created_at_utc": "2026-05-20T09:31:57.877796+00:00",
+  "data_files": [
+    {
+      "path": "prices.csv",
+      "role": "ohlcv",
+      "sha256": "81c76b6a2623d34b0807e95abb68a52b651d579f5ca29aebf37d274f904eb741"
+    }
+  ],
+  "dataset_id": "databento_xmom_20260520",
+  "date_range": {
+    "end": "2025-12-31",
+    "start": "2022-01-01"
+  },
+  "expected_symbols": [
+    "AEHR",
+    "ARRY",
+    "CABA",
+    "CRMD",
+    "IOVA",
+    "IWM"
+  ],
+  "immutable_after_validation": true,
+  "notes": "Derived daily OHLCV CSV only. Raw Databento payload not retained. Venue datasets used to cover 2022+ because EQUS.MINI starts 2023-03-28. Reference/PIT/corporate-action coverage caveats remain.",
+  "price_adjustment_policy": "databento_venue_ohlcv_1d_provider_default_not_independently_verified",
+  "provider": "Databento",
+  "provider_dataset": "XNAS.ITCH+ARCX.PILLAR",
+  "provider_warnings": {
+    "blocking": false,
+    "databento_bento_warnings_observed": true,
+    "message": "Databento emitted reduced-quality/degraded-day warnings during ingestion. Known examples from stderr include 2022-09-19 for XNAS symbols and 2022-07-18, 2022-08-22, 2022-12-05 for IWM/ARCX. Treat as data-quality caveat; no raw payload retained."
+  },
+  "raw_payload_retention": false,
+  "requested_by": "codex_real_ingestion_user_authorized_20260520",
+  "row_count": 6012,
+  "sanity_thresholds": {
+    "max_abs_close_to_close_return": 5.0,
+    "max_end_gap_days": 7,
+    "max_intraday_range_pct": 5.0,
+    "max_start_gap_days": 7
+  },
+  "symbol_row_counts": {
+    "AEHR": 1002,
+    "ARRY": 1002,
+    "CABA": 1002,
+    "CRMD": 1002,
+    "IOVA": 1002,
+    "IWM": 1002
+  },
+  "timezone": "UTC"
+}

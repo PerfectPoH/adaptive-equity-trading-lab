@@ -165,6 +165,8 @@ def _validate_price_data(data: pd.DataFrame, manifest: dict[str, Any], checks: l
     thresholds = manifest.get("sanity_thresholds", {})
     max_abs_close_return = float(thresholds.get("max_abs_close_to_close_return", 5.0))
     max_intraday_range_pct = float(thresholds.get("max_intraday_range_pct", 5.0))
+    max_start_gap_days = int(thresholds.get("max_start_gap_days", 7))
+    max_end_gap_days = int(thresholds.get("max_end_gap_days", 7))
 
     finite_price_rows = normalized[["open", "high", "low", "close"]].map(_is_finite_number).all(axis=1)
     positive_prices = (normalized[["open", "high", "low", "close"]] > 0).all(axis=1)
@@ -176,11 +178,38 @@ def _validate_price_data(data: pd.DataFrame, manifest: dict[str, Any], checks: l
     within_range = normalized["date"].between(start, end, inclusive="both").all() if pd.notna(start) and pd.notna(end) else False
     missing_expected_symbols = sorted(expected_symbols - observed_symbols)
     unexpected_symbols = sorted(observed_symbols - expected_symbols)
+    coverage = normalized.groupby("symbol")["date"].agg(["min", "max"])
+    start_gap_ok = True
+    end_gap_ok = True
+    coverage_details: list[str] = []
+    if pd.isna(start) or pd.isna(end):
+        start_gap_ok = False
+        end_gap_ok = False
+    else:
+        for symbol in sorted(expected_symbols):
+            if symbol not in coverage.index:
+                start_gap_ok = False
+                end_gap_ok = False
+                coverage_details.append(f"{symbol}:missing")
+                continue
+            symbol_min = coverage.loc[symbol, "min"]
+            symbol_max = coverage.loc[symbol, "max"]
+            start_gap = (symbol_min - start).days
+            end_gap = (end - symbol_max).days
+            start_gap_ok = start_gap_ok and 0 <= start_gap <= max_start_gap_days
+            end_gap_ok = end_gap_ok and 0 <= end_gap <= max_end_gap_days
+            coverage_details.append(f"{symbol}:start_gap={start_gap};end_gap={end_gap}")
     intraday_range_pct = (normalized["high"] - normalized["low"]) / normalized["close"]
     grouped_returns = normalized.sort_values(["symbol", "date"]).groupby("symbol")["close"].pct_change().abs()
 
     _add_check(checks, "symbols_match_manifest", not missing_expected_symbols and not unexpected_symbols, f"missing={missing_expected_symbols}; unexpected={unexpected_symbols}")
     _add_check(checks, "dates_parse_and_within_range", bool(dates_parse_ok and within_range), f"dates_parse_ok={bool(dates_parse_ok)}; within_range={bool(within_range)}")
+    _add_check(
+        checks,
+        "symbol_date_coverage_matches_manifest",
+        bool(start_gap_ok and end_gap_ok),
+        f"max_start_gap_days={max_start_gap_days}; max_end_gap_days={max_end_gap_days}; {' | '.join(coverage_details)}",
+    )
     _add_check(checks, "no_duplicate_symbol_date", duplicate_count == 0, f"duplicate_count={duplicate_count}")
     _add_check(checks, "prices_finite", bool(finite_price_rows.all()), f"bad_rows={int((~finite_price_rows).sum())}")
     _add_check(checks, "prices_positive", bool(positive_prices.all()), f"bad_rows={int((~positive_prices).sum())}")

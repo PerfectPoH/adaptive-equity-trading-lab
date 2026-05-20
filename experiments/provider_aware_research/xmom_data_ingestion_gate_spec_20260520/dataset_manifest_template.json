@@ -22,7 +22,9 @@
   },
   "sanity_thresholds": {
     "max_abs_close_to_close_return": 5.0,
-    "max_intraday_range_pct": 5.0
+    "max_intraday_range_pct": 5.0,
+    "max_start_gap_days": 7,
+    "max_end_gap_days": 7
   },
   "data_files": [
     {

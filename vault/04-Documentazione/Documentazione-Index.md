@@ -17,6 +17,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-Post-Run-Validation-Gate-2026-05-20]] - gate post-run per coerenza artifact, execution guardrails e riconciliazione trade-log/summary.
 - [[Report-XMOM-Data-Ingestion-Gate-2026-05-20]] - gate data-ingestion per manifest, hash, schema OHLCV, sanity check prezzi e report pass richiesto dal pre-run gate.
 - [[Report-XMOM-Data-Ingestion-Synthetic-Dry-Run-2026-05-20]] - prova isolata del data-ingestion gate su dati sintetici, senza sbloccare il trial reale.
+- [[Report-XMOM-Real-Data-Ingestion-2026-05-20]] - ingestione reale Databento XMOM; data gate e pre-run gate passano, nessun backtest eseguito.
 
 ## Handoff
 

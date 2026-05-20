@@ -110,6 +110,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-20-codex-post-run-validation-gate]] - post-run validator added for execution guardrails, trade-log reconciliation and artifact integrity before interpretation.
 - [[2026-05-20-codex-xmom-data-ingestion-gate]] - XMOM data-input validator added and pre-run gate hardened to require validation-report pass.
 - [[2026-05-20-codex-xmom-data-ingestion-synthetic-dry-run]] - isolated synthetic dataset validated 16/16 while real XMOM pre-run gate stayed blocked.
+- [[2026-05-20-codex-xmom-real-data-ingestion]] - real Databento XMOM data input ingested; data gate and pre-run gate both pass, no backtest executed.
 
 ## Convenzione
 

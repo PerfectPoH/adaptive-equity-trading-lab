@@ -4,6 +4,7 @@ data_file_hashes_match,yes,every declared data file exists and matches sha256,BL
 schema_valid,yes,OHLCV files contain symbol date open high low close volume,BLOCK_PRE_RUN_GATE
 symbols_match_manifest,yes,observed symbols match expected_symbols exactly,BLOCK_PRE_RUN_GATE
 date_range_valid,yes,all dates parse and stay inside manifest date_range,BLOCK_PRE_RUN_GATE
+symbol_date_coverage_valid,yes,each expected symbol covers manifest start/end within configured trading-calendar tolerance,BLOCK_PRE_RUN_GATE
 no_duplicate_symbol_date,yes,no duplicate symbol/date rows,BLOCK_PRE_RUN_GATE
 price_sanity_valid,yes,prices are finite positive and OHLC relationships are valid,BLOCK_PRE_RUN_GATE
 threshold_sanity_valid,yes,intraday and close-to-close moves stay within configured sanity thresholds,BLOCK_PRE_RUN_GATE
