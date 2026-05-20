@@ -1,0 +1,2 @@
+total_trades,total_pnl,gross_profit,gross_loss,top_1_pnl_contribution_pct,top_3_pnl_contribution_pct,outlier_concentration_alert,pnl_excluding_top_3,sign_flip_excluding_top_3,portfolio_return_excluding_top_3
+11,109363.25289774853,228597.85407899067,-119234.6011812421,0.6095021777030838,1.4579721022845828,True,-50085.31884226239,True,-0.5008531884226239

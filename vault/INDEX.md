@@ -1,7 +1,7 @@
 ---
 tipo: index
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-12
+ultimo-aggiornamento: 2026-05-20
 tags: [vault, index, obsidian, trading-lab]
 ---
 
@@ -31,6 +31,7 @@ tags: [vault, index, obsidian, trading-lab]
 - [[Report-XMOM-Data-Ingestion-Gate-2026-05-20]] - gate data-ingestion XMOM prima dello sblocco pre-run.
 - [[Report-XMOM-Data-Ingestion-Synthetic-Dry-Run-2026-05-20]] - dry run sintetico isolato del data-ingestion gate.
 - [[Report-XMOM-Real-Data-Ingestion-2026-05-20]] - ingestione reale Databento XMOM con pre-run gate pronto.
+- [[Report-XMOM-Trial-001-Execution-2026-05-20]] - prima esecuzione preregistrata XMOM: primary metric positiva, outlier stress blocca promozione.
 - [[small-cap-ranking-exits-research-track]] - track separato ranking/uscite design-only con trial accounting obbligatorio.
 - [[Project-Handoff]] - handoff completo per altre chat o agenti.
 - [[Devlog-Index]] - cronologia ordinata delle sessioni.

@@ -2,7 +2,7 @@
 tipo: roadmap-master
 progetto: adaptive-equity-trading-lab
 data: 2026-05-08
-ultimo-aggiornamento: 2026-05-12
+ultimo-aggiornamento: 2026-05-20
 tags: [roadmap, milestone, checklist, trading-lab]
 ---
 
@@ -150,6 +150,35 @@ Vedi [[news-risk-engine]].
 Gate metodologico corrente: run manifest, stress test ex-outlier, smoke ampia, cash starvation diagnostics, setup disentangler passivo, feature diagnostics per setup, breakout-only ablation, feature filter ablation, open-to-close sensitivity, temporal split validation, multi-year validation e passive regime diagnostics sono implementati. Dopo RankEx, il prossimo collo di bottiglia primario e' data-quality/methodology: data-quality audit result e Lessons Learned sono completati; non pre-registrare nuovi trial small-cap finche' non cambia dataset/provider. Scaffolding check tecnico fixed large-cap/ETF completato con `TECHNICAL_PASS`; `TRIAL-NCTRL-001` e' pre-registrato come property-based negative control; prossimo lavoro ammesso: implementazione TDD infrastruttura P5/P6/P4/reporting/accounting, non esecuzione del trial. La smoke ampia ha prodotto `portfolio_return=-22.16%`, score profile non monotono e missed opportunities mediane negative.
 
 Vedi [[small-cap-swing-research-spec]] e [[small-cap-ranking-exits-research-track]].
+
+## Milestone 3C - XMOM Databento Provider-Aware Track
+
+- [x] Pre-registrare `TRIAL-XMOM-001` con trial accounting e parameter freeze.
+- [x] Implementare Data Ingestion Gate per dataset XMOM.
+- [x] Eseguire synthetic dry run del Data Ingestion Gate.
+- [x] Ingerire dataset reale Databento XMOM con raw payload retention disattivata.
+- [x] Ottenere `DATA_INPUT_VALIDATION_PASS` e `PASS_READY_TO_EXECUTE`.
+- [x] Implementare runner singolo `TRIAL-XMOM-001` senza sweep/tuning.
+- [x] Eseguire `TRIAL-XMOM-001` una sola volta dopo autorizzazione esplicita.
+- [x] Eseguire Post-Run Validation Gate e Run Artifact Validator.
+- [x] Documentare verdict: primary metric positiva, ma outlier stress fallito.
+
+Verdetto corrente:
+
+```text
+primary_go_rule_passed_but_outlier_stress_blocks_promotion
+```
+
+Blocco:
+
+```text
+no paper trading
+no live trading
+no strategy promotion
+no post-hoc tuning on TRIAL-XMOM-001
+```
+
+Vedi [[Report-XMOM-Trial-001-Execution-2026-05-20]].
 
 ## Milestone 4 - Paper Trading
 

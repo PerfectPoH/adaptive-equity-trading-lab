@@ -1,0 +1,97 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_pre_run_gate_20260520",
+      "name": "gate_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_pre_run_gate_20260520\\pre_run_gate_manifest.json",
+      "name": "required_file:pre_run_gate_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_pre_run_gate_20260520\\pre_run_gate_checklist.csv",
+      "name": "required_file:pre_run_gate_checklist.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_pre_run_gate_20260520\\pre_run_gate_summary.md",
+      "name": "required_file:pre_run_gate_summary.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_pre_run_gate_20260520\\pre_run_gate_manifest.json",
+      "name": "manifest_json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_pre_run_gate_20260520\\pre_run_gate_checklist.csv: rows=3; columns=6",
+      "name": "csv_readable:pre_run_gate_checklist.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_pre_run_gate_20260520\\pre_run_gate_summary.md: chars=598",
+      "name": "markdown_readable:pre_run_gate_summary.md",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]; checks_set_ok=True",
+      "name": "manifest_required_fields",
+      "status": "pass"
+    },
+    {
+      "detail": "on_failure_action=EXIT_1_BLOCK_EXECUTION",
+      "name": "manifest_fail_closed_policy",
+      "status": "pass"
+    },
+    {
+      "detail": "execution_status=not_executed",
+      "name": "manifest_execution_status_not_executed",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "checklist_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "checklist_required_checks_present",
+      "status": "pass"
+    },
+    {
+      "detail": "all_required_yes=True",
+      "name": "checklist_all_required_yes",
+      "status": "pass"
+    },
+    {
+      "detail": "all_exit_1=True",
+      "name": "checklist_failure_action_exit_1",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments/provider_aware_research/data_inputs/databento_xmom_20260520",
+      "name": "runtime_databento_data_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "computed=22a6b557615521a0f276185fae0e86529da588c2e800a842c3063876263d6bb8; expected=22a6b557615521a0f276185fae0e86529da588c2e800a842c3063876263d6bb8",
+      "name": "runtime_config_hash_match",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments/provider_aware_research/trial_ledger/provider_sensitivity_trial_ledger.csv",
+      "name": "runtime_ledger_status_is_prepared",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "PASS_READY_TO_EXECUTE",
+  "gate_dir": "experiments\\provider_aware_research\\xmom_pre_run_gate_20260520",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 17,
+    "total": 17
+  }
+}

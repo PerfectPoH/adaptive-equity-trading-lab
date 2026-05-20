@@ -1,7 +1,7 @@
 ---
 tipo: bug-tracker
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-11
+ultimo-aggiornamento: 2026-05-20
 tags: [bug, backlog, tech-debt, risk]
 ---
 
@@ -84,6 +84,15 @@ Nessun bug critico aperto noto dopo la prima implementazione.
 - Impatto: usare lo score come filtro live o sizing input rischia di introdurre overfit e tagliare esposizione utile.
 - Azione: mantenerlo diagnostico; riprogettare ranking solo con validazione out-of-sample e piu' anni.
 - Stato: aperto, nessun ranking promosso.
+
+### RISK-040 - XMOM positive primary metric is outlier-concentrated
+
+- Priorita: P1.
+- Sintomo: `TRIAL-XMOM-001` produce `return_pct=+109.36%` e `excess_return_vs_iwm_net_of_costs=+107.66%`, ma il risultato gira negativo senza i top 3 winner.
+- Dettaglio: `top_1_pnl_contribution_pct=60.95%`, `top_3_pnl_contribution_pct=145.80%`, `pnl_excluding_top_3=-50085.32`, `sign_flip_excluding_top_3=True`.
+- Impatto: primary metric positiva non equivale a edge robusto; rischio alto di sample-small/outlier artifact.
+- Azione: nessuna promozione, nessun paper trading, nessun tuning post-hoc su `TRIAL-XMOM-001`; eventuale replica deve essere preregistrata come trial separato.
+- Stato: aperto, blocco promozione attivo.
 
 ### RISK-010 - Aumentare risk fraction non crea edge
 

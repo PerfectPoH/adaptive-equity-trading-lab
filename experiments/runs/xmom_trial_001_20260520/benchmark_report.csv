@@ -1,0 +1,3 @@
+benchmark,return,excess_return,observations,description
+iwm_holding_windows,0.017016633175505422,1.0766158958019798,11,Average IWM open-to-close return over matching XMOM holding windows.
+cash_flat,0.0,1.0936325289774853,11,Cash baseline.

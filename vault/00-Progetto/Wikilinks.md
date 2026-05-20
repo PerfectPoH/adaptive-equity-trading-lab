@@ -1,7 +1,7 @@
 ---
 tipo: wikilinks
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-12
+ultimo-aggiornamento: 2026-05-20
 tags: [graph, wikilinks, obsidian]
 ---
 
@@ -301,3 +301,6 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[small-cap-ranking-exits-research-track]] -> [[Report-Small-Cap-RankEx-Trial-001-Preregistration-2026-05-13]]
 - [[Roadmap-Master]] -> [[Quant-Research-Priorities-2026-05-09]]
 - [[Regole-Quant]] -> [[Quant-Research-Priorities-2026-05-09]]
+- [[Project-Handoff]] -> [[Report-XMOM-Trial-001-Execution-2026-05-20]]
+- [[Report-XMOM-Real-Data-Ingestion-2026-05-20]] -> [[Report-XMOM-Trial-001-Execution-2026-05-20]]
+- [[2026-05-20-codex-xmom-trial-001-execution]] -> [[Report-XMOM-Trial-001-Execution-2026-05-20]]

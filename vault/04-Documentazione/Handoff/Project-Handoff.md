@@ -1,7 +1,7 @@
 ---
 tipo: handoff
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-12
+ultimo-aggiornamento: 2026-05-20
 tags: [handoff, progetto, agenti, small-cap]
 ---
 
@@ -13,7 +13,7 @@ Adaptive Equity Trading Lab.
 
 ## Stato in una frase
 
-La baseline large-cap ML e' congelata come controllo negativo; il lavoro attivo e' la research track **small/mid-cap swing long-only**, ma nessuna strategia e' validata per paper trading o capitale reale.
+La baseline large-cap ML e' congelata come controllo negativo; il vecchio lavoro small-cap e' riclassificato come metodologia/infrastruttura; `TRIAL-XMOM-001` su Databento e' stato eseguito una sola volta, ha primary metric positiva, ma outlier stress fallito. Nessuna strategia e' validata per paper trading o capitale reale.
 
 ## Principio guida
 
@@ -89,6 +89,68 @@ Tooling gia' implementato:
 - run manifest con config hash;
 - regime filters configurabili;
 - risk-based sizing fix nel portfolio planner.
+
+## Track XMOM Databento
+
+Stato:
+
+```text
+TRIAL-XMOM-001 executed once
+data provider: Databento Historical OHLCV
+raw payload retention: false
+status: primary metric positive, not promotable
+```
+
+Dataset:
+
+```text
+experiments/provider_aware_research/data_inputs/databento_xmom_20260520/
+```
+
+Run:
+
+```text
+experiments/runs/xmom_trial_001_20260520/
+```
+
+Gate:
+
+```text
+data ingestion gate: DATA_INPUT_VALIDATION_PASS
+pre-run gate: PASS_READY_TO_EXECUTE
+post-run gate: POST_RUN_VALIDATION_PASS
+run artifact validator: pass
+```
+
+Risultato:
+
+```text
+total_trades: 11
+return_pct: +109.36%
+IWM holding-window return: +1.70%
+excess_return_vs_iwm_net_of_costs: +107.66%
+```
+
+Blocco:
+
+```text
+outlier_concentration_alert: true
+sign_flip_excluding_top_3: true
+pnl_excluding_top_3: -50085.32
+```
+
+Decisione:
+
+```text
+primary_go_rule_passed_but_outlier_stress_blocks_promotion
+```
+
+Regole operative:
+
+- non promuovere XMOM a paper trading;
+- non fare tuning post-hoc su `TRIAL-XMOM-001`;
+- non trattare il +109.36% come edge validato;
+- prossimo lavoro ammesso: interpretazione indipendente, diagnostica robustness non parametrica o nuova preregistrazione separata.
 
 ## Ipotesi Primaria Corrente
 

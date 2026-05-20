@@ -1,7 +1,7 @@
 ---
 tipo: documentazione-index
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-12
+ultimo-aggiornamento: 2026-05-20
 tags: [documentazione, index, report, handoff]
 ---
 
@@ -18,6 +18,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-XMOM-Data-Ingestion-Gate-2026-05-20]] - gate data-ingestion per manifest, hash, schema OHLCV, sanity check prezzi e report pass richiesto dal pre-run gate.
 - [[Report-XMOM-Data-Ingestion-Synthetic-Dry-Run-2026-05-20]] - prova isolata del data-ingestion gate su dati sintetici, senza sbloccare il trial reale.
 - [[Report-XMOM-Real-Data-Ingestion-2026-05-20]] - ingestione reale Databento XMOM; data gate e pre-run gate passano, nessun backtest eseguito.
+- [[Report-XMOM-Trial-001-Execution-2026-05-20]] - prima esecuzione preregistrata XMOM; primary metric positiva, ma outlier stress fallito e nessuna promozione.
 
 ## Handoff
 
