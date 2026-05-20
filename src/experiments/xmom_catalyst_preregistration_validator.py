@@ -17,6 +17,8 @@ REQUIRED_FILES = [
     "decision_rule.csv",
     "blocked_actions.csv",
     "source_hierarchy.csv",
+    "feature_threshold_rationale.md",
+    "threshold_candidate_policy.csv",
 ]
 
 REQUIRED_ALLOWED_FEATURES = {
@@ -52,6 +54,22 @@ REQUIRED_CATALYST_TYPES = {
     "no_obvious_catalyst",
 }
 
+REQUIRED_THRESHOLD_CANDIDATES = {
+    "candidate_lag_min_trading_days",
+    "candidate_lag_max_trading_days",
+    "volume_persistence_threshold_3d",
+    "volume_persistence_threshold_5d",
+    "volume_decay_threshold",
+    "price_digestion_hold_threshold",
+    "post_catalyst_retrace_limit",
+    "gap_hold_required",
+}
+
+REQUIRED_LOCKED_GOVERNANCE_THRESHOLDS = {
+    "minimum_accepted_trades_for_promotion": "30",
+    "top3_contribution_promotion_cap": "100%",
+}
+
 
 def validate_xmom_catalyst_preregistration(spec_dir: str | Path) -> dict[str, Any]:
     path = Path(spec_dir)
@@ -72,6 +90,8 @@ def validate_xmom_catalyst_preregistration(spec_dir: str | Path) -> dict[str, An
     decision = _read_csv(path / "decision_rule.csv", checks, "csv_readable:decision_rule.csv")
     blocked = _read_csv(path / "blocked_actions.csv", checks, "csv_readable:blocked_actions.csv")
     sources = _read_csv(path / "source_hierarchy.csv", checks, "csv_readable:source_hierarchy.csv")
+    rationale = _read_text(path / "feature_threshold_rationale.md", checks, "markdown_readable:feature_threshold_rationale.md")
+    threshold_policy = _read_csv(path / "threshold_candidate_policy.csv", checks, "csv_readable:threshold_candidate_policy.csv")
 
     if readme is not None and hypothesis is not None:
         _validate_markdown_status(readme, hypothesis, checks)
@@ -87,6 +107,10 @@ def validate_xmom_catalyst_preregistration(spec_dir: str | Path) -> dict[str, An
         _validate_blocked_actions(blocked, checks)
     if sources is not None:
         _validate_sources(sources, checks)
+    if rationale is not None:
+        _validate_feature_threshold_rationale(rationale, checks)
+    if threshold_policy is not None:
+        _validate_threshold_candidate_policy(threshold_policy, checks)
 
     return _report(path, checks)
 
@@ -201,6 +225,70 @@ def _validate_sources(frame: pd.DataFrame, checks: list[dict[str, str]]) -> None
     forum_blocked = len(forum_rows) == 1 and str(forum_rows.iloc[0]["status"]).lower() == "blocked_for_primary"
     _add_check(checks, "source_preferred_primary_sources", preferred.issubset(sources), f"sources={sorted(sources)}")
     _add_check(checks, "source_forums_not_primary", forum_blocked, f"forum_rows={len(forum_rows)}")
+
+
+def _validate_feature_threshold_rationale(text: str, checks: list[dict[str, str]]) -> None:
+    lower = text.lower()
+    _add_check(
+        checks,
+        "rationale_theory_review_only_not_executable",
+        "theory_review_only_not_executable" in lower,
+        "rationale status present",
+    )
+    _add_check(
+        checks,
+        "rationale_does_not_authorize_execution",
+        "does not make `trial-xmom-catalyst-001` executable" in lower or "does not make trial-xmom-catalyst-001 executable" in lower,
+        "execution remains blocked",
+    )
+    forbidden_selection_blocked = all(
+        phrase in lower
+        for phrase in [
+            "select thresholds from crmd/aehr winners",
+            "select thresholds from trial-xmom-001 pnl",
+            "select thresholds by maximizing the old run result",
+        ]
+    )
+    _add_check(
+        checks,
+        "rationale_blocks_old_run_threshold_selection",
+        forbidden_selection_blocked,
+        "old-run threshold selection is explicitly blocked",
+    )
+
+
+def _validate_threshold_candidate_policy(frame: pd.DataFrame, checks: list[dict[str, str]]) -> None:
+    required = {"candidate_parameter", "status", "proposed_value", "source_basis", "execution_policy", "notes"}
+    missing = sorted(required - set(frame.columns))
+    _add_check(checks, "threshold_policy_required_columns", not missing, f"missing={missing}")
+    if missing:
+        return
+
+    params = set(frame["candidate_parameter"].astype(str))
+    missing_candidates = sorted(REQUIRED_THRESHOLD_CANDIDATES - params)
+    _add_check(checks, "threshold_policy_required_candidates", not missing_candidates, f"missing={missing_candidates}")
+
+    candidate_rows = frame[frame["candidate_parameter"].astype(str).isin(REQUIRED_THRESHOLD_CANDIDATES)]
+    candidates_not_final = candidate_rows["status"].astype(str).str.lower().eq("not_final").all()
+    candidates_tbd = candidate_rows["proposed_value"].astype(str).str.upper().eq("TBD").all()
+    candidates_not_executable = candidate_rows["execution_policy"].astype(str).str.lower().eq("not_executable").all()
+    candidate_basis_ok = candidate_rows["source_basis"].astype(str).str.lower().eq("literature_logic_review_only").all()
+    _add_check(checks, "threshold_policy_candidates_not_final", bool(candidates_not_final), f"not_final={bool(candidates_not_final)}")
+    _add_check(checks, "threshold_policy_candidates_tbd", bool(candidates_tbd), f"tbd={bool(candidates_tbd)}")
+    _add_check(checks, "threshold_policy_candidates_not_executable", bool(candidates_not_executable), f"not_executable={bool(candidates_not_executable)}")
+    _add_check(checks, "threshold_policy_candidates_literature_only", bool(candidate_basis_ok), f"literature_only={bool(candidate_basis_ok)}")
+
+    rows = {str(row["candidate_parameter"]): row for _, row in frame.iterrows()}
+    locked_ok = True
+    for parameter, expected_value in REQUIRED_LOCKED_GOVERNANCE_THRESHOLDS.items():
+        row = rows.get(parameter)
+        if row is None:
+            locked_ok = False
+            continue
+        locked_ok = locked_ok and str(row["status"]).lower() == "final"
+        locked_ok = locked_ok and str(row["proposed_value"]) == expected_value
+        locked_ok = locked_ok and str(row["execution_policy"]).lower() == "locked"
+    _add_check(checks, "threshold_policy_governance_thresholds_locked", bool(locked_ok), f"locked_ok={bool(locked_ok)}")
 
 
 def _read_csv(path: Path, checks: list[dict[str, str]], name: str) -> pd.DataFrame | None:

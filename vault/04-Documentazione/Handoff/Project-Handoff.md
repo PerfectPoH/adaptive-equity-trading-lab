@@ -153,8 +153,10 @@ Regole operative:
 - interpretazione forense iniziale completata: top 3 winner sono AEHR 2025-09 e CRMD 2025-04/05, vicini a catalyst pubblici company-specific;
 - catalyst classification completata sugli 11 trade: domanda aggiornata a `post-catalyst continuation vs post-catalyst fade`;
 - preregistration spec catalyst-aware creata come `TRIAL-XMOM-CATALYST-001 / PREREG-XMOM-CATALYST-001`;
-- validator strutturale della spec completato: `SPEC_VALIDATION_PASS`, 44/44;
-- prossimo lavoro ammesso: review teorica soglie/feature o validator di implementation gate, non esecuzione.
+- validator strutturale della spec completato: `SPEC_VALIDATION_PASS`, 58/58;
+- review teorica feature/soglie completata: catalyst lag, volume persistence/decay e price digestion;
+- rationale artifacts inclusi nel validator: soglie operative restano `TBD / not_final / not_executable`;
+- prossimo lavoro ammesso: implementation gate spec o independent threshold-selection design, non esecuzione.
 
 ## Ipotesi Primaria Corrente
 

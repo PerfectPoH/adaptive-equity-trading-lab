@@ -46,6 +46,16 @@
       "status": "pass"
     },
     {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\feature_threshold_rationale.md",
+      "name": "required_file:feature_threshold_rationale.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\threshold_candidate_policy.csv",
+      "name": "required_file:threshold_candidate_policy.csv",
+      "status": "pass"
+    },
+    {
       "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\README.md: chars=1559",
       "name": "markdown_readable:README.md",
       "status": "pass"
@@ -83,6 +93,16 @@
     {
       "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\source_hierarchy.csv: rows=7; columns=5",
       "name": "csv_readable:source_hierarchy.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\feature_threshold_rationale.md: chars=4715",
+      "name": "markdown_readable:feature_threshold_rationale.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\threshold_candidate_policy.csv: rows=10; columns=6",
+      "name": "csv_readable:threshold_candidate_policy.csv",
       "status": "pass"
     },
     {
@@ -219,6 +239,56 @@
       "detail": "forum_rows=1",
       "name": "source_forums_not_primary",
       "status": "pass"
+    },
+    {
+      "detail": "rationale status present",
+      "name": "rationale_theory_review_only_not_executable",
+      "status": "pass"
+    },
+    {
+      "detail": "execution remains blocked",
+      "name": "rationale_does_not_authorize_execution",
+      "status": "pass"
+    },
+    {
+      "detail": "old-run threshold selection is explicitly blocked",
+      "name": "rationale_blocks_old_run_threshold_selection",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "threshold_policy_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "threshold_policy_required_candidates",
+      "status": "pass"
+    },
+    {
+      "detail": "not_final=True",
+      "name": "threshold_policy_candidates_not_final",
+      "status": "pass"
+    },
+    {
+      "detail": "tbd=True",
+      "name": "threshold_policy_candidates_tbd",
+      "status": "pass"
+    },
+    {
+      "detail": "not_executable=True",
+      "name": "threshold_policy_candidates_not_executable",
+      "status": "pass"
+    },
+    {
+      "detail": "literature_only=True",
+      "name": "threshold_policy_candidates_literature_only",
+      "status": "pass"
+    },
+    {
+      "detail": "locked_ok=True",
+      "name": "threshold_policy_governance_thresholds_locked",
+      "status": "pass"
     }
   ],
   "gate_decision": "SPEC_VALIDATION_PASS",
@@ -226,7 +296,7 @@
   "status": "pass",
   "summary": {
     "failed": 0,
-    "passed": 44,
-    "total": 44
+    "passed": 58,
+    "total": 58
   }
 }

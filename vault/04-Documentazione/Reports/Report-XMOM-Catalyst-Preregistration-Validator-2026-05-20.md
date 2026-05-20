@@ -41,7 +41,7 @@ experiments/provider_aware_research/xmom_catalyst_preregistration_spec_20260520/
 ```text
 status: pass
 gate_decision: SPEC_VALIDATION_PASS
-passed: 44
+passed: 58
 failed: 0
 ```
 
@@ -60,6 +60,9 @@ The validator checks:
 - required ex-ante feature families are present;
 - feature lookahead policies are strict pre-entry;
 - thresholds are not selected from `TRIAL-XMOM-001`;
+- feature-threshold rationale remains theory-review-only and not executable;
+- candidate threshold parameters remain `not_final`, `TBD` and `not_executable`;
+- locked governance thresholds remain fixed;
 - promotion rule is blocked;
 - robustness and sample-size gates are required;
 - Markov/HMM patch, paper/live, strategy promotion and future-news usage are blocked;
@@ -74,9 +77,9 @@ It is still not executable.
 
 Allowed next work:
 
-- manual review of theoretical thresholds;
-- literature/logic review for catalyst lag, volume persistence and price digestion;
-- implementation planning only after review.
+- implementation gate planning only after explicit approval;
+- independent threshold-selection design;
+- validator extensions for any new spec artifacts before execution.
 
 Blocked:
 

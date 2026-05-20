@@ -1,0 +1,11 @@
+candidate_parameter,status,proposed_value,source_basis,execution_policy,notes
+candidate_lag_min_trading_days,not_final,TBD,literature_logic_review_only,not_executable,Must not be selected from TRIAL-XMOM-001 PnL.
+candidate_lag_max_trading_days,not_final,TBD,literature_logic_review_only,not_executable,Must prevent stale catalyst attribution.
+volume_persistence_threshold_3d,not_final,TBD,literature_logic_review_only,not_executable,Threshold must be preregistered before any execution.
+volume_persistence_threshold_5d,not_final,TBD,literature_logic_review_only,not_executable,Diagnostic alternative to 3d persistence.
+volume_decay_threshold,not_final,TBD,literature_logic_review_only,not_executable,Used to identify attention collapse/fade risk.
+price_digestion_hold_threshold,not_final,TBD,literature_logic_review_only,not_executable,Must be defined using pre-entry reference only.
+post_catalyst_retrace_limit,not_final,TBD,literature_logic_review_only,not_executable,Must not be fitted to CRMD/AEHR outcomes.
+gap_hold_required,not_final,TBD,literature_logic_review_only,not_executable,Only applicable when catalyst gap is measurable.
+minimum_accepted_trades_for_promotion,final,30,governance_rule,locked,Promotion blocked below 30 trades unless explicitly exploratory.
+top3_contribution_promotion_cap,final,100%,governance_rule,locked,Promotion blocked if top 3 PnL contribution exceeds 100% of total PnL.

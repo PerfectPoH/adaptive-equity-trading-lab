@@ -43,6 +43,25 @@ def test_xmom_catalyst_preregistration_validator_fails_if_markov_not_blocked(tmp
     assert any(check["name"] == "blocked_actions_all_blocked" and check["status"] == "fail" for check in report["checks"])
 
 
+def test_xmom_catalyst_preregistration_validator_fails_if_candidate_threshold_is_executable(tmp_path: Path) -> None:
+    spec_dir = _copy_spec(tmp_path)
+    threshold_policy = spec_dir / "threshold_candidate_policy.csv"
+    threshold_policy.write_text(
+        threshold_policy.read_text(encoding="utf-8").replace(
+            "volume_persistence_threshold_3d,not_final,TBD,literature_logic_review_only,not_executable",
+            "volume_persistence_threshold_3d,final,2.0,literature_logic_review_only,executable",
+        ),
+        encoding="utf-8",
+    )
+
+    report = validate_xmom_catalyst_preregistration(spec_dir)
+
+    assert report["status"] == "fail"
+    assert any(check["name"] == "threshold_policy_candidates_not_final" and check["status"] == "fail" for check in report["checks"])
+    assert any(check["name"] == "threshold_policy_candidates_tbd" and check["status"] == "fail" for check in report["checks"])
+    assert any(check["name"] == "threshold_policy_candidates_not_executable" and check["status"] == "fail" for check in report["checks"])
+
+
 def test_xmom_catalyst_preregistration_validator_cli_exit_codes(tmp_path: Path) -> None:
     spec_dir = _copy_spec(tmp_path)
     assert main(["--spec-dir", str(spec_dir)]) == 0

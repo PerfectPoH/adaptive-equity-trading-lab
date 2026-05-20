@@ -28,15 +28,24 @@ experiments/provider_aware_research/xmom_catalyst_preregistration_spec_20260520/
 
 ```text
 SPEC_VALIDATION_PASS
-passed: 44
+passed: 58
 failed: 0
 ```
 
 Test mirati:
 
 ```text
-4 passed
+5 passed
 ```
+
+Aggiornamento successivo:
+
+```text
+feature_threshold_rationale.md
+threshold_candidate_policy.csv
+```
+
+sono ora parte del contratto del validator. Le soglie candidate devono restare `not_final / TBD / not_executable`; solo le soglie di governance sono `final / locked`.
 
 ## Decisione
 
