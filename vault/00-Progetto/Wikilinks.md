@@ -310,3 +310,5 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-20-codex-xmom-catalyst-classification]] -> [[Report-XMOM-Catalyst-Classification-2026-05-20]]
 - [[Report-XMOM-Catalyst-Classification-2026-05-20]] -> [[Report-XMOM-Catalyst-Trial-001-Preregistration-Spec-2026-05-20]]
 - [[2026-05-20-codex-xmom-catalyst-preregistration-spec]] -> [[Report-XMOM-Catalyst-Trial-001-Preregistration-Spec-2026-05-20]]
+- [[Report-XMOM-Catalyst-Trial-001-Preregistration-Spec-2026-05-20]] -> [[Report-XMOM-Catalyst-Preregistration-Validator-2026-05-20]]
+- [[2026-05-20-codex-xmom-catalyst-preregistration-validator]] -> [[Report-XMOM-Catalyst-Preregistration-Validator-2026-05-20]]

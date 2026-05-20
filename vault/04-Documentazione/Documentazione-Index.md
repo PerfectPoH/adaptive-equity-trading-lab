@@ -22,6 +22,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-XMOM-Trial-001-Forensic-Interpretation-2026-05-20]] - autopsia indipendente dei trade XMOM; top winner CRMD/AEHR vicini a catalyst, nessuna promozione.
 - [[Report-XMOM-Catalyst-Classification-2026-05-20]] - classificazione manuale catalyst su tutti gli 11 trade XMOM; nessuna promozione.
 - [[Report-XMOM-Catalyst-Trial-001-Preregistration-Spec-2026-05-20]] - preregistration spec-only per distinguere post-catalyst continuation da fade.
+- [[Report-XMOM-Catalyst-Preregistration-Validator-2026-05-20]] - validator strutturale della preregistration catalyst-aware; 44 controlli passati.
 
 ## Handoff
 

@@ -1,0 +1,232 @@
+﻿{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520",
+      "name": "spec_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\hypothesis.md",
+      "name": "required_file:hypothesis.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\catalyst_taxonomy.csv",
+      "name": "required_file:catalyst_taxonomy.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\allowed_features.csv",
+      "name": "required_file:allowed_features.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\parameter_freeze.csv",
+      "name": "required_file:parameter_freeze.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\decision_rule.csv",
+      "name": "required_file:decision_rule.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\source_hierarchy.csv",
+      "name": "required_file:source_hierarchy.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\README.md: chars=1559",
+      "name": "markdown_readable:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\hypothesis.md: chars=1895",
+      "name": "markdown_readable:hypothesis.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\catalyst_taxonomy.csv: rows=10; columns=4",
+      "name": "csv_readable:catalyst_taxonomy.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\allowed_features.csv: rows=11; columns=5",
+      "name": "csv_readable:allowed_features.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\parameter_freeze.csv: rows=15; columns=5",
+      "name": "csv_readable:parameter_freeze.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\decision_rule.csv: rows=10; columns=3",
+      "name": "csv_readable:decision_rule.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\blocked_actions.csv: rows=10; columns=3",
+      "name": "csv_readable:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520\\source_hierarchy.csv: rows=7; columns=5",
+      "name": "csv_readable:source_hierarchy.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "SPEC_ONLY_NOT_EXECUTED present",
+      "name": "status_spec_only_not_executed",
+      "status": "pass"
+    },
+    {
+      "detail": "trial id present",
+      "name": "trial_id_present",
+      "status": "pass"
+    },
+    {
+      "detail": "preregistration id present",
+      "name": "preregistration_id_present",
+      "status": "pass"
+    },
+    {
+      "detail": "no authorization language",
+      "name": "markdown_no_authorization_language",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "taxonomy_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "taxonomy_required_types",
+      "status": "pass"
+    },
+    {
+      "detail": "all_frozen=True",
+      "name": "taxonomy_status_frozen",
+      "status": "pass"
+    },
+    {
+      "detail": "regulatory_separate=True",
+      "name": "taxonomy_regulatory_separate_from_commercial",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "features_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "features_required_ex_ante_set",
+      "status": "pass"
+    },
+    {
+      "detail": "lookahead_ok=True",
+      "name": "features_strict_pre_entry",
+      "status": "pass"
+    },
+    {
+      "detail": "no_tbd_required=True",
+      "name": "features_final_definitions_not_tbd",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "parameters_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "changes_blocked=True",
+      "name": "parameters_changes_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "trial_status=SPEC_ONLY_NOT_EXECUTED",
+      "name": "parameters_trial_status_spec_only",
+      "status": "pass"
+    },
+    {
+      "detail": "thresholds deferred",
+      "name": "parameters_thresholds_not_selected_from_xmom_001",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "decision_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "decision_required_items",
+      "status": "pass"
+    },
+    {
+      "detail": "promotion_status=blocked",
+      "name": "decision_promotion_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "sample_size_gate=required",
+      "name": "decision_sample_size_gate_required",
+      "status": "pass"
+    },
+    {
+      "detail": "robustness_gate=required",
+      "name": "decision_robustness_gate_required",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_actions_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_actions_required_set",
+      "status": "pass"
+    },
+    {
+      "detail": "all_blocked=True",
+      "name": "blocked_actions_all_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "source_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "sources=['broker_analyst_news', 'earnings_calendar', 'exchange_or_regulatory_notice', 'forum_social_media', 'issuer_press_release', 'news_api_aggregate', 'sec_edgar_filing']",
+      "name": "source_preferred_primary_sources",
+      "status": "pass"
+    },
+    {
+      "detail": "forum_rows=1",
+      "name": "source_forums_not_primary",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "SPEC_VALIDATION_PASS",
+  "spec_dir": "experiments\\provider_aware_research\\xmom_catalyst_preregistration_spec_20260520",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 44,
+    "total": 44
+  }
+}

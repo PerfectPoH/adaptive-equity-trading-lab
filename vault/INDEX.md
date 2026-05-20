@@ -35,6 +35,7 @@ tags: [vault, index, obsidian, trading-lab]
 - [[Report-XMOM-Trial-001-Forensic-Interpretation-2026-05-20]] - autopsia top winner XMOM: possibile catalyst exposure, non edge validato.
 - [[Report-XMOM-Catalyst-Classification-2026-05-20]] - classificazione catalyst su tutti gli 11 trade XMOM; domanda aggiornata a continuation vs fade.
 - [[Report-XMOM-Catalyst-Trial-001-Preregistration-Spec-2026-05-20]] - spec-only per trial catalyst-aware continuation vs fade, non eseguito.
+- [[Report-XMOM-Catalyst-Preregistration-Validator-2026-05-20]] - validator strutturale della spec catalyst-aware, 44/44 pass.
 - [[small-cap-ranking-exits-research-track]] - track separato ranking/uscite design-only con trial accounting obbligatorio.
 - [[Project-Handoff]] - handoff completo per altre chat o agenti.
 - [[Devlog-Index]] - cronologia ordinata delle sessioni.
