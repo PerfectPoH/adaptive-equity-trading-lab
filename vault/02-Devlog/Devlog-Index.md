@@ -108,6 +108,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-17-cascade-intrinio-one-event-probe-result]] - Intrinio one-event probe attempted; blocked by HTTP 401 authentication, provider data not evaluated.
 - [[2026-05-17-cascade-databento-provider-evaluation-preflight]] - Databento equities historical preflight artifacts created and validator-pass verified; no provider query executed.
 - [[2026-05-20-codex-post-run-validation-gate]] - post-run validator added for execution guardrails, trade-log reconciliation and artifact integrity before interpretation.
+- [[2026-05-20-codex-xmom-data-ingestion-gate]] - XMOM data-input validator added and pre-run gate hardened to require validation-report pass.
 
 ## Convenzione
 

@@ -1,0 +1,10 @@
+check,required,pass_condition,failure_action
+dataset_manifest_present,yes,dataset_manifest.json exists and has required lineage fields,BLOCK_PRE_RUN_GATE
+data_file_hashes_match,yes,every declared data file exists and matches sha256,BLOCK_PRE_RUN_GATE
+schema_valid,yes,OHLCV files contain symbol date open high low close volume,BLOCK_PRE_RUN_GATE
+symbols_match_manifest,yes,observed symbols match expected_symbols exactly,BLOCK_PRE_RUN_GATE
+date_range_valid,yes,all dates parse and stay inside manifest date_range,BLOCK_PRE_RUN_GATE
+no_duplicate_symbol_date,yes,no duplicate symbol/date rows,BLOCK_PRE_RUN_GATE
+price_sanity_valid,yes,prices are finite positive and OHLC relationships are valid,BLOCK_PRE_RUN_GATE
+threshold_sanity_valid,yes,intraday and close-to-close moves stay within configured sanity thresholds,BLOCK_PRE_RUN_GATE
+validation_report_written,yes,data_input_validation_report.json status is pass,BLOCK_PRE_RUN_GATE

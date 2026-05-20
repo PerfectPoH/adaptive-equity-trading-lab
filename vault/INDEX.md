@@ -28,6 +28,7 @@ tags: [vault, index, obsidian, trading-lab]
 - [[Report-Milestone1-2026-05-08]] - primo report operativo.
 - [[Report-Small-Cap-Research-Status-2026-05-12]] - stato aggiornato track small-cap.
 - [[Report-Post-Run-Validation-Gate-2026-05-20]] - gate post-run per coerenza artifact ed execution guardrails.
+- [[Report-XMOM-Data-Ingestion-Gate-2026-05-20]] - gate data-ingestion XMOM prima dello sblocco pre-run.
 - [[small-cap-ranking-exits-research-track]] - track separato ranking/uscite design-only con trial accounting obbligatorio.
 - [[Project-Handoff]] - handoff completo per altre chat o agenti.
 - [[Devlog-Index]] - cronologia ordinata delle sessioni.

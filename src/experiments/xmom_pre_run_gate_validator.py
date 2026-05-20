@@ -113,7 +113,14 @@ def _databento_data_exists(evidence_source: str) -> bool:
     path = Path(evidence_source.replace("*", "")).parent if "*" in evidence_source else Path(evidence_source)
     if not path.exists():
         return False
-    return any(child.is_file() for child in path.rglob("*"))
+    report_path = path / "data_input_validation_report.json"
+    if not report_path.exists():
+        return False
+    try:
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+    except Exception:
+        return False
+    return report.get("status") == "pass" and report.get("gate_decision") == "DATA_INPUT_VALIDATION_PASS"
 
 
 def _config_hash_match(manifest: dict[str, Any], _evidence_source: str) -> tuple[bool, str]:

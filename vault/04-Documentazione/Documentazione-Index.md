@@ -15,6 +15,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Quant-Research-Priorities-2026-05-09]] - valutazione consigli esterni e priorita' research validation.
 - [[Report-Small-Cap-Research-Status-2026-05-12]] - stato aggiornato della track small-cap dopo OOS 2025 e fix risk-based sizing.
 - [[Report-Post-Run-Validation-Gate-2026-05-20]] - gate post-run per coerenza artifact, execution guardrails e riconciliazione trade-log/summary.
+- [[Report-XMOM-Data-Ingestion-Gate-2026-05-20]] - gate data-ingestion per manifest, hash, schema OHLCV, sanity check prezzi e report pass richiesto dal pre-run gate.
 
 ## Handoff
 

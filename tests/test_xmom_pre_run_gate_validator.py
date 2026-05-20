@@ -19,6 +19,10 @@ def _write_gate(tmp_path: Path, *, prepared: bool) -> Path:
     data_dir = tmp_path / "data_inputs"
     data_dir.mkdir()
     (data_dir / "dataset.csv").write_text("x\n1\n", encoding="utf-8")
+    (data_dir / "data_input_validation_report.json").write_text(
+        json.dumps({"status": "pass", "gate_decision": "DATA_INPUT_VALIDATION_PASS"}),
+        encoding="utf-8",
+    )
 
     ledger = tmp_path / "trial_ledger.csv"
     ledger_status = "prepared_not_executed" if prepared else "completed"
@@ -73,6 +77,18 @@ def test_validate_xmom_pre_run_gate_blocks_when_ledger_not_prepared(tmp_path: Pa
     assert report["status"] == "fail"
     assert report["gate_decision"] == "BLOCKED_EXIT_1"
     assert any(check["name"] == "runtime_ledger_status_is_prepared" and check["status"] == "fail" for check in report["checks"])
+
+
+def test_validate_xmom_pre_run_gate_blocks_when_data_input_report_missing(tmp_path: Path) -> None:
+    gate = _write_gate(tmp_path, prepared=True)
+    data_report = tmp_path / "data_inputs" / "data_input_validation_report.json"
+    data_report.unlink()
+
+    report = validate_xmom_pre_run_gate(gate)
+
+    assert report["status"] == "fail"
+    assert report["gate_decision"] == "BLOCKED_EXIT_1"
+    assert any(check["name"] == "runtime_databento_data_exists" and check["status"] == "fail" for check in report["checks"])
 
 
 def test_xmom_pre_run_gate_validator_cli_exit_codes(tmp_path: Path) -> None:
