@@ -1,0 +1,7 @@
+check,required,pass_condition,failure_action
+required_run_files_exist,yes,run_manifest/trade_log/summary/outlier/benchmark files exist,BLOCK_INTERPRETATION_AND_PROMOTION
+manifest_execution_config_present,yes,execution config includes liquidity fraction impact cap and coefficient,BLOCK_INTERPRETATION_AND_PROMOTION
+trade_log_schema_present,yes,trade log contains execution cost liquidity participation and pnl fields,BLOCK_INTERPRETATION_AND_PROMOTION
+execution_guardrails_respected,yes,no trade exceeds liquidity cap or hard impact participation cap,BLOCK_INTERPRETATION_AND_PROMOTION
+summary_reconciles_with_trade_log,yes,summary pnl return and trade count match trade log,BLOCK_INTERPRETATION_AND_PROMOTION
+outlier_diagnostics_present,yes,outlier concentration and ex-top3 diagnostics exist,BLOCK_INTERPRETATION_AND_PROMOTION

@@ -14,6 +14,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-Milestone1-2026-05-08]] - stato tecnico e risultati della prima pipeline.
 - [[Quant-Research-Priorities-2026-05-09]] - valutazione consigli esterni e priorita' research validation.
 - [[Report-Small-Cap-Research-Status-2026-05-12]] - stato aggiornato della track small-cap dopo OOS 2025 e fix risk-based sizing.
+- [[Report-Post-Run-Validation-Gate-2026-05-20]] - gate post-run per coerenza artifact, execution guardrails e riconciliazione trade-log/summary.
 
 ## Handoff
 

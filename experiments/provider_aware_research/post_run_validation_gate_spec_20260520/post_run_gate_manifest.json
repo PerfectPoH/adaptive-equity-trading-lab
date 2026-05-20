@@ -1,0 +1,22 @@
+{
+  "status": "SPEC_ONLY_NOT_EXECUTED",
+  "decision": "POST_RUN_VALIDATION_GATE_DEFINED",
+  "scope": "Validate completed research-run artifacts before interpretation or promotion discussion.",
+  "gate_id": "POST-RUN-GATE-001",
+  "research_stage": "new_signal_research",
+  "validator_module": "src.experiments.post_run_validation_gate_validator",
+  "required_checks": [
+    "required_run_files_exist",
+    "manifest_execution_config_present",
+    "trade_log_schema_present",
+    "execution_guardrails_respected",
+    "summary_reconciles_with_trade_log",
+    "outlier_diagnostics_present"
+  ],
+  "fail_closed_policy": true,
+  "on_failure_action": "BLOCK_INTERPRETATION_AND_PROMOTION",
+  "profit_is_not_pass_condition": true,
+  "no_provider_query": true,
+  "no_backtest": true,
+  "no_strategy_promotion": true
+}
