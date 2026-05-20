@@ -28,6 +28,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-DSR-PSR-Utilities-2026-05-20]] - utility PSR/DSR implementate e testate; non collegate al trial.
 - [[Report-CPCV-Utilities-2026-05-20]] - utility CPCV con purging/embargo implementate e testate; non collegate al trial.
 - [[Report-Effective-Trial-Count-Utilities-2026-05-21]] - stimatore del numero effettivo di trial indipendenti; non collegato al trial.
+- [[Report-Synthetic-Statistical-Gate-Harness-2026-05-21]] - harness sintetico che collega CPCV, `N_eff` e DSR; non collegato al trial.
 
 ## Handoff
 

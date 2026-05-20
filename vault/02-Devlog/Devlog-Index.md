@@ -120,6 +120,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-20-codex-dsr-psr-utilities]] - PSR/DSR math utilities implemented with Pearson kurtosis convention and targeted tests.
 - [[2026-05-20-codex-cpcv-utilities]] - CPCV utilities implemented with purging, embargo and synthetic leakage-boundary tests.
 - [[2026-05-21-codex-effective-trial-count-utilities]] - effective trial-count estimator implemented using eigenvalue participation ratio and average-correlation fallback.
+- [[2026-05-21-codex-synthetic-statistical-gate-harness]] - synthetic harness connects CPCV, effective trial count and DSR; rejects the best noise trial.
 - [[2026-05-20-codex-xmom-catalyst-feature-rationale]] - theory review for catalyst lag, volume persistence and price digestion; thresholds remain TBD/non-executable.
 
 ## Convenzione

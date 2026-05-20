@@ -160,7 +160,8 @@ Regole operative:
 - utility DSR/PSR implementate e testate, non collegate al trial;
 - utility CPCV con purging/embargo implementate e testate, non collegate al trial;
 - effective trial-count estimator implementato e testato, non collegato al trial;
-- prossimo lavoro ammesso: creare un harness sintetico che collega DSR + CPCV + N_eff senza dati OOS/provider, non esecuzione.
+- synthetic statistical gate harness creato: collega DSR + CPCV + `N_eff` e rigetta il miglior trial da rumore;
+- prossimo lavoro ammesso: manifest-only gate che richiede il passaggio dell'harness prima di firmare qualunque implementation manifest, non esecuzione.
 
 ## Ipotesi Primaria Corrente
 
