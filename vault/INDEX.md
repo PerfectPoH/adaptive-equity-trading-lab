@@ -33,6 +33,7 @@ tags: [vault, index, obsidian, trading-lab]
 - [[Report-XMOM-Real-Data-Ingestion-2026-05-20]] - ingestione reale Databento XMOM con pre-run gate pronto.
 - [[Report-XMOM-Trial-001-Execution-2026-05-20]] - prima esecuzione preregistrata XMOM: primary metric positiva, outlier stress blocca promozione.
 - [[Report-XMOM-Trial-001-Forensic-Interpretation-2026-05-20]] - autopsia top winner XMOM: possibile catalyst exposure, non edge validato.
+- [[Report-XMOM-Catalyst-Classification-2026-05-20]] - classificazione catalyst su tutti gli 11 trade XMOM; domanda aggiornata a continuation vs fade.
 - [[small-cap-ranking-exits-research-track]] - track separato ranking/uscite design-only con trial accounting obbligatorio.
 - [[Project-Handoff]] - handoff completo per altre chat o agenti.
 - [[Devlog-Index]] - cronologia ordinata delle sessioni.

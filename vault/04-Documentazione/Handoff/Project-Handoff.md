@@ -151,7 +151,8 @@ Regole operative:
 - non fare tuning post-hoc su `TRIAL-XMOM-001`;
 - non trattare il +109.36% come edge validato;
 - interpretazione forense iniziale completata: top 3 winner sono AEHR 2025-09 e CRMD 2025-04/05, vicini a catalyst pubblici company-specific;
-- prossimo lavoro ammesso: catalyst classification sui 11 trade, diagnostica robustness non parametrica o nuova preregistrazione separata.
+- catalyst classification completata sugli 11 trade: domanda aggiornata a `post-catalyst continuation vs post-catalyst fade`;
+- prossimo lavoro ammesso: preregistration spec catalyst-aware, non esecuzione.
 
 ## Ipotesi Primaria Corrente
 
