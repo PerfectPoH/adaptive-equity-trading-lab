@@ -158,7 +158,8 @@ Regole operative:
 - rationale artifacts inclusi nel validator: soglie operative restano `TBD / not_final / not_executable`;
 - implementation gate spec completata: `IMPLEMENTATION_GATE_SPEC_PASS`, 47/47;
 - utility DSR/PSR implementate e testate, non collegate al trial;
-- prossimo lavoro ammesso: implementare CPCV e trial-count estimator con test sintetici, non esecuzione.
+- utility CPCV con purging/embargo implementate e testate, non collegate al trial;
+- prossimo lavoro ammesso: implementare effective trial-count estimator con test sintetici, non esecuzione.
 
 ## Ipotesi Primaria Corrente
 
