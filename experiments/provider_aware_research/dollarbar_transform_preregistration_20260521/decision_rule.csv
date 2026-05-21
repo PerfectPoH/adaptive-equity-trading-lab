@@ -1,0 +1,7 @@
+decision_item,status,rule
+execution_status,blocked,Spec is preregistration only.
+primary_metric,required,median_stability_score_delta > 0 on frozen panel.
+coverage_gate,required,coverage_rate >= 0.80.
+sample_gate,required,transformed bar count must remain >= 20% of time-bar count per file.
+profit_metric_gate,blocked,No PnL or trade outcome metric may appear in selection.
+promotion_rule,blocked,"A passing transform can only move to data-transform validator, not strategy execution."

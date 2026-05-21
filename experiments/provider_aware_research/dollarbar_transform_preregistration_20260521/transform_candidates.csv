@@ -1,0 +1,3 @@
+transform_id,status,bucket_rule,parameter_policy,notes
+static_average_dollar_bucket,baseline,target_dollar_bucket = total_dollar_volume / time_bar_count,fixed_not_optimized,Current diagnostic baseline; uses no return or PnL information.
+rolling_ema_dollar_bucket,candidate,"target_dollar_bucket_t = EMA(dollar_value, span=predeclared_window)",window_predeclared_distribution_only,Adaptive representation candidate; evaluated only on distribution stability metrics.

@@ -1,0 +1,8 @@
+metric,status,reason
+pnl,forbidden,Would turn representation selection into strategy optimization.
+win_rate,forbidden,Depends on trade outcomes.
+signal_return,forbidden,Requires directional signal evaluation.
+trade_outcome,forbidden,Leaks strategy behavior into data-transform choice.
+sharpe,forbidden,"Performance metric, not representation metric."
+profit_factor,forbidden,"Performance metric, not representation metric."
+strategy_return,forbidden,Directly optimizes the future strategy layer.

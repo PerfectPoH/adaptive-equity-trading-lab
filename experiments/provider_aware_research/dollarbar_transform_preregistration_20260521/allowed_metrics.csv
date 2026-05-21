@@ -1,0 +1,7 @@
+metric,status,reason
+absolute_skew,allowed,Measures asymmetry of representation returns.
+pearson_kurtosis,allowed,Measures tail thickness using Pearson convention.
+outlier_rate_3sigma,allowed,Measures extreme standardized returns.
+bar_count_stability,allowed,Guards against transforms that collapse sample size.
+median_stability_score_delta,allowed,Primary distribution-only comparison metric.
+coverage_rate,allowed,Ensures transform works across the frozen panel.

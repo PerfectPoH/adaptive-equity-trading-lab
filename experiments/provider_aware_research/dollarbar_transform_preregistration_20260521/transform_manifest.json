@@ -1,0 +1,12 @@
+{
+  "backtest_performed": false,
+  "decision": "DOLLARBAR_TRANSFORM_PREREGISTERED_NOT_EXECUTED",
+  "input_panel_count": 12,
+  "live_trading_performed": false,
+  "paper_trading_performed": false,
+  "preregistration_id": "PREREG-DOLLARBAR-TRANSFORM-001",
+  "provider_query_performed": false,
+  "status": "SPEC_ONLY_NOT_EXECUTED",
+  "strategy_promotion_performed": false,
+  "trial_id": "TRIAL-DOLLARBAR-TRANSFORM-001"
+}

@@ -1,0 +1,8 @@
+action,status,reason
+bucket_selection_from_pnl,blocked,Not authorized by transform preregistration.
+directional_signal_generation,blocked,Not authorized by transform preregistration.
+live_trading,blocked,Not authorized by transform preregistration.
+paper_trading,blocked,Not authorized by transform preregistration.
+provider_query,blocked,Not authorized by transform preregistration.
+strategy_backtest,blocked,Not authorized by transform preregistration.
+strategy_promotion,blocked,Not authorized by transform preregistration.
