@@ -1,0 +1,8 @@
+parameter,value,status
+opening_window_minutes,30,frozen
+opening_shock_threshold,-0.05,frozen
+relative_opening_volume_threshold,2.0,frozen
+vwap_reclaim_cutoff_local,10:30,frozen
+holding_window_minutes,120,frozen
+round_trip_cost_bps,500.0,frozen
+daily_gap_as_trigger,forbidden,frozen

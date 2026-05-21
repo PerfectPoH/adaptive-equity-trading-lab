@@ -1,0 +1,19 @@
+{
+  "events_evaluated": 12,
+  "gross_return_sum": 0.05883911488147986,
+  "net_return_mean": -0.03823217702370403,
+  "net_return_sum": -0.19116088511852014,
+  "positive_net_trade_count": 1,
+  "promotion_allowed": false,
+  "promotion_blockers": [
+    "existing_gaprev_intraday_panel_reuse",
+    "below_30_trades",
+    "dsr_not_claimed",
+    "single_small_panel_probe"
+  ],
+  "round_trip_cost_bps": 500.0,
+  "run_id": "OPENING-RECLAIM-INTRADAY-PROBE-001",
+  "status": "pass",
+  "trade_count": 5,
+  "trial_id": "TRIAL-OPENING-RECLAIM-001"
+}

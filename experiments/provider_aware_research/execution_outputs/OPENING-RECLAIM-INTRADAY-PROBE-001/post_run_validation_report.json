@@ -1,0 +1,22 @@
+{
+  "checks": [
+    {
+      "name": "results_written",
+      "status": "pass"
+    },
+    {
+      "name": "cost_500bps_enforced",
+      "status": "pass"
+    },
+    {
+      "name": "promotion_blocked_below_30_trades",
+      "status": "pass"
+    },
+    {
+      "name": "no_dsr_claimed",
+      "status": "pass"
+    }
+  ],
+  "decision": "OPENING_RECLAIM_POST_RUN_PASS_PROMOTION_BLOCKED",
+  "status": "pass"
+}

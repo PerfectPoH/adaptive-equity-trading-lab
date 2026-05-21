@@ -1,0 +1,13 @@
+{
+  "daily_gap_as_trigger": "forbidden",
+  "new_provider_query_performed": false,
+  "parameter_sweep_performed": false,
+  "premarket_print_as_trigger": "forbidden",
+  "preregistration_id": "PREREG-OPENING-RECLAIM-001",
+  "primary_trigger": "RTH opening shock from intraday bars",
+  "promotion_rule": "blocked unless trade_count>=30 and DSR>=0.95 in a future preregistered run",
+  "round_trip_cost_bps": 500.0,
+  "run_id": "OPENING-RECLAIM-INTRADAY-PROBE-001",
+  "status": "PREREGISTERED_SPEC_EXECUTED_ON_EXISTING_INTRADAY_PANEL",
+  "trial_id": "TRIAL-OPENING-RECLAIM-001"
+}
