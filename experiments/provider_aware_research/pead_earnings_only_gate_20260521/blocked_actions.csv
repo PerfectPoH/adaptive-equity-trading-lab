@@ -1,0 +1,7 @@
+action,status,reason
+backtest,blocked,No historical earnings calendar with report-time metadata is available.
+use_manual_catalyst_log,blocked,Manual forensics would contaminate PEAD event selection.
+use_daily_gap_proxy,blocked,Daily gap proxy already failed as intraday/event trigger.
+paper_trading,blocked,No validated strategy.
+live_trading,blocked,No validated strategy.
+strategy_promotion,blocked,Provider gate unresolved and no DSR.

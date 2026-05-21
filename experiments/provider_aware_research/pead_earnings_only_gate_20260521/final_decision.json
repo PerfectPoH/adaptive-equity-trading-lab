@@ -1,0 +1,16 @@
+{
+  "backtest_performed": false,
+  "decision": "BLOCKED_PROVIDER_EARNINGS_CALENDAR_UNAVAILABLE",
+  "live_trading_performed": false,
+  "network_call_performed_now": false,
+  "next_unblocked_step": "Resolve historical earnings calendar/report-time provider access with one approved provider probe.",
+  "paper_trading_performed": false,
+  "pre_run_status": "blocked",
+  "preregistration_status": "PREREGISTERED_BLOCKED_PENDING_EARNINGS_PROVIDER",
+  "provider_query_performed_now": false,
+  "provider_status": "blocked",
+  "run_id": "PEAD-EARNINGS-ONLY-GATE-001",
+  "status": "blocked",
+  "strategy_promotion_performed": false,
+  "trial_id": "TRIAL-PEAD-EARNINGS-001"
+}

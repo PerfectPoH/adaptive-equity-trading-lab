@@ -1,0 +1,18 @@
+{
+  "daily_gap_trigger_allowed": false,
+  "dsr_threshold": 0.95,
+  "holding_window": "multi_day_tbd_after_provider_gate",
+  "hypothesis": "Post-earnings announcement drift can survive conservative execution costs over a multi-day holding window when events are timestamped by BMO/AMC reaction session.",
+  "manual_catalyst_log_allowed_as_event_source": false,
+  "minimum_trades_for_promotion": 30,
+  "parameter_sweep_allowed": false,
+  "preregistration_id": "PREREG-PEAD-EARNINGS-001",
+  "requires_bmo_amc_report_time": true,
+  "requires_historical_earnings_calendar": true,
+  "requires_surprise_or_event_magnitude": true,
+  "round_trip_cost_bps": 500.0,
+  "run_id": "PEAD-EARNINGS-ONLY-GATE-001",
+  "scope": "earnings_only",
+  "status": "PREREGISTERED_BLOCKED_PENDING_EARNINGS_PROVIDER",
+  "trial_id": "TRIAL-PEAD-EARNINGS-001"
+}

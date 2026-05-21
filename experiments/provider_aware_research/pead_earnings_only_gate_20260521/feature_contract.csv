@@ -1,0 +1,6 @@
+feature,status,rule
+earnings_event_timestamp,required,Must map to BMO/AMC reaction session; DMT/UNSPECIFIED purged.
+earnings_surprise_or_magnitude,required,Must be defined before execution; no PnL-derived thresholds.
+post_earnings_holding_window,blocked_tbd,Cannot freeze before event-source viability.
+daily_gap_trigger,forbidden,Daily OHLC gap cannot define PEAD events.
+manual_forensics_events,forbidden,XMOM forensics cannot seed PEAD trial events.

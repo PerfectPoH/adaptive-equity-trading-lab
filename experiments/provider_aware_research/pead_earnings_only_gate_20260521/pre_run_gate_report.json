@@ -1,0 +1,28 @@
+{
+  "backtest_authorized": false,
+  "checks": [
+    {
+      "name": "preregistration_exists",
+      "status": "pass"
+    },
+    {
+      "name": "earnings_only_scope",
+      "status": "pass"
+    },
+    {
+      "name": "provider_access_available",
+      "status": "fail"
+    },
+    {
+      "name": "report_time_metadata_available",
+      "status": "fail"
+    },
+    {
+      "name": "manual_event_substitution_forbidden",
+      "status": "pass"
+    }
+  ],
+  "run_id": "PEAD-EARNINGS-ONLY-GATE-001",
+  "status": "blocked",
+  "trial_id": "TRIAL-PEAD-EARNINGS-001"
+}
