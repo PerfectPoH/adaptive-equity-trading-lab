@@ -1,0 +1,211 @@
+﻿{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_provider_selection_gate_20260521",
+      "name": "gate_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_provider_selection_gate_20260521\\earnings_provider_selection_manifest.json",
+      "name": "required_file:earnings_provider_selection_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_provider_selection_gate_20260521\\provider_requirements.csv",
+      "name": "required_file:provider_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_provider_selection_gate_20260521\\candidate_provider_roles.csv",
+      "name": "required_file:candidate_provider_roles.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_provider_selection_gate_20260521\\coverage_quality_policy.csv",
+      "name": "required_file:coverage_quality_policy.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_provider_selection_gate_20260521\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_provider_selection_gate_20260521\\earnings_provider_selection_summary.md",
+      "name": "required_file:earnings_provider_selection_summary.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_provider_selection_gate_20260521\\earnings_provider_selection_manifest.json",
+      "name": "json_readable:earnings_provider_selection_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_provider_selection_gate_20260521\\provider_requirements.csv: rows=10; columns=5",
+      "name": "csv_readable:provider_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_provider_selection_gate_20260521\\candidate_provider_roles.csv: rows=4; columns=5",
+      "name": "csv_readable:candidate_provider_roles.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_provider_selection_gate_20260521\\coverage_quality_policy.csv: rows=8; columns=5",
+      "name": "csv_readable:coverage_quality_policy.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_provider_selection_gate_20260521\\blocked_actions.csv: rows=10; columns=3",
+      "name": "csv_readable:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_provider_selection_gate_20260521\\earnings_provider_selection_summary.md: chars=1070",
+      "name": "markdown_readable:earnings_provider_selection_summary.md",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "manifest_required_fields",
+      "status": "pass"
+    },
+    {
+      "detail": "status=SPEC_ONLY_NOT_QUERIED",
+      "name": "manifest_status_spec_only_not_queried",
+      "status": "pass"
+    },
+    {
+      "detail": "no_execution=True",
+      "name": "manifest_no_execution_or_query_flags",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "requirements_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "requirements_required_ids",
+      "status": "pass"
+    },
+    {
+      "detail": "all_required=True",
+      "name": "requirements_all_required",
+      "status": "pass"
+    },
+    {
+      "detail": "critical_blocking=True",
+      "name": "requirements_critical_are_blocking",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "roles_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "roles_required_set",
+      "status": "pass"
+    },
+    {
+      "detail": "primary_unselected=True",
+      "name": "roles_primary_not_preselected",
+      "status": "pass"
+    },
+    {
+      "detail": "blocked=True",
+      "name": "roles_static_today_or_unaudited_execution_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "quality_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "quality_required_metrics",
+      "status": "pass"
+    },
+    {
+      "detail": "all_locked=True",
+      "name": "quality_all_locked",
+      "status": "pass"
+    },
+    {
+      "detail": "threshold=0.30",
+      "name": "quality_unspecified_rate_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "threshold=0.70",
+      "name": "quality_report_time_coverage_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "threshold=45",
+      "name": "quality_min_periods_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "scope=earnings_only",
+      "name": "quality_earnings_only_scope",
+      "status": "pass"
+    },
+    {
+      "detail": "dmt=purge; amc=next_trading_session; bmo=same_trading_session",
+      "name": "quality_reaction_session_policy",
+      "status": "pass"
+    },
+    {
+      "detail": "bootstrap=required",
+      "name": "quality_ecdf_bootstrap_required",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_actions_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_actions_required_set",
+      "status": "pass"
+    },
+    {
+      "detail": "all_blocked=True",
+      "name": "blocked_actions_all_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "status present",
+      "name": "summary_status_spec_only_not_queried",
+      "status": "pass"
+    },
+    {
+      "detail": "reaction-session contract present",
+      "name": "summary_reaction_session_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "no query authorization",
+      "name": "summary_no_query_authorization",
+      "status": "pass"
+    }
+  ],
+  "extractor_implemented": false,
+  "gate_decision": "EARNINGS_PROVIDER_SELECTION_GATE_PASS",
+  "gate_dir": "experiments\\provider_aware_research\\xmom_earnings_provider_selection_gate_20260521",
+  "market_data_downloaded": false,
+  "network_call_performed": false,
+  "provider_query_performed": false,
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 39,
+    "total": 39
+  }
+}

@@ -1,0 +1,11 @@
+action,status,reason
+query_provider,blocked,Provider/data-source plan has not been approved for a probe.
+implement_extractor,blocked,Coverage and report-time quality are not validated.
+download_market_data,blocked,No extraction manifest exists.
+use_static_today_ticker_list,blocked,Creates survivorship bias.
+accept_unspecified_report_time,blocked,UNSPECIFIED events are not comparable reaction sessions.
+widen_to_universal_anomaly_days,blocked,Would contaminate earnings-only hypothesis.
+run_oos,blocked,No signed implementation manifest exists.
+paper_trading,blocked,No executable strategy exists.
+live_trading,blocked,No executable strategy exists.
+strategy_promotion,blocked,No validated trial exists.

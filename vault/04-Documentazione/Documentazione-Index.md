@@ -29,6 +29,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-CPCV-Utilities-2026-05-20]] - utility CPCV con purging/embargo implementate e testate; non collegate al trial.
 - [[Report-Effective-Trial-Count-Utilities-2026-05-21]] - stimatore del numero effettivo di trial indipendenti; non collegato al trial.
 - [[Report-Synthetic-Statistical-Gate-Harness-2026-05-21]] - harness sintetico che collega CPCV, `N_eff` e DSR; non collegato al trial.
+- [[Report-XMOM-Earnings-Provider-Selection-Gate-2026-05-21]] - gate per selezione provider earnings calendar; non interrogato.
 
 ## Handoff
 

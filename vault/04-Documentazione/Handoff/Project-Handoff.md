@@ -162,7 +162,8 @@ Regole operative:
 - effective trial-count estimator implementato e testato, non collegato al trial;
 - synthetic statistical gate harness creato: collega DSR + CPCV + `N_eff` e rigetta il miglior trial da rumore;
 - earnings-event extraction guardrails aggiunti alla implementation gate: earnings-only, reaction session BMO/AMC, purge DMT/UNSPECIFIED, min-periods rolling e bootstrap ECDF;
-- prossimo lavoro ammesso: provider/data-source plan per earnings calendar coverage e report-time quality, non extractor live e non esecuzione.
+- provider-selection gate earnings calendar creato e validato: `EARNINGS_PROVIDER_SELECTION_GATE_PASS`, 39/39, senza query;
+- prossimo lavoro ammesso: separate one-provider/one-symbol probe approval artifact, non extractor live e non esecuzione.
 
 ## Ipotesi Primaria Corrente
 

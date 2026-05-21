@@ -1,0 +1,5 @@
+role,status,allowed_use,blocked_use,notes
+primary_earnings_calendar,unselected,earnings dates and report_time flags,execution_without_coverage_audit,Candidate must satisfy report-time requirement before any extractor.
+secondary_crosscheck,unselected,cross-check dates and report_time quality,override_primary_without_review,Used to estimate missingness or disagreement.
+pit_universe_source,unselected,as-of symbol universe or explicit survivorship caveat,today_static_universe_backfill,Must prevent hidden survivorship bias.
+price_volume_source,preexisting_candidate,aligned OHLCV around reaction session,earnings_calendar_truth_source,Price/volume data does not define earnings event time.

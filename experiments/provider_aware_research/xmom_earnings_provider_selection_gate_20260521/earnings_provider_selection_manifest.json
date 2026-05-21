@@ -1,0 +1,16 @@
+{
+  "status": "SPEC_ONLY_NOT_QUERIED",
+  "gate_id": "EARNINGS-PROVIDER-GATE-XMOM-CATALYST-001",
+  "trial_id": "TRIAL-XMOM-CATALYST-001",
+  "purpose": "Define provider/data-source requirements for earnings-calendar coverage and report-time quality before any extractor is implemented.",
+  "no_provider_query": true,
+  "no_network_call": true,
+  "no_market_data_download": true,
+  "no_extractor_implementation": true,
+  "no_oos_execution": true,
+  "no_backtest": true,
+  "no_paper_trading": true,
+  "no_live_trading": true,
+  "no_strategy_promotion": true,
+  "requires_separate_probe_approval": true
+}

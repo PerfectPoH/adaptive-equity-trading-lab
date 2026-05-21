@@ -1,0 +1,9 @@
+metric,status,threshold,measurement_policy,failure_action
+max_unspecified_report_time_rate,locked,0.30,measured on approved pre-ingestion probe sample,spec_review_required
+min_report_time_coverage_rate,locked,0.70,1 minus unspecified rate on probe sample,spec_review_required
+min_valid_rolling_zscore_observations,locked,45,out of 60 pre-event observations,purge_event
+earnings_scope,locked,earnings_only,provider query must not widen to universal anomaly days,block_extractor
+dmt_policy,locked,purge,during-market releases excluded from ECDF discovery,purge_event
+amc_mapping,locked,next_trading_session,after-close earnings map to next full reaction session,block_if_unmappable
+bmo_mapping,locked,same_trading_session,before-open earnings map to same full reaction session,block_if_unmappable
+ecdf_bootstrap_ci,locked,required,threshold uncertainty must be estimated before execution,block_execution

@@ -1,0 +1,11 @@
+requirement_id,severity,required_status,pass_condition,failure_action
+historical_earnings_calendar,critical,required,provider has historical earnings event dates for US small caps,block_extractor
+report_time_flag,critical,required,provider distinguishes BMO AMC DMT or equivalent report time,block_extractor
+unspecified_rate_audit,critical,required,planned probe can estimate UNSPECIFIED rate before ingestion,block_extractor
+point_in_time_symbols,critical,required,provider plan avoids using today-only survivorship-biased ticker lists,block_extractor
+delisted_symbol_handling,critical,required,plan declares whether delisted/acquired symbols are covered or explicitly caveated,block_extractor
+event_timestamp_timezone,high,required,timezone and market-session mapping are declared,block_extractor
+licensing_retention_policy,critical,required,raw retention and derived artifact rights are declared,block_extractor
+rate_limit_policy,medium,required,probe and ingestion rate limits are declared before querying,block_probe
+coverage_window_declared,critical,required,in-sample coverage window is declared before query,block_extractor
+missingness_policy,critical,required,missing events and report times have deterministic purge/log policy,block_extractor
