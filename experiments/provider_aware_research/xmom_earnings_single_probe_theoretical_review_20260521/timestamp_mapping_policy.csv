@@ -1,0 +1,6 @@
+input_condition,classification,action,notes
+timestamp_missing_or_midnight,UNSPECIFIED,purge,Date-only or midnight timestamp is insufficient for reaction-session mapping.
+local_time_before_09_30, BMO,allow_candidate,t0 is same regular trading session.
+local_time_between_09_30_and_16_00,DMT,purge,Intraday release does not provide a full reaction session and may include halts.
+local_time_at_or_after_16_00,AMC,allow_candidate,t0 is next regular trading session.
+timezone_conversion_required,America/New_York,required,Convert provider UTC timestamp to exchange local time with DST awareness.

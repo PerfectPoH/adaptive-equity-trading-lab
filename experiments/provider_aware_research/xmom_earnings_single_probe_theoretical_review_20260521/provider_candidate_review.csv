@@ -1,0 +1,4 @@
+provider,role,fit_reason,known_caveat,decision
+Intrinio,primary_candidate,Fundamentals/SEC-style metadata and earnings-date endpoint appear closer to report-time validation than market-data-only feeds,expected_8k_at may not directly equal BMO/AMC and must be mapped/tested,preferred_for_single_probe_if_future_approval
+Databento,not_primary_for_this_probe,Excellent PIT symbology and market microstructure data,not the natural source for historical earnings report-time flags,keep_for_price_volume_microstructure
+Polygon,secondary_candidate,Strong equities market/reference/news ecosystem,official fit for historical BMO/AMC earnings report-time metadata remains less direct from current review,backup_candidate_after_intrinio_if_needed

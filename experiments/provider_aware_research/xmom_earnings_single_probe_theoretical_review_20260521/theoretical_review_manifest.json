@@ -1,0 +1,23 @@
+{
+  "status": "THEORETICAL_REVIEW_COMPLETE_NOT_APPROVED",
+  "review_id": "REVIEW-XMOM-EARNINGS-PROBE-001",
+  "gate_id": "EARNINGS-SINGLE-PROBE-XMOM-CATALYST-001",
+  "trial_id": "TRIAL-XMOM-CATALYST-001",
+  "provider_candidate": "Intrinio",
+  "symbol_candidate": "CRMD",
+  "endpoint_candidate": "expected_earnings_dates_or_equivalent",
+  "timestamp_field_candidate": "expected_8k_at",
+  "purpose": "Verify timestamp resolution for strict BMO/AMC/DMT/UNSPECIFIED classification mapping.",
+  "max_provider_calls_if_approved": 1,
+  "raw_payload_retention_allowed": false,
+  "approval_granted": false,
+  "live_approval_directory_created": false,
+  "output_directory_created": false,
+  "trial_ledger_entry_created": false,
+  "provider_query_performed": false,
+  "network_call_performed": false,
+  "market_data_downloaded": false,
+  "extractor_implemented": false,
+  "backtest_performed": false,
+  "strategy_promotion_performed": false
+}

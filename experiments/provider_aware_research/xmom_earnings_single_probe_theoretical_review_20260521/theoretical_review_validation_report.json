@@ -1,0 +1,181 @@
+﻿{
+  "approval_granted": false,
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_theoretical_review_20260521",
+      "name": "review_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_theoretical_review_20260521\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_theoretical_review_20260521\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_theoretical_review_20260521\\provider_candidate_review.csv",
+      "name": "required_file:provider_candidate_review.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_theoretical_review_20260521\\review_sources.csv",
+      "name": "required_file:review_sources.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_theoretical_review_20260521\\theoretical_review_manifest.json",
+      "name": "required_file:theoretical_review_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_theoretical_review_20260521\\timestamp_mapping_policy.csv",
+      "name": "required_file:timestamp_mapping_policy.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_theoretical_review_20260521\\theoretical_review_manifest.json",
+      "name": "json_readable:theoretical_review_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "rows=3",
+      "name": "csv_readable:provider_candidate_review.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "rows=5",
+      "name": "csv_readable:timestamp_mapping_policy.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "rows=4",
+      "name": "csv_readable:review_sources.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "rows=11",
+      "name": "csv_readable:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "chars=808",
+      "name": "text_readable:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "status=THEORETICAL_REVIEW_COMPLETE_NOT_APPROVED; provider=Intrinio; symbol=CRMD",
+      "name": "manifest_review_identity",
+      "status": "pass"
+    },
+    {
+      "detail": "approval=False; live_dir=False",
+      "name": "manifest_not_approved_or_prepared",
+      "status": "pass"
+    },
+    {
+      "detail": "safe=True",
+      "name": "manifest_no_execution_flags",
+      "status": "pass"
+    },
+    {
+      "detail": "timestamp_field=expected_8k_at",
+      "name": "manifest_timestamp_field_declared",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "provider_review_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "roles=['not_primary_for_this_probe', 'primary_candidate', 'secondary_candidate']",
+      "name": "provider_review_intrinio_primary",
+      "status": "pass"
+    },
+    {
+      "detail": "providers=['Databento', 'Intrinio', 'Polygon']",
+      "name": "provider_review_alternatives_documented",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "timestamp_policy_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "timestamp_policy_required_classifications",
+      "status": "pass"
+    },
+    {
+      "detail": "DMT=purge; UNSPECIFIED=purge",
+      "name": "timestamp_policy_dmt_and_unspecified_purged",
+      "status": "pass"
+    },
+    {
+      "detail": "classifications=['AMC', 'America/New_York', 'BMO', 'DMT', 'UNSPECIFIED']",
+      "name": "timestamp_policy_timezone_declared",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "sources_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "official=True",
+      "name": "sources_all_official_or_product_docs",
+      "status": "pass"
+    },
+    {
+      "detail": "urls=['https://databento.com/corporate-actions', 'https://databento.com/docs/api-reference-reference/basics/overview', 'https://docs.intrinio.com/documentation/web_api/all_expected_earnings_dates_v2', 'https://massive.com/docs/rest/stocks/overview']",
+      "name": "sources_cover_candidate_and_alternatives",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_required_actions",
+      "status": "pass"
+    },
+    {
+      "detail": "all_blocked=True",
+      "name": "blocked_all_actions_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "status marker",
+      "name": "readme_status_not_approved",
+      "status": "pass"
+    },
+    {
+      "detail": "no-query statement",
+      "name": "readme_no_query_statement",
+      "status": "pass"
+    },
+    {
+      "detail": "mapping purpose",
+      "name": "readme_mapping_purpose",
+      "status": "pass"
+    }
+  ],
+  "decision": "XMOM_EARNINGS_SINGLE_PROBE_THEORETICAL_REVIEW_PASS",
+  "extractor_implemented": false,
+  "network_call_performed": false,
+  "provider_query_performed": false,
+  "review_dir": "experiments\\provider_aware_research\\xmom_earnings_single_probe_theoretical_review_20260521",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 33,
+    "total": 33
+  }
+}

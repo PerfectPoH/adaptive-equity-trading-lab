@@ -1,0 +1,5 @@
+source_name,url,source_type,relevance
+Intrinio expected earnings dates docs,https://docs.intrinio.com/documentation/web_api/all_expected_earnings_dates_v2,official_docs,Documents earnings-date endpoint and timestamp-like fields to review for report-time metadata.
+Databento reference API overview,https://databento.com/docs/api-reference-reference/basics/overview,official_docs,Useful for reference-data/PIT context but not primary earnings calendar evidence.
+Databento corporate actions,https://databento.com/corporate-actions,official_product_page,Confirms corporate-action focus but not earnings BMO/AMC metadata as primary fit.
+Polygon stocks docs overview,https://massive.com/docs/rest/stocks/overview,official_docs,Useful equities API context; not selected as primary for this specific report-time probe.

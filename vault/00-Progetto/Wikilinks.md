@@ -334,3 +334,5 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-21-codex-xmom-earnings-single-probe-execution-preflight]] -> [[Report-XMOM-Earnings-Single-Probe-Execution-Preflight-2026-05-21]]
 - [[Report-XMOM-Earnings-Single-Probe-Execution-Preflight-2026-05-21]] -> [[Report-XMOM-Earnings-Single-Probe-Explicit-Approval-Template-2026-05-21]]
 - [[2026-05-21-codex-xmom-earnings-single-probe-explicit-approval-template]] -> [[Report-XMOM-Earnings-Single-Probe-Explicit-Approval-Template-2026-05-21]]
+- [[Report-XMOM-Earnings-Single-Probe-Explicit-Approval-Template-2026-05-21]] -> [[Report-XMOM-Earnings-Single-Probe-Theoretical-Review-2026-05-21]]
+- [[2026-05-21-codex-xmom-earnings-single-probe-theoretical-review]] -> [[Report-XMOM-Earnings-Single-Probe-Theoretical-Review-2026-05-21]]
