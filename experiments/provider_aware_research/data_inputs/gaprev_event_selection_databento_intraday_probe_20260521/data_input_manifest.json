@@ -1,0 +1,19 @@
+{
+  "dataset": "XNAS.ITCH",
+  "derived_bars_sha256": "1672066fb699940b0c95603741e3738334ebedf11f5c065b59ab9124ccc8ee62",
+  "end": "2023-03-02T21:00:00Z",
+  "gate_id": "GAPREV-EVENT-SELECTION-DATA-INGESTION-001",
+  "network_call_performed": true,
+  "provider": "Databento Historical",
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "rows": 751,
+  "run_id": "GAPREV-EVENT-SELECTION-PROBE-001",
+  "schema": "ohlcv-1m",
+  "session_filter": "RTH_09:30_16:00_America/New_York",
+  "start": "2023-03-01T14:30:00Z",
+  "status": "pass",
+  "symbol": "AEHR",
+  "trial_id": "TRIAL-GAPREV-001",
+  "validation_status": "pass"
+}

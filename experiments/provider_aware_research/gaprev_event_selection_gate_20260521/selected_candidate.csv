@@ -1,0 +1,2 @@
+symbol,event_date,previous_date,provider_dataset,daily_open,daily_prev_close,daily_gap,daily_volume,daily_adv20,daily_relative_volume,selection_rule
+AEHR,2023-03-02,2023-03-01,XNAS.ITCH,33.0,35.23,-0.06329832529094515,2012528,284767.8,7.067259711245443,daily_gap<=-5pct AND daily_relative_volume>=2x; exclude CRMD 2025-05-06 false RTH-open case; rank by daily_relative_volume desc

@@ -1,0 +1,14 @@
+{
+  "dataset": "XNAS.ITCH",
+  "end": "2023-03-02T21:00:00Z",
+  "gate_id": "GAPREV-EVENT-SELECTION-SINGLE-PROBE-001",
+  "max_provider_calls": 1,
+  "provider": "Databento Historical",
+  "raw_payload_retention_allowed": false,
+  "run_id": "GAPREV-EVENT-SELECTION-PROBE-001",
+  "schema": "ohlcv-1m",
+  "start": "2023-03-01T14:30:00Z",
+  "status": "APPROVED_EVENT_SELECTION_SINGLE_PROVIDER_PROBE",
+  "symbol": "AEHR",
+  "trial_id": "TRIAL-GAPREV-001"
+}

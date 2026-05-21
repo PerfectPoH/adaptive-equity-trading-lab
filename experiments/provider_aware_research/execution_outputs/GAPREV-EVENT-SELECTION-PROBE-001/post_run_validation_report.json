@@ -1,0 +1,24 @@
+{
+  "checks": [
+    {
+      "name": "controlled_result_written",
+      "status": "pass"
+    },
+    {
+      "name": "no_parameter_sweep",
+      "status": "pass"
+    },
+    {
+      "name": "promotion_blocked_below_30_trades",
+      "status": "pass"
+    },
+    {
+      "name": "dsr_not_claimed_for_micro_probe",
+      "status": "pass"
+    }
+  ],
+  "decision": "GAPREV_EVENT_SELECTION_POST_RUN_PASS_PROMOTION_BLOCKED",
+  "promotion_allowed": false,
+  "status": "pass",
+  "trade_count": 1
+}

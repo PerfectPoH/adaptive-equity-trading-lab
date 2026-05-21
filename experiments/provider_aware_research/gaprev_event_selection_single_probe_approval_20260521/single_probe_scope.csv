@@ -1,0 +1,13 @@
+field,value
+status,APPROVED_EVENT_SELECTION_SINGLE_PROVIDER_PROBE
+gate_id,GAPREV-EVENT-SELECTION-SINGLE-PROBE-001
+trial_id,TRIAL-GAPREV-001
+run_id,GAPREV-EVENT-SELECTION-PROBE-001
+provider,Databento Historical
+dataset,XNAS.ITCH
+schema,ohlcv-1m
+symbol,AEHR
+start,2023-03-01T14:30:00Z
+end,2023-03-02T21:00:00Z
+max_provider_calls,1
+raw_payload_retention_allowed,False

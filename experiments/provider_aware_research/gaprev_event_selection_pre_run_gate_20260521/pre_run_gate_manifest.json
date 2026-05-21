@@ -1,0 +1,23 @@
+{
+  "checks": [
+    {
+      "name": "event_selected_without_intraday_pnl",
+      "status": "pass"
+    },
+    {
+      "name": "single_probe_approved",
+      "status": "pass"
+    },
+    {
+      "name": "data_ingestion_passed",
+      "status": "pass"
+    },
+    {
+      "name": "raw_payload_not_retained",
+      "status": "pass"
+    }
+  ],
+  "run_id": "GAPREV-EVENT-SELECTION-PROBE-001",
+  "status": "pass",
+  "trial_id": "TRIAL-GAPREV-001"
+}

@@ -1,0 +1,5 @@
+action,status,reason
+multi_candidate_probe,blocked,Only selected candidate is queried.
+save_raw_payload,blocked,Derived bars only.
+parameter_sweep,blocked,Frozen GapRev parameters only.
+strategy_promotion,blocked,Single selected probe cannot promote.

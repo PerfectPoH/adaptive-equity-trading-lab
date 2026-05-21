@@ -1,0 +1,22 @@
+{
+  "candidate": {
+    "daily_adv20": 284767.8,
+    "daily_gap": -0.06329832529094515,
+    "daily_open": 33.0,
+    "daily_prev_close": 35.23,
+    "daily_relative_volume": 7.067259711245443,
+    "daily_volume": 2012528,
+    "event_date": "2023-03-02",
+    "previous_date": "2023-03-01",
+    "provider_dataset": "XNAS.ITCH",
+    "selection_rule": "daily_gap<=-5pct AND daily_relative_volume>=2x; exclude CRMD 2025-05-06 false RTH-open case; rank by daily_relative_volume desc",
+    "symbol": "AEHR"
+  },
+  "gate_id": "GAPREV-EVENT-SELECTION-GATE-001",
+  "parameter_sweep_performed": false,
+  "pnl_intraday_observed_before_selection": false,
+  "source_daily_file": "experiments\\provider_aware_research\\data_inputs\\databento_xmom_20260520\\prices.csv",
+  "status": "EVENT_SELECTED_FOR_SINGLE_CONTROLLED_PROBE",
+  "strategy_promotion_authorized": false,
+  "trial_id": "TRIAL-GAPREV-001"
+}

@@ -1,0 +1,39 @@
+{
+  "decision": "EVENT_SELECTION_CONTROLLED_PROBE_COMPLETE__NO_PROMOTION",
+  "gap_return": -0.20416088765603324,
+  "net_return": -0.01364907375043685,
+  "points_completed": {
+    "1_event_selection_gate": "EVENT_SELECTED_FOR_SINGLE_CONTROLLED_PROBE",
+    "2_single_provider_probe_approval": "APPROVED_EVENT_SELECTION_SINGLE_PROVIDER_PROBE",
+    "3_intraday_data_ingestion_gate": "pass",
+    "4_pre_run_gate": "pass",
+    "5_single_controlled_backtest": "pass",
+    "6_post_run_validation": "pass",
+    "7_decision": "NO_PROMOTION"
+  },
+  "promotion_allowed": false,
+  "promotion_blockers": [
+    "single_symbol_single_event_controlled_probe",
+    "trade_count_below_30",
+    "dsr_not_computable_from_one_trade",
+    "known_forensic_symbol_not_clean_oos"
+  ],
+  "relative_opening_volume": 16.830820770519264,
+  "run_id": "GAPREV-EVENT-SELECTION-PROBE-001",
+  "selected_candidate": {
+    "daily_adv20": 284767.8,
+    "daily_gap": -0.06329832529094515,
+    "daily_open": 33.0,
+    "daily_prev_close": 35.23,
+    "daily_relative_volume": 7.067259711245443,
+    "daily_volume": 2012528,
+    "event_date": "2023-03-02",
+    "previous_date": "2023-03-01",
+    "provider_dataset": "XNAS.ITCH",
+    "selection_rule": "daily_gap<=-5pct AND daily_relative_volume>=2x; exclude CRMD 2025-05-06 false RTH-open case; rank by daily_relative_volume desc",
+    "symbol": "AEHR"
+  },
+  "status": "promotion_blocked",
+  "trade_count": 1,
+  "trial_id": "TRIAL-GAPREV-001"
+}
