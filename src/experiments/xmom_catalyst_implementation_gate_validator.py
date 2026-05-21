@@ -17,6 +17,8 @@ REQUIRED_FILES = [
     "validation_math_policy.csv",
     "blocked_actions.csv",
     "source_review.csv",
+    "earnings_event_extraction_guardrails.md",
+    "earnings_event_extraction_policy.csv",
 ]
 
 REQUIRED_MANIFEST_FIELDS = {
@@ -102,6 +104,8 @@ def validate_xmom_catalyst_implementation_gate(spec_dir: str | Path) -> dict[str
     math_policy = _read_csv(path / "validation_math_policy.csv", checks, "csv_readable:validation_math_policy.csv")
     blocked = _read_csv(path / "blocked_actions.csv", checks, "csv_readable:blocked_actions.csv")
     sources = _read_csv(path / "source_review.csv", checks, "csv_readable:source_review.csv")
+    earnings_guardrails = _read_text(path / "earnings_event_extraction_guardrails.md", checks, "markdown_readable:earnings_event_extraction_guardrails.md")
+    earnings_policy = _read_csv(path / "earnings_event_extraction_policy.csv", checks, "csv_readable:earnings_event_extraction_policy.csv")
 
     if readme is not None and spec is not None:
         _validate_markdown(readme, spec, checks)
@@ -117,6 +121,10 @@ def validate_xmom_catalyst_implementation_gate(spec_dir: str | Path) -> dict[str
         _validate_blocked_actions(blocked, checks)
     if sources is not None:
         _validate_sources(sources, checks)
+    if earnings_guardrails is not None:
+        _validate_earnings_guardrails(earnings_guardrails, checks)
+    if earnings_policy is not None:
+        _validate_earnings_policy(earnings_policy, checks)
 
     return _report(path, checks)
 
@@ -260,6 +268,61 @@ def _validate_sources(frame: pd.DataFrame, checks: list[dict[str, str]]) -> None
     informal_blocked = len(informal) == 1 and str(informal.iloc[0]["status"]).lower() == "blocked_for_primary"
     _add_check(checks, "source_review_required_primary_sources", required_accepted.issubset(accepted), f"accepted={sorted(accepted)}")
     _add_check(checks, "source_review_informal_not_primary", informal_blocked, f"informal_rows={len(informal)}")
+
+
+def _validate_earnings_guardrails(text: str, checks: list[dict[str, str]]) -> None:
+    lower = text.lower()
+    _add_check(checks, "earnings_guardrails_status_spec_only", "spec_only_not_executable" in lower, "SPEC_ONLY_NOT_EXECUTABLE present")
+    narrow_scope = "stays scoped to earnings" in lower and "universal anomaly" in lower
+    reaction_mapping = all(marker in lower for marker in ["bmo -> same", "amc -> next", "dmt -> purge", "unspecified -> purge"])
+    quality_guards = all(marker in lower for marker in ["30%", "45 valid observations", "bootstrap confidence intervals"])
+    _add_check(checks, "earnings_guardrails_narrow_scope", narrow_scope, "earnings-only scope present")
+    _add_check(checks, "earnings_guardrails_reaction_session_mapping", reaction_mapping, "reaction-session mapping present")
+    _add_check(checks, "earnings_guardrails_quality_controls", quality_guards, "drop-rate/min-period/bootstrap controls present")
+
+
+def _validate_earnings_policy(frame: pd.DataFrame, checks: list[dict[str, str]]) -> None:
+    required = {"policy_id", "status", "rule_type", "required_value", "execution_policy", "notes"}
+    missing = sorted(required - set(frame.columns))
+    _add_check(checks, "earnings_policy_required_columns", not missing, f"missing={missing}")
+    if missing:
+        return
+
+    rows = {str(row["policy_id"]): row for _, row in frame.iterrows()}
+    required_ids = {
+        "event_scope",
+        "bmo_mapping",
+        "amc_mapping",
+        "dmt_policy",
+        "unspecified_policy",
+        "max_unspecified_purge_rate",
+        "rolling_zscore_window_days",
+        "rolling_zscore_min_valid_days",
+        "ecdf_bootstrap_ci",
+    }
+    missing_ids = sorted(required_ids - set(rows))
+    all_locked = frame["status"].astype(str).str.lower().eq("locked").all()
+    all_not_executable = frame["execution_policy"].astype(str).str.lower().eq("not_executable").all()
+    _add_check(checks, "earnings_policy_required_ids", not missing_ids, f"missing={missing_ids}")
+    _add_check(checks, "earnings_policy_all_locked", bool(all_locked), f"all_locked={bool(all_locked)}")
+    _add_check(checks, "earnings_policy_all_not_executable", bool(all_not_executable), f"all_not_executable={bool(all_not_executable)}")
+    if missing_ids:
+        return
+
+    event_scope_ok = str(rows["event_scope"]["required_value"]) == "earnings_only"
+    bmo_ok = str(rows["bmo_mapping"]["required_value"]) == "same_trading_session"
+    amc_ok = str(rows["amc_mapping"]["required_value"]) == "next_trading_session"
+    dmt_ok = str(rows["dmt_policy"]["required_value"]) == "purge"
+    unspecified_ok = str(rows["unspecified_policy"]["required_value"]) == "purge"
+    purge_rate_ok = float(rows["max_unspecified_purge_rate"]["required_value"]) <= 0.30
+    min_periods_ok = int(rows["rolling_zscore_window_days"]["required_value"]) == 60 and int(rows["rolling_zscore_min_valid_days"]["required_value"]) >= 45
+    bootstrap_ok = str(rows["ecdf_bootstrap_ci"]["required_value"]) == "required"
+    _add_check(checks, "earnings_policy_scope_earnings_only", event_scope_ok, f"event_scope={rows['event_scope']['required_value']}")
+    _add_check(checks, "earnings_policy_bmo_amc_mapping", bmo_ok and amc_ok, f"bmo={rows['bmo_mapping']['required_value']}; amc={rows['amc_mapping']['required_value']}")
+    _add_check(checks, "earnings_policy_intraday_unspecified_purged", dmt_ok and unspecified_ok, f"dmt={rows['dmt_policy']['required_value']}; unspecified={rows['unspecified_policy']['required_value']}")
+    _add_check(checks, "earnings_policy_unspecified_rate_review_threshold", purge_rate_ok, f"threshold={rows['max_unspecified_purge_rate']['required_value']}")
+    _add_check(checks, "earnings_policy_rolling_zscore_min_periods", min_periods_ok, f"window={rows['rolling_zscore_window_days']['required_value']}; min={rows['rolling_zscore_min_valid_days']['required_value']}")
+    _add_check(checks, "earnings_policy_ecdf_bootstrap_required", bootstrap_ok, f"bootstrap={rows['ecdf_bootstrap_ci']['required_value']}")
 
 
 def _read_text(path: Path, checks: list[dict[str, str]], name: str) -> str | None:

@@ -46,6 +46,16 @@
       "status": "pass"
     },
     {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\earnings_event_extraction_guardrails.md",
+      "name": "required_file:earnings_event_extraction_guardrails.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\earnings_event_extraction_policy.csv",
+      "name": "required_file:earnings_event_extraction_policy.csv",
+      "status": "pass"
+    },
+    {
       "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\README.md: chars=1075",
       "name": "markdown_readable:README.md",
       "status": "pass"
@@ -83,6 +93,16 @@
     {
       "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\source_review.csv: rows=6; columns=5",
       "name": "csv_readable:source_review.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\earnings_event_extraction_guardrails.md: chars=1546",
+      "name": "markdown_readable:earnings_event_extraction_guardrails.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_catalyst_implementation_gate_spec_20260520\\earnings_event_extraction_policy.csv: rows=9; columns=6",
+      "name": "csv_readable:earnings_event_extraction_policy.csv",
       "status": "pass"
     },
     {
@@ -234,6 +254,76 @@
       "detail": "informal_rows=1",
       "name": "source_review_informal_not_primary",
       "status": "pass"
+    },
+    {
+      "detail": "SPEC_ONLY_NOT_EXECUTABLE present",
+      "name": "earnings_guardrails_status_spec_only",
+      "status": "pass"
+    },
+    {
+      "detail": "earnings-only scope present",
+      "name": "earnings_guardrails_narrow_scope",
+      "status": "pass"
+    },
+    {
+      "detail": "reaction-session mapping present",
+      "name": "earnings_guardrails_reaction_session_mapping",
+      "status": "pass"
+    },
+    {
+      "detail": "drop-rate/min-period/bootstrap controls present",
+      "name": "earnings_guardrails_quality_controls",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "earnings_policy_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "earnings_policy_required_ids",
+      "status": "pass"
+    },
+    {
+      "detail": "all_locked=True",
+      "name": "earnings_policy_all_locked",
+      "status": "pass"
+    },
+    {
+      "detail": "all_not_executable=True",
+      "name": "earnings_policy_all_not_executable",
+      "status": "pass"
+    },
+    {
+      "detail": "event_scope=earnings_only",
+      "name": "earnings_policy_scope_earnings_only",
+      "status": "pass"
+    },
+    {
+      "detail": "bmo=same_trading_session; amc=next_trading_session",
+      "name": "earnings_policy_bmo_amc_mapping",
+      "status": "pass"
+    },
+    {
+      "detail": "dmt=purge; unspecified=purge",
+      "name": "earnings_policy_intraday_unspecified_purged",
+      "status": "pass"
+    },
+    {
+      "detail": "threshold=0.30",
+      "name": "earnings_policy_unspecified_rate_review_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "window=60; min=45",
+      "name": "earnings_policy_rolling_zscore_min_periods",
+      "status": "pass"
+    },
+    {
+      "detail": "bootstrap=required",
+      "name": "earnings_policy_ecdf_bootstrap_required",
+      "status": "pass"
     }
   ],
   "gate_decision": "IMPLEMENTATION_GATE_SPEC_PASS",
@@ -241,7 +331,7 @@
   "status": "pass",
   "summary": {
     "failed": 0,
-    "passed": 47,
-    "total": 47
+    "passed": 65,
+    "total": 65
   }
 }

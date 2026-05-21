@@ -65,6 +65,57 @@ def test_xmom_catalyst_implementation_gate_validator_fails_if_dsr_threshold_weak
     assert any(check["name"] == "manifest_dsr_threshold_at_least_095" and check["status"] == "fail" for check in report["checks"])
 
 
+def test_xmom_catalyst_implementation_gate_validator_fails_if_unspecified_events_allowed(tmp_path: Path) -> None:
+    spec_dir = _copy_spec(tmp_path)
+    policy = spec_dir / "earnings_event_extraction_policy.csv"
+    policy.write_text(
+        policy.read_text(encoding="utf-8").replace(
+            "unspecified_policy,locked,event_filter,purge,not_executable",
+            "unspecified_policy,locked,event_filter,allow,not_executable",
+        ),
+        encoding="utf-8",
+    )
+
+    report = validate_xmom_catalyst_implementation_gate(spec_dir)
+
+    assert report["status"] == "fail"
+    assert any(check["name"] == "earnings_policy_intraday_unspecified_purged" and check["status"] == "fail" for check in report["checks"])
+
+
+def test_xmom_catalyst_implementation_gate_validator_fails_if_zscore_min_periods_weakened(tmp_path: Path) -> None:
+    spec_dir = _copy_spec(tmp_path)
+    policy = spec_dir / "earnings_event_extraction_policy.csv"
+    policy.write_text(
+        policy.read_text(encoding="utf-8").replace(
+            "rolling_zscore_min_valid_days,locked,zscore_min_periods,45,not_executable",
+            "rolling_zscore_min_valid_days,locked,zscore_min_periods,20,not_executable",
+        ),
+        encoding="utf-8",
+    )
+
+    report = validate_xmom_catalyst_implementation_gate(spec_dir)
+
+    assert report["status"] == "fail"
+    assert any(check["name"] == "earnings_policy_rolling_zscore_min_periods" and check["status"] == "fail" for check in report["checks"])
+
+
+def test_xmom_catalyst_implementation_gate_validator_fails_if_ecdf_bootstrap_optional(tmp_path: Path) -> None:
+    spec_dir = _copy_spec(tmp_path)
+    policy = spec_dir / "earnings_event_extraction_policy.csv"
+    policy.write_text(
+        policy.read_text(encoding="utf-8").replace(
+            "ecdf_bootstrap_ci,locked,threshold_uncertainty,required,not_executable",
+            "ecdf_bootstrap_ci,locked,threshold_uncertainty,optional,not_executable",
+        ),
+        encoding="utf-8",
+    )
+
+    report = validate_xmom_catalyst_implementation_gate(spec_dir)
+
+    assert report["status"] == "fail"
+    assert any(check["name"] == "earnings_policy_ecdf_bootstrap_required" and check["status"] == "fail" for check in report["checks"])
+
+
 def test_xmom_catalyst_implementation_gate_validator_cli_exit_codes(tmp_path: Path) -> None:
     spec_dir = _copy_spec(tmp_path)
     assert main(["--spec-dir", str(spec_dir)]) == 0

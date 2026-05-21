@@ -161,7 +161,8 @@ Regole operative:
 - utility CPCV con purging/embargo implementate e testate, non collegate al trial;
 - effective trial-count estimator implementato e testato, non collegato al trial;
 - synthetic statistical gate harness creato: collega DSR + CPCV + `N_eff` e rigetta il miglior trial da rumore;
-- prossimo lavoro ammesso: manifest-only gate che richiede il passaggio dell'harness prima di firmare qualunque implementation manifest, non esecuzione.
+- earnings-event extraction guardrails aggiunti alla implementation gate: earnings-only, reaction session BMO/AMC, purge DMT/UNSPECIFIED, min-periods rolling e bootstrap ECDF;
+- prossimo lavoro ammesso: provider/data-source plan per earnings calendar coverage e report-time quality, non extractor live e non esecuzione.
 
 ## Ipotesi Primaria Corrente
 

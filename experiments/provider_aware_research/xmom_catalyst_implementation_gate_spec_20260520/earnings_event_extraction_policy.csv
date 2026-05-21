@@ -1,0 +1,10 @@
+policy_id,status,rule_type,required_value,execution_policy,notes
+event_scope,locked,scope,earnings_only,not_executable,Do not widen to universal anomaly days to force sample size.
+bmo_mapping,locked,reaction_session,same_trading_session,not_executable,Before-market earnings map to same full RTH session.
+amc_mapping,locked,reaction_session,next_trading_session,not_executable,After-close earnings map to next full RTH session.
+dmt_policy,locked,event_filter,purge,not_executable,Intraday releases create partial-session reactions.
+unspecified_policy,locked,event_filter,purge,not_executable,Unknown report time is not comparable.
+max_unspecified_purge_rate,locked,data_quality_review_threshold,0.30,not_executable,If exceeded then spec review is required before execution.
+rolling_zscore_window_days,locked,zscore_window,60,not_executable,Window length for pre-event local normalization.
+rolling_zscore_min_valid_days,locked,zscore_min_periods,45,not_executable,Events below this are purged.
+ecdf_bootstrap_ci,locked,threshold_uncertainty,required,not_executable,ECDF thresholds require bootstrap confidence intervals before execution.

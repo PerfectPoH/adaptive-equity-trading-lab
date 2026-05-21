@@ -29,6 +29,8 @@ experiments/provider_aware_research/xmom_catalyst_implementation_gate_spec_20260
 experiments/provider_aware_research/xmom_catalyst_implementation_gate_spec_20260520/validation_math_policy.csv
 experiments/provider_aware_research/xmom_catalyst_implementation_gate_spec_20260520/blocked_actions.csv
 experiments/provider_aware_research/xmom_catalyst_implementation_gate_spec_20260520/source_review.csv
+experiments/provider_aware_research/xmom_catalyst_implementation_gate_spec_20260520/earnings_event_extraction_guardrails.md
+experiments/provider_aware_research/xmom_catalyst_implementation_gate_spec_20260520/earnings_event_extraction_policy.csv
 experiments/provider_aware_research/xmom_catalyst_implementation_gate_spec_20260520/implementation_gate_validation_report.json
 ```
 
@@ -43,14 +45,14 @@ tests/test_xmom_catalyst_implementation_gate_validator.py
 
 ```text
 gate_decision: IMPLEMENTATION_GATE_SPEC_PASS
-passed: 47
+passed: 65
 failed: 0
 ```
 
 Targeted tests:
 
 ```text
-5 passed
+8 passed
 ```
 
 ## Key Invariants
@@ -63,6 +65,12 @@ Targeted tests:
 - `DSR >= 0.95` is required before any future promotion discussion;
 - failure after a final OOS pass cannot be repaired by a second OOS sweep;
 - informal sources are blocked as primary evidence.
+- earnings-event extraction stays scoped to earnings only;
+- BMO maps to same trading session, AMC maps to next trading session;
+- DMT and UNSPECIFIED report times are purged;
+- UNSPECIFIED purge rate above 30% requires spec review;
+- rolling z-score windows require at least 45 valid observations out of 60;
+- ECDF thresholds require bootstrap confidence intervals before execution.
 
 ## Important Interpretation
 
@@ -84,9 +92,8 @@ The gate spec is structurally valid but not executable.
 
 Next allowed work:
 
-- implement reusable DSR/PSR math utilities with unit tests;
-- implement CPCV split utilities with synthetic leakage tests;
-- design an effective trial-count estimator;
+- implement an extractor only after a separate provider/data-source plan;
+- keep extractor disabled until earnings calendar coverage and report-time quality are known;
 - still no OOS execution.
 
 Blocked:
