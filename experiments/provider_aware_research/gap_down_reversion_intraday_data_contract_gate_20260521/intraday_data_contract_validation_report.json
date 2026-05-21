@@ -1,0 +1,187 @@
+﻿{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_intraday_data_contract_gate_20260521",
+      "name": "contract_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_intraday_data_contract_gate_20260521\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_intraday_data_contract_gate_20260521\\intraday_data_contract_manifest.json",
+      "name": "required_file:intraday_data_contract_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_intraday_data_contract_gate_20260521\\intraday_coverage_requirements.csv",
+      "name": "required_file:intraday_coverage_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_intraday_data_contract_gate_20260521\\bar_schema_requirements.csv",
+      "name": "required_file:bar_schema_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_intraday_data_contract_gate_20260521\\calendar_and_session_policy.csv",
+      "name": "required_file:calendar_and_session_policy.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_intraday_data_contract_gate_20260521\\execution_cost_proxy_requirements.csv",
+      "name": "required_file:execution_cost_proxy_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_intraday_data_contract_gate_20260521\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_intraday_data_contract_gate_20260521\\intraday_data_contract_manifest.json",
+      "name": "manifest_json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_intraday_data_contract_gate_20260521\\intraday_coverage_requirements.csv: rows=10; columns=4",
+      "name": "csv_readable:intraday_coverage_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_intraday_data_contract_gate_20260521\\bar_schema_requirements.csv: rows=10; columns=4",
+      "name": "csv_readable:bar_schema_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_intraday_data_contract_gate_20260521\\calendar_and_session_policy.csv: rows=8; columns=4",
+      "name": "csv_readable:calendar_and_session_policy.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_intraday_data_contract_gate_20260521\\execution_cost_proxy_requirements.csv: rows=7; columns=4",
+      "name": "csv_readable:execution_cost_proxy_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_intraday_data_contract_gate_20260521\\blocked_actions.csv: rows=11; columns=3",
+      "name": "csv_readable:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_intraday_data_contract_gate_20260521\\README.md: chars=825",
+      "name": "markdown_readable:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "status=SPEC_ONLY_NOT_QUERIED",
+      "name": "manifest_status_spec_only",
+      "status": "pass"
+    },
+    {
+      "detail": "gate=GAPREV-INTRADAY-DATA-CONTRACT-001; trial=TRIAL-GAPREV-001",
+      "name": "manifest_identity",
+      "status": "pass"
+    },
+    {
+      "detail": "safe=True",
+      "name": "manifest_no_execution_flags",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "coverage_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "provider_selection=not_selected",
+      "name": "coverage_provider_not_selected",
+      "status": "pass"
+    },
+    {
+      "detail": "bar_frequency=required",
+      "name": "coverage_intraday_frequency_required",
+      "status": "pass"
+    },
+    {
+      "detail": "raw_payload_retention=blocked_by_default",
+      "name": "coverage_raw_payload_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "rate_limit_policy=required",
+      "name": "coverage_rate_limits_required",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "schema_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "schema_required_bar_fields",
+      "status": "pass"
+    },
+    {
+      "detail": "all_required=True",
+      "name": "schema_core_fields_required",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "calendar_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "calendar_required_items",
+      "status": "pass"
+    },
+    {
+      "detail": "all_required=True",
+      "name": "calendar_all_required",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "costs_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "costs_required_components",
+      "status": "pass"
+    },
+    {
+      "detail": "all_required=True",
+      "name": "costs_all_required",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_required_actions",
+      "status": "pass"
+    },
+    {
+      "detail": "all_blocked=True",
+      "name": "blocked_all_blocked",
+      "status": "pass"
+    }
+  ],
+  "contract_dir": "experiments\\provider_aware_research\\gap_down_reversion_intraday_data_contract_gate_20260521",
+  "gate_decision": "GAPREV_INTRADAY_DATA_CONTRACT_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 35,
+    "total": 35
+  }
+}

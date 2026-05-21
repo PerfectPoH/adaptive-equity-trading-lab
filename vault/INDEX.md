@@ -52,6 +52,7 @@ tags: [vault, index, obsidian, trading-lab]
 - [[Report-XMOM-Earnings-Single-Probe-Execution-2026-05-21]] - primo probe Intrinio/CRMD eseguito: HTTP 403 provider/access, nessun raw payload.
 - [[Report-Quant-Hypothesis-Generation-And-Video-Research-2026-05-21]] - note spec-only su PEAD, catalyst biotech, gap-down reversion e idee dai 3 video.
 - [[Report-Gap-Down-Reversion-Preregistration-2026-05-21]] - `TRIAL-GAPREV-001` spec-only, 43/43 pass, non eseguibile.
+- [[Report-GapRev-Intraday-Data-Contract-Gate-2026-05-21]] - data-contract intraday per `TRIAL-GAPREV-001`, 35/35 pass, nessun provider selezionato.
 - [[small-cap-ranking-exits-research-track]] - track separato ranking/uscite design-only con trial accounting obbligatorio.
 - [[Project-Handoff]] - handoff completo per altre chat o agenti.
 - [[Devlog-Index]] - cronologia ordinata delle sessioni.

@@ -1,0 +1,8 @@
+cost_component,status,minimum_contract,failure_action
+spread_proxy,required,observed quote spread or conservative spread estimate,block_execution
+slippage_model,required,declared before run,block_execution
+market_impact_model,required,declared before run,block_execution
+commission_model,required,declared before run,block_execution
+max_participation_rate,required,declared before run,block_execution
+gap_open_fill_policy,required,entry cannot assume better than available open/VWAP rule,block_execution
+no_gross_only_metrics,required,all promotion metrics must be net of costs,block_promotion

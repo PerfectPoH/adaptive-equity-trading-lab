@@ -1,0 +1,11 @@
+requirement,status,minimum_contract,failure_action
+provider_selection,not_selected,must be selected in a separate approval artifact,block_execution
+symbol_universe,not_selected,must be frozen before any query,block_execution
+coverage_start,not_selected,must be declared before any query,block_execution
+coverage_end,not_selected,must be declared before any query,block_execution
+bar_frequency,required,intraday bars no coarser than 1 minute for MVP,block_execution
+timezone,required,America/New_York or timestamp conversion policy,block_execution
+regular_session_filter,required,09:30-16:00 New York with half-day handling,block_execution
+raw_payload_retention,blocked_by_default,false unless separately licensed,block_execution
+rate_limit_policy,required,declared before query,stop_on_ambiguity
+pit_universe_policy,preferred,PIT universe or explicit non-promotion warning,block_promotion

@@ -751,3 +751,5 @@ Update: XMOM earnings single-probe was approved and executed once for `CRMD` via
 Update: Research notes for future hypothesis generation archived in [[Report-Quant-Hypothesis-Generation-And-Video-Research-2026-05-21]]. They define candidate future branches for PEAD/liquidity, binary biotech catalysts and gap-down reversion, plus video-derived ideas around meta-labeling, blind execution, trade-quality tagging, cooldown locks, dollar bars, absorption and LOB filters. Status remains spec-only; no new execution is authorized.
 
 Update: `TRIAL-GAPREV-001` opened as spec-only gap-down reversion branch in [[Report-Gap-Down-Reversion-Preregistration-2026-05-21]]. Validator passes 43/43 and targeted tests pass 5/5. All execution paths remain blocked; next allowed work is an intraday data-contract gate, not a backtest.
+
+Update: GapRev intraday data-contract gate added in [[Report-GapRev-Intraday-Data-Contract-Gate-2026-05-21]]. Validator passes 35/35 and targeted tests pass 5/5. No provider selected, no query/download/extractor/backtest authorized. Next allowed work: provider-selection gate for intraday bars and spread/quote proxy.

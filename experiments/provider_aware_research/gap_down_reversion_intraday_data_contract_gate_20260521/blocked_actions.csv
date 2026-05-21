@@ -1,0 +1,12 @@
+action,status,reason
+select_provider,blocked,Requires separate provider selection approval.
+provider_query,blocked,Requires approved one-provider bounded probe.
+download_intraday_data,blocked,Requires provider selection and data retention policy.
+implement_extractor,blocked,Schema and provider not selected.
+build_intraday_bars,blocked,No input contract has passed.
+compute_vwap_signals,blocked,No validated intraday bars.
+execute_backtest,blocked,Parameters and data not final.
+run_oos,blocked,Final manifest not created.
+paper_trading,blocked,No strategy validation.
+live_trading,blocked,No capital deployment.
+strategy_promotion,blocked,No validated strategy.

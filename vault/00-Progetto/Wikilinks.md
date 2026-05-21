@@ -344,3 +344,5 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-21-codex-quant-hypothesis-video-research-notes]] -> [[Report-Quant-Hypothesis-Generation-And-Video-Research-2026-05-21]]
 - [[Report-Quant-Hypothesis-Generation-And-Video-Research-2026-05-21]] -> [[Report-Gap-Down-Reversion-Preregistration-2026-05-21]]
 - [[2026-05-21-codex-gap-down-reversion-preregistration]] -> [[Report-Gap-Down-Reversion-Preregistration-2026-05-21]]
+- [[Report-Gap-Down-Reversion-Preregistration-2026-05-21]] -> [[Report-GapRev-Intraday-Data-Contract-Gate-2026-05-21]]
+- [[2026-05-21-codex-gaprev-intraday-data-contract-gate]] -> [[Report-GapRev-Intraday-Data-Contract-Gate-2026-05-21]]

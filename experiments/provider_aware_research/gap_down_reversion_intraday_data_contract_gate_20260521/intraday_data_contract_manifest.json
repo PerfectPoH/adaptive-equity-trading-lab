@@ -1,0 +1,22 @@
+{
+  "status": "SPEC_ONLY_NOT_QUERIED",
+  "decision": "GAPREV_INTRADAY_DATA_CONTRACT_DEFINED_NOT_EXECUTABLE",
+  "gate_id": "GAPREV-INTRADAY-DATA-CONTRACT-001",
+  "trial_id": "TRIAL-GAPREV-001",
+  "preregistration_id": "PREREG-GAPREV-001",
+  "provider_selected": false,
+  "provider_query_performed": false,
+  "network_call_performed": false,
+  "market_data_downloaded": false,
+  "extractor_implemented": false,
+  "backtest_performed": false,
+  "strategy_promotion_performed": false,
+  "raw_payload_retention_allowed": false,
+  "minimum_required_tables": [
+    "intraday_coverage_requirements.csv",
+    "bar_schema_requirements.csv",
+    "calendar_and_session_policy.csv",
+    "execution_cost_proxy_requirements.csv",
+    "blocked_actions.csv"
+  ]
+}

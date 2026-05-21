@@ -1,0 +1,11 @@
+field,required,semantic_contract,notes
+symbol,yes,security identifier after provider symbology resolution,Must be stable within dataset.
+timestamp,yes,timezone-aware bar start or end timestamp,Must declare convention.
+open,yes,regular-session bar open,Must be positive.
+high,yes,regular-session bar high,Must be positive and >= low.
+low,yes,regular-session bar low,Must be positive and <= high.
+close,yes,regular-session bar close,Must be positive.
+volume,yes,shares traded in bar,Must be non-negative.
+dollar_volume,preferred,close or VWAP times volume,Can be derived if absent.
+vwap,preferred,bar VWAP,Can be derived only if trades are available.
+trade_count,preferred,number of trades in bar,Useful for data quality.

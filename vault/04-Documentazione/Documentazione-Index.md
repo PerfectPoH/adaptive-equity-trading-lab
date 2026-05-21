@@ -39,6 +39,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-XMOM-Earnings-Single-Probe-Execution-2026-05-21]] - esecuzione bounded Intrinio/CRMD, HTTP 403 provider/access, no raw payload.
 - [[Report-Quant-Hypothesis-Generation-And-Video-Research-2026-05-21]] - manifesto spec-only per generare ipotesi falsificabili e roadmap Anno 2.
 - [[Report-Gap-Down-Reversion-Preregistration-2026-05-21]] - preregistrazione spec-only `TRIAL-GAPREV-001`, 43/43 pass.
+- [[Report-GapRev-Intraday-Data-Contract-Gate-2026-05-21]] - gate data-contract intraday per GapRev, 35/35 pass, no query.
 
 ## Handoff
 

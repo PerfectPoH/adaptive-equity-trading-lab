@@ -1,0 +1,9 @@
+policy_item,status,rule,failure_action
+session_timezone,required,America/New_York,block_execution
+regular_open,required,09:30,block_execution
+regular_close,required,16:00,block_execution
+half_days,required,must be represented or purged,block_execution
+holidays,required,must be represented in calendar,block_execution
+prior_close_mapping,required,previous regular-session close not extended-hours close,block_execution
+open_mapping,required,first regular-session print/bar open,block_execution
+late_open_or_halt,required,purge event if opening session is halted or missing,block_execution
