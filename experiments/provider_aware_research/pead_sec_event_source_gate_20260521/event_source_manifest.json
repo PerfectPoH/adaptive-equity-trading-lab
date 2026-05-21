@@ -1,0 +1,13 @@
+{
+  "backtest_authorized": false,
+  "blocker": "SEC EDGAR provides official earnings report-time metadata but not earnings surprise magnitude or tradable direction.",
+  "decision": "PEAD_SEC_EVENT_SOURCE_TIMESTAMP_PASS_SURPRISE_BLOCKED",
+  "event_source": "SEC_EDGAR_8K_ITEM_2_02",
+  "events_with_report_time": 10,
+  "events_with_surprise_magnitude": 0,
+  "provider_query_performed_now": false,
+  "run_id": "PEAD-SEC-EVENT-SOURCE-GATE-001",
+  "status": "blocked",
+  "tradable_direction_events": 0,
+  "trial_id": "TRIAL-PEAD-EARNINGS-001"
+}

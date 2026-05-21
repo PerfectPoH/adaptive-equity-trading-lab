@@ -1,0 +1,15 @@
+{
+  "backtest_performed": false,
+  "decision": "BLOCKED_EARNINGS_SURPRISE_MAGNITUDE_UNAVAILABLE",
+  "events_with_report_time": 10,
+  "events_with_surprise_magnitude": 0,
+  "live_trading_performed": false,
+  "next_unblocked_step": "Add a point-in-time earnings surprise or event-magnitude source; do not infer direction from returns.",
+  "paper_trading_performed": false,
+  "provider_query_performed_now": false,
+  "run_id": "PEAD-SEC-EVENT-SOURCE-GATE-001",
+  "status": "blocked",
+  "strategy_promotion_performed": false,
+  "tradable_direction_events": 0,
+  "trial_id": "TRIAL-PEAD-EARNINGS-001"
+}

@@ -1,0 +1,5 @@
+action,status,reason
+infer_direction_from_future_returns,blocked,Would be direct look-ahead leakage.
+use_price_gap_as_surprise_proxy,blocked,Daily/intraday gap proxy is not an earnings surprise measure.
+run_pead_backtest,blocked,No ex-ante earnings surprise or magnitude variable.
+strategy_promotion,blocked,No backtest and no DSR.
