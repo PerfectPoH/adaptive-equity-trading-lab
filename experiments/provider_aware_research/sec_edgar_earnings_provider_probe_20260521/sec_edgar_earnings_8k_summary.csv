@@ -1,0 +1,11 @@
+accessionNumber,filingDate,acceptanceDateTime,items,classification,action,reaction_session
+0001410098-26-000020,2026-05-14,2026-05-14T11:34:46.000Z,"2.02,9.01",BMO,allow_candidate,same_regular_session
+0001213900-26-023881,2026-03-05,2026-03-05T12:47:46.000Z,"2.02,9.01",BMO,allow_candidate,same_regular_session
+0001213900-26-002350,2026-01-08,2026-01-08T13:15:51.000Z,"2.02,5.02,8.01,9.01",BMO,allow_candidate,same_regular_session
+0001213900-25-108716,2025-11-12,2025-11-12T12:42:23.000Z,"2.02,9.01",BMO,allow_candidate,same_regular_session
+0001213900-25-100156,2025-10-20,2025-10-20T12:10:42.000Z,"2.02,9.01",BMO,allow_candidate,same_regular_session
+0001213900-25-072814,2025-08-07,2025-08-07T11:31:26.000Z,"1.01,2.02,3.02,7.01,8.01,9.01",BMO,allow_candidate,same_regular_session
+0001213900-25-039903,2025-05-06,2025-05-06T11:45:34.000Z,"2.02,9.01",BMO,allow_candidate,same_regular_session
+0001213900-25-029629,2025-04-08,2025-04-08T12:00:39.000Z,"2.02,9.01",BMO,allow_candidate,same_regular_session
+0001013762-25-001844,2025-03-25,2025-03-25T12:00:49.000Z,"2.02,9.01",BMO,allow_candidate,same_regular_session
+0001213900-25-001392,2025-01-07,2025-01-07T13:00:07.000Z,"2.02,9.01",BMO,allow_candidate,same_regular_session

@@ -1,0 +1,26 @@
+{
+  "backtest_performed": false,
+  "bmo_amc_candidate_records": 10,
+  "cik": "0001410098",
+  "decision": "SEC_EDGAR_EARNINGS_PROVIDER_METADATA_PASS",
+  "earnings_8k_records_found": 49,
+  "first_candidate": {
+    "acceptanceDateTime": "2026-05-14T11:34:46.000Z",
+    "accessionNumber": "0001410098-26-000020",
+    "action": "allow_candidate",
+    "classification": "BMO",
+    "filingDate": "2026-05-14",
+    "items": "2.02,9.01",
+    "reaction_session": "same_regular_session"
+  },
+  "market_data_downloaded": false,
+  "network_call_performed": true,
+  "provider": "SEC EDGAR submissions API",
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "run_id": "SEC-EDGAR-EARNINGS-PROVIDER-PROBE-001",
+  "status": "pass",
+  "symbol": "CRMD",
+  "timestamp_classifiable_records": 10,
+  "trial_id": "TRIAL-PEAD-EARNINGS-001"
+}
