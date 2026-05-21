@@ -1,0 +1,41 @@
+﻿{
+  "acknowledged_gates": [],
+  "approval_dir": "experiments\\provider_aware_research\\xmom_earnings_single_probe_approval_20260521",
+  "approval_gate_decision": "EARNINGS_SINGLE_PROBE_APPROVAL_SPEC_PASS",
+  "approval_gate_status": "pass",
+  "approval_status": "not_granted",
+  "backtest_performed": false,
+  "endpoint": "earnings_calendar_or_equivalent",
+  "error": "single_probe_real_run_gates_unresolved",
+  "execution_performed": false,
+  "extractor_implemented": false,
+  "gate_id": "EARNINGS-SINGLE-PROBE-XMOM-CATALYST-001",
+  "market_data_downloaded": false,
+  "missing_gates": [
+    "endpoint_selected",
+    "explicit_single_probe_approval_granted",
+    "immutable_output_directory_created",
+    "provider_selected",
+    "raw_payload_retention_blocked",
+    "symbol_selected",
+    "trial_ledger_entry_created"
+  ],
+  "network_call_performed": false,
+  "planned_output_dir": "not_created",
+  "provider": "unselected",
+  "provider_query_performed": false,
+  "raw_payload_retained": false,
+  "required_gates": [
+    "endpoint_selected",
+    "explicit_single_probe_approval_granted",
+    "immutable_output_directory_created",
+    "provider_selected",
+    "raw_payload_retention_blocked",
+    "symbol_selected",
+    "trial_ledger_entry_created"
+  ],
+  "status": "blocked",
+  "strategy_promotion_performed": false,
+  "symbol": "unselected",
+  "trial_id": "TRIAL-XMOM-CATALYST-001"
+}

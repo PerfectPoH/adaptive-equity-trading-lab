@@ -31,6 +31,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-Synthetic-Statistical-Gate-Harness-2026-05-21]] - harness sintetico che collega CPCV, `N_eff` e DSR; non collegato al trial.
 - [[Report-XMOM-Earnings-Provider-Selection-Gate-2026-05-21]] - gate per selezione provider earnings calendar; non interrogato.
 - [[Report-XMOM-Earnings-Single-Probe-Approval-2026-05-21]] - artifact di approvazione per probe one-provider/one-symbol; validato ma non interrogato.
+- [[Report-XMOM-Earnings-Single-Probe-Runner-Gate-2026-05-21]] - runner/preflight inerte per single probe; real-run bloccato.
 
 ## Handoff
 

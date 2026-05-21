@@ -1,0 +1,32 @@
+﻿{
+  "approval_dir": "experiments\\provider_aware_research\\xmom_earnings_single_probe_approval_20260521",
+  "approval_gate_decision": "EARNINGS_SINGLE_PROBE_APPROVAL_SPEC_PASS",
+  "approval_gate_status": "pass",
+  "backtest_performed": false,
+  "blocked_actions": [
+    "--all-symbols",
+    "--download-market-data",
+    "--implement-extractor",
+    "--live",
+    "--multi-provider",
+    "--paper",
+    "--promote",
+    "--run-oos",
+    "--save-raw-payload"
+  ],
+  "endpoint": "earnings_calendar_or_equivalent",
+  "execution_performed": false,
+  "extractor_implemented": false,
+  "gate_id": "EARNINGS-SINGLE-PROBE-XMOM-CATALYST-001",
+  "market_data_downloaded": false,
+  "network_call_performed": false,
+  "planned_output_dir": "not_created",
+  "provider": "unselected",
+  "provider_query_performed": false,
+  "raw_payload_retained": false,
+  "required_next_approval": "explicit_single_probe_approval_granted",
+  "status": "dry_run_only",
+  "strategy_promotion_performed": false,
+  "symbol": "unselected",
+  "trial_id": "TRIAL-XMOM-CATALYST-001"
+}
