@@ -1,0 +1,4 @@
+event,scope,cooldown_minutes,action,reason
+stop_loss_exit,same_symbol,15,block_new_orders,Prevents immediate revenge re-entry on the same instrument.
+manual_protocol_violation,same_symbol,15,block_new_orders,Prevents compounding discretionary override after an invalid action.
+cooldown_expired,same_symbol,0,allow_new_orders,Order flow may resume after the full lockout window.

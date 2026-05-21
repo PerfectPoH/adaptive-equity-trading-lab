@@ -1,0 +1,4 @@
+mode,status,allowed_display,blocked_display,reason
+research_backtest,allowed,aggregate_metrics_after_run,intraday_mark_to_market_intervention,Backtests may expose summary metrics but cannot create discretionary mid-run edits.
+paper_or_live_future,planned_not_implemented,protocol_state_and_risk_limits,raw_intraday_pnl_for_manual_exit_decisions,Future UI should avoid reinforcing premature exits or revenge trading.
+postmortem,allowed,full_trade_level_pnl_after_session,manual_mid_trade_pnl_override,Forensics can inspect PnL after execution is complete.

@@ -1,0 +1,5 @@
+quality,pnl_condition,protocol_condition,include_in_edge_metrics,interpretation
+GOOD_WIN,pnl > 0,protocol_followed,true,Profit earned while respecting the preregistered execution protocol.
+GOOD_LOSS,pnl <= 0,protocol_followed,true,Loss or flat result that remains valid evidence because the protocol was respected.
+BAD_WIN,pnl > 0,protocol_violated,false,Profitable protocol violation; excluded from edge metrics because it rewards behavior the lab must not learn.
+BAD_LOSS,pnl <= 0,protocol_violated,false,Loss or flat protocol violation; excluded and logged as execution-governance failure.

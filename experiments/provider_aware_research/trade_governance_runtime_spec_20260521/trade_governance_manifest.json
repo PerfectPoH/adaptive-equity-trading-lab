@@ -1,0 +1,12 @@
+{
+  "backtest_performed": false,
+  "broker_connection_performed": false,
+  "decision": "TRADE_GOVERNANCE_RUNTIME_IMPLEMENTED_SPEC_ONLY",
+  "live_trading_performed": false,
+  "paper_trading_performed": false,
+  "provider_query_performed": false,
+  "purpose": "Codify execution-behavior guardrails that classify protocol adherence, remove BAD_WIN trades from edge metrics, and block same-symbol revenge re-entry after stop-loss events.",
+  "run_id": "TRADE-GOVERNANCE-RUNTIME-SPEC-001",
+  "status": "implemented_not_connected_to_broker",
+  "strategy_promotion_performed": false
+}
