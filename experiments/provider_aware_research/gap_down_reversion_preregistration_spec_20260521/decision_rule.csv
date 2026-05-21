@@ -1,0 +1,10 @@
+decision_item,status,rule
+execution_precondition,blocked,Requires separate implementation gate and explicit execution approval.
+data_precondition,required,Intraday data contract and data-ingestion report must pass.
+primary_metric,not_final,TBD before execution; cannot be selected after looking at OOS.
+robustness_gate,required,DSR >= 0.95 after effective trial-count correction.
+sample_size_gate,required,No promotion if accepted trade count < 30 unless marked exploratory.
+outlier_gate,required,No promotion if top winners dominate PnL or sign flips after removing top winners.
+cost_gate,required,Must remain positive after realistic execution costs.
+promotion_rule,blocked,No promotion from spec-only artifact.
+stop_rule,required,Any data-contract breach or parameter drift kills the trial.

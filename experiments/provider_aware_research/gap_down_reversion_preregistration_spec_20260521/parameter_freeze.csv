@@ -1,0 +1,13 @@
+parameter_name,status,value,change_after_execution_policy,notes
+trial_status,final,SPEC_ONLY_NOT_EXECUTED,no_reset_allowed,Spec-only state.
+direction,final,long_only,new_preregistration_required,No shorting in first trial.
+gap_threshold,not_final,TBD_IN_FUTURE_SPEC,new_preregistration_required,Must not be selected from PnL sweep.
+relative_volume_threshold,not_final,TBD_IN_FUTURE_SPEC,new_preregistration_required,Must be justified ex ante or distributionally.
+vwap_reclaim_cutoff,not_final,TBD_IN_FUTURE_SPEC,new_preregistration_required,Example from notes is 10:30 NY but not executable yet.
+holding_window_minutes,not_final,TBD_IN_FUTURE_SPEC,new_preregistration_required,Example from notes is 120 minutes but not executable yet.
+max_holding_scope,final,intraday_only,new_preregistration_required,No overnight holding.
+stop_policy,not_final,TBD_IN_FUTURE_SPEC,new_preregistration_required,Must be frozen before run.
+cost_model,final,realistic_spread_slippage_impact_required,new_preregistration_required,No gross-only promotion.
+minimum_accepted_trades_for_promotion,final,30,no_reset_allowed,Governance lower bound.
+dsr_threshold,final,0.95,no_reset_allowed,Promotion gate.
+paper_live_status,final,blocked,no_reset_allowed,No paper/live from this spec.

@@ -1,0 +1,11 @@
+action,status,reason
+provider_query,blocked,Requires separate provider approval and data contract.
+download_intraday_data,blocked,Requires ingestion gate and explicit approval.
+implement_extractor,blocked,Data source and schema not approved.
+execute_backtest,blocked,Parameters and data contract not frozen.
+run_parameter_sweep,blocked,Would contaminate hypothesis before trial accounting.
+run_oos,blocked,OOS is fatal and requires final manifest.
+paper_trading,blocked,No live-adjacent use from spec-only artifact.
+live_trading,blocked,No capital deployment.
+strategy_promotion,blocked,No performance evidence.
+reuse_xmom_thresholds,blocked,Prevents post-hoc threshold contamination.

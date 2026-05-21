@@ -1,0 +1,227 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_preregistration_spec_20260521",
+      "name": "spec_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_preregistration_spec_20260521\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_preregistration_spec_20260521\\hypothesis.md",
+      "name": "required_file:hypothesis.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_preregistration_spec_20260521\\allowed_features.csv",
+      "name": "required_file:allowed_features.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_preregistration_spec_20260521\\parameter_freeze.csv",
+      "name": "required_file:parameter_freeze.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_preregistration_spec_20260521\\decision_rule.csv",
+      "name": "required_file:decision_rule.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_preregistration_spec_20260521\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_preregistration_spec_20260521\\data_requirements.csv",
+      "name": "required_file:data_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_preregistration_spec_20260521\\README.md: chars=1014",
+      "name": "markdown_readable:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_preregistration_spec_20260521\\hypothesis.md: chars=1331",
+      "name": "markdown_readable:hypothesis.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_preregistration_spec_20260521\\allowed_features.csv: rows=9; columns=5",
+      "name": "csv_readable:allowed_features.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_preregistration_spec_20260521\\parameter_freeze.csv: rows=12; columns=5",
+      "name": "csv_readable:parameter_freeze.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_preregistration_spec_20260521\\decision_rule.csv: rows=9; columns=3",
+      "name": "csv_readable:decision_rule.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_preregistration_spec_20260521\\blocked_actions.csv: rows=10; columns=3",
+      "name": "csv_readable:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\gap_down_reversion_preregistration_spec_20260521\\data_requirements.csv: rows=7; columns=4",
+      "name": "csv_readable:data_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "SPEC_ONLY_NOT_EXECUTED present",
+      "name": "status_spec_only_not_executed",
+      "status": "pass"
+    },
+    {
+      "detail": "trial id present",
+      "name": "trial_id_present",
+      "status": "pass"
+    },
+    {
+      "detail": "preregistration id present",
+      "name": "preregistration_id_present",
+      "status": "pass"
+    },
+    {
+      "detail": "long-only scope present",
+      "name": "long_only_scope_present",
+      "status": "pass"
+    },
+    {
+      "detail": "no authorization language",
+      "name": "markdown_no_authorization_language",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "features_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "features_required_set",
+      "status": "pass"
+    },
+    {
+      "detail": "lookahead_ok=True",
+      "name": "features_no_future_required_inputs",
+      "status": "pass"
+    },
+    {
+      "detail": "future_label_blocked=True",
+      "name": "features_future_return_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "parameters_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "trial_status=SPEC_ONLY_NOT_EXECUTED",
+      "name": "parameters_trial_status_spec_only",
+      "status": "pass"
+    },
+    {
+      "detail": "direction=long_only",
+      "name": "parameters_direction_long_only",
+      "status": "pass"
+    },
+    {
+      "detail": "paper_live_status=blocked",
+      "name": "parameters_paper_live_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "dsr_threshold=0.95",
+      "name": "parameters_dsr_threshold_locked",
+      "status": "pass"
+    },
+    {
+      "detail": "operational thresholds remain TBD",
+      "name": "parameters_operational_thresholds_not_final",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "decision_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "decision_required_items",
+      "status": "pass"
+    },
+    {
+      "detail": "execution=blocked",
+      "name": "decision_execution_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "promotion=blocked",
+      "name": "decision_promotion_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "cost_gate=required",
+      "name": "decision_cost_gate_required",
+      "status": "pass"
+    },
+    {
+      "detail": "outlier_gate=required",
+      "name": "decision_outlier_gate_required",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_actions_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_actions_required_set",
+      "status": "pass"
+    },
+    {
+      "detail": "all_blocked=True",
+      "name": "blocked_actions_all_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "data_requirements_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "data_requirements_required_set",
+      "status": "pass"
+    },
+    {
+      "detail": "intraday_bars=required",
+      "name": "data_intraday_required",
+      "status": "pass"
+    },
+    {
+      "detail": "raw_payload_retention=blocked_by_default",
+      "name": "data_raw_payload_blocked_by_default",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "GAPREV_PREREGISTRATION_SPEC_PASS",
+  "spec_dir": "experiments\\provider_aware_research\\gap_down_reversion_preregistration_spec_20260521",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 43,
+    "total": 43
+  }
+}

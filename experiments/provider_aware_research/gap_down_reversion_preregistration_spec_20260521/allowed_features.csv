@@ -1,0 +1,10 @@
+feature_name,status,definition,lookahead_policy,notes
+overnight_gap_return,final,"open_t0 / close_t_minus_1 - 1",pre_entry_or_at_entry,Primary dislocation measure.
+relative_opening_volume,final,"opening window volume divided by trailing regular-session average volume",pre_entry_or_observation_window,Requires fixed observation cutoff.
+vwap_reclaim_flag,final,"price reclaims regular-session VWAP before fixed cutoff",observation_window_only,Signal trigger; cutoff must be frozen before execution.
+vwap_reclaim_time_minutes,final,"minutes from regular open to first VWAP reclaim",observation_window_only,Used only if frozen in parameter manifest.
+macro_trend_regime,final,"broad market trend filter such as index above long moving average",pre_entry,Must be computed without future data.
+amihud_illiquidity,final,"rolling mean absolute return divided by dollar volume",pre_entry,Capacity/liquidity guardrail.
+spread_proxy,final,"estimated or observed bid-ask spread proxy",pre_entry_or_at_entry,Execution realism feature.
+known_catastrophic_event_flag,final,"known bankruptcy/delisting/fraud/binary-failure event before entry",pre_entry,Hard no-trade if true.
+intraday_holding_return,blocked_as_feature,"future return over holding window",future_label_only,May be label/metric only; never feature.

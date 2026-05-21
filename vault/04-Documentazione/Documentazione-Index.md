@@ -38,6 +38,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-Earnings-Timestamp-Classifier-2026-05-21]] - utility locale per classificare timestamp earnings in BMO/AMC/DMT/UNSPECIFIED.
 - [[Report-XMOM-Earnings-Single-Probe-Execution-2026-05-21]] - esecuzione bounded Intrinio/CRMD, HTTP 403 provider/access, no raw payload.
 - [[Report-Quant-Hypothesis-Generation-And-Video-Research-2026-05-21]] - manifesto spec-only per generare ipotesi falsificabili e roadmap Anno 2.
+- [[Report-Gap-Down-Reversion-Preregistration-2026-05-21]] - preregistrazione spec-only `TRIAL-GAPREV-001`, 43/43 pass.
 
 ## Handoff
 

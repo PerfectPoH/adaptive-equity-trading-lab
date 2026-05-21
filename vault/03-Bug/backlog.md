@@ -749,3 +749,5 @@ Update: Intrinio key rotation blocker resolved. User replaced the key and stored
 Update: XMOM earnings single-probe was approved and executed once for `CRMD` via Intrinio `companies/{identifier}/upcoming_earnings`. Preflight passed `21/21`; provider returned `HTTP_ERROR_403 / Forbidden`. Raw payload was not retained and no extractor/backtest/promotion occurred. Status: provider entitlement/path unresolved; do not retry blindly.
 
 Update: Research notes for future hypothesis generation archived in [[Report-Quant-Hypothesis-Generation-And-Video-Research-2026-05-21]]. They define candidate future branches for PEAD/liquidity, binary biotech catalysts and gap-down reversion, plus video-derived ideas around meta-labeling, blind execution, trade-quality tagging, cooldown locks, dollar bars, absorption and LOB filters. Status remains spec-only; no new execution is authorized.
+
+Update: `TRIAL-GAPREV-001` opened as spec-only gap-down reversion branch in [[Report-Gap-Down-Reversion-Preregistration-2026-05-21]]. Validator passes 43/43 and targeted tests pass 5/5. All execution paths remain blocked; next allowed work is an intraday data-contract gate, not a backtest.

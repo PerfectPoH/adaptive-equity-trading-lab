@@ -1,0 +1,8 @@
+requirement,status,minimum_contract,notes
+intraday_bars,required,regular-session OHLCV with timezone-aware timestamps,Minimum viable data for VWAP/gap test.
+corporate_actions,required,adjusted/unadjusted policy declared,Prevents split/dividend distortions.
+trading_calendar,required,holidays and half-days handled,Needed for close/open mapping.
+spread_or_quote_proxy,required,observed quote data or conservative spread model,No gross-only execution.
+raw_payload_retention,blocked_by_default,disabled unless separately licensed,Protects provider terms.
+provider_rate_limits,required,declared before query,Stop on rate-limit ambiguity.
+point_in_time_universe,preferred,PIT membership or explicit survivorship warning,Promotion impossible without PIT resolution.
