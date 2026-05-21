@@ -1,0 +1,22 @@
+{
+  "category_counts": {
+    "ADVERSE_CONTINUATION_OR_WEAK_REVERSION": 2,
+    "GROSS_EDGE_COST_DESTROYED": 1,
+    "NET_WIN_UNPROMOTABLE_SINGLE_EVENT": 2,
+    "RTH_SETUP_FALSE_POSITIVE_FROM_DAILY_GAP": 6,
+    "RTH_VOLUME_FILTER_FAIL": 1
+  },
+  "decision": "GAPREV_ARCHIVE_CURRENT_FORM",
+  "events_classified": 12,
+  "gross_return_sum": 0.1373459226119359,
+  "net_return_sum": -0.11265407738806399,
+  "no_new_query_performed": true,
+  "no_trade_count": 7,
+  "positive_net_trade_count": 2,
+  "primary_failure_mode": "RTH_SETUP_FALSE_POSITIVE_FROM_DAILY_GAP",
+  "run_id": "GAPREV-MINI-PANEL-PROBE-001",
+  "status": "pass",
+  "strategy_promotion_allowed": false,
+  "trade_count": 5,
+  "trial_id": "TRIAL-GAPREV-001"
+}
