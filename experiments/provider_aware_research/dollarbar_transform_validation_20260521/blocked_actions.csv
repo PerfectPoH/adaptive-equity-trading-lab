@@ -1,0 +1,8 @@
+action,status,reason
+provider_query,blocked,Validation uses frozen existing input panel.
+strategy_backtest,blocked,Data transform validation is not a strategy test.
+read_pnl,blocked,PnL metrics are forbidden by preregistration.
+directional_signal_generation,blocked,No directional signal is part of this validator.
+paper_trading,blocked,No strategy exists.
+live_trading,blocked,No strategy exists.
+strategy_promotion,blocked,A passing transform can only move to data-layer use.

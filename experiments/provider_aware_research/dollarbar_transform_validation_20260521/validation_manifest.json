@@ -1,0 +1,16 @@
+{
+  "backtest_performed": false,
+  "coverage_rate": 0.083333,
+  "decision": "DOLLARBAR_TRANSFORM_REJECTED_FOR_DATA_LAYER",
+  "ema_span": 20,
+  "evaluated_file_count": 12,
+  "live_trading_performed": false,
+  "median_stability_score_delta": -3.556627,
+  "paper_trading_performed": false,
+  "pass_distribution_stability_count": 1,
+  "provider_query_performed": false,
+  "run_id": "DOLLARBAR-TRANSFORM-VALIDATOR-001",
+  "status": "validation_complete_not_strategy",
+  "strategy_promotion_performed": false,
+  "trial_id": "TRIAL-DOLLARBAR-TRANSFORM-001"
+}

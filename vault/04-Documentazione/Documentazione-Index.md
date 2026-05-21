@@ -43,6 +43,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-Outlier-Resistant-Diagnostic-Harness-2026-05-21]] - diagnostico ALPHA-009 su artifact esistenti; nessun superstite robusto.
 - [[Report-Dollar-Bar-Diagnostic-2026-05-21]] - diagnostico ALPHA-003: dollar-bars migliorano stabilita' distributiva su 11/12 file, no alpha.
 - [[Report-DollarBar-Transform-Preregistration-2026-05-21]] - preregistrazione transform statico/adattivo con sole metriche distributive, no PnL.
+- [[Report-DollarBar-Transform-Validation-2026-05-21]] - validazione static vs EMA dollar-bars con sole metriche distributive; EMA rejected, no PnL.
 - [[Report-Quant-Hypothesis-Generation-And-Video-Research-2026-05-21]] - manifesto spec-only per generare ipotesi falsificabili e roadmap Anno 2.
 - [[Report-Gap-Down-Reversion-Preregistration-2026-05-21]] - preregistrazione spec-only `TRIAL-GAPREV-001`, 43/43 pass.
 - [[Report-GapRev-Intraday-Data-Contract-Gate-2026-05-21]] - gate data-contract intraday per GapRev, 35/35 pass, no query.
