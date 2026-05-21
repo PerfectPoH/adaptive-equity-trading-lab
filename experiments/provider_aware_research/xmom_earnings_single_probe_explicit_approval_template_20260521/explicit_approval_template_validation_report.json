@@ -1,0 +1,166 @@
+﻿{
+  "approval_granted": false,
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_explicit_approval_template_20260521",
+      "name": "template_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_explicit_approval_template_20260521\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_explicit_approval_template_20260521\\approval_fields_required.csv",
+      "name": "required_file:approval_fields_required.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_explicit_approval_template_20260521\\blocked_until_approval.csv",
+      "name": "required_file:blocked_until_approval.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_explicit_approval_template_20260521\\explicit_approval_template_manifest.json",
+      "name": "required_file:explicit_approval_template_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_explicit_approval_template_20260521\\pre_execution_package_checklist.csv",
+      "name": "required_file:pre_execution_package_checklist.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_explicit_approval_template_20260521\\explicit_approval_template_manifest.json",
+      "name": "json_readable:explicit_approval_template_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "rows=16",
+      "name": "csv_readable:approval_fields_required.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "rows=11",
+      "name": "csv_readable:pre_execution_package_checklist.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "rows=11",
+      "name": "csv_readable:blocked_until_approval.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "chars=636",
+      "name": "text_readable:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "status=TEMPLATE_ONLY_NOT_GRANTED; approval=not_granted",
+      "name": "manifest_template_identity_not_granted",
+      "status": "pass"
+    },
+    {
+      "detail": "provider=TBD; symbol=TBD",
+      "name": "manifest_provider_symbol_unresolved",
+      "status": "pass"
+    },
+    {
+      "detail": "output=False; ledger=False",
+      "name": "manifest_pre_execution_package_not_created",
+      "status": "pass"
+    },
+    {
+      "detail": "calls=1; providers=1; symbols=1; endpoints=1",
+      "name": "manifest_scope_bounded",
+      "status": "pass"
+    },
+    {
+      "detail": "safe=True",
+      "name": "manifest_no_execution_or_raw_payload",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "fields_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "fields_required_set",
+      "status": "pass"
+    },
+    {
+      "detail": "all_required=True",
+      "name": "fields_all_required",
+      "status": "pass"
+    },
+    {
+      "detail": "raw payload policy locked false",
+      "name": "fields_raw_payload_must_remain_false",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "checklist_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "all_required=True",
+      "name": "checklist_all_required_before_execution",
+      "status": "pass"
+    },
+    {
+      "detail": "statuses=['defined', 'missing']",
+      "name": "checklist_still_not_ready",
+      "status": "pass"
+    },
+    {
+      "detail": "statuses=['defined', 'missing']",
+      "name": "checklist_has_defined_controls",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_required_actions",
+      "status": "pass"
+    },
+    {
+      "detail": "all_blocked=True",
+      "name": "blocked_all_actions_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "status marker",
+      "name": "readme_template_not_granted",
+      "status": "pass"
+    },
+    {
+      "detail": "live dir separation",
+      "name": "readme_live_dir_separate",
+      "status": "pass"
+    },
+    {
+      "detail": "no-query statement",
+      "name": "readme_no_query_statement",
+      "status": "pass"
+    }
+  ],
+  "decision": "XMOM_EARNINGS_SINGLE_PROBE_EXPLICIT_APPROVAL_TEMPLATE_PASS",
+  "extractor_implemented": false,
+  "network_call_performed": false,
+  "provider_query_performed": false,
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 30,
+    "total": 30
+  },
+  "template_dir": "experiments\\provider_aware_research\\xmom_earnings_single_probe_explicit_approval_template_20260521"
+}

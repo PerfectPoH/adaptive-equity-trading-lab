@@ -46,6 +46,7 @@ tags: [vault, index, obsidian, trading-lab]
 - [[Report-XMOM-Earnings-Single-Probe-Approval-2026-05-21]] - artifact di approvazione probe one-provider/one-symbol, 38/38 pass, non interrogato.
 - [[Report-XMOM-Earnings-Single-Probe-Runner-Gate-2026-05-21]] - runner/preflight inerte per single probe: dry-run disponibile, real-run bloccato.
 - [[Report-XMOM-Earnings-Single-Probe-Execution-Preflight-2026-05-21]] - validator pre-esecuzione single probe: stato corrente bloccato.
+- [[Report-XMOM-Earnings-Single-Probe-Explicit-Approval-Template-2026-05-21]] - template approvazione esplicita single probe, 30/30 pass, non concesso.
 - [[small-cap-ranking-exits-research-track]] - track separato ranking/uscite design-only con trial accounting obbligatorio.
 - [[Project-Handoff]] - handoff completo per altre chat o agenti.
 - [[Devlog-Index]] - cronologia ordinata delle sessioni.

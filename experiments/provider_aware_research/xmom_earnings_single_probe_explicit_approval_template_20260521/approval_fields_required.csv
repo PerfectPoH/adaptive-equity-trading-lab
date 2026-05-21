@@ -1,0 +1,17 @@
+field,required,future_value_policy,status
+status,yes,must_be_APPROVAL_GRANTED_FOR_SINGLE_PROBE_PREPARATION_only_after_user_approval,not_granted
+gate_id,yes,must_equal_EARNINGS-SINGLE-PROBE-XMOM-CATALYST-001,locked
+trial_id,yes,must_equal_TRIAL-XMOM-CATALYST-001,locked
+provider,yes,must_select_one_provider,TBD
+symbol,yes,must_select_one_symbol,TBD
+endpoint,yes,must_select_one_endpoint,locked
+output_id,yes,must_equal_XMOM-EARNINGS-SINGLE-PROBE-001,locked
+output_directory_created,yes,must_be_true_after_directory_created,false
+trial_ledger_entry_created,yes,must_be_true_after_ledger_entry_created,false
+max_provider_calls,yes,must_equal_1,locked
+raw_payload_retention_allowed,yes,must_equal_false,locked
+provider_query_performed,yes,must_equal_false_before_execution,locked
+network_call_performed,yes,must_equal_false_before_execution,locked
+extractor_implemented,yes,must_equal_false,locked
+backtest_performed,yes,must_equal_false,locked
+strategy_promotion_performed,yes,must_equal_false,locked

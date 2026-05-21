@@ -1,0 +1,12 @@
+item,status,required_before_execution
+explicit_user_message,missing,yes
+provider_selected,missing,yes
+symbol_selected,missing,yes
+endpoint_selected,defined,yes
+output_directory_created,missing,yes
+pre_execution_manifest_created,missing,yes
+trial_ledger_entry_created,missing,yes
+raw_payload_retention_blocked,defined,yes
+single_call_budget_locked,defined,yes
+approval_manifest_copied_to_live_approval_dir,missing,yes
+execution_preflight_passed,missing,yes

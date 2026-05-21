@@ -33,6 +33,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-XMOM-Earnings-Single-Probe-Approval-2026-05-21]] - artifact di approvazione per probe one-provider/one-symbol; validato ma non interrogato.
 - [[Report-XMOM-Earnings-Single-Probe-Runner-Gate-2026-05-21]] - runner/preflight inerte per single probe; real-run bloccato.
 - [[Report-XMOM-Earnings-Single-Probe-Execution-Preflight-2026-05-21]] - validator pre-esecuzione single probe; stato corrente bloccato.
+- [[Report-XMOM-Earnings-Single-Probe-Explicit-Approval-Template-2026-05-21]] - template di approvazione esplicita single probe; non concesso.
 
 ## Handoff
 

@@ -1,0 +1,12 @@
+action,status,reason
+copy_to_live_approval_dir,blocked,Requires explicit user approval text.
+create_output_directory,blocked,Requires explicit user approval and selected provider/symbol.
+create_trial_ledger_entry,blocked,Requires explicit user approval and selected provider/symbol.
+execute_probe,blocked,Requires passing execution preflight.
+query_provider,blocked,Requires passing execution preflight.
+save_raw_payload,blocked,Raw payload retention remains forbidden.
+implement_extractor,blocked,Probe result cannot authorize extractor implementation by itself.
+run_oos,blocked,No strategy execution is in scope.
+paper_trading,blocked,No executable strategy exists.
+live_trading,blocked,No executable strategy exists.
+strategy_promotion,blocked,No validated strategy exists.

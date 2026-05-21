@@ -126,6 +126,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-21-codex-xmom-earnings-single-probe-approval]] - one-provider/one-symbol probe approval artifact passes 38/38 without queries.
 - [[2026-05-21-codex-xmom-earnings-single-probe-runner-gate]] - inert single-probe runner returns dry-run plan and blocked real-run report without queries.
 - [[2026-05-21-codex-xmom-earnings-single-probe-execution-preflight]] - single-probe execution preflight validator added; current state blocked without queries.
+- [[2026-05-21-codex-xmom-earnings-single-probe-explicit-approval-template]] - explicit approval template added and validated, but approval remains not granted.
 - [[2026-05-20-codex-xmom-catalyst-feature-rationale]] - theory review for catalyst lag, volume persistence and price digestion; thresholds remain TBD/non-executable.
 
 ## Convenzione
