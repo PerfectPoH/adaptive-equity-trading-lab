@@ -35,6 +35,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-XMOM-Earnings-Single-Probe-Execution-Preflight-2026-05-21]] - validator pre-esecuzione single probe; stato corrente bloccato.
 - [[Report-XMOM-Earnings-Single-Probe-Explicit-Approval-Template-2026-05-21]] - template di approvazione esplicita single probe; non concesso.
 - [[Report-XMOM-Earnings-Single-Probe-Theoretical-Review-2026-05-21]] - review teorica provider/simbolo Intrinio/CRMD; non approvata.
+- [[Report-Earnings-Timestamp-Classifier-2026-05-21]] - utility locale per classificare timestamp earnings in BMO/AMC/DMT/UNSPECIFIED.
 
 ## Handoff
 

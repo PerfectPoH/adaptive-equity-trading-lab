@@ -1,0 +1,18 @@
+﻿{
+  "status": "pass",
+  "decision": "EARNINGS_TIMESTAMP_CLASSIFIER_VALIDATION_PASS",
+  "provider_query_performed": false,
+  "network_call_performed": false,
+  "extractor_implemented": false,
+  "tested_policy": {
+    "timezone": "America/New_York",
+    "bmo": "local_time < 09:30 -> allow_candidate same_regular_session",
+    "dmt": "09:30 <= local_time < 16:00 -> purge",
+    "amc": "local_time >= 16:00 -> allow_candidate next_regular_session",
+    "unspecified": "missing/date-only/midnight/invalid -> purge"
+  },
+  "targeted_tests": {
+    "passed": 8,
+    "failed": 0
+  }
+}
