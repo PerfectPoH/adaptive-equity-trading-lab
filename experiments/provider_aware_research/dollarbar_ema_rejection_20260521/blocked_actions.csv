@@ -1,0 +1,4 @@
+action,status,reason
+use_ema_in_microrev,blocked,Rejected by validation.
+retune_ema_span,blocked,Would be post-hoc tuning.
+compare_ema_by_pnl,blocked,PnL was forbidden in transform validation.

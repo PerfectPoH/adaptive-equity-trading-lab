@@ -1,0 +1,26 @@
+{
+  "bar_transform": "static_average_dollar_bucket",
+  "direction": "long_only_micro_reversion_after_negative_dollarbar_shock",
+  "input_file_count": 12,
+  "input_panel": "existing_gaprev_mini_panel_databento_intraday_probe_20260521",
+  "live_trading_performed": false,
+  "oos_claim_performed": false,
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "parameters": {
+    "hold_bars": 3,
+    "min_net_return_sum_for_promotion": 0.0,
+    "min_positive_net_trade_rate": 0.5,
+    "min_rolling_observations": 10,
+    "min_trade_count_for_promotion": 30,
+    "rolling_window_bars": 20,
+    "round_trip_cost_bps": 500.0,
+    "shock_z_threshold": -1.5
+  },
+  "preregistration_id": "PREREG-DOLLARBAR-MICROREV-001",
+  "promotion_rule": "trade_count>=30 and net_return_sum>0 and positive_net_trade_rate>=0.50",
+  "provider_query_performed": false,
+  "run_id": "DOLLARBAR-MICROREV-RUN-001",
+  "status": "PREREGISTERED_EXISTING_PANEL_ONLY",
+  "trial_id": "TRIAL-DOLLARBAR-MICROREV-001"
+}

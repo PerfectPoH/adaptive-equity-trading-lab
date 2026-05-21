@@ -1,0 +1,29 @@
+{
+  "backtest_performed_on_existing_panel": true,
+  "decision": "DOLLARBAR_MICROREV_ARCHIVE_CURRENT_FORM",
+  "evaluated_file_count": 12,
+  "gross_return_sum": -0.8469489896,
+  "live_trading_performed": false,
+  "net_return_sum": -7.8469489896,
+  "paper_trading_performed": false,
+  "points_completed": {
+    "1_static_dollarbar_data_layer_contract": "STATIC_DOLLARBAR_DATA_LAYER_CANONICAL",
+    "2_ema_transform_blocked": "EMA_DOLLARBAR_TRANSFORM_REJECTED_AND_BLOCKED",
+    "3_microrev_preregistration": "PREREGISTERED_EXISTING_PANEL_ONLY",
+    "4_static_dollarbar_microrev_probe": "evaluated_existing_panel",
+    "5_final_decision": "NO_PROMOTION"
+  },
+  "positive_net_trade_rate": 0.0,
+  "promotion_allowed": false,
+  "promotion_blockers": [
+    "net_return_not_positive_after_500bps",
+    "positive_net_trade_rate_below_50pct"
+  ],
+  "provider_query_performed": false,
+  "round_trip_cost_bps": 500.0,
+  "run_id": "DOLLARBAR-MICROREV-RUN-001",
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trade_count": 140,
+  "trial_id": "TRIAL-DOLLARBAR-MICROREV-001"
+}

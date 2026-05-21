@@ -1,0 +1,21 @@
+{
+  "evaluated_file_count": 12,
+  "gross_return_sum": -0.8469489896,
+  "live_trading_performed": false,
+  "net_return_sum": -7.8469489896,
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "positive_net_trade_count": 0,
+  "positive_net_trade_rate": 0.0,
+  "promotion_allowed": false,
+  "promotion_blockers": [
+    "net_return_not_positive_after_500bps",
+    "positive_net_trade_rate_below_50pct"
+  ],
+  "provider_query_performed": false,
+  "round_trip_cost_bps": 500.0,
+  "run_id": "DOLLARBAR-MICROREV-RUN-001",
+  "status": "evaluated_existing_panel",
+  "trade_count": 140,
+  "trial_id": "TRIAL-DOLLARBAR-MICROREV-001"
+}

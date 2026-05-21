@@ -1,0 +1,9 @@
+parameter,value,status
+shock_z_threshold,-1.5,frozen
+rolling_window_bars,20,frozen
+min_rolling_observations,10,frozen
+hold_bars,3,frozen
+round_trip_cost_bps,500.0,frozen
+min_trade_count_for_promotion,30,frozen
+min_net_return_sum_for_promotion,0.0,frozen
+min_positive_net_trade_rate,0.5,frozen

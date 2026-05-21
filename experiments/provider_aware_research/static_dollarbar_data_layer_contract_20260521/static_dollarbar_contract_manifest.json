@@ -1,0 +1,17 @@
+{
+  "allowed_transform": "static_average_dollar_bucket",
+  "backtest_performed": false,
+  "contract_id": "CONTRACT-STATIC-DOLLARBAR-001",
+  "forbidden_transforms": [
+    "rolling_ema_dollar_bucket",
+    "pnl_selected_bucket",
+    "strategy_return_selected_bucket"
+  ],
+  "input_file_count": 12,
+  "live_trading_performed": false,
+  "paper_trading_performed": false,
+  "provider_query_performed": false,
+  "source": "Report-Dollar-Bar-Diagnostic-2026-05-21 and rejected EMA validation",
+  "status": "STATIC_DOLLARBAR_DATA_LAYER_CANONICAL",
+  "target_bucket_formula": "sum(close * volume) / time_bar_count"
+}

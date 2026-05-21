@@ -1,0 +1,12 @@
+{
+  "backtest_performed": false,
+  "future_use_policy": "blocked_until_new_preregistration_with_new_data_or_theory",
+  "live_trading_performed": false,
+  "paper_trading_performed": false,
+  "prior_coverage_rate": 0.083333,
+  "prior_decision": "DOLLARBAR_TRANSFORM_REJECTED_FOR_DATA_LAYER",
+  "prior_median_stability_score_delta": -3.556627,
+  "provider_query_performed": false,
+  "rejection_id": "REJECT-EMA-DOLLARBAR-001",
+  "status": "EMA_DOLLARBAR_TRANSFORM_REJECTED_AND_BLOCKED"
+}

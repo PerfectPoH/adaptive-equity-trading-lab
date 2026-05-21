@@ -1,0 +1,5 @@
+action,status,reason
+select_bucket_from_pnl,blocked,Static bucket is a data-layer rule.
+use_ema_bucket,blocked,EMA transform failed preregistered validation.
+paper_trading,blocked,Data-layer contract is not a strategy.
+live_trading,blocked,Data-layer contract is not a strategy.

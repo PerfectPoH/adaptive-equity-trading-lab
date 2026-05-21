@@ -1,0 +1,4 @@
+action,status,reason
+parameter_sweep,blocked,One frozen parameter set only.
+provider_query,blocked,Existing panel only.
+strategy_promotion,blocked,Requires final gate pass.
