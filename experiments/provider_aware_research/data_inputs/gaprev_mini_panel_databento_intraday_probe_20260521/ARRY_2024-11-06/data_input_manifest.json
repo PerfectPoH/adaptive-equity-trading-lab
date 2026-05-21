@@ -1,0 +1,15 @@
+{
+  "daily_gap": -0.06833114323258871,
+  "daily_relative_volume": 4.041632611311685,
+  "derived_bars_sha256": "0d89e6a0ce711fcc15271e468d5b32ceda3b0a8541f6de49f487ceb10de4dbd4",
+  "end": "2024-11-06T21:00:00Z",
+  "event_date": "2024-11-06",
+  "previous_date": "2024-11-05",
+  "provider_dataset": "XNAS.ITCH",
+  "raw_payload_retained": false,
+  "rows": 742,
+  "start": "2024-11-05T14:30:00Z",
+  "status": "pass",
+  "symbol": "ARRY",
+  "validation_status": "pass"
+}

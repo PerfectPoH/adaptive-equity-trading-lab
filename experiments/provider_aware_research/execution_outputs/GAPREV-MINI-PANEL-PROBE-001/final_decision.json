@@ -1,0 +1,26 @@
+{
+  "decision": "MINI_PANEL_COMPLETE__NO_PROMOTION",
+  "events_selected": 12,
+  "gross_return_sum": 0.1373459226119359,
+  "net_return_mean": -0.022530815477612827,
+  "net_return_sum": -0.11265407738806413,
+  "points_completed": {
+    "1_mini_panel_event_gate": "MINI_PANEL_SELECTED_FOR_CONTROLLED_PROBE",
+    "2_probe_approval": "APPROVED_MINI_PANEL_PROVIDER_PROBE",
+    "3_intraday_data_ingestion_and_replay": "pass",
+    "4_post_run_validation": "pass",
+    "5_decision": "NO_PROMOTION"
+  },
+  "positive_net_trade_count": 2,
+  "promotion_allowed": false,
+  "promotion_blockers": [
+    "mini_panel_below_30_trades",
+    "dsr_not_valid_for_small_sample",
+    "known_forensic_universe"
+  ],
+  "round_trip_cost_bps": 500.0,
+  "run_id": "GAPREV-MINI-PANEL-PROBE-001",
+  "status": "promotion_blocked",
+  "trade_count": 5,
+  "trial_id": "TRIAL-GAPREV-001"
+}

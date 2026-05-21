@@ -1,0 +1,15 @@
+{
+  "daily_gap": -0.05392156862745101,
+  "daily_relative_volume": 2.2653040550078525,
+  "derived_bars_sha256": "386009ee931e288772ad85f1b0f1cd851c2036a979c027098ec3f0af936ef813",
+  "end": "2025-09-18T20:00:00Z",
+  "event_date": "2025-09-18",
+  "previous_date": "2025-09-17",
+  "provider_dataset": "XNAS.ITCH",
+  "raw_payload_retained": false,
+  "rows": 442,
+  "start": "2025-09-17T13:30:00Z",
+  "status": "pass",
+  "symbol": "CABA",
+  "validation_status": "pass"
+}

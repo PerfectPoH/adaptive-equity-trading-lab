@@ -1,0 +1,5 @@
+action,status,reason
+parameter_sweep,blocked,Frozen GapRev parameters only.
+save_raw_payload,blocked,Derived bars only.
+expand_beyond_selected_panel,blocked,Panel fixed before provider calls.
+strategy_promotion,blocked,Mini-panel remains below promotion sample-size gate.

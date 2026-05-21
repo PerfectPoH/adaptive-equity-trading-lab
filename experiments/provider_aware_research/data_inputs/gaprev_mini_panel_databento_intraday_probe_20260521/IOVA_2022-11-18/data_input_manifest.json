@@ -1,0 +1,15 @@
+{
+  "daily_gap": -0.08873239436619718,
+  "daily_relative_volume": 2.8289106029513533,
+  "derived_bars_sha256": "fdd44c6f69abec20cd850709ce19a9dec4eae38d82ee2a10373f1513a96e5f04",
+  "end": "2022-11-18T21:00:00Z",
+  "event_date": "2022-11-18",
+  "previous_date": "2022-11-17",
+  "provider_dataset": "XNAS.ITCH",
+  "raw_payload_retained": false,
+  "rows": 737,
+  "start": "2022-11-17T14:30:00Z",
+  "status": "pass",
+  "symbol": "IOVA",
+  "validation_status": "pass"
+}

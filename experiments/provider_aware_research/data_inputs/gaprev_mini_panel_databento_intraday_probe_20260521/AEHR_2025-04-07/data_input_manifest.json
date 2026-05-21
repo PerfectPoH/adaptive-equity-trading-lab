@@ -1,0 +1,15 @@
+{
+  "daily_gap": -0.06796116504854377,
+  "daily_relative_volume": 2.4142436541315497,
+  "derived_bars_sha256": "7b1c75b1c3a513c421aab554643c191222d774a626640ba02cc847f0ff3fede6",
+  "end": "2025-04-07T20:00:00Z",
+  "event_date": "2025-04-07",
+  "previous_date": "2025-04-04",
+  "provider_dataset": "XNAS.ITCH",
+  "raw_payload_retained": false,
+  "rows": 702,
+  "start": "2025-04-04T13:30:00Z",
+  "status": "pass",
+  "symbol": "AEHR",
+  "validation_status": "pass"
+}

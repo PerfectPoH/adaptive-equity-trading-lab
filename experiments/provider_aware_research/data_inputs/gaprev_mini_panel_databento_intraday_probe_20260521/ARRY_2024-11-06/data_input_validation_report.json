@@ -1,0 +1,55 @@
+{
+  "checks": [
+    {
+      "detail": "missing=[]",
+      "name": "required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "rows=742",
+      "name": "non_empty",
+      "status": "pass"
+    },
+    {
+      "detail": "invalid=0",
+      "name": "timestamps_parse_utc",
+      "status": "pass"
+    },
+    {
+      "detail": "timestamps must be sorted",
+      "name": "chronological",
+      "status": "pass"
+    },
+    {
+      "detail": "OHLCV fields numeric",
+      "name": "numeric_fields_parse",
+      "status": "pass"
+    },
+    {
+      "detail": "open/high/low/close > 0",
+      "name": "positive_ohlc",
+      "status": "pass"
+    },
+    {
+      "detail": "volume >= 0",
+      "name": "non_negative_volume",
+      "status": "pass"
+    },
+    {
+      "detail": "high/low contain open/close",
+      "name": "high_low_envelope",
+      "status": "pass"
+    },
+    {
+      "detail": "raw payload retention blocked",
+      "name": "raw_payload_absent",
+      "status": "pass"
+    }
+  ],
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 9,
+    "total": 9
+  }
+}

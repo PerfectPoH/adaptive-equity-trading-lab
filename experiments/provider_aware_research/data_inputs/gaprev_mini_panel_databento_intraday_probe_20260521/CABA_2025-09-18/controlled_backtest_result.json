@@ -1,0 +1,13 @@
+{
+  "decision": "GAPREV_CONTROLLED_BACKTEST_EXECUTED_NO_TRADE",
+  "gap_return": 0.01041666666666674,
+  "open_price": 1.94,
+  "prior_close": 1.92,
+  "promotion_allowed": false,
+  "reason": "setup_filter_not_met",
+  "relative_opening_volume": 2.022466314362394,
+  "run_id": "GAPREV-MINI-PANEL-PROBE-001",
+  "status": "pass",
+  "trade_count": 0,
+  "trial_id": "TRIAL-GAPREV-001"
+}

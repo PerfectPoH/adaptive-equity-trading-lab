@@ -1,0 +1,15 @@
+{
+  "daily_gap": -0.05982905982905984,
+  "daily_relative_volume": 2.9447160219440693,
+  "derived_bars_sha256": "b73a79cb61eb9d78cb0e2bb1c4d6bac67c91a510ff0499875550ebde03c7a105",
+  "end": "2024-03-12T20:00:00Z",
+  "event_date": "2024-03-12",
+  "previous_date": "2024-03-11",
+  "provider_dataset": "XNAS.ITCH",
+  "raw_payload_retained": false,
+  "rows": 439,
+  "start": "2024-03-11T13:30:00Z",
+  "status": "pass",
+  "symbol": "CRMD",
+  "validation_status": "pass"
+}

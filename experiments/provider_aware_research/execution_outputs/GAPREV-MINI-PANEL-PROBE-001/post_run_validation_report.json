@@ -1,0 +1,26 @@
+{
+  "checks": [
+    {
+      "name": "results_file_written",
+      "status": "pass"
+    },
+    {
+      "name": "panel_has_at_least_one_event",
+      "status": "pass"
+    },
+    {
+      "name": "round_trip_cost_500bps_enforced",
+      "status": "pass"
+    },
+    {
+      "name": "promotion_blocked_below_30_trades",
+      "status": "pass"
+    },
+    {
+      "name": "no_dsr_claim_for_small_sample",
+      "status": "pass"
+    }
+  ],
+  "decision": "GAPREV_MINI_PANEL_POST_RUN_PASS_PROMOTION_BLOCKED",
+  "status": "pass"
+}

@@ -1,0 +1,28 @@
+{
+  "decision": "GAPREV_CONTROLLED_BACKTEST_EXECUTED_PROMOTION_BLOCKED",
+  "entry_price": 1.75,
+  "exit_price": 1.685,
+  "exit_timestamp": "2025-06-11T16:14:00+00:00",
+  "gap_return": -0.1343283582089554,
+  "gross_return": -0.037142857142857144,
+  "net_return": -0.08714285714285715,
+  "open_price": 2.03,
+  "prior_close": 2.345,
+  "promotion_allowed": false,
+  "promotion_blockers": [
+    "single_symbol_single_event_controlled_probe",
+    "trade_count_below_30",
+    "dsr_not_computable_from_one_trade",
+    "known_forensic_symbol_not_clean_oos"
+  ],
+  "provider_dataset": "XNAS.ITCH",
+  "relative_opening_volume": 15.145049055625188,
+  "round_trip_cost_bps": 500.0,
+  "run_id": "GAPREV-MINI-PANEL-PROBE-001",
+  "schema": "ohlcv-1m",
+  "status": "pass",
+  "symbol": "CABA",
+  "trade_count": 1,
+  "trial_id": "TRIAL-GAPREV-001",
+  "vwap_reclaim_timestamp": "2025-06-11T14:14:00+00:00"
+}

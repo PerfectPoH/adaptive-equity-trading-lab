@@ -1,0 +1,28 @@
+{
+  "decision": "GAPREV_CONTROLLED_BACKTEST_EXECUTED_PROMOTION_BLOCKED",
+  "entry_price": 28.61,
+  "exit_price": 29.65,
+  "exit_timestamp": "2023-03-02T16:30:00+00:00",
+  "gap_return": -0.20416088765603324,
+  "gross_return": 0.036350926249563154,
+  "net_return": -0.01364907375043685,
+  "open_price": 28.69,
+  "prior_close": 36.05,
+  "promotion_allowed": false,
+  "promotion_blockers": [
+    "single_symbol_single_event_controlled_probe",
+    "trade_count_below_30",
+    "dsr_not_computable_from_one_trade",
+    "known_forensic_symbol_not_clean_oos"
+  ],
+  "provider_dataset": "XNAS.ITCH",
+  "relative_opening_volume": 16.830820770519264,
+  "round_trip_cost_bps": 500.0,
+  "run_id": "GAPREV-MINI-PANEL-PROBE-001",
+  "schema": "ohlcv-1m",
+  "status": "pass",
+  "symbol": "AEHR",
+  "trade_count": 1,
+  "trial_id": "TRIAL-GAPREV-001",
+  "vwap_reclaim_timestamp": "2023-03-02T14:30:00+00:00"
+}

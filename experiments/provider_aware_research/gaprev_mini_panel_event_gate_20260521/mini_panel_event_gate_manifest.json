@@ -1,0 +1,14 @@
+{
+  "gate_id": "GAPREV-MINI-PANEL-EVENT-GATE-001",
+  "panel_size_requested": 15,
+  "panel_size_selected": 12,
+  "parameter_sweep_performed": false,
+  "pnl_intraday_observed_before_selection": false,
+  "round_trip_cost_bps_locked": 500.0,
+  "run_id": "GAPREV-MINI-PANEL-PROBE-001",
+  "selection_rule": "daily_gap<=-5pct AND daily_relative_volume>=2x; exclude CRMD 2025-05-06 false RTH-open case; rank by daily_relative_volume desc",
+  "source_daily_file": "experiments\\provider_aware_research\\data_inputs\\databento_xmom_20260520\\prices.csv",
+  "status": "MINI_PANEL_SELECTED_FOR_CONTROLLED_PROBE",
+  "strategy_promotion_authorized": false,
+  "trial_id": "TRIAL-GAPREV-001"
+}

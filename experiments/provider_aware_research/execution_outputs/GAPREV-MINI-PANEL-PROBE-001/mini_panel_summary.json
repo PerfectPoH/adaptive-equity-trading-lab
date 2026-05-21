@@ -1,0 +1,19 @@
+{
+  "events_selected": 12,
+  "events_with_data": 12,
+  "gross_return_sum": 0.1373459226119359,
+  "net_return_mean": -0.022530815477612827,
+  "net_return_sum": -0.11265407738806413,
+  "positive_net_trade_count": 2,
+  "promotion_allowed": false,
+  "promotion_blockers": [
+    "mini_panel_below_30_trades",
+    "dsr_not_valid_for_small_sample",
+    "known_forensic_universe"
+  ],
+  "round_trip_cost_bps": 500.0,
+  "run_id": "GAPREV-MINI-PANEL-PROBE-001",
+  "status": "pass",
+  "trade_count": 5,
+  "trial_id": "TRIAL-GAPREV-001"
+}

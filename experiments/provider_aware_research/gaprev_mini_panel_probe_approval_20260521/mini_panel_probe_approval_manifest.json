@@ -1,0 +1,12 @@
+{
+  "candidate_count": 12,
+  "derived_bars_retention_allowed": true,
+  "gate_id": "GAPREV-MINI-PANEL-PROBE-APPROVAL-001",
+  "max_provider_calls": 12,
+  "provider": "Databento Historical",
+  "raw_payload_retention_allowed": false,
+  "run_id": "GAPREV-MINI-PANEL-PROBE-001",
+  "schema": "ohlcv-1m",
+  "status": "APPROVED_MINI_PANEL_PROVIDER_PROBE",
+  "trial_id": "TRIAL-GAPREV-001"
+}
