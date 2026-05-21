@@ -1,0 +1,13 @@
+field,value
+status,APPROVED_SINGLE_PROVIDER_PROBE
+gate_id,GAPREV-SINGLE-PROVIDER-PROBE-001
+trial_id,TRIAL-GAPREV-001
+provider,Databento Historical
+dataset,XNAS.ITCH
+schema,ohlcv-1m
+symbols,"[""CRMD""]"
+start,2025-05-05T13:30:00Z
+end,2025-05-06T20:00:00Z
+max_provider_calls,1
+raw_payload_retention_allowed,False
+derived_bars_retention_allowed,True

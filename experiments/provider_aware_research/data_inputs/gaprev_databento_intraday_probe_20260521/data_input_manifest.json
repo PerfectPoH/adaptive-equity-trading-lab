@@ -1,0 +1,21 @@
+{
+  "dataset": "XNAS.ITCH",
+  "derived_bars_file": "bars.csv",
+  "derived_bars_sha256": "6744dc65b9e602b915dbdf14f065935852fb4e29e4363edb6d3aeb4f732c8049",
+  "end": "2025-05-06T20:00:00Z",
+  "gate_id": "GAPREV-INTRADAY-DATA-INGESTION-001",
+  "network_call_performed": true,
+  "provider": "Databento Historical",
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "rows": 662,
+  "schema": "ohlcv-1m",
+  "session_filter": "RTH_09:30_16:00_America/New_York",
+  "start": "2025-05-05T13:30:00Z",
+  "status": "pass",
+  "symbols": [
+    "CRMD"
+  ],
+  "trial_id": "TRIAL-GAPREV-001",
+  "validation_status": "pass"
+}

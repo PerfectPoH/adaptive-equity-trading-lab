@@ -1,0 +1,4 @@
+provider,role,status,rationale,blocked_use
+Databento Historical,primary_intraday_bars,selected,Existing provider evidence supports XNAS.ITCH OHLCV minute bars; PIT symbology remains a future scale requirement.,promotion_without_multi_event_validation
+Polygon,secondary_crosscheck,rejected_for_this_run,Prior provider audit recorded free-tier minute aggregate access failure.,primary_intraday_source
+Intrinio,earnings_calendar_metadata,not_used_in_this_run,"Useful for BMO/AMC earnings timestamps, not needed for this pure intraday CRMD probe.",price_microstructure_source

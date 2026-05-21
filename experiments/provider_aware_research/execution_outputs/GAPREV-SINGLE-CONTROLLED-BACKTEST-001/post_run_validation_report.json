@@ -1,0 +1,30 @@
+{
+  "checks": [
+    {
+      "name": "execution_artifact_present",
+      "status": "pass"
+    },
+    {
+      "name": "no_parameter_sweep",
+      "status": "pass"
+    },
+    {
+      "name": "no_paper_or_live",
+      "status": "pass"
+    },
+    {
+      "name": "promotion_blocked_below_min_trade_count",
+      "status": "pass"
+    },
+    {
+      "name": "dsr_not_claimed_for_single_trade",
+      "status": "pass"
+    }
+  ],
+  "decision": "GAPREV_POST_RUN_VALIDATION_PASS_PROMOTION_BLOCKED",
+  "promotion_allowed": false,
+  "run_id": "GAPREV-SINGLE-CONTROLLED-BACKTEST-001",
+  "status": "pass",
+  "trade_count": 0,
+  "trial_id": "TRIAL-GAPREV-001"
+}

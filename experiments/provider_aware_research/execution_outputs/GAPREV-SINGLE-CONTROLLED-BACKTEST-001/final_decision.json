@@ -1,0 +1,23 @@
+{
+  "artifact_root": "experiments\\provider_aware_research\\execution_outputs\\GAPREV-SINGLE-CONTROLLED-BACKTEST-001",
+  "decision": "TECHNICAL_CONTROLLED_RUN_COMPLETE__NO_PROMOTION",
+  "net_return": null,
+  "points_completed": {
+    "1_provider_selection_gate": "PROVIDER_SELECTED_FOR_SINGLE_CONTROLLED_PROBE",
+    "2_single_provider_probe_approval": "APPROVED_SINGLE_PROVIDER_PROBE",
+    "3_intraday_data_ingestion_gate": "pass",
+    "4_parameter_freeze": "PARAMETERS_FROZEN_FOR_SINGLE_CONTROLLED_PROBE",
+    "5_pre_run_gate": "pass",
+    "6_single_controlled_backtest": "pass",
+    "7_post_run_validation": "pass",
+    "8_decision": "NO_PROMOTION"
+  },
+  "promotion_allowed": false,
+  "promotion_blockers": [
+    "controlled_probe_not_promotable"
+  ],
+  "run_id": "GAPREV-SINGLE-CONTROLLED-BACKTEST-001",
+  "status": "promotion_blocked",
+  "trade_count": 0,
+  "trial_id": "TRIAL-GAPREV-001"
+}

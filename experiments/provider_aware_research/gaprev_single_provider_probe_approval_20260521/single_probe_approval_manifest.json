@@ -1,0 +1,16 @@
+{
+  "dataset": "XNAS.ITCH",
+  "derived_bars_retention_allowed": true,
+  "end": "2025-05-06T20:00:00Z",
+  "gate_id": "GAPREV-SINGLE-PROVIDER-PROBE-001",
+  "max_provider_calls": 1,
+  "provider": "Databento Historical",
+  "raw_payload_retention_allowed": false,
+  "schema": "ohlcv-1m",
+  "start": "2025-05-05T13:30:00Z",
+  "status": "APPROVED_SINGLE_PROVIDER_PROBE",
+  "symbols": [
+    "CRMD"
+  ],
+  "trial_id": "TRIAL-GAPREV-001"
+}

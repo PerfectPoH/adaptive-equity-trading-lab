@@ -1,0 +1,16 @@
+{
+  "no_parameter_sweep": true,
+  "no_threshold_selection_from_probe_pnl": true,
+  "parameters": {
+    "direction": "long_only",
+    "dsr_threshold": 0.95,
+    "gap_threshold": -0.05,
+    "holding_window_minutes": 120,
+    "min_trades_for_promotion": 30,
+    "relative_opening_volume_threshold": 2.0,
+    "round_trip_cost_bps": 500.0,
+    "vwap_reclaim_cutoff_local": "10:30"
+  },
+  "status": "PARAMETERS_FROZEN_FOR_SINGLE_CONTROLLED_PROBE",
+  "trial_id": "TRIAL-GAPREV-001"
+}

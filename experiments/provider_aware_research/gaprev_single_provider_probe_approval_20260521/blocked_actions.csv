@@ -1,0 +1,5 @@
+action,status,reason
+all_symbols_scan,blocked,Single probe only.
+save_raw_payload,blocked,Only derived bars and summaries retained.
+parameter_sweep,blocked,Parameters must be frozen before run.
+strategy_promotion,blocked,Controlled probe cannot promote.

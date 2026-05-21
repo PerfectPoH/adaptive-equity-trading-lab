@@ -1,0 +1,7 @@
+check,status
+provider_selected,pass
+single_probe_approved,pass
+data_ingestion_passed,pass
+raw_payload_not_retained,pass
+parameters_frozen,pass
+no_parameter_sweep,pass

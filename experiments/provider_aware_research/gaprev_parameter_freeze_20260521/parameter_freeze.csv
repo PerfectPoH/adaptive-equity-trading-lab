@@ -1,0 +1,9 @@
+parameter,value,status,notes
+direction,long_only,frozen,Research spec.
+gap_threshold,-0.05,frozen,Ex-ante gap-down magnitude threshold.
+relative_opening_volume_threshold,2.0,frozen,First 30 minutes vs previous session first 30 minutes.
+vwap_reclaim_cutoff_local,10:30,frozen,America/New_York cutoff.
+holding_window_minutes,120,frozen,Intraday only.
+round_trip_cost_bps,500.0,frozen,Conservative cost haircut.
+min_trades_for_promotion,30,frozen,Promotion impossible below this count.
+dsr_threshold,0.95,frozen,Promotion gate.

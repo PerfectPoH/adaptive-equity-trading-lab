@@ -1,0 +1,31 @@
+{
+  "checks": [
+    {
+      "name": "provider_selected",
+      "status": "pass"
+    },
+    {
+      "name": "single_probe_approved",
+      "status": "pass"
+    },
+    {
+      "name": "data_ingestion_passed",
+      "status": "pass"
+    },
+    {
+      "name": "raw_payload_not_retained",
+      "status": "pass"
+    },
+    {
+      "name": "parameters_frozen",
+      "status": "pass"
+    },
+    {
+      "name": "no_parameter_sweep",
+      "status": "pass"
+    }
+  ],
+  "gate_id": "GAPREV-PRE-RUN-GATE-001",
+  "status": "pass",
+  "trial_id": "TRIAL-GAPREV-001"
+}

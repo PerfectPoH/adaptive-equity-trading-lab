@@ -1,0 +1,10 @@
+{
+  "live_trading_performed": false,
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "run_id": "GAPREV-SINGLE-CONTROLLED-BACKTEST-001",
+  "single_controlled_backtest_performed": true,
+  "status": "pass",
+  "strategy_promotion_performed": false,
+  "trial_id": "TRIAL-GAPREV-001"
+}

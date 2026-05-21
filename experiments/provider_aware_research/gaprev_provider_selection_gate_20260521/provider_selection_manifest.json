@@ -1,0 +1,14 @@
+{
+  "gate_id": "GAPREV-PROVIDER-SELECTION-001",
+  "no_multi_symbol_scan": true,
+  "no_parameter_sweep": true,
+  "no_raw_payload_retention": true,
+  "no_strategy_promotion": true,
+  "selected_dataset": "XNAS.ITCH",
+  "selected_provider": "Databento Historical",
+  "selected_schema": "ohlcv-1m",
+  "selection_scope": "single_symbol_two_session_controlled_probe_only",
+  "status": "PROVIDER_SELECTED_FOR_SINGLE_CONTROLLED_PROBE",
+  "symbol": "CRMD",
+  "trial_id": "TRIAL-GAPREV-001"
+}
