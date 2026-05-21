@@ -37,6 +37,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-XMOM-Earnings-Single-Probe-Theoretical-Review-2026-05-21]] - review teorica provider/simbolo Intrinio/CRMD; non approvata.
 - [[Report-Earnings-Timestamp-Classifier-2026-05-21]] - utility locale per classificare timestamp earnings in BMO/AMC/DMT/UNSPECIFIED.
 - [[Report-XMOM-Earnings-Single-Probe-Execution-2026-05-21]] - esecuzione bounded Intrinio/CRMD, HTTP 403 provider/access, no raw payload.
+- [[Report-Quant-Hypothesis-Generation-And-Video-Research-2026-05-21]] - manifesto spec-only per generare ipotesi falsificabili e roadmap Anno 2.
 
 ## Handoff
 
