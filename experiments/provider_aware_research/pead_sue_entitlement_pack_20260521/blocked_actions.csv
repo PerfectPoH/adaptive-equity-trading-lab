@@ -1,0 +1,6 @@
+action,status,reason
+query_provider_without_entitlement_answer,blocked,"The current step is a pre-query entitlement pack, not execution."
+infer_sue_from_price_reaction,blocked,Using post-event returns to infer earnings surprise is direct label leakage.
+scrape_unversioned_web_pages,blocked,Unversioned pages do not provide PIT consensus or auditable revision policy.
+run_pead_backtest,blocked,No validated PIT SUE provider has passed the one-call probe.
+promote_strategy,blocked,"No PEAD signal, no backtest, no CPCV/DSR result."

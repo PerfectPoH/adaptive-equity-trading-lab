@@ -1,0 +1,30 @@
+{
+  "backtest_authorized": false,
+  "candidate_provider_priority": [
+    "Intrinio Zacks EPS Surprises if entitlement is verified",
+    "Nasdaq Data Link / Zacks if subscription and schema are verified",
+    "Estimize if API access and coverage policy are verified"
+  ],
+  "candidate_symbol": "CRMD",
+  "failure_decision": "BLOCKED_PIT_SUE_PROVIDER_UNAVAILABLE",
+  "max_provider_calls": 1,
+  "network_call_authorized_now": false,
+  "raw_payload_retention": false,
+  "required_output_fields": [
+    "provider",
+    "endpoint",
+    "symbol",
+    "fiscal_period",
+    "report_date",
+    "actual_eps",
+    "consensus_eps_or_estimated_eps",
+    "surprise_magnitude",
+    "surprise_percent_or_computable_equivalent",
+    "point_in_time_evidence",
+    "sec_edgar_join_key"
+  ],
+  "run_id": "PEAD-SUE-ENTITLEMENT-PACK-001",
+  "status": "approved_template_not_executable",
+  "success_decision": "SUE_PROVIDER_ENTITLEMENT_VERIFIED_FOR_SINGLE_PROBE_ONLY",
+  "trial_id": "TRIAL-PEAD-EARNINGS-001"
+}

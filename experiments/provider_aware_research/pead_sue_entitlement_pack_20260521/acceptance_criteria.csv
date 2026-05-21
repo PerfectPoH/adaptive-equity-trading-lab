@@ -1,0 +1,6 @@
+criterion_id,requirement,pass_condition,blocking_if_failed
+ACCEPT_001,single_probe_scope,"Exactly one provider, one symbol, one endpoint, one network call, and no raw payload retention.",True
+ACCEPT_002,sue_schema,"Probe summary contains actual EPS, consensus or estimated EPS, surprise magnitude, surprise percent or computable equivalent, fiscal period, and report date.",True
+ACCEPT_003,point_in_time_claim,"Provider documentation or response metadata supports point-in-time use, as-of query semantics, or an auditable pre-release estimate snapshot.",True
+ACCEPT_004,sec_join_compatibility,Provider record can be joined to SEC EDGAR Item 2.02 event by symbol/CIK plus fiscal period/report date without using returns.,True
+ACCEPT_005,no_strategy_execution,"The provider probe produces only entitlement/schema evidence; no extractor, PEAD backtest, parameter sweep, paper trade, live trade, or promotion is executed.",True

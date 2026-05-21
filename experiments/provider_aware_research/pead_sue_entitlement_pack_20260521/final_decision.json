@@ -1,0 +1,13 @@
+{
+  "backtest_performed": false,
+  "decision": "READY_FOR_SUE_PROVIDER_ENTITLEMENT_VERIFICATION",
+  "live_trading_performed": false,
+  "network_call_performed_now": false,
+  "next_unblocked_step": "Answer provider entitlement questions, then run exactly one approved SUE schema probe for CRMD if all acceptance criteria can be tested.",
+  "paper_trading_performed": false,
+  "provider_query_performed_now": false,
+  "run_id": "PEAD-SUE-ENTITLEMENT-PACK-001",
+  "status": "ready_not_executable",
+  "strategy_promotion_performed": false,
+  "trial_id": "TRIAL-PEAD-EARNINGS-001"
+}

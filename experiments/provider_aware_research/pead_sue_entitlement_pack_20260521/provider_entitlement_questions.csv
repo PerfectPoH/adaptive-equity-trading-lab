@@ -1,0 +1,7 @@
+question_id,topic,question,required_answer,failure_mode
+PIT_SUE_001,point_in_time_availability,"Can EPS consensus, actual EPS, surprise value, and surprise percent be queried as they were known before the reaction session?",yes_with_asof_or_auditable_pre_release_timestamp,posthoc_consensus_or_latest_only_values
+PIT_SUE_002,field_schema,"Does the endpoint expose symbol/identifier, fiscal period, report date, actual EPS, consensus EPS, surprise, and surprise percent in stable fields?",all_required_fields_present,missing_consensus_or_surprise_magnitude
+PIT_SUE_003,timestamp_alignment,"Does the provider expose report timestamp metadata, or can its report date be deterministically joined to SEC EDGAR Item 2.02 acceptanceDateTime?",timestamp_present_or_sec_join_allowed,date_only_without_sec_join
+PIT_SUE_004,coverage_bias,"Does historical coverage include inactive, delisted, acquired, and low-liquidity small-cap issuers, or is coverage limited to current survivors?",coverage_policy_disclosed_and_delisted_supported_or_measured,survivorship_biased_current_universe_only
+PIT_SUE_005,revision_policy,"Are estimate revisions and late corrections versioned, or does the endpoint overwrite history with restated values?",revision_policy_disclosed,silent_history_rewrites
+PIT_SUE_006,license_and_retention,Can derived fields and redacted probe summaries be retained in the research repository without storing raw licensed payloads?,derived_retention_allowed_raw_retention_not_required,license_forbids_auditable_artifacts

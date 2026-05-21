@@ -1,0 +1,14 @@
+{
+  "acceptance_criteria_count": 5,
+  "backtest_authorized": false,
+  "decision": "PEAD_SUE_ENTITLEMENT_PACK_READY",
+  "max_provider_calls": 1,
+  "network_call_performed_now": false,
+  "provider_query_performed_now": false,
+  "purpose": "Turn the PIT SUE provider blocker into a bounded entitlement verification workflow.",
+  "question_count": 6,
+  "raw_payload_retention": false,
+  "run_id": "PEAD-SUE-ENTITLEMENT-PACK-001",
+  "status": "ready_not_executable",
+  "trial_id": "TRIAL-PEAD-EARNINGS-001"
+}
