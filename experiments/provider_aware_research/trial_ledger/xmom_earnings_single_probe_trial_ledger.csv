@@ -1,0 +1,2 @@
+trial_id,gate_id,trial_number,provider,symbol,endpoint,artifact_dir,result_status,decision,within_budget,provider_query_performed,network_call_performed,error,timestamp_resolution_verdict
+TRIAL-XMOM-CATALYST-001,EARNINGS-SINGLE-PROBE-XMOM-CATALYST-001,1,Intrinio,CRMD,companies/{identifier}/upcoming_earnings,experiments/provider_aware_research/execution_outputs/XMOM-EARNINGS-SINGLE-PROBE-001,provider_error_recorded,XMOM_EARNINGS_SINGLE_PROBE_PROVIDER_ERROR_REDACTED,yes,true,true,HTTP_ERROR_403,

@@ -1,0 +1,17 @@
+{
+  "approval_artifact": "experiments/provider_aware_research/xmom_earnings_single_probe_explicit_approval_20260521",
+  "backtest_performed": false,
+  "endpoint": "companies/{identifier}/upcoming_earnings",
+  "extractor_implemented": false,
+  "gate_id": "EARNINGS-SINGLE-PROBE-XMOM-CATALYST-001",
+  "market_data_downloaded": false,
+  "max_provider_calls": 1,
+  "network_call_performed": false,
+  "provider": "Intrinio",
+  "provider_query_performed": false,
+  "raw_payload_retention_allowed": false,
+  "status": "prepared_not_executed",
+  "strategy_promotion_performed": false,
+  "symbol": "CRMD",
+  "trial_id": "TRIAL-XMOM-CATALYST-001"
+}

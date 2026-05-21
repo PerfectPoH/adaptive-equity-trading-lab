@@ -13,14 +13,14 @@ from src.experiments.xmom_earnings_single_probe_execution_preflight_validator im
 SOURCE_APPROVAL_GATE = Path("experiments/provider_aware_research/xmom_earnings_single_probe_approval_20260521")
 
 
-def test_single_probe_execution_preflight_blocks_current_missing_approval() -> None:
+def test_single_probe_execution_preflight_blocks_current_post_execution_artifact() -> None:
     report = validate_xmom_earnings_single_probe_execution_preflight()
 
     assert report["status"] == "blocked"
     assert report["provider_query_performed"] is False
     assert report["network_call_performed"] is False
     assert report["extractor_implemented"] is False
-    assert any(check["name"] == "json_readable:single_probe_explicit_approval_manifest.json" and check["status"] == "fail" for check in report["checks"])
+    assert any(check["name"] == "execution_manifest_absent" and check["status"] == "fail" for check in report["checks"])
 
 
 def test_single_probe_execution_preflight_passes_valid_prepared_artifacts(tmp_path: Path) -> None:

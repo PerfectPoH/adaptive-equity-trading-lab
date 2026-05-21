@@ -6,6 +6,8 @@ from pathlib import Path
 from src.experiments.xmom_earnings_single_probe_runner import (
     build_dry_run_plan,
     build_real_run_block_report,
+    _intrinio_upcoming_earnings_url,
+    _summarize_intrinio_earnings_payload,
     main,
 )
 
@@ -83,9 +85,56 @@ def test_single_probe_runner_blocks_if_raw_payload_retention_unlocked(tmp_path: 
 
 def test_single_probe_runner_cli_exit_codes() -> None:
     assert main(["--dry-run", "--approval-dir", str(ARTIFACT_DIR)]) == 0
-    assert main(["--real-run", "--approval-dir", str(ARTIFACT_DIR)]) == 2
+    assert main(["--real-run", "--approval-dir", str(ARTIFACT_DIR), "--acknowledge-gate", "provider_selected"]) == 2
     assert main(["--dry-run", "--approval-dir", str(ARTIFACT_DIR), "--execute"]) == 2
     assert main(["--dry-run", "--approval-dir", str(ARTIFACT_DIR), "--live"]) == 2
+
+
+def test_intrinio_url_is_single_symbol_and_redactable() -> None:
+    url = _intrinio_upcoming_earnings_url(
+        symbol="CRMD",
+        expected_date_after="2024-01-01",
+        expected_date_before="2025-12-31",
+        page_size=10,
+        api_key="SECRET",
+    )
+
+    assert url.startswith("https://api-v2.intrinio.com/companies/CRMD/upcoming_earnings?")
+    assert "expected_date_after=2024-01-01" in url
+    assert "expected_date_before=2025-12-31" in url
+    assert "page_size=10" in url
+    assert "api_key=SECRET" in url
+
+
+def test_intrinio_payload_summary_does_not_retain_raw_records() -> None:
+    payload = {
+        "expected_earnings": [
+            {
+                "ticker": "CRMD",
+                "expected_date": "2024-05-09",
+                "expected_8k_at": "2024-05-09T12:00:00Z",
+                "fiscal_year": 2024,
+            }
+        ],
+        "next_page": None,
+    }
+
+    summary = _summarize_intrinio_earnings_payload(
+        payload,
+        provider="Intrinio",
+        symbol="CRMD",
+        endpoint="companies/{identifier}/upcoming_earnings",
+        expected_date_after="2024-01-01",
+        expected_date_before="2025-12-31",
+    )
+
+    assert summary["status"] == "pass"
+    assert summary["provider_query_performed"] is True
+    assert summary["raw_payload_retained"] is False
+    assert summary["record_count"] == 1
+    assert "expected_8k_at" in summary["first_record_keys"]
+    assert "expected_earnings" not in summary
+    assert summary["api_key"] == "REDACTED"
 
 
 def _copy_artifact(tmp_path: Path) -> Path:

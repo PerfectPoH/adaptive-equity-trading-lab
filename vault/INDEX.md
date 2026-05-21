@@ -49,6 +49,7 @@ tags: [vault, index, obsidian, trading-lab]
 - [[Report-XMOM-Earnings-Single-Probe-Explicit-Approval-Template-2026-05-21]] - template approvazione esplicita single probe, 30/30 pass, non concesso.
 - [[Report-XMOM-Earnings-Single-Probe-Theoretical-Review-2026-05-21]] - review teorica Intrinio/CRMD, 33/33 pass, non approvata.
 - [[Report-Earnings-Timestamp-Classifier-2026-05-21]] - utility locale BMO/AMC/DMT/UNSPECIFIED, 8 test pass, nessuna query.
+- [[Report-XMOM-Earnings-Single-Probe-Execution-2026-05-21]] - primo probe Intrinio/CRMD eseguito: HTTP 403 provider/access, nessun raw payload.
 - [[small-cap-ranking-exits-research-track]] - track separato ranking/uscite design-only con trial accounting obbligatorio.
 - [[Project-Handoff]] - handoff completo per altre chat o agenti.
 - [[Devlog-Index]] - cronologia ordinata delle sessioni.
