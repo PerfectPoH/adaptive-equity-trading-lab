@@ -1,0 +1,6 @@
+action,status,reason
+provider_query,blocked,Diagnostic uses already stored intraday bars.
+run_strategy_backtest,blocked,"Dollar bars are a representation diagnostic, not an entry rule."
+select_bucket_from_pnl,blocked,"Bucket size is fixed by average dollar flow, not optimized for returns."
+paper_trading,blocked,No strategy signal exists.
+live_trading,blocked,No strategy signal exists.

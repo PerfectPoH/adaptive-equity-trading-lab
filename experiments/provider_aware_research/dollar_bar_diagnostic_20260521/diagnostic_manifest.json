@@ -1,0 +1,14 @@
+{
+  "backtest_performed": false,
+  "decision": "DOLLAR_BAR_DIAGNOSTIC_COMPLETE_NO_STRATEGY",
+  "evaluated_file_count": 12,
+  "improved_distribution_count": 11,
+  "input_file_count": 12,
+  "live_trading_performed": false,
+  "paper_trading_performed": false,
+  "provider_query_performed": false,
+  "run_id": "DOLLAR-BAR-DIAGNOSTIC-001",
+  "status": "diagnostic_complete_not_executable",
+  "strategy_promotion_performed": false,
+  "trial_id": "TRIAL-DOLLARBAR-DIAGNOSTIC-001"
+}

@@ -134,6 +134,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-21-codex-trade-governance-runtime]] - broker-free trade governance runtime for GOOD/BAD tagging, BAD_WIN exclusion and cooldown.
 - [[2026-05-21-codex-alpha-candidate-factory]] - alpha candidate factory ranks 12 falsifiable next probes without execution.
 - [[2026-05-21-codex-outlier-resistant-diagnostic-harness]] - ALPHA-009 diagnostic harness ranks existing artifacts by median/ex-top3 robustness.
+- [[2026-05-21-codex-dollar-bar-diagnostic]] - ALPHA-003 diagnostic transforms stored intraday bars into dollar-bars and compares distribution stability.
 - [[2026-05-21-codex-quant-hypothesis-video-research-notes]] - archived hypothesis-generation and three-video research notes as spec-only memory.
 - [[2026-05-21-codex-gap-down-reversion-preregistration]] - opened `TRIAL-GAPREV-001` spec-only branch with validator.
 - [[2026-05-21-codex-gaprev-intraday-data-contract-gate]] - added intraday data-contract gate for `TRIAL-GAPREV-001`.

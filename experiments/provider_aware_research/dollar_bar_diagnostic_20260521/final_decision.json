@@ -1,0 +1,15 @@
+{
+  "backtest_performed": false,
+  "decision": "DOLLAR_BAR_DIAGNOSTIC_COMPLETE_NO_STRATEGY",
+  "evaluated_file_count": 12,
+  "improved_distribution_count": 11,
+  "live_trading_performed": false,
+  "median_stability_score_delta": 19.806168,
+  "next_unblocked_step": "If distribution stability improves broadly, preregister a separate data-transform validator before any strategy test.",
+  "paper_trading_performed": false,
+  "provider_query_performed": false,
+  "run_id": "DOLLAR-BAR-DIAGNOSTIC-001",
+  "status": "diagnostic_complete_not_executable",
+  "strategy_promotion_performed": false,
+  "trial_id": "TRIAL-DOLLARBAR-DIAGNOSTIC-001"
+}
