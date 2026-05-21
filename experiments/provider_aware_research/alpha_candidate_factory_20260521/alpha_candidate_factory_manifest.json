@@ -1,0 +1,13 @@
+{
+  "backtest_performed": false,
+  "candidate_count": 12,
+  "decision": "ALPHA_CANDIDATE_FACTORY_READY_NO_EXECUTION",
+  "live_trading_performed": false,
+  "paper_trading_performed": false,
+  "provider_query_performed": false,
+  "run_id": "ALPHA-CANDIDATE-FACTORY-001",
+  "status": "ready_not_executable",
+  "strategy_promotion_performed": false,
+  "top_candidate_decision": "best_diagnostic_probe",
+  "top_candidate_id": "ALPHA-009"
+}

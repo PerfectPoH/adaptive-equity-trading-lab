@@ -1,0 +1,6 @@
+action,status,reason
+run_candidate_backtest,blocked,"Candidates are ranked ideas, not executable trials."
+select_threshold_from_old_pnl,blocked,Would reuse falsified samples as optimization data.
+paper_trade_candidate,blocked,"No candidate has passed preregistration, data, CPCV and DSR gates."
+live_trade_candidate,blocked,No candidate is strategy-promotable.
+provider_query,blocked,Each provider-dependent candidate requires its own one-call approval gate.

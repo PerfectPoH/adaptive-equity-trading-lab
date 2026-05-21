@@ -39,6 +39,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-XMOM-Earnings-Single-Probe-Execution-2026-05-21]] - esecuzione bounded Intrinio/CRMD, HTTP 403 provider/access, no raw payload.
 - [[Report-PEAD-SUE-Entitlement-Pack-2026-05-21]] - pack di domande provider, criteri e one-call probe spec per sbloccare SUE/PIT senza proxy.
 - [[Report-Trade-Governance-Runtime-2026-05-21]] - runtime spec-only per GOOD/BAD trade tagging, BAD_WIN exclusion e cooldown post-stop.
+- [[Report-Alpha-Candidate-Factory-2026-05-21]] - factory spec-only di 12 candidati alpha/probe ordinati per falsificabilita' e costo dati.
 - [[Report-Quant-Hypothesis-Generation-And-Video-Research-2026-05-21]] - manifesto spec-only per generare ipotesi falsificabili e roadmap Anno 2.
 - [[Report-Gap-Down-Reversion-Preregistration-2026-05-21]] - preregistrazione spec-only `TRIAL-GAPREV-001`, 43/43 pass.
 - [[Report-GapRev-Intraday-Data-Contract-Gate-2026-05-21]] - gate data-contract intraday per GapRev, 35/35 pass, no query.

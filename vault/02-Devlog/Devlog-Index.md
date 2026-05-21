@@ -132,6 +132,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-21-codex-xmom-earnings-single-probe-execution]] - bounded Intrinio/CRMD probe executed once; provider returned HTTP 403, no raw payload.
 - [[2026-05-21-codex-pead-sue-entitlement-pack]] - PEAD SUE blocker converted into provider entitlement questions and a one-call probe spec; no query.
 - [[2026-05-21-codex-trade-governance-runtime]] - broker-free trade governance runtime for GOOD/BAD tagging, BAD_WIN exclusion and cooldown.
+- [[2026-05-21-codex-alpha-candidate-factory]] - alpha candidate factory ranks 12 falsifiable next probes without execution.
 - [[2026-05-21-codex-quant-hypothesis-video-research-notes]] - archived hypothesis-generation and three-video research notes as spec-only memory.
 - [[2026-05-21-codex-gap-down-reversion-preregistration]] - opened `TRIAL-GAPREV-001` spec-only branch with validator.
 - [[2026-05-21-codex-gaprev-intraday-data-contract-gate]] - added intraday data-contract gate for `TRIAL-GAPREV-001`.
