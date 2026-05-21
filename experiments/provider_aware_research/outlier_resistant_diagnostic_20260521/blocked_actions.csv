@@ -1,0 +1,6 @@
+action,status,reason
+provider_query,blocked,Diagnostic uses existing artifacts only.
+run_backtest,blocked,No new performance run is authorized.
+select_strategy_for_promotion,blocked,Harness ranks robustness candidates only.
+paper_trading,blocked,"No strategy has passed preregistration, data, CPCV and DSR gates."
+live_trading,blocked,No strategy is promotable.

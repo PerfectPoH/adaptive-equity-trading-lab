@@ -1,0 +1,13 @@
+{
+  "backtest_performed": false,
+  "decision": "OUTLIER_DIAGNOSTIC_COMPLETE_NO_EXECUTION",
+  "live_trading_performed": false,
+  "panel_count": 4,
+  "paper_trading_performed": false,
+  "provider_query_performed": false,
+  "run_id": "OUTLIER-RESISTANT-DIAGNOSTIC-001",
+  "status": "diagnostic_complete_not_executable",
+  "strategy_promotion_performed": false,
+  "top_candidate_id": "DX-PROVIDER-REPLAY",
+  "top_candidate_verdict": "NEGATIVE_TOTAL_PNL_NO_PROMOTION"
+}

@@ -1,0 +1,13 @@
+{
+  "backtest_performed": false,
+  "decision": "OUTLIER_DIAGNOSTIC_COMPLETE_NO_EXECUTION",
+  "live_trading_performed": false,
+  "next_unblocked_step": "If any diagnostic candidate survives, create a separate preregistration spec before any new data or backtest.",
+  "panel_count": 4,
+  "paper_trading_performed": false,
+  "provider_query_performed": false,
+  "robustness_candidates_for_future_preregistration": [],
+  "run_id": "OUTLIER-RESISTANT-DIAGNOSTIC-001",
+  "status": "diagnostic_complete_not_executable",
+  "strategy_promotion_performed": false
+}

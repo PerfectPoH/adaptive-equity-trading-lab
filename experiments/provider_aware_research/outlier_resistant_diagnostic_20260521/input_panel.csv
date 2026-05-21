@@ -1,0 +1,5 @@
+candidate_id,label,path
+DX-XMOM-001,XMOM trial 001,experiments/runs/xmom_trial_001_20260520/portfolio_trade_log.csv
+DX-RANKEX-001,RankEx validation 2024,experiments/runs/small_cap_rankex_trial_001_validation_2024/portfolio_trade_log.csv
+DX-OOS-2025-RISK,Small-cap OOS 2025 full risk sizing,experiments/runs/small_cap_oos_open_to_close_010_iwm_ema200_2025_full_risk_sizing_20260512/portfolio_trade_log.csv
+DX-PROVIDER-REPLAY,Provider-aware bounded replay,experiments/runs/provider_aware_oos_replay_bounded_20260520/portfolio_trade_log.csv
