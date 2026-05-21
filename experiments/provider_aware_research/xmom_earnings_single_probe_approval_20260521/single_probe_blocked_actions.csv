@@ -1,0 +1,12 @@
+action,status,reason
+execute_probe,blocked,Separate user approval not granted.
+query_more_than_one_symbol,blocked,Probe scope is one symbol only.
+query_more_than_one_provider,blocked,Probe scope is one provider only.
+query_price_volume_data,blocked,This probe only evaluates earnings-calendar/report-time metadata.
+save_raw_payload,blocked,Raw payload retention is disabled.
+implement_extractor,blocked,Probe result does not authorize extractor implementation.
+download_market_data,blocked,No market-data download is in scope.
+run_oos,blocked,No trial execution is in scope.
+paper_trading,blocked,No executable strategy exists.
+live_trading,blocked,No executable strategy exists.
+strategy_promotion,blocked,No validated strategy exists.

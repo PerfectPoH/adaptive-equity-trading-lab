@@ -1,7 +1,7 @@
 ---
 tipo: devlog-index
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-20
+ultimo-aggiornamento: 2026-05-21
 tags: [devlog, index, cronologia]
 ---
 
@@ -123,6 +123,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-21-codex-synthetic-statistical-gate-harness]] - synthetic harness connects CPCV, effective trial count and DSR; rejects the best noise trial.
 - 2026-05-21 - XMOM catalyst implementation gate amended with earnings-only extraction guardrails; validator now passes 65/65.
 - [[2026-05-21-codex-xmom-earnings-provider-selection-gate]] - provider-selection gate for earnings calendar coverage/report-time quality passes 39/39 without queries.
+- [[2026-05-21-codex-xmom-earnings-single-probe-approval]] - one-provider/one-symbol probe approval artifact passes 38/38 without queries.
 - [[2026-05-20-codex-xmom-catalyst-feature-rationale]] - theory review for catalyst lag, volume persistence and price digestion; thresholds remain TBD/non-executable.
 
 ## Convenzione

@@ -1,0 +1,20 @@
+{
+  "status": "SPEC_ONLY_AWAITING_SEPARATE_APPROVAL",
+  "gate_id": "EARNINGS-SINGLE-PROBE-XMOM-CATALYST-001",
+  "upstream_gate_id": "EARNINGS-PROVIDER-GATE-XMOM-CATALYST-001",
+  "trial_id": "TRIAL-XMOM-CATALYST-001",
+  "decision": "SINGLE_PROVIDER_SINGLE_SYMBOL_PROBE_DEFINED_NOT_EXECUTED",
+  "provider_query_performed": false,
+  "network_call_performed": false,
+  "market_data_downloaded": false,
+  "extractor_implemented": false,
+  "backtest_performed": false,
+  "strategy_promotion_performed": false,
+  "separate_user_approval_required": true,
+  "approval_status": "not_granted",
+  "max_provider_count": 1,
+  "max_symbol_count": 1,
+  "max_endpoint_count": 1,
+  "raw_payload_retention_allowed": false,
+  "secret_values_disclosed": false
+}

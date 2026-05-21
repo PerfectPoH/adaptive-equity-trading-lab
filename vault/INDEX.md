@@ -1,7 +1,7 @@
 ---
 tipo: index
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-20
+ultimo-aggiornamento: 2026-05-21
 tags: [vault, index, obsidian, trading-lab]
 ---
 
@@ -43,6 +43,7 @@ tags: [vault, index, obsidian, trading-lab]
 - [[Report-Effective-Trial-Count-Utilities-2026-05-21]] - stimatore `N_eff` implementato e testato, non collegato al trial.
 - [[Report-Synthetic-Statistical-Gate-Harness-2026-05-21]] - harness sintetico DSR + CPCV + `N_eff`, rigetta il miglior trial da rumore.
 - [[Report-XMOM-Earnings-Provider-Selection-Gate-2026-05-21]] - gate per selezione fonte earnings calendar, 39/39 pass, non interrogato.
+- [[Report-XMOM-Earnings-Single-Probe-Approval-2026-05-21]] - artifact di approvazione probe one-provider/one-symbol, 38/38 pass, non interrogato.
 - [[small-cap-ranking-exits-research-track]] - track separato ranking/uscite design-only con trial accounting obbligatorio.
 - [[Project-Handoff]] - handoff completo per altre chat o agenti.
 - [[Devlog-Index]] - cronologia ordinata delle sessioni.

@@ -1,0 +1,9 @@
+field,value,status,notes
+provider,unselected,blocked_until_approval,Must be chosen by separate explicit approval.
+symbol,unselected,blocked_until_approval,One US small-cap symbol only.
+endpoint,earnings_calendar_or_equivalent,blocked_until_approval,One endpoint only; no price-volume download.
+lookback_window,small_probe_window,blocked_until_approval,Enough only to test report_time coverage shape.
+raw_payload_retention,false,locked,Derived/redacted artifacts only.
+max_provider_calls,1,locked,Hard cap.
+output_directory,not_created,blocked_until_approval,Create only after approval.
+trial_ledger_entry,not_created,blocked_until_approval,Create only after approval.

@@ -1,0 +1,205 @@
+﻿{
+  "artifact_dir": "experiments\\provider_aware_research\\xmom_earnings_single_probe_approval_20260521",
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_approval_20260521",
+      "name": "artifact_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_approval_20260521\\single_probe_approval_manifest.json",
+      "name": "required_file:single_probe_approval_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_approval_20260521\\single_probe_scope.csv",
+      "name": "required_file:single_probe_scope.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_approval_20260521\\expected_probe_output_schema.csv",
+      "name": "required_file:expected_probe_output_schema.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_approval_20260521\\single_probe_stop_rules.csv",
+      "name": "required_file:single_probe_stop_rules.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_approval_20260521\\single_probe_blocked_actions.csv",
+      "name": "required_file:single_probe_blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_approval_20260521\\single_probe_approval_summary.md",
+      "name": "required_file:single_probe_approval_summary.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_approval_20260521\\single_probe_approval_manifest.json",
+      "name": "json_readable:single_probe_approval_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_approval_20260521\\single_probe_scope.csv: rows=8; columns=4",
+      "name": "csv_readable:single_probe_scope.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_approval_20260521\\expected_probe_output_schema.csv: rows=13; columns=4",
+      "name": "csv_readable:expected_probe_output_schema.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_approval_20260521\\single_probe_stop_rules.csv: rows=7; columns=3",
+      "name": "csv_readable:single_probe_stop_rules.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_approval_20260521\\single_probe_blocked_actions.csv: rows=11; columns=3",
+      "name": "csv_readable:single_probe_blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_approval_20260521\\single_probe_approval_summary.md: chars=760",
+      "name": "markdown_readable:single_probe_approval_summary.md",
+      "status": "pass"
+    },
+    {
+      "detail": "status=SPEC_ONLY_AWAITING_SEPARATE_APPROVAL",
+      "name": "manifest_status_awaiting_approval",
+      "status": "pass"
+    },
+    {
+      "detail": "approval=not_granted",
+      "name": "manifest_separate_approval_not_granted",
+      "status": "pass"
+    },
+    {
+      "detail": "no_execution=True",
+      "name": "manifest_no_execution_or_secret_flags",
+      "status": "pass"
+    },
+    {
+      "detail": "provider=1; symbol=1; endpoint=1",
+      "name": "manifest_probe_scope_bounded_to_one",
+      "status": "pass"
+    },
+    {
+      "detail": "raw_payload_retention_allowed=False",
+      "name": "manifest_raw_retention_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "scope_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "scope_required_fields",
+      "status": "pass"
+    },
+    {
+      "detail": "provider=unselected; symbol=unselected",
+      "name": "scope_provider_and_symbol_unselected",
+      "status": "pass"
+    },
+    {
+      "detail": "max_provider_calls=1",
+      "name": "scope_max_provider_calls_one",
+      "status": "pass"
+    },
+    {
+      "detail": "raw_payload_retention=false",
+      "name": "scope_raw_retention_false",
+      "status": "pass"
+    },
+    {
+      "detail": "output=blocked_until_approval; ledger=blocked_until_approval",
+      "name": "scope_outputs_blocked_until_approval",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "output_schema_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "output_schema_required_fields",
+      "status": "pass"
+    },
+    {
+      "detail": "all_required=True",
+      "name": "output_schema_all_fields_required",
+      "status": "pass"
+    },
+    {
+      "detail": "secret_rows=1",
+      "name": "output_schema_secret_redaction_declared",
+      "status": "pass"
+    },
+    {
+      "detail": "raw_rows=1",
+      "name": "output_schema_raw_payload_false",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "stop_rules_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "stop_rules_required_set",
+      "status": "pass"
+    },
+    {
+      "detail": "all_stop=True",
+      "name": "stop_rules_all_stop_actions",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_actions_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_actions_required_set",
+      "status": "pass"
+    },
+    {
+      "detail": "all_blocked=True",
+      "name": "blocked_actions_all_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "status present",
+      "name": "summary_status_awaiting_approval",
+      "status": "pass"
+    },
+    {
+      "detail": "one-only scope present",
+      "name": "summary_one_provider_one_symbol_scope",
+      "status": "pass"
+    },
+    {
+      "detail": "blocked actions present",
+      "name": "summary_blocked_actions_present",
+      "status": "pass"
+    }
+  ],
+  "extractor_implemented": false,
+  "gate_decision": "EARNINGS_SINGLE_PROBE_APPROVAL_SPEC_PASS",
+  "network_call_performed": false,
+  "provider_query_performed": false,
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 38,
+    "total": 38
+  }
+}

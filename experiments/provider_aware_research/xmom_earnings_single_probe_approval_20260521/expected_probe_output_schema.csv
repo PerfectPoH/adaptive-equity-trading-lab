@@ -1,0 +1,14 @@
+field,required,allowed_or_format,redaction_policy
+provider,yes,string,not_secret
+symbol,yes,string,not_secret
+endpoint,yes,string,not_secret
+query_timestamp_utc,yes,ISO-8601,not_secret
+event_count,yes,integer,not_secret
+report_time_values_seen,yes,list_of_categories,not_secret
+unspecified_count,yes,integer,not_secret
+unspecified_rate,yes,float_0_to_1,not_secret
+coverage_start,yes,YYYY-MM-DD,not_secret
+coverage_end,yes,YYYY-MM-DD,not_secret
+raw_payload_saved,yes,false,not_secret
+secret_values_present,yes,false,redact_if_detected
+decision,yes,pass_or_fail,not_secret
