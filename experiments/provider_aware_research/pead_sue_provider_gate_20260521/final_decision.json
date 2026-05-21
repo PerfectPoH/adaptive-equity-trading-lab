@@ -1,0 +1,14 @@
+{
+  "backtest_performed": false,
+  "decision": "BLOCKED_PIT_SUE_PROVIDER_UNAVAILABLE",
+  "live_trading_performed": false,
+  "network_call_performed_now": false,
+  "next_unblocked_step": "Obtain/verify one PIT SUE provider entitlement, then run a single approved provider probe for CRMD.",
+  "paper_trading_performed": false,
+  "pit_sue_provider_available": false,
+  "provider_query_performed_now": false,
+  "run_id": "PEAD-SUE-PROVIDER-GATE-001",
+  "status": "blocked",
+  "strategy_promotion_performed": false,
+  "trial_id": "TRIAL-PEAD-EARNINGS-001"
+}

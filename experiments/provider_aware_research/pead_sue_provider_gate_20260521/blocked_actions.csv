@@ -1,0 +1,6 @@
+action,status,reason
+query_unentitled_provider,blocked,No endpoint guessing or repeated 403 loops.
+scrape_zacks_pages,blocked,Scraping pages would not guarantee PIT entitlement or stable schema.
+infer_surprise_from_returns,blocked,Future-return direction is leakage.
+run_pead_backtest,blocked,No PIT SUE provider available.
+strategy_promotion,blocked,No backtest and no DSR.

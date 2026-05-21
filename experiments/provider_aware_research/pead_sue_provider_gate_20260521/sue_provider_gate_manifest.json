@@ -1,0 +1,22 @@
+{
+  "backtest_authorized": false,
+  "blocker": "No validated point-in-time SUE/consensus provider entitlement is available.",
+  "candidate_count": 3,
+  "credential_review": {
+    "conclusion": "No validated PIT SUE provider entitlement is available for execution.",
+    "estimize_api_key_present": false,
+    "intrinio_api_key_present": true,
+    "intrinio_prior_earnings_probe_error": "HTTP_ERROR_403",
+    "nasdaq_data_link_api_key_present": false,
+    "network_call_performed_now": false,
+    "provider_query_performed_now": false,
+    "status": "blocked"
+  },
+  "decision": "PEAD_SUE_PROVIDER_GATE_BLOCKED",
+  "network_call_performed_now": false,
+  "pit_sue_provider_available": false,
+  "provider_query_performed_now": false,
+  "run_id": "PEAD-SUE-PROVIDER-GATE-001",
+  "status": "blocked",
+  "trial_id": "TRIAL-PEAD-EARNINGS-001"
+}
