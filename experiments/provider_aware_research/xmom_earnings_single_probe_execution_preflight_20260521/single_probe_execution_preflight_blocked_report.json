@@ -1,0 +1,98 @@
+﻿{
+  "backtest_performed": false,
+  "checks": [
+    {
+      "detail": "failed=0",
+      "name": "approval_gate_validator_passed",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\xmom_earnings_single_probe_explicit_approval_20260521\\single_probe_explicit_approval_manifest.json: FileNotFoundError: [Errno 2] No such file or directory: 'experiments\\\\provider_aware_research\\\\xmom_earnings_single_probe_explicit_approval_20260521\\\\single_probe_explicit_approval_manifest.json'",
+      "name": "json_readable:single_probe_explicit_approval_manifest.json",
+      "status": "fail"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\trial_ledger\\xmom_earnings_single_probe_trial_ledger.csv: FileNotFoundError: [Errno 2] No such file or directory: 'experiments\\\\provider_aware_research\\\\trial_ledger\\\\xmom_earnings_single_probe_trial_ledger.csv'",
+      "name": "csv_readable:xmom_earnings_single_probe_trial_ledger.csv",
+      "status": "fail"
+    },
+    {
+      "detail": "status=None; gate=None; trial=None",
+      "name": "explicit_approval_identity",
+      "status": "fail"
+    },
+    {
+      "detail": "provider=None",
+      "name": "explicit_approval_provider_selected",
+      "status": "fail"
+    },
+    {
+      "detail": "symbol=None",
+      "name": "explicit_approval_symbol_selected",
+      "status": "fail"
+    },
+    {
+      "detail": "endpoint=None",
+      "name": "explicit_approval_endpoint_selected",
+      "status": "fail"
+    },
+    {
+      "detail": "output_id=None; output=experiments\\provider_aware_research\\execution_outputs\\XMOM-EARNINGS-SINGLE-PROBE-001",
+      "name": "explicit_approval_output_directory_created",
+      "status": "fail"
+    },
+    {
+      "detail": "trial_ledger_entry_created=None",
+      "name": "explicit_approval_ledger_entry_created",
+      "status": "fail"
+    },
+    {
+      "detail": "calls=None; providers=None; symbols=None; endpoints=None",
+      "name": "explicit_approval_scope_bounded",
+      "status": "fail"
+    },
+    {
+      "detail": "safe=False",
+      "name": "explicit_approval_pre_execution_safety_flags",
+      "status": "fail"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\execution_outputs\\XMOM-EARNINGS-SINGLE-PROBE-001",
+      "name": "output_dir_exists",
+      "status": "fail"
+    },
+    {
+      "detail": "output=XMOM-EARNINGS-SINGLE-PROBE-001; approval=None",
+      "name": "output_name_expected",
+      "status": "fail"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\execution_outputs\\XMOM-EARNINGS-SINGLE-PROBE-001\\single_probe_pre_execution_manifest.json",
+      "name": "pre_execution_manifest_exists",
+      "status": "fail"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\execution_outputs\\XMOM-EARNINGS-SINGLE-PROBE-001\\single_probe_execution_manifest.json",
+      "name": "execution_manifest_absent",
+      "status": "pass"
+    },
+    {
+      "detail": "rows=0",
+      "name": "ledger_has_one_pre_execution_row",
+      "status": "fail"
+    }
+  ],
+  "decision": "XMOM_EARNINGS_SINGLE_PROBE_PREFLIGHT_BLOCKED",
+  "extractor_implemented": false,
+  "market_data_downloaded": false,
+  "network_call_performed": false,
+  "provider_query_performed": false,
+  "raw_payload_retained": false,
+  "status": "blocked",
+  "strategy_promotion_performed": false,
+  "summary": {
+    "failed": 14,
+    "passed": 2,
+    "total": 16
+  }
+}
