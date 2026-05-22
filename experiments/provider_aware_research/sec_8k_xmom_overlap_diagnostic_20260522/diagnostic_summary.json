@@ -1,0 +1,27 @@
+{
+  "backtest_performed": false,
+  "blockers": [
+    "trade_count_below_30"
+  ],
+  "decision": "SEC8K_XMOM_OVERLAP_SUPPORTS_CATALYST_EXPLANATION",
+  "live_trading_performed": false,
+  "loser_overlap_rate": 0.5,
+  "outside_median_pnl": -7703.904097,
+  "outside_total_pnl": -20788.984345,
+  "overlap_count": 8,
+  "overlap_median_pnl": 34574.641169,
+  "overlap_rate": 0.727273,
+  "overlap_total_pnl": 130152.237243,
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "run_id": "SEC-8K-XMOM-OVERLAP-DIAGNOSTIC-001",
+  "status": "diagnostic_complete_existing_artifacts_only",
+  "strategy_promotion_performed": false,
+  "top3_winner_overlap_rate": 1.0,
+  "trade_count": 11,
+  "trial_id": "TRIAL-SEC8K-XMOM-OVERLAP-DIAGNOSTIC-001",
+  "window_days": 5,
+  "winner_overlap_rate": 1.0
+}

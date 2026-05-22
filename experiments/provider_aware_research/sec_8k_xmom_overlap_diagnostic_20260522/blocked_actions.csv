@@ -1,0 +1,7 @@
+action,status,reason
+provider_query,blocked,Overlap uses existing SEC event panel.
+run_backtest,blocked,Diagnostic uses existing XMOM trade log only.
+use_overlap_as_filter,blocked,Would be post-hoc interpretation unless separately preregistered.
+parameter_sweep_window,blocked,Window is fixed at diagnostic start.
+paper_trading,blocked,No strategy has been promoted.
+live_trading,blocked,No strategy has been promoted.

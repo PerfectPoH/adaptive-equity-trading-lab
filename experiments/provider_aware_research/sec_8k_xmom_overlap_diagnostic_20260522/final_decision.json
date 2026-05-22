@@ -1,0 +1,19 @@
+{
+  "backtest_performed": false,
+  "blockers": [
+    "trade_count_below_30"
+  ],
+  "decision": "SEC8K_XMOM_OVERLAP_SUPPORTS_CATALYST_EXPLANATION",
+  "live_trading_performed": false,
+  "next_unblocked_step": "If overlap supports catalyst explanation, preregister SEC8K direction-source study; do not use overlap as a trading filter.",
+  "overlap_rate": 0.727273,
+  "paper_trading_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "run_id": "SEC-8K-XMOM-OVERLAP-DIAGNOSTIC-001",
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "top3_winner_overlap_rate": 1.0,
+  "trade_count": 11,
+  "trial_id": "TRIAL-SEC8K-XMOM-OVERLAP-DIAGNOSTIC-001"
+}
