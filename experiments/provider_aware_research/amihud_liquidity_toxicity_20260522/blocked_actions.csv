@@ -1,0 +1,6 @@
+action,status,reason
+provider_query,blocked,Diagnostic uses existing XMOM Databento artifacts only.
+run_backtest,blocked,No new strategy execution is authorized.
+optimize_liquidity_threshold,blocked,"Median split is diagnostic only, not a tuned threshold."
+paper_trading,blocked,No strategy has passed preregistration and validation gates.
+live_trading,blocked,No strategy is promotable.

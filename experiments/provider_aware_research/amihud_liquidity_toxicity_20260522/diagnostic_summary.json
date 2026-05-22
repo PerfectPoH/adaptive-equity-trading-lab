@@ -1,0 +1,28 @@
+{
+  "backtest_performed": false,
+  "blockers": [
+    "trade_count_below_30",
+    "insufficient_loser_rate_separation",
+    "high_illiq_median_pnl_not_worse"
+  ],
+  "candidate_filter_allowed": false,
+  "decision": "LIQUIDITY_TOXICITY_DIAGNOSTIC_ARCHIVE_CURRENT_FORM",
+  "high_illiq_count": 6,
+  "high_illiq_loser_rate": 0.333333,
+  "high_illiq_median_pnl": 37896.174002,
+  "live_trading_performed": false,
+  "lookback_days": 20,
+  "loser_rate_separation": -0.466667,
+  "low_illiq_count": 5,
+  "low_illiq_loser_rate": 0.8,
+  "low_illiq_median_pnl": -9846.473523,
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "run_id": "AMIHUD-LIQUIDITY-TOXICITY-001",
+  "status": "diagnostic_complete_existing_artifacts_only",
+  "strategy_promotion_performed": false,
+  "trade_count": 11,
+  "trial_id": "TRIAL-LIQUIDITY-TOXICITY-DIAGNOSTIC-001"
+}

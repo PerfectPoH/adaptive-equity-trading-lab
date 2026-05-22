@@ -1,7 +1,7 @@
 ---
 tipo: documentazione-index
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-21
+ultimo-aggiornamento: 2026-05-22
 tags: [documentazione, index, report, handoff]
 ---
 
@@ -45,6 +45,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-DollarBar-Transform-Preregistration-2026-05-21]] - preregistrazione transform statico/adattivo con sole metriche distributive, no PnL.
 - [[Report-DollarBar-Transform-Validation-2026-05-21]] - validazione static vs EMA dollar-bars con sole metriche distributive; EMA rejected, no PnL.
 - [[Report-DollarBar-MicroRev-Trial-2026-05-21]] - protocollo in 5 passi: static dollar-bars canoniche, EMA bloccata, MicroRev archiviata.
+- [[Report-Amihud-Liquidity-Toxicity-Diagnostic-2026-05-22]] - diagnostico Amihud pre-entry su XMOM; liquidity toxicity filter non supportato.
 - [[Report-Quant-Hypothesis-Generation-And-Video-Research-2026-05-21]] - manifesto spec-only per generare ipotesi falsificabili e roadmap Anno 2.
 - [[Report-Gap-Down-Reversion-Preregistration-2026-05-21]] - preregistrazione spec-only `TRIAL-GAPREV-001`, 43/43 pass.
 - [[Report-GapRev-Intraday-Data-Contract-Gate-2026-05-21]] - gate data-contract intraday per GapRev, 35/35 pass, no query.
