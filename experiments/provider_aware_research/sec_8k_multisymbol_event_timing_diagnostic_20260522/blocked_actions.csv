@@ -1,0 +1,7 @@
+action,status,reason
+retain_raw_sec_payload,blocked,Only derived event rows are retained.
+infer_direction_from_returns,blocked,Would create look-ahead leakage.
+run_strategy_backtest,blocked,Timing regime diagnostic only.
+parameter_sweep,blocked,No optimized event-window thresholds.
+paper_trading,blocked,No strategy has been promoted.
+live_trading,blocked,No strategy has been promoted.

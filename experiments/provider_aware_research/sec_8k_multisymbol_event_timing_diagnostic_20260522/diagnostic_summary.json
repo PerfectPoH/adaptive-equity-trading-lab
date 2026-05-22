@@ -1,0 +1,38 @@
+{
+  "abs_return_lift": 0.0425160578,
+  "backtest_performed": false,
+  "blockers": [
+    "candidate_requires_separate_preregistration_and_direction_source"
+  ],
+  "candidate_timing_signal_allowed": true,
+  "control_day_count": 4823,
+  "control_median_abs_return": 0.0299477103,
+  "control_median_volume_ratio": 0.98366013,
+  "decision": "SEC_8K_MULTISYMBOL_TIMING_CANDIDATE_ONLY",
+  "event_count_fetched": 183,
+  "event_day_count": 87,
+  "event_median_abs_return": 0.0724637681,
+  "event_median_volume_ratio": 3.03102063,
+  "live_trading_performed": false,
+  "lookback_days": 20,
+  "market_data_downloaded": false,
+  "min_event_count": 30,
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider": "SEC EDGAR submissions API",
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "run_id": "SEC-8K-MULTISYMBOL-TIMING-DIAGNOSTIC-001",
+  "status": "diagnostic_complete_sec_queries_bounded",
+  "strategy_promotion_performed": false,
+  "symbols": [
+    "AEHR",
+    "ARRY",
+    "CABA",
+    "CRMD",
+    "IOVA"
+  ],
+  "trial_id": "TRIAL-SEC-8K-MULTISYMBOL-TIMING-DIAGNOSTIC-001",
+  "volume_ratio_lift": 2.0473605
+}

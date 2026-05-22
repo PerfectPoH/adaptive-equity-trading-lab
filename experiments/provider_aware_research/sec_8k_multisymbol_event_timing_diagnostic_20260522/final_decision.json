@@ -1,0 +1,28 @@
+{
+  "backtest_performed": false,
+  "blockers": [
+    "candidate_requires_separate_preregistration_and_direction_source"
+  ],
+  "candidate_timing_signal_allowed": true,
+  "control_day_count": 4823,
+  "decision": "SEC_8K_MULTISYMBOL_TIMING_CANDIDATE_ONLY",
+  "event_day_count": 87,
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "next_unblocked_step": "If candidate_timing_signal_allowed is true, preregister a separate event-window regime study; still no trade direction without ex-ante surprise or catalyst classification.",
+  "paper_trading_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "run_id": "SEC-8K-MULTISYMBOL-TIMING-DIAGNOSTIC-001",
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "symbols": [
+    "AEHR",
+    "ARRY",
+    "CABA",
+    "CRMD",
+    "IOVA"
+  ],
+  "trial_id": "TRIAL-SEC-8K-MULTISYMBOL-TIMING-DIAGNOSTIC-001"
+}
