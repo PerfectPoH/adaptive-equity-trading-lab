@@ -1,0 +1,2 @@
+symbol,event_date,bars_path,status,first15_return,first15_volume,control_first15_volume_median,first15_volume_ratio,positive_oracle_candidate,entry_price,exit_price,gross_return,net_return_after_500bps
+CRMD,2024-03-12,experiments\provider_aware_research\data_inputs\gaprev_mini_panel_databento_intraday_probe_20260521\CRMD_2024-03-12\bars.csv,purged_incomplete_intraday_window,,,,,False,,,0.0,0.0

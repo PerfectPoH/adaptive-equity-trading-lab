@@ -1,0 +1,35 @@
+{
+  "checks": [
+    {
+      "detail": "SEC8K_DIRECTION_TAPE_ORACLE_PREREGISTRATION_PASS",
+      "name": "preregistration_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "SEC8K_TAPE_ORACLE_INTRADAY_DATA_CONTRACT_PASS",
+      "name": "data_contract_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "existing intraday artifacts only",
+      "name": "provider_query_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "fixed 09:30-09:45 oracle and 500 bps costs",
+      "name": "parameter_sweep_blocked",
+      "status": "pass"
+    }
+  ],
+  "market_data_downloaded": false,
+  "parameter_sweep_performed": false,
+  "provider_query_performed": false,
+  "run_id": "SEC8K-TAPE-ORACLE-EXISTING-INTRADAY-BACKTEST-001",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 4,
+    "total": 4
+  },
+  "trial_id": "TRIAL-SEC8K-DIRECTION-001"
+}
