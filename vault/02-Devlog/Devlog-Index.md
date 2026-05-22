@@ -139,6 +139,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-21-codex-dollarbar-transform-validation]] - validated static vs EMA dollar-bar transform using distribution-only metrics; EMA rejected.
 - [[2026-05-21-codex-dollarbar-microrev-trial]] - completed 5-step static dollar-bar MicroRev protocol; archived current form.
 - [[2026-05-22-codex-amihud-liquidity-toxicity-diagnostic]] - Amihud pre-entry liquidity toxicity diagnostic on XMOM artifacts; filter not supported.
+- [[2026-05-22-codex-sec-8k-event-timing-diagnostic]] - SEC 8-K event timing diagnostic on existing CRMD artifacts; distinctive windows, sample blocked.
 - [[2026-05-21-codex-quant-hypothesis-video-research-notes]] - archived hypothesis-generation and three-video research notes as spec-only memory.
 - [[2026-05-21-codex-gap-down-reversion-preregistration]] - opened `TRIAL-GAPREV-001` spec-only branch with validator.
 - [[2026-05-21-codex-gaprev-intraday-data-contract-gate]] - added intraday data-contract gate for `TRIAL-GAPREV-001`.

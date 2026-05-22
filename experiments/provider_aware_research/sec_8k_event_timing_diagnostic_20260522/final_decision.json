@@ -1,0 +1,20 @@
+{
+  "backtest_performed": false,
+  "blockers": [
+    "event_count_below_8"
+  ],
+  "candidate_timing_signal_allowed": false,
+  "control_day_count": 975,
+  "decision": "SEC_8K_TIMING_DIAGNOSTIC_ARCHIVE_CURRENT_FORM",
+  "event_day_count": 7,
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "next_unblocked_step": "Only if candidate_timing_signal_allowed is true: preregister a separate event-window study with an ex-ante direction source.",
+  "paper_trading_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "run_id": "SEC-8K-EVENT-TIMING-DIAGNOSTIC-001",
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trial_id": "TRIAL-SEC-8K-TIMING-DIAGNOSTIC-001"
+}

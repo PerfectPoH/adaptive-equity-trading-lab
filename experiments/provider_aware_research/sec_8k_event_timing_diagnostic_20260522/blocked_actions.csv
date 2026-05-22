@@ -1,0 +1,7 @@
+action,status,reason
+provider_query,blocked,Diagnostic uses existing SEC and Databento artifacts only.
+infer_direction_from_returns,blocked,Would turn event timing into look-ahead leakage.
+run_backtest,blocked,"This is an event-window diagnostic, not a strategy."
+parameter_sweep,blocked,No optimized event-window thresholds.
+paper_trading,blocked,No strategy has been promoted.
+live_trading,blocked,No strategy has been promoted.
