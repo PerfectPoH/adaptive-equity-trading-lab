@@ -1,0 +1,6 @@
+requirement,status,minimum_contract,failure_action
+sec8k_item_202_event_panel,required_existing_artifact,Existing SEC Item 2.02 event panel with reaction_session_date,block_execution
+reaction_session_date,required,First full RTH reaction session already mapped,block_execution
+reaction_session_classification,required,BMO or AMC classification only,block_execution
+bmo_amc_only,required,DMT and UNSPECIFIED events are not eligible,block_execution
+dmt_unspecified_purge,required,Intraday or unknown-timestamp filings must be purged,block_execution

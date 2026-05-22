@@ -1,0 +1,11 @@
+field,required,semantic_contract,notes
+symbol,yes,Issuer ticker resolved for the reaction session,Must match SEC event panel symbol.
+timestamp,yes,Timezone-aware timestamp normalized to America/New_York,UTC timestamps must be converted before oracle calculation.
+open,yes,Bar open price,Positive finite numeric value.
+high,yes,Bar high price,Must satisfy high >= low and high >= open/close.
+low,yes,Bar low price,Must satisfy low <= open/close.
+close,yes,Bar close price,Positive finite numeric value.
+volume,yes,Executed share volume for the bar,Required for first-window volume ratio.
+dollar_volume,yes,Close or VWAP notional volume proxy,Required for dollar-volume diagnostics and coverage sanity.
+vwap,no,Bar VWAP if available,Optional but preferred for oracle context.
+trade_count,no,Number of trades in the bar,Optional microstructure quality control.

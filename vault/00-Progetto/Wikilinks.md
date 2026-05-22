@@ -370,6 +370,8 @@ Questa pagina aiuta Obsidian a creare un grafo utile.
 - [[2026-05-22-codex-sec8k-xmom-overlap-diagnostic]] -> [[Report-SEC8K-XMOM-Overlap-Diagnostic-2026-05-22]]
 - [[Report-SEC8K-XMOM-Overlap-Diagnostic-2026-05-22]] -> [[Report-SEC8K-Direction-Tape-Oracle-Preregistration-2026-05-22]]
 - [[2026-05-22-codex-sec8k-direction-tape-oracle-preregistration]] -> [[Report-SEC8K-Direction-Tape-Oracle-Preregistration-2026-05-22]]
+- [[Report-SEC8K-Direction-Tape-Oracle-Preregistration-2026-05-22]] -> [[Report-SEC8K-Tape-Oracle-Intraday-Data-Contract-2026-05-22]]
+- [[2026-05-22-codex-sec8k-tape-oracle-intraday-data-contract]] -> [[Report-SEC8K-Tape-Oracle-Intraday-Data-Contract-2026-05-22]]
 - [[Report-DollarBar-MicroRev-Trial-2026-05-21]] -> [[Report-Gap-Down-Reversion-Preregistration-2026-05-21]]
 - [[Report-Dollar-Bar-Diagnostic-2026-05-21]] -> [[Report-Gap-Down-Reversion-Preregistration-2026-05-21]]
 - [[Report-Outlier-Resistant-Diagnostic-Harness-2026-05-21]] -> [[Report-Gap-Down-Reversion-Preregistration-2026-05-21]]

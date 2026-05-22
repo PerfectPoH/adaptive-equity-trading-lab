@@ -1,0 +1,8 @@
+requirement,status,minimum_contract,failure_action
+provider_selection,not_selected,Provider must be selected in a separate approval gate,block_execution
+bar_frequency,required,1 minute or finer RTH bars,block_execution
+rth_session_only,required,Regular Trading Hours only from 09:30 to 16:00 America/New_York,block_execution
+symbol_coverage,required,Must cover all event symbols included in the future authorized run,block_execution
+date_coverage,required,Must cover every reaction_session_date plus control-window baseline dates,block_execution
+rate_limit_policy,required,Provider rate limits and stop conditions must be documented before query,block_execution
+raw_payload_retention,blocked_by_default,No raw provider payload retention unless separately approved,block_execution

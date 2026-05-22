@@ -1,0 +1,7 @@
+cost_component,status,minimum_contract,failure_action
+spread_proxy,required,Spread or conservative quote proxy before hypothetical order,block_execution
+slippage_model,required,Adverse slippage model compatible with small-cap RTH liquidity,block_execution
+market_impact_model,required,Participation-aware impact model with explicit size assumptions,block_execution
+commission_model,required,Commission and fees included or conservatively dominated by bps model,block_execution
+cost_model_bps,required,500 bps round-trip minimum,block_execution
+no_gross_only_metrics,required,No strategy verdict may use gross-only returns,block_execution

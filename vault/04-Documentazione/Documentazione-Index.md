@@ -50,6 +50,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-SEC-8K-Multisymbol-Event-Timing-Diagnostic-2026-05-22]] - diagnostico SEC 8-K multi-symbol; timing regime candidate, direzione ancora bloccata.
 - [[Report-SEC8K-XMOM-Overlap-Diagnostic-2026-05-22]] - diagnostico overlap XMOM/SEC 8-K; supporta interpretazione catalyst storica, nessun filtro tradabile.
 - [[Report-SEC8K-Direction-Tape-Oracle-Preregistration-2026-05-22]] - preregistrazione spec-only direzionale SEC 8-K Tape Oracle; esecuzione bloccata.
+- [[Report-SEC8K-Tape-Oracle-Intraday-Data-Contract-2026-05-22]] - data-contract intraday RTH per SEC 8-K Tape Oracle; provider/query/backtest bloccati.
 - [[Report-Quant-Hypothesis-Generation-And-Video-Research-2026-05-21]] - manifesto spec-only per generare ipotesi falsificabili e roadmap Anno 2.
 - [[Report-Gap-Down-Reversion-Preregistration-2026-05-21]] - preregistrazione spec-only `TRIAL-GAPREV-001`, 43/43 pass.
 - [[Report-GapRev-Intraday-Data-Contract-Gate-2026-05-21]] - gate data-contract intraday per GapRev, 35/35 pass, no query.

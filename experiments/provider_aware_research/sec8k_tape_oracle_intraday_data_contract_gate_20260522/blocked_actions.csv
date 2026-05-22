@@ -1,0 +1,13 @@
+action,status,reason
+select_provider,blocked,Provider selection requires separate approval.
+provider_query,blocked,No network call is authorized by this gate.
+download_intraday_data,blocked,No data download is authorized by this gate.
+implement_extractor,blocked,Extractor implementation requires a separate plan.
+compute_oracle_signals,blocked,Signal computation would consume the preregistered trial.
+execute_backtest,blocked,Backtest requires future execution authorization.
+run_parameter_sweep,blocked,Oracle window threshold entry and exit are frozen.
+run_oos,blocked,OOS requires future execution authorization.
+paper_trading,blocked,No strategy has passed validation.
+live_trading,blocked,No strategy has passed validation.
+strategy_promotion,blocked,Promotion requires post-run statistical gates.
+short_selling,blocked,Negative oracle labels are observation-only.

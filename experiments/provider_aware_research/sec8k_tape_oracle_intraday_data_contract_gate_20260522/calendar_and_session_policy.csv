@@ -1,0 +1,7 @@
+policy_item,status,rule,failure_action
+session_timezone,required,America/New_York,block_execution
+regular_open,required,09:30 America/New_York,block_execution
+regular_close,required,16:00 America/New_York,block_execution
+holidays,required,NYSE/Nasdaq holiday calendar must be applied,block_execution
+early_closes,required,Early-close sessions must be excluded unless oracle and flat windows both exist,block_execution
+halt_policy,required,If halt prevents oracle or entry window the event is purged,block_execution

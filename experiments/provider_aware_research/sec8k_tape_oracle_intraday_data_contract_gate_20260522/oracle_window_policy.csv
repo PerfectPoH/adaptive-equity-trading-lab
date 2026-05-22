@@ -1,0 +1,9 @@
+policy_item,status,rule,failure_action
+oracle_start,required,09:30 America/New_York,block_execution
+oracle_end,required,09:45 America/New_York,block_execution
+entry_time,required,09:46 America/New_York,block_execution
+flat_time,required,15:55 America/New_York,block_execution
+volume_baseline,required,Median first-15m RTH volume on non-event control sessions for same symbol,block_execution
+volume_ratio_threshold,required,3.0 minimum,block_execution
+positive_oracle_rule,required,09:45 close greater than 09:30 open and volume ratio >= 3.0,block_execution
+negative_oracle_policy,required,Observation-only; no short selling authorized,block_execution
