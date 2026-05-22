@@ -142,6 +142,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-22-codex-sec-8k-event-timing-diagnostic]] - SEC 8-K event timing diagnostic on existing CRMD artifacts; distinctive windows, sample blocked.
 - [[2026-05-22-codex-sec-8k-multisymbol-event-timing-diagnostic]] - SEC 8-K Item 2.02 multi-symbol timing diagnostic; regime candidate only.
 - [[2026-05-22-codex-sec8k-xmom-overlap-diagnostic]] - XMOM/SEC 8-K overlap diagnostic; historical catalyst explanation only.
+- [[2026-05-22-codex-sec8k-direction-tape-oracle-preregistration]] - spec-only long-only positive Tape Oracle preregistration for SEC 8-K Item 2.02.
 - [[2026-05-21-codex-quant-hypothesis-video-research-notes]] - archived hypothesis-generation and three-video research notes as spec-only memory.
 - [[2026-05-21-codex-gap-down-reversion-preregistration]] - opened `TRIAL-GAPREV-001` spec-only branch with validator.
 - [[2026-05-21-codex-gaprev-intraday-data-contract-gate]] - added intraday data-contract gate for `TRIAL-GAPREV-001`.

@@ -1,0 +1,12 @@
+action,status,reason
+provider_query,blocked,This artifact is spec-only and uses no new provider call.
+download_intraday_data,blocked,Intraday data requires a separate data-contract and approval gate.
+execute_backtest,blocked,No executable runner exists in this preregistration.
+run_parameter_sweep,blocked,Oracle window volume threshold entry and exit are frozen.
+run_oos,blocked,OOS requires separate authorization after data contract.
+paper_trading,blocked,No strategy has been validated.
+live_trading,blocked,No strategy has been validated.
+strategy_promotion,blocked,Promotion requires future DSR and post-run gates.
+short_selling,blocked,Small-cap shorting requires a separate borrow and locate contract.
+use_xmom_pnl_for_thresholds,blocked,XMOM overlap is historical interpretation only.
+use_overlap_as_filter,blocked,Overlap diagnostic may not become a trading filter without separate preregistration.

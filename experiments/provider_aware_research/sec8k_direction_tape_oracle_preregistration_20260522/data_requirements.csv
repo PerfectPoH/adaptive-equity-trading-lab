@@ -1,0 +1,8 @@
+requirement,status,minimum_contract,notes
+sec8k_item_202_event_panel,required_existing_artifact,Existing SEC Item 2.02 reaction-session panel with BMO/AMC mapping,No new SEC query in this preregistration.
+rth_intraday_bars,required_future_gate,09:30-16:00 America/New_York bars with at least 1m resolution,Future gate must verify timestamps and session calendar.
+trading_calendar,required_future_gate,NYSE/Nasdaq regular-session calendar with holidays and early closes,Required for reaction session and flat time.
+timezone_policy,required_future_gate,All timestamps normalized to America/New_York,Prevents BMO/AMC/DMT ambiguity.
+spread_or_quote_proxy,required_future_gate,Spread quote or conservative proxy available before order,Required for execution realism.
+cost_model,required_future_gate,500 bps round-trip minimum cost model,Worst-case market assumption.
+raw_payload_retention,blocked_by_default,No raw provider payload retained unless separate approval,Matches lab retention policy.

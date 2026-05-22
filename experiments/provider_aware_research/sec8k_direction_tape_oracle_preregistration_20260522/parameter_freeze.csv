@@ -1,0 +1,11 @@
+parameter_name,status,value,change_after_execution_policy,notes
+trial_status,frozen,SPEC_ONLY_NOT_EXECUTED,immutable,Preregistration only.
+candidate_trade_side,frozen,long_only_positive_oracle,immutable,No short selling because small-cap borrow/locate risk is a separate regime.
+oracle_window,frozen,09:30-09:45 America/New_York,immutable,First full RTH response only.
+entry_time,frozen,09:46 America/New_York,immutable,Entry after oracle is observable.
+exit_policy,frozen,same_day_flat_by_15:55,immutable,No overnight risk.
+volume_ratio_threshold,frozen,3.0,immutable,Microstructure prior; not selected from XMOM PnL.
+cost_model_bps,frozen,500,immutable,Worst-case cost realism gate.
+dsr_threshold,frozen,0.95,immutable,Promotion cannot occur below DSR 0.95.
+minimum_trade_count,frozen,30,immutable,Below 30 trades the result is exploratory only.
+short_selling,blocked,not_allowed,immutable,Negative oracle labels do not authorize shorts.

@@ -1,0 +1,10 @@
+decision_item,status,rule
+execution_precondition,blocked,No execution until intraday data-contract gate and explicit run authorization exist.
+direction_source,required,Only first 15m RTH tape oracle may define direction before entry.
+primary_metric,required,Net intraday return after 500 bps on positive-oracle candidates.
+cost_gate,required,Fail if gross edge does not survive 500 bps round-trip cost model.
+sample_size_gate,required,No promotion if trade_count < 30; exploratory report only.
+dsr_gate,required,No promotion unless DSR >= 0.95 after effective trial accounting.
+outlier_gate,required,Fail if sign flips after removing top three winners.
+promotion_rule,blocked,Promotion is impossible in this preregistration artifact.
+stop_rule,required,Stop if any future label or XMOM PnL is used to choose thresholds.

@@ -1,0 +1,16 @@
+feature_name,status,definition,lookahead_policy,notes
+sec8k_item_202_event_day,allowed,Event day from existing SEC 8-K Item 2.02 panel,point_in_time_event_timestamp,Existing panel only; no new provider query in this preregistration.
+reaction_session_date,allowed,First full RTH reaction session mapped from SEC acceptance timestamp,point_in_time_event_timestamp,BMO same session and AMC next regular session policy inherited from prior SEC diagnostics.
+reaction_session_classification,allowed,BMO or AMC classification for reaction session mapping,point_in_time_event_timestamp,DMT and UNSPECIFIED remain purged by upstream event policy.
+rth_first_15m_return,allowed,Close at 09:45 divided by open at 09:30 minus one,available_before_entry,Direction oracle computed before hypothetical 09:46 entry.
+rth_first_15m_volume_ratio,allowed,First 15m RTH volume divided by control-window median first 15m volume,available_before_entry,Threshold fixed at 3.0 and not selected from XMOM PnL.
+rth_first_15m_vwap_position,allowed,09:45 close versus first-window VWAP,available_before_entry,Secondary diagnostic context only; not a sweep parameter.
+oracle_direction_label,allowed,positive_oracle_candidate if first 15m return > 0 and volume ratio >= 3.0,available_before_entry,Flat or negative labels authorize no long entry and no short entry.
+entry_timestamp,allowed,Fixed hypothetical timestamp 09:46 America/New_York,available_before_entry,No optimization of entry time allowed.
+intraday_exit_timestamp,allowed,Fixed same-day flat timestamp 15:55 America/New_York,predeclared_before_run,No overnight holding in this preregistration.
+spread_proxy,allowed,Spread or quote proxy required by future intraday data contract,available_before_order,Required for cost realism.
+cost_model_bps,allowed,500 bps round-trip cost realism gate,predeclared_before_run,Worst-case cost model remains mandatory.
+same_day_close_return,blocked_as_feature,Return from entry to same-day close,future_label,May be target or metric only after entry; never an input feature.
+post_entry_return,blocked_as_feature,Any return after hypothetical 09:46 entry,future_label,Forbidden as direction source.
+trade_pnl,blocked_as_feature,Realized or simulated trade PnL,future_label,Forbidden as threshold or feature.
+future_gap_fill,blocked_as_feature,Whether the gap filled later in the day,future_label,Forbidden as feature.
