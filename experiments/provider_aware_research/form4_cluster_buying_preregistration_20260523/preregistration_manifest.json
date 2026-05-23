@@ -1,0 +1,30 @@
+{
+  "allowed_symbols": [
+    "AEHR",
+    "ARRY",
+    "CABA",
+    "CRMD",
+    "IOVA"
+  ],
+  "cluster_window_days": 10,
+  "end_date": "2025-12-31",
+  "holding_days": 90,
+  "market_data_download_allowed": false,
+  "max_document_requests": 250,
+  "min_cluster_value_usd": 100000,
+  "min_distinct_owners": 2,
+  "minimum_trade_count": 5,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "price_file": "experiments/provider_aware_research/data_inputs/databento_xmom_20260520/prices.csv",
+  "preregistration_id": "PREREG-FORM4-CLUSTER-BUYING-001",
+  "promotion_allowed": false,
+  "provider": "SEC EDGAR",
+  "provider_query_allowed": true,
+  "raw_payload_retention": false,
+  "round_trip_cost_bps": 500,
+  "short_selling_allowed": false,
+  "start_date": "2022-01-03",
+  "status": "APPROVED_SEC_FORM4_EVENT_PANEL_NOT_EXECUTED",
+  "trial_id": "TRIAL-FORM4-CLUSTER-BUYING-001"
+}

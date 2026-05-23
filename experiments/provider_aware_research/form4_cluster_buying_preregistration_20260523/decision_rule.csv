@@ -1,0 +1,11 @@
+decision_item,rule
+data_scope,Official SEC EDGAR Form 4 filings for the approved five-symbol universe only.
+symbol_universe,"AEHR, ARRY, CABA, CRMD, IOVA."
+transaction_filter,Open-market purchase transactions only: transaction code P and acquired/disposed code A.
+cluster_definition,At least two distinct reporting owners disclosed within 10 calendar days.
+value_filter,Cluster aggregate disclosed purchase value must be at least 100000 USD.
+execution_rule,Enter long at the first available daily open after the cluster signal filing date and exit at the close 90 trading sessions later.
+cost_model,Subtract 500 bps round trip cost from every completed trade.
+sample_size_gate,Archive unless at least 5 completed trades exist in this restricted five-symbol panel.
+outlier_gate,Archive if positive net performance flips nonpositive after removing the top 3 net trades.
+promotion_rule,Candidate-only at best; strategy promotion is blocked regardless of result.

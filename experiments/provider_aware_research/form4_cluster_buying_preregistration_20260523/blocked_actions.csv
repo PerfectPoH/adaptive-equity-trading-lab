@@ -1,0 +1,9 @@
+action,reason
+market_data_download,Use existing Databento daily OHLCV artifact only.
+intraday_data_query,This trial is daily-only and does not need intraday data.
+raw_payload_retention,SEC XML/JSON payloads may be parsed but not retained.
+parameter_sweep,All thresholds are fixed before the query.
+short_selling,User mandate is long-only; shorts are permanently out of scope.
+paper_trading,Backtest-only diagnostic.
+live_trading,Backtest-only diagnostic.
+strategy_promotion,Promotion requires separate validation and is not authorized here.
