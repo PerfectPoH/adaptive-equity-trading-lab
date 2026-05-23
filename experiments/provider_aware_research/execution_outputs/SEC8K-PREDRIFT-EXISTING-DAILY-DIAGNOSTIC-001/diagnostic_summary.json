@@ -1,0 +1,30 @@
+{
+  "abs_return_lift": 0.0125164077,
+  "backtest_performed": false,
+  "blockers": [
+    "event_signed_predrift_not_above_control"
+  ],
+  "candidate_allowed": false,
+  "control_count": 4798,
+  "control_median_pre_window_abs_return": 0.0636257243,
+  "control_median_pre_window_return": -0.0051319675,
+  "control_median_pre_window_volume_ratio": 0.98159957,
+  "decision": "SEC8K_PREDRIFT_ARCHIVE_CURRENT_FORM",
+  "event_count": 87,
+  "event_median_pre_window_abs_return": 0.076142132,
+  "event_median_pre_window_return": -0.0163793103,
+  "event_median_pre_window_volume_ratio": 1.11705279,
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "min_event_count": 30,
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "run_id": "SEC8K-PREDRIFT-EXISTING-DAILY-DIAGNOSTIC-001",
+  "signed_return_lift": -0.0112473428,
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trial_id": "SEC8K-PREDRIFT-001",
+  "volume_ratio_lift": 0.13545322
+}

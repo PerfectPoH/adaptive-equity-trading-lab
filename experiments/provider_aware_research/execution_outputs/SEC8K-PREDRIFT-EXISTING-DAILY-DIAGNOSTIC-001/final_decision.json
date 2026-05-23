@@ -1,0 +1,20 @@
+{
+  "backtest_performed": false,
+  "blockers": [
+    "event_signed_predrift_not_above_control"
+  ],
+  "candidate_allowed": false,
+  "control_count": 4798,
+  "decision": "SEC8K_PREDRIFT_ARCHIVE_CURRENT_FORM",
+  "event_count": 87,
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "run_id": "SEC8K-PREDRIFT-EXISTING-DAILY-DIAGNOSTIC-001",
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trial_id": "SEC8K-PREDRIFT-001"
+}
