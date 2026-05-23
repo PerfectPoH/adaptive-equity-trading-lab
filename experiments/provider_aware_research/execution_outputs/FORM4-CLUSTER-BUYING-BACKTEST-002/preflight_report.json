@@ -1,0 +1,136 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\form4_cluster_buying_preregistration_20260523",
+      "name": "spec_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\form4_cluster_buying_preregistration_20260523\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\form4_cluster_buying_preregistration_20260523\\preregistration_manifest.json",
+      "name": "required_file:preregistration_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\form4_cluster_buying_preregistration_20260523\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\form4_cluster_buying_preregistration_20260523\\decision_rule.csv",
+      "name": "required_file:decision_rule.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "PREREG-FORM4-CLUSTER-BUYING-001",
+      "name": "preregistration_id",
+      "status": "pass"
+    },
+    {
+      "detail": "TRIAL-FORM4-CLUSTER-BUYING-001",
+      "name": "trial_id",
+      "status": "pass"
+    },
+    {
+      "detail": "APPROVED_SEC_FORM4_EVENT_PANEL_NOT_EXECUTED",
+      "name": "status_pre_run",
+      "status": "pass"
+    },
+    {
+      "detail": "SEC EDGAR",
+      "name": "provider_sec_edgar",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "provider_query_allowed",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "raw_retention_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "market_download_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "parameter_sweep_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "short_selling_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "paper_trading_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "promotion_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "10",
+      "name": "cluster_window_10",
+      "status": "pass"
+    },
+    {
+      "detail": "2",
+      "name": "min_distinct_owners_2",
+      "status": "pass"
+    },
+    {
+      "detail": "100000",
+      "name": "min_cluster_value_100k",
+      "status": "pass"
+    },
+    {
+      "detail": "90",
+      "name": "holding_90",
+      "status": "pass"
+    },
+    {
+      "detail": "500",
+      "name": "cost_500bps",
+      "status": "pass"
+    },
+    {
+      "detail": "5",
+      "name": "minimum_trade_count_5",
+      "status": "pass"
+    },
+    {
+      "detail": "250",
+      "name": "max_document_requests_bounded",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_blocked_actions",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_decision_items",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "FORM4_CLUSTER_BUYING_PREREGISTRATION_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 25,
+    "total": 25
+  }
+}
