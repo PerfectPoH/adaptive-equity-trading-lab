@@ -1,0 +1,19 @@
+{
+  "preregistration_id": "PREREG-SEC8K-PREDRIFT-001",
+  "trial_id": "SEC8K-PREDRIFT-001",
+  "status": "SPEC_ONLY_EXISTING_DAILY_ARTIFACTS",
+  "created_at": "2026-05-23",
+  "event_panel": "experiments/provider_aware_research/sec_8k_multisymbol_event_timing_diagnostic_20260522/sec_8k_multisymbol_event_panel.csv",
+  "daily_price_artifact": "experiments/provider_aware_research/data_inputs/databento_xmom_20260520/prices.csv",
+  "pre_window_days": 5,
+  "baseline_lookback_days": 20,
+  "minimum_event_count": 30,
+  "provider_query_allowed": false,
+  "market_data_download_allowed": false,
+  "intraday_query_allowed": false,
+  "parameter_sweep_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "promotion_allowed": false,
+  "invalidated_run_usage": "blocked_audit_trail_only"
+}

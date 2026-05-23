@@ -1,0 +1,9 @@
+decision_item,status,rule
+data_scope,required,Use only existing SEC8K event panel and existing daily Databento price artifact.
+pre_window,required,Measure only the 5 trading sessions ending at t-1 before the reaction session.
+baseline,required,Use the prior 20 trading sessions before the pre-window as baseline.
+direction_lift_gate,required,Candidate only if event median signed pre-window return is above control median.
+absolute_lift_gate,required,Candidate only if event median absolute pre-window return is above control median.
+volume_lift_gate,required,Candidate only if event median pre-window volume ratio is above control median.
+sample_size_gate,required,No candidate if event count is below 30.
+promotion_rule,blocked,Promotion impossible in this diagnostic artifact.

@@ -1,0 +1,10 @@
+action,status,reason
+provider_query,blocked,Existing daily artifact diagnostic only
+market_data_download,blocked,No new data acquisition is authorized
+intraday_data_query,blocked,Daily bars only
+parameter_sweep,blocked,Fixed pre-window and baseline lookback
+paper_trading,blocked,No broker simulation authorized
+live_trading,blocked,No broker action authorized
+strategy_promotion,blocked,Diagnostic only
+use_sec8k_mini_panel_001_for_calibration,blocked,Protocol-violated run is audit-trail only
+use_tape_oracle_002_for_thresholds,blocked,Prior Tape Oracle run cannot calibrate predrift thresholds
