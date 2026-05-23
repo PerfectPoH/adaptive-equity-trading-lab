@@ -1,0 +1,22 @@
+{
+  "backtest_performed": true,
+  "blockers": [
+    "net_return_not_positive_after_500bps",
+    "median_net_return_not_positive"
+  ],
+  "candidate_allowed": false,
+  "decision": "LOWVOL_TRADABILITY_ARCHIVE_CURRENT_FORM",
+  "gross_return_sum": -0.4661574616,
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "net_return_sum_after_500bps": -2.9161574616,
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "run_id": "LOWVOL-TRADABILITY-BACKTEST-001",
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trade_count": 49,
+  "trial_id": "TRIAL-LOWVOL-TRADABILITY-001"
+}

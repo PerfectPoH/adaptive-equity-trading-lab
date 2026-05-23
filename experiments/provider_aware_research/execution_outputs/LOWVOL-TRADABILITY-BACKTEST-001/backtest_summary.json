@@ -1,0 +1,32 @@
+{
+  "backtest_performed": true,
+  "blockers": [
+    "net_return_not_positive_after_500bps",
+    "median_net_return_not_positive"
+  ],
+  "candidate_allowed": false,
+  "decision": "LOWVOL_TRADABILITY_ARCHIVE_CURRENT_FORM",
+  "gross_return_sum": -0.4661574616,
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "median_net_return": -0.0779898219,
+  "minimum_trade_count": 30,
+  "net_return_sum_after_500bps": -2.9161574616,
+  "net_return_sum_ex_top3": -3.8479231662,
+  "net_win_rate": 0.22449,
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "run_id": "LOWVOL-TRADABILITY-BACKTEST-001",
+  "status": "backtest_complete_existing_daily_artifacts_only",
+  "strategy_promotion_performed": false,
+  "symbols_traded": [
+    "AEHR",
+    "ARRY",
+    "CRMD",
+    "IOVA"
+  ],
+  "trade_count": 49,
+  "trial_id": "TRIAL-LOWVOL-TRADABILITY-001"
+}
