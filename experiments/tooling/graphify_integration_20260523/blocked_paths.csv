@@ -1,0 +1,7 @@
+path,status,reason
+.env,blocked,Environment files may contain credentials
+.git,blocked,Git internals are not research artifacts
+.venv,blocked,Virtual environments are dependency noise and may be large
+.venv-lab,blocked,Virtual environments are dependency noise and may be large
+experiments/provider_aware_research/data_inputs,blocked,Provider-derived data inputs are not part of local code topology
+experiments/provider_aware_research/execution_outputs,blocked,Provider-derived execution outputs must not be reinterpreted as fresh evidence

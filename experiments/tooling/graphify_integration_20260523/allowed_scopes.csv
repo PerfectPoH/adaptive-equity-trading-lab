@@ -1,0 +1,4 @@
+scope,status,reason
+src,approved,Source code topology for local code queries
+tests,approved,Test topology for local query planning and coverage navigation
+vault/04-Documentazione/Reports,approved,Research reports and audit trail navigation

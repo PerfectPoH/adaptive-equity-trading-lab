@@ -1,0 +1,22 @@
+{
+  "artifact_id": "GRAPHIFY-INTEGRATION-001",
+  "created_at": "2026-05-23",
+  "status": "SPEC_ONLY_LOCAL_TOOLING_NOT_RUN",
+  "source_repository": "https://github.com/safishamsi/graphify",
+  "package_name": "graphifyy",
+  "cli_command": "graphify",
+  "inspected_version": "0.8.16",
+  "execution_performed": false,
+  "raw_graph_outputs_retained": false,
+  "approved_purpose": "Local static code and report graph generation for repository navigation and query planning.",
+  "forbidden_use": [
+    "provider_query",
+    "market_data_download",
+    "strategy_backtest",
+    "paper_trading",
+    "live_trading",
+    "strategy_promotion",
+    "scan_secrets"
+  ],
+  "first_run_rule": "Any first real Graphify scan must be executed as a separate run after this gate exists, with a bounded output directory and preserved blocked paths."
+}

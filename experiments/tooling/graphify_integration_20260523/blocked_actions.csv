@@ -1,0 +1,8 @@
+action,status,reason
+provider_query,blocked,Graphify integration is local static analysis only
+market_data_download,blocked,No provider or market-data acquisition is authorized by this artifact
+strategy_backtest,blocked,Static graph generation must not execute strategy logic
+paper_trading,blocked,No broker or simulated brokerage execution is authorized
+live_trading,blocked,No broker execution is authorized
+strategy_promotion,blocked,Graph topology is not strategy evidence
+scan_secrets,blocked,Local graph scans must avoid credentials and secret-bearing files
