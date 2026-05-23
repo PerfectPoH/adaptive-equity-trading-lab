@@ -1,0 +1,18 @@
+{
+  "backtest_performed": false,
+  "blockers": [
+    "HTTP_ERROR_403:Forbidden"
+  ],
+  "decision": "BLOCKED_EARNINGS_SOURCE_PROVIDER_ERROR",
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "paper_trading_performed": false,
+  "promotion_allowed": false,
+  "provider": "Intrinio",
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "reason": "HTTP_ERROR_403:Forbidden",
+  "run_id": "PROBE-PEAD-EARNINGS-SOURCE-001",
+  "status": "blocked",
+  "symbol": "CRMD"
+}

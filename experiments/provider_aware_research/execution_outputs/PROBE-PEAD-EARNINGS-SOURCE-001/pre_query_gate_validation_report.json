@@ -1,0 +1,101 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\pead_earnings_source_probe_gate_20260523",
+      "name": "spec_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\pead_earnings_source_probe_gate_20260523\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\pead_earnings_source_probe_gate_20260523\\probe_manifest.json",
+      "name": "required_file:probe_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\pead_earnings_source_probe_gate_20260523\\required_fields.csv",
+      "name": "required_file:required_fields.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\pead_earnings_source_probe_gate_20260523\\decision_rule.csv",
+      "name": "required_file:decision_rule.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\pead_earnings_source_probe_gate_20260523\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "PROBE-PEAD-EARNINGS-SOURCE-001",
+      "name": "probe_id",
+      "status": "pass"
+    },
+    {
+      "detail": "APPROVED_PRE_QUERY_NOT_EXECUTED",
+      "name": "status_pre_query",
+      "status": "pass"
+    },
+    {
+      "detail": "Intrinio",
+      "name": "provider_intrinio",
+      "status": "pass"
+    },
+    {
+      "detail": "CRMD",
+      "name": "symbol_crmd",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "max_one_call",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "raw_payload_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "provider_query_explicit",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "market_download_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "backtest_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "promotion_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_field_groups_present",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_actions_present",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "PEAD_EARNINGS_SOURCE_PROBE_GATE_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 18,
+    "total": 18
+  }
+}
