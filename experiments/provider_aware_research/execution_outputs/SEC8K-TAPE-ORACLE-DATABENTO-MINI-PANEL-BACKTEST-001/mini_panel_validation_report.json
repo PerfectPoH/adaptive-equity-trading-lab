@@ -1,0 +1,61 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\execution_outputs\\SEC8K-TAPE-ORACLE-DATABENTO-MINI-PANEL-BACKTEST-001",
+      "name": "output_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\execution_outputs\\SEC8K-TAPE-ORACLE-DATABENTO-MINI-PANEL-BACKTEST-001\\preflight_report.json",
+      "name": "required_file:preflight_report.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\execution_outputs\\SEC8K-TAPE-ORACLE-DATABENTO-MINI-PANEL-BACKTEST-001\\backtest_results.csv",
+      "name": "required_file:backtest_results.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\execution_outputs\\SEC8K-TAPE-ORACLE-DATABENTO-MINI-PANEL-BACKTEST-001\\backtest_summary.json",
+      "name": "required_file:backtest_summary.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\execution_outputs\\SEC8K-TAPE-ORACLE-DATABENTO-MINI-PANEL-BACKTEST-001\\final_decision.json",
+      "name": "required_file:final_decision.json",
+      "status": "pass"
+    },
+    {
+      "detail": "rows=30",
+      "name": "results_non_empty",
+      "status": "pass"
+    },
+    {
+      "detail": "present=[]",
+      "name": "forbidden_columns_absent",
+      "status": "pass"
+    },
+    {
+      "detail": "{'blockers': ['positive_oracle_trade_count_below_30'], 'evaluated_event_count': 30, 'gross_return_sum': 0.0505549675, 'live_trading_performed': False, 'market_data_downloaded': False, 'net_return_sum_after_500bps': -0.1494450325, 'paper_trading_performed': False, 'parameter_sweep_performed': False, 'positive_oracle_trade_count': 4, 'promotion_allowed': False, 'provider_query_performed': False, 'run_id': 'SEC8K-TAPE-ORACLE-EXISTING-INTRADAY-BACKTEST-001', 'status': 'backtest_complete_existing_intraday_artifacts_only', 'strategy_promotion_performed': False, 'trial_id': 'TRIAL-SEC8K-DIRECTION-001'}",
+      "name": "summary_no_provider_query",
+      "status": "pass"
+    },
+    {
+      "detail": "{'blockers': ['positive_oracle_trade_count_below_30'], 'evaluated_event_count': 30, 'gross_return_sum': 0.0505549675, 'live_trading_performed': False, 'market_data_downloaded': False, 'net_return_sum_after_500bps': -0.1494450325, 'paper_trading_performed': False, 'parameter_sweep_performed': False, 'positive_oracle_trade_count': 4, 'promotion_allowed': False, 'provider_query_performed': False, 'run_id': 'SEC8K-TAPE-ORACLE-EXISTING-INTRADAY-BACKTEST-001', 'status': 'backtest_complete_existing_intraday_artifacts_only', 'strategy_promotion_performed': False, 'trial_id': 'TRIAL-SEC8K-DIRECTION-001'}",
+      "name": "summary_no_sweep",
+      "status": "pass"
+    },
+    {
+      "detail": "{'backtest_performed': True, 'blockers': ['positive_oracle_trade_count_below_30'], 'decision': 'SEC8K_TAPE_ORACLE_ARCHIVE_CURRENT_EXISTING_DATA_FORM', 'evaluated_event_count': 30, 'live_trading_performed': False, 'market_data_downloaded': False, 'next_unblocked_step': 'If desired, create a separate bounded intraday provider approval to increase SEC8K Tape Oracle sample size.', 'paper_trading_performed': False, 'parameter_sweep_performed': False, 'positive_oracle_trade_count': 4, 'promotion_allowed': False, 'provider_query_performed': False, 'run_id': 'SEC8K-TAPE-ORACLE-EXISTING-INTRADAY-BACKTEST-001', 'status': 'complete', 'strategy_promotion_performed': False, 'trial_id': 'TRIAL-SEC8K-DIRECTION-001'}",
+      "name": "decision_no_promotion",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "SEC8K_TAPE_ORACLE_EXISTING_INTRADAY_BACKTEST_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 10,
+    "total": 10
+  }
+}

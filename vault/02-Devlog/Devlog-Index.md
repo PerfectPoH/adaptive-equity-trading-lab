@@ -145,6 +145,7 @@ I devlog sono ordinati per mese. Ogni file descrive una sessione concreta: cosa 
 - [[2026-05-22-codex-sec8k-direction-tape-oracle-preregistration]] - spec-only long-only positive Tape Oracle preregistration for SEC 8-K Item 2.02.
 - [[2026-05-22-codex-sec8k-tape-oracle-intraday-data-contract]] - intraday RTH data-contract gate for SEC 8-K Tape Oracle.
 - [[2026-05-22-codex-sec8k-tape-oracle-existing-intraday-backtest]] - bounded backtest on existing intraday artifacts; one SEC8K event purged, no trade.
+- [[2026-05-22-codex-sec8k-tape-oracle-databento-mini-panel-backtest]] - bounded Databento mini-panel and SEC 8-K Tape Oracle backtest; no promotion.
 - [[2026-05-21-codex-quant-hypothesis-video-research-notes]] - archived hypothesis-generation and three-video research notes as spec-only memory.
 - [[2026-05-21-codex-gap-down-reversion-preregistration]] - opened `TRIAL-GAPREV-001` spec-only branch with validator.
 - [[2026-05-21-codex-gaprev-intraday-data-contract-gate]] - added intraday data-contract gate for `TRIAL-GAPREV-001`.

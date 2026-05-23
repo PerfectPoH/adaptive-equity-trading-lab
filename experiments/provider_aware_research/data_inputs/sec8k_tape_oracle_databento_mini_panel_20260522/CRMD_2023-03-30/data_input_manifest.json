@@ -1,0 +1,15 @@
+{
+  "bars_path": "experiments\\provider_aware_research\\data_inputs\\sec8k_tape_oracle_databento_mini_panel_20260522\\CRMD_2023-03-30\\bars.csv",
+  "control_dates": "2023-03-23|2023-03-24|2023-03-27|2023-03-28|2023-03-29",
+  "dataset": "XNAS.ITCH",
+  "derived_bars_sha256": "862e8d2b3cbaad7ea5a314308fbb7e708f272619fb22cf0c4aa58b50ad8f4fe3",
+  "detail": "derived_bars_written_raw_not_retained",
+  "end": "2023-03-30T20:00:00+00:00",
+  "event_date": "2023-03-30",
+  "raw_payload_retained": false,
+  "rows": 572,
+  "schema": "ohlcv-1m",
+  "start": "2023-03-23T13:30:00+00:00",
+  "status": "pass",
+  "symbol": "CRMD"
+}

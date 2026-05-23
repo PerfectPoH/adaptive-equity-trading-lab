@@ -1,0 +1,16 @@
+{
+  "empty_count": 0,
+  "error_count": 0,
+  "live_trading_performed": false,
+  "max_events": 30,
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "pass_count": 30,
+  "provider_query_performed": true,
+  "query_count": 30,
+  "raw_payload_retained": false,
+  "market_data_downloaded": true,
+  "run_id": "SEC8K-TAPE-ORACLE-DATABENTO-MINI-PANEL-001",
+  "status": "complete",
+  "strategy_promotion_performed": false
+}

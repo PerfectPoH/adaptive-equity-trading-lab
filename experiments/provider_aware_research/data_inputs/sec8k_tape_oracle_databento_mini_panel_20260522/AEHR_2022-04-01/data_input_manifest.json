@@ -1,0 +1,15 @@
+{
+  "bars_path": "experiments\\provider_aware_research\\data_inputs\\sec8k_tape_oracle_databento_mini_panel_20260522\\AEHR_2022-04-01\\bars.csv",
+  "control_dates": "2022-03-25|2022-03-28|2022-03-29|2022-03-30|2022-03-31",
+  "dataset": "XNAS.ITCH",
+  "derived_bars_sha256": "776e9a1e47ce390ccbd067d4c3f2f4eee8ba05a612c6b02b63bac03806aa57da",
+  "detail": "derived_bars_written_raw_not_retained",
+  "end": "2022-04-01T20:00:00+00:00",
+  "event_date": "2022-04-01",
+  "raw_payload_retained": false,
+  "rows": 1667,
+  "schema": "ohlcv-1m",
+  "start": "2022-03-25T13:30:00+00:00",
+  "status": "pass",
+  "symbol": "AEHR"
+}

@@ -52,6 +52,7 @@ Questa cartella contiene documenti lunghi e trasferibili: report, handoff, revie
 - [[Report-SEC8K-Direction-Tape-Oracle-Preregistration-2026-05-22]] - preregistrazione spec-only direzionale SEC 8-K Tape Oracle; esecuzione bloccata.
 - [[Report-SEC8K-Tape-Oracle-Intraday-Data-Contract-2026-05-22]] - data-contract intraday RTH per SEC 8-K Tape Oracle; provider/query/backtest bloccati.
 - [[Report-SEC8K-Tape-Oracle-Existing-Intraday-Backtest-2026-05-22]] - backtest bounded su artifact intraday esistenti; 1 evento purgato, no trade.
+- [[Report-SEC8K-Tape-Oracle-Databento-Mini-Panel-Backtest-2026-05-22]] - mini-panel Databento bounded SEC 8-K Tape Oracle; netto negativo dopo costi, no promotion.
 - [[Report-Quant-Hypothesis-Generation-And-Video-Research-2026-05-21]] - manifesto spec-only per generare ipotesi falsificabili e roadmap Anno 2.
 - [[Report-Gap-Down-Reversion-Preregistration-2026-05-21]] - preregistrazione spec-only `TRIAL-GAPREV-001`, 43/43 pass.
 - [[Report-GapRev-Intraday-Data-Contract-Gate-2026-05-21]] - gate data-contract intraday per GapRev, 35/35 pass, no query.

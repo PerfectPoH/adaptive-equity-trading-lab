@@ -1,0 +1,17 @@
+{
+  "api_key_present": true,
+  "approval_id": "APPROVAL-SEC8K-TAPE-ORACLE-DATABENTO-MINI-PANEL-001",
+  "control_sessions_per_event": 5,
+  "dataset": "XNAS.ITCH",
+  "live_trading_allowed": false,
+  "max_events": 30,
+  "max_provider_calls": 30,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "promotion_allowed": false,
+  "provider": "Databento",
+  "provider_query_scope": "bounded_one_call_per_selected_event",
+  "raw_payload_retention": false,
+  "run_id": "SEC8K-TAPE-ORACLE-DATABENTO-MINI-PANEL-001",
+  "schema": "ohlcv-1m"
+}

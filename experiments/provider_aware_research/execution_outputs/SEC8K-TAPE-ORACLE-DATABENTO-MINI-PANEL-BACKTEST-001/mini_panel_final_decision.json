@@ -1,0 +1,19 @@
+{
+  "blockers": [
+    "positive_oracle_trade_count_below_30"
+  ],
+  "decision": "SEC8K_TAPE_ORACLE_MINI_PANEL_NO_PROMOTION_COST_AND_SAMPLE_BLOCKED",
+  "evaluated_event_count": 30,
+  "live_trading_performed": false,
+  "market_data_downloaded": true,
+  "net_return_sum_after_500bps": -0.1494450325,
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "positive_oracle_trade_count": 4,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "query_count": 30,
+  "run_id": "SEC8K-TAPE-ORACLE-DATABENTO-MINI-PANEL-001",
+  "status": "complete",
+  "trial_id": "TRIAL-SEC8K-DIRECTION-001"
+}

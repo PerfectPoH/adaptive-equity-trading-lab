@@ -1,0 +1,15 @@
+{
+  "bars_path": "experiments\\provider_aware_research\\data_inputs\\sec8k_tape_oracle_databento_mini_panel_20260522\\CABA_2022-05-12\\bars.csv",
+  "control_dates": "2022-05-05|2022-05-06|2022-05-09|2022-05-10|2022-05-11",
+  "dataset": "XNAS.ITCH",
+  "derived_bars_sha256": "a5292d6ba47e53eaae0de92b9ae490ecdadbae97a72892c47deb83d075e59dc8",
+  "detail": "derived_bars_written_raw_not_retained",
+  "end": "2022-05-12T20:00:00+00:00",
+  "event_date": "2022-05-12",
+  "raw_payload_retained": false,
+  "rows": 282,
+  "schema": "ohlcv-1m",
+  "start": "2022-05-05T13:30:00+00:00",
+  "status": "pass",
+  "symbol": "CABA"
+}

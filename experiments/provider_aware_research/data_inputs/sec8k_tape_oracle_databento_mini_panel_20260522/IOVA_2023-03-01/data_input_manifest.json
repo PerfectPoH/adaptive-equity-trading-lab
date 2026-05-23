@@ -1,0 +1,15 @@
+{
+  "bars_path": "experiments\\provider_aware_research\\data_inputs\\sec8k_tape_oracle_databento_mini_panel_20260522\\IOVA_2023-03-01\\bars.csv",
+  "control_dates": "2023-02-22|2023-02-23|2023-02-24|2023-02-27|2023-02-28",
+  "dataset": "XNAS.ITCH",
+  "derived_bars_sha256": "a40b59a9e899df25d98bab57f528abea6614b0e46f758a22d31176230fa21764",
+  "detail": "derived_bars_written_raw_not_retained",
+  "end": "2023-03-01T21:00:00+00:00",
+  "event_date": "2023-03-01",
+  "raw_payload_retained": false,
+  "rows": 2144,
+  "schema": "ohlcv-1m",
+  "start": "2023-02-22T14:30:00+00:00",
+  "status": "pass",
+  "symbol": "IOVA"
+}
