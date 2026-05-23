@@ -1,0 +1,10 @@
+decision_item,rule,status
+data_scope,existing Databento daily prices only,frozen
+symbol_universe,AEHR ARRY CABA CRMD IOVA only,frozen
+ranking_signal,minimum 60-day close-to-close realized volatility among tradable candidates,frozen
+tradability_filter,60-day median dollar volume >= 1000000 and signal close >= 1.0,frozen
+execution_rule,enter next trading day open and exit after 5 trading sessions close,frozen
+cost_model,subtract 500 bps round-trip from every trade,frozen
+sample_size_gate,minimum 30 completed trades required,frozen
+promotion_rule,promotion remains false unless separate future gate is opened,frozen
+

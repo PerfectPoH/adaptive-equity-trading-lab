@@ -1,0 +1,11 @@
+action,status,reason
+provider_query,blocked,Trial uses existing Databento daily artifact only.
+market_data_download,blocked,No new data acquisition is authorized.
+intraday_data_query,blocked,Daily-only trial.
+parameter_sweep,blocked,All parameters are fixed by preregistration.
+short_selling,blocked,Lab scope is long-only.
+paper_trading,blocked,Backtest result cannot directly promote.
+live_trading,blocked,Backtest result cannot directly promote.
+strategy_promotion,blocked,Requires separate promotion gate.
+fundamental_quality_claim,blocked,PIT fundamentals are unavailable.
+

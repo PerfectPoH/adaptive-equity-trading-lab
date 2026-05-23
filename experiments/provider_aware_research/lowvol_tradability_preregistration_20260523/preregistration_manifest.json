@@ -1,0 +1,27 @@
+{
+  "preregistration_id": "PREREG-LOWVOL-TRADABILITY-001",
+  "trial_id": "TRIAL-LOWVOL-TRADABILITY-001",
+  "status": "APPROVED_EXISTING_DAILY_BACKTEST_NOT_EXECUTED",
+  "created_at": "2026-05-23",
+  "data_source": "experiments/provider_aware_research/data_inputs/databento_xmom_20260520/prices.csv",
+  "allowed_symbols": ["AEHR", "ARRY", "CABA", "CRMD", "IOVA"],
+  "benchmark_symbol": "IWM",
+  "start_date": "2025-01-02",
+  "end_date": "2025-12-31",
+  "lookback_days": 60,
+  "holding_days": 5,
+  "rebalance_step_days": 5,
+  "min_median_dollar_volume": 1000000,
+  "min_price": 1.0,
+  "round_trip_cost_bps": 500,
+  "minimum_trade_count": 30,
+  "provider_query_allowed": false,
+  "market_data_download_allowed": false,
+  "intraday_query_allowed": false,
+  "parameter_sweep_allowed": false,
+  "short_selling_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "promotion_allowed": false
+}
+
