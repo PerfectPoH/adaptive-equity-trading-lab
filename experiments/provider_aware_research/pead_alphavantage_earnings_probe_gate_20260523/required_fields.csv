@@ -1,0 +1,8 @@
+field_group,accepted_fields,required,reason
+earnings_date,reportedDate|fiscalDateEnding,yes,PEAD event date anchor
+actual_eps,reportedEPS|actualEPS|reported_eps,yes,actual earnings needed for surprise direction
+consensus_eps,estimatedEPS|estimateEPS|consensusEPS|estimated_eps,yes,consensus/estimate needed before using surprise
+surprise,surprise|surprisePercentage,yes,provider-computed surprise can be audited against EPS fields
+timing,reportTime|timeOfDay|bmo_amc|confirmedTime|timestamp,yes,BMO/AMC/DMT/UNSPECIFIED mapping cannot be inferred from returns
+pit_metadata,updated_at|created_at|revised_at|as_of_date|lastRefreshed|asOfDate,yes,source must expose enough freshness/revision metadata for a future PIT review
+

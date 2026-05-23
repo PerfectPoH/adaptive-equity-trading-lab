@@ -69,7 +69,7 @@ def test_graphify_validator_fails_if_secret_path_guardrail_is_removed(tmp_path):
     shutil.copytree(SPEC_DIR, copied_spec)
 
     blocked_path_file = copied_spec / "blocked_paths.csv"
-    rows = list(csv.DictReader(blocked_path_file.read_text(newline="").splitlines()))
+    rows = list(csv.DictReader(blocked_path_file.read_text(encoding="utf-8").splitlines()))
     rows = [row for row in rows if row["path"] != ".env"]
 
     with blocked_path_file.open("w", encoding="utf-8", newline="") as handle:

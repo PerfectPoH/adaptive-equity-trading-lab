@@ -1,0 +1,8 @@
+action,status,reason
+backtest,blocked,source probe only
+market_data_download,blocked,no market prices are needed to inspect source fields
+parameter_sweep,blocked,no strategy parameters exist in this probe
+paper_trading,blocked,no executable strategy
+live_trading,blocked,no executable strategy
+strategy_promotion,blocked,provider field inspection cannot promote PEAD
+raw_payload_retention,blocked,only derived field summaries may be retained
