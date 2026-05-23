@@ -1,0 +1,9 @@
+action,status,reason
+provider_query,blocked,Source scan only
+web_scraping,blocked,No unofficial scraping before a separate gate
+market_data_download,blocked,No market prices required
+extractor_implementation,blocked,No extractor until source passes a probe
+backtest,blocked,Source scan is not strategy evidence
+paper_trading,blocked,No broker simulation authorized
+live_trading,blocked,No broker action authorized
+strategy_promotion,blocked,Provider coverage is not alpha

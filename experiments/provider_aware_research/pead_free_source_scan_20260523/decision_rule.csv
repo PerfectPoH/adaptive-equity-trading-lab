@@ -1,0 +1,8 @@
+decision_item,status,rule
+provider_query,blocked,No source may be queried in this scan.
+selected_probe_count,required,Exactly one candidate may be selected for the next probe.
+consensus_requirement,required,Selected candidate must plausibly expose consensus or estimate EPS.
+actual_eps_requirement,required,Selected candidate must plausibly expose actual or reported EPS.
+timing_requirement,required,If timing is unknown, next probe must explicitly test timing/BMO-AMC suitability.
+pit_requirement,required,If PIT policy is unknown, next probe must explicitly test revision/as-of metadata.
+promotion_rule,blocked,No strategy promotion can follow from this scan.
