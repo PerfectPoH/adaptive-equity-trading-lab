@@ -1,0 +1,9 @@
+decision_item,status,rule
+query_scope,required,At most 50 Databento calls on approved symbols and SEC8K event windows only.
+direction_source,required,Direction must come only from the 09:30-09:45 RTH tape oracle before 09:46 entry.
+cost_gate,required,Fail if net return after 500 bps is not positive.
+sample_size_gate,required,No promotion if positive oracle trade count is below 30.
+outlier_gate,required,If net edge survives costs and sample size, fail if sign flips after removing top three winners.
+dsr_gate,required,If net edge survives costs and outlier gate, require DSR >= 0.95.
+promotion_rule,blocked,No promotion is allowed in this run; candidate status requires a separate post-run gate.
+archive_rule,required,If cost/sample gate fails, archive without DSR/CPCV escalation.

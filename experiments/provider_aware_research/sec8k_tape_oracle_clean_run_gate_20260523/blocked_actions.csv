@@ -1,0 +1,9 @@
+action,status,reason
+use_sec8k_mini_panel_001_for_calibration,blocked,Prior mini-panel run is protocol-violated and audit-trail only
+use_xmom_pnl_for_thresholds,blocked,No thresholds may be selected from XMOM PnL
+parameter_sweep,blocked,Only frozen oracle parameters may execute
+paper_trading,blocked,No simulated brokerage action authorized
+live_trading,blocked,No broker action authorized
+strategy_promotion,blocked,This is a bounded evidence run only
+short_selling,blocked,Negative oracle labels do not authorize shorts
+raw_payload_retention,blocked,Only derived bars and manifests may be retained

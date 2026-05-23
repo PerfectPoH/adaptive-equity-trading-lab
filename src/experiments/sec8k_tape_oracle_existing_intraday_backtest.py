@@ -34,29 +34,33 @@ def run_existing_intraday_backtest(
     output_dir: str | Path = OUTPUT_DIR,
     prereg_dir: str | Path = PREREG_DIR,
     contract_dir: str | Path = CONTRACT_DIR,
+    run_id: str = RUN_ID,
+    trial_id: str = TRIAL_ID,
+    write_report: bool = True,
 ) -> dict[str, Any]:
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
     prereg_report = validate_sec8k_direction_tape_oracle_preregistration(prereg_dir)
     contract_report = validate_sec8k_tape_oracle_intraday_data_contract(contract_dir)
-    preflight = build_preflight(prereg_report, contract_report)
+    preflight = build_preflight(prereg_report, contract_report, run_id=run_id, trial_id=trial_id)
     _write_json(output / "preflight_report.json", preflight)
     if preflight["status"] != "pass":
-        decision = build_final_decision([], preflight, backtest_performed=False)
+        decision = build_final_decision([], preflight, backtest_performed=False, run_id=run_id, trial_id=trial_id)
         _write_outputs(output, [], {}, decision)
         return decision
 
     event_panel = pd.read_csv(event_panel_path)
     cases = discover_existing_intraday_cases(event_panel, intraday_root)
     results = [evaluate_case(case) for case in cases]
-    summary = summarize_results(results)
-    decision = build_final_decision(results, preflight, backtest_performed=True)
+    summary = summarize_results(results, run_id=run_id, trial_id=trial_id)
+    decision = build_final_decision(results, preflight, backtest_performed=True, run_id=run_id, trial_id=trial_id)
     _write_outputs(output, results, summary, decision)
-    write_vault_report(summary, decision, results)
+    if write_report:
+        write_vault_report(summary, decision, results)
     return decision
 
 
-def build_preflight(prereg_report: dict[str, Any], contract_report: dict[str, Any]) -> dict[str, Any]:
+def build_preflight(prereg_report: dict[str, Any], contract_report: dict[str, Any], *, run_id: str = RUN_ID, trial_id: str = TRIAL_ID) -> dict[str, Any]:
     checks = [
         {"name": "preregistration_pass", "status": "pass" if prereg_report.get("status") == "pass" else "fail", "detail": prereg_report.get("gate_decision", "")},
         {"name": "data_contract_pass", "status": "pass" if contract_report.get("status") == "pass" else "fail", "detail": contract_report.get("gate_decision", "")},
@@ -66,8 +70,8 @@ def build_preflight(prereg_report: dict[str, Any], contract_report: dict[str, An
     failed = sum(1 for check in checks if check["status"] == "fail")
     return {
         "status": "pass" if failed == 0 else "fail",
-        "run_id": RUN_ID,
-        "trial_id": TRIAL_ID,
+        "run_id": run_id,
+        "trial_id": trial_id,
         "checks": checks,
         "summary": {"total": len(checks), "passed": len(checks) - failed, "failed": failed},
         "provider_query_performed": False,
@@ -125,7 +129,7 @@ def evaluate_case(case: dict[str, Any]) -> dict[str, Any]:
     )
 
 
-def summarize_results(results: list[dict[str, Any]]) -> dict[str, Any]:
+def summarize_results(results: list[dict[str, Any]], *, run_id: str = RUN_ID, trial_id: str = TRIAL_ID) -> dict[str, Any]:
     candidates = [row for row in results if row["positive_oracle_candidate"] is True]
     blockers = []
     if len(candidates) < 30:
@@ -133,8 +137,8 @@ def summarize_results(results: list[dict[str, Any]]) -> dict[str, Any]:
     if not candidates:
         blockers.append("no_positive_oracle_candidates")
     return {
-        "run_id": RUN_ID,
-        "trial_id": TRIAL_ID,
+        "run_id": run_id,
+        "trial_id": trial_id,
         "status": "backtest_complete_existing_intraday_artifacts_only",
         "evaluated_event_count": len(results),
         "positive_oracle_trade_count": len(candidates),
@@ -151,15 +155,22 @@ def summarize_results(results: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-def build_final_decision(results: list[dict[str, Any]], preflight: dict[str, Any], backtest_performed: bool) -> dict[str, Any]:
-    summary = summarize_results(results) if backtest_performed else {}
+def build_final_decision(
+    results: list[dict[str, Any]],
+    preflight: dict[str, Any],
+    backtest_performed: bool,
+    *,
+    run_id: str = RUN_ID,
+    trial_id: str = TRIAL_ID,
+) -> dict[str, Any]:
+    summary = summarize_results(results, run_id=run_id, trial_id=trial_id) if backtest_performed else {}
     decision = "SEC8K_TAPE_ORACLE_ARCHIVE_CURRENT_EXISTING_DATA_FORM"
     blockers = summary.get("blockers", ["preflight_failed"])
     return {
         "status": "complete" if preflight["status"] == "pass" else "blocked",
         "decision": decision if preflight["status"] == "pass" else "SEC8K_TAPE_ORACLE_BACKTEST_PREFLIGHT_BLOCKED",
-        "run_id": RUN_ID,
-        "trial_id": TRIAL_ID,
+        "run_id": run_id,
+        "trial_id": trial_id,
         "backtest_performed": backtest_performed,
         "evaluated_event_count": summary.get("evaluated_event_count", 0),
         "positive_oracle_trade_count": summary.get("positive_oracle_trade_count", 0),
