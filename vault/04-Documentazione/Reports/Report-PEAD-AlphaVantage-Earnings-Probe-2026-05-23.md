@@ -1,6 +1,6 @@
 # Report PEAD Alpha Vantage Earnings Probe - 2026-05-23
 
-Decision: `BLOCKED_ALPHAVANTAGE_API_KEY_MISSING`
+Decision: `BLOCKED_ALPHAVANTAGE_SOURCE_INSUFFICIENT`
 
 ## Scope
 
@@ -8,6 +8,6 @@ Single bounded Alpha Vantage EARNINGS source probe. No market data download, bac
 
 ## Result
 
-- Provider query performed: False
-- Record count: 0
-- Blockers: ALPHAVANTAGE_API_KEY missing
+- Provider query performed: True
+- Record count: 63
+- Blockers: pit_metadata_missing

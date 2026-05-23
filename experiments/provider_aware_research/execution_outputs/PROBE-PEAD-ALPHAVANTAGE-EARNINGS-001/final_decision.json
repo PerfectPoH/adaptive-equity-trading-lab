@@ -1,18 +1,18 @@
 {
   "backtest_performed": false,
   "blockers": [
-    "ALPHAVANTAGE_API_KEY missing"
+    "pit_metadata_missing"
   ],
-  "decision": "BLOCKED_ALPHAVANTAGE_API_KEY_MISSING",
+  "decision": "BLOCKED_ALPHAVANTAGE_SOURCE_INSUFFICIENT",
   "live_trading_performed": false,
   "market_data_downloaded": false,
   "paper_trading_performed": false,
   "promotion_allowed": false,
   "provider": "Alpha Vantage",
-  "provider_query_performed": false,
+  "provider_query_performed": true,
   "raw_payload_retained": false,
-  "reason": "ALPHAVANTAGE_API_KEY missing",
+  "record_count": 63,
   "run_id": "PROBE-PEAD-ALPHAVANTAGE-EARNINGS-001",
-  "status": "blocked",
+  "status": "complete",
   "symbol": "CRMD"
 }

@@ -1,4 +1,47 @@
 {
+  "backtest_performed": false,
+  "field_group_matches": {
+    "actual_eps": [
+      "reportedEPS"
+    ],
+    "consensus_eps": [
+      "estimatedEPS"
+    ],
+    "earnings_date": [
+      "fiscalDateEnding",
+      "reportedDate"
+    ],
+    "pit_metadata": [],
+    "surprise": [
+      "surprise",
+      "surprisePercentage"
+    ],
+    "timing": [
+      "reportTime"
+    ]
+  },
+  "first_record_keys": [
+    "estimatedEPS",
+    "fiscalDateEnding",
+    "reportTime",
+    "reportedDate",
+    "reportedEPS",
+    "surprise",
+    "surprisePercentage"
+  ],
+  "market_data_downloaded": false,
+  "missing_requirements": [
+    "pit_metadata_missing"
+  ],
+  "payload_top_level_keys": [
+    "annualEarnings",
+    "quarterlyEarnings",
+    "symbol"
+  ],
+  "promotion_allowed": false,
+  "provider_query_performed": true,
   "raw_payload_retained": false,
-  "status": "not_available"
+  "record_count": 63,
+  "run_id": "PROBE-PEAD-ALPHAVANTAGE-EARNINGS-001",
+  "status": "complete"
 }
