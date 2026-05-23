@@ -1,0 +1,36 @@
+{
+  "run_id": "GRAPHIFY-SRC-RUN-20260523",
+  "gate_artifact_id": "GRAPHIFY-INTEGRATION-001",
+  "executed_at": "2026-05-23T12:08:25.6205136+02:00",
+  "status": "GRAPHIFY_LOCAL_SRC_SCAN_COMPLETE",
+  "tool_package": "graphifyy",
+  "installed_version": "0.4.23",
+  "entrypoint_used": "py -3 -m graphify update",
+  "approved_target_scope": "src",
+  "source_path": "src",
+  "output_path": "experiments/tooling/graphify_runs/graphify_src_20260523/graphify-out",
+  "raw_graph_outputs_retained": true,
+  "intermediate_cache_retained": false,
+  "provider_query_performed": false,
+  "market_data_download_performed": false,
+  "strategy_backtest_performed": false,
+  "strategy_promotion_performed": false,
+  "graph_stats": {
+    "files_scanned": 138,
+    "nodes": 1484,
+    "edges": 3498,
+    "communities": 65
+  },
+  "smoke_query": {
+    "question": "Where is the Deflated Sharpe Ratio implemented?",
+    "result_contains": [
+      "src/validation/deflated_sharpe.py",
+      "deflated_sharpe_ratio()",
+      "return_moments()"
+    ]
+  },
+  "notes": [
+    "Graphify 0.4.23 writes graphify-out beside the target path; generated output was moved from src/graphify-out into the bounded output path.",
+    "This run is a local code-graph smoke test only and is not strategy evidence."
+  ]
+}
