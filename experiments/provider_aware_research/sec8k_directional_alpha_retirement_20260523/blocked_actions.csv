@@ -1,0 +1,6 @@
+action,status,reason
+sec8k_tape_oracle_retrial,blocked,Tape Oracle 001 and 002 failed cost/sample gates
+sec8k_predrift_long_retrial,blocked,Predrift long failed signed drift gate
+sec8k_window_shopping,blocked,Changing windows after observed failures would be data mining
+sec8k_short_trial,blocked,Short selling is permanently outside lab scope
+sec8k_directional_promotion,blocked,SEC8K is risk/volatility regime only without external direction source

@@ -1,0 +1,6 @@
+field_group,status,accepted_field_names
+earnings_date,required,expected_date|date|earnings_date|report_date
+timing,required,expected_8k_at|report_time|time_of_day|confirmed_time|timestamp
+actual_eps,required,actual_eps|reported_eps|eps_actual|actual|earnings_per_share
+consensus_eps,required,consensus_eps|estimate_eps|estimated_eps|mean_estimate|analyst_estimate|consensus
+pit_metadata,required,updated_at|created_at|revised_at|as_of_date|expected_8k_at

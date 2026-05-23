@@ -1,0 +1,9 @@
+decision_item,status,rule
+provider_error,blocking,If the provider returns auth/entitlement/network error, decide BLOCKED_EARNINGS_SOURCE_PROVIDER_ERROR.
+date_presence,required,At least one earnings date field must be present.
+timing_presence,required,A BMO/AMC-classifiable timestamp or timing field must be present.
+actual_eps_presence,required,Actual/reported EPS field must be present.
+consensus_eps_presence,required,Consensus/estimate EPS field must be present.
+pit_metadata_presence,required,Timestamp or revision metadata must be present.
+candidate_rule,required,Only if all required fields are present, decide PEAD_SOURCE_CANDIDATE.
+promotion_rule,blocked,No strategy promotion in this probe.

@@ -1,0 +1,8 @@
+action,status,reason
+backtest,blocked,Source probe only
+market_data_download,blocked,No market prices required
+parameter_sweep,blocked,No strategy parameters exist in a source probe
+paper_trading,blocked,No broker simulation authorized
+live_trading,blocked,No broker action authorized
+strategy_promotion,blocked,Provider coverage is not alpha evidence
+raw_payload_retention,blocked,Only redacted summaries may be retained

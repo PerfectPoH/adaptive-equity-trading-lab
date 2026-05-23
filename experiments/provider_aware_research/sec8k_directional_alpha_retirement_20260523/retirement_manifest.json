@@ -1,0 +1,16 @@
+{
+  "artifact_id": "SEC8K-DIRECTIONAL-ALPHA-RETIREMENT-001",
+  "status": "SEC8K_DIRECTIONAL_ALPHA_RETIRED",
+  "created_at": "2026-05-23",
+  "regime_status": "SEC8K_VOLATILITY_RISK_REGIME_RETAINED",
+  "alpha_status": "SEC8K_LONG_ONLY_DIRECTIONAL_ALPHA_RETIRED",
+  "retired_trials": [
+    "SEC8K-TAPE-ORACLE-DATABENTO-MINI-PANEL-001",
+    "SEC8K-TAPE-ORACLE-CLEAN-RUN-002",
+    "SEC8K-PREDRIFT-001"
+  ],
+  "future_sec8k_long_only_directional_trials_allowed": false,
+  "future_sec8k_short_trials_allowed": false,
+  "requires_external_point_in_time_direction_source_for_reopening": true,
+  "promotion_allowed": false
+}
