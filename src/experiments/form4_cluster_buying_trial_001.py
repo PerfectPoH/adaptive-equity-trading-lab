@@ -15,12 +15,12 @@ import pandas as pd
 from src.experiments.form4_cluster_buying_preregistration_validator import validate_form4_cluster_buying_preregistration
 
 
-RUN_ID = "FORM4-CLUSTER-BUYING-BACKTEST-001"
+RUN_ID = "FORM4-CLUSTER-BUYING-BACKTEST-002"
 TRIAL_ID = "TRIAL-FORM4-CLUSTER-BUYING-001"
 SPEC_DIR = Path("experiments/provider_aware_research/form4_cluster_buying_preregistration_20260523")
 PRICE_FILE = Path("experiments/provider_aware_research/data_inputs/databento_xmom_20260520/prices.csv")
-OUTPUT_DIR = Path("experiments/provider_aware_research/execution_outputs/FORM4-CLUSTER-BUYING-BACKTEST-001")
-VAULT_REPORT = Path("vault/04-Documentazione/Reports/Report-Form4-Cluster-Buying-Trial-001-2026-05-23.md")
+OUTPUT_DIR = Path("experiments/provider_aware_research/execution_outputs/FORM4-CLUSTER-BUYING-BACKTEST-002")
+VAULT_REPORT = Path("vault/04-Documentazione/Reports/Report-Form4-Cluster-Buying-Trial-001-Clean-Rerun-2026-05-23.md")
 SEC_USER_AGENT = "adaptive-equity-trading-lab research-contact@example.com"
 
 
@@ -117,16 +117,19 @@ def fetch_sec_form4_transaction_panel(
             url = f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/{accession_no_dashes}/{document}"
             xml_text = _sec_text(url)
             requests_made += 1
-            rows.extend(
-                parse_form4_xml(
-                    xml_text,
-                    symbol=symbol,
-                    cik=cik,
-                    accession_number=str(accession),
-                    filing_date=str(filing_date),
-                    acceptance_datetime=str(accepted),
+            try:
+                rows.extend(
+                    parse_form4_xml(
+                        xml_text,
+                        symbol=symbol,
+                        cik=cik,
+                        accession_number=str(accession),
+                        filing_date=str(filing_date),
+                        acceptance_datetime=str(accepted),
+                    )
                 )
-            )
+            except ET.ParseError:
+                pass
             time.sleep(0.11)
     return rows
 
@@ -140,7 +143,7 @@ def parse_form4_xml(
     filing_date: str,
     acceptance_datetime: str,
 ) -> list[dict[str, Any]]:
-    root = ET.fromstring(xml_text)
+    root = ET.fromstring(_ownership_xml_fragment(xml_text))
     owner = _text(root, ".//reportingOwner/reportingOwnerId/rptOwnerName") or "UNKNOWN"
     relationship = root.find(".//reportingOwner/reportingOwnerRelationship")
     is_director = _flag(relationship, "isDirector")
@@ -375,6 +378,14 @@ def _load_sec_company_tickers(allowed_symbols: list[str]) -> dict[str, str]:
         if symbol in wanted:
             result[symbol] = str(row["cik_str"]).zfill(10)
     return result
+
+
+def _ownership_xml_fragment(text: str) -> str:
+    start = text.find("<ownershipDocument")
+    end = text.find("</ownershipDocument>")
+    if start >= 0 and end >= 0:
+        return text[start : end + len("</ownershipDocument>")]
+    return text
 
 
 def _sec_json(url: str) -> dict[str, Any]:

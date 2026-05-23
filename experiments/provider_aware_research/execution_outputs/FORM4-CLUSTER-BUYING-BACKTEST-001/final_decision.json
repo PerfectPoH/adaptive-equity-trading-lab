@@ -1,0 +1,28 @@
+{
+  "backtest_performed": true,
+  "blockers": [
+    "sec_provider_query_error",
+    "event_count_below_5",
+    "trade_count_below_5",
+    "net_return_not_positive_after_500bps",
+    "median_net_return_not_positive"
+  ],
+  "candidate_allowed": false,
+  "decision": "FORM4_CLUSTER_BUYING_ARCHIVE_CURRENT_FORM",
+  "event_cluster_count": 0,
+  "gross_return_sum": 0,
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "net_return_sum_after_500bps": 0,
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "run_id": "FORM4-CLUSTER-BUYING-BACKTEST-001",
+  "short_selling_performed": false,
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trade_count": 0,
+  "trial_id": "TRIAL-FORM4-CLUSTER-BUYING-001"
+}

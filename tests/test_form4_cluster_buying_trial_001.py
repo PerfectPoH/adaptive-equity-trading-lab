@@ -51,6 +51,60 @@ def test_parse_form4_xml_extracts_only_open_market_acquisitions() -> None:
     assert rows[0]["raw_payload_retained"] is False
 
 
+def test_parse_form4_xml_recovers_ownership_document_embedded_in_text() -> None:
+    wrapped = f"<SEC-DOCUMENT>\n<HTML><body>bad wrapper</body></HTML>\n{_form4_xml(transactions=[('P', 'A', '2025-01-02', 10_000, 6.0)])}\n</SEC-DOCUMENT>"
+
+    rows = trial.parse_form4_xml(
+        wrapped,
+        symbol="CRMD",
+        cik="1410098",
+        accession_number="0001410098-25-000001",
+        filing_date="2025-01-06",
+        acceptance_datetime="2025-01-06T21:30:00",
+    )
+
+    assert len(rows) == 1
+    assert rows[0]["ownerName"] == "Jane Director"
+
+
+def test_fetch_sec_panel_skips_one_malformed_document_without_losing_later_rows(monkeypatch) -> None:
+    def fake_tickers(symbols: list[str]) -> dict[str, str]:
+        return {"AEHR": "0001040470"}
+
+    def fake_json(url: str) -> dict:
+        return {
+            "filings": {
+                "recent": {
+                    "form": ["4", "4"],
+                    "accessionNumber": ["0001040470-25-000001", "0001040470-25-000002"],
+                    "filingDate": ["2025-01-05", "2025-01-06"],
+                    "acceptanceDateTime": ["2025-01-05T20:00:00", "2025-01-06T20:00:00"],
+                    "primaryDocument": ["bad.xml", "good.xml"],
+                }
+            }
+        }
+
+    def fake_text(url: str) -> str:
+        if url.endswith("bad.xml"):
+            return "<not><valid>"
+        return _form4_xml(transactions=[("P", "A", "2025-01-06", 10_000, 10.0)])
+
+    monkeypatch.setattr(trial, "_load_sec_company_tickers", fake_tickers)
+    monkeypatch.setattr(trial, "_sec_json", fake_json)
+    monkeypatch.setattr(trial, "_sec_text", fake_text)
+    monkeypatch.setattr(trial.time, "sleep", lambda seconds: None)
+
+    rows = trial.fetch_sec_form4_transaction_panel(
+        allowed_symbols=["AEHR"],
+        start_date="2025-01-01",
+        end_date="2025-12-31",
+        max_document_requests=2,
+    )
+
+    assert len(rows) == 1
+    assert rows[0]["symbol"] == "AEHR"
+
+
 def test_build_form4_clusters_requires_two_owners_and_minimum_value() -> None:
     transactions = [
         _tx("AEHR", "Owner A", "2025-02-03", 60_000),

@@ -1,0 +1,12 @@
+{
+  "approval_id": "APPROVAL-FORM4-CLUSTER-BUYING-CLEAN-RERUN-002",
+  "approved_run_id": "FORM4-CLUSTER-BUYING-BACKTEST-002",
+  "blocked_failed_run_id": "FORM4-CLUSTER-BUYING-BACKTEST-001",
+  "cause": "Form 4 parser aborted the entire SEC panel after one malformed or wrapped document raised XML ParseError.",
+  "corrective_rule": "Malformed individual Form 4 documents must be quarantined at document scope; they must not abort the full bounded event panel.",
+  "original_preregistration_id": "PREREG-FORM4-CLUSTER-BUYING-001",
+  "provider_query_allowed": true,
+  "raw_payload_retention": false,
+  "scope_change_allowed": false,
+  "status": "APPROVED_CLEAN_RERUN_NOT_EXECUTED"
+}
