@@ -1,0 +1,15 @@
+{
+  "bars_path": "experiments\\provider_aware_research\\data_inputs\\sec8k_tape_oracle_clean_run_002_20260523\\ARRY_2022-04-06\\bars.csv",
+  "control_dates": "2022-03-30|2022-03-31|2022-04-01|2022-04-04|2022-04-05",
+  "dataset": "XNAS.ITCH",
+  "derived_bars_sha256": "c873d3369b8a529ee47d1cfb966547aa7f10831e8e8cdd16c88d04e3864add77",
+  "detail": "derived_bars_written_raw_not_retained",
+  "end": "2022-04-06T20:00:00+00:00",
+  "event_date": "2022-04-06",
+  "raw_payload_retained": false,
+  "rows": 2471,
+  "schema": "ohlcv-1m",
+  "start": "2022-03-30T13:30:00+00:00",
+  "status": "pass",
+  "symbol": "ARRY"
+}

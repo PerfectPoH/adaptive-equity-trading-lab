@@ -1,0 +1,15 @@
+{
+  "bars_path": "experiments\\provider_aware_research\\data_inputs\\sec8k_tape_oracle_clean_run_002_20260523\\CABA_2023-05-11\\bars.csv",
+  "control_dates": "2023-05-04|2023-05-05|2023-05-08|2023-05-09|2023-05-10",
+  "dataset": "XNAS.ITCH",
+  "derived_bars_sha256": "5ea2a8650f07d19306ad3e7623af1fb83aac3ff1b55451d48c89b89e2a1b839d",
+  "detail": "derived_bars_written_raw_not_retained",
+  "end": "2023-05-11T20:00:00+00:00",
+  "event_date": "2023-05-11",
+  "raw_payload_retained": false,
+  "rows": 1046,
+  "schema": "ohlcv-1m",
+  "start": "2023-05-04T13:30:00+00:00",
+  "status": "pass",
+  "symbol": "CABA"
+}

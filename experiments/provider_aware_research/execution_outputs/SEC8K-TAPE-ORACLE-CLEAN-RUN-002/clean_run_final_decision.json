@@ -1,0 +1,24 @@
+{
+  "blockers": [
+    "net_return_after_500bps_not_positive",
+    "positive_oracle_trade_count_below_30"
+  ],
+  "decision": "SEC8K_TAPE_ORACLE_CLEAN_RUN_002_ARCHIVE_COST_OR_SAMPLE_FAILED",
+  "dsr_cpcv_escalation_allowed": false,
+  "evaluated_event_count": 50,
+  "gross_return_sum": -0.3440212363,
+  "invalidated_run_usage": "blocked_audit_trail_only",
+  "live_trading_performed": false,
+  "market_data_downloaded": true,
+  "net_return_sum_after_500bps": -1.0440212363,
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "positive_oracle_trade_count": 14,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "query_count": 50,
+  "run_id": "SEC8K-TAPE-ORACLE-CLEAN-RUN-002",
+  "source_backtest_decision": "SEC8K_TAPE_ORACLE_ARCHIVE_CURRENT_EXISTING_DATA_FORM",
+  "status": "complete",
+  "trial_id": "TRIAL-SEC8K-DIRECTION-001"
+}

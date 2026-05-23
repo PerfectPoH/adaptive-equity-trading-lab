@@ -1,0 +1,15 @@
+{
+  "bars_path": "experiments\\provider_aware_research\\data_inputs\\sec8k_tape_oracle_clean_run_002_20260523\\CRMD_2023-11-15\\bars.csv",
+  "control_dates": "2023-11-08|2023-11-09|2023-11-10|2023-11-13|2023-11-14",
+  "dataset": "XNAS.ITCH",
+  "derived_bars_sha256": "3049fd5d90dc8060ee1b16a84fa74d438ade6f72e05eb380c27cab724f8929c3",
+  "detail": "derived_bars_written_raw_not_retained",
+  "end": "2023-11-15T21:00:00+00:00",
+  "event_date": "2023-11-15",
+  "raw_payload_retained": false,
+  "rows": 1780,
+  "schema": "ohlcv-1m",
+  "start": "2023-11-08T14:30:00+00:00",
+  "status": "pass",
+  "symbol": "CRMD"
+}

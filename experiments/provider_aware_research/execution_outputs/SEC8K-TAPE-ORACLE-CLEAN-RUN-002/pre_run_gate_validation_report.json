@@ -1,0 +1,171 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\sec8k_tape_oracle_clean_run_gate_20260523",
+      "name": "spec_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\sec8k_tape_oracle_clean_run_gate_20260523\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\sec8k_tape_oracle_clean_run_gate_20260523\\run_authorization_manifest.json",
+      "name": "required_file:run_authorization_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\sec8k_tape_oracle_clean_run_gate_20260523\\allowed_symbols.csv",
+      "name": "required_file:allowed_symbols.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\sec8k_tape_oracle_clean_run_gate_20260523\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\sec8k_tape_oracle_clean_run_gate_20260523\\decision_rule.csv",
+      "name": "required_file:decision_rule.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "SEC8K-TAPE-ORACLE-CLEAN-RUN-002",
+      "name": "run_id_clean_002",
+      "status": "pass"
+    },
+    {
+      "detail": "APPROVED_PRE_RUN_NOT_EXECUTED",
+      "name": "status_pre_run_not_executed",
+      "status": "pass"
+    },
+    {
+      "detail": "Databento",
+      "name": "provider_databento",
+      "status": "pass"
+    },
+    {
+      "detail": "XNAS.ITCH",
+      "name": "dataset_xnas_itch",
+      "status": "pass"
+    },
+    {
+      "detail": "ohlcv-1m",
+      "name": "schema_ohlcv_1m",
+      "status": "pass"
+    },
+    {
+      "detail": "50",
+      "name": "max_events_bounded",
+      "status": "pass"
+    },
+    {
+      "detail": "50",
+      "name": "max_provider_calls_bounded",
+      "status": "pass"
+    },
+    {
+      "detail": "5",
+      "name": "control_sessions_fixed",
+      "status": "pass"
+    },
+    {
+      "detail": "09:30-09:45 America/New_York",
+      "name": "oracle_window_frozen",
+      "status": "pass"
+    },
+    {
+      "detail": "09:46 America/New_York",
+      "name": "entry_time_frozen",
+      "status": "pass"
+    },
+    {
+      "detail": "15:55 America/New_York",
+      "name": "exit_time_frozen",
+      "status": "pass"
+    },
+    {
+      "detail": "3.0",
+      "name": "volume_threshold_frozen",
+      "status": "pass"
+    },
+    {
+      "detail": "500",
+      "name": "cost_model_worst_case_500bps",
+      "status": "pass"
+    },
+    {
+      "detail": "30",
+      "name": "minimum_trade_count_30",
+      "status": "pass"
+    },
+    {
+      "detail": "0.95",
+      "name": "dsr_threshold_095",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "raw_payload_not_retained",
+      "status": "pass"
+    },
+    {
+      "detail": "blocked_audit_trail_only",
+      "name": "invalidated_run_usage_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "provider_query_allowed_explicit",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "market_data_download_allowed_explicit",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "parameter_sweep_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "paper_trading_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "live_trading_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "promotion_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_symbols_present",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "blocked_actions_present",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "decision_items_present",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "SEC8K_TAPE_ORACLE_CLEAN_RUN_GATE_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 32,
+    "total": 32
+  }
+}

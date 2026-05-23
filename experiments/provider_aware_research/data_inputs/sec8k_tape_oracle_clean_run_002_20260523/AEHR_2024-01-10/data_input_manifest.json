@@ -1,0 +1,15 @@
+{
+  "bars_path": "experiments\\provider_aware_research\\data_inputs\\sec8k_tape_oracle_clean_run_002_20260523\\AEHR_2024-01-10\\bars.csv",
+  "control_dates": "2024-01-03|2024-01-04|2024-01-05|2024-01-08|2024-01-09",
+  "dataset": "XNAS.ITCH",
+  "derived_bars_sha256": "595998923ee84baf480b1f4fcfd705fefcb2919af559b78939af0c921e376343",
+  "detail": "derived_bars_written_raw_not_retained",
+  "end": "2024-01-10T21:00:00+00:00",
+  "event_date": "2024-01-10",
+  "raw_payload_retained": false,
+  "rows": 2718,
+  "schema": "ohlcv-1m",
+  "start": "2024-01-03T14:30:00+00:00",
+  "status": "pass",
+  "symbol": "AEHR"
+}

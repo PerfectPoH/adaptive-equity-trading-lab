@@ -1,0 +1,15 @@
+{
+  "bars_path": "experiments\\provider_aware_research\\data_inputs\\sec8k_tape_oracle_clean_run_002_20260523\\IOVA_2024-02-20\\bars.csv",
+  "control_dates": "2024-02-12|2024-02-13|2024-02-14|2024-02-15|2024-02-16",
+  "dataset": "XNAS.ITCH",
+  "derived_bars_sha256": "61d50a99a169f09c7281d04366dd05c844b8fb6cac2264366f861da2c8b9a20e",
+  "detail": "derived_bars_written_raw_not_retained",
+  "end": "2024-02-20T21:00:00+00:00",
+  "event_date": "2024-02-20",
+  "raw_payload_retained": false,
+  "rows": 2840,
+  "schema": "ohlcv-1m",
+  "start": "2024-02-12T14:30:00+00:00",
+  "status": "pass",
+  "symbol": "IOVA"
+}

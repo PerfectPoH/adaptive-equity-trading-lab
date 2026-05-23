@@ -1,0 +1,40 @@
+{
+  "checks": [
+    {
+      "detail": "missing=[]",
+      "name": "required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": "rows=2289",
+      "name": "non_empty",
+      "status": "pass"
+    },
+    {
+      "detail": "event_rows=372",
+      "name": "event_day_present",
+      "status": "pass"
+    },
+    {
+      "detail": "09:30-09:45",
+      "name": "oracle_window_present",
+      "status": "pass"
+    },
+    {
+      "detail": "09:46",
+      "name": "entry_time_present",
+      "status": "pass"
+    },
+    {
+      "detail": "15:55",
+      "name": "flat_time_present",
+      "status": "pass"
+    }
+  ],
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 6,
+    "total": 6
+  }
+}

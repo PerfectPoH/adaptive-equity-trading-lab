@@ -1,0 +1,19 @@
+{
+  "approval_id": "APPROVAL-SEC8K-TAPE-ORACLE-CLEAN-RUN-002",
+  "empty_count": 0,
+  "error_count": 0,
+  "invalidated_run_usage": "blocked_audit_trail_only",
+  "live_trading_performed": false,
+  "market_data_downloaded": true,
+  "max_provider_calls": 50,
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "pass_count": 50,
+  "provider_query_performed": true,
+  "query_count": 50,
+  "raw_payload_retained": false,
+  "run_id": "SEC8K-TAPE-ORACLE-CLEAN-RUN-002",
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trial_id": "TRIAL-SEC8K-DIRECTION-001"
+}

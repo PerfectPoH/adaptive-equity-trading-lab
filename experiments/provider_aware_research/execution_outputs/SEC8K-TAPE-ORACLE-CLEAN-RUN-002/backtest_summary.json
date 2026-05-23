@@ -1,0 +1,19 @@
+{
+  "blockers": [
+    "positive_oracle_trade_count_below_30"
+  ],
+  "evaluated_event_count": 50,
+  "gross_return_sum": -0.3440212363,
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "net_return_sum_after_500bps": -1.0440212363,
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "positive_oracle_trade_count": 14,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "run_id": "SEC8K-TAPE-ORACLE-CLEAN-RUN-002",
+  "status": "backtest_complete_existing_intraday_artifacts_only",
+  "strategy_promotion_performed": false,
+  "trial_id": "TRIAL-SEC8K-DIRECTION-001"
+}
