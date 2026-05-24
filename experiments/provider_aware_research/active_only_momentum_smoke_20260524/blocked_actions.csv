@@ -1,0 +1,10 @@
+action,rationale
+provider_query,Use archived prices only.
+market_data_download,No new market data is authorized.
+raw_payload_retention,Raw payload retention remains forbidden.
+parameter_sweep,This is one fixed smoke configuration.
+short_selling,The lab remains long-only.
+paper_trading,No execution is authorized.
+live_trading,No execution is authorized.
+survivorship_free_claim,Active-only exploratory research is survivorship-biased.
+strategy_promotion,Exploratory active-only results cannot promote alpha.

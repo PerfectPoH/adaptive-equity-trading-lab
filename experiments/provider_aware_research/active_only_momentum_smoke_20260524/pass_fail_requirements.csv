@@ -1,0 +1,9 @@
+requirement,threshold,rationale
+provider_query_performed,false,No provider calls in this trial.
+market_data_downloaded,false,Use archived data only.
+backtest_performed,true,This is an exploratory historical smoke test.
+parameter_sweep_performed,false,Fixed single configuration only.
+short_selling_performed,false,Long-only only.
+survivorship_free_claim_allowed,false,Active-only universe is biased.
+promotion_allowed,false,No promotion is possible from this trial.
+cost_bps_round_trip,500,Keep cost realism gate consistent with prior lab policy.
