@@ -1,0 +1,7 @@
+requirement,expected
+pre_run_gate_committed_before_execution,true
+provider_query_performed,false
+market_data_downloaded,false
+backtest_performed,false
+completed_points,5
+promotion_allowed,false

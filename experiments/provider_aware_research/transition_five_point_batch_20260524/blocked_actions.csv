@@ -1,0 +1,10 @@
+action,reason
+provider_query,existing local artifacts only
+market_data_download,no new data acquisition in this batch
+raw_payload_retention,no raw provider payload is fetched
+new_backtest,risk/regime diagnostics only
+parameter_sweep,no optimization or threshold shopping
+short_selling,long-only lab constraint remains active
+paper_trading,no execution pathway
+live_trading,no execution pathway
+strategy_promotion,no alpha promotion from diagnostics
