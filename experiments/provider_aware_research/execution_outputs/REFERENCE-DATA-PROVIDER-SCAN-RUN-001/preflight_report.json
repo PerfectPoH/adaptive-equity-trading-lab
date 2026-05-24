@@ -1,0 +1,101 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\reference_data_provider_scan_20260524",
+      "name": "spec_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\reference_data_provider_scan_20260524\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\reference_data_provider_scan_20260524\\scan_manifest.json",
+      "name": "required_file:scan_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\reference_data_provider_scan_20260524\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\reference_data_provider_scan_20260524\\provider_matrix.csv",
+      "name": "required_file:provider_matrix.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\reference_data_provider_scan_20260524\\decision_rule.csv",
+      "name": "required_file:decision_rule.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "REFERENCE-DATA-PROVIDER-SCAN-001",
+      "name": "scan_id",
+      "status": "pass"
+    },
+    {
+      "detail": "REFERENCE-DATA-PROVIDER-SCAN-001",
+      "name": "trial_id",
+      "status": "pass"
+    },
+    {
+      "detail": "APPROVED_DOCUMENTATION_SCAN_NOT_EXECUTED",
+      "name": "status_pre_run",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "provider_query_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "market_download_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "backtest_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "parameter_sweep_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "short_selling_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "promotion_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_blocked_actions",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_providers",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_decision_items",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "REFERENCE_DATA_PROVIDER_SCAN_GATE_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 18,
+    "total": 18
+  }
+}

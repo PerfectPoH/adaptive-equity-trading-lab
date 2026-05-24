@@ -1,0 +1,20 @@
+{
+  "backtest_performed": false,
+  "decision": "REFERENCE_DATA_PROVIDER_SCAN_COMPLETE_PROBE_CANDIDATE_SELECTED",
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "next_unblocked_step": "Preregister a single provider-specific source probe for the selected provider; do not download market data or run a strategy.",
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "probe_candidate_count": 1,
+  "promotion_allowed": false,
+  "provider_count": 5,
+  "provider_query_performed": false,
+  "recommended_next_probe_provider": "Polygon/Massive",
+  "recommended_next_probe_url": "https://polygon.io/docs/rest/stocks/tickers/all-tickers",
+  "run_id": "REFERENCE-DATA-PROVIDER-SCAN-RUN-001",
+  "short_selling_performed": false,
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trial_id": "REFERENCE-DATA-PROVIDER-SCAN-001"
+}
