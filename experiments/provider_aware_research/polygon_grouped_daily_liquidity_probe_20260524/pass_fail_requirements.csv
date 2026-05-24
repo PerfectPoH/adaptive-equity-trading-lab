@@ -1,0 +1,10 @@
+requirement,threshold,rationale
+provider_call_count,<=1,Bound provider access before execution.
+grouped_daily_dates,1,One-day snapshot only.
+matched_seed_bar_count,>=300,Need broad daily bar availability across seed.
+liquid_candidate_count,>=300,Need enough names above minimum close and dollar-volume thresholds.
+min_price,>=1.0,Exclude sub-dollar symbols.
+min_dollar_volume,>=1000000,Initial tradability floor before future strategy work.
+raw_payload_retained,false,Avoid retaining raw provider payload.
+backtest_performed,false,No strategy trial in this probe.
+promotion_allowed,false,Liquidity probe cannot promote a strategy.
