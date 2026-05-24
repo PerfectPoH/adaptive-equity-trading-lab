@@ -1,0 +1,920 @@
+{
+  "backtest_performed": false,
+  "blockers": [],
+  "delisted_common_stock_count": 303,
+  "delisted_date_coverage": 0.9603960396039604,
+  "delisted_reference_sample": [
+    {
+      "active": "False",
+      "cik": "0001011006",
+      "delisted_utc": "2019-10-07T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AABA",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001829432",
+      "delisted_utc": "2023-11-07T05:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AAC",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001802457",
+      "delisted_utc": "2021-06-25T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AACQ",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001853138",
+      "delisted_utc": "2025-09-25T00:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AACT",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001422142",
+      "delisted_utc": "",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AADI",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001848898",
+      "delisted_utc": "2024-09-26T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AAGR",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000948846",
+      "delisted_utc": "2011-05-03T04:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AAI",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001209028",
+      "delisted_utc": "2023-12-15T05:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AAIC",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0002012964",
+      "delisted_utc": "2026-02-03T00:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AAM",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001555074",
+      "delisted_utc": "2024-09-17T04:00:00Z",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "AAMC",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001821393",
+      "delisted_utc": "2024-10-04T04:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AAN",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000706688",
+      "delisted_utc": "2010-12-13T05:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AAN.A",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001821393",
+      "delisted_utc": "2020-12-01T05:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AANw",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001630940",
+      "delisted_utc": "2017-10-05T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AAPC",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001838883",
+      "delisted_utc": "2022-12-16T05:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AAQC",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000943034",
+      "delisted_utc": "2022-12-30T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AATC",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001015647",
+      "delisted_utc": "2024-04-05T04:00:00Z",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "AAU",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001468079",
+      "delisted_utc": "2018-09-24T04:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AAV",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001135185",
+      "delisted_utc": "2023-03-20T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AAWW",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001486299",
+      "delisted_utc": "2019-01-17T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABAC",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000881890",
+      "delisted_utc": "2018-08-01T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABAX",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001140859",
+      "delisted_utc": "",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABC",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001466815",
+      "delisted_utc": "2018-12-19T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABCD",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001157377",
+      "delisted_utc": "2017-11-20T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABCO",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001578620",
+      "delisted_utc": "2020-02-03T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABDC",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000712034",
+      "delisted_utc": "",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABDw",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001833764",
+      "delisted_utc": "2023-02-28T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABGI",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001468079",
+      "delisted_utc": "2012-05-24T04:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABH",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001468079",
+      "delisted_utc": "2010-12-20T05:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABHw",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001652866",
+      "delisted_utc": "2019-12-27T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABIL",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000907654",
+      "delisted_utc": "2024-09-03T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABIO",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000874501",
+      "delisted_utc": "2010-11-10T05:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABK",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001814287",
+      "delisted_utc": "2025-12-30T00:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABL",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001814287",
+      "delisted_utc": "2025-12-30T00:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABLLL",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000815094",
+      "delisted_utc": "2022-12-23T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABMD",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "",
+      "delisted_utc": "2008-04-28T04:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABN",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001893219",
+      "delisted_utc": "2026-02-23T00:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABP",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000003333",
+      "delisted_utc": "2006-06-02T04:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABS",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001071058",
+      "delisted_utc": "2023-07-28T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABST",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001023364",
+      "delisted_utc": "2017-10-09T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABTL",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001642081",
+      "delisted_utc": "2022-10-03T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABTX",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000001800",
+      "delisted_utc": "2013-01-02T05:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABTw",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001113172",
+      "delisted_utc": "2013-11-11T05:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABV",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001113172",
+      "delisted_utc": "2013-11-11T05:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABV.C",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001043533",
+      "delisted_utc": "2012-07-03T04:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABVT",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001601072",
+      "delisted_utc": "2017-11-14T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABY",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001642122",
+      "delisted_utc": "2025-09-05T00:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AC",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001642122",
+      "delisted_utc": "2025-09-05T00:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AC",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001893219",
+      "delisted_utc": "2024-11-13T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACAB",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001914023",
+      "delisted_utc": "2024-09-27T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACAC",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001836274",
+      "delisted_utc": "2024-02-26T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACAH",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001759008",
+      "delisted_utc": "2021-01-22T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACAM",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001869141",
+      "delisted_utc": "2023-10-20T04:00:00Z",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "ACAQ",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000817473",
+      "delisted_utc": "2017-01-04T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACAS",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000719866",
+      "delisted_utc": "2017-03-07T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACAT",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001897245",
+      "delisted_utc": "2024-01-09T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACAX",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001844389",
+      "delisted_utc": "2024-05-24T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACBA",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001461755",
+      "delisted_utc": "2022-03-01T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACBI",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001283630",
+      "delisted_utc": "2022-08-10T04:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACC",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001481646",
+      "delisted_utc": "2025-04-09T00:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACCD",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "",
+      "delisted_utc": "2017-07-24T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACCP",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001850316",
+      "delisted_utc": "2023-02-16T05:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACDI",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000896159",
+      "delisted_utc": "2016-01-15T05:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACE",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001069308",
+      "delisted_utc": "2023-11-09T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACER",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001813658",
+      "delisted_utc": "2022-11-23T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACEV",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001405287",
+      "delisted_utc": "2010-10-01T04:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACF",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001404296",
+      "delisted_utc": "2018-05-29T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACFC",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000816754",
+      "delisted_utc": "2016-04-19T04:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACG",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000861838",
+      "delisted_utc": "2023-08-22T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACGN",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001070336",
+      "delisted_utc": "2020-01-29T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACHN",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001651235",
+      "delisted_utc": "2021-03-02T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACIA",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001167379",
+      "delisted_utc": "2011-04-11T04:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACL",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "",
+      "delisted_utc": "2020-07-20T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACLL",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001786205",
+      "delisted_utc": "2026-04-29T00:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACLX",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001483096",
+      "delisted_utc": "2015-02-03T05:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACMP",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001805651",
+      "delisted_utc": "2021-07-22T04:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACND",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000919991",
+      "delisted_utc": "2014-05-12T04:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACO",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001008848",
+      "delisted_utc": "2024-04-12T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACOR",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001044435",
+      "delisted_utc": "2016-11-30T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACPW",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001837393",
+      "delisted_utc": "2023-03-13T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACQR",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001847891",
+      "delisted_utc": "2023-12-19T05:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACRO",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001427925",
+      "delisted_utc": "",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACRX",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000002135",
+      "delisted_utc": "2010-02-08T05:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACS",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001581934",
+      "delisted_utc": "2018-08-27T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACSF",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001444192",
+      "delisted_utc": "",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACST",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001085621",
+      "delisted_utc": "2018-02-08T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACTA",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001820630",
+      "delisted_utc": "2021-06-15T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACTC",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001842279",
+      "delisted_utc": "2022-07-22T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACTD",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001753706",
+      "delisted_utc": "2020-06-25T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACTT",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000884629",
+      "delisted_utc": "2014-07-02T04:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACTw",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000786947",
+      "delisted_utc": "2017-02-23T05:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACUR",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000003327",
+      "delisted_utc": "2006-11-17T05:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACVw",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000817979",
+      "delisted_utc": "2016-11-21T05:00:00Z",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACW",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0000733269",
+      "delisted_utc": "2018-10-02T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACXM",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001036848",
+      "delisted_utc": "2022-03-28T04:00:00Z",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "ACY",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001853928",
+      "delisted_utc": "2023-05-03T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADAL",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001747661",
+      "delisted_utc": "2025-08-22T00:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADD",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001822912",
+      "delisted_utc": "2023-09-26T04:00:00Z",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADER",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001515156",
+      "delisted_utc": "",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADES",
+      "type": "CS"
+    },
+    {
+      "active": "False",
+      "cik": "0001830029",
+      "delisted_utc": "2024-01-03T05:00:00Z",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "ADEX",
+      "type": "CS"
+    }
+  ],
+  "market_data_downloaded": false,
+  "passes_delisted_metadata_support": true,
+  "pit_universe_backtest_authorized": false,
+  "promotion_allowed": false,
+  "provider": "Polygon/Massive",
+  "provider_query_performed": true,
+  "quality_scope": "delisted_metadata_support_only_not_full_pit_universe",
+  "raw_payload_retained": false,
+  "record_count": 1000,
+  "requires_pit_membership_construction": true,
+  "run_id": "POLYGON-DELISTED-SURVIVORSHIP-AUDIT-001",
+  "trial_id": "UNIVERSE-SURVIVORSHIP-AUDIT-001"
+}

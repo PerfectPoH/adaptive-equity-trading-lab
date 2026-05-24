@@ -1,0 +1,23 @@
+{
+  "backtest_performed": false,
+  "blockers": [],
+  "decision": "POLYGON_DELISTED_METADATA_SUPPORT_PASS",
+  "delisted_common_stock_count": 303,
+  "delisted_date_coverage": 0.9603960396039604,
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "next_unblocked_step": "Construct and preregister a PIT universe membership policy before any broad-universe strategy backtest.",
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "pit_universe_backtest_authorized": false,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "record_count": 1000,
+  "requires_pit_membership_construction": true,
+  "run_id": "POLYGON-DELISTED-SURVIVORSHIP-AUDIT-001",
+  "short_selling_performed": false,
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trial_id": "UNIVERSE-SURVIVORSHIP-AUDIT-001"
+}

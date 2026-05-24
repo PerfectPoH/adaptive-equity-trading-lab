@@ -1,0 +1,131 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_delisted_survivorship_audit_20260524",
+      "name": "spec_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_delisted_survivorship_audit_20260524\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_delisted_survivorship_audit_20260524\\audit_manifest.json",
+      "name": "required_file:audit_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_delisted_survivorship_audit_20260524\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_delisted_survivorship_audit_20260524\\pass_fail_requirements.csv",
+      "name": "required_file:pass_fail_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "PROBE-POLYGON-DELISTED-SURVIVORSHIP-AUDIT-001",
+      "name": "probe_id",
+      "status": "pass"
+    },
+    {
+      "detail": "UNIVERSE-SURVIVORSHIP-AUDIT-001",
+      "name": "trial_id",
+      "status": "pass"
+    },
+    {
+      "detail": "APPROVED_SINGLE_INACTIVE_REFERENCE_CALL_NOT_EXECUTED",
+      "name": "status_pre_run",
+      "status": "pass"
+    },
+    {
+      "detail": "Polygon/Massive",
+      "name": "provider_polygon",
+      "status": "pass"
+    },
+    {
+      "detail": "POLYGON_API_KEY",
+      "name": "api_key_env",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "single_call_bound",
+      "status": "pass"
+    },
+    {
+      "detail": "1000",
+      "name": "limit_bounded",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "inactive_reference_query",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "provider_query_allowed",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "raw_retention_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "market_download_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "backtest_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "parameter_sweep_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "short_selling_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "promotion_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "pit_backtest_not_authorized",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "pit_construction_required",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_fields",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_blocked_actions",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "POLYGON_DELISTED_SURVIVORSHIP_AUDIT_GATE_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 24,
+    "total": 24
+  }
+}
