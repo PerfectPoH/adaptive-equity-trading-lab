@@ -1,0 +1,9 @@
+requirement,threshold,rationale
+provider_query_performed,false,Policy gate must be no-query.
+market_data_downloaded,false,Policy gate must not download prices.
+backtest_performed,false,Policy gate must not run strategies.
+active_seed_passed,true,Active-only exploration needs the active seed.
+liquidity_probe_passed,true,Active-only exploration needs a liquid snapshot.
+delisted_listing_date_probe_blocked,true,Caveat must be based on the documented full-PIT blocker.
+survivorship_free_claim_allowed,false,Active-only exploration is not survivorship-free.
+promotion_allowed,false,Exploratory active-only results cannot promote alpha.

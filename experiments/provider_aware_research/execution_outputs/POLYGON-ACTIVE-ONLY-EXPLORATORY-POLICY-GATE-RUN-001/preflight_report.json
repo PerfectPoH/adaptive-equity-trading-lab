@@ -1,0 +1,126 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_active_only_exploratory_policy_gate_20260524",
+      "name": "spec_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_active_only_exploratory_policy_gate_20260524\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_active_only_exploratory_policy_gate_20260524\\policy_manifest.json",
+      "name": "required_file:policy_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_active_only_exploratory_policy_gate_20260524\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_active_only_exploratory_policy_gate_20260524\\pass_fail_requirements.csv",
+      "name": "required_file:pass_fail_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "POLYGON-ACTIVE-ONLY-EXPLORATORY-POLICY-GATE-001",
+      "name": "policy_id",
+      "status": "pass"
+    },
+    {
+      "detail": "UNIVERSE-ACTIVE-ONLY-EXPLORATORY-POLICY-GATE-001",
+      "name": "trial_id",
+      "status": "pass"
+    },
+    {
+      "detail": "APPROVED_NON_EXECUTABLE_ACTIVE_ONLY_POLICY_GATE",
+      "name": "status_non_executable",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments/provider_aware_research/execution_outputs/POLYGON-ACTIVE-UNIVERSE-SEED-001/final_decision.json",
+      "name": "active_decision_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments/provider_aware_research/execution_outputs/POLYGON-GROUPED-DAILY-LIQUIDITY-PROBE-001/final_decision.json",
+      "name": "liquidity_decision_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments/provider_aware_research/execution_outputs/POLYGON-DELISTED-LISTING-DATE-PROBE-001/final_decision.json",
+      "name": "delisted_block_decision_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "provider_query_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "market_download_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "raw_retention_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "backtest_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "broad_survivorship_free_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "survivorship_free_claim_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "promotion_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "short_selling_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "paper_trading_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "active_only_exploration_conditionally_allowed",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "mandatory_caveats_present",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_blocked_actions",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "POLYGON_ACTIVE_ONLY_EXPLORATORY_POLICY_GATE_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 23,
+    "total": 23
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "active_only_exploratory_research_allowed_if_inputs_pass": true,
+  "active_seed_decision": "experiments/provider_aware_research/execution_outputs/POLYGON-ACTIVE-UNIVERSE-SEED-001/final_decision.json",
+  "backtest_allowed": false,
+  "broad_survivorship_free_backtest_allowed": false,
+  "delisted_listing_date_probe_decision": "experiments/provider_aware_research/execution_outputs/POLYGON-DELISTED-LISTING-DATE-PROBE-001/final_decision.json",
+  "liquidity_probe_decision": "experiments/provider_aware_research/execution_outputs/POLYGON-GROUPED-DAILY-LIQUIDITY-PROBE-001/final_decision.json",
+  "market_data_download_allowed": false,
+  "mandatory_caveats": [
+    "active_only_survivorship_bias_declared",
+    "no_survivorship_free_claim",
+    "no_strategy_promotion",
+    "no_live_or_paper_trading",
+    "exploratory_research_only"
+  ],
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "policy_id": "POLYGON-ACTIVE-ONLY-EXPLORATORY-POLICY-GATE-001",
+  "promotion_allowed": false,
+  "provider_query_allowed": false,
+  "raw_payload_retention": false,
+  "short_selling_allowed": false,
+  "status": "APPROVED_NON_EXECUTABLE_ACTIVE_ONLY_POLICY_GATE",
+  "survivorship_free_claim_allowed": false,
+  "trial_id": "UNIVERSE-ACTIVE-ONLY-EXPLORATORY-POLICY-GATE-001"
+}
