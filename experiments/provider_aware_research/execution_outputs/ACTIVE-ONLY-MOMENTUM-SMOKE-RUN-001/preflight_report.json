@@ -1,0 +1,116 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\active_only_momentum_smoke_20260524",
+      "name": "spec_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\active_only_momentum_smoke_20260524\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\active_only_momentum_smoke_20260524\\trial_manifest.json",
+      "name": "required_file:trial_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\active_only_momentum_smoke_20260524\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\active_only_momentum_smoke_20260524\\pass_fail_requirements.csv",
+      "name": "required_file:pass_fail_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "ACTIVE-ONLY-MOMENTUM-SMOKE-001",
+      "name": "trial_id",
+      "status": "pass"
+    },
+    {
+      "detail": "APPROVED_ACTIVE_ONLY_EXPLORATORY_BACKTEST_NOT_EXECUTED",
+      "name": "status_pre_run",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments/provider_aware_research/execution_outputs/POLYGON-ACTIVE-ONLY-EXPLORATORY-POLICY-GATE-RUN-001/final_decision.json",
+      "name": "policy_decision_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments/provider_aware_research/data_inputs/databento_xmom_20260520/prices.csv",
+      "name": "prices_exist",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "backtest_allowed",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "provider_query_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "market_data_download_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "parameter_sweep_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "short_selling_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "paper_trading_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "promotion_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "survivorship_free_claim_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "500",
+      "name": "cost_realism",
+      "status": "pass"
+    },
+    {
+      "detail": "['AEHR', 'ARRY', 'CABA', 'CRMD', 'IOVA']",
+      "name": "fixed_symbols",
+      "status": "pass"
+    },
+    {
+      "detail": "{'active_only_policy_decision': 'experiments/provider_aware_research/execution_outputs/POLYGON-ACTIVE-ONLY-EXPLORATORY-POLICY-GATE-RUN-001/final_decision.json', 'backtest_allowed': True, 'cost_bps_round_trip': 500, 'hold_days': 21, 'input_prices': 'experiments/provider_aware_research/data_inputs/databento_xmom_20260520/prices.csv', 'lookback_days': 63, 'market_data_download_allowed': False, 'paper_trading_allowed': False, 'parameter_sweep_allowed': False, 'promotion_allowed': False, 'provider_query_allowed': False, 'raw_payload_retention': False, 'rebalance_step_days': 21, 'short_selling_allowed': False, 'status': 'APPROVED_ACTIVE_ONLY_EXPLORATORY_BACKTEST_NOT_EXECUTED', 'survivorship_free_claim_allowed': False, 'symbols': ['AEHR', 'ARRY', 'CABA', 'CRMD', 'IOVA'], 'trial_id': 'ACTIVE-ONLY-MOMENTUM-SMOKE-001'}",
+      "name": "fixed_parameters",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_blocked_actions",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "ACTIVE_ONLY_MOMENTUM_SMOKE_GATE_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 21,
+    "total": 21
+  }
+}
