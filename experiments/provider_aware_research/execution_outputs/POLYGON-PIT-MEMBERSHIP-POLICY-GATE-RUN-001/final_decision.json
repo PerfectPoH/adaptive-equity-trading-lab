@@ -1,0 +1,28 @@
+{
+  "active_seed_count": 524,
+  "backtest_performed": false,
+  "broad_backtest_blockers": [
+    "listing_dates_unavailable",
+    "asof_membership_history_unconstructed"
+  ],
+  "broad_universe_backtest_allowed": false,
+  "decision": "POLYGON_DATA_STACK_READY_SINGLE_DAY_ONLY",
+  "delisted_common_stock_count": 303,
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "matched_seed_bar_count": 515,
+  "next_unblocked_step": "Preregister a PIT membership construction method with listing dates/as-of membership before any broad-universe backtest; single-day non-alpha diagnostics may use the liquid snapshot.",
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "raw_payload_retained": false,
+  "run_id": "POLYGON-PIT-MEMBERSHIP-POLICY-GATE-RUN-001",
+  "short_selling_performed": false,
+  "single_day_blockers": [],
+  "single_day_liquid_candidate_count": 359,
+  "single_day_liquid_snapshot_allowed": true,
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trial_id": "UNIVERSE-PIT-POLICY-GATE-001"
+}

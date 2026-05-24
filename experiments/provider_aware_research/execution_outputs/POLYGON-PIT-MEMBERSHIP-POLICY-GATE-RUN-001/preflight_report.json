@@ -1,0 +1,126 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_pit_membership_policy_gate_20260524",
+      "name": "spec_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_pit_membership_policy_gate_20260524\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_pit_membership_policy_gate_20260524\\policy_manifest.json",
+      "name": "required_file:policy_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_pit_membership_policy_gate_20260524\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_pit_membership_policy_gate_20260524\\pass_fail_requirements.csv",
+      "name": "required_file:pass_fail_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "POLYGON-PIT-MEMBERSHIP-POLICY-GATE-001",
+      "name": "policy_id",
+      "status": "pass"
+    },
+    {
+      "detail": "UNIVERSE-PIT-POLICY-GATE-001",
+      "name": "trial_id",
+      "status": "pass"
+    },
+    {
+      "detail": "APPROVED_NON_EXECUTABLE_POLICY_GATE",
+      "name": "status_non_executable",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "provider_query_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "market_download_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "raw_retention_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "backtest_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "broad_backtest_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "parameter_sweep_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "short_selling_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "promotion_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "listing_dates_unavailable",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "pit_history_unconstructed",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "listing_date_source_required",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "pit_construction_required",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "single_day_snapshot_conditionally_allowed",
+      "status": "pass"
+    },
+    {
+      "detail": "{'active_seed_decision': 'experiments/provider_aware_research/execution_outputs/POLYGON-ACTIVE-UNIVERSE-SEED-001/final_decision.json', 'backtest_allowed': False, 'broad_universe_backtest_allowed': False, 'delisted_audit_decision': 'experiments/provider_aware_research/execution_outputs/POLYGON-DELISTED-SURVIVORSHIP-AUDIT-001/final_decision.json', 'liquidity_probe_decision': 'experiments/provider_aware_research/execution_outputs/POLYGON-GROUPED-DAILY-LIQUIDITY-PROBE-001/final_decision.json', 'market_data_download_allowed': False, 'paper_trading_allowed': False, 'parameter_sweep_allowed': False, 'pit_listing_dates_available': False, 'pit_membership_history_constructed': False, 'policy_id': 'POLYGON-PIT-MEMBERSHIP-POLICY-GATE-001', 'promotion_allowed': False, 'provider_query_allowed': False, 'raw_payload_retention': False, 'requires_listing_date_source_before_broad_backtest': True, 'requires_pit_membership_construction_before_broad_backtest': True, 'short_selling_allowed': False, 'single_day_liquid_snapshot_allowed_if_inputs_pass': True, 'status': 'APPROVED_NON_EXECUTABLE_POLICY_GATE', 'trial_id': 'UNIVERSE-PIT-POLICY-GATE-001'}",
+      "name": "input_decisions_declared",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_blocked_actions",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "POLYGON_PIT_MEMBERSHIP_POLICY_GATE_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 23,
+    "total": 23
+  }
+}
