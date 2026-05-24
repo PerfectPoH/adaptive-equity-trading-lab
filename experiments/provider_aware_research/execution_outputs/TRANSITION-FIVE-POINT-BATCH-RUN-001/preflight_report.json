@@ -1,0 +1,141 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\transition_five_point_batch_20260524",
+      "name": "spec_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\transition_five_point_batch_20260524\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\transition_five_point_batch_20260524\\batch_manifest.json",
+      "name": "required_file:batch_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\transition_five_point_batch_20260524\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\transition_five_point_batch_20260524\\pass_fail_requirements.csv",
+      "name": "required_file:pass_fail_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "TRANSITION-FIVE-POINT-BATCH-001",
+      "name": "trial_id",
+      "status": "pass"
+    },
+    {
+      "detail": "APPROVED_EXISTING_ARTIFACTS_DIAGNOSTIC_NOT_EXECUTED",
+      "name": "status_pre_run",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "provider_query_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "market_data_download_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "raw_payload_retention_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "new_backtest_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "parameter_sweep_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "short_selling_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "paper_trading_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "live_trading_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "promotion_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "['etf_largecap_regime_map', 'risk_overlay_replay', 'portfolio_allocation_smoke', 'smallcap_microstructure_diagnostic', 'data_upgrade_decision_matrix']",
+      "name": "five_points_declared",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_blocked_actions",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments/provider_aware_research/execution_outputs/RESEARCH-PROGRAM-TRANSITION-POLICY-GATE-RUN-001/final_decision.json",
+      "name": "transition_policy_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments/provider_aware_research/execution_outputs/ACTIVE-ONLY-MOMENTUM-SMOKE-RUN-001/trade_panel.csv",
+      "name": "active_only_trade_panel_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments/provider_aware_research/execution_outputs/ACTIVE-ONLY-MOMENTUM-SMOKE-ROBUSTNESS-RUN-001/final_decision.json",
+      "name": "active_only_robustness_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments/provider_aware_research/execution_outputs/POLYGON-DELISTED-LISTING-DATE-PROBE-001/final_decision.json",
+      "name": "delisted_decision_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments/provider_aware_research/data_inputs/databento_xmom_20260520/prices.csv",
+      "name": "smallcap_prices_exist",
+      "status": "pass"
+    },
+    {
+      "detail": "[WindowsPath('data/snapshots/AAPL_2026-05-08.csv'), WindowsPath('data/snapshots/AMD_2026-05-08.csv'), WindowsPath('data/snapshots/AMZN_2026-05-08.csv'), WindowsPath('data/snapshots/GOOGL_2026-05-08.csv'), WindowsPath('data/snapshots/META_2026-05-08.csv'), WindowsPath('data/snapshots/MSFT_2026-05-08.csv'), WindowsPath('data/snapshots/NVDA_2026-05-08.csv'), WindowsPath('data/snapshots/QQQ_2026-05-08.csv'), WindowsPath('data/snapshots/SPY_2026-05-08.csv'), WindowsPath('data/snapshots/TSLA_2026-05-08.csv')]",
+      "name": "snapshot_files_non_empty",
+      "status": "pass"
+    },
+    {
+      "detail": "[WindowsPath('data/snapshots/AAPL_2026-05-08.csv'), WindowsPath('data/snapshots/AMD_2026-05-08.csv'), WindowsPath('data/snapshots/AMZN_2026-05-08.csv'), WindowsPath('data/snapshots/GOOGL_2026-05-08.csv'), WindowsPath('data/snapshots/META_2026-05-08.csv'), WindowsPath('data/snapshots/MSFT_2026-05-08.csv'), WindowsPath('data/snapshots/NVDA_2026-05-08.csv'), WindowsPath('data/snapshots/QQQ_2026-05-08.csv'), WindowsPath('data/snapshots/SPY_2026-05-08.csv'), WindowsPath('data/snapshots/TSLA_2026-05-08.csv')]",
+      "name": "snapshot_files_exist",
+      "status": "pass"
+    },
+    {
+      "detail": "3",
+      "name": "min_symbols_for_allocation",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "TRANSITION_FIVE_POINT_BATCH_GATE_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 26,
+    "total": 26
+  }
+}

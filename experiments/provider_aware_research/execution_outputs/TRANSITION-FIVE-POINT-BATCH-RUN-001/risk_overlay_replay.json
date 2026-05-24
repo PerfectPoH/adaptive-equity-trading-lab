@@ -1,0 +1,16 @@
+{
+  "backtest_performed": false,
+  "fragility_block": true,
+  "original_median_net_return": -0.05230847,
+  "original_net_return_sum": 1.98092434,
+  "overlay_median_net_return": 0.0,
+  "overlay_net_return_sum": -0.38795234,
+  "per_trade_loss_floor": -0.15,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "run_id": "TRANSITION-FIVE-POINT-BATCH-RUN-001",
+  "stop_after_cumulative_loss": -0.35,
+  "stopped_by_risk_rule": true,
+  "trade_count": 44,
+  "trial_id": "TRANSITION-FIVE-POINT-BATCH-001"
+}

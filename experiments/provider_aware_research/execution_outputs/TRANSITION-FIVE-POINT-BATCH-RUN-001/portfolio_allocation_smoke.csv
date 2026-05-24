@@ -1,0 +1,11 @@
+symbol,realized_volatility,inverse_vol_score,diagnostic_weight,minimum_symbols_met,provider_query_performed,backtest_performed,promotion_allowed
+AAPL,0.2564803656,3.8989339304,0.1098257071,True,False,False,False
+AMD,0.7070491517,1.4143288308,0.039839009,True,False,False,False
+AMZN,0.2845772445,3.5139844082,0.098982396,True,False,False,False
+GOOGL,0.3370433654,2.9669772578,0.0835742234,True,False,False,False
+META,0.3954614119,2.5286917253,0.0712285362,True,False,False,False
+MSFT,0.2740821033,3.6485417613,0.1027726261,True,False,False,False
+NVDA,0.3586798487,2.7880016218,0.0785328131,True,False,False,False
+QQQ,0.1904815997,5.2498509126,0.1478785224,True,False,False,False
+SPY,0.1466633004,6.8183383121,0.1920598912,True,False,False,False
+TSLA,0.3740476783,2.6734559736,0.0753062755,True,False,False,False
