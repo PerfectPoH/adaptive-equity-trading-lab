@@ -1,0 +1,8 @@
+requirement,threshold,rationale
+provider_call_count,<=10,Bound provider access before execution.
+detail_success_count,>=8,Most bounded details calls must return usable results.
+list_date_coverage,>=0.80,Need broad enough listing-date coverage to justify a future PIT construction probe.
+raw_payload_retained,false,Avoid retaining raw provider payload.
+market_data_downloaded,false,No price data in this probe.
+backtest_performed,false,No strategy trial in this probe.
+broad_universe_backtest_allowed,false,Ten tickers cannot authorize broad PIT backtests.

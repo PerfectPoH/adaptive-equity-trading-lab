@@ -1,0 +1,27 @@
+{
+  "api_key_env_var": "POLYGON_API_KEY",
+  "backtest_allowed": false,
+  "broad_universe_backtest_allowed": false,
+  "endpoint_template": "https://api.polygon.io/v3/reference/tickers/{ticker}",
+  "expected_max_calls": 10,
+  "market_data_download_allowed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "probe_id": "PROBE-POLYGON-LISTING-DATE-COVERAGE-001",
+  "promotion_allowed": false,
+  "provider": "Polygon/Massive",
+  "provider_query_allowed": true,
+  "raw_payload_retention": false,
+  "required_fields": [
+    "ticker",
+    "primary_exchange",
+    "type",
+    "active",
+    "list_date"
+  ],
+  "sample_source": "experiments/provider_aware_research/execution_outputs/POLYGON-ACTIVE-UNIVERSE-SEED-001/active_common_stock_seed.csv",
+  "sample_ticker_count": 10,
+  "short_selling_allowed": false,
+  "status": "APPROVED_TEN_TICKER_DETAILS_CALLS_NOT_EXECUTED",
+  "trial_id": "UNIVERSE-LISTING-DATE-COVERAGE-PROBE-001"
+}
