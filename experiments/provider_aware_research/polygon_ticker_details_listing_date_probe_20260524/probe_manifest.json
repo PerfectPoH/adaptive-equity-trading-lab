@@ -1,0 +1,26 @@
+{
+  "api_key_env_var": "POLYGON_API_KEY",
+  "backtest_allowed": false,
+  "broad_universe_backtest_allowed": false,
+  "endpoint": "https://api.polygon.io/v3/reference/tickers/A",
+  "expected_max_calls": 1,
+  "market_data_download_allowed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "probe_id": "PROBE-POLYGON-TICKER-DETAILS-LISTING-DATE-001",
+  "promotion_allowed": false,
+  "provider": "Polygon/Massive",
+  "provider_query_allowed": true,
+  "raw_payload_retention": false,
+  "required_fields": [
+    "ticker",
+    "primary_exchange",
+    "type",
+    "active",
+    "list_date"
+  ],
+  "short_selling_allowed": false,
+  "status": "APPROVED_SINGLE_TICKER_DETAILS_CALL_NOT_EXECUTED",
+  "ticker": "A",
+  "trial_id": "UNIVERSE-LISTING-DATE-SOURCE-PROBE-001"
+}

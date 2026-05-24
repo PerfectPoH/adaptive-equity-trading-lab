@@ -1,0 +1,7 @@
+requirement,threshold,rationale
+provider_call_count,<=1,Bound provider access before execution.
+list_date_present,true,Need a listing-date field for future PIT construction.
+raw_payload_retained,false,Avoid retaining raw provider payload.
+market_data_downloaded,false,No price data in this probe.
+backtest_performed,false,No strategy trial in this probe.
+broad_universe_backtest_allowed,false,One ticker cannot authorize broad PIT universe.
