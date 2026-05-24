@@ -1,0 +1,7 @@
+requirement_id,field,required_for_pass,reason
+ticker,ticker,true,Need ticker identifiers.
+cik,cik_str,true,Need CIK mapping for SEC event joins.
+exchange,exchange,true,Need listing venue for universe filters.
+security_type,security_type,true,Need common-stock-only filter.
+active_windows,first_trade_date_and_last_trade_date,true,Need point-in-time active intervals.
+delisted_symbols,delisted_symbols,true,Need survivorship-bias control.

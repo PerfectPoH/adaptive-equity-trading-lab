@@ -1,0 +1,24 @@
+{
+  "backtest_allowed": false,
+  "endpoint": "https://www.sec.gov/files/company_tickers.json",
+  "expected_max_calls": 1,
+  "market_data_download_allowed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "probe_id": "PROBE-SEC-COMPANY-TICKERS-UNIVERSE-001",
+  "promotion_allowed": false,
+  "provider": "SEC",
+  "provider_query_allowed": true,
+  "raw_payload_retention": false,
+  "required_for_pass": [
+    "ticker",
+    "cik",
+    "exchange",
+    "security_type",
+    "active_windows",
+    "delisted_symbols"
+  ],
+  "short_selling_allowed": false,
+  "status": "APPROVED_SINGLE_CALL_NOT_EXECUTED",
+  "trial_id": "UNIVERSE-SOURCE-PROBE-001"
+}
