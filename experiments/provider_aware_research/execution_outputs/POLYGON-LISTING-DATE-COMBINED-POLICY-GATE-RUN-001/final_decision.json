@@ -1,0 +1,123 @@
+{
+  "backtest_performed": false,
+  "blockers": [],
+  "broad_universe_backtest_allowed": false,
+  "combined_listing_date_sample": [
+    {
+      "active": "True",
+      "cik": "0001090872",
+      "list_date": "1999-11-18",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": "False",
+      "ticker": "A",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001675149",
+      "list_date": "2016-10-18",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": "False",
+      "ticker": "AA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002034334",
+      "list_date": "2025-04-07",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": "False",
+      "ticker": "AACB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002092897",
+      "list_date": "2026-03-27",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": "False",
+      "ticker": "AACI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002099906",
+      "list_date": "2026-04-13",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": "False",
+      "ticker": "AACO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000006201",
+      "list_date": "1972-06-01",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": "False",
+      "ticker": "AAL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000008177",
+      "list_date": "1973-01-02",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": "False",
+      "ticker": "AAME",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001748824",
+      "list_date": "2014-10-09",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": "False",
+      "ticker": "AAMI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001158114",
+      "list_date": "2013-09-26",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": "False",
+      "ticker": "AAOI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000824142",
+      "list_date": "1990-12-01",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": "False",
+      "ticker": "AAON",
+      "type": "CS"
+    }
+  ],
+  "decision": "POLYGON_LISTING_DATE_SAMPLE_COVERAGE_PASS_NO_PIT_UNIVERSE",
+  "expected_min_count": 10,
+  "list_date_coverage": 1.0,
+  "list_date_present_count": 10,
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "missing_source_files": [],
+  "next_unblocked_step": "Preregister a no-backtest PIT construction method using listing dates, delisted metadata, and as-of membership rules.",
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "pit_universe_construction_allowed": false,
+  "promotion_allowed": false,
+  "provider_call_count": 0,
+  "provider_query_performed": false,
+  "quality_scope": "combined_listing_date_sample_policy_only_not_pit_universe",
+  "raw_payload_retained": false,
+  "run_id": "POLYGON-LISTING-DATE-COMBINED-POLICY-GATE-RUN-001",
+  "sample_ticker_count": 10,
+  "short_selling_performed": false,
+  "source_files": [
+    "experiments\\provider_aware_research\\execution_outputs\\POLYGON-LISTING-DATE-COVERAGE-PROBE-001\\derived_listing_date_coverage_sample.csv",
+    "experiments\\provider_aware_research\\execution_outputs\\POLYGON-LISTING-DATE-COVERAGE-CONTINUATION-001\\derived_listing_date_continuation_sample.csv"
+  ],
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trial_id": "UNIVERSE-LISTING-DATE-COMBINED-POLICY-GATE-001"
+}
