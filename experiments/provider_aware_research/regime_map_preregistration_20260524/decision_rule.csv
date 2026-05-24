@@ -1,0 +1,8 @@
+decision_item,rule
+data_scope,Existing daily OHLCV plus existing archived trade logs only.
+regime_features,Use close-to-close return, rolling 20-day return, rolling dollar volume z-score, and absolute daily return.
+regime_priority,Classify VOLATILITY_SHOCK first, then TREND_UP/TREND_DOWN, then QUIET_RANGE, else MIXED_NORMAL.
+trade_mapping,Map each archived trade to signal_date when available, otherwise entry_date.
+attribution,Aggregate trade counts and net/gross returns by source run and regime label.
+sample_size_gate,If fewer than 10 archived trades are mapped, report sample-starvation but still write diagnostics.
+promotion_rule,No strategy promotion is allowed; output can only seed a future preregistration.

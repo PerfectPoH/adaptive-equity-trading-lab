@@ -1,0 +1,9 @@
+action,reason
+provider_query,Regime map uses existing local artifacts only.
+market_data_download,Daily OHLCV file already exists.
+run_backtest,This is a diagnostic attribution run, not a new strategy test.
+parameter_sweep,Regime thresholds are fixed before execution.
+short_selling,User mandate is long-only and shorts remain out of scope.
+paper_trading,No strategy is promoted by this diagnostic.
+live_trading,No strategy is promoted by this diagnostic.
+strategy_promotion,Regime attribution can only generate future hypotheses.

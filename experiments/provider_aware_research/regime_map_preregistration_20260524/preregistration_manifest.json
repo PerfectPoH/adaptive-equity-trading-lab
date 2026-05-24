@@ -1,0 +1,35 @@
+{
+  "allowed_symbols": [
+    "AEHR",
+    "ARRY",
+    "CABA",
+    "CRMD",
+    "IOVA"
+  ],
+  "backtest_allowed": false,
+  "end_date": "2025-12-31",
+  "lookback_days": 20,
+  "market_data_download_allowed": false,
+  "minimum_mapped_trades": 10,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "price_file": "experiments/provider_aware_research/data_inputs/databento_xmom_20260520/prices.csv",
+  "preregistration_id": "PREREG-REGIME-MAP-001",
+  "promotion_allowed": false,
+  "provider_query_allowed": false,
+  "quiet_abs_return_threshold": 0.01,
+  "regime_labels": [
+    "VOLATILITY_SHOCK",
+    "TREND_UP",
+    "TREND_DOWN",
+    "QUIET_RANGE",
+    "MIXED_NORMAL"
+  ],
+  "shock_abs_return_threshold": 0.08,
+  "shock_volume_z_threshold": 2.0,
+  "short_selling_allowed": false,
+  "start_date": "2022-01-03",
+  "status": "APPROVED_EXISTING_ARTIFACT_DIAGNOSTIC_NOT_EXECUTED",
+  "trend_return_threshold": 0.03,
+  "trial_id": "REGIME-MAP-001"
+}
