@@ -1,0 +1,34 @@
+{
+  "api_key_env_var": "POLYGON_API_KEY",
+  "backtest_allowed": false,
+  "broad_universe_backtest_allowed": false,
+  "endpoint_template": "https://api.polygon.io/v3/reference/tickers/{ticker}",
+  "expected_max_calls": 5,
+  "market_data_download_allowed": false,
+  "min_seconds_between_calls": 13,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "probe_id": "PROBE-POLYGON-LISTING-DATE-COVERAGE-CONTINUATION-001",
+  "promotion_allowed": false,
+  "provider": "Polygon/Massive",
+  "provider_query_allowed": true,
+  "raw_payload_retention": false,
+  "remaining_tickers": [
+    "AAL",
+    "AAME",
+    "AAMI",
+    "AAOI",
+    "AAON"
+  ],
+  "required_fields": [
+    "ticker",
+    "primary_exchange",
+    "type",
+    "active",
+    "list_date"
+  ],
+  "short_selling_allowed": false,
+  "source_run_id": "POLYGON-LISTING-DATE-COVERAGE-PROBE-001",
+  "status": "APPROVED_FIVE_TICKER_DETAILS_CONTINUATION_NOT_EXECUTED",
+  "trial_id": "UNIVERSE-LISTING-DATE-COVERAGE-CONTINUATION-001"
+}
