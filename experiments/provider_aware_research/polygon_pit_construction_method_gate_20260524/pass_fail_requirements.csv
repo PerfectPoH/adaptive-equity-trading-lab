@@ -1,0 +1,9 @@
+requirement,threshold,rationale
+provider_query_performed,false,Method gate must be no-query.
+market_data_downloaded,false,Method gate must not download prices.
+backtest_performed,false,Method gate must not run strategies.
+pit_sample_construction_allowed,true,Only sample membership construction is authorized.
+broad_universe_backtest_allowed,false,Broad backtests require a separate preregistered trial.
+membership_rule,list_date <= as_of_date < delisted_date,As-of membership must exclude future listings and post-delisting survivorship.
+listing_date_sample_count,>=10,Use the archived 10 ticker listing-date sample.
+as_of_date_count,>=2,Demonstrate rule across multiple as-of dates.

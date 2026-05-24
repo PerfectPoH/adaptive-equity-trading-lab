@@ -1,0 +1,40 @@
+{
+  "as_of_dates": [
+    "2024-01-02",
+    "2026-05-22"
+  ],
+  "backtest_performed": false,
+  "broad_backtest_blockers": [
+    "sample_only_method_gate",
+    "delisted_listing_dates_unavailable_for_full_pit",
+    "full_historical_membership_artifact_unbuilt",
+    "strategy_trial_not_preregistered"
+  ],
+  "broad_universe_backtest_allowed": false,
+  "decision": "POLYGON_PIT_CONSTRUCTION_METHOD_APPROVED_PARTIAL_SAMPLE_ONLY",
+  "delisted_reference_sample_count": 10,
+  "delisted_rows_with_listing_date_count": 0,
+  "listing_date_sample_count": 10,
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "member_counts_by_as_of_date": {
+    "2024-01-02": 7,
+    "2026-05-22": 10
+  },
+  "membership_row_count": 20,
+  "membership_rule": "list_date <= as_of_date < delisted_date",
+  "next_unblocked_step": "Preregister a bounded full-universe PIT artifact build before any broad-universe strategy backtest.",
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "pit_sample_construction_allowed": true,
+  "pit_universe_construction_allowed": false,
+  "promotion_allowed": false,
+  "provider_call_count": 0,
+  "provider_query_performed": false,
+  "raw_payload_retained": false,
+  "run_id": "POLYGON-PIT-CONSTRUCTION-METHOD-GATE-RUN-001",
+  "short_selling_performed": false,
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trial_id": "UNIVERSE-PIT-CONSTRUCTION-METHOD-GATE-001"
+}

@@ -1,0 +1,22 @@
+{
+  "as_of_dates": [
+    "2024-01-02",
+    "2026-05-22"
+  ],
+  "backtest_allowed": false,
+  "broad_universe_backtest_allowed": false,
+  "delisted_reference_sample": "experiments/provider_aware_research/execution_outputs/POLYGON-DELISTED-SURVIVORSHIP-AUDIT-001/delisted_reference_sample.csv",
+  "listing_date_sample": "experiments/provider_aware_research/execution_outputs/POLYGON-LISTING-DATE-COMBINED-POLICY-GATE-RUN-001/combined_listing_date_sample.csv",
+  "market_data_download_allowed": false,
+  "membership_rule": "list_date <= as_of_date < delisted_date",
+  "method_id": "POLYGON-PIT-CONSTRUCTION-METHOD-GATE-001",
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "pit_sample_construction_allowed": true,
+  "promotion_allowed": false,
+  "provider_query_allowed": false,
+  "raw_payload_retention": false,
+  "short_selling_allowed": false,
+  "status": "APPROVED_NO_QUERY_SAMPLE_METHOD_GATE",
+  "trial_id": "UNIVERSE-PIT-CONSTRUCTION-METHOD-GATE-001"
+}
