@@ -1,0 +1,6 @@
+requirement_id,field,required_for_pass,reason
+ticker,ticker,true,Need ticker identifiers.
+exchange,primary_exchange,true,Need listing venue for universe filters.
+security_type,type,true,Need common-stock filter.
+active_status,active,true,Need active/inactive flag for current versus historical treatment.
+delisted_metadata,delisted_utc,true,Need delisting date metadata for survivorship control.

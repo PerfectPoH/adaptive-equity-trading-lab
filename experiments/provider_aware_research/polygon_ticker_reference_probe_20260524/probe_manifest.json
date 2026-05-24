@@ -1,0 +1,25 @@
+{
+  "api_key_env_var": "POLYGON_API_KEY",
+  "backtest_allowed": false,
+  "endpoint": "https://api.polygon.io/v3/reference/tickers",
+  "expected_max_calls": 1,
+  "limit": 100,
+  "market_data_download_allowed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "probe_id": "PROBE-POLYGON-TICKER-REFERENCE-001",
+  "promotion_allowed": false,
+  "provider": "Polygon/Massive",
+  "provider_query_allowed": true,
+  "raw_payload_retention": false,
+  "required_for_pass": [
+    "ticker",
+    "primary_exchange",
+    "type",
+    "active",
+    "delisted_utc"
+  ],
+  "short_selling_allowed": false,
+  "status": "APPROVED_SINGLE_CALL_NOT_EXECUTED",
+  "trial_id": "UNIVERSE-SOURCE-PROBE-002"
+}

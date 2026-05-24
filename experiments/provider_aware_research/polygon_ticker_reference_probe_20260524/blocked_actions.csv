@@ -1,0 +1,9 @@
+action,reason
+market_data_download,Probe evaluates reference metadata only.
+run_backtest,Universe source must pass before any strategy test.
+raw_payload_retention,Only derived sample and assessment may be retained.
+parameter_sweep,No strategy thresholds exist in this probe.
+short_selling,User mandate remains long-only.
+paper_trading,No strategy is promoted.
+live_trading,No strategy is promoted.
+strategy_promotion,Source probe cannot promote a strategy.
