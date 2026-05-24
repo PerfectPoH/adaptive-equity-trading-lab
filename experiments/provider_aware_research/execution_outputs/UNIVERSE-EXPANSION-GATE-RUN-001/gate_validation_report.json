@@ -1,0 +1,136 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\universe_expansion_gate_20260524",
+      "name": "spec_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\universe_expansion_gate_20260524\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\universe_expansion_gate_20260524\\universe_expansion_manifest.json",
+      "name": "required_file:universe_expansion_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\universe_expansion_gate_20260524\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\universe_expansion_gate_20260524\\universe_quality_rules.csv",
+      "name": "required_file:universe_quality_rules.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\universe_expansion_gate_20260524\\provider_requirements.csv",
+      "name": "required_file:provider_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\universe_expansion_gate_20260524\\candidate_universe_template.csv",
+      "name": "required_file:candidate_universe_template.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "UNIVERSE-EXPANSION-GATE-001",
+      "name": "gate_id",
+      "status": "pass"
+    },
+    {
+      "detail": "UNIVERSE-EXPANSION-GATE-001",
+      "name": "trial_id",
+      "status": "pass"
+    },
+    {
+      "detail": "APPROVED_UNIVERSE_GATE_NOT_EXECUTABLE",
+      "name": "status_not_executable",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "provider_query_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "market_download_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "backtest_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "parameter_sweep_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "short_selling_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "promotion_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "{'backtest_allowed': False, 'candidate_universe_template': 'candidate_universe_template.csv', 'gate_id': 'UNIVERSE-EXPANSION-GATE-001', 'market_data_download_allowed': False, 'max_target_universe_size': 1000, 'min_median_close_60d': 1.0, 'min_median_dollar_volume_60d': 1000000, 'min_target_universe_size': 300, 'paper_trading_allowed': False, 'parameter_sweep_allowed': False, 'promotion_allowed': False, 'provider_query_allowed': False, 'required_exchanges': ['NASDAQ', 'NYSE', 'NYSEAMERICAN'], 'required_security_types': ['COMMON_STOCK'], 'short_selling_allowed': False, 'status': 'APPROVED_UNIVERSE_GATE_NOT_EXECUTABLE', 'survivorship_policy_required': True, 'trial_id': 'UNIVERSE-EXPANSION-GATE-001', 'universe_quality_report_required_before_backtest': True}",
+      "name": "target_size_range",
+      "status": "pass"
+    },
+    {
+      "detail": "1000000",
+      "name": "liquidity_floor",
+      "status": "pass"
+    },
+    {
+      "detail": "1.0",
+      "name": "price_floor",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "survivorship_required",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "quality_report_before_backtest",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_blocked_actions",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_quality_rules",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_provider_requirements",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_template_columns",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "UNIVERSE_EXPANSION_GATE_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 25,
+    "total": 25
+  }
+}

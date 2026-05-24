@@ -1,0 +1,21 @@
+{
+  "backtest_performed": false,
+  "blocked_action_count": 8,
+  "decision": "UNIVERSE_EXPANSION_GATE_READY_NOT_EXECUTABLE",
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "max_target_universe_size": 1000,
+  "min_target_universe_size": 300,
+  "next_unblocked_step": "Create a separate provider-specific universe-source probe with explicit endpoint, max calls, raw retention policy, and no backtest.",
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "provider_requirement_count": 6,
+  "quality_rule_count": 6,
+  "run_id": "UNIVERSE-EXPANSION-GATE-RUN-001",
+  "short_selling_performed": false,
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trial_id": "UNIVERSE-EXPANSION-GATE-001"
+}

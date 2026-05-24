@@ -1,0 +1,9 @@
+action,reason
+provider_query,A separate provider-specific universe source probe must be preregistered first.
+market_data_download,A universe quality manifest must exist before any market data acquisition.
+run_backtest,Backtests are blocked until the universe quality report passes.
+parameter_sweep,No thresholds may be tuned inside this gate.
+short_selling,User mandate remains long-only.
+paper_trading,No strategy is promoted or executable here.
+live_trading,No strategy is promoted or executable here.
+strategy_promotion,This gate is infrastructure only.
