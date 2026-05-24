@@ -1,0 +1,19 @@
+{
+  "backtest_performed": false,
+  "blockers": [],
+  "decision": "REGIME_MAP_DIAGNOSTIC_COMPLETE_NO_STRATEGY",
+  "live_trading_performed": false,
+  "mapped_trade_count": 49,
+  "market_data_downloaded": false,
+  "next_unblocked_step": "Use this attribution only to write a separate preregistration if a regime-specific hypothesis is visible.",
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "regime_day_count": 5010,
+  "run_id": "REGIME-MAP-DIAGNOSTIC-001",
+  "short_selling_performed": false,
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trial_id": "REGIME-MAP-001"
+}

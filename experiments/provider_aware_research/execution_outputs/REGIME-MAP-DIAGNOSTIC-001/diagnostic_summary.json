@@ -1,0 +1,78 @@
+{
+  "backtest_performed": false,
+  "blockers": [],
+  "decision": "REGIME_MAP_DIAGNOSTIC_COMPLETE_NO_STRATEGY",
+  "live_trading_performed": false,
+  "mapped_trade_count": 49,
+  "market_data_downloaded": false,
+  "minimum_mapped_trades": 10,
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "regime_counts": {
+    "MIXED_NORMAL": 427,
+    "QUIET_RANGE": 130,
+    "TREND_DOWN": 2096,
+    "TREND_UP": 1603,
+    "VOLATILITY_SHOCK": 754
+  },
+  "regime_day_count": 5010,
+  "regime_summary_rows": [
+    {
+      "gross_return_sum": -0.0306144938,
+      "median_net_return": -0.0653072469,
+      "net_return_sum": -0.1306144938,
+      "net_win_rate": 0.0,
+      "promotion_allowed": false,
+      "regime_label": "MIXED_NORMAL",
+      "source_run_id": "LOWVOL-TRADABILITY-BACKTEST-001",
+      "trade_count": 2
+    },
+    {
+      "gross_return_sum": 0.0314685315,
+      "median_net_return": -0.0185314685,
+      "net_return_sum": -0.0185314685,
+      "net_win_rate": 0.0,
+      "promotion_allowed": false,
+      "regime_label": "QUIET_RANGE",
+      "source_run_id": "LOWVOL-TRADABILITY-BACKTEST-001",
+      "trade_count": 1
+    },
+    {
+      "gross_return_sum": -0.318762948,
+      "median_net_return": -0.0798245614,
+      "net_return_sum": -1.668762948,
+      "net_win_rate": 0.185185,
+      "promotion_allowed": false,
+      "regime_label": "TREND_DOWN",
+      "source_run_id": "LOWVOL-TRADABILITY-BACKTEST-001",
+      "trade_count": 27
+    },
+    {
+      "gross_return_sum": 0.1617147105,
+      "median_net_return": -0.0478165939,
+      "net_return_sum": -0.4882852895,
+      "net_win_rate": 0.384615,
+      "promotion_allowed": false,
+      "regime_label": "TREND_UP",
+      "source_run_id": "LOWVOL-TRADABILITY-BACKTEST-001",
+      "trade_count": 13
+    },
+    {
+      "gross_return_sum": -0.3099632618,
+      "median_net_return": -0.1105906383,
+      "net_return_sum": -0.6099632618,
+      "net_win_rate": 0.166667,
+      "promotion_allowed": false,
+      "regime_label": "VOLATILITY_SHOCK",
+      "source_run_id": "LOWVOL-TRADABILITY-BACKTEST-001",
+      "trade_count": 6
+    }
+  ],
+  "run_id": "REGIME-MAP-DIAGNOSTIC-001",
+  "short_selling_performed": false,
+  "status": "diagnostic_complete_existing_artifacts_only",
+  "strategy_promotion_performed": false,
+  "trial_id": "REGIME-MAP-001"
+}

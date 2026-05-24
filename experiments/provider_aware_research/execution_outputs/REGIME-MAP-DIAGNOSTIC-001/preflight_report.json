@@ -1,0 +1,106 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\regime_map_preregistration_20260524",
+      "name": "spec_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\regime_map_preregistration_20260524\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\regime_map_preregistration_20260524\\preregistration_manifest.json",
+      "name": "required_file:preregistration_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\regime_map_preregistration_20260524\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\regime_map_preregistration_20260524\\decision_rule.csv",
+      "name": "required_file:decision_rule.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "PREREG-REGIME-MAP-001",
+      "name": "preregistration_id",
+      "status": "pass"
+    },
+    {
+      "detail": "REGIME-MAP-001",
+      "name": "trial_id",
+      "status": "pass"
+    },
+    {
+      "detail": "APPROVED_EXISTING_ARTIFACT_DIAGNOSTIC_NOT_EXECUTED",
+      "name": "status_pre_run",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "provider_query_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "market_download_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "backtest_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "parameter_sweep_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "short_selling_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "promotion_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "20",
+      "name": "lookback_20",
+      "status": "pass"
+    },
+    {
+      "detail": "['MIXED_NORMAL', 'QUIET_RANGE', 'TREND_DOWN', 'TREND_UP', 'VOLATILITY_SHOCK']",
+      "name": "required_labels",
+      "status": "pass"
+    },
+    {
+      "detail": "{'allowed_symbols': ['AEHR', 'ARRY', 'CABA', 'CRMD', 'IOVA'], 'backtest_allowed': False, 'end_date': '2025-12-31', 'lookback_days': 20, 'market_data_download_allowed': False, 'minimum_mapped_trades': 10, 'paper_trading_allowed': False, 'parameter_sweep_allowed': False, 'price_file': 'experiments/provider_aware_research/data_inputs/databento_xmom_20260520/prices.csv', 'preregistration_id': 'PREREG-REGIME-MAP-001', 'promotion_allowed': False, 'provider_query_allowed': False, 'quiet_abs_return_threshold': 0.01, 'regime_labels': ['VOLATILITY_SHOCK', 'TREND_UP', 'TREND_DOWN', 'QUIET_RANGE', 'MIXED_NORMAL'], 'shock_abs_return_threshold': 0.08, 'shock_volume_z_threshold': 2.0, 'short_selling_allowed': False, 'start_date': '2022-01-03', 'status': 'APPROVED_EXISTING_ARTIFACT_DIAGNOSTIC_NOT_EXECUTED', 'trend_return_threshold': 0.03, 'trial_id': 'REGIME-MAP-001'}",
+      "name": "thresholds_positive",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_blocked_actions",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_decision_items",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "REGIME_MAP_PREREGISTRATION_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 19,
+    "total": 19
+  }
+}
