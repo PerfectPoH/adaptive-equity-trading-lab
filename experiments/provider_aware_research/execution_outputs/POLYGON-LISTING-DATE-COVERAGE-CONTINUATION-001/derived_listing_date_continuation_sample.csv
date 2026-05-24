@@ -1,0 +1,6 @@
+ticker,primary_exchange,type,active,list_date,cik,raw_payload_retained
+AAL,XNAS,CS,True,1972-06-01,0000006201,False
+AAME,XNAS,CS,True,1973-01-02,0000008177,False
+AAMI,XNYS,CS,True,2014-10-09,0001748824,False
+AAOI,XNAS,CS,True,2013-09-26,0001158114,False
+AAON,XNAS,CS,True,1990-12-01,0000824142,False

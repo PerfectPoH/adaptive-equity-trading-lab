@@ -1,0 +1,76 @@
+{
+  "backtest_performed": false,
+  "blockers": [],
+  "broad_universe_backtest_allowed": false,
+  "continuation_passed": true,
+  "derived_listing_date_sample": [
+    {
+      "active": "True",
+      "cik": "0000006201",
+      "list_date": "1972-06-01",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AAL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000008177",
+      "list_date": "1973-01-02",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AAME",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001748824",
+      "list_date": "2014-10-09",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AAMI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001158114",
+      "list_date": "2013-09-26",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AAOI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000824142",
+      "list_date": "1990-12-01",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AAON",
+      "type": "CS"
+    }
+  ],
+  "detail_success_count": 5,
+  "expected_ticker_count": 5,
+  "expected_tickers": [
+    "AAL",
+    "AAME",
+    "AAMI",
+    "AAOI",
+    "AAON"
+  ],
+  "list_date_present_count": 5,
+  "market_data_downloaded": false,
+  "missing_tickers": [],
+  "promotion_allowed": false,
+  "provider": "Polygon/Massive",
+  "provider_call_count": 5,
+  "provider_error_count": 0,
+  "provider_errors": [],
+  "provider_query_performed": true,
+  "provider_success_count": 5,
+  "quality_scope": "five_ticker_rate_limited_listing_date_continuation_only_not_pit_universe",
+  "raw_payload_retained": false,
+  "run_id": "POLYGON-LISTING-DATE-COVERAGE-CONTINUATION-001",
+  "trial_id": "UNIVERSE-LISTING-DATE-COVERAGE-CONTINUATION-001"
+}
