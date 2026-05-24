@@ -1,0 +1,11 @@
+action,rationale
+provider_query,This gate only interprets completed probe artifacts.
+market_data_download,This gate does not acquire data.
+raw_payload_retention,This gate creates only policy artifacts.
+run_broad_universe_backtest,Listing dates and as-of membership history are not constructed.
+run_strategy_backtest,No alpha trial is authorized.
+parameter_sweep,No tuning is authorized.
+short_selling,The lab remains long-only.
+paper_trading,No execution is authorized.
+live_trading,No execution is authorized.
+strategy_promotion,Data readiness is not alpha evidence.

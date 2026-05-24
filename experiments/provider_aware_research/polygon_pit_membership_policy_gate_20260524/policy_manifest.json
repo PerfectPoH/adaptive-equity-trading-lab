@@ -1,0 +1,22 @@
+{
+  "active_seed_decision": "experiments/provider_aware_research/execution_outputs/POLYGON-ACTIVE-UNIVERSE-SEED-001/final_decision.json",
+  "backtest_allowed": false,
+  "broad_universe_backtest_allowed": false,
+  "delisted_audit_decision": "experiments/provider_aware_research/execution_outputs/POLYGON-DELISTED-SURVIVORSHIP-AUDIT-001/final_decision.json",
+  "liquidity_probe_decision": "experiments/provider_aware_research/execution_outputs/POLYGON-GROUPED-DAILY-LIQUIDITY-PROBE-001/final_decision.json",
+  "market_data_download_allowed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "pit_listing_dates_available": false,
+  "pit_membership_history_constructed": false,
+  "policy_id": "POLYGON-PIT-MEMBERSHIP-POLICY-GATE-001",
+  "promotion_allowed": false,
+  "provider_query_allowed": false,
+  "raw_payload_retention": false,
+  "requires_listing_date_source_before_broad_backtest": true,
+  "requires_pit_membership_construction_before_broad_backtest": true,
+  "short_selling_allowed": false,
+  "single_day_liquid_snapshot_allowed_if_inputs_pass": true,
+  "status": "APPROVED_NON_EXECUTABLE_POLICY_GATE",
+  "trial_id": "UNIVERSE-PIT-POLICY-GATE-001"
+}

@@ -1,0 +1,9 @@
+requirement,expected,rationale
+active_seed_passed,true,Need active reference seed.
+liquidity_probe_passed,true,Need one-day price/liquidity availability.
+delisted_metadata_support_passed,true,Need delisted metadata support.
+single_day_liquid_snapshot_allowed,true,All three data probes can permit snapshot diagnostics.
+broad_universe_backtest_allowed,false,Missing listing dates and as-of membership history.
+provider_query_performed,false,Policy gate must be offline.
+market_data_downloaded,false,Policy gate must not acquire data.
+backtest_performed,false,Policy gate must not run a strategy.
