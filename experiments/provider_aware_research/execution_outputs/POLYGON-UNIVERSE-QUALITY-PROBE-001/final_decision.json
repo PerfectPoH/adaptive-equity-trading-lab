@@ -1,0 +1,22 @@
+{
+  "backtest_performed": false,
+  "blockers": [
+    "metadata_coverage_below_0_95:delisted_utc"
+  ],
+  "candidate_common_stock_count": 524,
+  "decision": "POLYGON_UNIVERSE_REFERENCE_QUALITY_BLOCKED",
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "next_unblocked_step": "If pass, preregister a bounded liquidity/price availability probe before any universe backtest.",
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "record_count": 1000,
+  "run_id": "POLYGON-UNIVERSE-QUALITY-PROBE-001",
+  "short_selling_performed": false,
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trial_id": "UNIVERSE-QUALITY-PROBE-001"
+}
