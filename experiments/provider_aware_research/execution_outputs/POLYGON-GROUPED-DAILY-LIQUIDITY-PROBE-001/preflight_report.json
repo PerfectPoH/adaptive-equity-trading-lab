@@ -1,0 +1,146 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_grouped_daily_liquidity_probe_20260524",
+      "name": "spec_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_grouped_daily_liquidity_probe_20260524\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_grouped_daily_liquidity_probe_20260524\\probe_manifest.json",
+      "name": "required_file:probe_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_grouped_daily_liquidity_probe_20260524\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_grouped_daily_liquidity_probe_20260524\\pass_fail_requirements.csv",
+      "name": "required_file:pass_fail_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "PROBE-POLYGON-GROUPED-DAILY-LIQUIDITY-001",
+      "name": "probe_id",
+      "status": "pass"
+    },
+    {
+      "detail": "UNIVERSE-LIQUIDITY-PROBE-001",
+      "name": "trial_id",
+      "status": "pass"
+    },
+    {
+      "detail": "APPROVED_SINGLE_GROUPED_DAILY_CALL_NOT_EXECUTED",
+      "name": "status_pre_run",
+      "status": "pass"
+    },
+    {
+      "detail": "Polygon/Massive",
+      "name": "provider_polygon",
+      "status": "pass"
+    },
+    {
+      "detail": "https://api.polygon.io/v2/aggs/grouped/locale/us/market/stocks/2026-05-22",
+      "name": "endpoint_fixed_date",
+      "status": "pass"
+    },
+    {
+      "detail": "POLYGON_API_KEY",
+      "name": "api_key_env",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "single_call_bound",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "single_date_bound",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "market_download_allowed_for_snapshot",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "provider_query_allowed",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "raw_retention_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "backtest_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "parameter_sweep_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "short_selling_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "promotion_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "300",
+      "name": "matched_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "300",
+      "name": "liquid_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "1.0",
+      "name": "min_price_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "1000000",
+      "name": "min_dollar_volume_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments/provider_aware_research/execution_outputs/POLYGON-ACTIVE-UNIVERSE-SEED-001/active_common_stock_seed.csv",
+      "name": "seed_input_declared",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_blocked_actions",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "pass_fail_requirements",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "POLYGON_GROUPED_DAILY_LIQUIDITY_PROBE_GATE_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 27,
+    "total": 27
+  }
+}

@@ -1,0 +1,1022 @@
+{
+  "backtest_performed": false,
+  "blockers": [],
+  "grouped_daily_date": "2026-05-22",
+  "liquid_candidate_count": 359,
+  "liquid_candidate_sample": [
+    {
+      "close": "114.960000",
+      "dollar_volume": "234125713.77",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "A",
+      "type": "CS",
+      "volume": "2036584"
+    },
+    {
+      "close": "71.380000",
+      "dollar_volume": "496260753.11",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AA",
+      "type": "CS",
+      "volume": "6952378"
+    },
+    {
+      "close": "13.850000",
+      "dollar_volume": "1375094950.23",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AAL",
+      "type": "CS",
+      "volume": "99284834"
+    },
+    {
+      "close": "71.580000",
+      "dollar_volume": "37892770.69",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AAMI",
+      "type": "CS",
+      "volume": "529377"
+    },
+    {
+      "close": "181.490000",
+      "dollar_volume": "1869677492.70",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AAOI",
+      "type": "CS",
+      "volume": "10301821"
+    },
+    {
+      "close": "134.600000",
+      "dollar_volume": "127085421.25",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AAON",
+      "type": "CS",
+      "volume": "944171"
+    },
+    {
+      "close": "57.950000",
+      "dollar_volume": "201007526.51",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AAP",
+      "type": "CS",
+      "volume": "3468637"
+    },
+    {
+      "close": "308.820000",
+      "dollar_volume": "13486238486.56",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AAPL",
+      "type": "CS",
+      "volume": "43670224"
+    },
+    {
+      "close": "22.780000",
+      "dollar_volume": "7761642.55",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AAT",
+      "type": "CS",
+      "volume": "340722"
+    },
+    {
+      "close": "27.320000",
+      "dollar_volume": "77803398.21",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AAUC",
+      "type": "CS",
+      "volume": "2847855"
+    },
+    {
+      "close": "37.930000",
+      "dollar_volume": "21401158.09",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AB",
+      "type": "CS",
+      "volume": "564228"
+    },
+    {
+      "close": "3.230000",
+      "dollar_volume": "17212126.54",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABAT",
+      "type": "CS",
+      "volume": "5328832"
+    },
+    {
+      "close": "215.700000",
+      "dollar_volume": "1166501546.27",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABBV",
+      "type": "CS",
+      "volume": "5407981"
+    },
+    {
+      "close": "84.690000",
+      "dollar_volume": "25429280.99",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABCB",
+      "type": "CS",
+      "volume": "300263"
+    },
+    {
+      "close": "5.200000",
+      "dollar_volume": "33626163.24",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABCL",
+      "type": "CS",
+      "volume": "6466570"
+    },
+    {
+      "close": "5.440000",
+      "dollar_volume": "3655671.92",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABEO",
+      "type": "CS",
+      "volume": "671999"
+    },
+    {
+      "close": "187.720000",
+      "dollar_volume": "21103152.00",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABG",
+      "type": "CS",
+      "volume": "112418"
+    },
+    {
+      "close": "40.190000",
+      "dollar_volume": "15708536.29",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABM",
+      "type": "CS",
+      "volume": "390857"
+    },
+    {
+      "close": "132.350000",
+      "dollar_volume": "410007958.96",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABNB",
+      "type": "CS",
+      "volume": "3097907"
+    },
+    {
+      "close": "5.570000",
+      "dollar_volume": "33928990.79",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABR",
+      "type": "CS",
+      "volume": "6091381"
+    },
+    {
+      "close": "5.100000",
+      "dollar_volume": "11438607.55",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABSI",
+      "type": "CS",
+      "volume": "2242864"
+    },
+    {
+      "close": "87.410000",
+      "dollar_volume": "832092237.08",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABT",
+      "type": "CS",
+      "volume": "9519417"
+    },
+    {
+      "close": "1.110000",
+      "dollar_volume": "8844631.10",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABTC",
+      "type": "CS",
+      "volume": "7968136"
+    },
+    {
+      "close": "4.350000",
+      "dollar_volume": "3686001.44",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABUS",
+      "type": "CS",
+      "volume": "847357"
+    },
+    {
+      "close": "9.040000",
+      "dollar_volume": "3990524.09",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABX",
+      "type": "CS",
+      "volume": "441430"
+    },
+    {
+      "close": "120.750000",
+      "dollar_volume": "40338885.78",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACA",
+      "type": "CS",
+      "volume": "334069"
+    },
+    {
+      "close": "21.100000",
+      "dollar_volume": "29054426.76",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACAD",
+      "type": "CS",
+      "volume": "1376987"
+    },
+    {
+      "close": "3.460000",
+      "dollar_volume": "1460478.78",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACB",
+      "type": "CS",
+      "volume": "422104"
+    },
+    {
+      "close": "3.820000",
+      "dollar_volume": "3691126.65",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACCO",
+      "type": "CS",
+      "volume": "966264"
+    },
+    {
+      "close": "7.150000",
+      "dollar_volume": "9092467.42",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACDC",
+      "type": "CS",
+      "volume": "1271674"
+    },
+    {
+      "close": "11.650000",
+      "dollar_volume": "2418268.77",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACEL",
+      "type": "CS",
+      "volume": "207577"
+    },
+    {
+      "close": "96.300000",
+      "dollar_volume": "187019920.23",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACGL",
+      "type": "CS",
+      "volume": "1942055"
+    },
+    {
+      "close": "2.830000",
+      "dollar_volume": "1747243.89",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACH",
+      "type": "CS",
+      "volume": "617401"
+    },
+    {
+      "close": "23.180000",
+      "dollar_volume": "59151890.76",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACHC",
+      "type": "CS",
+      "volume": "2551850"
+    },
+    {
+      "close": "6.360000",
+      "dollar_volume": "504362417.98",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACHR",
+      "type": "CS",
+      "volume": "79302267"
+    },
+    {
+      "close": "4.690000",
+      "dollar_volume": "3829907.45",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACHV",
+      "type": "CS",
+      "volume": "816611"
+    },
+    {
+      "close": "16.210000",
+      "dollar_volume": "105333547.14",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACI",
+      "type": "CS",
+      "volume": "6498060"
+    },
+    {
+      "close": "10.800000",
+      "dollar_volume": "3254232.16",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACIC",
+      "type": "CS",
+      "volume": "301318"
+    },
+    {
+      "close": "42.720000",
+      "dollar_volume": "21872405.25",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACIW",
+      "type": "CS",
+      "volume": "511995"
+    },
+    {
+      "close": "156.940000",
+      "dollar_volume": "74918999.17",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACLS",
+      "type": "CS",
+      "volume": "477374"
+    },
+    {
+      "close": "72.040000",
+      "dollar_volume": "140066204.97",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACM",
+      "type": "CS",
+      "volume": "1944284"
+    },
+    {
+      "close": "73.350000",
+      "dollar_volume": "134430611.68",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACMR",
+      "type": "CS",
+      "volume": "1832728"
+    },
+    {
+      "close": "179.240000",
+      "dollar_volume": "618890579.02",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACN",
+      "type": "CS",
+      "volume": "3452860"
+    },
+    {
+      "close": "54.450000",
+      "dollar_volume": "2234007.67",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACNB",
+      "type": "CS",
+      "volume": "41029"
+    },
+    {
+      "close": "4.780000",
+      "dollar_volume": "1524437.41",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACRE",
+      "type": "CS",
+      "volume": "318920"
+    },
+    {
+      "close": "4.520000",
+      "dollar_volume": "2837232.11",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACRS",
+      "type": "CS",
+      "volume": "627706"
+    },
+    {
+      "close": "1.750000",
+      "dollar_volume": "1445276.02",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACRV",
+      "type": "CS",
+      "volume": "825872"
+    },
+    {
+      "close": "42.730000",
+      "dollar_volume": "11991758.18",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACT",
+      "type": "CS",
+      "volume": "280640"
+    },
+    {
+      "close": "42.160000",
+      "dollar_volume": "1064929.00",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "ACU",
+      "type": "CS",
+      "volume": "25259"
+    },
+    {
+      "close": "5.950000",
+      "dollar_volume": "10825572.31",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACVA",
+      "type": "CS",
+      "volume": "1819424"
+    },
+    {
+      "close": "50.670000",
+      "dollar_volume": "13604298.85",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AD",
+      "type": "CS",
+      "volume": "268488"
+    },
+    {
+      "close": "8.900000",
+      "dollar_volume": "3904956.04",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADAM",
+      "type": "CS",
+      "volume": "438759"
+    },
+    {
+      "close": "244.760000",
+      "dollar_volume": "926025222.79",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADBE",
+      "type": "CS",
+      "volume": "3783401"
+    },
+    {
+      "close": "75.460000",
+      "dollar_volume": "69761284.50",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ADC",
+      "type": "CS",
+      "volume": "924480"
+    },
+    {
+      "close": "3.390000",
+      "dollar_volume": "2198416.14",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ADCT",
+      "type": "CS",
+      "volume": "648500"
+    },
+    {
+      "close": "26.860000",
+      "dollar_volume": "31672275.18",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADEA",
+      "type": "CS",
+      "volume": "1179161"
+    },
+    {
+      "close": "397.070000",
+      "dollar_volume": "2425499241.13",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADI",
+      "type": "CS",
+      "volume": "6108493"
+    },
+    {
+      "close": "77.520000",
+      "dollar_volume": "191350291.23",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ADM",
+      "type": "CS",
+      "volume": "2468399"
+    },
+    {
+      "close": "8.240000",
+      "dollar_volume": "24500064.16",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADMA",
+      "type": "CS",
+      "volume": "2973309"
+    },
+    {
+      "close": "21.580000",
+      "dollar_volume": "9073453.40",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ADNT",
+      "type": "CS",
+      "volume": "420457"
+    },
+    {
+      "close": "225.310000",
+      "dollar_volume": "514324051.38",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADP",
+      "type": "CS",
+      "volume": "2282740"
+    },
+    {
+      "close": "13.880000",
+      "dollar_volume": "17141887.93",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADPT",
+      "type": "CS",
+      "volume": "1235006"
+    },
+    {
+      "close": "240.990000",
+      "dollar_volume": "591767741.68",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADSK",
+      "type": "CS",
+      "volume": "2455570"
+    },
+    {
+      "close": "6.970000",
+      "dollar_volume": "41012819.30",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ADT",
+      "type": "CS",
+      "volume": "5884192"
+    },
+    {
+      "close": "15.670000",
+      "dollar_volume": "45607154.26",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADTN",
+      "type": "CS",
+      "volume": "2910476"
+    },
+    {
+      "close": "14.590000",
+      "dollar_volume": "5784298.66",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADUR",
+      "type": "CS",
+      "volume": "396456"
+    },
+    {
+      "close": "92.650000",
+      "dollar_volume": "16046139.52",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADUS",
+      "type": "CS",
+      "volume": "173191"
+    },
+    {
+      "close": "42.310000",
+      "dollar_volume": "6321870.30",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADV",
+      "type": "CS",
+      "volume": "149418"
+    },
+    {
+      "close": "12.100000",
+      "dollar_volume": "2318533.62",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AEBI",
+      "type": "CS",
+      "volume": "191614"
+    },
+    {
+      "close": "111.290000",
+      "dollar_volume": "202172432.83",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AEE",
+      "type": "CS",
+      "volume": "1816627"
+    },
+    {
+      "close": "8.610000",
+      "dollar_volume": "25507130.14",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AEG",
+      "type": "CS",
+      "volume": "2962501"
+    },
+    {
+      "close": "1.510000",
+      "dollar_volume": "1214140.09",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AEHL",
+      "type": "CS",
+      "volume": "804066"
+    },
+    {
+      "close": "95.020000",
+      "dollar_volume": "177187713.40",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AEHR",
+      "type": "CS",
+      "volume": "1864741"
+    },
+    {
+      "close": "324.860000",
+      "dollar_volume": "196972068.86",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AEIS",
+      "type": "CS",
+      "volume": "606329"
+    },
+    {
+      "close": "175.910000",
+      "dollar_volume": "252450132.00",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AEM",
+      "type": "CS",
+      "volume": "1435110"
+    },
+    {
+      "close": "16.530000",
+      "dollar_volume": "59177914.61",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AEO",
+      "type": "CS",
+      "volume": "3580031"
+    },
+    {
+      "close": "131.590000",
+      "dollar_volume": "431703315.97",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AEP",
+      "type": "CS",
+      "volume": "3280670"
+    },
+    {
+      "close": "138.620000",
+      "dollar_volume": "113576388.11",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AER",
+      "type": "CS",
+      "volume": "819336"
+    },
+    {
+      "close": "14.680000",
+      "dollar_volume": "128947327.38",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AES",
+      "type": "CS",
+      "volume": "8783878"
+    },
+    {
+      "close": "19.070000",
+      "dollar_volume": "39623727.01",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AESI",
+      "type": "CS",
+      "volume": "2077804"
+    },
+    {
+      "close": "25.320000",
+      "dollar_volume": "98424013.30",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AEVA",
+      "type": "CS",
+      "volume": "3887204"
+    },
+    {
+      "close": "136.690000",
+      "dollar_volume": "31083426.63",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AFG",
+      "type": "CS",
+      "volume": "227401"
+    },
+    {
+      "close": "117.860000",
+      "dollar_volume": "270627069.82",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AFL",
+      "type": "CS",
+      "volume": "2296174"
+    },
+    {
+      "close": "65.220000",
+      "dollar_volume": "361929274.41",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AFRM",
+      "type": "CS",
+      "volume": "5549360"
+    },
+    {
+      "close": "14.000000",
+      "dollar_volume": "1060867.81",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AFYA",
+      "type": "CS",
+      "volume": "75776"
+    },
+    {
+      "close": "19.450000",
+      "dollar_volume": "178922361.48",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AG",
+      "type": "CS",
+      "volume": "9199093"
+    },
+    {
+      "close": "7.110000",
+      "dollar_volume": "4473053.17",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AGBK",
+      "type": "CS",
+      "volume": "629121"
+    },
+    {
+      "close": "112.840000",
+      "dollar_volume": "59660737.45",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AGCO",
+      "type": "CS",
+      "volume": "528720"
+    },
+    {
+      "close": "3.110000",
+      "dollar_volume": "2803387.34",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGEN",
+      "type": "CS",
+      "volume": "901411"
+    },
+    {
+      "close": "38.340000",
+      "dollar_volume": "84653620.37",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AGI",
+      "type": "CS",
+      "volume": "2207971"
+    },
+    {
+      "close": "28.140000",
+      "dollar_volume": "24608884.08",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGIO",
+      "type": "CS",
+      "volume": "874516"
+    },
+    {
+      "close": "86.390000",
+      "dollar_volume": "29055783.45",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AGL",
+      "type": "CS",
+      "volume": "336333"
+    },
+    {
+      "close": "177.610000",
+      "dollar_volume": "9383369.47",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AGM",
+      "type": "CS",
+      "volume": "52831"
+    },
+    {
+      "close": "10.210000",
+      "dollar_volume": "119358666.63",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGNC",
+      "type": "CS",
+      "volume": "11690369"
+    },
+    {
+      "close": "5.050000",
+      "dollar_volume": "4138223.28",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGNT",
+      "type": "CS",
+      "volume": "819450"
+    },
+    {
+      "close": "76.890000",
+      "dollar_volume": "28196746.24",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AGO",
+      "type": "CS",
+      "volume": "366715"
+    },
+    {
+      "close": "5.340000",
+      "dollar_volume": "1234076.31",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGPU",
+      "type": "CS",
+      "volume": "231100"
+    },
+    {
+      "close": "12.810000",
+      "dollar_volume": "8989208.24",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AGRO",
+      "type": "CS",
+      "volume": "701734"
+    },
+    {
+      "close": "656.350000",
+      "dollar_volume": "165984095.76",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AGX",
+      "type": "CS",
+      "volume": "252890"
+    },
+    {
+      "close": "79.840000",
+      "dollar_volume": "24878943.96",
+      "passes_liquidity_filter": "True",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGYS",
+      "type": "CS",
+      "volume": "311610"
+    }
+  ],
+  "market_data_downloaded": true,
+  "matched_seed_bar_count": 515,
+  "min_dollar_volume": 1000000.0,
+  "min_price": 1.0,
+  "passes_liquidity_probe": true,
+  "promotion_allowed": false,
+  "provider": "Polygon/Massive",
+  "provider_bar_count": 12202,
+  "provider_query_performed": true,
+  "quality_scope": "single_day_liquidity_availability_only_no_strategy_claim",
+  "raw_payload_retained": false,
+  "run_id": "POLYGON-GROUPED-DAILY-LIQUIDITY-PROBE-001",
+  "seed_count": 524,
+  "trial_id": "UNIVERSE-LIQUIDITY-PROBE-001"
+}

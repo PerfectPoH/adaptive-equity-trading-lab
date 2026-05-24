@@ -1,0 +1,22 @@
+{
+  "backtest_performed": false,
+  "blockers": [],
+  "decision": "POLYGON_GROUPED_DAILY_LIQUIDITY_PASS",
+  "grouped_daily_date": "2026-05-22",
+  "liquid_candidate_count": 359,
+  "live_trading_performed": false,
+  "market_data_downloaded": true,
+  "matched_seed_bar_count": 515,
+  "next_unblocked_step": "If pass, preregister survivorship/delisted audit before any broad-universe strategy backtest.",
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "run_id": "POLYGON-GROUPED-DAILY-LIQUIDITY-PROBE-001",
+  "seed_count": 524,
+  "short_selling_performed": false,
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trial_id": "UNIVERSE-LIQUIDITY-PROBE-001"
+}
