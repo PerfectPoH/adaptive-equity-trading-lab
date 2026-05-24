@@ -1,0 +1,9 @@
+action,rationale
+raw_payload_retention,Retain only derived reference rows and aggregate quality metrics.
+market_data_download,This probe evaluates reference metadata only.
+run_backtest,No strategy trial is authorized by this probe.
+parameter_sweep,No thresholds may be tuned after seeing provider output.
+short_selling,The lab remains long-only.
+paper_trading,No execution is authorized.
+live_trading,No execution is authorized.
+strategy_promotion,Reference quality cannot promote a strategy.

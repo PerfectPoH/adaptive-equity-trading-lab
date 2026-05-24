@@ -1,0 +1,8 @@
+requirement,threshold,rationale
+provider_call_count,<=1,Bound provider access before execution.
+record_count,>=300,Need enough active reference rows to evaluate universe scale.
+candidate_common_stock_count,>=300,Need enough active common stocks before any liquidity probe.
+metadata_coverage,>=0.95,Required reference fields must be broadly populated.
+market_data_downloaded,false,No price bars in this probe.
+backtest_performed,false,No strategy trial in this probe.
+raw_payload_retained,false,Avoid retaining raw provider payload.
