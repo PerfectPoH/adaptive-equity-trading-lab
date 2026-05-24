@@ -1,0 +1,20 @@
+{
+  "backtest_performed": false,
+  "blockers": [],
+  "candidate_source_allowed": true,
+  "decision": "POLYGON_TICKER_REFERENCE_SOURCE_PASS",
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "next_unblocked_step": "If pass, preregister a bounded Polygon universe quality probe; do not download market prices or run strategy backtests yet.",
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "record_count": 100,
+  "run_id": "POLYGON-TICKER-REFERENCE-PROBE-001",
+  "short_selling_performed": false,
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trial_id": "UNIVERSE-SOURCE-PROBE-002"
+}
