@@ -1,0 +1,22 @@
+{
+  "active_common_stock_seed_count": 524,
+  "backtest_performed": false,
+  "blockers": [],
+  "decision": "POLYGON_ACTIVE_UNIVERSE_SEED_PASS",
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "next_unblocked_step": "Preregister survivorship/delisted audit and liquidity/price availability probes before any strategy backtest.",
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "record_count": 1000,
+  "requires_liquidity_probe_before_backtest": true,
+  "requires_survivorship_audit_before_backtest": true,
+  "run_id": "POLYGON-ACTIVE-UNIVERSE-SEED-001",
+  "short_selling_performed": false,
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trial_id": "UNIVERSE-ACTIVE-SEED-001"
+}

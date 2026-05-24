@@ -1,0 +1,5271 @@
+{
+  "active_common_stock_seed": [
+    {
+      "active": "True",
+      "cik": "0001090872",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "A",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001675149",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002034334",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AACB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002092897",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AACI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002099906",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AACO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000006201",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AAL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000008177",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AAME",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001748824",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AAMI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001158114",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AAOI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000824142",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AAON",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001158449",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AAP",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000320193",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AAPL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001774857",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AARD",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001500217",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AAT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001993344",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AAUC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000825313",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001576873",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABAT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001551152",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABBV",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000351569",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABCB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001703057",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABCL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000318306",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABEO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001144980",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001957489",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABLV",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000771497",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001559720",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABNB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001576885",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABOS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001253986",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001672688",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABSI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000001800",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001755953",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABTC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001864055",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABTS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001447028",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABUS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001173313",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABVC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001979484",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ABVE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001814287",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ABX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001739445",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002096900",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACAA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001070494",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACAD",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001683541",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002038378",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACCL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000712034",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACCO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000843006",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "ACCS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001881487",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACDC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001698991",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACEL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001720580",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACET",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000880984",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACFN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000947484",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACGL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000947484",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACGLN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000075252",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACH",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001520697",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACHC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001824502",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACHR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000949858",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACHV",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001646972",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001401521",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACIC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001651625",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACIU",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000935036",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACIW",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001113232",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACLS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000868857",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001680062",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACMR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001467373",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000715579",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACNB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000095953",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACNT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001655923",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACOG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001635077",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACON",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001332551",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001529377",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACRE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001557746",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACRS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001781174",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACRV",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001823529",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000934549",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACTG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001652935",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACTU",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000002098",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "ACU",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001637873",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ACVA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001736243",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ACXP",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000821130",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AD",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002083002",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADAC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001273685",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADAM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001273685",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADAMG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001273685",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADAMH",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001273685",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADAMI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001273685",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADAML",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001273685",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADAMO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001273685",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADAMZ",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000796343",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADBE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000917251",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ADC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001771910",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ADCT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001803696",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADEA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002006986",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADGM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000006281",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001513525",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADIL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000007084",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ADM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001368514",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADMA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001670541",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ADNT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000008670",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADP",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001478320",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADPT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001879248",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADSE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000769397",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADSK",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001703056",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ADT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000926282",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADTN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001726711",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADTX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001863934",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADUR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001468328",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADUS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001776661",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADV",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001941029",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ADVB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002083689",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AEAQ",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002048519",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AEBI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001519469",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AEC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001002910",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AEE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000769218",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AEG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001470683",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AEHL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001040470",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AEHR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001750106",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AEI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000927003",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AEIS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000002809",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AEM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000882291",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AEMD",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001823584",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AENT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000919012",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AEO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001837607",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "AEON",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000004904",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AEP",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001378789",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AER",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001853044",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AERT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000874761",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AES",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001984060",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AESI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001789029",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AEVA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002079173",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AEXA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001362190",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AEYE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001823406",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AFBI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001822523",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AFCG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001042046",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AFG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001979005",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AFJK",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000004977",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AFL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001903870",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AFRI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001820953",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AFRM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001771007",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AFYA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001308648",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001708341",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGAE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002081206",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AGBK",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002060016",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGCC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000880266",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AGCO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001098972",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGEN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001178819",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AGI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001156041",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "AGIG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001439222",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGIO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001831097",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AGL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000845877",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AGM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000845877",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AGM.A",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001705402",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGMH",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001423689",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGNC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001423689",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGNCL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001423689",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGNCO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001495932",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGNT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001273813",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AGO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001446159",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGPU",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001499505",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AGRO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002009233",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGRZ",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000100591",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AGX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000078749",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AGYS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001725255",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AHCO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002010959",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AHMA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001632970",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AHR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001569187",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AHRT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001232582",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AHT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001577526",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002096362",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIAI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002070542",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "AIB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001139685",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIDX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000862861",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIFC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000803578",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIFF",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001413855",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIFU",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000005272",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AIG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001711012",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIHS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002007587",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AII",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002073553",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AIIA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001932737",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIIO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002097725",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIIR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000946644",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "AIM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001014763",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIMD",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000819793",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AIN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001603993",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIOS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001774170",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIOT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001667011",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIP",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000001750",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AIR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001859199",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIRE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001272842",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIRG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001009891",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "AIRI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001855474",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIRJ",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001927958",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIRO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001870940",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIRS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000353184",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIRT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001842566",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AISP",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000109563",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AIT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000922864",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AIV",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001460702",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AIXC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001267238",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AIZ",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000354190",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AJG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001865107",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AKA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001086222",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AKAM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001888014",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AKAN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001517022",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AKBA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000899629",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AKR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002035832",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AKTS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001736297",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALAB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000915913",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ALB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001630212",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALBT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001167379",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ALC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000003545",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALCO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002031561",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALDF",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001341235",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALDX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001653087",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALEC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002010930",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALF",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000897077",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ALG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000866291",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALGM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001097149",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALGN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001799448",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALGS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001362468",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALGT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001317685",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ALH",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001832466",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALHC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002026767",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALIS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001809104",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ALIT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000766421",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ALK",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001520262",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALKS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001529274",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALKT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000899051",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ALL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001579241",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ALLE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001737287",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALLO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001860657",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALLR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001365767",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALLT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000040729",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ALLY",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001670061",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002104204",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALMR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001847367",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALMS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001828805",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALMU",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000046129",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALNT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001178670",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALNY",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000008146",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALOT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002083989",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALOV",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001567900",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALOY",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001095435",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALP",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002025774",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALPS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001459200",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALRM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000903419",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALRS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001411207",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ALSN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001326190",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001759824",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ALTG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001838615",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALTI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000778164",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALTO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002041493",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ALUB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001034670",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ALV",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001898416",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALVO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000003499",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ALX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001810182",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALXO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001677077",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ALZN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001623925",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001823608",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMAL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002112457",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMAN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000006951",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMAT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001280263",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMBA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001845097",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AMBP",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001500412",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AMBQ",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001411579",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AMC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001937891",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMCI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001748790",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AMCR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001514991",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMCX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000002488",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMD",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001037868",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AME",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001004434",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AMG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000318154",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMGN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001562401",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AMH",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001617867",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMIX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001047127",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMKR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001658551",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMLX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001142750",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AMN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001862463",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMOD",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000820027",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AMP",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001518461",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMPG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001297184",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMPH",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001866692",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMPL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001899287",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AMPX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001533924",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AMPY",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001704715",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AMR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001488139",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AMRC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001723128",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMRX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002035989",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AMRZ",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000744825",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "AMS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000880807",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMSC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001018979",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMSF",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001851491",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMSS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001807166",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMST",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001053507",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AMT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001734342",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AMTB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002011286",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AMTM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000738214",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMTX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000794619",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMWD",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001393584",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AMWL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001880343",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "AMZE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001018724",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AMZN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000350698",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001370053",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ANAB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000821026",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ANDE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002065708",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ANDG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001596532",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ANET",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001018840",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ANF",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001871983",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ANGH",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001705110",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ANGI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001275187",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ANGO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001865200",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ANGX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000898437",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ANIK",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001023024",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ANIP",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000715446",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ANIX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001845123",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ANNA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001528115",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ANNX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002031688",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ANPA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001999480",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ANRO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001854149",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ANSC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002044255",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ANTA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001880438",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ANTX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001477845",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ANVS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001591956",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ANY",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001766478",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AOMR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000315293",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AON",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000784199",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AORT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000091142",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AOS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001387467",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AOSL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001808997",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AOUT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000006176",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AP",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001841666",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002043630",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APAC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001517302",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "APAM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002080921",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000002969",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "APD",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001201792",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APEI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001796209",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "APG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001974640",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APGE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000820313",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "APH",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001144879",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APLD",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001418121",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "APLE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001944885",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APLM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001734005",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001858681",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "APO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000006845",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APOG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001751008",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APP",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001433195",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APPF",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001441683",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APPN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000317788",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APPS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001781983",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APRE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000884269",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "APT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001521332",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "APTV",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001894525",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "APUS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001671584",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APVO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001026980",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APWC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002079253",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APXT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000719135",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "APYX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001603978",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AQB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001621832",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AQMS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001174169",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AQN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001398733",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AQST",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001433270",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001818274",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARAI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001138723",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARAY",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001930179",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARBB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001861841",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARBE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000894405",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARCB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001287750",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARCC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002083910",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARCI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001508478",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ARCO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001768224",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARCT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001756655",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ARDT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001437402",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARDX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001035443",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ARE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001590715",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AREC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000894871",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "AREN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001176948",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ARES",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001875444",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARHS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001467760",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ARI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001964504",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ARIS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001823794",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARKO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000779544",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARKR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001102238",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ARL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001736946",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ARLO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001086600",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARLP",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001584509",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ARMK",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000921114",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "ARMP",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001389050",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AROC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000717538",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AROW",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001515156",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARQ",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001859690",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARQQ",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001787306",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARQT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001428205",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ARR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001820721",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARRY",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002086545",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARTC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001621221",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARTL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000863110",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARTNA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001817241",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARTV",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000007623",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARTW",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001655759",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARVN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000007536",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ARW",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000879407",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARWR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001997350",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ARX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002093536",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ARXS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001988894",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001477720",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ASAN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000007789",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ASB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001847345",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASBP",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001577437",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ASC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001674862",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ASH",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002040491",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ASIC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001673985",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ASIX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001754170",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASLE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000316888",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "ASM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001426800",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASMB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001612042",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASND",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001817358",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001890361",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASPC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001921865",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASPI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001145986",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ASPN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001462418",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASPS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001808665",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASRT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000707605",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASRV",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001920406",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASST",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001001907",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASTC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000792987",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASTE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001083446",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASTH",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001350102",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASTI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001860805",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASTL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001780312",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASTS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000884144",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASUR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000720500",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ASYS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002081043",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATAI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001963088",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "ATCH",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001684688",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATCX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001350653",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATEC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001580808",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ATEN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001757715",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATER",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001304492",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATEX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001967621",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATGL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002026353",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATHR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001018963",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ATI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002028516",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATII",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001666138",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ATKR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001464343",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATLC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001464343",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATLCL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001464343",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATLCZ",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001605888",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATLN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001132651",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATLO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001540684",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATLX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001921963",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ATMU",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000879585",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATNI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001388320",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "ATNM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000731802",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ATO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001420520",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATOM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001488039",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATOS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001713210",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATPC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000896622",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ATR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001604464",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATRA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001323885",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATRC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000008063",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATRO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001394832",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "ATS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001650101",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATXG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001339970",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "ATYR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001973832",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AU",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000883948",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AUB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000750574",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AUBN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001755058",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AUC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001086434",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AUDC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001468642",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AUGO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001534154",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AUID",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001799207",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AUNA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001600620",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AUPH",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001828108",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AUR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001501796",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AURA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001765850",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AURE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001817740",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "AUST",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001554818",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AUUD",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000104918",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AVA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001832332",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AVAH",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001368622",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AVAV",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000915912",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AVB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002058758",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AVBC",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001443575",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AVBH",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001868279",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AVBP",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000005981",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AVD",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002096300",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AVEX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001730168",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AVGO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001593899",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AVIR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001540171",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AVLN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001606498",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AVNS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001122976",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AVNT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001377789",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AVNW",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001802974",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AVO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001777921",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AVPT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002011514",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AVR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000008858",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AVT",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001722482",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AVTR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001534120",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AVTX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001826397",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AVX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001314052",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AVXL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000008818",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AVY",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000007431",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AWI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001410636",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AWK",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001056903",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AWR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001015739",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AWRE",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001061069",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "AWX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001299709",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AX",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001959224",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AXG",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000805928",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AXGN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001718500",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "AXIL",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002057030",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AXIN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001069183",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AXON",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000004962",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AXP",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000006207",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AXR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001214816",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AXS",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001579428",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AXSM",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001616862",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AXTA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001051627",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AXTI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001826836",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AYA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001144215",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AYI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001385818",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AYTU",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001866030",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AZ",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001959726",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AZI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000901832",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AZN",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000866787",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AZO",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000933974",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AZTA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001701478",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XASE",
+      "raw_payload_retained": false,
+      "ticker": "AZTR",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0000008947",
+      "locale": "us",
+      "market": "stocks",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AZZ",
+      "type": "CS"
+    }
+  ],
+  "active_common_stock_seed_count": 524,
+  "backtest_performed": false,
+  "blockers": [],
+  "market_data_downloaded": false,
+  "metadata_coverage": {
+    "active": 1.0,
+    "primary_exchange": 1.0,
+    "ticker": 1.0,
+    "type": 1.0
+  },
+  "passes_active_universe_seed": true,
+  "promotion_allowed": false,
+  "provider": "Polygon/Massive",
+  "provider_query_performed": true,
+  "quality_scope": "active_reference_seed_only_not_investable_universe",
+  "raw_payload_retained": false,
+  "record_count": 1000,
+  "required_exchanges": [
+    "XASE",
+    "XNAS",
+    "XNYS"
+  ],
+  "required_security_type": "CS",
+  "requires_liquidity_probe_before_backtest": true,
+  "requires_survivorship_audit_before_backtest": true,
+  "run_id": "POLYGON-ACTIVE-UNIVERSE-SEED-001",
+  "trial_id": "UNIVERSE-ACTIVE-SEED-001"
+}
