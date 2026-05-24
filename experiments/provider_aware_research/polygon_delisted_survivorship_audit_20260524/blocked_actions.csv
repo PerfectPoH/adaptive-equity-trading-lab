@@ -1,0 +1,9 @@
+action,rationale
+raw_payload_retention,Retain only derived inactive/delisted reference rows.
+market_data_download,No price data is authorized in this audit.
+run_backtest,Delisted metadata support is not a full PIT universe.
+parameter_sweep,No threshold tuning is authorized.
+short_selling,The lab remains long-only.
+paper_trading,No execution is authorized.
+live_trading,No execution is authorized.
+strategy_promotion,Survivorship metadata is not alpha evidence.

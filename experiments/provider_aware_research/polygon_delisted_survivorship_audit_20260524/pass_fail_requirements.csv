@@ -1,0 +1,9 @@
+requirement,threshold,rationale
+provider_call_count,<=1,Bound provider access before execution.
+delisted_common_stock_count,>=300,Need enough inactive common-stock examples.
+delisted_date_coverage,>=0.95,Need delisting timestamps for survivorship audit.
+pit_universe_backtest_authorized,false,Metadata support alone is not full PIT membership.
+requires_pit_membership_construction,true,A separate construction step is still required.
+raw_payload_retained,false,Avoid retaining raw provider payload.
+market_data_downloaded,false,No price data in this audit.
+backtest_performed,false,No strategy trial in this audit.
