@@ -1,0 +1,116 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\research_program_transition_policy_gate_20260524",
+      "name": "spec_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\research_program_transition_policy_gate_20260524\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\research_program_transition_policy_gate_20260524\\policy_manifest.json",
+      "name": "required_file:policy_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\research_program_transition_policy_gate_20260524\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\research_program_transition_policy_gate_20260524\\pass_fail_requirements.csv",
+      "name": "required_file:pass_fail_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "RESEARCH-PROGRAM-TRANSITION-POLICY-GATE-001",
+      "name": "policy_id",
+      "status": "pass"
+    },
+    {
+      "detail": "RESEARCH-PROGRAM-TRANSITION-POLICY-GATE-001",
+      "name": "trial_id",
+      "status": "pass"
+    },
+    {
+      "detail": "APPROVED_NON_EXECUTABLE_TRANSITION_GATE",
+      "name": "status_non_executable",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments/provider_aware_research/execution_outputs/POLYGON-ACTIVE-ONLY-EXPLORATORY-POLICY-GATE-RUN-001/final_decision.json",
+      "name": "active_policy_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments/provider_aware_research/execution_outputs/ACTIVE-ONLY-MOMENTUM-SMOKE-ROBUSTNESS-RUN-001/final_decision.json",
+      "name": "robustness_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments/provider_aware_research/execution_outputs/POLYGON-DELISTED-LISTING-DATE-PROBE-001/final_decision.json",
+      "name": "delisted_block_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "PAUSED",
+      "name": "smallcap_directional_paused",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "smallcap_diagnostic_tracks",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "etf_largecap_track_allowed",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "provider_query_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "market_download_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "backtest_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "{'active_only_policy_decision': 'experiments/provider_aware_research/execution_outputs/POLYGON-ACTIVE-ONLY-EXPLORATORY-POLICY-GATE-RUN-001/final_decision.json', 'active_only_robustness_decision': 'experiments/provider_aware_research/execution_outputs/ACTIVE-ONLY-MOMENTUM-SMOKE-ROBUSTNESS-RUN-001/final_decision.json', 'backtest_allowed': False, 'delisted_listing_date_probe_decision': 'experiments/provider_aware_research/execution_outputs/POLYGON-DELISTED-LISTING-DATE-PROBE-001/final_decision.json', 'etf_largecap_risk_regime_lab_allowed': True, 'live_trading_allowed': False, 'market_data_download_allowed': False, 'paper_trading_allowed': False, 'parameter_sweep_allowed': False, 'policy_id': 'RESEARCH-PROGRAM-TRANSITION-POLICY-GATE-001', 'promotion_allowed': False, 'provider_query_allowed': False, 'raw_payload_retention': False, 'short_selling_allowed': False, 'smallcap_allowed_tracks': ['microstructure_diagnostics', 'catalyst_diagnostics', 'data_quality_diagnostics', 'risk_management_diagnostics'], 'smallcap_free_data_directional_research_status': 'PAUSED', 'status': 'APPROVED_NON_EXECUTABLE_TRANSITION_GATE', 'strategy_promotion_allowed': False, 'survivorship_free_claim_allowed': False, 'trial_id': 'RESEARCH-PROGRAM-TRANSITION-POLICY-GATE-001'}",
+      "name": "promotion_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "survivorship_claim_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "{'active_only_policy_decision': 'experiments/provider_aware_research/execution_outputs/POLYGON-ACTIVE-ONLY-EXPLORATORY-POLICY-GATE-RUN-001/final_decision.json', 'active_only_robustness_decision': 'experiments/provider_aware_research/execution_outputs/ACTIVE-ONLY-MOMENTUM-SMOKE-ROBUSTNESS-RUN-001/final_decision.json', 'backtest_allowed': False, 'delisted_listing_date_probe_decision': 'experiments/provider_aware_research/execution_outputs/POLYGON-DELISTED-LISTING-DATE-PROBE-001/final_decision.json', 'etf_largecap_risk_regime_lab_allowed': True, 'live_trading_allowed': False, 'market_data_download_allowed': False, 'paper_trading_allowed': False, 'parameter_sweep_allowed': False, 'policy_id': 'RESEARCH-PROGRAM-TRANSITION-POLICY-GATE-001', 'promotion_allowed': False, 'provider_query_allowed': False, 'raw_payload_retention': False, 'short_selling_allowed': False, 'smallcap_allowed_tracks': ['microstructure_diagnostics', 'catalyst_diagnostics', 'data_quality_diagnostics', 'risk_management_diagnostics'], 'smallcap_free_data_directional_research_status': 'PAUSED', 'status': 'APPROVED_NON_EXECUTABLE_TRANSITION_GATE', 'strategy_promotion_allowed': False, 'survivorship_free_claim_allowed': False, 'trial_id': 'RESEARCH-PROGRAM-TRANSITION-POLICY-GATE-001'}",
+      "name": "execution_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_blocked_actions",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "RESEARCH_PROGRAM_TRANSITION_POLICY_GATE_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 21,
+    "total": 21
+  }
+}

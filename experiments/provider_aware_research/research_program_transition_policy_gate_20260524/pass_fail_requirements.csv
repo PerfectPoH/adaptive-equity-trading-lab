@@ -1,0 +1,9 @@
+requirement,threshold,rationale
+provider_query_performed,false,Transition gate must be no-query.
+market_data_downloaded,false,Transition gate must not download prices.
+backtest_performed,false,Transition gate must not run strategies.
+smallcap_free_data_directional_research_status,PAUSED,Stop repeatedly retesting fragile directional active-only ideas.
+smallcap_microstructure_diagnostic_allowed,true,Keep small-cap lab useful for local diagnostics.
+etf_largecap_risk_regime_lab_allowed,true,Open cleaner-data risk/regime track.
+strategy_promotion_allowed,false,No promotion from biased or transition-stage evidence.
+survivorship_free_claim_allowed,false,Full PIT remains blocked.

@@ -1,0 +1,12 @@
+action,rationale
+provider_query,This policy gate consumes archived decisions only.
+market_data_download,No market data is needed for a governance transition.
+raw_payload_retention,Raw payload retention remains forbidden.
+run_strategy_backtest,This policy gate does not run a strategy.
+smallcap_free_data_directional_research,Current free data stack produced no robust promotable long-only edge.
+strategy_promotion,No result is eligible for promotion from this gate.
+survivorship_free_claim,Full PIT remains blocked by delisted listing-date gaps.
+short_selling,The lab remains long-only.
+paper_trading,No execution is authorized.
+live_trading,No execution is authorized.
+parameter_sweep,No tuning is authorized.

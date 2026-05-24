@@ -1,0 +1,27 @@
+{
+  "active_only_policy_decision": "experiments/provider_aware_research/execution_outputs/POLYGON-ACTIVE-ONLY-EXPLORATORY-POLICY-GATE-RUN-001/final_decision.json",
+  "active_only_robustness_decision": "experiments/provider_aware_research/execution_outputs/ACTIVE-ONLY-MOMENTUM-SMOKE-ROBUSTNESS-RUN-001/final_decision.json",
+  "backtest_allowed": false,
+  "delisted_listing_date_probe_decision": "experiments/provider_aware_research/execution_outputs/POLYGON-DELISTED-LISTING-DATE-PROBE-001/final_decision.json",
+  "etf_largecap_risk_regime_lab_allowed": true,
+  "live_trading_allowed": false,
+  "market_data_download_allowed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "policy_id": "RESEARCH-PROGRAM-TRANSITION-POLICY-GATE-001",
+  "promotion_allowed": false,
+  "provider_query_allowed": false,
+  "raw_payload_retention": false,
+  "short_selling_allowed": false,
+  "smallcap_allowed_tracks": [
+    "microstructure_diagnostics",
+    "catalyst_diagnostics",
+    "data_quality_diagnostics",
+    "risk_management_diagnostics"
+  ],
+  "smallcap_free_data_directional_research_status": "PAUSED",
+  "status": "APPROVED_NON_EXECUTABLE_TRANSITION_GATE",
+  "strategy_promotion_allowed": false,
+  "survivorship_free_claim_allowed": false,
+  "trial_id": "RESEARCH-PROGRAM-TRANSITION-POLICY-GATE-001"
+}

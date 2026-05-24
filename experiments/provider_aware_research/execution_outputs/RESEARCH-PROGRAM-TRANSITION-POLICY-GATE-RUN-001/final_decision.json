@@ -1,0 +1,36 @@
+{
+  "active_only_failure_modes": [
+    "top3_dependency",
+    "negative_ex_top3_net_return",
+    "negative_median_net_return"
+  ],
+  "backtest_performed": false,
+  "blockers": [],
+  "decision": "RESEARCH_PROGRAM_TRANSITION_ACTIVE",
+  "etf_largecap_risk_regime_lab_allowed": true,
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "next_unblocked_step": "Preregister ETF/large-cap risk/regime diagnostics or small-cap intraday/catalyst diagnostics only; do not reopen small-cap free-data directional alpha trials without new PIT data.",
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "primary_data_blockers": [
+    "delisted_listing_dates_unavailable_for_full_pit"
+  ],
+  "promotion_allowed": false,
+  "provider_call_count": 0,
+  "provider_query_performed": false,
+  "raw_payload_retained": false,
+  "run_id": "RESEARCH-PROGRAM-TRANSITION-POLICY-GATE-RUN-001",
+  "short_selling_performed": false,
+  "smallcap_catalyst_diagnostic_allowed": true,
+  "smallcap_data_quality_diagnostic_allowed": true,
+  "smallcap_free_data_directional_research_allowed": false,
+  "smallcap_free_data_directional_research_status": "PAUSED",
+  "smallcap_microstructure_diagnostic_allowed": true,
+  "smallcap_risk_management_diagnostic_allowed": true,
+  "status": "complete",
+  "strategy_promotion_allowed": false,
+  "strategy_promotion_performed": false,
+  "survivorship_free_claim_allowed": false,
+  "trial_id": "RESEARCH-PROGRAM-TRANSITION-POLICY-GATE-001"
+}
