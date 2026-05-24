@@ -1,0 +1,7 @@
+rule_id,field,operator,value,reason
+exchange_whitelist,exchange,in,"NASDAQ|NYSE|NYSEAMERICAN",Avoid OTC and unsupported venues.
+security_type_common,security_type,equals,COMMON_STOCK,Exclude ETFs warrants units preferreds and funds.
+min_price,median_close_60d,>=,1.0,Avoid sub-dollar microstructure and split-risk artifacts.
+min_liquidity,median_dollar_volume_60d,>=,1000000,Reduce untradeable slippage in rare-event tests.
+survivorship_source,survivorship_source,not_empty,required,Universe construction must be auditable and not a current-only ticker scrape.
+active_window,first_trade_date_and_last_trade_date,not_empty,required,Each symbol needs trading-window metadata for PIT filtering.

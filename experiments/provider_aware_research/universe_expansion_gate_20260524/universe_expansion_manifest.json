@@ -1,0 +1,27 @@
+{
+  "backtest_allowed": false,
+  "candidate_universe_template": "candidate_universe_template.csv",
+  "gate_id": "UNIVERSE-EXPANSION-GATE-001",
+  "market_data_download_allowed": false,
+  "max_target_universe_size": 1000,
+  "min_median_close_60d": 1.0,
+  "min_median_dollar_volume_60d": 1000000,
+  "min_target_universe_size": 300,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "promotion_allowed": false,
+  "provider_query_allowed": false,
+  "required_exchanges": [
+    "NASDAQ",
+    "NYSE",
+    "NYSEAMERICAN"
+  ],
+  "required_security_types": [
+    "COMMON_STOCK"
+  ],
+  "short_selling_allowed": false,
+  "status": "APPROVED_UNIVERSE_GATE_NOT_EXECUTABLE",
+  "survivorship_policy_required": true,
+  "trial_id": "UNIVERSE-EXPANSION-GATE-001",
+  "universe_quality_report_required_before_backtest": true
+}

@@ -1,0 +1,7 @@
+requirement_id,requirement,reason
+official_or_licensed_source,Universe source must be official exchange listings or licensed reference data,Unofficial screeners can silently rewrite history.
+point_in_time_membership,Provider must expose delisted/inactive symbols or historical active windows,Current-only lists create survivorship bias.
+security_type_metadata,Provider must identify common stock versus ETF warrant unit ADR preferred or fund,Security-type contamination invalidates event frequency estimates.
+exchange_metadata,Provider must identify primary listing exchange,Venue constraints are part of execution feasibility.
+rate_limit_budget,Probe must define max calls before execution,Prevents unbounded acquisition.
+raw_retention_policy,Probe must define whether raw payloads are retained before execution,Preserves auditability and privacy/cost discipline.
