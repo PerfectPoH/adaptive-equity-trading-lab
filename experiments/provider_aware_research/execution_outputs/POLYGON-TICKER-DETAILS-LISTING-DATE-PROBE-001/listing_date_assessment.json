@@ -1,0 +1,32 @@
+{
+  "active": true,
+  "backtest_performed": false,
+  "blockers": [],
+  "broad_universe_backtest_allowed": false,
+  "cik": "0001090872",
+  "derived_listing_date_sample": [
+    {
+      "active": "True",
+      "cik": "0001090872",
+      "list_date": "1999-11-18",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "A",
+      "type": "CS"
+    }
+  ],
+  "has_listing_date": true,
+  "list_date": "1999-11-18",
+  "listing_date_support_passed": true,
+  "market_data_downloaded": false,
+  "primary_exchange": "XNYS",
+  "promotion_allowed": false,
+  "provider": "Polygon/Massive",
+  "provider_query_performed": true,
+  "quality_scope": "single_ticker_listing_date_support_only_not_pit_universe",
+  "raw_payload_retained": false,
+  "run_id": "POLYGON-TICKER-DETAILS-LISTING-DATE-PROBE-001",
+  "ticker": "A",
+  "trial_id": "UNIVERSE-LISTING-DATE-SOURCE-PROBE-001",
+  "type": "CS"
+}

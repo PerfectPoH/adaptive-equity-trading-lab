@@ -1,0 +1,21 @@
+{
+  "backtest_performed": false,
+  "blockers": [],
+  "broad_universe_backtest_allowed": false,
+  "decision": "POLYGON_TICKER_DETAILS_LISTING_DATE_SUPPORT_PASS",
+  "list_date": "1999-11-18",
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "next_unblocked_step": "If pass, preregister a multi-ticker listing-date coverage probe before PIT membership construction.",
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "run_id": "POLYGON-TICKER-DETAILS-LISTING-DATE-PROBE-001",
+  "short_selling_performed": false,
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "ticker": "A",
+  "trial_id": "UNIVERSE-LISTING-DATE-SOURCE-PROBE-001"
+}

@@ -1,0 +1,126 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_ticker_details_listing_date_probe_20260524",
+      "name": "spec_dir_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_ticker_details_listing_date_probe_20260524\\README.md",
+      "name": "required_file:README.md",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_ticker_details_listing_date_probe_20260524\\probe_manifest.json",
+      "name": "required_file:probe_manifest.json",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_ticker_details_listing_date_probe_20260524\\blocked_actions.csv",
+      "name": "required_file:blocked_actions.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\polygon_ticker_details_listing_date_probe_20260524\\pass_fail_requirements.csv",
+      "name": "required_file:pass_fail_requirements.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "PROBE-POLYGON-TICKER-DETAILS-LISTING-DATE-001",
+      "name": "probe_id",
+      "status": "pass"
+    },
+    {
+      "detail": "UNIVERSE-LISTING-DATE-SOURCE-PROBE-001",
+      "name": "trial_id",
+      "status": "pass"
+    },
+    {
+      "detail": "APPROVED_SINGLE_TICKER_DETAILS_CALL_NOT_EXECUTED",
+      "name": "status_pre_run",
+      "status": "pass"
+    },
+    {
+      "detail": "Polygon/Massive",
+      "name": "provider_polygon",
+      "status": "pass"
+    },
+    {
+      "detail": "A",
+      "name": "ticker_fixed",
+      "status": "pass"
+    },
+    {
+      "detail": "https://api.polygon.io/v3/reference/tickers/A",
+      "name": "endpoint_fixed",
+      "status": "pass"
+    },
+    {
+      "detail": "POLYGON_API_KEY",
+      "name": "api_key_env",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "single_call_bound",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "provider_query_allowed",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "raw_retention_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "market_download_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "backtest_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "broad_backtest_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "parameter_sweep_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "short_selling_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "promotion_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_fields",
+      "status": "pass"
+    },
+    {
+      "detail": "missing=[]",
+      "name": "required_blocked_actions",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "POLYGON_TICKER_DETAILS_LISTING_DATE_PROBE_GATE_PASS",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 23,
+    "total": 23
+  }
+}
