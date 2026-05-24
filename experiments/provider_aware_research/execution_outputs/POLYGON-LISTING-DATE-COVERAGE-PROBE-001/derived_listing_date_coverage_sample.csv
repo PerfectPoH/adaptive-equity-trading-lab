@@ -1,0 +1,6 @@
+ticker,primary_exchange,type,active,list_date,cik,raw_payload_retained
+A,XNYS,CS,True,1999-11-18,0001090872,False
+AA,XNYS,CS,True,2016-10-18,0001675149,False
+AACB,XNAS,CS,True,2025-04-07,0002034334,False
+AACI,XNAS,CS,True,2026-03-27,0002092897,False
+AACO,XNAS,CS,True,2026-04-13,0002099906,False

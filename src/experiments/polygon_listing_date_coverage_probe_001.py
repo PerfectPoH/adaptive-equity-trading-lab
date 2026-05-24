@@ -46,13 +46,18 @@ def run_polygon_listing_date_coverage_probe_001(
     else:
         payloads: list[dict[str, Any]] = []
         errors: list[dict[str, str]] = []
+        attempted_count = 0
         for ticker in tickers:
+            attempted_count += 1
             try:
                 payloads.append(_fetch_polygon_ticker_details(api_key, ticker=ticker))
             except Exception as exc:  # pragma: no cover - network/entitlement path
                 errors.append({"ticker": ticker, "error": f"{type(exc).__name__}: {exc}"})
         assessment = assess_listing_date_coverage(payloads, expected_tickers=tickers)
         assessment["provider_errors"] = errors
+        assessment["provider_call_count"] = attempted_count
+        assessment["provider_success_count"] = len(payloads)
+        assessment["provider_error_count"] = len(errors)
         decision = _decision(assessment)
     rows = list(assessment.get("derived_listing_date_sample", []))
     _write_csv(output / "derived_listing_date_coverage_sample.csv", _fieldnames(rows), rows)
@@ -99,6 +104,8 @@ def assess_listing_date_coverage(payloads: list[dict[str, Any]], *, expected_tic
         "derived_listing_date_sample": derived,
         "provider_query_performed": True,
         "provider_call_count": len(payloads),
+        "provider_success_count": len(payloads),
+        "provider_error_count": 0,
         "raw_payload_retained": False,
         "market_data_downloaded": False,
         "backtest_performed": False,

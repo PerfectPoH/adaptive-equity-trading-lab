@@ -95,3 +95,37 @@ def test_run_polygon_listing_date_coverage_probe_writes_clean_artifacts(tmp_path
     assert decision["provider_call_count"] == 10
     assert decision["backtest_performed"] is False
     assert decision["broad_universe_backtest_allowed"] is False
+
+
+def test_run_polygon_listing_date_coverage_probe_counts_failed_attempts(tmp_path: Path, monkeypatch) -> None:
+    tickers = [f"T{i}" for i in range(10)]
+    monkeypatch.setattr(probe, "_load_polygon_api_key", lambda: "test-key")
+    monkeypatch.setattr(probe, "_load_probe_tickers", lambda manifest: tickers)
+
+    def fetch(api_key: str, ticker: str) -> dict[str, object]:
+        if ticker in {"T8", "T9"}:
+            raise RuntimeError("rate limited")
+        return {
+            "results": {
+                "ticker": ticker,
+                "primary_exchange": "XNAS",
+                "type": "CS",
+                "active": True,
+                "list_date": "2020-01-01",
+                "cik": ticker,
+            }
+        }
+
+    monkeypatch.setattr(probe, "_fetch_polygon_ticker_details", fetch)
+
+    decision = probe.run_polygon_listing_date_coverage_probe_001(
+        spec_dir=SPEC_DIR,
+        output_dir=tmp_path / "out",
+        vault_report=tmp_path / "report.md",
+    )
+    assessment = json.loads((tmp_path / "out" / "listing_date_coverage_assessment.json").read_text(encoding="utf-8"))
+
+    assert decision["provider_call_count"] == 10
+    assert assessment["provider_call_count"] == 10
+    assert assessment["provider_success_count"] == 8
+    assert assessment["provider_error_count"] == 2

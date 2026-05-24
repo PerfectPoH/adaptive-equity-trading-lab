@@ -1,0 +1,112 @@
+{
+  "backtest_performed": false,
+  "blockers": [
+    "detail_success_count_below_8",
+    "list_date_coverage_below_0_80"
+  ],
+  "broad_universe_backtest_allowed": false,
+  "derived_listing_date_sample": [
+    {
+      "active": "True",
+      "cik": "0001090872",
+      "list_date": "1999-11-18",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "A",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0001675149",
+      "list_date": "2016-10-18",
+      "primary_exchange": "XNYS",
+      "raw_payload_retained": false,
+      "ticker": "AA",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002034334",
+      "list_date": "2025-04-07",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AACB",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002092897",
+      "list_date": "2026-03-27",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AACI",
+      "type": "CS"
+    },
+    {
+      "active": "True",
+      "cik": "0002099906",
+      "list_date": "2026-04-13",
+      "primary_exchange": "XNAS",
+      "raw_payload_retained": false,
+      "ticker": "AACO",
+      "type": "CS"
+    }
+  ],
+  "detail_success_count": 5,
+  "expected_ticker_count": 10,
+  "expected_tickers": [
+    "A",
+    "AA",
+    "AACB",
+    "AACI",
+    "AACO",
+    "AAL",
+    "AAME",
+    "AAMI",
+    "AAOI",
+    "AAON"
+  ],
+  "list_date_coverage": 0.5,
+  "list_date_present_count": 5,
+  "listing_date_coverage_passed": false,
+  "market_data_downloaded": false,
+  "missing_tickers": [
+    "AAL",
+    "AAME",
+    "AAMI",
+    "AAOI",
+    "AAON"
+  ],
+  "promotion_allowed": false,
+  "provider": "Polygon/Massive",
+  "provider_call_count": 10,
+  "provider_error_count": 5,
+  "provider_errors": [
+    {
+      "error": "HTTPError: HTTP Error 429: Too Many Requests",
+      "ticker": "AAL"
+    },
+    {
+      "error": "HTTPError: HTTP Error 429: Too Many Requests",
+      "ticker": "AAME"
+    },
+    {
+      "error": "HTTPError: HTTP Error 429: Too Many Requests",
+      "ticker": "AAMI"
+    },
+    {
+      "error": "HTTPError: HTTP Error 429: Too Many Requests",
+      "ticker": "AAOI"
+    },
+    {
+      "error": "HTTPError: HTTP Error 429: Too Many Requests",
+      "ticker": "AAON"
+    }
+  ],
+  "provider_query_performed": true,
+  "provider_success_count": 5,
+  "quality_scope": "ten_ticker_listing_date_coverage_only_not_pit_universe",
+  "raw_payload_retained": false,
+  "run_id": "POLYGON-LISTING-DATE-COVERAGE-PROBE-001",
+  "trial_id": "UNIVERSE-LISTING-DATE-COVERAGE-PROBE-001"
+}
