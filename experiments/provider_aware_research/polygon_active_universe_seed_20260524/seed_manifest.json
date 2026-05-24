@@ -1,0 +1,35 @@
+{
+  "api_key_env_var": "POLYGON_API_KEY",
+  "backtest_allowed": false,
+  "endpoint": "https://api.polygon.io/v3/reference/tickers",
+  "expected_max_calls": 1,
+  "limit": 1000,
+  "market_data_download_allowed": false,
+  "min_active_common_stock_seed_count": 300,
+  "min_metadata_coverage": 0.95,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "probe_id": "PROBE-POLYGON-ACTIVE-UNIVERSE-SEED-001",
+  "promotion_allowed": false,
+  "provider": "Polygon/Massive",
+  "provider_query_allowed": true,
+  "query_active": true,
+  "raw_payload_retention": false,
+  "required_exchanges": [
+    "XNAS",
+    "XNYS",
+    "XASE"
+  ],
+  "required_fields": [
+    "ticker",
+    "primary_exchange",
+    "type",
+    "active"
+  ],
+  "required_security_type": "CS",
+  "requires_liquidity_probe_before_backtest": true,
+  "requires_survivorship_audit_before_backtest": true,
+  "short_selling_allowed": false,
+  "status": "APPROVED_SINGLE_CALL_NOT_EXECUTED",
+  "trial_id": "UNIVERSE-ACTIVE-SEED-001"
+}

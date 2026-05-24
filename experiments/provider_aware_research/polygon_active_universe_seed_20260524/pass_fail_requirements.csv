@@ -1,0 +1,9 @@
+requirement,threshold,rationale
+provider_call_count,<=1,Bound provider access before execution.
+active_common_stock_seed_count,>=300,Need enough active common-stock candidates for later liquidity filtering.
+metadata_coverage,>=0.95,Required active reference fields must be broadly populated.
+requires_survivorship_audit_before_backtest,true,Active-only seed is survivorship-biased unless separately audited.
+requires_liquidity_probe_before_backtest,true,Reference metadata says nothing about tradability.
+market_data_downloaded,false,No price bars in this run.
+backtest_performed,false,No strategy trial in this run.
+raw_payload_retained,false,Avoid retaining raw provider payload.
