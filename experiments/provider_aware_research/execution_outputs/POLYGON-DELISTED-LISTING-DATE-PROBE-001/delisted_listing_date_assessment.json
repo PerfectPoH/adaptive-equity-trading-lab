@@ -1,0 +1,66 @@
+{
+  "backtest_performed": false,
+  "blockers": [
+    "detail_success_count_below_5",
+    "list_date_present_count_below_5"
+  ],
+  "broad_universe_backtest_allowed": false,
+  "delisted_listing_date_support_passed": false,
+  "derived_delisted_listing_date_sample": [
+    {
+      "active": "True",
+      "cik": "",
+      "delisted_date": "",
+      "list_date": "",
+      "primary_exchange": "OTC Link",
+      "raw_payload_retained": false,
+      "ticker": "AAGR",
+      "type": "CS"
+    }
+  ],
+  "detail_success_count": 1,
+  "expected_ticker_count": 5,
+  "expected_tickers": [
+    "AABA",
+    "AAC",
+    "AACQ",
+    "AACT",
+    "AAGR"
+  ],
+  "list_date_present_count": 0,
+  "market_data_downloaded": false,
+  "missing_tickers": [
+    "AABA",
+    "AAC",
+    "AACQ",
+    "AACT"
+  ],
+  "promotion_allowed": false,
+  "provider": "Polygon/Massive",
+  "provider_call_count": 5,
+  "provider_error_count": 4,
+  "provider_errors": [
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "ticker": "AABA"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "ticker": "AAC"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "ticker": "AACQ"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "ticker": "AACT"
+    }
+  ],
+  "provider_query_performed": true,
+  "provider_success_count": 1,
+  "quality_scope": "five_delisted_ticker_listing_date_support_only_not_full_pit_universe",
+  "raw_payload_retained": false,
+  "run_id": "POLYGON-DELISTED-LISTING-DATE-PROBE-001",
+  "trial_id": "UNIVERSE-DELISTED-LISTING-DATE-PROBE-001"
+}
