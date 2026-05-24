@@ -1,0 +1,9 @@
+action,reason
+provider_query,This scan uses documentation only; API calls require a separate probe gate.
+market_data_download,No datasets may be downloaded in a provider scan.
+run_backtest,Provider scan cannot test strategy performance.
+parameter_sweep,No strategy thresholds exist in this scan.
+short_selling,User mandate remains long-only.
+paper_trading,No strategy is promoted.
+live_trading,No strategy is promoted.
+strategy_promotion,Provider scan can only choose the next source probe.

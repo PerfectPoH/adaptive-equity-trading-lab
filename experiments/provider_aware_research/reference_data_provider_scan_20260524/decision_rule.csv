@@ -1,0 +1,6 @@
+decision_item,rule
+hard_requirements,Provider must plausibly support PIT membership, delisted symbols, exchange metadata and security-type metadata.
+api_probe_priority,Prefer providers with a bounded unauthenticated or already-entitled API probe path.
+cost_priority,Prefer lower-cost providers when hard requirements are satisfied.
+blocked_if_current_only,Current-only lists are blocked even when record count is large.
+next_step,Selected provider only authorizes a future source probe, not a dataset download or strategy backtest.

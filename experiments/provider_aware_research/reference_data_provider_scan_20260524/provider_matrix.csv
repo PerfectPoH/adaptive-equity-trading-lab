@@ -1,0 +1,6 @@
+provider,pit_membership,delisted_symbols,exchange_metadata,security_type_metadata,pricing_status,api_probe_feasible,official_source_url,notes
+Polygon/Massive,pass,pass,pass,pass,paid_low,yes,https://polygon.io/docs/rest/stocks/tickers/all-tickers,"Ticker reference documents active status, market/type, primary exchange and delisted_utc fields."
+Sharadar/Nasdaq Data Link,pass,pass,pass,pass,paid_medium,maybe,https://www.sharadar.com/data,"Sharadar presents active and delisted stocks and Nasdaq Data Link states Sharadar Equity Prices covers delisted stocks."
+Intrinio Securities,maybe,maybe,pass,pass,paid_unknown,maybe,https://docs.intrinio.com/documentation/web_api/get_all_securities_v2,"All Securities endpoint appears relevant, but entitlement and delisted/PIT adequacy need a separate account-level probe."
+Tiingo,maybe,maybe,maybe,maybe,paid_unknown,maybe,https://www.tiingo.com/documentation/general/overview,"Potential reference-data provider, but universe PIT/delisted/security-type fields need verification."
+SEC company_tickers,fail,fail,fail,fail,free,done,https://www.sec.gov/files/company_tickers.json,"Already probed: current ticker-CIK join only, missing exchange, type, active windows and delisted symbols."

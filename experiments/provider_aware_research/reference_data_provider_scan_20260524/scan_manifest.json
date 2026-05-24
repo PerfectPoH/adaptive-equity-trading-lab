@@ -1,0 +1,12 @@
+{
+  "backtest_allowed": false,
+  "market_data_download_allowed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "promotion_allowed": false,
+  "provider_query_allowed": false,
+  "scan_id": "REFERENCE-DATA-PROVIDER-SCAN-001",
+  "short_selling_allowed": false,
+  "status": "APPROVED_DOCUMENTATION_SCAN_NOT_EXECUTED",
+  "trial_id": "REFERENCE-DATA-PROVIDER-SCAN-001"
+}
