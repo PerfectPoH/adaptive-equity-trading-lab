@@ -1,0 +1,9 @@
+requirement,threshold,rationale
+provider_call_count,<=5,Bound provider access before execution.
+min_seconds_between_calls,>=13,Respect observed free-tier pacing limits.
+detail_success_count,>=5,All bounded delisted details calls should return usable results.
+list_date_present_count,>=5,Need listing dates for all sampled delisted tickers.
+raw_payload_retained,false,Avoid retaining raw provider payload.
+market_data_downloaded,false,No price data in this probe.
+backtest_performed,false,No strategy trial in this probe.
+broad_universe_backtest_allowed,false,Probe does not authorize broad PIT backtests.
