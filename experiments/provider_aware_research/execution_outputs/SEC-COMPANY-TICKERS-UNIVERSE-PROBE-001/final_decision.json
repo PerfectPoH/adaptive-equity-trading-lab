@@ -1,0 +1,25 @@
+{
+  "backtest_performed": false,
+  "blockers": [
+    "missing_exchange_metadata",
+    "missing_security_type_metadata",
+    "missing_point_in_time_membership",
+    "missing_delisted_symbols"
+  ],
+  "candidate_source_allowed": false,
+  "decision": "SEC_COMPANY_TICKERS_UNIVERSE_SOURCE_BLOCKED_METADATA_INSUFFICIENT",
+  "live_trading_performed": false,
+  "market_data_downloaded": false,
+  "next_unblocked_step": "If blocked, select another universe provider with PIT membership, security type, exchange and delisted-symbol metadata.",
+  "paper_trading_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "record_count": 10371,
+  "run_id": "SEC-COMPANY-TICKERS-UNIVERSE-PROBE-001",
+  "short_selling_performed": false,
+  "status": "complete",
+  "strategy_promotion_performed": false,
+  "trial_id": "UNIVERSE-SOURCE-PROBE-001"
+}

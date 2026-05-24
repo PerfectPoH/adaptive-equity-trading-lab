@@ -1,0 +1,30 @@
+{
+  "backtest_performed": false,
+  "blockers": [
+    "missing_exchange_metadata",
+    "missing_security_type_metadata",
+    "missing_point_in_time_membership",
+    "missing_delisted_symbols"
+  ],
+  "endpoint": "https://www.sec.gov/files/company_tickers.json",
+  "has_active_windows": false,
+  "has_cik": true,
+  "has_delisted_symbols": false,
+  "has_exchange": false,
+  "has_security_type": false,
+  "has_ticker": true,
+  "market_data_downloaded": false,
+  "observed_fields": [
+    "cik_str",
+    "ticker",
+    "title"
+  ],
+  "passes_universe_gate_requirements": false,
+  "promotion_allowed": false,
+  "provider": "SEC",
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "record_count": 10371,
+  "run_id": "SEC-COMPANY-TICKERS-UNIVERSE-PROBE-001",
+  "trial_id": "UNIVERSE-SOURCE-PROBE-001"
+}
