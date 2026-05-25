@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adaptive Lab - Human Workbench Mockup</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+    :root {
+      --paper: #fbfaf7;
+      --surface: #ffffff;
+      --ink: #171717;
+      --body: #3f3f46;
+      --muted: #71717a;
+      --hair: #e7e2d8;
+      --hair-strong: #cfc7bb;
+      --blue: #1f5eff;
+      --blue-soft: #eef3ff;
+      --rust: #b45309;
+      --rust-soft: #fff7ed;
+      --green: #0f8a4b;
+      --red: #b42318;
+      --shadow: 0 1px 0 rgba(23,23,23,.05), 0 18px 60px rgba(23,23,23,.06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(231,226,216,.55) 1px, transparent 1px),
+        var(--paper);
+      background-size: 72px 72px;
+      color: var(--ink);
+      font-family: "Instrument Sans", system-ui, sans-serif;
+    }
+    .frame {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+    }
+    aside {
+      padding: 28px 20px;
+      border-right: 1px solid var(--hair);
+      background: rgba(251,250,247,.92);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+    .monogram {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--ink);
+      border-radius: 7px;
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .side-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .side-caption {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      margin-bottom: 30px;
+    }
+    nav a {
+      display: block;
+      color: var(--body);
+      text-decoration: none;
+      padding: 9px 0;
+      font-weight: 600;
+      font-size: 14px;
+      border-bottom: 1px solid transparent;
+    }
+    nav a.active {
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+    }
+    .side-ledger {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 24px;
+      border-top: 1px solid var(--hair);
+      padding-top: 18px;
+    }
+    .mono {
+      font-family: "IBM Plex Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .ledger-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--hair);
+      font-size: 13px;
+    }
+    main {
+      max-width: 1360px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 34px 46px 90px;
+    }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 48px;
+    }
+    .breadcrumb {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .quiet-button {
+      border: 1px solid var(--hair-strong);
+      background: var(--surface);
+      padding: 9px 13px;
+      border-radius: 7px;
+      font-weight: 700;
+      box-shadow: 0 1px 0 rgba(23,23,23,.04);
+    }
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 64px;
+      align-items: end;
+      margin-bottom: 54px;
+    }
+    h1 {
+      font-size: clamp(54px, 7vw, 96px);
+      letter-spacing: -.05em;
+      line-height: .88;
+      margin: 10px 0 22px;
+      max-width: 900px;
+      font-weight: 700;
+    }
+    .lead {
+      color: var(--body);
+      font-size: 18px;
+      line-height: 1.62;
+      max-width: 780px;
+    }
+    .note {
+      border: 1px solid var(--hair);
+      background: rgba(255,255,255,.75);
+      border-radius: 9px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+    .note p {
+      margin: 8px 0 0;
+      color: var(--body);
+      line-height: 1.55;
+    }
+    .section {
+      border-top: 1px solid var(--hair-strong);
+      padding-top: 28px;
+      margin-top: 54px;
+    }
+    .section-head {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 36px;
+      margin-bottom: 26px;
+    }
+    .section-title {
+      font-size: 26px;
+      letter-spacing: -.02em;
+      font-weight: 700;
+    }
+    .section-copy {
+      color: var(--body);
+      line-height: 1.62;
+      max-width: 760px;
+    }
+    .builder {
+      display: grid;
+      grid-template-columns: 380px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+    .panel {
+      border: 1px solid var(--hair);
+      background: rgba(255,255,255,.86);
+      border-radius: 9px;
+      box-shadow: var(--shadow);
+    }
+    .composer-row {
+      padding: 18px 18px 20px;
+      border-bottom: 1px solid var(--hair);
+    }
+    .composer-row:last-child { border-bottom: 0; }
+    .composer-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .input {
+      border: 1px solid var(--hair-strong);
+      background: #fff;
+      border-radius: 7px;
+      padding: 12px 13px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .chip-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .chip {
+      border: 1px solid var(--hair);
+      background: #fff;
+      border-radius: 999px;
+      padding: 8px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--body);
+    }
+    .chip.active {
+      background: var(--ink);
+      color: white;
+      border-color: var(--ink);
+    }
+    .contract-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .contract-card {
+      border: 1px solid var(--hair);
+      border-radius: 9px;
+      padding: 16px;
+      background: #fff;
+      min-height: 150px;
+    }
+    .contract-card strong {
+      display: block;
+      margin: 8px 0;
+      font-size: 17px;
+    }
+    .contract-card p {
+      margin: 0;
+      color: var(--body);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+    .visual-panel {
+      padding: 18px;
+    }
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 14px;
+    }
+    .panel-head h3 {
+      margin: 4px 0 0;
+      font-size: 22px;
+      letter-spacing: -.02em;
+    }
+    .status {
+      background: var(--blue-soft);
+      color: var(--blue);
+      border: 1px solid #c8d7ff;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .chart {
+      height: 338px;
+      border: 1px solid var(--hair);
+      border-radius: 8px;
+      background:
+        linear-gradient(#ece7dd 1px, transparent 1px),
+        linear-gradient(90deg, #ece7dd 1px, transparent 1px),
+        #fffdfa;
+      background-size: 100% 68px, 90px 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .line {
+      position: absolute;
+      height: 2px;
+      background: var(--ink);
+      opacity: .72;
+      transform-origin: left center;
+    }
+    .candle {
+      position: absolute;
+      bottom: 60px;
+      width: 16px;
+      border-radius: 3px;
+      background: var(--blue);
+    }
+    .candle.down { background: var(--rust); }
+    .mark {
+      position: absolute;
+      padding: 7px 9px;
+      border-radius: 7px;
+      background: #fff;
+      border: 1px solid var(--hair-strong);
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(23,23,23,.08);
+    }
+    .mark.buy { color: var(--blue); }
+    .mark.exit { color: var(--rust); }
+    .diagnostics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .explain {
+      border-bottom: 1px solid var(--hair);
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      color: var(--body);
+      line-height: 1.55;
+    }
+    .bars {
+      height: 226px;
+      display: flex;
+      align-items: end;
+      gap: 12px;
+      padding: 22px 10px 8px;
+      border-radius: 8px;
+      background: #fffdfa;
+      border: 1px solid var(--hair);
+    }
+    .vbar {
+      flex: 1;
+      min-width: 32px;
+      border-radius: 5px 5px 0 0;
+      background: var(--blue);
+      position: relative;
+    }
+    .vbar.loss { background: var(--rust); }
+    .vbar.bad { background: var(--red); }
+    .vbar.win { background: var(--green); }
+    .vbar span {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%) rotate(-28deg);
+      bottom: -34px;
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .audit {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .audit-card {
+      border: 1px solid var(--hair);
+      background: #fff;
+      border-radius: 9px;
+      padding: 16px;
+      min-height: 128px;
+    }
+    .audit-card strong {
+      display: block;
+      font-size: 24px;
+      margin: 8px 0;
+    }
+    @media (max-width: 1040px) {
+      .frame, .intro, .section-head, .builder, .diagnostics, .audit, .contract-grid { grid-template-columns: 1fr; }
+      aside { position: relative; height: auto; }
+      .side-ledger { position: static; margin-top: 28px; }
+      main { padding: 24px 18px 70px; }
+      h1 { font-size: 56px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <aside>
+      <div class="monogram">AL</div>
+      <div class="side-title">Adaptive Lab</div>
+      <div class="side-caption">A research notebook that happens to have controls.</div>
+      <nav>
+        <a>Command Center</a>
+        <a>Strategies</a>
+        <a>Results & Data</a>
+        <a>Project Anatomy</a>
+        <a class="active">Strategy Workbench</a>
+      </nav>
+      <div class="side-ledger">
+        <div class="mono">today's posture</div>
+        <div class="ledger-row"><span>Promoted</span><strong>0</strong></div>
+        <div class="ledger-row"><span>Mode</span><strong>Risk engine</strong></div>
+        <div class="ledger-row"><span>Provider calls</span><strong>gated</strong></div>
+      </div>
+    </aside>
+    <main>
+      <div class="top">
+        <div class="breadcrumb">Adaptive Equity Trading Lab / Workbench concept</div>
+        <button class="quiet-button">Open audit trail</button>
+      </div>
+
+      <section class="intro">
+        <div>
+          <div class="mono">Human redesign mockup</div>
+          <h1>Build the idea. Then let the lab disagree.</h1>
+          <p class="lead">
+            This direction keeps the analytical rigor but makes the product feel less like a generated dashboard:
+            fewer identical cards, more notebook rhythm, quieter typography, and explanations placed exactly where doubt appears.
+          </p>
+        </div>
+        <div class="note">
+          <div class="mono">Design references</div>
+          <p>Inspired by restrained developer-tool interfaces: hairline dividers, persistent navigation, ink-first typography, and progressive disclosure for dense systems.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <div class="mono">01</div>
+            <div class="section-title">Composer</div>
+          </div>
+          <p class="section-copy">
+            The user should not face every number at once. First they define intent; then the interface translates that intent into a falsifiable contract.
+          </p>
+        </div>
+        <div class="builder">
+          <div class="panel">
+            <div class="composer-row">
+              <div class="composer-label"><span>Hypothesis name</span><span class="mono">ledger</span></div>
+              <div class="input">Biotech anticipation basket <span>⌘K</span></div>
+            </div>
+            <div class="composer-row">
+              <div class="composer-label"><span>Strategy family</span><span class="mono">template</span></div>
+              <div class="input">Custom Rule Builder <span>⌄</span></div>
+            </div>
+            <div class="composer-row">
+              <div class="composer-label"><span>Signal</span><span class="mono">rank</span></div>
+              <div class="chip-row">
+                <span class="chip">Momentum</span>
+                <span class="chip active">Volume shock</span>
+                <span class="chip">Dip</span>
+                <span class="chip">Low-vol</span>
+              </div>
+            </div>
+            <div class="composer-row">
+              <div class="composer-label"><span>Assumptions</span><span class="mono">frozen</span></div>
+              <div class="chip-row">
+                <span class="chip active">30d hold</span>
+                <span class="chip">375 bps</span>
+                <span class="chip">No provider query</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="contract-grid">
+              <div class="contract-card">
+                <div class="mono">buys</div>
+                <strong>Highest abnormal-volume windows</strong>
+                <p>The strategy ranks local OHLCV windows, then enters the strongest routed candidates.</p>
+              </div>
+              <div class="contract-card">
+                <div class="mono">exits</div>
+                <strong>Fixed 30-day evidence window</strong>
+                <p>The exit is declared before the run, so the chart cannot move the goalposts.</p>
+              </div>
+              <div class="contract-card">
+                <div class="mono">blocks</div>
+                <strong>Cost, sample, outlier gates</strong>
+                <p>The result must survive friction and not depend on one spectacular winner.</p>
+              </div>
+            </div>
+            <div class="panel visual-panel">
+              <div class="panel-head">
+                <div>
+                  <div class="mono">visual contract</div>
+                  <h3>Show me exactly where this rule acts.</h3>
+                </div>
+                <span class="status">local preview</span>
+              </div>
+              <div class="chart">
+                <div class="line" style="left:34px;top:210px;width:190px;transform:rotate(-8deg);"></div>
+                <div class="line" style="left:224px;top:184px;width:220px;transform:rotate(-18deg);"></div>
+                <div class="line" style="left:443px;top:116px;width:260px;transform:rotate(13deg);"></div>
+                <div class="candle down" style="left:60px;height:80px;"></div>
+                <div class="candle down" style="left:120px;height:118px;"></div>
+                <div class="candle" style="left:210px;height:142px;"></div>
+                <div class="candle" style="left:305px;height:206px;"></div>
+                <div class="candle down" style="left:420px;height:132px;"></div>
+                <div class="candle" style="left:520px;height:174px;"></div>
+                <div class="mark buy" style="left:274px;top:48px;">BUY: signal fires</div>
+                <div class="mark exit" style="right:46px;top:176px;">EXIT: frozen hold</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <div class="mono">02</div>
+            <div class="section-title">Dry-run reading</div>
+          </div>
+          <p class="section-copy">
+            The dashboard should teach the user how to read the result before showing the raw ledger. Charts become explanations, not decoration.
+          </p>
+        </div>
+        <div class="diagnostics">
+          <div class="panel visual-panel">
+            <div class="panel-head">
+              <div>
+                <div class="mono">distribution</div>
+                <h3>Does the typical trade survive?</h3>
+              </div>
+            </div>
+            <div class="explain">A healthy rule does not need every trade to win, but if most trades live left of zero it is probably a lottery basket.</div>
+            <div class="bars">
+              <div class="vbar bad" style="height:84px;"><span>&lt;-20%</span></div>
+              <div class="vbar loss" style="height:136px;"><span>-20/-10</span></div>
+              <div class="vbar loss" style="height:188px;"><span>-10/0</span></div>
+              <div class="vbar" style="height:122px;"><span>0/10</span></div>
+              <div class="vbar" style="height:72px;"><span>10/25</span></div>
+              <div class="vbar win" style="height:38px;"><span>&gt;25%</span></div>
+            </div>
+          </div>
+          <div class="panel visual-panel">
+            <div class="panel-head">
+              <div>
+                <div class="mono">concentration</div>
+                <h3>Is one winner carrying the story?</h3>
+              </div>
+            </div>
+            <div class="explain">If the first bar dominates, the strategy may be an outlier dressed as a system. The lab should say that plainly.</div>
+            <div class="bars">
+              <div class="vbar win" style="height:196px;"><span>TSLA</span></div>
+              <div class="vbar" style="height:82px;"><span>AMD</span></div>
+              <div class="vbar" style="height:54px;"><span>NVDA</span></div>
+              <div class="vbar" style="height:42px;"><span>SPY</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <div class="mono">03</div>
+            <div class="section-title">Audit, but later</div>
+          </div>
+          <p class="section-copy">
+            Nothing is removed. The heavy material moves into clear secondary layers: gate panel, ledger rows, raw JSON, artifacts.
+          </p>
+        </div>
+        <div class="audit">
+          <div class="audit-card"><div class="mono">gate</div><strong>PASS</strong><span>trade count</span></div>
+          <div class="audit-card"><div class="mono">gate</div><strong>BLOCK</strong><span>outlier dependency</span></div>
+          <div class="audit-card"><div class="mono">data</div><strong>15 / 250</strong><span>local coverage</span></div>
+          <div class="audit-card"><div class="mono">mode</div><strong>false</strong><span>promotion allowed</span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
