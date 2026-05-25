@@ -43,79 +43,95 @@ def inject_theme() -> None:
     st.markdown(
         """
         <style>
-        @import url('https://fonts.googleapis.com/css2?family=Exo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
         :root {
-          --lab-bg: #f8fafc;
+          --lab-bg: #fbfaf7;
           --lab-panel: #ffffff;
-          --lab-ink: #1e293b;
-          --lab-strong: #0f172a;
-          --lab-muted: #64748b;
-          --lab-blue: #2563eb;
+          --lab-ink: #3f3f46;
+          --lab-strong: #171717;
+          --lab-muted: #71717a;
+          --lab-blue: #1f5eff;
           --lab-blue-2: #3b82f6;
-          --lab-amber: #f97316;
-          --lab-line: #d8dee6;
-          --lab-red: #dc2626;
-          --lab-green: #16a34a;
-          --lab-slate: #111827;
+          --lab-blue-soft: #eef3ff;
+          --lab-amber: #d97706;
+          --lab-amber-soft: #fff7ed;
+          --lab-plum: #7c3aed;
+          --lab-plum-soft: #f3edff;
+          --lab-mint: #0f9f75;
+          --lab-mint-soft: #e9fbf4;
+          --lab-rose: #d12f5f;
+          --lab-rose-soft: #fff0f5;
+          --lab-line: #e7e2d8;
+          --lab-line-strong: #cfc7bb;
+          --lab-red: #b42318;
+          --lab-green: #0f8a4b;
+          --lab-slate: #171717;
         }
         [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu, footer {
           display: none !important;
           visibility: hidden !important;
         }
         html, body, [data-testid="stAppViewContainer"] {
-          background: var(--lab-bg);
+          background:
+            radial-gradient(circle at 88% 6%, rgba(31,94,255,.08), transparent 26%),
+            radial-gradient(circle at 8% 28%, rgba(15,159,117,.075), transparent 28%),
+            linear-gradient(90deg, rgba(231,226,216,.55) 1px, transparent 1px),
+            var(--lab-bg);
+          background-size: auto, auto, 72px 72px;
           color: var(--lab-ink);
-          font-family: "Inter", system-ui, sans-serif;
+          font-family: "Instrument Sans", system-ui, sans-serif;
         }
         section[data-testid="stSidebar"] {
-          background: #0b1220;
-          border-right: 1px solid #1e293b;
+          background: rgba(251, 250, 247, .94);
+          border-right: 1px solid var(--lab-line);
         }
         section[data-testid="stSidebar"] * {
-          color: #e5edf8;
+          color: var(--lab-ink);
         }
         section[data-testid="stSidebar"] .sidebar-tile {
-          border: 1px solid #22304a;
+          border: 1px solid var(--lab-line);
           border-radius: 8px;
-          background: #111827;
+          background: rgba(255, 255, 255, .78);
           padding: 14px;
           min-height: 108px;
+          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 12px 34px rgba(23,23,23,.055);
         }
         section[data-testid="stSidebar"] .sidebar-label {
-          color: #93c5fd !important;
-          font-family: "Roboto Mono", monospace;
+          color: var(--lab-blue) !important;
+          font-family: "IBM Plex Mono", monospace;
           font-size: 12px;
           font-weight: 700;
           text-transform: uppercase;
         }
         section[data-testid="stSidebar"] .sidebar-value {
-          color: #ffffff !important;
-          font-family: "Exo", system-ui, sans-serif;
+          color: var(--lab-strong) !important;
+          font-family: "Instrument Sans", system-ui, sans-serif;
           font-size: 30px;
           font-weight: 800;
           line-height: 1.05;
           overflow-wrap: anywhere;
         }
         section[data-testid="stSidebar"] .sidebar-note {
-          color: #cbd5e1 !important;
+          color: var(--lab-muted) !important;
           font-size: 13px;
           line-height: 1.35;
         }
         section[data-testid="stSidebar"] [role="radiogroup"] label {
-          border: 1px solid #22304a;
+          border: 0;
+          border-bottom: 1px solid transparent;
           border-radius: 8px;
           margin-bottom: 8px;
           padding: 8px 10px;
-          background: rgba(255, 255, 255, .04);
+          background: transparent;
         }
         h1, h2, h3 {
-          font-family: "Exo", system-ui, sans-serif;
-          letter-spacing: 0;
+          font-family: "Instrument Sans", system-ui, sans-serif;
+          letter-spacing: -.025em;
           color: var(--lab-strong);
         }
         .block-container {
-          padding-top: .75rem;
-          padding-bottom: 3rem;
+          padding-top: 1.25rem;
+          padding-bottom: 5rem;
           max-width: 1500px;
         }
         .lab-shell-nav {
@@ -127,23 +143,23 @@ def inject_theme() -> None:
           justify-content: space-between;
           gap: 14px;
           border: 1px solid var(--lab-line);
-          border-radius: 8px;
-          background: rgba(255, 255, 255, .92);
+          border-radius: 9px;
+          background: rgba(255, 255, 255, .78);
           backdrop-filter: blur(12px);
-          padding: 10px 12px;
-          margin-bottom: 16px;
-          box-shadow: 0 10px 28px rgba(15, 23, 42, .06);
+          padding: 12px 14px;
+          margin-bottom: 22px;
+          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 16px 46px rgba(23,23,23,.055);
         }
         .main-nav-card {
           border: 1px solid var(--lab-line);
-          border-radius: 8px;
-          background: #ffffff;
-          padding: 14px;
-          margin-bottom: 20px;
-          box-shadow: 0 10px 28px rgba(15, 23, 42, .05);
+          border-radius: 9px;
+          background: rgba(255,255,255,.72);
+          padding: 12px 14px;
+          margin-bottom: 24px;
+          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 16px 46px rgba(23,23,23,.045);
         }
         .nav-help {
-          font-family: "Roboto Mono", monospace;
+          font-family: "IBM Plex Mono", monospace;
           font-size: 12px;
           color: var(--lab-muted);
           margin-bottom: 8px;
@@ -154,7 +170,8 @@ def inject_theme() -> None:
           border-radius: 8px;
           border: 1px solid var(--lab-line);
           font-weight: 700;
-          min-height: 42px;
+          min-height: 44px;
+          transition: background .18s ease, border-color .18s ease, transform .18s ease;
         }
         div[data-testid="stButton"] > button[kind="secondary"] {
           background: #ffffff;
@@ -214,29 +231,31 @@ def inject_theme() -> None:
           color: #334155;
         }
         .lab-brand {
-          font-family: "Roboto Mono", monospace;
+          font-family: "IBM Plex Mono", monospace;
           font-size: 12px;
           font-weight: 700;
           color: var(--lab-blue);
           text-transform: uppercase;
         }
         .lab-nav-state {
-          font-family: "Roboto Mono", monospace;
+          font-family: "IBM Plex Mono", monospace;
           font-size: 12px;
           color: var(--lab-muted);
         }
         .lab-hero {
           position: relative;
           overflow: hidden;
-          border: 1px solid #1e293b;
-          border-radius: 8px;
+          border: 1px solid #1f2937;
+          border-radius: 12px;
           background:
-            linear-gradient(115deg, rgba(37, 99, 235, .98), rgba(15, 23, 42, .98) 52%, rgba(249, 115, 22, .88)),
-            #0f172a;
-          padding: 34px 34px 28px;
-          margin-bottom: 18px;
+            radial-gradient(circle at 82% 18%, rgba(15,159,117,.35), transparent 25%),
+            linear-gradient(115deg, rgba(31, 94, 255, .98), rgba(23, 23, 23, .98) 55%, rgba(217, 119, 6, .78)),
+            #171717;
+          padding: 44px 42px 36px;
+          margin-bottom: 28px;
           color: #f8fafc;
-          min-height: 300px;
+          min-height: 320px;
+          box-shadow: 0 1px 0 rgba(23,23,23,.08), 0 24px 70px rgba(23,23,23,.14);
         }
         .lab-hero::after {
           content: "";
@@ -250,7 +269,7 @@ def inject_theme() -> None:
           opacity: .52;
         }
         .lab-kicker {
-          font-family: "Roboto Mono", monospace;
+          font-family: "IBM Plex Mono", monospace;
           color: #bfdbfe;
           font-size: 12px;
           text-transform: uppercase;
@@ -260,9 +279,10 @@ def inject_theme() -> None:
         .lab-title {
           position: relative;
           z-index: 1;
-          font-family: "Exo", system-ui, sans-serif;
+          font-family: "Instrument Sans", system-ui, sans-serif;
           font-size: clamp(42px, 6vw, 78px);
-          line-height: .98;
+          letter-spacing: -.05em;
+          line-height: .92;
           font-weight: 800;
           max-width: 1000px;
           margin: 12px 0;
@@ -278,14 +298,14 @@ def inject_theme() -> None:
         }
         .metric-card, .strategy-card, .lab-section, .chart-panel {
           border: 1px solid var(--lab-line);
-          border-radius: 8px;
-          background: var(--lab-panel);
-          padding: 16px;
-          box-shadow: 0 12px 34px rgba(15, 23, 42, .055);
+          border-radius: 9px;
+          background: rgba(255,255,255,.84);
+          padding: 18px;
+          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 16px 46px rgba(23,23,23,.055);
         }
         .metric-label, .strategy-family, .eyebrow {
           color: var(--lab-muted);
-          font-family: "Roboto Mono", monospace;
+          font-family: "IBM Plex Mono", monospace;
           font-size: 12px;
           text-transform: uppercase;
           font-weight: 700;
@@ -293,7 +313,7 @@ def inject_theme() -> None:
         }
         .metric-value {
           color: var(--lab-strong);
-          font-family: "Exo", system-ui, sans-serif;
+          font-family: "Instrument Sans", system-ui, sans-serif;
           font-size: 32px;
           font-weight: 800;
           margin-top: 4px;
@@ -314,7 +334,7 @@ def inject_theme() -> None:
           width: fit-content;
           border-radius: 999px;
           padding: 5px 10px;
-          font-family: "Roboto Mono", monospace;
+          font-family: "IBM Plex Mono", monospace;
           font-size: 12px;
           font-weight: 700;
           border: 1px solid var(--lab-line);
@@ -327,16 +347,16 @@ def inject_theme() -> None:
         .status-PROMOTED { color: #166534; background: #dcfce7; border-color: #bbf7d0; }
         .strategy-section {
           border: 1px solid var(--lab-line);
-          border-radius: 8px;
+          border-radius: 12px;
           background:
-            linear-gradient(180deg, rgba(248,250,252,.96), rgba(255,255,255,.98)),
+            linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.98)),
             #ffffff;
-          padding: 22px;
-          margin: 22px 0;
-          box-shadow: 0 18px 46px rgba(15, 23, 42, .065);
+          padding: 28px;
+          margin: 32px 0;
+          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 52px rgba(23,23,23,.06);
         }
         .strategy-title {
-          font-family: "Exo", system-ui, sans-serif;
+          font-family: "Instrument Sans", system-ui, sans-serif;
           font-size: clamp(26px, 3vw, 40px);
           font-weight: 800;
           margin: 8px 0 6px;
@@ -348,12 +368,13 @@ def inject_theme() -> None:
           font-size: 15px;
         }
         .callout {
+          border: 1px solid #c8d7ff;
           border-left: 4px solid var(--lab-blue);
           background: #eff6ff;
-          padding: 12px 14px;
-          border-radius: 6px;
+          padding: 14px 16px;
+          border-radius: 8px;
           color: #1e3a8a;
-          margin: 12px 0;
+          margin: 16px 0;
         }
         .danger-callout {
           border-left-color: var(--lab-red);
@@ -367,10 +388,11 @@ def inject_theme() -> None:
         }
         .mini-tile {
           border: 1px solid var(--lab-line);
-          border-radius: 8px;
-          background: #fff;
-          padding: 12px;
-          min-height: 96px;
+          border-radius: 9px;
+          background: rgba(255,255,255,.82);
+          padding: 14px;
+          min-height: 108px;
+          box-shadow: 0 1px 0 rgba(23,23,23,.035);
         }
         .lifecycle-card {
           border: 1px solid var(--lab-line);
@@ -415,10 +437,10 @@ def inject_theme() -> None:
         }
         .workbench-card {
           border: 1px solid var(--lab-line);
-          border-radius: 8px;
-          background: #ffffff;
-          padding: 18px;
-          box-shadow: 0 14px 34px rgba(15, 23, 42, .05);
+          border-radius: 10px;
+          background: rgba(255,255,255,.86);
+          padding: 22px;
+          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 54px rgba(23,23,23,.06);
         }
         .workbench-step {
           display: inline-flex;
@@ -429,21 +451,22 @@ def inject_theme() -> None:
           border-radius: 999px;
           background: var(--lab-blue);
           color: #ffffff;
-          font-family: "Roboto Mono", monospace;
+          font-family: "IBM Plex Mono", monospace;
           font-size: 12px;
           font-weight: 800;
           margin-right: 8px;
         }
         .dryrun-report {
-          border: 1px solid #bfdbfe;
-          border-radius: 8px;
-          background: linear-gradient(180deg, #eff6ff, #ffffff);
-          padding: 18px;
-          margin-top: 14px;
-          box-shadow: 0 14px 34px rgba(37, 99, 235, .08);
+          border: 1px solid #c8d7ff;
+          border-top: 4px solid var(--lab-blue);
+          border-radius: 10px;
+          background: rgba(255,255,255,.88);
+          padding: 22px;
+          margin-top: 18px;
+          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 54px rgba(31, 94, 255, .08);
         }
         .dryrun-title {
-          font-family: "Exo", system-ui, sans-serif;
+          font-family: "Instrument Sans", system-ui, sans-serif;
           color: #0f172a;
           font-size: 26px;
           font-weight: 800;
@@ -461,33 +484,132 @@ def inject_theme() -> None:
           line-height: 1.55;
         }
         .rule-card {
-          border: 1px solid #bfdbfe;
-          border-radius: 8px;
-          background: #eff6ff;
-          padding: 14px;
-          min-height: 110px;
+          border: 1px solid var(--lab-line);
+          border-top: 4px solid var(--lab-blue);
+          border-radius: 10px;
+          background: rgba(255,255,255,.86);
+          padding: 16px;
+          min-height: 120px;
+          box-shadow: 0 1px 0 rgba(23,23,23,.035);
         }
         .rule-title {
-          font-family: "Exo", system-ui, sans-serif;
+          font-family: "Instrument Sans", system-ui, sans-serif;
           color: #0f172a;
           font-weight: 800;
           font-size: 18px;
           margin-bottom: 6px;
         }
         .validation-pass {
-          border-left: 4px solid var(--lab-green);
-          background: #f0fdf4;
+          border-top-color: var(--lab-mint);
+          border-left: 4px solid var(--lab-mint);
+          background: var(--lab-mint-soft);
           color: #14532d;
         }
         .validation-warn {
+          border-top-color: var(--lab-amber);
           border-left: 4px solid var(--lab-amber);
-          background: #fff7ed;
+          background: var(--lab-amber-soft);
           color: #7c2d12;
         }
         .validation-block {
-          border-left: 4px solid var(--lab-red);
-          background: #fef2f2;
+          border-top-color: var(--lab-rose);
+          border-left: 4px solid var(--lab-rose);
+          background: var(--lab-rose-soft);
           color: #7f1d1d;
+        }
+        .human-workbench-hero {
+          display: grid;
+          grid-template-columns: minmax(0, 1.35fr) 380px;
+          gap: 28px;
+          align-items: stretch;
+          margin: 12px 0 34px;
+        }
+        .human-workbench-copy {
+          border: 1px solid #1f2937;
+          border-radius: 12px;
+          padding: 38px;
+          min-height: 280px;
+          color: white;
+          background:
+            radial-gradient(circle at 82% 18%, rgba(15,159,117,.33), transparent 25%),
+            linear-gradient(120deg, rgba(31,94,255,.97), rgba(23,23,23,.98) 56%, rgba(217,119,6,.76)),
+            #171717;
+          box-shadow: 0 1px 0 rgba(23,23,23,.08), 0 24px 70px rgba(23,23,23,.14);
+        }
+        .human-workbench-copy h1 {
+          color: #ffffff;
+          font-size: clamp(46px, 6vw, 78px);
+          line-height: .9;
+          letter-spacing: -.055em;
+          margin: 12px 0 16px;
+          max-width: 820px;
+        }
+        .human-workbench-copy p {
+          color: #dbeafe;
+          font-size: 17px;
+          line-height: 1.62;
+          max-width: 780px;
+        }
+        .human-workbench-note {
+          border: 1px solid var(--lab-line);
+          border-top: 4px solid var(--lab-mint);
+          border-radius: 10px;
+          background: rgba(255,255,255,.82);
+          padding: 22px;
+          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 54px rgba(23,23,23,.06);
+        }
+        .semantic-strip {
+          display: flex;
+          gap: 8px;
+          margin-top: 18px;
+        }
+        .semantic-strip span {
+          height: 10px;
+          flex: 1;
+          border-radius: 999px;
+        }
+        .semantic-badge {
+          display: inline-flex;
+          align-items: center;
+          width: fit-content;
+          border-radius: 999px;
+          border: 1px solid var(--lab-line);
+          padding: 6px 10px;
+          font-family: "IBM Plex Mono", monospace;
+          font-size: 11px;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+        .badge-signal { background: var(--lab-blue-soft); color: var(--lab-blue); border-color: #c8d7ff; }
+        .badge-evidence { background: var(--lab-mint-soft); color: var(--lab-mint); border-color: #b8efd9; }
+        .badge-risk { background: var(--lab-amber-soft); color: var(--lab-amber); border-color: #fed7aa; }
+        .badge-data { background: var(--lab-plum-soft); color: var(--lab-plum); border-color: #ddd6fe; }
+        .badge-block { background: var(--lab-rose-soft); color: var(--lab-rose); border-color: #ffd1df; }
+        .workbench-section {
+          border-top: 1px solid var(--lab-line-strong);
+          padding-top: 26px;
+          margin-top: 42px;
+        }
+        .section-kicker {
+          font-family: "IBM Plex Mono", monospace;
+          color: var(--lab-muted);
+          font-size: 11px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: .05em;
+        }
+        .workbench-section-title {
+          font-size: 28px;
+          font-weight: 800;
+          letter-spacing: -.03em;
+          margin: 4px 0 6px;
+          color: var(--lab-strong);
+        }
+        .workbench-section-copy {
+          color: var(--lab-ink);
+          line-height: 1.62;
+          max-width: 780px;
+          margin-bottom: 18px;
         }
         div[data-testid="stMetric"] {
           border: 1px solid var(--lab-line);
@@ -499,6 +621,8 @@ def inject_theme() -> None:
           .lab-hero { padding: 24px; min-height: 260px; }
           .lab-title { font-size: 42px; }
           .lab-shell-nav { position: relative; align-items: flex-start; flex-direction: column; }
+          .human-workbench-hero { grid-template-columns: 1fr; }
+          .human-workbench-copy { padding: 26px; }
         }
         </style>
         """,
@@ -1054,13 +1178,32 @@ def render_lab_explainer(payload: dict[str, object]) -> None:
 
 
 def render_strategy_workbench() -> None:
-    st.header("Strategy Workbench")
     st.markdown(
         """
-        <div class="callout">
-        This is the first step of the next phase: a user-facing strategy builder. It does not run a backtest yet.
-        It turns a trading idea into a readable, governed hypothesis: what signal you mean, what data it needs,
-        where a buy would happen, where the exit would happen, and which gate must stop bad research first.
+        <div class="human-workbench-hero">
+          <div class="human-workbench-copy">
+            <div class="lab-kicker">Human strategy workbench</div>
+            <h1>Build the idea. Then let the lab disagree.</h1>
+            <p>
+              Define a strategy like a researcher, not like a gambler. The workbench translates your rule into a falsifiable contract,
+              shows what data is actually available, and keeps promotion locked until the gates survive.
+            </p>
+          </div>
+          <div class="human-workbench-note">
+            <div class="eyebrow">Color logic</div>
+            <div class="strategy-title" style="font-size:24px;">Color carries meaning.</div>
+            <div class="strategy-copy">
+              Blue marks signal/action, mint marks valid evidence, amber marks risk and cost, plum marks data scope,
+              and rose marks blockers or fragility.
+            </div>
+            <div class="semantic-strip">
+              <span style="background:var(--lab-blue);"></span>
+              <span style="background:var(--lab-mint);"></span>
+              <span style="background:var(--lab-amber);"></span>
+              <span style="background:var(--lab-plum);"></span>
+              <span style="background:var(--lab-rose);"></span>
+            </div>
+          </div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -1068,7 +1211,7 @@ def render_strategy_workbench() -> None:
 
     st.markdown(
         f"""
-        <div class="workbench-card">
+        <div class="workbench-card" style="border-top:4px solid var(--lab-plum);">
           <div class="eyebrow">Template catalog</div>
           <div class="strategy-title" style="font-size:30px;">{len(WORKBENCH_TEMPLATES)} strategy families, not 4</div>
           <div class="strategy-copy">
@@ -1081,7 +1224,20 @@ def render_strategy_workbench() -> None:
     )
     st.markdown('<div class="results-spacer"></div>', unsafe_allow_html=True)
 
-    left, right = st.columns([1, 1])
+    st.markdown(
+        """
+        <div class="workbench-section">
+          <div class="section-kicker">01 / Composer</div>
+          <div class="workbench-section-title">Turn a trading idea into a contract.</div>
+          <div class="workbench-section-copy">
+            The left side captures your intent in frozen assumptions. The right side translates it into the first audit object the lab can validate.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    left, right = st.columns([0.82, 1.18], gap="large")
     with left:
         st.subheader("Strategy Draft")
         st.markdown('<span class="workbench-step">1</span><strong>Name the hypothesis</strong>', unsafe_allow_html=True)
@@ -1159,7 +1315,7 @@ def render_strategy_workbench() -> None:
         )
         st.markdown(
             f"""
-            <div class="workbench-card">
+            <div class="workbench-card" style="border-top:4px solid var(--lab-blue);">
               <div class="eyebrow">Strategy contract</div>
               <div class="strategy-title" style="font-size:28px;">{manifest["strategy_name"]}</div>
               <div class="strategy-copy"><strong>Template:</strong> {manifest["template"]}</div>
@@ -1175,7 +1331,7 @@ def render_strategy_workbench() -> None:
         with rule_cols[0]:
             st.markdown(
                 f"""
-                <div class="rule-card">
+                <div class="rule-card" style="border-top-color:var(--lab-blue);">
                   <div class="rule-title">Entry Rule</div>
                   <div class="small-muted">{manifest["entry_rule"]}</div>
                 </div>
@@ -1185,7 +1341,7 @@ def render_strategy_workbench() -> None:
         with rule_cols[1]:
             st.markdown(
                 f"""
-                <div class="rule-card">
+                <div class="rule-card" style="border-top-color:var(--lab-amber);">
                   <div class="rule-title">Exit Rule</div>
                   <div class="small-muted">{manifest["exit_rule"]}</div>
                 </div>
@@ -1194,7 +1350,7 @@ def render_strategy_workbench() -> None:
             )
         st.markdown(
             f"""
-            <div class="callout danger-callout">
+            <div class="callout danger-callout" style="border-left-color:var(--lab-rose);background:var(--lab-rose-soft);">
               <strong>Known failure mode:</strong> {manifest["known_failure_mode"]}
             </div>
             """,
@@ -1209,12 +1365,23 @@ def render_strategy_workbench() -> None:
 
     data_scope_preview = build_workbench_data_scope_preview(manifest)
     strategy_narrative = build_workbench_strategy_narrative(manifest, data_scope_preview)
-    st.subheader("Readable Strategy Contract")
+    st.markdown(
+        """
+        <div class="workbench-section">
+          <div class="section-kicker">02 / Readable contract</div>
+          <div class="workbench-section-title">Understand the rule before seeing numbers.</div>
+          <div class="workbench-section-copy">
+            The lab should first say what the strategy buys, how it exits, what data is real, and what can block it.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     n1, n2, n3 = st.columns([1.25, 1, 1])
     with n1:
         st.markdown(
             f"""
-            <div class="rule-card">
+            <div class="rule-card" style="border-top-color:var(--lab-blue);">
               <div class="rule-title">What it buys</div>
               <div class="strategy-copy">{strategy_narrative["plain_english_rule"]}</div>
             </div>
@@ -1224,7 +1391,7 @@ def render_strategy_workbench() -> None:
     with n2:
         st.markdown(
             f"""
-            <div class="rule-card">
+            <div class="rule-card" style="border-top-color:var(--lab-amber);">
               <div class="rule-title">How it exits</div>
               <div class="strategy-copy">{strategy_narrative["exit_plain_english"]}</div>
             </div>
@@ -1235,7 +1402,7 @@ def render_strategy_workbench() -> None:
         coverage = strategy_narrative["data_coverage"]
         st.markdown(
             f"""
-            <div class="rule-card">
+            <div class="rule-card" style="border-top-color:var(--lab-plum);">
               <div class="rule-title">Data actually available</div>
               <div class="metric-value" style="font-size:26px;">{coverage["local_price_symbols"]} / {coverage["configured_symbols"]}</div>
               <div class="small-muted">{coverage["local_rows"]} local OHLCV rows routed into this dry-run.</div>
@@ -1245,7 +1412,7 @@ def render_strategy_workbench() -> None:
         )
     st.markdown(
         f"""
-        <div class="callout">
+        <div class="callout" style="border-color:#ffd1df;border-left-color:var(--lab-rose);background:var(--lab-rose-soft);color:#831843;">
           <strong>First blocker:</strong> {strategy_narrative["failure_plain_english"]}
         </div>
         """,
@@ -1256,20 +1423,40 @@ def render_strategy_workbench() -> None:
         with guardrail_cols[index % 4]:
             st.markdown(
                 f"""
-                <div class="mini-tile">
-                  <div class="eyebrow">Guardrail</div>
+                <div class="mini-tile" style="border-top:4px solid var(--lab-mint);">
+                  <div class="semantic-badge badge-evidence">Guardrail</div>
                   <div class="small-muted">{guardrail}</div>
                 </div>
                 """,
                 unsafe_allow_html=True,
             )
 
-    st.subheader("Chart Preview")
-    st.write("This preview shows what the strategy must explain visually before it is allowed to become a backtest.")
+    st.markdown(
+        """
+        <div class="workbench-section">
+          <div class="section-kicker">03 / Visual explanation</div>
+          <div class="workbench-section-title">Show where the rule acts.</div>
+          <div class="workbench-section-copy">
+            This preview is not a performance claim. It is a visual contract: entry, exit, and the first gate must be explainable on a chart.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     st.plotly_chart(strategy_candlestick_chart(build_workbench_chart_story(manifest)), width="stretch")
 
-    st.subheader("Strategy Flow Preview")
-    st.write("This is the governed path the builder will use before any future backtest button exists.")
+    st.markdown(
+        """
+        <div class="workbench-section">
+          <div class="section-kicker">04 / Governance path</div>
+          <div class="workbench-section-title">The lab keeps the brakes visible.</div>
+          <div class="workbench-section-copy">
+            Every strategy has to pass through a pre-run gate, data contract, dry-run, cost realism, robustness, and final decision.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     st.plotly_chart(flow_chart(build_workbench_flow_nodes(manifest)), width="stretch")
 
     validation_rows = validate_workbench_manifest(manifest)
@@ -1281,7 +1468,15 @@ def render_strategy_workbench() -> None:
         st.session_state["workbench_backtest_preview"] = None
         st.session_state["workbench_artifact_bundle"] = None
 
-    st.subheader("Validation Panel")
+    st.markdown(
+        """
+        <div class="workbench-section">
+          <div class="section-kicker">05 / Validation</div>
+          <div class="workbench-section-title">Before the button, the gate.</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     validation_cols = st.columns(3)
     for index, row in enumerate(validation_rows.to_dict("records")):
         css = {
@@ -1300,7 +1495,7 @@ def render_strategy_workbench() -> None:
                 unsafe_allow_html=True,
             )
 
-    st.subheader("Pre-Run Gate Draft")
+    st.markdown('<div class="section-kicker" style="margin-top:22px;">Pre-run gate draft</div>', unsafe_allow_html=True)
     gate_cols = st.columns(3)
     gate_items = [
         ("Data required", ", ".join(manifest["required_data"])),
@@ -1321,7 +1516,7 @@ def render_strategy_workbench() -> None:
     with st.expander("Open structured pre-run gate draft"):
         st.json(gate)
 
-    st.subheader("Data Scope Preview")
+    st.markdown('<div class="section-kicker" style="margin-top:22px;">Data scope preview</div>', unsafe_allow_html=True)
     scope_cols = st.columns(3)
     with scope_cols[0]:
         metric_card("Data scope", data_scope_preview["data_scope"], "Universe routing before the dry-run")
@@ -1333,8 +1528,18 @@ def render_strategy_workbench() -> None:
         "Configured tickers are the research catalog. Local prices are the subset already present in archived files; missing symbols are never invented by the workbench."
     )
 
-    st.subheader("Controlled Backtest Button")
-    st.write("This is intentionally a local dry-run preview. It does not query providers, trade, or promote anything.")
+    st.markdown(
+        """
+        <div class="workbench-section">
+          <div class="section-kicker">06 / Controlled local dry-run</div>
+          <div class="workbench-section-title">Run locally, explain first, audit later.</div>
+          <div class="workbench-section-copy">
+            The button uses archived local data only. It does not query providers, trade, or promote anything.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     run_clicked = st.button("Run controlled local dry-run", type="primary", disabled=not gate_valid, width="stretch")
     if run_clicked:
         preview_result = build_controlled_backtest_preview(manifest, validation_rows)
@@ -1414,12 +1619,12 @@ def render_strategy_workbench() -> None:
                         y="trade_count",
                         color="zone",
                         color_discrete_map={
-                            "large loss": "#991b1b",
-                            "loss": "#dc2626",
-                            "small loss": "#f97316",
+                            "large loss": "#b42318",
+                            "loss": "#d12f5f",
+                            "small loss": "#d97706",
                             "small win": "#60a5fa",
-                            "win": "#2563eb",
-                            "large win": "#16a34a",
+                            "win": "#1f5eff",
+                            "large win": "#0f9f75",
                         },
                     )
                     fig.update_layout(
@@ -1427,13 +1632,13 @@ def render_strategy_workbench() -> None:
                         showlegend=False,
                         paper_bgcolor="rgba(0,0,0,0)",
                         plot_bgcolor="rgba(0,0,0,0)",
-                        font=dict(color="#0f172a", family="Inter"),
+                        font=dict(color="#171717", family="Instrument Sans"),
                         xaxis_title="Net return bucket",
                         yaxis_title="Trades",
                         margin=dict(l=10, r=10, t=28, b=10),
                     )
-                    fig.update_xaxes(tickfont=dict(color="#0f172a"), title_font=dict(color="#0f172a"), gridcolor="#dbe3ef")
-                    fig.update_yaxes(tickfont=dict(color="#0f172a"), title_font=dict(color="#0f172a"), gridcolor="#dbe3ef")
+                    fig.update_xaxes(tickfont=dict(color="#171717"), title_font=dict(color="#171717"), gridcolor="#e7e2d8")
+                    fig.update_yaxes(tickfont=dict(color="#171717"), title_font=dict(color="#171717"), gridcolor="#e7e2d8")
                     st.plotly_chart(fig, width="stretch")
                 else:
                     st.info("No distribution available for this dry-run.")
@@ -1448,7 +1653,7 @@ def render_strategy_workbench() -> None:
                         x="symbol",
                         y="share_of_positive_net",
                         color="net_return",
-                        color_continuous_scale=["#f97316", "#16a34a"],
+                        color_continuous_scale=["#d97706", "#0f9f75"],
                         hover_data=["entry_date", "exit_date", "net_return"],
                     )
                     fig.update_layout(
@@ -1456,14 +1661,14 @@ def render_strategy_workbench() -> None:
                         showlegend=False,
                         paper_bgcolor="rgba(0,0,0,0)",
                         plot_bgcolor="rgba(0,0,0,0)",
-                        font=dict(color="#0f172a", family="Inter"),
+                        font=dict(color="#171717", family="Instrument Sans"),
                         xaxis_title="Symbol",
                         yaxis_title="Share of positive net",
                         margin=dict(l=10, r=10, t=28, b=10),
                     )
-                    fig.update_coloraxes(colorbar_tickfont=dict(color="#0f172a"), colorbar_title_font=dict(color="#0f172a"))
-                    fig.update_xaxes(tickfont=dict(color="#0f172a"), title_font=dict(color="#0f172a"), gridcolor="#dbe3ef")
-                    fig.update_yaxes(tickfont=dict(color="#0f172a"), title_font=dict(color="#0f172a"), gridcolor="#dbe3ef")
+                    fig.update_coloraxes(colorbar_tickfont=dict(color="#171717"), colorbar_title_font=dict(color="#171717"))
+                    fig.update_xaxes(tickfont=dict(color="#171717"), title_font=dict(color="#171717"), gridcolor="#e7e2d8")
+                    fig.update_yaxes(tickfont=dict(color="#171717"), title_font=dict(color="#171717"), gridcolor="#e7e2d8")
                     st.plotly_chart(fig, width="stretch")
                 else:
                     st.info("No winners available for this dry-run.")
