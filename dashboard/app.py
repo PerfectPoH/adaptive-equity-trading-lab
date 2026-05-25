@@ -10,7 +10,9 @@ import streamlit as st
 
 from dashboard.lab_dashboard_data import (
     STRATEGY_PROFILES,
+    WORKBENCH_TEMPLATES,
     build_strategy_chart_story,
+    build_workbench_manifest,
     governance_metrics,
     load_dashboard_payload,
     project_capability_rows,
@@ -21,6 +23,8 @@ from dashboard.lab_dashboard_data import (
 
 
 st.set_page_config(page_title="Adaptive Equity Trading Lab", layout="wide", initial_sidebar_state="expanded")
+
+SECTIONS = ["Command Center", "Strategies", "Results & Data", "Project Anatomy", "Strategy Workbench"]
 
 
 def inject_theme() -> None:
@@ -117,6 +121,28 @@ def inject_theme() -> None:
           padding: 10px 12px;
           margin-bottom: 16px;
           box-shadow: 0 10px 28px rgba(15, 23, 42, .06);
+        }
+        .main-nav-card {
+          border: 1px solid var(--lab-line);
+          border-radius: 8px;
+          background: #ffffff;
+          padding: 10px 12px 2px;
+          margin-bottom: 20px;
+          box-shadow: 0 10px 28px rgba(15, 23, 42, .05);
+        }
+        .main-nav-card [role="radiogroup"] {
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+        .main-nav-card [role="radiogroup"] label {
+          border: 1px solid var(--lab-line);
+          border-radius: 8px;
+          padding: 8px 12px;
+          background: #f8fafc;
+        }
+        .main-nav-card [role="radiogroup"] label:has(input:checked) {
+          border-color: #93c5fd;
+          background: #eff6ff;
         }
         .lab-brand {
           font-family: "Roboto Mono", monospace;
@@ -350,6 +376,19 @@ def shell_nav(section: str) -> None:
         """,
         unsafe_allow_html=True,
     )
+
+
+def main_navigation(current_section: str) -> str:
+    st.markdown('<div class="main-nav-card">', unsafe_allow_html=True)
+    selected = st.radio(
+        "Primary navigation",
+        SECTIONS,
+        index=SECTIONS.index(current_section) if current_section in SECTIONS else 0,
+        horizontal=True,
+        label_visibility="collapsed",
+    )
+    st.markdown("</div>", unsafe_allow_html=True)
+    return selected
 
 
 def metric_card(label: str, value: str | int | float, note: str) -> None:
@@ -831,14 +870,77 @@ def render_lab_explainer(payload: dict[str, object]) -> None:
     )
 
 
-def sidebar_navigation(payload: dict[str, object]) -> str:
+def render_strategy_workbench() -> None:
+    st.header("Strategy Workbench")
+    st.markdown(
+        """
+        <div class="callout">
+        This is the first step of the next phase: a user-facing strategy builder. For now it creates a governed
+        strategy manifest and explains the data/gate contract before any backtest or provider query can run.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    left, right = st.columns([1, 1])
+    with left:
+        st.subheader("Strategy Draft")
+        name = st.text_input("Strategy name", value="My falsifiable strategy")
+        template = st.selectbox("Strategy template", list(WORKBENCH_TEMPLATES.keys()))
+        universe = st.selectbox(
+            "Universe",
+            [
+                "large-cap / ETF clean-data sandbox",
+                "small-cap active-only exploratory sandbox",
+                "local archived Databento panel",
+                "custom universe pending PIT validation",
+            ],
+        )
+        holding_period = st.slider("Holding period days", min_value=1, max_value=180, value=21)
+        cost_bps = st.slider("Round-trip cost model (bps)", min_value=0, max_value=1000, value=500, step=25)
+        provider_query = st.checkbox("Allow external provider query after pre-run gate", value=False)
+    with right:
+        st.subheader("Governance Preview")
+        manifest = build_workbench_manifest(
+            name=name,
+            template=template,
+            universe=universe,
+            holding_period_days=holding_period,
+            cost_bps=cost_bps,
+            allow_provider_query=provider_query,
+        )
+        st.json(manifest)
+
+    st.subheader("What The Builder Will Enforce")
+    checks = [
+        ("Pre-run gate first", "No backtest and no provider query before the manifest is frozen."),
+        ("Data contract", "The UI must declare whether the strategy needs PIT, RTH, delisted, or intraday data."),
+        ("Cost realism", "The selected cost model is part of the hypothesis, not an after-the-fact adjustment."),
+        ("No silent promotion", "The workbench can generate candidates, but promotion stays false until gates pass."),
+    ]
+    st.markdown('<div class="capability-grid">', unsafe_allow_html=True)
+    for title, body in checks:
+        st.markdown(
+            f"""
+            <div class="capability">
+              <div class="strategy-family">Workbench guardrail</div>
+              <div style="font-family:Exo,system-ui,sans-serif;font-weight:800;margin:8px 0;">{title}</div>
+              <div class="small-muted">{body}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    st.markdown("</div>", unsafe_allow_html=True)
+
+
+def sidebar_navigation(payload: dict[str, object], current_section: str) -> str:
     metrics = governance_metrics(payload)
     st.sidebar.markdown("### Adaptive Lab")
     st.sidebar.caption("Research console")
     section = st.sidebar.radio(
         "Navigate",
-        ["Command Center", "Strategies", "Results & Data", "Project Anatomy"],
-        index=0,
+        SECTIONS,
+        index=SECTIONS.index(current_section) if current_section in SECTIONS else 0,
         label_visibility="collapsed",
     )
     st.sidebar.markdown("---")
@@ -865,7 +967,13 @@ def sidebar_navigation(payload: dict[str, object]) -> str:
 def main() -> None:
     inject_theme()
     payload = load_dashboard_payload(Path("."))
-    section = sidebar_navigation(payload)
+    if "active_section" not in st.session_state:
+        st.session_state["active_section"] = "Command Center"
+    sidebar_section = sidebar_navigation(payload, st.session_state["active_section"])
+    if sidebar_section != st.session_state["active_section"]:
+        st.session_state["active_section"] = sidebar_section
+    section = main_navigation(st.session_state["active_section"])
+    st.session_state["active_section"] = section
     shell_nav(section)
 
     if section == "Command Center":
@@ -874,8 +982,10 @@ def main() -> None:
         render_strategy_atlas(payload)
     elif section == "Results & Data":
         render_results_and_data(payload)
-    else:
+    elif section == "Project Anatomy":
         render_lab_explainer(payload)
+    else:
+        render_strategy_workbench()
 
 
 if __name__ == "__main__":

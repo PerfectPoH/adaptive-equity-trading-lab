@@ -7,6 +7,8 @@ import pandas as pd
 
 from dashboard.lab_dashboard_data import (
     STRATEGY_PROFILES,
+    WORKBENCH_TEMPLATES,
+    build_workbench_manifest,
     build_strategy_chart_story,
     classify_strategy_status,
     governance_metrics,
@@ -99,6 +101,24 @@ def test_project_lifecycle_documents_research_arc() -> None:
     assert {"phase", "idea_source", "what_happened", "lesson"}.issubset(rows.columns)
     assert any(rows["phase"].str.contains("Momentum", case=False))
     assert any(rows["lesson"].str.contains("data", case=False))
+
+
+def test_build_workbench_manifest_starts_unpromoted_and_gate_first() -> None:
+    manifest = build_workbench_manifest(
+        name="My gap probe",
+        template="Mean Reversion",
+        universe="small-cap active-only sandbox",
+        holding_period_days=3,
+        cost_bps=500,
+        allow_provider_query=False,
+    )
+
+    assert "Mean Reversion" in WORKBENCH_TEMPLATES
+    assert manifest["strategy_name"] == "My gap probe"
+    assert manifest["promotion_allowed"] is False
+    assert manifest["provider_query_allowed"] is False
+    assert manifest["first_gate"] == "cost_realism_gate"
+    assert "pre-run gate" in manifest["next_step"]
 
 
 def test_build_strategy_chart_story_uses_real_ohlc_window(tmp_path: Path) -> None:

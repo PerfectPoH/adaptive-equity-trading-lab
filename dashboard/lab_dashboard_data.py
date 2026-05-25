@@ -101,6 +101,30 @@ STRATEGY_PROFILES: list[StrategyProfile] = [
 ]
 
 
+WORKBENCH_TEMPLATES: dict[str, dict[str, Any]] = {
+    "Momentum": {
+        "signal": "Rank symbols by trailing return and test top-N long-only continuation.",
+        "required_data": ["daily OHLCV", "survivorship-aware universe", "corporate action adjustment"],
+        "default_gate": "outlier_dependency_gate",
+    },
+    "Mean Reversion": {
+        "signal": "Find extreme dislocations and test bounded reversion after a confirmation trigger.",
+        "required_data": ["RTH timestamped bars", "spread/slippage proxy", "event purge rules"],
+        "default_gate": "cost_realism_gate",
+    },
+    "Catalyst": {
+        "signal": "Map an external event to a reaction window and require a separate direction source.",
+        "required_data": ["event timestamp", "reaction session mapping", "point-in-time direction source"],
+        "default_gate": "lookahead_bias_gate",
+    },
+    "Regime Filter": {
+        "signal": "Classify market state first, then allow or block strategy families by context.",
+        "required_data": ["daily OHLCV", "volatility features", "drawdown features"],
+        "default_gate": "regime_scope_gate",
+    },
+}
+
+
 def load_json(path: Path) -> dict[str, Any]:
     if not path.exists():
         return {}
@@ -260,6 +284,31 @@ def project_lifecycle_rows() -> pd.DataFrame:
             },
         ]
     )
+
+
+def build_workbench_manifest(
+    *,
+    name: str,
+    template: str,
+    universe: str,
+    holding_period_days: int,
+    cost_bps: int,
+    allow_provider_query: bool,
+) -> dict[str, Any]:
+    selected = WORKBENCH_TEMPLATES.get(template, WORKBENCH_TEMPLATES["Momentum"])
+    return {
+        "strategy_name": name.strip() or "UNTITLED_STRATEGY",
+        "template": template,
+        "universe": universe,
+        "holding_period_days": int(holding_period_days),
+        "cost_bps": int(cost_bps),
+        "provider_query_allowed": bool(allow_provider_query),
+        "promotion_allowed": False,
+        "signal_contract": selected["signal"],
+        "required_data": selected["required_data"],
+        "first_gate": selected["default_gate"],
+        "next_step": "Generate a pre-run gate before any backtest or provider query.",
+    }
 
 
 def build_strategy_chart_story(profile_key: str, *, price_file: str | Path = PRICE_FILE) -> dict[str, Any]:
