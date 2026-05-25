@@ -157,19 +157,22 @@ def inject_theme() -> None:
           min-height: 42px;
         }
         div[data-testid="stButton"] > button[kind="secondary"] {
-          background: #111827;
-          color: #f8fafc;
-          border-color: #334155;
+          background: #ffffff;
+          color: #0f172a;
+          border-color: #94a3b8;
         }
         div[data-testid="stButton"] > button[kind="secondary"]:hover {
-          background: #1d4ed8;
-          color: #ffffff;
+          background: #eff6ff;
+          color: #1d4ed8;
           border-color: #2563eb;
         }
         div[data-testid="stButton"] > button[kind="primary"] {
           background: #2563eb;
           color: #ffffff;
           border-color: #2563eb;
+        }
+        div[data-testid="stButton"] > button * {
+          color: inherit !important;
         }
         div[data-testid="stSelectbox"] label,
         div[data-testid="stTextInput"] label,
@@ -1390,28 +1393,55 @@ def render_strategy_workbench() -> None:
             top_winner_rows = pd.DataFrame(visual_diagnostics.get("top_winners", []))
             with viz_left:
                 st.markdown("**Trade distribution**")
+                st.caption(
+                    "Read this as strategy health: too many bars left of 0% means the rule usually loses; bars to the far right show rare jackpot behavior."
+                )
                 if not distribution_rows.empty:
+                    distribution_rows = distribution_rows.copy()
+                    distribution_rows["zone"] = distribution_rows["bucket"].map(
+                        {
+                            "<= -20%": "large loss",
+                            "-20% to -10%": "loss",
+                            "-10% to 0%": "small loss",
+                            "0% to 10%": "small win",
+                            "10% to 25%": "win",
+                            "> 25%": "large win",
+                        }
+                    )
                     fig = px.bar(
                         distribution_rows,
                         x="bucket",
                         y="trade_count",
-                        color="trade_count",
-                        color_continuous_scale=["#dbeafe", "#2563eb"],
+                        color="zone",
+                        color_discrete_map={
+                            "large loss": "#991b1b",
+                            "loss": "#dc2626",
+                            "small loss": "#f97316",
+                            "small win": "#60a5fa",
+                            "win": "#2563eb",
+                            "large win": "#16a34a",
+                        },
                     )
                     fig.update_layout(
                         height=310,
                         showlegend=False,
                         paper_bgcolor="rgba(0,0,0,0)",
                         plot_bgcolor="rgba(0,0,0,0)",
+                        font=dict(color="#0f172a", family="Inter"),
                         xaxis_title="Net return bucket",
                         yaxis_title="Trades",
-                        margin=dict(l=10, r=10, t=20, b=10),
+                        margin=dict(l=10, r=10, t=28, b=10),
                     )
+                    fig.update_xaxes(tickfont=dict(color="#0f172a"), title_font=dict(color="#0f172a"), gridcolor="#dbe3ef")
+                    fig.update_yaxes(tickfont=dict(color="#0f172a"), title_font=dict(color="#0f172a"), gridcolor="#dbe3ef")
                     st.plotly_chart(fig, width="stretch")
                 else:
                     st.info("No distribution available for this dry-run.")
             with viz_right:
                 st.markdown("**Top winner contribution**")
+                st.caption(
+                    "Read this as fragility: if one symbol dominates positive return, the result may be a single lucky outlier rather than a repeatable rule."
+                )
                 if not top_winner_rows.empty:
                     fig = px.bar(
                         top_winner_rows.head(8),
@@ -1426,10 +1456,14 @@ def render_strategy_workbench() -> None:
                         showlegend=False,
                         paper_bgcolor="rgba(0,0,0,0)",
                         plot_bgcolor="rgba(0,0,0,0)",
+                        font=dict(color="#0f172a", family="Inter"),
                         xaxis_title="Symbol",
                         yaxis_title="Share of positive net",
-                        margin=dict(l=10, r=10, t=20, b=10),
+                        margin=dict(l=10, r=10, t=28, b=10),
                     )
+                    fig.update_coloraxes(colorbar_tickfont=dict(color="#0f172a"), colorbar_title_font=dict(color="#0f172a"))
+                    fig.update_xaxes(tickfont=dict(color="#0f172a"), title_font=dict(color="#0f172a"), gridcolor="#dbe3ef")
+                    fig.update_yaxes(tickfont=dict(color="#0f172a"), title_font=dict(color="#0f172a"), gridcolor="#dbe3ef")
                     st.plotly_chart(fig, width="stretch")
                 else:
                     st.info("No winners available for this dry-run.")
