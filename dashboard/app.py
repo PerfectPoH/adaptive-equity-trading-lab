@@ -169,6 +169,45 @@ def inject_theme() -> None:
           color: #ffffff;
           border-color: #2563eb;
         }
+        div[data-testid="stSelectbox"] label,
+        div[data-testid="stTextInput"] label,
+        div[data-testid="stTextArea"] label,
+        div[data-testid="stSlider"] label,
+        div[data-testid="stRadio"] label,
+        div[data-testid="stRadio"] p,
+        div[data-testid="stMarkdownContainer"] p {
+          color: #0f172a;
+        }
+        div[data-testid="stSelectbox"] [data-baseweb="select"] > div,
+        div[data-testid="stTextInput"] input,
+        div[data-testid="stTextArea"] textarea {
+          background: #ffffff;
+          color: #0f172a;
+          border: 1px solid #cbd5e1;
+          border-radius: 8px;
+        }
+        div[data-testid="stSelectbox"] [data-baseweb="select"] svg {
+          color: #0f172a;
+          fill: #0f172a;
+        }
+        div[data-testid="stTextArea"] textarea::placeholder,
+        div[data-testid="stTextInput"] input::placeholder {
+          color: #64748b;
+          opacity: 1;
+        }
+        div[data-testid="stRadio"] [role="radiogroup"] label {
+          background: transparent;
+          border: 0;
+          color: #0f172a;
+        }
+        div[data-testid="stRadio"] [role="radiogroup"] label span,
+        div[data-testid="stRadio"] [role="radiogroup"] label p {
+          color: #0f172a;
+          font-weight: 600;
+        }
+        div[data-testid="stSlider"] [data-testid="stTickBar"] {
+          color: #334155;
+        }
         .lab-brand {
           font-family: "Roboto Mono", monospace;
           font-size: 12px;
