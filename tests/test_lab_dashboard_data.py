@@ -114,10 +114,14 @@ def test_build_workbench_manifest_starts_unpromoted_and_gate_first() -> None:
     )
 
     assert "Mean Reversion" in WORKBENCH_TEMPLATES
+    assert len(WORKBENCH_TEMPLATES) >= 10
     assert manifest["strategy_name"] == "My gap probe"
     assert manifest["promotion_allowed"] is False
     assert manifest["provider_query_allowed"] is False
     assert manifest["first_gate"] == "cost_realism_gate"
+    assert manifest["entry_rule"]
+    assert manifest["exit_rule"]
+    assert manifest["chart_requirement"]
     assert "pre-run gate" in manifest["next_step"]
 
 

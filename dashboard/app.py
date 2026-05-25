@@ -126,23 +126,17 @@ def inject_theme() -> None:
           border: 1px solid var(--lab-line);
           border-radius: 8px;
           background: #ffffff;
-          padding: 10px 12px 2px;
+          padding: 14px;
           margin-bottom: 20px;
           box-shadow: 0 10px 28px rgba(15, 23, 42, .05);
         }
-        .main-nav-card [role="radiogroup"] {
-          gap: 8px;
-          flex-wrap: wrap;
-        }
-        .main-nav-card [role="radiogroup"] label {
-          border: 1px solid var(--lab-line);
-          border-radius: 8px;
-          padding: 8px 12px;
-          background: #f8fafc;
-        }
-        .main-nav-card [role="radiogroup"] label:has(input:checked) {
-          border-color: #93c5fd;
-          background: #eff6ff;
+        .nav-help {
+          font-family: "Roboto Mono", monospace;
+          font-size: 12px;
+          color: var(--lab-muted);
+          margin-bottom: 8px;
+          text-transform: uppercase;
+          font-weight: 700;
         }
         .lab-brand {
           font-family: "Roboto Mono", monospace;
@@ -344,6 +338,41 @@ def inject_theme() -> None:
           padding: 14px;
           min-height: 120px;
         }
+        .workbench-card {
+          border: 1px solid var(--lab-line);
+          border-radius: 8px;
+          background: #ffffff;
+          padding: 18px;
+          box-shadow: 0 14px 34px rgba(15, 23, 42, .05);
+        }
+        .workbench-step {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 26px;
+          height: 26px;
+          border-radius: 999px;
+          background: var(--lab-blue);
+          color: #ffffff;
+          font-family: "Roboto Mono", monospace;
+          font-size: 12px;
+          font-weight: 800;
+          margin-right: 8px;
+        }
+        .rule-card {
+          border: 1px solid #bfdbfe;
+          border-radius: 8px;
+          background: #eff6ff;
+          padding: 14px;
+          min-height: 110px;
+        }
+        .rule-title {
+          font-family: "Exo", system-ui, sans-serif;
+          color: #0f172a;
+          font-weight: 800;
+          font-size: 18px;
+          margin-bottom: 6px;
+        }
         div[data-testid="stMetric"] {
           border: 1px solid var(--lab-line);
           border-radius: 8px;
@@ -379,16 +408,25 @@ def shell_nav(section: str) -> None:
 
 
 def main_navigation(current_section: str) -> str:
-    st.markdown('<div class="main-nav-card">', unsafe_allow_html=True)
-    selected = st.radio(
-        "Primary navigation",
-        SECTIONS,
-        index=SECTIONS.index(current_section) if current_section in SECTIONS else 0,
-        horizontal=True,
-        label_visibility="collapsed",
+    st.markdown(
+        """
+        <div class="main-nav-card">
+          <div class="nav-help">Primary navigation stays usable even if the sidebar is closed</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
-    st.markdown("</div>", unsafe_allow_html=True)
-    return selected
+    selected = current_section if current_section in SECTIONS else "Command Center"
+    columns = st.columns([1.15, 0.9, 1.05, 1.05, 1.25])
+    for column, section_name in zip(columns, SECTIONS):
+        with column:
+            button_type = "primary" if section_name == selected else "secondary"
+            st.button(section_name, type=button_type, width="stretch", key=f"main_nav_{section_name}", on_click=set_active_section, args=(section_name,))
+    return st.session_state.get("active_section", selected)
+
+
+def set_active_section(section_name: str) -> None:
+    st.session_state["active_section"] = section_name
 
 
 def metric_card(label: str, value: str | int | float, note: str) -> None:
@@ -875,18 +913,42 @@ def render_strategy_workbench() -> None:
     st.markdown(
         """
         <div class="callout">
-        This is the first step of the next phase: a user-facing strategy builder. For now it creates a governed
-        strategy manifest and explains the data/gate contract before any backtest or provider query can run.
+        This is the first step of the next phase: a user-facing strategy builder. It does not run a backtest yet.
+        It turns a trading idea into a readable, governed hypothesis: what signal you mean, what data it needs,
+        where a buy would happen, where the exit would happen, and which gate must stop bad research first.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
+    st.markdown(
+        f"""
+        <div class="workbench-card">
+          <div class="eyebrow">Template catalog</div>
+          <div class="strategy-title" style="font-size:30px;">{len(WORKBENCH_TEMPLATES)} strategy families, not 4</div>
+          <div class="strategy-copy">
+            These are not promoted strategies. They are starting contracts for future tests: momentum, reversion,
+            catalysts, PEAD, insider filings, dollar bars, risk regimes, biotech calendars, and activist filings.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.markdown('<div class="results-spacer"></div>', unsafe_allow_html=True)
+
     left, right = st.columns([1, 1])
     with left:
         st.subheader("Strategy Draft")
+        st.markdown('<span class="workbench-step">1</span><strong>Name the hypothesis</strong>', unsafe_allow_html=True)
+        st.caption("Use a name that can survive in the ledger, not a vague note like 'new idea'.")
         name = st.text_input("Strategy name", value="My falsifiable strategy")
+        st.markdown('<span class="workbench-step">2</span><strong>Choose the strategy family</strong>', unsafe_allow_html=True)
+        st.caption("The family defines the first data contract and the first blocker the lab will apply.")
         template = st.selectbox("Strategy template", list(WORKBENCH_TEMPLATES.keys()))
+        selected_template = WORKBENCH_TEMPLATES[template]
+        st.info(selected_template["signal"])
+        st.markdown('<span class="workbench-step">3</span><strong>Choose the universe</strong>', unsafe_allow_html=True)
+        st.caption("This controls whether the result can ever be promotable or is only exploratory.")
         universe = st.selectbox(
             "Universe",
             [
@@ -896,11 +958,16 @@ def render_strategy_workbench() -> None:
                 "custom universe pending PIT validation",
             ],
         )
+        st.markdown('<span class="workbench-step">4</span><strong>Set the test assumptions</strong>', unsafe_allow_html=True)
+        st.caption("These numbers become part of the hypothesis. They cannot be tuned after seeing the result.")
+        st.markdown("**Holding period**: how long the simulated position is allowed to stay open.")
         holding_period = st.slider("Holding period days", min_value=1, max_value=180, value=21)
+        st.markdown("**Cost model**: round-trip execution friction. Small-cap tests should stay conservative.")
         cost_bps = st.slider("Round-trip cost model (bps)", min_value=0, max_value=1000, value=500, step=25)
+        st.markdown("**Provider query**: external data must be explicitly allowed and gated before any call.")
         provider_query = st.checkbox("Allow external provider query after pre-run gate", value=False)
     with right:
-        st.subheader("Governance Preview")
+        st.subheader("Readable Preview")
         manifest = build_workbench_manifest(
             name=name,
             template=template,
@@ -909,7 +976,54 @@ def render_strategy_workbench() -> None:
             cost_bps=cost_bps,
             allow_provider_query=provider_query,
         )
-        st.json(manifest)
+        st.markdown(
+            f"""
+            <div class="workbench-card">
+              <div class="eyebrow">Strategy contract</div>
+              <div class="strategy-title" style="font-size:28px;">{manifest["strategy_name"]}</div>
+              <div class="strategy-copy"><strong>Template:</strong> {manifest["template"]}</div>
+              <div class="strategy-copy"><strong>Universe:</strong> {manifest["universe"]}</div>
+              <div class="strategy-copy"><strong>First gate:</strong> {manifest["first_gate"]}</div>
+              <div class="strategy-copy"><strong>Promotion:</strong> locked to <code>false</code> until validation passes.</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        rule_cols = st.columns(2)
+        with rule_cols[0]:
+            st.markdown(
+                f"""
+                <div class="rule-card">
+                  <div class="rule-title">Entry Rule</div>
+                  <div class="small-muted">{manifest["entry_rule"]}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+        with rule_cols[1]:
+            st.markdown(
+                f"""
+                <div class="rule-card">
+                  <div class="rule-title">Exit Rule</div>
+                  <div class="small-muted">{manifest["exit_rule"]}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+        st.markdown(
+            f"""
+            <div class="callout danger-callout">
+              <strong>Known failure mode:</strong> {manifest["known_failure_mode"]}
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.markdown("**Required data**")
+        st.write(", ".join(manifest["required_data"]))
+        st.markdown("**What the chart must show**")
+        st.write(manifest["chart_requirement"])
+        with st.expander("Open raw manifest JSON"):
+            st.json(manifest)
 
     st.subheader("What The Builder Will Enforce")
     checks = [
@@ -931,6 +1045,19 @@ def render_strategy_workbench() -> None:
             unsafe_allow_html=True,
         )
     st.markdown("</div>", unsafe_allow_html=True)
+
+    with st.expander("Open full template library"):
+        template_rows = []
+        for template_name, template_data in WORKBENCH_TEMPLATES.items():
+            template_rows.append(
+                {
+                    "template": template_name,
+                    "signal": template_data["signal"],
+                    "first_gate": template_data["default_gate"],
+                    "known_failure_mode": template_data["failure_mode"],
+                }
+            )
+        st.dataframe(pd.DataFrame(template_rows), width="stretch", hide_index=True)
 
 
 def sidebar_navigation(payload: dict[str, object], current_section: str) -> str:
