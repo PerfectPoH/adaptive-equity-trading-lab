@@ -11,6 +11,7 @@ import pandas as pd
 EXECUTION_OUTPUTS_DIR = Path("experiments/provider_aware_research/execution_outputs")
 FINAL_STATUS_DIR = EXECUTION_OUTPUTS_DIR / "LAB-FINAL-STATUS-PACK-RUN-001"
 FIVE_POINT_DIR = EXECUTION_OUTPUTS_DIR / "TRANSITION-FIVE-POINT-BATCH-RUN-001"
+PRICE_FILE = Path("experiments/provider_aware_research/data_inputs/databento_xmom_20260520/prices.csv")
 
 
 @dataclass(frozen=True)
@@ -216,6 +217,109 @@ def project_capability_rows() -> pd.DataFrame:
             {"area": "Future UX", "capability": "User strategy builder and result explorer", "state": "planned"},
         ]
     )
+
+
+def build_strategy_chart_story(profile_key: str, *, price_file: str | Path = PRICE_FILE) -> dict[str, Any]:
+    profile = next(item for item in STRATEGY_PROFILES if item.key == profile_key)
+    prices = load_csv(Path(price_file))
+    if prices.empty:
+        return {
+            "title": f"{profile.name} / no local price panel",
+            "symbol": "",
+            "prices": pd.DataFrame(columns=["date", "open", "high", "low", "close", "volume"]),
+            "markers": [],
+            "explanation": "No local OHLCV panel was available for this chart story.",
+        }
+    prices = prices.copy()
+    prices["date"] = pd.to_datetime(prices["date"])
+    symbol, preferred_date = _chart_seed(profile_key)
+    if symbol not in set(prices["symbol"].astype(str)):
+        symbol = str(prices["symbol"].iloc[0])
+    symbol_prices = prices[prices["symbol"].astype(str) == symbol].sort_values("date").reset_index(drop=True)
+    center = pd.Timestamp(preferred_date)
+    if not ((symbol_prices["date"] - center).abs().min() <= pd.Timedelta(days=45)):
+        center = symbol_prices.iloc[min(80, len(symbol_prices) - 1)]["date"]
+    window = symbol_prices[(symbol_prices["date"] >= center - pd.Timedelta(days=45)) & (symbol_prices["date"] <= center + pd.Timedelta(days=45))].copy()
+    if len(window) < 12:
+        window = symbol_prices.head(min(60, len(symbol_prices))).copy()
+    markers = _chart_markers(profile_key, window)
+    return {
+        "title": _chart_title(profile_key, profile.name, symbol),
+        "symbol": symbol,
+        "prices": window[["date", "open", "high", "low", "close", "volume"]].reset_index(drop=True),
+        "markers": markers,
+        "explanation": _chart_explanation(profile_key),
+    }
+
+
+def _chart_seed(profile_key: str) -> tuple[str, str]:
+    seeds = {
+        "xmom": ("CRMD", "2022-04-04"),
+        "gaprev": ("CABA", "2022-07-28"),
+        "sec8k": ("AEHR", "2023-01-06"),
+        "pead": ("CRMD", "2024-05-09"),
+        "lowvol": ("IOVA", "2022-05-04"),
+        "form4": ("AEHR", "2023-03-31"),
+        "dollarbar": ("ARRY", "2024-02-28"),
+        "regime": ("IWM", "2024-08-05"),
+    }
+    return seeds.get(profile_key, ("AEHR", "2023-01-06"))
+
+
+def _chart_markers(profile_key: str, prices: pd.DataFrame) -> list[dict[str, Any]]:
+    if prices.empty:
+        return []
+    count = len(prices)
+    buy_idx = min(max(count // 3, 0), count - 1)
+    exit_idx = min(max((count * 2) // 3, 0), count - 1)
+    block_idx = count - 1
+    labels = {
+        "xmom": ("BUY: top momentum candidate", "EXIT: 21d hold", "BLOCK: ex-top3 fragility"),
+        "gaprev": ("WATCH: gap-down setup", "BUY: reclaim attempt", "BLOCK: cost realism"),
+        "sec8k": ("EVENT: 8-K shock", "ORACLE: 09:45 tape read", "BLOCK: direction failed"),
+        "pead": ("EVENT: earnings window", "NEED: SUE direction", "BLOCK: no PIT consensus"),
+        "lowvol": ("FILTER: tradability pass", "BUY: low-vol basket", "BLOCK: negative net"),
+        "form4": ("FILING: Form 4 scan", "NEED: cluster buy", "BLOCK: no events"),
+        "dollarbar": ("TRANSFORM: dollar bars", "PROBE: micro-reversion", "BLOCK: net negative"),
+        "regime": ("CLASSIFY: regime", "OVERLAY: risk rules", "MODE: diagnostics only"),
+    }
+    first, second, third = labels.get(profile_key, ("Signal", "Decision", "Gate"))
+    return [
+        _marker(prices.iloc[buy_idx], first, "buy"),
+        _marker(prices.iloc[exit_idx], second, "exit"),
+        _marker(prices.iloc[block_idx], third, "block"),
+    ]
+
+
+def _marker(row: pd.Series, label: str, kind: str) -> dict[str, Any]:
+    return {
+        "date": pd.Timestamp(row["date"]).date().isoformat(),
+        "price": float(row["close"]),
+        "label": label,
+        "kind": kind,
+    }
+
+
+def _chart_title(profile_key: str, strategy_name: str, symbol: str) -> str:
+    if profile_key == "pead":
+        return f"{strategy_name}: why the chart is not enough ({symbol})"
+    if profile_key in {"form4", "sec8k"}:
+        return f"{strategy_name}: catalyst mapped onto price ({symbol})"
+    return f"{strategy_name}: signal anatomy on {symbol}"
+
+
+def _chart_explanation(profile_key: str) -> str:
+    explanations = {
+        "xmom": "The attractive section is not automatically alpha: the lab shows the apparent momentum depended on a few extreme winners.",
+        "gaprev": "The buy zone only exists after RTH remapping. Daily gaps were rejected because they mixed pre-market and regular-session reality.",
+        "sec8k": "The event produces volatility, but the opening tape did not supply a reliable long-only direction.",
+        "pead": "A price reaction can illustrate the event, but the strategy remains blocked without point-in-time consensus surprise.",
+        "lowvol": "The chart shows a tradable-looking segment, but the basket failed both gross/net and median gates.",
+        "form4": "The visual idea is simple: buy after verified insider clusters. The tested universe produced no tradable cluster panel.",
+        "dollarbar": "Dollar bars improved statistical stability, but the directional micro-reversion probe still failed after costs.",
+        "regime": "This is no longer a buy/sell strategy: the chart shows how the lab now classifies context before allowing research actions.",
+    }
+    return explanations.get(profile_key, "The chart demonstrates the strategy logic and the governance gate that controlled it.")
 
 
 def _match_strategy_rows(ledger: pd.DataFrame, profile: StrategyProfile) -> pd.DataFrame:

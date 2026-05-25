@@ -7,6 +7,7 @@ import pandas as pd
 
 from dashboard.lab_dashboard_data import (
     STRATEGY_PROFILES,
+    build_strategy_chart_story,
     classify_strategy_status,
     governance_metrics,
     load_dashboard_payload,
@@ -88,3 +89,23 @@ def test_project_capabilities_include_future_strategy_builder_as_planned() -> No
 
     assert "Future UX" in set(rows["area"])
     assert "planned" in set(rows["state"])
+
+
+def test_build_strategy_chart_story_uses_real_ohlc_window(tmp_path: Path) -> None:
+    prices = tmp_path / "prices.csv"
+    pd.DataFrame(
+        [
+            {"symbol": "AEHR", "date": "2026-01-01", "open": 10.0, "high": 10.5, "low": 9.8, "close": 10.2, "volume": 1000},
+            {"symbol": "AEHR", "date": "2026-01-02", "open": 10.2, "high": 11.0, "low": 10.1, "close": 10.8, "volume": 2000},
+            {"symbol": "AEHR", "date": "2026-01-05", "open": 10.8, "high": 11.2, "low": 10.0, "close": 10.1, "volume": 3000},
+            {"symbol": "AEHR", "date": "2026-01-06", "open": 10.1, "high": 10.4, "low": 9.9, "close": 10.0, "volume": 1500},
+        ]
+    ).to_csv(prices, index=False)
+
+    story = build_strategy_chart_story("xmom", price_file=prices)
+
+    assert story["symbol"] == "AEHR"
+    assert {"date", "open", "high", "low", "close", "volume"}.issubset(story["prices"].columns)
+    assert len(story["markers"]) >= 2
+    assert any(marker["kind"] == "buy" for marker in story["markers"])
+    assert story["title"]
