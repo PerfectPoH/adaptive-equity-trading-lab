@@ -341,6 +341,35 @@ def test_workbench_expanded_local_research_scope_combines_local_panels() -> None
     assert preview["simulated_trades"] >= 400
 
 
+def test_workbench_templates_use_distinct_local_rule_profiles() -> None:
+    previews = []
+    for template in WORKBENCH_TEMPLATES:
+        manifest = build_workbench_manifest(
+            name=f"{template} local dry-run",
+            template=template,
+            universe="expanded local research sandbox",
+            holding_period_days=21,
+            cost_bps=500,
+            allow_provider_query=True,
+        )
+        previews.append(build_controlled_backtest_preview(manifest, validate_workbench_manifest(manifest)))
+
+    profiles = {preview["local_data_summary"]["template_rule_profile"] for preview in previews}
+    result_shapes = {
+        (
+            preview["template"],
+            preview["local_data_summary"]["template_rule_profile"],
+            preview["simulated_trades"],
+            preview["gross_edge_proxy"],
+            preview["cost_breakdown"]["net_return_sum"],
+        )
+        for preview in previews
+    }
+
+    assert profiles == set(WORKBENCH_TEMPLATES)
+    assert len(result_shapes) == len(WORKBENCH_TEMPLATES)
+
+
 def test_persist_workbench_run_bundle_writes_manifest_gate_and_result(tmp_path: Path) -> None:
     manifest = build_workbench_manifest(
         name="Persisted strategy",

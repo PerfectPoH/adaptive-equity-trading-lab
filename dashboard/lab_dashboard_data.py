@@ -693,6 +693,7 @@ def _build_local_workbench_trades(manifest: dict[str, Any], *, price_file: str |
     holding = max(1, int(manifest["holding_period_days"]))
     cost_return = round(int(manifest["cost_bps"]) / 10000, 6)
     entry_step = max(5, holding // 2)
+    template_rule_profile = _workbench_template_rule_profile(str(manifest["template"]))
     trades: list[dict[str, Any]] = []
     for symbol, group in prices.groupby("symbol"):
         symbol_prices = group.sort_values("date").reset_index(drop=True)
@@ -720,6 +721,7 @@ def _build_local_workbench_trades(manifest: dict[str, Any], *, price_file: str |
                     "net_return": net_return,
                     "holding_days": int((symbol_prices.loc[exit_index, "date"] - symbol_prices.loc[entry_index, "date"]).days),
                     "rule": str(manifest["template"]),
+                    "template_rule_profile": template_rule_profile,
                     "entry_window_index": int(entry_index),
                 }
             )
@@ -728,6 +730,7 @@ def _build_local_workbench_trades(manifest: dict[str, Any], *, price_file: str |
         "rows": int(len(prices)),
         "price_file": str(price_file),
         "eligible_trades": len(trades),
+        "template_rule_profile": template_rule_profile,
         "data_scope": scope["data_scope"],
         "scope_explanation": scope["scope_explanation"],
         "selected_symbols": sorted(str(symbol) for symbol in prices["symbol"].unique()),
@@ -816,15 +819,61 @@ def _select_workbench_entry_indices(symbol_prices: pd.DataFrame, template: str, 
     if max_entry <= 1:
         return [1] if max_entry == 1 else []
     base_indices = list(range(1, max_entry + 1, step))
-    if template in {"Mean Reversion", "GapRev RTH Reversion"} and len(symbol_prices) > 3:
-        returns = symbol_prices["close"].astype(float).pct_change(2)
-        candidates = returns.iloc[: max_entry + 1].nsmallest(min(40, max(5, len(base_indices)))).index.tolist()
-        return sorted({max(1, min(int(candidate), max_entry)) for candidate in candidates})
-    if template in {"LowVol Tradability", "Regime Filter"} and len(symbol_prices) > 5:
-        volatility = symbol_prices["close"].astype(float).pct_change().rolling(3).std()
-        ranked = volatility.iloc[: max_entry + 1].dropna().nsmallest(min(40, max(5, len(base_indices)))).index.tolist()
-        return sorted({max(1, min(int(candidate), max_entry)) for candidate in ranked}) if ranked else base_indices
+    close = symbol_prices["close"].astype(float)
+    volume = symbol_prices["volume"].astype(float) if "volume" in symbol_prices.columns else pd.Series(1.0, index=symbol_prices.index)
+    one_day_return = close.pct_change()
+    two_day_return = close.pct_change(2)
+    five_day_return = close.pct_change(5)
+    ten_day_return = close.pct_change(10)
+    twenty_one_day_return = close.pct_change(21)
+    volatility = one_day_return.rolling(5).std()
+    dollar_volume = close * volume
+    volume_ratio = volume / volume.rolling(20, min_periods=3).mean()
+
+    if template == "Momentum":
+        return _ranked_entry_indices(twenty_one_day_return, max_entry, base_indices, largest=True, limit=90)
+    if template in {"Mean Reversion", "GapRev RTH Reversion"}:
+        return _ranked_entry_indices(two_day_return, max_entry, base_indices, largest=False, limit=70)
+    if template == "Catalyst":
+        event_pressure = one_day_return.abs() * volume_ratio.fillna(1.0)
+        return _ranked_entry_indices(event_pressure, max_entry, base_indices, largest=True, limit=55)
+    if template == "PEAD":
+        earnings_proxy = one_day_return.where(one_day_return > 0) * volume_ratio.fillna(1.0)
+        return _ranked_entry_indices(earnings_proxy, max_entry, base_indices, largest=True, limit=45)
+    if template == "Form 4 Cluster Buying":
+        accumulation_proxy = five_day_return.where(five_day_return > 0) / volatility.replace(0, pd.NA)
+        return _ranked_entry_indices(accumulation_proxy, max_entry, base_indices, largest=True, limit=35)
+    if template == "LowVol Tradability":
+        return _ranked_entry_indices(volatility, max_entry, base_indices, largest=False, limit=60)
+    if template == "Dollar-Bar Microstructure":
+        micro_reversion_proxy = dollar_volume.pct_change().where(one_day_return < 0)
+        return _ranked_entry_indices(micro_reversion_proxy, max_entry, base_indices, largest=True, limit=65)
+    if template == "Regime Filter":
+        regime_proxy = ten_day_return.where(volatility <= volatility.rolling(60, min_periods=10).median())
+        return _ranked_entry_indices(regime_proxy, max_entry, base_indices, largest=True, limit=50)
+    if template == "PDUFA Run-Up":
+        biotech_symbols = {"CABA", "CRMD", "IOVA"}
+        if str(symbol_prices["symbol"].iloc[0]).upper() not in biotech_symbols:
+            return []
+        return _ranked_entry_indices(twenty_one_day_return.where(twenty_one_day_return > 0), max_entry, base_indices, largest=True, limit=40)
+    if template == "13D Activist Follow-On":
+        activist_proxy = twenty_one_day_return.where(volume_ratio > 1.15)
+        return _ranked_entry_indices(activist_proxy, max_entry, base_indices, largest=True, limit=30)
     return base_indices
+
+
+def _ranked_entry_indices(series: pd.Series, max_entry: int, fallback: list[int], *, largest: bool, limit: int) -> list[int]:
+    candidates = series.iloc[: max_entry + 1].replace([float("inf"), float("-inf")], pd.NA).dropna()
+    if candidates.empty:
+        return fallback
+    ranked = candidates.nlargest(limit).index.tolist() if largest else candidates.nsmallest(limit).index.tolist()
+    return sorted({max(1, min(int(candidate), max_entry)) for candidate in ranked})
+
+
+def _workbench_template_rule_profile(template: str) -> str:
+    if template in WORKBENCH_TEMPLATES:
+        return template
+    return "Momentum"
 
 
 def _build_workbench_equity_curve(trades: list[dict[str, Any]]) -> list[dict[str, Any]]:
