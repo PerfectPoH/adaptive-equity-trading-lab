@@ -8,6 +8,7 @@ import pandas as pd
 from dashboard.lab_dashboard_data import (
     STRATEGY_PROFILES,
     WORKBENCH_TEMPLATES,
+    build_workbench_flow_nodes,
     build_workbench_manifest,
     build_strategy_chart_story,
     classify_strategy_status,
@@ -123,6 +124,11 @@ def test_build_workbench_manifest_starts_unpromoted_and_gate_first() -> None:
     assert manifest["exit_rule"]
     assert manifest["chart_requirement"]
     assert "pre-run gate" in manifest["next_step"]
+
+    flow_nodes = build_workbench_flow_nodes(manifest)
+    assert flow_nodes[0] == "Template: Mean Reversion"
+    assert "Data contract" in flow_nodes
+    assert flow_nodes[-1] == "Pre-run manifest"
 
 
 def test_build_strategy_chart_story_uses_real_ohlc_window(tmp_path: Path) -> None:

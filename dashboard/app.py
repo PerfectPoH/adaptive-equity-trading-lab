@@ -12,6 +12,7 @@ from dashboard.lab_dashboard_data import (
     STRATEGY_PROFILES,
     WORKBENCH_TEMPLATES,
     build_strategy_chart_story,
+    build_workbench_flow_nodes,
     build_workbench_manifest,
     governance_metrics,
     load_dashboard_payload,
@@ -137,6 +138,27 @@ def inject_theme() -> None:
           margin-bottom: 8px;
           text-transform: uppercase;
           font-weight: 700;
+        }
+        div[data-testid="stButton"] > button {
+          border-radius: 8px;
+          border: 1px solid var(--lab-line);
+          font-weight: 700;
+          min-height: 42px;
+        }
+        div[data-testid="stButton"] > button[kind="secondary"] {
+          background: #ffffff;
+          color: #0f172a;
+          border-color: #cbd5e1;
+        }
+        div[data-testid="stButton"] > button[kind="secondary"]:hover {
+          background: #eff6ff;
+          color: #1d4ed8;
+          border-color: #93c5fd;
+        }
+        div[data-testid="stButton"] > button[kind="primary"] {
+          background: #2563eb;
+          color: #ffffff;
+          border-color: #2563eb;
         }
         .lab-brand {
           font-family: "Roboto Mono", monospace;
@@ -1024,6 +1046,29 @@ def render_strategy_workbench() -> None:
         st.write(manifest["chart_requirement"])
         with st.expander("Open raw manifest JSON"):
             st.json(manifest)
+
+    st.subheader("Strategy Flow Preview")
+    st.write("This is the governed path the builder will use before any future backtest button exists.")
+    st.plotly_chart(flow_chart(build_workbench_flow_nodes(manifest)), width="stretch")
+
+    st.subheader("Pre-Run Gate Draft")
+    gate_cols = st.columns(3)
+    gate_items = [
+        ("Data required", ", ".join(manifest["required_data"])),
+        ("First blocker", manifest["first_gate"]),
+        ("Promotion state", "Locked to false until all gates pass."),
+    ]
+    for column, (title, body) in zip(gate_cols, gate_items):
+        with column:
+            st.markdown(
+                f"""
+                <div class="rule-card">
+                  <div class="rule-title">{title}</div>
+                  <div class="small-muted">{body}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
 
     st.subheader("What The Builder Will Enforce")
     checks = [

@@ -385,6 +385,17 @@ def build_workbench_manifest(
     }
 
 
+def build_workbench_flow_nodes(manifest: dict[str, Any]) -> list[str]:
+    return [
+        f"Template: {manifest['template']}",
+        "Data contract",
+        "Entry rule",
+        "Exit rule",
+        f"Gate: {manifest['first_gate']}",
+        "Pre-run manifest",
+    ]
+
+
 def build_strategy_chart_story(profile_key: str, *, price_file: str | Path = PRICE_FILE) -> dict[str, Any]:
     profile = next(item for item in STRATEGY_PROFILES if item.key == profile_key)
     prices = load_csv(Path(price_file))
