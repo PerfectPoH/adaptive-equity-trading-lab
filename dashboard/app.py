@@ -155,14 +155,14 @@ def inject_theme() -> None:
           min-height: 42px;
         }
         div[data-testid="stButton"] > button[kind="secondary"] {
-          background: #ffffff;
-          color: #0f172a;
-          border-color: #cbd5e1;
+          background: #111827;
+          color: #f8fafc;
+          border-color: #334155;
         }
         div[data-testid="stButton"] > button[kind="secondary"]:hover {
-          background: #eff6ff;
-          color: #1d4ed8;
-          border-color: #93c5fd;
+          background: #1d4ed8;
+          color: #ffffff;
+          border-color: #2563eb;
         }
         div[data-testid="stButton"] > button[kind="primary"] {
           background: #2563eb;
@@ -1048,6 +1048,34 @@ def render_strategy_workbench() -> None:
         template = st.selectbox("Strategy template", list(WORKBENCH_TEMPLATES.keys()))
         selected_template = WORKBENCH_TEMPLATES[template]
         st.info(selected_template["signal"])
+        custom_rules = None
+        if template == "Custom Rule Builder":
+            st.markdown('<span class="workbench-step">2B</span><strong>Define the local rule</strong>', unsafe_allow_html=True)
+            st.caption("These controls change the local dry-run rule. They still use only archived OHLCV, no provider query.")
+            custom_signal = st.selectbox(
+                "Custom signal",
+                ["momentum_21d", "momentum_5d", "dip_2d", "low_vol_5d", "volume_shock", "dollar_volume_shock"],
+                help="The OHLCV feature used to rank entry windows.",
+            )
+            custom_selection = st.radio(
+                "Selection direction",
+                ["top", "bottom"],
+                horizontal=True,
+                help="Top buys the highest-ranked windows; bottom buys the lowest-ranked windows.",
+            )
+            custom_entries = st.slider("Entry windows per symbol", min_value=1, max_value=120, value=20)
+            custom_allowed = st.text_area(
+                "Optional allowed symbols",
+                value="",
+                placeholder="Example: CABA, CRMD, IOVA, SPY. Leave empty to use all locally routed symbols.",
+                help="This filters only the local dry-run universe. It does not download missing prices.",
+            )
+            custom_rules = {
+                "signal": custom_signal,
+                "selection": custom_selection,
+                "entries_per_symbol": custom_entries,
+                "allowed_symbols": custom_allowed,
+            }
         st.markdown('<span class="workbench-step">3</span><strong>Choose the universe</strong>', unsafe_allow_html=True)
         st.caption("This controls whether the result can ever be promotable or is only exploratory.")
         universe = st.selectbox(
@@ -1083,6 +1111,7 @@ def render_strategy_workbench() -> None:
             cost_bps=cost_bps,
             allow_provider_query=provider_query,
             strategy_mode=strategy_mode,
+            custom_rules=custom_rules,
         )
         st.markdown(
             f"""
@@ -1197,9 +1226,12 @@ def render_strategy_workbench() -> None:
     with scope_cols[0]:
         metric_card("Data scope", data_scope_preview["data_scope"], "Universe routing before the dry-run")
     with scope_cols[1]:
-        metric_card("Symbols", data_scope_preview["symbols"], ", ".join(data_scope_preview["selected_symbols"]) or "No symbols routed")
+        metric_card("Local prices", data_scope_preview["local_price_symbols"], ", ".join(data_scope_preview["selected_symbols"]) or "No symbols routed")
     with scope_cols[2]:
-        metric_card("Rows", data_scope_preview["rows"], data_scope_preview["scope_explanation"])
+        metric_card("Configured tickers", data_scope_preview["configured_symbols"], data_scope_preview["scope_explanation"])
+    st.caption(
+        "Configured tickers are the research catalog. Local prices are the subset already present in archived files; missing symbols are never invented by the workbench."
+    )
 
     st.subheader("Controlled Backtest Button")
     st.write("This is intentionally a local dry-run preview. It does not query providers, trade, or promote anything.")

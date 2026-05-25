@@ -7,6 +7,8 @@ import pandas as pd
 
 from dashboard.lab_dashboard_data import (
     STRATEGY_PROFILES,
+    WORKBENCH_CONFIGURED_LARGECAP_SYMBOLS,
+    WORKBENCH_CONFIGURED_SMALLCAP_SYMBOLS,
     WORKBENCH_TEMPLATES,
     build_controlled_backtest_preview,
     build_workbench_chart_story,
@@ -120,6 +122,35 @@ def test_delisted_data_source_gate_payload_surfaces_admissible_sources() -> None
     assert {"CRSP", "Norgate Data", "Sharadar/Nasdaq Data Link"}.issubset(set(payload["admissible_sources"]))
     assert not payload["candidate_source_matrix"].empty
     assert not payload["unlock_requirements"].empty
+
+
+def test_workbench_universe_catalogs_are_much_larger_than_local_price_coverage() -> None:
+    large = build_workbench_manifest(
+        name="Large catalog",
+        template="Momentum",
+        universe="large-cap / ETF clean-data sandbox",
+        holding_period_days=21,
+        cost_bps=250,
+        allow_provider_query=False,
+    )
+    small = build_workbench_manifest(
+        name="Small catalog",
+        template="Momentum",
+        universe="small-cap active-only exploratory sandbox",
+        holding_period_days=21,
+        cost_bps=250,
+        allow_provider_query=False,
+    )
+
+    large_scope = build_workbench_data_scope_preview(large)
+    small_scope = build_workbench_data_scope_preview(small)
+
+    assert len(WORKBENCH_CONFIGURED_LARGECAP_SYMBOLS) >= 100
+    assert len(WORKBENCH_CONFIGURED_SMALLCAP_SYMBOLS) >= 100
+    assert large_scope["configured_symbols"] >= 100
+    assert small_scope["configured_symbols"] >= 100
+    assert large_scope["local_price_symbols"] <= large_scope["configured_symbols"]
+    assert small_scope["local_price_symbols"] <= small_scope["configured_symbols"]
 
 
 def test_build_workbench_manifest_starts_unpromoted_and_gate_first() -> None:
@@ -376,8 +407,45 @@ def test_workbench_templates_use_distinct_local_rule_profiles() -> None:
         for preview in previews
     }
 
-    assert profiles == set(WORKBENCH_TEMPLATES)
+    assert profiles == {
+        template if template != "Custom Rule Builder" else "Custom Rule Builder:momentum_21d:top"
+        for template in WORKBENCH_TEMPLATES
+    }
     assert len(result_shapes) == len(WORKBENCH_TEMPLATES)
+
+
+def test_custom_rule_builder_manifest_changes_local_rule_profile_and_results() -> None:
+    momentum = build_workbench_manifest(
+        name="Momentum baseline",
+        template="Momentum",
+        universe="expanded local research sandbox",
+        holding_period_days=21,
+        cost_bps=500,
+        allow_provider_query=False,
+    )
+    custom = build_workbench_manifest(
+        name="My custom dip rule",
+        template="Custom Rule Builder",
+        universe="expanded local research sandbox",
+        holding_period_days=21,
+        cost_bps=500,
+        allow_provider_query=False,
+        custom_rules={
+            "signal": "dip_2d",
+            "selection": "bottom",
+            "entries_per_symbol": 12,
+            "allowed_symbols": "CABA,CRMD,IOVA,SPY",
+        },
+    )
+
+    momentum_preview = build_controlled_backtest_preview(momentum, validate_workbench_manifest(momentum))
+    custom_preview = build_controlled_backtest_preview(custom, validate_workbench_manifest(custom))
+
+    assert custom["custom_rules"]["signal"] == "dip_2d"
+    assert custom_preview["local_data_summary"]["template_rule_profile"] == "Custom Rule Builder:dip_2d:bottom"
+    assert custom_preview["local_data_summary"]["custom_allowed_symbols"] == ["CABA", "CRMD", "IOVA", "SPY"]
+    assert custom_preview["simulated_trades"] != momentum_preview["simulated_trades"]
+    assert custom_preview["cost_breakdown"]["net_return_sum"] != momentum_preview["cost_breakdown"]["net_return_sum"]
 
 
 def test_workbench_auto_switches_long_holding_to_investment_mode() -> None:

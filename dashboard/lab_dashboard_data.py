@@ -16,7 +16,26 @@ PRICE_FILE = Path("experiments/provider_aware_research/data_inputs/databento_xmo
 LARGECAP_PRICE_FILE = Path("experiments/runs/20260508_173235_news_thr60/signals.csv")
 WORKBENCH_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-WORKBENCH"
 DELISTED_DATA_SOURCE_GATE_DIR = Path("experiments/provider_aware_research/delisted_data_source_gate_20260525")
-WORKBENCH_LARGECAP_ETF_SYMBOLS = {"IWM", "SPY", "QQQ", "DIA", "AAPL", "MSFT", "NVDA", "META", "AMZN", "GOOGL", "AMD", "TSLA"}
+WORKBENCH_CONFIGURED_LARGECAP_SYMBOLS = {
+    "SPY", "QQQ", "IWM", "DIA", "VTI", "VOO", "IVV", "RSP", "XLK", "XLF", "XLE", "XLY", "XLP", "XLV", "XLI", "XLU", "XLB", "XLRE", "XLC",
+    "AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "GOOG", "META", "TSLA", "AVGO", "BRK.B", "JPM", "LLY", "V", "UNH", "XOM", "MA", "COST",
+    "WMT", "NFLX", "PG", "JNJ", "HD", "ORCL", "ABBV", "BAC", "KO", "CRM", "CVX", "AMD", "MRK", "PEP", "TMO", "ADBE", "MCD", "CSCO",
+    "GE", "LIN", "ABT", "QCOM", "IBM", "INTU", "DHR", "AMAT", "TXN", "CMCSA", "VZ", "NOW", "ISRG", "CAT", "PM", "DIS", "UBER", "GS",
+    "RTX", "SPGI", "LOW", "PFE", "BKNG", "T", "HON", "NKE", "UNP", "COP", "MS", "LMT", "PLD", "DE", "ELV", "AMGN", "SYK", "ADP",
+    "GILD", "C", "MDLZ", "PANW", "ADI", "MMC", "CB", "BMY", "SCHW", "SO", "UPS", "FI", "MU", "KLAC", "REGN", "ZTS", "EQIX", "APD",
+    "ICE", "CME", "VRTX", "SNPS", "CDNS", "PGR", "AON", "HCA", "ETN", "MCO", "SHW", "BSX", "WM", "GD", "CL", "MCK", "TDG", "EOG",
+}
+WORKBENCH_CONFIGURED_SMALLCAP_SYMBOLS = {
+    "AEHR", "ARRY", "CABA", "CRMD", "IOVA", "SAVA", "BLUE", "EDIT", "BEAM", "NTLA", "CRSP", "VERV", "FATE", "RLAY", "KYMR", "ADAP",
+    "KURA", "VCYT", "TGTX", "IMTX", "ARVN", "CGEN", "VSTM", "XFOR", "KOD", "KPTI", "VYGR", "PDSB", "ADMA", "AKBA", "ALDX", "ALLO",
+    "ANAB", "APLT", "AQST", "ARCT", "AUPH", "AXSM", "BCRX", "BNGO", "CERS", "CLDX", "CMPS", "CYTK", "DMTK", "DNLI", "EBS", "EYPT",
+    "FGEN", "FOLD", "GERN", "GLUE", "HRTX", "IBRX", "INO", "KALA", "KNSA", "LQDA", "LXRX", "MCRB", "MIRM", "MRSN", "NERV", "NVAX",
+    "OMER", "OPK", "PBYI", "PGEN", "PIRS", "PLRX", "PRTA", "PTGX", "RAPT", "RIGL", "RVNC", "SAGE", "SANA", "SNDX", "SRPT", "TERN",
+    "TNGX", "TNYA", "TSVT", "VCEL", "VERA", "VKTX", "XENE", "XERS", "ZYME", "ZYXI", "BLFS", "CDNA", "CERT", "DCPH", "EOLS", "EVLO",
+    "GH", "HCAT", "HLIT", "IRTC", "LUNG", "MODV", "NTRA", "OMCL", "PACB", "PGNY", "RARE", "RXRX", "SDGR", "TDOC", "TWST", "MARA",
+    "RIOT", "HIMS", "UPST", "OPEN", "SOFI", "DNA", "IONQ", "RKLB", "ASTS", "JOBY", "ACHR", "ENVX", "QS", "CHPT", "BLNK", "RUN",
+}
+WORKBENCH_LARGECAP_ETF_SYMBOLS = WORKBENCH_CONFIGURED_LARGECAP_SYMBOLS
 
 
 @dataclass(frozen=True)
@@ -196,6 +215,15 @@ WORKBENCH_TEMPLATES: dict[str, dict[str, Any]] = {
         "required_data": ["Schedule 13D", "Item 4 text", "daily OHLCV", "liquidity screen"],
         "default_gate": "filing_intent_gate",
         "chart_hint": "The chart must mark the 13D filing, media reaction, and follow-on horizon.",
+    },
+    "Custom Rule Builder": {
+        "signal": "User-defined local rule over archived OHLCV features.",
+        "entry_rule": "Enter windows selected by the chosen user signal and selection direction.",
+        "exit_rule": "Exit after the declared holding period.",
+        "failure_mode": "Overfitting, tiny local panels, and proxy-data misuse.",
+        "required_data": ["daily OHLCV", "user rule manifest", "local price coverage"],
+        "default_gate": "custom_rule_manifest_gate",
+        "chart_hint": "The chart must show the custom signal window, entry candle, exit candle, and robustness gate.",
     },
 }
 
@@ -388,11 +416,13 @@ def build_workbench_manifest(
     cost_bps: int,
     allow_provider_query: bool,
     strategy_mode: str = "Auto",
+    custom_rules: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     selected = WORKBENCH_TEMPLATES.get(template, WORKBENCH_TEMPLATES["Momentum"])
     holding = int(holding_period_days)
     requested_mode = strategy_mode if strategy_mode in {"Auto", "Trading", "Investment"} else "Auto"
     analysis_mode = "Investment" if (requested_mode == "Investment" or (requested_mode == "Auto" and holding > 30)) else "Trading"
+    normalized_custom_rules = _normalize_workbench_custom_rules(custom_rules)
     return {
         "strategy_name": name.strip() or "UNTITLED_STRATEGY",
         "template": template,
@@ -403,6 +433,7 @@ def build_workbench_manifest(
         "cost_bps": int(cost_bps),
         "provider_query_allowed": bool(allow_provider_query),
         "promotion_allowed": False,
+        "custom_rules": normalized_custom_rules,
         "signal_contract": selected["signal"],
         "entry_rule": selected["entry_rule"],
         "exit_rule": selected["exit_rule"],
@@ -411,6 +442,36 @@ def build_workbench_manifest(
         "first_gate": selected["default_gate"],
         "chart_requirement": selected["chart_hint"],
         "next_step": "Generate a pre-run gate before any backtest or provider query.",
+    }
+
+
+def _normalize_workbench_custom_rules(custom_rules: dict[str, Any] | None) -> dict[str, Any]:
+    rules = custom_rules or {}
+    allowed_signals = {"momentum_21d", "momentum_5d", "dip_2d", "low_vol_5d", "volume_shock", "dollar_volume_shock"}
+    signal = str(rules.get("signal", "momentum_21d")).strip().lower()
+    if signal not in allowed_signals:
+        signal = "momentum_21d"
+    selection = str(rules.get("selection", "top")).strip().lower()
+    if selection not in {"top", "bottom"}:
+        selection = "top"
+    try:
+        entries_per_symbol = int(rules.get("entries_per_symbol", 20))
+    except (TypeError, ValueError):
+        entries_per_symbol = 20
+    entries_per_symbol = max(1, min(200, entries_per_symbol))
+    raw_allowed = rules.get("allowed_symbols", [])
+    if isinstance(raw_allowed, str):
+        allowed_symbols = [symbol.strip().upper() for symbol in raw_allowed.replace("\n", ",").split(",")]
+    elif isinstance(raw_allowed, list):
+        allowed_symbols = [str(symbol).strip().upper() for symbol in raw_allowed]
+    else:
+        allowed_symbols = []
+    allowed_symbols = sorted({symbol for symbol in allowed_symbols if symbol})
+    return {
+        "signal": signal,
+        "selection": selection,
+        "entries_per_symbol": entries_per_symbol,
+        "allowed_symbols": allowed_symbols,
     }
 
 
@@ -516,6 +577,7 @@ def workbench_manifest_signature(manifest: dict[str, Any]) -> str:
         "entry_rule": manifest.get("entry_rule"),
         "exit_rule": manifest.get("exit_rule"),
         "first_gate": manifest.get("first_gate"),
+        "custom_rules": manifest.get("custom_rules"),
     }
     payload = json.dumps(signature_fields, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()[:16]
@@ -692,6 +754,7 @@ def persist_workbench_run_bundle(
 
 def build_workbench_data_scope_preview(manifest: dict[str, Any], *, price_file: str | Path = PRICE_FILE) -> dict[str, Any]:
     prices = _load_workbench_price_panel(manifest, price_file=price_file)
+    configured_symbols = _configured_symbols_for_universe(str(manifest.get("universe", "")))
     if prices.empty or "symbol" not in prices.columns:
         return {
             "data_scope": "missing_local_price_panel",
@@ -699,9 +762,12 @@ def build_workbench_data_scope_preview(manifest: dict[str, Any], *, price_file: 
             "selected_symbols": [],
             "rows": 0,
             "symbols": 0,
+            "configured_symbols": len(configured_symbols),
+            "local_price_symbols": 0,
             "price_file": str(price_file),
         }
     filtered, scope = _filter_prices_for_workbench_universe(prices, str(manifest.get("universe", "")))
+    filtered = _apply_custom_symbol_filter(filtered, manifest)
     selected_symbols = sorted(str(symbol) for symbol in filtered["symbol"].unique()) if not filtered.empty else []
     return {
         "data_scope": scope["data_scope"],
@@ -709,6 +775,8 @@ def build_workbench_data_scope_preview(manifest: dict[str, Any], *, price_file: 
         "selected_symbols": selected_symbols,
         "rows": int(len(filtered)),
         "symbols": int(len(selected_symbols)),
+        "configured_symbols": len(configured_symbols),
+        "local_price_symbols": int(len(selected_symbols)),
         "price_file": str(price_file),
     }
 
@@ -719,6 +787,9 @@ def _build_local_workbench_trades(manifest: dict[str, Any], *, price_file: str |
         return [], {"symbols": 0, "rows": 0, "price_file": str(price_file)}
     prices = prices.copy()
     prices, scope = _filter_prices_for_workbench_universe(prices, str(manifest.get("universe", "")))
+    prices = _apply_custom_symbol_filter(prices, manifest)
+    configured_symbols = _configured_symbols_for_universe(str(manifest.get("universe", "")))
+    custom_allowed_symbols = _custom_allowed_symbols(manifest)
     if prices.empty:
         return [], {
             "symbols": 0,
@@ -727,18 +798,21 @@ def _build_local_workbench_trades(manifest: dict[str, Any], *, price_file: str |
             "data_scope": scope["data_scope"],
             "scope_explanation": scope["scope_explanation"],
             "selected_symbols": [],
+            "configured_symbols": len(configured_symbols),
+            "local_price_symbols": 0,
+            "custom_allowed_symbols": custom_allowed_symbols,
         }
     prices["date"] = pd.to_datetime(prices["date"])
     holding = max(1, int(manifest["holding_period_days"]))
     cost_return = round(int(manifest["cost_bps"]) / 10000, 6)
     entry_step = max(5, holding // 2)
-    template_rule_profile = _workbench_template_rule_profile(str(manifest["template"]))
+    template_rule_profile = _workbench_template_rule_profile(str(manifest["template"]), manifest.get("custom_rules", {}))
     trades: list[dict[str, Any]] = []
     for symbol, group in prices.groupby("symbol"):
         symbol_prices = group.sort_values("date").reset_index(drop=True)
         if len(symbol_prices) <= holding + 1:
             continue
-        for entry_index in _select_workbench_entry_indices(symbol_prices, str(manifest["template"]), holding, step=entry_step):
+        for entry_index in _select_workbench_entry_indices(symbol_prices, str(manifest["template"]), holding, step=entry_step, custom_rules=manifest.get("custom_rules", {})):
             exit_index = min(entry_index + holding, len(symbol_prices) - 1)
             if exit_index <= entry_index:
                 continue
@@ -773,6 +847,9 @@ def _build_local_workbench_trades(manifest: dict[str, Any], *, price_file: str |
         "data_scope": scope["data_scope"],
         "scope_explanation": scope["scope_explanation"],
         "selected_symbols": sorted(str(symbol) for symbol in prices["symbol"].unique()),
+        "configured_symbols": len(configured_symbols),
+        "local_price_symbols": int(prices["symbol"].nunique()),
+        "custom_allowed_symbols": custom_allowed_symbols,
     }
     return trades, summary
 
@@ -853,7 +930,35 @@ def _filter_prices_for_workbench_universe(prices: pd.DataFrame, universe: str) -
     }
 
 
-def _select_workbench_entry_indices(symbol_prices: pd.DataFrame, template: str, holding: int, *, step: int) -> list[int]:
+def _configured_symbols_for_universe(universe: str) -> set[str]:
+    lowered = universe.lower()
+    if "large-cap / etf" in lowered:
+        return set(WORKBENCH_CONFIGURED_LARGECAP_SYMBOLS)
+    if "small-cap active-only" in lowered:
+        return set(WORKBENCH_CONFIGURED_SMALLCAP_SYMBOLS)
+    if "expanded local research" in lowered:
+        return set(WORKBENCH_CONFIGURED_LARGECAP_SYMBOLS) | set(WORKBENCH_CONFIGURED_SMALLCAP_SYMBOLS)
+    if "local archived databento" in lowered:
+        return {"AEHR", "ARRY", "CABA", "CRMD", "IOVA", "IWM"}
+    return set()
+
+
+def _custom_allowed_symbols(manifest: dict[str, Any]) -> list[str]:
+    custom_rules = manifest.get("custom_rules", {})
+    symbols = custom_rules.get("allowed_symbols", []) if isinstance(custom_rules, dict) else []
+    return sorted({str(symbol).strip().upper() for symbol in symbols if str(symbol).strip()})
+
+
+def _apply_custom_symbol_filter(prices: pd.DataFrame, manifest: dict[str, Any]) -> pd.DataFrame:
+    if str(manifest.get("template")) != "Custom Rule Builder":
+        return prices
+    allowed_symbols = _custom_allowed_symbols(manifest)
+    if not allowed_symbols or prices.empty or "symbol" not in prices.columns:
+        return prices
+    return prices[prices["symbol"].astype(str).str.upper().isin(allowed_symbols)].copy()
+
+
+def _select_workbench_entry_indices(symbol_prices: pd.DataFrame, template: str, holding: int, *, step: int, custom_rules: dict[str, Any] | None = None) -> list[int]:
     max_entry = max(0, len(symbol_prices) - holding - 1)
     if max_entry <= 1:
         return [1] if max_entry == 1 else []
@@ -869,6 +974,10 @@ def _select_workbench_entry_indices(symbol_prices: pd.DataFrame, template: str, 
     dollar_volume = close * volume
     volume_ratio = volume / volume.rolling(20, min_periods=3).mean()
 
+    if template == "Custom Rule Builder":
+        normalized = _normalize_workbench_custom_rules(custom_rules)
+        signal = _custom_workbench_signal_series(symbol_prices, normalized["signal"])
+        return _ranked_entry_indices(signal, max_entry, base_indices, largest=normalized["selection"] == "top", limit=int(normalized["entries_per_symbol"]))
     if template == "Momentum":
         return _ranked_entry_indices(twenty_one_day_return, max_entry, base_indices, largest=True, limit=90)
     if template in {"Mean Reversion", "GapRev RTH Reversion"}:
@@ -901,6 +1010,24 @@ def _select_workbench_entry_indices(symbol_prices: pd.DataFrame, template: str, 
     return base_indices
 
 
+def _custom_workbench_signal_series(symbol_prices: pd.DataFrame, signal: str) -> pd.Series:
+    close = symbol_prices["close"].astype(float)
+    volume = symbol_prices["volume"].astype(float) if "volume" in symbol_prices.columns else pd.Series(1.0, index=symbol_prices.index)
+    one_day_return = close.pct_change()
+    if signal == "momentum_5d":
+        return close.pct_change(5)
+    if signal == "dip_2d":
+        return close.pct_change(2)
+    if signal == "low_vol_5d":
+        return one_day_return.rolling(5).std()
+    if signal == "volume_shock":
+        return volume / volume.rolling(20, min_periods=3).mean()
+    if signal == "dollar_volume_shock":
+        dollar_volume = close * volume
+        return dollar_volume / dollar_volume.rolling(20, min_periods=3).mean()
+    return close.pct_change(21)
+
+
 def _ranked_entry_indices(series: pd.Series, max_entry: int, fallback: list[int], *, largest: bool, limit: int) -> list[int]:
     candidates = series.iloc[: max_entry + 1].replace([float("inf"), float("-inf")], pd.NA).dropna()
     if candidates.empty:
@@ -909,7 +1036,10 @@ def _ranked_entry_indices(series: pd.Series, max_entry: int, fallback: list[int]
     return sorted({max(1, min(int(candidate), max_entry)) for candidate in ranked})
 
 
-def _workbench_template_rule_profile(template: str) -> str:
+def _workbench_template_rule_profile(template: str, custom_rules: dict[str, Any] | None = None) -> str:
+    if template == "Custom Rule Builder":
+        normalized = _normalize_workbench_custom_rules(custom_rules)
+        return f"Custom Rule Builder:{normalized['signal']}:{normalized['selection']}"
     if template in WORKBENCH_TEMPLATES:
         return template
     return "Momentum"
