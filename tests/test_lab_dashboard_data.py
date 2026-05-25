@@ -242,6 +242,18 @@ def test_workbench_dry_run_uses_local_prices_and_returns_trade_artifacts(tmp_pat
     assert preview["local_data_summary"]["symbols"] == 2
     assert preview["local_data_summary"]["data_scope"] == "full_local_archived_panel"
     assert preview["cost_breakdown"]["net_return_sum"] == sum(row["net_return"] for row in preview["trade_rows"])
+    assert preview["robustness_panel"]["trade_count_gate"]["status"] in {"PASS", "BLOCK"}
+    assert preview["robustness_panel"]["outlier_dependency_gate"]["status"] in {"PASS", "BLOCK"}
+    assert preview["robustness_panel"]["win_rate_gate"]["value"] >= 0
+    assert preview["automatic_verdict"]["promotion_allowed"] is False
+    assert preview["automatic_verdict"]["decision"] in {
+        "RESEARCH_CANDIDATE_ONLY",
+        "REJECTED_SAMPLE_TOO_SMALL",
+        "REJECTED_OUTLIER_DEPENDENCY",
+        "REJECTED_COST_STRESS",
+    }
+    assert {"cumulative_gross_return", "cumulative_net_return", "drawdown"}.issubset(preview["equity_curve"][0])
+    assert "# Workbench Dry-Run Report" in preview["markdown_report"]
 
 
 def test_workbench_universe_routes_to_distinct_price_scopes(tmp_path: Path) -> None:
@@ -281,11 +293,13 @@ def test_workbench_universe_routes_to_distinct_price_scopes(tmp_path: Path) -> N
     large_preview = build_controlled_backtest_preview(large, validate_workbench_manifest(large), price_file=prices)
     small_preview = build_controlled_backtest_preview(small, validate_workbench_manifest(small), price_file=prices)
 
-    assert large_preview["local_data_summary"]["data_scope"] == "largecap_etf_clean_scope"
+    assert large_preview["local_data_summary"]["data_scope"] == "largecap_etf_broadened_demo_scope"
     assert small_preview["local_data_summary"]["data_scope"] == "smallcap_active_only_scope"
-    assert large_preview["local_data_summary"]["selected_symbols"] == ["IWM"]
+    assert large_preview["local_data_summary"]["selected_symbols"] == ["AEHR", "ARRY", "IWM"]
     assert small_preview["local_data_summary"]["selected_symbols"] == ["AEHR", "ARRY"]
     assert large_preview["simulated_trades"] != small_preview["simulated_trades"]
+    assert large_preview["data_scope_preview"]["selected_symbols"] == ["AEHR", "ARRY", "IWM"]
+    assert small_preview["data_scope_preview"]["selected_symbols"] == ["AEHR", "ARRY"]
 
 
 def test_persist_workbench_run_bundle_writes_manifest_gate_and_result(tmp_path: Path) -> None:
@@ -307,6 +321,7 @@ def test_persist_workbench_run_bundle_writes_manifest_gate_and_result(tmp_path: 
     assert Path(bundle["gate_path"]).exists()
     assert Path(bundle["result_path"]).exists()
     assert Path(bundle["trade_list_path"]).exists()
+    assert Path(bundle["markdown_report_path"]).exists()
 
 
 def test_build_strategy_chart_story_uses_real_ohlc_window(tmp_path: Path) -> None:

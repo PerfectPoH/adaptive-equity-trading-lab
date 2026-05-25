@@ -14,6 +14,7 @@ from dashboard.lab_dashboard_data import (
     build_controlled_backtest_preview,
     build_strategy_chart_story,
     build_workbench_chart_story,
+    build_workbench_data_scope_preview,
     build_workbench_flow_nodes,
     build_workbench_manifest,
     build_workbench_pre_run_gate,
@@ -1152,6 +1153,16 @@ def render_strategy_workbench() -> None:
     with st.expander("Open structured pre-run gate draft"):
         st.json(gate)
 
+    data_scope_preview = build_workbench_data_scope_preview(manifest)
+    st.subheader("Data Scope Preview")
+    scope_cols = st.columns(3)
+    with scope_cols[0]:
+        metric_card("Data scope", data_scope_preview["data_scope"], "Universe routing before the dry-run")
+    with scope_cols[1]:
+        metric_card("Symbols", data_scope_preview["symbols"], ", ".join(data_scope_preview["selected_symbols"]) or "No symbols routed")
+    with scope_cols[2]:
+        metric_card("Rows", data_scope_preview["rows"], data_scope_preview["scope_explanation"])
+
     st.subheader("Controlled Backtest Button")
     st.write("This is intentionally a local dry-run preview. It does not query providers, trade, or promote anything.")
     run_clicked = st.button("Run controlled local dry-run", type="primary", disabled=not gate_valid, width="stretch")
@@ -1194,7 +1205,7 @@ def render_strategy_workbench() -> None:
             with p3:
                 metric_card("Avg net", preview["net_edge_proxy"], "After declared cost")
             with p4:
-                metric_card("Promotion", str(preview["promotion_allowed"]), "Locked until real gates pass")
+                metric_card("Verdict", preview["automatic_verdict"]["decision"], "Promotion locked false")
             detail_cols = st.columns([1, 1])
             with detail_cols[0]:
                 st.markdown("**Why this outcome**")
@@ -1219,14 +1230,31 @@ def render_strategy_workbench() -> None:
                 st.markdown(f'<ul class="dryrun-list">{actions_html}</ul>', unsafe_allow_html=True)
             st.markdown("**Dry-run audit rows**")
             st.dataframe(pd.DataFrame(preview["dry_run_rows"]), width="stretch", hide_index=True)
+            st.markdown("**Robustness gates**")
+            robustness_rows = []
+            for gate_name, gate_payload in preview.get("robustness_panel", {}).items():
+                robustness_rows.append(
+                    {
+                        "gate": gate_name,
+                        "status": gate_payload.get("status"),
+                        "value": gate_payload.get("value"),
+                        "detail": gate_payload.get("detail"),
+                    }
+                )
+            st.dataframe(pd.DataFrame(robustness_rows), width="stretch", hide_index=True)
             trade_rows = pd.DataFrame(preview.get("trade_rows", []))
             equity_curve = pd.DataFrame(preview.get("equity_curve", []))
             if not trade_rows.empty:
                 st.markdown("**Generated local trade list**")
                 st.dataframe(trade_rows, width="stretch", hide_index=True)
             if not equity_curve.empty:
-                st.markdown("**Local equity curve**")
-                st.line_chart(equity_curve.set_index("step")["cumulative_net_return"], height=260)
+                st.markdown("**Local equity and drawdown curve**")
+                st.line_chart(
+                    equity_curve.set_index("step")[["cumulative_gross_return", "cumulative_net_return", "drawdown"]],
+                    height=280,
+                )
+            with st.expander("Open Markdown dry-run report"):
+                st.code(preview.get("markdown_report", ""), language="markdown")
             artifact_bundle = st.session_state.get("workbench_artifact_bundle")
             if artifact_bundle:
                 st.markdown("**Persisted artifacts**")

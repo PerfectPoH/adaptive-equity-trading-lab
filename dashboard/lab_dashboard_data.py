@@ -506,6 +506,7 @@ def _validation_summary(validation_rows: pd.DataFrame) -> dict[str, int]:
 def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows: pd.DataFrame, *, price_file: str | Path = PRICE_FILE) -> dict[str, Any]:
     manifest_signature = workbench_manifest_signature(manifest)
     validation_summary = _validation_summary(validation_rows)
+    data_scope_preview = build_workbench_data_scope_preview(manifest, price_file=price_file)
     base_report = {
         "manifest_signature": manifest_signature,
         "strategy_name": manifest["strategy_name"],
@@ -515,6 +516,7 @@ def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows:
         "cost_bps": int(manifest["cost_bps"]),
         "provider_query_allowed": bool(manifest["provider_query_allowed"]),
         "validation_summary": validation_summary,
+        "data_scope_preview": data_scope_preview,
         "promotion_allowed": False,
     }
     if not workbench_gate_is_valid(validation_rows):
@@ -552,6 +554,9 @@ def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows:
     net_edge_proxy = average_net_return
     diagnostic_score = round(average_net_return * 100, 4)
     equity_curve = _build_workbench_equity_curve(local_trades)
+    robustness_panel = _build_workbench_robustness_panel(local_trades, int(manifest["cost_bps"]))
+    automatic_verdict = _build_workbench_verdict(robustness_panel, validation_summary)
+    markdown_report = _build_workbench_markdown_report(manifest, local_summary, robustness_panel, automatic_verdict, local_trades)
     decision = "DRY_RUN_READY"
     if validation_summary["warn"] > 0:
         decision = "LOCAL_DRY_RUN_COMPLETE_WITH_WARNINGS"
@@ -572,6 +577,9 @@ def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows:
         "local_data_summary": local_summary,
         "trade_rows": local_trades,
         "equity_curve": equity_curve,
+        "robustness_panel": robustness_panel,
+        "automatic_verdict": automatic_verdict,
+        "markdown_report": markdown_report,
         "assumptions": [
             f"Template: {manifest['template']}",
             f"Universe: {manifest['universe']}",
@@ -624,11 +632,13 @@ def persist_workbench_run_bundle(
     result_path = artifact_dir / "dry_run_result.json"
     trade_list_path = artifact_dir / "trade_list.csv"
     equity_curve_path = artifact_dir / "equity_curve.csv"
+    markdown_report_path = artifact_dir / "dry_run_report.md"
     manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8")
     gate_path.write_text(json.dumps(gate, indent=2, sort_keys=True), encoding="utf-8")
     result_path.write_text(json.dumps(_json_safe(preview), indent=2, sort_keys=True), encoding="utf-8")
     pd.DataFrame(preview.get("trade_rows", [])).to_csv(trade_list_path, index=False)
     pd.DataFrame(preview.get("equity_curve", [])).to_csv(equity_curve_path, index=False)
+    markdown_report_path.write_text(str(preview.get("markdown_report", "")), encoding="utf-8")
     return {
         "artifact_dir": str(artifact_dir),
         "manifest_path": str(manifest_path),
@@ -636,6 +646,30 @@ def persist_workbench_run_bundle(
         "result_path": str(result_path),
         "trade_list_path": str(trade_list_path),
         "equity_curve_path": str(equity_curve_path),
+        "markdown_report_path": str(markdown_report_path),
+    }
+
+
+def build_workbench_data_scope_preview(manifest: dict[str, Any], *, price_file: str | Path = PRICE_FILE) -> dict[str, Any]:
+    prices = load_csv(Path(price_file))
+    if prices.empty or "symbol" not in prices.columns:
+        return {
+            "data_scope": "missing_local_price_panel",
+            "scope_explanation": "No local price panel is available for this universe.",
+            "selected_symbols": [],
+            "rows": 0,
+            "symbols": 0,
+            "price_file": str(price_file),
+        }
+    filtered, scope = _filter_prices_for_workbench_universe(prices, str(manifest.get("universe", "")))
+    selected_symbols = sorted(str(symbol) for symbol in filtered["symbol"].unique()) if not filtered.empty else []
+    return {
+        "data_scope": scope["data_scope"],
+        "scope_explanation": scope["scope_explanation"],
+        "selected_symbols": selected_symbols,
+        "rows": int(len(filtered)),
+        "symbols": int(len(selected_symbols)),
+        "price_file": str(price_file),
     }
 
 
@@ -702,6 +736,20 @@ def _filter_prices_for_workbench_universe(prices: pd.DataFrame, universe: str) -
     symbols = prices["symbol"].astype(str).str.upper()
     if "large-cap / etf" in universe.lower():
         selected = prices[symbols.isin(WORKBENCH_LARGECAP_ETF_SYMBOLS)].copy()
+        if selected["symbol"].nunique() < 3 and prices["symbol"].nunique() >= 3:
+            fallback_symbols = (
+                prices.assign(_symbol=prices["symbol"].astype(str))
+                .groupby("_symbol")["volume"]
+                .mean()
+                .sort_values(ascending=False)
+                .head(3)
+                .index.tolist()
+            )
+            selected = prices[prices["symbol"].astype(str).isin(fallback_symbols)].copy()
+            return selected, {
+                "data_scope": "largecap_etf_broadened_demo_scope",
+                "scope_explanation": "Local panel has fewer than 3 large-cap/ETF proxy symbols, so the preview broadens to the most liquid available symbols and remains non-promotable demo research.",
+            }
         return selected, {
             "data_scope": "largecap_etf_clean_scope",
             "scope_explanation": "Uses only large-cap/ETF proxy symbols available in the local panel.",
@@ -738,11 +786,120 @@ def _select_workbench_entry_index(symbol_prices: pd.DataFrame, template: str, ho
 
 def _build_workbench_equity_curve(trades: list[dict[str, Any]]) -> list[dict[str, Any]]:
     curve: list[dict[str, Any]] = []
-    cumulative = 0.0
+    cumulative_gross = 0.0
+    cumulative_net = 0.0
+    peak_net = 0.0
     for index, trade in enumerate(sorted(trades, key=lambda row: (row["exit_date"], row["symbol"])), start=1):
-        cumulative = round(cumulative + float(trade["net_return"]), 6)
-        curve.append({"step": index, "date": trade["exit_date"], "symbol": trade["symbol"], "cumulative_net_return": cumulative})
+        cumulative_gross = round(cumulative_gross + float(trade["gross_return"]), 6)
+        cumulative_net = round(cumulative_net + float(trade["net_return"]), 6)
+        peak_net = max(peak_net, cumulative_net)
+        drawdown = round(cumulative_net - peak_net, 6)
+        curve.append(
+            {
+                "step": index,
+                "date": trade["exit_date"],
+                "symbol": trade["symbol"],
+                "cumulative_gross_return": cumulative_gross,
+                "cumulative_net_return": cumulative_net,
+                "drawdown": drawdown,
+            }
+        )
     return curve
+
+
+def _build_workbench_robustness_panel(trades: list[dict[str, Any]], cost_bps: int) -> dict[str, dict[str, Any]]:
+    net_returns = sorted((float(row["net_return"]) for row in trades), reverse=True)
+    gross_returns = [float(row["gross_return"]) for row in trades]
+    trade_count = len(net_returns)
+    net_sum = round(sum(net_returns), 6)
+    ex_top1 = round(sum(net_returns[1:]), 6) if trade_count > 1 else 0.0
+    ex_top3 = round(sum(net_returns[3:]), 6) if trade_count > 3 else 0.0
+    median_return = round(float(pd.Series(net_returns).median()), 6) if net_returns else 0.0
+    win_rate = round(sum(1 for value in net_returns if value > 0) / trade_count, 6) if trade_count else 0.0
+    stressed_cost = round((cost_bps * 1.5) / 10000, 6)
+    stressed_net_sum = round(sum(gross_returns) - (stressed_cost * trade_count), 6)
+    return {
+        "trade_count_gate": {
+            "status": "PASS" if trade_count >= 5 else "BLOCK",
+            "value": trade_count,
+            "threshold": 5,
+            "detail": "Requires at least 5 local trades before even a research candidate label.",
+        },
+        "outlier_dependency_gate": {
+            "status": "PASS" if ex_top1 > 0 and (trade_count < 4 or ex_top3 > 0) else "BLOCK",
+            "value": {"net_sum": net_sum, "ex_top1": ex_top1, "ex_top3": ex_top3},
+            "detail": "Blocks when the result dies after removing the best trades.",
+        },
+        "median_return_gate": {
+            "status": "PASS" if median_return > 0 else "BLOCK",
+            "value": median_return,
+            "detail": "Requires the typical trade, not only the average, to be positive.",
+        },
+        "win_rate_gate": {
+            "status": "PASS" if win_rate >= 0.5 else "BLOCK",
+            "value": win_rate,
+            "threshold": 0.5,
+            "detail": "Requires at least half the local trades to be positive.",
+        },
+        "cost_stress_gate": {
+            "status": "PASS" if stressed_net_sum > 0 else "BLOCK",
+            "value": {"stressed_cost_return": stressed_cost, "stressed_net_sum": stressed_net_sum},
+            "detail": "Replays the trade list with 1.5x the declared round-trip cost.",
+        },
+    }
+
+
+def _build_workbench_verdict(robustness_panel: dict[str, dict[str, Any]], validation_summary: dict[str, int]) -> dict[str, Any]:
+    if validation_summary["block"] > 0:
+        decision = "DRY_RUN_BLOCKED"
+    elif robustness_panel["trade_count_gate"]["status"] == "BLOCK":
+        decision = "REJECTED_SAMPLE_TOO_SMALL"
+    elif robustness_panel["outlier_dependency_gate"]["status"] == "BLOCK":
+        decision = "REJECTED_OUTLIER_DEPENDENCY"
+    elif robustness_panel["cost_stress_gate"]["status"] == "BLOCK":
+        decision = "REJECTED_COST_STRESS"
+    elif robustness_panel["median_return_gate"]["status"] == "BLOCK" or robustness_panel["win_rate_gate"]["status"] == "BLOCK":
+        decision = "REJECTED_WEAK_DISTRIBUTION"
+    else:
+        decision = "RESEARCH_CANDIDATE_ONLY"
+    blockers = [name for name, gate in robustness_panel.items() if gate.get("status") == "BLOCK"]
+    return {
+        "decision": decision,
+        "promotion_allowed": False,
+        "blockers": blockers,
+        "summary": "Promotion remains disabled. This verdict only determines whether the dry-run deserves deeper research.",
+    }
+
+
+def _build_workbench_markdown_report(
+    manifest: dict[str, Any],
+    local_summary: dict[str, Any],
+    robustness_panel: dict[str, dict[str, Any]],
+    verdict: dict[str, Any],
+    trades: list[dict[str, Any]],
+) -> str:
+    lines = [
+        "# Workbench Dry-Run Report",
+        "",
+        f"Strategy: {manifest['strategy_name']}",
+        f"Template: {manifest['template']}",
+        f"Universe: {manifest['universe']}",
+        f"Data scope: {local_summary.get('data_scope', 'unknown')}",
+        f"Selected symbols: {', '.join(local_summary.get('selected_symbols', [])) or 'none'}",
+        "",
+        "## Verdict",
+        f"Decision: {verdict['decision']}",
+        f"Promotion allowed: {verdict['promotion_allowed']}",
+        f"Blockers: {', '.join(verdict['blockers']) or 'none'}",
+        "",
+        "## Robustness Gates",
+    ]
+    for name, gate in robustness_panel.items():
+        lines.append(f"- {name}: {gate['status']} | {gate['value']}")
+    lines.extend(["", "## Trades", f"Trade count: {len(trades)}"])
+    for trade in trades[:10]:
+        lines.append(f"- {trade['symbol']} {trade['entry_date']} -> {trade['exit_date']}: net {trade['net_return']}")
+    return "\n".join(lines) + "\n"
 
 
 def _json_safe(value: Any) -> Any:
