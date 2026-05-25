@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adaptive Lab - Spacious Workbench Mockup</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@500;600;700&display=swap");
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --ink: #0f172a;
+      --muted: #64748b;
+      --line: #d8e0eb;
+      --blue: #2563eb;
+      --blue-soft: #eff6ff;
+      --orange: #f97316;
+      --red: #dc2626;
+      --green: #16a34a;
+      --shadow: 0 18px 48px rgba(15, 23, 42, .08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, system-ui, sans-serif;
+    }
+    .shell {
+      display: grid;
+      grid-template-columns: 292px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background: #0b1220;
+      color: #e5edf8;
+      padding: 28px 22px;
+      border-right: 1px solid #1e293b;
+    }
+    .brand {
+      font-weight: 800;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+    .side-note {
+      color: #94a3b8;
+      font-size: 13px;
+      margin-bottom: 32px;
+    }
+    .nav-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 14px;
+      border: 1px solid #22304a;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      color: #dbeafe;
+      font-weight: 700;
+    }
+    .nav-item.active {
+      background: #2563eb;
+      color: white;
+      border-color: #3b82f6;
+    }
+    .side-card {
+      margin-top: 28px;
+      border: 1px solid #22304a;
+      border-radius: 8px;
+      padding: 16px;
+      background: rgba(255,255,255,.04);
+    }
+    .label {
+      font-family: "Fira Code", monospace;
+      color: #64748b;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    aside .label { color: #93c5fd; }
+    .side-value {
+      font-size: 28px;
+      line-height: 1;
+      font-weight: 800;
+      margin-top: 8px;
+      color: white;
+    }
+    main {
+      padding: 34px 44px 80px;
+      max-width: 1480px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+    .crumb {
+      font-family: "Fira Code", monospace;
+      font-size: 12px;
+      color: var(--blue);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .status-pill {
+      border: 1px solid #bfdbfe;
+      background: var(--blue-soft);
+      color: #1d4ed8;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) 380px;
+      gap: 28px;
+      align-items: stretch;
+      margin-bottom: 30px;
+    }
+    .hero-copy {
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 34px;
+      min-height: 260px;
+      color: white;
+      background:
+        linear-gradient(120deg, rgba(37,99,235,.98), rgba(15,23,42,.98) 56%, rgba(249,115,22,.82)),
+        #0f172a;
+      box-shadow: var(--shadow);
+    }
+    h1 {
+      font-size: clamp(42px, 5vw, 68px);
+      letter-spacing: 0;
+      line-height: .98;
+      margin: 14px 0 16px;
+    }
+    .hero-copy p {
+      max-width: 800px;
+      color: #dbeafe;
+      line-height: 1.6;
+      font-size: 17px;
+    }
+    .hero-panel {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+    .metric-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fbfdff;
+    }
+    .metric strong {
+      display: block;
+      font-size: 26px;
+      margin-top: 6px;
+    }
+    .section {
+      margin-top: 34px;
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 16px;
+    }
+    .section-head h2 {
+      font-size: 30px;
+      margin: 0 0 6px;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 720px;
+      line-height: 1.55;
+    }
+    .workbench-grid {
+      display: grid;
+      grid-template-columns: minmax(340px, .82fr) minmax(0, 1.18fr);
+      gap: 26px;
+      align-items: start;
+    }
+    .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+    .card-pad { padding: 22px; }
+    .step {
+      border-bottom: 1px solid var(--line);
+      padding: 20px 22px;
+    }
+    .step:last-child { border-bottom: 0; }
+    .step-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+    .step-number {
+      width: 24px;
+      height: 24px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 999px;
+      background: var(--blue);
+      color: white;
+      font-family: "Fira Code", monospace;
+      font-size: 12px;
+      margin-right: 8px;
+    }
+    .field {
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 13px 14px;
+      background: white;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+    }
+    .segmented {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .segmented span {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+    }
+    .segmented .selected {
+      background: var(--blue);
+      color: white;
+      border-color: var(--blue);
+    }
+    .preview-stack {
+      display: grid;
+      gap: 20px;
+    }
+    .contract {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .contract-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: #fbfdff;
+      min-height: 148px;
+    }
+    .contract-card h3 {
+      margin: 8px 0;
+      font-size: 17px;
+    }
+    .contract-card p {
+      color: var(--muted);
+      line-height: 1.48;
+      margin: 0;
+      font-size: 14px;
+    }
+    .chart-card {
+      padding: 22px;
+    }
+    .chart-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .fake-chart {
+      height: 310px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(#e2e8f0 1px, transparent 1px),
+        linear-gradient(90deg, #e2e8f0 1px, transparent 1px),
+        white;
+      background-size: 100% 62px, 72px 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .bar {
+      position: absolute;
+      bottom: 30px;
+      width: 34px;
+      border-radius: 5px 5px 0 0;
+      background: #60a5fa;
+    }
+    .loss { background: #f97316; }
+    .win { background: #2563eb; }
+    .jackpot { background: #16a34a; }
+    .annotation {
+      position: absolute;
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, .12);
+    }
+    .diagnostic-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+    .explain {
+      border-left: 4px solid var(--blue);
+      background: #eff6ff;
+      color: #1e3a8a;
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      line-height: 1.55;
+    }
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .phase {
+      border-top: 3px solid var(--blue);
+      background: white;
+      border-radius: 8px;
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 16px;
+      min-height: 180px;
+    }
+    .phase strong {
+      display: block;
+      margin: 8px 0;
+      font-size: 17px;
+    }
+    .phase p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+    @media (max-width: 980px) {
+      .shell { grid-template-columns: 1fr; }
+      aside { position: relative; height: auto; }
+      main { padding: 24px 18px 60px; }
+      .hero, .workbench-grid, .diagnostic-grid, .contract, .timeline { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside>
+      <div class="brand">Adaptive Lab</div>
+      <div class="side-note">Research console redesign mockup</div>
+      <div class="nav-item active">Strategy Workbench <span>→</span></div>
+      <div class="nav-item">Strategies</div>
+      <div class="nav-item">Results & Data</div>
+      <div class="nav-item">Project Anatomy</div>
+      <div class="side-card">
+        <div class="label">Promotion state</div>
+        <div class="side-value">0</div>
+        <div class="side-note">No live strategy; research only.</div>
+      </div>
+      <div class="side-card">
+        <div class="label">Mode</div>
+        <div class="side-value" style="font-size:20px;">Risk engine</div>
+        <div class="side-note">Every result remains gated.</div>
+      </div>
+    </aside>
+    <main>
+      <div class="topbar">
+        <div>
+          <div class="crumb">Adaptive Equity Trading Lab / Mockup</div>
+          <h1 style="margin:8px 0 0;font-size:34px;">Spacious Strategy Builder</h1>
+        </div>
+        <div class="status-pill">Mockup only - no app logic changed</div>
+      </div>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="crumb" style="color:#bfdbfe;">Research cockpit</div>
+          <h1>Less clutter. Same rigor.</h1>
+          <p>
+            The redesign keeps every piece of information, but separates the experience into progressive layers:
+            build the strategy, understand the contract, inspect the dry-run, then open the raw audit only when needed.
+          </p>
+        </div>
+        <div class="hero-panel">
+          <div class="label">Current strategy draft</div>
+          <h2 style="margin:10px 0 6px;">Custom volume shock</h2>
+          <p style="color:var(--muted);line-height:1.55;">A local dry-run that buys the highest volume-shock windows, exits after 30 days, and refuses promotion.</p>
+          <div class="metric-row">
+            <div class="metric"><div class="label">Local prices</div><strong>15</strong></div>
+            <div class="metric"><div class="label">Configured</div><strong>250+</strong></div>
+            <div class="metric"><div class="label">Cost</div><strong>375 bps</strong></div>
+            <div class="metric"><div class="label">Mode</div><strong>Trading</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>1. Build the rule</h2>
+            <p>The left side becomes a calm, step-by-step composer. The right side immediately translates choices into plain language.</p>
+          </div>
+        </div>
+        <div class="workbench-grid">
+          <div class="card">
+            <div class="step">
+              <div class="step-title"><span><span class="step-number">1</span>Name</span><span class="label">Ledger</span></div>
+              <div class="field">My falsifiable strategy <span>edit</span></div>
+            </div>
+            <div class="step">
+              <div class="step-title"><span><span class="step-number">2</span>Family</span><span class="label">Template</span></div>
+              <div class="field">Custom Rule Builder <span>⌄</span></div>
+            </div>
+            <div class="step">
+              <div class="step-title"><span><span class="step-number">3</span>Signal</span><span class="label">OHLCV</span></div>
+              <div class="field">Volume shock <span>top ranked</span></div>
+              <div class="segmented">
+                <span>momentum</span><span class="selected">volume</span><span>dip</span>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-title"><span><span class="step-number">4</span>Risk assumptions</span><span class="label">Frozen</span></div>
+              <div class="segmented">
+                <span>21d</span><span class="selected">30d</span><span>180d</span>
+              </div>
+            </div>
+          </div>
+          <div class="preview-stack">
+            <div class="contract">
+              <div class="contract-card">
+                <div class="label">What it buys</div>
+                <h3>Highest volume-shock windows</h3>
+                <p>Ranks routed symbols by abnormal volume and enters the strongest local windows.</p>
+              </div>
+              <div class="contract-card">
+                <div class="label">How it exits</div>
+                <h3>Fixed 30-day hold</h3>
+                <p>Exit timing is frozen before results; no tuning after seeing the chart.</p>
+              </div>
+              <div class="contract-card">
+                <div class="label">What blocks it</div>
+                <h3>Cost + outlier gates</h3>
+                <p>Promotion stays false if the result depends on a tiny number of winners.</p>
+              </div>
+            </div>
+            <div class="card chart-card">
+              <div class="chart-title">
+                <div>
+                  <div class="label">Visual contract</div>
+                  <h2 style="margin:5px 0 0;">Where the rule would buy</h2>
+                </div>
+                <div class="status-pill">Local preview</div>
+              </div>
+              <div class="fake-chart">
+                <div class="bar win" style="left:7%;height:80px;"></div>
+                <div class="bar loss" style="left:16%;height:126px;"></div>
+                <div class="bar win" style="left:25%;height:180px;"></div>
+                <div class="bar jackpot" style="left:34%;height:230px;"></div>
+                <div class="bar loss" style="left:47%;height:110px;"></div>
+                <div class="bar win" style="left:58%;height:155px;"></div>
+                <div class="bar loss" style="left:69%;height:88px;"></div>
+                <div class="bar win" style="left:81%;height:170px;"></div>
+                <div class="annotation" style="left:30%;top:34px;">BUY: volume shock</div>
+                <div class="annotation" style="left:68%;top:128px;">EXIT: 30d hold</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>2. Read the dry-run without drowning</h2>
+            <p>Instead of raw tables first, the page shows interpretation first, then charts, then gates, then raw audit rows.</p>
+          </div>
+        </div>
+        <div class="diagnostic-grid">
+          <div class="card card-pad">
+            <div class="explain"><strong>Trade distribution:</strong> if most bars sit left of 0%, the rule loses frequently. A far-right green bar means jackpot behavior.</div>
+            <div class="fake-chart" style="height:250px;">
+              <div class="bar loss" style="left:9%;height:70px;"></div>
+              <div class="bar loss" style="left:23%;height:150px;"></div>
+              <div class="bar loss" style="left:37%;height:215px;"></div>
+              <div class="bar win" style="left:51%;height:130px;"></div>
+              <div class="bar win" style="left:65%;height:82px;"></div>
+              <div class="bar jackpot" style="left:79%;height:34px;"></div>
+            </div>
+          </div>
+          <div class="card card-pad">
+            <div class="explain"><strong>Top winner contribution:</strong> if one symbol dominates the green bars, the result is fragile even if total return is positive.</div>
+            <div class="fake-chart" style="height:250px;">
+              <div class="bar jackpot" style="left:14%;height:210px;width:62px;"></div>
+              <div class="bar win" style="left:38%;height:86px;width:62px;"></div>
+              <div class="bar win" style="left:62%;height:48px;width:62px;"></div>
+              <div class="annotation" style="left:10%;top:24px;">Too dominant?</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>3. Project story becomes a guided timeline</h2>
+            <p>The long project anatomy stays complete, but it is chunked into readable stages with expandable evidence underneath.</p>
+          </div>
+        </div>
+        <div class="timeline">
+          <div class="phase"><div class="label">Phase 01</div><strong>Naive momentum dies</strong><p>Outlier removal exposes lottery-ticket dependency.</p></div>
+          <div class="phase"><div class="label">Phase 02</div><strong>Event regimes found</strong><p>8-K days show volatility lift but no tradable long-only direction.</p></div>
+          <div class="phase"><div class="label">Phase 03</div><strong>Data wall appears</strong><p>PEAD and PDUFA need point-in-time calendars and delisted coverage.</p></div>
+          <div class="phase"><div class="label">Phase 04</div><strong>Workbench begins</strong><p>The lab becomes a governed strategy-building interface.</p></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
