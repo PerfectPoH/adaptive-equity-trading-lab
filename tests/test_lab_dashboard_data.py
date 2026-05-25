@@ -420,6 +420,25 @@ def test_investment_mode_does_not_reject_only_because_trade_median_or_win_rate_i
     assert "investment" in preview["automatic_verdict"]["summary"].lower()
 
 
+def test_event_investment_proxy_flags_high_survivorship_bias() -> None:
+    manifest = build_workbench_manifest(
+        name="PDUFA proxy bias warning",
+        template="PDUFA Run-Up",
+        universe="expanded local research sandbox",
+        holding_period_days=180,
+        cost_bps=500,
+        allow_provider_query=True,
+        strategy_mode="Investment",
+    )
+    preview = build_controlled_backtest_preview(manifest, validate_workbench_manifest(manifest))
+
+    warnings = preview["bias_warnings"]
+    warning_ids = {warning["warning_id"] for warning in warnings}
+    assert "SURVIVORSHIP_BIAS_SUSPECTED_HIGH" in warning_ids
+    assert "PROXY_INVESTMENT_CANDIDATE_ONLY" in preview["automatic_verdict"]["summary"]
+    assert "SURVIVORSHIP_BIAS_SUSPECTED_HIGH" in preview["markdown_report"]
+
+
 def test_persist_workbench_run_bundle_writes_manifest_gate_and_result(tmp_path: Path) -> None:
     manifest = build_workbench_manifest(
         name="Persisted strategy",

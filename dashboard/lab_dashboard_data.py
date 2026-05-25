@@ -587,9 +587,10 @@ def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows:
     equity_curve = _build_workbench_equity_curve(local_trades)
     analysis_mode = str(manifest.get("analysis_mode", "Trading"))
     portfolio_diagnostics = _build_workbench_portfolio_diagnostics(local_trades, equity_curve, int(manifest["holding_period_days"]), analysis_mode)
+    bias_warnings = _build_workbench_bias_warnings(manifest, local_summary, portfolio_diagnostics)
     robustness_panel = _build_workbench_robustness_panel(local_trades, int(manifest["cost_bps"]), analysis_mode=analysis_mode, portfolio_diagnostics=portfolio_diagnostics)
-    automatic_verdict = _build_workbench_verdict(robustness_panel, validation_summary, analysis_mode=analysis_mode, portfolio_diagnostics=portfolio_diagnostics)
-    markdown_report = _build_workbench_markdown_report(manifest, local_summary, robustness_panel, automatic_verdict, local_trades, portfolio_diagnostics)
+    automatic_verdict = _build_workbench_verdict(robustness_panel, validation_summary, analysis_mode=analysis_mode, portfolio_diagnostics=portfolio_diagnostics, bias_warnings=bias_warnings)
+    markdown_report = _build_workbench_markdown_report(manifest, local_summary, robustness_panel, automatic_verdict, local_trades, portfolio_diagnostics, bias_warnings)
     decision = "DRY_RUN_READY"
     if validation_summary["warn"] > 0:
         decision = "LOCAL_DRY_RUN_COMPLETE_WITH_WARNINGS"
@@ -611,6 +612,7 @@ def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows:
         "trade_rows": local_trades,
         "equity_curve": equity_curve,
         "portfolio_diagnostics": portfolio_diagnostics,
+        "bias_warnings": bias_warnings,
         "robustness_panel": robustness_panel,
         "automatic_verdict": automatic_verdict,
         "markdown_report": markdown_report,
@@ -632,6 +634,7 @@ def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows:
         "risk_notes": [
             "Dry-run uses archived local prices and simplified template rules.",
             "Event-heavy templates remain proxy simulations until real point-in-time event calendars are attached.",
+            *[f"{warning['warning_id']}: {warning['message']}" for warning in bias_warnings],
             "Promotion remains false even when the dry-run is ready.",
             "A real backtest still requires a persisted pre-run gate and an approved runner.",
         ],
@@ -986,6 +989,42 @@ def _build_workbench_portfolio_diagnostics(
     }
 
 
+def _build_workbench_bias_warnings(manifest: dict[str, Any], local_summary: dict[str, Any], portfolio_diagnostics: dict[str, Any]) -> list[dict[str, str]]:
+    warnings: list[dict[str, str]] = []
+    template = str(manifest.get("template", ""))
+    universe = str(manifest.get("universe", "")).lower()
+    mode = str(manifest.get("analysis_mode", "Trading"))
+    event_templates = {"PDUFA Run-Up", "Form 4 Cluster Buying", "13D Activist Follow-On", "Catalyst", "PEAD"}
+    proxy_scope = any(token in universe for token in ["active-only", "expanded local", "local archived"])
+    drawdown = abs(float(portfolio_diagnostics.get("max_drawdown", 0.0)))
+    total_net = float(portfolio_diagnostics.get("total_net_return", 0.0))
+    if mode == "Investment" and template in event_templates and proxy_scope:
+        warnings.append(
+            {
+                "warning_id": "SURVIVORSHIP_BIAS_SUSPECTED_HIGH",
+                "severity": "high",
+                "message": "Event-driven investment proxy uses local/active-style data without historical delisted issuers, so returns and drawdown may be artificially smooth.",
+            }
+        )
+    if mode == "Investment" and total_net > 0 and drawdown > 0 and abs(total_net / drawdown) > 10:
+        warnings.append(
+            {
+                "warning_id": "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+                "severity": "medium",
+                "message": "Portfolio return is much larger than observed drawdown; this is plausible only after verifying delisted prices and PIT membership.",
+            }
+        )
+    if str(local_summary.get("data_scope", "")).lower() in {"smallcap_active_only_scope", "expanded_local_research_scope", "full_local_archived_panel"}:
+        warnings.append(
+            {
+                "warning_id": "PROXY_DATA_SCOPE_NOT_PROMOTABLE",
+                "severity": "medium",
+                "message": "The routed local scope is useful for UX and diagnostics but cannot promote a real strategy without a survivor-bias-free source gate.",
+            }
+        )
+    return warnings
+
+
 def _build_workbench_robustness_panel(
     trades: list[dict[str, Any]],
     cost_bps: int,
@@ -1084,6 +1123,7 @@ def _build_workbench_verdict(
     *,
     analysis_mode: str = "Trading",
     portfolio_diagnostics: dict[str, Any] | None = None,
+    bias_warnings: list[dict[str, str]] | None = None,
 ) -> dict[str, Any]:
     if validation_summary["block"] > 0:
         decision = "DRY_RUN_BLOCKED"
@@ -1104,6 +1144,9 @@ def _build_workbench_verdict(
     summary = "Promotion remains disabled. This verdict only determines whether the dry-run deserves deeper research."
     if analysis_mode == "Investment":
         summary = "Promotion remains disabled. Investment mode judges the basket as a portfolio, so weak per-trade median or win rate is diagnostic rather than automatically fatal."
+    if bias_warnings:
+        warning_ids = ", ".join(warning["warning_id"] for warning in bias_warnings)
+        summary = f"{summary} Bias status: PROXY_INVESTMENT_CANDIDATE_ONLY until warnings are resolved ({warning_ids})."
     return {
         "decision": decision,
         "promotion_allowed": False,
@@ -1120,6 +1163,7 @@ def _build_workbench_markdown_report(
     verdict: dict[str, Any],
     trades: list[dict[str, Any]],
     portfolio_diagnostics: dict[str, Any] | None = None,
+    bias_warnings: list[dict[str, str]] | None = None,
 ) -> str:
     lines = [
         "# Workbench Dry-Run Report",
@@ -1152,6 +1196,10 @@ def _build_workbench_markdown_report(
                 f"- payoff_ratio: {portfolio_diagnostics['payoff_ratio']}",
             ]
         )
+    if bias_warnings:
+        lines.extend(["", "## Bias Warnings"])
+        for warning in bias_warnings:
+            lines.append(f"- {warning['warning_id']} ({warning['severity']}): {warning['message']}")
     lines.extend(["", "## Trades", f"Trade count: {len(trades)}"])
     for trade in trades[:10]:
         lines.append(f"- {trade['symbol']} {trade['entry_date']} -> {trade['exit_date']}: net {trade['net_return']}")

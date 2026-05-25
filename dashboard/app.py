@@ -1261,6 +1261,10 @@ def render_strategy_workbench() -> None:
                     "Investment mode does not automatically kill a convex strategy because win rate or median trade is weak. "
                     "It asks whether the whole basket survives costs, drawdown, and outlier concentration. PDUFA/Form4/13D remain proxy simulations until real PIT event data is attached."
                 )
+            if preview.get("bias_warnings"):
+                st.markdown("**Bias warnings**")
+                for warning in preview["bias_warnings"]:
+                    st.warning(f"{warning['warning_id']} ({warning['severity']}): {warning['message']}")
             detail_cols = st.columns([1, 1])
             with detail_cols[0]:
                 st.markdown("**Why this outcome**")
