@@ -396,6 +396,108 @@ def build_workbench_flow_nodes(manifest: dict[str, Any]) -> list[str]:
     ]
 
 
+def build_workbench_chart_story(manifest: dict[str, Any], *, price_file: str | Path = PRICE_FILE) -> dict[str, Any]:
+    template_to_profile = {
+        "Momentum": "xmom",
+        "Mean Reversion": "gaprev",
+        "Catalyst": "sec8k",
+        "PEAD": "pead",
+        "Form 4 Cluster Buying": "form4",
+        "LowVol Tradability": "lowvol",
+        "Dollar-Bar Microstructure": "dollarbar",
+        "Regime Filter": "regime",
+        "PDUFA Run-Up": "sec8k",
+        "13D Activist Follow-On": "form4",
+    }
+    story = build_strategy_chart_story(template_to_profile.get(str(manifest["template"]), "xmom"), price_file=price_file)
+    story["title"] = f"Chart preview: {manifest['strategy_name']} on {story['symbol']}"
+    story["explanation"] = manifest["chart_requirement"]
+    labels = ["ENTRY: " + manifest["entry_rule"], "EXIT: " + manifest["exit_rule"], "GATE: " + manifest["first_gate"]]
+    markers = story.get("markers", [])
+    for index, label in enumerate(labels):
+        if index < len(markers):
+            markers[index]["label"] = label
+    story["markers"] = markers
+    return story
+
+
+def validate_workbench_manifest(manifest: dict[str, Any]) -> pd.DataFrame:
+    rows: list[dict[str, str]] = []
+    strategy_name = str(manifest.get("strategy_name", "")).strip()
+    universe = str(manifest.get("universe", ""))
+    template = str(manifest.get("template", ""))
+    provider_allowed = bool(manifest.get("provider_query_allowed", False))
+    required_data = [str(item).lower() for item in manifest.get("required_data", [])]
+    cost_bps = int(manifest.get("cost_bps", 0))
+    holding_period = int(manifest.get("holding_period_days", 0))
+
+    rows.append(_validation_row("Named hypothesis", bool(strategy_name and strategy_name != "UNTITLED_STRATEGY"), "Strategy needs a stable ledger name."))
+    rows.append(_validation_row("Cost model declared", cost_bps >= 0, f"{cost_bps} bps round-trip cost is part of the hypothesis."))
+    rows.append(_validation_row("Holding period declared", holding_period > 0, f"{holding_period} days declared before any result is seen."))
+
+    needs_external = any(token in " ".join(required_data) for token in ["event timestamp", "consensus eps", "fda", "schedule 13d", "sec form 4"])
+    if needs_external and not provider_allowed:
+        rows.append({"check": "Provider permission", "status": "BLOCK", "detail": f"{template} needs external/event data; provider query is not allowed."})
+    else:
+        rows.append({"check": "Provider permission", "status": "PASS", "detail": "No external query needed, or the query is explicitly allowed after a gate."})
+
+    if "active-only" in universe:
+        rows.append({"check": "Universe bias", "status": "WARN", "detail": "Active-only universe is exploratory and cannot promote without delisted/PIT coverage."})
+    elif "custom universe pending" in universe:
+        rows.append({"check": "Universe bias", "status": "BLOCK", "detail": "Custom universe must be validated before a controlled backtest."})
+    else:
+        rows.append({"check": "Universe bias", "status": "PASS", "detail": "Universe is compatible with a controlled local dry-run."})
+
+    rows.append({"check": "Promotion lock", "status": "PASS", "detail": "Promotion remains false until all downstream gates pass."})
+    return pd.DataFrame(rows)
+
+
+def workbench_gate_is_valid(validation_rows: pd.DataFrame) -> bool:
+    if validation_rows.empty or "status" not in validation_rows.columns:
+        return False
+    return not validation_rows["status"].astype(str).eq("BLOCK").any()
+
+
+def build_workbench_pre_run_gate(manifest: dict[str, Any], validation_rows: pd.DataFrame) -> dict[str, Any]:
+    return {
+        "gate_id": "USER-STRATEGY-PRE-RUN-GATE-DRAFT",
+        "strategy_name": manifest["strategy_name"],
+        "template": manifest["template"],
+        "provider_query_allowed": manifest["provider_query_allowed"],
+        "promotion_allowed": False,
+        "gate_valid": workbench_gate_is_valid(validation_rows),
+        "checks": validation_rows.to_dict("records"),
+        "blocked_actions": ["live_trading", "paper_trading", "promotion_without_final_decision"],
+        "next_allowed_action": "controlled_local_dry_run" if workbench_gate_is_valid(validation_rows) else "fix_blocking_validation_rows",
+    }
+
+
+def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows: pd.DataFrame) -> dict[str, Any]:
+    if not workbench_gate_is_valid(validation_rows):
+        return {
+            "status": "BLOCKED",
+            "reason": "Validation panel contains blocking rows.",
+            "trades": 0,
+            "promotion_allowed": False,
+        }
+    base_score = max(0, 1000 - int(manifest["cost_bps"])) / 1000
+    holding_penalty = min(int(manifest["holding_period_days"]), 180) / 360
+    diagnostic_score = round(base_score - holding_penalty, 4)
+    return {
+        "status": "DRY_RUN_READY",
+        "scope": "local preview only",
+        "simulated_trades": 12,
+        "diagnostic_score": diagnostic_score,
+        "cost_bps": int(manifest["cost_bps"]),
+        "promotion_allowed": False,
+        "next_step": "Persist a real pre-run gate before connecting this to the backtest runner.",
+    }
+
+
+def _validation_row(check: str, passed: bool, detail: str) -> dict[str, str]:
+    return {"check": check, "status": "PASS" if passed else "BLOCK", "detail": detail}
+
+
 def build_strategy_chart_story(profile_key: str, *, price_file: str | Path = PRICE_FILE) -> dict[str, Any]:
     profile = next(item for item in STRATEGY_PROFILES if item.key == profile_key)
     prices = load_csv(Path(price_file))

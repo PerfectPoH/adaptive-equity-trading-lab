@@ -11,15 +11,20 @@ import streamlit as st
 from dashboard.lab_dashboard_data import (
     STRATEGY_PROFILES,
     WORKBENCH_TEMPLATES,
+    build_controlled_backtest_preview,
     build_strategy_chart_story,
+    build_workbench_chart_story,
     build_workbench_flow_nodes,
     build_workbench_manifest,
+    build_workbench_pre_run_gate,
     governance_metrics,
     load_dashboard_payload,
     project_capability_rows,
     project_lifecycle_rows,
     strategy_detail,
     strategy_rows,
+    validate_workbench_manifest,
+    workbench_gate_is_valid,
 )
 
 
@@ -394,6 +399,21 @@ def inject_theme() -> None:
           font-weight: 800;
           font-size: 18px;
           margin-bottom: 6px;
+        }
+        .validation-pass {
+          border-left: 4px solid var(--lab-green);
+          background: #f0fdf4;
+          color: #14532d;
+        }
+        .validation-warn {
+          border-left: 4px solid var(--lab-amber);
+          background: #fff7ed;
+          color: #7c2d12;
+        }
+        .validation-block {
+          border-left: 4px solid var(--lab-red);
+          background: #fef2f2;
+          color: #7f1d1d;
         }
         div[data-testid="stMetric"] {
           border: 1px solid var(--lab-line);
@@ -1047,16 +1067,43 @@ def render_strategy_workbench() -> None:
         with st.expander("Open raw manifest JSON"):
             st.json(manifest)
 
+    st.subheader("Chart Preview")
+    st.write("This preview shows what the strategy must explain visually before it is allowed to become a backtest.")
+    st.plotly_chart(strategy_candlestick_chart(build_workbench_chart_story(manifest)), width="stretch")
+
     st.subheader("Strategy Flow Preview")
     st.write("This is the governed path the builder will use before any future backtest button exists.")
     st.plotly_chart(flow_chart(build_workbench_flow_nodes(manifest)), width="stretch")
+
+    validation_rows = validate_workbench_manifest(manifest)
+    gate_valid = workbench_gate_is_valid(validation_rows)
+    gate = build_workbench_pre_run_gate(manifest, validation_rows)
+
+    st.subheader("Validation Panel")
+    validation_cols = st.columns(3)
+    for index, row in enumerate(validation_rows.to_dict("records")):
+        css = {
+            "PASS": "validation-pass",
+            "WARN": "validation-warn",
+            "BLOCK": "validation-block",
+        }.get(str(row["status"]), "validation-warn")
+        with validation_cols[index % 3]:
+            st.markdown(
+                f"""
+                <div class="rule-card {css}">
+                  <div class="rule-title">{row["status"]}: {row["check"]}</div>
+                  <div class="small-muted">{row["detail"]}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
 
     st.subheader("Pre-Run Gate Draft")
     gate_cols = st.columns(3)
     gate_items = [
         ("Data required", ", ".join(manifest["required_data"])),
         ("First blocker", manifest["first_gate"]),
-        ("Promotion state", "Locked to false until all gates pass."),
+        ("Gate status", "VALID for local dry-run" if gate_valid else "BLOCKED until validation is fixed."),
     ]
     for column, (title, body) in zip(gate_cols, gate_items):
         with column:
@@ -1069,6 +1116,30 @@ def render_strategy_workbench() -> None:
                 """,
                 unsafe_allow_html=True,
             )
+    with st.expander("Open structured pre-run gate draft"):
+        st.json(gate)
+
+    st.subheader("Controlled Backtest Button")
+    st.write("This is intentionally a local dry-run preview. It does not query providers, trade, or promote anything.")
+    run_clicked = st.button("Run controlled local dry-run", type="primary", disabled=not gate_valid, width="stretch")
+    if run_clicked:
+        st.session_state["workbench_backtest_preview"] = build_controlled_backtest_preview(manifest, validation_rows)
+    if not gate_valid:
+        st.warning("Backtest disabled: fix the BLOCK rows in the validation panel first.")
+    preview = st.session_state.get("workbench_backtest_preview")
+    if preview:
+        if preview["status"] == "BLOCKED":
+            st.error(preview["reason"])
+        else:
+            p1, p2, p3, p4 = st.columns(4)
+            with p1:
+                metric_card("Dry-run status", preview["status"], preview["scope"])
+            with p2:
+                metric_card("Sim trades", preview["simulated_trades"], "Preview only")
+            with p3:
+                metric_card("Diag score", preview["diagnostic_score"], "Not a Sharpe, not promotion")
+            with p4:
+                metric_card("Promotion", str(preview["promotion_allowed"]), preview["next_step"])
 
     st.subheader("What The Builder Will Enforce")
     checks = [

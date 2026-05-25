@@ -8,8 +8,11 @@ import pandas as pd
 from dashboard.lab_dashboard_data import (
     STRATEGY_PROFILES,
     WORKBENCH_TEMPLATES,
+    build_controlled_backtest_preview,
+    build_workbench_chart_story,
     build_workbench_flow_nodes,
     build_workbench_manifest,
+    build_workbench_pre_run_gate,
     build_strategy_chart_story,
     classify_strategy_status,
     governance_metrics,
@@ -18,6 +21,8 @@ from dashboard.lab_dashboard_data import (
     project_lifecycle_rows,
     strategy_detail,
     strategy_rows,
+    validate_workbench_manifest,
+    workbench_gate_is_valid,
 )
 
 
@@ -130,6 +135,35 @@ def test_build_workbench_manifest_starts_unpromoted_and_gate_first() -> None:
     assert "Data contract" in flow_nodes
     assert flow_nodes[-1] == "Pre-run manifest"
 
+    validation = validate_workbench_manifest(manifest)
+    assert workbench_gate_is_valid(validation)
+    gate = build_workbench_pre_run_gate(manifest, validation)
+    assert gate["gate_valid"] is True
+    assert gate["next_allowed_action"] == "controlled_local_dry_run"
+    preview = build_controlled_backtest_preview(manifest, validation)
+    assert preview["status"] == "DRY_RUN_READY"
+    assert preview["promotion_allowed"] is False
+
+
+def test_workbench_blocks_external_event_template_without_provider_permission() -> None:
+    manifest = build_workbench_manifest(
+        name="No provider catalyst",
+        template="Catalyst",
+        universe="large-cap / ETF clean-data sandbox",
+        holding_period_days=5,
+        cost_bps=250,
+        allow_provider_query=False,
+    )
+
+    validation = validate_workbench_manifest(manifest)
+    gate = build_workbench_pre_run_gate(manifest, validation)
+    preview = build_controlled_backtest_preview(manifest, validation)
+
+    assert not workbench_gate_is_valid(validation)
+    assert "BLOCK" in set(validation["status"])
+    assert gate["next_allowed_action"] == "fix_blocking_validation_rows"
+    assert preview["status"] == "BLOCKED"
+
 
 def test_build_strategy_chart_story_uses_real_ohlc_window(tmp_path: Path) -> None:
     prices = tmp_path / "prices.csv"
@@ -149,3 +183,30 @@ def test_build_strategy_chart_story_uses_real_ohlc_window(tmp_path: Path) -> Non
     assert len(story["markers"]) >= 2
     assert any(marker["kind"] == "buy" for marker in story["markers"])
     assert story["title"]
+
+
+def test_build_workbench_chart_story_relabels_markers_with_manifest_rules(tmp_path: Path) -> None:
+    prices = tmp_path / "prices.csv"
+    pd.DataFrame(
+        [
+            {"symbol": "CABA", "date": "2026-01-01", "open": 10.0, "high": 10.5, "low": 9.8, "close": 10.2, "volume": 1000},
+            {"symbol": "CABA", "date": "2026-01-02", "open": 10.2, "high": 11.0, "low": 10.1, "close": 10.8, "volume": 2000},
+            {"symbol": "CABA", "date": "2026-01-05", "open": 10.8, "high": 11.2, "low": 10.0, "close": 10.1, "volume": 3000},
+            {"symbol": "CABA", "date": "2026-01-06", "open": 10.1, "high": 10.4, "low": 9.9, "close": 10.0, "volume": 1500},
+        ]
+    ).to_csv(prices, index=False)
+    manifest = build_workbench_manifest(
+        name="Reversion preview",
+        template="Mean Reversion",
+        universe="large-cap / ETF clean-data sandbox",
+        holding_period_days=3,
+        cost_bps=500,
+        allow_provider_query=False,
+    )
+
+    story = build_workbench_chart_story(manifest, price_file=prices)
+
+    assert story["title"].startswith("Chart preview")
+    assert story["markers"][0]["label"].startswith("ENTRY:")
+    assert story["markers"][1]["label"].startswith("EXIT:")
+    assert story["markers"][2]["label"].startswith("GATE:")
