@@ -1,0 +1,23 @@
+{
+  "allowed_actions": {
+    "data_quality_diagnostics": true,
+    "etf_largecap_risk_regime_diagnostics": true,
+    "portfolio_risk_diagnostics": true,
+    "smallcap_microstructure_diagnostics": true
+  },
+  "forbidden_actions": {
+    "paper_or_live_trading": true,
+    "provider_query_without_pre_run_gate": true,
+    "short_selling": true,
+    "smallcap_free_data_directional_alpha": true,
+    "strategy_promotion_without_new_gate": true
+  },
+  "mode": "RISK_REGIME_ENGINE",
+  "promotion_allowed": false,
+  "run_id": "LAB-FINAL-STATUS-PACK-RUN-001",
+  "source_decisions": {
+    "five_point_batch": "TRANSITION_FIVE_POINT_BATCH_COMPLETE_NO_STRATEGY",
+    "transition_policy": "RESEARCH_PROGRAM_TRANSITION_ACTIVE"
+  },
+  "trial_id": "LAB-FINAL-STATUS-PACK-001"
+}

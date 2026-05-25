@@ -1,0 +1,17 @@
+{
+  "backtest_rows": 7,
+  "decision_count": 35,
+  "final_policy": "RISK_REGIME_ENGINE_ONLY",
+  "primary_blockers": [
+    "earnings_point_in_time_data_blocker",
+    "outlier_dependency_blocker",
+    "survivorship_or_pit_blocker"
+  ],
+  "promoted_strategy_count": 0,
+  "promotion_allowed": false,
+  "provider_query_rows": 14,
+  "run_id": "LAB-FINAL-STATUS-PACK-RUN-001",
+  "short_selling_rows": 0,
+  "smallcap_free_data_directional_research_status": "PAUSED",
+  "trial_id": "LAB-FINAL-STATUS-PACK-001"
+}

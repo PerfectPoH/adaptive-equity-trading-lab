@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Adaptive Equity Trading Lab Status</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 32px; color: #1f2933; }
+    h1, h2 { margin-bottom: 8px; }
+    .band { border: 1px solid #ccd5df; border-radius: 6px; padding: 16px; margin: 16px 0; }
+    table { border-collapse: collapse; width: 100%; font-size: 13px; }
+    th, td { border-bottom: 1px solid #d8dee6; padding: 8px; text-align: left; }
+    code { background: #eef2f6; padding: 2px 4px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>Adaptive Equity Trading Lab Status</h1>
+  <section class="band">
+    <h2>Research Phase Closure</h2>
+    <p>Final policy: <code>RISK_REGIME_ENGINE_ONLY</code></p>
+    <p>Promoted strategies: <code>0</code></p>
+    <p>Small-cap free-data directional research: <code>PAUSED</code></p>
+  </section>
+  <section class="band">
+    <h2>Risk/Regime Operating Rules</h2>
+    <p>Mode: <code>RISK_REGIME_ENGINE</code></p>
+    <p>Promotion allowed: <code>False</code></p>
+  </section>
+  <section class="band">
+    <h2>Final Research Ledger</h2>
+    <table>
+      <thead><tr><th>Trial</th><th>Decision</th><th>Promotion Allowed</th></tr></thead>
+      <tbody><tr><td>ACTIVE-ONLY-MOMENTUM-SMOKE-ROBUSTNESS-001</td><td>ACTIVE_ONLY_MOMENTUM_SMOKE_ROBUSTNESS_COMPLETE_NO_PROMOTION</td><td>False</td></tr>
+<tr><td>ACTIVE-ONLY-MOMENTUM-SMOKE-001</td><td>ACTIVE_ONLY_MOMENTUM_SMOKE_COMPLETE_NO_PROMOTION</td><td>False</td></tr>
+<tr><td>TRIAL-DOLLARBAR-MICROREV-001</td><td>DOLLARBAR_MICROREV_ARCHIVE_CURRENT_FORM</td><td>False</td></tr>
+<tr><td>TRIAL-FORM4-CLUSTER-BUYING-001</td><td>FORM4_CLUSTER_BUYING_ARCHIVE_CURRENT_FORM</td><td>False</td></tr>
+<tr><td>TRIAL-FORM4-CLUSTER-BUYING-001</td><td>FORM4_CLUSTER_BUYING_ARCHIVE_CURRENT_FORM</td><td>False</td></tr>
+<tr><td>TRIAL-GAPREV-001</td><td>EVENT_SELECTION_CONTROLLED_PROBE_COMPLETE__NO_PROMOTION</td><td>False</td></tr>
+<tr><td>TRIAL-GAPREV-001</td><td>MINI_PANEL_COMPLETE__NO_PROMOTION</td><td>False</td></tr>
+<tr><td>TRIAL-GAPREV-001</td><td>TECHNICAL_CONTROLLED_RUN_COMPLETE__NO_PROMOTION</td><td>False</td></tr>
+<tr><td>TRIAL-LOWVOL-TRADABILITY-001</td><td>LOWVOL_TRADABILITY_ARCHIVE_CURRENT_FORM</td><td>False</td></tr>
+<tr><td>TRIAL-OPENING-RECLAIM-001</td><td>OPENING_RECLAIM_INTRADAY_PROBE_COMPLETE__NO_PROMOTION</td><td>False</td></tr>
+<tr><td>UNIVERSE-ACTIVE-ONLY-EXPLORATORY-POLICY-GATE-001</td><td>POLYGON_ACTIVE_ONLY_EXPLORATORY_RESEARCH_ALLOWED_NO_PROMOTION</td><td>False</td></tr>
+<tr><td>UNIVERSE-ACTIVE-SEED-001</td><td>POLYGON_ACTIVE_UNIVERSE_SEED_PASS</td><td>False</td></tr>
+<tr><td>UNIVERSE-DELISTED-LISTING-DATE-PROBE-001</td><td>POLYGON_DELISTED_LISTING_DATE_SUPPORT_BLOCKED</td><td>False</td></tr>
+<tr><td>UNIVERSE-SURVIVORSHIP-AUDIT-001</td><td>POLYGON_DELISTED_METADATA_SUPPORT_PASS</td><td>False</td></tr>
+<tr><td>UNIVERSE-LIQUIDITY-PROBE-001</td><td>POLYGON_GROUPED_DAILY_LIQUIDITY_PASS</td><td>False</td></tr>
+<tr><td>UNIVERSE-LISTING-DATE-COMBINED-POLICY-GATE-001</td><td>POLYGON_LISTING_DATE_SAMPLE_COVERAGE_PASS_NO_PIT_UNIVERSE</td><td>False</td></tr>
+<tr><td>UNIVERSE-LISTING-DATE-COVERAGE-CONTINUATION-001</td><td>POLYGON_LISTING_DATE_COVERAGE_CONTINUATION_PASS</td><td>False</td></tr>
+<tr><td>UNIVERSE-LISTING-DATE-COVERAGE-PROBE-001</td><td>POLYGON_LISTING_DATE_COVERAGE_SUPPORT_BLOCKED</td><td>False</td></tr>
+<tr><td>UNIVERSE-PIT-CONSTRUCTION-METHOD-GATE-001</td><td>POLYGON_PIT_CONSTRUCTION_METHOD_APPROVED_PARTIAL_SAMPLE_ONLY</td><td>False</td></tr>
+<tr><td>UNIVERSE-PIT-POLICY-GATE-001</td><td>POLYGON_DATA_STACK_READY_SINGLE_DAY_ONLY</td><td>False</td></tr>
+<tr><td>UNIVERSE-LISTING-DATE-SOURCE-PROBE-001</td><td>POLYGON_TICKER_DETAILS_LISTING_DATE_SUPPORT_PASS</td><td>False</td></tr>
+<tr><td>UNIVERSE-SOURCE-PROBE-002</td><td>POLYGON_TICKER_REFERENCE_SOURCE_PASS</td><td>False</td></tr>
+<tr><td>UNIVERSE-QUALITY-PROBE-001</td><td>POLYGON_UNIVERSE_REFERENCE_QUALITY_BLOCKED</td><td>False</td></tr>
+<tr><td></td><td>BLOCKED_ALPHAVANTAGE_SOURCE_INSUFFICIENT</td><td>False</td></tr>
+<tr><td></td><td>BLOCKED_EARNINGS_SOURCE_PROVIDER_ERROR</td><td>False</td></tr>
+<tr><td>REFERENCE-DATA-PROVIDER-SCAN-001</td><td>REFERENCE_DATA_PROVIDER_SCAN_COMPLETE_PROBE_CANDIDATE_SELECTED</td><td>False</td></tr>
+<tr><td>REGIME-MAP-001</td><td>REGIME_MAP_DIAGNOSTIC_COMPLETE_NO_STRATEGY</td><td>False</td></tr>
+<tr><td>RESEARCH-PROGRAM-TRANSITION-POLICY-GATE-001</td><td>RESEARCH_PROGRAM_TRANSITION_ACTIVE</td><td>False</td></tr>
+<tr><td>UNIVERSE-SOURCE-PROBE-001</td><td>SEC_COMPANY_TICKERS_UNIVERSE_SOURCE_BLOCKED_METADATA_INSUFFICIENT</td><td>False</td></tr>
+<tr><td>SEC8K-PREDRIFT-001</td><td>SEC8K_PREDRIFT_ARCHIVE_CURRENT_FORM</td><td>False</td></tr>
+<tr><td>TRIAL-SEC8K-DIRECTION-001</td><td>SEC8K_TAPE_ORACLE_ARCHIVE_CURRENT_EXISTING_DATA_FORM</td><td>False</td></tr>
+<tr><td>TRIAL-SEC8K-DIRECTION-001</td><td>SEC8K_TAPE_ORACLE_ARCHIVE_CURRENT_EXISTING_DATA_FORM</td><td>False</td></tr>
+<tr><td>TRIAL-SEC8K-DIRECTION-001</td><td>SEC8K_TAPE_ORACLE_ARCHIVE_CURRENT_EXISTING_DATA_FORM</td><td>False</td></tr>
+<tr><td>TRANSITION-FIVE-POINT-BATCH-001</td><td>TRANSITION_FIVE_POINT_BATCH_COMPLETE_NO_STRATEGY</td><td>False</td></tr>
+<tr><td>UNIVERSE-EXPANSION-GATE-001</td><td>UNIVERSE_EXPANSION_GATE_READY_NOT_EXECUTABLE</td><td>False</td></tr></tbody>
+    </table>
+  </section>
+</body>
+</html>
