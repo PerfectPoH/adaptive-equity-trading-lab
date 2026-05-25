@@ -370,6 +370,46 @@ def test_workbench_templates_use_distinct_local_rule_profiles() -> None:
     assert len(result_shapes) == len(WORKBENCH_TEMPLATES)
 
 
+def test_workbench_auto_switches_long_holding_to_investment_mode() -> None:
+    manifest = build_workbench_manifest(
+        name="PDUFA convex basket",
+        template="PDUFA Run-Up",
+        universe="expanded local research sandbox",
+        holding_period_days=180,
+        cost_bps=500,
+        allow_provider_query=True,
+    )
+    preview = build_controlled_backtest_preview(manifest, validate_workbench_manifest(manifest))
+
+    assert manifest["requested_mode"] == "Auto"
+    assert manifest["analysis_mode"] == "Investment"
+    assert preview["analysis_mode"] == "Investment"
+    assert preview["portfolio_diagnostics"]["holding_period_days"] == 180
+    assert preview["portfolio_diagnostics"]["total_net_return"] == preview["cost_breakdown"]["net_return_sum"]
+    assert "convex" in preview["why"].lower()
+    assert "portfolio_diagnostics" in preview["dry_run_rows"][-1]["metric"]
+
+
+def test_investment_mode_does_not_reject_only_because_trade_median_or_win_rate_is_weak() -> None:
+    manifest = build_workbench_manifest(
+        name="Forced investment reading",
+        template="PDUFA Run-Up",
+        universe="expanded local research sandbox",
+        holding_period_days=180,
+        cost_bps=500,
+        allow_provider_query=True,
+        strategy_mode="Investment",
+    )
+    preview = build_controlled_backtest_preview(manifest, validate_workbench_manifest(manifest))
+
+    assert preview["analysis_mode"] == "Investment"
+    assert preview["robustness_panel"]["median_return_gate"]["status"] in {"INFO", "PASS", "BLOCK"}
+    assert preview["robustness_panel"]["win_rate_gate"]["status"] in {"INFO", "PASS", "BLOCK"}
+    if preview["robustness_panel"]["median_return_gate"]["status"] == "BLOCK" or preview["robustness_panel"]["win_rate_gate"]["status"] == "BLOCK":
+        assert preview["automatic_verdict"]["decision"] != "REJECTED_WEAK_DISTRIBUTION"
+    assert "investment" in preview["automatic_verdict"]["summary"].lower()
+
+
 def test_persist_workbench_run_bundle_writes_manifest_gate_and_result(tmp_path: Path) -> None:
     manifest = build_workbench_manifest(
         name="Persisted strategy",

@@ -368,13 +368,19 @@ def build_workbench_manifest(
     holding_period_days: int,
     cost_bps: int,
     allow_provider_query: bool,
+    strategy_mode: str = "Auto",
 ) -> dict[str, Any]:
     selected = WORKBENCH_TEMPLATES.get(template, WORKBENCH_TEMPLATES["Momentum"])
+    holding = int(holding_period_days)
+    requested_mode = strategy_mode if strategy_mode in {"Auto", "Trading", "Investment"} else "Auto"
+    analysis_mode = "Investment" if (requested_mode == "Investment" or (requested_mode == "Auto" and holding > 30)) else "Trading"
     return {
         "strategy_name": name.strip() or "UNTITLED_STRATEGY",
         "template": template,
         "universe": universe,
-        "holding_period_days": int(holding_period_days),
+        "holding_period_days": holding,
+        "requested_mode": requested_mode,
+        "analysis_mode": analysis_mode,
         "cost_bps": int(cost_bps),
         "provider_query_allowed": bool(allow_provider_query),
         "promotion_allowed": False,
@@ -467,6 +473,7 @@ def build_workbench_pre_run_gate(manifest: dict[str, Any], validation_rows: pd.D
         "gate_id": "USER-STRATEGY-PRE-RUN-GATE-DRAFT",
         "strategy_name": manifest["strategy_name"],
         "template": manifest["template"],
+        "analysis_mode": manifest.get("analysis_mode", "Trading"),
         "provider_query_allowed": manifest["provider_query_allowed"],
         "promotion_allowed": False,
         "gate_valid": workbench_gate_is_valid(validation_rows),
@@ -482,6 +489,8 @@ def workbench_manifest_signature(manifest: dict[str, Any]) -> str:
         "template": manifest.get("template"),
         "universe": manifest.get("universe"),
         "holding_period_days": manifest.get("holding_period_days"),
+        "requested_mode": manifest.get("requested_mode"),
+        "analysis_mode": manifest.get("analysis_mode"),
         "cost_bps": manifest.get("cost_bps"),
         "provider_query_allowed": manifest.get("provider_query_allowed"),
         "signal_contract": manifest.get("signal_contract"),
@@ -514,6 +523,8 @@ def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows:
         "template": manifest["template"],
         "universe": manifest["universe"],
         "holding_period_days": int(manifest["holding_period_days"]),
+        "requested_mode": manifest.get("requested_mode", "Auto"),
+        "analysis_mode": manifest.get("analysis_mode", "Trading"),
         "cost_bps": int(manifest["cost_bps"]),
         "provider_query_allowed": bool(manifest["provider_query_allowed"]),
         "validation_summary": validation_summary,
@@ -555,9 +566,11 @@ def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows:
     net_edge_proxy = average_net_return
     diagnostic_score = round(average_net_return * 100, 4)
     equity_curve = _build_workbench_equity_curve(local_trades)
-    robustness_panel = _build_workbench_robustness_panel(local_trades, int(manifest["cost_bps"]))
-    automatic_verdict = _build_workbench_verdict(robustness_panel, validation_summary)
-    markdown_report = _build_workbench_markdown_report(manifest, local_summary, robustness_panel, automatic_verdict, local_trades)
+    analysis_mode = str(manifest.get("analysis_mode", "Trading"))
+    portfolio_diagnostics = _build_workbench_portfolio_diagnostics(local_trades, equity_curve, int(manifest["holding_period_days"]), analysis_mode)
+    robustness_panel = _build_workbench_robustness_panel(local_trades, int(manifest["cost_bps"]), analysis_mode=analysis_mode, portfolio_diagnostics=portfolio_diagnostics)
+    automatic_verdict = _build_workbench_verdict(robustness_panel, validation_summary, analysis_mode=analysis_mode, portfolio_diagnostics=portfolio_diagnostics)
+    markdown_report = _build_workbench_markdown_report(manifest, local_summary, robustness_panel, automatic_verdict, local_trades, portfolio_diagnostics)
     decision = "DRY_RUN_READY"
     if validation_summary["warn"] > 0:
         decision = "LOCAL_DRY_RUN_COMPLETE_WITH_WARNINGS"
@@ -574,16 +587,18 @@ def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows:
         "cost_drag_proxy": cost_drag,
         "time_drag_proxy": 0,
         "net_edge_proxy": net_edge_proxy,
-        "why": "The manifest passed the pre-run checks and was replayed on the archived local OHLCV panel. No provider query was made.",
+        "why": _workbench_why_text(manifest, automatic_verdict),
         "local_data_summary": local_summary,
         "trade_rows": local_trades,
         "equity_curve": equity_curve,
+        "portfolio_diagnostics": portfolio_diagnostics,
         "robustness_panel": robustness_panel,
         "automatic_verdict": automatic_verdict,
         "markdown_report": markdown_report,
         "assumptions": [
             f"Template: {manifest['template']}",
             f"Universe: {manifest['universe']}",
+            f"Analysis mode: {analysis_mode}",
             f"Holding period frozen before result: {manifest['holding_period_days']} days",
             f"Round-trip cost frozen before result: {manifest['cost_bps']} bps",
         ],
@@ -597,6 +612,7 @@ def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows:
         },
         "risk_notes": [
             "Dry-run uses archived local prices and simplified template rules.",
+            "Event-heavy templates remain proxy simulations until real point-in-time event calendars are attached.",
             "Promotion remains false even when the dry-run is ready.",
             "A real backtest still requires a persisted pre-run gate and an approved runner.",
         ],
@@ -612,6 +628,7 @@ def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows:
             {"metric": "Gross return sum", "value": gross_return_sum, "interpretation": "Sum of local template-rule trade returns before costs."},
             {"metric": "Cost drag proxy", "value": cost_drag, "interpretation": "Cost model translated into a visible friction component."},
             {"metric": "Net return sum", "value": net_return_sum, "interpretation": "Local gross return sum after the declared round-trip cost model."},
+            {"metric": "portfolio_diagnostics", "value": portfolio_diagnostics["mode"], "interpretation": "Portfolio-level diagnostics used when the strategy is evaluated as Investment/Convex Basket."},
         ],
         "next_step": "Persist a real pre-run gate before connecting this to the backtest runner.",
     }
@@ -899,7 +916,64 @@ def _build_workbench_equity_curve(trades: list[dict[str, Any]]) -> list[dict[str
     return curve
 
 
-def _build_workbench_robustness_panel(trades: list[dict[str, Any]], cost_bps: int) -> dict[str, dict[str, Any]]:
+def _build_workbench_portfolio_diagnostics(
+    trades: list[dict[str, Any]],
+    equity_curve: list[dict[str, Any]],
+    holding_period_days: int,
+    analysis_mode: str,
+) -> dict[str, Any]:
+    net_returns = sorted((float(row["net_return"]) for row in trades), reverse=True)
+    gross_returns = [float(row["gross_return"]) for row in trades]
+    winners = [value for value in net_returns if value > 0]
+    losers = [value for value in net_returns if value <= 0]
+    total_net = round(sum(net_returns), 6)
+    total_gross = round(sum(gross_returns), 6)
+    top1 = round(net_returns[0], 6) if net_returns else 0.0
+    top3 = round(sum(net_returns[:3]), 6) if net_returns else 0.0
+    top_decile_count = max(1, int(len(net_returns) * 0.1)) if len(net_returns) >= 10 else len(net_returns)
+    top_decile = round(sum(net_returns[:top_decile_count]), 6) if net_returns else 0.0
+    max_drawdown = round(min((float(row["drawdown"]) for row in equity_curve), default=0.0), 6)
+    underwater_steps = sum(1 for row in equity_curve if float(row.get("drawdown", 0)) < 0)
+    time_underwater_ratio = round(underwater_steps / len(equity_curve), 6) if equity_curve else 0.0
+    average_winner = round(sum(winners) / len(winners), 6) if winners else 0.0
+    average_loser = round(sum(losers) / len(losers), 6) if losers else 0.0
+    payoff_ratio = round(average_winner / abs(average_loser), 6) if average_loser else None
+    exit_year_returns: dict[str, float] = {}
+    for trade in trades:
+        year = str(trade["exit_date"])[:4]
+        exit_year_returns[year] = round(exit_year_returns.get(year, 0.0) + float(trade["net_return"]), 6)
+    positive_years = sum(1 for value in exit_year_returns.values() if value > 0)
+    exposure_proxy = round((len(trades) * holding_period_days) / max(1, len({row["symbol"] for row in trades}) * 252), 6) if trades else 0.0
+    top_decile_contribution = round(top_decile / total_net, 6) if total_net > 0 else None
+    return {
+        "mode": analysis_mode,
+        "holding_period_days": int(holding_period_days),
+        "trade_count": len(trades),
+        "total_gross_return": total_gross,
+        "total_net_return": total_net,
+        "max_drawdown": max_drawdown,
+        "time_underwater_ratio": time_underwater_ratio,
+        "top1_contribution": top1,
+        "top3_contribution": top3,
+        "top_decile_contribution": top_decile_contribution,
+        "top_decile_net_return": top_decile,
+        "positive_years": positive_years,
+        "year_count": len(exit_year_returns),
+        "year_returns": exit_year_returns,
+        "average_winner": average_winner,
+        "average_loser": average_loser,
+        "payoff_ratio": payoff_ratio,
+        "exposure_proxy": exposure_proxy,
+    }
+
+
+def _build_workbench_robustness_panel(
+    trades: list[dict[str, Any]],
+    cost_bps: int,
+    *,
+    analysis_mode: str = "Trading",
+    portfolio_diagnostics: dict[str, Any] | None = None,
+) -> dict[str, dict[str, Any]]:
     net_returns = sorted((float(row["net_return"]) for row in trades), reverse=True)
     gross_returns = [float(row["gross_return"]) for row in trades]
     trade_count = len(net_returns)
@@ -927,7 +1001,16 @@ def _build_workbench_robustness_panel(trades: list[dict[str, Any]], cost_bps: in
         outlier_status = "PASS" if ex_top_decile is not None and ex_top_decile > 0 else "BLOCK"
         outlier_mode = "ex_top_decile"
         outlier_detail = "100+ trades: removes the top decile of trades."
-    return {
+    median_status = "PASS" if median_return > 0 else "BLOCK"
+    win_rate_status = "PASS" if win_rate >= 0.5 else "BLOCK"
+    median_detail = "Requires the typical trade, not only the average, to be positive."
+    win_rate_detail = "Requires at least half the local trades to be positive."
+    if analysis_mode == "Investment":
+        median_status = "INFO"
+        win_rate_status = "INFO"
+        median_detail = "Investment/convex mode records median trade quality but does not reject only because the typical trade is negative."
+        win_rate_detail = "Investment/convex mode records hit rate but does not require more than half of trades to win."
+    panel = {
         "trade_count_gate": {
             "status": "PASS" if trade_count >= 30 else "BLOCK",
             "value": trade_count,
@@ -940,15 +1023,15 @@ def _build_workbench_robustness_panel(trades: list[dict[str, Any]], cost_bps: in
             "detail": outlier_detail,
         },
         "median_return_gate": {
-            "status": "PASS" if median_return > 0 else "BLOCK",
+            "status": median_status,
             "value": median_return,
-            "detail": "Requires the typical trade, not only the average, to be positive.",
+            "detail": median_detail,
         },
         "win_rate_gate": {
-            "status": "PASS" if win_rate >= 0.5 else "BLOCK",
+            "status": win_rate_status,
             "value": win_rate,
             "threshold": 0.5,
-            "detail": "Requires at least half the local trades to be positive.",
+            "detail": win_rate_detail,
         },
         "cost_stress_gate": {
             "status": "PASS" if stressed_net_sum > 0 else "BLOCK",
@@ -956,9 +1039,33 @@ def _build_workbench_robustness_panel(trades: list[dict[str, Any]], cost_bps: in
             "detail": "Replays the trade list with 1.5x the declared round-trip cost.",
         },
     }
+    if analysis_mode == "Investment" and portfolio_diagnostics is not None:
+        total_net = float(portfolio_diagnostics.get("total_net_return", 0.0))
+        top_decile_contribution = portfolio_diagnostics.get("top_decile_contribution")
+        concentration_pass = top_decile_contribution is None or float(top_decile_contribution) <= 0.8
+        panel["portfolio_total_return_gate"] = {
+            "status": "PASS" if total_net > 0 else "BLOCK",
+            "value": total_net,
+            "detail": "Investment mode requires the whole local portfolio basket to be positive after costs.",
+        }
+        panel["convex_concentration_gate"] = {
+            "status": "PASS" if concentration_pass else "WARN",
+            "value": {
+                "top_decile_contribution": top_decile_contribution,
+                "top_decile_net_return": portfolio_diagnostics.get("top_decile_net_return"),
+            },
+            "detail": "Warns when the portfolio is mostly one cluster of jackpot trades rather than a repeatable basket.",
+        }
+    return panel
 
 
-def _build_workbench_verdict(robustness_panel: dict[str, dict[str, Any]], validation_summary: dict[str, int]) -> dict[str, Any]:
+def _build_workbench_verdict(
+    robustness_panel: dict[str, dict[str, Any]],
+    validation_summary: dict[str, int],
+    *,
+    analysis_mode: str = "Trading",
+    portfolio_diagnostics: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     if validation_summary["block"] > 0:
         decision = "DRY_RUN_BLOCKED"
     elif robustness_panel["trade_count_gate"]["status"] == "BLOCK":
@@ -967,16 +1074,23 @@ def _build_workbench_verdict(robustness_panel: dict[str, dict[str, Any]], valida
         decision = "REJECTED_OUTLIER_DEPENDENCY"
     elif robustness_panel["cost_stress_gate"]["status"] == "BLOCK":
         decision = "REJECTED_COST_STRESS"
-    elif robustness_panel["median_return_gate"]["status"] == "BLOCK" or robustness_panel["win_rate_gate"]["status"] == "BLOCK":
+    elif analysis_mode == "Investment" and robustness_panel.get("portfolio_total_return_gate", {}).get("status") == "BLOCK":
+        decision = "REJECTED_NEGATIVE_PORTFOLIO"
+    elif analysis_mode != "Investment" and (robustness_panel["median_return_gate"]["status"] == "BLOCK" or robustness_panel["win_rate_gate"]["status"] == "BLOCK"):
         decision = "REJECTED_WEAK_DISTRIBUTION"
     else:
-        decision = "RESEARCH_CANDIDATE_ONLY"
+        decision = "INVESTMENT_RESEARCH_CANDIDATE_ONLY" if analysis_mode == "Investment" else "RESEARCH_CANDIDATE_ONLY"
     blockers = [name for name, gate in robustness_panel.items() if gate.get("status") == "BLOCK"]
+    warnings = [name for name, gate in robustness_panel.items() if gate.get("status") == "WARN"]
+    summary = "Promotion remains disabled. This verdict only determines whether the dry-run deserves deeper research."
+    if analysis_mode == "Investment":
+        summary = "Promotion remains disabled. Investment mode judges the basket as a portfolio, so weak per-trade median or win rate is diagnostic rather than automatically fatal."
     return {
         "decision": decision,
         "promotion_allowed": False,
         "blockers": blockers,
-        "summary": "Promotion remains disabled. This verdict only determines whether the dry-run deserves deeper research.",
+        "warnings": warnings,
+        "summary": summary,
     }
 
 
@@ -986,12 +1100,14 @@ def _build_workbench_markdown_report(
     robustness_panel: dict[str, dict[str, Any]],
     verdict: dict[str, Any],
     trades: list[dict[str, Any]],
+    portfolio_diagnostics: dict[str, Any] | None = None,
 ) -> str:
     lines = [
         "# Workbench Dry-Run Report",
         "",
         f"Strategy: {manifest['strategy_name']}",
         f"Template: {manifest['template']}",
+        f"Analysis mode: {manifest.get('analysis_mode', 'Trading')}",
         f"Universe: {manifest['universe']}",
         f"Data scope: {local_summary.get('data_scope', 'unknown')}",
         f"Selected symbols: {', '.join(local_summary.get('selected_symbols', [])) or 'none'}",
@@ -1005,10 +1121,32 @@ def _build_workbench_markdown_report(
     ]
     for name, gate in robustness_panel.items():
         lines.append(f"- {name}: {gate['status']} | {gate['value']}")
+    if portfolio_diagnostics is not None:
+        lines.extend(
+            [
+                "",
+                "## Portfolio Diagnostics",
+                f"- total_net_return: {portfolio_diagnostics['total_net_return']}",
+                f"- max_drawdown: {portfolio_diagnostics['max_drawdown']}",
+                f"- time_underwater_ratio: {portfolio_diagnostics['time_underwater_ratio']}",
+                f"- top_decile_contribution: {portfolio_diagnostics['top_decile_contribution']}",
+                f"- payoff_ratio: {portfolio_diagnostics['payoff_ratio']}",
+            ]
+        )
     lines.extend(["", "## Trades", f"Trade count: {len(trades)}"])
     for trade in trades[:10]:
         lines.append(f"- {trade['symbol']} {trade['entry_date']} -> {trade['exit_date']}: net {trade['net_return']}")
     return "\n".join(lines) + "\n"
+
+
+def _workbench_why_text(manifest: dict[str, Any], verdict: dict[str, Any]) -> str:
+    if manifest.get("analysis_mode") == "Investment":
+        return (
+            "The manifest passed the pre-run checks and was replayed as an investment/convex basket on archived local OHLCV. "
+            "This mode treats low win rate and negative median trade as diagnostics, then asks whether the portfolio survives costs, drawdown, and jackpot concentration. "
+            "No provider query was made, and event-heavy templates remain proxy tests until real point-in-time calendars are attached."
+        )
+    return "The manifest passed the pre-run checks and was replayed on the archived local OHLCV panel. No provider query was made."
 
 
 def _json_safe(value: Any) -> Any:

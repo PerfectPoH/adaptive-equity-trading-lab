@@ -1034,6 +1034,11 @@ def render_strategy_workbench() -> None:
         st.caption("These numbers become part of the hypothesis. They cannot be tuned after seeing the result.")
         st.markdown("**Holding period**: how long the simulated position is allowed to stay open.")
         holding_period = st.slider("Holding period days", min_value=1, max_value=180, value=21)
+        st.markdown("**Analysis mode**: trading mode judges each signal; investment mode judges the basket.")
+        strategy_mode = st.selectbox("Analysis mode", ["Auto", "Trading", "Investment"])
+        if strategy_mode == "Auto":
+            inferred_mode = "Investment" if holding_period > 30 else "Trading"
+            st.caption(f"Auto currently resolves to {inferred_mode} because holding period is {holding_period} days.")
         st.markdown("**Cost model**: round-trip execution friction. Small-cap tests should stay conservative.")
         cost_bps = st.slider("Round-trip cost model (bps)", min_value=0, max_value=1000, value=500, step=25)
         st.markdown("**Provider query**: external data must be explicitly allowed and gated before any call.")
@@ -1047,6 +1052,7 @@ def render_strategy_workbench() -> None:
             holding_period_days=holding_period,
             cost_bps=cost_bps,
             allow_provider_query=provider_query,
+            strategy_mode=strategy_mode,
         )
         st.markdown(
             f"""
@@ -1055,6 +1061,7 @@ def render_strategy_workbench() -> None:
               <div class="strategy-title" style="font-size:28px;">{manifest["strategy_name"]}</div>
               <div class="strategy-copy"><strong>Template:</strong> {manifest["template"]}</div>
               <div class="strategy-copy"><strong>Universe:</strong> {manifest["universe"]}</div>
+              <div class="strategy-copy"><strong>Analysis mode:</strong> {manifest["analysis_mode"]} <span class="small-muted">(requested: {manifest["requested_mode"]})</span></div>
               <div class="strategy-copy"><strong>First gate:</strong> {manifest["first_gate"]}</div>
               <div class="strategy-copy"><strong>Promotion:</strong> locked to <code>false</code> until validation passes.</div>
             </div>
@@ -1192,6 +1199,7 @@ def render_strategy_workbench() -> None:
                   <div class="dryrun-meta">
                     <strong>Template:</strong> {preview["template"]} &nbsp;|&nbsp;
                     <strong>Universe:</strong> {preview["universe"]} &nbsp;|&nbsp;
+                    <strong>Mode:</strong> {preview["analysis_mode"]} &nbsp;|&nbsp;
                     <strong>Signature:</strong> <code>{preview["manifest_signature"]}</code>
                   </div>
                 </div>
@@ -1207,6 +1215,22 @@ def render_strategy_workbench() -> None:
                 metric_card("Avg net", preview["net_edge_proxy"], "After declared cost")
             with p4:
                 metric_card("Verdict", preview["automatic_verdict"]["decision"], "Promotion locked false")
+            if preview.get("analysis_mode") == "Investment":
+                diagnostics = preview.get("portfolio_diagnostics", {})
+                st.markdown("**Investment / Convex Basket Diagnostics**")
+                d1, d2, d3, d4 = st.columns(4)
+                with d1:
+                    metric_card("Total net", diagnostics.get("total_net_return", 0), "Whole basket after costs")
+                with d2:
+                    metric_card("Max drawdown", diagnostics.get("max_drawdown", 0), "Additive local equity drawdown")
+                with d3:
+                    metric_card("Top decile share", diagnostics.get("top_decile_contribution") or "n/a", "Jackpot concentration")
+                with d4:
+                    metric_card("Payoff ratio", diagnostics.get("payoff_ratio") or "n/a", "Avg winner / avg loser")
+                st.info(
+                    "Investment mode does not automatically kill a convex strategy because win rate or median trade is weak. "
+                    "It asks whether the whole basket survives costs, drawdown, and outlier concentration. PDUFA/Form4/13D remain proxy simulations until real PIT event data is attached."
+                )
             detail_cols = st.columns([1, 1])
             with detail_cols[0]:
                 st.markdown("**Why this outcome**")
