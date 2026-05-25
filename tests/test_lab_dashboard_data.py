@@ -226,7 +226,7 @@ def test_workbench_dry_run_uses_local_prices_and_returns_trade_artifacts(tmp_pat
     manifest = build_workbench_manifest(
         name="Real local runner",
         template="Momentum",
-        universe="large-cap / ETF clean-data sandbox",
+        universe="local archived Databento panel",
         holding_period_days=2,
         cost_bps=100,
         allow_provider_query=False,
@@ -240,7 +240,52 @@ def test_workbench_dry_run_uses_local_prices_and_returns_trade_artifacts(tmp_pat
     assert preview["trade_rows"]
     assert preview["equity_curve"]
     assert preview["local_data_summary"]["symbols"] == 2
+    assert preview["local_data_summary"]["data_scope"] == "full_local_archived_panel"
     assert preview["cost_breakdown"]["net_return_sum"] == sum(row["net_return"] for row in preview["trade_rows"])
+
+
+def test_workbench_universe_routes_to_distinct_price_scopes(tmp_path: Path) -> None:
+    prices = tmp_path / "prices.csv"
+    rows = []
+    for symbol, base in [("AEHR", 10.0), ("ARRY", 20.0), ("IWM", 100.0)]:
+        for offset in range(6):
+            rows.append(
+                {
+                    "symbol": symbol,
+                    "date": f"2026-01-0{offset + 1}",
+                    "open": base + offset,
+                    "high": base + offset + 0.5,
+                    "low": base + offset - 0.5,
+                    "close": base + offset,
+                    "volume": 1000 + offset,
+                }
+            )
+    pd.DataFrame(rows).to_csv(prices, index=False)
+    large = build_workbench_manifest(
+        name="Large scope",
+        template="Momentum",
+        universe="large-cap / ETF clean-data sandbox",
+        holding_period_days=2,
+        cost_bps=100,
+        allow_provider_query=False,
+    )
+    small = build_workbench_manifest(
+        name="Small scope",
+        template="Momentum",
+        universe="small-cap active-only exploratory sandbox",
+        holding_period_days=2,
+        cost_bps=100,
+        allow_provider_query=False,
+    )
+
+    large_preview = build_controlled_backtest_preview(large, validate_workbench_manifest(large), price_file=prices)
+    small_preview = build_controlled_backtest_preview(small, validate_workbench_manifest(small), price_file=prices)
+
+    assert large_preview["local_data_summary"]["data_scope"] == "largecap_etf_clean_scope"
+    assert small_preview["local_data_summary"]["data_scope"] == "smallcap_active_only_scope"
+    assert large_preview["local_data_summary"]["selected_symbols"] == ["IWM"]
+    assert small_preview["local_data_summary"]["selected_symbols"] == ["AEHR", "ARRY"]
+    assert large_preview["simulated_trades"] != small_preview["simulated_trades"]
 
 
 def test_persist_workbench_run_bundle_writes_manifest_gate_and_result(tmp_path: Path) -> None:

@@ -14,6 +14,7 @@ FINAL_STATUS_DIR = EXECUTION_OUTPUTS_DIR / "LAB-FINAL-STATUS-PACK-RUN-001"
 FIVE_POINT_DIR = EXECUTION_OUTPUTS_DIR / "TRANSITION-FIVE-POINT-BATCH-RUN-001"
 PRICE_FILE = Path("experiments/provider_aware_research/data_inputs/databento_xmom_20260520/prices.csv")
 WORKBENCH_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-WORKBENCH"
+WORKBENCH_LARGECAP_ETF_SYMBOLS = {"IWM", "SPY", "QQQ", "DIA", "AAPL", "MSFT", "NVDA", "META", "AMZN", "GOOGL"}
 
 
 @dataclass(frozen=True)
@@ -643,6 +644,16 @@ def _build_local_workbench_trades(manifest: dict[str, Any], *, price_file: str |
     if prices.empty or not {"symbol", "date", "close"}.issubset(prices.columns):
         return [], {"symbols": 0, "rows": 0, "price_file": str(price_file)}
     prices = prices.copy()
+    prices, scope = _filter_prices_for_workbench_universe(prices, str(manifest.get("universe", "")))
+    if prices.empty:
+        return [], {
+            "symbols": 0,
+            "rows": 0,
+            "price_file": str(price_file),
+            "data_scope": scope["data_scope"],
+            "scope_explanation": scope["scope_explanation"],
+            "selected_symbols": [],
+        }
     prices["date"] = pd.to_datetime(prices["date"])
     holding = max(1, int(manifest["holding_period_days"]))
     cost_return = round(int(manifest["cost_bps"]) / 10000, 6)
@@ -680,8 +691,36 @@ def _build_local_workbench_trades(manifest: dict[str, Any], *, price_file: str |
         "rows": int(len(prices)),
         "price_file": str(price_file),
         "eligible_trades": len(trades),
+        "data_scope": scope["data_scope"],
+        "scope_explanation": scope["scope_explanation"],
+        "selected_symbols": sorted(str(symbol) for symbol in prices["symbol"].unique()),
     }
     return trades, summary
+
+
+def _filter_prices_for_workbench_universe(prices: pd.DataFrame, universe: str) -> tuple[pd.DataFrame, dict[str, str]]:
+    symbols = prices["symbol"].astype(str).str.upper()
+    if "large-cap / etf" in universe.lower():
+        selected = prices[symbols.isin(WORKBENCH_LARGECAP_ETF_SYMBOLS)].copy()
+        return selected, {
+            "data_scope": "largecap_etf_clean_scope",
+            "scope_explanation": "Uses only large-cap/ETF proxy symbols available in the local panel.",
+        }
+    if "small-cap active-only" in universe.lower():
+        selected = prices[~symbols.isin(WORKBENCH_LARGECAP_ETF_SYMBOLS)].copy()
+        return selected, {
+            "data_scope": "smallcap_active_only_scope",
+            "scope_explanation": "Uses active small-cap symbols only; results remain non-promotable without delisted/PIT coverage.",
+        }
+    if "local archived databento" in universe.lower():
+        return prices.copy(), {
+            "data_scope": "full_local_archived_panel",
+            "scope_explanation": "Uses every symbol in the archived local Databento price panel.",
+        }
+    return prices.iloc[0:0].copy(), {
+        "data_scope": "unresolved_custom_scope",
+        "scope_explanation": "Custom universe has no approved local routing and must be validated first.",
+    }
 
 
 def _select_workbench_entry_index(symbol_prices: pd.DataFrame, template: str, holding: int) -> int:
