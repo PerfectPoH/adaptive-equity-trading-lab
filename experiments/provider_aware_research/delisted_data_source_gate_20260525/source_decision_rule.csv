@@ -1,0 +1,7 @@
+decision_item,rule
+current_status,Keep PDUFA 180-day workbench output frozen as PROXY_INVESTMENT_CANDIDATE_ONLY until this data gate is satisfied.
+real_backtest_unlock,A real PDUFA investment-mode backtest requires an admissible source plus PIT PDUFA calendar and frozen entry/exit rules.
+blocked_if_no_delisted_prices,If the selected provider cannot supply historical prices for delisted common stocks the strategy remains proxy-only.
+blocked_if_no_pdufa_calendar,If no point-in-time PDUFA/FDA calendar is available the strategy cannot become an event-driven backtest.
+polygon_path,Polygon/Massive may proceed only through a separate bounded entitlement probe for inactive tickers and historical delisted aggregates.
+preferred_path,Prefer CRSP through university access; otherwise evaluate Norgate or Sharadar before attempting paid Polygon entitlement work.

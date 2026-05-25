@@ -1,0 +1,15 @@
+{
+  "backtest_allowed": false,
+  "current_candidate_status": "PROXY_INVESTMENT_CANDIDATE_ONLY",
+  "gate_id": "DELISTED-DATA-SOURCE-GATE-001",
+  "market_data_download_allowed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "promotion_allowed": false,
+  "provider_query_allowed": false,
+  "purpose": "Define the data contract required before the PDUFA investment-mode proxy can become a real survivor-bias-free backtest.",
+  "short_selling_allowed": false,
+  "status": "APPROVED_SOURCE_GATE_NOT_EXECUTABLE",
+  "target_strategy": "PDUFA Investment Mode",
+  "trial_id": "DELISTED-DATA-SOURCE-GATE-001"
+}

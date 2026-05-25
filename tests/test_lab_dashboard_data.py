@@ -14,6 +14,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_manifest,
     build_workbench_pre_run_gate,
     build_workbench_data_scope_preview,
+    delisted_data_source_gate_payload,
     persist_workbench_run_bundle,
     build_strategy_chart_story,
     classify_strategy_status,
@@ -110,6 +111,15 @@ def test_project_lifecycle_documents_research_arc() -> None:
     assert {"phase", "idea_source", "what_happened", "lesson"}.issubset(rows.columns)
     assert any(rows["phase"].str.contains("Momentum", case=False))
     assert any(rows["lesson"].str.contains("data", case=False))
+
+
+def test_delisted_data_source_gate_payload_surfaces_admissible_sources() -> None:
+    payload = delisted_data_source_gate_payload()
+
+    assert payload["manifest"]["current_candidate_status"] == "PROXY_INVESTMENT_CANDIDATE_ONLY"
+    assert {"CRSP", "Norgate Data", "Sharadar/Nasdaq Data Link"}.issubset(set(payload["admissible_sources"]))
+    assert not payload["candidate_source_matrix"].empty
+    assert not payload["unlock_requirements"].empty
 
 
 def test_build_workbench_manifest_starts_unpromoted_and_gate_first() -> None:

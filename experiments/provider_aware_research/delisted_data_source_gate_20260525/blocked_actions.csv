@@ -1,0 +1,9 @@
+action,rationale
+provider_query,This gate is a source contract only; provider calls require a separate approved probe.
+market_data_download,No price or reference dataset may be downloaded from this gate.
+run_backtest,The PDUFA proxy cannot be replayed until delisted prices and a PIT event calendar are present.
+parameter_sweep,No threshold tuning is allowed before the real dataset exists.
+short_selling,The lab remains long-only.
+paper_trading,No paper execution is authorized.
+live_trading,No live execution is authorized.
+strategy_promotion,A source gate cannot promote a strategy.

@@ -15,6 +15,7 @@ FIVE_POINT_DIR = EXECUTION_OUTPUTS_DIR / "TRANSITION-FIVE-POINT-BATCH-RUN-001"
 PRICE_FILE = Path("experiments/provider_aware_research/data_inputs/databento_xmom_20260520/prices.csv")
 LARGECAP_PRICE_FILE = Path("experiments/runs/20260508_173235_news_thr60/signals.csv")
 WORKBENCH_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-WORKBENCH"
+DELISTED_DATA_SOURCE_GATE_DIR = Path("experiments/provider_aware_research/delisted_data_source_gate_20260525")
 WORKBENCH_LARGECAP_ETF_SYMBOLS = {"IWM", "SPY", "QQQ", "DIA", "AAPL", "MSFT", "NVDA", "META", "AMZN", "GOOGL", "AMD", "TSLA"}
 
 
@@ -315,6 +316,24 @@ def project_capability_rows() -> pd.DataFrame:
             {"area": "Future UX", "capability": "User strategy builder and result explorer", "state": "planned"},
         ]
     )
+
+
+def delisted_data_source_gate_payload(root: Path = Path(".")) -> dict[str, Any]:
+    gate_dir = root / DELISTED_DATA_SOURCE_GATE_DIR
+    manifest = load_json(gate_dir / "delisted_data_source_gate_manifest.json")
+    matrix = load_csv(gate_dir / "candidate_source_matrix.csv")
+    requirements = load_csv(gate_dir / "pdufa_real_backtest_unlock_requirements.csv")
+    decision_rule = load_csv(gate_dir / "source_decision_rule.csv")
+    admissible = []
+    if not matrix.empty and "gate_status" in matrix.columns:
+        admissible = matrix[matrix["gate_status"].astype(str).str.lower().eq("admissible")]["provider"].astype(str).tolist()
+    return {
+        "manifest": manifest,
+        "candidate_source_matrix": matrix,
+        "unlock_requirements": requirements,
+        "decision_rule": decision_rule,
+        "admissible_sources": admissible,
+    }
 
 
 def project_lifecycle_rows() -> pd.DataFrame:

@@ -1,0 +1,10 @@
+requirement_id,status,why_required
+historical_delisted_common_stocks,required,The universe must include failed and delisted biotech issuers or the investment-mode curve is survivor-biased.
+daily_ohlcv_adjusted,required,The 180-day basket needs adjusted daily prices to handle splits and corporate actions.
+listing_date,required,The system must know when each security became tradable.
+delisting_date,required,The system must know when each security stopped being tradable and why.
+corporate_action_adjustments,required,Splits and mergers must not create artificial returns.
+pit_membership_or_reconstructable_membership,required,The tradable universe must be reconstructable at each historical date.
+security_type_common_stock,required,ETFs warrants ADRs preferred shares and non-common securities must be filtered consistently.
+exchange_metadata,required,The biotech universe and liquidity filters need primary exchange context.
+license_allows_derived_research_artifacts,required,The lab must be allowed to retain derived reports without raw payload leakage.

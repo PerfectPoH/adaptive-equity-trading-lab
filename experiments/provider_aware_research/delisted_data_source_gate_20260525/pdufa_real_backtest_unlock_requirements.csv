@@ -1,0 +1,9 @@
+requirement_id,required_before_real_backtest,failure_action,rationale
+survivorship_free_universe,yes,block_real_backtest,Active-only biotech panels overstate return and understate drawdown.
+delisted_price_panel,yes,block_real_backtest,Failed PDUFA outcomes often disappear from active ticker datasets.
+biotech_universe_filter,yes,block_real_backtest,PDUFA logic must apply only to relevant life-sciences issuers.
+pdufa_calendar_point_in_time,yes,block_real_backtest,Event dates must be knowable before entry.
+event_entry_exit_rule_freeze,yes,block_real_backtest,Entry and exit offsets must be fixed before seeing event outcomes.
+no_hold_through_binary_event,yes,block_real_backtest,The run-up strategy must exit before the FDA decision.
+benchmark_comparison,yes,block_real_backtest,The basket must beat simple biotech buy-and-hold or cash-equivalent baselines.
+portfolio_diagnostics,yes,block_real_backtest,Investment mode requires drawdown time-underwater payoff and outlier concentration metrics.

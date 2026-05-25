@@ -18,6 +18,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_flow_nodes,
     build_workbench_manifest,
     build_workbench_pre_run_gate,
+    delisted_data_source_gate_payload,
     governance_metrics,
     load_dashboard_payload,
     persist_workbench_run_bundle,
@@ -820,6 +821,35 @@ def render_results_and_data(payload: dict[str, object]) -> None:
     with c3:
         metric_card("Data Upgrades", len(data_matrix), "Provider paths scored")
 
+    st.markdown('<div class="results-spacer"></div>', unsafe_allow_html=True)
+    delisted_gate = delisted_data_source_gate_payload()
+    st.subheader("Delisted Data Source Gate")
+    st.markdown(
+        """
+        <div class="callout danger-callout">
+        PDUFA Investment Mode remains <strong>PROXY_INVESTMENT_CANDIDATE_ONLY</strong> until a survivor-bias-free source supplies
+        delisted common-stock prices, listing/delisting dates, corporate actions, PIT membership, and a separate PIT PDUFA/FDA calendar.
+        This gate performs no provider query and no backtest.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    g1, g2, g3 = st.columns(3)
+    with g1:
+        metric_card("Gate status", delisted_gate["manifest"].get("status", "missing"), "Source contract only")
+    with g2:
+        metric_card("Admissible sources", len(delisted_gate["admissible_sources"]), ", ".join(delisted_gate["admissible_sources"]) or "none")
+    with g3:
+        metric_card("Candidate status", delisted_gate["manifest"].get("current_candidate_status", "unknown"), "No capital deployment")
+    gate_cols = st.columns([1.25, 1])
+    with gate_cols[0]:
+        matrix = delisted_gate["candidate_source_matrix"]
+        if not matrix.empty:
+            st.dataframe(matrix[["provider", "delisted_symbols", "survivorship_free_prices", "pit_membership", "gate_status", "notes"]], width="stretch", hide_index=True)
+    with gate_cols[1]:
+        requirements = delisted_gate["unlock_requirements"]
+        if not requirements.empty:
+            st.dataframe(requirements[["requirement_id", "failure_action"]], width="stretch", hide_index=True)
     st.markdown('<div class="results-spacer"></div>', unsafe_allow_html=True)
     c1, c2 = st.columns([1.2, 1])
     with c1:

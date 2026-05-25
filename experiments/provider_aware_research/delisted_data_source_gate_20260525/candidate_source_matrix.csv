@@ -1,0 +1,7 @@
+provider,official_source_url,delisted_symbols,survivorship_free_prices,listing_dates,delisting_dates,corporate_actions,pit_membership,biotech_filter_support,gate_status,notes
+CRSP,https://www.crsp.org/,pass,pass,pass,pass,pass,pass,pass,admissible,"Best institutional path if university/WRDS access exists; includes delisting history and delisting returns."
+Norgate Data,https://norgatedata.com/data-content-tables.php,pass,pass,pass,pass,pass,pass,pass,admissible,"Commercial retail/quant path; US Platinum/Diamond includes delisted stocks and historical constituent features."
+Sharadar/Nasdaq Data Link,https://www.sharadar.com/data,pass,pass,pass,pass,pass,pass,pass,admissible,"Commercial path; active and delisted coverage with daily prices and fundamentals."
+Polygon/Massive,https://polygon.io/docs/rest/stocks/tickers/all-tickers,pass,maybe,pass,pass,maybe,maybe,maybe,probe_required,"Reference metadata appears useful, but historical delisted price entitlement and listing-date quality require a separate approved probe."
+SEC EDGAR,https://www.sec.gov/edgar,fail,fail,fail,maybe,fail,fail,maybe,blocked,"Useful for filings and CIK identity only; not a survivor-bias-free historical price source."
+Alpha Vantage,https://www.alphavantage.co/documentation/,fail,fail,fail,fail,maybe,fail,maybe,blocked,"Useful for some active-symbol endpoints but not adequate for delisted survivor-bias-free PDUFA backtests."
