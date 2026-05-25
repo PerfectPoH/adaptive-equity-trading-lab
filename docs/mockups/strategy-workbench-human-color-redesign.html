@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adaptive Lab - Human Color Workbench Mockup</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+    :root {
+      --paper: #fbfaf7;
+      --surface: #ffffff;
+      --ink: #171717;
+      --body: #3f3f46;
+      --muted: #71717a;
+      --hair: #e7e2d8;
+      --hair-strong: #cfc7bb;
+      --blue: #1f5eff;
+      --blue-soft: #eef3ff;
+      --mint: #0f9f75;
+      --mint-soft: #e9fbf4;
+      --plum: #7c3aed;
+      --plum-soft: #f3edff;
+      --amber: #d97706;
+      --amber-soft: #fff7ed;
+      --rose: #d12f5f;
+      --rose-soft: #fff0f5;
+      --red: #b42318;
+      --green: #0f8a4b;
+      --shadow: 0 1px 0 rgba(23,23,23,.05), 0 18px 60px rgba(23,23,23,.06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 82% 8%, rgba(31,94,255,.10), transparent 28%),
+        radial-gradient(circle at 8% 28%, rgba(15,159,117,.09), transparent 28%),
+        linear-gradient(90deg, rgba(231,226,216,.55) 1px, transparent 1px),
+        var(--paper);
+      background-size: auto, auto, 72px 72px;
+      color: var(--ink);
+      font-family: "Instrument Sans", system-ui, sans-serif;
+    }
+    .frame { min-height: 100vh; display: grid; grid-template-columns: 260px minmax(0, 1fr); }
+    aside {
+      padding: 28px 20px;
+      border-right: 1px solid var(--hair);
+      background: rgba(251,250,247,.92);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+    .monogram {
+      width: 34px; height: 34px; display: grid; place-items: center;
+      border: 1px solid var(--ink); border-radius: 7px;
+      font-family: "IBM Plex Mono", monospace; font-weight: 600; margin-bottom: 18px;
+      background: linear-gradient(135deg, var(--ink), #334155);
+      color: white;
+    }
+    .side-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+    .side-caption { color: var(--muted); font-size: 13px; line-height: 1.45; margin-bottom: 30px; }
+    nav a {
+      display: flex; align-items: center; gap: 9px;
+      color: var(--body); text-decoration: none; padding: 9px 0;
+      font-weight: 600; font-size: 14px; border-bottom: 1px solid transparent;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 999px; background: var(--hair-strong); }
+    nav a.active { color: var(--ink); border-bottom-color: var(--ink); }
+    nav a.active .dot { background: var(--blue); box-shadow: 0 0 0 4px var(--blue-soft); }
+    .side-ledger {
+      position: absolute; left: 20px; right: 20px; bottom: 24px;
+      border-top: 1px solid var(--hair); padding-top: 18px;
+    }
+    .mono {
+      font-family: "IBM Plex Mono", monospace; text-transform: uppercase;
+      letter-spacing: .04em; font-size: 11px; color: var(--muted); font-weight: 600;
+    }
+    .ledger-row {
+      display: flex; justify-content: space-between; gap: 12px;
+      padding: 10px 0; border-bottom: 1px solid var(--hair); font-size: 13px;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      border-radius: 999px; padding: 7px 10px; font-weight: 700; font-size: 12px;
+      border: 1px solid var(--hair);
+    }
+    .badge.blue { background: var(--blue-soft); color: var(--blue); border-color: #c8d7ff; }
+    .badge.mint { background: var(--mint-soft); color: var(--mint); border-color: #b8efd9; }
+    .badge.amber { background: var(--amber-soft); color: var(--amber); border-color: #fed7aa; }
+    .badge.plum { background: var(--plum-soft); color: var(--plum); border-color: #ddd6fe; }
+    main { max-width: 1360px; width: 100%; margin: 0 auto; padding: 34px 46px 90px; }
+    .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 48px; }
+    .breadcrumb { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--muted); }
+    .quiet-button {
+      border: 1px solid var(--hair-strong); background: var(--surface);
+      padding: 9px 13px; border-radius: 7px; font-weight: 700; box-shadow: 0 1px 0 rgba(23,23,23,.04);
+    }
+    .intro { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 64px; align-items: end; margin-bottom: 54px; }
+    h1 { font-size: clamp(54px, 7vw, 96px); letter-spacing: -.05em; line-height: .88; margin: 10px 0 22px; max-width: 920px; font-weight: 700; }
+    .lead { color: var(--body); font-size: 18px; line-height: 1.62; max-width: 790px; }
+    .note {
+      border: 1px solid var(--hair); background: rgba(255,255,255,.78);
+      border-radius: 9px; padding: 20px; box-shadow: var(--shadow);
+      border-top: 4px solid var(--mint);
+    }
+    .note p { margin: 8px 0 0; color: var(--body); line-height: 1.55; }
+    .color-strip { display: flex; gap: 8px; margin-top: 18px; }
+    .swatch { height: 10px; flex: 1; border-radius: 999px; }
+    .section { border-top: 1px solid var(--hair-strong); padding-top: 28px; margin-top: 54px; }
+    .section-head { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 36px; margin-bottom: 26px; }
+    .section-title { font-size: 26px; letter-spacing: -.02em; font-weight: 700; }
+    .section-copy { color: var(--body); line-height: 1.62; max-width: 760px; }
+    .builder { display: grid; grid-template-columns: 380px minmax(0, 1fr); gap: 28px; align-items: start; }
+    .panel { border: 1px solid var(--hair); background: rgba(255,255,255,.88); border-radius: 9px; box-shadow: var(--shadow); }
+    .composer-row { padding: 18px 18px 20px; border-bottom: 1px solid var(--hair); }
+    .composer-row:last-child { border-bottom: 0; }
+    .composer-label { display: flex; justify-content: space-between; gap: 16px; align-items: center; margin-bottom: 10px; font-size: 14px; font-weight: 700; }
+    .input {
+      border: 1px solid var(--hair-strong); background: #fff; border-radius: 7px;
+      padding: 12px 13px; display: flex; justify-content: space-between; font-weight: 600; color: var(--ink);
+    }
+    .chip-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .chip { border: 1px solid var(--hair); background: #fff; border-radius: 999px; padding: 8px 11px; font-size: 13px; font-weight: 600; color: var(--body); }
+    .chip.signal { background: var(--blue-soft); color: var(--blue); border-color: #c8d7ff; }
+    .chip.risk { background: var(--amber-soft); color: var(--amber); border-color: #fed7aa; }
+    .chip.data { background: var(--plum-soft); color: var(--plum); border-color: #ddd6fe; }
+    .chip.active { background: var(--ink); color: white; border-color: var(--ink); }
+    .contract-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+    .contract-card {
+      border: 1px solid var(--hair); border-radius: 9px; padding: 16px;
+      background: #fff; min-height: 150px; position: relative; overflow: hidden;
+    }
+    .contract-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--blue); }
+    .contract-card.exit::before { background: var(--amber); }
+    .contract-card.block::before { background: var(--rose); }
+    .contract-card strong { display: block; margin: 8px 0; font-size: 17px; }
+    .contract-card p { margin: 0; color: var(--body); line-height: 1.5; font-size: 14px; }
+    .visual-panel { padding: 18px; }
+    .panel-head { display: flex; justify-content: space-between; gap: 18px; align-items: start; margin-bottom: 14px; }
+    .panel-head h3 { margin: 4px 0 0; font-size: 22px; letter-spacing: -.02em; }
+    .chart {
+      height: 338px; border: 1px solid var(--hair); border-radius: 8px;
+      background: linear-gradient(#ece7dd 1px, transparent 1px), linear-gradient(90deg, #ece7dd 1px, transparent 1px), #fffdfa;
+      background-size: 100% 68px, 90px 100%; position: relative; overflow: hidden;
+    }
+    .band { position: absolute; inset: 0 auto 0 0; width: 34%; background: linear-gradient(90deg, rgba(31,94,255,.08), transparent); }
+    .line { position: absolute; height: 2px; background: var(--ink); opacity: .72; transform-origin: left center; }
+    .candle { position: absolute; bottom: 60px; width: 16px; border-radius: 3px; background: var(--blue); }
+    .candle.down { background: var(--amber); }
+    .candle.green { background: var(--mint); }
+    .mark {
+      position: absolute; padding: 7px 9px; border-radius: 7px; background: #fff;
+      border: 1px solid var(--hair-strong); font-size: 12px; font-weight: 700;
+      box-shadow: 0 10px 30px rgba(23,23,23,.08);
+    }
+    .mark.buy { color: var(--blue); border-color: #c8d7ff; }
+    .mark.exit { color: var(--amber); border-color: #fed7aa; }
+    .mark.block { color: var(--rose); border-color: #ffd1df; }
+    .diagnostics { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .explain { border-bottom: 1px solid var(--hair); padding-bottom: 14px; margin-bottom: 14px; color: var(--body); line-height: 1.55; }
+    .bars {
+      height: 226px; display: flex; align-items: end; gap: 12px; padding: 22px 10px 8px;
+      border-radius: 8px; background: #fffdfa; border: 1px solid var(--hair);
+    }
+    .vbar { flex: 1; min-width: 32px; border-radius: 5px 5px 0 0; background: var(--blue); position: relative; }
+    .vbar.loss { background: var(--amber); }
+    .vbar.bad { background: var(--red); }
+    .vbar.win { background: var(--green); }
+    .vbar.plum { background: var(--plum); }
+    .vbar span { position: absolute; left: 50%; transform: translateX(-50%) rotate(-28deg); bottom: -34px; font-size: 11px; color: var(--muted); white-space: nowrap; }
+    .audit { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .audit-card { border: 1px solid var(--hair); background: #fff; border-radius: 9px; padding: 16px; min-height: 128px; }
+    .audit-card strong { display: block; font-size: 24px; margin: 8px 0; }
+    .audit-card.pass { border-top: 4px solid var(--mint); }
+    .audit-card.block { border-top: 4px solid var(--rose); }
+    .audit-card.data { border-top: 4px solid var(--plum); }
+    .audit-card.mode { border-top: 4px solid var(--blue); }
+    @media (max-width: 1040px) {
+      .frame, .intro, .section-head, .builder, .diagnostics, .audit, .contract-grid { grid-template-columns: 1fr; }
+      aside { position: relative; height: auto; }
+      .side-ledger { position: static; margin-top: 28px; }
+      main { padding: 24px 18px 70px; }
+      h1 { font-size: 56px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <aside>
+      <div class="monogram">AL</div>
+      <div class="side-title">Adaptive Lab</div>
+      <div class="side-caption">A research notebook that happens to have controls.</div>
+      <nav>
+        <a><span class="dot"></span>Command Center</a>
+        <a><span class="dot"></span>Strategies</a>
+        <a><span class="dot"></span>Results & Data</a>
+        <a><span class="dot"></span>Project Anatomy</a>
+        <a class="active"><span class="dot"></span>Strategy Workbench</a>
+      </nav>
+      <div class="side-ledger">
+        <div class="mono">today's posture</div>
+        <div class="ledger-row"><span>Promoted</span><strong>0</strong></div>
+        <div class="ledger-row"><span>Mode</span><strong>Risk engine</strong></div>
+        <div class="ledger-row"><span>Provider calls</span><strong>gated</strong></div>
+      </div>
+    </aside>
+    <main>
+      <div class="top">
+        <div class="breadcrumb">Adaptive Equity Trading Lab / Workbench color concept</div>
+        <button class="quiet-button">Open audit trail</button>
+      </div>
+
+      <section class="intro">
+        <div>
+          <div class="mono">Human color redesign mockup</div>
+          <h1>Build the idea. Then let the lab disagree.</h1>
+          <p class="lead">
+            Same notebook feel, but with purposeful color: blue for signals, mint for valid evidence, amber for risk/cost,
+            plum for data scope, and rose for blockers.
+          </p>
+          <div class="color-strip">
+            <span class="swatch" style="background:var(--blue)"></span>
+            <span class="swatch" style="background:var(--mint)"></span>
+            <span class="swatch" style="background:var(--amber)"></span>
+            <span class="swatch" style="background:var(--plum)"></span>
+            <span class="swatch" style="background:var(--rose)"></span>
+          </div>
+        </div>
+        <div class="note">
+          <div class="mono">Color logic</div>
+          <p>Color carries meaning, not decoration. A user can scan the page and instantly separate signal, risk, data coverage, and blockers.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;">
+            <span class="badge blue">signal</span>
+            <span class="badge mint">evidence</span>
+            <span class="badge amber">cost/risk</span>
+            <span class="badge plum">data</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div><div class="mono">01</div><div class="section-title">Composer</div></div>
+          <p class="section-copy">The user defines intent in small chunks. The interface immediately translates choices into a falsifiable contract.</p>
+        </div>
+        <div class="builder">
+          <div class="panel">
+            <div class="composer-row">
+              <div class="composer-label"><span>Hypothesis name</span><span class="badge plum">ledger</span></div>
+              <div class="input">Biotech anticipation basket <span>⌘K</span></div>
+            </div>
+            <div class="composer-row">
+              <div class="composer-label"><span>Strategy family</span><span class="badge blue">template</span></div>
+              <div class="input">Custom Rule Builder <span>⌄</span></div>
+            </div>
+            <div class="composer-row">
+              <div class="composer-label"><span>Signal</span><span class="badge blue">rank</span></div>
+              <div class="chip-row">
+                <span class="chip">Momentum</span>
+                <span class="chip signal">Volume shock</span>
+                <span class="chip">Dip</span>
+                <span class="chip">Low-vol</span>
+              </div>
+            </div>
+            <div class="composer-row">
+              <div class="composer-label"><span>Assumptions</span><span class="badge amber">frozen</span></div>
+              <div class="chip-row">
+                <span class="chip active">30d hold</span>
+                <span class="chip risk">375 bps</span>
+                <span class="chip data">No provider query</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="contract-grid">
+              <div class="contract-card">
+                <div class="mono">buys</div>
+                <strong>Highest abnormal-volume windows</strong>
+                <p>The strategy ranks local OHLCV windows, then enters the strongest routed candidates.</p>
+              </div>
+              <div class="contract-card exit">
+                <div class="mono">exits</div>
+                <strong>Fixed 30-day evidence window</strong>
+                <p>The exit is declared before the run, so the chart cannot move the goalposts.</p>
+              </div>
+              <div class="contract-card block">
+                <div class="mono">blocks</div>
+                <strong>Cost, sample, outlier gates</strong>
+                <p>The result must survive friction and not depend on one spectacular winner.</p>
+              </div>
+            </div>
+            <div class="panel visual-panel">
+              <div class="panel-head">
+                <div><div class="mono">visual contract</div><h3>Show me exactly where this rule acts.</h3></div>
+                <span class="badge mint">local preview</span>
+              </div>
+              <div class="chart">
+                <div class="band"></div>
+                <div class="line" style="left:34px;top:210px;width:190px;transform:rotate(-8deg);"></div>
+                <div class="line" style="left:224px;top:184px;width:220px;transform:rotate(-18deg);"></div>
+                <div class="line" style="left:443px;top:116px;width:260px;transform:rotate(13deg);"></div>
+                <div class="candle down" style="left:60px;height:80px;"></div>
+                <div class="candle down" style="left:120px;height:118px;"></div>
+                <div class="candle" style="left:210px;height:142px;"></div>
+                <div class="candle green" style="left:305px;height:206px;"></div>
+                <div class="candle down" style="left:420px;height:132px;"></div>
+                <div class="candle" style="left:520px;height:174px;"></div>
+                <div class="mark buy" style="left:274px;top:48px;">BUY: signal fires</div>
+                <div class="mark exit" style="right:46px;top:176px;">EXIT: frozen hold</div>
+                <div class="mark block" style="left:42px;bottom:28px;">GATE: cost realism</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div><div class="mono">02</div><div class="section-title">Dry-run reading</div></div>
+          <p class="section-copy">The dashboard teaches the user how to read the result before showing the raw ledger. Charts become explanations, not decoration.</p>
+        </div>
+        <div class="diagnostics">
+          <div class="panel visual-panel">
+            <div class="panel-head"><div><div class="mono">distribution</div><h3>Does the typical trade survive?</h3></div><span class="badge amber">health</span></div>
+            <div class="explain">A healthy rule does not need every trade to win, but if most trades live left of zero it is probably a lottery basket.</div>
+            <div class="bars">
+              <div class="vbar bad" style="height:84px;"><span>&lt;-20%</span></div>
+              <div class="vbar loss" style="height:136px;"><span>-20/-10</span></div>
+              <div class="vbar loss" style="height:188px;"><span>-10/0</span></div>
+              <div class="vbar" style="height:122px;"><span>0/10</span></div>
+              <div class="vbar plum" style="height:72px;"><span>10/25</span></div>
+              <div class="vbar win" style="height:38px;"><span>&gt;25%</span></div>
+            </div>
+          </div>
+          <div class="panel visual-panel">
+            <div class="panel-head"><div><div class="mono">concentration</div><h3>Is one winner carrying the story?</h3></div><span class="badge rose" style="background:var(--rose-soft);color:var(--rose);border-color:#ffd1df;">fragility</span></div>
+            <div class="explain">If the first bar dominates, the strategy may be an outlier dressed as a system. The lab should say that plainly.</div>
+            <div class="bars">
+              <div class="vbar win" style="height:196px;"><span>TSLA</span></div>
+              <div class="vbar" style="height:82px;"><span>AMD</span></div>
+              <div class="vbar plum" style="height:54px;"><span>NVDA</span></div>
+              <div class="vbar" style="height:42px;"><span>SPY</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div><div class="mono">03</div><div class="section-title">Audit, but later</div></div>
+          <p class="section-copy">Nothing is removed. The heavy material moves into clear secondary layers: gate panel, ledger rows, raw JSON, artifacts.</p>
+        </div>
+        <div class="audit">
+          <div class="audit-card pass"><div class="mono">gate</div><strong>PASS</strong><span>trade count</span></div>
+          <div class="audit-card block"><div class="mono">gate</div><strong>BLOCK</strong><span>outlier dependency</span></div>
+          <div class="audit-card data"><div class="mono">data</div><strong>15 / 250</strong><span>local coverage</span></div>
+          <div class="audit-card mode"><div class="mono">mode</div><strong>false</strong><span>promotion allowed</span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
