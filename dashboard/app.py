@@ -25,6 +25,7 @@ from dashboard.lab_dashboard_data import (
     strategy_rows,
     validate_workbench_manifest,
     workbench_gate_is_valid,
+    workbench_manifest_signature,
 )
 
 
@@ -385,6 +386,32 @@ def inject_theme() -> None:
           font-size: 12px;
           font-weight: 800;
           margin-right: 8px;
+        }
+        .dryrun-report {
+          border: 1px solid #bfdbfe;
+          border-radius: 8px;
+          background: linear-gradient(180deg, #eff6ff, #ffffff);
+          padding: 18px;
+          margin-top: 14px;
+          box-shadow: 0 14px 34px rgba(37, 99, 235, .08);
+        }
+        .dryrun-title {
+          font-family: "Exo", system-ui, sans-serif;
+          color: #0f172a;
+          font-size: 26px;
+          font-weight: 800;
+          margin-bottom: 6px;
+        }
+        .dryrun-meta {
+          color: #334155;
+          font-size: 14px;
+          line-height: 1.5;
+        }
+        .dryrun-list {
+          margin: 0;
+          padding-left: 18px;
+          color: #334155;
+          line-height: 1.55;
         }
         .rule-card {
           border: 1px solid #bfdbfe;
@@ -1078,6 +1105,10 @@ def render_strategy_workbench() -> None:
     validation_rows = validate_workbench_manifest(manifest)
     gate_valid = workbench_gate_is_valid(validation_rows)
     gate = build_workbench_pre_run_gate(manifest, validation_rows)
+    manifest_signature = workbench_manifest_signature(manifest)
+    if st.session_state.get("workbench_active_signature") != manifest_signature:
+        st.session_state["workbench_active_signature"] = manifest_signature
+        st.session_state["workbench_backtest_preview"] = None
 
     st.subheader("Validation Panel")
     validation_cols = st.columns(3)
@@ -1127,19 +1158,61 @@ def render_strategy_workbench() -> None:
     if not gate_valid:
         st.warning("Backtest disabled: fix the BLOCK rows in the validation panel first.")
     preview = st.session_state.get("workbench_backtest_preview")
+    if preview and preview.get("manifest_signature") != manifest_signature:
+        preview = None
+        st.session_state["workbench_backtest_preview"] = None
+    if not preview and gate_valid:
+        st.info("Dry-run pending for this manifest. If you changed template, cost, universe, name, or provider permission, the old report is intentionally cleared.")
     if preview:
         if preview["status"] == "BLOCKED":
             st.error(preview["reason"])
         else:
+            st.markdown(
+                f"""
+                <div class="dryrun-report">
+                  <div class="eyebrow">Dry-run report</div>
+                  <div class="dryrun-title">{preview["strategy_name"]}</div>
+                  <div class="dryrun-meta">
+                    <strong>Template:</strong> {preview["template"]} &nbsp;|&nbsp;
+                    <strong>Universe:</strong> {preview["universe"]} &nbsp;|&nbsp;
+                    <strong>Signature:</strong> <code>{preview["manifest_signature"]}</code>
+                  </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
             p1, p2, p3, p4 = st.columns(4)
             with p1:
-                metric_card("Dry-run status", preview["status"], preview["scope"])
+                metric_card("Dry-run status", preview["status"], preview["decision"])
             with p2:
                 metric_card("Sim trades", preview["simulated_trades"], "Preview only")
             with p3:
-                metric_card("Diag score", preview["diagnostic_score"], "Not a Sharpe, not promotion")
+                metric_card("Net proxy", preview["net_edge_proxy"], "Synthetic, not promotion")
             with p4:
-                metric_card("Promotion", str(preview["promotion_allowed"]), preview["next_step"])
+                metric_card("Promotion", str(preview["promotion_allowed"]), "Locked until real gates pass")
+            detail_cols = st.columns([1, 1])
+            with detail_cols[0]:
+                st.markdown("**Why this outcome**")
+                st.write(preview["why"])
+                st.markdown("**Assumptions frozen in this dry-run**")
+                assumptions_html = "".join(f"<li>{item}</li>" for item in preview["assumptions"])
+                st.markdown(f'<ul class="dryrun-list">{assumptions_html}</ul>', unsafe_allow_html=True)
+                st.markdown("**Risk notes**")
+                risk_html = "".join(f"<li>{item}</li>" for item in preview["risk_notes"])
+                st.markdown(f'<ul class="dryrun-list">{risk_html}</ul>', unsafe_allow_html=True)
+            with detail_cols[1]:
+                st.markdown("**Cost and validation breakdown**")
+                st.json(
+                    {
+                        "validation_summary": preview["validation_summary"],
+                        "cost_breakdown": preview["cost_breakdown"],
+                    }
+                )
+                st.markdown("**Next actions**")
+                actions_html = "".join(f"<li>{item}</li>" for item in preview["next_actions"])
+                st.markdown(f'<ul class="dryrun-list">{actions_html}</ul>', unsafe_allow_html=True)
+            st.markdown("**Dry-run audit rows**")
+            st.dataframe(pd.DataFrame(preview["dry_run_rows"]), width="stretch", hide_index=True)
 
     st.subheader("What The Builder Will Enforce")
     checks = [

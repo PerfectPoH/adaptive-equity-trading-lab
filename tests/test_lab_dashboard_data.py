@@ -23,6 +23,7 @@ from dashboard.lab_dashboard_data import (
     strategy_rows,
     validate_workbench_manifest,
     workbench_gate_is_valid,
+    workbench_manifest_signature,
 )
 
 
@@ -143,6 +144,14 @@ def test_build_workbench_manifest_starts_unpromoted_and_gate_first() -> None:
     preview = build_controlled_backtest_preview(manifest, validation)
     assert preview["status"] == "DRY_RUN_READY"
     assert preview["promotion_allowed"] is False
+    assert preview["manifest_signature"] == workbench_manifest_signature(manifest)
+    assert preview["strategy_name"] == "My gap probe"
+    assert preview["template"] == "Mean Reversion"
+    assert preview["validation_summary"]["block"] == 0
+    assert preview["cost_breakdown"]["round_trip_cost_bps"] == 500
+    assert preview["risk_notes"]
+    assert preview["next_actions"]
+    assert any(row["metric"] == "Manifest signature" for row in preview["dry_run_rows"])
 
 
 def test_workbench_blocks_external_event_template_without_provider_permission() -> None:
@@ -163,6 +172,40 @@ def test_workbench_blocks_external_event_template_without_provider_permission() 
     assert "BLOCK" in set(validation["status"])
     assert gate["next_allowed_action"] == "fix_blocking_validation_rows"
     assert preview["status"] == "BLOCKED"
+    assert preview["decision"] == "DRY_RUN_BLOCKED"
+    assert preview["validation_summary"]["block"] >= 1
+    assert preview["dry_run_rows"]
+
+
+def test_workbench_signature_and_preview_change_when_strategy_changes() -> None:
+    first = build_workbench_manifest(
+        name="Version one",
+        template="Momentum",
+        universe="large-cap / ETF clean-data sandbox",
+        holding_period_days=21,
+        cost_bps=500,
+        allow_provider_query=False,
+    )
+    second = build_workbench_manifest(
+        name="Version two",
+        template="Mean Reversion",
+        universe="large-cap / ETF clean-data sandbox",
+        holding_period_days=5,
+        cost_bps=250,
+        allow_provider_query=False,
+    )
+
+    first_validation = validate_workbench_manifest(first)
+    second_validation = validate_workbench_manifest(second)
+    first_preview = build_controlled_backtest_preview(first, first_validation)
+    second_preview = build_controlled_backtest_preview(second, second_validation)
+
+    assert workbench_manifest_signature(first) != workbench_manifest_signature(second)
+    assert first_preview["manifest_signature"] != second_preview["manifest_signature"]
+    assert first_preview["template"] == "Momentum"
+    assert second_preview["template"] == "Mean Reversion"
+    assert first_preview["strategy_name"] == "Version one"
+    assert second_preview["strategy_name"] == "Version two"
 
 
 def test_build_strategy_chart_story_uses_real_ohlc_window(tmp_path: Path) -> None:

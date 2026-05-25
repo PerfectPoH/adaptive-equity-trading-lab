@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 from dataclasses import dataclass
 from pathlib import Path
@@ -472,24 +473,114 @@ def build_workbench_pre_run_gate(manifest: dict[str, Any], validation_rows: pd.D
     }
 
 
+def workbench_manifest_signature(manifest: dict[str, Any]) -> str:
+    signature_fields = {
+        "strategy_name": manifest.get("strategy_name"),
+        "template": manifest.get("template"),
+        "universe": manifest.get("universe"),
+        "holding_period_days": manifest.get("holding_period_days"),
+        "cost_bps": manifest.get("cost_bps"),
+        "provider_query_allowed": manifest.get("provider_query_allowed"),
+        "signal_contract": manifest.get("signal_contract"),
+        "entry_rule": manifest.get("entry_rule"),
+        "exit_rule": manifest.get("exit_rule"),
+        "first_gate": manifest.get("first_gate"),
+    }
+    payload = json.dumps(signature_fields, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()[:16]
+
+
+def _validation_summary(validation_rows: pd.DataFrame) -> dict[str, int]:
+    if validation_rows.empty or "status" not in validation_rows.columns:
+        return {"pass": 0, "warn": 0, "block": 1}
+    counts = validation_rows["status"].astype(str).str.upper().value_counts().to_dict()
+    return {
+        "pass": int(counts.get("PASS", 0)),
+        "warn": int(counts.get("WARN", 0)),
+        "block": int(counts.get("BLOCK", 0)),
+    }
+
+
 def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows: pd.DataFrame) -> dict[str, Any]:
+    manifest_signature = workbench_manifest_signature(manifest)
+    validation_summary = _validation_summary(validation_rows)
+    base_report = {
+        "manifest_signature": manifest_signature,
+        "strategy_name": manifest["strategy_name"],
+        "template": manifest["template"],
+        "universe": manifest["universe"],
+        "holding_period_days": int(manifest["holding_period_days"]),
+        "cost_bps": int(manifest["cost_bps"]),
+        "provider_query_allowed": bool(manifest["provider_query_allowed"]),
+        "validation_summary": validation_summary,
+        "promotion_allowed": False,
+    }
     if not workbench_gate_is_valid(validation_rows):
         return {
+            **base_report,
             "status": "BLOCKED",
             "reason": "Validation panel contains blocking rows.",
             "trades": 0,
-            "promotion_allowed": False,
+            "decision": "DRY_RUN_BLOCKED",
+            "why": "The workbench refuses to simulate a strategy while any pre-run validation row is BLOCK.",
+            "risk_notes": [
+                "Fix the blocking rows before any local preview.",
+                "No provider query, paper trade, live trade, or promotion is allowed from this state.",
+            ],
+            "next_actions": ["Resolve BLOCK checks", "Re-run the controlled dry-run on the updated manifest"],
+            "dry_run_rows": validation_rows.to_dict("records"),
         }
     base_score = max(0, 1000 - int(manifest["cost_bps"])) / 1000
     holding_penalty = min(int(manifest["holding_period_days"]), 180) / 360
     diagnostic_score = round(base_score - holding_penalty, 4)
+    gross_edge_proxy = round(0.42 + min(int(manifest["holding_period_days"]), 90) / 600, 4)
+    cost_drag = round(int(manifest["cost_bps"]) / 10000, 4)
+    time_drag = round(holding_penalty / 10, 4)
+    net_edge_proxy = round(gross_edge_proxy - cost_drag - time_drag, 4)
+    decision = "DRY_RUN_READY"
+    if validation_summary["warn"] > 0:
+        decision = "DRY_RUN_READY_WITH_WARNINGS"
     return {
+        **base_report,
         "status": "DRY_RUN_READY",
         "scope": "local preview only",
         "simulated_trades": 12,
         "diagnostic_score": diagnostic_score,
-        "cost_bps": int(manifest["cost_bps"]),
-        "promotion_allowed": False,
+        "decision": decision,
+        "gross_edge_proxy": gross_edge_proxy,
+        "cost_drag_proxy": cost_drag,
+        "time_drag_proxy": time_drag,
+        "net_edge_proxy": net_edge_proxy,
+        "why": "The manifest passed the pre-run checks, so the UI can produce a local synthetic preview. This is still not a real backtest.",
+        "assumptions": [
+            f"Template: {manifest['template']}",
+            f"Universe: {manifest['universe']}",
+            f"Holding period frozen before result: {manifest['holding_period_days']} days",
+            f"Round-trip cost frozen before result: {manifest['cost_bps']} bps",
+        ],
+        "cost_breakdown": {
+            "round_trip_cost_bps": int(manifest["cost_bps"]),
+            "cost_drag_proxy": cost_drag,
+            "holding_time_drag_proxy": time_drag,
+            "net_edge_proxy": net_edge_proxy,
+        },
+        "risk_notes": [
+            "Preview numbers are synthetic diagnostics, not realized returns.",
+            "Promotion remains false even when the dry-run is ready.",
+            "A real backtest still requires a persisted pre-run gate and an approved runner.",
+        ],
+        "next_actions": [
+            "Persist a real pre-run gate if this manifest is worth testing.",
+            "Attach a real data source and backtest runner only after the gate exists.",
+            "Review cost, sample-size, outlier, and PIT gates before any promotion decision.",
+        ],
+        "dry_run_rows": [
+            {"metric": "Manifest signature", "value": manifest_signature, "interpretation": "Changes whenever name/template/universe/cost/holding/provider contract changes."},
+            {"metric": "Validation PASS/WARN/BLOCK", "value": f"{validation_summary['pass']}/{validation_summary['warn']}/{validation_summary['block']}", "interpretation": "Any BLOCK disables the simulated run."},
+            {"metric": "Gross edge proxy", "value": gross_edge_proxy, "interpretation": "Synthetic estimate used only to explain how the workbench will report outcomes."},
+            {"metric": "Cost drag proxy", "value": cost_drag, "interpretation": "Cost model translated into a visible friction component."},
+            {"metric": "Net edge proxy", "value": net_edge_proxy, "interpretation": "Synthetic gross minus cost/time drag; not a promotion metric."},
+        ],
         "next_step": "Persist a real pre-run gate before connecting this to the backtest runner.",
     }
 
