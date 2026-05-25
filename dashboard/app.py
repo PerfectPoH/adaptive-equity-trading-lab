@@ -29,6 +29,8 @@ from dashboard.lab_dashboard_data import (
     validate_workbench_manifest,
     workbench_gate_is_valid,
     workbench_manifest_signature,
+    build_workbench_strategy_narrative,
+    build_workbench_visual_diagnostics,
 )
 
 
@@ -1202,6 +1204,63 @@ def render_strategy_workbench() -> None:
         with st.expander("Open raw manifest JSON"):
             st.json(manifest)
 
+    data_scope_preview = build_workbench_data_scope_preview(manifest)
+    strategy_narrative = build_workbench_strategy_narrative(manifest, data_scope_preview)
+    st.subheader("Readable Strategy Contract")
+    n1, n2, n3 = st.columns([1.25, 1, 1])
+    with n1:
+        st.markdown(
+            f"""
+            <div class="rule-card">
+              <div class="rule-title">What it buys</div>
+              <div class="strategy-copy">{strategy_narrative["plain_english_rule"]}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    with n2:
+        st.markdown(
+            f"""
+            <div class="rule-card">
+              <div class="rule-title">How it exits</div>
+              <div class="strategy-copy">{strategy_narrative["exit_plain_english"]}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    with n3:
+        coverage = strategy_narrative["data_coverage"]
+        st.markdown(
+            f"""
+            <div class="rule-card">
+              <div class="rule-title">Data actually available</div>
+              <div class="metric-value" style="font-size:26px;">{coverage["local_price_symbols"]} / {coverage["configured_symbols"]}</div>
+              <div class="small-muted">{coverage["local_rows"]} local OHLCV rows routed into this dry-run.</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    st.markdown(
+        f"""
+        <div class="callout">
+          <strong>First blocker:</strong> {strategy_narrative["failure_plain_english"]}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    guardrail_cols = st.columns(4)
+    for index, guardrail in enumerate(strategy_narrative["guardrails"]):
+        with guardrail_cols[index % 4]:
+            st.markdown(
+                f"""
+                <div class="mini-tile">
+                  <div class="eyebrow">Guardrail</div>
+                  <div class="small-muted">{guardrail}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
     st.subheader("Chart Preview")
     st.write("This preview shows what the strategy must explain visually before it is allowed to become a backtest.")
     st.plotly_chart(strategy_candlestick_chart(build_workbench_chart_story(manifest)), width="stretch")
@@ -1259,7 +1318,6 @@ def render_strategy_workbench() -> None:
     with st.expander("Open structured pre-run gate draft"):
         st.json(gate)
 
-    data_scope_preview = build_workbench_data_scope_preview(manifest)
     st.subheader("Data Scope Preview")
     scope_cols = st.columns(3)
     with scope_cols[0]:
@@ -1316,6 +1374,65 @@ def render_strategy_workbench() -> None:
                 metric_card("Avg net", preview["net_edge_proxy"], "After declared cost")
             with p4:
                 metric_card("Verdict", preview["automatic_verdict"]["decision"], "Promotion locked false")
+            visual_diagnostics = preview.get("visual_diagnostics") or build_workbench_visual_diagnostics(preview)
+            explainer = visual_diagnostics.get("result_explainer", {})
+            st.markdown(
+                f"""
+                <div class="callout">
+                  <strong>{explainer.get("headline", preview["decision"])}</strong><br/>
+                  {explainer.get("explanation", preview.get("why", ""))}
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+            viz_left, viz_right = st.columns([1, 1])
+            distribution_rows = pd.DataFrame(visual_diagnostics.get("trade_distribution", []))
+            top_winner_rows = pd.DataFrame(visual_diagnostics.get("top_winners", []))
+            with viz_left:
+                st.markdown("**Trade distribution**")
+                if not distribution_rows.empty:
+                    fig = px.bar(
+                        distribution_rows,
+                        x="bucket",
+                        y="trade_count",
+                        color="trade_count",
+                        color_continuous_scale=["#dbeafe", "#2563eb"],
+                    )
+                    fig.update_layout(
+                        height=310,
+                        showlegend=False,
+                        paper_bgcolor="rgba(0,0,0,0)",
+                        plot_bgcolor="rgba(0,0,0,0)",
+                        xaxis_title="Net return bucket",
+                        yaxis_title="Trades",
+                        margin=dict(l=10, r=10, t=20, b=10),
+                    )
+                    st.plotly_chart(fig, width="stretch")
+                else:
+                    st.info("No distribution available for this dry-run.")
+            with viz_right:
+                st.markdown("**Top winner contribution**")
+                if not top_winner_rows.empty:
+                    fig = px.bar(
+                        top_winner_rows.head(8),
+                        x="symbol",
+                        y="share_of_positive_net",
+                        color="net_return",
+                        color_continuous_scale=["#f97316", "#16a34a"],
+                        hover_data=["entry_date", "exit_date", "net_return"],
+                    )
+                    fig.update_layout(
+                        height=310,
+                        showlegend=False,
+                        paper_bgcolor="rgba(0,0,0,0)",
+                        plot_bgcolor="rgba(0,0,0,0)",
+                        xaxis_title="Symbol",
+                        yaxis_title="Share of positive net",
+                        margin=dict(l=10, r=10, t=20, b=10),
+                    )
+                    st.plotly_chart(fig, width="stretch")
+                else:
+                    st.info("No winners available for this dry-run.")
             if preview.get("analysis_mode") == "Investment":
                 diagnostics = preview.get("portfolio_diagnostics", {})
                 st.markdown("**Investment / Convex Basket Diagnostics**")
@@ -1379,10 +1496,45 @@ def render_strategy_workbench() -> None:
                 st.dataframe(trade_rows, width="stretch", hide_index=True)
             if not equity_curve.empty:
                 st.markdown("**Local equity and drawdown curve**")
-                st.line_chart(
-                    equity_curve.set_index("step")[["cumulative_gross_return", "cumulative_net_return", "drawdown"]],
-                    height=280,
+                fig = go.Figure()
+                fig.add_trace(
+                    go.Scatter(
+                        x=equity_curve["step"],
+                        y=equity_curve["cumulative_net_return"],
+                        mode="lines",
+                        name="Cumulative net",
+                        line=dict(color="#2563eb", width=3),
+                    )
                 )
+                fig.add_trace(
+                    go.Scatter(
+                        x=equity_curve["step"],
+                        y=equity_curve["cumulative_gross_return"],
+                        mode="lines",
+                        name="Cumulative gross",
+                        line=dict(color="#94a3b8", width=2, dash="dot"),
+                    )
+                )
+                fig.add_trace(
+                    go.Scatter(
+                        x=equity_curve["step"],
+                        y=equity_curve["drawdown"],
+                        mode="lines",
+                        name="Drawdown",
+                        fill="tozeroy",
+                        line=dict(color="#ef4444", width=2),
+                    )
+                )
+                fig.update_layout(
+                    height=320,
+                    paper_bgcolor="rgba(0,0,0,0)",
+                    plot_bgcolor="rgba(0,0,0,0)",
+                    xaxis_title="Trade exit order",
+                    yaxis_title="Additive return",
+                    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+                    margin=dict(l=10, r=10, t=34, b=10),
+                )
+                st.plotly_chart(fig, width="stretch")
             with st.expander("Open Markdown dry-run report"):
                 st.code(preview.get("markdown_report", ""), language="markdown")
             artifact_bundle = st.session_state.get("workbench_artifact_bundle")

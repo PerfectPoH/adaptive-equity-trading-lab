@@ -653,6 +653,22 @@ def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows:
     robustness_panel = _build_workbench_robustness_panel(local_trades, int(manifest["cost_bps"]), analysis_mode=analysis_mode, portfolio_diagnostics=portfolio_diagnostics)
     automatic_verdict = _build_workbench_verdict(robustness_panel, validation_summary, analysis_mode=analysis_mode, portfolio_diagnostics=portfolio_diagnostics, bias_warnings=bias_warnings)
     markdown_report = _build_workbench_markdown_report(manifest, local_summary, robustness_panel, automatic_verdict, local_trades, portfolio_diagnostics, bias_warnings)
+    visual_diagnostics = build_workbench_visual_diagnostics(
+        {
+            "trade_rows": local_trades,
+            "equity_curve": equity_curve,
+            "robustness_panel": robustness_panel,
+            "automatic_verdict": automatic_verdict,
+            "cost_breakdown": {
+                "round_trip_cost_bps": int(manifest["cost_bps"]),
+                "cost_drag_proxy": cost_drag,
+                "gross_return_sum": gross_return_sum,
+                "net_return_sum": net_return_sum,
+                "average_net_return": average_net_return,
+                "net_edge_proxy": net_edge_proxy,
+            },
+        }
+    )
     decision = "DRY_RUN_READY"
     if validation_summary["warn"] > 0:
         decision = "LOCAL_DRY_RUN_COMPLETE_WITH_WARNINGS"
@@ -677,6 +693,7 @@ def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows:
         "bias_warnings": bias_warnings,
         "robustness_panel": robustness_panel,
         "automatic_verdict": automatic_verdict,
+        "visual_diagnostics": visual_diagnostics,
         "markdown_report": markdown_report,
         "assumptions": [
             f"Template: {manifest['template']}",
@@ -779,6 +796,130 @@ def build_workbench_data_scope_preview(manifest: dict[str, Any], *, price_file: 
         "local_price_symbols": int(len(selected_symbols)),
         "price_file": str(price_file),
     }
+
+
+def build_workbench_strategy_narrative(manifest: dict[str, Any], data_scope_preview: dict[str, Any]) -> dict[str, Any]:
+    template = str(manifest.get("template", "Momentum"))
+    holding = int(manifest.get("holding_period_days", 0))
+    cost_bps = int(manifest.get("cost_bps", 0))
+    mode = str(manifest.get("analysis_mode", "Trading"))
+    custom_rules = _normalize_workbench_custom_rules(manifest.get("custom_rules", {}))
+    signal_labels = {
+        "momentum_21d": "21-day momentum",
+        "momentum_5d": "5-day momentum",
+        "dip_2d": "2-day dip",
+        "low_vol_5d": "5-day low-volatility",
+        "volume_shock": "volume shock",
+        "dollar_volume_shock": "dollar-volume shock",
+    }
+    if template == "Custom Rule Builder":
+        direction = "highest" if custom_rules["selection"] == "top" else "lowest"
+        plain_rule = (
+            f"Buy the {direction}-ranked local windows by {signal_labels[custom_rules['signal']]} "
+            f"for each routed symbol, capped at {custom_rules['entries_per_symbol']} windows per symbol."
+        )
+    else:
+        plain_rule = f"Buy according to the {template} contract: {manifest.get('entry_rule', '')}"
+    exit_rule = f"Exit after {holding} calendar days using the frozen local dry-run holding period."
+    data_coverage = {
+        "configured_symbols": int(data_scope_preview.get("configured_symbols", 0)),
+        "local_price_symbols": int(data_scope_preview.get("local_price_symbols", data_scope_preview.get("symbols", 0))),
+        "local_rows": int(data_scope_preview.get("rows", 0)),
+        "selected_symbols": data_scope_preview.get("selected_symbols", []),
+        "coverage_ratio": round(
+            int(data_scope_preview.get("local_price_symbols", data_scope_preview.get("symbols", 0))) / max(1, int(data_scope_preview.get("configured_symbols", 0))),
+            6,
+        ),
+    }
+    guardrails = [
+        f"Cost model is frozen at {cost_bps} bps round-trip before seeing the result.",
+        f"Analysis mode is {mode}; promotion remains locked false.",
+        "No provider query is allowed unless the manifest explicitly enables it and a pre-run gate exists.",
+        "Missing local prices are reported as unavailable, never fabricated.",
+    ]
+    if "active-only" in str(manifest.get("universe", "")):
+        guardrails.append("Active-only universes are exploratory because delisted/PIT coverage is incomplete.")
+    return {
+        "plain_english_rule": plain_rule,
+        "exit_plain_english": exit_rule,
+        "failure_plain_english": f"The first blocker is {manifest.get('first_gate')}: {manifest.get('known_failure_mode')}",
+        "data_coverage": data_coverage,
+        "guardrails": guardrails,
+    }
+
+
+def build_workbench_visual_diagnostics(preview: dict[str, Any]) -> dict[str, Any]:
+    trades = list(preview.get("trade_rows", []))
+    equity_curve = list(preview.get("equity_curve", []))
+    robustness_panel = dict(preview.get("robustness_panel", {}))
+    verdict = dict(preview.get("automatic_verdict", {}))
+    net_returns = [float(row.get("net_return", 0.0)) for row in trades]
+    distribution = _workbench_trade_distribution(net_returns)
+    positive_total = sum(value for value in net_returns if value > 0)
+    top_winners: list[dict[str, Any]] = []
+    for row in sorted(trades, key=lambda item: float(item.get("net_return", 0.0)), reverse=True)[:10]:
+        net_return = round(float(row.get("net_return", 0.0)), 6)
+        top_winners.append(
+            {
+                "symbol": row.get("symbol", ""),
+                "entry_date": row.get("entry_date", ""),
+                "exit_date": row.get("exit_date", ""),
+                "net_return": net_return,
+                "share_of_positive_net": round(net_return / positive_total, 6) if positive_total > 0 and net_return > 0 else 0.0,
+            }
+        )
+    verdict_blocks = [
+        {
+            "gate": gate_name,
+            "status": gate_payload.get("status"),
+            "detail": gate_payload.get("detail"),
+        }
+        for gate_name, gate_payload in robustness_panel.items()
+        if gate_payload.get("status") in {"BLOCK", "WARN", "INFO"}
+    ]
+    headline = str(verdict.get("decision", preview.get("decision", "DRY_RUN_READY")))
+    blockers = verdict.get("blockers", [])
+    warnings = verdict.get("warnings", [])
+    if blockers:
+        explanation = f"Blocked by {', '.join(blockers)}. The dry-run is useful diagnostically, but not promotable."
+    elif warnings:
+        explanation = f"Passed hard blockers with warnings: {', '.join(warnings)}. This is still not a promoted strategy."
+    else:
+        explanation = "No hard blocker fired in the local dry-run, but promotion remains false until a real governed backtest exists."
+    return {
+        "result_explainer": {
+            "headline": headline,
+            "explanation": explanation,
+            "promotion_allowed": bool(verdict.get("promotion_allowed", False)),
+        },
+        "trade_distribution": distribution,
+        "top_winners": top_winners,
+        "equity_curve": equity_curve,
+        "verdict_blocks": verdict_blocks,
+    }
+
+
+def _workbench_trade_distribution(net_returns: list[float]) -> list[dict[str, Any]]:
+    if not net_returns:
+        return []
+    buckets = [
+        ("<= -20%", None, -0.20),
+        ("-20% to -10%", -0.20, -0.10),
+        ("-10% to 0%", -0.10, 0.0),
+        ("0% to 10%", 0.0, 0.10),
+        ("10% to 25%", 0.10, 0.25),
+        ("> 25%", 0.25, None),
+    ]
+    rows: list[dict[str, Any]] = []
+    for label, lower, upper in buckets:
+        count = 0
+        for value in net_returns:
+            lower_ok = True if lower is None else value > lower
+            upper_ok = True if upper is None else value <= upper
+            if lower_ok and upper_ok:
+                count += 1
+        rows.append({"bucket": label, "trade_count": count})
+    return rows
 
 
 def _build_local_workbench_trades(manifest: dict[str, Any], *, price_file: str | Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:

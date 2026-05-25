@@ -16,6 +16,8 @@ from dashboard.lab_dashboard_data import (
     build_workbench_manifest,
     build_workbench_pre_run_gate,
     build_workbench_data_scope_preview,
+    build_workbench_strategy_narrative,
+    build_workbench_visual_diagnostics,
     delisted_data_source_gate_payload,
     persist_workbench_run_bundle,
     build_strategy_chart_story,
@@ -446,6 +448,61 @@ def test_custom_rule_builder_manifest_changes_local_rule_profile_and_results() -
     assert custom_preview["local_data_summary"]["custom_allowed_symbols"] == ["CABA", "CRMD", "IOVA", "SPY"]
     assert custom_preview["simulated_trades"] != momentum_preview["simulated_trades"]
     assert custom_preview["cost_breakdown"]["net_return_sum"] != momentum_preview["cost_breakdown"]["net_return_sum"]
+
+
+def test_workbench_strategy_narrative_explains_custom_rule_and_data_coverage() -> None:
+    manifest = build_workbench_manifest(
+        name="Readable custom volume shock",
+        template="Custom Rule Builder",
+        universe="expanded local research sandbox",
+        holding_period_days=30,
+        cost_bps=375,
+        allow_provider_query=False,
+        custom_rules={
+            "signal": "volume_shock",
+            "selection": "top",
+            "entries_per_symbol": 20,
+            "allowed_symbols": "CABA, CRMD, IOVA",
+        },
+    )
+    scope = build_workbench_data_scope_preview(manifest)
+
+    narrative = build_workbench_strategy_narrative(manifest, scope)
+
+    assert narrative["plain_english_rule"].startswith("Buy")
+    assert "volume shock" in narrative["plain_english_rule"].lower()
+    assert "30" in narrative["exit_plain_english"]
+    assert narrative["data_coverage"]["configured_symbols"] >= 100
+    assert narrative["data_coverage"]["local_price_symbols"] == 3
+    assert any("No provider query" in item for item in narrative["guardrails"])
+
+
+def test_workbench_visual_diagnostics_exposes_distribution_and_top_winners() -> None:
+    manifest = build_workbench_manifest(
+        name="Visual diagnostics",
+        template="Custom Rule Builder",
+        universe="expanded local research sandbox",
+        holding_period_days=21,
+        cost_bps=500,
+        allow_provider_query=False,
+        custom_rules={
+            "signal": "momentum_5d",
+            "selection": "top",
+            "entries_per_symbol": 15,
+            "allowed_symbols": "CABA,CRMD,IOVA,SPY",
+        },
+    )
+    preview = build_controlled_backtest_preview(manifest, validate_workbench_manifest(manifest))
+
+    diagnostics = build_workbench_visual_diagnostics(preview)
+
+    assert diagnostics["trade_distribution"]
+    assert diagnostics["top_winners"]
+    assert diagnostics["equity_curve"]
+    assert {"bucket", "trade_count"}.issubset(diagnostics["trade_distribution"][0])
+    assert {"symbol", "net_return", "share_of_positive_net"}.issubset(diagnostics["top_winners"][0])
+    assert diagnostics["verdict_blocks"]
+    assert diagnostics["result_explainer"]["headline"] == preview["automatic_verdict"]["decision"]
 
 
 def test_workbench_auto_switches_long_holding_to_investment_mode() -> None:
