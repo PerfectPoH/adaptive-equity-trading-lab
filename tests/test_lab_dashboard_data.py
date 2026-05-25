@@ -13,6 +13,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_flow_nodes,
     build_workbench_manifest,
     build_workbench_pre_run_gate,
+    build_workbench_data_scope_preview,
     persist_workbench_run_bundle,
     build_strategy_chart_story,
     classify_strategy_status,
@@ -243,7 +244,7 @@ def test_workbench_dry_run_uses_local_prices_and_returns_trade_artifacts(tmp_pat
     assert preview["local_data_summary"]["data_scope"] == "full_local_archived_panel"
     assert preview["cost_breakdown"]["net_return_sum"] == sum(row["net_return"] for row in preview["trade_rows"])
     assert preview["robustness_panel"]["trade_count_gate"]["status"] in {"PASS", "BLOCK"}
-    assert preview["robustness_panel"]["outlier_dependency_gate"]["status"] in {"PASS", "BLOCK"}
+    assert preview["robustness_panel"]["outlier_dependency_gate"]["status"] in {"PASS", "BLOCK", "SKIP"}
     assert preview["robustness_panel"]["win_rate_gate"]["value"] >= 0
     assert preview["automatic_verdict"]["promotion_allowed"] is False
     assert preview["automatic_verdict"]["decision"] in {
@@ -251,6 +252,7 @@ def test_workbench_dry_run_uses_local_prices_and_returns_trade_artifacts(tmp_pat
         "REJECTED_SAMPLE_TOO_SMALL",
         "REJECTED_OUTLIER_DEPENDENCY",
         "REJECTED_COST_STRESS",
+        "REJECTED_WEAK_DISTRIBUTION",
     }
     assert {"cumulative_gross_return", "cumulative_net_return", "drawdown"}.issubset(preview["equity_curve"][0])
     assert "# Workbench Dry-Run Report" in preview["markdown_report"]
@@ -300,6 +302,43 @@ def test_workbench_universe_routes_to_distinct_price_scopes(tmp_path: Path) -> N
     assert large_preview["simulated_trades"] != small_preview["simulated_trades"]
     assert large_preview["data_scope_preview"]["selected_symbols"] == ["AEHR", "ARRY", "IWM"]
     assert small_preview["data_scope_preview"]["selected_symbols"] == ["AEHR", "ARRY"]
+
+
+def test_workbench_default_largecap_scope_uses_expanded_local_artifact() -> None:
+    manifest = build_workbench_manifest(
+        name="Expanded large local",
+        template="Momentum",
+        universe="large-cap / ETF clean-data sandbox",
+        holding_period_days=21,
+        cost_bps=250,
+        allow_provider_query=False,
+    )
+
+    scope = build_workbench_data_scope_preview(manifest)
+    preview = build_controlled_backtest_preview(manifest, validate_workbench_manifest(manifest))
+
+    assert scope["data_scope"] == "largecap_etf_clean_scope"
+    assert scope["symbols"] >= 10
+    assert preview["simulated_trades"] >= 300
+    assert preview["robustness_panel"]["outlier_dependency_gate"]["value"]["mode"] in {"ex_top_decile", "ex_top3"}
+
+
+def test_workbench_expanded_local_research_scope_combines_local_panels() -> None:
+    manifest = build_workbench_manifest(
+        name="Expanded all local",
+        template="Momentum",
+        universe="expanded local research sandbox",
+        holding_period_days=21,
+        cost_bps=250,
+        allow_provider_query=False,
+    )
+
+    scope = build_workbench_data_scope_preview(manifest)
+    preview = build_controlled_backtest_preview(manifest, validate_workbench_manifest(manifest))
+
+    assert scope["data_scope"] == "expanded_local_research_scope"
+    assert scope["symbols"] >= 15
+    assert preview["simulated_trades"] >= 400
 
 
 def test_persist_workbench_run_bundle_writes_manifest_gate_and_result(tmp_path: Path) -> None:

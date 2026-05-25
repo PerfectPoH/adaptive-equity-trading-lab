@@ -1025,6 +1025,7 @@ def render_strategy_workbench() -> None:
             [
                 "large-cap / ETF clean-data sandbox",
                 "small-cap active-only exploratory sandbox",
+                "expanded local research sandbox",
                 "local archived Databento panel",
                 "custom universe pending PIT validation",
             ],

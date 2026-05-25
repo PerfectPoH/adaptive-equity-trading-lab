@@ -13,8 +13,9 @@ EXECUTION_OUTPUTS_DIR = Path("experiments/provider_aware_research/execution_outp
 FINAL_STATUS_DIR = EXECUTION_OUTPUTS_DIR / "LAB-FINAL-STATUS-PACK-RUN-001"
 FIVE_POINT_DIR = EXECUTION_OUTPUTS_DIR / "TRANSITION-FIVE-POINT-BATCH-RUN-001"
 PRICE_FILE = Path("experiments/provider_aware_research/data_inputs/databento_xmom_20260520/prices.csv")
+LARGECAP_PRICE_FILE = Path("experiments/runs/20260508_173235_news_thr60/signals.csv")
 WORKBENCH_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-WORKBENCH"
-WORKBENCH_LARGECAP_ETF_SYMBOLS = {"IWM", "SPY", "QQQ", "DIA", "AAPL", "MSFT", "NVDA", "META", "AMZN", "GOOGL"}
+WORKBENCH_LARGECAP_ETF_SYMBOLS = {"IWM", "SPY", "QQQ", "DIA", "AAPL", "MSFT", "NVDA", "META", "AMZN", "GOOGL", "AMD", "TSLA"}
 
 
 @dataclass(frozen=True)
@@ -207,7 +208,7 @@ def load_json(path: Path) -> dict[str, Any]:
 def load_csv(path: Path) -> pd.DataFrame:
     if not path.exists():
         return pd.DataFrame()
-    return pd.read_csv(path)
+    return pd.read_csv(path, low_memory=False)
 
 
 def load_dashboard_payload(root: Path = Path(".")) -> dict[str, Any]:
@@ -651,7 +652,7 @@ def persist_workbench_run_bundle(
 
 
 def build_workbench_data_scope_preview(manifest: dict[str, Any], *, price_file: str | Path = PRICE_FILE) -> dict[str, Any]:
-    prices = load_csv(Path(price_file))
+    prices = _load_workbench_price_panel(manifest, price_file=price_file)
     if prices.empty or "symbol" not in prices.columns:
         return {
             "data_scope": "missing_local_price_panel",
@@ -674,7 +675,7 @@ def build_workbench_data_scope_preview(manifest: dict[str, Any], *, price_file: 
 
 
 def _build_local_workbench_trades(manifest: dict[str, Any], *, price_file: str | Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    prices = load_csv(Path(price_file))
+    prices = _load_workbench_price_panel(manifest, price_file=price_file)
     if prices.empty or not {"symbol", "date", "close"}.issubset(prices.columns):
         return [], {"symbols": 0, "rows": 0, "price_file": str(price_file)}
     prices = prices.copy()
@@ -691,35 +692,37 @@ def _build_local_workbench_trades(manifest: dict[str, Any], *, price_file: str |
     prices["date"] = pd.to_datetime(prices["date"])
     holding = max(1, int(manifest["holding_period_days"]))
     cost_return = round(int(manifest["cost_bps"]) / 10000, 6)
+    entry_step = max(5, holding // 2)
     trades: list[dict[str, Any]] = []
     for symbol, group in prices.groupby("symbol"):
         symbol_prices = group.sort_values("date").reset_index(drop=True)
         if len(symbol_prices) <= holding + 1:
             continue
-        entry_index = _select_workbench_entry_index(symbol_prices, str(manifest["template"]), holding)
-        exit_index = min(entry_index + holding, len(symbol_prices) - 1)
-        if exit_index <= entry_index:
-            continue
-        entry_price = float(symbol_prices.loc[entry_index, "close"])
-        exit_price = float(symbol_prices.loc[exit_index, "close"])
-        if entry_price <= 0:
-            continue
-        gross_return = round((exit_price / entry_price) - 1, 6)
-        net_return = round(gross_return - cost_return, 6)
-        trades.append(
-            {
-                "symbol": str(symbol),
-                "entry_date": symbol_prices.loc[entry_index, "date"].date().isoformat(),
-                "exit_date": symbol_prices.loc[exit_index, "date"].date().isoformat(),
-                "entry_price": round(entry_price, 6),
-                "exit_price": round(exit_price, 6),
-                "gross_return": gross_return,
-                "cost_return": cost_return,
-                "net_return": net_return,
-                "holding_days": int((symbol_prices.loc[exit_index, "date"] - symbol_prices.loc[entry_index, "date"]).days),
-                "rule": str(manifest["template"]),
-            }
-        )
+        for entry_index in _select_workbench_entry_indices(symbol_prices, str(manifest["template"]), holding, step=entry_step):
+            exit_index = min(entry_index + holding, len(symbol_prices) - 1)
+            if exit_index <= entry_index:
+                continue
+            entry_price = float(symbol_prices.loc[entry_index, "close"])
+            exit_price = float(symbol_prices.loc[exit_index, "close"])
+            if entry_price <= 0:
+                continue
+            gross_return = round((exit_price / entry_price) - 1, 6)
+            net_return = round(gross_return - cost_return, 6)
+            trades.append(
+                {
+                    "symbol": str(symbol),
+                    "entry_date": symbol_prices.loc[entry_index, "date"].date().isoformat(),
+                    "exit_date": symbol_prices.loc[exit_index, "date"].date().isoformat(),
+                    "entry_price": round(entry_price, 6),
+                    "exit_price": round(exit_price, 6),
+                    "gross_return": gross_return,
+                    "cost_return": cost_return,
+                    "net_return": net_return,
+                    "holding_days": int((symbol_prices.loc[exit_index, "date"] - symbol_prices.loc[entry_index, "date"]).days),
+                    "rule": str(manifest["template"]),
+                    "entry_window_index": int(entry_index),
+                }
+            )
     summary = {
         "symbols": int(prices["symbol"].nunique()),
         "rows": int(len(prices)),
@@ -730,6 +733,38 @@ def _build_local_workbench_trades(manifest: dict[str, Any], *, price_file: str |
         "selected_symbols": sorted(str(symbol) for symbol in prices["symbol"].unique()),
     }
     return trades, summary
+
+
+def _load_workbench_price_panel(manifest: dict[str, Any], *, price_file: str | Path = PRICE_FILE) -> pd.DataFrame:
+    universe = str(manifest.get("universe", "")).lower()
+    explicit_file = Path(price_file)
+    if explicit_file != PRICE_FILE:
+        return _normalize_price_columns(load_csv(explicit_file))
+    if "large-cap / etf" in universe and LARGECAP_PRICE_FILE.exists():
+        return _normalize_price_columns(load_csv(LARGECAP_PRICE_FILE))
+    if "expanded local research" in universe and LARGECAP_PRICE_FILE.exists():
+        small = _normalize_price_columns(load_csv(PRICE_FILE))
+        large = _normalize_price_columns(load_csv(LARGECAP_PRICE_FILE))
+        return pd.concat([small, large], ignore_index=True)
+    return _normalize_price_columns(load_csv(PRICE_FILE))
+
+
+def _normalize_price_columns(prices: pd.DataFrame) -> pd.DataFrame:
+    if prices.empty:
+        return prices
+    rename_map = {column: column.lower().replace(" ", "_") for column in prices.columns}
+    prices = prices.rename(columns=rename_map)
+    if "date" not in prices.columns and "Date" in prices.columns:
+        prices = prices.rename(columns={"Date": "date"})
+    required = ["symbol", "date", "open", "high", "low", "close", "volume"]
+    available = [column for column in required if column in prices.columns]
+    normalized = prices[available].copy()
+    for column in ["open", "high", "low", "close", "volume"]:
+        if column in normalized.columns:
+            normalized[column] = pd.to_numeric(normalized[column], errors="coerce")
+    if "symbol" in normalized.columns:
+        normalized["symbol"] = normalized["symbol"].astype(str).str.upper()
+    return normalized.dropna(subset=[column for column in ["symbol", "date", "close"] if column in normalized.columns])
 
 
 def _filter_prices_for_workbench_universe(prices: pd.DataFrame, universe: str) -> tuple[pd.DataFrame, dict[str, str]]:
@@ -760,6 +795,11 @@ def _filter_prices_for_workbench_universe(prices: pd.DataFrame, universe: str) -
             "data_scope": "smallcap_active_only_scope",
             "scope_explanation": "Uses active small-cap symbols only; results remain non-promotable without delisted/PIT coverage.",
         }
+    if "expanded local research" in universe.lower():
+        return prices.copy(), {
+            "data_scope": "expanded_local_research_scope",
+            "scope_explanation": "Combines every locally archived price panel available to increase breadth without making a provider query.",
+        }
     if "local archived databento" in universe.lower():
         return prices.copy(), {
             "data_scope": "full_local_archived_panel",
@@ -771,17 +811,20 @@ def _filter_prices_for_workbench_universe(prices: pd.DataFrame, universe: str) -
     }
 
 
-def _select_workbench_entry_index(symbol_prices: pd.DataFrame, template: str, holding: int) -> int:
+def _select_workbench_entry_indices(symbol_prices: pd.DataFrame, template: str, holding: int, *, step: int) -> list[int]:
     max_entry = max(0, len(symbol_prices) - holding - 1)
+    if max_entry <= 1:
+        return [1] if max_entry == 1 else []
+    base_indices = list(range(1, max_entry + 1, step))
     if template in {"Mean Reversion", "GapRev RTH Reversion"} and len(symbol_prices) > 3:
         returns = symbol_prices["close"].astype(float).pct_change(2)
-        candidate = int(returns.iloc[: max_entry + 1].idxmin())
-        return max(1, min(candidate, max_entry))
+        candidates = returns.iloc[: max_entry + 1].nsmallest(min(40, max(5, len(base_indices)))).index.tolist()
+        return sorted({max(1, min(int(candidate), max_entry)) for candidate in candidates})
     if template in {"LowVol Tradability", "Regime Filter"} and len(symbol_prices) > 5:
         volatility = symbol_prices["close"].astype(float).pct_change().rolling(3).std()
-        candidate = int(volatility.iloc[: max_entry + 1].idxmin()) if volatility.notna().any() else max_entry // 2
-        return max(1, min(candidate, max_entry))
-    return max(1, min(len(symbol_prices) // 3, max_entry))
+        ranked = volatility.iloc[: max_entry + 1].dropna().nsmallest(min(40, max(5, len(base_indices)))).index.tolist()
+        return sorted({max(1, min(int(candidate), max_entry)) for candidate in ranked}) if ranked else base_indices
+    return base_indices
 
 
 def _build_workbench_equity_curve(trades: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -814,21 +857,38 @@ def _build_workbench_robustness_panel(trades: list[dict[str, Any]], cost_bps: in
     net_sum = round(sum(net_returns), 6)
     ex_top1 = round(sum(net_returns[1:]), 6) if trade_count > 1 else 0.0
     ex_top3 = round(sum(net_returns[3:]), 6) if trade_count > 3 else 0.0
+    trim_count = max(1, int(trade_count * 0.1)) if trade_count >= 100 else 0
+    ex_top_decile = round(sum(net_returns[trim_count:]), 6) if trim_count else None
     median_return = round(float(pd.Series(net_returns).median()), 6) if net_returns else 0.0
     win_rate = round(sum(1 for value in net_returns if value > 0) / trade_count, 6) if trade_count else 0.0
     stressed_cost = round((cost_bps * 1.5) / 10000, 6)
     stressed_net_sum = round(sum(gross_returns) - (stressed_cost * trade_count), 6)
+    outlier_status = "SKIP"
+    outlier_mode = "sample_size_only"
+    outlier_detail = "Sample below 10 trades: outlier removal would destroy too much of the panel."
+    if 10 <= trade_count < 30:
+        outlier_status = "PASS" if ex_top1 > 0 else "BLOCK"
+        outlier_mode = "ex_top1"
+        outlier_detail = "10-29 trades: only the single best trade is removed."
+    elif 30 <= trade_count < 100:
+        outlier_status = "PASS" if ex_top3 > 0 else "BLOCK"
+        outlier_mode = "ex_top3"
+        outlier_detail = "30-99 trades: removes the three best trades."
+    elif trade_count >= 100:
+        outlier_status = "PASS" if ex_top_decile is not None and ex_top_decile > 0 else "BLOCK"
+        outlier_mode = "ex_top_decile"
+        outlier_detail = "100+ trades: removes the top decile of trades."
     return {
         "trade_count_gate": {
-            "status": "PASS" if trade_count >= 5 else "BLOCK",
+            "status": "PASS" if trade_count >= 30 else "BLOCK",
             "value": trade_count,
-            "threshold": 5,
-            "detail": "Requires at least 5 local trades before even a research candidate label.",
+            "threshold": 30,
+            "detail": "Requires at least 30 local trades before a research candidate label.",
         },
         "outlier_dependency_gate": {
-            "status": "PASS" if ex_top1 > 0 and (trade_count < 4 or ex_top3 > 0) else "BLOCK",
-            "value": {"net_sum": net_sum, "ex_top1": ex_top1, "ex_top3": ex_top3},
-            "detail": "Blocks when the result dies after removing the best trades.",
+            "status": outlier_status,
+            "value": {"net_sum": net_sum, "ex_top1": ex_top1, "ex_top3": ex_top3, "ex_top_decile": ex_top_decile, "mode": outlier_mode},
+            "detail": outlier_detail,
         },
         "median_return_gate": {
             "status": "PASS" if median_return > 0 else "BLOCK",
