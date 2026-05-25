@@ -1,295 +1,488 @@
 from __future__ import annotations
 
-import json
+import math
 from pathlib import Path
 
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 import streamlit as st
+
+from dashboard.lab_dashboard_data import (
+    STRATEGY_PROFILES,
+    governance_metrics,
+    load_dashboard_payload,
+    project_capability_rows,
+    strategy_detail,
+    strategy_rows,
+)
 
 
 st.set_page_config(page_title="Adaptive Equity Trading Lab", layout="wide")
-st.title("Adaptive Equity Trading Lab")
-st.caption("Milestone 1 research dashboard. Results are prototype-only, not trading advice.")
-
-RUNS_DIR = Path("experiments/runs")
-LOG_PATH = Path("experiments/log.csv")
-MODEL_REGISTRY_PATH = Path("experiments/model_registry.csv")
-NEWS_ABLATION_PATH = Path("experiments/news_ablation_latest.csv")
-THRESHOLD_VALIDATION_PATH = Path("experiments/threshold_validation_latest.csv")
-CALIBRATION_COMPARISON_PATH = Path("experiments/calibration_comparison_latest.csv")
-REGIME_FILTER_VALIDATION_PATH = Path("experiments/regime_filter_validation_latest.csv")
-WALK_FORWARD_VALIDATION_PATH = Path("experiments/walk_forward_validation_latest.csv")
-MODEL_COMPARISON_PATH = Path("experiments/model_comparison_latest.csv")
-HYPERPARAMETER_COMPARISON_PATH = Path("experiments/hyperparameter_comparison_latest.csv")
-FEATURE_SET_COMPARISON_PATH = Path("experiments/feature_set_comparison_latest.csv")
-TARGET_EXIT_COMPARISON_PATH = Path("experiments/target_exit_comparison_latest.csv")
-SIGNAL_QUALITY_COMPARISON_PATH = Path("experiments/signal_quality_comparison_latest.csv")
-MARKET_EXPOSURE_COMPARISON_PATH = Path("experiments/market_exposure_comparison_latest.csv")
-UNIVERSE_SELECTION_COMPARISON_PATH = Path("experiments/universe_selection_comparison_latest.csv")
-BENCHMARK_OBJECTIVE_COMPARISON_PATH = Path("experiments/benchmark_objective_comparison_latest.csv")
 
 
-def latest_run_dir() -> Path | None:
-    runs = sorted([path for path in RUNS_DIR.glob("*") if path.is_dir()])
-    return runs[-1] if runs else None
+def inject_theme() -> None:
+    st.markdown(
+        """
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:wght@300;400;500;600;700&display=swap');
+        :root {
+          --lab-bg: #f8fafc;
+          --lab-panel: #ffffff;
+          --lab-ink: #1e293b;
+          --lab-muted: #64748b;
+          --lab-blue: #2563eb;
+          --lab-blue-soft: #dbeafe;
+          --lab-amber: #f97316;
+          --lab-line: #d8dee6;
+          --lab-red: #dc2626;
+          --lab-green: #16a34a;
+        }
+        html, body, [data-testid="stAppViewContainer"] {
+          background: var(--lab-bg);
+          color: var(--lab-ink);
+          font-family: "Fira Sans", system-ui, sans-serif;
+        }
+        h1, h2, h3 { letter-spacing: 0; }
+        .block-container { padding-top: 1.5rem; max-width: 1480px; }
+        .lab-hero {
+          border: 1px solid var(--lab-line);
+          border-radius: 8px;
+          background:
+            linear-gradient(135deg, rgba(37, 99, 235, .10), rgba(249, 115, 22, .08)),
+            #ffffff;
+          padding: 28px 30px;
+          margin-bottom: 18px;
+        }
+        .lab-kicker {
+          font-family: "Fira Code", monospace;
+          color: var(--lab-blue);
+          font-size: 12px;
+          text-transform: uppercase;
+          font-weight: 700;
+          letter-spacing: .06em;
+        }
+        .lab-title {
+          font-size: clamp(34px, 5vw, 64px);
+          line-height: 1.02;
+          font-weight: 700;
+          margin: 10px 0 12px;
+          color: #0f172a;
+        }
+        .lab-subtitle {
+          max-width: 960px;
+          color: var(--lab-muted);
+          font-size: 18px;
+          line-height: 1.55;
+        }
+        .metric-card, .strategy-card, .lab-section {
+          border: 1px solid var(--lab-line);
+          border-radius: 8px;
+          background: var(--lab-panel);
+          padding: 16px;
+        }
+        .metric-label {
+          color: var(--lab-muted);
+          font-family: "Fira Code", monospace;
+          font-size: 12px;
+          text-transform: uppercase;
+          font-weight: 600;
+        }
+        .metric-value {
+          color: #0f172a;
+          font-size: 30px;
+          font-weight: 700;
+          margin-top: 4px;
+          overflow-wrap: anywhere;
+          line-height: 1.2;
+        }
+        .metric-value-long {
+          font-size: 22px;
+        }
+        .metric-note { color: var(--lab-muted); font-size: 13px; margin-top: 4px; }
+        .status-pill {
+          display: inline-block;
+          border-radius: 999px;
+          padding: 4px 10px;
+          font-family: "Fira Code", monospace;
+          font-size: 12px;
+          font-weight: 700;
+          border: 1px solid var(--lab-line);
+          background: #f1f5f9;
+        }
+        .status-ARCHIVED { color: #92400e; background: #ffedd5; border-color: #fed7aa; }
+        .status-BLOCKED { color: #991b1b; background: #fee2e2; border-color: #fecaca; }
+        .status-DIAGNOSTIC { color: #1d4ed8; background: #dbeafe; border-color: #bfdbfe; }
+        .status-NOT-RUN { color: #475569; background: #f1f5f9; }
+        .status-PROMOTED { color: #166534; background: #dcfce7; border-color: #bbf7d0; }
+        .strategy-title { font-size: 22px; font-weight: 700; margin: 6px 0; }
+        .strategy-family {
+          font-family: "Fira Code", monospace;
+          color: var(--lab-muted);
+          font-size: 12px;
+        }
+        .callout {
+          border-left: 4px solid var(--lab-blue);
+          background: #eff6ff;
+          padding: 12px 14px;
+          border-radius: 6px;
+          color: #1e3a8a;
+          margin: 12px 0;
+        }
+        .danger-callout {
+          border-left: 4px solid var(--lab-red);
+          background: #fef2f2;
+          color: #7f1d1d;
+        }
+        .flow-node {
+          border: 1px solid var(--lab-line);
+          border-radius: 6px;
+          padding: 10px;
+          background: #ffffff;
+          font-family: "Fira Code", monospace;
+          font-size: 12px;
+          min-height: 54px;
+        }
+        .capability-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 12px;
+        }
+        .capability {
+          border: 1px solid var(--lab-line);
+          border-radius: 8px;
+          background: #fff;
+          padding: 14px;
+          min-height: 120px;
+        }
+        .small-muted { color: var(--lab-muted); font-size: 13px; }
+        div[data-testid="stMetric"] {
+          border: 1px solid var(--lab-line);
+          border-radius: 8px;
+          padding: 12px;
+          background: #fff;
+        }
+        @media (max-width: 768px) {
+          .lab-hero { padding: 20px; }
+          .lab-title { font-size: 38px; }
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
-run_dir = latest_run_dir()
+def status_badge(status: str) -> str:
+    css = status.replace(" ", "-")
+    return f'<span class="status-pill status-{css}">{status}</span>'
 
-if LOG_PATH.exists():
-    st.subheader("Experiment Log")
-    log = pd.read_csv(LOG_PATH)
-    st.dataframe(log.tail(20), use_container_width=True)
-else:
-    st.info("No experiment log yet. Run `python -m src.pipeline` first.")
 
-if MODEL_REGISTRY_PATH.exists():
-    st.subheader("Model Registry")
-    registry = pd.read_csv(MODEL_REGISTRY_PATH)
-    st.dataframe(registry.tail(20), use_container_width=True)
+def metric_card(label: str, value: str | int | float, note: str) -> None:
+    value_text = str(value)
+    value_class = "metric-value metric-value-long" if len(value_text) > 14 else "metric-value"
+    st.markdown(
+        f"""
+        <div class="metric-card">
+          <div class="metric-label">{label}</div>
+          <div class="{value_class}">{value_text}</div>
+          <div class="metric-note">{note}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-if (
-    NEWS_ABLATION_PATH.exists()
-    or THRESHOLD_VALIDATION_PATH.exists()
-    or CALIBRATION_COMPARISON_PATH.exists()
-    or REGIME_FILTER_VALIDATION_PATH.exists()
-    or WALK_FORWARD_VALIDATION_PATH.exists()
-    or MODEL_COMPARISON_PATH.exists()
-    or HYPERPARAMETER_COMPARISON_PATH.exists()
-    or FEATURE_SET_COMPARISON_PATH.exists()
-    or TARGET_EXIT_COMPARISON_PATH.exists()
-    or SIGNAL_QUALITY_COMPARISON_PATH.exists()
-    or MARKET_EXPOSURE_COMPARISON_PATH.exists()
-    or UNIVERSE_SELECTION_COMPARISON_PATH.exists()
-    or BENCHMARK_OBJECTIVE_COMPARISON_PATH.exists()
-):
-    st.subheader("Experiment Reports")
-    if NEWS_ABLATION_PATH.exists():
-        with st.expander("Latest News Ablation", expanded=False):
-            st.dataframe(pd.read_csv(NEWS_ABLATION_PATH), use_container_width=True)
-    if THRESHOLD_VALIDATION_PATH.exists():
-        with st.expander("Latest Threshold Validation", expanded=True):
-            threshold_report = pd.read_csv(THRESHOLD_VALIDATION_PATH)
-            st.dataframe(threshold_report, use_container_width=True)
-    if CALIBRATION_COMPARISON_PATH.exists():
-        with st.expander("Latest Calibration Comparison", expanded=False):
-            st.dataframe(pd.read_csv(CALIBRATION_COMPARISON_PATH), use_container_width=True)
-    if REGIME_FILTER_VALIDATION_PATH.exists():
-        with st.expander("Latest Regime Filter Validation", expanded=True):
-            st.dataframe(pd.read_csv(REGIME_FILTER_VALIDATION_PATH), use_container_width=True)
-    if WALK_FORWARD_VALIDATION_PATH.exists():
-        with st.expander("Latest Walk-Forward Validation", expanded=True):
-            st.dataframe(pd.read_csv(WALK_FORWARD_VALIDATION_PATH), use_container_width=True)
-    if MODEL_COMPARISON_PATH.exists():
-        with st.expander("Latest Model Comparison", expanded=True):
-            st.dataframe(pd.read_csv(MODEL_COMPARISON_PATH), use_container_width=True)
-    if HYPERPARAMETER_COMPARISON_PATH.exists():
-        with st.expander("Latest Hyperparameter Comparison", expanded=True):
-            st.dataframe(pd.read_csv(HYPERPARAMETER_COMPARISON_PATH), use_container_width=True)
-    if FEATURE_SET_COMPARISON_PATH.exists():
-        with st.expander("Latest Feature Set Comparison", expanded=True):
-            st.dataframe(pd.read_csv(FEATURE_SET_COMPARISON_PATH), use_container_width=True)
-    if TARGET_EXIT_COMPARISON_PATH.exists():
-        with st.expander("Latest Target/Exit Comparison", expanded=True):
-            st.dataframe(pd.read_csv(TARGET_EXIT_COMPARISON_PATH), use_container_width=True)
-    if SIGNAL_QUALITY_COMPARISON_PATH.exists():
-        with st.expander("Latest Signal Quality Comparison", expanded=True):
-            st.dataframe(pd.read_csv(SIGNAL_QUALITY_COMPARISON_PATH), use_container_width=True)
-    if MARKET_EXPOSURE_COMPARISON_PATH.exists():
-        with st.expander("Latest Market Exposure Comparison", expanded=True):
-            st.dataframe(pd.read_csv(MARKET_EXPOSURE_COMPARISON_PATH), use_container_width=True)
-    if UNIVERSE_SELECTION_COMPARISON_PATH.exists():
-        with st.expander("Latest Universe Selection Comparison", expanded=True):
-            st.dataframe(pd.read_csv(UNIVERSE_SELECTION_COMPARISON_PATH), use_container_width=True)
-    if BENCHMARK_OBJECTIVE_COMPARISON_PATH.exists():
-        with st.expander("Latest Benchmark Objective Comparison", expanded=True):
-            st.dataframe(pd.read_csv(BENCHMARK_OBJECTIVE_COMPARISON_PATH), use_container_width=True)
 
-if run_dir is None:
-    st.stop()
-
-st.subheader(f"Latest Run: {run_dir.name}")
-
-backtests_path = run_dir / "backtests.csv"
-signals_path = run_dir / "signals.csv"
-equity_path = run_dir / "equity_curves.csv"
-analysis_path = run_dir / "analysis.csv"
-analysis_summary_path = run_dir / "analysis_summary.json"
-signal_diagnostics_path = run_dir / "signal_diagnostics.csv"
-signal_diagnostics_summary_path = run_dir / "signal_diagnostics_summary.json"
-threshold_diagnostics_path = run_dir / "threshold_diagnostics.csv"
-threshold_diagnostics_summary_path = run_dir / "threshold_diagnostics_summary.json"
-calibration_path = run_dir / "calibration.csv"
-calibration_summary_path = run_dir / "calibration_summary.json"
-trades_path = run_dir / "trades.csv"
-trade_analysis_path = run_dir / "trade_analysis_by_symbol.csv"
-trade_analysis_summary_path = run_dir / "trade_analysis_summary.json"
-feature_regime_path = run_dir / "feature_regime_analysis.csv"
-feature_regime_contrasts_path = run_dir / "feature_regime_contrasts.csv"
-feature_regime_summary_path = run_dir / "feature_regime_summary.json"
-
-if analysis_summary_path.exists():
-    summary = json.loads(analysis_summary_path.read_text(encoding="utf-8"))
-    st.subheader("Run Analysis")
-    c1, c2, c3, c4, c5 = st.columns(5)
-    c1.metric("Signals", summary.get("total_signals", 0))
-    c2.metric("Executable", summary.get("total_executable_signals", 0))
-    c3.metric("Symbols w/ Trades", summary.get("symbols_with_trades", 0))
-    c4.metric("Skipped", summary.get("total_skipped_signals", 0))
-    c5.metric("Underperformers", summary.get("underperforming_symbols", 0))
-    for finding in summary.get("primary_findings", []):
-        st.write(f"- {finding}")
-
-if backtests_path.exists():
-    backtests = pd.read_csv(backtests_path)
-    st.subheader("2024 Per-Symbol Backtests")
-    st.dataframe(backtests, use_container_width=True)
-
-    if {"symbol", "strategy_return", "buy_and_hold_return"}.issubset(backtests.columns):
-        melted = backtests.melt(
-            id_vars=["symbol"],
-            value_vars=["strategy_return", "buy_and_hold_return"],
-            var_name="series",
-            value_name="return",
+def flow_chart(nodes: list[str]) -> go.Figure:
+    if len(nodes) < 2:
+        nodes = nodes + ["Decision"]
+    x = [i / max(len(nodes) - 1, 1) for i in range(len(nodes))]
+    y = [0.5 + (0.08 * math.sin(i)) for i in range(len(nodes))]
+    fig = go.Figure()
+    for i in range(len(nodes) - 1):
+        fig.add_trace(
+            go.Scatter(
+                x=[x[i], x[i + 1]],
+                y=[y[i], y[i + 1]],
+                mode="lines",
+                line=dict(color="#94a3b8", width=3),
+                hoverinfo="skip",
+                showlegend=False,
+            )
         )
-        fig = px.bar(melted, x="symbol", y="return", color="series", barmode="group")
-        st.plotly_chart(fig, use_container_width=True)
-
-if equity_path.exists():
-    equity = pd.read_csv(equity_path, parse_dates=["Date"])
-    if not equity.empty and {"Date", "symbol", "normalized_equity"}.issubset(equity.columns):
-        st.subheader("Normalized Equity Curves")
-        pivot = equity.pivot_table(index="Date", columns="symbol", values="normalized_equity")
-        aggregate = pivot.mean(axis=1).rename("equal_weight_strategy")
-        aggregate_frame = aggregate.reset_index()
-        fig = px.line(aggregate_frame, x="Date", y="equal_weight_strategy")
-        st.plotly_chart(fig, use_container_width=True)
-
-        with st.expander("Per-symbol equity curves"):
-            long_equity = pivot.reset_index().melt(id_vars="Date", var_name="symbol", value_name="normalized_equity")
-            fig = px.line(long_equity, x="Date", y="normalized_equity", color="symbol")
-            st.plotly_chart(fig, use_container_width=True)
-
-if analysis_path.exists():
-    analysis = pd.read_csv(analysis_path)
-    st.subheader("Per-Symbol Diagnosis")
-    st.dataframe(analysis, use_container_width=True)
-
-if signal_diagnostics_summary_path.exists():
-    diagnostics_summary = json.loads(signal_diagnostics_summary_path.read_text(encoding="utf-8"))
-    st.subheader("Signal Bottlenecks")
-    d1, d2, d3 = st.columns(3)
-    d1.metric("Scanner Pass Symbols", diagnostics_summary.get("symbols_with_scanner_pass", 0))
-    d2.metric("Model Pass Symbols", diagnostics_summary.get("symbols_with_model_pass", 0))
-    d3.metric("Signal Symbols", diagnostics_summary.get("symbols_with_signals", 0))
-    bottlenecks = diagnostics_summary.get("primary_bottlenecks", {})
-    if bottlenecks:
-        st.write("Bottleneck counts:", bottlenecks)
-
-if signal_diagnostics_path.exists():
-    diagnostics = pd.read_csv(signal_diagnostics_path)
-    st.dataframe(diagnostics, use_container_width=True)
-
-if threshold_diagnostics_summary_path.exists():
-    threshold_summary = json.loads(threshold_diagnostics_summary_path.read_text(encoding="utf-8"))
-    st.subheader("Label-Based Probability Threshold Diagnostics")
-    st.metric("Label Diagnostic Threshold", threshold_summary.get("recommended_threshold"))
-    st.caption(threshold_summary.get("reason", ""))
-    st.caption("Operational defaults come from walk-forward validation, not from this label-only diagnostic.")
-
-if threshold_diagnostics_path.exists():
-    threshold_diagnostics = pd.read_csv(threshold_diagnostics_path)
-    st.dataframe(threshold_diagnostics, use_container_width=True)
-
-if calibration_summary_path.exists():
-    calibration_summary = json.loads(calibration_summary_path.read_text(encoding="utf-8"))
-    st.subheader("Model Calibration")
-    cal_cols = st.columns(2)
-    for idx, period in enumerate(["validation", "test"]):
-        period_summary = calibration_summary.get(period, {})
-        with cal_cols[idx]:
-            st.metric(f"{period.title()} Brier", period_summary.get("brier_score"))
-            st.metric(f"{period.title()} Mean Abs Error", period_summary.get("mean_abs_calibration_error"))
-
-if calibration_path.exists():
-    calibration = pd.read_csv(calibration_path)
-    populated = calibration[calibration["count"] > 0]
-    if not populated.empty:
-        fig = px.line(
-            populated,
-            x="avg_predicted_probability",
-            y="observed_success_rate",
-            color="period",
-            markers=True,
+    fig.add_trace(
+        go.Scatter(
+            x=x,
+            y=y,
+            mode="markers+text",
+            marker=dict(size=30, color=["#2563eb"] + ["#3b82f6"] * (len(nodes) - 2) + ["#f97316"], line=dict(color="#ffffff", width=2)),
+            text=[f"{i + 1}" for i in range(len(nodes))],
+            textfont=dict(color="white", size=12, family="Fira Code"),
+            hovertext=nodes,
+            hoverinfo="text",
+            showlegend=False,
         )
-        st.plotly_chart(fig, use_container_width=True)
-    with st.expander("Calibration bins"):
-        st.dataframe(calibration, use_container_width=True)
+    )
+    for i, node in enumerate(nodes):
+        fig.add_annotation(
+            x=x[i],
+            y=y[i] - 0.16,
+            text=node,
+            showarrow=False,
+            font=dict(size=11, color="#1e293b"),
+            align="center",
+            width=125,
+        )
+    fig.update_layout(
+        height=260,
+        margin=dict(l=20, r=20, t=20, b=40),
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        xaxis=dict(visible=False, range=[-0.04, 1.04]),
+        yaxis=dict(visible=False, range=[0.15, 0.75]),
+    )
+    return fig
 
-if trade_analysis_summary_path.exists():
-    trade_summary = json.loads(trade_analysis_summary_path.read_text(encoding="utf-8"))
-    st.subheader("Trade-Level Analysis")
-    t1, t2, t3, t4 = st.columns(4)
-    t1.metric("Closed Trades", trade_summary.get("total_trades", 0))
-    t2.metric("Trade Win Rate", trade_summary.get("win_rate"))
-    t3.metric("Avg Trade Return", trade_summary.get("avg_return_pct"))
-    t4.metric("Total PnL", trade_summary.get("total_pnl"))
-    st.write("Worst trade:", trade_summary.get("worst_trade"))
 
-if trade_analysis_path.exists():
-    trade_analysis = pd.read_csv(trade_analysis_path)
-    st.dataframe(trade_analysis, use_container_width=True)
+def strategy_result_chart(runs: pd.DataFrame) -> go.Figure:
+    if runs.empty:
+        frame = pd.DataFrame({"decision": ["not run"], "count": [1]})
+    else:
+        frame = runs.assign(decision=runs["decision"].astype(str).str.slice(0, 42)).groupby("decision", as_index=False).size()
+        frame = frame.rename(columns={"size": "count"})
+    fig = px.bar(
+        frame,
+        x="count",
+        y="decision",
+        orientation="h",
+        color="count",
+        color_continuous_scale=["#dbeafe", "#2563eb"],
+        text="count",
+    )
+    fig.update_layout(
+        height=max(220, 52 * len(frame)),
+        margin=dict(l=10, r=20, t=20, b=10),
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        coloraxis_showscale=False,
+        xaxis_title="Runs",
+        yaxis_title="",
+        font=dict(family="Fira Sans", color="#1e293b"),
+    )
+    return fig
 
-if trades_path.exists():
-    with st.expander("Closed trades"):
-        trades = pd.read_csv(trades_path)
-        st.dataframe(trades, use_container_width=True)
 
-if feature_regime_summary_path.exists():
-    regime_summary = json.loads(feature_regime_summary_path.read_text(encoding="utf-8"))
-    st.subheader("Feature-Regime Analysis")
-    for finding in regime_summary.get("primary_findings", []):
-        st.write(f"- {finding}")
+def render_hero(metrics: dict[str, object]) -> None:
+    st.markdown(
+        f"""
+        <div class="lab-hero">
+          <div class="lab-kicker">Adaptive Equity Trading Lab / Final Research Console</div>
+          <div class="lab-title">A quant lab that learned to say no.</div>
+          <div class="lab-subtitle">
+            This dashboard is the forensic cockpit for the research program: every strategy, blocker,
+            data source, cost gate, governance rule, and final decision is surfaced as an auditable product UI.
+            The current state is <strong>{metrics["final_policy"]}</strong>, not capital deployment.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-if feature_regime_path.exists():
-    feature_regimes = pd.read_csv(feature_regime_path)
-    if not feature_regimes.empty:
-        st.dataframe(feature_regimes, use_container_width=True)
 
-if feature_regime_contrasts_path.exists():
-    with st.expander("Win/loss feature contrasts"):
-        feature_contrasts = pd.read_csv(feature_regime_contrasts_path)
-        st.dataframe(feature_contrasts, use_container_width=True)
+def render_overview(payload: dict[str, object]) -> None:
+    metrics = governance_metrics(payload)
+    render_hero(metrics)
+    c1, c2, c3, c4 = st.columns(4)
+    with c1:
+        metric_card("Decisions", metrics["decision_count"], "Final decision files in the ledger")
+    with c2:
+        metric_card("Promoted", metrics["promoted_strategy_count"], "Strategies allowed through promotion gates")
+    with c3:
+        metric_card("Provider Queries", metrics["provider_query_rows"], "Rows that touched external providers")
+    with c4:
+        metric_card("Final Mode", metrics["final_policy"], "Research posture after closure")
 
-if signals_path.exists():
-    signals = pd.read_csv(signals_path)
-    st.subheader("Recent Signals")
-    cols = [
-        col
-        for col in [
-            "Date",
-            "symbol",
-            "Close",
-            "scanner_score",
-            "model_probability",
-            "signal",
-            "execution_valid",
-            "execution_skip_reason",
-            "signal_quality_score",
-            "signal_rank",
-            "signal_filter_reason",
-            "risk_fraction",
-            "risk_fraction_reason",
-            "market_regime_strong",
-        ]
-        if col in signals.columns
+    phase = payload["phase_summary"]
+    blockers = phase.get("primary_blockers", [])
+    st.markdown(
+        f"""
+        <div class="callout danger-callout">
+          <strong>Current operating conclusion:</strong> small-cap/free-data directional alpha is paused.
+          Primary blockers: {", ".join(blockers) if blockers else "none recorded"}.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_strategy_atlas(payload: dict[str, object]) -> None:
+    ledger = payload["ledger"]
+    rows = strategy_rows(ledger)
+    st.header("Strategy Atlas")
+    st.caption("Each strategy has a thesis, execution logic, graph demonstration, and the actual archived verdicts from the lab.")
+
+    status_counts = rows.groupby("status", as_index=False).size().rename(columns={"size": "count"})
+    status_fig = px.pie(status_counts, names="status", values="count", hole=0.58, color="status", color_discrete_map={
+        "ARCHIVED": "#f97316",
+        "BLOCKED": "#dc2626",
+        "DIAGNOSTIC": "#2563eb",
+        "NOT RUN": "#64748b",
+        "PROMOTED": "#16a34a",
+    })
+    status_fig.update_layout(height=320, margin=dict(l=10, r=10, t=10, b=10), font=dict(family="Fira Sans"))
+    left, right = st.columns([1, 2])
+    with left:
+        st.plotly_chart(status_fig, width="stretch")
+    with right:
+        st.dataframe(rows[["name", "family", "runs", "status", "primary_decision"]], width="stretch", hide_index=True)
+
+    for profile in STRATEGY_PROFILES:
+        detail = strategy_detail(profile.key, ledger)
+        runs = detail["runs"]
+        st.markdown("---")
+        header_l, header_r = st.columns([3, 1])
+        with header_l:
+            st.markdown(f'<div class="strategy-family">{profile.family}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="strategy-title">{profile.name}</div>', unsafe_allow_html=True)
+        with header_r:
+            st.markdown(status_badge(str(detail["status"])), unsafe_allow_html=True)
+
+        a, b = st.columns([1.2, 1])
+        with a:
+            st.markdown("**How it works**")
+            st.write(profile.mechanism)
+            st.markdown("**Why it mattered**")
+            st.write(profile.thesis)
+            if not runs.empty:
+                st.dataframe(runs[["run_id", "decision", "provider_query_performed", "backtest_performed", "promotion_allowed"]], width="stretch", hide_index=True)
+        with b:
+            st.plotly_chart(strategy_result_chart(runs), width="stretch")
+
+        st.markdown("**Strategy graph demonstration**")
+        st.plotly_chart(flow_chart(detail["flow_nodes"]), width="stretch")
+
+
+def render_results_and_data(payload: dict[str, object]) -> None:
+    st.header("Results And Data Dashboard")
+    ledger = payload["ledger"]
+    regime_map = payload["regime_map"]
+    allocation = payload["allocation"]
+    smallcap = payload["smallcap_microstructure"]
+    data_matrix = payload["data_matrix"]
+
+    c1, c2 = st.columns([1, 1])
+    with c1:
+        st.subheader("Decision Ledger")
+        st.dataframe(ledger, width="stretch", hide_index=True)
+    with c2:
+        if not ledger.empty:
+            counts = ledger.groupby("decision", as_index=False).size().sort_values("size", ascending=False).head(12)
+            fig = px.bar(counts, x="size", y="decision", orientation="h", color="size", color_continuous_scale=["#dbeafe", "#2563eb"])
+            fig.update_layout(height=520, margin=dict(l=0, r=10, t=10, b=10), coloraxis_showscale=False, yaxis_title="", xaxis_title="Count")
+            st.plotly_chart(fig, width="stretch")
+
+    st.subheader("Regime Map")
+    if not regime_map.empty and "regime_label" in regime_map.columns:
+        regime_counts = regime_map.groupby("regime_label", as_index=False).size()
+        fig = px.bar(regime_counts, x="regime_label", y="size", color="regime_label", color_discrete_sequence=px.colors.qualitative.Safe)
+        fig.update_layout(height=340, margin=dict(l=0, r=0, t=10, b=10), showlegend=False, xaxis_title="", yaxis_title="Symbol-days")
+        st.plotly_chart(fig, width="stretch")
+        st.dataframe(regime_map.tail(500), width="stretch", hide_index=True)
+
+    st.subheader("Portfolio And Microstructure Diagnostics")
+    m1, m2 = st.columns(2)
+    with m1:
+        if not allocation.empty and {"symbol", "diagnostic_weight"}.issubset(allocation.columns):
+            fig = px.bar(allocation.sort_values("diagnostic_weight", ascending=False), x="symbol", y="diagnostic_weight", color="realized_volatility", color_continuous_scale="Blues")
+            fig.update_layout(height=340, margin=dict(l=0, r=0, t=10, b=10), xaxis_title="", yaxis_title="Diagnostic weight")
+            st.plotly_chart(fig, width="stretch")
+            st.dataframe(allocation, width="stretch", hide_index=True)
+    with m2:
+        if not smallcap.empty and {"symbol", "median_dollar_volume", "median_spread_proxy"}.issubset(smallcap.columns):
+            fig = px.scatter(
+                smallcap,
+                x="median_dollar_volume",
+                y="median_spread_proxy",
+                size="observations",
+                color="symbol",
+                hover_name="symbol",
+                log_x=True,
+            )
+            fig.update_layout(height=340, margin=dict(l=0, r=0, t=10, b=10), xaxis_title="Median dollar volume", yaxis_title="Spread proxy")
+            st.plotly_chart(fig, width="stretch")
+            st.dataframe(smallcap, width="stretch", hide_index=True)
+
+    st.subheader("Data Upgrade Matrix")
+    st.dataframe(data_matrix, width="stretch", hide_index=True)
+
+
+def render_lab_explainer(payload: dict[str, object]) -> None:
+    st.header("How The Laboratory Works")
+    st.markdown(
+        """
+        <div class="callout">
+        The project is not a simple backtester. It is a falsification machine: every idea must pass data quality,
+        timestamp integrity, cost realism, sample-size, robustness, and governance gates before it can become a candidate.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    nodes = [
+        "Hypothesis",
+        "Pre-run gate",
+        "Data contract",
+        "Backtest / diagnostic",
+        "Cost realism",
+        "Robustness",
+        "Final decision",
+        "Archive or block",
     ]
-    if cols:
-        st.dataframe(signals[cols].tail(100), use_container_width=True)
+    st.plotly_chart(flow_chart(nodes), width="stretch")
 
-st.subheader("Warnings & Limits")
-st.warning(
-    "This MVP uses yfinance data and simple next-open backtesting. It has survivorship bias, "
-    "does not model live execution quality, and is not sufficient evidence for real capital allocation."
-)
+    capabilities = project_capability_rows()
+    st.markdown('<div class="capability-grid">', unsafe_allow_html=True)
+    for row in capabilities.to_dict("records"):
+        st.markdown(
+            f"""
+            <div class="capability">
+              <div class="strategy-family">{row["area"]} / {row["state"]}</div>
+              <div style="font-weight:700;margin:8px 0;">{row["capability"]}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    rules = payload["operating_rules"]
+    st.subheader("Operating Rules")
+    r1, r2 = st.columns(2)
+    with r1:
+        st.markdown("**Allowed**")
+        st.json(rules.get("allowed_actions", {}))
+    with r2:
+        st.markdown("**Forbidden**")
+        st.json(rules.get("forbidden_actions", {}))
+
+    st.subheader("Next Product Layer")
+    st.write(
+        "The next phase can be a user-facing strategy workbench: users define a rule, choose data assumptions, run the same governance gates, "
+        "and inspect results without bypassing PIT, cost, robustness, or promotion controls. This dashboard intentionally stops before that."
+    )
+
+
+def main() -> None:
+    inject_theme()
+    payload = load_dashboard_payload(Path("."))
+
+    tabs = st.tabs(["Overview", "Strategies", "Results & Data", "Project Anatomy"])
+    with tabs[0]:
+        render_overview(payload)
+    with tabs[1]:
+        render_strategy_atlas(payload)
+    with tabs[2]:
+        render_results_and_data(payload)
+    with tabs[3]:
+        render_lab_explainer(payload)
+
+
+if __name__ == "__main__":
+    main()
