@@ -13,6 +13,7 @@ EXECUTION_OUTPUTS_DIR = Path("experiments/provider_aware_research/execution_outp
 FINAL_STATUS_DIR = EXECUTION_OUTPUTS_DIR / "LAB-FINAL-STATUS-PACK-RUN-001"
 FIVE_POINT_DIR = EXECUTION_OUTPUTS_DIR / "TRANSITION-FIVE-POINT-BATCH-RUN-001"
 PRICE_FILE = Path("experiments/provider_aware_research/data_inputs/databento_xmom_20260520/prices.csv")
+WORKBENCH_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-WORKBENCH"
 
 
 @dataclass(frozen=True)
@@ -501,7 +502,7 @@ def _validation_summary(validation_rows: pd.DataFrame) -> dict[str, int]:
     }
 
 
-def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows: pd.DataFrame) -> dict[str, Any]:
+def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows: pd.DataFrame, *, price_file: str | Path = PRICE_FILE) -> dict[str, Any]:
     manifest_signature = workbench_manifest_signature(manifest)
     validation_summary = _validation_summary(validation_rows)
     base_report = {
@@ -530,28 +531,46 @@ def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows:
             "next_actions": ["Resolve BLOCK checks", "Re-run the controlled dry-run on the updated manifest"],
             "dry_run_rows": validation_rows.to_dict("records"),
         }
-    base_score = max(0, 1000 - int(manifest["cost_bps"])) / 1000
-    holding_penalty = min(int(manifest["holding_period_days"]), 180) / 360
-    diagnostic_score = round(base_score - holding_penalty, 4)
-    gross_edge_proxy = round(0.42 + min(int(manifest["holding_period_days"]), 90) / 600, 4)
-    cost_drag = round(int(manifest["cost_bps"]) / 10000, 4)
-    time_drag = round(holding_penalty / 10, 4)
-    net_edge_proxy = round(gross_edge_proxy - cost_drag - time_drag, 4)
+    local_trades, local_summary = _build_local_workbench_trades(manifest, price_file=price_file)
+    if not local_trades:
+        return {
+            **base_report,
+            "status": "BLOCKED",
+            "reason": "No local archived price rows were available for this manifest.",
+            "trades": 0,
+            "decision": "LOCAL_DRY_RUN_BLOCKED_NO_DATA",
+            "why": "The workbench can only run a controlled local dry-run when the archived price panel has enough rows per symbol.",
+            "risk_notes": ["No provider query was attempted.", "No synthetic trades were invented to fill the gap."],
+            "next_actions": ["Attach a valid local price panel", "Re-run the controlled dry-run"],
+            "dry_run_rows": [{"metric": "Local data", "value": "missing_or_insufficient", "interpretation": "The runner refused to fabricate trades."}],
+        }
+    gross_return_sum = round(sum(float(row["gross_return"]) for row in local_trades), 6)
+    net_return_sum = round(sum(float(row["net_return"]) for row in local_trades), 6)
+    average_net_return = round(net_return_sum / len(local_trades), 6)
+    cost_drag = round(int(manifest["cost_bps"]) / 10000, 6)
+    net_edge_proxy = average_net_return
+    diagnostic_score = round(average_net_return * 100, 4)
+    equity_curve = _build_workbench_equity_curve(local_trades)
     decision = "DRY_RUN_READY"
     if validation_summary["warn"] > 0:
-        decision = "DRY_RUN_READY_WITH_WARNINGS"
+        decision = "LOCAL_DRY_RUN_COMPLETE_WITH_WARNINGS"
+    else:
+        decision = "LOCAL_DRY_RUN_COMPLETE_NO_PROMOTION"
     return {
         **base_report,
         "status": "DRY_RUN_READY",
-        "scope": "local preview only",
-        "simulated_trades": 12,
+        "scope": "local archived price runner",
+        "simulated_trades": len(local_trades),
         "diagnostic_score": diagnostic_score,
         "decision": decision,
-        "gross_edge_proxy": gross_edge_proxy,
+        "gross_edge_proxy": gross_return_sum,
         "cost_drag_proxy": cost_drag,
-        "time_drag_proxy": time_drag,
+        "time_drag_proxy": 0,
         "net_edge_proxy": net_edge_proxy,
-        "why": "The manifest passed the pre-run checks, so the UI can produce a local synthetic preview. This is still not a real backtest.",
+        "why": "The manifest passed the pre-run checks and was replayed on the archived local OHLCV panel. No provider query was made.",
+        "local_data_summary": local_summary,
+        "trade_rows": local_trades,
+        "equity_curve": equity_curve,
         "assumptions": [
             f"Template: {manifest['template']}",
             f"Universe: {manifest['universe']}",
@@ -561,11 +580,13 @@ def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows:
         "cost_breakdown": {
             "round_trip_cost_bps": int(manifest["cost_bps"]),
             "cost_drag_proxy": cost_drag,
-            "holding_time_drag_proxy": time_drag,
+            "gross_return_sum": gross_return_sum,
+            "net_return_sum": net_return_sum,
+            "average_net_return": average_net_return,
             "net_edge_proxy": net_edge_proxy,
         },
         "risk_notes": [
-            "Preview numbers are synthetic diagnostics, not realized returns.",
+            "Dry-run uses archived local prices and simplified template rules.",
             "Promotion remains false even when the dry-run is ready.",
             "A real backtest still requires a persisted pre-run gate and an approved runner.",
         ],
@@ -577,12 +598,122 @@ def build_controlled_backtest_preview(manifest: dict[str, Any], validation_rows:
         "dry_run_rows": [
             {"metric": "Manifest signature", "value": manifest_signature, "interpretation": "Changes whenever name/template/universe/cost/holding/provider contract changes."},
             {"metric": "Validation PASS/WARN/BLOCK", "value": f"{validation_summary['pass']}/{validation_summary['warn']}/{validation_summary['block']}", "interpretation": "Any BLOCK disables the simulated run."},
-            {"metric": "Gross edge proxy", "value": gross_edge_proxy, "interpretation": "Synthetic estimate used only to explain how the workbench will report outcomes."},
+            {"metric": "Local symbols", "value": local_summary["symbols"], "interpretation": "Symbols found in the archived price panel."},
+            {"metric": "Gross return sum", "value": gross_return_sum, "interpretation": "Sum of local template-rule trade returns before costs."},
             {"metric": "Cost drag proxy", "value": cost_drag, "interpretation": "Cost model translated into a visible friction component."},
-            {"metric": "Net edge proxy", "value": net_edge_proxy, "interpretation": "Synthetic gross minus cost/time drag; not a promotion metric."},
+            {"metric": "Net return sum", "value": net_return_sum, "interpretation": "Local gross return sum after the declared round-trip cost model."},
         ],
         "next_step": "Persist a real pre-run gate before connecting this to the backtest runner.",
     }
+
+
+def persist_workbench_run_bundle(
+    manifest: dict[str, Any],
+    validation_rows: pd.DataFrame,
+    preview: dict[str, Any],
+    *,
+    root: Path = Path("."),
+) -> dict[str, str]:
+    signature = workbench_manifest_signature(manifest)
+    artifact_dir = root / WORKBENCH_OUTPUT_DIR / signature
+    artifact_dir.mkdir(parents=True, exist_ok=True)
+    gate = build_workbench_pre_run_gate(manifest, validation_rows)
+    manifest_path = artifact_dir / "strategy_manifest.json"
+    gate_path = artifact_dir / "pre_run_gate.json"
+    result_path = artifact_dir / "dry_run_result.json"
+    trade_list_path = artifact_dir / "trade_list.csv"
+    equity_curve_path = artifact_dir / "equity_curve.csv"
+    manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8")
+    gate_path.write_text(json.dumps(gate, indent=2, sort_keys=True), encoding="utf-8")
+    result_path.write_text(json.dumps(_json_safe(preview), indent=2, sort_keys=True), encoding="utf-8")
+    pd.DataFrame(preview.get("trade_rows", [])).to_csv(trade_list_path, index=False)
+    pd.DataFrame(preview.get("equity_curve", [])).to_csv(equity_curve_path, index=False)
+    return {
+        "artifact_dir": str(artifact_dir),
+        "manifest_path": str(manifest_path),
+        "gate_path": str(gate_path),
+        "result_path": str(result_path),
+        "trade_list_path": str(trade_list_path),
+        "equity_curve_path": str(equity_curve_path),
+    }
+
+
+def _build_local_workbench_trades(manifest: dict[str, Any], *, price_file: str | Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    prices = load_csv(Path(price_file))
+    if prices.empty or not {"symbol", "date", "close"}.issubset(prices.columns):
+        return [], {"symbols": 0, "rows": 0, "price_file": str(price_file)}
+    prices = prices.copy()
+    prices["date"] = pd.to_datetime(prices["date"])
+    holding = max(1, int(manifest["holding_period_days"]))
+    cost_return = round(int(manifest["cost_bps"]) / 10000, 6)
+    trades: list[dict[str, Any]] = []
+    for symbol, group in prices.groupby("symbol"):
+        symbol_prices = group.sort_values("date").reset_index(drop=True)
+        if len(symbol_prices) <= holding + 1:
+            continue
+        entry_index = _select_workbench_entry_index(symbol_prices, str(manifest["template"]), holding)
+        exit_index = min(entry_index + holding, len(symbol_prices) - 1)
+        if exit_index <= entry_index:
+            continue
+        entry_price = float(symbol_prices.loc[entry_index, "close"])
+        exit_price = float(symbol_prices.loc[exit_index, "close"])
+        if entry_price <= 0:
+            continue
+        gross_return = round((exit_price / entry_price) - 1, 6)
+        net_return = round(gross_return - cost_return, 6)
+        trades.append(
+            {
+                "symbol": str(symbol),
+                "entry_date": symbol_prices.loc[entry_index, "date"].date().isoformat(),
+                "exit_date": symbol_prices.loc[exit_index, "date"].date().isoformat(),
+                "entry_price": round(entry_price, 6),
+                "exit_price": round(exit_price, 6),
+                "gross_return": gross_return,
+                "cost_return": cost_return,
+                "net_return": net_return,
+                "holding_days": int((symbol_prices.loc[exit_index, "date"] - symbol_prices.loc[entry_index, "date"]).days),
+                "rule": str(manifest["template"]),
+            }
+        )
+    summary = {
+        "symbols": int(prices["symbol"].nunique()),
+        "rows": int(len(prices)),
+        "price_file": str(price_file),
+        "eligible_trades": len(trades),
+    }
+    return trades, summary
+
+
+def _select_workbench_entry_index(symbol_prices: pd.DataFrame, template: str, holding: int) -> int:
+    max_entry = max(0, len(symbol_prices) - holding - 1)
+    if template in {"Mean Reversion", "GapRev RTH Reversion"} and len(symbol_prices) > 3:
+        returns = symbol_prices["close"].astype(float).pct_change(2)
+        candidate = int(returns.iloc[: max_entry + 1].idxmin())
+        return max(1, min(candidate, max_entry))
+    if template in {"LowVol Tradability", "Regime Filter"} and len(symbol_prices) > 5:
+        volatility = symbol_prices["close"].astype(float).pct_change().rolling(3).std()
+        candidate = int(volatility.iloc[: max_entry + 1].idxmin()) if volatility.notna().any() else max_entry // 2
+        return max(1, min(candidate, max_entry))
+    return max(1, min(len(symbol_prices) // 3, max_entry))
+
+
+def _build_workbench_equity_curve(trades: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    curve: list[dict[str, Any]] = []
+    cumulative = 0.0
+    for index, trade in enumerate(sorted(trades, key=lambda row: (row["exit_date"], row["symbol"])), start=1):
+        cumulative = round(cumulative + float(trade["net_return"]), 6)
+        curve.append({"step": index, "date": trade["exit_date"], "symbol": trade["symbol"], "cumulative_net_return": cumulative})
+    return curve
+
+
+def _json_safe(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {str(key): _json_safe(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_json_safe(item) for item in value]
+    if hasattr(value, "item"):
+        return value.item()
+    return value
 
 
 def _validation_row(check: str, passed: bool, detail: str) -> dict[str, str]:

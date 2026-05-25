@@ -13,6 +13,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_flow_nodes,
     build_workbench_manifest,
     build_workbench_pre_run_gate,
+    persist_workbench_run_bundle,
     build_strategy_chart_story,
     classify_strategy_status,
     governance_metrics,
@@ -206,6 +207,61 @@ def test_workbench_signature_and_preview_change_when_strategy_changes() -> None:
     assert second_preview["template"] == "Mean Reversion"
     assert first_preview["strategy_name"] == "Version one"
     assert second_preview["strategy_name"] == "Version two"
+
+
+def test_workbench_dry_run_uses_local_prices_and_returns_trade_artifacts(tmp_path: Path) -> None:
+    prices = tmp_path / "prices.csv"
+    pd.DataFrame(
+        [
+            {"symbol": "AAA", "date": "2026-01-01", "open": 10.0, "high": 10.2, "low": 9.8, "close": 10.0, "volume": 1000},
+            {"symbol": "AAA", "date": "2026-01-02", "open": 10.0, "high": 10.8, "low": 9.9, "close": 10.7, "volume": 1200},
+            {"symbol": "AAA", "date": "2026-01-05", "open": 10.7, "high": 11.2, "low": 10.6, "close": 11.0, "volume": 1300},
+            {"symbol": "AAA", "date": "2026-01-06", "open": 11.0, "high": 11.8, "low": 10.9, "close": 11.6, "volume": 1600},
+            {"symbol": "BBB", "date": "2026-01-01", "open": 20.0, "high": 20.4, "low": 19.7, "close": 20.0, "volume": 900},
+            {"symbol": "BBB", "date": "2026-01-02", "open": 20.0, "high": 20.1, "low": 19.0, "close": 19.2, "volume": 1500},
+            {"symbol": "BBB", "date": "2026-01-05", "open": 19.2, "high": 19.6, "low": 18.9, "close": 19.5, "volume": 1400},
+            {"symbol": "BBB", "date": "2026-01-06", "open": 19.5, "high": 20.0, "low": 19.4, "close": 19.8, "volume": 1100},
+        ]
+    ).to_csv(prices, index=False)
+    manifest = build_workbench_manifest(
+        name="Real local runner",
+        template="Momentum",
+        universe="large-cap / ETF clean-data sandbox",
+        holding_period_days=2,
+        cost_bps=100,
+        allow_provider_query=False,
+    )
+    validation = validate_workbench_manifest(manifest)
+
+    preview = build_controlled_backtest_preview(manifest, validation, price_file=prices)
+
+    assert preview["scope"] == "local archived price runner"
+    assert preview["simulated_trades"] == 2
+    assert preview["trade_rows"]
+    assert preview["equity_curve"]
+    assert preview["local_data_summary"]["symbols"] == 2
+    assert preview["cost_breakdown"]["net_return_sum"] == sum(row["net_return"] for row in preview["trade_rows"])
+
+
+def test_persist_workbench_run_bundle_writes_manifest_gate_and_result(tmp_path: Path) -> None:
+    manifest = build_workbench_manifest(
+        name="Persisted strategy",
+        template="Momentum",
+        universe="large-cap / ETF clean-data sandbox",
+        holding_period_days=2,
+        cost_bps=100,
+        allow_provider_query=False,
+    )
+    validation = validate_workbench_manifest(manifest)
+    preview = build_controlled_backtest_preview(manifest, validation)
+
+    bundle = persist_workbench_run_bundle(manifest, validation, preview, root=tmp_path)
+
+    assert bundle["artifact_dir"].startswith(str(tmp_path))
+    assert Path(bundle["manifest_path"]).exists()
+    assert Path(bundle["gate_path"]).exists()
+    assert Path(bundle["result_path"]).exists()
+    assert Path(bundle["trade_list_path"]).exists()
 
 
 def test_build_strategy_chart_story_uses_real_ohlc_window(tmp_path: Path) -> None:

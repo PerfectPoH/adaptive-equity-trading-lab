@@ -19,6 +19,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_pre_run_gate,
     governance_metrics,
     load_dashboard_payload,
+    persist_workbench_run_bundle,
     project_capability_rows,
     project_lifecycle_rows,
     strategy_detail,
@@ -1109,6 +1110,7 @@ def render_strategy_workbench() -> None:
     if st.session_state.get("workbench_active_signature") != manifest_signature:
         st.session_state["workbench_active_signature"] = manifest_signature
         st.session_state["workbench_backtest_preview"] = None
+        st.session_state["workbench_artifact_bundle"] = None
 
     st.subheader("Validation Panel")
     validation_cols = st.columns(3)
@@ -1154,13 +1156,16 @@ def render_strategy_workbench() -> None:
     st.write("This is intentionally a local dry-run preview. It does not query providers, trade, or promote anything.")
     run_clicked = st.button("Run controlled local dry-run", type="primary", disabled=not gate_valid, width="stretch")
     if run_clicked:
-        st.session_state["workbench_backtest_preview"] = build_controlled_backtest_preview(manifest, validation_rows)
+        preview_result = build_controlled_backtest_preview(manifest, validation_rows)
+        st.session_state["workbench_backtest_preview"] = preview_result
+        st.session_state["workbench_artifact_bundle"] = persist_workbench_run_bundle(manifest, validation_rows, preview_result)
     if not gate_valid:
         st.warning("Backtest disabled: fix the BLOCK rows in the validation panel first.")
     preview = st.session_state.get("workbench_backtest_preview")
     if preview and preview.get("manifest_signature") != manifest_signature:
         preview = None
         st.session_state["workbench_backtest_preview"] = None
+        st.session_state["workbench_artifact_bundle"] = None
     if not preview and gate_valid:
         st.info("Dry-run pending for this manifest. If you changed template, cost, universe, name, or provider permission, the old report is intentionally cleared.")
     if preview:
@@ -1185,9 +1190,9 @@ def render_strategy_workbench() -> None:
             with p1:
                 metric_card("Dry-run status", preview["status"], preview["decision"])
             with p2:
-                metric_card("Sim trades", preview["simulated_trades"], "Preview only")
+                metric_card("Local trades", preview["simulated_trades"], "Archived prices only")
             with p3:
-                metric_card("Net proxy", preview["net_edge_proxy"], "Synthetic, not promotion")
+                metric_card("Avg net", preview["net_edge_proxy"], "After declared cost")
             with p4:
                 metric_card("Promotion", str(preview["promotion_allowed"]), "Locked until real gates pass")
             detail_cols = st.columns([1, 1])
@@ -1206,6 +1211,7 @@ def render_strategy_workbench() -> None:
                     {
                         "validation_summary": preview["validation_summary"],
                         "cost_breakdown": preview["cost_breakdown"],
+                        "local_data_summary": preview.get("local_data_summary", {}),
                     }
                 )
                 st.markdown("**Next actions**")
@@ -1213,6 +1219,18 @@ def render_strategy_workbench() -> None:
                 st.markdown(f'<ul class="dryrun-list">{actions_html}</ul>', unsafe_allow_html=True)
             st.markdown("**Dry-run audit rows**")
             st.dataframe(pd.DataFrame(preview["dry_run_rows"]), width="stretch", hide_index=True)
+            trade_rows = pd.DataFrame(preview.get("trade_rows", []))
+            equity_curve = pd.DataFrame(preview.get("equity_curve", []))
+            if not trade_rows.empty:
+                st.markdown("**Generated local trade list**")
+                st.dataframe(trade_rows, width="stretch", hide_index=True)
+            if not equity_curve.empty:
+                st.markdown("**Local equity curve**")
+                st.line_chart(equity_curve.set_index("step")["cumulative_net_return"], height=260)
+            artifact_bundle = st.session_state.get("workbench_artifact_bundle")
+            if artifact_bundle:
+                st.markdown("**Persisted artifacts**")
+                st.json(artifact_bundle)
 
     st.subheader("What The Builder Will Enforce")
     checks = [
