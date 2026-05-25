@@ -12,6 +12,7 @@ from dashboard.lab_dashboard_data import (
     governance_metrics,
     load_dashboard_payload,
     project_capability_rows,
+    project_lifecycle_rows,
     strategy_detail,
     strategy_rows,
 )
@@ -89,6 +90,15 @@ def test_project_capabilities_include_future_strategy_builder_as_planned() -> No
 
     assert "Future UX" in set(rows["area"])
     assert "planned" in set(rows["state"])
+
+
+def test_project_lifecycle_documents_research_arc() -> None:
+    rows = project_lifecycle_rows()
+
+    assert len(rows) >= 6
+    assert {"phase", "idea_source", "what_happened", "lesson"}.issubset(rows.columns)
+    assert any(rows["phase"].str.contains("Momentum", case=False))
+    assert any(rows["lesson"].str.contains("data", case=False))
 
 
 def test_build_strategy_chart_story_uses_real_ohlc_window(tmp_path: Path) -> None:

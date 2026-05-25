@@ -219,6 +219,49 @@ def project_capability_rows() -> pd.DataFrame:
     )
 
 
+def project_lifecycle_rows() -> pd.DataFrame:
+    return pd.DataFrame(
+        [
+            {
+                "phase": "1. Infrastructure hardening",
+                "idea_source": "Initial trading lab architecture",
+                "what_happened": "The project first built the research skeleton: reproducible runs, local artifacts, provider-aware data loading, final decisions, and testable gates.",
+                "lesson": "Before looking for alpha, the lab needed a way to make every result auditable and repeatable.",
+            },
+            {
+                "phase": "2. Momentum falsification",
+                "idea_source": "XMOM and active-only momentum",
+                "what_happened": "The first promising curves depended on a tiny number of extreme winners. Removing the top trades flipped the result.",
+                "lesson": "A strategy that survives only because of a few outliers is not a durable edge; it is lottery exposure.",
+            },
+            {
+                "phase": "3. Catalyst and gap probes",
+                "idea_source": "Earnings, SEC 8-K, GapRev, RTH remapping",
+                "what_happened": "The lab found real volatility regimes, especially around SEC 8-K events, but long-only direction and daily-gap assumptions failed under timestamp and cost realism.",
+                "lesson": "Market shocks are real, but volatility is not direction. RTH-native timing matters more than appealing daily candles.",
+            },
+            {
+                "phase": "4. Data-quality wall",
+                "idea_source": "PEAD, Alpha Vantage, Intrinio, SEC EDGAR",
+                "what_happened": "PEAD remained theoretically attractive, but free data could not provide point-in-time consensus metadata with enough audit quality.",
+                "lesson": "A correct hypothesis must still be blocked when the data cannot prove what was knowable at the time.",
+            },
+            {
+                "phase": "5. Microstructure and SEC event expansion",
+                "idea_source": "Dollar bars, Form 4, insider clusters, active-only Polygon universe",
+                "what_happened": "Dollar bars improved data stability, but directional probes still failed. Form 4 cluster buying was data-starved in the mini-universe. Active-only exploration was marked non-promotable.",
+                "lesson": "Cleaner data representation helps the lab see better, but it does not manufacture alpha.",
+            },
+            {
+                "phase": "6. Strategic closure",
+                "idea_source": "Regime map and risk-engine transition",
+                "what_happened": "After repeated honest archives, the lab stopped trying to promote small-cap/free-data directional alpha and reframed itself as a risk-regime engine and strategy validation platform.",
+                "lesson": "The project did not fail to find a story; it succeeded at refusing weak stories.",
+            },
+        ]
+    )
+
+
 def build_strategy_chart_story(profile_key: str, *, price_file: str | Path = PRICE_FILE) -> dict[str, Any]:
     profile = next(item for item in STRATEGY_PROFILES if item.key == profile_key)
     prices = load_csv(Path(price_file))

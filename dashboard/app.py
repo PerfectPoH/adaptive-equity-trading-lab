@@ -14,6 +14,7 @@ from dashboard.lab_dashboard_data import (
     governance_metrics,
     load_dashboard_payload,
     project_capability_rows,
+    project_lifecycle_rows,
     strategy_detail,
     strategy_rows,
 )
@@ -56,6 +57,33 @@ def inject_theme() -> None:
         }
         section[data-testid="stSidebar"] * {
           color: #e5edf8;
+        }
+        section[data-testid="stSidebar"] .sidebar-tile {
+          border: 1px solid #22304a;
+          border-radius: 8px;
+          background: #111827;
+          padding: 14px;
+          min-height: 108px;
+        }
+        section[data-testid="stSidebar"] .sidebar-label {
+          color: #93c5fd !important;
+          font-family: "Roboto Mono", monospace;
+          font-size: 12px;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+        section[data-testid="stSidebar"] .sidebar-value {
+          color: #ffffff !important;
+          font-family: "Exo", system-ui, sans-serif;
+          font-size: 30px;
+          font-weight: 800;
+          line-height: 1.05;
+          overflow-wrap: anywhere;
+        }
+        section[data-testid="stSidebar"] .sidebar-note {
+          color: #cbd5e1 !important;
+          font-size: 13px;
+          line-height: 1.35;
         }
         section[data-testid="stSidebar"] [role="radiogroup"] label {
           border: 1px solid #22304a;
@@ -249,6 +277,35 @@ def inject_theme() -> None:
           padding: 12px;
           min-height: 96px;
         }
+        .lifecycle-card {
+          border: 1px solid var(--lab-line);
+          border-radius: 8px;
+          background: #ffffff;
+          padding: 18px;
+          min-height: 230px;
+          box-shadow: 0 14px 34px rgba(15, 23, 42, .05);
+        }
+        .lifecycle-phase {
+          font-family: "Exo", system-ui, sans-serif;
+          font-size: 22px;
+          font-weight: 800;
+          color: var(--lab-strong);
+          margin: 8px 0;
+        }
+        .lifecycle-source {
+          display: inline-flex;
+          border: 1px solid #bfdbfe;
+          background: #eff6ff;
+          color: #1d4ed8;
+          border-radius: 999px;
+          padding: 4px 9px;
+          font-family: "Roboto Mono", monospace;
+          font-size: 11px;
+          font-weight: 700;
+        }
+        .results-spacer {
+          height: 28px;
+        }
         .capability-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -352,6 +409,7 @@ def flow_chart(nodes: list[str]) -> go.Figure:
             width=130,
         )
     fig.update_layout(
+        template="plotly_white",
         height=260,
         margin=dict(l=20, r=20, t=20, b=40),
         paper_bgcolor="rgba(0,0,0,0)",
@@ -378,14 +436,17 @@ def strategy_result_chart(runs: pd.DataFrame) -> go.Figure:
         text="count",
     )
     fig.update_layout(
+        template="plotly_white",
         height=max(220, 52 * len(frame)),
         margin=dict(l=10, r=20, t=20, b=10),
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="#ffffff",
+        plot_bgcolor="#ffffff",
         coloraxis_showscale=False,
         xaxis_title="Runs",
         yaxis_title="",
         font=dict(family="Inter", color="#1e293b"),
+        xaxis=dict(tickfont=dict(color="#475569"), title_font=dict(color="#64748b"), gridcolor="#e2e8f0"),
+        yaxis=dict(tickfont=dict(color="#334155"), title_font=dict(color="#64748b"), gridcolor="#e2e8f0"),
     )
     return fig
 
@@ -446,6 +507,7 @@ def strategy_candlestick_chart(story: dict[str, object]) -> go.Figure:
             )
         )
     fig.update_layout(
+        template="plotly_white",
         title=dict(text=str(story["title"]), font=dict(size=16, family="Exo", color="#0f172a")),
         height=430,
         margin=dict(l=10, r=10, t=44, b=10),
@@ -453,7 +515,7 @@ def strategy_candlestick_chart(story: dict[str, object]) -> go.Figure:
         plot_bgcolor="#ffffff",
         font=dict(family="Inter", color="#1e293b"),
         xaxis=dict(rangeslider=dict(visible=False), showgrid=True, gridcolor="#e2e8f0"),
-        yaxis=dict(title="", showgrid=True, gridcolor="#e2e8f0"),
+        yaxis=dict(title="", showgrid=True, gridcolor="#e2e8f0", tickfont=dict(color="#475569")),
         showlegend=False,
     )
     return fig
@@ -610,18 +672,43 @@ def render_results_and_data(payload: dict[str, object]) -> None:
     with c3:
         metric_card("Data Upgrades", len(data_matrix), "Provider paths scored")
 
+    st.markdown('<div class="results-spacer"></div>', unsafe_allow_html=True)
     c1, c2 = st.columns([1.2, 1])
     with c1:
         if not ledger.empty:
             counts = ledger.groupby("decision", as_index=False).size().sort_values("size", ascending=False).head(12)
             fig = px.bar(counts, x="size", y="decision", orientation="h", color="size", color_continuous_scale=["#dbeafe", "#2563eb"])
-            fig.update_layout(height=500, margin=dict(l=0, r=10, t=10, b=10), coloraxis_showscale=False, yaxis_title="", xaxis_title="Count")
+            fig.update_layout(
+                template="plotly_white",
+                height=500,
+                margin=dict(l=0, r=10, t=10, b=10),
+                coloraxis_showscale=False,
+                yaxis_title="",
+                xaxis_title="Count",
+                paper_bgcolor="#ffffff",
+                plot_bgcolor="#ffffff",
+                font=dict(color="#1e293b"),
+                xaxis=dict(tickfont=dict(color="#475569"), title_font=dict(color="#64748b"), gridcolor="#e2e8f0"),
+                yaxis=dict(tickfont=dict(color="#334155"), title_font=dict(color="#64748b"), gridcolor="#e2e8f0"),
+            )
             st.plotly_chart(fig, width="stretch")
     with c2:
         if not regime_map.empty and "regime_label" in regime_map.columns:
             regime_counts = regime_map.groupby("regime_label", as_index=False).size()
             fig = px.bar(regime_counts, x="regime_label", y="size", color="regime_label", color_discrete_sequence=px.colors.qualitative.Safe)
-            fig.update_layout(height=500, margin=dict(l=0, r=0, t=10, b=10), showlegend=False, xaxis_title="", yaxis_title="Symbol-days")
+            fig.update_layout(
+                template="plotly_white",
+                height=500,
+                margin=dict(l=0, r=0, t=10, b=10),
+                showlegend=False,
+                xaxis_title="",
+                yaxis_title="Symbol-days",
+                paper_bgcolor="#ffffff",
+                plot_bgcolor="#ffffff",
+                font=dict(color="#1e293b"),
+                xaxis=dict(tickfont=dict(color="#334155"), title_font=dict(color="#64748b"), gridcolor="#e2e8f0"),
+                yaxis=dict(tickfont=dict(color="#475569"), title_font=dict(color="#64748b"), gridcolor="#e2e8f0"),
+            )
             st.plotly_chart(fig, width="stretch")
 
     st.subheader("Portfolio And Microstructure Diagnostics")
@@ -635,7 +722,7 @@ def render_results_and_data(payload: dict[str, object]) -> None:
                 color="realized_volatility",
                 color_continuous_scale="Blues",
             )
-            fig.update_layout(height=340, margin=dict(l=0, r=0, t=10, b=10), xaxis_title="", yaxis_title="Diagnostic weight")
+            fig.update_layout(template="plotly_white", height=340, margin=dict(l=0, r=0, t=10, b=10), xaxis_title="", yaxis_title="Diagnostic weight")
             st.plotly_chart(fig, width="stretch")
     with m2:
         if not smallcap.empty and {"symbol", "median_dollar_volume", "median_spread_proxy"}.issubset(smallcap.columns):
@@ -648,7 +735,7 @@ def render_results_and_data(payload: dict[str, object]) -> None:
                 hover_name="symbol",
                 log_x=True,
             )
-            fig.update_layout(height=340, margin=dict(l=0, r=0, t=10, b=10), xaxis_title="Median dollar volume", yaxis_title="Spread proxy")
+            fig.update_layout(template="plotly_white", height=340, margin=dict(l=0, r=0, t=10, b=10), xaxis_title="Median dollar volume", yaxis_title="Spread proxy")
             st.plotly_chart(fig, width="stretch")
 
     st.subheader("Data Upgrade Matrix")
@@ -675,6 +762,31 @@ def render_lab_explainer(payload: dict[str, object]) -> None:
         """,
         unsafe_allow_html=True,
     )
+
+    st.subheader("The Life Of The Project")
+    st.write(
+        "This section tells the research arc, not just the final architecture: where the ideas came from, "
+        "what the lab tried to prove, why each branch was stopped, and what survived as reusable infrastructure."
+    )
+    lifecycle = project_lifecycle_rows()
+    for index, row in enumerate(lifecycle.to_dict("records")):
+        if index % 2 == 0:
+            cols = st.columns(2)
+        with cols[index % 2]:
+            st.markdown(
+                f"""
+                <div class="lifecycle-card">
+                  <div class="lifecycle-source">{row["idea_source"]}</div>
+                  <div class="lifecycle-phase">{row["phase"]}</div>
+                  <div class="strategy-copy"><strong>What happened:</strong> {row["what_happened"]}</div>
+                  <div class="strategy-copy" style="margin-top:10px;"><strong>Why it matters:</strong> {row["lesson"]}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+    st.markdown('<div class="results-spacer"></div>', unsafe_allow_html=True)
+
+    st.subheader("Lab Pipeline")
     nodes = [
         "Hypothesis",
         "Pre-run gate",
@@ -687,6 +799,7 @@ def render_lab_explainer(payload: dict[str, object]) -> None:
     ]
     st.plotly_chart(flow_chart(nodes), width="stretch")
 
+    st.subheader("Capabilities Built Along The Way")
     capabilities = project_capability_rows()
     st.markdown('<div class="capability-grid">', unsafe_allow_html=True)
     for row in capabilities.to_dict("records"):
@@ -731,16 +844,16 @@ def sidebar_navigation(payload: dict[str, object]) -> str:
     st.sidebar.markdown("---")
     st.sidebar.markdown(
         f"""
-        <div class="mini-tile">
-          <div class="metric-label">Promoted</div>
-          <div class="metric-value">{metrics["promoted_strategy_count"]}</div>
-          <div class="metric-note">No strategy passed promotion gates.</div>
+        <div class="sidebar-tile">
+          <div class="sidebar-label">Promoted</div>
+          <div class="sidebar-value">{metrics["promoted_strategy_count"]}</div>
+          <div class="sidebar-note">No strategy passed promotion gates.</div>
         </div>
         <div style="height:10px;"></div>
-        <div class="mini-tile">
-          <div class="metric-label">Final mode</div>
-          <div class="metric-value metric-value-long">{metrics["final_policy"]}</div>
-          <div class="metric-note">Research posture after closure.</div>
+        <div class="sidebar-tile">
+          <div class="sidebar-label">Final mode</div>
+          <div class="sidebar-value" style="font-size:20px;">{metrics["final_policy"]}</div>
+          <div class="sidebar-note">Research posture after closure.</div>
         </div>
         """,
         unsafe_allow_html=True,
