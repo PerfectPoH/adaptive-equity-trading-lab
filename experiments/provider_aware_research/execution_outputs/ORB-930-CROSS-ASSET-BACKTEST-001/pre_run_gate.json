@@ -1,0 +1,43 @@
+{
+  "approval_basis": "User explicitly requested the 9:30 AM strategy backtest on gold, euro, and bitcoin.",
+  "blocked_actions": [
+    "live_trading",
+    "paper_trading",
+    "strategy_promotion"
+  ],
+  "gate_id": "ORB-930-CROSS-ASSET-PRE-RUN-GATE-001",
+  "interval": "5m",
+  "market_data_download_allowed": true,
+  "parameter_freeze": {
+    "entry_cutoff": "11:00 America/New_York; no trade after cutoff",
+    "entry_trigger": "first 5m candle close above OR high or below OR low after range lock",
+    "opening_range": "09:30 inclusive to 09:30 + range_minutes exclusive",
+    "opening_range_minutes": [
+      5,
+      15
+    ],
+    "reward_r_multiples": [
+      1,
+      3,
+      4
+    ],
+    "round_trip_cost_bps": 5,
+    "same_bar_collision_policy": "pessimistic_stop_first",
+    "session_exit": "16:00 America/New_York if stop/target not touched",
+    "stop": "opposite side of opening range",
+    "targets": "1R, 3R, 4R measured from entry risk"
+  },
+  "period": "60d",
+  "promotion_allowed": false,
+  "provider": "Yahoo Finance through yfinance",
+  "provider_query_allowed": true,
+  "raw_payload_retention_allowed": false,
+  "status": "APPROVED_FOR_BOUNDED_PROVIDER_QUERY",
+  "strategy": "9:30 AM Opening Range Breakout",
+  "symbols": {
+    "BTC-USD": "Bitcoin / US dollar",
+    "EURUSD=X": "Euro / US dollar",
+    "GC=F": "Gold futures proxy"
+  },
+  "timezone": "America/New_York"
+}

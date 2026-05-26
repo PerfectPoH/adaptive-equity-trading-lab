@@ -225,6 +225,15 @@ WORKBENCH_TEMPLATES: dict[str, dict[str, Any]] = {
         "default_gate": "custom_rule_manifest_gate",
         "chart_hint": "The chart must show the custom signal window, entry candle, exit candle, and robustness gate.",
     },
+    "9:30 AM ORB": {
+        "signal": "Mark the first 5m or 15m New York opening range and trade the first breakout before 11:00.",
+        "entry_rule": "Enter long on a 5m close above the opening-range high, or short on a 5m close below the opening-range low, before 11:00 ET.",
+        "exit_rule": "Stop at the opposite side of the opening range; target at the frozen R multiple or exit at the session close.",
+        "failure_mode": "Session anchoring ambiguity on 24h assets, false breakouts, and Yahoo intraday data limits.",
+        "required_data": ["5m OHLCV", "America/New_York session mapping", "opening range high/low", "cost model"],
+        "default_gate": "orb_session_mapping_gate",
+        "chart_hint": "The chart must mark 09:30 opening range high/low, breakout close, stop, target, and 11:00 no-entry cutoff.",
+    },
 }
 
 
@@ -520,6 +529,7 @@ def build_workbench_chart_story(manifest: dict[str, Any], *, price_file: str | P
         "Regime Filter": "regime",
         "PDUFA Run-Up": "sec8k",
         "13D Activist Follow-On": "form4",
+        "9:30 AM ORB": "gaprev",
     }
     story = build_strategy_chart_story(template_to_profile.get(str(manifest["template"]), "xmom"), price_file=price_file)
     story["title"] = f"Chart preview: {manifest['strategy_name']} on {story['symbol']}"
@@ -1283,6 +1293,8 @@ def _select_workbench_entry_indices(symbol_prices: pd.DataFrame, template: str, 
     if template == "13D Activist Follow-On":
         activist_proxy = twenty_one_day_return.where(volume_ratio > 1.15)
         return _ranked_entry_indices(activist_proxy, max_entry, base_indices, largest=True, limit=30)
+    if template == "9:30 AM ORB":
+        return _ranked_entry_indices((one_day_return.abs() * volume_ratio.fillna(1.0)), max_entry, base_indices, largest=True, limit=55)
     return base_indices
 
 
