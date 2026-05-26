@@ -18,6 +18,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_data_scope_preview,
     build_workbench_strategy_narrative,
     build_workbench_visual_diagnostics,
+    display_safe_records,
     delisted_data_source_gate_payload,
     persist_workbench_run_bundle,
     build_strategy_chart_story,
@@ -503,6 +504,19 @@ def test_workbench_visual_diagnostics_exposes_distribution_and_top_winners() -> 
     assert {"symbol", "net_return", "share_of_positive_net"}.issubset(diagnostics["top_winners"][0])
     assert diagnostics["verdict_blocks"]
     assert diagnostics["result_explainer"]["headline"] == preview["automatic_verdict"]["decision"]
+
+
+def test_display_safe_records_serializes_nested_table_values() -> None:
+    records = [
+        {"gate": "outlier", "value": {"net_sum": 1.2, "ex_top3": -0.4}, "count": 5},
+        {"gate": "median", "value": 0.2, "count": 5},
+    ]
+
+    safe = display_safe_records(records)
+
+    assert safe[0]["value"] == '{"ex_top3": -0.4, "net_sum": 1.2}'
+    assert safe[1]["value"] == "0.2"
+    assert safe[0]["count"] == "5"
 
 
 def test_workbench_auto_switches_long_holding_to_investment_mode() -> None:

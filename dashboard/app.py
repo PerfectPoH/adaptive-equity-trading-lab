@@ -31,6 +31,7 @@ from dashboard.lab_dashboard_data import (
     workbench_manifest_signature,
     build_workbench_strategy_narrative,
     build_workbench_visual_diagnostics,
+    display_safe_records,
 )
 
 
@@ -1715,7 +1716,7 @@ def render_strategy_workbench() -> None:
                 actions_html = "".join(f"<li>{item}</li>" for item in preview["next_actions"])
                 st.markdown(f'<ul class="dryrun-list">{actions_html}</ul>', unsafe_allow_html=True)
             st.markdown("**Dry-run audit rows**")
-            st.dataframe(pd.DataFrame(preview["dry_run_rows"]), width="stretch", hide_index=True)
+            st.dataframe(pd.DataFrame(display_safe_records(preview["dry_run_rows"])), width="stretch", hide_index=True)
             st.markdown("**Robustness gates**")
             robustness_rows = []
             for gate_name, gate_payload in preview.get("robustness_panel", {}).items():
@@ -1727,7 +1728,7 @@ def render_strategy_workbench() -> None:
                         "detail": gate_payload.get("detail"),
                     }
                 )
-            st.dataframe(pd.DataFrame(robustness_rows), width="stretch", hide_index=True)
+            st.dataframe(pd.DataFrame(display_safe_records(robustness_rows)), width="stretch", hide_index=True)
             trade_rows = pd.DataFrame(preview.get("trade_rows", []))
             equity_curve = pd.DataFrame(preview.get("equity_curve", []))
             if not trade_rows.empty:

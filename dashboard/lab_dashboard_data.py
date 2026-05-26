@@ -769,6 +769,19 @@ def persist_workbench_run_bundle(
     }
 
 
+def display_safe_records(records: list[dict[str, Any]]) -> list[dict[str, str]]:
+    safe_rows: list[dict[str, str]] = []
+    for row in records:
+        safe_row: dict[str, str] = {}
+        for key, value in row.items():
+            if isinstance(value, (dict, list)):
+                safe_row[str(key)] = json.dumps(_json_safe(value), sort_keys=True)
+            else:
+                safe_row[str(key)] = str(_json_safe(value))
+        safe_rows.append(safe_row)
+    return safe_rows
+
+
 def build_workbench_data_scope_preview(manifest: dict[str, Any], *, price_file: str | Path = PRICE_FILE) -> dict[str, Any]:
     prices = _load_workbench_price_panel(manifest, price_file=price_file)
     configured_symbols = _configured_symbols_for_universe(str(manifest.get("universe", "")))
