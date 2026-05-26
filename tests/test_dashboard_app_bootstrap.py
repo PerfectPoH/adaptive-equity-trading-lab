@@ -21,8 +21,12 @@ def test_dashboard_app_bootstraps_repo_root_when_run_from_dashboard_dir() -> Non
 def test_workbench_color_logic_has_distinct_meanings() -> None:
     repo_root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(repo_root))
-    from dashboard.app import COLOR_LOGIC
+    from dashboard.app import COLOR_LOGIC, color_logic_component_html
 
     assert set(COLOR_LOGIC) == {"Blue", "Mint", "Amber", "Plum", "Rose"}
     assert len({item["body"] for item in COLOR_LOGIC.values()}) == 5
     assert COLOR_LOGIC["Rose"]["body"] != COLOR_LOGIC["Blue"]["body"]
+    html = color_logic_component_html()
+    assert "addEventListener(\"click\"" in html
+    assert "selectColor(\"Blue\")" in html
+    assert "aria-pressed" in html

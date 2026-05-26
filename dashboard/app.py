@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import math
 from pathlib import Path
 import sys
@@ -8,6 +9,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+import streamlit.components.v1 as components
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
@@ -45,27 +47,27 @@ st.set_page_config(page_title="Adaptive Equity Trading Lab", layout="wide", init
 SECTIONS = ["Command Center", "Strategies", "Results & Data", "Project Anatomy", "Strategy Workbench"]
 COLOR_LOGIC = {
     "Blue": {
-        "css": "var(--lab-blue)",
+        "css": "#1f5eff",
         "title": "Signal and action",
         "body": "Blue marks the place where the user or strategy does something: entry logic, selected navigation, primary buttons, and live chart annotations.",
     },
     "Mint": {
-        "css": "var(--lab-mint)",
+        "css": "#0f9f75",
         "title": "Evidence that survived",
         "body": "Mint marks facts the lab can actually support: valid local coverage, completed checks, documented evidence, and results that are safe to inspect.",
     },
     "Amber": {
-        "css": "var(--lab-amber)",
+        "css": "#d97706",
         "title": "Risk, cost, and friction",
         "body": "Amber marks the parts that usually kill paper alpha: transaction costs, slippage, fragile assumptions, and unresolved operating risk.",
     },
     "Plum": {
-        "css": "var(--lab-plum)",
+        "css": "#7c3aed",
         "title": "Data scope and structure",
         "body": "Plum marks the research container: universe routing, dataset scope, provider boundaries, and the difference between local data and missing coverage.",
     },
     "Rose": {
-        "css": "var(--lab-rose)",
+        "css": "#d12f5f",
         "title": "Blockers and fragility",
         "body": "Rose marks the lab saying no: PIT blockers, survivorship bias, outlier dependency, insufficient sample size, or promotion locked false.",
     },
@@ -701,6 +703,150 @@ def status_badge(status: str) -> str:
     return f'<span class="status-pill status-{css}">{status}</span>'
 
 
+def color_logic_component_html() -> str:
+    payload = json.dumps(COLOR_LOGIC)
+    return f"""
+    <!doctype html>
+    <html>
+      <head>
+        <style>
+          body {{
+            margin: 0;
+            font-family: "Instrument Sans", Inter, system-ui, sans-serif;
+            color: #171717;
+            background: transparent;
+          }}
+          .card {{
+            box-sizing: border-box;
+            min-height: 318px;
+            border: 1px solid #d8d2c8;
+            border-top: 4px solid #0f9f75;
+            border-radius: 10px;
+            background: rgba(255,255,255,.88);
+            padding: 22px;
+            box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 54px rgba(23,23,23,.06);
+          }}
+          .eyebrow {{
+            color: #675f55;
+            font-family: "IBM Plex Mono", ui-monospace, monospace;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+          }}
+          h2 {{
+            margin: 12px 0 8px;
+            font-size: 24px;
+            line-height: 1.12;
+            letter-spacing: 0;
+          }}
+          p {{
+            margin: 0;
+            color: #3f3a34;
+            font-size: 15px;
+            line-height: 1.55;
+          }}
+          .strip {{
+            display: flex;
+            gap: 8px;
+            margin: 18px 0 22px;
+          }}
+          button {{
+            height: 10px;
+            flex: 1;
+            border: 0;
+            border-radius: 999px;
+            cursor: pointer;
+            outline: 2px solid transparent;
+            outline-offset: 4px;
+            transition: transform .16s ease, outline-color .16s ease, box-shadow .16s ease;
+          }}
+          button:hover {{
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(23,23,23,.12);
+          }}
+          button[aria-pressed="true"] {{
+            outline-color: currentColor;
+            box-shadow: 0 0 0 4px rgba(255,255,255,.9), 0 10px 22px rgba(23,23,23,.14);
+          }}
+          .meaning {{
+            display: grid;
+            grid-template-columns: 18px 1fr;
+            gap: 12px;
+            border-top: 1px solid #e7e2d8;
+            padding-top: 16px;
+          }}
+          .dot {{
+            width: 18px;
+            height: 18px;
+            border-radius: 999px;
+            margin-top: 3px;
+            box-shadow: 0 0 0 5px rgba(23,23,23,.05);
+          }}
+          .title {{
+            font-size: 17px;
+            font-weight: 850;
+            margin-bottom: 5px;
+          }}
+          .hint {{
+            margin-top: 14px;
+            color: #675f55;
+            font-size: 12px;
+          }}
+        </style>
+      </head>
+      <body>
+        <div class="card">
+          <div class="eyebrow">Color logic</div>
+          <h2>Color carries meaning.</h2>
+          <p id="summary">Click a color strip to inspect how the interface uses it.</p>
+          <div class="strip" id="strip"></div>
+          <div class="meaning">
+            <span class="dot" id="dot"></span>
+            <div>
+              <div class="eyebrow">Selected color logic</div>
+              <div class="title" id="title"></div>
+              <p id="body"></p>
+            </div>
+          </div>
+          <div class="hint">The selected strip changes this explanation in-place.</div>
+        </div>
+        <script>
+          const data = {payload};
+          const strip = document.getElementById("strip");
+          const dot = document.getElementById("dot");
+          const title = document.getElementById("title");
+          const body = document.getElementById("body");
+          const buttons = {{}};
+
+          function selectColor(name) {{
+            const item = data[name];
+            dot.style.background = item.css;
+            title.textContent = item.title;
+            body.textContent = item.body;
+            Object.entries(buttons).forEach(([buttonName, button]) => {{
+              button.setAttribute("aria-pressed", String(buttonName === name));
+            }});
+          }}
+
+          Object.entries(data).forEach(([name, item]) => {{
+            const button = document.createElement("button");
+            button.type = "button";
+            button.title = name + ": " + item.title;
+            button.setAttribute("aria-label", name + " color meaning");
+            button.style.background = item.css;
+            button.style.color = item.css;
+            button.addEventListener("click", () => selectColor(name));
+            buttons[name] = button;
+            strip.appendChild(button);
+          }});
+          selectColor("Blue");
+        </script>
+      </body>
+    </html>
+    """
+
+
 def shell_nav(section: str) -> None:
     st.markdown(
         f"""
@@ -1244,13 +1390,10 @@ def render_lab_explainer(payload: dict[str, object]) -> None:
 
 
 def render_strategy_workbench() -> None:
-    color_names = list(COLOR_LOGIC.keys())
-    selected_color = st.session_state.get("workbench_color_logic", "Blue")
-    if selected_color not in COLOR_LOGIC:
-        selected_color = "Blue"
-    st.markdown(
-        """
-        <div class="human-workbench-hero">
+    hero_left, hero_right = st.columns([1.35, 0.58], gap="large")
+    with hero_left:
+        st.markdown(
+            """
           <div class="human-workbench-copy">
             <div class="lab-kicker">Human strategy workbench</div>
             <h1>Build the idea. Then let the lab disagree.</h1>
@@ -1259,47 +1402,11 @@ def render_strategy_workbench() -> None:
               shows what data is actually available, and keeps promotion locked until the gates survive.
             </p>
           </div>
-          <div class="human-workbench-note">
-            <div class="eyebrow">Color logic</div>
-            <div class="strategy-title" style="font-size:24px;">Color carries meaning.</div>
-            <div class="strategy-copy">
-              Blue marks signal/action, mint marks valid evidence, amber marks risk and cost, plum marks data scope,
-              and rose marks blockers or fragility.
-            </div>
-            <div class="semantic-strip">
-              <span title="Blue: signal and action" style="background:var(--lab-blue);"></span>
-              <span title="Mint: valid evidence" style="background:var(--lab-mint);"></span>
-              <span title="Amber: risk and cost" style="background:var(--lab-amber);"></span>
-              <span title="Plum: data scope" style="background:var(--lab-plum);"></span>
-              <span title="Rose: blockers and fragility" style="background:var(--lab-rose);"></span>
-            </div>
-          </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-    st.radio(
-        "Inspect color meaning",
-        color_names,
-        horizontal=True,
-        key="workbench_color_logic",
-    )
-    selected_logic = COLOR_LOGIC[st.session_state.get("workbench_color_logic", selected_color)]
-    st.markdown(
-        f"""
-        <div class="color-meaning-card">
-          <div class="color-meaning-row">
-            <span class="color-dot-large" style="background:{selected_logic["css"]};"></span>
-            <div>
-              <div class="eyebrow">Selected color logic</div>
-              <div class="color-meaning-title">{selected_logic["title"]}</div>
-              <div class="color-meaning-body">{selected_logic["body"]}</div>
-            </div>
-          </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+            """,
+            unsafe_allow_html=True,
+        )
+    with hero_right:
+        components.html(color_logic_component_html(), height=330)
 
     st.markdown(
         f"""
