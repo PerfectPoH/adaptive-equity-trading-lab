@@ -16,3 +16,13 @@ def test_dashboard_app_bootstraps_repo_root_when_run_from_dashboard_dir() -> Non
     )
 
     assert result.returncode == 0, result.stderr
+
+
+def test_workbench_color_logic_has_distinct_meanings() -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(repo_root))
+    from dashboard.app import COLOR_LOGIC
+
+    assert set(COLOR_LOGIC) == {"Blue", "Mint", "Amber", "Plum", "Rose"}
+    assert len({item["body"] for item in COLOR_LOGIC.values()}) == 5
+    assert COLOR_LOGIC["Rose"]["body"] != COLOR_LOGIC["Blue"]["body"]

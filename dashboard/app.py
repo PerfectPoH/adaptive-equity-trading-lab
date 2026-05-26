@@ -43,6 +43,33 @@ from dashboard.lab_dashboard_data import (
 st.set_page_config(page_title="Adaptive Equity Trading Lab", layout="wide", initial_sidebar_state="expanded")
 
 SECTIONS = ["Command Center", "Strategies", "Results & Data", "Project Anatomy", "Strategy Workbench"]
+COLOR_LOGIC = {
+    "Blue": {
+        "css": "var(--lab-blue)",
+        "title": "Signal and action",
+        "body": "Blue marks the place where the user or strategy does something: entry logic, selected navigation, primary buttons, and live chart annotations.",
+    },
+    "Mint": {
+        "css": "var(--lab-mint)",
+        "title": "Evidence that survived",
+        "body": "Mint marks facts the lab can actually support: valid local coverage, completed checks, documented evidence, and results that are safe to inspect.",
+    },
+    "Amber": {
+        "css": "var(--lab-amber)",
+        "title": "Risk, cost, and friction",
+        "body": "Amber marks the parts that usually kill paper alpha: transaction costs, slippage, fragile assumptions, and unresolved operating risk.",
+    },
+    "Plum": {
+        "css": "var(--lab-plum)",
+        "title": "Data scope and structure",
+        "body": "Plum marks the research container: universe routing, dataset scope, provider boundaries, and the difference between local data and missing coverage.",
+    },
+    "Rose": {
+        "css": "var(--lab-rose)",
+        "title": "Blockers and fragility",
+        "body": "Rose marks the lab saying no: PIT blockers, survivorship bias, outlier dependency, insufficient sample size, or promotion locked false.",
+    },
+}
 
 
 def inject_theme() -> None:
@@ -546,15 +573,16 @@ def inject_theme() -> None:
           color: #ffffff;
           font-size: clamp(46px, 6vw, 78px);
           line-height: .9;
-          letter-spacing: -.055em;
+          letter-spacing: 0;
           margin: 12px 0 16px;
           max-width: 820px;
         }
         .human-workbench-copy p {
-          color: #dbeafe;
+          color: #eff6ff !important;
           font-size: 17px;
           line-height: 1.62;
           max-width: 780px;
+          text-shadow: 0 1px 14px rgba(0,0,0,.36);
         }
         .human-workbench-note {
           border: 1px solid var(--lab-line);
@@ -573,6 +601,38 @@ def inject_theme() -> None:
           height: 10px;
           flex: 1;
           border-radius: 999px;
+        }
+        .color-meaning-card {
+          border: 1px solid var(--lab-line);
+          border-radius: 10px;
+          background: rgba(255,255,255,.86);
+          padding: 18px;
+          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 54px rgba(23,23,23,.05);
+          margin: -18px 0 34px;
+        }
+        .color-meaning-row {
+          display: flex;
+          gap: 12px;
+          align-items: flex-start;
+        }
+        .color-dot-large {
+          width: 18px;
+          height: 18px;
+          border-radius: 999px;
+          flex: 0 0 auto;
+          box-shadow: 0 0 0 5px rgba(23,23,23,.05);
+          margin-top: 4px;
+        }
+        .color-meaning-title {
+          color: var(--lab-strong);
+          font-size: 18px;
+          font-weight: 800;
+          margin-bottom: 4px;
+        }
+        .color-meaning-body {
+          color: var(--lab-ink);
+          line-height: 1.56;
+          max-width: 820px;
         }
         .semantic-badge {
           display: inline-flex;
@@ -1184,6 +1244,10 @@ def render_lab_explainer(payload: dict[str, object]) -> None:
 
 
 def render_strategy_workbench() -> None:
+    color_names = list(COLOR_LOGIC.keys())
+    selected_color = st.session_state.get("workbench_color_logic", "Blue")
+    if selected_color not in COLOR_LOGIC:
+        selected_color = "Blue"
     st.markdown(
         """
         <div class="human-workbench-hero">
@@ -1203,11 +1267,33 @@ def render_strategy_workbench() -> None:
               and rose marks blockers or fragility.
             </div>
             <div class="semantic-strip">
-              <span style="background:var(--lab-blue);"></span>
-              <span style="background:var(--lab-mint);"></span>
-              <span style="background:var(--lab-amber);"></span>
-              <span style="background:var(--lab-plum);"></span>
-              <span style="background:var(--lab-rose);"></span>
+              <span title="Blue: signal and action" style="background:var(--lab-blue);"></span>
+              <span title="Mint: valid evidence" style="background:var(--lab-mint);"></span>
+              <span title="Amber: risk and cost" style="background:var(--lab-amber);"></span>
+              <span title="Plum: data scope" style="background:var(--lab-plum);"></span>
+              <span title="Rose: blockers and fragility" style="background:var(--lab-rose);"></span>
+            </div>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.radio(
+        "Inspect color meaning",
+        color_names,
+        horizontal=True,
+        key="workbench_color_logic",
+    )
+    selected_logic = COLOR_LOGIC[st.session_state.get("workbench_color_logic", selected_color)]
+    st.markdown(
+        f"""
+        <div class="color-meaning-card">
+          <div class="color-meaning-row">
+            <span class="color-dot-large" style="background:{selected_logic["css"]};"></span>
+            <div>
+              <div class="eyebrow">Selected color logic</div>
+              <div class="color-meaning-title">{selected_logic["title"]}</div>
+              <div class="color-meaning-body">{selected_logic["body"]}</div>
             </div>
           </div>
         </div>
