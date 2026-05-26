@@ -16,6 +16,7 @@ PRICE_FILE = Path("experiments/provider_aware_research/data_inputs/databento_xmo
 LARGECAP_PRICE_FILE = Path("experiments/runs/20260508_173235_news_thr60/signals.csv")
 WORKBENCH_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-WORKBENCH"
 DELISTED_DATA_SOURCE_GATE_DIR = Path("experiments/provider_aware_research/delisted_data_source_gate_20260525")
+ORB_930_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "ORB-930-CROSS-ASSET-BACKTEST-001"
 WORKBENCH_CONFIGURED_LARGECAP_SYMBOLS = {
     "SPY", "QQQ", "IWM", "DIA", "VTI", "VOO", "IVV", "RSP", "XLK", "XLF", "XLE", "XLY", "XLP", "XLV", "XLI", "XLU", "XLB", "XLRE", "XLC",
     "AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "GOOG", "META", "TSLA", "AVGO", "BRK.B", "JPM", "LLY", "V", "UNH", "XOM", "MA", "COST",
@@ -112,6 +113,15 @@ STRATEGY_PROFILES: list[StrategyProfile] = [
         mechanism="Transforms time bars into dollar bars, validates distribution stability, and separately rejects directional micro-reversion when net edge is negative.",
         demonstration=["Intraday bars", "Dollar bucket", "Variance stabilization", "Micro-reversion probe", "Cost gate", "No strategy"],
         decision_pattern="DOLLARBAR",
+    ),
+    StrategyProfile(
+        key="orb930",
+        name="9:30 AM Opening Range Breakout",
+        family="Cross-asset intraday",
+        thesis="Mark the first 5m/15m New York range, trade the first breakout before 11:00, and exit by target, stop, or 16:00.",
+        mechanism="Tests 5m and 15m opening ranges on gold, EUR/USD, and bitcoin with 1R, 3R, and 4R targets. Same-bar collisions are pessimistic, no-entry days stop at 11:00, and any open trade exits at the 16:00 New York session boundary.",
+        demonstration=["09:30 NY anchor", "Opening range high/low", "Breakout before 11:00", "Stop opposite range", "1R/3R/4R target", "Median gate archive"],
+        decision_pattern="ORB_930",
     ),
     StrategyProfile(
         key="regime",
@@ -260,6 +270,22 @@ def load_dashboard_payload(root: Path = Path(".")) -> dict[str, Any]:
     allocation = load_csv(five_dir / "portfolio_allocation_smoke.csv")
     smallcap_microstructure = load_csv(five_dir / "smallcap_microstructure_diagnostic.csv")
     data_matrix = load_csv(five_dir / "data_upgrade_decision_matrix.csv")
+    orb_payload = orb_930_backtest_payload(root)
+    if orb_payload["decision"]:
+        orb_row = pd.DataFrame(
+            [
+                {
+                    "trial_id": "ORB-930-CROSS-ASSET-BACKTEST-001",
+                    "run_id": "ORB_930_CROSS_ASSET_BACKTEST",
+                    "decision": orb_payload["decision"].get("decision", "UNKNOWN"),
+                    "provider_query_performed": True,
+                    "market_data_download_performed": True,
+                    "backtest_performed": True,
+                    "promotion_allowed": orb_payload["decision"].get("promotion_allowed", False),
+                }
+            ]
+        )
+        ledger = pd.concat([ledger, orb_row], ignore_index=True) if not ledger.empty else orb_row
     return {
         "ledger": ledger,
         "phase_summary": phase_summary,
@@ -269,6 +295,7 @@ def load_dashboard_payload(root: Path = Path(".")) -> dict[str, Any]:
         "allocation": allocation,
         "smallcap_microstructure": smallcap_microstructure,
         "data_matrix": data_matrix,
+        "orb_930": orb_payload,
     }
 
 
@@ -353,6 +380,28 @@ def project_capability_rows() -> pd.DataFrame:
             {"area": "Future UX", "capability": "User strategy builder and result explorer", "state": "planned"},
         ]
     )
+
+
+def orb_930_backtest_payload(root: Path = Path(".")) -> dict[str, Any]:
+    output_dir = root / ORB_930_OUTPUT_DIR
+    decision = load_json(output_dir / "final_decision.json")
+    summary = load_csv(output_dir / "summary.csv")
+    trades = load_csv(output_dir / "trades.csv")
+    report_path = output_dir / "orb_930_report.md"
+    best = decision.get("best_configuration", {}) if decision else {}
+    by_symbol = pd.DataFrame()
+    if not trades.empty and "symbol" in trades.columns:
+        by_symbol = trades.groupby("symbol", as_index=False).size().rename(columns={"size": "trades"})
+    return {
+        "available": bool(decision),
+        "decision": decision,
+        "summary": summary,
+        "trades": trades,
+        "by_symbol": by_symbol,
+        "best": best,
+        "report_path": str(report_path),
+        "report_text": report_path.read_text(encoding="utf-8") if report_path.exists() else "",
+    }
 
 
 def delisted_data_source_gate_payload(root: Path = Path(".")) -> dict[str, Any]:
@@ -1730,6 +1779,7 @@ def _chart_seed(profile_key: str) -> tuple[str, str]:
         "lowvol": ("IOVA", "2022-05-04"),
         "form4": ("AEHR", "2023-03-31"),
         "dollarbar": ("ARRY", "2024-02-28"),
+        "orb930": ("CRMD", "2022-07-28"),
         "regime": ("IWM", "2024-08-05"),
     }
     return seeds.get(profile_key, ("AEHR", "2023-01-06"))
@@ -1750,6 +1800,7 @@ def _chart_markers(profile_key: str, prices: pd.DataFrame) -> list[dict[str, Any
         "lowvol": ("FILTER: tradability pass", "BUY: low-vol basket", "BLOCK: negative net"),
         "form4": ("FILING: Form 4 scan", "NEED: cluster buy", "BLOCK: no events"),
         "dollarbar": ("TRANSFORM: dollar bars", "PROBE: micro-reversion", "BLOCK: net negative"),
+        "orb930": ("MARK: 09:30 range", "TRADE: first breakout", "BLOCK: median negative"),
         "regime": ("CLASSIFY: regime", "OVERLAY: risk rules", "MODE: diagnostics only"),
     }
     first, second, third = labels.get(profile_key, ("Signal", "Decision", "Gate"))
@@ -1786,6 +1837,7 @@ def _chart_explanation(profile_key: str) -> str:
         "lowvol": "The chart shows a tradable-looking segment, but the basket failed both gross/net and median gates.",
         "form4": "The visual idea is simple: buy after verified insider clusters. The tested universe produced no tradable cluster panel.",
         "dollarbar": "Dollar bars improved statistical stability, but the directional micro-reversion probe still failed after costs.",
+        "orb930": "The chart illustrates the opening-range contract: mark the first range, wait for a breakout, then let stop/target decide. The real cross-asset run still failed the median gate.",
         "regime": "This is no longer a buy/sell strategy: the chart shows how the lab now classifies context before allowing research actions.",
     }
     return explanations.get(profile_key, "The chart demonstrates the strategy logic and the governance gate that controlled it.")

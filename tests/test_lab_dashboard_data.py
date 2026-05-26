@@ -23,6 +23,7 @@ from dashboard.lab_dashboard_data import (
     display_safe_records,
     delisted_data_source_gate_payload,
     load_workbench_strategy_cards,
+    orb_930_backtest_payload,
     persist_workbench_run_bundle,
     build_strategy_chart_story,
     classify_strategy_status,
@@ -41,7 +42,7 @@ from dashboard.lab_dashboard_data import (
 def test_strategy_catalog_covers_core_research_tracks() -> None:
     keys = {profile.key for profile in STRATEGY_PROFILES}
 
-    assert {"xmom", "gaprev", "sec8k", "pead", "lowvol", "form4", "dollarbar", "regime"}.issubset(keys)
+    assert {"xmom", "gaprev", "sec8k", "pead", "lowvol", "form4", "dollarbar", "orb930", "regime"}.issubset(keys)
     assert all(len(profile.demonstration) >= 5 for profile in STRATEGY_PROFILES)
 
 
@@ -103,6 +104,24 @@ def test_load_dashboard_payload_reads_final_status_artifacts(tmp_path: Path) -> 
     assert metrics["decision_count"] == 1
     assert metrics["final_policy"] == "RISK_REGIME_ENGINE_ONLY"
     assert not payload["ledger"].empty
+
+
+def test_orb_930_payload_reads_backtest_artifacts(tmp_path: Path) -> None:
+    output_dir = tmp_path / "experiments/provider_aware_research/execution_outputs/ORB-930-CROSS-ASSET-BACKTEST-001"
+    output_dir.mkdir(parents=True)
+    (output_dir / "final_decision.json").write_text(
+        json.dumps({"decision": "ORB_930_ARCHIVE_CURRENT_FORM", "promotion_allowed": False, "best_configuration": {"symbol": "BTC-USD"}}),
+        encoding="utf-8",
+    )
+    pd.DataFrame([{"symbol": "BTC-USD", "net_return": 0.01}]).to_csv(output_dir / "trades.csv", index=False)
+    pd.DataFrame([{"symbol": "BTC-USD", "net_return_sum": 0.01}]).to_csv(output_dir / "summary.csv", index=False)
+    (output_dir / "orb_930_report.md").write_text("# ORB report\n", encoding="utf-8")
+
+    payload = orb_930_backtest_payload(tmp_path)
+
+    assert payload["available"] is True
+    assert payload["best"]["symbol"] == "BTC-USD"
+    assert payload["by_symbol"].iloc[0]["trades"] == 1
 
 
 def test_project_capabilities_include_future_strategy_builder_as_planned() -> None:

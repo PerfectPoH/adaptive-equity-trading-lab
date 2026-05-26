@@ -151,12 +151,14 @@ def backtest_orb_symbol_day(day_bars: pd.DataFrame, config: OrbConfig) -> dict[s
         target = entry_price - (risk * config.reward_r)
     if risk <= 0:
         return None
-    exit_price = float(bars.iloc[-1]["close"])
-    exit_reason = "session_close"
-    exit_timestamp = bars.iloc[-1]["timestamp"]
     future = bars.iloc[entry_index + 1 :].copy()
     future_times = future["timestamp"].map(_bar_time)
     future = future[future_times <= config.session_close]
+    if future.empty:
+        return None
+    exit_price = float(future.iloc[-1]["close"])
+    exit_reason = "session_close"
+    exit_timestamp = future.iloc[-1]["timestamp"]
     for _, row in future.iterrows():
         high = float(row["high"])
         low = float(row["low"])
@@ -208,7 +210,8 @@ def backtest_orb_panel(panel: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]
     if panel.empty:
         return pd.DataFrame(), pd.DataFrame()
     data = panel.copy()
-    data["timestamp"] = pd.to_datetime(data["timestamp"])
+    data["timestamp"] = pd.to_datetime(data["timestamp"], utc=True, errors="coerce").dt.tz_convert("America/New_York")
+    data = data.dropna(subset=["timestamp"]).copy()
     data["session_date"] = data["timestamp"].dt.date
     trades: list[dict[str, Any]] = []
     for (symbol, _date), group in data.groupby(["symbol", "session_date"]):
@@ -267,12 +270,71 @@ def final_decision(summary: pd.DataFrame, trades: pd.DataFrame) -> dict[str, Any
     }
 
 
-def run_backtest() -> dict[str, Path]:
+def _markdown_table(frame: pd.DataFrame) -> str:
+    columns = [str(column) for column in frame.columns]
+    rows = [
+        "| " + " | ".join(columns) + " |",
+        "| " + " | ".join(["---"] * len(columns)) + " |",
+    ]
+    for record in frame.astype(object).to_dict("records"):
+        rows.append("| " + " | ".join(str(record[column]) for column in frame.columns) + " |")
+    return "\n".join(rows)
+
+
+def write_markdown_report(summary: pd.DataFrame, trades: pd.DataFrame, decision: dict[str, Any], output_dir: Path = OUTPUT_DIR) -> Path:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    best = decision.get("best_configuration", {})
+    blockers = ", ".join(decision.get("blockers", [])) or "none"
+    by_symbol = trades.groupby("symbol").size().to_dict() if not trades.empty and "symbol" in trades else {}
+    best_rows = summary.sort_values("net_return_sum", ascending=False).head(6) if not summary.empty else pd.DataFrame()
+    lines = [
+        "# ORB-930-CROSS-ASSET-BACKTEST-001",
+        "",
+        "## Verdict",
+        "",
+        f"- decision: `{decision.get('decision', 'UNKNOWN')}`",
+        f"- promotion_allowed: `{decision.get('promotion_allowed', False)}`",
+        f"- blockers: `{blockers}`",
+        f"- total generated trades: `{decision.get('trade_count_total', len(trades))}`",
+        "",
+        "## Best Configuration",
+        "",
+        f"- symbol: `{best.get('symbol', 'n/a')}`",
+        f"- opening range: `{best.get('range_minutes', 'n/a')} minutes`",
+        f"- reward multiple: `{best.get('reward_r', 'n/a')}R`",
+        f"- trades: `{best.get('trades', 'n/a')}`",
+        f"- win rate: `{best.get('win_rate', 'n/a')}`",
+        f"- net return sum: `{best.get('net_return_sum', 'n/a')}`",
+        f"- median net return: `{best.get('median_net_return', 'n/a')}`",
+        "",
+        "## Interpretation",
+        "",
+        "The 9:30 AM opening-range breakout creates plenty of trades across gold, EUR/USD, and bitcoin, "
+        "but the best configuration is still archived because the typical trade is negative after costs. "
+        "The gross effect is not strong enough to become a governed candidate.",
+        "",
+        "## Trade Counts By Symbol",
+        "",
+    ]
+    for symbol, count in sorted(by_symbol.items()):
+        lines.append(f"- `{symbol}`: `{count}`")
+    if not best_rows.empty:
+        lines.extend(["", "## Top Parameter Rows", ""])
+        lines.append(_markdown_table(best_rows))
+    report_path = output_dir / "orb_930_report.md"
+    report_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return report_path
+
+
+def run_backtest(panel_path: Path | None = None) -> dict[str, Path]:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    panel = fetch_yfinance_panel()
-    panel_path = DATA_DIR / "orb_930_yfinance_5m_panel.csv"
-    panel.to_csv(panel_path, index=False)
+    if panel_path is None:
+        panel = fetch_yfinance_panel()
+        panel_path = DATA_DIR / "orb_930_yfinance_5m_panel.csv"
+        panel.to_csv(panel_path, index=False)
+    else:
+        panel = pd.read_csv(panel_path)
     trades, summary = backtest_orb_panel(panel)
     trades_path = OUTPUT_DIR / "trades.csv"
     summary_path = OUTPUT_DIR / "summary.csv"
@@ -281,18 +343,20 @@ def run_backtest() -> dict[str, Path]:
     summary.to_csv(summary_path, index=False)
     decision = final_decision(summary, trades)
     decision_path.write_text(json.dumps(decision, indent=2, sort_keys=True), encoding="utf-8")
-    return {"panel_path": panel_path, "trades_path": trades_path, "summary_path": summary_path, "decision_path": decision_path}
+    report_path = write_markdown_report(summary, trades, decision)
+    return {"panel_path": panel_path, "trades_path": trades_path, "summary_path": summary_path, "decision_path": decision_path, "report_path": report_path}
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--write-gate", action="store_true")
     parser.add_argument("--run", action="store_true")
+    parser.add_argument("--panel-path", type=Path, default=None)
     args = parser.parse_args()
     if args.write_gate:
         paths = write_pre_run_gate()
     elif args.run:
-        paths = run_backtest()
+        paths = run_backtest(panel_path=args.panel_path)
     else:
         raise SystemExit("Use --write-gate or --run")
     print(json.dumps({key: str(value) for key, value in paths.items()}, indent=2, sort_keys=True))

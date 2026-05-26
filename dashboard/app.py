@@ -418,6 +418,12 @@ def inject_theme() -> None:
           background: #fef2f2;
           color: #7f1d1d;
         }
+        .amber-callout {
+          border-color: #fed7aa;
+          border-left-color: var(--lab-amber);
+          background: #fff7ed;
+          color: #7c2d12;
+        }
         .compact-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -1194,6 +1200,7 @@ def render_results_and_data(payload: dict[str, object]) -> None:
     allocation = payload["allocation"]
     smallcap = payload["smallcap_microstructure"]
     data_matrix = payload["data_matrix"]
+    orb = payload.get("orb_930", {})
 
     c1, c2, c3 = st.columns(3)
     with c1:
@@ -1202,6 +1209,77 @@ def render_results_and_data(payload: dict[str, object]) -> None:
         metric_card("Regime Rows", len(regime_map), "Large-cap/ETF symbol-days mapped")
     with c3:
         metric_card("Data Upgrades", len(data_matrix), "Provider paths scored")
+
+    st.markdown('<div class="results-spacer"></div>', unsafe_allow_html=True)
+    if isinstance(orb, dict) and orb.get("available"):
+        decision = orb.get("decision", {})
+        best = orb.get("best", {})
+        summary = orb.get("summary", pd.DataFrame())
+        by_symbol = orb.get("by_symbol", pd.DataFrame())
+        st.subheader("9:30 AM Opening Range Breakout")
+        st.markdown(
+            """
+            <div class="callout amber-callout">
+            This is the requested cross-asset ORB test: first 5m/15m New York range, entry only before 11:00,
+            stop on the opposite side of the range, 1R/3R/4R targets, session exit at 16:00. It is a completed
+            exploratory backtest, not a promoted strategy.
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        o1, o2, o3, o4 = st.columns(4)
+        with o1:
+            metric_card("Decision", decision.get("decision", "UNKNOWN"), "Final ORB verdict")
+        with o2:
+            metric_card("Total trades", decision.get("trade_count_total", 0), "All symbols and parameter rows")
+        with o3:
+            metric_card("Best config", f"{best.get('symbol', 'n/a')} {best.get('range_minutes', 'n/a')}m/{best.get('reward_r', 'n/a')}R", "By net return sum")
+        with o4:
+            metric_card("Median net", best.get("median_net_return", "n/a"), "Typical trade after cost")
+        orb_cols = st.columns([1.2, 1])
+        with orb_cols[0]:
+            if isinstance(summary, pd.DataFrame) and not summary.empty:
+                top_summary = summary.sort_values("net_return_sum", ascending=False).head(9)
+                fig = px.bar(
+                    top_summary,
+                    x="net_return_sum",
+                    y=top_summary.apply(lambda row: f"{row['symbol']} {int(row['range_minutes'])}m/{int(row['reward_r'])}R", axis=1),
+                    orientation="h",
+                    color="median_net_return",
+                    color_continuous_scale=["#d12f5f", "#d97706", "#0f9f75"],
+                    hover_data=["trades", "win_rate", "average_net_return"],
+                )
+                fig.update_layout(
+                    template="plotly_white",
+                    height=360,
+                    margin=dict(l=0, r=0, t=20, b=10),
+                    xaxis_title="Net return sum",
+                    yaxis_title="Configuration",
+                    paper_bgcolor="rgba(0,0,0,0)",
+                    plot_bgcolor="rgba(0,0,0,0)",
+                    font=dict(color="#171717", family="Instrument Sans"),
+                )
+                fig.update_xaxes(tickfont=dict(color="#171717"), title_font=dict(color="#171717"), gridcolor="#e7e2d8")
+                fig.update_yaxes(tickfont=dict(color="#171717"), title_font=dict(color="#171717"), gridcolor="#e7e2d8")
+                fig.update_coloraxes(colorbar_tickfont=dict(color="#171717"), colorbar_title_font=dict(color="#171717"))
+                st.plotly_chart(fig, width="stretch")
+        with orb_cols[1]:
+            if isinstance(by_symbol, pd.DataFrame) and not by_symbol.empty:
+                fig = px.pie(by_symbol, names="symbol", values="trades", hole=0.55, color_discrete_sequence=["#1f5eff", "#0f9f75", "#d97706"])
+                fig.update_layout(
+                    height=360,
+                    margin=dict(l=0, r=0, t=20, b=10),
+                    font=dict(color="#171717", family="Instrument Sans"),
+                    paper_bgcolor="rgba(0,0,0,0)",
+                    plot_bgcolor="rgba(0,0,0,0)",
+                )
+                st.plotly_chart(fig, width="stretch")
+        with st.expander("Open ORB parameter table and report"):
+            if isinstance(summary, pd.DataFrame) and not summary.empty:
+                st.dataframe(summary.sort_values("net_return_sum", ascending=False), width="stretch", hide_index=True)
+            report_text = str(orb.get("report_text", ""))
+            if report_text:
+                st.markdown(report_text)
 
     st.markdown('<div class="results-spacer"></div>', unsafe_allow_html=True)
     delisted_gate = delisted_data_source_gate_payload()

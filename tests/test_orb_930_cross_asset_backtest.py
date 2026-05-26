@@ -8,6 +8,7 @@ from src.experiments.orb_930_cross_asset_backtest import (
     backtest_orb_symbol_day,
     build_pre_run_gate,
     final_decision,
+    write_markdown_report,
 )
 
 
@@ -68,6 +69,26 @@ def test_orb_symbol_day_skips_when_no_entry_before_11() -> None:
     assert backtest_orb_symbol_day(bars, OrbConfig(range_minutes=15, reward_r=1)) is None
 
 
+def test_orb_symbol_day_session_exit_uses_last_bar_before_1600() -> None:
+    bars = pd.DataFrame(
+        [
+            _bar("2026-05-01 09:30", 100, 101, 99, 100),
+            _bar("2026-05-01 09:35", 100, 100.5, 99.5, 100),
+            _bar("2026-05-01 09:40", 100, 100.4, 99.6, 100),
+            _bar("2026-05-01 09:45", 100, 102, 100.5, 101.5),
+            _bar("2026-05-01 15:55", 101.5, 102, 101, 101.8),
+            _bar("2026-05-01 23:55", 101.8, 150, 101.8, 150),
+        ]
+    )
+
+    trade = backtest_orb_symbol_day(bars, OrbConfig(range_minutes=15, reward_r=4))
+
+    assert trade is not None
+    assert trade["exit_reason"] == "session_close"
+    assert trade["exit_timestamp"].startswith("2026-05-01T15:55:00")
+    assert trade["exit_price"] == 101.8
+
+
 def test_orb_panel_summarizes_parameter_grid_and_decision() -> None:
     rows = []
     for day in ["2026-05-01", "2026-05-02"]:
@@ -90,3 +111,34 @@ def test_orb_panel_summarizes_parameter_grid_and_decision() -> None:
     assert {"range_minutes", "reward_r", "net_return_sum"}.issubset(summary.columns)
     assert decision["promotion_allowed"] is False
     assert decision["trade_count_total"] == len(trades)
+
+
+def test_orb_markdown_report_explains_archived_verdict(tmp_path) -> None:
+    trades = pd.DataFrame(
+        [
+            {"symbol": "GC=F", "net_return": 0.01},
+            {"symbol": "BTC-USD", "net_return": -0.02},
+        ]
+    )
+    summary = pd.DataFrame(
+        [
+            {
+                "symbol": "GC=F",
+                "range_minutes": 5,
+                "reward_r": 3,
+                "trades": 2,
+                "win_rate": 0.5,
+                "gross_return_sum": 0.0,
+                "net_return_sum": -0.01,
+                "average_net_return": -0.005,
+                "median_net_return": -0.005,
+            }
+        ]
+    )
+    decision = final_decision(summary, trades)
+
+    path = write_markdown_report(summary, trades, decision, tmp_path)
+
+    text = path.read_text(encoding="utf-8")
+    assert "ORB-930-CROSS-ASSET-BACKTEST-001" in text
+    assert "median_net_return_not_positive" in text

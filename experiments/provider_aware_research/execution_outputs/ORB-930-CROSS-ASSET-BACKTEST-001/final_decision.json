@@ -1,0 +1,24 @@
+{
+  "best_configuration": {
+    "average_net_return": 0.00035124,
+    "gross_return_sum": 0.05022309,
+    "median_net_return": -0.00159155,
+    "net_return_sum": 0.02072309,
+    "range_minutes": 5,
+    "reward_r": 3,
+    "symbol": "BTC-USD",
+    "trades": 59,
+    "win_rate": 0.389831
+  },
+  "blockers": [
+    "median_net_return_not_positive"
+  ],
+  "decision": "ORB_930_ARCHIVE_CURRENT_FORM",
+  "notes": [
+    "Uses bounded yfinance 5m data; this is exploratory provider data, not institutional tick data.",
+    "9:30 is interpreted as America/New_York session anchor for all three assets.",
+    "Same-bar target/stop collisions are resolved pessimistically as stop first."
+  ],
+  "promotion_allowed": false,
+  "trade_count_total": 990
+}
