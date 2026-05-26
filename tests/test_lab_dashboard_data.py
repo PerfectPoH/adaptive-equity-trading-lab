@@ -16,10 +16,12 @@ from dashboard.lab_dashboard_data import (
     build_workbench_manifest,
     build_workbench_pre_run_gate,
     build_workbench_data_scope_preview,
+    build_workbench_result_summary,
     build_workbench_strategy_narrative,
     build_workbench_visual_diagnostics,
     display_safe_records,
     delisted_data_source_gate_payload,
+    load_workbench_strategy_cards,
     persist_workbench_run_bundle,
     build_strategy_chart_story,
     classify_strategy_status,
@@ -411,7 +413,7 @@ def test_workbench_templates_use_distinct_local_rule_profiles() -> None:
     }
 
     assert profiles == {
-        template if template != "Custom Rule Builder" else "Custom Rule Builder:momentum_21d:top"
+        template if template != "Custom Rule Builder" else "Custom Rule Builder:momentum_21d:top:none:holding_period"
         for template in WORKBENCH_TEMPLATES
     }
     assert len(result_shapes) == len(WORKBENCH_TEMPLATES)
@@ -438,6 +440,10 @@ def test_custom_rule_builder_manifest_changes_local_rule_profile_and_results() -
             "selection": "bottom",
             "entries_per_symbol": 12,
             "allowed_symbols": "CABA,CRMD,IOVA,SPY",
+            "market_filter": "volume_above_20d",
+            "exit_policy": "risk_box",
+            "stop_loss_pct": 12,
+            "take_profit_pct": 25,
         },
     )
 
@@ -445,8 +451,13 @@ def test_custom_rule_builder_manifest_changes_local_rule_profile_and_results() -
     custom_preview = build_controlled_backtest_preview(custom, validate_workbench_manifest(custom))
 
     assert custom["custom_rules"]["signal"] == "dip_2d"
-    assert custom_preview["local_data_summary"]["template_rule_profile"] == "Custom Rule Builder:dip_2d:bottom"
+    assert custom["custom_rules"]["market_filter"] == "volume_above_20d"
+    assert custom["custom_rules"]["exit_policy"] == "risk_box"
+    assert custom["custom_rules"]["stop_loss_pct"] == 12
+    assert custom["custom_rules"]["take_profit_pct"] == 25
+    assert "risk_box" in custom_preview["local_data_summary"]["template_rule_profile"]
     assert custom_preview["local_data_summary"]["custom_allowed_symbols"] == ["CABA", "CRMD", "IOVA", "SPY"]
+    assert all(row["exit_reason"] in {"holding_period", "stop_loss", "take_profit"} for row in custom_preview["trade_rows"])
     assert custom_preview["simulated_trades"] != momentum_preview["simulated_trades"]
     assert custom_preview["cost_breakdown"]["net_return_sum"] != momentum_preview["cost_breakdown"]["net_return_sum"]
 
@@ -464,6 +475,10 @@ def test_workbench_strategy_narrative_explains_custom_rule_and_data_coverage() -
             "selection": "top",
             "entries_per_symbol": 20,
             "allowed_symbols": "CABA, CRMD, IOVA",
+            "market_filter": "positive_5d",
+            "exit_policy": "risk_box",
+            "stop_loss_pct": 10,
+            "take_profit_pct": 30,
         },
     )
     scope = build_workbench_data_scope_preview(manifest)
@@ -472,6 +487,9 @@ def test_workbench_strategy_narrative_explains_custom_rule_and_data_coverage() -
 
     assert narrative["plain_english_rule"].startswith("Buy")
     assert "volume shock" in narrative["plain_english_rule"].lower()
+    assert "positive 5-day trend filter" in narrative["plain_english_rule"].lower()
+    assert "10%" in narrative["exit_plain_english"]
+    assert "30%" in narrative["exit_plain_english"]
     assert "30" in narrative["exit_plain_english"]
     assert narrative["data_coverage"]["configured_symbols"] >= 100
     assert narrative["data_coverage"]["local_price_symbols"] == 3
@@ -504,6 +522,25 @@ def test_workbench_visual_diagnostics_exposes_distribution_and_top_winners() -> 
     assert {"symbol", "net_return", "share_of_positive_net"}.issubset(diagnostics["top_winners"][0])
     assert diagnostics["verdict_blocks"]
     assert diagnostics["result_explainer"]["headline"] == preview["automatic_verdict"]["decision"]
+
+
+def test_workbench_result_summary_explains_outcome_in_plain_language() -> None:
+    manifest = build_workbench_manifest(
+        name="Plain result",
+        template="Custom Rule Builder",
+        universe="expanded local research sandbox",
+        holding_period_days=21,
+        cost_bps=500,
+        allow_provider_query=False,
+        custom_rules={"signal": "momentum_5d", "selection": "top", "entries_per_symbol": 10},
+    )
+    preview = build_controlled_backtest_preview(manifest, validate_workbench_manifest(manifest))
+
+    summary = build_workbench_result_summary(preview)
+
+    assert {"headline", "plain_result", "primary_blocker", "next_best_action"}.issubset(summary)
+    assert "Promotion remains locked" in summary["plain_result"]
+    assert summary["net_return_percent"].endswith("%")
 
 
 def test_display_safe_records_serializes_nested_table_values() -> None:
@@ -598,6 +635,28 @@ def test_persist_workbench_run_bundle_writes_manifest_gate_and_result(tmp_path: 
     assert Path(bundle["result_path"]).exists()
     assert Path(bundle["trade_list_path"]).exists()
     assert Path(bundle["markdown_report_path"]).exists()
+
+
+def test_load_workbench_strategy_cards_reads_saved_runs(tmp_path: Path) -> None:
+    manifest = build_workbench_manifest(
+        name="Saved strategy",
+        template="Momentum",
+        universe="large-cap / ETF clean-data sandbox",
+        holding_period_days=5,
+        cost_bps=100,
+        allow_provider_query=False,
+    )
+    validation = validate_workbench_manifest(manifest)
+    preview = build_controlled_backtest_preview(manifest, validation)
+    persist_workbench_run_bundle(manifest, validation, preview, root=tmp_path)
+
+    cards = load_workbench_strategy_cards(root=tmp_path)
+
+    assert len(cards) == 1
+    assert cards[0]["strategy_name"] == "Saved strategy"
+    assert cards[0]["template"] == "Momentum"
+    assert cards[0]["artifact_dir"]
+    assert cards[0]["net_return_sum"] == preview["cost_breakdown"]["net_return_sum"]
 
 
 def test_build_strategy_chart_story_uses_real_ohlc_window(tmp_path: Path) -> None:

@@ -9,7 +9,6 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
-import streamlit.components.v1 as components
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
@@ -36,9 +35,11 @@ from dashboard.lab_dashboard_data import (
     validate_workbench_manifest,
     workbench_gate_is_valid,
     workbench_manifest_signature,
+    build_workbench_result_summary,
     build_workbench_strategy_narrative,
     build_workbench_visual_diagnostics,
     display_safe_records,
+    load_workbench_strategy_cards,
 )
 
 
@@ -1406,7 +1407,7 @@ def render_strategy_workbench() -> None:
             unsafe_allow_html=True,
         )
     with hero_right:
-        components.html(color_logic_component_html(), height=330)
+        st.iframe(color_logic_component_html(), height=330)
 
     st.markdown(
         f"""
@@ -1463,6 +1464,18 @@ def render_strategy_workbench() -> None:
                 help="Top buys the highest-ranked windows; bottom buys the lowest-ranked windows.",
             )
             custom_entries = st.slider("Entry windows per symbol", min_value=1, max_value=120, value=20)
+            custom_filter = st.selectbox(
+                "Market filter",
+                ["none", "positive_5d", "negative_5d", "volume_above_20d", "low_volatility_20d"],
+                help="Adds a simple local OHLCV filter before ranking windows.",
+            )
+            custom_exit = st.selectbox(
+                "Exit policy",
+                ["holding_period", "risk_box"],
+                help="Holding period exits at the fixed horizon. Risk box can exit earlier on stop/take-profit touches.",
+            )
+            stop_loss_pct = st.slider("Stop loss %", min_value=1, max_value=80, value=15, disabled=custom_exit != "risk_box")
+            take_profit_pct = st.slider("Take profit %", min_value=1, max_value=300, value=30, disabled=custom_exit != "risk_box")
             custom_allowed = st.text_area(
                 "Optional allowed symbols",
                 value="",
@@ -1473,6 +1486,10 @@ def render_strategy_workbench() -> None:
                 "signal": custom_signal,
                 "selection": custom_selection,
                 "entries_per_symbol": custom_entries,
+                "market_filter": custom_filter,
+                "exit_policy": custom_exit,
+                "stop_loss_pct": stop_loss_pct,
+                "take_profit_pct": take_profit_pct,
                 "allowed_symbols": custom_allowed,
             }
         st.markdown('<span class="workbench-step">3</span><strong>Choose the universe</strong>', unsafe_allow_html=True)
@@ -1781,6 +1798,19 @@ def render_strategy_workbench() -> None:
                 metric_card("Avg net", preview["net_edge_proxy"], "After declared cost")
             with p4:
                 metric_card("Verdict", preview["automatic_verdict"]["decision"], "Promotion locked false")
+            result_summary = build_workbench_result_summary(preview)
+            st.markdown(
+                f"""
+                <div class="workbench-card" style="border-top:4px solid var(--lab-mint);">
+                  <div class="eyebrow">Plain-language result</div>
+                  <div class="strategy-title" style="font-size:26px;">{result_summary["headline"]}</div>
+                  <div class="strategy-copy">{result_summary["plain_result"]}</div>
+                  <div class="strategy-copy"><strong>Primary blocker:</strong> {result_summary["primary_blocker"]}</div>
+                  <div class="strategy-copy"><strong>Next best action:</strong> {result_summary["next_best_action"]}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
             visual_diagnostics = preview.get("visual_diagnostics") or build_workbench_visual_diagnostics(preview)
             explainer = visual_diagnostics.get("result_explainer", {})
             st.markdown(
@@ -1979,6 +2009,38 @@ def render_strategy_workbench() -> None:
             if artifact_bundle:
                 st.markdown("**Persisted artifacts**")
                 st.json(artifact_bundle)
+
+    saved_cards = load_workbench_strategy_cards(limit=6)
+    if saved_cards:
+        st.markdown(
+            """
+            <div class="workbench-section">
+              <div class="section-kicker">07 / Saved strategy cards</div>
+              <div class="workbench-section-title">Every dry-run becomes an auditable card.</div>
+              <div class="workbench-section-copy">
+                These are saved workbench artifacts, not promoted strategies. They let you compare ideas without losing the gate trail.
+              </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        card_cols = st.columns(3)
+        for index, card in enumerate(saved_cards):
+            with card_cols[index % 3]:
+                net_pct = float(card["net_return_sum"]) * 100
+                st.markdown(
+                    f"""
+                    <div class="rule-card" style="border-top-color:var(--lab-plum);">
+                      <div class="eyebrow">{card["template"]} / {card["analysis_mode"]}</div>
+                      <div class="rule-title">{card["strategy_name"]}</div>
+                      <div class="strategy-copy"><strong>Decision:</strong> {card["decision"]}</div>
+                      <div class="strategy-copy"><strong>Trades:</strong> {card["simulated_trades"]}</div>
+                      <div class="strategy-copy"><strong>Net sum:</strong> {net_pct:.2f}%</div>
+                      <div class="small-muted">{card["artifact_dir"]}</div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
 
     st.subheader("What The Builder Will Enforce")
     checks = [

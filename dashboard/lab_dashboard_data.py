@@ -448,6 +448,8 @@ def build_workbench_manifest(
 def _normalize_workbench_custom_rules(custom_rules: dict[str, Any] | None) -> dict[str, Any]:
     rules = custom_rules or {}
     allowed_signals = {"momentum_21d", "momentum_5d", "dip_2d", "low_vol_5d", "volume_shock", "dollar_volume_shock"}
+    allowed_filters = {"none", "positive_5d", "negative_5d", "volume_above_20d", "low_volatility_20d"}
+    allowed_exits = {"holding_period", "risk_box"}
     signal = str(rules.get("signal", "momentum_21d")).strip().lower()
     if signal not in allowed_signals:
         signal = "momentum_21d"
@@ -467,11 +469,31 @@ def _normalize_workbench_custom_rules(custom_rules: dict[str, Any] | None) -> di
     else:
         allowed_symbols = []
     allowed_symbols = sorted({symbol for symbol in allowed_symbols if symbol})
+    market_filter = str(rules.get("market_filter", "none")).strip().lower()
+    if market_filter not in allowed_filters:
+        market_filter = "none"
+    exit_policy = str(rules.get("exit_policy", "holding_period")).strip().lower()
+    if exit_policy not in allowed_exits:
+        exit_policy = "holding_period"
+    try:
+        stop_loss_pct = float(rules.get("stop_loss_pct", 15))
+    except (TypeError, ValueError):
+        stop_loss_pct = 15.0
+    try:
+        take_profit_pct = float(rules.get("take_profit_pct", 30))
+    except (TypeError, ValueError):
+        take_profit_pct = 30.0
+    stop_loss_pct = round(max(1.0, min(80.0, stop_loss_pct)), 2)
+    take_profit_pct = round(max(1.0, min(500.0, take_profit_pct)), 2)
     return {
         "signal": signal,
         "selection": selection,
         "entries_per_symbol": entries_per_symbol,
         "allowed_symbols": allowed_symbols,
+        "market_filter": market_filter,
+        "exit_policy": exit_policy,
+        "stop_loss_pct": stop_loss_pct,
+        "take_profit_pct": take_profit_pct,
     }
 
 
@@ -782,6 +804,71 @@ def display_safe_records(records: list[dict[str, Any]]) -> list[dict[str, str]]:
     return safe_rows
 
 
+def build_workbench_result_summary(preview: dict[str, Any]) -> dict[str, str]:
+    verdict = dict(preview.get("automatic_verdict", {}))
+    cost_breakdown = dict(preview.get("cost_breakdown", {}))
+    diagnostics = dict(preview.get("portfolio_diagnostics", {}))
+    net_sum = float(cost_breakdown.get("net_return_sum", diagnostics.get("total_net_return", 0.0)) or 0.0)
+    gross_sum = float(cost_breakdown.get("gross_return_sum", diagnostics.get("total_gross_return", 0.0)) or 0.0)
+    trade_count = int(preview.get("simulated_trades", diagnostics.get("trade_count", 0)) or 0)
+    blockers = list(verdict.get("blockers", []))
+    primary_blocker = str(blockers[0]) if blockers else "none"
+    decision = str(verdict.get("decision", preview.get("decision", "DRY_RUN_READY")))
+    direction = "positive" if net_sum > 0 else "negative" if net_sum < 0 else "flat"
+    net_percent = f"{net_sum * 100:.2f}%"
+    gross_percent = f"{gross_sum * 100:.2f}%"
+    if primary_blocker == "none":
+        next_action = "Use this as a research candidate only after a real pre-run gate and data-quality review."
+    elif primary_blocker == "trade_count_gate":
+        next_action = "Increase breadth or attach more local history before trusting the result."
+    elif primary_blocker == "outlier_dependency_gate":
+        next_action = "Broaden the universe and inspect whether the result survives without the largest winners."
+    elif primary_blocker == "cost_stress_gate":
+        next_action = "Reduce execution friction, switch to a maker-style assumption, or discard the rule."
+    else:
+        next_action = "Inspect the blocking gate before changing parameters."
+    plain_result = (
+        f"The local dry-run produced a {direction} net sum of {net_percent} across {trade_count} trades "
+        f"after costs, versus {gross_percent} gross before costs. Promotion remains locked false."
+    )
+    return {
+        "headline": decision.replace("_", " ").title(),
+        "plain_result": plain_result,
+        "primary_blocker": primary_blocker,
+        "next_best_action": next_action,
+        "net_return_percent": net_percent,
+        "gross_return_percent": gross_percent,
+        "trade_count": str(trade_count),
+    }
+
+
+def load_workbench_strategy_cards(*, root: Path = Path("."), limit: int = 12) -> list[dict[str, Any]]:
+    output_root = root / WORKBENCH_OUTPUT_DIR
+    if not output_root.exists():
+        return []
+    cards: list[dict[str, Any]] = []
+    for result_path in sorted(output_root.glob("*/dry_run_result.json"), key=lambda path: path.stat().st_mtime, reverse=True):
+        result = load_json(result_path)
+        manifest = load_json(result_path.parent / "strategy_manifest.json")
+        cost_breakdown = dict(result.get("cost_breakdown", {}))
+        verdict = dict(result.get("automatic_verdict", {}))
+        cards.append(
+            {
+                "strategy_name": str(result.get("strategy_name") or manifest.get("strategy_name") or result_path.parent.name),
+                "template": str(result.get("template") or manifest.get("template") or "unknown"),
+                "analysis_mode": str(result.get("analysis_mode") or manifest.get("analysis_mode") or "unknown"),
+                "decision": str(verdict.get("decision", result.get("decision", "unknown"))),
+                "simulated_trades": int(result.get("simulated_trades", 0) or 0),
+                "net_return_sum": float(cost_breakdown.get("net_return_sum", 0.0) or 0.0),
+                "artifact_dir": str(result_path.parent),
+                "manifest_signature": str(result.get("manifest_signature", result_path.parent.name)),
+            }
+        )
+        if len(cards) >= limit:
+            break
+    return cards
+
+
 def build_workbench_data_scope_preview(manifest: dict[str, Any], *, price_file: str | Path = PRICE_FILE) -> dict[str, Any]:
     prices = _load_workbench_price_panel(manifest, price_file=price_file)
     configured_symbols = _configured_symbols_for_universe(str(manifest.get("universe", "")))
@@ -825,15 +912,28 @@ def build_workbench_strategy_narrative(manifest: dict[str, Any], data_scope_prev
         "volume_shock": "volume shock",
         "dollar_volume_shock": "dollar-volume shock",
     }
+    filter_labels = {
+        "none": "no additional market filter",
+        "positive_5d": "positive 5-day trend filter",
+        "negative_5d": "negative 5-day stress filter",
+        "volume_above_20d": "above-average 20-day volume filter",
+        "low_volatility_20d": "below-median 20-day volatility filter",
+    }
     if template == "Custom Rule Builder":
         direction = "highest" if custom_rules["selection"] == "top" else "lowest"
         plain_rule = (
             f"Buy the {direction}-ranked local windows by {signal_labels[custom_rules['signal']]} "
-            f"for each routed symbol, capped at {custom_rules['entries_per_symbol']} windows per symbol."
+            f"for each routed symbol, capped at {custom_rules['entries_per_symbol']} windows per symbol, "
+            f"with {filter_labels[custom_rules['market_filter']]}."
         )
     else:
         plain_rule = f"Buy according to the {template} contract: {manifest.get('entry_rule', '')}"
     exit_rule = f"Exit after {holding} calendar days using the frozen local dry-run holding period."
+    if template == "Custom Rule Builder" and custom_rules["exit_policy"] == "risk_box":
+        exit_rule = (
+            f"Exit after {holding} calendar days, or earlier if the local window touches "
+            f"{custom_rules['stop_loss_pct']:g}% stop loss or {custom_rules['take_profit_pct']:g}% take profit."
+        )
     data_coverage = {
         "configured_symbols": int(data_scope_preview.get("configured_symbols", 0)),
         "local_price_symbols": int(data_scope_preview.get("local_price_symbols", data_scope_preview.get("symbols", 0))),
@@ -967,7 +1067,7 @@ def _build_local_workbench_trades(manifest: dict[str, Any], *, price_file: str |
         if len(symbol_prices) <= holding + 1:
             continue
         for entry_index in _select_workbench_entry_indices(symbol_prices, str(manifest["template"]), holding, step=entry_step, custom_rules=manifest.get("custom_rules", {})):
-            exit_index = min(entry_index + holding, len(symbol_prices) - 1)
+            exit_index, exit_reason = _resolve_workbench_exit(symbol_prices, entry_index, holding, manifest)
             if exit_index <= entry_index:
                 continue
             entry_price = float(symbol_prices.loc[entry_index, "close"])
@@ -987,6 +1087,7 @@ def _build_local_workbench_trades(manifest: dict[str, Any], *, price_file: str |
                     "cost_return": cost_return,
                     "net_return": net_return,
                     "holding_days": int((symbol_prices.loc[exit_index, "date"] - symbol_prices.loc[entry_index, "date"]).days),
+                    "exit_reason": exit_reason,
                     "rule": str(manifest["template"]),
                     "template_rule_profile": template_rule_profile,
                     "entry_window_index": int(entry_index),
@@ -1131,6 +1232,7 @@ def _select_workbench_entry_indices(symbol_prices: pd.DataFrame, template: str, 
     if template == "Custom Rule Builder":
         normalized = _normalize_workbench_custom_rules(custom_rules)
         signal = _custom_workbench_signal_series(symbol_prices, normalized["signal"])
+        signal = _apply_custom_market_filter(symbol_prices, signal, normalized["market_filter"])
         return _ranked_entry_indices(signal, max_entry, base_indices, largest=normalized["selection"] == "top", limit=int(normalized["entries_per_symbol"]))
     if template == "Momentum":
         return _ranked_entry_indices(twenty_one_day_return, max_entry, base_indices, largest=True, limit=90)
@@ -1182,6 +1284,46 @@ def _custom_workbench_signal_series(symbol_prices: pd.DataFrame, signal: str) ->
     return close.pct_change(21)
 
 
+def _apply_custom_market_filter(symbol_prices: pd.DataFrame, signal: pd.Series, market_filter: str) -> pd.Series:
+    close = symbol_prices["close"].astype(float)
+    volume = symbol_prices["volume"].astype(float) if "volume" in symbol_prices.columns else pd.Series(1.0, index=symbol_prices.index)
+    one_day_return = close.pct_change()
+    five_day_return = close.pct_change(5)
+    volatility = one_day_return.rolling(20, min_periods=5).std()
+    mask = pd.Series(True, index=symbol_prices.index)
+    if market_filter == "positive_5d":
+        mask = five_day_return > 0
+    elif market_filter == "negative_5d":
+        mask = five_day_return < 0
+    elif market_filter == "volume_above_20d":
+        mask = volume > volume.rolling(20, min_periods=3).mean()
+    elif market_filter == "low_volatility_20d":
+        mask = volatility <= volatility.rolling(60, min_periods=10).median()
+    return signal.where(mask)
+
+
+def _resolve_workbench_exit(symbol_prices: pd.DataFrame, entry_index: int, holding: int, manifest: dict[str, Any]) -> tuple[int, str]:
+    default_exit = min(entry_index + holding, len(symbol_prices) - 1)
+    if str(manifest.get("template")) != "Custom Rule Builder":
+        return default_exit, "holding_period"
+    rules = _normalize_workbench_custom_rules(manifest.get("custom_rules", {}))
+    if rules["exit_policy"] != "risk_box":
+        return default_exit, "holding_period"
+    entry_price = float(symbol_prices.loc[entry_index, "close"])
+    if entry_price <= 0:
+        return default_exit, "holding_period"
+    stop_price = entry_price * (1 - (float(rules["stop_loss_pct"]) / 100))
+    take_price = entry_price * (1 + (float(rules["take_profit_pct"]) / 100))
+    for index in range(entry_index + 1, default_exit + 1):
+        low = float(symbol_prices.loc[index, "low"]) if "low" in symbol_prices.columns else float(symbol_prices.loc[index, "close"])
+        high = float(symbol_prices.loc[index, "high"]) if "high" in symbol_prices.columns else float(symbol_prices.loc[index, "close"])
+        if low <= stop_price:
+            return index, "stop_loss"
+        if high >= take_price:
+            return index, "take_profit"
+    return default_exit, "holding_period"
+
+
 def _ranked_entry_indices(series: pd.Series, max_entry: int, fallback: list[int], *, largest: bool, limit: int) -> list[int]:
     candidates = series.iloc[: max_entry + 1].replace([float("inf"), float("-inf")], pd.NA).dropna()
     if candidates.empty:
@@ -1193,7 +1335,7 @@ def _ranked_entry_indices(series: pd.Series, max_entry: int, fallback: list[int]
 def _workbench_template_rule_profile(template: str, custom_rules: dict[str, Any] | None = None) -> str:
     if template == "Custom Rule Builder":
         normalized = _normalize_workbench_custom_rules(custom_rules)
-        return f"Custom Rule Builder:{normalized['signal']}:{normalized['selection']}"
+        return f"Custom Rule Builder:{normalized['signal']}:{normalized['selection']}:{normalized['market_filter']}:{normalized['exit_policy']}"
     if template in WORKBENCH_TEMPLATES:
         return template
     return "Momentum"
