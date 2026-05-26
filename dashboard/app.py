@@ -701,7 +701,7 @@ def flow_chart(nodes: list[str]) -> go.Figure:
                 showlegend=False,
             )
         )
-    colors = ["#2563eb"] + ["#3b82f6"] * max(len(nodes) - 2, 0) + ["#f97316"]
+    colors = ["#1f5eff"] + ["#0f9f75"] * max(len(nodes) - 2, 0) + ["#d97706"]
     fig.add_trace(
         go.Scatter(
             x=x,
@@ -709,7 +709,7 @@ def flow_chart(nodes: list[str]) -> go.Figure:
             mode="markers+text",
             marker=dict(size=30, color=colors[: len(nodes)], line=dict(color="#ffffff", width=2)),
             text=[f"{i + 1}" for i in range(len(nodes))],
-            textfont=dict(color="white", size=12, family="Roboto Mono"),
+            textfont=dict(color="white", size=12, family="IBM Plex Mono"),
             hovertext=nodes,
             hoverinfo="text",
             showlegend=False,
@@ -721,7 +721,7 @@ def flow_chart(nodes: list[str]) -> go.Figure:
             y=y[i] - 0.16,
             text=node,
             showarrow=False,
-            font=dict(size=11, color="#1e293b"),
+            font=dict(size=11, color="#171717", family="Instrument Sans"),
             align="center",
             width=130,
         )
@@ -749,21 +749,21 @@ def strategy_result_chart(runs: pd.DataFrame) -> go.Figure:
         y="decision",
         orientation="h",
         color="count",
-        color_continuous_scale=["#dbeafe", "#2563eb"],
+        color_continuous_scale=["#eef3ff", "#1f5eff"],
         text="count",
     )
     fig.update_layout(
         template="plotly_white",
         height=max(220, 52 * len(frame)),
         margin=dict(l=10, r=20, t=20, b=10),
-        paper_bgcolor="#ffffff",
-        plot_bgcolor="#ffffff",
+        paper_bgcolor="rgba(255,255,255,.72)",
+        plot_bgcolor="rgba(255,255,255,.72)",
         coloraxis_showscale=False,
         xaxis_title="Runs",
         yaxis_title="",
-        font=dict(family="Inter", color="#1e293b"),
-        xaxis=dict(tickfont=dict(color="#475569"), title_font=dict(color="#64748b"), gridcolor="#e2e8f0"),
-        yaxis=dict(tickfont=dict(color="#334155"), title_font=dict(color="#64748b"), gridcolor="#e2e8f0"),
+        font=dict(family="Instrument Sans", color="#171717"),
+        xaxis=dict(tickfont=dict(color="#3f3f46"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8"),
+        yaxis=dict(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8"),
     )
     return fig
 
@@ -784,10 +784,10 @@ def strategy_candlestick_chart(story: dict[str, object]) -> go.Figure:
             low=prices["low"],
             close=prices["close"],
             name="OHLC",
-            increasing_line_color="#16a34a",
-            decreasing_line_color="#dc2626",
-            increasing_fillcolor="rgba(22,163,74,.65)",
-            decreasing_fillcolor="rgba(220,38,38,.65)",
+            increasing_line_color="#0f9f75",
+            decreasing_line_color="#d97706",
+            increasing_fillcolor="rgba(15,159,117,.65)",
+            decreasing_fillcolor="rgba(217,119,6,.65)",
         )
     )
     volume_scale = float(prices["volume"].max()) if "volume" in prices and prices["volume"].max() else 1.0
@@ -800,12 +800,12 @@ def strategy_candlestick_chart(story: dict[str, object]) -> go.Figure:
             y=(prices["volume"] / volume_scale * volume_height) + low,
             base=low,
             name="Volume pulse",
-            marker=dict(color="rgba(37,99,235,.18)"),
+            marker=dict(color="rgba(31,94,255,.18)"),
             hovertemplate="Volume %{customdata:,}<extra></extra>",
             customdata=prices["volume"],
         )
     )
-    marker_colors = {"buy": "#16a34a", "exit": "#2563eb", "block": "#dc2626"}
+    marker_colors = {"buy": "#1f5eff", "exit": "#d97706", "block": "#d12f5f"}
     marker_symbols = {"buy": "triangle-up", "exit": "circle", "block": "x"}
     for marker in markers:
         color = marker_colors.get(str(marker["kind"]), "#f97316")
@@ -818,21 +818,21 @@ def strategy_candlestick_chart(story: dict[str, object]) -> go.Figure:
                 marker=dict(size=14, color=color, symbol=symbol, line=dict(color="#ffffff", width=1.5)),
                 text=[marker["label"]],
                 textposition="top center",
-                textfont=dict(size=11, color=color, family="Roboto Mono"),
+                textfont=dict(size=11, color=color, family="IBM Plex Mono"),
                 name=str(marker["label"]),
                 hovertemplate="%{text}<br>%{x}<br>$%{y:.2f}<extra></extra>",
             )
         )
     fig.update_layout(
         template="plotly_white",
-        title=dict(text=str(story["title"]), font=dict(size=16, family="Exo", color="#0f172a")),
+        title=dict(text=str(story["title"]), font=dict(size=16, family="Instrument Sans", color="#171717")),
         height=430,
         margin=dict(l=10, r=10, t=44, b=10),
         paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="#ffffff",
-        font=dict(family="Inter", color="#1e293b"),
-        xaxis=dict(rangeslider=dict(visible=False), showgrid=True, gridcolor="#e2e8f0"),
-        yaxis=dict(title="", showgrid=True, gridcolor="#e2e8f0", tickfont=dict(color="#475569")),
+        plot_bgcolor="rgba(255,255,255,.78)",
+        font=dict(family="Instrument Sans", color="#171717"),
+        xaxis=dict(rangeslider=dict(visible=False), showgrid=True, gridcolor="#e7e2d8"),
+        yaxis=dict(title="", showgrid=True, gridcolor="#e7e2d8", tickfont=dict(color="#3f3f46")),
         showlegend=False,
     )
     return fig
@@ -892,7 +892,7 @@ def render_strategy_tiles(payload: dict[str, object]) -> None:
             f"""
             <div class="mini-tile">
               <div class="eyebrow">{row["family"]}</div>
-              <div style="font-family:Exo,system-ui,sans-serif;font-weight:800;font-size:18px;margin:6px 0;">{row["name"]}</div>
+              <div style="font-family:Instrument Sans,system-ui,sans-serif;font-weight:800;font-size:18px;margin:6px 0;">{row["name"]}</div>
               {status_badge(str(row["status"]))}
               <div class="small-muted" style="margin-top:8px;">{row["primary_decision"]}</div>
             </div>
@@ -918,14 +918,14 @@ def render_strategy_atlas(payload: dict[str, object]) -> None:
             hole=0.58,
             color="status",
             color_discrete_map={
-                "ARCHIVED": "#f97316",
-                "BLOCKED": "#dc2626",
-                "DIAGNOSTIC": "#2563eb",
-                "NOT RUN": "#64748b",
-                "PROMOTED": "#16a34a",
+                "ARCHIVED": "#d97706",
+                "BLOCKED": "#d12f5f",
+                "DIAGNOSTIC": "#1f5eff",
+                "NOT RUN": "#71717a",
+                "PROMOTED": "#0f9f75",
             },
         )
-        status_fig.update_layout(height=300, margin=dict(l=10, r=10, t=10, b=10), font=dict(family="Inter"))
+        status_fig.update_layout(height=300, margin=dict(l=10, r=10, t=10, b=10), font=dict(family="Instrument Sans", color="#171717"), paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
         st.plotly_chart(status_fig, width="stretch")
     with right:
         st.markdown(
@@ -1023,7 +1023,7 @@ def render_results_and_data(payload: dict[str, object]) -> None:
     with c1:
         if not ledger.empty:
             counts = ledger.groupby("decision", as_index=False).size().sort_values("size", ascending=False).head(12)
-            fig = px.bar(counts, x="size", y="decision", orientation="h", color="size", color_continuous_scale=["#dbeafe", "#2563eb"])
+            fig = px.bar(counts, x="size", y="decision", orientation="h", color="size", color_continuous_scale=["#eef3ff", "#1f5eff"])
             fig.update_layout(
                 template="plotly_white",
                 height=500,
@@ -1031,17 +1031,17 @@ def render_results_and_data(payload: dict[str, object]) -> None:
                 coloraxis_showscale=False,
                 yaxis_title="",
                 xaxis_title="Count",
-                paper_bgcolor="#ffffff",
-                plot_bgcolor="#ffffff",
-                font=dict(color="#1e293b"),
-                xaxis=dict(tickfont=dict(color="#475569"), title_font=dict(color="#64748b"), gridcolor="#e2e8f0"),
-                yaxis=dict(tickfont=dict(color="#334155"), title_font=dict(color="#64748b"), gridcolor="#e2e8f0"),
+                paper_bgcolor="rgba(255,255,255,.72)",
+                plot_bgcolor="rgba(255,255,255,.72)",
+                font=dict(color="#171717", family="Instrument Sans"),
+                xaxis=dict(tickfont=dict(color="#3f3f46"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8"),
+                yaxis=dict(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8"),
             )
             st.plotly_chart(fig, width="stretch")
     with c2:
         if not regime_map.empty and "regime_label" in regime_map.columns:
             regime_counts = regime_map.groupby("regime_label", as_index=False).size()
-            fig = px.bar(regime_counts, x="regime_label", y="size", color="regime_label", color_discrete_sequence=px.colors.qualitative.Safe)
+            fig = px.bar(regime_counts, x="regime_label", y="size", color="regime_label", color_discrete_sequence=["#1f5eff", "#0f9f75", "#d97706", "#7c3aed", "#d12f5f", "#71717a"])
             fig.update_layout(
                 template="plotly_white",
                 height=500,
@@ -1049,11 +1049,11 @@ def render_results_and_data(payload: dict[str, object]) -> None:
                 showlegend=False,
                 xaxis_title="",
                 yaxis_title="Symbol-days",
-                paper_bgcolor="#ffffff",
-                plot_bgcolor="#ffffff",
-                font=dict(color="#1e293b"),
-                xaxis=dict(tickfont=dict(color="#334155"), title_font=dict(color="#64748b"), gridcolor="#e2e8f0"),
-                yaxis=dict(tickfont=dict(color="#475569"), title_font=dict(color="#64748b"), gridcolor="#e2e8f0"),
+                paper_bgcolor="rgba(255,255,255,.72)",
+                plot_bgcolor="rgba(255,255,255,.72)",
+                font=dict(color="#171717", family="Instrument Sans"),
+                xaxis=dict(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8"),
+                yaxis=dict(tickfont=dict(color="#3f3f46"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8"),
             )
             st.plotly_chart(fig, width="stretch")
 
