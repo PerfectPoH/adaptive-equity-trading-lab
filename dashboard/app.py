@@ -2,11 +2,16 @@ from __future__ import annotations
 
 import math
 from pathlib import Path
+import sys
 
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 from dashboard.lab_dashboard_data import (
     STRATEGY_PROFILES,
