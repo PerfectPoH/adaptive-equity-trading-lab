@@ -24,6 +24,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_flow_nodes,
     build_workbench_manifest,
     build_workbench_pre_run_gate,
+    build_workbench_comparison_table,
     delisted_data_source_gate_payload,
     governance_metrics,
     load_dashboard_payload,
@@ -1440,35 +1441,74 @@ def render_strategy_workbench() -> None:
     left, right = st.columns([0.82, 1.18], gap="large")
     with left:
         st.subheader("Strategy Draft")
-        st.markdown('<span class="workbench-step">1</span><strong>Name the hypothesis</strong>', unsafe_allow_html=True)
-        st.caption("Use a name that can survive in the ledger, not a vague note like 'new idea'.")
-        name = st.text_input("Strategy name", value="My falsifiable strategy")
-        st.markdown('<span class="workbench-step">2</span><strong>Choose the strategy family</strong>', unsafe_allow_html=True)
-        st.caption("The family defines the first data contract and the first blocker the lab will apply.")
-        template = st.selectbox("Strategy template", list(WORKBENCH_TEMPLATES.keys()))
-        selected_template = WORKBENCH_TEMPLATES[template]
-        st.info(selected_template["signal"])
+        idea_tab, data_tab, risk_tab, run_tab = st.tabs(["1 Idea", "2 Data", "3 Risk", "4 Run"])
+        with idea_tab:
+            st.markdown('<span class="workbench-step">1</span><strong>Name the hypothesis</strong>', unsafe_allow_html=True)
+            st.caption("Use a name that can survive in the ledger, not a vague note like 'new idea'.")
+            name = st.text_input("Strategy name", value="My falsifiable strategy")
+            st.markdown('<span class="workbench-step">2</span><strong>Choose the strategy family</strong>', unsafe_allow_html=True)
+            st.caption("The family defines the first data contract and the first blocker the lab will apply.")
+            template = st.selectbox("Strategy template", list(WORKBENCH_TEMPLATES.keys()))
+            selected_template = WORKBENCH_TEMPLATES[template]
+            st.info(selected_template["signal"])
         custom_rules = None
-        if template == "Custom Rule Builder":
-            st.markdown('<span class="workbench-step">2B</span><strong>Define the local rule</strong>', unsafe_allow_html=True)
-            st.caption("These controls change the local dry-run rule. They still use only archived OHLCV, no provider query.")
-            custom_signal = st.selectbox(
-                "Custom signal",
-                ["momentum_21d", "momentum_5d", "dip_2d", "low_vol_5d", "volume_shock", "dollar_volume_shock"],
-                help="The OHLCV feature used to rank entry windows.",
+        with data_tab:
+            st.markdown('<span class="workbench-step">3</span><strong>Choose the universe</strong>', unsafe_allow_html=True)
+            st.caption("This controls whether the result can ever be promotable or is only exploratory.")
+            universe = st.selectbox(
+                "Universe",
+                [
+                    "large-cap / ETF clean-data sandbox",
+                    "small-cap active-only exploratory sandbox",
+                    "expanded local research sandbox",
+                    "local archived Databento panel",
+                    "custom universe pending PIT validation",
+                ],
             )
-            custom_selection = st.radio(
-                "Selection direction",
-                ["top", "bottom"],
-                horizontal=True,
-                help="Top buys the highest-ranked windows; bottom buys the lowest-ranked windows.",
-            )
-            custom_entries = st.slider("Entry windows per symbol", min_value=1, max_value=120, value=20)
-            custom_filter = st.selectbox(
-                "Market filter",
-                ["none", "positive_5d", "negative_5d", "volume_above_20d", "low_volatility_20d"],
-                help="Adds a simple local OHLCV filter before ranking windows.",
-            )
+            if template == "Custom Rule Builder":
+                st.markdown('<span class="workbench-step">3B</span><strong>Define the local rule</strong>', unsafe_allow_html=True)
+                st.caption("These controls change the local dry-run rule. They still use only archived OHLCV, no provider query.")
+                custom_signal = st.selectbox(
+                    "Custom signal",
+                    ["momentum_21d", "momentum_5d", "dip_2d", "low_vol_5d", "volume_shock", "dollar_volume_shock"],
+                    help="The OHLCV feature used to rank entry windows.",
+                )
+                custom_selection = st.radio(
+                    "Selection direction",
+                    ["top", "bottom"],
+                    horizontal=True,
+                    help="Top buys the highest-ranked windows; bottom buys the lowest-ranked windows.",
+                )
+                custom_entries = st.slider("Entry windows per symbol", min_value=1, max_value=120, value=20)
+                custom_filter = st.selectbox(
+                    "Market filter",
+                    ["none", "positive_5d", "negative_5d", "volume_above_20d", "low_volatility_20d"],
+                    help="Adds a simple local OHLCV filter before ranking windows.",
+                )
+                custom_allowed = st.text_area(
+                    "Optional allowed symbols",
+                    value="",
+                    placeholder="Example: CABA, CRMD, IOVA, SPY. Leave empty to use all locally routed symbols.",
+                    help="This filters only the local dry-run universe. It does not download missing prices.",
+                )
+            else:
+                custom_signal = "momentum_21d"
+                custom_selection = "top"
+                custom_entries = 20
+                custom_filter = "none"
+                custom_allowed = ""
+        with risk_tab:
+            st.markdown('<span class="workbench-step">4</span><strong>Set the test assumptions</strong>', unsafe_allow_html=True)
+            st.caption("These numbers become part of the hypothesis. They cannot be tuned after seeing the result.")
+            st.markdown("**Holding period**: how long the simulated position is allowed to stay open.")
+            holding_period = st.slider("Holding period days", min_value=1, max_value=180, value=21)
+            st.markdown("**Analysis mode**: trading mode judges each signal; investment mode judges the basket.")
+            strategy_mode = st.selectbox("Analysis mode", ["Auto", "Trading", "Investment"])
+            if strategy_mode == "Auto":
+                inferred_mode = "Investment" if holding_period > 30 else "Trading"
+                st.caption(f"Auto currently resolves to {inferred_mode} because holding period is {holding_period} days.")
+            st.markdown("**Cost model**: round-trip execution friction. Small-cap tests should stay conservative.")
+            cost_bps = st.slider("Round-trip cost model (bps)", min_value=0, max_value=1000, value=500, step=25)
             custom_exit = st.selectbox(
                 "Exit policy",
                 ["holding_period", "risk_box"],
@@ -1476,12 +1516,11 @@ def render_strategy_workbench() -> None:
             )
             stop_loss_pct = st.slider("Stop loss %", min_value=1, max_value=80, value=15, disabled=custom_exit != "risk_box")
             take_profit_pct = st.slider("Take profit %", min_value=1, max_value=300, value=30, disabled=custom_exit != "risk_box")
-            custom_allowed = st.text_area(
-                "Optional allowed symbols",
-                value="",
-                placeholder="Example: CABA, CRMD, IOVA, SPY. Leave empty to use all locally routed symbols.",
-                help="This filters only the local dry-run universe. It does not download missing prices.",
-            )
+        with run_tab:
+            st.markdown("**Provider query**: external data must be explicitly allowed and gated before any call.")
+            provider_query = st.checkbox("Allow external provider query after pre-run gate", value=False)
+            st.caption("The dry-run button remains below the validation section so the gate is always visible first.")
+        if template == "Custom Rule Builder":
             custom_rules = {
                 "signal": custom_signal,
                 "selection": custom_selection,
@@ -1492,31 +1531,6 @@ def render_strategy_workbench() -> None:
                 "take_profit_pct": take_profit_pct,
                 "allowed_symbols": custom_allowed,
             }
-        st.markdown('<span class="workbench-step">3</span><strong>Choose the universe</strong>', unsafe_allow_html=True)
-        st.caption("This controls whether the result can ever be promotable or is only exploratory.")
-        universe = st.selectbox(
-            "Universe",
-            [
-                "large-cap / ETF clean-data sandbox",
-                "small-cap active-only exploratory sandbox",
-                "expanded local research sandbox",
-                "local archived Databento panel",
-                "custom universe pending PIT validation",
-            ],
-        )
-        st.markdown('<span class="workbench-step">4</span><strong>Set the test assumptions</strong>', unsafe_allow_html=True)
-        st.caption("These numbers become part of the hypothesis. They cannot be tuned after seeing the result.")
-        st.markdown("**Holding period**: how long the simulated position is allowed to stay open.")
-        holding_period = st.slider("Holding period days", min_value=1, max_value=180, value=21)
-        st.markdown("**Analysis mode**: trading mode judges each signal; investment mode judges the basket.")
-        strategy_mode = st.selectbox("Analysis mode", ["Auto", "Trading", "Investment"])
-        if strategy_mode == "Auto":
-            inferred_mode = "Investment" if holding_period > 30 else "Trading"
-            st.caption(f"Auto currently resolves to {inferred_mode} because holding period is {holding_period} days.")
-        st.markdown("**Cost model**: round-trip execution friction. Small-cap tests should stay conservative.")
-        cost_bps = st.slider("Round-trip cost model (bps)", min_value=0, max_value=1000, value=500, step=25)
-        st.markdown("**Provider query**: external data must be explicitly allowed and gated before any call.")
-        provider_query = st.checkbox("Allow external provider query after pre-run gate", value=False)
     with right:
         st.subheader("Readable Preview")
         manifest = build_workbench_manifest(
@@ -2041,6 +2055,10 @@ def render_strategy_workbench() -> None:
                     """,
                     unsafe_allow_html=True,
                 )
+        comparison = build_workbench_comparison_table(saved_cards)
+        st.markdown("**Saved run comparison**")
+        st.caption("Sorted by net return, but still diagnostic only: every row remains promotion-locked.")
+        st.dataframe(comparison, width="stretch", hide_index=True)
 
     st.subheader("What The Builder Will Enforce")
     checks = [

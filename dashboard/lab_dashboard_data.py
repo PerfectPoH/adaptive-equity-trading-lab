@@ -869,6 +869,26 @@ def load_workbench_strategy_cards(*, root: Path = Path("."), limit: int = 12) ->
     return cards
 
 
+def build_workbench_comparison_table(cards: list[dict[str, Any]]) -> pd.DataFrame:
+    rows: list[dict[str, Any]] = []
+    for card in cards:
+        net_return = float(card.get("net_return_sum", 0.0) or 0.0)
+        rows.append(
+            {
+                "strategy_name": str(card.get("strategy_name", "")),
+                "template": str(card.get("template", "")),
+                "decision": str(card.get("decision", "")),
+                "simulated_trades": int(card.get("simulated_trades", 0) or 0),
+                "net_return_percent": round(net_return * 100, 2),
+                "artifact_dir": str(card.get("artifact_dir", "")),
+                "governance_note": "Promotion locked; compare diagnostics only.",
+            }
+        )
+    if not rows:
+        return pd.DataFrame(columns=["strategy_name", "template", "decision", "simulated_trades", "net_return_percent", "artifact_dir", "governance_note"])
+    return pd.DataFrame(rows).sort_values(["net_return_percent", "simulated_trades"], ascending=[False, False]).reset_index(drop=True)
+
+
 def build_workbench_data_scope_preview(manifest: dict[str, Any], *, price_file: str | Path = PRICE_FILE) -> dict[str, Any]:
     prices = _load_workbench_price_panel(manifest, price_file=price_file)
     configured_symbols = _configured_symbols_for_universe(str(manifest.get("universe", "")))

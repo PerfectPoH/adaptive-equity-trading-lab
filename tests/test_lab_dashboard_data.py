@@ -15,6 +15,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_flow_nodes,
     build_workbench_manifest,
     build_workbench_pre_run_gate,
+    build_workbench_comparison_table,
     build_workbench_data_scope_preview,
     build_workbench_result_summary,
     build_workbench_strategy_narrative,
@@ -657,6 +658,19 @@ def test_load_workbench_strategy_cards_reads_saved_runs(tmp_path: Path) -> None:
     assert cards[0]["template"] == "Momentum"
     assert cards[0]["artifact_dir"]
     assert cards[0]["net_return_sum"] == preview["cost_breakdown"]["net_return_sum"]
+
+
+def test_workbench_comparison_table_ranks_saved_runs_by_net_return() -> None:
+    cards = [
+        {"strategy_name": "Weak", "template": "Momentum", "decision": "REJECTED", "simulated_trades": 30, "net_return_sum": -0.2, "artifact_dir": "a"},
+        {"strategy_name": "Strong", "template": "Custom", "decision": "CANDIDATE", "simulated_trades": 40, "net_return_sum": 0.35, "artifact_dir": "b"},
+    ]
+
+    table = build_workbench_comparison_table(cards)
+
+    assert list(table["strategy_name"]) == ["Strong", "Weak"]
+    assert list(table["net_return_percent"]) == [35.0, -20.0]
+    assert "Promotion locked" in table.iloc[0]["governance_note"]
 
 
 def test_build_strategy_chart_story_uses_real_ohlc_window(tmp_path: Path) -> None:
