@@ -24,6 +24,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_flow_nodes,
     build_workbench_manifest,
     build_workbench_pre_run_gate,
+    build_workbench_backtest_readiness,
     build_workbench_comparison_table,
     delisted_data_source_gate_payload,
     governance_metrics,
@@ -38,6 +39,8 @@ from dashboard.lab_dashboard_data import (
     workbench_manifest_signature,
     build_workbench_result_summary,
     build_workbench_strategy_narrative,
+    build_workbench_strategy_blueprint,
+    build_workbench_metric_glossary,
     build_workbench_visual_diagnostics,
     display_safe_records,
     load_workbench_strategy_cards,
@@ -1836,6 +1839,42 @@ def render_strategy_workbench() -> None:
         "Configured tickers are the research catalog. Local prices are the subset already present in archived files; missing symbols are never invented by the workbench."
     )
 
+    readiness = build_workbench_backtest_readiness(manifest, validation_rows, st.session_state.get("workbench_backtest_preview"))
+    st.markdown(
+        """
+        <div class="workbench-section">
+          <div class="section-kicker">05B / Backtest readiness</div>
+          <div class="workbench-section-title">What remains before this can become a real governed backtest?</div>
+          <div class="workbench-section-copy">
+            The Workbench can explain and dry-run. A real backtest still needs a committed gate, approved data, and a separate runner.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    ready_cols = st.columns(3)
+    for index, stage in enumerate(readiness["stages"]):
+        color = {
+            "PASS": "var(--lab-mint)",
+            "WARN": "var(--lab-amber)",
+            "WAIT": "var(--lab-blue)",
+            "BLOCK": "var(--lab-rose)",
+            "LOCKED": "var(--lab-plum)",
+        }.get(str(stage["status"]), "var(--lab-line)")
+        with ready_cols[index % 3]:
+            st.markdown(
+                f"""
+                <div class="rule-card" style="border-top-color:{color};">
+                  <div class="eyebrow">{stage["status"]}</div>
+                  <div class="rule-title">{stage["stage"]}</div>
+                  <div class="small-muted">{stage["meaning"]}</div>
+                  <div class="strategy-copy" style="margin-top:8px;"><strong>Next:</strong> {stage["next_step"]}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+    st.info(f"Readiness: {readiness['overall_status']} · Next action: {readiness['next_user_action']}")
+
     st.markdown(
         """
         <div class="workbench-section">
@@ -2013,6 +2052,9 @@ def render_strategy_workbench() -> None:
                 st.markdown("**Bias warnings**")
                 for warning in preview["bias_warnings"]:
                     st.warning(f"{warning['warning_id']} ({warning['severity']}): {warning['message']}")
+            st.markdown("**Metric dictionary**")
+            st.caption("This translates the numbers into plain language so the report is not just a wall of decimals.")
+            st.dataframe(pd.DataFrame(build_workbench_metric_glossary(preview)), width="stretch", hide_index=True)
             detail_cols = st.columns([1, 1])
             with detail_cols[0]:
                 st.markdown("**Why this outcome**")
@@ -2097,6 +2139,8 @@ def render_strategy_workbench() -> None:
                 st.plotly_chart(fig, width="stretch")
             with st.expander("Open Markdown dry-run report"):
                 st.code(preview.get("markdown_report", ""), language="markdown")
+            with st.expander("Open exportable strategy blueprint"):
+                st.json(build_workbench_strategy_blueprint(manifest, preview))
             artifact_bundle = st.session_state.get("workbench_artifact_bundle")
             if artifact_bundle:
                 st.markdown("**Persisted artifacts**")

@@ -1040,6 +1040,141 @@ def build_workbench_strategy_narrative(manifest: dict[str, Any], data_scope_prev
     }
 
 
+def build_workbench_backtest_readiness(manifest: dict[str, Any], validation_rows: pd.DataFrame, preview: dict[str, Any] | None = None) -> dict[str, Any]:
+    validation_summary = _validation_summary(validation_rows)
+    data_scope = build_workbench_data_scope_preview(manifest)
+    preview = preview or {}
+    simulated_trades = int(preview.get("simulated_trades", 0) or 0)
+    has_dry_run = bool(preview and preview.get("status") == "DRY_RUN_READY")
+    provider_allowed = bool(manifest.get("provider_query_allowed", False))
+    required_data = [str(item).lower() for item in manifest.get("required_data", [])]
+    event_like = any(token in " ".join(required_data) for token in ["sec", "fda", "event", "earnings", "schedule", "form 4", "pdufa"])
+    stages = [
+        {
+            "stage": "Manifest",
+            "status": "PASS" if validation_summary["block"] == 0 else "BLOCK",
+            "meaning": "The user idea has a stable name, frozen cost, holding period, universe, and first gate.",
+            "next_step": "Fix validation rows first." if validation_summary["block"] else "Manifest can be dry-run locally.",
+        },
+        {
+            "stage": "Local data",
+            "status": "PASS" if int(data_scope.get("local_price_symbols", 0)) > 0 else "BLOCK",
+            "meaning": f"{data_scope.get('local_price_symbols', 0)} local symbols and {data_scope.get('rows', 0)} OHLCV rows are available.",
+            "next_step": "Attach a local price panel." if int(data_scope.get("local_price_symbols", 0)) == 0 else "Dry-run may use only these local rows.",
+        },
+        {
+            "stage": "Dry-run",
+            "status": "PASS" if has_dry_run else "WAIT",
+            "meaning": "The local simulator produced an auditable preview." if has_dry_run else "No dry-run has been generated for this exact manifest yet.",
+            "next_step": "Review robustness gates." if has_dry_run else "Press the controlled local dry-run button.",
+        },
+        {
+            "stage": "Provider/data contract",
+            "status": "WARN" if event_like and not provider_allowed else "PASS",
+            "meaning": "Event strategies need an explicit provider gate before real data calls." if event_like else "This rule can be evaluated on local OHLCV unless the user adds external data.",
+            "next_step": "Enable provider permission only after writing a real pre-run gate." if event_like and not provider_allowed else "Keep raw payload retention disabled unless a protocol says otherwise.",
+        },
+        {
+            "stage": "Sample and robustness",
+            "status": "PASS" if simulated_trades >= 30 else "WARN",
+            "meaning": f"{simulated_trades} dry-run trades were generated. Below 30 remains weak evidence.",
+            "next_step": "Increase universe/history before trusting robustness." if simulated_trades < 30 else "Inspect top-winner and cost-stress gates.",
+        },
+        {
+            "stage": "Promotion",
+            "status": "LOCKED",
+            "meaning": "The workbench cannot promote, paper trade, or live trade.",
+            "next_step": "Create a separate governed backtest runner if the dry-run is worth escalation.",
+        },
+    ]
+    blocking = [stage for stage in stages if stage["status"] == "BLOCK"]
+    warnings = [stage for stage in stages if stage["status"] in {"WARN", "WAIT"}]
+    if blocking:
+        overall = "BLOCKED_BEFORE_DRY_RUN"
+        next_action = blocking[0]["next_step"]
+    elif not has_dry_run:
+        overall = "DRY_RUN_PENDING"
+        next_action = "Run the controlled local dry-run for this exact manifest."
+    elif warnings:
+        overall = "DRY_RUN_READY_REAL_BACKTEST_LOCKED"
+        next_action = warnings[0]["next_step"]
+    else:
+        overall = "REAL_BACKTEST_PREP_REQUIRED"
+        next_action = "Write and commit a real pre-run gate before connecting a provider or runner."
+    return {
+        "overall_status": overall,
+        "promotion_allowed": False,
+        "stages": stages,
+        "next_user_action": next_action,
+    }
+
+
+def build_workbench_strategy_blueprint(manifest: dict[str, Any], preview: dict[str, Any] | None = None) -> dict[str, Any]:
+    data_scope = build_workbench_data_scope_preview(manifest)
+    narrative = build_workbench_strategy_narrative(manifest, data_scope)
+    preview = preview or {}
+    return {
+        "strategy_name": str(manifest.get("strategy_name", "")),
+        "template": str(manifest.get("template", "")),
+        "analysis_mode": str(manifest.get("analysis_mode", "Trading")),
+        "what_the_user_built": narrative["plain_english_rule"],
+        "how_it_exits": narrative["exit_plain_english"],
+        "first_blocker": narrative["failure_plain_english"],
+        "data_available": narrative["data_coverage"],
+        "frozen_assumptions": {
+            "holding_period_days": int(manifest.get("holding_period_days", 0)),
+            "cost_bps": int(manifest.get("cost_bps", 0)),
+            "provider_query_allowed": bool(manifest.get("provider_query_allowed", False)),
+            "promotion_allowed": False,
+        },
+        "latest_dry_run": {
+            "available": bool(preview),
+            "decision": preview.get("automatic_verdict", {}).get("decision", preview.get("decision", "not_run")) if preview else "not_run",
+            "simulated_trades": int(preview.get("simulated_trades", 0) or 0),
+            "net_return_sum": preview.get("cost_breakdown", {}).get("net_return_sum") if preview else None,
+        },
+        "real_backtest_unlock": [
+            "Commit a pre-run gate for this exact manifest signature.",
+            "Attach the real data provider or approved local panel declared in the data contract.",
+            "Run a separate governed backtest runner, not the UI dry-run.",
+            "Archive final_decision.json with promotion_allowed=false unless all gates pass.",
+        ],
+    }
+
+
+def build_workbench_metric_glossary(preview: dict[str, Any]) -> list[dict[str, str]]:
+    cost = dict(preview.get("cost_breakdown", {}))
+    diagnostics = dict(preview.get("portfolio_diagnostics", {}))
+    verdict = dict(preview.get("automatic_verdict", {}))
+    return [
+        {
+            "metric": "Net return sum",
+            "value": str(cost.get("net_return_sum", diagnostics.get("total_net_return", "n/a"))),
+            "plain_meaning": "Additive total of all local dry-run trades after the declared round-trip cost. 0.45 means roughly +45% additive, not guaranteed portfolio CAGR.",
+        },
+        {
+            "metric": "Average net",
+            "value": str(cost.get("average_net_return", "n/a")),
+            "plain_meaning": "The average trade after costs. This can look good even when the typical trade is weak if a few winners dominate.",
+        },
+        {
+            "metric": "Median / typical trade",
+            "value": str(diagnostics.get("median_net_return", verdict.get("median_net_return", "see robustness table"))),
+            "plain_meaning": "The middle trade in the distribution. The lab cares about this because it resists jackpot illusion better than the mean.",
+        },
+        {
+            "metric": "Top winner contribution",
+            "value": str(diagnostics.get("top_decile_contribution", "see chart")),
+            "plain_meaning": "How much of the positive result comes from the biggest winners. High values mean the strategy may depend on rare outliers.",
+        },
+        {
+            "metric": "Promotion allowed",
+            "value": str(preview.get("promotion_allowed", False)),
+            "plain_meaning": "Always false in the Workbench. A dry-run can teach, but it cannot authorize paper/live trading.",
+        },
+    ]
+
+
 def build_workbench_visual_diagnostics(preview: dict[str, Any]) -> dict[str, Any]:
     trades = list(preview.get("trade_rows", []))
     equity_curve = list(preview.get("equity_curve", []))

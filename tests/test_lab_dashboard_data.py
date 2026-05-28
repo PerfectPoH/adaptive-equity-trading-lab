@@ -15,10 +15,13 @@ from dashboard.lab_dashboard_data import (
     build_workbench_flow_nodes,
     build_workbench_manifest,
     build_workbench_pre_run_gate,
+    build_workbench_backtest_readiness,
     build_workbench_comparison_table,
     build_workbench_data_scope_preview,
     build_workbench_result_summary,
     build_workbench_strategy_narrative,
+    build_workbench_strategy_blueprint,
+    build_workbench_metric_glossary,
     build_workbench_visual_diagnostics,
     display_safe_records,
     delisted_data_source_gate_payload,
@@ -690,6 +693,59 @@ def test_workbench_comparison_table_ranks_saved_runs_by_net_return() -> None:
     assert list(table["strategy_name"]) == ["Strong", "Weak"]
     assert list(table["net_return_percent"]) == [35.0, -20.0]
     assert "Promotion locked" in table.iloc[0]["governance_note"]
+
+
+def test_workbench_backtest_readiness_maps_dry_run_to_real_backtest_steps() -> None:
+    manifest = build_workbench_manifest(
+        name="Readiness map",
+        template="Custom Rule Builder",
+        universe="expanded local research sandbox",
+        holding_period_days=21,
+        cost_bps=300,
+        allow_provider_query=False,
+        custom_rules={"signal": "momentum_5d", "selection": "top", "entries_per_symbol": 8},
+    )
+    validation = validate_workbench_manifest(manifest)
+    preview = build_controlled_backtest_preview(manifest, validation)
+
+    readiness = build_workbench_backtest_readiness(manifest, validation, preview)
+
+    assert readiness["overall_status"] in {"DRY_RUN_READY_REAL_BACKTEST_LOCKED", "REAL_BACKTEST_PREP_REQUIRED"}
+    assert readiness["promotion_allowed"] is False
+    assert readiness["stages"][0]["stage"] == "Manifest"
+    assert any(stage["stage"] == "Provider/data contract" for stage in readiness["stages"])
+    assert readiness["next_user_action"]
+
+
+def test_workbench_strategy_blueprint_and_glossary_are_user_readable() -> None:
+    manifest = build_workbench_manifest(
+        name="Blueprint strategy",
+        template="Custom Rule Builder",
+        universe="expanded local research sandbox",
+        holding_period_days=45,
+        cost_bps=375,
+        allow_provider_query=False,
+        strategy_mode="Investment",
+        custom_rules={
+            "signal": "volume_shock",
+            "selection": "top",
+            "entries_per_symbol": 12,
+            "market_filter": "positive_5d",
+            "exit_policy": "risk_box",
+            "stop_loss_pct": 12,
+            "take_profit_pct": 40,
+        },
+    )
+    preview = build_controlled_backtest_preview(manifest, validate_workbench_manifest(manifest))
+
+    blueprint = build_workbench_strategy_blueprint(manifest, preview)
+    glossary = build_workbench_metric_glossary(preview)
+
+    assert blueprint["strategy_name"] == "Blueprint strategy"
+    assert "what_the_user_built" in blueprint
+    assert "real_backtest_unlock" in blueprint
+    assert any(item["metric"] == "Net return sum" for item in glossary)
+    assert all(item["plain_meaning"] for item in glossary)
 
 
 def test_build_strategy_chart_story_uses_real_ohlc_window(tmp_path: Path) -> None:
