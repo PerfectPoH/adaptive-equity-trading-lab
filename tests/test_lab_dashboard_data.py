@@ -12,6 +12,8 @@ from dashboard.lab_dashboard_data import (
     WORKBENCH_TEMPLATES,
     build_controlled_backtest_preview,
     build_workbench_chart_story,
+    build_workbench_rule_flow,
+    build_workbench_trade_annotation_story,
     build_workbench_flow_nodes,
     build_workbench_manifest,
     build_workbench_pre_run_gate,
@@ -28,6 +30,7 @@ from dashboard.lab_dashboard_data import (
     load_workbench_strategy_cards,
     orb_930_backtest_payload,
     persist_workbench_run_bundle,
+    write_workbench_phase_report,
     build_strategy_chart_story,
     classify_strategy_status,
     governance_metrics,
@@ -793,3 +796,81 @@ def test_build_workbench_chart_story_relabels_markers_with_manifest_rules(tmp_pa
     assert story["markers"][0]["label"].startswith("ENTRY:")
     assert story["markers"][1]["label"].startswith("EXIT:")
     assert story["markers"][2]["label"].startswith("GATE:")
+
+
+def test_workbench_rule_flow_exposes_composable_strategy_blocks() -> None:
+    manifest = build_workbench_manifest(
+        name="Flow strategy",
+        template="Custom Rule Builder",
+        universe="expanded local research sandbox",
+        holding_period_days=20,
+        cost_bps=250,
+        allow_provider_query=False,
+        custom_rules={
+            "signal": "volume_shock",
+            "selection": "top",
+            "entries_per_symbol": 10,
+            "market_filter": "positive_5d",
+            "exit_policy": "risk_box",
+            "stop_loss_pct": 10,
+            "take_profit_pct": 35,
+        },
+    )
+
+    flow = build_workbench_rule_flow(manifest)
+
+    assert [item["block"] for item in flow] == ["Universe", "Signal", "Filter", "Entry", "Risk", "Exit", "Gates"]
+    assert any("volume shock" in item["description"].lower() for item in flow)
+    assert any("10%" in item["description"] for item in flow)
+
+
+def test_workbench_trade_annotation_story_marks_entry_exit_and_risk_box(tmp_path: Path) -> None:
+    prices = tmp_path / "prices.csv"
+    rows = []
+    for offset in range(12):
+        rows.append(
+            {
+                "symbol": "AAA",
+                "date": f"2026-01-{offset + 1:02d}",
+                "open": 10 + offset * 0.2,
+                "high": 10.5 + offset * 0.2,
+                "low": 9.8 + offset * 0.2,
+                "close": 10 + offset * 0.2,
+                "volume": 1000 + offset * 20,
+            }
+        )
+    pd.DataFrame(rows).to_csv(prices, index=False)
+    manifest = build_workbench_manifest(
+        name="Annotated trade",
+        template="Custom Rule Builder",
+        universe="local archived Databento panel",
+        holding_period_days=4,
+        cost_bps=50,
+        allow_provider_query=False,
+        custom_rules={
+            "signal": "momentum_5d",
+            "selection": "top",
+            "entries_per_symbol": 3,
+            "exit_policy": "risk_box",
+            "stop_loss_pct": 8,
+            "take_profit_pct": 20,
+        },
+    )
+    preview = build_controlled_backtest_preview(manifest, validate_workbench_manifest(manifest), price_file=prices)
+
+    story = build_workbench_trade_annotation_story(manifest, preview, price_file=prices)
+
+    assert story["available"] is True
+    assert story["symbol"] == "AAA"
+    assert {marker["kind"] for marker in story["markers"]} >= {"entry", "exit"}
+    assert story["risk_box"]["stop_price"] > 0
+    assert story["risk_box"]["take_profit_price"] > story["risk_box"]["entry_price"]
+
+
+def test_write_workbench_phase_report_records_v2_progress(tmp_path: Path) -> None:
+    path = write_workbench_phase_report(root=tmp_path)
+
+    text = path.read_text(encoding="utf-8")
+    assert "Strategy Workbench V2" in text
+    assert "Chart Annotator" in text
+    assert "promotion_allowed" in text

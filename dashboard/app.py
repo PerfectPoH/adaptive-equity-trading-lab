@@ -20,6 +20,8 @@ from dashboard.lab_dashboard_data import (
     build_controlled_backtest_preview,
     build_strategy_chart_story,
     build_workbench_chart_story,
+    build_workbench_rule_flow,
+    build_workbench_trade_annotation_story,
     build_workbench_data_scope_preview,
     build_workbench_flow_nodes,
     build_workbench_manifest,
@@ -1028,8 +1030,8 @@ def strategy_candlestick_chart(story: dict[str, object]) -> go.Figure:
             customdata=prices["volume"],
         )
     )
-    marker_colors = {"buy": "#1f5eff", "exit": "#d97706", "block": "#d12f5f"}
-    marker_symbols = {"buy": "triangle-up", "exit": "circle", "block": "x"}
+    marker_colors = {"buy": "#1f5eff", "entry": "#1f5eff", "exit": "#d97706", "block": "#d12f5f"}
+    marker_symbols = {"buy": "triangle-up", "entry": "triangle-up", "exit": "circle", "block": "x"}
     for marker in markers:
         color = marker_colors.get(str(marker["kind"]), "#f97316")
         symbol = marker_symbols.get(str(marker["kind"]), "diamond")
@@ -1046,6 +1048,16 @@ def strategy_candlestick_chart(story: dict[str, object]) -> go.Figure:
                 hovertemplate="%{text}<br>%{x}<br>$%{y:.2f}<extra></extra>",
             )
         )
+    risk_box = story.get("risk_box", {})
+    if isinstance(risk_box, dict):
+        for line_name, color, dash in [("stop_price", "#d12f5f", "dash"), ("take_profit_price", "#0f9f75", "dot")]:
+            if line_name in risk_box:
+                fig.add_hline(
+                    y=float(risk_box[line_name]),
+                    line=dict(color=color, width=2, dash=dash),
+                    annotation_text=line_name.replace("_", " ").title(),
+                    annotation_position="right",
+                )
     fig.update_layout(
         template="plotly_white",
         title=dict(text=str(story["title"]), font=dict(size=16, family="Instrument Sans", color="#171717")),
@@ -1742,6 +1754,24 @@ def render_strategy_workbench() -> None:
                 unsafe_allow_html=True,
             )
 
+    st.markdown("**Composable rule flow**")
+    st.caption("This is the strategy as blocks, not as JSON: universe, signal, filter, entry, risk, exit, gates.")
+    rule_flow = build_workbench_rule_flow(manifest)
+    flow_cols = st.columns(len(rule_flow))
+    color_cycle = ["var(--lab-blue)", "var(--lab-mint)", "var(--lab-amber)", "var(--lab-plum)", "var(--lab-rose)", "var(--lab-amber)", "var(--lab-mint)"]
+    for index, block in enumerate(rule_flow):
+        with flow_cols[index]:
+            st.markdown(
+                f"""
+                <div class="mini-tile" style="border-top:4px solid {color_cycle[index % len(color_cycle)]};min-height:138px;">
+                  <div class="eyebrow">{index + 1:02d}</div>
+                  <div class="rule-title">{block["block"]}</div>
+                  <div class="small-muted">{block["description"]}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
     st.markdown(
         """
         <div class="workbench-section">
@@ -2052,6 +2082,14 @@ def render_strategy_workbench() -> None:
                 st.markdown("**Bias warnings**")
                 for warning in preview["bias_warnings"]:
                     st.warning(f"{warning['warning_id']} ({warning['severity']}): {warning['message']}")
+            st.markdown("**Annotated example trade**")
+            st.caption("One generated dry-run trade, marked on the local chart. This shows what the rule actually did, not what it claims in prose.")
+            annotation_story = build_workbench_trade_annotation_story(manifest, preview)
+            if annotation_story.get("available"):
+                st.plotly_chart(strategy_candlestick_chart(annotation_story), width="stretch")
+                st.write(annotation_story.get("explanation", ""))
+            else:
+                st.info(annotation_story.get("reason", "No annotated trade is available for this dry-run."))
             st.markdown("**Metric dictionary**")
             st.caption("This translates the numbers into plain language so the report is not just a wall of decimals.")
             st.dataframe(pd.DataFrame(build_workbench_metric_glossary(preview)), width="stretch", hide_index=True)

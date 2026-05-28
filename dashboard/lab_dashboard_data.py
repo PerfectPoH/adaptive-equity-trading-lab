@@ -1040,6 +1040,138 @@ def build_workbench_strategy_narrative(manifest: dict[str, Any], data_scope_prev
     }
 
 
+def build_workbench_rule_flow(manifest: dict[str, Any]) -> list[dict[str, str]]:
+    custom_rules = _normalize_workbench_custom_rules(manifest.get("custom_rules", {}))
+    signal_labels = {
+        "momentum_21d": "21-day momentum",
+        "momentum_5d": "5-day momentum",
+        "dip_2d": "2-day dip",
+        "low_vol_5d": "5-day low-volatility",
+        "volume_shock": "volume shock",
+        "dollar_volume_shock": "dollar-volume shock",
+    }
+    filter_labels = {
+        "none": "No additional market filter.",
+        "positive_5d": "Require positive 5-day trend before ranking.",
+        "negative_5d": "Require negative 5-day stress before ranking.",
+        "volume_above_20d": "Require above-average 20-day volume.",
+        "low_volatility_20d": "Require below-median 20-day volatility.",
+    }
+    if str(manifest.get("template")) == "Custom Rule Builder":
+        signal = signal_labels.get(custom_rules["signal"], custom_rules["signal"])
+        entry = f"Rank windows by {signal}; choose the {custom_rules['selection']} {custom_rules['entries_per_symbol']} per symbol."
+        risk = (
+            f"{custom_rules['stop_loss_pct']:g}% stop and {custom_rules['take_profit_pct']:g}% take profit."
+            if custom_rules["exit_policy"] == "risk_box"
+            else "No intratrade stop/take-profit in the local dry-run; horizon exit only."
+        )
+        exit_text = (
+            "Exit at risk-box touch or holding horizon."
+            if custom_rules["exit_policy"] == "risk_box"
+            else f"Exit after {int(manifest.get('holding_period_days', 0))} days."
+        )
+        filter_text = filter_labels.get(custom_rules["market_filter"], custom_rules["market_filter"])
+    else:
+        entry = str(manifest.get("entry_rule", "Template entry rule."))
+        filter_text = "Template-level filters only; no custom filter selected."
+        risk = f"{int(manifest.get('cost_bps', 0))} bps cost model; template failure mode: {manifest.get('known_failure_mode', '')}"
+        exit_text = str(manifest.get("exit_rule", "Template exit rule."))
+    return [
+        {"block": "Universe", "description": str(manifest.get("universe", ""))},
+        {"block": "Signal", "description": str(manifest.get("signal", WORKBENCH_TEMPLATES.get(str(manifest.get("template")), {}).get("signal", "")))},
+        {"block": "Filter", "description": filter_text},
+        {"block": "Entry", "description": entry},
+        {"block": "Risk", "description": risk},
+        {"block": "Exit", "description": exit_text},
+        {"block": "Gates", "description": f"First gate: {manifest.get('first_gate')}; promotion_allowed=false."},
+    ]
+
+
+def build_workbench_trade_annotation_story(manifest: dict[str, Any], preview: dict[str, Any], *, price_file: str | Path = PRICE_FILE) -> dict[str, Any]:
+    trades = list(preview.get("trade_rows", []))
+    if not trades:
+        return {
+            "available": False,
+            "reason": "No dry-run trade rows available.",
+            "prices": pd.DataFrame(columns=["date", "open", "high", "low", "close", "volume"]),
+            "markers": [],
+            "risk_box": {},
+        }
+    trade = sorted(trades, key=lambda row: abs(float(row.get("net_return", 0.0))), reverse=True)[0]
+    prices = _load_workbench_price_panel(manifest, price_file=price_file)
+    prices, _scope = _filter_prices_for_workbench_universe(prices, str(manifest.get("universe", "")))
+    prices = _apply_custom_symbol_filter(prices, manifest)
+    symbol = str(trade.get("symbol", "")).upper()
+    symbol_prices = prices[prices["symbol"].astype(str).str.upper() == symbol].copy()
+    if symbol_prices.empty:
+        return {
+            "available": False,
+            "reason": f"No local price rows found for {symbol}.",
+            "prices": pd.DataFrame(columns=["date", "open", "high", "low", "close", "volume"]),
+            "markers": [],
+            "risk_box": {},
+        }
+    symbol_prices["date"] = pd.to_datetime(symbol_prices["date"])
+    entry_date = pd.Timestamp(str(trade["entry_date"]))
+    exit_date = pd.Timestamp(str(trade["exit_date"]))
+    window = symbol_prices[(symbol_prices["date"] >= entry_date - pd.Timedelta(days=8)) & (symbol_prices["date"] <= exit_date + pd.Timedelta(days=8))].copy()
+    if len(window) < 4:
+        window = symbol_prices.head(min(40, len(symbol_prices))).copy()
+    entry_price = float(trade.get("entry_price", 0.0))
+    exit_price = float(trade.get("exit_price", 0.0))
+    risk_box: dict[str, float] = {"entry_price": round(entry_price, 6)}
+    custom_rules = _normalize_workbench_custom_rules(manifest.get("custom_rules", {}))
+    if custom_rules["exit_policy"] == "risk_box" and entry_price > 0:
+        risk_box["stop_price"] = round(entry_price * (1 - float(custom_rules["stop_loss_pct"]) / 100), 6)
+        risk_box["take_profit_price"] = round(entry_price * (1 + float(custom_rules["take_profit_pct"]) / 100), 6)
+    return {
+        "available": True,
+        "title": f"Annotated dry-run trade: {symbol}",
+        "symbol": symbol,
+        "prices": window[["date", "open", "high", "low", "close", "volume"]].reset_index(drop=True),
+        "markers": [
+            {"date": entry_date.date().isoformat(), "price": entry_price, "label": f"ENTRY: {manifest.get('entry_rule', '')}", "kind": "entry"},
+            {"date": exit_date.date().isoformat(), "price": exit_price, "label": f"EXIT: {trade.get('exit_reason', 'exit')} net={float(trade.get('net_return', 0.0)):.2%}", "kind": "exit"},
+        ],
+        "risk_box": risk_box,
+        "trade": trade,
+        "explanation": "This chart annotates one generated local dry-run trade so the user can inspect what the rule actually did on a real local price path.",
+    }
+
+
+def write_workbench_phase_report(*, root: Path = Path(".")) -> Path:
+    output_dir = root / WORKBENCH_OUTPUT_DIR
+    output_dir.mkdir(parents=True, exist_ok=True)
+    path = output_dir / "WORKBENCH-V2-PHASE-REPORT.md"
+    path.write_text(
+        "\n".join(
+            [
+                "# Strategy Workbench V2",
+                "",
+                "## Scope",
+                "",
+                "- Added composable rule flow blocks: Universe, Signal, Filter, Entry, Risk, Exit, Gates.",
+                "- Added Chart Annotator for generated dry-run trades.",
+                "- Added readiness, blueprint, and metric glossary surfaces.",
+                "",
+                "## Governance",
+                "",
+                "- `promotion_allowed` remains false inside the Workbench.",
+                "- Dry-runs remain local and diagnostic.",
+                "- Real backtests still require a committed pre-run gate, data contract, and separate governed runner.",
+                "",
+                "## Next Phase",
+                "",
+                "- Convert approved strategy blueprints into real pre-run gate packages.",
+                "- Connect only selected strategies to real backtest runners after the gate exists.",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return path
+
+
 def build_workbench_backtest_readiness(manifest: dict[str, Any], validation_rows: pd.DataFrame, preview: dict[str, Any] | None = None) -> dict[str, Any]:
     validation_summary = _validation_summary(validation_rows)
     data_scope = build_workbench_data_scope_preview(manifest)
