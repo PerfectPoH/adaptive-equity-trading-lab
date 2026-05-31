@@ -187,6 +187,85 @@ def test_portfolio_diagnostic_deduplicates_same_strategy_family_before_search(tm
     assert set(dedupe["deduped_component_ids"]) == {"dup01", "mean01", "cat01"} or set(dedupe["deduped_component_ids"]) == {"dup02", "mean01", "cat01"}
 
 
+def test_portfolio_diagnostic_deduplicates_same_factory_recipe_before_search() -> None:
+    components = [
+        {
+            "component_id": "FACTORY-MOM-A",
+            "strategy_name": "Factory Momentum 180d 100bps",
+            "template": "Momentum",
+            "analysis_mode": "Investment",
+            "decision": "FACTORY_GENERATED_LOCAL_DRY_RUN",
+            "promotion_allowed": False,
+            "bias_warnings": ["FACTORY_GENERATED_NOT_PREREGISTERED"],
+            "trade_count": 4,
+            "net_return_sum": 0.5,
+            "cost_bps": 100,
+            "source": "factory_generated",
+            "inline_returns": [
+                {"period": "2026-01-01", "net_return": 0.20},
+                {"period": "2026-01-02", "net_return": -0.10},
+                {"period": "2026-01-03", "net_return": 0.30},
+                {"period": "2026-01-04", "net_return": 0.10},
+            ],
+        },
+        {
+            "component_id": "FACTORY-MOM-B",
+            "strategy_name": "Factory Momentum 180d 100bps",
+            "template": "Momentum",
+            "analysis_mode": "Investment",
+            "decision": "FACTORY_GENERATED_LOCAL_DRY_RUN",
+            "promotion_allowed": False,
+            "bias_warnings": ["FACTORY_GENERATED_NOT_PREREGISTERED"],
+            "trade_count": 4,
+            "net_return_sum": 0.45,
+            "cost_bps": 100,
+            "source": "factory_generated",
+            "inline_returns": [
+                {"period": "2026-01-01", "net_return": -0.15},
+                {"period": "2026-01-02", "net_return": 0.25},
+                {"period": "2026-01-03", "net_return": -0.05},
+                {"period": "2026-01-04", "net_return": 0.40},
+            ],
+        },
+        {
+            "component_id": "FACTORY-MR-A",
+            "strategy_name": "Factory Mean Reversion 180d 100bps",
+            "template": "Mean Reversion",
+            "analysis_mode": "Investment",
+            "decision": "FACTORY_GENERATED_LOCAL_DRY_RUN",
+            "promotion_allowed": False,
+            "bias_warnings": ["FACTORY_GENERATED_NOT_PREREGISTERED"],
+            "trade_count": 4,
+            "net_return_sum": 0.2,
+            "cost_bps": 100,
+            "source": "factory_generated",
+            "inline_returns": [{"period": f"2026-01-0{i}", "net_return": 0.05} for i in range(1, 5)],
+        },
+        {
+            "component_id": "FACTORY-DB-A",
+            "strategy_name": "Factory Dollar-Bar Microstructure 180d 100bps",
+            "template": "Dollar-Bar Microstructure",
+            "analysis_mode": "Investment",
+            "decision": "FACTORY_GENERATED_LOCAL_DRY_RUN",
+            "promotion_allowed": False,
+            "bias_warnings": ["FACTORY_GENERATED_NOT_PREREGISTERED"],
+            "trade_count": 4,
+            "net_return_sum": 0.16,
+            "cost_bps": 100,
+            "source": "factory_generated",
+            "inline_returns": [{"period": f"2026-01-0{i}", "net_return": 0.04} for i in range(1, 5)],
+        },
+    ]
+
+    diagnostic = run_portfolio_diagnostic(components, policy="equal_weight")
+
+    dedupe = diagnostic["strategy_deduplication"]
+    assert dedupe["duplicate_group_count"] == 1
+    assert dedupe["groups"][0]["reason"] == "same_generated_strategy_recipe"
+    best_ids = diagnostic["portfolio_search"]["best_basket_component_ids"]
+    assert not {"FACTORY-MOM-A", "FACTORY-MOM-B"}.issubset(set(best_ids))
+
+
 def test_portfolio_diagnostic_searches_bounded_best_basket_without_promoting(tmp_path: Path) -> None:
     _component(tmp_path, "bad01", template="Momentum", decision="REJECTED_OUTLIER_DEPENDENCY", returns=[-0.08, -0.04, 0.01, -0.02, 0.0])
     _component(tmp_path, "good01", template="Mean Reversion", decision="RESEARCH_CANDIDATE_ONLY", returns=[0.03, 0.02, -0.01, 0.04, 0.02])

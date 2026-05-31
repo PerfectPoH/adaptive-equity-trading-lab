@@ -5,6 +5,7 @@ import hashlib
 import itertools
 import json
 from pathlib import Path
+import re
 from typing import Any
 
 import pandas as pd
@@ -525,8 +526,15 @@ def _build_strategy_deduplication(
         right_component = component_by_id.get(right, {})
         same_template = str(left_component.get("template", "")).lower() == str(right_component.get("template", "")).lower()
         same_mode = str(left_component.get("analysis_mode", "")).lower() == str(right_component.get("analysis_mode", "")).lower()
+        same_generated_recipe = (
+            _generated_recipe_key(left_component) != ""
+            and _generated_recipe_key(left_component) == _generated_recipe_key(right_component)
+        )
         corr_value = float(correlation.loc[left, right]) if not correlation.empty and left in correlation.index and right in correlation.columns else 0.0
-        if same_template and same_mode and abs(corr_value) >= 0.98:
+        if same_generated_recipe:
+            union(left, right)
+            reasons[frozenset({left, right})] = "same_generated_strategy_recipe"
+        elif same_template and same_mode and abs(corr_value) >= 0.98:
             union(left, right)
             reasons[frozenset({left, right})] = "same_template_and_near_identical_returns"
 
@@ -567,8 +575,23 @@ def _build_strategy_deduplication(
         "removed_component_count": removed_count,
         "deduped_component_ids": [component_id for component_id in allocation_ids if component_id in set(deduped)],
         "groups": groups,
-        "rule": "same template + same analysis mode + absolute return correlation >= 0.98",
+        "rule": "same generated recipe OR same template + same analysis mode + absolute return correlation >= 0.98",
     }
+
+
+def _generated_recipe_key(component: dict[str, Any]) -> str:
+    source = str(component.get("source", "saved_workbench"))
+    warnings = {str(warning) for warning in component.get("bias_warnings", [])}
+    name = str(component.get("strategy_name", ""))
+    generated = source == "factory_generated" or "FACTORY_GENERATED_NOT_PREREGISTERED" in warnings or "Factory " in name
+    if not generated:
+        return ""
+    normalized_name = re.sub(r"^Materialized\s+", "", name, flags=re.IGNORECASE).strip().lower()
+    normalized_name = re.sub(r"\s+", " ", normalized_name)
+    template = str(component.get("template", "")).strip().lower()
+    mode = str(component.get("analysis_mode", "")).strip().lower()
+    cost = str(component.get("cost_bps", "")).strip()
+    return "|".join([normalized_name, template, mode, cost])
 
 
 def _build_portfolio_search(
