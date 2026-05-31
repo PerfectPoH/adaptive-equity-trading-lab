@@ -2590,6 +2590,12 @@ def render_portfolio_lab() -> None:
         f"Component sources in this diagnostic: saved workbench = {source_summary.get('saved_workbench', 0)}, "
         f"factory generated = {source_summary.get('factory_generated', 0)}."
     )
+    if source_summary.get("factory_generated", 0):
+        st.warning(
+            "Factory-generated components are idea discovery only. The best basket can suggest a recipe, "
+            "but it cannot be treated as a research candidate until those components are converted into "
+            "explicit pre-registered Workbench runs."
+        )
 
     dedupe = preview.get("strategy_deduplication", {})
     search = preview.get("portfolio_search", {})
@@ -2632,6 +2638,13 @@ def render_portfolio_lab() -> None:
         with best_cols[3]:
             metric_card("Ex-best", f"{best.get('ex_best_net_return', 0.0):.2f}", "After removing strongest component")
         st.caption("Best governed basket components: " + ", ".join(search.get("best_component_labels", [])))
+        best_ids = set(search.get("best_basket_component_ids", []))
+        best_source_by_id = {str(component.get("component_id")): str(component.get("source", "saved_workbench")) for component in components}
+        if any(best_source_by_id.get(component_id) == "factory_generated" for component_id in best_ids):
+            st.warning(
+                "This best basket contains generated strategies. Read it as a hypothesis recipe: "
+                "promote nothing, pre-register the selected rules, then rerun with real artifacts."
+            )
         if st.button("Load best governed basket into selector", type="secondary", width="stretch"):
             st.session_state["portfolio_lab_pending_selected_ids"] = list(search.get("best_basket_component_ids", []))
             st.rerun()

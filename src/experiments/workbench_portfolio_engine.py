@@ -373,6 +373,16 @@ def _build_gate_panel(
 ) -> list[dict[str, Any]]:
     warnings = sorted({warning for component in components for warning in component.get("bias_warnings", [])})
     component_count = len(allocation)
+    allocated_ids = {str(row["component_id"]) for row in allocation}
+    factory_generated_ids = sorted(
+        str(component["component_id"])
+        for component in components
+        if str(component.get("component_id")) in allocated_ids
+        and (
+            str(component.get("source", "saved_workbench")) == "factory_generated"
+            or "FACTORY_GENERATED_NOT_PREREGISTERED" in component.get("bias_warnings", [])
+        )
+    )
     positive_total = float(contribution[contribution > 0].sum()) if not contribution.empty else 0.0
     top_share = float(contribution.iloc[0] / positive_total) if positive_total > 0 and not contribution.empty else 0.0
     best_component = str(contribution.index[0]) if not contribution.empty else ""
@@ -390,6 +400,15 @@ def _build_gate_panel(
             "status": "WARN" if warnings else "PASS",
             "value": warnings or "no_component_bias_warnings",
             "detail": "Any proxy, active-only, PIT, or survivorship warning keeps the portfolio diagnostic-only.",
+        },
+        {
+            "gate": "factory_generated_scope_gate",
+            "status": "BLOCK" if factory_generated_ids else "PASS",
+            "value": {
+                "factory_generated_component_count": len(factory_generated_ids),
+                "factory_generated_component_ids": factory_generated_ids[:12],
+            },
+            "detail": "Generated catalog components are hypothesis discovery recipes, not pre-registered evidence.",
         },
         {
             "gate": "component_count_gate",
@@ -877,6 +896,7 @@ def _build_action_plan(
 
 def _human_decision_title(decision: str) -> str:
     return {
+        "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY": "Factory search is diagnostic-only",
         "PORTFOLIO_ARCHIVE_CONCENTRATION_FAILED": "Failed because return is too concentrated",
         "PORTFOLIO_ARCHIVE_COST_STRESS_FAILED": "Failed because costs erase the basket",
         "PORTFOLIO_ARCHIVE_INSUFFICIENT_COMPONENTS": "Failed because there are too few components",
@@ -887,6 +907,7 @@ def _human_decision_title(decision: str) -> str:
 
 def _human_decision_action(decision: str) -> str:
     return {
+        "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY": "Convert the generated components into explicit Workbench manifests, pre-register them, and rerun before reading candidate status.",
         "PORTFOLIO_ARCHIVE_CONCENTRATION_FAILED": "Reduce the top contributor weight or add genuinely different components before rerunning.",
         "PORTFOLIO_ARCHIVE_COST_STRESS_FAILED": "Lower turnover, use longer holding periods, or test execution assumptions before trusting the result.",
         "PORTFOLIO_ARCHIVE_INSUFFICIENT_COMPONENTS": "Add at least three saved strategy components before reading portfolio-level metrics.",
@@ -903,7 +924,9 @@ def _weighted_cost_drag(components: list[dict[str, Any]], allocation: list[dict[
 def _build_final_decision(gate_panel: list[dict[str, Any]], returns: pd.Series, components: list[dict[str, Any]]) -> dict[str, Any]:
     blockers = [row["gate"] for row in gate_panel if row["status"] == "BLOCK"]
     decision = "PORTFOLIO_DIAGNOSTIC_COMPLETE_NO_PROMOTION"
-    if "component_count_gate" in blockers:
+    if "factory_generated_scope_gate" in blockers:
+        decision = "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY"
+    elif "component_count_gate" in blockers:
         decision = "PORTFOLIO_ARCHIVE_INSUFFICIENT_COMPONENTS"
     elif "ex_best_component_gate" in blockers:
         decision = "PORTFOLIO_ARCHIVE_EX_BEST_COMPONENT_FAILED"

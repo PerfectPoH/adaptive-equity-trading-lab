@@ -206,6 +206,75 @@ def test_portfolio_diagnostic_searches_bounded_best_basket_without_promoting(tmp
     assert diagnostic["final_decision"]["promotion_allowed"] is False
 
 
+def test_portfolio_diagnostic_blocks_factory_generated_candidate_status() -> None:
+    components = [
+        {
+            "component_id": "FACTORY-MOM-001",
+            "strategy_name": "Factory Momentum 180d 100bps",
+            "template": "Momentum",
+            "analysis_mode": "Trading",
+            "decision": "FACTORY_GENERATED_LOCAL_DRY_RUN",
+            "promotion_allowed": False,
+            "bias_warnings": ["FACTORY_GENERATED_NOT_PREREGISTERED"],
+            "trade_count": 4,
+            "net_return_sum": 0.16,
+            "cost_bps": 100,
+            "source": "factory_generated",
+            "inline_returns": [
+                {"period": "2026-01-01", "net_return": 0.04},
+                {"period": "2026-01-02", "net_return": 0.03},
+                {"period": "2026-01-03", "net_return": 0.05},
+                {"period": "2026-01-04", "net_return": 0.04},
+            ],
+        },
+        {
+            "component_id": "FACTORY-MR-001",
+            "strategy_name": "Factory Mean Reversion 180d 100bps",
+            "template": "Mean Reversion",
+            "analysis_mode": "Trading",
+            "decision": "FACTORY_GENERATED_LOCAL_DRY_RUN",
+            "promotion_allowed": False,
+            "bias_warnings": ["FACTORY_GENERATED_NOT_PREREGISTERED"],
+            "trade_count": 4,
+            "net_return_sum": 0.12,
+            "cost_bps": 100,
+            "source": "factory_generated",
+            "inline_returns": [
+                {"period": "2026-01-01", "net_return": 0.02},
+                {"period": "2026-01-02", "net_return": 0.04},
+                {"period": "2026-01-03", "net_return": 0.03},
+                {"period": "2026-01-04", "net_return": 0.03},
+            ],
+        },
+        {
+            "component_id": "FACTORY-DB-001",
+            "strategy_name": "Factory Dollar-Bar Microstructure 180d 100bps",
+            "template": "Dollar-Bar Microstructure",
+            "analysis_mode": "Trading",
+            "decision": "FACTORY_GENERATED_LOCAL_DRY_RUN",
+            "promotion_allowed": False,
+            "bias_warnings": ["FACTORY_GENERATED_NOT_PREREGISTERED"],
+            "trade_count": 4,
+            "net_return_sum": 0.08,
+            "cost_bps": 100,
+            "source": "factory_generated",
+            "inline_returns": [
+                {"period": "2026-01-01", "net_return": 0.01},
+                {"period": "2026-01-02", "net_return": 0.02},
+                {"period": "2026-01-03", "net_return": 0.02},
+                {"period": "2026-01-04", "net_return": 0.03},
+            ],
+        },
+    ]
+
+    diagnostic = run_portfolio_diagnostic(components, policy="equal_weight")
+
+    factory_gate = next(gate for gate in diagnostic["gate_panel"] if gate["gate"] == "factory_generated_scope_gate")
+    assert factory_gate["status"] == "BLOCK"
+    assert diagnostic["final_decision"]["decision"] == "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY"
+    assert diagnostic["final_decision"]["promotion_allowed"] is False
+
+
 def test_persist_portfolio_diagnostic_writes_required_artifacts(tmp_path: Path) -> None:
     _component(tmp_path, "alpha1", template="Mean Reversion", decision="RESEARCH_CANDIDATE_ONLY", returns=[0.02, 0.03, 0.01])
     _component(tmp_path, "alpha2", template="Momentum", decision="RESEARCH_CANDIDATE_ONLY", returns=[0.01, -0.02, 0.04])
