@@ -2473,12 +2473,25 @@ def render_portfolio_lab() -> None:
         st.error("Portfolio blockers: " + ", ".join(decision["blockers"]))
     else:
         st.success("No hard portfolio blocker fired, but the diagnostic remains non-promotable.")
+    action_plan = preview.get("action_plan", [])
+    if action_plan:
+        st.markdown("**Recommended next actions**")
+        for action in action_plan[:4]:
+            severity = str(action.get("severity", "warn")).lower()
+            message = f"**{action.get('title', 'Action')}**: {action.get('action', '')}"
+            if severity == "block":
+                st.error(message)
+            elif severity == "pass":
+                st.success(message)
+            else:
+                st.warning(message)
 
     allocation = pd.DataFrame(preview["allocation"])
     equity = pd.DataFrame(preview["equity_curve"])
     contribution = pd.DataFrame(preview["contribution"])
     gates = pd.DataFrame(preview["gate_panel"])
     corr = pd.DataFrame(preview["correlation_matrix"])
+    high_corr = pd.DataFrame(preview.get("high_correlation_pairs", []))
 
     chart_cols = st.columns(2)
     with chart_cols[0]:
@@ -2492,6 +2505,11 @@ def render_portfolio_lab() -> None:
         st.markdown("**Drawdown path**")
         st.caption("How to read it: this shows the local pain required to hold the basket through bad periods.")
         if not equity.empty:
+            st.info(
+                f"Context: max drawdown is {summary['max_drawdown']:.2f} additive return units "
+                f"({summary['max_drawdown_pct']:.1f}% if one unit is read as 100%). "
+                "Because Workbench dry-runs are proxy artifacts, use this as relative pain, not account P&L."
+            )
             fig = px.area(equity, x="period", y="drawdown")
             fig.update_traces(line_color="#d12f5f", fillcolor="rgba(209,47,95,0.25)")
             fig.update_layout(height=340, margin=dict(l=10, r=10, t=20, b=10), yaxis_title="Drawdown")
@@ -2514,6 +2532,43 @@ def render_portfolio_lab() -> None:
             fig = go.Figure(data=go.Heatmap(z=corr.to_numpy(), x=list(corr.columns), y=list(corr.index), colorscale="RdBu", zmin=-1, zmax=1))
             fig.update_layout(height=340, margin=dict(l=10, r=10, t=20, b=10))
             st.plotly_chart(fig, width="stretch")
+            if high_corr.empty:
+                st.success("No component pair crossed the high-correlation threshold. The basket is not obviously one duplicated bet.")
+            else:
+                first_pair = high_corr.iloc[0]
+                st.warning(
+                    f"{len(high_corr)} highly correlated pair(s) found. First action: remove either "
+                    f"{first_pair['left_strategy']} or {first_pair['right_strategy']} and rerun."
+                )
+                st.dataframe(high_corr, width="stretch", hide_index=True)
+
+    st.markdown("**What-if removal**")
+    st.caption("Remove one selected component and recompute the portfolio locally before changing the actual basket.")
+    what_if_options = ["No removal"] + [row["component_id"] for row in preview["allocation"]]
+    what_if_remove = st.selectbox(
+        "Component to remove",
+        what_if_options,
+        format_func=lambda component_id: "No removal"
+        if component_id == "No removal"
+        else labels.get(component_id, component_id),
+    )
+    if what_if_remove != "No removal":
+        reduced_ids = [component_id for component_id in selected_ids if component_id != what_if_remove]
+        what_if = build_portfolio_lab_preview(
+            reduced_ids,
+            policy=policy,
+            max_component_weight=max_component_weight,
+            max_rejected_weight=max_rejected_weight,
+            max_convex_weight=max_convex_weight,
+        )
+        delta = float(what_if["summary"]["total_net_return"]) - float(summary["total_net_return"])
+        st.info(
+            f"Without {labels.get(what_if_remove, what_if_remove)}: decision "
+            f"{what_if['final_decision']['decision']}, net sum {what_if['summary']['total_net_return']:.2f} "
+            f"({delta:+.2f} vs current), max drawdown {what_if['summary']['max_drawdown']:.2f}."
+        )
+        for action in what_if.get("action_plan", [])[:2]:
+            st.caption(f"{action['title']}: {action['action']}")
 
     st.markdown("**Allocation table**")
     st.caption("Weights are explainable policy outputs, not optimized hindsight weights.")

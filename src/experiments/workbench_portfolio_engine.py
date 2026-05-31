@@ -275,6 +275,8 @@ def run_portfolio_diagnostic(
     correlation = matrix.reindex(columns=weights.index).corr().fillna(0.0) if len(weights) > 1 else pd.DataFrame()
     gate_panel = _build_gate_panel(components, matrix, allocation, returns, drawdown, contribution, correlation)
     final_decision = _build_final_decision(gate_panel, returns, components)
+    high_correlation_pairs = _high_correlation_pairs(correlation, allocation)
+    action_plan = _build_action_plan(gate_panel, allocation, contribution, high_correlation_pairs, final_decision)
     signature = _portfolio_signature(components, policy, max_component_weight, max_rejected_weight, max_convex_weight)
     equity_curve = [
         {
@@ -302,8 +304,10 @@ def run_portfolio_diagnostic(
         "policy": policy,
         "total_net_return": round(float(returns.sum() if not returns.empty else 0.0), 8),
         "max_drawdown": round(float(drawdown.min() if not drawdown.empty else 0.0), 8),
+        "max_drawdown_pct": round(float((drawdown.min() if not drawdown.empty else 0.0) * 100.0), 4),
         "time_underwater_ratio": round(float((drawdown < 0).mean() if not drawdown.empty else 0.0), 8),
         "top_component_contribution": round(float((contribution.iloc[0] / max(contribution[contribution > 0].sum(), 1e-12)) if not contribution.empty and contribution.iloc[0] > 0 else 0.0), 8),
+        "high_correlation_pair_count": len(high_correlation_pairs),
     }
     return {
         "portfolio_manifest": {
@@ -325,6 +329,8 @@ def run_portfolio_diagnostic(
         "drawdown": [{"period": row["period"], "drawdown": row["drawdown"]} for row in equity_curve],
         "correlation_matrix": correlation.reset_index(names="component_id").to_dict("records") if not correlation.empty else [],
         "contribution": [{"component_id": key, "contribution": round(float(value), 8)} for key, value in contribution.items()],
+        "high_correlation_pairs": high_correlation_pairs,
+        "action_plan": action_plan,
         "gate_panel": gate_panel,
         "final_decision": final_decision,
     }
@@ -423,6 +429,115 @@ def _average_abs_correlation(correlation: pd.DataFrame) -> float:
     return sum(values) / len(values) if values else 0.0
 
 
+def _high_correlation_pairs(correlation: pd.DataFrame, allocation: list[dict[str, Any]], *, threshold: float = 0.75) -> list[dict[str, Any]]:
+    if correlation.empty or len(correlation) < 2:
+        return []
+    names = {row["component_id"]: row.get("strategy_name", row["component_id"]) for row in allocation}
+    pairs: list[dict[str, Any]] = []
+    for row_index, left in enumerate(correlation.index):
+        for column_index, right in enumerate(correlation.columns):
+            if column_index <= row_index:
+                continue
+            value = float(correlation.loc[left, right])
+            if abs(value) >= threshold:
+                pairs.append(
+                    {
+                        "left_component_id": str(left),
+                        "right_component_id": str(right),
+                        "left_strategy": names.get(str(left), str(left)),
+                        "right_strategy": names.get(str(right), str(right)),
+                        "correlation": round(value, 8),
+                    }
+                )
+    return sorted(pairs, key=lambda row: abs(float(row["correlation"])), reverse=True)
+
+
+def _build_action_plan(
+    gate_panel: list[dict[str, Any]],
+    allocation: list[dict[str, Any]],
+    contribution: pd.Series,
+    high_correlation_pairs: list[dict[str, Any]],
+    final_decision: dict[str, Any],
+) -> list[dict[str, str]]:
+    gates = {row["gate"]: row for row in gate_panel}
+    name_by_id = {row["component_id"]: row.get("strategy_name", row["component_id"]) for row in allocation}
+    actions: list[dict[str, str]] = []
+    if final_decision["blockers"]:
+        actions.append(
+            {
+                "severity": "block",
+                "title": _human_decision_title(str(final_decision["decision"])),
+                "action": _human_decision_action(str(final_decision["decision"])),
+            }
+        )
+    if high_correlation_pairs:
+        first = high_correlation_pairs[0]
+        actions.append(
+            {
+                "severity": "warn",
+                "title": f"{len(high_correlation_pairs)} highly correlated component pair(s)",
+                "action": f"Start by removing either {first['left_strategy']} or {first['right_strategy']}, then rerun. They appear to be overlapping bets.",
+            }
+        )
+    concentration = gates.get("component_concentration_gate", {})
+    if concentration.get("status") == "BLOCK" and not contribution.empty:
+        best_id = str(contribution.index[0])
+        actions.append(
+            {
+                "severity": "block",
+                "title": "One component dominates the portfolio",
+                "action": f"Remove or cap {name_by_id.get(best_id, best_id)}, then add at least two components from different sleeves before rerunning.",
+            }
+        )
+    cost_stress = gates.get("cost_stress_gate", {})
+    if cost_stress.get("status") == "BLOCK" and final_decision["decision"] != "PORTFOLIO_ARCHIVE_COST_STRESS_FAILED":
+        actions.append(
+            {
+                "severity": "block",
+                "title": "The basket fails under tougher costs",
+                "action": "Try longer-horizon components, lower-turnover rules, or maker-style execution assumptions. Do not treat the current basket as robust.",
+            }
+        )
+    data_gate = gates.get("data_contract_gate", {})
+    if data_gate.get("status") == "WARN":
+        actions.append(
+            {
+                "severity": "warn",
+                "title": "Data quality keeps this diagnostic-only",
+                "action": "Resolve PIT, delisted, or proxy-data warnings before interpreting this as real strategy evidence.",
+            }
+        )
+    if not actions:
+        actions.append(
+            {
+                "severity": "pass",
+                "title": "No immediate structural action",
+                "action": "The local portfolio passed current gates, but promotion is still forbidden until a real governed backtest exists.",
+            }
+        )
+    return actions
+
+
+def _human_decision_title(decision: str) -> str:
+    return {
+        "PORTFOLIO_ARCHIVE_CONCENTRATION_FAILED": "Failed because return is too concentrated",
+        "PORTFOLIO_ARCHIVE_COST_STRESS_FAILED": "Failed because costs erase the basket",
+        "PORTFOLIO_ARCHIVE_INSUFFICIENT_COMPONENTS": "Failed because there are too few components",
+        "PORTFOLIO_ARCHIVE_EX_BEST_COMPONENT_FAILED": "Failed because the best component carries the portfolio",
+        "PORTFOLIO_ARCHIVE_DATA_CONTRACT_FAILED": "Failed because the data contract is not strong enough",
+    }.get(decision, decision.replace("_", " ").title())
+
+
+def _human_decision_action(decision: str) -> str:
+    return {
+        "PORTFOLIO_ARCHIVE_CONCENTRATION_FAILED": "Reduce the top contributor weight or add genuinely different components before rerunning.",
+        "PORTFOLIO_ARCHIVE_COST_STRESS_FAILED": "Lower turnover, use longer holding periods, or test execution assumptions before trusting the result.",
+        "PORTFOLIO_ARCHIVE_INSUFFICIENT_COMPONENTS": "Add at least three saved strategy components before reading portfolio-level metrics.",
+        "PORTFOLIO_ARCHIVE_EX_BEST_COMPONENT_FAILED": "Remove the best component and rebuild the basket; if the sign flips, the portfolio is not diversified.",
+        "PORTFOLIO_ARCHIVE_DATA_CONTRACT_FAILED": "Fix data-quality blockers before using this as evidence.",
+    }.get(decision, "Inspect the blocking gates and rerun after changing one thing at a time.")
+
+
 def _weighted_cost_drag(components: list[dict[str, Any]], allocation: list[dict[str, Any]]) -> float:
     cost_by_id = {str(component["component_id"]): float(component.get("cost_bps", 0)) / 10000.0 for component in components}
     return sum(float(row["weight"]) * cost_by_id.get(row["component_id"], 0.0) for row in allocation)
@@ -485,7 +600,9 @@ def persist_portfolio_diagnostic(diagnostic: dict[str, Any], *, root: Path = Pat
         "portfolio_equity_curve_path": output_dir / "portfolio_equity_curve.csv",
         "portfolio_drawdown_path": output_dir / "portfolio_drawdown.csv",
         "portfolio_correlation_matrix_path": output_dir / "portfolio_correlation_matrix.csv",
+        "portfolio_high_correlation_pairs_path": output_dir / "portfolio_high_correlation_pairs.csv",
         "portfolio_gate_panel_path": output_dir / "portfolio_gate_panel.json",
+        "portfolio_action_plan_path": output_dir / "portfolio_action_plan.json",
         "portfolio_final_decision_path": output_dir / "portfolio_final_decision.json",
         "portfolio_vault_report_path": output_dir / "portfolio_vault_report.md",
     }
@@ -496,7 +613,9 @@ def persist_portfolio_diagnostic(diagnostic: dict[str, Any], *, root: Path = Pat
     pd.DataFrame(diagnostic["equity_curve"]).to_csv(paths["portfolio_equity_curve_path"], index=False)
     pd.DataFrame(diagnostic["drawdown"]).to_csv(paths["portfolio_drawdown_path"], index=False)
     pd.DataFrame(diagnostic["correlation_matrix"]).to_csv(paths["portfolio_correlation_matrix_path"], index=False)
+    pd.DataFrame(diagnostic["high_correlation_pairs"]).to_csv(paths["portfolio_high_correlation_pairs_path"], index=False)
     _write_json(paths["portfolio_gate_panel_path"], diagnostic["gate_panel"])
+    _write_json(paths["portfolio_action_plan_path"], diagnostic["action_plan"])
     _write_json(paths["portfolio_final_decision_path"], diagnostic["final_decision"])
     paths["portfolio_vault_report_path"].write_text(_portfolio_report(diagnostic), encoding="utf-8")
     return {key: str(value) for key, value in paths.items()}
@@ -521,7 +640,12 @@ def _portfolio_report(diagnostic: dict[str, Any]) -> str:
         f"- policy: `{summary['policy']}`",
         f"- total_net_return: `{summary['total_net_return']}`",
         f"- max_drawdown: `{summary['max_drawdown']}`",
+        f"- max_drawdown_pct_context: `{summary['max_drawdown_pct']}`",
         f"- time_underwater_ratio: `{summary['time_underwater_ratio']}`",
+        "",
+        "## Recommended Actions",
+        "",
+        *[f"- `{row['severity']}` {row['title']}: {row['action']}" for row in diagnostic.get("action_plan", [])],
         "",
         "## Governance",
         "",

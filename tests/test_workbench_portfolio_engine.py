@@ -148,6 +148,22 @@ def test_run_portfolio_diagnostic_emits_gates_and_never_promotes(tmp_path: Path)
     assert "ex_best_component_gate" in gate_names
     assert "cost_stress_gate" in gate_names
     assert "correlation_gate" in gate_names
+    assert diagnostic["action_plan"]
+    assert diagnostic["summary"]["max_drawdown_pct"] <= 0
+
+
+def test_portfolio_diagnostic_explains_high_correlation_action(tmp_path: Path) -> None:
+    same_returns = [0.01, -0.02, 0.03, 0.04]
+    _component(tmp_path, "one", template="Momentum", decision="RESEARCH_CANDIDATE_ONLY", returns=same_returns)
+    _component(tmp_path, "two", template="Custom Rule Builder", decision="RESEARCH_CANDIDATE_ONLY", returns=same_returns)
+    _component(tmp_path, "three", template="Mean Reversion", decision="RESEARCH_CANDIDATE_ONLY", returns=[-0.01, 0.01, -0.02, 0.02])
+    components = load_workbench_portfolio_components(root=tmp_path)
+
+    diagnostic = run_portfolio_diagnostic(components, policy="equal_weight")
+
+    assert diagnostic["summary"]["high_correlation_pair_count"] >= 1
+    assert diagnostic["high_correlation_pairs"][0]["correlation"] == 1.0
+    assert any("highly correlated" in action["title"] for action in diagnostic["action_plan"])
 
 
 def test_persist_portfolio_diagnostic_writes_required_artifacts(tmp_path: Path) -> None:
@@ -167,7 +183,9 @@ def test_persist_portfolio_diagnostic_writes_required_artifacts(tmp_path: Path) 
         "portfolio_equity_curve_path",
         "portfolio_drawdown_path",
         "portfolio_correlation_matrix_path",
+        "portfolio_high_correlation_pairs_path",
         "portfolio_gate_panel_path",
+        "portfolio_action_plan_path",
         "portfolio_final_decision_path",
         "portfolio_vault_report_path",
     }

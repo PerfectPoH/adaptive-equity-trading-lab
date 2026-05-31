@@ -1,0 +1,8 @@
+left_component_id,right_component_id,left_strategy,right_strategy,correlation
+ef3f1ebb21d03d5c,ee5692c4832db94b,My falsifiable strategy,9:15,1.0
+7d30471f7325a2a8,f8e4773a916f0f75,gg,My falsifiable strategy,1.0
+7d30471f7325a2a8,08a55727092fc895,gg,My falsifiable strategy,1.0
+f8e4773a916f0f75,08a55727092fc895,My falsifiable strategy,My falsifiable strategy,1.0
+e8cde4045a54b14a,64880f270f8f6861,My falsifiable strategy,My falsifiable strategy,0.99135437
+ef3f1ebb21d03d5c,0dc08daefa67c12e,My falsifiable strategy,9:15,0.77555164
+0dc08daefa67c12e,ee5692c4832db94b,9:15,9:15,0.77555164
