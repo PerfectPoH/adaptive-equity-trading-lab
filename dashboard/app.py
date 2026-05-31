@@ -51,6 +51,7 @@ from dashboard.lab_dashboard_data import (
     build_portfolio_preregistration_approval_gate,
     build_portfolio_preregistration_draft,
     build_portfolio_frozen_recipe_trial,
+    build_portfolio_external_data_backtest_gate,
     build_separate_portfolio_trial_dry_run,
     build_strategy_factory_components,
     display_safe_records,
@@ -63,6 +64,7 @@ from dashboard.lab_dashboard_data import (
     persist_portfolio_preregistration_approval_gate,
     persist_portfolio_preregistration_draft,
     persist_portfolio_frozen_recipe_trial,
+    persist_portfolio_external_data_backtest_gate,
     persist_separate_portfolio_trial_dry_run,
     portfolio_lab_component_table,
 )
@@ -2788,6 +2790,28 @@ def render_portfolio_lab() -> None:
             with frozen_cols[3]:
                 metric_card("Max weight", f"{float(frozen.get('weight_contract', {}).get('max_component_weight', 0.0)):.0%}", "No optimization")
             st.caption(f"Frozen files: {paths.get('trial_report_path', '')} and {paths.get('final_decision_path', '')}")
+            if st.button("Create true-backtest data gate", type="secondary", width="stretch"):
+                data_gate = build_portfolio_external_data_backtest_gate(frozen)
+                data_gate_paths = persist_portfolio_external_data_backtest_gate(data_gate, root=REPO_ROOT)
+                st.session_state["portfolio_lab_external_data_gate_result"] = {"gate": data_gate, "paths": data_gate_paths}
+                st.rerun()
+        if "portfolio_lab_external_data_gate_result" in st.session_state:
+            data_gate_result = st.session_state["portfolio_lab_external_data_gate_result"]
+            data_gate = data_gate_result.get("gate", {})
+            paths = data_gate_result.get("paths", {})
+            st.warning(
+                f"True backtest gate: {data_gate.get('status', 'UNKNOWN')}. "
+                "No provider query or market-data download is allowed until an admissible PIT/delisted source is selected."
+            )
+            st.caption(f"Data gate files: {paths.get('gate_path', '')} and {paths.get('final_decision_path', '')}")
+            with st.expander("Open required external-data contract"):
+                st.json(
+                    {
+                        "required_before_backtest": data_gate.get("required_before_backtest", []),
+                        "provider_candidates": data_gate.get("provider_candidates", []),
+                        "minimum_backtest_contract": data_gate.get("minimum_backtest_contract", {}),
+                    }
+                )
         with st.expander("Open search controls and top candidates"):
             st.json(
                 {

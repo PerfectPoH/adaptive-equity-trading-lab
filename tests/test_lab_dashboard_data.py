@@ -32,6 +32,7 @@ from dashboard.lab_dashboard_data import (
     build_portfolio_preregistration_approval_gate,
     build_separate_portfolio_trial_dry_run,
     build_portfolio_frozen_recipe_trial,
+    build_portfolio_external_data_backtest_gate,
     display_safe_records,
     delisted_data_source_gate_payload,
     load_portfolio_lab_components,
@@ -47,6 +48,7 @@ from dashboard.lab_dashboard_data import (
     persist_portfolio_preregistration_approval_gate,
     persist_separate_portfolio_trial_dry_run,
     persist_portfolio_frozen_recipe_trial,
+    persist_portfolio_external_data_backtest_gate,
     write_workbench_phase_report,
     build_strategy_chart_story,
     classify_strategy_status,
@@ -813,6 +815,32 @@ def test_portfolio_frozen_recipe_uses_fixed_weights_and_validation_split(tmp_pat
 
     paths = persist_portfolio_frozen_recipe_trial(frozen, root=tmp_path)
     assert Path(paths["trial_report_path"]).exists()
+    assert Path(paths["final_decision_path"]).exists()
+    assert Path(paths["markdown_path"]).exists()
+
+
+def test_portfolio_external_data_gate_blocks_without_pit_source(tmp_path: Path) -> None:
+    components = build_strategy_factory_components(max_variants=24)
+    selected_ids = [component["component_id"] for component in components[:3]]
+    draft = build_portfolio_preregistration_draft(components, selected_ids)
+    gate = build_portfolio_preregistration_approval_gate(draft, approved_by="barak")
+    trial = build_separate_portfolio_trial_dry_run(draft, gate, components)
+    frozen = build_portfolio_frozen_recipe_trial(trial, gate, components)
+
+    data_gate = build_portfolio_external_data_backtest_gate(frozen)
+
+    assert data_gate["status"] == "BLOCKED_EXTERNAL_DATA_CONTRACT_REQUIRED"
+    assert data_gate["promotion_allowed"] is False
+    assert data_gate["provider_query_allowed"] is False
+    assert data_gate["market_data_download_allowed"] is False
+    assert data_gate["required_before_backtest"]
+    assert "survivorship_free_universe" in data_gate["required_before_backtest"]
+    assert "point_in_time_membership" in data_gate["required_before_backtest"]
+    assert data_gate["final_decision"]["decision"] == "PORTFOLIO_TRUE_BACKTEST_BLOCKED_DATA_GATE"
+    assert "external_data_contract_gate" in data_gate["final_decision"]["blockers"]
+
+    paths = persist_portfolio_external_data_backtest_gate(data_gate, root=tmp_path)
+    assert Path(paths["gate_path"]).exists()
     assert Path(paths["final_decision_path"]).exists()
     assert Path(paths["markdown_path"]).exists()
 

@@ -25,6 +25,7 @@ WORKBENCH_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-WORKBENCH"
 PORTFOLIO_PREREG_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-PREREG"
 PORTFOLIO_TRIAL_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-TRIALS"
 PORTFOLIO_FROZEN_RECIPE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-FROZEN-RECIPES"
+PORTFOLIO_EXTERNAL_DATA_GATE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-EXTERNAL-DATA-GATES"
 DELISTED_DATA_SOURCE_GATE_DIR = Path("experiments/provider_aware_research/delisted_data_source_gate_20260525")
 ORB_930_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "ORB-930-CROSS-ASSET-BACKTEST-001"
 WORKBENCH_CONFIGURED_LARGECAP_SYMBOLS = {
@@ -2874,6 +2875,132 @@ def persist_portfolio_frozen_recipe_trial(trial: dict[str, Any], *, root: Path =
     return {
         "output_dir": str(output_dir),
         "trial_report_path": str(trial_report_path),
+        "final_decision_path": str(final_decision_path),
+        "markdown_path": str(markdown_path),
+    }
+
+
+def build_portfolio_external_data_backtest_gate(frozen_trial: dict[str, Any]) -> dict[str, Any]:
+    """Create the hard gate that must pass before a frozen recipe can become a real backtest."""
+
+    frozen_id = str(frozen_trial.get("frozen_recipe_id", "unknown"))
+    required = [
+        "survivorship_free_universe",
+        "point_in_time_membership",
+        "delisted_symbol_prices",
+        "listing_and_delisting_dates",
+        "split_dividend_adjusted_ohlcv",
+        "component_specific_data_resolution",
+        "provider_entitlement_manifest",
+        "raw_payload_retention_policy",
+        "benchmark_panel",
+    ]
+    component_templates = sorted(
+        {
+            str(component.get("template", "UNKNOWN"))
+            for component in frozen_trial.get("portfolio_diagnostic", {}).get("components", [])
+        }
+    )
+    provider_candidates = [
+        {
+            "provider": "CRSP/WRDS",
+            "status": "preferred_but_currently_unavailable",
+            "covers": ["survivorship_free_universe", "delisted_symbol_prices", "corporate_actions", "PIT membership"],
+            "blocker": "access_not_confirmed",
+        },
+        {
+            "provider": "Norgate Data",
+            "status": "candidate_requires_subscription",
+            "covers": ["delisted_symbol_prices", "listing_dates", "adjusted_daily_prices"],
+            "blocker": "subscription_and_license_not_confirmed",
+        },
+        {
+            "provider": "Sharadar/Nasdaq Data Link",
+            "status": "candidate_requires_entitlement_probe",
+            "covers": ["fundamentals", "daily_prices", "corporate_actions"],
+            "blocker": "PIT_membership_and_delisted_coverage_not_verified",
+        },
+        {
+            "provider": "Polygon/AlphaVantage/Yahoo free tiers",
+            "status": "rejected_for_promotion",
+            "covers": ["active_symbols_or_partial_prices"],
+            "blocker": "active_only_or_missing_PIT_delisted_metadata",
+        },
+    ]
+    blockers = ["external_data_contract_gate"]
+    if "factory_generated_scope_gate" in frozen_trial.get("final_decision", {}).get("blockers", []):
+        blockers.append("factory_generated_scope_gate")
+    return {
+        "gate_id": f"PORTFOLIO-TRUE-BACKTEST-DATA-GATE-{frozen_id.upper()}",
+        "frozen_recipe_id": frozen_id,
+        "source_trial_id": frozen_trial.get("trial_id", "UNKNOWN"),
+        "status": "BLOCKED_EXTERNAL_DATA_CONTRACT_REQUIRED",
+        "promotion_allowed": False,
+        "paper_trading_allowed": False,
+        "live_trading_allowed": False,
+        "provider_query_allowed": False,
+        "market_data_download_allowed": False,
+        "backtest_allowed": False,
+        "provider_query_performed": False,
+        "market_data_download_performed": False,
+        "required_before_backtest": required,
+        "component_templates": component_templates,
+        "provider_candidates": provider_candidates,
+        "minimum_backtest_contract": {
+            "universe": "survivorship-free and point-in-time",
+            "prices": "adjusted OHLCV with delisted symbols retained",
+            "time_split": "frozen train/validation/test chronology; no recipe search on test",
+            "benchmarks": ["SPY", "IWM", "equal-weight universe benchmark"],
+            "costs": "component costs retained or increased; no cost relaxation",
+            "promotion": "still forbidden until a separate final decision passes all gates",
+        },
+        "next_allowed_action": "obtain_or_probe_admissible_data_source_before_backtest",
+        "final_decision": {
+            "decision": "PORTFOLIO_TRUE_BACKTEST_BLOCKED_DATA_GATE",
+            "blockers": blockers,
+            "promotion_allowed": False,
+            "paper_trading_allowed": False,
+            "live_trading_allowed": False,
+            "provider_query_allowed": False,
+            "market_data_download_allowed": False,
+            "provider_query_performed": False,
+            "market_data_download_performed": False,
+            "portfolio_backtest_performed": False,
+            "runner_mode": "external_data_backtest_gate_only",
+        },
+    }
+
+
+def persist_portfolio_external_data_backtest_gate(gate: dict[str, Any], *, root: Path = Path(".")) -> dict[str, str]:
+    output_dir = Path(root) / PORTFOLIO_EXTERNAL_DATA_GATE_OUTPUT_DIR / str(gate.get("frozen_recipe_id", "unknown"))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    gate_path = output_dir / "portfolio_external_data_backtest_gate.json"
+    final_decision_path = output_dir / "final_decision.json"
+    markdown_path = output_dir / "portfolio_external_data_backtest_gate.md"
+    gate_path.write_text(json.dumps(_json_safe(gate), indent=2, sort_keys=True), encoding="utf-8")
+    final_decision_path.write_text(json.dumps(_json_safe(gate.get("final_decision", {})), indent=2, sort_keys=True), encoding="utf-8")
+    markdown_lines = [
+        f"# Portfolio True Backtest Data Gate: {gate.get('gate_id', 'UNKNOWN')}",
+        "",
+        f"- status: `{gate.get('status')}`",
+        f"- decision: `{gate.get('final_decision', {}).get('decision', 'UNKNOWN')}`",
+        "- provider_query_allowed: `false`",
+        "- market_data_download_allowed: `false`",
+        "- backtest_allowed: `false`",
+        "",
+        "## Required Before Backtest",
+        "",
+        *[f"- `{item}`" for item in gate.get("required_before_backtest", [])],
+        "",
+        "## Provider Candidates",
+        "",
+    ]
+    for candidate in gate.get("provider_candidates", []):
+        markdown_lines.append(f"- **{candidate['provider']}**: `{candidate['status']}` - blocker `{candidate['blocker']}`")
+    markdown_path.write_text("\n".join(markdown_lines), encoding="utf-8")
+    return {
+        "output_dir": str(output_dir),
+        "gate_path": str(gate_path),
         "final_decision_path": str(final_decision_path),
         "markdown_path": str(markdown_path),
     }
