@@ -951,7 +951,7 @@ def _human_decision_title(decision: str) -> str:
 
 def _human_decision_action(decision: str) -> str:
     return {
-        "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY": "Convert the generated components into explicit Workbench manifests, pre-register them, and rerun before reading candidate status.",
+        "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY": "Create and approve a portfolio pre-registration draft, then run a separate portfolio trial dry-run; do not reuse factory-search metrics as evidence.",
         "PORTFOLIO_ARCHIVE_CONCENTRATION_FAILED": "Reduce the top contributor weight or add genuinely different components before rerunning.",
         "PORTFOLIO_ARCHIVE_COST_STRESS_FAILED": "Lower turnover, use longer holding periods, or test execution assumptions before trusting the result.",
         "PORTFOLIO_ARCHIVE_INSUFFICIENT_COMPONENTS": "Add at least three saved strategy components before reading portfolio-level metrics.",

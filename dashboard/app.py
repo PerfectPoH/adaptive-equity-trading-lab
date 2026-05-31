@@ -50,6 +50,7 @@ from dashboard.lab_dashboard_data import (
     build_portfolio_lab_preview_from_components,
     build_portfolio_preregistration_approval_gate,
     build_portfolio_preregistration_draft,
+    build_separate_portfolio_trial_dry_run,
     build_strategy_factory_components,
     display_safe_records,
     load_workbench_strategy_cards,
@@ -60,6 +61,7 @@ from dashboard.lab_dashboard_data import (
     persist_portfolio_lab_preview,
     persist_portfolio_preregistration_approval_gate,
     persist_portfolio_preregistration_draft,
+    persist_separate_portfolio_trial_dry_run,
     portfolio_lab_component_table,
 )
 from src.experiments.workbench_package_runner import run_package_diagnostic
@@ -2736,6 +2738,26 @@ def render_portfolio_lab() -> None:
                 "Next allowed action is a separate portfolio trial dry-run only."
             )
             st.caption(f"Approval gate file: {paths.get('approval_gate_path', '')}")
+            if st.button("Run separate portfolio trial dry-run", type="primary", width="stretch"):
+                prereg = st.session_state.get("portfolio_lab_preregistration_result", {})
+                draft = prereg.get("draft", {})
+                trial = build_separate_portfolio_trial_dry_run(draft, gate, components, policy=policy)
+                trial_paths = persist_separate_portfolio_trial_dry_run(trial, root=REPO_ROOT)
+                st.session_state["portfolio_lab_separate_trial_result"] = {"trial": trial, "paths": trial_paths}
+                st.rerun()
+        if "portfolio_lab_separate_trial_result" in st.session_state:
+            separate_trial = st.session_state["portfolio_lab_separate_trial_result"]
+            trial = separate_trial.get("trial", {})
+            paths = separate_trial.get("paths", {})
+            final = trial.get("final_decision", {})
+            if trial.get("status") == "SEPARATE_PORTFOLIO_TRIAL_DRY_RUN_COMPLETE":
+                st.success(
+                    f"Separate portfolio trial dry-run complete: {final.get('decision', 'UNKNOWN')}. "
+                    "Promotion remains locked."
+                )
+            else:
+                st.error(f"Separate portfolio trial blocked: {trial.get('status', 'UNKNOWN')}")
+            st.caption(f"Trial files: {paths.get('trial_report_path', '')} and {paths.get('final_decision_path', '')}")
         with st.expander("Open search controls and top candidates"):
             st.json(
                 {

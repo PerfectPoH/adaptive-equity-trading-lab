@@ -30,6 +30,7 @@ from dashboard.lab_dashboard_data import (
     build_strategy_factory_components,
     build_portfolio_preregistration_draft,
     build_portfolio_preregistration_approval_gate,
+    build_separate_portfolio_trial_dry_run,
     display_safe_records,
     delisted_data_source_gate_payload,
     load_portfolio_lab_components,
@@ -43,6 +44,7 @@ from dashboard.lab_dashboard_data import (
     persist_workbench_strategy_package,
     persist_portfolio_preregistration_draft,
     persist_portfolio_preregistration_approval_gate,
+    persist_separate_portfolio_trial_dry_run,
     write_workbench_phase_report,
     build_strategy_chart_story,
     classify_strategy_status,
@@ -757,6 +759,29 @@ def test_portfolio_preregistration_approval_gate_preserves_safety_locks(tmp_path
     assert Path(paths["approval_gate_path"]).exists()
     loaded = json.loads(Path(paths["approval_gate_path"]).read_text(encoding="utf-8"))
     assert loaded["draft_id"] == draft["draft_id"]
+
+
+def test_separate_portfolio_trial_requires_approval_and_remains_non_promotable(tmp_path: Path) -> None:
+    components = build_strategy_factory_components(max_variants=24)
+    selected_ids = [component["component_id"] for component in components[:3]]
+    draft = build_portfolio_preregistration_draft(components, selected_ids)
+
+    blocked = build_separate_portfolio_trial_dry_run(draft, None, components)
+    assert blocked["status"] == "BLOCKED_APPROVAL_GATE_MISSING"
+    assert blocked["promotion_allowed"] is False
+
+    gate = build_portfolio_preregistration_approval_gate(draft, approved_by="barak")
+    trial = build_separate_portfolio_trial_dry_run(draft, gate, components)
+
+    assert trial["status"] == "SEPARATE_PORTFOLIO_TRIAL_DRY_RUN_COMPLETE"
+    assert trial["promotion_allowed"] is False
+    assert trial["portfolio_diagnostic"]["final_decision"]["promotion_allowed"] is False
+    assert trial["portfolio_diagnostic"]["final_decision"]["decision"] == "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY"
+    assert trial["trial_lineage"]["approval_gate_id"] == gate["approval_gate_id"]
+
+    paths = persist_separate_portfolio_trial_dry_run(trial, root=tmp_path)
+    assert Path(paths["trial_report_path"]).exists()
+    assert Path(paths["final_decision_path"]).exists()
 
 
 def test_portfolio_preview_can_include_factory_generated_components(tmp_path: Path) -> None:

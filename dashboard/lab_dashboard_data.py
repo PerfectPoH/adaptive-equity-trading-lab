@@ -23,6 +23,7 @@ PRICE_FILE = Path("experiments/provider_aware_research/data_inputs/databento_xmo
 LARGECAP_PRICE_FILE = Path("experiments/runs/20260508_173235_news_thr60/signals.csv")
 WORKBENCH_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-WORKBENCH"
 PORTFOLIO_PREREG_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-PREREG"
+PORTFOLIO_TRIAL_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-TRIALS"
 DELISTED_DATA_SOURCE_GATE_DIR = Path("experiments/provider_aware_research/delisted_data_source_gate_20260525")
 ORB_930_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "ORB-930-CROSS-ASSET-BACKTEST-001"
 WORKBENCH_CONFIGURED_LARGECAP_SYMBOLS = {
@@ -2651,6 +2652,81 @@ def persist_portfolio_preregistration_approval_gate(gate: dict[str, Any], *, roo
     return {
         "output_dir": str(output_dir),
         "approval_gate_path": str(approval_gate_path),
+    }
+
+
+def build_separate_portfolio_trial_dry_run(
+    draft: dict[str, Any],
+    approval_gate: dict[str, Any] | None,
+    components: list[dict[str, Any]],
+    *,
+    policy: str = "sleeve_allocation",
+) -> dict[str, Any]:
+    if not approval_gate or approval_gate.get("status") != "APPROVED_FOR_SEPARATE_PORTFOLIO_TRIAL_ONLY":
+        return {
+            "trial_id": draft.get("trial_id", "UNKNOWN"),
+            "draft_id": draft.get("draft_id", "UNKNOWN"),
+            "status": "BLOCKED_APPROVAL_GATE_MISSING",
+            "promotion_allowed": False,
+            "paper_trading_allowed": False,
+            "live_trading_allowed": False,
+            "provider_query_performed": False,
+            "market_data_download_performed": False,
+            "reason": "A portfolio pre-registration approval gate is required before a separate dry-run.",
+        }
+    selected_ids = [str(component.get("component_id")) for component in draft.get("selected_components", [])]
+    selected = {component_id for component_id in selected_ids if component_id}
+    trial_components = [component for component in components if str(component.get("component_id")) in selected]
+    diagnostic = run_portfolio_diagnostic(trial_components, policy=policy)
+    return {
+        "trial_id": draft["trial_id"].replace("PORTFOLIO-PREREG-", "PORTFOLIO-TRIAL-"),
+        "draft_id": draft["draft_id"],
+        "status": "SEPARATE_PORTFOLIO_TRIAL_DRY_RUN_COMPLETE",
+        "promotion_allowed": False,
+        "paper_trading_allowed": False,
+        "live_trading_allowed": False,
+        "provider_query_performed": False,
+        "market_data_download_performed": False,
+        "trial_lineage": {
+            "draft_id": draft["draft_id"],
+            "approval_gate_id": approval_gate["approval_gate_id"],
+            "selected_component_ids": selected_ids,
+            "source_trial_id": draft["trial_id"],
+        },
+        "portfolio_diagnostic": diagnostic,
+        "final_decision": {
+            **diagnostic["final_decision"],
+            "trial_status": "SEPARATE_PORTFOLIO_TRIAL_DRY_RUN_COMPLETE",
+            "promotion_allowed": False,
+        },
+        "required_next_step": "Archive if blockers remain; otherwise require a new external-data/PIT gate before any stronger claim.",
+    }
+
+
+def persist_separate_portfolio_trial_dry_run(trial: dict[str, Any], *, root: Path = Path(".")) -> dict[str, str]:
+    output_dir = Path(root) / PORTFOLIO_TRIAL_OUTPUT_DIR / str(trial.get("draft_id", "unknown"))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    trial_report_path = output_dir / "portfolio_trial_dry_run.json"
+    final_decision_path = output_dir / "final_decision.json"
+    markdown_path = output_dir / "portfolio_trial_report.md"
+    trial_report_path.write_text(json.dumps(_json_safe(trial), indent=2, sort_keys=True), encoding="utf-8")
+    final_decision_path.write_text(json.dumps(_json_safe(trial.get("final_decision", {})), indent=2, sort_keys=True), encoding="utf-8")
+    markdown_lines = [
+        f"# Separate Portfolio Trial Dry-Run: {trial.get('trial_id', 'UNKNOWN')}",
+        "",
+        f"- status: `{trial.get('status')}`",
+        f"- decision: `{trial.get('final_decision', {}).get('decision', 'UNKNOWN')}`",
+        f"- promotion_allowed: `{str(trial.get('promotion_allowed', False)).lower()}`",
+        f"- blockers: `{', '.join(trial.get('final_decision', {}).get('blockers', []))}`",
+        "",
+        "This artifact is a dry-run only. It does not authorize paper trading, live trading, provider queries, or promotion.",
+    ]
+    markdown_path.write_text("\n".join(markdown_lines), encoding="utf-8")
+    return {
+        "output_dir": str(output_dir),
+        "trial_report_path": str(trial_report_path),
+        "final_decision_path": str(final_decision_path),
+        "markdown_path": str(markdown_path),
     }
 
 
