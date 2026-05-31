@@ -1,0 +1,12 @@
+left_component_id,right_component_id,left_strategy,right_strategy,correlation
+aeb3c97678fffc03,ef3f1ebb21d03d5c,My falsifiable strategy,My falsifiable strategy,1.0
+aeb3c97678fffc03,ee5692c4832db94b,My falsifiable strategy,9:15,1.0
+f884aeb8a0a20815,e0008aaebb2fda63,My falsifiable strategy,My falsifiable strategy,1.0
+a37a53c4e1fce137,913c67d63ee5a478,My falsifiable strategy,My falsifiable strategy,1.0
+ef3f1ebb21d03d5c,ee5692c4832db94b,My falsifiable strategy,9:15,1.0
+7d30471f7325a2a8,f8e4773a916f0f75,gg,My falsifiable strategy,1.0
+e8cde4045a54b14a,64880f270f8f6861,My falsifiable strategy,My falsifiable strategy,0.99136009
+aeb3c97678fffc03,0dc08daefa67c12e,My falsifiable strategy,9:15,0.77555833
+ef3f1ebb21d03d5c,0dc08daefa67c12e,My falsifiable strategy,9:15,0.77555833
+0dc08daefa67c12e,ee5692c4832db94b,9:15,9:15,0.77555833
+bcfc1ff3b7cf8a4a,dcfbeec9cf4c5190,My falsifiable strategy,strategia folle,0.76869374

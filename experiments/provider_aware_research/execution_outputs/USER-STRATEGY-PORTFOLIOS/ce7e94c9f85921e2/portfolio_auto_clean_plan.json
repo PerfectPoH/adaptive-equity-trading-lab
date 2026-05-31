@@ -1,0 +1,122 @@
+{
+  "available": true,
+  "kept_component_ids": [
+    "aeb3c97678fffc03",
+    "9c7fb1982851f609",
+    "f884aeb8a0a20815",
+    "a37a53c4e1fce137",
+    "dcfbeec9cf4c5190",
+    "292441755c5ffdcc",
+    "7d30471f7325a2a8",
+    "f173207ae9bd5ccd",
+    "91510d8163e121fc",
+    "2496e35863212c76",
+    "208d36ae3c31f890",
+    "8bf949936eddd596",
+    "e8cde4045a54b14a",
+    "28a0d94ccf2a6c08",
+    "680166d42265ad55",
+    "816022f1cffa8310",
+    "fda6a92d0fdc1a1d",
+    "fad9ff0f91ecab15",
+    "2902e60324bd4c13",
+    "23ff266a203fea0d",
+    "bec60afef14416c2",
+    "a0cc249592a067f4",
+    "acc065823d9dcfb7",
+    "4087717bb62f6610",
+    "0b596d1ce6d258c0",
+    "bc79985845236f4a",
+    "6b50c641a4eaf53e",
+    "bfe638853ce4a153",
+    "409ca5c54a3efce7",
+    "eeb44b96bbac9604",
+    "dd95aab5d08306e1",
+    "6a116a4eef3afb73"
+  ],
+  "min_components": 3,
+  "removed_components": [
+    {
+      "component_id": "ef3f1ebb21d03d5c",
+      "component_label": "My falsifiable strategy (9:30 AM ORB, ef3f1e)",
+      "correlation": 1.0,
+      "paired_with_component_id": "aeb3c97678fffc03",
+      "paired_with_label": "My falsifiable strategy (Catalyst, aeb3c9)",
+      "paired_with_strategy": "My falsifiable strategy",
+      "reason": "Removed the lower-contribution component in a highly correlated pair.",
+      "strategy_name": "My falsifiable strategy"
+    },
+    {
+      "component_id": "ee5692c4832db94b",
+      "component_label": "9:15 (9:30 AM ORB, ee5692)",
+      "correlation": 1.0,
+      "paired_with_component_id": "aeb3c97678fffc03",
+      "paired_with_label": "My falsifiable strategy (Catalyst, aeb3c9)",
+      "paired_with_strategy": "My falsifiable strategy",
+      "reason": "Removed the lower-contribution component in a highly correlated pair.",
+      "strategy_name": "9:15"
+    },
+    {
+      "component_id": "e0008aaebb2fda63",
+      "component_label": "My falsifiable strategy (Mean Reversion, e0008a)",
+      "correlation": 1.0,
+      "paired_with_component_id": "f884aeb8a0a20815",
+      "paired_with_label": "My falsifiable strategy (Mean Reversion, f884ae)",
+      "paired_with_strategy": "My falsifiable strategy",
+      "reason": "Removed the lower-contribution component in a highly correlated pair.",
+      "strategy_name": "My falsifiable strategy"
+    },
+    {
+      "component_id": "913c67d63ee5a478",
+      "component_label": "My falsifiable strategy (Momentum, 913c67)",
+      "correlation": 1.0,
+      "paired_with_component_id": "a37a53c4e1fce137",
+      "paired_with_label": "My falsifiable strategy (Momentum, a37a53)",
+      "paired_with_strategy": "My falsifiable strategy",
+      "reason": "Removed the lower-contribution component in a highly correlated pair.",
+      "strategy_name": "My falsifiable strategy"
+    },
+    {
+      "component_id": "f8e4773a916f0f75",
+      "component_label": "My falsifiable strategy (PDUFA Run-Up, f8e477)",
+      "correlation": 1.0,
+      "paired_with_component_id": "7d30471f7325a2a8",
+      "paired_with_label": "gg (PDUFA Run-Up, 7d3047)",
+      "paired_with_strategy": "gg",
+      "reason": "Removed the lower-contribution component in a highly correlated pair.",
+      "strategy_name": "My falsifiable strategy"
+    },
+    {
+      "component_id": "64880f270f8f6861",
+      "component_label": "My falsifiable strategy (Custom Rule Builder, 64880f)",
+      "correlation": 0.99136009,
+      "paired_with_component_id": "e8cde4045a54b14a",
+      "paired_with_label": "My falsifiable strategy (Custom Rule Builder, e8cde4)",
+      "paired_with_strategy": "My falsifiable strategy",
+      "reason": "Removed the lower-contribution component in a highly correlated pair.",
+      "strategy_name": "My falsifiable strategy"
+    },
+    {
+      "component_id": "0dc08daefa67c12e",
+      "component_label": "9:15 (9:30 AM ORB, 0dc08d)",
+      "correlation": 0.77555833,
+      "paired_with_component_id": "aeb3c97678fffc03",
+      "paired_with_label": "My falsifiable strategy (Catalyst, aeb3c9)",
+      "paired_with_strategy": "My falsifiable strategy",
+      "reason": "Removed the lower-contribution component in a highly correlated pair.",
+      "strategy_name": "9:15"
+    },
+    {
+      "component_id": "bcfc1ff3b7cf8a4a",
+      "component_label": "My falsifiable strategy (Momentum, bcfc1f)",
+      "correlation": 0.76869374,
+      "paired_with_component_id": "dcfbeec9cf4c5190",
+      "paired_with_label": "strategia folle (PDUFA Run-Up, dcfbee)",
+      "paired_with_strategy": "strategia folle",
+      "reason": "Removed the rejected component in a highly correlated pair.",
+      "strategy_name": "My falsifiable strategy"
+    }
+  ],
+  "summary": "Remove 8 duplicated component(s). Start with My falsifiable strategy (9:30 AM ORB, ef3f1e) because it overlaps with My falsifiable strategy (Catalyst, aeb3c9).",
+  "threshold": 0.75
+}

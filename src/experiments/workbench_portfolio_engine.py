@@ -276,6 +276,7 @@ def run_portfolio_diagnostic(
     gate_panel = _build_gate_panel(components, matrix, allocation, returns, drawdown, contribution, correlation)
     final_decision = _build_final_decision(gate_panel, returns, components)
     high_correlation_pairs = _high_correlation_pairs(correlation, allocation)
+    auto_clean = _build_auto_clean_plan(components, allocation, contribution, high_correlation_pairs)
     action_plan = _build_action_plan(gate_panel, allocation, contribution, high_correlation_pairs, final_decision)
     signature = _portfolio_signature(components, policy, max_component_weight, max_rejected_weight, max_convex_weight)
     equity_curve = [
@@ -330,6 +331,7 @@ def run_portfolio_diagnostic(
         "correlation_matrix": correlation.reset_index(names="component_id").to_dict("records") if not correlation.empty else [],
         "contribution": [{"component_id": key, "contribution": round(float(value), 8)} for key, value in contribution.items()],
         "high_correlation_pairs": high_correlation_pairs,
+        "auto_clean": auto_clean,
         "action_plan": action_plan,
         "gate_panel": gate_panel,
         "final_decision": final_decision,
@@ -452,6 +454,114 @@ def _high_correlation_pairs(correlation: pd.DataFrame, allocation: list[dict[str
     return sorted(pairs, key=lambda row: abs(float(row["correlation"])), reverse=True)
 
 
+def _build_auto_clean_plan(
+    components: list[dict[str, Any]],
+    allocation: list[dict[str, Any]],
+    contribution: pd.Series,
+    high_correlation_pairs: list[dict[str, Any]],
+    *,
+    min_components: int = 3,
+) -> dict[str, Any]:
+    kept = {str(row["component_id"]) for row in allocation}
+    component_by_id = {str(component["component_id"]): component for component in components}
+    allocation_by_id = {str(row["component_id"]): row for row in allocation}
+    removed: list[dict[str, Any]] = []
+    for pair in high_correlation_pairs:
+        left = str(pair["left_component_id"])
+        right = str(pair["right_component_id"])
+        if left not in kept or right not in kept:
+            continue
+        if len(kept) <= min_components:
+            break
+        remove_id = _choose_component_to_remove(left, right, component_by_id, allocation_by_id, contribution)
+        keep_id = right if remove_id == left else left
+        kept.remove(remove_id)
+        removed.append(
+            {
+                "component_id": remove_id,
+                "strategy_name": component_by_id.get(remove_id, {}).get("strategy_name", remove_id),
+                "component_label": _component_display_label(remove_id, component_by_id),
+                "paired_with_component_id": keep_id,
+                "paired_with_strategy": component_by_id.get(keep_id, {}).get("strategy_name", keep_id),
+                "paired_with_label": _component_display_label(keep_id, component_by_id),
+                "correlation": pair["correlation"],
+                "reason": _auto_clean_reason(remove_id, keep_id, component_by_id, contribution),
+            }
+        )
+    return {
+        "available": bool(removed),
+        "threshold": 0.75,
+        "min_components": min_components,
+        "kept_component_ids": [row["component_id"] for row in allocation if row["component_id"] in kept],
+        "removed_components": removed,
+        "summary": _auto_clean_summary(removed),
+    }
+
+
+def _choose_component_to_remove(
+    left: str,
+    right: str,
+    component_by_id: dict[str, dict[str, Any]],
+    allocation_by_id: dict[str, dict[str, Any]],
+    contribution: pd.Series,
+) -> str:
+    left_score = _component_quality_score(left, component_by_id, allocation_by_id, contribution)
+    right_score = _component_quality_score(right, component_by_id, allocation_by_id, contribution)
+    return left if left_score < right_score else right
+
+
+def _component_display_label(component_id: str, component_by_id: dict[str, dict[str, Any]]) -> str:
+    component = component_by_id.get(component_id, {})
+    name = str(component.get("strategy_name") or component_id)
+    template = str(component.get("template") or "custom")
+    short_id = component_id[:6]
+    return f"{name} ({template}, {short_id})"
+
+
+def _component_quality_score(
+    component_id: str,
+    component_by_id: dict[str, dict[str, Any]],
+    allocation_by_id: dict[str, dict[str, Any]],
+    contribution: pd.Series,
+) -> tuple[float, float, float, float]:
+    component = component_by_id.get(component_id, {})
+    decision = str(component.get("decision", ""))
+    decision_score = 0.0 if decision.startswith("REJECTED") or "ARCHIVE" in decision else 1.0
+    contribution_score = float(contribution.get(component_id, 0.0)) if not contribution.empty else 0.0
+    trade_count_score = float(component.get("trade_count", 0) or 0)
+    warning_penalty = -float(len(component.get("bias_warnings", [])))
+    sleeve_score = 0.1 if allocation_by_id.get(component_id, {}).get("sleeve") == "core" else 0.0
+    return (decision_score, contribution_score + sleeve_score, trade_count_score, warning_penalty)
+
+
+def _auto_clean_reason(
+    remove_id: str,
+    keep_id: str,
+    component_by_id: dict[str, dict[str, Any]],
+    contribution: pd.Series,
+) -> str:
+    removed = component_by_id.get(remove_id, {})
+    kept = component_by_id.get(keep_id, {})
+    removed_contribution = float(contribution.get(remove_id, 0.0)) if not contribution.empty else 0.0
+    kept_contribution = float(contribution.get(keep_id, 0.0)) if not contribution.empty else 0.0
+    if str(removed.get("decision", "")).startswith("REJECTED") and not str(kept.get("decision", "")).startswith("REJECTED"):
+        return "Removed the rejected component in a highly correlated pair."
+    if removed_contribution <= kept_contribution:
+        return "Removed the lower-contribution component in a highly correlated pair."
+    return "Removed the less robust duplicate to preserve component diversity."
+
+
+def _auto_clean_summary(removed: list[dict[str, Any]]) -> str:
+    if not removed:
+        return "No automatic de-duplication suggested."
+    first = removed[0]
+    return (
+        f"Remove {len(removed)} duplicated component(s). Start with "
+        f"{first.get('component_label', first['strategy_name'])} because it overlaps with "
+        f"{first.get('paired_with_label', first['paired_with_strategy'])}."
+    )
+
+
 def _build_action_plan(
     gate_panel: list[dict[str, Any]],
     allocation: list[dict[str, Any]],
@@ -460,7 +570,14 @@ def _build_action_plan(
     final_decision: dict[str, Any],
 ) -> list[dict[str, str]]:
     gates = {row["gate"]: row for row in gate_panel}
-    name_by_id = {row["component_id"]: row.get("strategy_name", row["component_id"]) for row in allocation}
+    allocation_by_id = {str(row["component_id"]): row for row in allocation}
+
+    def allocation_label(component_id: str) -> str:
+        row = allocation_by_id.get(component_id, {})
+        name = str(row.get("strategy_name") or component_id)
+        template = str(row.get("template") or "custom")
+        return f"{name} ({template}, {component_id[:6]})"
+
     actions: list[dict[str, str]] = []
     if final_decision["blockers"]:
         actions.append(
@@ -472,11 +589,13 @@ def _build_action_plan(
         )
     if high_correlation_pairs:
         first = high_correlation_pairs[0]
+        left = str(first["left_component_id"])
+        right = str(first["right_component_id"])
         actions.append(
             {
                 "severity": "warn",
                 "title": f"{len(high_correlation_pairs)} highly correlated component pair(s)",
-                "action": f"Start by removing either {first['left_strategy']} or {first['right_strategy']}, then rerun. They appear to be overlapping bets.",
+                "action": f"Start by removing either {allocation_label(left)} or {allocation_label(right)}, then rerun. They appear to be overlapping bets.",
             }
         )
     concentration = gates.get("component_concentration_gate", {})
@@ -486,7 +605,7 @@ def _build_action_plan(
             {
                 "severity": "block",
                 "title": "One component dominates the portfolio",
-                "action": f"Remove or cap {name_by_id.get(best_id, best_id)}, then add at least two components from different sleeves before rerunning.",
+                "action": f"Remove or cap {allocation_label(best_id)}, then add at least two components from different sleeves before rerunning.",
             }
         )
     cost_stress = gates.get("cost_stress_gate", {})
@@ -601,6 +720,7 @@ def persist_portfolio_diagnostic(diagnostic: dict[str, Any], *, root: Path = Pat
         "portfolio_drawdown_path": output_dir / "portfolio_drawdown.csv",
         "portfolio_correlation_matrix_path": output_dir / "portfolio_correlation_matrix.csv",
         "portfolio_high_correlation_pairs_path": output_dir / "portfolio_high_correlation_pairs.csv",
+        "portfolio_auto_clean_plan_path": output_dir / "portfolio_auto_clean_plan.json",
         "portfolio_gate_panel_path": output_dir / "portfolio_gate_panel.json",
         "portfolio_action_plan_path": output_dir / "portfolio_action_plan.json",
         "portfolio_final_decision_path": output_dir / "portfolio_final_decision.json",
@@ -614,6 +734,7 @@ def persist_portfolio_diagnostic(diagnostic: dict[str, Any], *, root: Path = Pat
     pd.DataFrame(diagnostic["drawdown"]).to_csv(paths["portfolio_drawdown_path"], index=False)
     pd.DataFrame(diagnostic["correlation_matrix"]).to_csv(paths["portfolio_correlation_matrix_path"], index=False)
     pd.DataFrame(diagnostic["high_correlation_pairs"]).to_csv(paths["portfolio_high_correlation_pairs_path"], index=False)
+    _write_json(paths["portfolio_auto_clean_plan_path"], diagnostic["auto_clean"])
     _write_json(paths["portfolio_gate_panel_path"], diagnostic["gate_panel"])
     _write_json(paths["portfolio_action_plan_path"], diagnostic["action_plan"])
     _write_json(paths["portfolio_final_decision_path"], diagnostic["final_decision"])
@@ -642,6 +763,11 @@ def _portfolio_report(diagnostic: dict[str, Any]) -> str:
         f"- max_drawdown: `{summary['max_drawdown']}`",
         f"- max_drawdown_pct_context: `{summary['max_drawdown_pct']}`",
         f"- time_underwater_ratio: `{summary['time_underwater_ratio']}`",
+        "",
+        "## Auto-Clean Basket",
+        "",
+        f"- available: `{diagnostic.get('auto_clean', {}).get('available', False)}`",
+        f"- summary: {diagnostic.get('auto_clean', {}).get('summary', 'No automatic de-duplication suggested.')}",
         "",
         "## Recommended Actions",
         "",

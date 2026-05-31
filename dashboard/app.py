@@ -2485,6 +2485,38 @@ def render_portfolio_lab() -> None:
                 st.success(message)
             else:
                 st.warning(message)
+    auto_clean = preview.get("auto_clean", {})
+    if auto_clean.get("available"):
+        st.markdown("**Auto-clean basket**")
+        st.caption("The lab removes highly correlated duplicates using a conservative rule: keep the stronger or less fragile component, never optimize hindsight weights.")
+        st.info(auto_clean.get("summary", "Automatic de-duplication is available."))
+        removed = pd.DataFrame(auto_clean.get("removed_components", []))
+        if not removed.empty:
+            st.dataframe(removed, width="stretch", hide_index=True)
+        cleaned_ids = list(auto_clean.get("kept_component_ids", []))
+        cleaned_preview = build_portfolio_lab_preview(
+            cleaned_ids,
+            policy=policy,
+            max_component_weight=max_component_weight,
+            max_rejected_weight=max_rejected_weight,
+            max_convex_weight=max_convex_weight,
+        )
+        delta = float(cleaned_preview["summary"]["total_net_return"]) - float(summary["total_net_return"])
+        clean_cols = st.columns(4)
+        with clean_cols[0]:
+            metric_card("Clean components", cleaned_preview["summary"]["component_count"], "After duplicate removal")
+        with clean_cols[1]:
+            metric_card("Clean net", f"{cleaned_preview['summary']['total_net_return']:.2f}", f"{delta:+.2f} vs current")
+        with clean_cols[2]:
+            metric_card("Clean drawdown", f"{cleaned_preview['summary']['max_drawdown']:.2f}", "After duplicate removal")
+        with clean_cols[3]:
+            metric_card("Clean decision", cleaned_preview["final_decision"]["decision"], "Still non-promotable")
+        if cleaned_preview["final_decision"]["blockers"]:
+            st.warning("Clean basket blockers: " + ", ".join(cleaned_preview["final_decision"]["blockers"]))
+        else:
+            st.success("Clean basket has no hard portfolio blocker, but promotion remains locked.")
+    else:
+        st.success("Auto-clean basket: no highly correlated duplicate removal suggested.")
 
     allocation = pd.DataFrame(preview["allocation"])
     equity = pd.DataFrame(preview["equity_curve"])
