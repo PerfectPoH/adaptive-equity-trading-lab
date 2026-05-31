@@ -48,6 +48,8 @@ from dashboard.lab_dashboard_data import (
     build_workbench_visual_diagnostics,
     display_safe_records,
     load_workbench_strategy_cards,
+    load_workbench_strategy_packages,
+    inspect_workbench_strategy_package,
 )
 
 
@@ -2236,6 +2238,52 @@ def render_strategy_workbench() -> None:
         st.markdown("**Saved run comparison**")
         st.caption("Sorted by net return, but still diagnostic only: every row remains promotion-locked.")
         st.dataframe(comparison, width="stretch", hide_index=True)
+
+    saved_packages = load_workbench_strategy_packages(limit=8)
+    st.markdown(
+        """
+        <div class="workbench-section">
+          <div class="section-kicker">08 / Package Inspector</div>
+          <div class="workbench-section-title">Inspect saved governed packages before any runner exists.</div>
+          <div class="workbench-section-copy">
+            A package can be ready for runner build while still forbidding execution, paper trading, live trading, and promotion.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    if not saved_packages:
+        st.info("No governed strategy packages saved yet. Run a dry-run, then press Generate governed strategy package.")
+    else:
+        package_table = pd.DataFrame(saved_packages)
+        st.dataframe(package_table[["strategy_name", "template", "analysis_mode", "status", "execution_allowed", "promotion_allowed"]], width="stretch", hide_index=True)
+        labels = [f"{row['strategy_name']} · {row['manifest_signature']}" for row in saved_packages]
+        selected_label = st.selectbox("Inspect package", labels)
+        selected_package = saved_packages[labels.index(selected_label)]
+        inspection = inspect_workbench_strategy_package(Path(selected_package["package_dir"]))
+        i1, i2, i3 = st.columns(3)
+        with i1:
+            metric_card("Package status", inspection["status"], "Runner readiness, not execution permission")
+        with i2:
+            metric_card("Execution", inspection["command_spec"].get("execution_allowed", False), "Must remain false here")
+        with i3:
+            metric_card("Promotion", inspection["risk_policy"].get("promotion_allowed", False), "Must remain false here")
+        st.markdown("**Readiness checks**")
+        st.dataframe(pd.DataFrame(inspection["readiness_rows"]), width="stretch", hide_index=True)
+        package_tabs = st.tabs(["README", "Manifest", "Data Contract", "Command Spec", "Risk Policy", "Dry-Run Report"])
+        with package_tabs[0]:
+            st.markdown(inspection["readme"])
+        with package_tabs[1]:
+            st.json(inspection["manifest"])
+        with package_tabs[2]:
+            st.json(inspection["data_contract"])
+        with package_tabs[3]:
+            st.json(inspection["command_spec"])
+        with package_tabs[4]:
+            st.json(inspection["risk_policy"])
+        with package_tabs[5]:
+            st.code(inspection["dry_run_report"], language="markdown")
+        st.info("Next phase is still separate: build a real runner adapter that consumes this package and emits final_decision.json.")
 
     st.subheader("What The Builder Will Enforce")
     checks = [

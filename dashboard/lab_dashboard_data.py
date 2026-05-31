@@ -959,6 +959,90 @@ def persist_workbench_strategy_package(
     }
 
 
+def load_workbench_strategy_packages(*, root: Path = Path("."), limit: int = 12) -> list[dict[str, Any]]:
+    output_root = root / WORKBENCH_OUTPUT_DIR
+    if not output_root.exists():
+        return []
+    packages: list[dict[str, Any]] = []
+    for package_dir in sorted(output_root.glob("*/strategy_package"), key=lambda path: path.stat().st_mtime, reverse=True):
+        inspection = inspect_workbench_strategy_package(package_dir)
+        manifest = inspection.get("manifest", {})
+        command = inspection.get("command_spec", {})
+        risk = inspection.get("risk_policy", {})
+        packages.append(
+            {
+                "strategy_name": str(manifest.get("strategy_name", package_dir.parent.name)),
+                "template": str(manifest.get("template", "unknown")),
+                "analysis_mode": str(risk.get("analysis_mode", manifest.get("analysis_mode", "unknown"))),
+                "status": inspection["status"],
+                "execution_allowed": bool(command.get("execution_allowed", False)),
+                "promotion_allowed": bool(risk.get("promotion_allowed", False)),
+                "package_dir": str(package_dir),
+                "manifest_signature": str(command.get("manifest_signature", package_dir.parent.name)),
+            }
+        )
+        if len(packages) >= limit:
+            break
+    return packages
+
+
+def inspect_workbench_strategy_package(package_dir: Path) -> dict[str, Any]:
+    package_dir = Path(package_dir)
+    filenames = [
+        "strategy_manifest.json",
+        "pre_run_gate.json",
+        "data_contract.json",
+        "command_spec.json",
+        "risk_policy.json",
+        "README.md",
+        "dry_run_report.md",
+    ]
+    files_present = {filename: (package_dir / filename).exists() for filename in filenames}
+    manifest = load_json(package_dir / "strategy_manifest.json")
+    gate = load_json(package_dir / "pre_run_gate.json")
+    data_contract = load_json(package_dir / "data_contract.json")
+    command_spec = load_json(package_dir / "command_spec.json")
+    risk_policy = load_json(package_dir / "risk_policy.json")
+    readme = (package_dir / "README.md").read_text(encoding="utf-8") if (package_dir / "README.md").exists() else ""
+    dry_report = (package_dir / "dry_run_report.md").read_text(encoding="utf-8") if (package_dir / "dry_run_report.md").exists() else ""
+    readiness_rows = [
+        {
+            "check": "execution_allowed",
+            "status": "PASS" if command_spec.get("execution_allowed") is False else "BLOCK",
+            "detail": "Package inspection must not enable execution.",
+        },
+        {
+            "check": "promotion_allowed",
+            "status": "PASS" if risk_policy.get("promotion_allowed") is False and gate.get("promotion_allowed") is False else "BLOCK",
+            "detail": "Promotion must stay locked in package inspector.",
+        },
+        {
+            "check": "required_files",
+            "status": "PASS" if all(files_present.values()) else "BLOCK",
+            "detail": f"missing={[name for name, present in files_present.items() if not present]}",
+        },
+        {
+            "check": "forbidden_flags",
+            "status": "PASS" if {"--paper", "--live", "--promote"}.issubset(set(command_spec.get("forbidden_flags", []))) else "BLOCK",
+            "detail": "Command spec must keep paper/live/promote forbidden.",
+        },
+    ]
+    status = "READY_FOR_RUNNER_BUILD" if all(row["status"] == "PASS" for row in readiness_rows) else "PACKAGE_BLOCKED"
+    return {
+        "package_dir": str(package_dir),
+        "status": status,
+        "files_present": files_present,
+        "readiness_rows": readiness_rows,
+        "manifest": manifest,
+        "pre_run_gate": gate,
+        "data_contract": data_contract,
+        "command_spec": command_spec,
+        "risk_policy": risk_policy,
+        "readme": readme,
+        "dry_run_report": dry_report,
+    }
+
+
 def display_safe_records(records: list[dict[str, Any]]) -> list[dict[str, str]]:
     safe_rows: list[dict[str, str]] = []
     for row in records:
@@ -1270,6 +1354,7 @@ def write_workbench_phase_report(*, root: Path = Path(".")) -> Path:
                 "- Added governed strategy package generation.",
                 "- Package includes strategy manifest, pre-run gate, data contract, command spec, risk policy, README, and dry-run report.",
                 "- Package generation remains non-executing and cannot authorize paper/live trading.",
+                "- Added Package Inspector to review saved packages before building any real runner.",
                 "",
                 "## Governance",
                 "",
@@ -1277,6 +1362,7 @@ def write_workbench_phase_report(*, root: Path = Path(".")) -> Path:
                 "- Dry-runs remain local and diagnostic.",
                 "- Real backtests still require a committed pre-run gate, data contract, and separate governed runner.",
                 "- Strategy packages keep `execution_allowed=false` and `promotion_allowed=false`.",
+                "- Package Inspector can mark a package ready for runner build, but not ready for execution.",
                 "",
                 "## Next Phase",
                 "",

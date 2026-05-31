@@ -29,6 +29,8 @@ from dashboard.lab_dashboard_data import (
     display_safe_records,
     delisted_data_source_gate_payload,
     load_workbench_strategy_cards,
+    load_workbench_strategy_packages,
+    inspect_workbench_strategy_package,
     orb_930_backtest_payload,
     persist_workbench_run_bundle,
     persist_workbench_strategy_package,
@@ -937,3 +939,30 @@ def test_persist_workbench_strategy_package_writes_all_files(tmp_path: Path) -> 
     ]:
         assert Path(bundle["files"][filename]).exists()
     assert "strategy_package" in bundle["package_dir"]
+
+
+def test_load_and_inspect_workbench_strategy_packages(tmp_path: Path) -> None:
+    manifest = build_workbench_manifest(
+        name="Inspectable package",
+        template="Momentum",
+        universe="large-cap / ETF clean-data sandbox",
+        holding_period_days=21,
+        cost_bps=250,
+        allow_provider_query=False,
+    )
+    validation = validate_workbench_manifest(manifest)
+    preview = build_controlled_backtest_preview(manifest, validation)
+    bundle = persist_workbench_strategy_package(manifest, validation, preview, root=tmp_path)
+
+    packages = load_workbench_strategy_packages(root=tmp_path)
+    inspection = inspect_workbench_strategy_package(Path(bundle["package_dir"]))
+
+    assert len(packages) == 1
+    assert packages[0]["strategy_name"] == "Inspectable package"
+    assert packages[0]["status"] == "READY_FOR_RUNNER_BUILD"
+    assert packages[0]["execution_allowed"] is False
+    assert inspection["package_dir"] == bundle["package_dir"]
+    assert inspection["status"] == "READY_FOR_RUNNER_BUILD"
+    assert inspection["files_present"]["README.md"] is True
+    assert inspection["readiness_rows"][0]["check"] == "execution_allowed"
+    assert inspection["readme"].startswith("# Strategy Package")
