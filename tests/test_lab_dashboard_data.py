@@ -33,6 +33,7 @@ from dashboard.lab_dashboard_data import (
     build_separate_portfolio_trial_dry_run,
     build_portfolio_frozen_recipe_trial,
     build_portfolio_external_data_backtest_gate,
+    build_portfolio_manual_composite_trial,
     display_safe_records,
     delisted_data_source_gate_payload,
     load_portfolio_lab_components,
@@ -49,6 +50,7 @@ from dashboard.lab_dashboard_data import (
     persist_separate_portfolio_trial_dry_run,
     persist_portfolio_frozen_recipe_trial,
     persist_portfolio_external_data_backtest_gate,
+    persist_portfolio_manual_composite_trial,
     write_workbench_phase_report,
     build_strategy_chart_story,
     classify_strategy_status,
@@ -843,6 +845,35 @@ def test_portfolio_external_data_gate_blocks_without_pit_source(tmp_path: Path) 
     assert Path(paths["gate_path"]).exists()
     assert Path(paths["final_decision_path"]).exists()
     assert Path(paths["markdown_path"]).exists()
+
+
+def test_manual_composite_removes_factory_scope_but_keeps_external_data_gate(tmp_path: Path) -> None:
+    components = build_strategy_factory_components(max_variants=24)
+    selected_ids = [component["component_id"] for component in components[:3]]
+    draft = build_portfolio_preregistration_draft(components, selected_ids)
+    gate = build_portfolio_preregistration_approval_gate(draft, approved_by="barak")
+    trial = build_separate_portfolio_trial_dry_run(draft, gate, components)
+    frozen = build_portfolio_frozen_recipe_trial(trial, gate, components)
+
+    manual = build_portfolio_manual_composite_trial(frozen)
+
+    assert manual["status"] == "PORTFOLIO_MANUAL_COMPOSITE_DRY_RUN_COMPLETE"
+    assert manual["manual_manifest"]["strategy_name"] == "Multi-Horizon Reversion Momentum Basket"
+    assert manual["manual_manifest"]["human_authored"] is True
+    assert manual["manual_manifest"]["source_factory_recipe_id"] == frozen["frozen_recipe_id"]
+    assert manual["promotion_allowed"] is False
+    assert manual["final_decision"]["decision"] == "PORTFOLIO_MANUAL_COMPOSITE_DATA_GATE_ONLY"
+    assert "factory_generated_scope_gate" not in manual["final_decision"]["blockers"]
+    assert manual["final_decision"]["blockers"] == ["external_data_contract_gate"]
+    assert manual["provider_query_performed"] is False
+    assert manual["market_data_download_performed"] is False
+    assert len(manual["manual_manifest"]["sleeves"]) == 3
+    assert sum(sleeve["weight"] for sleeve in manual["manual_manifest"]["sleeves"]) == 1.0
+
+    paths = persist_portfolio_manual_composite_trial(manual, root=tmp_path)
+    assert Path(paths["manifest_path"]).exists()
+    assert Path(paths["trial_report_path"]).exists()
+    assert Path(paths["final_decision_path"]).exists()
 
 
 def test_portfolio_preview_can_include_factory_generated_components(tmp_path: Path) -> None:

@@ -52,6 +52,7 @@ from dashboard.lab_dashboard_data import (
     build_portfolio_preregistration_draft,
     build_portfolio_frozen_recipe_trial,
     build_portfolio_external_data_backtest_gate,
+    build_portfolio_manual_composite_trial,
     build_separate_portfolio_trial_dry_run,
     build_strategy_factory_components,
     display_safe_records,
@@ -65,6 +66,7 @@ from dashboard.lab_dashboard_data import (
     persist_portfolio_preregistration_draft,
     persist_portfolio_frozen_recipe_trial,
     persist_portfolio_external_data_backtest_gate,
+    persist_portfolio_manual_composite_trial,
     persist_separate_portfolio_trial_dry_run,
     portfolio_lab_component_table,
 )
@@ -2795,6 +2797,30 @@ def render_portfolio_lab() -> None:
                 data_gate_paths = persist_portfolio_external_data_backtest_gate(data_gate, root=REPO_ROOT)
                 st.session_state["portfolio_lab_external_data_gate_result"] = {"gate": data_gate, "paths": data_gate_paths}
                 st.rerun()
+            if st.button("Create manual composite hypothesis", type="secondary", width="stretch"):
+                manual = build_portfolio_manual_composite_trial(frozen)
+                manual_paths = persist_portfolio_manual_composite_trial(manual, root=REPO_ROOT)
+                st.session_state["portfolio_lab_manual_composite_result"] = {"trial": manual, "paths": manual_paths}
+                st.rerun()
+        if "portfolio_lab_manual_composite_result" in st.session_state:
+            manual_result = st.session_state["portfolio_lab_manual_composite_result"]
+            manual = manual_result.get("trial", {})
+            paths = manual_result.get("paths", {})
+            manifest = manual.get("manual_manifest", {})
+            st.success(
+                f"Manual composite written: {manifest.get('strategy_name', 'Manual Composite')}. "
+                "Factory-scope blocker removed, external-data gate remains."
+            )
+            st.caption(f"Manual files: {paths.get('manifest_path', '')} and {paths.get('final_decision_path', '')}")
+            with st.expander("Open manual composite sleeves"):
+                st.json(
+                    {
+                        "hypothesis": manifest.get("hypothesis", ""),
+                        "sleeves": manifest.get("sleeves", []),
+                        "falsification_criteria": manifest.get("falsification_criteria", []),
+                        "final_decision": manual.get("final_decision", {}),
+                    }
+                )
         if "portfolio_lab_external_data_gate_result" in st.session_state:
             data_gate_result = st.session_state["portfolio_lab_external_data_gate_result"]
             data_gate = data_gate_result.get("gate", {})

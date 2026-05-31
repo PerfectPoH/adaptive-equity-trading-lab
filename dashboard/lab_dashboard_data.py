@@ -26,6 +26,7 @@ PORTFOLIO_PREREG_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-P
 PORTFOLIO_TRIAL_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-TRIALS"
 PORTFOLIO_FROZEN_RECIPE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-FROZEN-RECIPES"
 PORTFOLIO_EXTERNAL_DATA_GATE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-EXTERNAL-DATA-GATES"
+PORTFOLIO_MANUAL_COMPOSITE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-MANUAL-COMPOSITE-001"
 DELISTED_DATA_SOURCE_GATE_DIR = Path("experiments/provider_aware_research/delisted_data_source_gate_20260525")
 ORB_930_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "ORB-930-CROSS-ASSET-BACKTEST-001"
 WORKBENCH_CONFIGURED_LARGECAP_SYMBOLS = {
@@ -3001,6 +3002,148 @@ def persist_portfolio_external_data_backtest_gate(gate: dict[str, Any], *, root:
     return {
         "output_dir": str(output_dir),
         "gate_path": str(gate_path),
+        "final_decision_path": str(final_decision_path),
+        "markdown_path": str(markdown_path),
+    }
+
+
+def build_portfolio_manual_composite_trial(frozen_trial: dict[str, Any]) -> dict[str, Any]:
+    """Convert the searched recipe into a human-readable hypothesis without granting promotion rights."""
+
+    frozen_id = str(frozen_trial.get("frozen_recipe_id", "unknown"))
+    validation = frozen_trial.get("validation_split", {})
+    sleeves = [
+        {
+            "name": "Mean-reversion sleeve",
+            "template": "Mean Reversion",
+            "weight": 1 / 3,
+            "rule": "Buy diversified dislocations after confirmation; do not average down into unresolved continuation.",
+            "failure_mode": "False reversion and cost drag.",
+        },
+        {
+            "name": "Momentum sleeve",
+            "template": "Momentum",
+            "weight": 1 / 3,
+            "rule": "Hold diversified continuation candidates only through the frozen multi-day horizon.",
+            "failure_mode": "Outlier dependency and regime decay.",
+        },
+        {
+            "name": "Dollar-bar microstructure sleeve",
+            "template": "Dollar-Bar Microstructure",
+            "weight": 1 / 3,
+            "rule": "Use traded-dollar sampling as a stabilizer, not as standalone promotion evidence.",
+            "failure_mode": "Cleaner sampling without tradable direction.",
+        },
+    ]
+    manual_manifest = {
+        "strategy_name": "Multi-Horizon Reversion Momentum Basket",
+        "trial_id": f"PORTFOLIO-MANUAL-COMPOSITE-001-{frozen_id.upper()}",
+        "human_authored": True,
+        "source_factory_recipe_id": frozen_id,
+        "source_trial_id": frozen_trial.get("trial_id", "UNKNOWN"),
+        "hypothesis": (
+            "A fixed-weight basket combining reversion, continuation, and dollar-sampled microstructure may be more robust "
+            "than a single setup, but only if it survives a survivorship-free/PIT data gate."
+        ),
+        "sleeves": sleeves,
+        "weight_policy": {
+            "policy": "equal_weight",
+            "optimization_allowed": False,
+            "max_component_weight": 0.40,
+            "reason": "Weights are semantic and frozen; they are not fitted to historical Sharpe or net return.",
+        },
+        "falsification_criteria": [
+            "Archive if external-data/PIT gate cannot be satisfied.",
+            "Archive if validation net turns negative under the true data source.",
+            "Archive if one sleeve contributes more than 40% of positive contribution under true data.",
+            "Archive if ex-best-sleeve net return is non-positive under true data.",
+            "Archive if benchmark-relative return is not positive after costs.",
+        ],
+        "required_data": [
+            "survivorship_free_universe",
+            "point_in_time_membership",
+            "delisted_symbol_prices",
+            "adjusted_ohlcv",
+            "benchmark_panel",
+        ],
+    }
+    return {
+        "trial_id": manual_manifest["trial_id"],
+        "manual_composite_id": f"manual-{frozen_id}",
+        "status": "PORTFOLIO_MANUAL_COMPOSITE_DRY_RUN_COMPLETE",
+        "promotion_allowed": False,
+        "paper_trading_allowed": False,
+        "live_trading_allowed": False,
+        "provider_query_performed": False,
+        "market_data_download_performed": False,
+        "manual_manifest": manual_manifest,
+        "inherited_validation": {
+            "train_net_return": validation.get("train_net_return", 0.0),
+            "validation_net_return": validation.get("validation_net_return", 0.0),
+            "validation_max_drawdown": validation.get("validation_max_drawdown", 0.0),
+            "source": "frozen_recipe_proxy_validation_only",
+            "interpretation": "Descriptive only; not promotion evidence.",
+        },
+        "final_decision": {
+            "decision": "PORTFOLIO_MANUAL_COMPOSITE_DATA_GATE_ONLY",
+            "blockers": ["external_data_contract_gate"],
+            "promotion_allowed": False,
+            "paper_trading_allowed": False,
+            "live_trading_allowed": False,
+            "provider_query_allowed": False,
+            "market_data_download_allowed": False,
+            "provider_query_performed": False,
+            "market_data_download_performed": False,
+            "portfolio_backtest_performed": False,
+            "runner_mode": "manual_composite_manifest_only",
+        },
+        "required_next_step": "Create or satisfy the external-data/PIT gate before any true backtest.",
+    }
+
+
+def persist_portfolio_manual_composite_trial(trial: dict[str, Any], *, root: Path = Path(".")) -> dict[str, str]:
+    output_dir = Path(root) / PORTFOLIO_MANUAL_COMPOSITE_OUTPUT_DIR / str(trial.get("manual_composite_id", "unknown"))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    manifest_path = output_dir / "manual_composite_manifest.json"
+    trial_report_path = output_dir / "manual_composite_trial.json"
+    final_decision_path = output_dir / "final_decision.json"
+    markdown_path = output_dir / "manual_composite_report.md"
+    manifest = trial.get("manual_manifest", {})
+    manifest_path.write_text(json.dumps(_json_safe(manifest), indent=2, sort_keys=True), encoding="utf-8")
+    trial_report_path.write_text(json.dumps(_json_safe(trial), indent=2, sort_keys=True), encoding="utf-8")
+    final_decision_path.write_text(json.dumps(_json_safe(trial.get("final_decision", {})), indent=2, sort_keys=True), encoding="utf-8")
+    markdown_lines = [
+        f"# {manifest.get('strategy_name', 'Manual Composite Strategy')}",
+        "",
+        f"- trial_id: `{trial.get('trial_id', 'UNKNOWN')}`",
+        f"- status: `{trial.get('status')}`",
+        f"- decision: `{trial.get('final_decision', {}).get('decision', 'UNKNOWN')}`",
+        f"- promotion_allowed: `{str(trial.get('promotion_allowed', False)).lower()}`",
+        "",
+        "## Hypothesis",
+        "",
+        str(manifest.get("hypothesis", "")),
+        "",
+        "## Sleeves",
+        "",
+    ]
+    for sleeve in manifest.get("sleeves", []):
+        markdown_lines.append(f"- **{sleeve['name']}** ({sleeve['template']}): weight `{sleeve['weight']:.4f}` - {sleeve['rule']}")
+    markdown_lines.extend(
+        [
+            "",
+            "## Falsification Criteria",
+            "",
+            *[f"- {criterion}" for criterion in manifest.get("falsification_criteria", [])],
+            "",
+            "This manifest removes the factory-search label by rewriting the idea as a human hypothesis, but it still cannot promote without a true external-data/PIT gate.",
+        ]
+    )
+    markdown_path.write_text("\n".join(markdown_lines), encoding="utf-8")
+    return {
+        "output_dir": str(output_dir),
+        "manifest_path": str(manifest_path),
+        "trial_report_path": str(trial_report_path),
         "final_decision_path": str(final_decision_path),
         "markdown_path": str(markdown_path),
     }
