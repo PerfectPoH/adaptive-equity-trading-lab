@@ -2574,7 +2574,7 @@ def render_portfolio_lab() -> None:
     )
     result_cols = st.columns(4)
     with result_cols[0]:
-        metric_card("Components", summary["component_count"], "Saved Workbench runs included")
+        metric_card("Components", summary["component_count"], "Allocated components in diagnostic")
     with result_cols[1]:
         metric_card("Net sum", f"{summary['total_net_return']:.2f}", "Weighted diagnostic return")
     with result_cols[2]:
@@ -2607,7 +2607,7 @@ def render_portfolio_lab() -> None:
           <div class="portfolio-proof-card good">
             <div class="eyebrow">Duplicate control</div>
             <div class="portfolio-proof-title">{dedupe.get("removed_component_count", 0)} strategy duplicate(s) removed</div>
-            <div class="portfolio-proof-copy">Same-template strategies with near-identical return paths are treated as one hidden bet before the search reads them.</div>
+            <div class="portfolio-proof-copy">Same generated recipes and near-identical return paths are treated as one hidden bet before the search reads them.</div>
           </div>
           <div class="portfolio-proof-card warn">
             <div class="eyebrow">Governed search</div>

@@ -478,7 +478,7 @@ def _average_abs_correlation(correlation: pd.DataFrame) -> float:
 def _high_correlation_pairs(correlation: pd.DataFrame, allocation: list[dict[str, Any]], *, threshold: float = 0.75) -> list[dict[str, Any]]:
     if correlation.empty or len(correlation) < 2:
         return []
-    names = {row["component_id"]: row.get("strategy_name", row["component_id"]) for row in allocation}
+    names = {row["component_id"]: _allocation_display_label(row) for row in allocation}
     pairs: list[dict[str, Any]] = []
     for row_index, left in enumerate(correlation.index):
         for column_index, right in enumerate(correlation.columns):
@@ -794,8 +794,21 @@ def _component_display_label(component_id: str, component_by_id: dict[str, dict[
     component = component_by_id.get(component_id, {})
     name = str(component.get("strategy_name") or component_id)
     template = str(component.get("template") or "custom")
-    short_id = component_id[:6]
+    short_id = _short_component_id(component_id)
     return f"{name} ({template}, {short_id})"
+
+
+def _allocation_display_label(row: dict[str, Any]) -> str:
+    component_id = str(row.get("component_id", ""))
+    name = str(row.get("strategy_name") or component_id)
+    template = str(row.get("template") or "custom")
+    return f"{name} ({template}, {_short_component_id(component_id)})"
+
+
+def _short_component_id(component_id: str) -> str:
+    if component_id.startswith("FACTORY-"):
+        return f"F-{component_id.removeprefix('FACTORY-')[:6]}"
+    return component_id[:6]
 
 
 def _component_quality_score(
@@ -854,9 +867,7 @@ def _build_action_plan(
 
     def allocation_label(component_id: str) -> str:
         row = allocation_by_id.get(component_id, {})
-        name = str(row.get("strategy_name") or component_id)
-        template = str(row.get("template") or "custom")
-        return f"{name} ({template}, {component_id[:6]})"
+        return _allocation_display_label(row) if row else component_id
 
     actions: list[dict[str, str]] = []
     if final_decision["blockers"]:

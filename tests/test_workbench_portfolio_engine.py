@@ -264,6 +264,9 @@ def test_portfolio_diagnostic_deduplicates_same_factory_recipe_before_search() -
     assert dedupe["groups"][0]["reason"] == "same_generated_strategy_recipe"
     best_ids = diagnostic["portfolio_search"]["best_basket_component_ids"]
     assert not {"FACTORY-MOM-A", "FACTORY-MOM-B"}.issubset(set(best_ids))
+    labels = diagnostic["portfolio_search"]["best_component_labels"]
+    assert all("FACTOR)" not in label for label in labels)
+    assert any("F-" in label for label in labels)
 
 
 def test_portfolio_diagnostic_searches_bounded_best_basket_without_promoting(tmp_path: Path) -> None:
