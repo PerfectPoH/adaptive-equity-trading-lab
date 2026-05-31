@@ -1006,6 +1006,15 @@ def metric_card(label: str, value: str | int | float, note: str) -> None:
     )
 
 
+def compact_component_label(component_id: str, name: str, template: str | None = None) -> str:
+    clean_name = str(name or component_id).replace("Factory ", "").replace("Materialized ", "")
+    clean_name = " ".join(clean_name.split())
+    short_id = f"F-{component_id.removeprefix('FACTORY-')[:6]}" if component_id.startswith("FACTORY-") else component_id[:6]
+    if template:
+        return f"{clean_name} | {template} | {short_id}"
+    return f"{clean_name} | {short_id}"
+
+
 def flow_chart(nodes: list[str]) -> go.Figure:
     if len(nodes) < 2:
         nodes = nodes + ["Decision"]
@@ -2758,19 +2767,52 @@ def render_portfolio_lab() -> None:
     chart_cols = st.columns(2)
     with chart_cols[0]:
         st.markdown("**Contribution by component**")
-        st.caption("How to read it: if one bar does all the work, the portfolio is still a disguised single bet.")
+        st.caption("How to read it: this shows the largest contributors only. If one bar dominates this view, the portfolio is still a disguised single bet.")
         if not contribution.empty:
-            contribution = contribution.merge(allocation[["component_id", "strategy_name", "sleeve"]], on="component_id", how="left")
-            fig = px.bar(contribution, x="strategy_name", y="contribution", color="sleeve", color_discrete_sequence=["#2563eb", "#0f9f75", "#f97316"])
-            fig.update_layout(height=340, margin=dict(l=10, r=10, t=20, b=80), xaxis_title="", yaxis_title="Weighted contribution")
+            contribution = contribution.merge(allocation[["component_id", "strategy_name", "template", "sleeve"]], on="component_id", how="left")
+            contribution["abs_contribution"] = contribution["contribution"].abs()
+            contribution["component_label"] = contribution.apply(
+                lambda row: compact_component_label(str(row["component_id"]), str(row.get("strategy_name", "")), str(row.get("template", ""))),
+                axis=1,
+            )
+            contribution_view = contribution.sort_values("abs_contribution", ascending=False).head(24)
+            hidden_count = max(0, len(contribution) - len(contribution_view))
+            if hidden_count:
+                st.info(f"Showing the top {len(contribution_view)} contributors by absolute impact. {hidden_count} small components are hidden to keep the chart readable.")
+            fig = px.bar(
+                contribution_view.sort_values("contribution"),
+                x="contribution",
+                y="component_label",
+                orientation="h",
+                color="sleeve",
+                color_discrete_sequence=["#2563eb", "#0f9f75", "#f97316"],
+                hover_data=["component_id", "template"],
+            )
+            fig.update_layout(height=520, margin=dict(l=10, r=10, t=20, b=10), xaxis_title="Weighted contribution", yaxis_title="")
             st.plotly_chart(fig, width="stretch")
     with chart_cols[1]:
         st.markdown("**Correlation heatmap**")
-        st.caption("How to read it: hot blocks mean strategies may be the same hidden trade wearing different clothes.")
+        st.caption("How to read it: this is a focused heatmap of the highest-impact components, not the full 298-row matrix.")
         if not corr.empty:
             corr = corr.set_index("component_id")
-            fig = go.Figure(data=go.Heatmap(z=corr.to_numpy(), x=list(corr.columns), y=list(corr.index), colorscale="RdBu", zmin=-1, zmax=1))
-            fig.update_layout(height=340, margin=dict(l=10, r=10, t=20, b=10))
+            label_source = allocation.set_index("component_id") if not allocation.empty else pd.DataFrame()
+            if not contribution.empty:
+                heatmap_ids = contribution.sort_values("abs_contribution", ascending=False)["component_id"].astype(str).head(28).tolist()
+            else:
+                heatmap_ids = list(corr.index[:28])
+            heatmap_ids = [component_id for component_id in heatmap_ids if component_id in corr.index]
+            focused_corr = corr.loc[heatmap_ids, heatmap_ids] if heatmap_ids else corr.iloc[:0, :0]
+            axis_labels = []
+            for component_id in heatmap_ids:
+                if component_id in label_source.index:
+                    row = label_source.loc[component_id]
+                    axis_labels.append(compact_component_label(component_id, str(row.get("strategy_name", component_id)), str(row.get("template", ""))))
+                else:
+                    axis_labels.append(component_id)
+            if len(corr) > len(focused_corr):
+                st.info(f"Showing {len(focused_corr)} highest-impact components out of {len(corr)}. Use the high-correlation table below for exact pairs.")
+            fig = go.Figure(data=go.Heatmap(z=focused_corr.to_numpy(), x=axis_labels, y=axis_labels, colorscale="RdBu", zmin=-1, zmax=1))
+            fig.update_layout(height=520, margin=dict(l=10, r=10, t=20, b=10), xaxis_tickangle=35)
             st.plotly_chart(fig, width="stretch")
             if high_corr.empty:
                 st.success("No component pair crossed the high-correlation threshold. The basket is not obviously one duplicated bet.")
@@ -2780,7 +2822,9 @@ def render_portfolio_lab() -> None:
                     f"{len(high_corr)} highly correlated pair(s) found. First action: remove either "
                     f"{first_pair['left_strategy']} or {first_pair['right_strategy']} and rerun."
                 )
-                st.dataframe(high_corr, width="stretch", hide_index=True)
+                st.dataframe(high_corr.head(30), width="stretch", hide_index=True)
+                if len(high_corr) > 30:
+                    st.caption(f"Showing first 30 of {len(high_corr)} high-correlation pairs.")
 
     st.markdown("**What-if removal**")
     st.caption("Remove one selected component and recompute the portfolio locally before changing the actual basket.")
