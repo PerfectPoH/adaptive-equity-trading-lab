@@ -50,6 +50,7 @@ from dashboard.lab_dashboard_data import (
     build_portfolio_lab_preview_from_components,
     build_portfolio_preregistration_approval_gate,
     build_portfolio_preregistration_draft,
+    build_portfolio_frozen_recipe_trial,
     build_separate_portfolio_trial_dry_run,
     build_strategy_factory_components,
     display_safe_records,
@@ -61,6 +62,7 @@ from dashboard.lab_dashboard_data import (
     persist_portfolio_lab_preview,
     persist_portfolio_preregistration_approval_gate,
     persist_portfolio_preregistration_draft,
+    persist_portfolio_frozen_recipe_trial,
     persist_separate_portfolio_trial_dry_run,
     portfolio_lab_component_table,
 )
@@ -2755,9 +2757,37 @@ def render_portfolio_lab() -> None:
                     f"Separate portfolio trial dry-run complete: {final.get('decision', 'UNKNOWN')}. "
                     "Promotion remains locked."
                 )
+                if st.button("Freeze recipe and run validation split", type="secondary", width="stretch"):
+                    approval = st.session_state.get("portfolio_lab_preregistration_approval", {})
+                    gate = approval.get("gate", {})
+                    frozen = build_portfolio_frozen_recipe_trial(trial, gate, components)
+                    frozen_paths = persist_portfolio_frozen_recipe_trial(frozen, root=REPO_ROOT)
+                    st.session_state["portfolio_lab_frozen_recipe_result"] = {"trial": frozen, "paths": frozen_paths}
+                    st.rerun()
             else:
                 st.error(f"Separate portfolio trial blocked: {trial.get('status', 'UNKNOWN')}")
             st.caption(f"Trial files: {paths.get('trial_report_path', '')} and {paths.get('final_decision_path', '')}")
+        if "portfolio_lab_frozen_recipe_result" in st.session_state:
+            frozen_result = st.session_state["portfolio_lab_frozen_recipe_result"]
+            frozen = frozen_result.get("trial", {})
+            paths = frozen_result.get("paths", {})
+            split = frozen.get("validation_split", {})
+            final = frozen.get("final_decision", {})
+            st.info(
+                f"Frozen recipe validation: {final.get('decision', 'UNKNOWN')}. "
+                f"Validation net {float(split.get('validation_net_return', 0.0)):.2f}; "
+                "promotion remains locked."
+            )
+            frozen_cols = st.columns(4)
+            with frozen_cols[0]:
+                metric_card("Train net", f"{float(split.get('train_net_return', 0.0)):.2f}", "First half")
+            with frozen_cols[1]:
+                metric_card("Validation net", f"{float(split.get('validation_net_return', 0.0)):.2f}", "Later half")
+            with frozen_cols[2]:
+                metric_card("Validation DD", f"{float(split.get('validation_max_drawdown', 0.0)):.2f}", "Later half pain")
+            with frozen_cols[3]:
+                metric_card("Max weight", f"{float(frozen.get('weight_contract', {}).get('max_component_weight', 0.0)):.0%}", "No optimization")
+            st.caption(f"Frozen files: {paths.get('trial_report_path', '')} and {paths.get('final_decision_path', '')}")
         with st.expander("Open search controls and top candidates"):
             st.json(
                 {

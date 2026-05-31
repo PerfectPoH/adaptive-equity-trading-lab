@@ -31,6 +31,7 @@ from dashboard.lab_dashboard_data import (
     build_portfolio_preregistration_draft,
     build_portfolio_preregistration_approval_gate,
     build_separate_portfolio_trial_dry_run,
+    build_portfolio_frozen_recipe_trial,
     display_safe_records,
     delisted_data_source_gate_payload,
     load_portfolio_lab_components,
@@ -45,6 +46,7 @@ from dashboard.lab_dashboard_data import (
     persist_portfolio_preregistration_draft,
     persist_portfolio_preregistration_approval_gate,
     persist_separate_portfolio_trial_dry_run,
+    persist_portfolio_frozen_recipe_trial,
     write_workbench_phase_report,
     build_strategy_chart_story,
     classify_strategy_status,
@@ -782,6 +784,37 @@ def test_separate_portfolio_trial_requires_approval_and_remains_non_promotable(t
     paths = persist_separate_portfolio_trial_dry_run(trial, root=tmp_path)
     assert Path(paths["trial_report_path"]).exists()
     assert Path(paths["final_decision_path"]).exists()
+
+
+def test_portfolio_frozen_recipe_uses_fixed_weights_and_validation_split(tmp_path: Path) -> None:
+    components = build_strategy_factory_components(max_variants=24)
+    selected_ids = [component["component_id"] for component in components[:3]]
+    draft = build_portfolio_preregistration_draft(components, selected_ids)
+    gate = build_portfolio_preregistration_approval_gate(draft, approved_by="barak")
+    trial = build_separate_portfolio_trial_dry_run(draft, gate, components)
+
+    frozen = build_portfolio_frozen_recipe_trial(trial, gate, components)
+
+    assert frozen["status"] == "PORTFOLIO_FROZEN_RECIPE_VALIDATION_COMPLETE"
+    assert frozen["promotion_allowed"] is False
+    assert frozen["paper_trading_allowed"] is False
+    assert frozen["live_trading_allowed"] is False
+    assert frozen["provider_query_performed"] is False
+    assert frozen["market_data_download_performed"] is False
+    assert frozen["weight_contract"]["policy"] == "equal_weight"
+    assert frozen["weight_contract"]["max_component_weight"] == 0.4
+    assert frozen["weight_contract"]["optimization_allowed"] is False
+    assert frozen["validation_split"]["train_period_count"] > 0
+    assert frozen["validation_split"]["validation_period_count"] > 0
+    assert "validation_net_return" in frozen["validation_split"]
+    assert frozen["final_decision"]["promotion_allowed"] is False
+    assert "factory_generated_scope_gate" in frozen["final_decision"]["blockers"]
+    assert frozen["trial_lineage"]["source_trial_id"] == trial["trial_id"]
+
+    paths = persist_portfolio_frozen_recipe_trial(frozen, root=tmp_path)
+    assert Path(paths["trial_report_path"]).exists()
+    assert Path(paths["final_decision_path"]).exists()
+    assert Path(paths["markdown_path"]).exists()
 
 
 def test_portfolio_preview_can_include_factory_generated_components(tmp_path: Path) -> None:

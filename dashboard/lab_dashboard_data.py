@@ -24,6 +24,7 @@ LARGECAP_PRICE_FILE = Path("experiments/runs/20260508_173235_news_thr60/signals.
 WORKBENCH_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-WORKBENCH"
 PORTFOLIO_PREREG_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-PREREG"
 PORTFOLIO_TRIAL_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-TRIALS"
+PORTFOLIO_FROZEN_RECIPE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-FROZEN-RECIPES"
 DELISTED_DATA_SOURCE_GATE_DIR = Path("experiments/provider_aware_research/delisted_data_source_gate_20260525")
 ORB_930_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "ORB-930-CROSS-ASSET-BACKTEST-001"
 WORKBENCH_CONFIGURED_LARGECAP_SYMBOLS = {
@@ -2720,6 +2721,154 @@ def persist_separate_portfolio_trial_dry_run(trial: dict[str, Any], *, root: Pat
         f"- blockers: `{', '.join(trial.get('final_decision', {}).get('blockers', []))}`",
         "",
         "This artifact is a dry-run only. It does not authorize paper trading, live trading, provider queries, or promotion.",
+    ]
+    markdown_path.write_text("\n".join(markdown_lines), encoding="utf-8")
+    return {
+        "output_dir": str(output_dir),
+        "trial_report_path": str(trial_report_path),
+        "final_decision_path": str(final_decision_path),
+        "markdown_path": str(markdown_path),
+    }
+
+
+def build_portfolio_frozen_recipe_trial(
+    separate_trial: dict[str, Any],
+    approval_gate: dict[str, Any] | None,
+    components: list[dict[str, Any]],
+    *,
+    policy: str = "equal_weight",
+    max_component_weight: float = 0.40,
+) -> dict[str, Any]:
+    """Validate a searched portfolio as a frozen recipe, with no new search or weight tuning."""
+
+    if separate_trial.get("status") != "SEPARATE_PORTFOLIO_TRIAL_DRY_RUN_COMPLETE":
+        return {
+            "trial_id": "PORTFOLIO-FROZEN-UNKNOWN",
+            "status": "BLOCKED_SOURCE_TRIAL_MISSING",
+            "promotion_allowed": False,
+            "paper_trading_allowed": False,
+            "live_trading_allowed": False,
+            "provider_query_performed": False,
+            "market_data_download_performed": False,
+            "reason": "A completed separate portfolio dry-run is required before freezing the recipe.",
+        }
+    if not approval_gate or approval_gate.get("status") != "APPROVED_FOR_SEPARATE_PORTFOLIO_TRIAL_ONLY":
+        return {
+            "trial_id": separate_trial.get("trial_id", "PORTFOLIO-FROZEN-UNKNOWN"),
+            "status": "BLOCKED_APPROVAL_GATE_MISSING",
+            "promotion_allowed": False,
+            "paper_trading_allowed": False,
+            "live_trading_allowed": False,
+            "provider_query_performed": False,
+            "market_data_download_performed": False,
+            "reason": "The same approval gate lineage is required before the frozen recipe validation.",
+        }
+
+    selected_ids = [str(component_id) for component_id in separate_trial.get("trial_lineage", {}).get("selected_component_ids", [])]
+    selected = {component_id for component_id in selected_ids if component_id}
+    frozen_components = [component for component in components if str(component.get("component_id")) in selected]
+    diagnostic = run_portfolio_diagnostic(
+        frozen_components,
+        policy=policy,
+        max_component_weight=max_component_weight,
+        max_rejected_weight=max_component_weight,
+        max_convex_weight=max_component_weight,
+    )
+    equity_curve = list(diagnostic.get("equity_curve", []))
+    midpoint = len(equity_curve) // 2
+    train_curve = equity_curve[:midpoint]
+    validation_curve = equity_curve[midpoint:]
+    train_net = sum(float(row.get("portfolio_return", 0.0) or 0.0) for row in train_curve)
+    validation_net = sum(float(row.get("portfolio_return", 0.0) or 0.0) for row in validation_curve)
+    validation_drawdown = min((float(row.get("drawdown", 0.0) or 0.0) for row in validation_curve), default=0.0)
+    validation_positive_rate = (
+        sum(1 for row in validation_curve if float(row.get("portfolio_return", 0.0) or 0.0) > 0) / len(validation_curve)
+        if validation_curve
+        else 0.0
+    )
+    source_blockers = list(diagnostic.get("final_decision", {}).get("blockers", []))
+    blockers = list(dict.fromkeys(source_blockers))
+    if validation_net <= 0:
+        blockers.append("validation_split_gate")
+    if not validation_curve:
+        blockers.append("validation_sample_gate")
+    decision = "PORTFOLIO_FROZEN_RECIPE_DIAGNOSTIC_ONLY" if blockers else "PORTFOLIO_FROZEN_RECIPE_RESEARCH_CANDIDATE_ONLY"
+    signature_payload = {
+        "source_trial_id": separate_trial.get("trial_id"),
+        "selected_component_ids": selected_ids,
+        "policy": policy,
+        "max_component_weight": max_component_weight,
+    }
+    frozen_id = hashlib.sha256(json.dumps(signature_payload, sort_keys=True).encode("utf-8")).hexdigest()[:16]
+    return {
+        "trial_id": f"PORTFOLIO-FROZEN-RECIPE-{frozen_id.upper()}",
+        "frozen_recipe_id": frozen_id,
+        "status": "PORTFOLIO_FROZEN_RECIPE_VALIDATION_COMPLETE",
+        "promotion_allowed": False,
+        "paper_trading_allowed": False,
+        "live_trading_allowed": False,
+        "provider_query_performed": False,
+        "market_data_download_performed": False,
+        "weight_contract": {
+            "policy": policy,
+            "max_component_weight": max_component_weight,
+            "optimization_allowed": False,
+            "search_allowed": False,
+            "reason": "The recipe is frozen before validation; no Sharpe, CAGR, or hindsight weight optimization is allowed.",
+        },
+        "trial_lineage": {
+            "source_trial_id": separate_trial["trial_id"],
+            "source_draft_id": separate_trial.get("draft_id", ""),
+            "approval_gate_id": approval_gate["approval_gate_id"],
+            "selected_component_ids": selected_ids,
+        },
+        "validation_split": {
+            "method": "chronological_half_split",
+            "train_period_count": len(train_curve),
+            "validation_period_count": len(validation_curve),
+            "train_net_return": round(float(train_net), 8),
+            "validation_net_return": round(float(validation_net), 8),
+            "validation_max_drawdown": round(float(validation_drawdown), 8),
+            "validation_positive_period_rate": round(float(validation_positive_rate), 8),
+        },
+        "portfolio_diagnostic": diagnostic,
+        "final_decision": {
+            "decision": decision,
+            "blockers": blockers,
+            "net_return_sum": diagnostic.get("summary", {}).get("total_net_return", 0.0),
+            "validation_net_return": round(float(validation_net), 8),
+            "promotion_allowed": False,
+            "paper_trading_allowed": False,
+            "live_trading_allowed": False,
+            "provider_query_performed": False,
+            "market_data_download_performed": False,
+            "portfolio_backtest_performed": False,
+            "runner_mode": "frozen_recipe_local_validation",
+        },
+        "required_next_step": "If still interesting, convert the recipe into a real external-data/PIT backtest gate; this dry-run cannot promote.",
+    }
+
+
+def persist_portfolio_frozen_recipe_trial(trial: dict[str, Any], *, root: Path = Path(".")) -> dict[str, str]:
+    output_dir = Path(root) / PORTFOLIO_FROZEN_RECIPE_OUTPUT_DIR / str(trial.get("frozen_recipe_id", "unknown"))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    trial_report_path = output_dir / "portfolio_frozen_recipe_trial.json"
+    final_decision_path = output_dir / "final_decision.json"
+    markdown_path = output_dir / "portfolio_frozen_recipe_report.md"
+    trial_report_path.write_text(json.dumps(_json_safe(trial), indent=2, sort_keys=True), encoding="utf-8")
+    final_decision_path.write_text(json.dumps(_json_safe(trial.get("final_decision", {})), indent=2, sort_keys=True), encoding="utf-8")
+    split = trial.get("validation_split", {})
+    markdown_lines = [
+        f"# Frozen Portfolio Recipe Trial: {trial.get('trial_id', 'UNKNOWN')}",
+        "",
+        f"- status: `{trial.get('status')}`",
+        f"- decision: `{trial.get('final_decision', {}).get('decision', 'UNKNOWN')}`",
+        f"- promotion_allowed: `{str(trial.get('promotion_allowed', False)).lower()}`",
+        f"- train_net_return: `{split.get('train_net_return', 0.0)}`",
+        f"- validation_net_return: `{split.get('validation_net_return', 0.0)}`",
+        f"- blockers: `{', '.join(trial.get('final_decision', {}).get('blockers', []))}`",
+        "",
+        "Weights are frozen before validation. This artifact is still diagnostic-only and does not authorize paper trading, live trading, provider queries, or promotion.",
     ]
     markdown_path.write_text("\n".join(markdown_lines), encoding="utf-8")
     return {
