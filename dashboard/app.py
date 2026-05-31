@@ -2470,6 +2470,8 @@ def render_portfolio_lab() -> None:
     default_ids = [component["component_id"] for component in components[: min(6, len(components))]]
     if "portfolio_lab_selected_ids" not in st.session_state:
         st.session_state["portfolio_lab_selected_ids"] = default_ids
+    if "portfolio_lab_pending_selected_ids" in st.session_state:
+        st.session_state["portfolio_lab_selected_ids"] = list(st.session_state.pop("portfolio_lab_pending_selected_ids"))
     st.session_state["portfolio_lab_selected_ids"] = [
         component_id for component_id in st.session_state["portfolio_lab_selected_ids"] if component_id in labels
     ] or default_ids
@@ -2604,7 +2606,7 @@ def render_portfolio_lab() -> None:
             metric_card("Ex-best", f"{best.get('ex_best_net_return', 0.0):.2f}", "After removing strongest component")
         st.caption("Best governed basket components: " + ", ".join(search.get("best_component_labels", [])))
         if st.button("Load best governed basket into selector", type="secondary", width="stretch"):
-            st.session_state["portfolio_lab_selected_ids"] = list(search.get("best_basket_component_ids", []))
+            st.session_state["portfolio_lab_pending_selected_ids"] = list(search.get("best_basket_component_ids", []))
             st.rerun()
         with st.expander("Open search controls and top candidates"):
             st.json(
