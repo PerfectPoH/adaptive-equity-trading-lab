@@ -850,6 +850,115 @@ def persist_workbench_run_bundle(
     }
 
 
+def build_workbench_strategy_package(manifest: dict[str, Any], validation_rows: pd.DataFrame, preview: dict[str, Any]) -> dict[str, Any]:
+    signature = workbench_manifest_signature(manifest)
+    gate = build_workbench_pre_run_gate(manifest, validation_rows)
+    data_scope = build_workbench_data_scope_preview(manifest)
+    readiness = build_workbench_backtest_readiness(manifest, validation_rows, preview)
+    package_readme = "\n".join(
+        [
+            f"# Strategy Package: {manifest['strategy_name']}",
+            "",
+            "## Purpose",
+            "",
+            "This package is a governed bridge from Workbench dry-run to a future real backtest.",
+            "It does not authorize paper trading, live trading, provider queries, or strategy promotion.",
+            "",
+            "## Current Status",
+            "",
+            f"- manifest_signature: `{signature}`",
+            f"- template: `{manifest['template']}`",
+            f"- analysis_mode: `{manifest.get('analysis_mode', 'Trading')}`",
+            f"- readiness: `{readiness['overall_status']}`",
+            f"- promotion_allowed: `false`",
+            "",
+            "## Required Next Step",
+            "",
+            readiness["next_user_action"],
+            "",
+            "## Files",
+            "",
+            "- `strategy_manifest.json`: frozen user hypothesis.",
+            "- `pre_run_gate.json`: validation and blocked actions.",
+            "- `data_contract.json`: required data, local coverage, and provider permissions.",
+            "- `command_spec.json`: future runner contract; execution remains disabled.",
+            "- `risk_policy.json`: cost, gate, and promotion rules.",
+            "- `dry_run_report.md`: local diagnostic report.",
+        ]
+    )
+    return {
+        "strategy_manifest.json": manifest,
+        "pre_run_gate.json": gate,
+        "data_contract.json": {
+            "manifest_signature": signature,
+            "strategy_name": manifest["strategy_name"],
+            "template": manifest["template"],
+            "required_data": manifest.get("required_data", []),
+            "universe": manifest.get("universe", ""),
+            "data_scope": data_scope,
+            "provider_query_allowed": bool(manifest.get("provider_query_allowed", False)),
+            "raw_payload_retention_allowed": False,
+            "pit_or_survivorship_warning": any("active-only" in str(manifest.get("universe", "")).lower() for _ in [0]),
+            "missing_data_action": "block_real_backtest_or_mark_proxy_only",
+        },
+        "command_spec.json": {
+            "manifest_signature": signature,
+            "command_type": "future_governed_backtest_package",
+            "module": "UNASSIGNED_UNTIL_PRE_RUN_GATE_COMMITTED",
+            "arguments": [],
+            "execution_allowed": False,
+            "provider_query_allowed": bool(manifest.get("provider_query_allowed", False)),
+            "forbidden_flags": ["--paper", "--live", "--promote", "--retain-raw-response", "--sweep"],
+            "next_allowed_action": "commit_package_then_select_or_build_a_governed_runner",
+        },
+        "risk_policy.json": {
+            "manifest_signature": signature,
+            "analysis_mode": manifest.get("analysis_mode", "Trading"),
+            "holding_period_days": int(manifest.get("holding_period_days", 0)),
+            "round_trip_cost_bps": int(manifest.get("cost_bps", 0)),
+            "first_gate": manifest.get("first_gate", ""),
+            "promotion_allowed": False,
+            "required_gates_before_promotion": [
+                "data_quality_gate",
+                "sample_size_gate",
+                "cost_realism_gate",
+                "outlier_dependency_gate",
+                "median_or_portfolio_gate",
+                "final_decision_gate",
+            ],
+            "paper_live_policy": "forbidden_from_workbench_package",
+        },
+        "README.md": package_readme,
+        "dry_run_report.md": str(preview.get("markdown_report", "")),
+    }
+
+
+def persist_workbench_strategy_package(
+    manifest: dict[str, Any],
+    validation_rows: pd.DataFrame,
+    preview: dict[str, Any],
+    *,
+    root: Path = Path("."),
+) -> dict[str, Any]:
+    signature = workbench_manifest_signature(manifest)
+    package_dir = root / WORKBENCH_OUTPUT_DIR / signature / "strategy_package"
+    package_dir.mkdir(parents=True, exist_ok=True)
+    package = build_workbench_strategy_package(manifest, validation_rows, preview)
+    files: dict[str, str] = {}
+    for filename, payload in package.items():
+        path = package_dir / filename
+        if filename.endswith(".json"):
+            path.write_text(json.dumps(_json_safe(payload), indent=2, sort_keys=True), encoding="utf-8")
+        else:
+            path.write_text(str(payload), encoding="utf-8")
+        files[filename] = str(path)
+    return {
+        "package_dir": str(package_dir),
+        "manifest_signature": signature,
+        "files": files,
+    }
+
+
 def display_safe_records(records: list[dict[str, Any]]) -> list[dict[str, str]]:
     safe_rows: list[dict[str, str]] = []
     for row in records:
@@ -1154,11 +1263,20 @@ def write_workbench_phase_report(*, root: Path = Path(".")) -> Path:
                 "- Added Chart Annotator for generated dry-run trades.",
                 "- Added readiness, blueprint, and metric glossary surfaces.",
                 "",
+                "# Strategy Workbench V3",
+                "",
+                "## Scope",
+                "",
+                "- Added governed strategy package generation.",
+                "- Package includes strategy manifest, pre-run gate, data contract, command spec, risk policy, README, and dry-run report.",
+                "- Package generation remains non-executing and cannot authorize paper/live trading.",
+                "",
                 "## Governance",
                 "",
                 "- `promotion_allowed` remains false inside the Workbench.",
                 "- Dry-runs remain local and diagnostic.",
                 "- Real backtests still require a committed pre-run gate, data contract, and separate governed runner.",
+                "- Strategy packages keep `execution_allowed=false` and `promotion_allowed=false`.",
                 "",
                 "## Next Phase",
                 "",

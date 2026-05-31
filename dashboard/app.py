@@ -27,11 +27,13 @@ from dashboard.lab_dashboard_data import (
     build_workbench_manifest,
     build_workbench_pre_run_gate,
     build_workbench_backtest_readiness,
+    build_workbench_strategy_package,
     build_workbench_comparison_table,
     delisted_data_source_gate_payload,
     governance_metrics,
     load_dashboard_payload,
     persist_workbench_run_bundle,
+    persist_workbench_strategy_package,
     project_capability_rows,
     project_lifecycle_rows,
     strategy_detail,
@@ -2179,10 +2181,25 @@ def render_strategy_workbench() -> None:
                 st.code(preview.get("markdown_report", ""), language="markdown")
             with st.expander("Open exportable strategy blueprint"):
                 st.json(build_workbench_strategy_blueprint(manifest, preview))
+            st.markdown("**Governed strategy package**")
+            st.caption("This prepares the files a real runner would need later. It does not execute a real backtest.")
+            package_cols = st.columns([1, 1])
+            with package_cols[0]:
+                if st.button("Generate governed strategy package", type="secondary", width="stretch"):
+                    st.session_state["workbench_strategy_package"] = persist_workbench_strategy_package(manifest, validation_rows, preview)
+            with package_cols[1]:
+                st.caption("Files: manifest, pre-run gate, data contract, command spec, risk policy, README, dry-run report.")
+            package_preview = build_workbench_strategy_package(manifest, validation_rows, preview)
+            with st.expander("Preview generated package contents"):
+                st.json({filename: ("markdown/text" if filename.endswith(".md") else payload) for filename, payload in package_preview.items()})
             artifact_bundle = st.session_state.get("workbench_artifact_bundle")
             if artifact_bundle:
                 st.markdown("**Persisted artifacts**")
                 st.json(artifact_bundle)
+            strategy_package = st.session_state.get("workbench_strategy_package")
+            if strategy_package:
+                st.markdown("**Persisted strategy package**")
+                st.json(strategy_package)
 
     saved_cards = load_workbench_strategy_cards(limit=6)
     if saved_cards:

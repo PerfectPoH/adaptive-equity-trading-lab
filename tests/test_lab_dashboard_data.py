@@ -18,6 +18,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_manifest,
     build_workbench_pre_run_gate,
     build_workbench_backtest_readiness,
+    build_workbench_strategy_package,
     build_workbench_comparison_table,
     build_workbench_data_scope_preview,
     build_workbench_result_summary,
@@ -30,6 +31,7 @@ from dashboard.lab_dashboard_data import (
     load_workbench_strategy_cards,
     orb_930_backtest_payload,
     persist_workbench_run_bundle,
+    persist_workbench_strategy_package,
     write_workbench_phase_report,
     build_strategy_chart_story,
     classify_strategy_status,
@@ -872,5 +874,66 @@ def test_write_workbench_phase_report_records_v2_progress(tmp_path: Path) -> Non
 
     text = path.read_text(encoding="utf-8")
     assert "Strategy Workbench V2" in text
+    assert "Strategy Workbench V3" in text
     assert "Chart Annotator" in text
+    assert "strategy package" in text.lower()
     assert "promotion_allowed" in text
+
+
+def test_workbench_strategy_package_contains_governed_backtest_files() -> None:
+    manifest = build_workbench_manifest(
+        name="Package strategy",
+        template="Custom Rule Builder",
+        universe="expanded local research sandbox",
+        holding_period_days=30,
+        cost_bps=300,
+        allow_provider_query=False,
+        custom_rules={"signal": "momentum_5d", "selection": "top", "entries_per_symbol": 6},
+    )
+    validation = validate_workbench_manifest(manifest)
+    preview = build_controlled_backtest_preview(manifest, validation)
+
+    package = build_workbench_strategy_package(manifest, validation, preview)
+
+    assert set(package) == {
+        "strategy_manifest.json",
+        "pre_run_gate.json",
+        "data_contract.json",
+        "command_spec.json",
+        "risk_policy.json",
+        "README.md",
+        "dry_run_report.md",
+    }
+    assert package["pre_run_gate.json"]["promotion_allowed"] is False
+    assert package["data_contract.json"]["provider_query_allowed"] is False
+    assert package["command_spec.json"]["execution_allowed"] is False
+    assert "--live" in package["command_spec.json"]["forbidden_flags"]
+    assert "Package strategy" in package["README.md"]
+
+
+def test_persist_workbench_strategy_package_writes_all_files(tmp_path: Path) -> None:
+    manifest = build_workbench_manifest(
+        name="Persist package",
+        template="Momentum",
+        universe="large-cap / ETF clean-data sandbox",
+        holding_period_days=21,
+        cost_bps=250,
+        allow_provider_query=False,
+    )
+    validation = validate_workbench_manifest(manifest)
+    preview = build_controlled_backtest_preview(manifest, validation)
+
+    bundle = persist_workbench_strategy_package(manifest, validation, preview, root=tmp_path)
+
+    assert Path(bundle["package_dir"]).exists()
+    for filename in [
+        "strategy_manifest.json",
+        "pre_run_gate.json",
+        "data_contract.json",
+        "command_spec.json",
+        "risk_policy.json",
+        "README.md",
+        "dry_run_report.md",
+    ]:
+        assert Path(bundle["files"][filename]).exists()
+    assert "strategy_package" in bundle["package_dir"]
