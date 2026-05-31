@@ -63,6 +63,7 @@ def load_workbench_portfolio_components(*, root: Path = Path("."), limit: int = 
         cost = result.get("cost_breakdown", {})
         warnings = result.get("bias_warnings", []) or []
         warning_ids = [str(row.get("warning_id", row.get("message", "UNKNOWN_WARNING"))) for row in warnings if isinstance(row, dict)]
+        source = _component_source_from_result(result, warning_ids)
         trade_path = run_dir / "trade_list.csv"
         equity_path = run_dir / "equity_curve.csv"
         trade_count = int(result.get("simulated_trades") or 0)
@@ -77,6 +78,7 @@ def load_workbench_portfolio_components(*, root: Path = Path("."), limit: int = 
                 "decision": verdict.get("decision", result.get("decision", "UNKNOWN")),
                 "promotion_allowed": bool(verdict.get("promotion_allowed", False)),
                 "bias_warnings": warning_ids,
+                "source": source,
                 "trade_count": trade_count,
                 "net_return_sum": float(cost.get("net_return_sum") or 0.0),
                 "gross_return_sum": float(cost.get("gross_return_sum") or 0.0),
@@ -87,6 +89,14 @@ def load_workbench_portfolio_components(*, root: Path = Path("."), limit: int = 
             }
         )
     return components
+
+
+def _component_source_from_result(result: dict[str, Any], warning_ids: list[str]) -> str:
+    if result.get("factory_materialization") or "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE" in warning_ids:
+        return "factory_materialized"
+    if "FACTORY_GENERATED_NOT_PREREGISTERED" in warning_ids:
+        return "factory_materialized"
+    return str(result.get("source", "saved_workbench") or "saved_workbench")
 
 
 def build_component_return_matrix(components: list[dict[str, Any]]) -> pd.DataFrame:

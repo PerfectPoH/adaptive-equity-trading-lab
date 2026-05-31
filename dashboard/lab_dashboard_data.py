@@ -2515,7 +2515,7 @@ def build_portfolio_preregistration_draft(
         source = component["source"]
         source_summary[source] = source_summary.get(source, 0) + 1
     disclosure_flags = ["selected_after_search", "portfolio_diagnostic_only", "promotion_locked_false"]
-    if source_summary.get("factory_generated", 0):
+    if source_summary.get("factory_generated", 0) or source_summary.get("factory_materialized", 0):
         disclosure_flags.append("factory_generated_scope")
     if any(component["bias_warnings"] for component in selected_components):
         disclosure_flags.append("component_bias_warnings_present")

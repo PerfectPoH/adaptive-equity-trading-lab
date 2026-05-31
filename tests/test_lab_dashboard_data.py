@@ -713,6 +713,28 @@ def test_portfolio_preregistration_draft_preserves_overfit_disclosure(tmp_path: 
     assert "manual approval" in Path(paths["markdown_path"]).read_text(encoding="utf-8").lower()
 
 
+def test_portfolio_preregistration_draft_keeps_factory_scope_after_materialization() -> None:
+    components = [
+        {
+            "component_id": "abc123",
+            "strategy_name": "Materialized Factory Momentum 180d 100bps",
+            "template": "Momentum",
+            "analysis_mode": "Investment",
+            "decision": "FACTORY_MATERIALIZED_DIAGNOSTIC_ONLY",
+            "source": "factory_materialized",
+            "trade_count": 10,
+            "net_return_sum": 1.2,
+            "cost_bps": 100,
+            "bias_warnings": ["FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE"],
+        }
+    ]
+
+    draft = build_portfolio_preregistration_draft(components, ["abc123"])
+
+    assert draft["source_summary"]["factory_materialized"] == 1
+    assert "factory_generated_scope" in draft["anti_overfit_disclosures"]
+
+
 def test_portfolio_preview_can_include_factory_generated_components(tmp_path: Path) -> None:
     preview = build_portfolio_lab_preview(root=tmp_path, include_factory_generated=True, factory_variant_limit=12)
 

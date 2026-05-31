@@ -90,6 +90,22 @@ def test_load_workbench_portfolio_components_reads_saved_runs(tmp_path: Path) ->
     assert components[0]["trade_count"] == 2
 
 
+def test_load_workbench_portfolio_components_preserves_factory_materialized_lineage(tmp_path: Path) -> None:
+    _component(
+        tmp_path,
+        "factorylineage1",
+        template="Momentum",
+        decision="FACTORY_MATERIALIZED_DIAGNOSTIC_ONLY",
+        returns=[0.1, 0.2],
+        warning="FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+    )
+
+    components = load_workbench_portfolio_components(root=tmp_path)
+
+    assert components[0]["source"] == "factory_materialized"
+    assert "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE" in components[0]["bias_warnings"]
+
+
 def test_load_workbench_portfolio_components_treats_blank_trade_file_as_empty(tmp_path: Path) -> None:
     run_dir = _component(tmp_path, "blank1", template="Momentum", decision="RESEARCH_CANDIDATE_ONLY", returns=[])
     (run_dir / "trade_list.csv").write_text("\n", encoding="utf-8")
