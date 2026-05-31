@@ -103,6 +103,12 @@ def build_component_return_matrix(components: list[dict[str, Any]]) -> pd.DataFr
 
 
 def _component_return_series(component: dict[str, Any]) -> pd.Series:
+    inline_returns = component.get("inline_returns", [])
+    if isinstance(inline_returns, list) and inline_returns:
+        periods = [str(row.get("period", f"step-{index:05d}")) for index, row in enumerate(inline_returns, start=1) if isinstance(row, dict)]
+        values = [float(row.get("net_return", 0.0) or 0.0) for row in inline_returns if isinstance(row, dict)]
+        if periods and len(periods) == len(values):
+            return pd.Series(values, index=periods).groupby(level=0).sum().sort_index()
     equity_value = str(component.get("equity_curve_path", ""))
     trade_value = str(component.get("trade_list_path", ""))
     equity_path = Path(equity_value) if equity_value else None
@@ -301,7 +307,7 @@ def run_portfolio_diagnostic(
     ]
     component_manifest = [
         {
-            **{key: component[key] for key in ("component_id", "strategy_name", "template", "analysis_mode", "decision", "trade_count", "net_return_sum") if key in component},
+            **{key: component[key] for key in ("component_id", "strategy_name", "template", "analysis_mode", "decision", "trade_count", "net_return_sum", "source") if key in component},
             "bias_warnings": ";".join(component.get("bias_warnings", [])),
             "weight": next((row["weight"] for row in allocation if row["component_id"] == component["component_id"]), 0.0),
             "sleeve": _classify_sleeve(component),
@@ -321,6 +327,10 @@ def run_portfolio_diagnostic(
         "top_component_contribution": round(float((contribution.iloc[0] / max(contribution[contribution > 0].sum(), 1e-12)) if not contribution.empty and contribution.iloc[0] > 0 else 0.0), 8),
         "high_correlation_pair_count": len(high_correlation_pairs),
     }
+    source_summary: dict[str, int] = {}
+    for component in component_manifest:
+        source = str(component.get("source", "saved_workbench"))
+        source_summary[source] = source_summary.get(source, 0) + 1
     return {
         "portfolio_manifest": {
             "portfolio_id": "WORKBENCH-PORTFOLIO-001",
@@ -334,6 +344,7 @@ def run_portfolio_diagnostic(
             "paper_live_policy": "forbidden_from_portfolio_lab",
         },
         "summary": summary,
+        "component_source_summary": source_summary,
         "components": component_manifest,
         "return_matrix": matrix.reset_index(names="period").to_dict("records") if not matrix.empty else [],
         "allocation": allocation,

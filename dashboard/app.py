@@ -47,6 +47,8 @@ from dashboard.lab_dashboard_data import (
     build_workbench_metric_glossary,
     build_workbench_visual_diagnostics,
     build_portfolio_lab_preview,
+    build_portfolio_lab_preview_from_components,
+    build_strategy_factory_components,
     display_safe_records,
     load_workbench_strategy_cards,
     load_workbench_strategy_packages,
@@ -981,6 +983,11 @@ def main_navigation(current_section: str) -> str:
 
 def set_active_section(section_name: str) -> None:
     st.session_state["active_section"] = section_name
+
+
+@st.cache_data(show_spinner=False)
+def cached_strategy_factory_components(factory_variant_limit: int) -> list[dict[str, object]]:
+    return build_strategy_factory_components(max_variants=factory_variant_limit)
 
 
 def metric_card(label: str, value: str | int | float, note: str) -> None:
@@ -2458,7 +2465,18 @@ def render_portfolio_lab() -> None:
         """,
         unsafe_allow_html=True,
     )
+    factory_cols = st.columns([1, 1, 2])
+    with factory_cols[0]:
+        include_factory_generated = st.checkbox("Include generated catalog", value=True)
+    with factory_cols[1]:
+        factory_variant_limit = st.slider("Generated variants", 24, 240, 48, 24)
+    with factory_cols[2]:
+        st.caption("Generated catalog = all governed templates x frozen universes/holds/costs. Diagnostic only, no provider query, no promotion.")
+    run_full_catalog = st.checkbox("Run governed search on full loaded catalog", value=include_factory_generated)
+
     components = load_portfolio_lab_components(limit=60)
+    if include_factory_generated:
+        components = [*components, *cached_strategy_factory_components(factory_variant_limit)]
     if not components:
         st.warning("No saved Workbench components found yet. Create and dry-run strategies first.")
         return
@@ -2481,8 +2499,8 @@ def render_portfolio_lab() -> None:
           <div class="lab-kicker">01 / Component Basket</div>
           <div class="workbench-section-title">Choose the saved strategy components.</div>
           <div class="workbench-section-copy">
-            This selector is the current basket you are inspecting. It is not automatically the best basket;
-            the governed search below will identify a suggested combination after duplicate and overfit controls.
+            This selector is the current basket you are inspecting. When generated catalog is enabled,
+            the list includes strategies you never manually created, produced from frozen templates and guarded local dry-runs.
           </div>
         </div>
         """,
@@ -2499,6 +2517,8 @@ def render_portfolio_lab() -> None:
     component_table = portfolio_lab_component_table([component for component in components if component["component_id"] in selected_ids])
     if not component_table.empty:
         st.dataframe(component_table, width="stretch", hide_index=True)
+    if run_full_catalog:
+        st.info(f"Full-catalog mode is active: the diagnostic below ignores the selector and evaluates all {len(components)} loaded components after dedupe. The selector is only for inspection.")
 
     st.markdown(
         """
@@ -2523,12 +2543,14 @@ def render_portfolio_lab() -> None:
     with cols[3]:
         max_convex_weight = st.slider("Max convex sleeve", 0.00, 0.50, 0.20, 0.05)
 
-    if not selected_ids:
+    if not selected_ids and not run_full_catalog:
         st.info("Select at least three components to run a toy portfolio diagnostic.")
         return
 
-    preview = build_portfolio_lab_preview(
-        selected_ids,
+    diagnostic_selected_ids = None if run_full_catalog else selected_ids
+    preview = build_portfolio_lab_preview_from_components(
+        components,
+        diagnostic_selected_ids,
         policy=policy,
         max_component_weight=max_component_weight,
         max_rejected_weight=max_rejected_weight,
@@ -2563,6 +2585,11 @@ def render_portfolio_lab() -> None:
         st.error("Portfolio blockers: " + ", ".join(decision["blockers"]))
     else:
         st.success("No hard portfolio blocker fired, but the diagnostic remains non-promotable.")
+    source_summary = preview.get("component_source_summary", {})
+    st.caption(
+        f"Component sources in this diagnostic: saved workbench = {source_summary.get('saved_workbench', 0)}, "
+        f"factory generated = {source_summary.get('factory_generated', 0)}."
+    )
 
     dedupe = preview.get("strategy_deduplication", {})
     search = preview.get("portfolio_search", {})
@@ -2641,7 +2668,8 @@ def render_portfolio_lab() -> None:
         if not removed.empty:
             st.dataframe(removed, width="stretch", hide_index=True)
         cleaned_ids = list(auto_clean.get("kept_component_ids", []))
-        cleaned_preview = build_portfolio_lab_preview(
+        cleaned_preview = build_portfolio_lab_preview_from_components(
+            components,
             cleaned_ids,
             policy=policy,
             max_component_weight=max_component_weight,
@@ -2732,8 +2760,10 @@ def render_portfolio_lab() -> None:
         else labels.get(component_id, component_id),
     )
     if what_if_remove != "No removal":
-        reduced_ids = [component_id for component_id in selected_ids if component_id != what_if_remove]
-        what_if = build_portfolio_lab_preview(
+        active_ids = [row["component_id"] for row in preview["allocation"]]
+        reduced_ids = [component_id for component_id in active_ids if component_id != what_if_remove]
+        what_if = build_portfolio_lab_preview_from_components(
+            components,
             reduced_ids,
             policy=policy,
             max_component_weight=max_component_weight,

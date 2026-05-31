@@ -27,6 +27,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_metric_glossary,
     build_workbench_visual_diagnostics,
     build_portfolio_lab_preview,
+    build_strategy_factory_components,
     display_safe_records,
     delisted_data_source_gate_payload,
     load_portfolio_lab_components,
@@ -646,6 +647,26 @@ def test_event_investment_proxy_flags_high_survivorship_bias() -> None:
     assert "SURVIVORSHIP_BIAS_SUSPECTED_HIGH" in warning_ids
     assert "PROXY_INVESTMENT_CANDIDATE_ONLY" in preview["automatic_verdict"]["summary"]
     assert "SURVIVORSHIP_BIAS_SUSPECTED_HIGH" in preview["markdown_report"]
+
+
+def test_strategy_factory_generates_uncreated_template_variants() -> None:
+    components = build_strategy_factory_components(max_variants=24)
+
+    assert components
+    assert all(component["source"] == "factory_generated" for component in components)
+    assert any("FACTORY" in component["component_id"] for component in components)
+    assert any(component["template"] == "PDUFA Run-Up" for component in components)
+    assert all(component["provider_query_performed"] is False for component in components)
+    assert any(component["trade_count"] > 0 for component in components)
+
+
+def test_portfolio_preview_can_include_factory_generated_components(tmp_path: Path) -> None:
+    preview = build_portfolio_lab_preview(root=tmp_path, include_factory_generated=True, factory_variant_limit=12)
+
+    assert preview["summary"]["component_count"] >= 3
+    assert preview["component_source_summary"]["factory_generated"] >= 3
+    assert preview["portfolio_search"]["search_performed"] is True
+    assert preview["final_decision"]["promotion_allowed"] is False
 
 
 def test_persist_workbench_run_bundle_writes_manifest_gate_and_result(tmp_path: Path) -> None:

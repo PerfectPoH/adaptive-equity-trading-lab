@@ -2335,6 +2335,75 @@ def load_portfolio_lab_components(*, root: Path = Path("."), limit: int = 40) ->
     return load_workbench_portfolio_components(root=root, limit=limit)
 
 
+def build_strategy_factory_components(*, max_variants: int = 120, root: Path = Path(".")) -> list[dict[str, Any]]:
+    """Generate governed, never-promotable strategy variants not manually created in Workbench."""
+
+    universes = ["expanded local research sandbox", "large-cap / ETF clean-data sandbox"]
+    holding_periods = [5, 20, 45, 90, 180]
+    cost_bps_values = [100, 375, 500]
+    components: list[dict[str, Any]] = []
+    for universe in universes:
+        for holding_period in holding_periods:
+            for cost_bps in cost_bps_values:
+                for template in WORKBENCH_TEMPLATES:
+                    if len(components) >= max_variants:
+                        return components
+                    event_template = template in {"Catalyst", "PEAD", "Form 4 Cluster Buying", "PDUFA Run-Up", "13D Activist Follow-On"}
+                    manifest = build_workbench_manifest(
+                        name=f"Factory {template} {holding_period}d {cost_bps}bps",
+                        template=template,
+                        universe=universe,
+                        holding_period_days=holding_period,
+                        cost_bps=cost_bps,
+                        allow_provider_query=event_template,
+                        strategy_mode="Auto",
+                    )
+                    validation = validate_workbench_manifest(manifest)
+                    preview = build_controlled_backtest_preview(manifest, validation)
+                    component = _factory_component_from_preview(manifest, preview)
+                    if component is not None:
+                        components.append(component)
+    return components
+
+
+def _factory_component_from_preview(manifest: dict[str, Any], preview: dict[str, Any]) -> dict[str, Any] | None:
+    trades = preview.get("trade_rows", [])
+    if not isinstance(trades, list) or not trades:
+        return None
+    signature = workbench_manifest_signature(manifest)
+    verdict = preview.get("automatic_verdict", {})
+    cost = preview.get("cost_breakdown", {})
+    warnings = preview.get("bias_warnings", []) or []
+    warning_ids = [str(row.get("warning_id", row.get("message", "UNKNOWN_WARNING"))) for row in warnings if isinstance(row, dict)]
+    inline_returns = [
+        {
+            "period": str(row.get("entry_date", row.get("exit_date", f"step-{index:05d}"))),
+            "net_return": float(row.get("net_return", 0.0) or 0.0),
+        }
+        for index, row in enumerate(trades, start=1)
+        if isinstance(row, dict)
+    ]
+    return {
+        "component_id": f"FACTORY-{signature}",
+        "strategy_name": manifest["strategy_name"],
+        "template": manifest["template"],
+        "analysis_mode": manifest.get("analysis_mode", "Trading"),
+        "decision": verdict.get("decision", preview.get("decision", "UNKNOWN")),
+        "promotion_allowed": False,
+        "bias_warnings": sorted(set([*warning_ids, "FACTORY_GENERATED_NOT_PREREGISTERED"])),
+        "provider_query_performed": False,
+        "trade_count": int(preview.get("simulated_trades") or len(trades)),
+        "net_return_sum": float(cost.get("net_return_sum") or preview.get("net_edge_proxy") or 0.0),
+        "gross_return_sum": float(cost.get("gross_return_sum") or 0.0),
+        "cost_bps": int(manifest.get("cost_bps") or 0),
+        "artifact_dir": "",
+        "trade_list_path": "",
+        "equity_curve_path": "",
+        "inline_returns": inline_returns,
+        "source": "factory_generated",
+    }
+
+
 def build_portfolio_lab_preview(
     selected_component_ids: list[str] | None = None,
     *,
@@ -2342,14 +2411,40 @@ def build_portfolio_lab_preview(
     max_component_weight: float = 0.60,
     max_rejected_weight: float = 0.20,
     max_convex_weight: float = 0.20,
+    include_factory_generated: bool = False,
+    factory_variant_limit: int = 120,
     root: Path = Path("."),
 ) -> dict[str, Any]:
     components = load_portfolio_lab_components(root=root)
+    if include_factory_generated:
+        components = [*components, *build_strategy_factory_components(max_variants=factory_variant_limit, root=root)]
     if selected_component_ids:
         selected = set(selected_component_ids)
         components = [component for component in components if str(component["component_id"]) in selected]
     return run_portfolio_diagnostic(
         components,
+        policy=policy,
+        max_component_weight=max_component_weight,
+        max_rejected_weight=max_rejected_weight,
+        max_convex_weight=max_convex_weight,
+    )
+
+
+def build_portfolio_lab_preview_from_components(
+    components: list[dict[str, Any]],
+    selected_component_ids: list[str] | None = None,
+    *,
+    policy: str = "sleeve_allocation",
+    max_component_weight: float = 0.60,
+    max_rejected_weight: float = 0.20,
+    max_convex_weight: float = 0.20,
+) -> dict[str, Any]:
+    scoped = components
+    if selected_component_ids:
+        selected = set(selected_component_ids)
+        scoped = [component for component in components if str(component["component_id"]) in selected]
+    return run_portfolio_diagnostic(
+        scoped,
         policy=policy,
         max_component_weight=max_component_weight,
         max_rejected_weight=max_rejected_weight,
