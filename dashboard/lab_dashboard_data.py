@@ -2400,7 +2400,87 @@ def _factory_component_from_preview(manifest: dict[str, Any], preview: dict[str,
         "trade_list_path": "",
         "equity_curve_path": "",
         "inline_returns": inline_returns,
+        "factory_manifest": manifest,
+        "factory_preview": preview,
         "source": "factory_generated",
+    }
+
+
+def materialize_factory_components_as_workbench_runs(
+    components: list[dict[str, Any]],
+    selected_component_ids: list[str],
+    *,
+    root: Path = Path("."),
+) -> dict[str, Any]:
+    """Persist selected generated recipes as Workbench bundles without laundering provenance."""
+
+    selected = set(selected_component_ids)
+    bundles: list[dict[str, str]] = []
+    skipped: list[dict[str, str]] = []
+    for component in components:
+        component_id = str(component.get("component_id", ""))
+        if component_id not in selected:
+            continue
+        if str(component.get("source", "")) != "factory_generated":
+            skipped.append({"component_id": component_id, "reason": "not_factory_generated"})
+            continue
+        manifest = component.get("factory_manifest")
+        preview = component.get("factory_preview")
+        if not isinstance(manifest, dict) or not isinstance(preview, dict):
+            skipped.append({"component_id": component_id, "reason": "missing_factory_manifest_or_preview"})
+            continue
+
+        materialized_manifest = dict(manifest)
+        materialized_manifest["strategy_name"] = f"Materialized {manifest.get('strategy_name', component_id)}"
+        materialized_manifest["factory_source_component_id"] = component_id
+        materialized_manifest["promotion_allowed"] = False
+        validation_rows = validate_workbench_manifest(materialized_manifest)
+
+        materialized_preview = dict(preview)
+        existing_warnings = [
+            warning for warning in materialized_preview.get("bias_warnings", []) if isinstance(warning, dict)
+        ]
+        warning_ids = {str(warning.get("warning_id")) for warning in existing_warnings}
+        for warning_id, message in [
+            (
+                "FACTORY_GENERATED_NOT_PREREGISTERED",
+                "This Workbench run was materialized from an automatically generated factory recipe.",
+            ),
+            (
+                "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+                "The rule was selected after a portfolio search and cannot be used as promotion evidence.",
+            ),
+        ]:
+            if warning_id not in warning_ids:
+                existing_warnings.append({"warning_id": warning_id, "severity": "high", "message": message})
+        materialized_preview["bias_warnings"] = existing_warnings
+        verdict = dict(materialized_preview.get("automatic_verdict", {}))
+        verdict["promotion_allowed"] = False
+        verdict["decision"] = "FACTORY_MATERIALIZED_DIAGNOSTIC_ONLY"
+        blockers = list(verdict.get("blockers", []))
+        for blocker in ["factory_generated_scope", "selected_after_search"]:
+            if blocker not in blockers:
+                blockers.append(blocker)
+        verdict["blockers"] = blockers
+        verdict["summary"] = "Materialized from factory search; diagnostic only, not promotion evidence."
+        materialized_preview["automatic_verdict"] = verdict
+        materialized_preview["decision"] = "FACTORY_MATERIALIZED_DIAGNOSTIC_ONLY"
+        materialized_preview["promotion_allowed"] = False
+        materialized_preview["factory_materialization"] = {
+            "source_component_id": component_id,
+            "selected_after_search": True,
+            "promotion_allowed": False,
+            "next_step": "Manually preregister this hypothesis before any real backtest can count as evidence.",
+        }
+        bundles.append(persist_workbench_run_bundle(materialized_manifest, validation_rows, materialized_preview, root=root))
+
+    return {
+        "materialized_count": len(bundles),
+        "skipped_count": len(skipped),
+        "bundles": bundles,
+        "skipped": skipped,
+        "promotion_allowed": False,
+        "next_step": "Reload Portfolio Lab and rerun with materialized diagnostic artifacts.",
     }
 
 

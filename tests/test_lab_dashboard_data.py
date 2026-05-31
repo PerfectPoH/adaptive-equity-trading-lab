@@ -34,6 +34,7 @@ from dashboard.lab_dashboard_data import (
     load_workbench_strategy_cards,
     load_workbench_strategy_packages,
     inspect_workbench_strategy_package,
+    materialize_factory_components_as_workbench_runs,
     orb_930_backtest_payload,
     persist_workbench_run_bundle,
     portfolio_lab_component_table,
@@ -654,10 +655,32 @@ def test_strategy_factory_generates_uncreated_template_variants() -> None:
 
     assert components
     assert all(component["source"] == "factory_generated" for component in components)
+    assert all("factory_manifest" in component for component in components)
+    assert all("factory_preview" in component for component in components)
     assert any("FACTORY" in component["component_id"] for component in components)
     assert any(component["template"] == "PDUFA Run-Up" for component in components)
     assert all(component["provider_query_performed"] is False for component in components)
     assert any(component["trade_count"] > 0 for component in components)
+
+
+def test_materialize_factory_components_keeps_factory_provenance(tmp_path: Path) -> None:
+    components = build_strategy_factory_components(max_variants=12)
+    selected_ids = [component["component_id"] for component in components[:3]]
+
+    result = materialize_factory_components_as_workbench_runs(components, selected_ids, root=tmp_path)
+
+    assert result["materialized_count"] == 3
+    assert result["skipped_count"] == 0
+    for bundle in result["bundles"]:
+        assert Path(bundle["manifest_path"]).exists()
+        dry_run = json.loads(Path(bundle["result_path"]).read_text(encoding="utf-8"))
+        warning_ids = {warning["warning_id"] for warning in dry_run["bias_warnings"]}
+        assert "FACTORY_GENERATED_NOT_PREREGISTERED" in warning_ids
+        assert "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE" in warning_ids
+
+    saved = load_portfolio_lab_components(root=tmp_path, limit=10)
+    assert len(saved) == 3
+    assert all("FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE" in component["bias_warnings"] for component in saved)
 
 
 def test_portfolio_preview_can_include_factory_generated_components(tmp_path: Path) -> None:

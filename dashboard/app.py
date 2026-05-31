@@ -54,6 +54,7 @@ from dashboard.lab_dashboard_data import (
     load_workbench_strategy_packages,
     load_portfolio_lab_components,
     inspect_workbench_strategy_package,
+    materialize_factory_components_as_workbench_runs,
     persist_portfolio_lab_preview,
     portfolio_lab_component_table,
 )
@@ -2645,9 +2646,28 @@ def render_portfolio_lab() -> None:
                 "This best basket contains generated strategies. Read it as a hypothesis recipe: "
                 "promote nothing, pre-register the selected rules, then rerun with real artifacts."
             )
-        if st.button("Load best governed basket into selector", type="secondary", width="stretch"):
-            st.session_state["portfolio_lab_pending_selected_ids"] = list(search.get("best_basket_component_ids", []))
-            st.rerun()
+        best_actions = st.columns(2)
+        with best_actions[0]:
+            if st.button("Load best governed basket into selector", type="secondary", width="stretch"):
+                st.session_state["portfolio_lab_pending_selected_ids"] = list(search.get("best_basket_component_ids", []))
+                st.rerun()
+        with best_actions[1]:
+            if st.button("Materialize generated best basket", type="secondary", width="stretch"):
+                result = materialize_factory_components_as_workbench_runs(
+                    components,
+                    list(search.get("best_basket_component_ids", [])),
+                    root=REPO_ROOT,
+                )
+                st.session_state["portfolio_lab_materialization_result"] = result
+                st.rerun()
+        if "portfolio_lab_materialization_result" in st.session_state:
+            materialization = st.session_state["portfolio_lab_materialization_result"]
+            st.success(
+                f"Materialized {materialization.get('materialized_count', 0)} generated component(s) as Workbench diagnostic artifacts. "
+                "Factory provenance warnings were retained."
+            )
+            if materialization.get("skipped_count", 0):
+                st.warning(f"Skipped {materialization.get('skipped_count')} component(s): {materialization.get('skipped')}")
         with st.expander("Open search controls and top candidates"):
             st.json(
                 {
