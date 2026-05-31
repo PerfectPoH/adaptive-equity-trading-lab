@@ -48,6 +48,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_visual_diagnostics,
     build_portfolio_lab_preview,
     build_portfolio_lab_preview_from_components,
+    build_portfolio_preregistration_draft,
     build_strategy_factory_components,
     display_safe_records,
     load_workbench_strategy_cards,
@@ -56,6 +57,7 @@ from dashboard.lab_dashboard_data import (
     inspect_workbench_strategy_package,
     materialize_factory_components_as_workbench_runs,
     persist_portfolio_lab_preview,
+    persist_portfolio_preregistration_draft,
     portfolio_lab_component_table,
 )
 from src.experiments.workbench_package_runner import run_package_diagnostic
@@ -2655,7 +2657,7 @@ def render_portfolio_lab() -> None:
                 "This best basket contains generated strategies. Read it as a hypothesis recipe: "
                 "promote nothing, pre-register the selected rules, then rerun with real artifacts."
             )
-        best_actions = st.columns(2)
+        best_actions = st.columns(3)
         with best_actions[0]:
             if st.button("Load best governed basket into selector", type="secondary", width="stretch"):
                 st.session_state["portfolio_lab_pending_selected_ids"] = list(search.get("best_basket_component_ids", []))
@@ -2669,6 +2671,22 @@ def render_portfolio_lab() -> None:
                 )
                 st.session_state["portfolio_lab_materialization_result"] = result
                 st.rerun()
+        with best_actions[2]:
+            if st.button("Create pre-registration draft", type="primary", width="stretch"):
+                draft = build_portfolio_preregistration_draft(
+                    components,
+                    list(search.get("best_basket_component_ids", [])),
+                    source_search={
+                        "selection_rule": search.get("selection_rule"),
+                        "objective": search.get("objective"),
+                        "evaluated_candidate_count": search.get("evaluated_candidate_count"),
+                        "best_summary": search.get("best_summary", {}),
+                        "best_component_labels": search.get("best_component_labels", []),
+                    },
+                )
+                paths = persist_portfolio_preregistration_draft(draft, root=REPO_ROOT)
+                st.session_state["portfolio_lab_preregistration_result"] = {"draft": draft, "paths": paths}
+                st.rerun()
         if "portfolio_lab_materialization_result" in st.session_state:
             materialization = st.session_state["portfolio_lab_materialization_result"]
             st.success(
@@ -2677,6 +2695,25 @@ def render_portfolio_lab() -> None:
             )
             if materialization.get("skipped_count", 0):
                 st.warning(f"Skipped {materialization.get('skipped_count')} component(s): {materialization.get('skipped')}")
+        if "portfolio_lab_preregistration_result" in st.session_state:
+            prereg = st.session_state["portfolio_lab_preregistration_result"]
+            draft = prereg.get("draft", {})
+            paths = prereg.get("paths", {})
+            st.success(
+                f"Pre-registration draft created: {draft.get('trial_id', 'UNKNOWN')}. "
+                "Manual approval is still required before any portfolio trial can count as evidence."
+            )
+            st.caption(f"Vault files: {paths.get('json_path', '')} and {paths.get('markdown_path', '')}")
+            with st.expander("Open pre-registration draft summary"):
+                st.json(
+                    {
+                        "status": draft.get("status"),
+                        "anti_overfit_disclosures": draft.get("anti_overfit_disclosures", []),
+                        "template_mix": draft.get("template_mix", []),
+                        "falsification_criteria": draft.get("falsification_criteria", []),
+                        "required_next_step": draft.get("required_next_step"),
+                    }
+                )
         with st.expander("Open search controls and top candidates"):
             st.json(
                 {

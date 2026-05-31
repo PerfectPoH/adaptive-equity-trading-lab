@@ -28,6 +28,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_visual_diagnostics,
     build_portfolio_lab_preview,
     build_strategy_factory_components,
+    build_portfolio_preregistration_draft,
     display_safe_records,
     delisted_data_source_gate_payload,
     load_portfolio_lab_components,
@@ -39,6 +40,7 @@ from dashboard.lab_dashboard_data import (
     persist_workbench_run_bundle,
     portfolio_lab_component_table,
     persist_workbench_strategy_package,
+    persist_portfolio_preregistration_draft,
     write_workbench_phase_report,
     build_strategy_chart_story,
     classify_strategy_status,
@@ -681,6 +683,34 @@ def test_materialize_factory_components_keeps_factory_provenance(tmp_path: Path)
     saved = load_portfolio_lab_components(root=tmp_path, limit=10)
     assert len(saved) == 3
     assert all("FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE" in component["bias_warnings"] for component in saved)
+
+
+def test_portfolio_preregistration_draft_preserves_overfit_disclosure(tmp_path: Path) -> None:
+    components = build_strategy_factory_components(max_variants=24)
+    selected_ids = [component["component_id"] for component in components[:3]]
+    draft = build_portfolio_preregistration_draft(
+        components,
+        selected_ids,
+        source_search={"selection_rule": "predeclared_robust_score_no_promotion", "evaluated_candidate_count": 42},
+    )
+
+    assert draft["status"] == "PREREGISTRATION_DRAFT_REQUIRES_MANUAL_APPROVAL"
+    assert draft["promotion_allowed"] is False
+    assert draft["paper_trading_allowed"] is False
+    assert draft["live_trading_allowed"] is False
+    assert draft["source_search"]["evaluated_candidate_count"] == 42
+    assert len(draft["selected_components"]) == 3
+    assert "selected_after_search" in draft["anti_overfit_disclosures"]
+    assert "factory_generated_scope" in draft["anti_overfit_disclosures"]
+    assert draft["falsification_criteria"]
+
+    paths = persist_portfolio_preregistration_draft(draft, root=tmp_path)
+
+    assert Path(paths["json_path"]).exists()
+    assert Path(paths["markdown_path"]).exists()
+    loaded = json.loads(Path(paths["json_path"]).read_text(encoding="utf-8"))
+    assert loaded["draft_id"] == draft["draft_id"]
+    assert "manual approval" in Path(paths["markdown_path"]).read_text(encoding="utf-8").lower()
 
 
 def test_portfolio_preview_can_include_factory_generated_components(tmp_path: Path) -> None:

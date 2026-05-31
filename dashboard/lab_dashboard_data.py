@@ -21,6 +21,7 @@ FIVE_POINT_DIR = EXECUTION_OUTPUTS_DIR / "TRANSITION-FIVE-POINT-BATCH-RUN-001"
 PRICE_FILE = Path("experiments/provider_aware_research/data_inputs/databento_xmom_20260520/prices.csv")
 LARGECAP_PRICE_FILE = Path("experiments/runs/20260508_173235_news_thr60/signals.csv")
 WORKBENCH_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-WORKBENCH"
+PORTFOLIO_PREREG_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-PREREG"
 DELISTED_DATA_SOURCE_GATE_DIR = Path("experiments/provider_aware_research/delisted_data_source_gate_20260525")
 ORB_930_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "ORB-930-CROSS-ASSET-BACKTEST-001"
 WORKBENCH_CONFIGURED_LARGECAP_SYMBOLS = {
@@ -2481,6 +2482,130 @@ def materialize_factory_components_as_workbench_runs(
         "skipped": skipped,
         "promotion_allowed": False,
         "next_step": "Reload Portfolio Lab and rerun with materialized diagnostic artifacts.",
+    }
+
+
+def build_portfolio_preregistration_draft(
+    components: list[dict[str, Any]],
+    selected_component_ids: list[str],
+    *,
+    source_search: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Build an auditable draft that freezes a generated portfolio idea before any real test."""
+
+    selected = set(selected_component_ids)
+    chosen = [component for component in components if str(component.get("component_id")) in selected]
+    selected_components = [
+        {
+            "component_id": str(component.get("component_id", "")),
+            "strategy_name": str(component.get("strategy_name", "")),
+            "template": str(component.get("template", "")),
+            "analysis_mode": str(component.get("analysis_mode", "")),
+            "decision_at_selection_time": str(component.get("decision", "")),
+            "source": str(component.get("source", "saved_workbench")),
+            "trade_count_proxy": int(component.get("trade_count", 0) or 0),
+            "net_return_sum_proxy": float(component.get("net_return_sum", 0.0) or 0.0),
+            "cost_bps": int(component.get("cost_bps", 0) or 0),
+            "bias_warnings": list(component.get("bias_warnings", [])),
+        }
+        for component in chosen
+    ]
+    source_summary: dict[str, int] = {}
+    for component in selected_components:
+        source = component["source"]
+        source_summary[source] = source_summary.get(source, 0) + 1
+    disclosure_flags = ["selected_after_search", "portfolio_diagnostic_only", "promotion_locked_false"]
+    if source_summary.get("factory_generated", 0):
+        disclosure_flags.append("factory_generated_scope")
+    if any(component["bias_warnings"] for component in selected_components):
+        disclosure_flags.append("component_bias_warnings_present")
+
+    signature_payload = {
+        "selected_component_ids": sorted(selected),
+        "source_search": source_search or {},
+        "source_summary": source_summary,
+    }
+    draft_id = hashlib.sha256(json.dumps(signature_payload, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()[:16]
+    template_mix = sorted({component["template"] for component in selected_components})
+    return {
+        "draft_id": draft_id,
+        "trial_id": f"PORTFOLIO-PREREG-{draft_id.upper()}",
+        "status": "PREREGISTRATION_DRAFT_REQUIRES_MANUAL_APPROVAL",
+        "promotion_allowed": False,
+        "paper_trading_allowed": False,
+        "live_trading_allowed": False,
+        "provider_query_allowed": False,
+        "market_data_download_allowed": False,
+        "hypothesis": "A bounded basket of separately governed strategy components may be more robust than any single component after costs, duplicate removal, correlation checks, and ex-best stress.",
+        "selected_components": selected_components,
+        "source_summary": source_summary,
+        "template_mix": template_mix,
+        "source_search": source_search or {},
+        "anti_overfit_disclosures": disclosure_flags,
+        "frozen_allocation_policy": {
+            "allowed_policies": ["sleeve_allocation", "equal_weight", "inverse_volatility"],
+            "default_policy": "sleeve_allocation",
+            "weight_optimization_allowed": False,
+            "reason": "Weights must be explainable before the validation run; no hindsight Sharpe optimization.",
+        },
+        "falsification_criteria": [
+            "Archive if the basket fails after removing the strongest component.",
+            "Archive if cost stress at 1.5x declared costs flips the net result negative.",
+            "Archive if a single component contributes more than 40% of positive contribution.",
+            "Archive if high correlation shows the basket is a hidden duplicate bet.",
+            "Archive or keep diagnostic-only if any component still depends on factory-generated/proxy data.",
+        ],
+        "required_next_step": "User must manually approve this draft, then rerun as a separately pre-registered portfolio trial before interpreting candidate status.",
+    }
+
+
+def persist_portfolio_preregistration_draft(draft: dict[str, Any], *, root: Path = Path(".")) -> dict[str, str]:
+    output_dir = Path(root) / PORTFOLIO_PREREG_OUTPUT_DIR / str(draft["draft_id"])
+    output_dir.mkdir(parents=True, exist_ok=True)
+    json_path = output_dir / "portfolio_preregistration.json"
+    markdown_path = output_dir / "portfolio_preregistration.md"
+    json_path.write_text(json.dumps(_json_safe(draft), indent=2, sort_keys=True), encoding="utf-8")
+    markdown_lines = [
+        f"# Portfolio Pre-Registration Draft: {draft['trial_id']}",
+        "",
+        f"- status: `{draft['status']}`",
+        "- manual approval required: `true`",
+        "- promotion_allowed: `false`",
+        "- paper_trading_allowed: `false`",
+        "- live_trading_allowed: `false`",
+        "",
+        "## Hypothesis",
+        "",
+        str(draft["hypothesis"]),
+        "",
+        "## Selected Components",
+        "",
+    ]
+    for component in draft.get("selected_components", []):
+        markdown_lines.append(
+            f"- `{component['component_id']}` | {component['strategy_name']} | {component['template']} | source `{component['source']}`"
+        )
+    markdown_lines.extend(
+        [
+            "",
+            "## Anti-Overfit Disclosures",
+            "",
+            *[f"- `{flag}`" for flag in draft.get("anti_overfit_disclosures", [])],
+            "",
+            "## Falsification Criteria",
+            "",
+            *[f"- {criterion}" for criterion in draft.get("falsification_criteria", [])],
+            "",
+            "## Required Next Step",
+            "",
+            str(draft["required_next_step"]),
+        ]
+    )
+    markdown_path.write_text("\n".join(markdown_lines), encoding="utf-8")
+    return {
+        "output_dir": str(output_dir),
+        "json_path": str(json_path),
+        "markdown_path": str(markdown_path),
     }
 
 
