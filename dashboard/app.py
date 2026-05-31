@@ -2468,25 +2468,32 @@ def render_portfolio_lab() -> None:
         for component in components
     }
     default_ids = [component["component_id"] for component in components[: min(6, len(components))]]
+    if "portfolio_lab_selected_ids" not in st.session_state:
+        st.session_state["portfolio_lab_selected_ids"] = default_ids
+    st.session_state["portfolio_lab_selected_ids"] = [
+        component_id for component_id in st.session_state["portfolio_lab_selected_ids"] if component_id in labels
+    ] or default_ids
     st.markdown(
         """
         <div class="workbench-section">
           <div class="lab-kicker">01 / Component Basket</div>
           <div class="workbench-section-title">Choose the saved strategy components.</div>
           <div class="workbench-section-copy">
-            The portfolio is built from auditable Workbench artifacts. Rejected components can be inspected,
-            but their weights are capped and the final result remains non-promotable.
+            This selector is the current basket you are inspecting. It is not automatically the best basket;
+            the governed search below will identify a suggested combination after duplicate and overfit controls.
           </div>
         </div>
         """,
         unsafe_allow_html=True,
     )
     selected_ids = st.multiselect(
-        "Saved strategy components",
+        "Current selected basket",
         options=list(labels),
-        default=default_ids,
+        default=st.session_state["portfolio_lab_selected_ids"],
         format_func=lambda component_id: labels.get(component_id, component_id),
+        key="portfolio_lab_selected_ids",
     )
+    st.caption("Current basket only. Use the governed-search button below to load the suggested best basket into this selector.")
     component_table = portfolio_lab_component_table([component for component in components if component["component_id"] in selected_ids])
     if not component_table.empty:
         st.dataframe(component_table, width="stretch", hide_index=True)
@@ -2595,7 +2602,10 @@ def render_portfolio_lab() -> None:
             metric_card("Validation net", f"{best.get('validation_net_return', 0.0):.2f}", "Later half of local return path")
         with best_cols[3]:
             metric_card("Ex-best", f"{best.get('ex_best_net_return', 0.0):.2f}", "After removing strongest component")
-        st.caption("Selected components: " + ", ".join(search.get("best_component_labels", [])))
+        st.caption("Best governed basket components: " + ", ".join(search.get("best_component_labels", [])))
+        if st.button("Load best governed basket into selector", type="secondary", width="stretch"):
+            st.session_state["portfolio_lab_selected_ids"] = list(search.get("best_basket_component_ids", []))
+            st.rerun()
         with st.expander("Open search controls and top candidates"):
             st.json(
                 {
