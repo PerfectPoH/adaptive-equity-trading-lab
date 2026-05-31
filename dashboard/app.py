@@ -48,6 +48,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_visual_diagnostics,
     build_portfolio_lab_preview,
     build_portfolio_lab_preview_from_components,
+    build_portfolio_preregistration_approval_gate,
     build_portfolio_preregistration_draft,
     build_strategy_factory_components,
     display_safe_records,
@@ -57,6 +58,7 @@ from dashboard.lab_dashboard_data import (
     inspect_workbench_strategy_package,
     materialize_factory_components_as_workbench_runs,
     persist_portfolio_lab_preview,
+    persist_portfolio_preregistration_approval_gate,
     persist_portfolio_preregistration_draft,
     portfolio_lab_component_table,
 )
@@ -2716,6 +2718,24 @@ def render_portfolio_lab() -> None:
                         "required_next_step": draft.get("required_next_step"),
                     }
                 )
+            if st.button("Approve draft gate for separate portfolio trial", type="secondary", width="stretch"):
+                gate = build_portfolio_preregistration_approval_gate(
+                    draft,
+                    approved_by="local_user",
+                    approval_note="Approved from Portfolio Lab UI for separate dry-run only.",
+                )
+                gate_paths = persist_portfolio_preregistration_approval_gate(gate, root=REPO_ROOT)
+                st.session_state["portfolio_lab_preregistration_approval"] = {"gate": gate, "paths": gate_paths}
+                st.rerun()
+        if "portfolio_lab_preregistration_approval" in st.session_state:
+            approval = st.session_state["portfolio_lab_preregistration_approval"]
+            gate = approval.get("gate", {})
+            paths = approval.get("paths", {})
+            st.success(
+                f"Approval gate written: {gate.get('status', 'UNKNOWN')}. "
+                "Next allowed action is a separate portfolio trial dry-run only."
+            )
+            st.caption(f"Approval gate file: {paths.get('approval_gate_path', '')}")
         with st.expander("Open search controls and top candidates"):
             st.json(
                 {

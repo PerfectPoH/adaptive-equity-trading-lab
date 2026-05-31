@@ -29,6 +29,7 @@ from dashboard.lab_dashboard_data import (
     build_portfolio_lab_preview,
     build_strategy_factory_components,
     build_portfolio_preregistration_draft,
+    build_portfolio_preregistration_approval_gate,
     display_safe_records,
     delisted_data_source_gate_payload,
     load_portfolio_lab_components,
@@ -41,6 +42,7 @@ from dashboard.lab_dashboard_data import (
     portfolio_lab_component_table,
     persist_workbench_strategy_package,
     persist_portfolio_preregistration_draft,
+    persist_portfolio_preregistration_approval_gate,
     write_workbench_phase_report,
     build_strategy_chart_story,
     classify_strategy_status,
@@ -733,6 +735,28 @@ def test_portfolio_preregistration_draft_keeps_factory_scope_after_materializati
 
     assert draft["source_summary"]["factory_materialized"] == 1
     assert "factory_generated_scope" in draft["anti_overfit_disclosures"]
+
+
+def test_portfolio_preregistration_approval_gate_preserves_safety_locks(tmp_path: Path) -> None:
+    components = build_strategy_factory_components(max_variants=24)
+    draft = build_portfolio_preregistration_draft(components, [component["component_id"] for component in components[:3]])
+
+    gate = build_portfolio_preregistration_approval_gate(draft, approved_by="barak", approval_note="Approve only as separate governed trial.")
+
+    assert gate["status"] == "APPROVED_FOR_SEPARATE_PORTFOLIO_TRIAL_ONLY"
+    assert gate["draft_id"] == draft["draft_id"]
+    assert gate["approved_by"] == "barak"
+    assert gate["next_allowed_action"] == "separate_portfolio_trial_dry_run"
+    assert gate["promotion_allowed"] is False
+    assert gate["paper_trading_allowed"] is False
+    assert gate["live_trading_allowed"] is False
+    assert "promotion_without_final_decision" in gate["blocked_actions"]
+
+    paths = persist_portfolio_preregistration_approval_gate(gate, root=tmp_path)
+
+    assert Path(paths["approval_gate_path"]).exists()
+    loaded = json.loads(Path(paths["approval_gate_path"]).read_text(encoding="utf-8"))
+    assert loaded["draft_id"] == draft["draft_id"]
 
 
 def test_portfolio_preview_can_include_factory_generated_components(tmp_path: Path) -> None:

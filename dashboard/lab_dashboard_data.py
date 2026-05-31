@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -2606,6 +2607,50 @@ def persist_portfolio_preregistration_draft(draft: dict[str, Any], *, root: Path
         "output_dir": str(output_dir),
         "json_path": str(json_path),
         "markdown_path": str(markdown_path),
+    }
+
+
+def build_portfolio_preregistration_approval_gate(
+    draft: dict[str, Any],
+    *,
+    approved_by: str = "local_user",
+    approval_note: str = "",
+) -> dict[str, Any]:
+    return {
+        "approval_gate_id": f"PORTFOLIO-PREREG-APPROVAL-{draft['draft_id']}",
+        "draft_id": draft["draft_id"],
+        "trial_id": draft["trial_id"],
+        "status": "APPROVED_FOR_SEPARATE_PORTFOLIO_TRIAL_ONLY",
+        "approved_by": approved_by.strip() or "local_user",
+        "approval_note": approval_note.strip(),
+        "approved_at_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+        "promotion_allowed": False,
+        "paper_trading_allowed": False,
+        "live_trading_allowed": False,
+        "provider_query_allowed": False,
+        "market_data_download_allowed": False,
+        "next_allowed_action": "separate_portfolio_trial_dry_run",
+        "blocked_actions": [
+            "paper_trading",
+            "live_trading",
+            "promotion_without_final_decision",
+            "provider_query_without_new_gate",
+            "market_data_download_without_new_gate",
+        ],
+        "anti_overfit_disclosures": list(draft.get("anti_overfit_disclosures", [])),
+        "falsification_criteria": list(draft.get("falsification_criteria", [])),
+        "required_next_step": "Run a separate portfolio trial from this approved draft; do not reuse factory-search metrics as evidence.",
+    }
+
+
+def persist_portfolio_preregistration_approval_gate(gate: dict[str, Any], *, root: Path = Path(".")) -> dict[str, str]:
+    output_dir = Path(root) / PORTFOLIO_PREREG_OUTPUT_DIR / str(gate["draft_id"])
+    output_dir.mkdir(parents=True, exist_ok=True)
+    approval_gate_path = output_dir / "portfolio_preregistration_approval_gate.json"
+    approval_gate_path.write_text(json.dumps(_json_safe(gate), indent=2, sort_keys=True), encoding="utf-8")
+    return {
+        "output_dir": str(output_dir),
+        "approval_gate_path": str(approval_gate_path),
     }
 
 
