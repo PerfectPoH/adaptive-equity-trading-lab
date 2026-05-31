@@ -966,3 +966,5 @@ def test_load_and_inspect_workbench_strategy_packages(tmp_path: Path) -> None:
     assert inspection["files_present"]["README.md"] is True
     assert inspection["readiness_rows"][0]["check"] == "execution_allowed"
     assert inspection["readme"].startswith("# Strategy Package")
+    assert inspection["runner_available"] is False
+    assert inspection["runner_output_dir"].endswith("diagnostic_runner")

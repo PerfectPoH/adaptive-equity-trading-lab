@@ -51,6 +51,7 @@ from dashboard.lab_dashboard_data import (
     load_workbench_strategy_packages,
     inspect_workbench_strategy_package,
 )
+from src.experiments.workbench_package_runner import run_package_diagnostic
 
 
 st.set_page_config(page_title="Adaptive Equity Trading Lab", layout="wide", initial_sidebar_state="expanded")
@@ -2270,7 +2271,29 @@ def render_strategy_workbench() -> None:
             metric_card("Promotion", inspection["risk_policy"].get("promotion_allowed", False), "Must remain false here")
         st.markdown("**Readiness checks**")
         st.dataframe(pd.DataFrame(inspection["readiness_rows"]), width="stretch", hide_index=True)
-        package_tabs = st.tabs(["README", "Manifest", "Data Contract", "Command Spec", "Risk Policy", "Dry-Run Report"])
+        st.markdown("**Diagnostic runner**")
+        runner_cols = st.columns([1, 1, 1])
+        with runner_cols[0]:
+            metric_card("Runner output", "available" if inspection["runner_available"] else "not run", inspection["runner_output_dir"])
+        with runner_cols[1]:
+            if st.button("Run diagnostic package runner", type="secondary", width="stretch"):
+                st.session_state["workbench_last_runner_paths"] = run_package_diagnostic(Path(selected_package["package_dir"]))
+                inspection = inspect_workbench_strategy_package(Path(selected_package["package_dir"]))
+        with runner_cols[2]:
+            st.caption("Local diagnostic only: no provider query, no paper/live, no promotion.")
+        if inspection["runner_available"]:
+            r1, r2, r3 = st.columns(3)
+            with r1:
+                metric_card("Final decision", inspection["runner_decision"].get("decision", "UNKNOWN"), "Runner artifact")
+            with r2:
+                metric_card("Trades", inspection["runner_decision"].get("simulated_trades", 0), "Local diagnostic run")
+            with r3:
+                metric_card("Net sum", inspection["runner_decision"].get("net_return_sum", "n/a"), "After declared costs")
+        runner_paths = st.session_state.get("workbench_last_runner_paths")
+        if runner_paths:
+            st.markdown("**Last runner artifact paths**")
+            st.json(runner_paths)
+        package_tabs = st.tabs(["README", "Manifest", "Data Contract", "Command Spec", "Risk Policy", "Dry-Run Report", "Runner Artifacts"])
         with package_tabs[0]:
             st.markdown(inspection["readme"])
         with package_tabs[1]:
@@ -2283,7 +2306,18 @@ def render_strategy_workbench() -> None:
             st.json(inspection["risk_policy"])
         with package_tabs[5]:
             st.code(inspection["dry_run_report"], language="markdown")
-        st.info("Next phase is still separate: build a real runner adapter that consumes this package and emits final_decision.json.")
+        with package_tabs[6]:
+            if inspection["runner_available"]:
+                st.json(
+                    {
+                        "final_decision": inspection["runner_decision"],
+                        "summary": inspection["runner_summary"],
+                        "runner_audit": inspection["runner_audit"],
+                    }
+                )
+            else:
+                st.info("No diagnostic runner artifact yet.")
+        st.info("This adapter is the first real end-to-end diagnostic runner, but it still cannot paper trade, live trade, query providers, or promote.")
 
     st.subheader("What The Builder Will Enforce")
     checks = [

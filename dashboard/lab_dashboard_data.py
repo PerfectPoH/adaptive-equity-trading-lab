@@ -1005,6 +1005,10 @@ def inspect_workbench_strategy_package(package_dir: Path) -> dict[str, Any]:
     risk_policy = load_json(package_dir / "risk_policy.json")
     readme = (package_dir / "README.md").read_text(encoding="utf-8") if (package_dir / "README.md").exists() else ""
     dry_report = (package_dir / "dry_run_report.md").read_text(encoding="utf-8") if (package_dir / "dry_run_report.md").exists() else ""
+    runner_dir = package_dir / "diagnostic_runner"
+    runner_decision = load_json(runner_dir / "final_decision.json")
+    runner_summary = load_json(runner_dir / "summary.json")
+    runner_audit = load_json(runner_dir / "runner_audit.json")
     readiness_rows = [
         {
             "check": "execution_allowed",
@@ -1040,6 +1044,11 @@ def inspect_workbench_strategy_package(package_dir: Path) -> dict[str, Any]:
         "risk_policy": risk_policy,
         "readme": readme,
         "dry_run_report": dry_report,
+        "runner_available": bool(runner_decision),
+        "runner_output_dir": str(runner_dir),
+        "runner_decision": runner_decision,
+        "runner_summary": runner_summary,
+        "runner_audit": runner_audit,
     }
 
 
@@ -1355,6 +1364,7 @@ def write_workbench_phase_report(*, root: Path = Path(".")) -> Path:
                 "- Package includes strategy manifest, pre-run gate, data contract, command spec, risk policy, README, and dry-run report.",
                 "- Package generation remains non-executing and cannot authorize paper/live trading.",
                 "- Added Package Inspector to review saved packages before building any real runner.",
+                "- Added first local diagnostic package runner that consumes a saved package and emits final_decision.json.",
                 "",
                 "## Governance",
                 "",
@@ -1363,6 +1373,7 @@ def write_workbench_phase_report(*, root: Path = Path(".")) -> Path:
                 "- Real backtests still require a committed pre-run gate, data contract, and separate governed runner.",
                 "- Strategy packages keep `execution_allowed=false` and `promotion_allowed=false`.",
                 "- Package Inspector can mark a package ready for runner build, but not ready for execution.",
+                "- Diagnostic runner performs local artifact generation only; provider, paper, live, and promotion remain forbidden.",
                 "",
                 "## Next Phase",
                 "",
