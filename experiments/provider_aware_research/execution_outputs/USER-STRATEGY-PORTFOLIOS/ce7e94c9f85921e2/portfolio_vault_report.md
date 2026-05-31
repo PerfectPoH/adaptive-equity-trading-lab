@@ -21,6 +21,14 @@
 - available: `True`
 - summary: Remove 8 duplicated component(s). Start with My falsifiable strategy (9:30 AM ORB, ef3f1e) because it overlaps with My falsifiable strategy (Catalyst, aeb3c9).
 
+## Governed Search
+
+- duplicate_groups: `5`
+- duplicates_removed: `5`
+- candidates_evaluated: `3223`
+- best_basket: `['bc79985845236f4a', '7d30471f7325a2a8', 'acc065823d9dcfb7']`
+- promotion_allowed: `False`
+
 ## Recommended Actions
 
 - `block` Failed because costs erase the basket: Lower turnover, use longer holding periods, or test execution assumptions before trusting the result.

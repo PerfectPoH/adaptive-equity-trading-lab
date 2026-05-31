@@ -1,0 +1,182 @@
+{
+  "best_basket_component_ids": [
+    "bc79985845236f4a",
+    "7d30471f7325a2a8",
+    "acc065823d9dcfb7"
+  ],
+  "best_component_labels": [
+    "My falsifiable strategy (Catalyst, bc7998)",
+    "gg (PDUFA Run-Up, 7d3047)",
+    "My falsifiable strategy (Momentum, acc065)"
+  ],
+  "best_summary": {
+    "average_abs_correlation": 0.04972429,
+    "component_count": 3,
+    "ex_best_net_return": 152.27112,
+    "max_drawdown": -14.3931366,
+    "stressed_net_return": 85.9186906,
+    "top_component_contribution": 0.53036692,
+    "total_net_return": 129.6936906,
+    "train_net_return": 43.2609716,
+    "validation_net_return": 86.432719
+  },
+  "evaluated_candidate_count": 3223,
+  "excluded_component_ids": [
+    "2902e60324bd4c13",
+    "bcfc1ff3b7cf8a4a",
+    "23ff266a203fea0d",
+    "28a0d94ccf2a6c08",
+    "9c7fb1982851f609",
+    "2496e35863212c76",
+    "f173207ae9bd5ccd",
+    "292441755c5ffdcc",
+    "aeb3c97678fffc03",
+    "ef3f1ebb21d03d5c",
+    "bfe638853ce4a153",
+    "409ca5c54a3efce7",
+    "91510d8163e121fc",
+    "8bf949936eddd596",
+    "eeb44b96bbac9604",
+    "680166d42265ad55",
+    "816022f1cffa8310",
+    "e8cde4045a54b14a",
+    "0dc08daefa67c12e",
+    "f884aeb8a0a20815",
+    "208d36ae3c31f890",
+    "fad9ff0f91ecab15",
+    "a37a53c4e1fce137"
+  ],
+  "exhaustive_within_search_pool": true,
+  "objective": "maximize validation-weighted robust score after duplicate removal, cost stress, contribution concentration, and correlation penalties",
+  "optimization_allowed": false,
+  "overfit_controls": {
+    "dedupe_before_search": true,
+    "diagnostic_only": true,
+    "max_candidates": 5000,
+    "max_search_pool_size": 12,
+    "max_subset_size": 7,
+    "no_market_data_download": true,
+    "no_provider_query": true,
+    "promotion_locked_false": true,
+    "why_not_full_optimization": "A fully flexible optimizer would overfit saved dry-run artifacts and manufacture fake edge."
+  },
+  "promotion_allowed": false,
+  "search_performed": true,
+  "search_pool_component_ids": [
+    "bc79985845236f4a",
+    "7d30471f7325a2a8",
+    "acc065823d9dcfb7",
+    "a0cc249592a067f4",
+    "6b50c641a4eaf53e",
+    "4087717bb62f6610",
+    "fda6a92d0fdc1a1d",
+    "bec60afef14416c2",
+    "dcfbeec9cf4c5190",
+    "0b596d1ce6d258c0",
+    "dd95aab5d08306e1",
+    "6a116a4eef3afb73"
+  ],
+  "selection_rule": "predeclared_robust_score_no_promotion",
+  "top_candidates": [
+    {
+      "component_ids": [
+        "bc79985845236f4a",
+        "7d30471f7325a2a8",
+        "acc065823d9dcfb7"
+      ],
+      "robust_score": 142.22191103,
+      "summary": {
+        "average_abs_correlation": 0.04972429,
+        "component_count": 3,
+        "ex_best_net_return": 152.27112,
+        "max_drawdown": -14.3931366,
+        "stressed_net_return": 85.9186906,
+        "top_component_contribution": 0.53036692,
+        "total_net_return": 129.6936906,
+        "train_net_return": 43.2609716,
+        "validation_net_return": 86.432719
+      }
+    },
+    {
+      "component_ids": [
+        "bc79985845236f4a",
+        "7d30471f7325a2a8",
+        "acc065823d9dcfb7",
+        "0b596d1ce6d258c0"
+      ],
+      "robust_score": 133.55170054,
+      "summary": {
+        "average_abs_correlation": 0.04396509,
+        "component_count": 4,
+        "ex_best_net_return": 125.14958633,
+        "max_drawdown": -8.59854925,
+        "stressed_net_return": 76.12082948,
+        "top_component_contribution": 0.47809032,
+        "total_net_return": 119.89582992,
+        "train_net_return": 37.24679169,
+        "validation_net_return": 82.64903823
+      }
+    },
+    {
+      "component_ids": [
+        "bc79985845236f4a",
+        "7d30471f7325a2a8",
+        "acc065823d9dcfb7",
+        "6b50c641a4eaf53e"
+      ],
+      "robust_score": 132.11650476,
+      "summary": {
+        "average_abs_correlation": 0.13042465,
+        "component_count": 4,
+        "ex_best_net_return": 126.35204267,
+        "max_drawdown": -11.98526631,
+        "stressed_net_return": 76.72205766,
+        "top_component_contribution": 0.47570485,
+        "total_net_return": 120.4970581,
+        "train_net_return": 36.05080966,
+        "validation_net_return": 84.44624843
+      }
+    },
+    {
+      "component_ids": [
+        "bc79985845236f4a",
+        "7d30471f7325a2a8",
+        "a0cc249592a067f4"
+      ],
+      "robust_score": 130.88921323,
+      "summary": {
+        "average_abs_correlation": 0.04621545,
+        "component_count": 3,
+        "ex_best_net_return": 152.27112,
+        "max_drawdown": -14.450826,
+        "stressed_net_return": 71.0772922,
+        "top_component_contribution": 0.46968017,
+        "total_net_return": 114.8522922,
+        "train_net_return": 33.6395678,
+        "validation_net_return": 81.2127244
+      }
+    },
+    {
+      "component_ids": [
+        "bc79985845236f4a",
+        "7d30471f7325a2a8",
+        "6b50c641a4eaf53e",
+        "fda6a92d0fdc1a1d",
+        "0b596d1ce6d258c0"
+      ],
+      "robust_score": 129.1456098,
+      "summary": {
+        "average_abs_correlation": 0.12169215,
+        "component_count": 5,
+        "ex_best_net_return": 82.847615,
+        "max_drawdown": -6.3697272,
+        "stressed_net_return": 57.6084016,
+        "top_component_contribution": 0.34626289,
+        "total_net_return": 101.3834016,
+        "train_net_return": 1.309425,
+        "validation_net_return": 100.0739766
+      }
+    }
+  ],
+  "truncated": false
+}

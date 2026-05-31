@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import itertools
 import json
 from pathlib import Path
 from typing import Any
@@ -276,6 +277,16 @@ def run_portfolio_diagnostic(
     gate_panel = _build_gate_panel(components, matrix, allocation, returns, drawdown, contribution, correlation)
     final_decision = _build_final_decision(gate_panel, returns, components)
     high_correlation_pairs = _high_correlation_pairs(correlation, allocation)
+    strategy_deduplication = _build_strategy_deduplication(components, allocation, correlation, contribution)
+    portfolio_search = _build_portfolio_search(
+        components,
+        matrix,
+        strategy_deduplication,
+        policy=policy,
+        max_component_weight=max_component_weight,
+        max_rejected_weight=max_rejected_weight,
+        max_convex_weight=max_convex_weight,
+    )
     auto_clean = _build_auto_clean_plan(components, allocation, contribution, high_correlation_pairs)
     action_plan = _build_action_plan(gate_panel, allocation, contribution, high_correlation_pairs, final_decision)
     signature = _portfolio_signature(components, policy, max_component_weight, max_rejected_weight, max_convex_weight)
@@ -331,6 +342,8 @@ def run_portfolio_diagnostic(
         "correlation_matrix": correlation.reset_index(names="component_id").to_dict("records") if not correlation.empty else [],
         "contribution": [{"component_id": key, "contribution": round(float(value), 8)} for key, value in contribution.items()],
         "high_correlation_pairs": high_correlation_pairs,
+        "strategy_deduplication": strategy_deduplication,
+        "portfolio_search": portfolio_search,
         "auto_clean": auto_clean,
         "action_plan": action_plan,
         "gate_panel": gate_panel,
@@ -452,6 +465,220 @@ def _high_correlation_pairs(correlation: pd.DataFrame, allocation: list[dict[str
                     }
                 )
     return sorted(pairs, key=lambda row: abs(float(row["correlation"])), reverse=True)
+
+
+def _build_strategy_deduplication(
+    components: list[dict[str, Any]],
+    allocation: list[dict[str, Any]],
+    correlation: pd.DataFrame,
+    contribution: pd.Series,
+) -> dict[str, Any]:
+    component_by_id = {str(component["component_id"]): component for component in components}
+    allocation_ids = [str(row["component_id"]) for row in allocation]
+    parent = {component_id: component_id for component_id in allocation_ids}
+
+    def find(component_id: str) -> str:
+        while parent[component_id] != component_id:
+            parent[component_id] = parent[parent[component_id]]
+            component_id = parent[component_id]
+        return component_id
+
+    def union(left: str, right: str) -> None:
+        left_root = find(left)
+        right_root = find(right)
+        if left_root != right_root:
+            parent[right_root] = left_root
+
+    reasons: dict[frozenset[str], str] = {}
+    for left, right in itertools.combinations(allocation_ids, 2):
+        left_component = component_by_id.get(left, {})
+        right_component = component_by_id.get(right, {})
+        same_template = str(left_component.get("template", "")).lower() == str(right_component.get("template", "")).lower()
+        same_mode = str(left_component.get("analysis_mode", "")).lower() == str(right_component.get("analysis_mode", "")).lower()
+        corr_value = float(correlation.loc[left, right]) if not correlation.empty and left in correlation.index and right in correlation.columns else 0.0
+        if same_template and same_mode and abs(corr_value) >= 0.98:
+            union(left, right)
+            reasons[frozenset({left, right})] = "same_template_and_near_identical_returns"
+
+    grouped: dict[str, list[str]] = {}
+    for component_id in allocation_ids:
+        grouped.setdefault(find(component_id), []).append(component_id)
+
+    groups: list[dict[str, Any]] = []
+    deduped: list[str] = []
+    removed_count = 0
+    allocation_by_id = {str(row["component_id"]): row for row in allocation}
+    for ids in grouped.values():
+        if len(ids) == 1:
+            deduped.append(ids[0])
+            continue
+        ranked = sorted(
+            ids,
+            key=lambda component_id: _component_quality_score(component_id, component_by_id, allocation_by_id, contribution),
+            reverse=True,
+        )
+        kept = ranked[0]
+        removed = ranked[1:]
+        deduped.append(kept)
+        removed_count += len(removed)
+        reason = next((value for key, value in reasons.items() if len(key.intersection(ids)) == 2), "near_duplicate_strategy_family")
+        groups.append(
+            {
+                "reason": reason,
+                "kept_component_id": kept,
+                "kept_label": _component_display_label(kept, component_by_id),
+                "removed_component_ids": removed,
+                "removed_labels": [_component_display_label(component_id, component_by_id) for component_id in removed],
+                "group_size": len(ids),
+            }
+        )
+    return {
+        "duplicate_group_count": len(groups),
+        "removed_component_count": removed_count,
+        "deduped_component_ids": [component_id for component_id in allocation_ids if component_id in set(deduped)],
+        "groups": groups,
+        "rule": "same template + same analysis mode + absolute return correlation >= 0.98",
+    }
+
+
+def _build_portfolio_search(
+    components: list[dict[str, Any]],
+    matrix: pd.DataFrame,
+    strategy_deduplication: dict[str, Any],
+    *,
+    policy: str,
+    max_component_weight: float,
+    max_rejected_weight: float,
+    max_convex_weight: float,
+    max_pool_size: int = 12,
+    max_subset_size: int = 7,
+    max_candidates: int = 5000,
+) -> dict[str, Any]:
+    component_by_id = {str(component["component_id"]): component for component in components}
+    deduped_ids = [component_id for component_id in strategy_deduplication.get("deduped_component_ids", []) if component_id in matrix.columns]
+    if len(deduped_ids) < 3:
+        return {
+            "search_performed": False,
+            "optimization_allowed": False,
+            "selection_rule": "predeclared_robust_score_no_promotion",
+            "reason": "fewer_than_three_deduped_components",
+            "best_basket_component_ids": [],
+            "best_summary": {},
+            "evaluated_candidate_count": 0,
+            "overfit_controls": _portfolio_search_controls(max_pool_size, max_subset_size, max_candidates),
+        }
+    ranking = sorted(deduped_ids, key=lambda component_id: _search_component_rank(component_by_id[component_id], matrix[component_id]), reverse=True)
+    pool = ranking[:max_pool_size]
+    excluded = ranking[max_pool_size:]
+    evaluations: list[dict[str, Any]] = []
+    stop = False
+    for size in range(3, min(max_subset_size, len(pool)) + 1):
+        for ids in itertools.combinations(pool, size):
+            evaluations.append(_evaluate_search_basket(list(ids), component_by_id, matrix, policy, max_component_weight, max_rejected_weight, max_convex_weight))
+            if len(evaluations) >= max_candidates:
+                stop = True
+                break
+        if stop:
+            break
+    best = max(evaluations, key=lambda row: row["robust_score"]) if evaluations else {}
+    return {
+        "search_performed": bool(evaluations),
+        "optimization_allowed": False,
+        "selection_rule": "predeclared_robust_score_no_promotion",
+        "objective": "maximize validation-weighted robust score after duplicate removal, cost stress, contribution concentration, and correlation penalties",
+        "search_pool_component_ids": pool,
+        "excluded_component_ids": excluded,
+        "evaluated_candidate_count": len(evaluations),
+        "truncated": stop,
+        "exhaustive_within_search_pool": not stop,
+        "best_basket_component_ids": best.get("component_ids", []),
+        "best_component_labels": [_component_display_label(component_id, component_by_id) for component_id in best.get("component_ids", [])],
+        "best_summary": best.get("summary", {}),
+        "top_candidates": evaluations[:0] if not evaluations else sorted(evaluations, key=lambda row: row["robust_score"], reverse=True)[:5],
+        "overfit_controls": _portfolio_search_controls(max_pool_size, max_subset_size, max_candidates),
+        "promotion_allowed": False,
+    }
+
+
+def _portfolio_search_controls(max_pool_size: int, max_subset_size: int, max_candidates: int) -> dict[str, Any]:
+    return {
+        "diagnostic_only": True,
+        "no_provider_query": True,
+        "no_market_data_download": True,
+        "promotion_locked_false": True,
+        "dedupe_before_search": True,
+        "max_search_pool_size": max_pool_size,
+        "max_subset_size": max_subset_size,
+        "max_candidates": max_candidates,
+        "why_not_full_optimization": "A fully flexible optimizer would overfit saved dry-run artifacts and manufacture fake edge.",
+    }
+
+
+def _search_component_rank(component: dict[str, Any], series: pd.Series) -> tuple[float, float, float, float]:
+    decision = str(component.get("decision", ""))
+    decision_score = 0.0 if decision.startswith("REJECTED") or "ARCHIVE" in decision else 1.0
+    return (decision_score, float(series.sum()), -float(series.std(ddof=0) or 0.0), float(component.get("trade_count", 0) or 0))
+
+
+def _evaluate_search_basket(
+    component_ids: list[str],
+    component_by_id: dict[str, dict[str, Any]],
+    matrix: pd.DataFrame,
+    policy: str,
+    max_component_weight: float,
+    max_rejected_weight: float,
+    max_convex_weight: float,
+) -> dict[str, Any]:
+    subset_components = [component_by_id[component_id] for component_id in component_ids]
+    subset_matrix = matrix.reindex(columns=component_ids, fill_value=0.0)
+    allocation = build_portfolio_allocation(
+        subset_components,
+        subset_matrix,
+        policy=policy,
+        max_component_weight=max_component_weight,
+        max_rejected_weight=max_rejected_weight,
+        max_convex_weight=max_convex_weight,
+    )
+    weights = pd.Series({row["component_id"]: row["weight"] for row in allocation}, dtype=float)
+    weighted = subset_matrix.reindex(columns=weights.index, fill_value=0.0).mul(weights, axis=1)
+    returns = weighted.sum(axis=1)
+    cumulative = returns.cumsum()
+    drawdown = cumulative - cumulative.cummax()
+    contribution = weighted.sum(axis=0).sort_values(ascending=False)
+    positive_total = float(contribution[contribution > 0].sum()) if not contribution.empty else 0.0
+    top_share = float(contribution.iloc[0] / positive_total) if positive_total > 0 and not contribution.empty else 0.0
+    corr = subset_matrix.reindex(columns=weights.index).corr().fillna(0.0) if len(weights) > 1 else pd.DataFrame()
+    avg_corr = _average_abs_correlation(corr)
+    ex_best = _ex_best_return(subset_matrix, allocation, str(contribution.index[0]) if not contribution.empty else "")
+    declared_cost_drag = _weighted_cost_drag(subset_components, allocation)
+    stressed_total = float(returns.sum() - declared_cost_drag * max(1, len(returns)) * 0.5)
+    split = max(1, len(returns) // 2)
+    train_total = float(returns.iloc[:split].sum())
+    validation_total = float(returns.iloc[split:].sum())
+    robust_score = (
+        validation_total
+        + 0.25 * train_total
+        + 0.25 * ex_best
+        + 0.25 * stressed_total
+        - max(0.0, top_share - 0.35)
+        - max(0.0, avg_corr - 0.65)
+        + float(drawdown.min() if not drawdown.empty else 0.0)
+    )
+    return {
+        "component_ids": component_ids,
+        "robust_score": round(float(robust_score), 8),
+        "summary": {
+            "component_count": len(component_ids),
+            "total_net_return": round(float(returns.sum()), 8),
+            "train_net_return": round(train_total, 8),
+            "validation_net_return": round(validation_total, 8),
+            "stressed_net_return": round(stressed_total, 8),
+            "ex_best_net_return": round(ex_best, 8),
+            "top_component_contribution": round(top_share, 8),
+            "average_abs_correlation": round(avg_corr, 8),
+            "max_drawdown": round(float(drawdown.min() if not drawdown.empty else 0.0), 8),
+        },
+    }
 
 
 def _build_auto_clean_plan(
@@ -721,6 +948,8 @@ def persist_portfolio_diagnostic(diagnostic: dict[str, Any], *, root: Path = Pat
         "portfolio_correlation_matrix_path": output_dir / "portfolio_correlation_matrix.csv",
         "portfolio_high_correlation_pairs_path": output_dir / "portfolio_high_correlation_pairs.csv",
         "portfolio_auto_clean_plan_path": output_dir / "portfolio_auto_clean_plan.json",
+        "portfolio_deduplication_path": output_dir / "portfolio_deduplication.json",
+        "portfolio_search_path": output_dir / "portfolio_search.json",
         "portfolio_gate_panel_path": output_dir / "portfolio_gate_panel.json",
         "portfolio_action_plan_path": output_dir / "portfolio_action_plan.json",
         "portfolio_final_decision_path": output_dir / "portfolio_final_decision.json",
@@ -735,6 +964,8 @@ def persist_portfolio_diagnostic(diagnostic: dict[str, Any], *, root: Path = Pat
     pd.DataFrame(diagnostic["correlation_matrix"]).to_csv(paths["portfolio_correlation_matrix_path"], index=False)
     pd.DataFrame(diagnostic["high_correlation_pairs"]).to_csv(paths["portfolio_high_correlation_pairs_path"], index=False)
     _write_json(paths["portfolio_auto_clean_plan_path"], diagnostic["auto_clean"])
+    _write_json(paths["portfolio_deduplication_path"], diagnostic["strategy_deduplication"])
+    _write_json(paths["portfolio_search_path"], diagnostic["portfolio_search"])
     _write_json(paths["portfolio_gate_panel_path"], diagnostic["gate_panel"])
     _write_json(paths["portfolio_action_plan_path"], diagnostic["action_plan"])
     _write_json(paths["portfolio_final_decision_path"], diagnostic["final_decision"])
@@ -768,6 +999,14 @@ def _portfolio_report(diagnostic: dict[str, Any]) -> str:
         "",
         f"- available: `{diagnostic.get('auto_clean', {}).get('available', False)}`",
         f"- summary: {diagnostic.get('auto_clean', {}).get('summary', 'No automatic de-duplication suggested.')}",
+        "",
+        "## Governed Search",
+        "",
+        f"- duplicate_groups: `{diagnostic.get('strategy_deduplication', {}).get('duplicate_group_count', 0)}`",
+        f"- duplicates_removed: `{diagnostic.get('strategy_deduplication', {}).get('removed_component_count', 0)}`",
+        f"- candidates_evaluated: `{diagnostic.get('portfolio_search', {}).get('evaluated_candidate_count', 0)}`",
+        f"- best_basket: `{diagnostic.get('portfolio_search', {}).get('best_basket_component_ids', [])}`",
+        f"- promotion_allowed: `{diagnostic.get('portfolio_search', {}).get('promotion_allowed', False)}`",
         "",
         "## Recommended Actions",
         "",

@@ -616,6 +616,86 @@ def inject_theme() -> None:
           padding: 22px;
           box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 54px rgba(23,23,23,.06);
         }
+        .portfolio-hero {
+          display: grid;
+          grid-template-columns: minmax(0, 1.45fr) minmax(280px, .55fr);
+          gap: 22px;
+          align-items: end;
+          border: 1px solid #1e293b;
+          border-radius: 12px;
+          padding: 42px;
+          margin: 12px 0 34px;
+          color: #fff;
+          background:
+            linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px),
+            linear-gradient(0deg, rgba(255,255,255,.07) 1px, transparent 1px),
+            radial-gradient(circle at 75% 16%, rgba(15,159,117,.30), transparent 26%),
+            linear-gradient(125deg, #1f5eff 0%, #172033 52%, #945100 100%);
+          background-size: 38px 38px, 38px 38px, auto, auto;
+          box-shadow: 0 1px 0 rgba(23,23,23,.08), 0 24px 70px rgba(23,23,23,.14);
+        }
+        .portfolio-hero h1 {
+          color: #ffffff;
+          font-size: clamp(44px, 6vw, 74px);
+          line-height: .92;
+          letter-spacing: 0;
+          margin: 12px 0 16px;
+          max-width: 900px;
+        }
+        .portfolio-hero p {
+          color: #eaf2ff !important;
+          font-size: 17px;
+          line-height: 1.58;
+          max-width: 880px;
+          text-shadow: 0 1px 14px rgba(0,0,0,.28);
+        }
+        .portfolio-hero-note {
+          border: 1px solid rgba(255,255,255,.24);
+          border-radius: 10px;
+          background: rgba(15,23,42,.36);
+          padding: 18px;
+          color: #f8fafc;
+          backdrop-filter: blur(10px);
+        }
+        .portfolio-hero-note strong {
+          display: block;
+          color: #ffffff;
+          font-size: 20px;
+          margin-bottom: 8px;
+        }
+        .portfolio-hero-note span {
+          color: #dbeafe;
+          line-height: 1.45;
+        }
+        .portfolio-proof-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+          gap: 14px;
+          margin: 14px 0 24px;
+        }
+        .portfolio-proof-card {
+          border: 1px solid var(--lab-line);
+          border-top: 4px solid var(--lab-blue);
+          border-radius: 10px;
+          background: rgba(255,255,255,.88);
+          padding: 16px;
+          min-height: 132px;
+          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 16px 44px rgba(23,23,23,.05);
+        }
+        .portfolio-proof-card.warn { border-top-color: var(--lab-amber); }
+        .portfolio-proof-card.good { border-top-color: var(--lab-mint); }
+        .portfolio-proof-card.block { border-top-color: var(--lab-rose); }
+        .portfolio-proof-title {
+          color: var(--lab-strong);
+          font-weight: 800;
+          font-size: 18px;
+          margin: 5px 0;
+        }
+        .portfolio-proof-copy {
+          color: var(--lab-ink);
+          font-size: 14px;
+          line-height: 1.5;
+        }
         .semantic-strip {
           display: flex;
           gap: 8px;
@@ -2361,8 +2441,8 @@ def render_strategy_workbench() -> None:
 def render_portfolio_lab() -> None:
     st.markdown(
         """
-        <div class="human-workbench-hero" style="background:linear-gradient(120deg,#10213f 0%,#143d6b 42%,#0f766e 76%,#7c2d12 100%);">
-          <div class="human-workbench-copy">
+        <div class="portfolio-hero">
+          <div>
             <div class="lab-kicker">WORKBENCH-PORTFOLIO-001</div>
             <h1>Stop hunting one perfect setup.</h1>
             <p>
@@ -2370,8 +2450,9 @@ def render_portfolio_lab() -> None:
               become more robust together after costs, correlation, drawdown, and best-component removal.
             </p>
           </div>
-          <div class="human-workbench-note">
-            Diagnostic only. No provider query, no market-data download, no paper trading, no live trading, no promotion.
+          <div class="portfolio-hero-note">
+            <strong>Research console, not a launchpad.</strong>
+            <span>Diagnostic only: no provider query, no market-data download, no paper trading, no live trading, and no promotion.</span>
           </div>
         </div>
         """,
@@ -2473,6 +2554,60 @@ def render_portfolio_lab() -> None:
         st.error("Portfolio blockers: " + ", ".join(decision["blockers"]))
     else:
         st.success("No hard portfolio blocker fired, but the diagnostic remains non-promotable.")
+
+    dedupe = preview.get("strategy_deduplication", {})
+    search = preview.get("portfolio_search", {})
+    st.markdown("**Automatic portfolio hygiene**")
+    st.markdown(
+        f"""
+        <div class="portfolio-proof-grid">
+          <div class="portfolio-proof-card good">
+            <div class="eyebrow">Duplicate control</div>
+            <div class="portfolio-proof-title">{dedupe.get("removed_component_count", 0)} strategy duplicate(s) removed</div>
+            <div class="portfolio-proof-copy">Same-template strategies with near-identical return paths are treated as one hidden bet before the search reads them.</div>
+          </div>
+          <div class="portfolio-proof-card warn">
+            <div class="eyebrow">Governed search</div>
+            <div class="portfolio-proof-title">{search.get("evaluated_candidate_count", 0)} bounded basket(s) evaluated</div>
+            <div class="portfolio-proof-copy">The objective is fixed in code: validation-weighted return after cost stress, ex-best removal, concentration and correlation penalties.</div>
+          </div>
+          <div class="portfolio-proof-card block">
+            <div class="eyebrow">Overfit guard</div>
+            <div class="portfolio-proof-title">Promotion stays locked</div>
+            <div class="portfolio-proof-copy">The best basket is a diagnostic suggestion only. It cannot become a tradable edge without a separately pre-registered backtest.</div>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    if dedupe.get("groups"):
+        with st.expander("Show eliminated equivalent strategies"):
+            st.dataframe(pd.DataFrame(dedupe["groups"]), width="stretch", hide_index=True)
+    if search.get("search_performed"):
+        best = search.get("best_summary", {})
+        st.markdown("**Best governed basket found locally**")
+        best_cols = st.columns(4)
+        with best_cols[0]:
+            metric_card("Best components", best.get("component_count", 0), "After dedupe and bounded search")
+        with best_cols[1]:
+            metric_card("Best net", f"{best.get('total_net_return', 0.0):.2f}", "Diagnostic weighted sum")
+        with best_cols[2]:
+            metric_card("Validation net", f"{best.get('validation_net_return', 0.0):.2f}", "Later half of local return path")
+        with best_cols[3]:
+            metric_card("Ex-best", f"{best.get('ex_best_net_return', 0.0):.2f}", "After removing strongest component")
+        st.caption("Selected components: " + ", ".join(search.get("best_component_labels", [])))
+        with st.expander("Open search controls and top candidates"):
+            st.json(
+                {
+                    "selection_rule": search.get("selection_rule"),
+                    "objective": search.get("objective"),
+                    "overfit_controls": search.get("overfit_controls"),
+                    "truncated": search.get("truncated"),
+                    "exhaustive_within_search_pool": search.get("exhaustive_within_search_pool"),
+                    "excluded_component_count": len(search.get("excluded_component_ids", [])),
+                    "top_candidates": search.get("top_candidates", []),
+                }
+            )
     action_plan = preview.get("action_plan", [])
     if action_plan:
         st.markdown("**Recommended next actions**")
