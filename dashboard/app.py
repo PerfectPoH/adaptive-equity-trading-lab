@@ -46,17 +46,21 @@ from dashboard.lab_dashboard_data import (
     build_workbench_strategy_blueprint,
     build_workbench_metric_glossary,
     build_workbench_visual_diagnostics,
+    build_portfolio_lab_preview,
     display_safe_records,
     load_workbench_strategy_cards,
     load_workbench_strategy_packages,
+    load_portfolio_lab_components,
     inspect_workbench_strategy_package,
+    persist_portfolio_lab_preview,
+    portfolio_lab_component_table,
 )
 from src.experiments.workbench_package_runner import run_package_diagnostic
 
 
 st.set_page_config(page_title="Adaptive Equity Trading Lab", layout="wide", initial_sidebar_state="expanded")
 
-SECTIONS = ["Command Center", "Strategies", "Results & Data", "Project Anatomy", "Strategy Workbench"]
+SECTIONS = ["Command Center", "Strategies", "Results & Data", "Project Anatomy", "Strategy Workbench", "Portfolio Lab"]
 COLOR_LOGIC = {
     "Blue": {
         "css": "#1f5eff",
@@ -887,7 +891,7 @@ def main_navigation(current_section: str) -> str:
         unsafe_allow_html=True,
     )
     selected = current_section if current_section in SECTIONS else "Command Center"
-    columns = st.columns([1.15, 0.9, 1.05, 1.05, 1.25])
+    columns = st.columns([1.15, 0.9, 1.05, 1.05, 1.25, 1.05])
     for column, section_name in zip(columns, SECTIONS):
         with column:
             button_type = "primary" if section_name == selected else "secondary"
@@ -2354,6 +2358,181 @@ def render_strategy_workbench() -> None:
         st.dataframe(pd.DataFrame(template_rows), width="stretch", hide_index=True)
 
 
+def render_portfolio_lab() -> None:
+    st.markdown(
+        """
+        <div class="human-workbench-hero" style="background:linear-gradient(120deg,#10213f 0%,#143d6b 42%,#0f766e 76%,#7c2d12 100%);">
+          <div class="human-workbench-copy">
+            <div class="lab-kicker">WORKBENCH-PORTFOLIO-001</div>
+            <h1>Stop hunting one perfect setup.</h1>
+            <p>
+              Portfolio Lab composes saved Workbench dry-runs and asks whether imperfect strategy components
+              become more robust together after costs, correlation, drawdown, and best-component removal.
+            </p>
+          </div>
+          <div class="human-workbench-note">
+            Diagnostic only. No provider query, no market-data download, no paper trading, no live trading, no promotion.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    components = load_portfolio_lab_components(limit=60)
+    if not components:
+        st.warning("No saved Workbench components found yet. Create and dry-run strategies first.")
+        return
+
+    labels = {
+        component["component_id"]: f"{component['strategy_name']} · {component['template']} · {component['component_id']}"
+        for component in components
+    }
+    default_ids = [component["component_id"] for component in components[: min(6, len(components))]]
+    st.markdown(
+        """
+        <div class="workbench-section">
+          <div class="lab-kicker">01 / Component Basket</div>
+          <div class="workbench-section-title">Choose the saved strategy components.</div>
+          <div class="workbench-section-copy">
+            The portfolio is built from auditable Workbench artifacts. Rejected components can be inspected,
+            but their weights are capped and the final result remains non-promotable.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    selected_ids = st.multiselect(
+        "Saved strategy components",
+        options=list(labels),
+        default=default_ids,
+        format_func=lambda component_id: labels.get(component_id, component_id),
+    )
+    component_table = portfolio_lab_component_table([component for component in components if component["component_id"] in selected_ids])
+    if not component_table.empty:
+        st.dataframe(component_table, width="stretch", hide_index=True)
+
+    st.markdown(
+        """
+        <div class="workbench-section">
+          <div class="lab-kicker">02 / Allocation Contract</div>
+          <div class="workbench-section-title">Set weights before seeing the verdict.</div>
+          <div class="workbench-section-copy">
+            Avoid historical Sharpe optimization. The first portfolio diagnostic should use simple,
+            explainable weights that cannot torture the past into a pretty curve.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    cols = st.columns(4)
+    with cols[0]:
+        policy = st.selectbox("Allocation policy", ["sleeve_allocation", "equal_weight", "inverse_volatility"], index=0)
+    with cols[1]:
+        max_component_weight = st.slider("Max component weight", 0.10, 0.80, 0.60, 0.05)
+    with cols[2]:
+        max_rejected_weight = st.slider("Max rejected weight", 0.00, 0.40, 0.20, 0.05)
+    with cols[3]:
+        max_convex_weight = st.slider("Max convex sleeve", 0.00, 0.50, 0.20, 0.05)
+
+    if not selected_ids:
+        st.info("Select at least three components to run a toy portfolio diagnostic.")
+        return
+
+    preview = build_portfolio_lab_preview(
+        selected_ids,
+        policy=policy,
+        max_component_weight=max_component_weight,
+        max_rejected_weight=max_rejected_weight,
+        max_convex_weight=max_convex_weight,
+    )
+    summary = preview["summary"]
+    decision = preview["final_decision"]
+    st.markdown(
+        """
+        <div class="workbench-section">
+          <div class="lab-kicker">03 / Portfolio Verdict</div>
+          <div class="workbench-section-title">Diversification is tested, not assumed.</div>
+          <div class="workbench-section-copy">
+            The gates ask whether the basket survives concentration, costs, drawdown,
+            common-factor correlation, and removal of the best component.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    result_cols = st.columns(4)
+    with result_cols[0]:
+        metric_card("Components", summary["component_count"], "Saved Workbench runs included")
+    with result_cols[1]:
+        metric_card("Net sum", f"{summary['total_net_return']:.2f}", "Weighted diagnostic return")
+    with result_cols[2]:
+        metric_card("Max drawdown", f"{summary['max_drawdown']:.2f}", "Worst local decline")
+    with result_cols[3]:
+        metric_card("Decision", decision["decision"], "Promotion locked false")
+
+    if decision["blockers"]:
+        st.error("Portfolio blockers: " + ", ".join(decision["blockers"]))
+    else:
+        st.success("No hard portfolio blocker fired, but the diagnostic remains non-promotable.")
+
+    allocation = pd.DataFrame(preview["allocation"])
+    equity = pd.DataFrame(preview["equity_curve"])
+    contribution = pd.DataFrame(preview["contribution"])
+    gates = pd.DataFrame(preview["gate_panel"])
+    corr = pd.DataFrame(preview["correlation_matrix"])
+
+    chart_cols = st.columns(2)
+    with chart_cols[0]:
+        st.markdown("**Portfolio equity**")
+        st.caption("How to read it: a smoother line means components are offsetting each other; it is not a live-trading claim.")
+        if not equity.empty:
+            fig = px.line(equity, x="period", y="cumulative_net_return", markers=True)
+            fig.update_layout(height=340, margin=dict(l=10, r=10, t=20, b=10), yaxis_title="Cumulative net")
+            st.plotly_chart(fig, width="stretch")
+    with chart_cols[1]:
+        st.markdown("**Drawdown path**")
+        st.caption("How to read it: this shows the local pain required to hold the basket through bad periods.")
+        if not equity.empty:
+            fig = px.area(equity, x="period", y="drawdown")
+            fig.update_traces(line_color="#d12f5f", fillcolor="rgba(209,47,95,0.25)")
+            fig.update_layout(height=340, margin=dict(l=10, r=10, t=20, b=10), yaxis_title="Drawdown")
+            st.plotly_chart(fig, width="stretch")
+
+    chart_cols = st.columns(2)
+    with chart_cols[0]:
+        st.markdown("**Contribution by component**")
+        st.caption("How to read it: if one bar does all the work, the portfolio is still a disguised single bet.")
+        if not contribution.empty:
+            contribution = contribution.merge(allocation[["component_id", "strategy_name", "sleeve"]], on="component_id", how="left")
+            fig = px.bar(contribution, x="strategy_name", y="contribution", color="sleeve", color_discrete_sequence=["#2563eb", "#0f9f75", "#f97316"])
+            fig.update_layout(height=340, margin=dict(l=10, r=10, t=20, b=80), xaxis_title="", yaxis_title="Weighted contribution")
+            st.plotly_chart(fig, width="stretch")
+    with chart_cols[1]:
+        st.markdown("**Correlation heatmap**")
+        st.caption("How to read it: hot blocks mean strategies may be the same hidden trade wearing different clothes.")
+        if not corr.empty:
+            corr = corr.set_index("component_id")
+            fig = go.Figure(data=go.Heatmap(z=corr.to_numpy(), x=list(corr.columns), y=list(corr.index), colorscale="RdBu", zmin=-1, zmax=1))
+            fig.update_layout(height=340, margin=dict(l=10, r=10, t=20, b=10))
+            st.plotly_chart(fig, width="stretch")
+
+    st.markdown("**Allocation table**")
+    st.caption("Weights are explainable policy outputs, not optimized hindsight weights.")
+    st.dataframe(allocation, width="stretch", hide_index=True)
+
+    st.markdown("**Portfolio gates**")
+    st.caption("PASS/WARN/BLOCK rows explain why the basket remains diagnostic-only or gets archived.")
+    st.dataframe(gates, width="stretch", hide_index=True)
+
+    with st.expander("Open portfolio manifest and final decision"):
+        st.json(preview["portfolio_manifest"])
+        st.json(preview["final_decision"])
+
+    if st.button("Persist portfolio diagnostic artifacts", type="primary"):
+        paths = persist_portfolio_lab_preview(preview)
+        st.success("Portfolio diagnostic artifacts written to the vault.")
+        st.json(paths)
+
+
 def sidebar_navigation(payload: dict[str, object], current_section: str) -> str:
     metrics = governance_metrics(payload)
     st.sidebar.markdown("### Adaptive Lab")
@@ -2405,8 +2584,10 @@ def main() -> None:
         render_results_and_data(payload)
     elif section == "Project Anatomy":
         render_lab_explainer(payload)
-    else:
+    elif section == "Strategy Workbench":
         render_strategy_workbench()
+    else:
+        render_portfolio_lab()
 
 
 if __name__ == "__main__":

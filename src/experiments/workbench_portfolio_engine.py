@@ -1,0 +1,554 @@
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+from pathlib import Path
+from typing import Any
+
+import pandas as pd
+from pandas.errors import EmptyDataError
+
+
+WORKBENCH_OUTPUT_DIR = Path("experiments/provider_aware_research/execution_outputs/USER-STRATEGY-WORKBENCH")
+PORTFOLIO_OUTPUT_DIR = Path("experiments/provider_aware_research/execution_outputs/USER-STRATEGY-PORTFOLIOS")
+FORBIDDEN_FLAGS = {"--paper", "--live", "--promote", "--provider-query", "--download-market-data"}
+
+
+def _read_json(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _safe_read_csv(path: Path) -> pd.DataFrame:
+    try:
+        return pd.read_csv(path)
+    except EmptyDataError:
+        return pd.DataFrame()
+
+
+def _write_json(path: Path, payload: dict[str, Any] | list[dict[str, Any]]) -> None:
+    path.write_text(json.dumps(_jsonable(payload), indent=2, sort_keys=True), encoding="utf-8")
+
+
+def _jsonable(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {str(key): _jsonable(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_jsonable(item) for item in value]
+    if hasattr(value, "item"):
+        return value.item()
+    if pd.isna(value) if not isinstance(value, (dict, list, tuple, str)) else False:
+        return None
+    return value
+
+
+def load_workbench_portfolio_components(*, root: Path = Path("."), limit: int = 40) -> list[dict[str, Any]]:
+    """Load saved Workbench dry-run artifacts as portfolio components."""
+
+    output_root = Path(root) / WORKBENCH_OUTPUT_DIR
+    if not output_root.exists():
+        return []
+    result_paths = sorted(
+        output_root.glob("*/dry_run_result.json"),
+        key=lambda path: (path.stat().st_mtime_ns, path.parent.name),
+        reverse=True,
+    )
+    components: list[dict[str, Any]] = []
+    for result_path in result_paths[:limit]:
+        run_dir = result_path.parent
+        result = _read_json(result_path)
+        verdict = result.get("automatic_verdict", {})
+        cost = result.get("cost_breakdown", {})
+        warnings = result.get("bias_warnings", []) or []
+        warning_ids = [str(row.get("warning_id", row.get("message", "UNKNOWN_WARNING"))) for row in warnings if isinstance(row, dict)]
+        trade_path = run_dir / "trade_list.csv"
+        equity_path = run_dir / "equity_curve.csv"
+        trade_count = int(result.get("simulated_trades") or 0)
+        if trade_count == 0 and trade_path.exists():
+            trade_count = len(_safe_read_csv(trade_path))
+        components.append(
+            {
+                "component_id": run_dir.name,
+                "strategy_name": result.get("strategy_name", run_dir.name),
+                "template": result.get("template", "UNKNOWN"),
+                "analysis_mode": result.get("analysis_mode", "UNKNOWN"),
+                "decision": verdict.get("decision", result.get("decision", "UNKNOWN")),
+                "promotion_allowed": bool(verdict.get("promotion_allowed", False)),
+                "bias_warnings": warning_ids,
+                "trade_count": trade_count,
+                "net_return_sum": float(cost.get("net_return_sum") or 0.0),
+                "gross_return_sum": float(cost.get("gross_return_sum") or 0.0),
+                "cost_bps": int(result.get("cost_bps") or cost.get("round_trip_cost_bps") or 0),
+                "artifact_dir": str(run_dir),
+                "trade_list_path": str(trade_path) if trade_path.exists() else "",
+                "equity_curve_path": str(equity_path) if equity_path.exists() else "",
+            }
+        )
+    return components
+
+
+def build_component_return_matrix(components: list[dict[str, Any]]) -> pd.DataFrame:
+    """Align saved component return streams into a common local diagnostic matrix."""
+
+    series_by_component: dict[str, pd.Series] = {}
+    for component in components:
+        series = _component_return_series(component)
+        if not series.empty:
+            series_by_component[str(component["component_id"])] = series
+    if not series_by_component:
+        return pd.DataFrame()
+    matrix = pd.DataFrame(series_by_component).fillna(0.0)
+    return matrix.sort_index()
+
+
+def _component_return_series(component: dict[str, Any]) -> pd.Series:
+    equity_value = str(component.get("equity_curve_path", ""))
+    trade_value = str(component.get("trade_list_path", ""))
+    equity_path = Path(equity_value) if equity_value else None
+    trade_path = Path(trade_value) if trade_value else None
+    if equity_path and equity_path.exists():
+        equity = _safe_read_csv(equity_path)
+        if {"date", "cumulative_net_return"}.issubset(equity.columns):
+            frame = equity.copy()
+            frame["period"] = pd.to_datetime(frame["date"], errors="coerce").dt.strftime("%Y-%m-%d")
+            if frame["period"].isna().all():
+                frame["period"] = frame.get("step", pd.Series(range(1, len(frame) + 1))).map(lambda item: f"step-{int(item):05d}")
+            cumulative = pd.to_numeric(frame["cumulative_net_return"], errors="coerce").fillna(0.0)
+            returns = cumulative.diff().fillna(cumulative)
+            return pd.Series(returns.to_numpy(), index=frame["period"]).groupby(level=0).sum().sort_index()
+    if trade_path and trade_path.exists():
+        trades = _safe_read_csv(trade_path)
+        if "net_return" in trades.columns:
+            date_column = "entry_date" if "entry_date" in trades.columns else "exit_date"
+            if date_column in trades.columns:
+                periods = pd.to_datetime(trades[date_column], errors="coerce").dt.strftime("%Y-%m-%d")
+            else:
+                periods = pd.Series([f"step-{index:05d}" for index in range(1, len(trades) + 1)])
+            values = pd.to_numeric(trades["net_return"], errors="coerce").fillna(0.0)
+            return pd.Series(values.to_numpy(), index=periods).groupby(level=0).sum().sort_index()
+    return pd.Series(dtype=float)
+
+
+def build_portfolio_allocation(
+    components: list[dict[str, Any]],
+    return_matrix: pd.DataFrame,
+    *,
+    policy: str = "equal_weight",
+    max_component_weight: float = 0.60,
+    max_rejected_weight: float = 0.20,
+    max_convex_weight: float = 0.20,
+) -> list[dict[str, Any]]:
+    active = [component for component in components if str(component["component_id"]) in return_matrix.columns]
+    if not active:
+        return []
+    policy = policy.lower().strip()
+    if policy == "inverse_volatility":
+        raw = _inverse_volatility_weights(active, return_matrix)
+    elif policy == "sleeve_allocation":
+        raw = _sleeve_weights(active, max_convex_weight=max_convex_weight)
+    else:
+        raw = {str(component["component_id"]): 1.0 / len(active) for component in active}
+    caps = {}
+    for component in active:
+        component_id = str(component["component_id"])
+        cap = max_component_weight
+        if str(component.get("decision", "")).startswith("REJECTED"):
+            cap = min(cap, max_rejected_weight)
+        if _classify_sleeve(component) == "convex":
+            cap = min(cap, max_convex_weight)
+        caps[component_id] = max(0.0, cap)
+    capped = _cap_and_redistribute(raw, caps)
+    rows: list[dict[str, Any]] = []
+    for component in active:
+        component_id = str(component["component_id"])
+        rows.append(
+            {
+                "component_id": component_id,
+                "strategy_name": component.get("strategy_name", component_id),
+                "template": component.get("template", "UNKNOWN"),
+                "decision": component.get("decision", "UNKNOWN"),
+                "sleeve": _classify_sleeve(component),
+                "weight": round(float(capped.get(component_id, 0.0)), 8),
+            }
+        )
+    return rows
+
+
+def _inverse_volatility_weights(components: list[dict[str, Any]], return_matrix: pd.DataFrame) -> dict[str, float]:
+    scores: dict[str, float] = {}
+    for component in components:
+        component_id = str(component["component_id"])
+        volatility = float(return_matrix[component_id].std(ddof=0) or 0.0)
+        scores[component_id] = 1.0 / max(volatility, 1e-6)
+    total = sum(scores.values()) or 1.0
+    return {component_id: score / total for component_id, score in scores.items()}
+
+
+def _sleeve_weights(components: list[dict[str, Any]], *, max_convex_weight: float) -> dict[str, float]:
+    by_sleeve: dict[str, list[str]] = {"core": [], "convex": [], "tactical": []}
+    for component in components:
+        by_sleeve[_classify_sleeve(component)].append(str(component["component_id"]))
+    desired = {"core": 0.60, "convex": max_convex_weight, "tactical": max(0.0, 0.40 - max_convex_weight)}
+    available = {sleeve: ids for sleeve, ids in by_sleeve.items() if ids}
+    missing_weight = sum(weight for sleeve, weight in desired.items() if sleeve not in available)
+    if missing_weight and available:
+        redistribution_base = sum(desired[sleeve] for sleeve in available) or 1.0
+        for sleeve in available:
+            desired[sleeve] += missing_weight * (desired[sleeve] / redistribution_base)
+    weights: dict[str, float] = {}
+    for sleeve, ids in available.items():
+        sleeve_weight = desired[sleeve]
+        for component_id in ids:
+            weights[component_id] = sleeve_weight / len(ids)
+    total = sum(weights.values()) or 1.0
+    return {component_id: weight / total for component_id, weight in weights.items()}
+
+
+def _classify_sleeve(component: dict[str, Any]) -> str:
+    template = str(component.get("template", "")).lower()
+    if any(token in template for token in ("pdufa", "catalyst", "13d", "form 4", "insider", "sec")):
+        return "convex"
+    if any(token in template for token in ("orb", "9:30", "dollar", "momentum", "custom")):
+        return "tactical"
+    return "core"
+
+
+def _cap_and_redistribute(weights: dict[str, float], caps: dict[str, float]) -> dict[str, float]:
+    if not weights:
+        return {}
+    normalized_total = sum(max(0.0, value) for value in weights.values()) or 1.0
+    result = {key: max(0.0, value) / normalized_total for key, value in weights.items()}
+    for _ in range(len(result) + 2):
+        excess = 0.0
+        eligible: list[str] = []
+        for key, value in list(result.items()):
+            cap = caps.get(key, 1.0)
+            if value > cap:
+                excess += value - cap
+                result[key] = cap
+            elif value < cap:
+                eligible.append(key)
+        if excess <= 1e-12 or not eligible:
+            break
+        capacity = sum(caps.get(key, 1.0) - result[key] for key in eligible)
+        if capacity <= 1e-12:
+            break
+        for key in eligible:
+            room = caps.get(key, 1.0) - result[key]
+            result[key] += excess * (room / capacity)
+    total = sum(result.values())
+    if total > 0 and abs(total - 1.0) > 1e-8:
+        scalable = [key for key, value in result.items() if value < caps.get(key, 1.0)]
+        if scalable:
+            gap = 1.0 - total
+            capacity = sum(caps.get(key, 1.0) - result[key] for key in scalable)
+            if capacity > 0:
+                for key in scalable:
+                    result[key] += gap * ((caps.get(key, 1.0) - result[key]) / capacity)
+    return result
+
+
+def run_portfolio_diagnostic(
+    components: list[dict[str, Any]],
+    *,
+    policy: str = "sleeve_allocation",
+    max_component_weight: float = 0.60,
+    max_rejected_weight: float = 0.20,
+    max_convex_weight: float = 0.20,
+) -> dict[str, Any]:
+    matrix = build_component_return_matrix(components)
+    allocation = build_portfolio_allocation(
+        components,
+        matrix,
+        policy=policy,
+        max_component_weight=max_component_weight,
+        max_rejected_weight=max_rejected_weight,
+        max_convex_weight=max_convex_weight,
+    )
+    weights = pd.Series({row["component_id"]: row["weight"] for row in allocation}, dtype=float)
+    weighted_matrix = matrix.reindex(columns=weights.index, fill_value=0.0).mul(weights, axis=1) if not matrix.empty else pd.DataFrame()
+    returns = weighted_matrix.sum(axis=1) if not weighted_matrix.empty else pd.Series(dtype=float)
+    cumulative = returns.cumsum()
+    running_peak = cumulative.cummax()
+    drawdown = cumulative - running_peak
+    contribution = weighted_matrix.sum(axis=0).sort_values(ascending=False) if not weighted_matrix.empty else pd.Series(dtype=float)
+    correlation = matrix.reindex(columns=weights.index).corr().fillna(0.0) if len(weights) > 1 else pd.DataFrame()
+    gate_panel = _build_gate_panel(components, matrix, allocation, returns, drawdown, contribution, correlation)
+    final_decision = _build_final_decision(gate_panel, returns, components)
+    signature = _portfolio_signature(components, policy, max_component_weight, max_rejected_weight, max_convex_weight)
+    equity_curve = [
+        {
+            "period": str(period),
+            "portfolio_return": round(float(returns.loc[period]), 8),
+            "cumulative_net_return": round(float(cumulative.loc[period]), 8),
+            "drawdown": round(float(drawdown.loc[period]), 8),
+        }
+        for period in returns.index
+    ]
+    component_manifest = [
+        {
+            **{key: component[key] for key in ("component_id", "strategy_name", "template", "analysis_mode", "decision", "trade_count", "net_return_sum") if key in component},
+            "bias_warnings": ";".join(component.get("bias_warnings", [])),
+            "weight": next((row["weight"] for row in allocation if row["component_id"] == component["component_id"]), 0.0),
+            "sleeve": _classify_sleeve(component),
+        }
+        for component in components
+        if str(component["component_id"]) in weights.index
+    ]
+    summary = {
+        "portfolio_signature": signature,
+        "component_count": len(allocation),
+        "period_count": int(len(returns)),
+        "policy": policy,
+        "total_net_return": round(float(returns.sum() if not returns.empty else 0.0), 8),
+        "max_drawdown": round(float(drawdown.min() if not drawdown.empty else 0.0), 8),
+        "time_underwater_ratio": round(float((drawdown < 0).mean() if not drawdown.empty else 0.0), 8),
+        "top_component_contribution": round(float((contribution.iloc[0] / max(contribution[contribution > 0].sum(), 1e-12)) if not contribution.empty and contribution.iloc[0] > 0 else 0.0), 8),
+    }
+    return {
+        "portfolio_manifest": {
+            "portfolio_id": "WORKBENCH-PORTFOLIO-001",
+            "portfolio_signature": signature,
+            "policy": policy,
+            "max_component_weight": max_component_weight,
+            "max_rejected_weight": max_rejected_weight,
+            "max_convex_weight": max_convex_weight,
+            "promotion_allowed": False,
+            "provider_query_allowed": False,
+            "paper_live_policy": "forbidden_from_portfolio_lab",
+        },
+        "summary": summary,
+        "components": component_manifest,
+        "return_matrix": matrix.reset_index(names="period").to_dict("records") if not matrix.empty else [],
+        "allocation": allocation,
+        "equity_curve": equity_curve,
+        "drawdown": [{"period": row["period"], "drawdown": row["drawdown"]} for row in equity_curve],
+        "correlation_matrix": correlation.reset_index(names="component_id").to_dict("records") if not correlation.empty else [],
+        "contribution": [{"component_id": key, "contribution": round(float(value), 8)} for key, value in contribution.items()],
+        "gate_panel": gate_panel,
+        "final_decision": final_decision,
+    }
+
+
+def _build_gate_panel(
+    components: list[dict[str, Any]],
+    matrix: pd.DataFrame,
+    allocation: list[dict[str, Any]],
+    returns: pd.Series,
+    drawdown: pd.Series,
+    contribution: pd.Series,
+    correlation: pd.DataFrame,
+) -> list[dict[str, Any]]:
+    warnings = sorted({warning for component in components for warning in component.get("bias_warnings", [])})
+    component_count = len(allocation)
+    positive_total = float(contribution[contribution > 0].sum()) if not contribution.empty else 0.0
+    top_share = float(contribution.iloc[0] / positive_total) if positive_total > 0 and not contribution.empty else 0.0
+    best_component = str(contribution.index[0]) if not contribution.empty else ""
+    ex_best_return = _ex_best_return(matrix, allocation, best_component)
+    avg_abs_corr = _average_abs_correlation(correlation)
+    declared_cost_drag = _weighted_cost_drag(components, allocation)
+    stressed_net = float(returns.sum() - declared_cost_drag * max(1, len(returns)) * 0.5) if not returns.empty else 0.0
+    family_weights: dict[str, float] = {}
+    for row in allocation:
+        family_weights[row["sleeve"]] = family_weights.get(row["sleeve"], 0.0) + float(row["weight"])
+    max_family_weight = max(family_weights.values()) if family_weights else 0.0
+    return [
+        {
+            "gate": "data_contract_gate",
+            "status": "WARN" if warnings else "PASS",
+            "value": warnings or "no_component_bias_warnings",
+            "detail": "Any proxy, active-only, PIT, or survivorship warning keeps the portfolio diagnostic-only.",
+        },
+        {
+            "gate": "component_count_gate",
+            "status": "PASS" if component_count >= 3 else "BLOCK",
+            "value": component_count,
+            "detail": "Requires at least 3 saved strategy components for a toy diagnostic portfolio.",
+        },
+        {
+            "gate": "component_concentration_gate",
+            "status": "BLOCK" if top_share > 0.40 else "PASS",
+            "value": round(top_share, 8),
+            "detail": "Blocks when the best component explains more than 40% of positive portfolio contribution.",
+        },
+        {
+            "gate": "strategy_family_concentration_gate",
+            "status": "WARN" if max_family_weight > 0.60 else "PASS",
+            "value": round(max_family_weight, 8),
+            "detail": "Warns when one sleeve dominates capital allocation.",
+        },
+        {
+            "gate": "correlation_gate",
+            "status": "WARN" if avg_abs_corr > 0.75 else "PASS",
+            "value": round(avg_abs_corr, 8),
+            "detail": "High correlation means components may be the same hidden bet.",
+        },
+        {
+            "gate": "drawdown_gate",
+            "status": "WARN" if float(drawdown.min() if not drawdown.empty else 0.0) < -0.25 else "PASS",
+            "value": round(float(drawdown.min() if not drawdown.empty else 0.0), 8),
+            "detail": "Reports the worst local drawdown of the composed portfolio.",
+        },
+        {
+            "gate": "ex_best_component_gate",
+            "status": "BLOCK" if float(returns.sum() if not returns.empty else 0.0) > 0 and ex_best_return <= 0 else "PASS",
+            "value": {"best_component": best_component, "ex_best_net_return": round(ex_best_return, 8)},
+            "detail": "Replays the portfolio after removing its best component.",
+        },
+        {
+            "gate": "cost_stress_gate",
+            "status": "BLOCK" if float(returns.sum() if not returns.empty else 0.0) > 0 and stressed_net <= 0 else "PASS",
+            "value": {"stressed_net_return": round(stressed_net, 8), "extra_cost_drag_per_period": round(declared_cost_drag * 0.5, 8)},
+            "detail": "Replays the portfolio with 1.5x declared component costs.",
+        },
+    ]
+
+
+def _ex_best_return(matrix: pd.DataFrame, allocation: list[dict[str, Any]], best_component: str) -> float:
+    remaining = [row for row in allocation if row["component_id"] != best_component]
+    if not remaining or matrix.empty:
+        return 0.0
+    total_weight = sum(float(row["weight"]) for row in remaining) or 1.0
+    weights = pd.Series({row["component_id"]: float(row["weight"]) / total_weight for row in remaining})
+    return float(matrix.reindex(columns=weights.index, fill_value=0.0).mul(weights, axis=1).sum(axis=1).sum())
+
+
+def _average_abs_correlation(correlation: pd.DataFrame) -> float:
+    if correlation.empty or len(correlation) < 2:
+        return 0.0
+    values = []
+    for row_index in range(len(correlation)):
+        for column_index in range(row_index + 1, len(correlation.columns)):
+            values.append(abs(float(correlation.iloc[row_index, column_index])))
+    return sum(values) / len(values) if values else 0.0
+
+
+def _weighted_cost_drag(components: list[dict[str, Any]], allocation: list[dict[str, Any]]) -> float:
+    cost_by_id = {str(component["component_id"]): float(component.get("cost_bps", 0)) / 10000.0 for component in components}
+    return sum(float(row["weight"]) * cost_by_id.get(row["component_id"], 0.0) for row in allocation)
+
+
+def _build_final_decision(gate_panel: list[dict[str, Any]], returns: pd.Series, components: list[dict[str, Any]]) -> dict[str, Any]:
+    blockers = [row["gate"] for row in gate_panel if row["status"] == "BLOCK"]
+    decision = "PORTFOLIO_DIAGNOSTIC_COMPLETE_NO_PROMOTION"
+    if "component_count_gate" in blockers:
+        decision = "PORTFOLIO_ARCHIVE_INSUFFICIENT_COMPONENTS"
+    elif "ex_best_component_gate" in blockers:
+        decision = "PORTFOLIO_ARCHIVE_EX_BEST_COMPONENT_FAILED"
+    elif "cost_stress_gate" in blockers:
+        decision = "PORTFOLIO_ARCHIVE_COST_STRESS_FAILED"
+    elif "component_concentration_gate" in blockers:
+        decision = "PORTFOLIO_ARCHIVE_CONCENTRATION_FAILED"
+    elif not blockers and float(returns.sum() if not returns.empty else 0.0) > 0 and len(components) >= 5:
+        decision = "PORTFOLIO_RESEARCH_BASKET_CANDIDATE_ONLY"
+    return {
+        "decision": decision,
+        "promotion_allowed": False,
+        "paper_trading_allowed": False,
+        "live_trading_allowed": False,
+        "provider_query_performed": False,
+        "market_data_download_performed": False,
+        "portfolio_backtest_performed": False,
+        "runner_mode": "diagnostic_local_portfolio_composer",
+        "blockers": blockers,
+        "net_return_sum": round(float(returns.sum() if not returns.empty else 0.0), 8),
+    }
+
+
+def _portfolio_signature(
+    components: list[dict[str, Any]],
+    policy: str,
+    max_component_weight: float,
+    max_rejected_weight: float,
+    max_convex_weight: float,
+) -> str:
+    payload = {
+        "components": [component.get("component_id") for component in components],
+        "policy": policy,
+        "max_component_weight": max_component_weight,
+        "max_rejected_weight": max_rejected_weight,
+        "max_convex_weight": max_convex_weight,
+    }
+    return hashlib.sha256(json.dumps(payload, sort_keys=True).encode("utf-8")).hexdigest()[:16]
+
+
+def persist_portfolio_diagnostic(diagnostic: dict[str, Any], *, root: Path = Path(".")) -> dict[str, str]:
+    signature = str(diagnostic["summary"]["portfolio_signature"])
+    output_dir = Path(root) / PORTFOLIO_OUTPUT_DIR / signature
+    output_dir.mkdir(parents=True, exist_ok=True)
+    paths = {
+        "output_dir": output_dir,
+        "portfolio_manifest_path": output_dir / "portfolio_manifest.json",
+        "component_manifest_path": output_dir / "component_manifest.csv",
+        "component_return_matrix_path": output_dir / "component_return_matrix.csv",
+        "allocation_table_path": output_dir / "allocation_table.csv",
+        "portfolio_equity_curve_path": output_dir / "portfolio_equity_curve.csv",
+        "portfolio_drawdown_path": output_dir / "portfolio_drawdown.csv",
+        "portfolio_correlation_matrix_path": output_dir / "portfolio_correlation_matrix.csv",
+        "portfolio_gate_panel_path": output_dir / "portfolio_gate_panel.json",
+        "portfolio_final_decision_path": output_dir / "portfolio_final_decision.json",
+        "portfolio_vault_report_path": output_dir / "portfolio_vault_report.md",
+    }
+    _write_json(paths["portfolio_manifest_path"], diagnostic["portfolio_manifest"])
+    pd.DataFrame(diagnostic["components"]).to_csv(paths["component_manifest_path"], index=False)
+    pd.DataFrame(diagnostic["return_matrix"]).to_csv(paths["component_return_matrix_path"], index=False)
+    pd.DataFrame(diagnostic["allocation"]).to_csv(paths["allocation_table_path"], index=False)
+    pd.DataFrame(diagnostic["equity_curve"]).to_csv(paths["portfolio_equity_curve_path"], index=False)
+    pd.DataFrame(diagnostic["drawdown"]).to_csv(paths["portfolio_drawdown_path"], index=False)
+    pd.DataFrame(diagnostic["correlation_matrix"]).to_csv(paths["portfolio_correlation_matrix_path"], index=False)
+    _write_json(paths["portfolio_gate_panel_path"], diagnostic["gate_panel"])
+    _write_json(paths["portfolio_final_decision_path"], diagnostic["final_decision"])
+    paths["portfolio_vault_report_path"].write_text(_portfolio_report(diagnostic), encoding="utf-8")
+    return {key: str(value) for key, value in paths.items()}
+
+
+def _portfolio_report(diagnostic: dict[str, Any]) -> str:
+    summary = diagnostic["summary"]
+    final = diagnostic["final_decision"]
+    lines = [
+        "# WORKBENCH-PORTFOLIO-001 Diagnostic Report",
+        "",
+        "## Verdict",
+        "",
+        f"- decision: `{final['decision']}`",
+        f"- promotion_allowed: `{final['promotion_allowed']}`",
+        f"- provider_query_performed: `{final['provider_query_performed']}`",
+        f"- net_return_sum: `{final['net_return_sum']}`",
+        "",
+        "## Portfolio",
+        "",
+        f"- component_count: `{summary['component_count']}`",
+        f"- policy: `{summary['policy']}`",
+        f"- total_net_return: `{summary['total_net_return']}`",
+        f"- max_drawdown: `{summary['max_drawdown']}`",
+        f"- time_underwater_ratio: `{summary['time_underwater_ratio']}`",
+        "",
+        "## Governance",
+        "",
+        "This diagnostic composes saved local Workbench artifacts only. It cannot query providers, download market data, paper trade, live trade, or promote a portfolio.",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--root", type=Path, default=Path("."))
+    parser.add_argument("--policy", default="sleeve_allocation", choices=["equal_weight", "inverse_volatility", "sleeve_allocation"])
+    parser.add_argument("--paper", action="store_true")
+    parser.add_argument("--live", action="store_true")
+    parser.add_argument("--promote", action="store_true")
+    parser.add_argument("--provider-query", action="store_true")
+    parser.add_argument("--download-market-data", action="store_true")
+    args = parser.parse_args(argv)
+    if args.paper or args.live or args.promote or args.provider_query or args.download_market_data:
+        print(json.dumps({"error": "forbidden_flag_present"}, indent=2, sort_keys=True))
+        return 2
+    components = load_workbench_portfolio_components(root=args.root)
+    diagnostic = run_portfolio_diagnostic(components, policy=args.policy)
+    paths = persist_portfolio_diagnostic(diagnostic, root=args.root)
+    print(json.dumps(paths, indent=2, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

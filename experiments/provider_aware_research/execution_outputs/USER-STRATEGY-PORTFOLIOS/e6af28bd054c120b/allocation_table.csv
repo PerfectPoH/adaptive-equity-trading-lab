@@ -1,0 +1,40 @@
+component_id,strategy_name,template,decision,sleeve,weight
+dcfbeec9cf4c5190,strategia folle,PDUFA Run-Up,RESEARCH_CANDIDATE_ONLY,convex,0.01333333
+ef3f1ebb21d03d5c,My falsifiable strategy,9:30 AM ORB,REJECTED_OUTLIER_DEPENDENCY,tactical,0.0125
+292441755c5ffdcc,nuova versione,Custom Rule Builder,REJECTED_OUTLIER_DEPENDENCY,tactical,0.0125
+7d30471f7325a2a8,gg,PDUFA Run-Up,INVESTMENT_RESEARCH_CANDIDATE_ONLY,convex,0.01333333
+f173207ae9bd5ccd,Abed,Regime Filter,REJECTED_OUTLIER_DEPENDENCY,core,0.075
+0dc08daefa67c12e,9:15,9:30 AM ORB,REJECTED_OUTLIER_DEPENDENCY,tactical,0.0125
+ee5692c4832db94b,9:15,9:30 AM ORB,REJECTED_OUTLIER_DEPENDENCY,tactical,0.0125
+91510d8163e121fc,Nigga Strartegy,Dollar-Bar Microstructure,REJECTED_OUTLIER_DEPENDENCY,tactical,0.0125
+2496e35863212c76,My falsifiable strategy,Catalyst,REJECTED_OUTLIER_DEPENDENCY,convex,0.01333333
+208d36ae3c31f890,My falsifiable strategy,Custom Rule Builder,REJECTED_OUTLIER_DEPENDENCY,tactical,0.0125
+8bf949936eddd596,My falsifiable strategy,Custom Rule Builder,REJECTED_OUTLIER_DEPENDENCY,tactical,0.0125
+e8cde4045a54b14a,My falsifiable strategy,Custom Rule Builder,REJECTED_OUTLIER_DEPENDENCY,tactical,0.0125
+64880f270f8f6861,My falsifiable strategy,Custom Rule Builder,REJECTED_OUTLIER_DEPENDENCY,tactical,0.0125
+913c67d63ee5a478,My falsifiable strategy,Momentum,REJECTED_OUTLIER_DEPENDENCY,tactical,0.0125
+28a0d94ccf2a6c08,My falsifiable strategy,Mean Reversion,REJECTED_OUTLIER_DEPENDENCY,core,0.075
+e0008aaebb2fda63,My falsifiable strategy,Mean Reversion,REJECTED_OUTLIER_DEPENDENCY,core,0.075
+680166d42265ad55,My falsifiable strategy,13D Activist Follow-On,REJECTED_OUTLIER_DEPENDENCY,convex,0.01333333
+816022f1cffa8310,My falsifiable strategy,Custom Rule Builder,REJECTED_OUTLIER_DEPENDENCY,tactical,0.0125
+f8e4773a916f0f75,My falsifiable strategy,PDUFA Run-Up,INVESTMENT_RESEARCH_CANDIDATE_ONLY,convex,0.01333333
+fda6a92d0fdc1a1d,My falsifiable strategy,PDUFA Run-Up,INVESTMENT_RESEARCH_CANDIDATE_ONLY,convex,0.01333333
+fad9ff0f91ecab15,My falsifiable strategy,LowVol Tradability,REJECTED_OUTLIER_DEPENDENCY,core,0.075
+2902e60324bd4c13,My falsifiable strategy,Form 4 Cluster Buying,REJECTED_OUTLIER_DEPENDENCY,convex,0.01333333
+23ff266a203fea0d,My falsifiable strategy,Form 4 Cluster Buying,REJECTED_OUTLIER_DEPENDENCY,convex,0.01333333
+bec60afef14416c2,My falsifiable strategy,PEAD,INVESTMENT_RESEARCH_CANDIDATE_ONLY,core,0.075
+a0cc249592a067f4,My falsifiable strategy,Mean Reversion,INVESTMENT_RESEARCH_CANDIDATE_ONLY,core,0.075
+acc065823d9dcfb7,My falsifiable strategy,Momentum,INVESTMENT_RESEARCH_CANDIDATE_ONLY,tactical,0.0125
+4087717bb62f6610,My falsifiable strategy,Catalyst,INVESTMENT_RESEARCH_CANDIDATE_ONLY,convex,0.01333333
+0b596d1ce6d258c0,My falsifiable strategy,Catalyst,REJECTED_OUTLIER_DEPENDENCY,convex,0.01333333
+bc79985845236f4a,My falsifiable strategy,Catalyst,INVESTMENT_RESEARCH_CANDIDATE_ONLY,convex,0.01333333
+6b50c641a4eaf53e,My falsifiable strategy,13D Activist Follow-On,INVESTMENT_RESEARCH_CANDIDATE_ONLY,convex,0.01333333
+bfe638853ce4a153,My falsifiable strategy,Custom Rule Builder,REJECTED_OUTLIER_DEPENDENCY,tactical,0.0125
+409ca5c54a3efce7,My falsifiable strategy,Custom Rule Builder,REJECTED_OUTLIER_DEPENDENCY,tactical,0.0125
+eeb44b96bbac9604,My falsifiable strategy,Custom Rule Builder,REJECTED_OUTLIER_DEPENDENCY,tactical,0.0125
+dd95aab5d08306e1,My falsifiable strategy,Regime Filter,REJECTED_OUTLIER_DEPENDENCY,core,0.075
+6a116a4eef3afb73,My falsifiable strategy,Regime Filter,REJECTED_OUTLIER_DEPENDENCY,core,0.075
+277f5aa08f7f9d9c,My falsifiable strategy,Form 4 Cluster Buying,REJECTED_OUTLIER_DEPENDENCY,convex,0.01333333
+a669c488d63a2146,My falsifiable strategy,Form 4 Cluster Buying,REJECTED_OUTLIER_DEPENDENCY,convex,0.01333333
+394fda88ef8296bd,My falsifiable strategy,Momentum,REJECTED_OUTLIER_DEPENDENCY,tactical,0.0125
+08a55727092fc895,My falsifiable strategy,PDUFA Run-Up,INVESTMENT_RESEARCH_CANDIDATE_ONLY,convex,0.01333333

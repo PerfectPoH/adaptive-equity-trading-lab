@@ -26,13 +26,16 @@ from dashboard.lab_dashboard_data import (
     build_workbench_strategy_blueprint,
     build_workbench_metric_glossary,
     build_workbench_visual_diagnostics,
+    build_portfolio_lab_preview,
     display_safe_records,
     delisted_data_source_gate_payload,
+    load_portfolio_lab_components,
     load_workbench_strategy_cards,
     load_workbench_strategy_packages,
     inspect_workbench_strategy_package,
     orb_930_backtest_payload,
     persist_workbench_run_bundle,
+    portfolio_lab_component_table,
     persist_workbench_strategy_package,
     write_workbench_phase_report,
     build_strategy_chart_story,
@@ -968,3 +971,34 @@ def test_load_and_inspect_workbench_strategy_packages(tmp_path: Path) -> None:
     assert inspection["readme"].startswith("# Strategy Package")
     assert inspection["runner_available"] is False
     assert inspection["runner_output_dir"].endswith("diagnostic_runner")
+
+
+def test_portfolio_lab_helpers_compose_saved_workbench_runs(tmp_path: Path) -> None:
+    for name, template in [
+        ("Portfolio momentum", "Momentum"),
+        ("Portfolio reversion", "Mean Reversion"),
+        ("Portfolio custom", "Custom Rule Builder"),
+    ]:
+        manifest = build_workbench_manifest(
+            name=name,
+            template=template,
+            universe="large-cap / ETF clean-data sandbox",
+            holding_period_days=21,
+            cost_bps=250,
+            allow_provider_query=False,
+            custom_rules={"signal": "momentum_5d", "selection": "top", "entries_per_symbol": 3},
+        )
+        validation = validate_workbench_manifest(manifest)
+        preview = build_controlled_backtest_preview(manifest, validation)
+        persist_workbench_run_bundle(manifest, validation, preview, root=tmp_path)
+
+    components = load_portfolio_lab_components(root=tmp_path)
+    component_table = portfolio_lab_component_table(components)
+    portfolio = build_portfolio_lab_preview([component["component_id"] for component in components], root=tmp_path, policy="equal_weight")
+
+    assert len(components) == 3
+    assert set(["strategy", "template", "decision", "trades"]).issubset(component_table.columns)
+    assert portfolio["final_decision"]["promotion_allowed"] is False
+    assert portfolio["summary"]["component_count"] == 3
+    assert portfolio["allocation"]
+    assert portfolio["gate_panel"]

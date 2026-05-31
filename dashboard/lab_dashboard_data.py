@@ -8,6 +8,12 @@ from typing import Any
 
 import pandas as pd
 
+from src.experiments.workbench_portfolio_engine import (
+    load_workbench_portfolio_components,
+    persist_portfolio_diagnostic,
+    run_portfolio_diagnostic,
+)
+
 
 EXECUTION_OUTPUTS_DIR = Path("experiments/provider_aware_research/execution_outputs")
 FINAL_STATUS_DIR = EXECUTION_OUTPUTS_DIR / "LAB-FINAL-STATUS-PACK-RUN-001"
@@ -2323,6 +2329,54 @@ def _chart_explanation(profile_key: str) -> str:
         "regime": "This is no longer a buy/sell strategy: the chart shows how the lab now classifies context before allowing research actions.",
     }
     return explanations.get(profile_key, "The chart demonstrates the strategy logic and the governance gate that controlled it.")
+
+
+def load_portfolio_lab_components(*, root: Path = Path("."), limit: int = 40) -> list[dict[str, Any]]:
+    return load_workbench_portfolio_components(root=root, limit=limit)
+
+
+def build_portfolio_lab_preview(
+    selected_component_ids: list[str] | None = None,
+    *,
+    policy: str = "sleeve_allocation",
+    max_component_weight: float = 0.60,
+    max_rejected_weight: float = 0.20,
+    max_convex_weight: float = 0.20,
+    root: Path = Path("."),
+) -> dict[str, Any]:
+    components = load_portfolio_lab_components(root=root)
+    if selected_component_ids:
+        selected = set(selected_component_ids)
+        components = [component for component in components if str(component["component_id"]) in selected]
+    return run_portfolio_diagnostic(
+        components,
+        policy=policy,
+        max_component_weight=max_component_weight,
+        max_rejected_weight=max_rejected_weight,
+        max_convex_weight=max_convex_weight,
+    )
+
+
+def persist_portfolio_lab_preview(preview: dict[str, Any], *, root: Path = Path(".")) -> dict[str, str]:
+    return persist_portfolio_diagnostic(preview, root=root)
+
+
+def portfolio_lab_component_table(components: list[dict[str, Any]]) -> pd.DataFrame:
+    rows = []
+    for component in components:
+        rows.append(
+            {
+                "id": component.get("component_id"),
+                "strategy": component.get("strategy_name"),
+                "template": component.get("template"),
+                "mode": component.get("analysis_mode"),
+                "decision": component.get("decision"),
+                "trades": component.get("trade_count"),
+                "net_return_sum": component.get("net_return_sum"),
+                "warnings": ", ".join(component.get("bias_warnings", [])),
+            }
+        )
+    return pd.DataFrame(rows)
 
 
 def _match_strategy_rows(ledger: pd.DataFrame, profile: StrategyProfile) -> pd.DataFrame:
