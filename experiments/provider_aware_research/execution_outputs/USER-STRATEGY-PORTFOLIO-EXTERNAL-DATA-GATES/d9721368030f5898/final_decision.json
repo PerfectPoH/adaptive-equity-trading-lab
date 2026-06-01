@@ -1,0 +1,15 @@
+{
+  "blockers": [
+    "external_data_contract_gate"
+  ],
+  "decision": "PORTFOLIO_CANDIDATE_003_TRUE_BACKTEST_BLOCKED_DATA_GATE",
+  "live_trading_allowed": false,
+  "market_data_download_allowed": false,
+  "market_data_download_performed": false,
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_allowed": false,
+  "provider_query_performed": false,
+  "runner_mode": "external_data_backtest_gate_only"
+}

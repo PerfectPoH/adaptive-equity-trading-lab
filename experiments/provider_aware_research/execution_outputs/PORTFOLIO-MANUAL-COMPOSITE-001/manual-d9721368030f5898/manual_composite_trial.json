@@ -1,0 +1,117 @@
+{
+  "final_decision": {
+    "blockers": [
+      "external_data_contract_gate"
+    ],
+    "decision": "PORTFOLIO_MANUAL_COMPOSITE_DATA_GATE_ONLY",
+    "live_trading_allowed": false,
+    "market_data_download_allowed": false,
+    "market_data_download_performed": false,
+    "paper_trading_allowed": false,
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false,
+    "provider_query_allowed": false,
+    "provider_query_performed": false,
+    "runner_mode": "manual_composite_manifest_only"
+  },
+  "inherited_validation": {
+    "interpretation": "Descriptive only; not promotion evidence.",
+    "source": "frozen_recipe_proxy_validation_only",
+    "train_net_return": 170.175128,
+    "validation_max_drawdown": -8.34468775,
+    "validation_net_return": 214.9844045
+  },
+  "live_trading_allowed": false,
+  "manual_composite_id": "manual-d9721368030f5898",
+  "manual_manifest": {
+    "candidate_label": "PORTFOLIO-CANDIDATE-003-MANUAL-COMPOSITE",
+    "component_contract": [
+      {
+        "component_id": "9474fe601e0f2bd2",
+        "role": "sampling/noise-control sleeve",
+        "strategy_name": "Factory Dollar-Bar Microstructure 180d 100bps",
+        "template": "Dollar-Bar Microstructure",
+        "weight": 0.25
+      },
+      {
+        "component_id": "28fb7b03aa56a91e",
+        "role": "continuation sleeve and breadth diversifier",
+        "strategy_name": "Factory Momentum 180d 100bps",
+        "template": "Momentum",
+        "weight": 0.25
+      },
+      {
+        "component_id": "a42078cbf0a2ea94",
+        "role": "core dislocation/recovery sleeve",
+        "strategy_name": "Factory Mean Reversion 180d 100bps",
+        "template": "Mean Reversion",
+        "weight": 0.25
+      },
+      {
+        "component_id": "acc065823d9dcfb7",
+        "role": "continuation sleeve and breadth diversifier",
+        "strategy_name": "My falsifiable strategy",
+        "template": "Momentum",
+        "weight": 0.25
+      }
+    ],
+    "falsification_criteria": [
+      "Archive if Norgate/CRSP-grade survivorship-free data cannot reproduce the component universe with delisted symbols retained.",
+      "Archive if validation/test net return turns negative after current or higher costs.",
+      "Archive if any sleeve contributes more than 40% of positive contribution under true data.",
+      "Archive if ex-best-sleeve net return is non-positive under true data.",
+      "Archive if SPY/IWM/equal-weight benchmark-relative return is not positive after costs.",
+      "Archive if factory/proxy lineage cannot be replaced by a human-authored executable rule contract."
+    ],
+    "human_authored": true,
+    "hypothesis": "A fixed-weight four-sleeve composite may be more robust than the original three-sleeve factory basket because it caps the leading sleeve below 40% contribution while combining mean reversion, continuation, and dollar-bar sampling. The claim remains non-promotable until a survivorship-free/PIT data gate is satisfied.",
+    "required_data": [
+      "survivorship_free_universe",
+      "point_in_time_membership",
+      "delisted_symbol_prices",
+      "adjusted_ohlcv",
+      "benchmark_panel"
+    ],
+    "sleeves": [
+      {
+        "failure_mode": "Cleaner sampling without tradable direction.",
+        "name": "Dollar-bar microstructure sleeve",
+        "rule": "Use traded-dollar sampling as a stabilizer, not as standalone promotion evidence.",
+        "template": "Dollar-Bar Microstructure",
+        "weight": 0.3333333333333333
+      },
+      {
+        "failure_mode": "Outlier dependency and regime decay.",
+        "name": "Momentum sleeve",
+        "rule": "Hold diversified continuation candidates only through the frozen multi-day horizon.",
+        "template": "Momentum",
+        "weight": 0.3333333333333333
+      },
+      {
+        "failure_mode": "False reversion and cost drag.",
+        "name": "Mean-reversion sleeve",
+        "rule": "Buy diversified dislocations after confirmation; do not average down into unresolved continuation.",
+        "template": "Mean Reversion",
+        "weight": 0.3333333333333333
+      }
+    ],
+    "source_factory_recipe_id": "d9721368030f5898",
+    "source_repair_run_id": "PORTFOLIO-CONCENTRATION-REPAIR-001",
+    "source_trial_id": "PORTFOLIO-FROZEN-RECIPE-D9721368030F5898",
+    "strategy_name": "PORTFOLIO-CANDIDATE-003 Concentration-Repaired Composite",
+    "trial_id": "PORTFOLIO-MANUAL-COMPOSITE-001-D9721368030F5898",
+    "weight_policy": {
+      "max_component_weight": 0.4,
+      "optimization_allowed": false,
+      "policy": "equal_weight",
+      "reason": "Weights are semantic and frozen; they are not fitted to historical Sharpe or net return."
+    }
+  },
+  "market_data_download_performed": false,
+  "paper_trading_allowed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "required_next_step": "Create or satisfy the external-data/PIT gate before any true backtest.",
+  "status": "PORTFOLIO_MANUAL_COMPOSITE_DRY_RUN_COMPLETE",
+  "trial_id": "PORTFOLIO-MANUAL-COMPOSITE-001-D9721368030F5898"
+}

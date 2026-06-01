@@ -1,0 +1,101 @@
+{
+  "backtest_allowed": false,
+  "component_templates": [
+    "Dollar-Bar Microstructure",
+    "Mean Reversion",
+    "Momentum"
+  ],
+  "final_decision": {
+    "blockers": [
+      "external_data_contract_gate"
+    ],
+    "decision": "PORTFOLIO_CANDIDATE_003_TRUE_BACKTEST_BLOCKED_DATA_GATE",
+    "live_trading_allowed": false,
+    "market_data_download_allowed": false,
+    "market_data_download_performed": false,
+    "paper_trading_allowed": false,
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false,
+    "provider_query_allowed": false,
+    "provider_query_performed": false,
+    "runner_mode": "external_data_backtest_gate_only"
+  },
+  "frozen_recipe_id": "d9721368030f5898",
+  "gate_id": "PORTFOLIO-CANDIDATE-003-DATA-GATE-D9721368030F5898",
+  "live_trading_allowed": false,
+  "market_data_download_allowed": false,
+  "market_data_download_performed": false,
+  "minimum_backtest_contract": {
+    "benchmarks": [
+      "SPY",
+      "IWM",
+      "equal-weight universe benchmark"
+    ],
+    "costs": "component costs retained or increased; no cost relaxation",
+    "prices": "adjusted OHLCV with delisted symbols retained",
+    "promotion": "still forbidden until a separate final decision passes all gates",
+    "time_split": "frozen train/validation/test chronology; no recipe search on test",
+    "universe": "survivorship-free and point-in-time"
+  },
+  "next_allowed_action": "probe_local_norgate_schema_without_running_candidate_backtest",
+  "paper_trading_allowed": false,
+  "promotion_allowed": false,
+  "provider_candidates": [
+    {
+      "blocker": "norgate_python_schema_and_trial_history_window_not_verified_for_this_candidate",
+      "covers": [
+        "delisted_symbol_prices",
+        "listing_dates",
+        "adjusted_daily_prices",
+        "historical_constituents"
+      ],
+      "provider": "Norgate Data",
+      "status": "local_trial_installed_requires_schema_probe"
+    },
+    {
+      "blocker": "access_not_confirmed",
+      "covers": [
+        "survivorship_free_universe",
+        "delisted_symbol_prices",
+        "corporate_actions",
+        "PIT membership"
+      ],
+      "provider": "CRSP/WRDS",
+      "status": "preferred_but_currently_unavailable"
+    },
+    {
+      "blocker": "PIT_membership_and_delisted_coverage_not_verified",
+      "covers": [
+        "fundamentals",
+        "daily_prices",
+        "corporate_actions"
+      ],
+      "provider": "Sharadar/Nasdaq Data Link",
+      "status": "candidate_requires_entitlement_probe"
+    },
+    {
+      "blocker": "active_only_or_missing_PIT_delisted_metadata",
+      "covers": [
+        "active_symbols_or_partial_prices"
+      ],
+      "provider": "Polygon/AlphaVantage/Yahoo free tiers",
+      "status": "rejected_for_promotion"
+    }
+  ],
+  "provider_query_allowed": false,
+  "provider_query_performed": false,
+  "required_before_backtest": [
+    "survivorship_free_universe",
+    "point_in_time_membership",
+    "delisted_symbol_prices",
+    "listing_and_delisting_dates",
+    "split_dividend_adjusted_ohlcv",
+    "component_specific_data_resolution",
+    "provider_entitlement_manifest",
+    "raw_payload_retention_policy",
+    "benchmark_panel"
+  ],
+  "source_manual_composite_trial_id": "PORTFOLIO-MANUAL-COMPOSITE-001-D9721368030F5898",
+  "source_trial_id": "PORTFOLIO-FROZEN-RECIPE-D9721368030F5898",
+  "status": "BLOCKED_EXTERNAL_DATA_CONTRACT_REQUIRED"
+}
