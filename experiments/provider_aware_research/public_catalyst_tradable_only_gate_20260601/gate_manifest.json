@@ -1,0 +1,36 @@
+{
+  "gate_id": "PUBLIC-CATALYST-TRADABLE-ONLY-GATE-001",
+  "created_at": "2026-06-01T00:00:00+02:00",
+  "allowed_operations": [
+    "build_tradable_only_event_panel",
+    "run_strict_as_of_micro_backtest"
+  ],
+  "input_panel": "experiments/provider_aware_research/public_catalyst_hybrid_panel_expansion_run_20260601/expanded_event_panel.csv",
+  "input_price_manifest": "experiments/provider_aware_research/execution_outputs/PUBLIC-CATALYST-HYBRID-MICRO-BACKTEST-STRICT-ASOF-001/price_manifest.json",
+  "as_of_date": "2026-06-01",
+  "provider_query_allowed": false,
+  "market_data_download_allowed": false,
+  "parameter_optimization_allowed": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "tradable_only_rules": {
+    "admissibility_label": "admissible_event",
+    "pit_proof_status": "pass",
+    "event_date_on_or_before_as_of": true,
+    "symbol_must_have_local_price_manifest_coverage": true,
+    "delisted_or_acquired_status_required": "active",
+    "date_aware_symbol_mapping_status_required": "pass",
+    "exclude_private_or_nonstandard_symbols": true,
+    "fixed_windows_days": [30, 60, 90],
+    "cost_bps": 500
+  },
+  "required_outputs": [
+    "tradable_only_event_panel.csv",
+    "tradable_only_exclusion_log.csv",
+    "tradable_only_summary.json",
+    "micro_backtest_report.md",
+    "final_decision.json"
+  ]
+}
+
