@@ -1,0 +1,30 @@
+{
+  "gate_id": "PUBLIC-CATALYST-PIT-AUDIT-RUN-001",
+  "created_at_local": "2026-06-01",
+  "parent_gate": "PUBLIC-CATALYST-PIT-AUDIT-GATE-001",
+  "purpose": "Authorize a tiny manual public-source audit for biotech/PDUFA catalyst point-in-time admissibility.",
+  "authorized": true,
+  "scope": {
+    "max_sources": 9,
+    "max_named_events": 10,
+    "allowed_actions": [
+      "manual browser/search inspection of public pages",
+      "official documentation review",
+      "record source-level admissibility judgment"
+    ],
+    "forbidden_actions": [
+      "bulk scraping",
+      "market data download",
+      "trading backtest",
+      "promotion decision",
+      "paper trading",
+      "live trading"
+    ]
+  },
+  "decision_rule": {
+    "pass": "At least one public/freemium source proves pre-event timestamping, negative-event retention, delisted/acquired retention, stable identifiers, and reproducible access.",
+    "partial": "Sources can support qualitative discovery or event verification but cannot create a promotable Catalyst panel.",
+    "fail": "No source proves point-in-time completeness and retention under the manual audit."
+  }
+}
+
