@@ -1,0 +1,68 @@
+{
+  "benchmark": {
+    "IWM": {
+      "total_return": 0.4511789825685786
+    },
+    "SPY": {
+      "total_return": 0.4681493265545571
+    }
+  },
+  "bundle_id": "NORGATE-ADMISSIBLE-DATA-BUNDLE-001",
+  "cost_bps": 500,
+  "disabled_sleeves": {
+    "Catalyst": "missing_point_in_time_event_and_direction_source",
+    "Dollar-Bar Microstructure": "daily_bars_cannot_reconstruct_dollar_bars"
+  },
+  "final_decision": {
+    "blockers": [
+      "trial_history_below_full_validation_requirement",
+      "promotion_locked_until_long_history_oos_gate",
+      "Catalyst:missing_point_in_time_event_and_direction_source",
+      "Dollar-Bar Microstructure:daily_bars_cannot_reconstruct_dollar_bars",
+      "outlier_dependency_ex_best_symbol_nonpositive",
+      "weak_distribution_win_rate_below_half",
+      "sub_dollar_trade_quality_blocker",
+      "extreme_rank_score_instability"
+    ],
+    "decision": "NORGATE_PORTFOLIO_TRIAL_LIMITED_ARCHIVE_NO_PROMOTION",
+    "financial_performance_claimed": false,
+    "portfolio_backtest_performed": true,
+    "promotion_allowed": false,
+    "trial_limited": true
+  },
+  "financial_performance_claimed": false,
+  "frozen_sleeve_weights": {
+    "Catalyst": 0.25,
+    "Dollar-Bar Microstructure": 0.25,
+    "Mean Reversion": 0.25,
+    "Momentum": 0.25
+  },
+  "gate_id": "NORGATE-PORTFOLIO-TRIAL-BACKTEST-GATE-001",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "robustness": {
+    "best_symbol": "AAGR",
+    "best_symbol_weighted_net_return": 12.684375013509031,
+    "ex_best_symbol_weighted_net_return": -0.01016147524230071,
+    "symbol_concentration_top1": 1.0008017440460206
+  },
+  "run_id": "NORGATE-PORTFOLIO-TRIAL-BACKTEST-001",
+  "status": "NORGATE_PORTFOLIO_TRIAL_LIMITED_COMPLETE",
+  "summary": {
+    "gross_return_sum": 52.19685415306693,
+    "max_drawdown": -0.8428559770335257,
+    "total_trades": 30,
+    "weighted_net_return_sum": 12.674213538266734,
+    "win_rate": 0.3
+  },
+  "symbol_counts": {
+    "active": 80,
+    "delisted": 80,
+    "tradable_with_frames": 160
+  },
+  "trial_limited": true
+}
