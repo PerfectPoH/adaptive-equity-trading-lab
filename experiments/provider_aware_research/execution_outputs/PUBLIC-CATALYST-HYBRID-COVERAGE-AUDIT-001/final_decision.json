@@ -1,0 +1,74 @@
+{
+  "audit_id": "PUBLIC-CATALYST-HYBRID-COVERAGE-AUDIT-001",
+  "backtest_performed": false,
+  "blockers": [
+    "coverage_completeness_not_proven",
+    "delisted_retention_not_proven",
+    "manual_panel_non_promotable",
+    "mature_admissible_events_missing_price_coverage"
+  ],
+  "decision": "PUBLIC_CATALYST_HYBRID_COVERAGE_AUDIT_BLOCKS_PROMOTION",
+  "decision_timestamp": "2026-06-01T00:00:00+02:00",
+  "market_data_download_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "summary": {
+    "admissible_events": 33,
+    "all_rerun_trade_count": 57,
+    "all_rerun_weighted_net_return_sum": 1.1987612341026765,
+    "as_of_date": "2026-06-01",
+    "audit_id": "PUBLIC-CATALYST-HYBRID-COVERAGE-AUDIT-001",
+    "backtest_performed": false,
+    "blockers": [
+      "coverage_completeness_not_proven",
+      "delisted_retention_not_proven",
+      "manual_panel_non_promotable",
+      "mature_admissible_events_missing_price_coverage"
+    ],
+    "covered_mature_admissible_events": 19,
+    "decision": "PUBLIC_CATALYST_HYBRID_COVERAGE_AUDIT_BLOCKS_PROMOTION",
+    "immature_or_future_trade_count": 0,
+    "immature_or_future_weighted_net_return_sum": 0,
+    "mapping_complication_events": 6,
+    "market_data_download_performed": false,
+    "mature_admissible_events_as_of": 23,
+    "missing_mature_admissible_events": 4,
+    "panel_rows": 34,
+    "price_failures": {
+      "DCPH": "ValueError",
+      "KRTX": "ValueError",
+      "ORCA-PRIVATE": "ValueError",
+      "SAVA": "ValueError",
+      "TLX.AX": "ValueError"
+    },
+    "promotion_allowed": false,
+    "provider_query_performed": false,
+    "source_rerun": "PUBLIC-CATALYST-HYBRID-MICRO-BACKTEST-RERUN-001",
+    "valid_as_of_by_window": {
+      "30": {
+        "median_net_return": -0.04510200656190207,
+        "net_return_sum": -0.7232334360087151,
+        "trade_count": 19,
+        "weighted_net_return_sum": -0.241077812002905,
+        "win_rate": 0.3684210526315789
+      },
+      "60": {
+        "median_net_return": 0.06185184566251416,
+        "net_return_sum": 1.5551078007203736,
+        "trade_count": 19,
+        "weighted_net_return_sum": 0.5183692669067912,
+        "win_rate": 0.7368421052631579
+      },
+      "90": {
+        "median_net_return": 0.07124849939976001,
+        "net_return_sum": 2.7644093375963714,
+        "trade_count": 19,
+        "weighted_net_return_sum": 0.9214697791987905,
+        "win_rate": 0.6842105263157895
+      }
+    },
+    "valid_as_of_trade_count": 57,
+    "valid_as_of_weighted_net_return_sum": 1.1987612341026765,
+    "valid_as_of_win_rate": 0.5964912280701754
+  }
+}
