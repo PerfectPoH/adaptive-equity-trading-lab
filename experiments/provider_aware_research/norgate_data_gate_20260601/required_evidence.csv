@@ -1,0 +1,9 @@
+evidence_id,required_for_gate_pass,why_required
+python_package_available,yes,The lab needs a reproducible Python interface rather than manual GUI inspection.
+local_database_accessible,yes,The trial must expose locally readable data after the updater download.
+delisted_symbols_discoverable,yes,Portfolio Candidate 002 is blocked primarily by survivorship bias.
+delisted_prices_accessible,yes,Delisted symbols must have historical OHLCV, not only names.
+adjusted_daily_prices_available,yes,Backtests require split/dividend-adjusted daily prices.
+listing_or_delisting_metadata_available,yes,The runner needs point-in-time eligibility and exit handling.
+trial_history_limit_recorded,yes,The two-year trial limit must be carried into all downstream decisions.
+raw_payload_hashes_recorded,yes,Probe outputs must be auditable without storing excessive provider data.

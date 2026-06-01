@@ -1,0 +1,5 @@
+decision_item,rule
+gate_pass,Norgate probe passes only if Python access, delisted discovery, delisted prices, adjusted prices, and metadata evidence are all present.
+trial_limited_status,Even if the probe passes, downstream status remains TRIAL_LIMITED_2Y_NOT_FULL_VALIDATION.
+backtest_unlock,A real backtest requires a separate committed run gate and an admissible data bundle manifest.
+failure_action,If any required evidence is missing, keep Portfolio Candidate 002 blocked by DATA_BUNDLE_NOT_ADMISSIBLE.

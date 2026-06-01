@@ -1,0 +1,10 @@
+scope_item,status,limit,notes
+python_package_import,allowed,metadata_only,Import norgatedata and record version/API surface if installed.
+database_inventory,allowed,max_20_names,Inspect available database/watchlist names without broad extraction.
+active_symbol_price_sample,allowed,max_5_symbols_60_bars,Pull tiny adjusted daily samples for known active symbols only if package API is available.
+delisted_symbol_discovery,allowed,max_20_symbols,Verify whether delisted securities are discoverable.
+delisted_symbol_price_sample,allowed,max_5_symbols_60_bars,Pull tiny adjusted daily samples for delisted symbols only after discovery confirms support.
+historical_constituent_probe,allowed,max_3_index_queries,Verify whether historical index constituent/membership API exists.
+broad_universe_export,blocked,none,No full universe export in this gate.
+strategy_backtest,blocked,none,No portfolio or strategy backtest in this gate.
+parameter_sweep,blocked,none,No threshold or strategy optimization in this gate.

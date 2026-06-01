@@ -1,0 +1,18 @@
+{
+  "backtest_allowed": false,
+  "created_date": "2026-06-01",
+  "data_source": "Norgate Data",
+  "gate_id": "NORGATE-DATA-GATE-001",
+  "local_database_read_allowed": true,
+  "market_data_download_allowed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "promotion_allowed": false,
+  "provider_query_allowed": true,
+  "purpose": "Verify whether the installed Norgate trial exposes survivorship-free US equity data, delisted securities, adjustment metadata, and Python access required by Portfolio Candidate 002.",
+  "raw_payload_retention_required": true,
+  "short_selling_allowed": false,
+  "status": "APPROVED_BOUNDED_LOCAL_PROVIDER_PROBE_NOT_BACKTEST",
+  "trial_history_limit_declared": "2_years_expected",
+  "trial_id": "NORGATE-DATA-GATE-001"
+}

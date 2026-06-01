@@ -1,0 +1,9 @@
+action,reason
+broad_market_data_download,This probe is bounded to tiny samples and inventory checks.
+full_universe_backtest,The gate verifies access only; it does not authorize performance testing.
+portfolio_candidate_backtest,The true backtest requires a separate run after the data bundle is validated.
+parameter_sweep,Optimization before data validation would create a false edge.
+paper_trading,No strategy has been promoted.
+live_trading,No strategy has been promoted.
+strategy_promotion,Provider availability is not alpha evidence.
+short_selling,The lab remains long-only.
