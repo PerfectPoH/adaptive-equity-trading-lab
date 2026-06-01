@@ -1,0 +1,5 @@
+decision_item,rule
+daily_subset_interpretation,Norgate tradability rerun falsifies only Momentum and Mean Reversion under the frozen daily-compatible setup.
+full_candidate_interpretation,Portfolio Candidate 002 cannot be promoted or fully archived as a four-sleeve portfolio until Catalyst and Dollar-Bar data contracts are satisfied.
+provider_stack_interpretation,No single observed provider currently satisfies all four sleeves; use a stack rather than forcing one vendor.
+next_gate,Create separate provider gates only for missing sleeves if research continues.

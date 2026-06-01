@@ -1,0 +1,33 @@
+{
+  "decision_id": "PORTFOLIO-COMPONENT-COVERAGE-GATE-001",
+  "candidate_id": "PORTFOLIO-CANDIDATE-002",
+  "created_at_local": "2026-06-01",
+  "decision": "FULL_PORTFOLIO_JUDGMENT_BLOCKED_BY_COMPONENT_COVERAGE",
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "provider_query_performed": false,
+  "market_data_download_performed": false,
+  "backtest_performed": false,
+  "interpretation": {
+    "norgate_tradability_rerun_scope": "Daily-compatible subset only.",
+    "daily_subset_components_observed": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "daily_subset_result": "Observed and archived in current form after tradability filter.",
+    "full_candidate_result": "Not fully falsified because Catalyst and Dollar-Bar Microstructure were not observable under Norgate daily data.",
+    "weight_redistribution_policy": "Disabled sleeves remain disabled. Their weight must not be silently redistributed to produce a synthetic four-sleeve verdict."
+  },
+  "coverage_blockers": [
+    "Catalyst requires point-in-time event timestamp and direction source.",
+    "Dollar-Bar Microstructure requires intraday trades/quotes or order-book data.",
+    "Norgate trial history is limited and cannot satisfy long-history OOS promotion gates."
+  ],
+  "next_valid_actions": [
+    "Use Norgate to continue daily-only survivor-aware research.",
+    "Open a separate intraday provider gate for dollar-bar/order-flow sleeves.",
+    "Open a separate catalyst provider gate for earnings or biotech event direction.",
+    "Only evaluate the four-sleeve portfolio after every component has admissible data coverage."
+  ]
+}

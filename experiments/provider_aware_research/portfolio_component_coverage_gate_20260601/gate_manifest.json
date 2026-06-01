@@ -1,0 +1,16 @@
+{
+  "candidate_id": "PORTFOLIO-CANDIDATE-002",
+  "created_date": "2026-06-01",
+  "daily_subset_status": "OBSERVED_AND_ARCHIVED_NEGATIVE_WITH_NORGATE_TRADABILITY_FILTER",
+  "full_portfolio_status": "NOT_FULLY_OBSERVABLE",
+  "gate_id": "PORTFOLIO-COMPONENT-COVERAGE-GATE-001",
+  "live_trading_allowed": false,
+  "paper_trading_allowed": false,
+  "promotion_allowed": false,
+  "purpose": "Separate daily-subset falsification from full four-sleeve portfolio coverage.",
+  "status": "APPROVED_COMPONENT_COVERAGE_BLOCKER",
+  "unobserved_components": [
+    "Catalyst",
+    "Dollar-Bar Microstructure"
+  ]
+}
