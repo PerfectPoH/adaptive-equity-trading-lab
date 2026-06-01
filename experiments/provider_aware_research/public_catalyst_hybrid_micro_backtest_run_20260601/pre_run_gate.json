@@ -1,0 +1,22 @@
+{
+  "gate_id": "PUBLIC-CATALYST-HYBRID-MICRO-BACKTEST-RUN-001",
+  "created_at_local": "2026-06-01",
+  "parent_gate": "PUBLIC-CATALYST-HYBRID-MICRO-BACKTEST-GATE-001",
+  "purpose": "Authorize an exploratory micro-backtest of the committed hybrid Catalyst event panel using local daily price data only.",
+  "authorized": true,
+  "panel_source": "experiments/provider_aware_research/public_catalyst_hybrid_event_panel_run_20260601/hybrid_event_panel.csv",
+  "allowed_price_source": "existing local Norgate daily database",
+  "provider_query_authorized": false,
+  "market_data_download_authorized": false,
+  "external_api_call_authorized": false,
+  "backtest_authorized": true,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "fixed_windows_days": [30, 60, 90],
+  "minimum_price_covered_events": 8,
+  "cost_bps": 500,
+  "parameter_sweep_allowed": false,
+  "short_selling_allowed": false
+}
+
