@@ -1,0 +1,22 @@
+{
+  "gate_id": "PUBLIC-CATALYST-HYBRID-PANEL-EXPANSION-RUN-001",
+  "created_at_local": "2026-06-01",
+  "parent_gate": "PUBLIC-CATALYST-HYBRID-PANEL-EXPANSION-GATE-001",
+  "purpose": "Authorize manual expansion of the public hybrid Catalyst panel from 12 events toward 30-50 events.",
+  "authorized": true,
+  "provider_query_authorized": true,
+  "provider_query_scope": "Manual public web/source inspection only; no bulk scraping.",
+  "web_scraping_authorized": false,
+  "market_data_download_authorized": false,
+  "backtest_authorized": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "minimum_admissible_events": 30,
+  "target_admissible_events": 50,
+  "minimum_non_success_or_unresolved_share": 0.35,
+  "minimum_delisted_acquired_or_name_change_events": 5,
+  "window_policy": "30d_60d_90d_remain_labeled_diagnostics_only",
+  "parameter_sweep_allowed": false
+}
+
