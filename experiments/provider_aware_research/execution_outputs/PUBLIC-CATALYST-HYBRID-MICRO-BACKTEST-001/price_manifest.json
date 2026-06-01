@@ -1,0 +1,20 @@
+{
+  "failures": {},
+  "loaded_symbols": [
+    "AGIO",
+    "AQST",
+    "CAPR",
+    "DNLI",
+    "FBIO",
+    "GKOS",
+    "KALV",
+    "MIST",
+    "REPL",
+    "SNDX",
+    "SUPN",
+    "TNXP"
+  ],
+  "market_data_download_performed": false,
+  "provider_query_performed": false,
+  "source": "local_norgate_database"
+}
