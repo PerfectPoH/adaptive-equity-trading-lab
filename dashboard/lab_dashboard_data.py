@@ -27,6 +27,7 @@ PORTFOLIO_TRIAL_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-TR
 PORTFOLIO_FROZEN_RECIPE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-FROZEN-RECIPES"
 PORTFOLIO_EXTERNAL_DATA_GATE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-EXTERNAL-DATA-GATES"
 PORTFOLIO_MANUAL_COMPOSITE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-MANUAL-COMPOSITE-001"
+PORTFOLIO_CANDIDATE_COMPARISON_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-CANDIDATE-COMPARISON-001"
 DELISTED_DATA_SOURCE_GATE_DIR = Path("experiments/provider_aware_research/delisted_data_source_gate_20260525")
 ORB_930_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "ORB-930-CROSS-ASSET-BACKTEST-001"
 WORKBENCH_CONFIGURED_LARGECAP_SYMBOLS = {
@@ -3012,29 +3013,60 @@ def build_portfolio_manual_composite_trial(frozen_trial: dict[str, Any]) -> dict
 
     frozen_id = str(frozen_trial.get("frozen_recipe_id", "unknown"))
     validation = frozen_trial.get("validation_split", {})
-    sleeves = [
-        {
-            "name": "Mean-reversion sleeve",
-            "template": "Mean Reversion",
-            "weight": 1 / 3,
-            "rule": "Buy diversified dislocations after confirmation; do not average down into unresolved continuation.",
-            "failure_mode": "False reversion and cost drag.",
-        },
-        {
-            "name": "Momentum sleeve",
-            "template": "Momentum",
-            "weight": 1 / 3,
-            "rule": "Hold diversified continuation candidates only through the frozen multi-day horizon.",
-            "failure_mode": "Outlier dependency and regime decay.",
-        },
-        {
-            "name": "Dollar-bar microstructure sleeve",
-            "template": "Dollar-Bar Microstructure",
-            "weight": 1 / 3,
-            "rule": "Use traded-dollar sampling as a stabilizer, not as standalone promotion evidence.",
-            "failure_mode": "Cleaner sampling without tradable direction.",
-        },
+    templates = [
+        str(component.get("template", "UNKNOWN"))
+        for component in frozen_trial.get("portfolio_diagnostic", {}).get("components", [])
     ]
+    seen_templates: set[str] = set()
+    ordered_templates = []
+    for template in templates:
+        if template not in seen_templates:
+            ordered_templates.append(template)
+            seen_templates.add(template)
+    if not ordered_templates:
+        ordered_templates = ["Mean Reversion", "Momentum", "Dollar-Bar Microstructure"]
+    sleeve_rules = {
+        "Mean Reversion": (
+            "Mean-reversion sleeve",
+            "Buy diversified dislocations after confirmation; do not average down into unresolved continuation.",
+            "False reversion and cost drag.",
+        ),
+        "Momentum": (
+            "Momentum sleeve",
+            "Hold diversified continuation candidates only through the frozen multi-day horizon.",
+            "Outlier dependency and regime decay.",
+        ),
+        "Dollar-Bar Microstructure": (
+            "Dollar-bar microstructure sleeve",
+            "Use traded-dollar sampling as a stabilizer, not as standalone promotion evidence.",
+            "Cleaner sampling without tradable direction.",
+        ),
+        "9:30 AM ORB": (
+            "Opening-range sleeve",
+            "Use the 09:30 opening range as a bounded intraday timing sleeve, with no-entry cutoffs and fixed exits.",
+            "False breakout clustering and session anchoring error.",
+        ),
+    }
+    sleeve_weight = 1.0 / len(ordered_templates)
+    sleeves = []
+    for template in ordered_templates:
+        name, rule, failure_mode = sleeve_rules.get(
+            template,
+            (
+                f"{template} sleeve",
+                "Keep the component rule frozen and treat it as one bounded sleeve inside the composite.",
+                "Unspecified component fragility.",
+            ),
+        )
+        sleeves.append(
+            {
+                "name": name,
+                "template": template,
+                "weight": sleeve_weight,
+                "rule": rule,
+                "failure_mode": failure_mode,
+            }
+        )
     manual_manifest = {
         "strategy_name": "Multi-Horizon Reversion Momentum Basket",
         "trial_id": f"PORTFOLIO-MANUAL-COMPOSITE-001-{frozen_id.upper()}",
@@ -3144,6 +3176,98 @@ def persist_portfolio_manual_composite_trial(trial: dict[str, Any], *, root: Pat
         "output_dir": str(output_dir),
         "manifest_path": str(manifest_path),
         "trial_report_path": str(trial_report_path),
+        "final_decision_path": str(final_decision_path),
+        "markdown_path": str(markdown_path),
+    }
+
+
+def build_portfolio_candidate_comparison(candidate_001: dict[str, Any], candidate_002: dict[str, Any]) -> dict[str, Any]:
+    """Compare two saved candidate recipes without allowing iterative search to become evidence."""
+
+    def _float(row: dict[str, Any], key: str) -> float:
+        return float(row.get(key, 0.0) or 0.0)
+
+    drawdown_improvement = _float(candidate_002, "max_drawdown") - _float(candidate_001, "max_drawdown")
+    validation_delta = _float(candidate_002, "validation_net_return") - _float(candidate_001, "validation_net_return")
+    total_delta = _float(candidate_002, "total_net_return") - _float(candidate_001, "total_net_return")
+    component_delta = int(candidate_002.get("component_count", 0) or 0) - int(candidate_001.get("component_count", 0) or 0)
+    winner = str(candidate_002.get("candidate_id", "PORTFOLIO-CANDIDATE-002")) if (
+        drawdown_improvement > 0 and validation_delta > 0
+    ) else str(candidate_001.get("candidate_id", "PORTFOLIO-CANDIDATE-001"))
+    overlap = sorted(set(candidate_001.get("component_ids", [])) & set(candidate_002.get("component_ids", [])))
+    union = sorted(set(candidate_001.get("component_ids", [])) | set(candidate_002.get("component_ids", [])))
+    overlap_ratio = len(overlap) / len(union) if union else 0.0
+    return {
+        "comparison_id": "PORTFOLIO-CANDIDATE-COMPARISON-001",
+        "status": "PORTFOLIO_CANDIDATE_COMPARISON_COMPLETE",
+        "promotion_allowed": False,
+        "paper_trading_allowed": False,
+        "live_trading_allowed": False,
+        "provider_query_performed": False,
+        "market_data_download_performed": False,
+        "candidate_001": candidate_001,
+        "candidate_002": candidate_002,
+        "deltas": {
+            "component_count_delta": component_delta,
+            "total_net_return_delta": round(float(total_delta), 8),
+            "validation_net_return_delta": round(float(validation_delta), 8),
+            "max_drawdown_improvement": round(float(drawdown_improvement), 8),
+            "component_overlap_ratio": round(float(overlap_ratio), 8),
+        },
+        "winner_for_research_review": winner,
+        "anti_overfit_disclosures": [
+            "iterative_search_after_candidate_001",
+            "same_sample_candidate_comparison",
+            "diagnostic_only_not_model_selection_evidence",
+            "requires_external_data_gate_before_true_backtest",
+        ],
+        "interpretation": (
+            "Candidate 002 may be preferable for manual research review if it improves validation and drawdown, "
+            "but because it was discovered after Candidate 001 on the same local/proxy search surface it cannot be promotion evidence."
+        ),
+        "final_decision": {
+            "decision": "PORTFOLIO_CANDIDATE_COMPARISON_DIAGNOSTIC_ONLY",
+            "blockers": ["iterative_search_after_candidate_001", "external_data_contract_gate"],
+            "promotion_allowed": False,
+            "paper_trading_allowed": False,
+            "live_trading_allowed": False,
+            "provider_query_performed": False,
+            "market_data_download_performed": False,
+            "portfolio_backtest_performed": False,
+            "runner_mode": "candidate_comparison_only",
+        },
+    }
+
+
+def persist_portfolio_candidate_comparison(comparison: dict[str, Any], *, root: Path = Path(".")) -> dict[str, str]:
+    output_dir = Path(root) / PORTFOLIO_CANDIDATE_COMPARISON_OUTPUT_DIR / str(comparison.get("comparison_id", "unknown"))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    comparison_path = output_dir / "candidate_comparison.json"
+    final_decision_path = output_dir / "final_decision.json"
+    markdown_path = output_dir / "candidate_comparison_report.md"
+    comparison_path.write_text(json.dumps(_json_safe(comparison), indent=2, sort_keys=True), encoding="utf-8")
+    final_decision_path.write_text(json.dumps(_json_safe(comparison.get("final_decision", {})), indent=2, sort_keys=True), encoding="utf-8")
+    deltas = comparison.get("deltas", {})
+    markdown_lines = [
+        "# Portfolio Candidate Comparison",
+        "",
+        f"- status: `{comparison.get('status')}`",
+        f"- review candidate: `{comparison.get('winner_for_research_review')}`",
+        f"- promotion_allowed: `{str(comparison.get('promotion_allowed', False)).lower()}`",
+        f"- validation delta: `{deltas.get('validation_net_return_delta', 0.0)}`",
+        f"- drawdown improvement: `{deltas.get('max_drawdown_improvement', 0.0)}`",
+        f"- overlap ratio: `{deltas.get('component_overlap_ratio', 0.0)}`",
+        "",
+        "## Anti-Overfit Disclosures",
+        "",
+        *[f"- `{flag}`" for flag in comparison.get("anti_overfit_disclosures", [])],
+        "",
+        str(comparison.get("interpretation", "")),
+    ]
+    markdown_path.write_text("\n".join(markdown_lines), encoding="utf-8")
+    return {
+        "output_dir": str(output_dir),
+        "comparison_path": str(comparison_path),
         "final_decision_path": str(final_decision_path),
         "markdown_path": str(markdown_path),
     }

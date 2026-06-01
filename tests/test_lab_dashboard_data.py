@@ -34,6 +34,7 @@ from dashboard.lab_dashboard_data import (
     build_portfolio_frozen_recipe_trial,
     build_portfolio_external_data_backtest_gate,
     build_portfolio_manual_composite_trial,
+    build_portfolio_candidate_comparison,
     display_safe_records,
     delisted_data_source_gate_payload,
     load_portfolio_lab_components,
@@ -51,6 +52,7 @@ from dashboard.lab_dashboard_data import (
     persist_portfolio_frozen_recipe_trial,
     persist_portfolio_external_data_backtest_gate,
     persist_portfolio_manual_composite_trial,
+    persist_portfolio_candidate_comparison,
     write_workbench_phase_report,
     build_strategy_chart_story,
     classify_strategy_status,
@@ -874,6 +876,64 @@ def test_manual_composite_removes_factory_scope_but_keeps_external_data_gate(tmp
     assert Path(paths["manifest_path"]).exists()
     assert Path(paths["trial_report_path"]).exists()
     assert Path(paths["final_decision_path"]).exists()
+
+
+def test_manual_composite_includes_opening_range_sleeve_when_present() -> None:
+    frozen = {
+        "frozen_recipe_id": "abc123",
+        "trial_id": "PORTFOLIO-FROZEN-RECIPE-ABC123",
+        "validation_split": {"train_net_return": 1.0, "validation_net_return": 2.0},
+        "portfolio_diagnostic": {
+            "components": [
+                {"template": "Momentum"},
+                {"template": "Mean Reversion"},
+                {"template": "Dollar-Bar Microstructure"},
+                {"template": "9:30 AM ORB"},
+            ]
+        },
+    }
+
+    manual = build_portfolio_manual_composite_trial(frozen)
+
+    templates = [sleeve["template"] for sleeve in manual["manual_manifest"]["sleeves"]]
+    assert templates == ["Momentum", "Mean Reversion", "Dollar-Bar Microstructure", "9:30 AM ORB"]
+    assert sum(sleeve["weight"] for sleeve in manual["manual_manifest"]["sleeves"]) == 1.0
+    assert any(sleeve["name"] == "Opening-range sleeve" for sleeve in manual["manual_manifest"]["sleeves"])
+
+
+def test_candidate_comparison_flags_iterative_search_and_no_promotion(tmp_path: Path) -> None:
+    candidate_001 = {
+        "candidate_id": "PORTFOLIO-CANDIDATE-001",
+        "component_count": 3,
+        "total_net_return": 480.42,
+        "max_drawdown": -12.21,
+        "validation_net_return": 217.51,
+        "component_ids": ["A", "B", "C"],
+        "blockers": ["external_data_contract_gate"],
+    }
+    candidate_002 = {
+        "candidate_id": "PORTFOLIO-CANDIDATE-002",
+        "component_count": 4,
+        "total_net_return": 469.38,
+        "max_drawdown": -11.72,
+        "validation_net_return": 312.86,
+        "component_ids": ["A", "B", "C", "D"],
+        "blockers": ["factory_generated_scope_gate"],
+    }
+
+    comparison = build_portfolio_candidate_comparison(candidate_001, candidate_002)
+
+    assert comparison["status"] == "PORTFOLIO_CANDIDATE_COMPARISON_COMPLETE"
+    assert comparison["promotion_allowed"] is False
+    assert comparison["winner_for_research_review"] == "PORTFOLIO-CANDIDATE-002"
+    assert comparison["deltas"]["component_count_delta"] == 1
+    assert comparison["deltas"]["max_drawdown_improvement"] > 0
+    assert "iterative_search_after_candidate_001" in comparison["anti_overfit_disclosures"]
+    assert comparison["final_decision"]["decision"] == "PORTFOLIO_CANDIDATE_COMPARISON_DIAGNOSTIC_ONLY"
+
+    paths = persist_portfolio_candidate_comparison(comparison, root=tmp_path)
+    assert Path(paths["comparison_path"]).exists()
+    assert Path(paths["markdown_path"]).exists()
 
 
 def test_portfolio_preview_can_include_factory_generated_components(tmp_path: Path) -> None:
