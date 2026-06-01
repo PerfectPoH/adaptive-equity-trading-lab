@@ -1,0 +1,1050 @@
+{
+  "benchmark": {
+    "IWM": {
+      "total_return": 0.4511789825685786
+    },
+    "SPY": {
+      "total_return": 0.4681493265545571
+    }
+  },
+  "bundle_id": "NORGATE-ADMISSIBLE-DATA-BUNDLE-001",
+  "cost_bps": 500,
+  "disabled_sleeves": {
+    "Catalyst": "missing_point_in_time_event_and_direction_source",
+    "Dollar-Bar Microstructure": "daily_bars_cannot_reconstruct_dollar_bars"
+  },
+  "final_decision": {
+    "blockers": [
+      "trial_history_below_full_validation_requirement",
+      "promotion_locked_until_long_history_oos_gate",
+      "Catalyst:missing_point_in_time_event_and_direction_source",
+      "Dollar-Bar Microstructure:daily_bars_cannot_reconstruct_dollar_bars",
+      "outlier_dependency_ex_best_symbol_nonpositive",
+      "weak_distribution_win_rate_below_half"
+    ],
+    "decision": "NORGATE_TRADABILITY_RERUN_ARCHIVE_NO_PROMOTION",
+    "financial_performance_claimed": false,
+    "portfolio_backtest_performed": true,
+    "promotion_allowed": false,
+    "trial_limited": true
+  },
+  "financial_performance_claimed": false,
+  "frozen_sleeve_weights": {
+    "Catalyst": 0.25,
+    "Dollar-Bar Microstructure": 0.25,
+    "Mean Reversion": 0.25,
+    "Momentum": 0.25
+  },
+  "gate_id": "NORGATE-TRADABILITY-GATE-001",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "robustness": {
+    "best_symbol": "AHL-202602",
+    "best_symbol_weighted_net_return": 0.0525897889666201,
+    "ex_best_symbol_weighted_net_return": -0.7152541738617882,
+    "symbol_concentration_top1": -0.07936112180668904
+  },
+  "run_id": "NORGATE-TRADABILITY-RERUN-001",
+  "status": "NORGATE_PORTFOLIO_TRIAL_LIMITED_COMPLETE",
+  "summary": {
+    "gross_return_sum": -0.5006575395806725,
+    "max_drawdown": -0.6380190098973991,
+    "total_trades": 43,
+    "weighted_net_return_sum": -0.6626643848951681,
+    "win_rate": 0.2558139534883721
+  },
+  "symbol_counts": {
+    "active": 26,
+    "delisted": 31,
+    "tradable_with_frames": 57
+  },
+  "tradability_filter": {
+    "accepted_symbols": [
+      "A",
+      "AA",
+      "AAAU",
+      "AAGIY",
+      "AAL",
+      "AAMI",
+      "AAOI",
+      "AAON",
+      "AAP",
+      "AAPB",
+      "AAPD",
+      "AAPL",
+      "AAPU",
+      "AAPX",
+      "AARD",
+      "AAT",
+      "AAXJ",
+      "AB",
+      "ABBNY",
+      "ABBV",
+      "ABCB",
+      "ABCL",
+      "ABEO",
+      "ABEV",
+      "ABFL",
+      "ABG",
+      "ACCD-202504",
+      "ACLX-202604",
+      "AGR-202412",
+      "AGS-202506",
+      "AHL-202602",
+      "AKRO-202512",
+      "AL-202604",
+      "ALE-202512",
+      "ALEX-202603",
+      "ALTM-202503",
+      "ALTR-202503",
+      "AMED-202508",
+      "AMPS-202504",
+      "AMWD-202605",
+      "ANSS-202507",
+      "APLS-202605",
+      "ARCH-202501",
+      "ARIS-202510",
+      "ATSG-202504",
+      "ATXS-202601",
+      "AVDL-202602",
+      "AVDX-202510",
+      "AXNX-202411",
+      "AY-202412",
+      "AZEK-202506",
+      "AZN-202601",
+      "AZPN-202503",
+      "B-202501",
+      "BALY-202502",
+      "BASE-202509",
+      "BECN-202504",
+      "IWM",
+      "SPY"
+    ],
+    "diagnostics": {
+      "A": {
+        "median_turnover": 230903072.0,
+        "minimum_close": 98.48164367675781,
+        "rows": 499
+      },
+      "AA": {
+        "median_turnover": 198060096.0,
+        "minimum_close": 22.284093856811523,
+        "rows": 499
+      },
+      "AAA": {
+        "median_turnover": 194078.046875,
+        "minimum_close": 22.520389556884766,
+        "rows": 499
+      },
+      "AAAA": {
+        "median_turnover": 90621.5625,
+        "minimum_close": 24.799962997436523,
+        "rows": 220
+      },
+      "AAAC": {
+        "median_turnover": 179.41018676757812,
+        "minimum_close": 19.566043853759766,
+        "rows": 116
+      },
+      "AAAU": {
+        "median_turnover": 66039968.0,
+        "minimum_close": 22.639999389648438,
+        "rows": 499
+      },
+      "AABB": {
+        "median_turnover": 152842.953125,
+        "minimum_close": 0.012395000085234642,
+        "rows": 499
+      },
+      "AABVF": {
+        "median_turnover": 150.3839111328125,
+        "minimum_close": 0.013500000350177288,
+        "rows": 161
+      },
+      "AACAY": {
+        "median_turnover": 19414.53515625,
+        "minimum_close": 2.9871041774749756,
+        "rows": 492
+      },
+      "AACB": {
+        "median_turnover": 65687.4921875,
+        "minimum_close": 9.880000114440918,
+        "rows": 197
+      },
+      "AACBR": {
+        "median_turnover": 538.0599975585938,
+        "minimum_close": 0.1598999947309494,
+        "rows": 149
+      },
+      "AACBU": {
+        "median_turnover": 9299.9599609375,
+        "minimum_close": 10.0,
+        "rows": 133
+      },
+      "AACG": {
+        "median_turnover": 16267.37109375,
+        "minimum_close": 0.5024999976158142,
+        "rows": 499
+      },
+      "AACTF": {
+        "median_turnover": 73.5,
+        "minimum_close": 0.003599999938160181,
+        "rows": 403
+      },
+      "AADR": {
+        "median_turnover": 138656.890625,
+        "minimum_close": 55.92894744873047,
+        "rows": 499
+      },
+      "AAEQ": {
+        "median_turnover": 5909.52001953125,
+        "minimum_close": 45.21009826660156,
+        "rows": 117
+      },
+      "AAFRF": {
+        "median_turnover": 3631.550048828125,
+        "minimum_close": 1.130967140197754,
+        "rows": 291
+      },
+      "AAGAF": {
+        "median_turnover": 123273.5078125,
+        "minimum_close": 0.23000000417232513,
+        "rows": 344
+      },
+      "AAGC": {
+        "median_turnover": 2210.6220703125,
+        "minimum_close": 0.0003499999875202775,
+        "rows": 498
+      },
+      "AAGFF": {
+        "median_turnover": 193665.515625,
+        "minimum_close": 0.18310000002384186,
+        "rows": 499
+      },
+      "AAGH": {
+        "median_turnover": 426.1197509765625,
+        "minimum_close": 9.999999974752427e-07,
+        "rows": 258
+      },
+      "AAGIY": {
+        "median_turnover": 10228934.0,
+        "minimum_close": 24.591859817504883,
+        "rows": 499
+      },
+      "AAGR": {
+        "median_turnover": 1.0,
+        "minimum_close": 9.999999974752427e-07,
+        "rows": 463
+      },
+      "AAGRW": {
+        "median_turnover": 8.48874282836914,
+        "minimum_close": 9.999999974752427e-07,
+        "rows": 104
+      },
+      "AAIGF": {
+        "median_turnover": 172959.15625,
+        "minimum_close": 5.693957328796387,
+        "rows": 499
+      },
+      "AAIRF": {
+        "median_turnover": 3008.4609375,
+        "minimum_close": 0.01850000023841858,
+        "rows": 490
+      },
+      "AAL": {
+        "median_turnover": 615205248.0,
+        "minimum_close": 9.069999694824219,
+        "rows": 499
+      },
+      "AALG": {
+        "median_turnover": 230925.15625,
+        "minimum_close": 7.173999786376953,
+        "rows": 223
+      },
+      "AAM-202602": {
+        "median_turnover": 80615.953125,
+        "minimum_close": 9.979999542236328,
+        "rows": 328
+      },
+      "AAMCF": {
+        "median_turnover": 4603.501953125,
+        "minimum_close": 2500.0,
+        "rows": 173
+      },
+      "AAME": {
+        "median_turnover": 14676.7890625,
+        "minimum_close": 1.2899999618530273,
+        "rows": 497
+      },
+      "AAMI": {
+        "median_turnover": 7525645.0,
+        "minimum_close": 21.46643829345703,
+        "rows": 499
+      },
+      "AAMMF": {
+        "median_turnover": 5159.64990234375,
+        "minimum_close": 0.05000000074505806,
+        "rows": 463
+      },
+      "AAMTF": {
+        "median_turnover": 940.0,
+        "minimum_close": 0.10180000215768814,
+        "rows": 93
+      },
+      "AAOI": {
+        "median_turnover": 102691344.0,
+        "minimum_close": 6.869999885559082,
+        "rows": 499
+      },
+      "AAON": {
+        "median_turnover": 69309904.0,
+        "minimum_close": 71.39602661132812,
+        "rows": 499
+      },
+      "AAP": {
+        "median_turnover": 89879440.0,
+        "minimum_close": 29.49271583557129,
+        "rows": 499
+      },
+      "AAPB": {
+        "median_turnover": 3812593.5,
+        "minimum_close": 14.539216995239258,
+        "rows": 499
+      },
+      "AAPD": {
+        "median_turnover": 17064136.0,
+        "minimum_close": 11.345000267028809,
+        "rows": 499
+      },
+      "AAPG": {
+        "median_turnover": 217858.625,
+        "minimum_close": 17.200000762939453,
+        "rows": 332
+      },
+      "AAPI": {
+        "median_turnover": 1650.0,
+        "minimum_close": 0.09059999883174896,
+        "rows": 183
+      },
+      "AAPJ": {
+        "median_turnover": 1088.751953125,
+        "minimum_close": 9.999999974752427e-07,
+        "rows": 234
+      },
+      "AAPL": {
+        "median_turnover": 10958324736.0,
+        "minimum_close": 171.5137481689453,
+        "rows": 499
+      },
+      "AAPR": {
+        "median_turnover": 99121.2890625,
+        "minimum_close": 24.899999618530273,
+        "rows": 499
+      },
+      "AAPT": {
+        "median_turnover": 0.09999999403953552,
+        "minimum_close": 9.999999974752427e-07,
+        "rows": 171
+      },
+      "AAPU": {
+        "median_turnover": 48324108.0,
+        "minimum_close": 15.28171443939209,
+        "rows": 499
+      },
+      "AAPW": {
+        "median_turnover": 554490.875,
+        "minimum_close": 21.401636123657227,
+        "rows": 321
+      },
+      "AAPX": {
+        "median_turnover": 2269194.25,
+        "minimum_close": 14.255426406860352,
+        "rows": 499
+      },
+      "AAPY": {
+        "median_turnover": 58524.12109375,
+        "minimum_close": 16.238176345825195,
+        "rows": 499
+      },
+      "AARD": {
+        "median_turnover": 1109645.625,
+        "minimum_close": 3.509999990463257,
+        "rows": 324
+      },
+      "AASP": {
+        "median_turnover": 5051.43408203125,
+        "minimum_close": 0.17299999296665192,
+        "rows": 337
+      },
+      "AASZF": {
+        "median_turnover": 1548.0,
+        "minimum_close": 0.0640999972820282,
+        "rows": 273
+      },
+      "AAT": {
+        "median_turnover": 6720829.0,
+        "minimum_close": 16.150178909301758,
+        "rows": 499
+      },
+      "AATC": {
+        "median_turnover": 31728.748046875,
+        "minimum_close": 4.399622440338135,
+        "rows": 488
+      },
+      "AATV": {
+        "median_turnover": 1029.8399658203125,
+        "minimum_close": 0.05999999865889549,
+        "rows": 143
+      },
+      "AAUAF": {
+        "median_turnover": 5078.94140625,
+        "minimum_close": 0.03229999914765358,
+        "rows": 499
+      },
+      "AAUC": {
+        "median_turnover": 749087.875,
+        "minimum_close": 5.850000381469727,
+        "rows": 476
+      },
+      "AAUKF": {
+        "median_turnover": 36665.9296875,
+        "minimum_close": 18.674009323120117,
+        "rows": 290
+      },
+      "AAUM": {
+        "median_turnover": 756.6973876953125,
+        "minimum_close": 18.59000015258789,
+        "rows": 166
+      },
+      "AAUS": {
+        "median_turnover": 10949.1416015625,
+        "minimum_close": 49.00595474243164,
+        "rows": 215
+      },
+      "AAVM": {
+        "median_turnover": 27500.359375,
+        "minimum_close": 21.15520477294922,
+        "rows": 499
+      },
+      "AAVMY": {
+        "median_turnover": 296713.03125,
+        "minimum_close": 13.731173515319824,
+        "rows": 499
+      },
+      "AAVVF": {
+        "median_turnover": 304315.125,
+        "minimum_close": 5.75,
+        "rows": 488
+      },
+      "AAWH": {
+        "median_turnover": 60338.5390625,
+        "minimum_close": 0.28110000491142273,
+        "rows": 499
+      },
+      "AAXJ": {
+        "median_turnover": 38068468.0,
+        "minimum_close": 63.75703811645508,
+        "rows": 499
+      },
+      "AB": {
+        "median_turnover": 9047748.0,
+        "minimum_close": 27.251392364501953,
+        "rows": 499
+      },
+      "ABAT": {
+        "median_turnover": 5277221.0,
+        "minimum_close": 0.7599999904632568,
+        "rows": 499
+      },
+      "ABBNY": {
+        "median_turnover": 13184239.0,
+        "minimum_close": 45.80659103393555,
+        "rows": 499
+      },
+      "ABBRF": {
+        "median_turnover": 498275.96875,
+        "minimum_close": 1.5199999809265137,
+        "rows": 499
+      },
+      "ABBV": {
+        "median_turnover": 1097970304.0,
+        "minimum_close": 149.69781494140625,
+        "rows": 499
+      },
+      "ABCB": {
+        "median_turnover": 26472722.0,
+        "minimum_close": 45.71395492553711,
+        "rows": 499
+      },
+      "ABCFF": {
+        "median_turnover": 309.5000915527344,
+        "minimum_close": 0.009999999776482582,
+        "rows": 341
+      },
+      "ABCL": {
+        "median_turnover": 10697587.0,
+        "minimum_close": 1.9299999475479126,
+        "rows": 499
+      },
+      "ABCP": {
+        "median_turnover": 3479.68017578125,
+        "minimum_close": 0.13770000636577606,
+        "rows": 389
+      },
+      "ABCS": {
+        "median_turnover": 80416.9375,
+        "minimum_close": 23.96074104309082,
+        "rows": 499
+      },
+      "ABEO": {
+        "median_turnover": 3817713.0,
+        "minimum_close": 4.090000152587891,
+        "rows": 499
+      },
+      "ABEPF": {
+        "median_turnover": 200.14605712890625,
+        "minimum_close": 0.009800000116229057,
+        "rows": 432
+      },
+      "ABEQ": {
+        "median_turnover": 236027.65625,
+        "minimum_close": 29.11485481262207,
+        "rows": 499
+      },
+      "ABEV": {
+        "median_turnover": 65649672.0,
+        "minimum_close": 1.650871992111206,
+        "rows": 499
+      },
+      "ABFL": {
+        "median_turnover": 1153708.125,
+        "minimum_close": 56.51236343383789,
+        "rows": 499
+      },
+      "ABG": {
+        "median_turnover": 41047628.0,
+        "minimum_close": 176.27999877929688,
+        "rows": 499
+      },
+      "ACCD-202504": {
+        "median_turnover": 4627320.5,
+        "minimum_close": 3.1500000953674316,
+        "rows": 212
+      },
+      "ACHL-202503": {
+        "median_turnover": 74199.4453125,
+        "minimum_close": 0.7001000046730042,
+        "rows": 200
+      },
+      "ACLX-202604": {
+        "median_turnover": 40425168.0,
+        "minimum_close": 50.779998779296875,
+        "rows": 476
+      },
+      "ACTV-202510": {
+        "median_turnover": 168707.484375,
+        "minimum_close": 26.947486877441406,
+        "rows": 351
+      },
+      "ADVM-202512": {
+        "median_turnover": 923187.1875,
+        "minimum_close": 2.049999952316284,
+        "rows": 381
+      },
+      "ADXS-202602": {
+        "median_turnover": 38.51274871826172,
+        "minimum_close": 0.0012000000569969416,
+        "rows": 250
+      },
+      "AE-202502": {
+        "median_turnover": 187848.671875,
+        "minimum_close": 22.097213745117188,
+        "rows": 169
+      },
+      "AFTY-202410": {
+        "median_turnover": 6748.7392578125,
+        "minimum_close": 13.470000267028809,
+        "rows": 91
+      },
+      "AGIH-202508": {
+        "median_turnover": 124.2195053100586,
+        "minimum_close": 23.306364059448242,
+        "rows": 291
+      },
+      "AGR-202412": {
+        "median_turnover": 19912368.0,
+        "minimum_close": 34.33611297607422,
+        "rows": 141
+      },
+      "AGS-202506": {
+        "median_turnover": 3027647.0,
+        "minimum_close": 11.25,
+        "rows": 269
+      },
+      "AHL-202602": {
+        "median_turnover": 7760143.5,
+        "minimum_close": 27.510000228881836,
+        "rows": 199
+      },
+      "AHOY-202412": {
+        "median_turnover": 2597.457275390625,
+        "minimum_close": 23.516399383544922,
+        "rows": 141
+      },
+      "AIRL-202509": {
+        "median_turnover": 3309.135498046875,
+        "minimum_close": 21.351970672607422,
+        "rows": 321
+      },
+      "AITR-202504": {
+        "median_turnover": 27513.1875,
+        "minimum_close": 10.329999923706055,
+        "rows": 156
+      },
+      "AKRO-202512": {
+        "median_turnover": 35107248.0,
+        "minimum_close": 19.190000534057617,
+        "rows": 381
+      },
+      "AKTSQ-202601": {
+        "median_turnover": 4332.234375,
+        "minimum_close": 9.999999974752427e-07,
+        "rows": 354
+      },
+      "AKYA-202507": {
+        "median_turnover": 356135.71875,
+        "minimum_close": 0.9456999897956848,
+        "rows": 273
+      },
+      "AL-202604": {
+        "median_turnover": 44016120.0,
+        "minimum_close": 39.60513687133789,
+        "rows": 462
+      },
+      "ALE-202512": {
+        "median_turnover": 24493760.0,
+        "minimum_close": 58.34099578857422,
+        "rows": 385
+      },
+      "ALEX-202603": {
+        "median_turnover": 6502550.5,
+        "minimum_close": 14.886823654174805,
+        "rows": 445
+      },
+      "ALLK-202505": {
+        "median_turnover": 284633.4375,
+        "minimum_close": 0.21699999272823334,
+        "rows": 238
+      },
+      "ALTM-202503": {
+        "median_turnover": 45110892.0,
+        "minimum_close": 2.259999990463257,
+        "rows": 189
+      },
+      "ALTR-202503": {
+        "median_turnover": 58274936.0,
+        "minimum_close": 81.55999755859375,
+        "rows": 203
+      },
+      "AMDS-202506": {
+        "median_turnover": 527724.8125,
+        "minimum_close": 0.017753081396222115,
+        "rows": 263
+      },
+      "AMDU-202601": {
+        "median_turnover": 410472.28125,
+        "minimum_close": 12.700970649719238,
+        "rows": 109
+      },
+      "AMED-202508": {
+        "median_turnover": 31543596.0,
+        "minimum_close": 83.77999877929688,
+        "rows": 301
+      },
+      "AMNA-202412": {
+        "median_turnover": 647.9357299804688,
+        "minimum_close": 41.284584045410156,
+        "rows": 130
+      },
+      "AMND-202412": {
+        "median_turnover": 505.314697265625,
+        "minimum_close": 42.540218353271484,
+        "rows": 131
+      },
+      "AMPD-202502": {
+        "median_turnover": 2440.875,
+        "minimum_close": 19.05698013305664,
+        "rows": 179
+      },
+      "AMPS-202504": {
+        "median_turnover": 3898090.0,
+        "minimum_close": 2.75,
+        "rows": 218
+      },
+      "AMTR-202412": {
+        "median_turnover": 161.57460021972656,
+        "minimum_close": 58.98419952392578,
+        "rows": 129
+      },
+      "AMWD-202605": {
+        "median_turnover": 10150590.0,
+        "minimum_close": 34.2400016784668,
+        "rows": 497
+      },
+      "ANSS-202507": {
+        "median_turnover": 154256192.0,
+        "minimum_close": 284.19000244140625,
+        "rows": 280
+      },
+      "APED-202512": {
+        "median_turnover": 49227.96484375,
+        "minimum_close": 6.475500106811523,
+        "rows": 202
+      },
+      "APLS-202605": {
+        "median_turnover": 49977040.0,
+        "minimum_close": 16.360000610351562,
+        "rows": 488
+      },
+      "APLT-202602": {
+        "median_turnover": 2174104.0,
+        "minimum_close": 0.0925000011920929,
+        "rows": 418
+      },
+      "APRD-202504": {
+        "median_turnover": 12083.2265625,
+        "minimum_close": 22.72624397277832,
+        "rows": 208
+      },
+      "APRQ-202504": {
+        "median_turnover": 34252.08984375,
+        "minimum_close": 23.493118286132812,
+        "rows": 208
+      },
+      "APXIF-202512": {
+        "median_turnover": 25674.25,
+        "minimum_close": 1.0499999523162842,
+        "rows": 144
+      },
+      "ARC-202411": {
+        "median_turnover": 361332.6875,
+        "minimum_close": 2.5011672973632812,
+        "rows": 121
+      },
+      "ARCH-202501": {
+        "median_turnover": 42892976.0,
+        "minimum_close": 120.10601806640625,
+        "rows": 154
+      },
+      "AREA-202602": {
+        "median_turnover": 331.8335876464844,
+        "minimum_close": 16.286731719970703,
+        "rows": 333
+      },
+      "ARIS-202510": {
+        "median_turnover": 13292724.0,
+        "minimum_close": 13.684261322021484,
+        "rows": 343
+      },
+      "ARKA-202509": {
+        "median_turnover": 76246.984375,
+        "minimum_close": 35.246055603027344,
+        "rows": 330
+      },
+      "ARKC-202503": {
+        "median_turnover": 12458.3994140625,
+        "minimum_close": 24.226848602294922,
+        "rows": 205
+      },
+      "ARKD-202509": {
+        "median_turnover": 110818.078125,
+        "minimum_close": 30.396692276000977,
+        "rows": 330
+      },
+      "ARKY-202503": {
+        "median_turnover": 38330.953125,
+        "minimum_close": 22.466182708740234,
+        "rows": 205
+      },
+      "ARKZ-202509": {
+        "median_turnover": 85371.1171875,
+        "minimum_close": 15.6738862991333,
+        "rows": 330
+      },
+      "ARMU-202603": {
+        "median_turnover": 228295.75,
+        "minimum_close": 11.587599754333496,
+        "rows": 260
+      },
+      "ASET-202510": {
+        "median_turnover": 12842.509765625,
+        "minimum_close": 27.811805725097656,
+        "rows": 345
+      },
+      "ATIP-202507": {
+        "median_turnover": 12758.9130859375,
+        "minimum_close": 0.009999999776482582,
+        "rows": 262
+      },
+      "ATMC-202512": {
+        "median_turnover": 18428.689453125,
+        "minimum_close": 11.039999961853027,
+        "rows": 141
+      },
+      "ATSG-202504": {
+        "median_turnover": 10363423.0,
+        "minimum_close": 12.239999771118164,
+        "rows": 215
+      },
+      "ATXS-202601": {
+        "median_turnover": 2722326.0,
+        "minimum_close": 3.75,
+        "rows": 411
+      },
+      "AURU-202602": {
+        "median_turnover": 80945.515625,
+        "minimum_close": 9.640000343322754,
+        "rows": 92
+      },
+      "AVDL-202602": {
+        "median_turnover": 13662101.0,
+        "minimum_close": 6.590000152587891,
+        "rows": 425
+      },
+      "AVDX-202510": {
+        "median_turnover": 15860831.0,
+        "minimum_close": 6.889999866485596,
+        "rows": 343
+      },
+      "AVGR-202502": {
+        "median_turnover": 57441.50390625,
+        "minimum_close": 0.3910999894142151,
+        "rows": 177
+      },
+      "AWEG-202512": {
+        "median_turnover": 224.84519958496094,
+        "minimum_close": 19.335651397705078,
+        "rows": 393
+      },
+      "AXDXQ-202508": {
+        "median_turnover": 40830.171875,
+        "minimum_close": 9.999999974752427e-07,
+        "rows": 292
+      },
+      "AXNX-202411": {
+        "median_turnover": 22165200.0,
+        "minimum_close": 66.80000305175781,
+        "rows": 116
+      },
+      "AXUP-202603": {
+        "median_turnover": 210549.234375,
+        "minimum_close": 5.869999885559082,
+        "rows": 125
+      },
+      "AY-202412": {
+        "median_turnover": 20401110.0,
+        "minimum_close": 21.227493286132812,
+        "rows": 134
+      },
+      "AZEK-202506": {
+        "median_turnover": 77551640.0,
+        "minimum_close": 36.810001373291016,
+        "rows": 269
+      },
+      "AZN-202601": {
+        "median_turnover": 350432032.0,
+        "minimum_close": 61.8796501159668,
+        "rows": 417
+      },
+      "AZNH-202601": {
+        "median_turnover": 98498.140625,
+        "minimum_close": 39.3877067565918,
+        "rows": 329
+      },
+      "AZPN-202503": {
+        "median_turnover": 54144128.0,
+        "minimum_close": 172.89999389648438,
+        "rows": 193
+      },
+      "AZULQ-202601": {
+        "median_turnover": 1727746.25,
+        "minimum_close": 0.05000000074505806,
+        "rows": 396
+      },
+      "B-202501": {
+        "median_turnover": 16898416.0,
+        "minimum_close": 34.650001525878906,
+        "rows": 162
+      },
+      "BACQU-202603": {
+        "median_turnover": 24577.771484375,
+        "minimum_close": 9.978400230407715,
+        "rows": 139
+      },
+      "BALY-202502": {
+        "median_turnover": 4483803.5,
+        "minimum_close": 11.15999984741211,
+        "rows": 171
+      },
+      "BASE-202509": {
+        "median_turnover": 8935005.0,
+        "minimum_close": 13.170000076293945,
+        "rows": 328
+      },
+      "BBIP-202410": {
+        "median_turnover": 2421.982666015625,
+        "minimum_close": 95.32498168945312,
+        "rows": 97
+      },
+      "BBSA-202410": {
+        "median_turnover": 13038.294921875,
+        "minimum_close": 46.64675521850586,
+        "rows": 97
+      },
+      "BBU-202603": {
+        "median_turnover": 425801.25,
+        "minimum_close": 16.67854881286621,
+        "rows": 457
+      },
+      "BCIM-202512": {
+        "median_turnover": 98761.15625,
+        "minimum_close": 18.196855545043945,
+        "rows": 378
+      },
+      "BCOV-202502": {
+        "median_turnover": 528303.5,
+        "minimum_close": 1.9900000095367432,
+        "rows": 168
+      },
+      "BECN-202504": {
+        "median_turnover": 66010800.0,
+        "minimum_close": 80.11000061035156,
+        "rows": 226
+      },
+      "IWM": {
+        "median_turnover": 6988900864.0,
+        "minimum_close": 172.95628356933594,
+        "rows": 499
+      },
+      "SPY": {
+        "median_turnover": 39010299904.0,
+        "minimum_close": 490.8526306152344,
+        "rows": 499
+      }
+    },
+    "filter_id": "NORGATE-TRADABILITY-GATE-001",
+    "min_median_turnover": 1000000.0,
+    "min_price": 1.0,
+    "min_rows": 90,
+    "rejections": {
+      "AAA": "median_turnover_below_threshold",
+      "AAAA": "median_turnover_below_threshold",
+      "AAAC": "median_turnover_below_threshold",
+      "AABB": "minimum_price_below_threshold",
+      "AABVF": "minimum_price_below_threshold",
+      "AACAY": "median_turnover_below_threshold",
+      "AACB": "median_turnover_below_threshold",
+      "AACBR": "minimum_price_below_threshold",
+      "AACBU": "median_turnover_below_threshold",
+      "AACG": "minimum_price_below_threshold",
+      "AACTF": "minimum_price_below_threshold",
+      "AADR": "median_turnover_below_threshold",
+      "AAEQ": "median_turnover_below_threshold",
+      "AAFRF": "median_turnover_below_threshold",
+      "AAGAF": "minimum_price_below_threshold",
+      "AAGC": "minimum_price_below_threshold",
+      "AAGFF": "minimum_price_below_threshold",
+      "AAGH": "minimum_price_below_threshold",
+      "AAGR": "minimum_price_below_threshold",
+      "AAGRW": "minimum_price_below_threshold",
+      "AAIGF": "median_turnover_below_threshold",
+      "AAIRF": "minimum_price_below_threshold",
+      "AALG": "median_turnover_below_threshold",
+      "AAM-202602": "median_turnover_below_threshold",
+      "AAMCF": "median_turnover_below_threshold",
+      "AAME": "median_turnover_below_threshold",
+      "AAMMF": "minimum_price_below_threshold",
+      "AAMTF": "minimum_price_below_threshold",
+      "AAPG": "median_turnover_below_threshold",
+      "AAPI": "minimum_price_below_threshold",
+      "AAPJ": "minimum_price_below_threshold",
+      "AAPR": "median_turnover_below_threshold",
+      "AAPT": "minimum_price_below_threshold",
+      "AAPW": "median_turnover_below_threshold",
+      "AAPY": "median_turnover_below_threshold",
+      "AASP": "minimum_price_below_threshold",
+      "AASZF": "minimum_price_below_threshold",
+      "AATC": "median_turnover_below_threshold",
+      "AATV": "minimum_price_below_threshold",
+      "AAUAF": "minimum_price_below_threshold",
+      "AAUC": "median_turnover_below_threshold",
+      "AAUKF": "median_turnover_below_threshold",
+      "AAUM": "median_turnover_below_threshold",
+      "AAUS": "median_turnover_below_threshold",
+      "AAVM": "median_turnover_below_threshold",
+      "AAVMY": "median_turnover_below_threshold",
+      "AAVVF": "median_turnover_below_threshold",
+      "AAWH": "minimum_price_below_threshold",
+      "ABAT": "minimum_price_below_threshold",
+      "ABBRF": "median_turnover_below_threshold",
+      "ABCFF": "minimum_price_below_threshold",
+      "ABCP": "minimum_price_below_threshold",
+      "ABCS": "median_turnover_below_threshold",
+      "ABEPF": "minimum_price_below_threshold",
+      "ABEQ": "median_turnover_below_threshold",
+      "ACHL-202503": "minimum_price_below_threshold",
+      "ACTV-202510": "median_turnover_below_threshold",
+      "ADVM-202512": "median_turnover_below_threshold",
+      "ADXS-202602": "minimum_price_below_threshold",
+      "AE-202502": "median_turnover_below_threshold",
+      "AFTY-202410": "median_turnover_below_threshold",
+      "AGIH-202508": "median_turnover_below_threshold",
+      "AHOY-202412": "median_turnover_below_threshold",
+      "AIRL-202509": "median_turnover_below_threshold",
+      "AITR-202504": "median_turnover_below_threshold",
+      "AKTSQ-202601": "minimum_price_below_threshold",
+      "AKYA-202507": "minimum_price_below_threshold",
+      "ALLK-202505": "minimum_price_below_threshold",
+      "AMDS-202506": "minimum_price_below_threshold",
+      "AMDU-202601": "median_turnover_below_threshold",
+      "AMNA-202412": "median_turnover_below_threshold",
+      "AMND-202412": "median_turnover_below_threshold",
+      "AMPD-202502": "median_turnover_below_threshold",
+      "AMTR-202412": "median_turnover_below_threshold",
+      "APED-202512": "median_turnover_below_threshold",
+      "APLT-202602": "minimum_price_below_threshold",
+      "APRD-202504": "median_turnover_below_threshold",
+      "APRQ-202504": "median_turnover_below_threshold",
+      "APXIF-202512": "median_turnover_below_threshold",
+      "ARC-202411": "median_turnover_below_threshold",
+      "AREA-202602": "median_turnover_below_threshold",
+      "ARKA-202509": "median_turnover_below_threshold",
+      "ARKC-202503": "median_turnover_below_threshold",
+      "ARKD-202509": "median_turnover_below_threshold",
+      "ARKY-202503": "median_turnover_below_threshold",
+      "ARKZ-202509": "median_turnover_below_threshold",
+      "ARMU-202603": "median_turnover_below_threshold",
+      "ASET-202510": "median_turnover_below_threshold",
+      "ATIP-202507": "minimum_price_below_threshold",
+      "ATMC-202512": "median_turnover_below_threshold",
+      "AURU-202602": "median_turnover_below_threshold",
+      "AVGR-202502": "minimum_price_below_threshold",
+      "AWEG-202512": "median_turnover_below_threshold",
+      "AXDXQ-202508": "minimum_price_below_threshold",
+      "AXUP-202603": "median_turnover_below_threshold",
+      "AZNH-202601": "median_turnover_below_threshold",
+      "AZULQ-202601": "minimum_price_below_threshold",
+      "BACQU-202603": "median_turnover_below_threshold",
+      "BBIP-202410": "median_turnover_below_threshold",
+      "BBSA-202410": "median_turnover_below_threshold",
+      "BBU-202603": "median_turnover_below_threshold",
+      "BCIM-202512": "median_turnover_below_threshold",
+      "BCOV-202502": "median_turnover_below_threshold"
+    }
+  },
+  "trial_limited": true
+}

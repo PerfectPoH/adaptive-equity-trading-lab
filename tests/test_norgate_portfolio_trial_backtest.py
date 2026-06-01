@@ -4,6 +4,7 @@ import pandas as pd
 
 from src.experiments.norgate_portfolio_trial_backtest import (
     build_norgate_admissible_bundle_manifest,
+    build_tradability_filtered_frames,
     persist_norgate_trial_outputs,
     run_trial_limited_portfolio_diagnostic,
 )
@@ -120,6 +121,7 @@ def test_persisted_report_surfaces_blockers(tmp_path) -> None:
         "summary": {"total_trades": 1, "weighted_net_return_sum": 0.1, "max_drawdown": -0.01},
         "robustness": {"ex_best_symbol_weighted_net_return": -0.1},
         "symbol_counts": {"active": 1, "delisted": 1},
+        "tradability_filter": {"accepted_symbols": ["AAA"], "rejections": {"PENNY": "minimum_price_below_threshold"}},
         "trade_log": [],
         "equity_curve": [],
         "trial_limited": True,
@@ -133,6 +135,8 @@ def test_persisted_report_surfaces_blockers(tmp_path) -> None:
 
     report = pd.io.common.Path(paths["report_path"]).read_text(encoding="utf-8")
     assert "outlier_dependency_ex_best_symbol_nonpositive" in report
+    assert "accepted symbols after filter" in report
+    assert "tradability rejections" in report
 
 
 def test_trial_limited_portfolio_diagnostic_flags_sub_dollar_tradability() -> None:
@@ -151,3 +155,43 @@ def test_trial_limited_portfolio_diagnostic_flags_sub_dollar_tradability() -> No
     result = run_trial_limited_portfolio_diagnostic(frames, bundle, gate)
 
     assert "sub_dollar_trade_quality_blocker" in result["final_decision"]["blockers"]
+
+
+def test_tradability_filter_removes_sub_dollar_and_low_turnover_before_signals() -> None:
+    frames = {
+        "PENNY": _frame(0.50, 0.01),
+        "THIN": _frame(5.0, 0.01),
+        "OK": _frame(5.0, 0.01),
+    }
+    frames["THIN"]["Turnover"] = 25_000.0
+    frames["OK"]["Turnover"] = 2_000_000.0
+
+    filtered, report = build_tradability_filtered_frames(
+        frames,
+        min_price=1.0,
+        min_median_turnover=1_000_000.0,
+        min_rows=90,
+    )
+
+    assert sorted(filtered) == ["OK"]
+    assert report["accepted_symbols"] == ["OK"]
+    assert report["rejections"]["PENNY"] == "minimum_price_below_threshold"
+    assert report["rejections"]["THIN"] == "median_turnover_below_threshold"
+
+
+def test_trial_limited_portfolio_diagnostic_blocks_sample_starved_rerun() -> None:
+    frames = {
+        "OK": _frame(5.0, 0.01),
+        "DEAD-202501": _frame(10.0, -0.01),
+    }
+    bundle = build_norgate_admissible_bundle_manifest(
+        {"probe_id": "NORGATE-DATA-PROBE-001", "evidence": {"us_delisted_prices_accessible": True}},
+        active_symbols=["OK"],
+        delisted_symbols=["DEAD-202501"],
+    )
+    gate = {"gate_id": "NORGATE-PORTFOLIO-TRIAL-BACKTEST-GATE-001", "parameter_sweep_allowed": False}
+
+    result = run_trial_limited_portfolio_diagnostic(frames, bundle, gate)
+
+    assert result["summary"]["total_trades"] < 20
+    assert "sample_starved_after_tradability_filter" in result["final_decision"]["blockers"]

@@ -20,6 +20,49 @@ DISABLED_SLEEVES = {
 }
 
 
+def build_tradability_filtered_frames(
+    frames: dict[str, pd.DataFrame],
+    *,
+    min_price: float,
+    min_median_turnover: float,
+    min_rows: int,
+) -> tuple[dict[str, pd.DataFrame], dict[str, Any]]:
+    filtered: dict[str, pd.DataFrame] = {}
+    rejections: dict[str, str] = {}
+    diagnostics: dict[str, dict[str, Any]] = {}
+    for symbol, frame in frames.items():
+        if frame is None or frame.empty or len(frame) < min_rows:
+            rejections[symbol] = "insufficient_rows"
+            diagnostics[symbol] = {"rows": 0 if frame is None else int(len(frame))}
+            continue
+        data = frame.copy().sort_index()
+        close = pd.to_numeric(data.get("Close"), errors="coerce").dropna()
+        turnover = _turnover_series(data).dropna()
+        minimum_price = float(close.min()) if not close.empty else 0.0
+        median_turnover = float(turnover.median()) if not turnover.empty else 0.0
+        diagnostics[symbol] = {
+            "rows": int(len(data)),
+            "minimum_close": minimum_price,
+            "median_turnover": median_turnover,
+        }
+        if minimum_price < min_price:
+            rejections[symbol] = "minimum_price_below_threshold"
+            continue
+        if median_turnover < min_median_turnover:
+            rejections[symbol] = "median_turnover_below_threshold"
+            continue
+        filtered[symbol] = data
+    return filtered, {
+        "filter_id": "NORGATE-TRADABILITY-GATE-001",
+        "min_price": min_price,
+        "min_median_turnover": min_median_turnover,
+        "min_rows": min_rows,
+        "accepted_symbols": sorted(filtered),
+        "rejections": rejections,
+        "diagnostics": diagnostics,
+    }
+
+
 def build_norgate_admissible_bundle_manifest(
     probe_result: dict[str, Any],
     *,
@@ -79,6 +122,7 @@ def run_trial_limited_portfolio_diagnostic(
     gate: dict[str, Any],
     *,
     cost_bps: int = 500,
+    tradability_report: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     if gate.get("parameter_sweep_allowed"):
         raise ValueError("parameter sweeps are forbidden for the Norgate trial diagnostic")
@@ -106,6 +150,8 @@ def run_trial_limited_portfolio_diagnostic(
         blockers.append("sub_dollar_trade_quality_blocker")
     if not trade_log.empty and float(trade_log["score"].abs().max()) > 10.0:
         blockers.append("extreme_rank_score_instability")
+    if summary.get("total_trades", 0) < 20:
+        blockers.append("sample_starved_after_tradability_filter")
     return {
         "run_id": "NORGATE-PORTFOLIO-TRIAL-BACKTEST-001",
         "gate_id": gate.get("gate_id", "NORGATE-PORTFOLIO-TRIAL-BACKTEST-GATE-001"),
@@ -122,6 +168,7 @@ def run_trial_limited_portfolio_diagnostic(
         "disabled_sleeves": DISABLED_SLEEVES,
         "frozen_sleeve_weights": FROZEN_SLEEVE_WEIGHTS,
         "cost_bps": cost_bps,
+        "tradability_filter": tradability_report or {},
         "symbol_counts": {
             "active": len(active_symbols),
             "delisted": len(delisted_symbols),
@@ -225,6 +272,14 @@ def _norgate_price_frame(norgatedata: Any, symbol: str) -> pd.DataFrame | None:
     if not required.issubset(frame.columns):
         return None
     return frame.sort_index()
+
+
+def _turnover_series(frame: pd.DataFrame) -> pd.Series:
+    if "Turnover" in frame.columns:
+        return pd.to_numeric(frame["Turnover"], errors="coerce")
+    close = pd.to_numeric(frame.get("Close"), errors="coerce")
+    volume = pd.to_numeric(frame.get("Volume"), errors="coerce")
+    return close * volume
 
 
 def _generate_sleeve_trades(sleeve: str, symbols: list[str], frames: dict[str, pd.DataFrame], *, cost_bps: int) -> list[dict[str, Any]]:
@@ -383,6 +438,18 @@ def _markdown_report(bundle: dict[str, Any], result: dict[str, Any]) -> str:
     summary = result["summary"]
     robustness = result["robustness"]
     decision = result["final_decision"]
+    tradability = result.get("tradability_filter", {}) or {}
+    tradability_lines: list[str] = []
+    if tradability:
+        tradability_lines = [
+            "",
+            "## Tradability Filter",
+            "",
+            f"- accepted symbols after filter: `{len(tradability.get('accepted_symbols', []))}`",
+            f"- tradability rejections: `{len(tradability.get('rejections', {}))}`",
+            f"- minimum price: `{tradability.get('min_price')}`",
+            f"- minimum median turnover: `{tradability.get('min_median_turnover')}`",
+        ]
     return "\n".join(
         [
             "# Norgate Portfolio Trial Backtest 001",
@@ -396,6 +463,7 @@ def _markdown_report(bundle: dict[str, Any], result: dict[str, Any]) -> str:
             f"- ex-best-symbol weighted net return: `{robustness['ex_best_symbol_weighted_net_return']:.6f}`",
             f"- active symbols: `{result['symbol_counts']['active']}`",
             f"- delisted symbols: `{result['symbol_counts']['delisted']}`",
+            *tradability_lines,
             "",
             "## Disabled Sleeves",
             "",
