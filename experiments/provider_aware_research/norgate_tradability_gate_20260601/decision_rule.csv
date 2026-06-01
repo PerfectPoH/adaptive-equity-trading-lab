@@ -1,0 +1,6 @@
+decision_item,rule
+primary_decision,Archive regardless of return because the Norgate trial is short-history and still diagnostic-only.
+quality_failure,If fewer than 20 trades survive the tradability filter, archive as sample-starved.
+outlier_failure,If ex-best-symbol weighted net is nonpositive, archive as outlier-dependent.
+distribution_failure,If win rate is below 50%, archive as weak distribution.
+promotion_rule,Promotion remains false until a separate long-history OOS validation gate exists.

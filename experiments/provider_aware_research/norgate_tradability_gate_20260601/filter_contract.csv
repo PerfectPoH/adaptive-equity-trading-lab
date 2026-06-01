@@ -1,0 +1,9 @@
+filter_id,status,value,reason
+minimum_entry_price,required,1.00,Block sub-dollar and micro-penny artifacts before signal generation.
+minimum_median_turnover,required,1000000,Require meaningful dollar liquidity in the available trial history.
+minimum_rows,required,90,Require enough bars for warmup plus holding windows.
+exclude_units_warrants_rights,required,true,Remove non-common-stock-like symbols before testing.
+active_symbol_limit,required,80,Keep the rerun bounded and comparable.
+delisted_symbol_limit,required,80,Keep survivorship pressure while avoiding broad export.
+no_parameter_search,required,true,Do not change lookbacks or holding windows after seeing the prior result.
+no_weight_redistribution,required,true,Disabled sleeves remain idle; weights are not redistributed.

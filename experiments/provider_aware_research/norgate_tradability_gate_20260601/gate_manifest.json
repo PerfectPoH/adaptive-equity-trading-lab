@@ -1,0 +1,14 @@
+{
+  "backtest_allowed": true,
+  "created_date": "2026-06-01",
+  "gate_id": "NORGATE-TRADABILITY-GATE-001",
+  "linked_run": "NORGATE-PORTFOLIO-TRIAL-BACKTEST-001",
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "promotion_allowed": false,
+  "provider_query_allowed": true,
+  "purpose": "Freeze minimum tradability constraints before one Norgate trial-limited rerun.",
+  "short_selling_allowed": false,
+  "status": "APPROVED_TRADABILITY_FILTER_RERUN_NOT_PROMOTION",
+  "trial_id": "NORGATE-TRADABILITY-RERUN-001"
+}
