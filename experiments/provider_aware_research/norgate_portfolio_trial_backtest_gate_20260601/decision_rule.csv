@@ -1,0 +1,6 @@
+decision_item,rule
+primary_decision,Always archive as trial-limited unless a separate licensed long-history validation gate is created later.
+promotion_rule,Promotion is false regardless of return because history is trial-limited and two sleeves are disabled by missing data classes.
+overfit_rule,No parameter changes, weight redistribution, symbol filtering by result, or component combination search after seeing returns.
+survivorship_rule,The diagnostic must include both active and delisted US equity samples or archive as data-bundle failure.
+reporting_rule,Report disabled sleeves, active/delisted composition, benchmark comparison, drawdown, ex-best-symbol result, and blocker list.

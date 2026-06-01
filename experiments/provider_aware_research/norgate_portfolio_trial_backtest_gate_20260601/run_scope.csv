@@ -1,0 +1,12 @@
+scope_item,status,limit,notes
+us_active_symbols,allowed,80,Alphabetical bounded sample from US Equities; no performance sorting before inclusion.
+us_delisted_symbols,allowed,80,Alphabetical bounded sample from US Equities Delisted; required for survivorship-bias pressure.
+price_bars_per_symbol,allowed,full_trial_window,Use local trial history available for selected symbols only.
+benchmarks,allowed,SPY;IWM,Reference only; no optimization against benchmark.
+component_weights,allowed,frozen_25pct_each,Disabled sleeves keep idle weight; no redistribution after outcomes.
+momentum_parameters,allowed,fixed_60_20_20,Sixty-bar warmup, 20-bar rank lookback, 20-bar hold.
+mean_reversion_parameters,allowed,fixed_60_5_10,Sixty-bar warmup, 5-bar reversal lookback, 10-bar hold.
+catalyst_sleeve,blocked,none,No PIT event timestamp and direction source in this run.
+dollarbar_sleeve,blocked,none,Norgate daily bars cannot reconstruct dollar bars.
+parameter_search,blocked,none,No tuning or search.
+promotion,blocked,none,Trial-limited diagnostic only.

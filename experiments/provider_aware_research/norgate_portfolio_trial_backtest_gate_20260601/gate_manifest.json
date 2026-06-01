@@ -1,0 +1,17 @@
+{
+  "backtest_allowed": true,
+  "created_date": "2026-06-01",
+  "data_source": "Norgate Data trial",
+  "gate_id": "NORGATE-PORTFOLIO-TRIAL-BACKTEST-GATE-001",
+  "linked_probe": "NORGATE-DATA-PROBE-001",
+  "market_data_download_allowed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "promotion_allowed": false,
+  "provider_query_allowed": true,
+  "purpose": "Run one bounded survivor-aware Portfolio Candidate 002 diagnostic replay on the Norgate two-year trial data.",
+  "raw_payload_retention_required": true,
+  "short_selling_allowed": false,
+  "status": "APPROVED_SINGLE_TRIAL_LIMITED_BACKTEST_NOT_PROMOTION",
+  "trial_id": "NORGATE-PORTFOLIO-TRIAL-BACKTEST-001"
+}
