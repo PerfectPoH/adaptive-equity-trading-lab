@@ -1,0 +1,179 @@
+{
+  "as_of_date": "2026-06-01",
+  "backtest_performed": true,
+  "blockers": [
+    "coverage_completeness_not_proven",
+    "delisted_retention_not_proven",
+    "manual_panel_non_promotable",
+    "tradable_only_subset_not_independent_discovery",
+    "tradable_only_top3_dependency"
+  ],
+  "decision": "PUBLIC_CATALYST_TRADABLE_ONLY_COMPLETE_EXPLORATORY_ONLY",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "paper_trading_allowed": false,
+  "price_manifest": {
+    "failures": {},
+    "loaded_symbols": [
+      "AGIO",
+      "AQST",
+      "ASND",
+      "CAPR",
+      "CING",
+      "DNLI",
+      "FBIO",
+      "GKOS",
+      "KALV",
+      "MIST",
+      "OTLK",
+      "PTCT",
+      "RARE",
+      "REPL",
+      "SNDX",
+      "SUPN",
+      "TNXP",
+      "UNCY"
+    ],
+    "market_data_download_performed": false,
+    "provider_query_performed": false,
+    "source": "local_norgate_database"
+  },
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "robustness": {
+    "by_symbol": {
+      "AGIO": 0.009660565257373147,
+      "AQST": -0.5660864261952055,
+      "ASND": 0.05749701712250907,
+      "CAPR": -0.39859999800145185,
+      "CING": -0.312934428184287,
+      "DNLI": -0.03160949869930473,
+      "FBIO": 0.026576836035741944,
+      "GKOS": -0.12849834515767336,
+      "KALV": 0.07823459146002107,
+      "MIST": 0.32181789019473717,
+      "OTLK": 0.19908947939428884,
+      "PTCT": 0.020401988559278147,
+      "RARE": -0.20798400432121575,
+      "REPL": 0.20195300827093357,
+      "SNDX": 0.1400045448944362,
+      "SUPN": 0.07751121635513952,
+      "TNXP": 1.362388940259515,
+      "UNCY": 0.07714026338711251
+    },
+    "decision": "TRADABLE_ONLY_ROBUSTNESS_DIAGNOSTIC_BLOCK_PROMOTION",
+    "ex_top1_weighted_net_return_sum": -0.4358252996275671,
+    "ex_top3_weighted_net_return_sum": -0.9595961980932379,
+    "top3_contribution_share": 2.0356506083475936,
+    "top3_events": [
+      [
+        "HYB-PDUFA-005",
+        1.362388940259515
+      ],
+      [
+        "HYB-PDUFA-010",
+        0.32181789019473717
+      ],
+      [
+        "HYB-PDUFA-004",
+        0.20195300827093357
+      ]
+    ],
+    "top_event": [
+      "HYB-PDUFA-005",
+      1.362388940259515
+    ],
+    "top_event_contribution_share": 1.4703673665959085,
+    "total_weighted_net_return_sum": 0.926563640631948
+  },
+  "run_id": "PUBLIC-CATALYST-TRADABLE-ONLY-RUN-001",
+  "summary": {
+    "backtest_performed": true,
+    "blockers": [
+      "manual_panel_non_promotable",
+      "coverage_completeness_not_proven",
+      "delisted_retention_not_proven"
+    ],
+    "by_window": {
+      "30": {
+        "gross_return_sum": 0.22186857055318698,
+        "median_net_return": -0.06380375272699153,
+        "net_return_sum": -0.6781314294468131,
+        "trade_count": 18,
+        "win_rate": 0.3888888888888889
+      },
+      "60": {
+        "gross_return_sum": 2.0483029844505314,
+        "median_net_return": 0.04880684345331636,
+        "net_return_sum": 1.148302984450531,
+        "trade_count": 18,
+        "win_rate": 0.7222222222222222
+      },
+      "90": {
+        "gross_return_sum": 3.209519366892126,
+        "median_net_return": 0.06084746484089058,
+        "net_return_sum": 2.3095193668921254,
+        "trade_count": 18,
+        "win_rate": 0.6666666666666666
+      }
+    },
+    "decision": "PUBLIC_CATALYST_HYBRID_MICRO_BACKTEST_COMPLETE_EXPLORATORY_ONLY",
+    "event_count": 18,
+    "financial_performance_claimed": false,
+    "live_trading_allowed": false,
+    "market_data_download_performed": false,
+    "max_drawdown": -0.8972412151365154,
+    "paper_trading_allowed": false,
+    "parameter_sweep_performed": false,
+    "price_covered_event_count": 18,
+    "promotion_allowed": false,
+    "provider_query_performed": false,
+    "trade_count": 54,
+    "weighted_net_return_sum": 0.926563640631948,
+    "win_rate": 0.5925925925925926,
+    "windows": [
+      30,
+      60,
+      90
+    ]
+  },
+  "tradable_only_summary": {
+    "as_of_date": "2026-06-01",
+    "excluded_events": 16,
+    "filter_rules": {
+      "admissibility_label": "admissible_event",
+      "date_aware_symbol_mapping_status": "pass",
+      "delisted_or_acquired_status": "active",
+      "event_date_on_or_before": "2026-06-01",
+      "exclude_private_or_nonstandard_symbols": true,
+      "pit_proof_status": "pass",
+      "symbol_in_local_price_manifest": true
+    },
+    "kept_events": 18,
+    "kept_symbols": [
+      "AGIO",
+      "AQST",
+      "ASND",
+      "CAPR",
+      "CING",
+      "DNLI",
+      "FBIO",
+      "GKOS",
+      "KALV",
+      "MIST",
+      "OTLK",
+      "PTCT",
+      "RARE",
+      "REPL",
+      "SNDX",
+      "SUPN",
+      "TNXP",
+      "UNCY"
+    ],
+    "market_data_download_performed": false,
+    "promotion_allowed": false,
+    "provider_query_performed": false,
+    "run_id": "PUBLIC-CATALYST-TRADABLE-ONLY-RUN-001",
+    "source_panel_rows": 34
+  }
+}

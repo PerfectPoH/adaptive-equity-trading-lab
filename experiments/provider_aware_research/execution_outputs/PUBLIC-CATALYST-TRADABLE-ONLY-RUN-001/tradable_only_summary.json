@@ -1,0 +1,115 @@
+{
+  "as_of_date": "2026-06-01",
+  "backtest_summary": {
+    "backtest_performed": true,
+    "blockers": [
+      "manual_panel_non_promotable",
+      "coverage_completeness_not_proven",
+      "delisted_retention_not_proven"
+    ],
+    "by_window": {
+      "30": {
+        "gross_return_sum": 0.22186857055318698,
+        "median_net_return": -0.06380375272699153,
+        "net_return_sum": -0.6781314294468131,
+        "trade_count": 18,
+        "win_rate": 0.3888888888888889
+      },
+      "60": {
+        "gross_return_sum": 2.0483029844505314,
+        "median_net_return": 0.04880684345331636,
+        "net_return_sum": 1.148302984450531,
+        "trade_count": 18,
+        "win_rate": 0.7222222222222222
+      },
+      "90": {
+        "gross_return_sum": 3.209519366892126,
+        "median_net_return": 0.06084746484089058,
+        "net_return_sum": 2.3095193668921254,
+        "trade_count": 18,
+        "win_rate": 0.6666666666666666
+      }
+    },
+    "decision": "PUBLIC_CATALYST_HYBRID_MICRO_BACKTEST_COMPLETE_EXPLORATORY_ONLY",
+    "event_count": 18,
+    "financial_performance_claimed": false,
+    "live_trading_allowed": false,
+    "market_data_download_performed": false,
+    "max_drawdown": -0.8972412151365154,
+    "paper_trading_allowed": false,
+    "parameter_sweep_performed": false,
+    "price_covered_event_count": 18,
+    "promotion_allowed": false,
+    "provider_query_performed": false,
+    "trade_count": 54,
+    "weighted_net_return_sum": 0.926563640631948,
+    "win_rate": 0.5925925925925926,
+    "windows": [
+      30,
+      60,
+      90
+    ]
+  },
+  "excluded_events": 16,
+  "filter_rules": {
+    "admissibility_label": "admissible_event",
+    "date_aware_symbol_mapping_status": "pass",
+    "delisted_or_acquired_status": "active",
+    "event_date_on_or_before": "2026-06-01",
+    "exclude_private_or_nonstandard_symbols": true,
+    "pit_proof_status": "pass",
+    "symbol_in_local_price_manifest": true
+  },
+  "kept_events": 18,
+  "kept_symbols": [
+    "AGIO",
+    "AQST",
+    "ASND",
+    "CAPR",
+    "CING",
+    "DNLI",
+    "FBIO",
+    "GKOS",
+    "KALV",
+    "MIST",
+    "OTLK",
+    "PTCT",
+    "RARE",
+    "REPL",
+    "SNDX",
+    "SUPN",
+    "TNXP",
+    "UNCY"
+  ],
+  "market_data_download_performed": false,
+  "price_manifest": {
+    "failures": {},
+    "loaded_symbols": [
+      "AGIO",
+      "AQST",
+      "ASND",
+      "CAPR",
+      "CING",
+      "DNLI",
+      "FBIO",
+      "GKOS",
+      "KALV",
+      "MIST",
+      "OTLK",
+      "PTCT",
+      "RARE",
+      "REPL",
+      "SNDX",
+      "SUPN",
+      "TNXP",
+      "UNCY"
+    ],
+    "market_data_download_performed": false,
+    "provider_query_performed": false,
+    "source": "local_norgate_database"
+  },
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "run_id": "PUBLIC-CATALYST-TRADABLE-ONLY-RUN-001",
+  "source_panel_rows": 34
+}
