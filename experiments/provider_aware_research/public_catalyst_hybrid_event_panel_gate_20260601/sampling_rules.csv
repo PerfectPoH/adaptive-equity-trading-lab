@@ -1,0 +1,10 @@
+rule_id,rule,reason
+HYBRID-CAT-001,Panel size must be between 10 and 20 events.,Keeps manual verification feasible while avoiding one-event anecdotes.
+HYBRID-CAT-002,At least 30 percent of rows must be non-success or unresolved if such events are available.,Prevents success-only selection bias.
+HYBRID-CAT-003,No row can be admissible without pre-event proof dated before the event date.,Prevents look-ahead bias.
+HYBRID-CAT-004,Discovery source alone is never enough for admissibility.,Prevents treating public calendars as PIT evidence.
+HYBRID-CAT-005,Rows with only month/quarter date precision can be included only as exploratory_only.,Prevents false precision.
+HYBRID-CAT-006,Issuer press release SEC filing or archived snapshot is preferred over third-party calendar text.,Anchors the event date to a timestamped source.
+HYBRID-CAT-007,No return calculation is allowed in the panel-building run.,Separates data construction from strategy evaluation.
+HYBRID-CAT-008,No promotion is allowed from this panel without a later coverage-completeness gate.,Protects against manually curated panel bias.
+

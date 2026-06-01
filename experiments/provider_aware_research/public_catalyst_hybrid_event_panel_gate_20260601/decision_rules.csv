@@ -1,0 +1,7 @@
+decision,status,rule
+panel_not_built,BLOCKED,No event panel exists yet.
+panel_built_with_all_pit_proof,EXPLORATORY_PANEL_READY,10-20 events exist and every admissible row has pre-event proof.
+panel_contains_success_only_bias,ARCHIVE_CURRENT_FORM,Panel lacks negative delayed unresolved or failed events.
+panel_has_missing_pit_proof,ARCHIVE_OR_PARTIAL,Rows without pre-event proof must be rejected or kept exploratory_only.
+panel_ready_for_backtest_gate,NEXT_GATE_ONLY,If schema and sampling rules pass create separate micro-backtest gate.
+

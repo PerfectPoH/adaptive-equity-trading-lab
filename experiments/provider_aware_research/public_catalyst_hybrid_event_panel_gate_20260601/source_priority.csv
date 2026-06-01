@@ -1,0 +1,9 @@
+priority,source_class,use_for,admissibility_power
+1,SEC EDGAR filing or exhibit,pre_event_proof and legal timestamp,high_event_level
+2,issuer investor relations press release,pre_event_proof and event details,high_event_level
+3,Internet Archive snapshot of issuer/calendar page,timestamp proof when live page lacks publication metadata,medium_event_level
+4,FDA/openFDA Drugs@FDA,outcome verification and approval records,verification_only
+5,ClinicalTrials.gov,trial context and phase metadata,context_only
+6,public/freemium PDUFA calendar,discovery and cross-checking,discovery_only
+7,news article or third-party blog,secondary context,low_unless_archived_and_source_linked
+

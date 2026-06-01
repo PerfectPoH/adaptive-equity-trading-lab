@@ -1,0 +1,20 @@
+{
+  "gate_id": "PUBLIC-CATALYST-HYBRID-EVENT-PANEL-GATE-001",
+  "created_at_local": "2026-06-01",
+  "parent_decision": "PUBLIC_CATALYST_PIT_AUDIT_PARTIAL_NO_SOURCE_PROMOTABLE",
+  "purpose": "Authorize only a tiny manually audited hybrid Catalyst event panel design using public discovery sources plus event-level PIT proof.",
+  "panel_build_authorized": true,
+  "provider_query_authorized": true,
+  "provider_query_scope": "Manual public source inspection only; no bulk scraping.",
+  "web_scraping_authorized": false,
+  "market_data_download_authorized": false,
+  "backtest_authorized": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "max_events": 20,
+  "min_events": 10,
+  "required_non_success_share": 0.3,
+  "next_valid_action": "Build PUBLIC-CATALYST-HYBRID-EVENT-PANEL-001 under this schema."
+}
+

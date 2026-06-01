@@ -1,0 +1,18 @@
+{
+  "decision_id": "PUBLIC-CATALYST-HYBRID-EVENT-PANEL-GATE-001",
+  "created_at_local": "2026-06-01",
+  "decision": "HYBRID_EVENT_PANEL_GATE_DEFINED_NO_BACKTEST",
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "backtest_performed": false,
+  "summary": "The lab may build a tiny manually audited Catalyst event panel from public discovery sources only if every admissible event has pre-event issuer/SEC/archive proof. The panel remains non-promotable and cannot be backtested until a separate run gate is committed.",
+  "blocked_actions": [
+    "No public calendar-only Catalyst backtest.",
+    "No success-only event panel.",
+    "No market data joins during panel construction.",
+    "No promotion from a manually curated panel."
+  ]
+}
+
