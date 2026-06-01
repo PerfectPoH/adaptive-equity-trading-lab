@@ -38,6 +38,7 @@ from dashboard.lab_dashboard_data import (
     build_portfolio_candidate_primary_research_state,
     build_portfolio_candidate_true_backtest_harness,
     build_portfolio_candidate_true_backtest_spec,
+    build_portfolio_manual_partial_data_bundle,
     build_portfolio_mock_admissible_data_bundle,
     run_portfolio_candidate_true_backtest_skeleton,
     validate_portfolio_admissible_data_bundle,
@@ -61,6 +62,7 @@ from dashboard.lab_dashboard_data import (
     persist_portfolio_candidate_comparison,
     persist_portfolio_candidate_primary_research_state,
     persist_portfolio_candidate_true_backtest_spec,
+    persist_portfolio_manual_partial_data_bundle,
     persist_portfolio_mock_admissible_data_bundle,
     write_workbench_phase_report,
     build_strategy_chart_story,
@@ -1100,6 +1102,43 @@ def test_admissible_bundle_validator_blocks_proxy_trade_reuse() -> None:
     assert validation["proxy_return_reuse_detected"] is True
     assert "proxy_return_reuse_blocker" in validation["blockers"]
     assert "proxy_return_reuse_blocker" in harness["final_decision"]["blockers"]
+
+
+def test_manual_partial_bundle_is_exploratory_and_blocked_by_missing_pit_fields(tmp_path: Path) -> None:
+    spec = build_portfolio_candidate_true_backtest_spec({"selected_candidate": {"component_templates": ["Momentum", "Mean Reversion"]}})
+
+    bundle = build_portfolio_manual_partial_data_bundle(spec)
+    validation = validate_portfolio_admissible_data_bundle(spec, bundle)
+    harness = build_portfolio_candidate_true_backtest_harness(spec, data_bundle_manifest=bundle)
+    skeleton = run_portfolio_candidate_true_backtest_skeleton(spec, harness, bundle)
+
+    assert bundle["status"] == "MANUAL_PARTIAL_DATA_BUNDLE_EXPLORATORY_ONLY"
+    assert bundle["exploratory_only"] is True
+    assert bundle["real_financial_claim_allowed"] is False
+    assert "delisted_symbol_prices" not in bundle["covered_fields"]
+    assert validation["status"] == "ADMISSIBLE_DATA_BUNDLE_BLOCKED"
+    assert "data_bundle_missing" in validation["blockers"]
+    assert harness["status"] == "BLOCKED_TRUE_BACKTEST_DATA_BUNDLE_REQUIRED"
+    assert "data_bundle_missing" in harness["final_decision"]["blockers"]
+    assert skeleton["status"] == "NO_REAL_DATA_NO_CLAIM"
+    assert skeleton["financial_performance_claimed"] is False
+
+    paths = persist_portfolio_manual_partial_data_bundle(bundle, skeleton, root=tmp_path)
+    assert Path(paths["bundle_path"]).exists()
+    assert Path(paths["runner_path"]).exists()
+    assert Path(paths["markdown_path"]).exists()
+
+
+def test_manual_partial_bundle_never_claims_provider_entitlement() -> None:
+    spec = build_portfolio_candidate_true_backtest_spec({"selected_candidate": {"component_templates": ["Catalyst"]}})
+
+    bundle = build_portfolio_manual_partial_data_bundle(spec)
+
+    assert bundle["provider"] == "manual_partial_local_assembly"
+    assert bundle["provider_entitlement_verified"] is False
+    assert bundle["uses_workbench_proxy_trade_lists"] is False
+    assert bundle["raw_payload_manifest"]["provider_query_performed"] is False
+    assert bundle["raw_payload_manifest"]["market_data_download_performed"] is False
 
 
 def test_portfolio_preview_can_include_factory_generated_components(tmp_path: Path) -> None:

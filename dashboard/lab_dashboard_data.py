@@ -31,6 +31,7 @@ PORTFOLIO_CANDIDATE_COMPARISON_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-C
 PORTFOLIO_PRIMARY_RESEARCH_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-CANDIDATE-002-PRIMARY-RESEARCH"
 PORTFOLIO_TRUE_BACKTEST_SPEC_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC"
 PORTFOLIO_MOCK_ADMISSIBLE_BUNDLE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-CANDIDATE-002-MOCK-ADMISSIBLE-BUNDLE"
+PORTFOLIO_MANUAL_PARTIAL_BUNDLE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-CANDIDATE-002-MANUAL-PARTIAL-BUNDLE"
 DELISTED_DATA_SOURCE_GATE_DIR = Path("experiments/provider_aware_research/delisted_data_source_gate_20260525")
 ORB_930_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "ORB-930-CROSS-ASSET-BACKTEST-001"
 WORKBENCH_CONFIGURED_LARGECAP_SYMBOLS = {
@@ -3558,6 +3559,66 @@ def build_portfolio_mock_admissible_data_bundle(spec: dict[str, Any]) -> dict[st
     }
 
 
+def build_portfolio_manual_partial_data_bundle(spec: dict[str, Any]) -> dict[str, Any]:
+    """Describe the no-capital fallback data bundle available from local/manual sources."""
+
+    covered = [
+        "split_dividend_adjusted_ohlcv",
+        "benchmark_panel",
+        "tradability_and_liquidity_history",
+        "raw_payload_retention_manifest",
+    ]
+    missing_by_design = [
+        field
+        for field in spec.get("data_contract", {}).get("required_fields", [])
+        if field not in covered
+    ]
+    return {
+        "bundle_id": "PORTFOLIO-CANDIDATE-002-MANUAL-PARTIAL-BUNDLE",
+        "status": "MANUAL_PARTIAL_DATA_BUNDLE_EXPLORATORY_ONLY",
+        "created_at_utc": datetime.now(timezone.utc).isoformat(),
+        "spec_id": spec.get("spec_id", "PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC"),
+        "provider": "manual_partial_local_assembly",
+        "provider_entitlement_verified": False,
+        "is_synthetic": False,
+        "is_partial": True,
+        "exploratory_only": True,
+        "real_market_data": True,
+        "real_financial_claim_allowed": False,
+        "covered_fields": covered,
+        "missing_fields_declared_upfront": missing_by_design,
+        "uses_workbench_proxy_trade_lists": False,
+        "allowed_uses": [
+            "schema_plumbing",
+            "runner_integration",
+            "benchmark_adapter_dry_run",
+            "manual_data_gap_report",
+        ],
+        "forbidden_uses": [
+            "promotion",
+            "paper_trading",
+            "live_trading",
+            "alpha_claim",
+            "survivorship_free_backtest",
+        ],
+        "raw_payload_manifest": {
+            "retained": True,
+            "hash_policy": "manual_file_hashes_when_files_exist",
+            "provider_query_performed": False,
+            "market_data_download_performed": False,
+        },
+        "tables": {
+            "prices_adjusted": "manual_partial/prices_adjusted.csv",
+            "benchmarks": "manual_partial/benchmarks.csv",
+            "liquidity_history": "manual_partial/liquidity_history.csv",
+        },
+        "interpretation": (
+            "This no-capital path can test the runner interface and expose data gaps, "
+            "but it cannot satisfy PIT membership or delisted-symbol requirements."
+        ),
+    }
+
+
 def validate_portfolio_admissible_data_bundle(spec: dict[str, Any], bundle: dict[str, Any]) -> dict[str, Any]:
     required = list(spec.get("data_contract", {}).get("required_fields", []))
     covered = set(bundle.get("covered_fields", []))
@@ -3653,6 +3714,51 @@ def persist_portfolio_mock_admissible_data_bundle(
         *[f"- `{field}`" for field in bundle.get("covered_fields", [])],
         "",
         "This artifact validates plumbing only. It cannot be used as evidence of alpha.",
+    ]
+    markdown_path.write_text("\n".join(markdown_lines), encoding="utf-8")
+    return {
+        "output_dir": str(output_dir),
+        "bundle_path": str(bundle_path),
+        "runner_path": str(runner_path),
+        "final_decision_path": str(final_decision_path),
+        "markdown_path": str(markdown_path),
+    }
+
+
+def persist_portfolio_manual_partial_data_bundle(
+    bundle: dict[str, Any],
+    skeleton: dict[str, Any],
+    *,
+    root: Path = Path("."),
+) -> dict[str, str]:
+    output_dir = Path(root) / PORTFOLIO_MANUAL_PARTIAL_BUNDLE_OUTPUT_DIR / str(bundle.get("bundle_id", "unknown"))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    bundle_path = output_dir / "manual_partial_data_bundle_manifest.json"
+    runner_path = output_dir / "manual_partial_runner_skeleton.json"
+    final_decision_path = output_dir / "final_decision.json"
+    markdown_path = output_dir / "manual_partial_bundle_report.md"
+    bundle_path.write_text(json.dumps(_json_safe(bundle), indent=2, sort_keys=True), encoding="utf-8")
+    runner_path.write_text(json.dumps(_json_safe(skeleton), indent=2, sort_keys=True), encoding="utf-8")
+    final_decision_path.write_text(json.dumps(_json_safe(skeleton.get("final_decision", {})), indent=2, sort_keys=True), encoding="utf-8")
+    markdown_lines = [
+        "# Manual Partial Data Bundle",
+        "",
+        f"- bundle_id: `{bundle.get('bundle_id')}`",
+        f"- status: `{bundle.get('status')}`",
+        f"- runner status: `{skeleton.get('status')}`",
+        "- exploratory only: `true`",
+        "- real financial claim allowed: `false`",
+        "- portfolio backtest performed: `false`",
+        "",
+        "## Covered Fields",
+        "",
+        *[f"- `{field}`" for field in bundle.get("covered_fields", [])],
+        "",
+        "## Missing Fields Declared Upfront",
+        "",
+        *[f"- `{field}`" for field in bundle.get("missing_fields_declared_upfront", [])],
+        "",
+        "This artifact is the no-capital fallback path. It can test interfaces, not alpha.",
     ]
     markdown_path.write_text("\n".join(markdown_lines), encoding="utf-8")
     return {

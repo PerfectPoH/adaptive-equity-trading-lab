@@ -1,0 +1,48 @@
+{
+  "bundle_id": "PORTFOLIO-CANDIDATE-002-MANUAL-PARTIAL-BUNDLE",
+  "bundle_validation": {
+    "blockers": [
+      "data_bundle_missing",
+      "provider_entitlement_unverified"
+    ],
+    "bundle_id": "PORTFOLIO-CANDIDATE-002-MANUAL-PARTIAL-BUNDLE",
+    "missing_fields": [
+      "survivorship_free_universe",
+      "point_in_time_membership",
+      "listing_and_delisting_dates",
+      "delisted_symbol_prices"
+    ],
+    "provider_entitlement_verified": false,
+    "proxy_return_reuse_detected": false,
+    "real_financial_claim_allowed": false,
+    "spec_id": "PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC",
+    "status": "ADMISSIBLE_DATA_BUNDLE_BLOCKED",
+    "validation_id": "PORTFOLIO-CANDIDATE-002-MANUAL-PARTIAL-BUNDLE-VALIDATION"
+  },
+  "created_at_utc": "2026-06-01T11:37:10.331042+00:00",
+  "final_decision": {
+    "blockers": [
+      "data_bundle_missing",
+      "provider_entitlement_unverified"
+    ],
+    "decision": "PORTFOLIO_TRUE_BACKTEST_SKELETON_COMPLETE_NO_CLAIM",
+    "financial_performance_claimed": false,
+    "live_trading_allowed": false,
+    "market_data_download_performed": false,
+    "paper_trading_allowed": false,
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false,
+    "provider_query_performed": false,
+    "runner_mode": "true_backtest_runner_skeleton_no_claim"
+  },
+  "financial_performance_claimed": false,
+  "harness_id": "PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC-HARNESS",
+  "market_data_download_performed": false,
+  "next_real_runner_step": "Implement trade derivation only after a non-synthetic admissible data bundle is attached.",
+  "portfolio_backtest_performed": false,
+  "provider_query_performed": false,
+  "runner_id": "PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SKELETON",
+  "spec_id": "PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC",
+  "status": "NO_REAL_DATA_NO_CLAIM",
+  "trade_generation_performed": false
+}

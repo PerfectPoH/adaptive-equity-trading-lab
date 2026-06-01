@@ -1,0 +1,51 @@
+{
+  "allowed_uses": [
+    "schema_plumbing",
+    "runner_integration",
+    "benchmark_adapter_dry_run",
+    "manual_data_gap_report"
+  ],
+  "bundle_id": "PORTFOLIO-CANDIDATE-002-MANUAL-PARTIAL-BUNDLE",
+  "covered_fields": [
+    "split_dividend_adjusted_ohlcv",
+    "benchmark_panel",
+    "tradability_and_liquidity_history",
+    "raw_payload_retention_manifest"
+  ],
+  "created_at_utc": "2026-06-01T11:37:10.331042+00:00",
+  "exploratory_only": true,
+  "forbidden_uses": [
+    "promotion",
+    "paper_trading",
+    "live_trading",
+    "alpha_claim",
+    "survivorship_free_backtest"
+  ],
+  "interpretation": "This no-capital path can test the runner interface and expose data gaps, but it cannot satisfy PIT membership or delisted-symbol requirements.",
+  "is_partial": true,
+  "is_synthetic": false,
+  "missing_fields_declared_upfront": [
+    "survivorship_free_universe",
+    "point_in_time_membership",
+    "listing_and_delisting_dates",
+    "delisted_symbol_prices"
+  ],
+  "provider": "manual_partial_local_assembly",
+  "provider_entitlement_verified": false,
+  "raw_payload_manifest": {
+    "hash_policy": "manual_file_hashes_when_files_exist",
+    "market_data_download_performed": false,
+    "provider_query_performed": false,
+    "retained": true
+  },
+  "real_financial_claim_allowed": false,
+  "real_market_data": true,
+  "spec_id": "PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC",
+  "status": "MANUAL_PARTIAL_DATA_BUNDLE_EXPLORATORY_ONLY",
+  "tables": {
+    "benchmarks": "manual_partial/benchmarks.csv",
+    "liquidity_history": "manual_partial/liquidity_history.csv",
+    "prices_adjusted": "manual_partial/prices_adjusted.csv"
+  },
+  "uses_workbench_proxy_trade_lists": false
+}
