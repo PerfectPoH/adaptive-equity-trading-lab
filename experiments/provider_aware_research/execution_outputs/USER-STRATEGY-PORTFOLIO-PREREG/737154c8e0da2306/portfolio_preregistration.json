@@ -1,0 +1,117 @@
+{
+  "anti_overfit_disclosures": [
+    "selected_after_search",
+    "portfolio_diagnostic_only",
+    "promotion_locked_false",
+    "factory_generated_scope",
+    "component_bias_warnings_present"
+  ],
+  "draft_id": "737154c8e0da2306",
+  "falsification_criteria": [
+    "Archive if the basket fails after removing the strongest component.",
+    "Archive if cost stress at 1.5x declared costs flips the net result negative.",
+    "Archive if a single component contributes more than 40% of positive contribution.",
+    "Archive if high correlation shows the basket is a hidden duplicate bet.",
+    "Archive or keep diagnostic-only if any component still depends on factory-generated/proxy data."
+  ],
+  "frozen_allocation_policy": {
+    "allowed_policies": [
+      "sleeve_allocation",
+      "equal_weight",
+      "inverse_volatility"
+    ],
+    "default_policy": "sleeve_allocation",
+    "reason": "Weights must be explainable before the validation run; no hindsight Sharpe optimization.",
+    "weight_optimization_allowed": false
+  },
+  "hypothesis": "A bounded basket of separately governed strategy components may be more robust than any single component after costs, duplicate removal, correlation checks, and ex-best stress.",
+  "live_trading_allowed": false,
+  "market_data_download_allowed": false,
+  "paper_trading_allowed": false,
+  "promotion_allowed": false,
+  "provider_query_allowed": false,
+  "required_next_step": "User must manually approve this draft, then rerun as a separately pre-registered portfolio trial before interpreting candidate status.",
+  "selected_components": [
+    {
+      "analysis_mode": "Investment",
+      "bias_warnings": [
+        "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+        "PROXY_DATA_SCOPE_NOT_PROMOTABLE",
+        "FACTORY_GENERATED_NOT_PREREGISTERED",
+        "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE"
+      ],
+      "component_id": "a42078cbf0a2ea94",
+      "cost_bps": 100,
+      "decision_at_selection_time": "FACTORY_MATERIALIZED_DIAGNOSTIC_ONLY",
+      "net_return_sum_proxy": 488.065604,
+      "source": "factory_materialized",
+      "strategy_name": "Factory Mean Reversion 180d 100bps",
+      "template": "Mean Reversion",
+      "trade_count_proxy": 1120
+    },
+    {
+      "analysis_mode": "Investment",
+      "bias_warnings": [
+        "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+        "FACTORY_GENERATED_NOT_PREREGISTERED",
+        "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+      ],
+      "component_id": "FACTORY-e62a48e2d142923e",
+      "cost_bps": 100,
+      "decision_at_selection_time": "INVESTMENT_RESEARCH_CANDIDATE_ONLY",
+      "net_return_sum_proxy": 559.116288,
+      "source": "factory_generated",
+      "strategy_name": "Factory Momentum 180d 100bps",
+      "template": "Momentum",
+      "trade_count_proxy": 1440
+    },
+    {
+      "analysis_mode": "Investment",
+      "bias_warnings": [
+        "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+        "FACTORY_GENERATED_NOT_PREREGISTERED",
+        "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+      ],
+      "component_id": "FACTORY-119d99f730b677f6",
+      "cost_bps": 100,
+      "decision_at_selection_time": "INVESTMENT_RESEARCH_CANDIDATE_ONLY",
+      "net_return_sum_proxy": 378.814167,
+      "source": "factory_generated",
+      "strategy_name": "Factory Dollar-Bar Microstructure 180d 100bps",
+      "template": "Dollar-Bar Microstructure",
+      "trade_count_proxy": 1040
+    }
+  ],
+  "source_search": {
+    "best_component_labels": [
+      "Factory Momentum 180d 100bps (Momentum, F-e62a48)",
+      "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+      "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, F-119d99)"
+    ],
+    "best_summary": {
+      "average_abs_correlation": 0.03528793,
+      "component_count": 3,
+      "ex_best_net_return": 468.9652275,
+      "max_drawdown": -3.7512214,
+      "stressed_net_return": 470.3354534,
+      "top_component_contribution": 0.60954173,
+      "total_net_return": 480.4254534,
+      "train_net_return": 156.0177434,
+      "validation_net_return": 324.40771
+    },
+    "evaluated_candidate_count": 3223,
+    "objective": "maximize validation-weighted robust score after duplicate removal, cost stress, contribution concentration, and correlation penalties",
+    "selection_rule": "predeclared_robust_score_no_promotion"
+  },
+  "source_summary": {
+    "factory_generated": 2,
+    "factory_materialized": 1
+  },
+  "status": "PREREGISTRATION_DRAFT_REQUIRES_MANUAL_APPROVAL",
+  "template_mix": [
+    "Dollar-Bar Microstructure",
+    "Mean Reversion",
+    "Momentum"
+  ],
+  "trial_id": "PORTFOLIO-PREREG-737154C8E0DA2306"
+}
