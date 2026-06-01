@@ -1,0 +1,8 @@
+rule_id,rule,reason
+PTRIAL-001,Free or trial data can unlock diagnostics but cannot by itself override OOS history requirements.,A short trial window can prove plumbing but not durable alpha.
+PTRIAL-002,Each provider may only be used for the data class named in its contract.,Prevents treating a price source as a direction source.
+PTRIAL-003,No disabled sleeve weight redistribution is allowed.,Prevents a partial data run from impersonating a complete portfolio test.
+PTRIAL-004,Any Databento or other paid-credit query requires a pre-run bounded query gate.,Prevents accidental cost and post-hoc documentation.
+PTRIAL-005,Public/freemium catalyst calendars are non-promotable until PIT completeness and revision policy are audited.,Prevents look-ahead and survivorship contamination.
+PTRIAL-006,Commercial demos should be requested only with exact missing fields and sample symbols/events.,Prevents wasting demo access on vague exploration.
+

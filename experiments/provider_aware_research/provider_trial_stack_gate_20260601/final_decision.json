@@ -1,0 +1,20 @@
+{
+  "decision_id": "PROVIDER-TRIAL-STACK-GATE-001",
+  "created_at_local": "2026-06-01",
+  "decision": "FREE_TRIAL_PROVIDER_STACK_DEFINED_NO_QUERY_AUTHORIZED",
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "provider_query_performed": false,
+  "market_data_download_performed": false,
+  "backtest_performed": false,
+  "summary": "The lab will use free/trial sources only through sleeve-specific data contracts. Norgate remains the daily survivor-aware base; SEC EDGAR remains legal filing support; Databento credits require a separate bounded intraday gate; public/free catalyst sources are exploratory-only until PIT completeness is audited; commercial demos require exact field questions.",
+  "next_valid_gate": "DATABENTO-DOLLARBAR-MICRO-PROBE-GATE-001 or PUBLIC-CATALYST-PIT-AUDIT-GATE-001",
+  "blocked_actions": [
+    "Do not claim Portfolio Candidate 002 is fully tested while Catalyst and Dollar-Bar sleeves are disabled.",
+    "Do not redistribute disabled sleeve weight into daily sleeves.",
+    "Do not use public catalyst calendars for promotion without PIT audit.",
+    "Do not spend Databento credits without a bounded pre-run gate."
+  ]
+}
+

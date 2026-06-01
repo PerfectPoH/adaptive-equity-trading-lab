@@ -1,0 +1,47 @@
+{
+  "gate_id": "PROVIDER-TRIAL-STACK-GATE-001",
+  "created_at_local": "2026-06-01",
+  "purpose": "Define the free/trial provider acquisition order for Portfolio Candidate 002 without authorizing any data query.",
+  "provider_query_authorized": false,
+  "market_data_download_authorized": false,
+  "backtest_authorized": false,
+  "promotion_allowed": false,
+  "sequence": [
+    {
+      "step": 1,
+      "provider": "Norgate Data",
+      "action": "Use existing trial installation for daily survivor-aware subset diagnostics.",
+      "required_gate_before_query": "Already satisfied by NORGATE-DATA-GATE-001 and downstream Norgate gates.",
+      "unlock": ["Momentum", "Mean Reversion"]
+    },
+    {
+      "step": 2,
+      "provider": "SEC EDGAR",
+      "action": "Use free official filings only for event timestamps and legal document enrichment.",
+      "required_gate_before_query": "Create a bounded filing-enrichment gate if new SEC queries are needed.",
+      "unlock": ["Catalyst support only"]
+    },
+    {
+      "step": 3,
+      "provider": "Databento",
+      "action": "Spend free credits only on a tiny preregistered dollar-bar feasibility probe.",
+      "required_gate_before_query": "DATABENTO-DOLLARBAR-MICRO-PROBE-GATE-001",
+      "unlock": ["Dollar-Bar Microstructure feasibility"]
+    },
+    {
+      "step": 4,
+      "provider": "Public biotech calendars and Alpha Vantage/Nasdaq Data Link samples",
+      "action": "Use only for schema reconnaissance and non-promotable exploratory coverage checks.",
+      "required_gate_before_query": "PUBLIC-CATALYST-PIT-AUDIT-GATE-001",
+      "unlock": ["No promotion; possible field discovery"]
+    },
+    {
+      "step": 5,
+      "provider": "FactSet/LSEG/Citeline/Evaluate",
+      "action": "Request demos only with exact field list, candidate symbols, date range, and PIT audit questions.",
+      "required_gate_before_query": "COMMERCIAL-DEMO-FIELD-REQUEST-PACK-001",
+      "unlock": ["Potential Catalyst/PEAD/PDUFA promotion-grade source"]
+    }
+  ]
+}
+
