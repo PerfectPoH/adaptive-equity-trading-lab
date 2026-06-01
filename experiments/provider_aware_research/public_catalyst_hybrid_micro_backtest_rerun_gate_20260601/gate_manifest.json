@@ -1,0 +1,28 @@
+{
+  "trial_id": "PUBLIC-CATALYST-HYBRID-MICRO-BACKTEST-RERUN-GATE-001",
+  "created_at": "2026-06-01T00:00:00+02:00",
+  "input_panel": "experiments/provider_aware_research/public_catalyst_hybrid_panel_expansion_run_20260601/expanded_event_panel.csv",
+  "input_panel_decision": "PUBLIC_CATALYST_HYBRID_PANEL_EXPANSION_PASS_EXPLORATORY_ONLY",
+  "allowed_operation": "exploratory_micro_backtest_rerun",
+  "provider_query_allowed": false,
+  "market_data_download_allowed": false,
+  "local_daily_data_only": true,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "parameter_optimization_allowed": false,
+  "fixed_windows_days": [30, 60, 90],
+  "future_event_policy": "exclude events whose event_date or requested exit_date has not matured as of the backtest data end date",
+  "required_outputs": [
+    "rerun_result.json",
+    "rerun_trade_list.csv",
+    "rerun_report.md",
+    "final_decision.json"
+  ],
+  "required_labels": [
+    "manual_panel_non_promotable",
+    "coverage_completeness_not_proven",
+    "exploratory_only"
+  ]
+}
+

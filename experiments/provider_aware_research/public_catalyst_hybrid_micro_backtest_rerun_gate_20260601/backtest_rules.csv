@@ -1,0 +1,9 @@
+rule_id,rule,required
+RERUN-001,Use only expanded_event_panel.csv as the event source,true
+RERUN-002,Do not query providers or download market data,true
+RERUN-003,Use only fixed 30/60/90 day holding windows,true
+RERUN-004,Exclude future or immature event windows,true
+RERUN-005,Report coverage failures explicitly,true
+RERUN-006,Do not promote the strategy regardless of result,true
+RERUN-007,Do not optimize window length after seeing results,true
+

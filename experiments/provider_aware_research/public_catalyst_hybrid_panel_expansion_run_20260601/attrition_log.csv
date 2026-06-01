@@ -1,0 +1,12 @@
+candidate_id,discovery_source,discovery_url,symbol_or_company,event_hint,accepted_into_panel,rejection_reason,pit_failure_reason,negative_or_failure_event,delisted_or_mapping_issue,notes
+REJ-001,reddit_search,https://www.reddit.com/r/IBRX/comments/1t678iw/regulatory_timelines_and_background_on_the_sbla/,IBRX,Possible September 2026 PDUFA,false,no_company_confirmed_pdufa_date,no official company PDUFA date observed,true,false,Kept out because date was inferred by commenters.
+REJ-002,reddit_search,https://www.reddit.com/r/Wiseek/comments/1tpwh28/nuvl_fda_accepts_nuvalents_neladalkib_nda_with/,NUVL,Neladalkib PDUFA November 2026,false,source_not_primary_enough,official issuer proof not collected in this run,false,false,Could be revisited with issuer PR.
+REJ-003,public_calendar,https://biomednexus.com/pdufa-calendar-2026/,multiple,Calendar row list,false,aggregated_calendar_only,no event-level issuer proof collected,false,false,Calendar useful for discovery but not enough.
+REJ-004,reddit_search,https://www.reddit.com/r/biotech/comments/1ssunvg/13_upcoming_2026_pdufa_dates_ive_been_tracking/,multiple,Upcoming 2026 PDUFA table,false,third_party_user_compilation,no issuer proof row-level audit,false,false,Useful search lead only.
+REJ-005,company_search,https://www.reddit.com/r/UNCY/comments/1pzhp77/nda_for_olc_resubmitted/,UNCY,OLC resubmission expected PDUFA,false,replaced_by_primary_source,reddit source replaced by GlobeNewswire issuer proof,true,false,Primary issuer proof used instead.
+REJ-006,regulatory_search,https://open.fda.gov/crltable/,multiple,FDA CRL table,false,not_event_calendar,no pre-event PDUFA dates,true,false,Useful outcome verifier only.
+REJ-007,official_context,https://clinicaltrials.gov/data-api/api,multiple,Clinical trial metadata,false,not_pdufa_calendar,no FDA action date,false,false,Context source only.
+REJ-008,official_context,https://open.fda.gov/apis/drug/drugsfda/,multiple,Drugs at FDA records,false,post_event_verification_only,no pre-event trading calendar,false,false,Outcome verification only.
+REJ-009,search_result,https://www.nasdaq.com/press-release/vertex-announces-us-fda-acceptance-biologics-license-application,VRTX,Povetacicept,false,duplicate_large_cap_mapping_check,,false,true,Accepted separately as EXP-PDUFA-031.
+REJ-010,company_search,issuer_specific,unknown,Undated pipeline claim,false,no_fixed_event_date,no exact PDUFA or proof date,false,false,No date precision.
+

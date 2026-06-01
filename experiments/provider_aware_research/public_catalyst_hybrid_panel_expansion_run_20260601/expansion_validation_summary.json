@@ -1,0 +1,23 @@
+{
+  "trial_id": "PUBLIC-CATALYST-HYBRID-PANEL-EXPANSION-RUN-001",
+  "validation_timestamp": "2026-06-01T00:00:00+02:00",
+  "total_rows": 34,
+  "admissible_events": 33,
+  "exploratory_only_rows": 1,
+  "rejected_panel_rows": 0,
+  "attrition_rows": 10,
+  "non_success_or_unresolved_count": 22,
+  "non_success_or_unresolved_share": 0.6667,
+  "mapping_complication_count": 6,
+  "future_event_count_as_of_2026_06_01": 10,
+  "market_data_join_performed": false,
+  "provider_query_performed": false,
+  "promotion_allowed": false,
+  "proof_failures": [],
+  "validation": "PASS",
+  "blockers": [
+    "manual_expansion_non_promotable",
+    "coverage_completeness_still_not_proven",
+    "future_rows_excluded_from_any_completed_backtest_until_mature"
+  ]
+}
