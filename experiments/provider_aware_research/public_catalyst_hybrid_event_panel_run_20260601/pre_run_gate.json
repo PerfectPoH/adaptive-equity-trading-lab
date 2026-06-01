@@ -1,0 +1,24 @@
+{
+  "gate_id": "PUBLIC-CATALYST-HYBRID-EVENT-PANEL-RUN-001",
+  "created_at_local": "2026-06-01",
+  "parent_gate": "PUBLIC-CATALYST-HYBRID-EVENT-PANEL-GATE-001",
+  "purpose": "Authorize construction of a tiny manually audited public Catalyst event panel.",
+  "authorized": true,
+  "provider_query_authorized": true,
+  "provider_query_scope": "Manual public web/source inspection only; max 20 events; no bulk scraping.",
+  "web_scraping_authorized": false,
+  "market_data_download_authorized": false,
+  "backtest_authorized": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "panel_rules": {
+    "min_events": 10,
+    "max_events": 20,
+    "required_non_success_share": 0.3,
+    "required_pit_proof_for_admissible_rows": true,
+    "allow_exploratory_only_rows": true
+  },
+  "if_panel_passes_next_gate": "PUBLIC-CATALYST-HYBRID-MICRO-BACKTEST-GATE-001"
+}
+
