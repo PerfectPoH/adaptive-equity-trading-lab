@@ -56,6 +56,7 @@ from dashboard.lab_dashboard_data import (
     build_portfolio_candidate_primary_research_state,
     build_portfolio_candidate_true_backtest_harness,
     build_portfolio_candidate_true_backtest_spec,
+    build_portfolio_mock_admissible_data_bundle,
     build_separate_portfolio_trial_dry_run,
     build_strategy_factory_components,
     display_safe_records,
@@ -73,8 +74,10 @@ from dashboard.lab_dashboard_data import (
     persist_portfolio_manual_composite_trial,
     persist_portfolio_candidate_primary_research_state,
     persist_portfolio_candidate_true_backtest_spec,
+    persist_portfolio_mock_admissible_data_bundle,
     persist_separate_portfolio_trial_dry_run,
     portfolio_lab_component_table,
+    run_portfolio_candidate_true_backtest_skeleton,
 )
 from src.experiments.workbench_package_runner import run_package_diagnostic
 
@@ -2920,6 +2923,37 @@ def render_portfolio_lab() -> None:
             with harness_cols[3]:
                 metric_card("Proxy reuse", "OFF", "No dry-run P&L")
             st.caption(f"Spec file: {spec_state.get('paths', {}).get('spec_path', '')}")
+            if st.button("Attach mock admissible bundle", type="secondary", width="stretch"):
+                bundle = build_portfolio_mock_admissible_data_bundle(spec)
+                ready_harness = build_portfolio_candidate_true_backtest_harness(spec, data_bundle_manifest=bundle)
+                skeleton = run_portfolio_candidate_true_backtest_skeleton(spec, ready_harness, bundle)
+                bundle_paths = persist_portfolio_mock_admissible_data_bundle(bundle, skeleton, root=REPO_ROOT)
+                st.session_state["portfolio_lab_mock_bundle_result"] = {
+                    "bundle": bundle,
+                    "harness": ready_harness,
+                    "skeleton": skeleton,
+                    "paths": bundle_paths,
+                }
+                st.rerun()
+        bundle_result = st.session_state.get("portfolio_lab_mock_bundle_result")
+        if bundle_result:
+            skeleton = bundle_result.get("skeleton", {})
+            bundle = bundle_result.get("bundle", {})
+            st.markdown("**Mock data-bundle plumbing**")
+            st.info(
+                f"{bundle.get('bundle_id', 'Mock bundle')} validates the harness shape only. "
+                f"Runner state: {skeleton.get('status', 'UNKNOWN')}; no performance claim is allowed."
+            )
+            bundle_cols = st.columns(4)
+            with bundle_cols[0]:
+                metric_card("Covered fields", len(bundle.get("covered_fields", [])), "Contract fields")
+            with bundle_cols[1]:
+                metric_card("Harness", bundle_result.get("harness", {}).get("status", "UNKNOWN"), "Ready only in mock")
+            with bundle_cols[2]:
+                metric_card("Backtest", "NO", "No real run")
+            with bundle_cols[3]:
+                metric_card("Claim", "NO", "Synthetic bundle")
+            st.caption(f"Mock bundle file: {bundle_result.get('paths', {}).get('bundle_path', '')}")
         with st.expander("Open search controls and top candidates"):
             st.json(
                 {

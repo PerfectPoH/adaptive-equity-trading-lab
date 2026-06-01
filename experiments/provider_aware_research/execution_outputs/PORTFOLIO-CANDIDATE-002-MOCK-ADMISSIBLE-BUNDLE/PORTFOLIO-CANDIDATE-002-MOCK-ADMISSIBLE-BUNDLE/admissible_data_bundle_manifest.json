@@ -1,0 +1,36 @@
+{
+  "bundle_id": "PORTFOLIO-CANDIDATE-002-MOCK-ADMISSIBLE-BUNDLE",
+  "covered_fields": [
+    "survivorship_free_universe",
+    "point_in_time_membership",
+    "listing_and_delisting_dates",
+    "delisted_symbol_prices",
+    "split_dividend_adjusted_ohlcv",
+    "tradability_and_liquidity_history",
+    "benchmark_panel",
+    "raw_payload_retention_manifest"
+  ],
+  "created_at_utc": "2026-06-01T11:16:52.373241+00:00",
+  "interpretation": "This bundle only proves the harness wiring. It is not evidence of alpha or tradability.",
+  "is_synthetic": true,
+  "provider": "synthetic_mock_bundle",
+  "provider_entitlement_verified": true,
+  "raw_payload_manifest": {
+    "hash_policy": "synthetic_hashes_only",
+    "market_data_download_performed": false,
+    "provider_query_performed": false,
+    "retained": true
+  },
+  "real_financial_claim_allowed": false,
+  "real_market_data": false,
+  "spec_id": "PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC",
+  "status": "MOCK_ADMISSIBLE_DATA_BUNDLE_FOR_PLUMBING_ONLY",
+  "tables": {
+    "benchmarks": "mock/benchmarks.parquet",
+    "delisted_prices": "mock/delisted_prices.parquet",
+    "liquidity_history": "mock/liquidity_history.parquet",
+    "prices_adjusted": "mock/prices_adjusted.parquet",
+    "universe_membership": "mock/universe_membership.parquet"
+  },
+  "uses_workbench_proxy_trade_lists": false
+}

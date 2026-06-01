@@ -30,6 +30,7 @@ PORTFOLIO_MANUAL_COMPOSITE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-MANUA
 PORTFOLIO_CANDIDATE_COMPARISON_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-CANDIDATE-COMPARISON-001"
 PORTFOLIO_PRIMARY_RESEARCH_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-CANDIDATE-002-PRIMARY-RESEARCH"
 PORTFOLIO_TRUE_BACKTEST_SPEC_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC"
+PORTFOLIO_MOCK_ADMISSIBLE_BUNDLE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-CANDIDATE-002-MOCK-ADMISSIBLE-BUNDLE"
 DELISTED_DATA_SOURCE_GATE_DIR = Path("experiments/provider_aware_research/delisted_data_source_gate_20260525")
 ORB_930_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "ORB-930-CROSS-ASSET-BACKTEST-001"
 WORKBENCH_CONFIGURED_LARGECAP_SYMBOLS = {
@@ -3521,6 +3522,145 @@ def build_portfolio_candidate_true_backtest_harness(
             "portfolio_backtest_performed": False,
             "runner_mode": "true_backtest_harness_gate",
         },
+    }
+
+
+def build_portfolio_mock_admissible_data_bundle(spec: dict[str, Any]) -> dict[str, Any]:
+    """Create a synthetic manifest that exercises plumbing but cannot support financial claims."""
+
+    required = list(spec.get("data_contract", {}).get("required_fields", []))
+    return {
+        "bundle_id": "PORTFOLIO-CANDIDATE-002-MOCK-ADMISSIBLE-BUNDLE",
+        "status": "MOCK_ADMISSIBLE_DATA_BUNDLE_FOR_PLUMBING_ONLY",
+        "created_at_utc": datetime.now(timezone.utc).isoformat(),
+        "spec_id": spec.get("spec_id", "PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC"),
+        "provider": "synthetic_mock_bundle",
+        "provider_entitlement_verified": True,
+        "is_synthetic": True,
+        "real_market_data": False,
+        "real_financial_claim_allowed": False,
+        "covered_fields": required,
+        "uses_workbench_proxy_trade_lists": False,
+        "raw_payload_manifest": {
+            "retained": True,
+            "hash_policy": "synthetic_hashes_only",
+            "provider_query_performed": False,
+            "market_data_download_performed": False,
+        },
+        "tables": {
+            "universe_membership": "mock/universe_membership.parquet",
+            "prices_adjusted": "mock/prices_adjusted.parquet",
+            "delisted_prices": "mock/delisted_prices.parquet",
+            "benchmarks": "mock/benchmarks.parquet",
+            "liquidity_history": "mock/liquidity_history.parquet",
+        },
+        "interpretation": "This bundle only proves the harness wiring. It is not evidence of alpha or tradability.",
+    }
+
+
+def validate_portfolio_admissible_data_bundle(spec: dict[str, Any], bundle: dict[str, Any]) -> dict[str, Any]:
+    required = list(spec.get("data_contract", {}).get("required_fields", []))
+    covered = set(bundle.get("covered_fields", []))
+    missing = [field for field in required if field not in covered]
+    proxy_reuse = bool(bundle.get("uses_workbench_proxy_trade_lists", False))
+    blockers = []
+    if missing:
+        blockers.append("data_bundle_missing")
+    if proxy_reuse:
+        blockers.append("proxy_return_reuse_blocker")
+    if not bundle.get("provider_entitlement_verified", False):
+        blockers.append("provider_entitlement_unverified")
+    status = "ADMISSIBLE_DATA_BUNDLE_VALID" if not blockers else "ADMISSIBLE_DATA_BUNDLE_BLOCKED"
+    return {
+        "validation_id": f"{bundle.get('bundle_id', 'UNKNOWN')}-VALIDATION",
+        "status": status,
+        "spec_id": spec.get("spec_id", "UNKNOWN"),
+        "bundle_id": bundle.get("bundle_id", "UNKNOWN"),
+        "missing_fields": missing,
+        "blockers": blockers,
+        "proxy_return_reuse_detected": proxy_reuse,
+        "provider_entitlement_verified": bool(bundle.get("provider_entitlement_verified", False)),
+        "real_financial_claim_allowed": bool(bundle.get("real_market_data", False)) and not bool(bundle.get("is_synthetic", True)) and not blockers,
+    }
+
+
+def run_portfolio_candidate_true_backtest_skeleton(
+    spec: dict[str, Any],
+    harness: dict[str, Any],
+    bundle: dict[str, Any],
+) -> dict[str, Any]:
+    """Exercise the true-backtest runner boundary without generating trades or performance."""
+
+    validation = validate_portfolio_admissible_data_bundle(spec, bundle)
+    ready = harness.get("status") == "READY_FOR_TRUE_BACKTEST_RUN" and validation.get("status") == "ADMISSIBLE_DATA_BUNDLE_VALID"
+    real_claim_allowed = bool(validation.get("real_financial_claim_allowed", False))
+    status = "READY_FOR_REAL_DATA_RUN" if ready and real_claim_allowed else "NO_REAL_DATA_NO_CLAIM"
+    return {
+        "runner_id": "PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SKELETON",
+        "status": status,
+        "created_at_utc": datetime.now(timezone.utc).isoformat(),
+        "spec_id": spec.get("spec_id", "UNKNOWN"),
+        "harness_id": harness.get("harness_id", "UNKNOWN"),
+        "bundle_id": bundle.get("bundle_id", "UNKNOWN"),
+        "bundle_validation": validation,
+        "portfolio_backtest_performed": False,
+        "trade_generation_performed": False,
+        "financial_performance_claimed": False,
+        "provider_query_performed": False,
+        "market_data_download_performed": False,
+        "next_real_runner_step": "Implement trade derivation only after a non-synthetic admissible data bundle is attached.",
+        "final_decision": {
+            "decision": "PORTFOLIO_TRUE_BACKTEST_SKELETON_COMPLETE_NO_CLAIM",
+            "blockers": [] if ready else list(validation.get("blockers", [])),
+            "promotion_allowed": False,
+            "paper_trading_allowed": False,
+            "live_trading_allowed": False,
+            "provider_query_performed": False,
+            "market_data_download_performed": False,
+            "portfolio_backtest_performed": False,
+            "financial_performance_claimed": False,
+            "runner_mode": "true_backtest_runner_skeleton_no_claim",
+        },
+    }
+
+
+def persist_portfolio_mock_admissible_data_bundle(
+    bundle: dict[str, Any],
+    skeleton: dict[str, Any],
+    *,
+    root: Path = Path("."),
+) -> dict[str, str]:
+    output_dir = Path(root) / PORTFOLIO_MOCK_ADMISSIBLE_BUNDLE_OUTPUT_DIR / str(bundle.get("bundle_id", "unknown"))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    bundle_path = output_dir / "admissible_data_bundle_manifest.json"
+    runner_path = output_dir / "true_backtest_runner_skeleton.json"
+    final_decision_path = output_dir / "final_decision.json"
+    markdown_path = output_dir / "mock_bundle_report.md"
+    bundle_path.write_text(json.dumps(_json_safe(bundle), indent=2, sort_keys=True), encoding="utf-8")
+    runner_path.write_text(json.dumps(_json_safe(skeleton), indent=2, sort_keys=True), encoding="utf-8")
+    final_decision_path.write_text(json.dumps(_json_safe(skeleton.get("final_decision", {})), indent=2, sort_keys=True), encoding="utf-8")
+    markdown_lines = [
+        "# Mock Admissible Data Bundle",
+        "",
+        f"- bundle_id: `{bundle.get('bundle_id')}`",
+        f"- status: `{bundle.get('status')}`",
+        f"- runner status: `{skeleton.get('status')}`",
+        "- real financial claim allowed: `false`",
+        "- portfolio backtest performed: `false`",
+        "",
+        "## Covered Fields",
+        "",
+        *[f"- `{field}`" for field in bundle.get("covered_fields", [])],
+        "",
+        "This artifact validates plumbing only. It cannot be used as evidence of alpha.",
+    ]
+    markdown_path.write_text("\n".join(markdown_lines), encoding="utf-8")
+    return {
+        "output_dir": str(output_dir),
+        "bundle_path": str(bundle_path),
+        "runner_path": str(runner_path),
+        "final_decision_path": str(final_decision_path),
+        "markdown_path": str(markdown_path),
     }
 
 

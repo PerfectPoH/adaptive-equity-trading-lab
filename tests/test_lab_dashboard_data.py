@@ -38,6 +38,9 @@ from dashboard.lab_dashboard_data import (
     build_portfolio_candidate_primary_research_state,
     build_portfolio_candidate_true_backtest_harness,
     build_portfolio_candidate_true_backtest_spec,
+    build_portfolio_mock_admissible_data_bundle,
+    run_portfolio_candidate_true_backtest_skeleton,
+    validate_portfolio_admissible_data_bundle,
     display_safe_records,
     delisted_data_source_gate_payload,
     load_portfolio_lab_components,
@@ -58,6 +61,7 @@ from dashboard.lab_dashboard_data import (
     persist_portfolio_candidate_comparison,
     persist_portfolio_candidate_primary_research_state,
     persist_portfolio_candidate_true_backtest_spec,
+    persist_portfolio_mock_admissible_data_bundle,
     write_workbench_phase_report,
     build_strategy_chart_story,
     classify_strategy_status,
@@ -1037,6 +1041,65 @@ def test_candidate_002_true_backtest_spec_and_harness_do_not_reuse_proxy_returns
     assert Path(paths["harness_path"]).exists()
     assert Path(paths["final_decision_path"]).exists()
     assert Path(paths["markdown_path"]).exists()
+
+
+def test_mock_admissible_bundle_makes_harness_ready_but_runner_makes_no_claim(tmp_path: Path) -> None:
+    state = {
+        "selected_candidate_id": "PORTFOLIO-CANDIDATE-002",
+        "selected_candidate": {"component_templates": ["Catalyst", "Dollar-Bar Microstructure", "Mean Reversion", "Momentum"]},
+        "manual_manifest": {
+            "strategy_name": "Multi-Horizon Reversion Momentum Catalyst Basket",
+            "sleeves": [
+                {"template": "Momentum", "weight": 0.25},
+                {"template": "Mean Reversion", "weight": 0.25},
+                {"template": "Catalyst", "weight": 0.25},
+                {"template": "Dollar-Bar Microstructure", "weight": 0.25},
+            ],
+        },
+    }
+    spec = build_portfolio_candidate_true_backtest_spec(state)
+    bundle = build_portfolio_mock_admissible_data_bundle(spec)
+
+    validation = validate_portfolio_admissible_data_bundle(spec, bundle)
+
+    assert validation["status"] == "ADMISSIBLE_DATA_BUNDLE_VALID"
+    assert validation["missing_fields"] == []
+    assert validation["proxy_return_reuse_detected"] is False
+    assert validation["real_financial_claim_allowed"] is False
+
+    ready_harness = build_portfolio_candidate_true_backtest_harness(spec, data_bundle_manifest=bundle)
+
+    assert ready_harness["status"] == "READY_FOR_TRUE_BACKTEST_RUN"
+    assert ready_harness["portfolio_backtest_performed"] is False
+    assert ready_harness["final_decision"]["decision"] == "PORTFOLIO_TRUE_BACKTEST_HARNESS_READY"
+    assert ready_harness["final_decision"]["blockers"] == []
+
+    skeleton = run_portfolio_candidate_true_backtest_skeleton(spec, ready_harness, bundle)
+
+    assert skeleton["status"] == "NO_REAL_DATA_NO_CLAIM"
+    assert skeleton["portfolio_backtest_performed"] is False
+    assert skeleton["financial_performance_claimed"] is False
+    assert skeleton["trade_generation_performed"] is False
+    assert skeleton["final_decision"]["decision"] == "PORTFOLIO_TRUE_BACKTEST_SKELETON_COMPLETE_NO_CLAIM"
+
+    paths = persist_portfolio_mock_admissible_data_bundle(bundle, skeleton, root=tmp_path)
+    assert Path(paths["bundle_path"]).exists()
+    assert Path(paths["runner_path"]).exists()
+    assert Path(paths["final_decision_path"]).exists()
+
+
+def test_admissible_bundle_validator_blocks_proxy_trade_reuse() -> None:
+    spec = build_portfolio_candidate_true_backtest_spec({"selected_candidate": {"component_templates": ["Momentum"]}})
+    bundle = build_portfolio_mock_admissible_data_bundle(spec)
+    bundle["uses_workbench_proxy_trade_lists"] = True
+
+    validation = validate_portfolio_admissible_data_bundle(spec, bundle)
+    harness = build_portfolio_candidate_true_backtest_harness(spec, data_bundle_manifest=bundle)
+
+    assert validation["status"] == "ADMISSIBLE_DATA_BUNDLE_BLOCKED"
+    assert validation["proxy_return_reuse_detected"] is True
+    assert "proxy_return_reuse_blocker" in validation["blockers"]
+    assert "proxy_return_reuse_blocker" in harness["final_decision"]["blockers"]
 
 
 def test_portfolio_preview_can_include_factory_generated_components(tmp_path: Path) -> None:

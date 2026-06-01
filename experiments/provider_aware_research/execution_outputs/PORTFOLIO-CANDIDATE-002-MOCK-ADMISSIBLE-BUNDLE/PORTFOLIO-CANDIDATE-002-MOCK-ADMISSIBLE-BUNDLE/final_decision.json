@@ -1,0 +1,12 @@
+{
+  "blockers": [],
+  "decision": "PORTFOLIO_TRUE_BACKTEST_SKELETON_COMPLETE_NO_CLAIM",
+  "financial_performance_claimed": false,
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "runner_mode": "true_backtest_runner_skeleton_no_claim"
+}
