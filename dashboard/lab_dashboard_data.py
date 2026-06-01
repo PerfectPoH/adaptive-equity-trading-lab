@@ -263,6 +263,72 @@ WORKBENCH_TEMPLATES: dict[str, dict[str, Any]] = {
     },
 }
 
+FACTORY_DATA_BLOCKED_TEMPLATES: dict[str, dict[str, str]] = {
+    "Catalyst": {
+        "reason_code": "requires_point_in_time_direction_source",
+        "reason": "Generic catalyst strategies need a verified event timestamp plus a separate point-in-time direction source. The lab has regime evidence, not durable direction data.",
+        "unlock_condition": "Provide a pre-registered event panel with PIT direction labels and complete local price coverage.",
+    },
+    "PEAD": {
+        "reason_code": "requires_pit_earnings_consensus",
+        "reason": "PEAD needs point-in-time actual EPS, consensus EPS, report timing, and revision metadata. Intrinio was blocked and Alpha Vantage lacked PIT metadata.",
+        "unlock_condition": "Provide an institutional earnings source with PIT consensus and revision metadata.",
+    },
+    "Form 4 Cluster Buying": {
+        "reason_code": "requires_larger_sec_form4_panel",
+        "reason": "The tested mini-universe produced zero tradable Form 4 clusters. A factory search over this proxy surface would only optimize data starvation.",
+        "unlock_condition": "Provide a larger SEC Form 4 panel with parsed open-market buys, roles, cluster windows, and liquidity coverage.",
+    },
+    "PDUFA Run-Up": {
+        "reason_code": "requires_larger_clean_catalyst_panel",
+        "reason": "The tradable-only PDUFA sleeve stayed positive but failed ex-top1 and ex-top3 robustness. It is not admissible for portfolio optimization yet.",
+        "unlock_condition": "Reach a larger clean tradable-only catalyst panel and pass convex gates: ex-top1 positive, ex-top3 non-catastrophic, no single event >50% of profit.",
+    },
+    "13D Activist Follow-On": {
+        "reason_code": "requires_13d_item4_panel",
+        "reason": "13D follow-on needs PIT Schedule 13D filings, Item 4 classification, and date-aware symbol coverage. That panel has not been built.",
+        "unlock_condition": "Provide a pre-registered Schedule 13D Item 4 panel with complete local price coverage.",
+    },
+}
+
+
+def build_factory_data_eligibility_report() -> dict[str, Any]:
+    """Explain which strategy templates are allowed into generated portfolio search."""
+
+    eligible_templates: list[dict[str, Any]] = []
+    excluded_templates: list[dict[str, Any]] = []
+    for template, spec in WORKBENCH_TEMPLATES.items():
+        blocked = FACTORY_DATA_BLOCKED_TEMPLATES.get(template)
+        if blocked:
+            excluded_templates.append(
+                {
+                    "template": template,
+                    "factory_search_allowed": False,
+                    "reason_code": blocked["reason_code"],
+                    "reason": blocked["reason"],
+                    "unlock_condition": blocked["unlock_condition"],
+                    "required_data": spec.get("required_data", []),
+                }
+            )
+            continue
+        eligible_templates.append(
+            {
+                "template": template,
+                "factory_search_allowed": True,
+                "reason_code": "local_proxy_surface_available",
+                "reason": "The Workbench can produce local diagnostic returns without requiring unavailable provider data.",
+                "required_data": spec.get("required_data", []),
+            }
+        )
+    return {
+        "policy": "exclude_untestable_data_requirements_from_factory_search",
+        "eligible_count": len(eligible_templates),
+        "excluded_count": len(excluded_templates),
+        "eligible_templates": eligible_templates,
+        "excluded_templates": excluded_templates,
+        "promotion_allowed": False,
+    }
+
 
 def load_json(path: Path) -> dict[str, Any]:
     if not path.exists():
@@ -2352,11 +2418,18 @@ def build_strategy_factory_components(*, max_variants: int = 120, root: Path = P
     universes = ["expanded local research sandbox", "large-cap / ETF clean-data sandbox"]
     holding_periods = [5, 20, 45, 90, 180]
     cost_bps_values = [100, 375, 500]
+    eligible_templates = {
+        row["template"]
+        for row in build_factory_data_eligibility_report()["eligible_templates"]
+        if row.get("factory_search_allowed")
+    }
     components: list[dict[str, Any]] = []
     for universe in universes:
         for holding_period in holding_periods:
             for cost_bps in cost_bps_values:
                 for template in WORKBENCH_TEMPLATES:
+                    if template not in eligible_templates:
+                        continue
                     if len(components) >= max_variants:
                         return components
                     event_template = template in {"Catalyst", "PEAD", "Form 4 Cluster Buying", "PDUFA Run-Up", "13D Activist Follow-On"}

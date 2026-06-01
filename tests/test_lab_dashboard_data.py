@@ -27,6 +27,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_metric_glossary,
     build_workbench_visual_diagnostics,
     build_portfolio_lab_preview,
+    build_factory_data_eligibility_report,
     build_strategy_factory_components,
     build_portfolio_preregistration_draft,
     build_portfolio_preregistration_approval_gate,
@@ -683,9 +684,24 @@ def test_strategy_factory_generates_uncreated_template_variants() -> None:
     assert all("factory_manifest" in component for component in components)
     assert all("factory_preview" in component for component in components)
     assert any("FACTORY" in component["component_id"] for component in components)
-    assert any(component["template"] == "PDUFA Run-Up" for component in components)
+    blocked_templates = {"PEAD", "Form 4 Cluster Buying", "PDUFA Run-Up", "13D Activist Follow-On"}
+    assert blocked_templates.isdisjoint({component["template"] for component in components})
     assert all(component["provider_query_performed"] is False for component in components)
     assert any(component["trade_count"] > 0 for component in components)
+
+
+def test_factory_data_eligibility_report_lists_excluded_untestable_templates() -> None:
+    report = build_factory_data_eligibility_report()
+
+    excluded = {row["template"]: row for row in report["excluded_templates"]}
+    assert "PEAD" in excluded
+    assert "PDUFA Run-Up" in excluded
+    assert "Form 4 Cluster Buying" in excluded
+    assert "13D Activist Follow-On" in excluded
+    assert excluded["PDUFA Run-Up"]["reason_code"] == "requires_larger_clean_catalyst_panel"
+    assert all(row["factory_search_allowed"] is False for row in excluded.values())
+    assert report["excluded_count"] >= 4
+    assert report["eligible_count"] >= 1
 
 
 def test_materialize_factory_components_keeps_factory_provenance(tmp_path: Path) -> None:

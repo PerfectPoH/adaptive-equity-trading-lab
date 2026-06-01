@@ -46,6 +46,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_strategy_blueprint,
     build_workbench_metric_glossary,
     build_workbench_visual_diagnostics,
+    build_factory_data_eligibility_report,
     build_portfolio_lab_preview,
     build_portfolio_lab_preview_from_components,
     build_portfolio_preregistration_approval_gate,
@@ -1012,6 +1013,11 @@ def set_active_section(section_name: str) -> None:
 @st.cache_data(show_spinner=False)
 def cached_strategy_factory_components(factory_variant_limit: int) -> list[dict[str, object]]:
     return build_strategy_factory_components(max_variants=factory_variant_limit)
+
+
+@st.cache_data(show_spinner=False)
+def cached_factory_data_eligibility_report() -> dict[str, object]:
+    return build_factory_data_eligibility_report()
 
 
 def metric_card(label: str, value: str | int | float, note: str) -> None:
@@ -2504,8 +2510,30 @@ def render_portfolio_lab() -> None:
     with factory_cols[1]:
         factory_variant_limit = st.slider("Generated variants", 24, 240, 48, 24)
     with factory_cols[2]:
-        st.caption("Generated catalog = all governed templates x frozen universes/holds/costs. Diagnostic only, no provider query, no promotion.")
+        st.caption("Generated catalog = only templates that the lab can test with currently available local/proxy data. Diagnostic only, no provider query, no promotion.")
     run_full_catalog = st.checkbox("Run governed search on full loaded catalog", value=include_factory_generated)
+    eligibility = cached_factory_data_eligibility_report()
+    excluded_templates = eligibility.get("excluded_templates", [])
+    st.markdown(
+        f"""
+        <div class="portfolio-proof-grid">
+          <div class="portfolio-proof-card good">
+            <div class="eyebrow">Factory eligibility</div>
+            <div class="portfolio-proof-title">{eligibility.get("eligible_count", 0)} template(s) allowed</div>
+            <div class="portfolio-proof-copy">Only strategies with a locally testable data contract enter the combinatorial search.</div>
+          </div>
+          <div class="portfolio-proof-card block">
+            <div class="eyebrow">Data blockers</div>
+            <div class="portfolio-proof-title">{eligibility.get("excluded_count", 0)} template(s) excluded</div>
+            <div class="portfolio-proof-copy">Blocked templates remain visible, but they cannot pollute the best-basket search with untestable proxy returns.</div>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    if excluded_templates:
+        with st.expander("Show templates excluded from Factory search"):
+            st.dataframe(pd.DataFrame(excluded_templates), width="stretch", hide_index=True)
 
     components = load_portfolio_lab_components(limit=60)
     if include_factory_generated:
