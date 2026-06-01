@@ -1,0 +1,17 @@
+{
+  "gate_id": "PUBLIC-CATALYST-HYBRID-MICRO-BACKTEST-GATE-001",
+  "created_at_local": "2026-06-01",
+  "parent_decision": "PUBLIC_CATALYST_HYBRID_EVENT_PANEL_PASS_EXPLORATORY_ONLY",
+  "purpose": "Authorize a future exploratory micro-backtest design for the hybrid public Catalyst panel.",
+  "backtest_authorized_now": false,
+  "market_data_download_authorized": false,
+  "provider_query_authorized": false,
+  "allowed_next_run": "Use existing local daily data only, or stop for a separate provider query gate.",
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "candidate_windows_days": [30, 60, 90],
+  "minimum_price_covered_events": 8,
+  "short_selling_allowed": false
+}
+

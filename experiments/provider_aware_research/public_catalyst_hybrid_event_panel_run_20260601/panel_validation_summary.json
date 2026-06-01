@@ -1,0 +1,8 @@
+{
+  "event_count": 12,
+  "admissible_count": 12,
+  "pit_pass_count": 12,
+  "non_success_or_unresolved_count": 5,
+  "non_success_or_unresolved_share": 0.4167,
+  "validation": "PASS"
+}

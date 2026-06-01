@@ -1,0 +1,9 @@
+rule_id,rule,reason
+CAT-MICRO-001,Use only event dates from the committed hybrid panel.,Prevents post-hoc event selection.
+CAT-MICRO-002,Do not optimize event windows after seeing returns.,Prevents curve fitting.
+CAT-MICRO-003,Report every event including CRL delay and unknown outcome rows.,Prevents winner-only selection.
+CAT-MICRO-004,If fewer than 8 events have local price coverage archive as sample-starved.,Prevents one-off narrative backtests.
+CAT-MICRO-005,Run 30d 60d and 90d windows as labeled diagnostics not parameter search.,Allows shape inspection without choosing the best curve.
+CAT-MICRO-006,If any external price query is needed stop and create a provider query gate first.,Preserves pre-run data governance.
+CAT-MICRO-007,No promotion regardless of performance.,Manual panel cannot support deployment claims.
+

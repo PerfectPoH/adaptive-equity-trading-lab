@@ -1,0 +1,22 @@
+{
+  "decision_id": "PUBLIC-CATALYST-HYBRID-EVENT-PANEL-RUN-001",
+  "created_at_local": "2026-06-01",
+  "decision": "PUBLIC_CATALYST_HYBRID_EVENT_PANEL_PASS_EXPLORATORY_ONLY",
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "provider_query_performed": true,
+  "provider_query_scope": "Manual public web/source inspection only; no bulk scraping.",
+  "market_data_download_performed": false,
+  "backtest_performed": false,
+  "panel_metrics": {
+    "event_count": 12,
+    "admissible_count": 12,
+    "pit_pass_count": 12,
+    "non_success_or_unresolved_count": 5,
+    "non_success_or_unresolved_share": 0.4167
+  },
+  "interpretation": "The panel is clean enough for an exploratory micro-backtest gate, but not sufficient for promotion because it is manually curated and cannot prove full catalyst-universe completeness.",
+  "next_valid_gate": "PUBLIC-CATALYST-HYBRID-MICRO-BACKTEST-GATE-001"
+}
+

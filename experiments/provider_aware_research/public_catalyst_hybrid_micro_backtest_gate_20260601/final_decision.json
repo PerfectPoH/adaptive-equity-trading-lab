@@ -1,0 +1,13 @@
+{
+  "decision_id": "PUBLIC-CATALYST-HYBRID-MICRO-BACKTEST-GATE-001",
+  "created_at_local": "2026-06-01",
+  "decision": "MICRO_BACKTEST_GATE_DEFINED_NO_RUN",
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "provider_query_performed": false,
+  "market_data_download_performed": false,
+  "backtest_performed": false,
+  "summary": "The hybrid Catalyst panel passed construction checks, so a future exploratory micro-backtest is allowed only under a separate run using existing local data or a newly committed provider query gate."
+}
+

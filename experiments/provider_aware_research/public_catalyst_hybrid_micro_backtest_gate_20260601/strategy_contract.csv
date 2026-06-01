@@ -1,0 +1,14 @@
+field,value
+panel_source,PUBLIC-CATALYST-HYBRID-EVENT-PANEL-001
+sample_size,12_events
+allowed_data,existing_local_daily_prices_only_unless_separate_provider_gate
+entry_rule,enter_N_trading_days_before_event
+exit_rule,exit_1_trading_day_before_event_or_on_event_open_if_only_daily_close_available
+parameter_policy,predefine_windows_no_optimization
+candidate_windows,30d;60d;90d
+cost_policy,use_existing_lab_round_trip_cost_stress
+short_selling_allowed,false
+promotion_allowed,false
+paper_trading_allowed,false
+live_trading_allowed,false
+
