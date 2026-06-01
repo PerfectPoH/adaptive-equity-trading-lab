@@ -1,0 +1,606 @@
+{
+  "backtest_performed": false,
+  "bounded_scope": {
+    "database_symbol_limit_per_db": 10,
+    "historical_constituent_watchlist_sample_limit": 5,
+    "price_bar_limit": 60,
+    "price_sample_symbols_per_db": 5,
+    "target_databases": [
+      "US Equities",
+      "US Equities Delisted"
+    ]
+  },
+  "created_at_utc": "2026-06-01T15:18:14.876254+00:00",
+  "databases_available_sample": [
+    "AU Equities",
+    "AU Equities Delisted",
+    "AU ETOs",
+    "AU Indices",
+    "AU Warrants",
+    "CA Equities",
+    "CA Equities Delisted",
+    "CA Indices",
+    "Cash Commodities",
+    "Continuous Futures",
+    "Economic",
+    "Forex Spot",
+    "Futures",
+    "US Equities",
+    "US Equities Delisted",
+    "US Indices",
+    "World Indices"
+  ],
+  "evidence": {
+    "historical_constituent_watchlists_available": true,
+    "local_database_accessible": true,
+    "python_package_available": true,
+    "trial_history_limit": "2_years_expected_from_trial_terms",
+    "trial_history_limit_recorded": true,
+    "us_active_adjusted_daily_prices_available": true,
+    "us_delisted_database_available": true,
+    "us_delisted_listing_or_delisting_dates_available": true,
+    "us_delisted_prices_accessible": true,
+    "us_delisted_symbols_discoverable": true,
+    "us_equities_database_available": true
+  },
+  "final_decision": {
+    "backtest_allowed": false,
+    "decision": "NORGATE_DATA_PROBE_PASS_TRIAL_LIMITED",
+    "financial_performance_claimed": false,
+    "market_data_download_performed": false,
+    "missing_evidence": [],
+    "promotion_allowed": false,
+    "provider_query_performed": true,
+    "trial_limited": true
+  },
+  "financial_performance_claimed": false,
+  "gate_id": "NORGATE-DATA-GATE-001",
+  "historical_constituent_watchlists_sample": [
+    "Dow Jones Industrial Average Current & Past",
+    "Nasdaq 100 + Next Generation 100 Superset Current & Past",
+    "Nasdaq 100 + Q-50 Superset Current & Past",
+    "Nasdaq 100 Current & Past",
+    "Nasdaq 100 Technology Sector Current & Past"
+  ],
+  "metadata_samples": {
+    "US Equities": {
+      "A": {
+        "assetid": {
+          "ok": true,
+          "value": "131684"
+        },
+        "exchange_name": {
+          "ok": true,
+          "value": "NYSE"
+        },
+        "first_quoted_date": {
+          "ok": true,
+          "value": "2024-06-01"
+        },
+        "last_quoted_date": {
+          "ok": true,
+          "value": "None"
+        },
+        "security_name": {
+          "ok": true,
+          "value": "Agilent Technologies Inc Common"
+        },
+        "subtype1": {
+          "ok": true,
+          "value": "Equity"
+        },
+        "subtype2": {
+          "ok": true,
+          "value": "Operating/Holding Company"
+        }
+      },
+      "AA": {
+        "assetid": {
+          "ok": true,
+          "value": "2214917"
+        },
+        "exchange_name": {
+          "ok": true,
+          "value": "NYSE"
+        },
+        "first_quoted_date": {
+          "ok": true,
+          "value": "2024-06-01"
+        },
+        "last_quoted_date": {
+          "ok": true,
+          "value": "None"
+        },
+        "security_name": {
+          "ok": true,
+          "value": "Alcoa Corp Common"
+        },
+        "subtype1": {
+          "ok": true,
+          "value": "Equity"
+        },
+        "subtype2": {
+          "ok": true,
+          "value": "Operating/Holding Company"
+        }
+      },
+      "AAA": {
+        "assetid": {
+          "ok": true,
+          "value": "2730624"
+        },
+        "exchange_name": {
+          "ok": true,
+          "value": "NYSE Arca"
+        },
+        "first_quoted_date": {
+          "ok": true,
+          "value": "2024-06-01"
+        },
+        "last_quoted_date": {
+          "ok": true,
+          "value": "None"
+        },
+        "security_name": {
+          "ok": true,
+          "value": "Alternative Access First Priority CLO Bond ETF"
+        },
+        "subtype1": {
+          "ok": true,
+          "value": "Exchange Traded Product"
+        },
+        "subtype2": {
+          "ok": true,
+          "value": "Exchange Traded Fund (ETF)"
+        }
+      },
+      "AAAA": {
+        "assetid": {
+          "ok": true,
+          "value": "3836955"
+        },
+        "exchange_name": {
+          "ok": true,
+          "value": "Cboe BZX"
+        },
+        "first_quoted_date": {
+          "ok": true,
+          "value": "2025-07-16"
+        },
+        "last_quoted_date": {
+          "ok": true,
+          "value": "None"
+        },
+        "security_name": {
+          "ok": true,
+          "value": "Amplius Aggressive Asset Allocation ETF"
+        },
+        "subtype1": {
+          "ok": true,
+          "value": "Exchange Traded Product"
+        },
+        "subtype2": {
+          "ok": true,
+          "value": "Exchange Traded Fund (ETF)"
+        }
+      },
+      "AAAC": {
+        "assetid": {
+          "ok": true,
+          "value": "3940080"
+        },
+        "exchange_name": {
+          "ok": true,
+          "value": "NYSE Arca"
+        },
+        "first_quoted_date": {
+          "ok": true,
+          "value": "2025-12-11"
+        },
+        "last_quoted_date": {
+          "ok": true,
+          "value": "None"
+        },
+        "security_name": {
+          "ok": true,
+          "value": "Columbia AAA CLO ETF"
+        },
+        "subtype1": {
+          "ok": true,
+          "value": "Exchange Traded Product"
+        },
+        "subtype2": {
+          "ok": true,
+          "value": "Exchange Traded Fund (ETF)"
+        }
+      }
+    },
+    "US Equities Delisted": {
+      "AACIU-202408": {
+        "assetid": {
+          "ok": true,
+          "value": "2852843"
+        },
+        "exchange_name": {
+          "ok": true,
+          "value": "Nasdaq"
+        },
+        "first_quoted_date": {
+          "ok": true,
+          "value": "2024-06-01"
+        },
+        "last_quoted_date": {
+          "ok": true,
+          "value": "2024-08-15"
+        },
+        "security_name": {
+          "ok": true,
+          "value": "Armada Acquisition Corp I Unit"
+        },
+        "subtype1": {
+          "ok": true,
+          "value": "Equity"
+        },
+        "subtype2": {
+          "ok": true,
+          "value": "Special Purpose Company"
+        }
+      },
+      "AACT.U-202509": {
+        "assetid": {
+          "ok": true,
+          "value": "3310789"
+        },
+        "exchange_name": {
+          "ok": true,
+          "value": "NYSE"
+        },
+        "first_quoted_date": {
+          "ok": true,
+          "value": "2024-06-01"
+        },
+        "last_quoted_date": {
+          "ok": true,
+          "value": "2025-09-24"
+        },
+        "security_name": {
+          "ok": true,
+          "value": "Ares Acquisition Corp II Unit"
+        },
+        "subtype1": {
+          "ok": true,
+          "value": "Equity"
+        },
+        "subtype2": {
+          "ok": true,
+          "value": "Special Purpose Company"
+        }
+      },
+      "AAM-202602": {
+        "assetid": {
+          "ok": true,
+          "value": "3616886"
+        },
+        "exchange_name": {
+          "ok": true,
+          "value": "NYSE"
+        },
+        "first_quoted_date": {
+          "ok": true,
+          "value": "2024-09-16"
+        },
+        "last_quoted_date": {
+          "ok": true,
+          "value": "2026-02-02"
+        },
+        "security_name": {
+          "ok": true,
+          "value": "AA Mission Acquisition Corp Class A Common"
+        },
+        "subtype1": {
+          "ok": true,
+          "value": "Equity"
+        },
+        "subtype2": {
+          "ok": true,
+          "value": "Special Purpose Company"
+        }
+      },
+      "AAM.U-202601": {
+        "assetid": {
+          "ok": true,
+          "value": "3586237"
+        },
+        "exchange_name": {
+          "ok": true,
+          "value": "NYSE"
+        },
+        "first_quoted_date": {
+          "ok": true,
+          "value": "2024-08-01"
+        },
+        "last_quoted_date": {
+          "ok": true,
+          "value": "2026-01-26"
+        },
+        "security_name": {
+          "ok": true,
+          "value": "AA Mission Acquisition Corp Unit"
+        },
+        "subtype1": {
+          "ok": true,
+          "value": "Equity"
+        },
+        "subtype2": {
+          "ok": true,
+          "value": "Special Purpose Company"
+        }
+      },
+      "AAN-202410": {
+        "assetid": {
+          "ok": true,
+          "value": "2762915"
+        },
+        "exchange_name": {
+          "ok": true,
+          "value": "NYSE"
+        },
+        "first_quoted_date": {
+          "ok": true,
+          "value": "2024-06-01"
+        },
+        "last_quoted_date": {
+          "ok": true,
+          "value": "2024-10-03"
+        },
+        "security_name": {
+          "ok": true,
+          "value": "Aaron's Company Inc Common"
+        },
+        "subtype1": {
+          "ok": true,
+          "value": "Equity"
+        },
+        "subtype2": {
+          "ok": true,
+          "value": "Operating/Holding Company"
+        }
+      }
+    }
+  },
+  "package_version": "1.0.74",
+  "price_samples": {
+    "US Equities": {
+      "A": {
+        "columns": [
+          "Open",
+          "High",
+          "Low",
+          "Close",
+          "Volume",
+          "Turnover",
+          "Unadjusted Close",
+          "Dividend"
+        ],
+        "first_index": "2026-03-05 00:00:00",
+        "last_index": "2026-05-29 00:00:00",
+        "ok": true,
+        "rows": 60
+      },
+      "AA": {
+        "columns": [
+          "Open",
+          "High",
+          "Low",
+          "Close",
+          "Volume",
+          "Turnover",
+          "Unadjusted Close",
+          "Dividend"
+        ],
+        "first_index": "2026-03-05 00:00:00",
+        "last_index": "2026-05-29 00:00:00",
+        "ok": true,
+        "rows": 60
+      },
+      "AAA": {
+        "columns": [
+          "Open",
+          "High",
+          "Low",
+          "Close",
+          "Volume",
+          "Turnover",
+          "Unadjusted Close",
+          "Dividend"
+        ],
+        "first_index": "2026-03-05 00:00:00",
+        "last_index": "2026-05-29 00:00:00",
+        "ok": true,
+        "rows": 60
+      },
+      "AAAA": {
+        "columns": [
+          "Open",
+          "High",
+          "Low",
+          "Close",
+          "Volume",
+          "Turnover",
+          "Unadjusted Close",
+          "Dividend"
+        ],
+        "first_index": "2026-03-05 00:00:00",
+        "last_index": "2026-05-29 00:00:00",
+        "ok": true,
+        "rows": 60
+      },
+      "AAAC": {
+        "columns": [
+          "Open",
+          "High",
+          "Low",
+          "Close",
+          "Volume",
+          "Turnover",
+          "Unadjusted Close",
+          "Dividend"
+        ],
+        "first_index": "2026-03-05 00:00:00",
+        "last_index": "2026-05-29 00:00:00",
+        "ok": true,
+        "rows": 60
+      }
+    },
+    "US Equities Delisted": {
+      "AACIU-202408": {
+        "columns": [
+          "Open",
+          "High",
+          "Low",
+          "Close",
+          "Volume",
+          "Turnover",
+          "Unadjusted Close",
+          "Dividend"
+        ],
+        "first_index": "2024-06-06 00:00:00",
+        "last_index": "2024-08-15 00:00:00",
+        "ok": true,
+        "rows": 14
+      },
+      "AACT.U-202509": {
+        "columns": [
+          "Open",
+          "High",
+          "Low",
+          "Close",
+          "Volume",
+          "Turnover",
+          "Unadjusted Close",
+          "Dividend"
+        ],
+        "first_index": "2025-01-02 00:00:00",
+        "last_index": "2025-09-24 00:00:00",
+        "ok": true,
+        "rows": 60
+      },
+      "AAM-202602": {
+        "columns": [
+          "Open",
+          "High",
+          "Low",
+          "Close",
+          "Volume",
+          "Turnover",
+          "Unadjusted Close",
+          "Dividend"
+        ],
+        "first_index": "2025-11-03 00:00:00",
+        "last_index": "2026-02-02 00:00:00",
+        "ok": true,
+        "rows": 60
+      },
+      "AAM.U-202601": {
+        "columns": [
+          "Open",
+          "High",
+          "Low",
+          "Close",
+          "Volume",
+          "Turnover",
+          "Unadjusted Close",
+          "Dividend"
+        ],
+        "first_index": "2024-10-29 00:00:00",
+        "last_index": "2026-01-26 00:00:00",
+        "ok": true,
+        "rows": 60
+      },
+      "AAN-202410": {
+        "columns": [
+          "Open",
+          "High",
+          "Low",
+          "Close",
+          "Volume",
+          "Turnover",
+          "Unadjusted Close",
+          "Dividend"
+        ],
+        "first_index": "2024-07-11 00:00:00",
+        "last_index": "2024-10-03 00:00:00",
+        "ok": true,
+        "rows": 60
+      }
+    }
+  },
+  "probe_id": "NORGATE-DATA-PROBE-001",
+  "promotion_allowed": false,
+  "target_database_symbol_samples": {
+    "US Equities": {
+      "error": null,
+      "ok": true,
+      "sample": [
+        "A",
+        "AA",
+        "AAA",
+        "AAAA",
+        "AAAC",
+        "AAAIF",
+        "AAAU",
+        "AABB",
+        "AABVF",
+        "AACAF"
+      ]
+    },
+    "US Equities Delisted": {
+      "error": null,
+      "ok": true,
+      "sample": [
+        "AACIU-202408",
+        "AACT.U-202509",
+        "AAM.U-202601",
+        "AAM-202602",
+        "AAN-202410",
+        "ABMC-202506",
+        "ACABU-202411",
+        "ACACU-202409",
+        "ACCD-202504",
+        "ACHL-202503"
+      ]
+    }
+  },
+  "watchlists_available_sample": [
+    "All Ordinaries Current & Past",
+    "All Ordinaries excl S&P ASX 100 Current & Past",
+    "All Ordinaries excl S&P ASX 100",
+    "All Ordinaries excl S&P ASX 200 Current & Past",
+    "All Ordinaries excl S&P ASX 200",
+    "All Ordinaries excl S&P ASX 300 Current & Past",
+    "All Ordinaries excl S&P ASX 300",
+    "All Ordinaries",
+    "Dow Jones Industrial Average Current & Past",
+    "Dow Jones Industrial Average",
+    "Nasdaq 100 + Next Generation 100 Superset Current & Past",
+    "Nasdaq 100 + Next Generation 100 Superset",
+    "Nasdaq 100 + Q-50 Superset Current & Past",
+    "Nasdaq 100 + Q-50 Superset",
+    "Nasdaq 100 Current & Past",
+    "Nasdaq 100 Technology Sector Current & Past",
+    "Nasdaq 100 Technology Sector",
+    "Nasdaq 100",
+    "Nasdaq Biotechnology Current & Past",
+    "Nasdaq Biotechnology",
+    "Nasdaq Composite Current & Past",
+    "Nasdaq Composite",
+    "Nasdaq Internet Current & Past",
+    "Nasdaq Internet",
+    "Nasdaq Next Generation 100 Current & Past",
+    "Nasdaq Next Generation 100",
+    "Nasdaq Q-50 Current & Past",
+    "Nasdaq Q-50",
+    "NYSE Composite Current & Past",
+    "NYSE Composite"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "backtest_allowed": false,
+  "decision": "NORGATE_DATA_PROBE_PASS_TRIAL_LIMITED",
+  "financial_performance_claimed": false,
+  "market_data_download_performed": false,
+  "missing_evidence": [],
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "trial_limited": true
+}
