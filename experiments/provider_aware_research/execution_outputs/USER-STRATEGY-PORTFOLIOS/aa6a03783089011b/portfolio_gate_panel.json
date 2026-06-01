@@ -1,0 +1,58 @@
+[
+  {
+    "detail": "Any proxy, active-only, PIT, or survivorship warning keeps the portfolio diagnostic-only.",
+    "gate": "data_contract_gate",
+    "status": "WARN",
+    "value": [
+      "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+    ]
+  },
+  {
+    "detail": "Requires at least 3 saved strategy components for a toy diagnostic portfolio.",
+    "gate": "component_count_gate",
+    "status": "PASS",
+    "value": 3
+  },
+  {
+    "detail": "Blocks when the best component explains more than 40% of positive portfolio contribution.",
+    "gate": "component_concentration_gate",
+    "status": "BLOCK",
+    "value": 0.47865938
+  },
+  {
+    "detail": "Warns when one sleeve dominates capital allocation.",
+    "gate": "strategy_family_concentration_gate",
+    "status": "PASS",
+    "value": 0.2
+  },
+  {
+    "detail": "High correlation means components may be the same hidden bet.",
+    "gate": "correlation_gate",
+    "status": "PASS",
+    "value": 0.31505729
+  },
+  {
+    "detail": "Reports the worst local drawdown of the composed portfolio.",
+    "gate": "drawdown_gate",
+    "status": "WARN",
+    "value": -3.863992
+  },
+  {
+    "detail": "Replays the portfolio after removing its best component.",
+    "gate": "ex_best_component_gate",
+    "status": "PASS",
+    "value": {
+      "best_component": "dcfbeec9cf4c5190",
+      "ex_best_net_return": 15.8563925
+    }
+  },
+  {
+    "detail": "Replays the portfolio with 1.5x declared component costs.",
+    "gate": "cost_stress_gate",
+    "status": "PASS",
+    "value": {
+      "extra_cost_drag_per_period": 0.015,
+      "stressed_net_return": 3.93086
+    }
+  }
+]

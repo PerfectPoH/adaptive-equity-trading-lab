@@ -1,0 +1,4 @@
+component_id,strategy_name,template,decision,sleeve,weight
+bcfc1ff3b7cf8a4a,My falsifiable strategy,Momentum,REJECTED_OUTLIER_DEPENDENCY,tactical,0.2
+9c7fb1982851f609,My falsifiable strategy,Mean Reversion,REJECTED_OUTLIER_DEPENDENCY,core,0.2
+dcfbeec9cf4c5190,strategia folle,PDUFA Run-Up,RESEARCH_CANDIDATE_ONLY,convex,0.2

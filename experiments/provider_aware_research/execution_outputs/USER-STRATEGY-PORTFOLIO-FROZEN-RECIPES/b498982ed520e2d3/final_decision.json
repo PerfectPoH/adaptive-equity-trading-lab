@@ -1,0 +1,15 @@
+{
+  "blockers": [
+    "factory_generated_scope_gate"
+  ],
+  "decision": "PORTFOLIO_FROZEN_RECIPE_DIAGNOSTIC_ONLY",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "net_return_sum": 475.33201491,
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "runner_mode": "frozen_recipe_local_validation",
+  "validation_net_return": 217.51552181
+}

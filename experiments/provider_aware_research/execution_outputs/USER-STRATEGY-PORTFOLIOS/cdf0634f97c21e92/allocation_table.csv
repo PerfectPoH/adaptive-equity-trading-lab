@@ -1,0 +1,7 @@
+component_id,strategy_name,template,decision,sleeve,weight
+dcfbeec9cf4c5190,strategia folle,PDUFA Run-Up,RESEARCH_CANDIDATE_ONLY,convex,0.16666667
+ef3f1ebb21d03d5c,My falsifiable strategy,9:30 AM ORB,REJECTED_OUTLIER_DEPENDENCY,tactical,0.15555556
+292441755c5ffdcc,nuova versione,Custom Rule Builder,REJECTED_OUTLIER_DEPENDENCY,tactical,0.15555556
+7d30471f7325a2a8,gg,PDUFA Run-Up,INVESTMENT_RESEARCH_CANDIDATE_ONLY,convex,0.16666667
+f173207ae9bd5ccd,Abed,Regime Filter,REJECTED_OUTLIER_DEPENDENCY,core,0.2
+0dc08daefa67c12e,9:15,9:30 AM ORB,REJECTED_OUTLIER_DEPENDENCY,tactical,0.15555556

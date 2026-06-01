@@ -1,0 +1,11 @@
+{
+  "max_component_weight": 0.6,
+  "max_convex_weight": 0.2,
+  "max_rejected_weight": 0.2,
+  "paper_live_policy": "forbidden_from_portfolio_lab",
+  "policy": "sleeve_allocation",
+  "portfolio_id": "WORKBENCH-PORTFOLIO-001",
+  "portfolio_signature": "417376a027c5dd07",
+  "promotion_allowed": false,
+  "provider_query_allowed": false
+}

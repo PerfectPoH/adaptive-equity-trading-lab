@@ -1,0 +1,1258 @@
+{
+  "deduped_component_ids": [
+    "aeb3c97678fffc03",
+    "bcfc1ff3b7cf8a4a",
+    "9c7fb1982851f609",
+    "f884aeb8a0a20815",
+    "a37a53c4e1fce137",
+    "dcfbeec9cf4c5190",
+    "ef3f1ebb21d03d5c",
+    "292441755c5ffdcc",
+    "f173207ae9bd5ccd",
+    "0dc08daefa67c12e",
+    "91510d8163e121fc",
+    "2496e35863212c76",
+    "208d36ae3c31f890",
+    "8bf949936eddd596",
+    "e8cde4045a54b14a",
+    "28a0d94ccf2a6c08",
+    "680166d42265ad55",
+    "816022f1cffa8310",
+    "fda6a92d0fdc1a1d",
+    "fad9ff0f91ecab15",
+    "2902e60324bd4c13",
+    "23ff266a203fea0d",
+    "bec60afef14416c2",
+    "a0cc249592a067f4",
+    "acc065823d9dcfb7",
+    "4087717bb62f6610",
+    "0b596d1ce6d258c0",
+    "bc79985845236f4a",
+    "6b50c641a4eaf53e",
+    "bfe638853ce4a153",
+    "409ca5c54a3efce7",
+    "eeb44b96bbac9604",
+    "dd95aab5d08306e1",
+    "6a116a4eef3afb73",
+    "277f5aa08f7f9d9c",
+    "a669c488d63a2146",
+    "394fda88ef8296bd",
+    "08a55727092fc895",
+    "faf6a5f0b841f6f7",
+    "672c7336643b6bf1",
+    "adcb9498d7e107c0",
+    "900a378c15b3392e",
+    "193d919e20e40e73",
+    "10c52726d554590d",
+    "55727f67f28b0c3c",
+    "3dced0f5393fe8c6",
+    "13040f5119f7c906",
+    "4af74041e1d28933",
+    "2323ad38b0557437",
+    "43624c56813e9304",
+    "FACTORY-633e2bb05655049f",
+    "FACTORY-9aa27ed14e743eb8",
+    "FACTORY-7beb5d7a8b8038c1",
+    "FACTORY-0a8b76d8e9c965be",
+    "FACTORY-8413ce13dec443e3",
+    "FACTORY-171ac28e5b423f68",
+    "FACTORY-35eb7c5efc5da071",
+    "FACTORY-988575baf49a4912",
+    "FACTORY-012e1765b0c286d8",
+    "FACTORY-8e82b9153214d439",
+    "FACTORY-3f5b5e2af7a3e0ce",
+    "FACTORY-1429370489f690ad",
+    "FACTORY-cb9267a22681d28d",
+    "FACTORY-40d2b4dfba0a074d",
+    "FACTORY-8c53f735cf806348",
+    "FACTORY-8947ce22b80b9ee1",
+    "FACTORY-2fa84d3e324d0ad1",
+    "FACTORY-0a068c8a27ef583b",
+    "FACTORY-72fadb6d71c63049",
+    "FACTORY-dea4cd8697c22ed5",
+    "FACTORY-01ccbce77e85e306",
+    "FACTORY-f9d708e9710586da",
+    "FACTORY-936855ed5bd59a5a",
+    "FACTORY-efba882cb8ce39ad",
+    "FACTORY-d5a39d7a88bc24cf",
+    "FACTORY-f497e801a04a00ac",
+    "FACTORY-582e3b9b11091a1b",
+    "FACTORY-eeb9cda10c3c0728",
+    "FACTORY-7719d5fc2dc12422",
+    "FACTORY-54f51ccfae2851ab",
+    "FACTORY-a48667d59c0341c7",
+    "FACTORY-609f9af8970bab77",
+    "FACTORY-71fd1cd246f2c826",
+    "FACTORY-1ccb2e9a10bbb66a",
+    "FACTORY-9d39f00e50a7ff49",
+    "FACTORY-d028fe234d674df1",
+    "FACTORY-ef2dfa466e3b0e52",
+    "FACTORY-3649fae5bc1b7b74",
+    "FACTORY-4478d675ccfafd31",
+    "FACTORY-3d1034410d11b1be",
+    "FACTORY-d6e26b4dde83c8b0",
+    "FACTORY-30088dc93bd4a178",
+    "FACTORY-206f18f4951cd8c9",
+    "FACTORY-706cdbf4b53724c8",
+    "FACTORY-91da581313704e54",
+    "FACTORY-37370ef762fec428",
+    "FACTORY-2c22961973d6b9d9",
+    "FACTORY-2306e8d8b69f7be8",
+    "FACTORY-5138428531b2cbc4",
+    "FACTORY-4374f4a63472e9d1",
+    "FACTORY-2ed1639d36c6b44c",
+    "FACTORY-7d7fc107faf661dc",
+    "FACTORY-fcc65b33bba2a984",
+    "FACTORY-2fdf6c07a3bcb68d",
+    "FACTORY-bda4a6a967022002",
+    "FACTORY-44336afe577baf16",
+    "FACTORY-1ae9c3303191d694",
+    "FACTORY-3a4646fedbd66e5c",
+    "FACTORY-3b82ee277a85c752",
+    "FACTORY-809ae08874ff229c",
+    "FACTORY-58fde2142f9a24a0",
+    "FACTORY-e62a48e2d142923e",
+    "FACTORY-fab94445f0b51fdf",
+    "FACTORY-6a8afca3951761f9",
+    "FACTORY-0391e93ebbeb1f98",
+    "FACTORY-5e3bba4315fd435f",
+    "FACTORY-7a19d9d29f26229e",
+    "FACTORY-119d99f730b677f6",
+    "FACTORY-a26c47e6385e2c63",
+    "FACTORY-b156c56670aac97e",
+    "FACTORY-778a7498ad44efbb",
+    "FACTORY-4c337763d226e0e4",
+    "FACTORY-048d754979815760",
+    "FACTORY-32cddb18e173d6a5",
+    "FACTORY-5d7bb4d4fecbd758",
+    "FACTORY-673b8aef9706882d",
+    "FACTORY-b2571eb4e48ee3fb",
+    "FACTORY-45e90ef62971498a",
+    "FACTORY-76753375415f5dd7",
+    "FACTORY-58ad0155348a2440",
+    "FACTORY-5362cd2ae855e220",
+    "FACTORY-08078fc67cfbc038",
+    "FACTORY-9b84bf90cdccb0ca",
+    "FACTORY-8dd755e2f8762126",
+    "FACTORY-6e4f085c13e95091",
+    "FACTORY-e1db06c5156f7149",
+    "FACTORY-242ddc7a506aa7ba",
+    "FACTORY-d1893fa9808889ff",
+    "FACTORY-4c63f4888d4676d6",
+    "FACTORY-a8ba3464fded3edb",
+    "FACTORY-4f2398b6e0f737a6",
+    "FACTORY-6ee5b751639cff9d",
+    "FACTORY-eecffd9fc1c8db58",
+    "FACTORY-f186683398e16f3a",
+    "FACTORY-832e69dd8d7cef92",
+    "FACTORY-171e0565d482ba59",
+    "FACTORY-8f5d4e1caeb5c929",
+    "FACTORY-48f166c1c0802b66",
+    "FACTORY-b0c7f10acd2e2fd1",
+    "FACTORY-0893167e5b3cd58e",
+    "FACTORY-0584cabbb54594ec",
+    "FACTORY-a7e09015bc37f943",
+    "FACTORY-d56c84f26c9de3df",
+    "FACTORY-198fb8b93bd75fa6",
+    "FACTORY-856e9c303c706b2e",
+    "FACTORY-18898b7dda64c53e",
+    "FACTORY-511e400b5c4a876b",
+    "FACTORY-115ab24aa842c356",
+    "FACTORY-0971e80d69e19c37",
+    "FACTORY-48339998c1f9883a",
+    "FACTORY-014d208df652e32d",
+    "FACTORY-d29d63f253ebe744",
+    "FACTORY-f5a25236baf342cd",
+    "FACTORY-98998cc2ab40632e",
+    "FACTORY-9984f12dca8c403a",
+    "FACTORY-ecad2c3432587025",
+    "FACTORY-7913b08e73e03618"
+  ],
+  "duplicate_group_count": 82,
+  "groups": [
+    {
+      "group_size": 2,
+      "kept_component_id": "f884aeb8a0a20815",
+      "kept_label": "My falsifiable strategy (Mean Reversion, f884ae)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "e0008aaebb2fda63"
+      ],
+      "removed_labels": [
+        "My falsifiable strategy (Mean Reversion, e0008a)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "a37a53c4e1fce137",
+      "kept_label": "My falsifiable strategy (Momentum, a37a53)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "913c67d63ee5a478"
+      ],
+      "removed_labels": [
+        "My falsifiable strategy (Momentum, 913c67)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "ef3f1ebb21d03d5c",
+      "kept_label": "My falsifiable strategy (9:30 AM ORB, ef3f1e)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "ee5692c4832db94b"
+      ],
+      "removed_labels": [
+        "9:15 (9:30 AM ORB, ee5692)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "08a55727092fc895",
+      "kept_label": "My falsifiable strategy (PDUFA Run-Up, 08a557)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "7d30471f7325a2a8",
+        "f8e4773a916f0f75"
+      ],
+      "removed_labels": [
+        "gg (PDUFA Run-Up, 7d3047)",
+        "My falsifiable strategy (PDUFA Run-Up, f8e477)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "e8cde4045a54b14a",
+      "kept_label": "My falsifiable strategy (Custom Rule Builder, e8cde4)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "64880f270f8f6861"
+      ],
+      "removed_labels": [
+        "My falsifiable strategy (Custom Rule Builder, 64880f)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "55727f67f28b0c3c",
+      "kept_label": "My falsifiable strategy (PDUFA Run-Up, 55727f)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "6c6bb20cdb419497",
+        "f14bfb46255e825b"
+      ],
+      "removed_labels": [
+        "My falsifiable strategy (PDUFA Run-Up, 6c6bb2)",
+        "My falsifiable strategy (PDUFA Run-Up, f14bfb)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-012e1765b0c286d8",
+      "kept_label": "Factory PDUFA Run-Up 5d 100bps (PDUFA Run-Up, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-9a7d8827f22d3bcc",
+        "FACTORY-0b46f79e504f2627"
+      ],
+      "removed_labels": [
+        "Factory PDUFA Run-Up 5d 375bps (PDUFA Run-Up, FACTOR)",
+        "Factory PDUFA Run-Up 5d 500bps (PDUFA Run-Up, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-cb9267a22681d28d",
+      "kept_label": "Factory Momentum 5d 375bps (Momentum, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-c28eec485c97ab60"
+      ],
+      "removed_labels": [
+        "Factory Momentum 5d 500bps (Momentum, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-40d2b4dfba0a074d",
+      "kept_label": "Factory Mean Reversion 5d 375bps (Mean Reversion, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-03a53d17c324dec6"
+      ],
+      "removed_labels": [
+        "Factory Mean Reversion 5d 500bps (Mean Reversion, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-8c53f735cf806348",
+      "kept_label": "Factory Catalyst 5d 375bps (Catalyst, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-b9eeca42dc0b6ac1"
+      ],
+      "removed_labels": [
+        "Factory Catalyst 5d 500bps (Catalyst, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-8947ce22b80b9ee1",
+      "kept_label": "Factory PEAD 5d 375bps (PEAD, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-2799e503bee9bc50"
+      ],
+      "removed_labels": [
+        "Factory PEAD 5d 500bps (PEAD, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-2fa84d3e324d0ad1",
+      "kept_label": "Factory Form 4 Cluster Buying 5d 375bps (Form 4 Cluster Buying, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-cd913686ce1f399c"
+      ],
+      "removed_labels": [
+        "Factory Form 4 Cluster Buying 5d 500bps (Form 4 Cluster Buying, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-0a068c8a27ef583b",
+      "kept_label": "Factory LowVol Tradability 5d 375bps (LowVol Tradability, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-e8820a84c0d6faf6"
+      ],
+      "removed_labels": [
+        "Factory LowVol Tradability 5d 500bps (LowVol Tradability, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-72fadb6d71c63049",
+      "kept_label": "Factory Dollar-Bar Microstructure 5d 375bps (Dollar-Bar Microstructure, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-bccbea39bed3c806"
+      ],
+      "removed_labels": [
+        "Factory Dollar-Bar Microstructure 5d 500bps (Dollar-Bar Microstructure, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-dea4cd8697c22ed5",
+      "kept_label": "Factory Regime Filter 5d 375bps (Regime Filter, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-0a70bc00edb3ff6b"
+      ],
+      "removed_labels": [
+        "Factory Regime Filter 5d 500bps (Regime Filter, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-01ccbce77e85e306",
+      "kept_label": "Factory 13D Activist Follow-On 5d 375bps (13D Activist Follow-On, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-504e005cf35929de"
+      ],
+      "removed_labels": [
+        "Factory 13D Activist Follow-On 5d 500bps (13D Activist Follow-On, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-f9d708e9710586da",
+      "kept_label": "Factory Custom Rule Builder 5d 375bps (Custom Rule Builder, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-8713d4958c02e25f"
+      ],
+      "removed_labels": [
+        "Factory Custom Rule Builder 5d 500bps (Custom Rule Builder, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-936855ed5bd59a5a",
+      "kept_label": "Factory 9:30 AM ORB 5d 375bps (9:30 AM ORB, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-2833589a22eb1996"
+      ],
+      "removed_labels": [
+        "Factory 9:30 AM ORB 5d 500bps (9:30 AM ORB, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-efba882cb8ce39ad",
+      "kept_label": "Factory Momentum 20d 100bps (Momentum, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-d2621bbbf56dff40",
+        "FACTORY-4365a19489b27c36"
+      ],
+      "removed_labels": [
+        "Factory Momentum 20d 375bps (Momentum, FACTOR)",
+        "Factory Momentum 20d 500bps (Momentum, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-d5a39d7a88bc24cf",
+      "kept_label": "Factory Mean Reversion 20d 100bps (Mean Reversion, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-b0100b2bcad2ded2",
+        "FACTORY-17d25540b5e54179"
+      ],
+      "removed_labels": [
+        "Factory Mean Reversion 20d 375bps (Mean Reversion, FACTOR)",
+        "Factory Mean Reversion 20d 500bps (Mean Reversion, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-f497e801a04a00ac",
+      "kept_label": "Factory Catalyst 20d 100bps (Catalyst, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-6bb21d695283dd40",
+        "FACTORY-f0ba087264e60c6a"
+      ],
+      "removed_labels": [
+        "Factory Catalyst 20d 375bps (Catalyst, FACTOR)",
+        "Factory Catalyst 20d 500bps (Catalyst, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-582e3b9b11091a1b",
+      "kept_label": "Factory PEAD 20d 100bps (PEAD, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-95688ad8c98521e1",
+        "FACTORY-dc349166892cc7df"
+      ],
+      "removed_labels": [
+        "Factory PEAD 20d 375bps (PEAD, FACTOR)",
+        "Factory PEAD 20d 500bps (PEAD, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-eeb9cda10c3c0728",
+      "kept_label": "Factory Form 4 Cluster Buying 20d 100bps (Form 4 Cluster Buying, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-200d7c22024910b6",
+        "FACTORY-31b323dbb27dccd2"
+      ],
+      "removed_labels": [
+        "Factory Form 4 Cluster Buying 20d 375bps (Form 4 Cluster Buying, FACTOR)",
+        "Factory Form 4 Cluster Buying 20d 500bps (Form 4 Cluster Buying, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-a48667d59c0341c7",
+      "kept_label": "Factory Regime Filter 20d 100bps (Regime Filter, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-3e07023d857a2656",
+        "FACTORY-d90f9f26691681b5"
+      ],
+      "removed_labels": [
+        "Factory Regime Filter 20d 375bps (Regime Filter, FACTOR)",
+        "Factory Regime Filter 20d 500bps (Regime Filter, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-609f9af8970bab77",
+      "kept_label": "Factory PDUFA Run-Up 20d 100bps (PDUFA Run-Up, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-7b72bd081c7f1f96",
+        "FACTORY-f4bc4ad10d286feb"
+      ],
+      "removed_labels": [
+        "Factory PDUFA Run-Up 20d 375bps (PDUFA Run-Up, FACTOR)",
+        "Factory PDUFA Run-Up 20d 500bps (PDUFA Run-Up, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-71fd1cd246f2c826",
+      "kept_label": "Factory 13D Activist Follow-On 20d 100bps (13D Activist Follow-On, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-b739667ff87eaf74",
+        "FACTORY-a11aeab2b579676d"
+      ],
+      "removed_labels": [
+        "Factory 13D Activist Follow-On 20d 375bps (13D Activist Follow-On, FACTOR)",
+        "Factory 13D Activist Follow-On 20d 500bps (13D Activist Follow-On, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-1ccb2e9a10bbb66a",
+      "kept_label": "Factory Custom Rule Builder 20d 100bps (Custom Rule Builder, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-c0803ca9f67aa76d",
+        "FACTORY-29dc34ee3138d683"
+      ],
+      "removed_labels": [
+        "Factory Custom Rule Builder 20d 375bps (Custom Rule Builder, FACTOR)",
+        "Factory Custom Rule Builder 20d 500bps (Custom Rule Builder, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-9d39f00e50a7ff49",
+      "kept_label": "Factory 9:30 AM ORB 20d 100bps (9:30 AM ORB, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-87e8a4bb35786483",
+        "FACTORY-f2c9931106bc9c82"
+      ],
+      "removed_labels": [
+        "Factory 9:30 AM ORB 20d 375bps (9:30 AM ORB, FACTOR)",
+        "Factory 9:30 AM ORB 20d 500bps (9:30 AM ORB, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-d028fe234d674df1",
+      "kept_label": "Factory LowVol Tradability 20d 375bps (LowVol Tradability, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-6d11f16258c0abf7"
+      ],
+      "removed_labels": [
+        "Factory LowVol Tradability 20d 500bps (LowVol Tradability, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-ef2dfa466e3b0e52",
+      "kept_label": "Factory Dollar-Bar Microstructure 20d 375bps (Dollar-Bar Microstructure, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-ae163c98647d7bea"
+      ],
+      "removed_labels": [
+        "Factory Dollar-Bar Microstructure 20d 500bps (Dollar-Bar Microstructure, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-3649fae5bc1b7b74",
+      "kept_label": "Factory Momentum 45d 100bps (Momentum, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-e608af4f07ff28c5",
+        "FACTORY-e18fa0f3988ad341"
+      ],
+      "removed_labels": [
+        "Factory Momentum 45d 375bps (Momentum, FACTOR)",
+        "Factory Momentum 45d 500bps (Momentum, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-4478d675ccfafd31",
+      "kept_label": "Factory Mean Reversion 45d 100bps (Mean Reversion, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-37c572af2456505a",
+        "FACTORY-f13e649972324e6d"
+      ],
+      "removed_labels": [
+        "Factory Mean Reversion 45d 375bps (Mean Reversion, FACTOR)",
+        "Factory Mean Reversion 45d 500bps (Mean Reversion, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-3d1034410d11b1be",
+      "kept_label": "Factory Catalyst 45d 100bps (Catalyst, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-c75960b30e0ccbc3",
+        "FACTORY-56417e8834fedfe5"
+      ],
+      "removed_labels": [
+        "Factory Catalyst 45d 375bps (Catalyst, FACTOR)",
+        "Factory Catalyst 45d 500bps (Catalyst, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-d6e26b4dde83c8b0",
+      "kept_label": "Factory PEAD 45d 100bps (PEAD, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-5ac7948ae3836df9",
+        "FACTORY-8c83bf25f1c86fc7"
+      ],
+      "removed_labels": [
+        "Factory PEAD 45d 375bps (PEAD, FACTOR)",
+        "Factory PEAD 45d 500bps (PEAD, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-30088dc93bd4a178",
+      "kept_label": "Factory Form 4 Cluster Buying 45d 100bps (Form 4 Cluster Buying, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-51163fa9f51e78ce",
+        "FACTORY-6ad3e5a321c70687"
+      ],
+      "removed_labels": [
+        "Factory Form 4 Cluster Buying 45d 375bps (Form 4 Cluster Buying, FACTOR)",
+        "Factory Form 4 Cluster Buying 45d 500bps (Form 4 Cluster Buying, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-206f18f4951cd8c9",
+      "kept_label": "Factory LowVol Tradability 45d 100bps (LowVol Tradability, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-5ab39e4570644761",
+        "FACTORY-e166b064509b48f3"
+      ],
+      "removed_labels": [
+        "Factory LowVol Tradability 45d 375bps (LowVol Tradability, FACTOR)",
+        "Factory LowVol Tradability 45d 500bps (LowVol Tradability, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-706cdbf4b53724c8",
+      "kept_label": "Factory Dollar-Bar Microstructure 45d 100bps (Dollar-Bar Microstructure, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-ace14c640db8e8f8",
+        "FACTORY-7a0b6cc0e47e9913"
+      ],
+      "removed_labels": [
+        "Factory Dollar-Bar Microstructure 45d 375bps (Dollar-Bar Microstructure, FACTOR)",
+        "Factory Dollar-Bar Microstructure 45d 500bps (Dollar-Bar Microstructure, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-91da581313704e54",
+      "kept_label": "Factory Regime Filter 45d 100bps (Regime Filter, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-1cbd0d3c3b95022d",
+        "FACTORY-9424b27321e327f5"
+      ],
+      "removed_labels": [
+        "Factory Regime Filter 45d 375bps (Regime Filter, FACTOR)",
+        "Factory Regime Filter 45d 500bps (Regime Filter, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-37370ef762fec428",
+      "kept_label": "Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-84018bc09d7b34aa",
+        "FACTORY-8c126ce3235c7b20"
+      ],
+      "removed_labels": [
+        "Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, FACTOR)",
+        "Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-2c22961973d6b9d9",
+      "kept_label": "Factory 13D Activist Follow-On 45d 100bps (13D Activist Follow-On, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-1412a8ffeea876e6",
+        "FACTORY-5b404f42d9bf8050"
+      ],
+      "removed_labels": [
+        "Factory 13D Activist Follow-On 45d 375bps (13D Activist Follow-On, FACTOR)",
+        "Factory 13D Activist Follow-On 45d 500bps (13D Activist Follow-On, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-2306e8d8b69f7be8",
+      "kept_label": "Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-45ebfdbb131f6cbd",
+        "FACTORY-036709cbb90245e8"
+      ],
+      "removed_labels": [
+        "Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, FACTOR)",
+        "Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-5138428531b2cbc4",
+      "kept_label": "Factory 9:30 AM ORB 45d 100bps (9:30 AM ORB, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-a1414413a37a7d80",
+        "FACTORY-8d1b34609a4f06c7"
+      ],
+      "removed_labels": [
+        "Factory 9:30 AM ORB 45d 375bps (9:30 AM ORB, FACTOR)",
+        "Factory 9:30 AM ORB 45d 500bps (9:30 AM ORB, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-4374f4a63472e9d1",
+      "kept_label": "Factory Momentum 90d 100bps (Momentum, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-8f8cac315a45ff9e",
+        "FACTORY-07d58dc6d8516cd2"
+      ],
+      "removed_labels": [
+        "Factory Momentum 90d 375bps (Momentum, FACTOR)",
+        "Factory Momentum 90d 500bps (Momentum, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-2ed1639d36c6b44c",
+      "kept_label": "Factory Mean Reversion 90d 100bps (Mean Reversion, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-663f068161cceb04",
+        "FACTORY-dc41e4a737562d2c"
+      ],
+      "removed_labels": [
+        "Factory Mean Reversion 90d 375bps (Mean Reversion, FACTOR)",
+        "Factory Mean Reversion 90d 500bps (Mean Reversion, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-7d7fc107faf661dc",
+      "kept_label": "Factory Catalyst 90d 100bps (Catalyst, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-dbcae1b95fd38612",
+        "FACTORY-27bfb999b143a3bf"
+      ],
+      "removed_labels": [
+        "Factory Catalyst 90d 375bps (Catalyst, FACTOR)",
+        "Factory Catalyst 90d 500bps (Catalyst, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-fcc65b33bba2a984",
+      "kept_label": "Factory PEAD 90d 100bps (PEAD, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-8c7853c5ae904d13",
+        "FACTORY-5fcd77f2c0517c34"
+      ],
+      "removed_labels": [
+        "Factory PEAD 90d 375bps (PEAD, FACTOR)",
+        "Factory PEAD 90d 500bps (PEAD, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-2fdf6c07a3bcb68d",
+      "kept_label": "Factory Form 4 Cluster Buying 90d 100bps (Form 4 Cluster Buying, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-f3a11def315430dd",
+        "FACTORY-187d8d55eeef6a10"
+      ],
+      "removed_labels": [
+        "Factory Form 4 Cluster Buying 90d 375bps (Form 4 Cluster Buying, FACTOR)",
+        "Factory Form 4 Cluster Buying 90d 500bps (Form 4 Cluster Buying, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-bda4a6a967022002",
+      "kept_label": "Factory LowVol Tradability 90d 100bps (LowVol Tradability, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-919303c9f4bda3a1",
+        "FACTORY-0c7844dc82468698"
+      ],
+      "removed_labels": [
+        "Factory LowVol Tradability 90d 375bps (LowVol Tradability, FACTOR)",
+        "Factory LowVol Tradability 90d 500bps (LowVol Tradability, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-44336afe577baf16",
+      "kept_label": "Factory Dollar-Bar Microstructure 90d 100bps (Dollar-Bar Microstructure, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-8226fabb047803a9",
+        "FACTORY-2860db9797152544"
+      ],
+      "removed_labels": [
+        "Factory Dollar-Bar Microstructure 90d 375bps (Dollar-Bar Microstructure, FACTOR)",
+        "Factory Dollar-Bar Microstructure 90d 500bps (Dollar-Bar Microstructure, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-1ae9c3303191d694",
+      "kept_label": "Factory Regime Filter 90d 100bps (Regime Filter, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-1399577a8d1d5dca",
+        "FACTORY-5ef159f89339a4f8"
+      ],
+      "removed_labels": [
+        "Factory Regime Filter 90d 375bps (Regime Filter, FACTOR)",
+        "Factory Regime Filter 90d 500bps (Regime Filter, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-3a4646fedbd66e5c",
+      "kept_label": "Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-9e5b3dc1b0a6b383",
+        "FACTORY-cd77d4a8eb310124"
+      ],
+      "removed_labels": [
+        "Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, FACTOR)",
+        "Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-3b82ee277a85c752",
+      "kept_label": "Factory 13D Activist Follow-On 90d 100bps (13D Activist Follow-On, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-25beb93c5b115751",
+        "FACTORY-941cc6d3fdd9affc"
+      ],
+      "removed_labels": [
+        "Factory 13D Activist Follow-On 90d 375bps (13D Activist Follow-On, FACTOR)",
+        "Factory 13D Activist Follow-On 90d 500bps (13D Activist Follow-On, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-809ae08874ff229c",
+      "kept_label": "Factory Custom Rule Builder 90d 100bps (Custom Rule Builder, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-f9ae921135d93340",
+        "FACTORY-c43a6563b2178d23"
+      ],
+      "removed_labels": [
+        "Factory Custom Rule Builder 90d 375bps (Custom Rule Builder, FACTOR)",
+        "Factory Custom Rule Builder 90d 500bps (Custom Rule Builder, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-58fde2142f9a24a0",
+      "kept_label": "Factory 9:30 AM ORB 90d 100bps (9:30 AM ORB, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-1e6fb3ffd92f62a9",
+        "FACTORY-5fbad472b1879679"
+      ],
+      "removed_labels": [
+        "Factory 9:30 AM ORB 90d 375bps (9:30 AM ORB, FACTOR)",
+        "Factory 9:30 AM ORB 90d 500bps (9:30 AM ORB, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-e62a48e2d142923e",
+      "kept_label": "Factory Momentum 180d 100bps (Momentum, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-3f1e95ca9e8549c1",
+        "FACTORY-2886d4ef6f931734"
+      ],
+      "removed_labels": [
+        "Factory Momentum 180d 375bps (Momentum, FACTOR)",
+        "Factory Momentum 180d 500bps (Momentum, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-fab94445f0b51fdf",
+      "kept_label": "Factory Mean Reversion 180d 100bps (Mean Reversion, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-e021ad4521158745",
+        "FACTORY-06b51d2083257b36"
+      ],
+      "removed_labels": [
+        "Factory Mean Reversion 180d 375bps (Mean Reversion, FACTOR)",
+        "Factory Mean Reversion 180d 500bps (Mean Reversion, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-6a8afca3951761f9",
+      "kept_label": "Factory Catalyst 180d 100bps (Catalyst, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-3f31720278715f4a",
+        "FACTORY-1a986d424d0dcdde"
+      ],
+      "removed_labels": [
+        "Factory Catalyst 180d 375bps (Catalyst, FACTOR)",
+        "Factory Catalyst 180d 500bps (Catalyst, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-0391e93ebbeb1f98",
+      "kept_label": "Factory PEAD 180d 100bps (PEAD, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-9504b7bcf75908ef",
+        "FACTORY-99796a89a76bfa4c"
+      ],
+      "removed_labels": [
+        "Factory PEAD 180d 375bps (PEAD, FACTOR)",
+        "Factory PEAD 180d 500bps (PEAD, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-5e3bba4315fd435f",
+      "kept_label": "Factory Form 4 Cluster Buying 180d 100bps (Form 4 Cluster Buying, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-06a5bea953601da8",
+        "FACTORY-dbcb37c9ddbb6896"
+      ],
+      "removed_labels": [
+        "Factory Form 4 Cluster Buying 180d 375bps (Form 4 Cluster Buying, FACTOR)",
+        "Factory Form 4 Cluster Buying 180d 500bps (Form 4 Cluster Buying, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-7a19d9d29f26229e",
+      "kept_label": "Factory LowVol Tradability 180d 100bps (LowVol Tradability, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-f93ccb2221606b8b",
+        "FACTORY-a1c67102f5531e27"
+      ],
+      "removed_labels": [
+        "Factory LowVol Tradability 180d 375bps (LowVol Tradability, FACTOR)",
+        "Factory LowVol Tradability 180d 500bps (LowVol Tradability, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-119d99f730b677f6",
+      "kept_label": "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-6965d33db9c8fb5b",
+        "FACTORY-80a6a5b9f8587535"
+      ],
+      "removed_labels": [
+        "Factory Dollar-Bar Microstructure 180d 375bps (Dollar-Bar Microstructure, FACTOR)",
+        "Factory Dollar-Bar Microstructure 180d 500bps (Dollar-Bar Microstructure, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-a26c47e6385e2c63",
+      "kept_label": "Factory Regime Filter 180d 100bps (Regime Filter, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-f084a7400225c73b",
+        "FACTORY-cc3e48f7613e805e"
+      ],
+      "removed_labels": [
+        "Factory Regime Filter 180d 375bps (Regime Filter, FACTOR)",
+        "Factory Regime Filter 180d 500bps (Regime Filter, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-b156c56670aac97e",
+      "kept_label": "Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-fce8300bed43d2aa",
+        "FACTORY-1cb350f28a1d4597"
+      ],
+      "removed_labels": [
+        "Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, FACTOR)",
+        "Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-778a7498ad44efbb",
+      "kept_label": "Factory 13D Activist Follow-On 180d 100bps (13D Activist Follow-On, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-0574d7be5b9a847c",
+        "FACTORY-9883de58e44f5ae7"
+      ],
+      "removed_labels": [
+        "Factory 13D Activist Follow-On 180d 375bps (13D Activist Follow-On, FACTOR)",
+        "Factory 13D Activist Follow-On 180d 500bps (13D Activist Follow-On, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-4c337763d226e0e4",
+      "kept_label": "Factory Custom Rule Builder 180d 100bps (Custom Rule Builder, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-0ea2260f8186ba11",
+        "FACTORY-a3adc8024085df55"
+      ],
+      "removed_labels": [
+        "Factory Custom Rule Builder 180d 375bps (Custom Rule Builder, FACTOR)",
+        "Factory Custom Rule Builder 180d 500bps (Custom Rule Builder, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 3,
+      "kept_component_id": "FACTORY-048d754979815760",
+      "kept_label": "Factory 9:30 AM ORB 180d 100bps (9:30 AM ORB, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-c3d425ca8fa3db00",
+        "FACTORY-553b10663e17fb26"
+      ],
+      "removed_labels": [
+        "Factory 9:30 AM ORB 180d 375bps (9:30 AM ORB, FACTOR)",
+        "Factory 9:30 AM ORB 180d 500bps (9:30 AM ORB, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-6e4f085c13e95091",
+      "kept_label": "Factory Momentum 5d 375bps (Momentum, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-fbbacd667432317c"
+      ],
+      "removed_labels": [
+        "Factory Momentum 5d 500bps (Momentum, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-e1db06c5156f7149",
+      "kept_label": "Factory Mean Reversion 5d 375bps (Mean Reversion, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-688a5013e817d0da"
+      ],
+      "removed_labels": [
+        "Factory Mean Reversion 5d 500bps (Mean Reversion, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-242ddc7a506aa7ba",
+      "kept_label": "Factory Catalyst 5d 375bps (Catalyst, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-8af0d52dca5654af"
+      ],
+      "removed_labels": [
+        "Factory Catalyst 5d 500bps (Catalyst, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-d1893fa9808889ff",
+      "kept_label": "Factory PEAD 5d 375bps (PEAD, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-f100658fbcbfd0d9"
+      ],
+      "removed_labels": [
+        "Factory PEAD 5d 500bps (PEAD, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-4c63f4888d4676d6",
+      "kept_label": "Factory Form 4 Cluster Buying 5d 375bps (Form 4 Cluster Buying, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-c44fa114a55b4e7e"
+      ],
+      "removed_labels": [
+        "Factory Form 4 Cluster Buying 5d 500bps (Form 4 Cluster Buying, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-a8ba3464fded3edb",
+      "kept_label": "Factory LowVol Tradability 5d 375bps (LowVol Tradability, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-da380bbc5f5e93d8"
+      ],
+      "removed_labels": [
+        "Factory LowVol Tradability 5d 500bps (LowVol Tradability, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-4f2398b6e0f737a6",
+      "kept_label": "Factory Dollar-Bar Microstructure 5d 375bps (Dollar-Bar Microstructure, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-de5ef61019341a9d"
+      ],
+      "removed_labels": [
+        "Factory Dollar-Bar Microstructure 5d 500bps (Dollar-Bar Microstructure, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-6ee5b751639cff9d",
+      "kept_label": "Factory Regime Filter 5d 375bps (Regime Filter, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-29518f44dcd8afd3"
+      ],
+      "removed_labels": [
+        "Factory Regime Filter 5d 500bps (Regime Filter, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-eecffd9fc1c8db58",
+      "kept_label": "Factory 13D Activist Follow-On 5d 375bps (13D Activist Follow-On, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-70556db6df05f38a"
+      ],
+      "removed_labels": [
+        "Factory 13D Activist Follow-On 5d 500bps (13D Activist Follow-On, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-f186683398e16f3a",
+      "kept_label": "Factory Custom Rule Builder 5d 375bps (Custom Rule Builder, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-13d69783791ca4de"
+      ],
+      "removed_labels": [
+        "Factory Custom Rule Builder 5d 500bps (Custom Rule Builder, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-832e69dd8d7cef92",
+      "kept_label": "Factory 9:30 AM ORB 5d 375bps (9:30 AM ORB, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-d3a7487f53385ea9"
+      ],
+      "removed_labels": [
+        "Factory 9:30 AM ORB 5d 500bps (9:30 AM ORB, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-511e400b5c4a876b",
+      "kept_label": "Factory Momentum 20d 375bps (Momentum, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-24c6670e8a410cae"
+      ],
+      "removed_labels": [
+        "Factory Momentum 20d 500bps (Momentum, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-115ab24aa842c356",
+      "kept_label": "Factory Mean Reversion 20d 375bps (Mean Reversion, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-214e36d619e8364b"
+      ],
+      "removed_labels": [
+        "Factory Mean Reversion 20d 500bps (Mean Reversion, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-0971e80d69e19c37",
+      "kept_label": "Factory Catalyst 20d 375bps (Catalyst, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-7b5e4a28452607cf"
+      ],
+      "removed_labels": [
+        "Factory Catalyst 20d 500bps (Catalyst, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-48339998c1f9883a",
+      "kept_label": "Factory PEAD 20d 375bps (PEAD, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-005e7108e32c5c35"
+      ],
+      "removed_labels": [
+        "Factory PEAD 20d 500bps (PEAD, FACTOR)"
+      ]
+    },
+    {
+      "group_size": 2,
+      "kept_component_id": "FACTORY-014d208df652e32d",
+      "kept_label": "Factory Form 4 Cluster Buying 20d 375bps (Form 4 Cluster Buying, FACTOR)",
+      "reason": "same_template_and_near_identical_returns",
+      "removed_component_ids": [
+        "FACTORY-9166cc2a2cf7438b"
+      ],
+      "removed_labels": [
+        "Factory Form 4 Cluster Buying 20d 500bps (Form 4 Cluster Buying, FACTOR)"
+      ]
+    }
+  ],
+  "removed_component_count": 131,
+  "rule": "same template + same analysis mode + absolute return correlation >= 0.98"
+}

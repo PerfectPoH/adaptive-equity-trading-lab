@@ -1,0 +1,15 @@
+{
+  "blockers": [
+    "factory_generated_scope_gate"
+  ],
+  "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "net_return_sum": 457.49891109,
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "runner_mode": "diagnostic_local_portfolio_composer",
+  "trial_status": "SEPARATE_PORTFOLIO_TRIAL_DRY_RUN_COMPLETE"
+}

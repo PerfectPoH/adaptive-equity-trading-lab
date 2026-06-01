@@ -1,0 +1,37 @@
+{
+  "anti_overfit_disclosures": [
+    "selected_after_search",
+    "portfolio_diagnostic_only",
+    "promotion_locked_false",
+    "factory_generated_scope",
+    "component_bias_warnings_present"
+  ],
+  "approval_gate_id": "PORTFOLIO-PREREG-APPROVAL-8318fdacd5b5b2a3",
+  "approval_note": "Approved from Portfolio Lab UI for separate dry-run only.",
+  "approved_at_utc": "2026-05-31T22:55:38+00:00",
+  "approved_by": "local_user",
+  "blocked_actions": [
+    "paper_trading",
+    "live_trading",
+    "promotion_without_final_decision",
+    "provider_query_without_new_gate",
+    "market_data_download_without_new_gate"
+  ],
+  "draft_id": "8318fdacd5b5b2a3",
+  "falsification_criteria": [
+    "Archive if the basket fails after removing the strongest component.",
+    "Archive if cost stress at 1.5x declared costs flips the net result negative.",
+    "Archive if a single component contributes more than 40% of positive contribution.",
+    "Archive if high correlation shows the basket is a hidden duplicate bet.",
+    "Archive or keep diagnostic-only if any component still depends on factory-generated/proxy data."
+  ],
+  "live_trading_allowed": false,
+  "market_data_download_allowed": false,
+  "next_allowed_action": "separate_portfolio_trial_dry_run",
+  "paper_trading_allowed": false,
+  "promotion_allowed": false,
+  "provider_query_allowed": false,
+  "required_next_step": "Run a separate portfolio trial from this approved draft; do not reuse factory-search metrics as evidence.",
+  "status": "APPROVED_FOR_SEPARATE_PORTFOLIO_TRIAL_ONLY",
+  "trial_id": "PORTFOLIO-PREREG-8318FDACD5B5B2A3"
+}

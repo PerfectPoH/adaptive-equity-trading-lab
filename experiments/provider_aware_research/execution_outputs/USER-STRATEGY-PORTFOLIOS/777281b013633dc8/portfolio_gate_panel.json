@@ -1,0 +1,84 @@
+[
+  {
+    "detail": "Any proxy, active-only, PIT, or survivorship warning keeps the portfolio diagnostic-only.",
+    "gate": "data_contract_gate",
+    "status": "WARN",
+    "value": [
+      "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+      "FACTORY_GENERATED_NOT_PREREGISTERED",
+      "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+      "PROXY_DATA_SCOPE_NOT_PROMOTABLE",
+      "SURVIVORSHIP_BIAS_SUSPECTED_HIGH"
+    ]
+  },
+  {
+    "detail": "Generated catalog components are hypothesis discovery recipes, not pre-registered evidence.",
+    "gate": "factory_generated_scope_gate",
+    "status": "BLOCK",
+    "value": {
+      "factory_generated_component_count": 243,
+      "factory_generated_component_ids": [
+        "28fb7b03aa56a91e",
+        "9474fe601e0f2bd2",
+        "FACTORY-005e7108e32c5c35",
+        "FACTORY-012e1765b0c286d8",
+        "FACTORY-014d208df652e32d",
+        "FACTORY-01ccbce77e85e306",
+        "FACTORY-036709cbb90245e8",
+        "FACTORY-0391e93ebbeb1f98",
+        "FACTORY-03a53d17c324dec6",
+        "FACTORY-048d754979815760",
+        "FACTORY-0574d7be5b9a847c",
+        "FACTORY-0584cabbb54594ec"
+      ]
+    }
+  },
+  {
+    "detail": "Requires at least 3 saved strategy components for a toy diagnostic portfolio.",
+    "gate": "component_count_gate",
+    "status": "PASS",
+    "value": 298
+  },
+  {
+    "detail": "Blocks when the best component explains more than 40% of positive portfolio contribution.",
+    "gate": "component_concentration_gate",
+    "status": "PASS",
+    "value": 0.04544566
+  },
+  {
+    "detail": "Warns when one sleeve dominates capital allocation.",
+    "gate": "strategy_family_concentration_gate",
+    "status": "PASS",
+    "value": 0.59999973
+  },
+  {
+    "detail": "High correlation means components may be the same hidden bet.",
+    "gate": "correlation_gate",
+    "status": "PASS",
+    "value": 0.0966716
+  },
+  {
+    "detail": "Reports the worst local drawdown of the composed portfolio.",
+    "gate": "drawdown_gate",
+    "status": "WARN",
+    "value": -3.9792313
+  },
+  {
+    "detail": "Replays the portfolio after removing its best component.",
+    "gate": "ex_best_component_gate",
+    "status": "PASS",
+    "value": {
+      "best_component": "FACTORY-fab94445f0b51fdf",
+      "ex_best_net_return": 60.91796846
+    }
+  },
+  {
+    "detail": "Replays the portfolio with 1.5x declared component costs.",
+    "gate": "cost_stress_gate",
+    "status": "PASS",
+    "value": {
+      "extra_cost_drag_per_period": 0.01723733,
+      "stressed_net_return": 28.81989421
+    }
+  }
+]

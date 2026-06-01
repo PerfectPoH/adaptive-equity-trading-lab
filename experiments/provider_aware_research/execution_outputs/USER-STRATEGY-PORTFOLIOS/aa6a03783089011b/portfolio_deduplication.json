@@ -1,0 +1,11 @@
+{
+  "deduped_component_ids": [
+    "bcfc1ff3b7cf8a4a",
+    "9c7fb1982851f609",
+    "dcfbeec9cf4c5190"
+  ],
+  "duplicate_group_count": 0,
+  "groups": [],
+  "removed_component_count": 0,
+  "rule": "same template + same analysis mode + absolute return correlation >= 0.98"
+}

@@ -1,0 +1,138 @@
+{
+  "anti_overfit_disclosures": [
+    "component_bias_warnings_present",
+    "factory_generated_scope",
+    "iterative_search_after_candidate_001",
+    "portfolio_diagnostic_only",
+    "promotion_locked_false",
+    "selected_after_search"
+  ],
+  "draft_id": "8ae940faff3f492a",
+  "falsification_criteria": [
+    "Archive if the basket fails after removing the strongest component.",
+    "Archive if cost stress at 1.5x declared costs flips the net result negative.",
+    "Archive if a single component contributes more than 40% of positive contribution.",
+    "Archive if high correlation shows the basket is a hidden duplicate bet.",
+    "Archive or keep diagnostic-only if any component still depends on factory-generated/proxy data."
+  ],
+  "frozen_allocation_policy": {
+    "allowed_policies": [
+      "sleeve_allocation",
+      "equal_weight",
+      "inverse_volatility"
+    ],
+    "default_policy": "sleeve_allocation",
+    "reason": "Weights must be explainable before the validation run; no hindsight Sharpe optimization.",
+    "weight_optimization_allowed": false
+  },
+  "hypothesis": "A bounded basket of separately governed strategy components may be more robust than any single component after costs, duplicate removal, correlation checks, and ex-best stress.",
+  "live_trading_allowed": false,
+  "market_data_download_allowed": false,
+  "paper_trading_allowed": false,
+  "promotion_allowed": false,
+  "provider_query_allowed": false,
+  "required_next_step": "User must manually approve this draft, then rerun as a separately pre-registered portfolio trial before interpreting candidate status.",
+  "selected_components": [
+    {
+      "analysis_mode": "Investment",
+      "bias_warnings": [
+        "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+        "FACTORY_GENERATED_NOT_PREREGISTERED",
+        "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+      ],
+      "component_id": "FACTORY-e62a48e2d142923e",
+      "cost_bps": 100,
+      "decision_at_selection_time": "INVESTMENT_RESEARCH_CANDIDATE_ONLY",
+      "net_return_sum_proxy": 559.116288,
+      "source": "factory_generated",
+      "strategy_name": "Factory Momentum 180d 100bps",
+      "template": "Momentum",
+      "trade_count_proxy": 1440
+    },
+    {
+      "analysis_mode": "Investment",
+      "bias_warnings": [
+        "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+        "FACTORY_GENERATED_NOT_PREREGISTERED",
+        "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+      ],
+      "component_id": "FACTORY-fab94445f0b51fdf",
+      "cost_bps": 100,
+      "decision_at_selection_time": "INVESTMENT_RESEARCH_CANDIDATE_ONLY",
+      "net_return_sum_proxy": 488.065604,
+      "source": "factory_generated",
+      "strategy_name": "Factory Mean Reversion 180d 100bps",
+      "template": "Mean Reversion",
+      "trade_count_proxy": 1120
+    },
+    {
+      "analysis_mode": "Investment",
+      "bias_warnings": [
+        "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+        "FACTORY_GENERATED_NOT_PREREGISTERED",
+        "PROXY_DATA_SCOPE_NOT_PROMOTABLE",
+        "SURVIVORSHIP_BIAS_SUSPECTED_HIGH"
+      ],
+      "component_id": "FACTORY-6a8afca3951761f9",
+      "cost_bps": 100,
+      "decision_at_selection_time": "INVESTMENT_RESEARCH_CANDIDATE_ONLY",
+      "net_return_sum_proxy": 386.166453,
+      "source": "factory_generated",
+      "strategy_name": "Factory Catalyst 180d 100bps",
+      "template": "Catalyst",
+      "trade_count_proxy": 880
+    },
+    {
+      "analysis_mode": "Investment",
+      "bias_warnings": [
+        "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+        "FACTORY_GENERATED_NOT_PREREGISTERED",
+        "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+      ],
+      "component_id": "FACTORY-119d99f730b677f6",
+      "cost_bps": 100,
+      "decision_at_selection_time": "INVESTMENT_RESEARCH_CANDIDATE_ONLY",
+      "net_return_sum_proxy": 378.814167,
+      "source": "factory_generated",
+      "strategy_name": "Factory Dollar-Bar Microstructure 180d 100bps",
+      "template": "Dollar-Bar Microstructure",
+      "trade_count_proxy": 1040
+    }
+  ],
+  "source_search": {
+    "anti_overfit_note": "Discovered after Candidate 001 on the same local/proxy search surface; diagnostic-only.",
+    "best_component_labels": [
+      "Factory Momentum 180d 100bps",
+      "Factory Mean Reversion 180d 100bps",
+      "Factory Catalyst 180d 100bps",
+      "Factory Dollar-Bar Microstructure 180d 100bps"
+    ],
+    "best_summary": {
+      "average_abs_correlation": 0.17922697,
+      "component_count": 4,
+      "ex_best_net_return": 427.56584025,
+      "max_drawdown": -12.314241,
+      "stressed_net_return": 453.7556985,
+      "top_component_contribution": 0.63130204,
+      "total_net_return": 463.8656985,
+      "train_net_return": 155.9160519,
+      "validation_net_return": 307.9496466
+    },
+    "candidate_sequence": "PORTFOLIO-CANDIDATE-002",
+    "evaluated_candidate_count": 3223,
+    "objective": "maximize validation-weighted robust score after duplicate removal, cost stress, contribution concentration, and correlation penalties",
+    "selection_rule": "predeclared_robust_score_no_promotion",
+    "source_saved_portfolio_id": "777281b013633dc8"
+  },
+  "source_summary": {
+    "factory_generated": 4
+  },
+  "status": "PREREGISTRATION_DRAFT_REQUIRES_MANUAL_APPROVAL",
+  "template_mix": [
+    "Catalyst",
+    "Dollar-Bar Microstructure",
+    "Mean Reversion",
+    "Momentum"
+  ],
+  "trial_id": "PORTFOLIO-PREREG-CANDIDATE-002-8AE940FAFF3F492A"
+}

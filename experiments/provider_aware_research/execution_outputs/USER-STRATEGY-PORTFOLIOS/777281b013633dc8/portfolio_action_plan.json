@@ -1,0 +1,17 @@
+[
+  {
+    "action": "Convert the generated components into explicit Workbench manifests, pre-register them, and rerun before reading candidate status.",
+    "severity": "block",
+    "title": "Factory search is diagnostic-only"
+  },
+  {
+    "action": "Start by removing either My falsifiable strategy (Catalyst, aeb3c9) or My falsifiable strategy (9:30 AM ORB, ef3f1e), then rerun. They appear to be overlapping bets.",
+    "severity": "warn",
+    "title": "646 highly correlated component pair(s)"
+  },
+  {
+    "action": "Resolve PIT, delisted, or proxy-data warnings before interpreting this as real strategy evidence.",
+    "severity": "warn",
+    "title": "Data quality keeps this diagnostic-only"
+  }
+]

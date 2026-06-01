@@ -1,0 +1,78 @@
+{
+  "anti_overfit_disclosures": [
+    "iterative_search_after_candidate_001",
+    "same_sample_candidate_comparison",
+    "diagnostic_only_not_model_selection_evidence",
+    "requires_external_data_gate_before_true_backtest"
+  ],
+  "candidate_001": {
+    "blockers": [
+      "factory_generated_scope_gate"
+    ],
+    "candidate_id": "PORTFOLIO-CANDIDATE-001",
+    "component_count": 3,
+    "component_ids": [
+      "9474fe601e0f2bd2",
+      "a42078cbf0a2ea94",
+      "28fb7b03aa56a91e"
+    ],
+    "max_drawdown": -14.11430053,
+    "source_id": "b498982ed520e2d3",
+    "total_net_return": 475.33201491,
+    "validation_net_return": 217.51552181
+  },
+  "candidate_002": {
+    "blockers": [
+      "factory_generated_scope_gate",
+      "iterative_search_after_candidate_001"
+    ],
+    "candidate_id": "PORTFOLIO-CANDIDATE-002",
+    "component_count": 4,
+    "component_ids": [
+      "FACTORY-e62a48e2d142923e",
+      "FACTORY-fab94445f0b51fdf",
+      "FACTORY-6a8afca3951761f9",
+      "FACTORY-119d99f730b677f6"
+    ],
+    "component_templates": [
+      "Catalyst",
+      "Dollar-Bar Microstructure",
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "max_drawdown": -13.611672,
+    "source_id": "e832f14bb7290f18",
+    "total_net_return": 453.040628,
+    "validation_net_return": 302.81306575
+  },
+  "comparison_id": "PORTFOLIO-CANDIDATE-COMPARISON-001",
+  "deltas": {
+    "component_count_delta": 1,
+    "component_overlap_ratio": 0.0,
+    "max_drawdown_improvement": 0.50262853,
+    "total_net_return_delta": -22.29138691,
+    "validation_net_return_delta": 85.29754394
+  },
+  "final_decision": {
+    "blockers": [
+      "iterative_search_after_candidate_001",
+      "external_data_contract_gate"
+    ],
+    "decision": "PORTFOLIO_CANDIDATE_COMPARISON_DIAGNOSTIC_ONLY",
+    "live_trading_allowed": false,
+    "market_data_download_performed": false,
+    "paper_trading_allowed": false,
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false,
+    "provider_query_performed": false,
+    "runner_mode": "candidate_comparison_only"
+  },
+  "interpretation": "Candidate 002 may be preferable for manual research review if it improves validation and drawdown, but because it was discovered after Candidate 001 on the same local/proxy search surface it cannot be promotion evidence.",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "paper_trading_allowed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "status": "PORTFOLIO_CANDIDATE_COMPARISON_COMPLETE",
+  "winner_for_research_review": "PORTFOLIO-CANDIDATE-002"
+}

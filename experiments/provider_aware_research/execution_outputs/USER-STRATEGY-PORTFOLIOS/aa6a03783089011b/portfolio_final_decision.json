@@ -1,0 +1,14 @@
+{
+  "blockers": [
+    "component_concentration_gate"
+  ],
+  "decision": "PORTFOLIO_ARCHIVE_CONCENTRATION_FAILED",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "net_return_sum": 12.16586,
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "runner_mode": "diagnostic_local_portfolio_composer"
+}

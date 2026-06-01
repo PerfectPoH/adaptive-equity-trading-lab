@@ -1,0 +1,647 @@
+left_component_id,right_component_id,left_strategy,right_strategy,correlation
+aeb3c97678fffc03,ef3f1ebb21d03d5c,"My falsifiable strategy (Catalyst, aeb3c9)","My falsifiable strategy (9:30 AM ORB, ef3f1e)",1.0
+aeb3c97678fffc03,ee5692c4832db94b,"My falsifiable strategy (Catalyst, aeb3c9)","9:15 (9:30 AM ORB, ee5692)",1.0
+f884aeb8a0a20815,e0008aaebb2fda63,"My falsifiable strategy (Mean Reversion, f884ae)","My falsifiable strategy (Mean Reversion, e0008a)",1.0
+a37a53c4e1fce137,913c67d63ee5a478,"My falsifiable strategy (Momentum, a37a53)","My falsifiable strategy (Momentum, 913c67)",1.0
+ef3f1ebb21d03d5c,ee5692c4832db94b,"My falsifiable strategy (9:30 AM ORB, ef3f1e)","9:15 (9:30 AM ORB, ee5692)",1.0
+7d30471f7325a2a8,f8e4773a916f0f75,"gg (PDUFA Run-Up, 7d3047)","My falsifiable strategy (PDUFA Run-Up, f8e477)",1.0
+7d30471f7325a2a8,08a55727092fc895,"gg (PDUFA Run-Up, 7d3047)","My falsifiable strategy (PDUFA Run-Up, 08a557)",1.0
+7d30471f7325a2a8,faf6a5f0b841f6f7,"gg (PDUFA Run-Up, 7d3047)","My falsifiable strategy (PDUFA Run-Up, faf6a5)",1.0
+f8e4773a916f0f75,08a55727092fc895,"My falsifiable strategy (PDUFA Run-Up, f8e477)","My falsifiable strategy (PDUFA Run-Up, 08a557)",1.0
+f8e4773a916f0f75,faf6a5f0b841f6f7,"My falsifiable strategy (PDUFA Run-Up, f8e477)","My falsifiable strategy (PDUFA Run-Up, faf6a5)",1.0
+fda6a92d0fdc1a1d,10c52726d554590d,"My falsifiable strategy (PDUFA Run-Up, fda6a9)","My falsifiable strategy (PDUFA Run-Up, 10c527)",1.0
+277f5aa08f7f9d9c,adcb9498d7e107c0,"My falsifiable strategy (Form 4 Cluster Buying, 277f5a)","My falsifiable strategy (Form 4 Cluster Buying, adcb94)",1.0
+a669c488d63a2146,672c7336643b6bf1,"My falsifiable strategy (Form 4 Cluster Buying, a669c4)","My falsifiable strategy (Form 4 Cluster Buying, 672c73)",1.0
+08a55727092fc895,faf6a5f0b841f6f7,"My falsifiable strategy (PDUFA Run-Up, 08a557)","My falsifiable strategy (PDUFA Run-Up, faf6a5)",1.0
+55727f67f28b0c3c,6c6bb20cdb419497,"My falsifiable strategy (PDUFA Run-Up, 55727f)","My falsifiable strategy (PDUFA Run-Up, 6c6bb2)",1.0
+55727f67f28b0c3c,f14bfb46255e825b,"My falsifiable strategy (PDUFA Run-Up, 55727f)","My falsifiable strategy (PDUFA Run-Up, f14bfb)",1.0
+6c6bb20cdb419497,f14bfb46255e825b,"My falsifiable strategy (PDUFA Run-Up, 6c6bb2)","My falsifiable strategy (PDUFA Run-Up, f14bfb)",1.0
+FACTORY-7beb5d7a8b8038c1,FACTORY-1429370489f690ad,"Factory Catalyst 5d 100bps (Catalyst, F-7beb5d)","Factory 9:30 AM ORB 5d 100bps (9:30 AM ORB, F-142937)",1.0
+FACTORY-8c53f735cf806348,FACTORY-936855ed5bd59a5a,"Factory Catalyst 5d 375bps (Catalyst, F-8c53f7)","Factory 9:30 AM ORB 5d 375bps (9:30 AM ORB, F-936855)",1.0
+FACTORY-b9eeca42dc0b6ac1,FACTORY-2833589a22eb1996,"Factory Catalyst 5d 500bps (Catalyst, F-b9eeca)","Factory 9:30 AM ORB 5d 500bps (9:30 AM ORB, F-283358)",1.0
+FACTORY-f497e801a04a00ac,FACTORY-9d39f00e50a7ff49,"Factory Catalyst 20d 100bps (Catalyst, F-f497e8)","Factory 9:30 AM ORB 20d 100bps (9:30 AM ORB, F-9d39f0)",1.0
+FACTORY-6bb21d695283dd40,FACTORY-87e8a4bb35786483,"Factory Catalyst 20d 375bps (Catalyst, F-6bb21d)","Factory 9:30 AM ORB 20d 375bps (9:30 AM ORB, F-87e8a4)",1.0
+FACTORY-f0ba087264e60c6a,FACTORY-f2c9931106bc9c82,"Factory Catalyst 20d 500bps (Catalyst, F-f0ba08)","Factory 9:30 AM ORB 20d 500bps (9:30 AM ORB, F-f2c993)",1.0
+FACTORY-3d1034410d11b1be,FACTORY-5138428531b2cbc4,"Factory Catalyst 45d 100bps (Catalyst, F-3d1034)","Factory 9:30 AM ORB 45d 100bps (9:30 AM ORB, F-513842)",1.0
+FACTORY-c75960b30e0ccbc3,FACTORY-a1414413a37a7d80,"Factory Catalyst 45d 375bps (Catalyst, F-c75960)","Factory 9:30 AM ORB 45d 375bps (9:30 AM ORB, F-a14144)",1.0
+FACTORY-56417e8834fedfe5,FACTORY-8d1b34609a4f06c7,"Factory Catalyst 45d 500bps (Catalyst, F-56417e)","Factory 9:30 AM ORB 45d 500bps (9:30 AM ORB, F-8d1b34)",1.0
+FACTORY-7d7fc107faf661dc,FACTORY-58fde2142f9a24a0,"Factory Catalyst 90d 100bps (Catalyst, F-7d7fc1)","Factory 9:30 AM ORB 90d 100bps (9:30 AM ORB, F-58fde2)",1.0
+FACTORY-dbcae1b95fd38612,FACTORY-1e6fb3ffd92f62a9,"Factory Catalyst 90d 375bps (Catalyst, F-dbcae1)","Factory 9:30 AM ORB 90d 375bps (9:30 AM ORB, F-1e6fb3)",1.0
+FACTORY-27bfb999b143a3bf,FACTORY-5fbad472b1879679,"Factory Catalyst 90d 500bps (Catalyst, F-27bfb9)","Factory 9:30 AM ORB 90d 500bps (9:30 AM ORB, F-5fbad4)",1.0
+FACTORY-6a8afca3951761f9,FACTORY-048d754979815760,"Factory Catalyst 180d 100bps (Catalyst, F-6a8afc)","Factory 9:30 AM ORB 180d 100bps (9:30 AM ORB, F-048d75)",1.0
+FACTORY-3f31720278715f4a,FACTORY-c3d425ca8fa3db00,"Factory Catalyst 180d 375bps (Catalyst, F-3f3172)","Factory 9:30 AM ORB 180d 375bps (9:30 AM ORB, F-c3d425)",1.0
+FACTORY-1a986d424d0dcdde,FACTORY-553b10663e17fb26,"Factory Catalyst 180d 500bps (Catalyst, F-1a986d)","Factory 9:30 AM ORB 180d 500bps (9:30 AM ORB, F-553b10)",1.0
+FACTORY-673b8aef9706882d,FACTORY-8dd755e2f8762126,"Factory Catalyst 5d 100bps (Catalyst, F-673b8a)","Factory 9:30 AM ORB 5d 100bps (9:30 AM ORB, F-8dd755)",1.0
+FACTORY-242ddc7a506aa7ba,FACTORY-832e69dd8d7cef92,"Factory Catalyst 5d 375bps (Catalyst, F-242ddc)","Factory 9:30 AM ORB 5d 375bps (9:30 AM ORB, F-832e69)",1.0
+FACTORY-8af0d52dca5654af,FACTORY-d3a7487f53385ea9,"Factory Catalyst 5d 500bps (Catalyst, F-8af0d5)","Factory 9:30 AM ORB 5d 500bps (9:30 AM ORB, F-d3a748)",1.0
+FACTORY-48f166c1c0802b66,FACTORY-18898b7dda64c53e,"Factory Catalyst 20d 100bps (Catalyst, F-48f166)","Factory 9:30 AM ORB 20d 100bps (9:30 AM ORB, F-18898b)",1.0
+FACTORY-0971e80d69e19c37,FACTORY-7913b08e73e03618,"Factory Catalyst 20d 375bps (Catalyst, F-0971e8)","Factory 9:30 AM ORB 20d 375bps (9:30 AM ORB, F-7913b0)",1.0
+FACTORY-fce8300bed43d2aa,FACTORY-1cb350f28a1d4597,"Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, F-fce830)","Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, F-1cb350)",0.99998828
+FACTORY-84018bc09d7b34aa,FACTORY-8c126ce3235c7b20,"Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, F-84018b)","Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, F-8c126c)",0.99997535
+FACTORY-9e5b3dc1b0a6b383,FACTORY-cd77d4a8eb310124,"Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, F-9e5b3d)","Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, F-cd77d4)",0.99996207
+FACTORY-b156c56670aac97e,FACTORY-fce8300bed43d2aa,"Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, F-b156c5)","Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, F-fce830)",0.99994416
+FACTORY-9504b7bcf75908ef,FACTORY-99796a89a76bfa4c,"Factory PEAD 180d 375bps (PEAD, F-9504b7)","Factory PEAD 180d 500bps (PEAD, F-99796a)",0.99992714
+FACTORY-3f31720278715f4a,FACTORY-1a986d424d0dcdde,"Factory Catalyst 180d 375bps (Catalyst, F-3f3172)","Factory Catalyst 180d 500bps (Catalyst, F-1a986d)",0.99992623
+FACTORY-3f31720278715f4a,FACTORY-553b10663e17fb26,"Factory Catalyst 180d 375bps (Catalyst, F-3f3172)","Factory 9:30 AM ORB 180d 500bps (9:30 AM ORB, F-553b10)",0.99992623
+FACTORY-c3d425ca8fa3db00,FACTORY-1a986d424d0dcdde,"Factory 9:30 AM ORB 180d 375bps (9:30 AM ORB, F-c3d425)","Factory Catalyst 180d 500bps (Catalyst, F-1a986d)",0.99992623
+FACTORY-c3d425ca8fa3db00,FACTORY-553b10663e17fb26,"Factory 9:30 AM ORB 180d 375bps (9:30 AM ORB, F-c3d425)","Factory 9:30 AM ORB 180d 500bps (9:30 AM ORB, F-553b10)",0.99992623
+FACTORY-0ea2260f8186ba11,FACTORY-a3adc8024085df55,"Factory Custom Rule Builder 180d 375bps (Custom Rule Builder, F-0ea226)","Factory Custom Rule Builder 180d 500bps (Custom Rule Builder, F-a3adc8)",0.99992597
+FACTORY-6965d33db9c8fb5b,FACTORY-80a6a5b9f8587535,"Factory Dollar-Bar Microstructure 180d 375bps (Dollar-Bar Microstructure, F-6965d3)","Factory Dollar-Bar Microstructure 180d 500bps (Dollar-Bar Microstructure, F-80a6a5)",0.9999122
+FACTORY-e021ad4521158745,FACTORY-06b51d2083257b36,"Factory Mean Reversion 180d 375bps (Mean Reversion, F-e021ad)","Factory Mean Reversion 180d 500bps (Mean Reversion, F-06b51d)",0.99990594
+FACTORY-f084a7400225c73b,FACTORY-cc3e48f7613e805e,"Factory Regime Filter 180d 375bps (Regime Filter, F-f084a7)","Factory Regime Filter 180d 500bps (Regime Filter, F-cc3e48)",0.99988897
+FACTORY-37370ef762fec428,FACTORY-84018bc09d7b34aa,"Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, F-37370e)","Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, F-84018b)",0.99988284
+FACTORY-b156c56670aac97e,FACTORY-1cb350f28a1d4597,"Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, F-b156c5)","Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, F-1cb350)",0.99988127
+FACTORY-06a5bea953601da8,FACTORY-dbcb37c9ddbb6896,"Factory Form 4 Cluster Buying 180d 375bps (Form 4 Cluster Buying, F-06a5be)","Factory Form 4 Cluster Buying 180d 500bps (Form 4 Cluster Buying, F-dbcb37)",0.99988034
+FACTORY-3f1e95ca9e8549c1,FACTORY-2886d4ef6f931734,"Factory Momentum 180d 375bps (Momentum, F-3f1e95)","Factory Momentum 180d 500bps (Momentum, F-2886d4)",0.99987616
+FACTORY-0574d7be5b9a847c,FACTORY-9883de58e44f5ae7,"Factory 13D Activist Follow-On 180d 375bps (13D Activist Follow-On, F-0574d7)","Factory 13D Activist Follow-On 180d 500bps (13D Activist Follow-On, F-9883de)",0.99985185
+FACTORY-3a4646fedbd66e5c,FACTORY-9e5b3dc1b0a6b383,"Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, F-3a4646)","Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, F-9e5b3d)",0.99982024
+FACTORY-7b72bd081c7f1f96,FACTORY-f4bc4ad10d286feb,"Factory PDUFA Run-Up 20d 375bps (PDUFA Run-Up, F-7b72bd)","Factory PDUFA Run-Up 20d 500bps (PDUFA Run-Up, F-f4bc4a)",0.99981726
+FACTORY-f93ccb2221606b8b,FACTORY-a1c67102f5531e27,"Factory LowVol Tradability 180d 375bps (LowVol Tradability, F-f93ccb)","Factory LowVol Tradability 180d 500bps (LowVol Tradability, F-a1c671)",0.99979538
+FACTORY-8226fabb047803a9,FACTORY-2860db9797152544,"Factory Dollar-Bar Microstructure 90d 375bps (Dollar-Bar Microstructure, F-8226fa)","Factory Dollar-Bar Microstructure 90d 500bps (Dollar-Bar Microstructure, F-2860db)",0.9997925
+FACTORY-8c7853c5ae904d13,FACTORY-5fcd77f2c0517c34,"Factory PEAD 90d 375bps (PEAD, F-8c7853)","Factory PEAD 90d 500bps (PEAD, F-5fcd77)",0.99978467
+FACTORY-f9ae921135d93340,FACTORY-c43a6563b2178d23,"Factory Custom Rule Builder 90d 375bps (Custom Rule Builder, F-f9ae92)","Factory Custom Rule Builder 90d 500bps (Custom Rule Builder, F-c43a65)",0.99978314
+FACTORY-37370ef762fec428,FACTORY-8c126ce3235c7b20,"Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, F-37370e)","Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, F-8c126c)",0.99975071
+FACTORY-dbcae1b95fd38612,FACTORY-27bfb999b143a3bf,"Factory Catalyst 90d 375bps (Catalyst, F-dbcae1)","Factory Catalyst 90d 500bps (Catalyst, F-27bfb9)",0.99974915
+FACTORY-dbcae1b95fd38612,FACTORY-5fbad472b1879679,"Factory Catalyst 90d 375bps (Catalyst, F-dbcae1)","Factory 9:30 AM ORB 90d 500bps (9:30 AM ORB, F-5fbad4)",0.99974915
+FACTORY-1e6fb3ffd92f62a9,FACTORY-27bfb999b143a3bf,"Factory 9:30 AM ORB 90d 375bps (9:30 AM ORB, F-1e6fb3)","Factory Catalyst 90d 500bps (Catalyst, F-27bfb9)",0.99974915
+FACTORY-1e6fb3ffd92f62a9,FACTORY-5fbad472b1879679,"Factory 9:30 AM ORB 90d 375bps (9:30 AM ORB, F-1e6fb3)","Factory 9:30 AM ORB 90d 500bps (9:30 AM ORB, F-5fbad4)",0.99974915
+FACTORY-45ebfdbb131f6cbd,FACTORY-036709cbb90245e8,"Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)","Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)",0.99974104
+FACTORY-663f068161cceb04,FACTORY-dc41e4a737562d2c,"Factory Mean Reversion 90d 375bps (Mean Reversion, F-663f06)","Factory Mean Reversion 90d 500bps (Mean Reversion, F-dc41e4)",0.99972008
+FACTORY-f3a11def315430dd,FACTORY-187d8d55eeef6a10,"Factory Form 4 Cluster Buying 90d 375bps (Form 4 Cluster Buying, F-f3a11d)","Factory Form 4 Cluster Buying 90d 500bps (Form 4 Cluster Buying, F-187d8d)",0.99966316
+FACTORY-0391e93ebbeb1f98,FACTORY-9504b7bcf75908ef,"Factory PEAD 180d 100bps (PEAD, F-0391e9)","Factory PEAD 180d 375bps (PEAD, F-9504b7)",0.99966121
+FACTORY-6a8afca3951761f9,FACTORY-3f31720278715f4a,"Factory Catalyst 180d 100bps (Catalyst, F-6a8afc)","Factory Catalyst 180d 375bps (Catalyst, F-3f3172)",0.99965776
+FACTORY-6a8afca3951761f9,FACTORY-c3d425ca8fa3db00,"Factory Catalyst 180d 100bps (Catalyst, F-6a8afc)","Factory 9:30 AM ORB 180d 375bps (9:30 AM ORB, F-c3d425)",0.99965776
+FACTORY-048d754979815760,FACTORY-3f31720278715f4a,"Factory 9:30 AM ORB 180d 100bps (9:30 AM ORB, F-048d75)","Factory Catalyst 180d 375bps (Catalyst, F-3f3172)",0.99965776
+FACTORY-048d754979815760,FACTORY-c3d425ca8fa3db00,"Factory 9:30 AM ORB 180d 100bps (9:30 AM ORB, F-048d75)","Factory 9:30 AM ORB 180d 375bps (9:30 AM ORB, F-c3d425)",0.99965776
+FACTORY-4c337763d226e0e4,FACTORY-0ea2260f8186ba11,"Factory Custom Rule Builder 180d 100bps (Custom Rule Builder, F-4c3377)","Factory Custom Rule Builder 180d 375bps (Custom Rule Builder, F-0ea226)",0.99965595
+FACTORY-3a4646fedbd66e5c,FACTORY-cd77d4a8eb310124,"Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, F-3a4646)","Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, F-cd77d4)",0.99961719
+FACTORY-8f8cac315a45ff9e,FACTORY-07d58dc6d8516cd2,"Factory Momentum 90d 375bps (Momentum, F-8f8cac)","Factory Momentum 90d 500bps (Momentum, F-07d58d)",0.9996144
+FACTORY-1399577a8d1d5dca,FACTORY-5ef159f89339a4f8,"Factory Regime Filter 90d 375bps (Regime Filter, F-139957)","Factory Regime Filter 90d 500bps (Regime Filter, F-5ef159)",0.99959986
+FACTORY-119d99f730b677f6,FACTORY-6965d33db9c8fb5b,"Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, F-119d99)","Factory Dollar-Bar Microstructure 180d 375bps (Dollar-Bar Microstructure, F-6965d3)",0.99958827
+FACTORY-fab94445f0b51fdf,FACTORY-e021ad4521158745,"Factory Mean Reversion 180d 100bps (Mean Reversion, F-fab944)","Factory Mean Reversion 180d 375bps (Mean Reversion, F-e021ad)",0.99956743
+FACTORY-25beb93c5b115751,FACTORY-941cc6d3fdd9affc,"Factory 13D Activist Follow-On 90d 375bps (13D Activist Follow-On, F-25beb9)","Factory 13D Activist Follow-On 90d 500bps (13D Activist Follow-On, F-941cc6)",0.99956507
+FACTORY-51163fa9f51e78ce,FACTORY-6ad3e5a321c70687,"Factory Form 4 Cluster Buying 45d 375bps (Form 4 Cluster Buying, F-51163f)","Factory Form 4 Cluster Buying 45d 500bps (Form 4 Cluster Buying, F-6ad3e5)",0.99953072
+FACTORY-5ac7948ae3836df9,FACTORY-8c83bf25f1c86fc7,"Factory PEAD 45d 375bps (PEAD, F-5ac794)","Factory PEAD 45d 500bps (PEAD, F-8c83bf)",0.9994951
+FACTORY-a26c47e6385e2c63,FACTORY-f084a7400225c73b,"Factory Regime Filter 180d 100bps (Regime Filter, F-a26c47)","Factory Regime Filter 180d 375bps (Regime Filter, F-f084a7)",0.99948205
+FACTORY-e62a48e2d142923e,FACTORY-3f1e95ca9e8549c1,"Factory Momentum 180d 100bps (Momentum, F-e62a48)","Factory Momentum 180d 375bps (Momentum, F-3f1e95)",0.99943588
+FACTORY-5e3bba4315fd435f,FACTORY-06a5bea953601da8,"Factory Form 4 Cluster Buying 180d 100bps (Form 4 Cluster Buying, F-5e3bba)","Factory Form 4 Cluster Buying 180d 375bps (Form 4 Cluster Buying, F-06a5be)",0.99943522
+FACTORY-778a7498ad44efbb,FACTORY-0574d7be5b9a847c,"Factory 13D Activist Follow-On 180d 100bps (13D Activist Follow-On, F-778a74)","Factory 13D Activist Follow-On 180d 375bps (13D Activist Follow-On, F-0574d7)",0.99931596
+FACTORY-e608af4f07ff28c5,FACTORY-e18fa0f3988ad341,"Factory Momentum 45d 375bps (Momentum, F-e608af)","Factory Momentum 45d 500bps (Momentum, F-e18fa0)",0.99930011
+FACTORY-1cbd0d3c3b95022d,FACTORY-9424b27321e327f5,"Factory Regime Filter 45d 375bps (Regime Filter, F-1cbd0d)","Factory Regime Filter 45d 500bps (Regime Filter, F-9424b2)",0.99929823
+FACTORY-1412a8ffeea876e6,FACTORY-5b404f42d9bf8050,"Factory 13D Activist Follow-On 45d 375bps (13D Activist Follow-On, F-1412a8)","Factory 13D Activist Follow-On 45d 500bps (13D Activist Follow-On, F-5b404f)",0.99927455
+FACTORY-0391e93ebbeb1f98,FACTORY-99796a89a76bfa4c,"Factory PEAD 180d 100bps (PEAD, F-0391e9)","Factory PEAD 180d 500bps (PEAD, F-99796a)",0.99927419
+FACTORY-6a8afca3951761f9,FACTORY-1a986d424d0dcdde,"Factory Catalyst 180d 100bps (Catalyst, F-6a8afc)","Factory Catalyst 180d 500bps (Catalyst, F-1a986d)",0.99926627
+FACTORY-6a8afca3951761f9,FACTORY-553b10663e17fb26,"Factory Catalyst 180d 100bps (Catalyst, F-6a8afc)","Factory 9:30 AM ORB 180d 500bps (9:30 AM ORB, F-553b10)",0.99926627
+FACTORY-048d754979815760,FACTORY-1a986d424d0dcdde,"Factory 9:30 AM ORB 180d 100bps (9:30 AM ORB, F-048d75)","Factory Catalyst 180d 500bps (Catalyst, F-1a986d)",0.99926627
+FACTORY-048d754979815760,FACTORY-553b10663e17fb26,"Factory 9:30 AM ORB 180d 100bps (9:30 AM ORB, F-048d75)","Factory 9:30 AM ORB 180d 500bps (9:30 AM ORB, F-553b10)",0.99926627
+FACTORY-4c337763d226e0e4,FACTORY-a3adc8024085df55,"Factory Custom Rule Builder 180d 100bps (Custom Rule Builder, F-4c3377)","Factory Custom Rule Builder 180d 500bps (Custom Rule Builder, F-a3adc8)",0.9992628
+FACTORY-c75960b30e0ccbc3,FACTORY-56417e8834fedfe5,"Factory Catalyst 45d 375bps (Catalyst, F-c75960)","Factory Catalyst 45d 500bps (Catalyst, F-56417e)",0.99926188
+FACTORY-c75960b30e0ccbc3,FACTORY-8d1b34609a4f06c7,"Factory Catalyst 45d 375bps (Catalyst, F-c75960)","Factory 9:30 AM ORB 45d 500bps (9:30 AM ORB, F-8d1b34)",0.99926188
+FACTORY-a1414413a37a7d80,FACTORY-56417e8834fedfe5,"Factory 9:30 AM ORB 45d 375bps (9:30 AM ORB, F-a14144)","Factory Catalyst 45d 500bps (Catalyst, F-56417e)",0.99926188
+FACTORY-a1414413a37a7d80,FACTORY-8d1b34609a4f06c7,"Factory 9:30 AM ORB 45d 375bps (9:30 AM ORB, F-a14144)","Factory 9:30 AM ORB 45d 500bps (9:30 AM ORB, F-8d1b34)",0.99926188
+FACTORY-609f9af8970bab77,FACTORY-7b72bd081c7f1f96,"Factory PDUFA Run-Up 20d 100bps (PDUFA Run-Up, F-609f9a)","Factory PDUFA Run-Up 20d 375bps (PDUFA Run-Up, F-7b72bd)",0.99915995
+FACTORY-919303c9f4bda3a1,FACTORY-0c7844dc82468698,"Factory LowVol Tradability 90d 375bps (LowVol Tradability, F-919303)","Factory LowVol Tradability 90d 500bps (LowVol Tradability, F-0c7844)",0.99914458
+FACTORY-ace14c640db8e8f8,FACTORY-7a0b6cc0e47e9913,"Factory Dollar-Bar Microstructure 45d 375bps (Dollar-Bar Microstructure, F-ace14c)","Factory Dollar-Bar Microstructure 45d 500bps (Dollar-Bar Microstructure, F-7a0b6c)",0.99912972
+FACTORY-119d99f730b677f6,FACTORY-80a6a5b9f8587535,"Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, F-119d99)","Factory Dollar-Bar Microstructure 180d 500bps (Dollar-Bar Microstructure, F-80a6a5)",0.9991203
+FACTORY-fab94445f0b51fdf,FACTORY-06b51d2083257b36,"Factory Mean Reversion 180d 100bps (Mean Reversion, F-fab944)","Factory Mean Reversion 180d 500bps (Mean Reversion, F-06b51d)",0.99907004
+FACTORY-7a19d9d29f26229e,FACTORY-f93ccb2221606b8b,"Factory LowVol Tradability 180d 100bps (LowVol Tradability, F-7a19d9)","Factory LowVol Tradability 180d 375bps (LowVol Tradability, F-f93ccb)",0.99905465
+FACTORY-44336afe577baf16,FACTORY-8226fabb047803a9,"Factory Dollar-Bar Microstructure 90d 100bps (Dollar-Bar Microstructure, F-44336a)","Factory Dollar-Bar Microstructure 90d 375bps (Dollar-Bar Microstructure, F-8226fa)",0.99902546
+FACTORY-809ae08874ff229c,FACTORY-f9ae921135d93340,"Factory Custom Rule Builder 90d 100bps (Custom Rule Builder, F-809ae0)","Factory Custom Rule Builder 90d 375bps (Custom Rule Builder, F-f9ae92)",0.99902079
+FACTORY-fcc65b33bba2a984,FACTORY-8c7853c5ae904d13,"Factory PEAD 90d 100bps (PEAD, F-fcc65b)","Factory PEAD 90d 375bps (PEAD, F-8c7853)",0.99901305
+FACTORY-a26c47e6385e2c63,FACTORY-cc3e48f7613e805e,"Factory Regime Filter 180d 100bps (Regime Filter, F-a26c47)","Factory Regime Filter 180d 500bps (Regime Filter, F-cc3e48)",0.99889155
+FACTORY-7d7fc107faf661dc,FACTORY-dbcae1b95fd38612,"Factory Catalyst 90d 100bps (Catalyst, F-7d7fc1)","Factory Catalyst 90d 375bps (Catalyst, F-dbcae1)",0.99886044
+FACTORY-7d7fc107faf661dc,FACTORY-1e6fb3ffd92f62a9,"Factory Catalyst 90d 100bps (Catalyst, F-7d7fc1)","Factory 9:30 AM ORB 90d 375bps (9:30 AM ORB, F-1e6fb3)",0.99886044
+FACTORY-58fde2142f9a24a0,FACTORY-dbcae1b95fd38612,"Factory 9:30 AM ORB 90d 100bps (9:30 AM ORB, F-58fde2)","Factory Catalyst 90d 375bps (Catalyst, F-dbcae1)",0.99886044
+FACTORY-58fde2142f9a24a0,FACTORY-1e6fb3ffd92f62a9,"Factory 9:30 AM ORB 90d 100bps (9:30 AM ORB, F-58fde2)","Factory 9:30 AM ORB 90d 375bps (9:30 AM ORB, F-1e6fb3)",0.99886044
+FACTORY-5e3bba4315fd435f,FACTORY-dbcb37c9ddbb6896,"Factory Form 4 Cluster Buying 180d 100bps (Form 4 Cluster Buying, F-5e3bba)","Factory Form 4 Cluster Buying 180d 500bps (Form 4 Cluster Buying, F-dbcb37)",0.99879578
+FACTORY-e62a48e2d142923e,FACTORY-2886d4ef6f931734,"Factory Momentum 180d 100bps (Momentum, F-e62a48)","Factory Momentum 180d 500bps (Momentum, F-2886d4)",0.99878359
+FACTORY-2306e8d8b69f7be8,FACTORY-45ebfdbb131f6cbd,"Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)","Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)",0.99877047
+FACTORY-2ed1639d36c6b44c,FACTORY-663f068161cceb04,"Factory Mean Reversion 90d 100bps (Mean Reversion, F-2ed163)","Factory Mean Reversion 90d 375bps (Mean Reversion, F-663f06)",0.99871164
+FACTORY-778a7498ad44efbb,FACTORY-9883de58e44f5ae7,"Factory 13D Activist Follow-On 180d 100bps (13D Activist Follow-On, F-778a74)","Factory 13D Activist Follow-On 180d 500bps (13D Activist Follow-On, F-9883de)",0.99853137
+FACTORY-37c572af2456505a,FACTORY-f13e649972324e6d,"Factory Mean Reversion 45d 375bps (Mean Reversion, F-37c572)","Factory Mean Reversion 45d 500bps (Mean Reversion, F-f13e64)",0.99852099
+FACTORY-5ab39e4570644761,FACTORY-e166b064509b48f3,"Factory LowVol Tradability 45d 375bps (LowVol Tradability, F-5ab39e)","Factory LowVol Tradability 45d 500bps (LowVol Tradability, F-e166b0)",0.9984471
+FACTORY-2fdf6c07a3bcb68d,FACTORY-f3a11def315430dd,"Factory Form 4 Cluster Buying 90d 100bps (Form 4 Cluster Buying, F-2fdf6c)","Factory Form 4 Cluster Buying 90d 375bps (Form 4 Cluster Buying, F-f3a11d)",0.99842291
+FACTORY-9a7d8827f22d3bcc,FACTORY-0b46f79e504f2627,"Factory PDUFA Run-Up 5d 375bps (PDUFA Run-Up, F-9a7d88)","Factory PDUFA Run-Up 5d 500bps (PDUFA Run-Up, F-0b46f7)",0.99839741
+FACTORY-4374f4a63472e9d1,FACTORY-8f8cac315a45ff9e,"Factory Momentum 90d 100bps (Momentum, F-4374f4)","Factory Momentum 90d 375bps (Momentum, F-8f8cac)",0.99830456
+FACTORY-c0803ca9f67aa76d,FACTORY-29dc34ee3138d683,"Factory Custom Rule Builder 20d 375bps (Custom Rule Builder, F-c0803c)","Factory Custom Rule Builder 20d 500bps (Custom Rule Builder, F-29dc34)",0.9982661
+FACTORY-1ae9c3303191d694,FACTORY-1399577a8d1d5dca,"Factory Regime Filter 90d 100bps (Regime Filter, F-1ae9c3)","Factory Regime Filter 90d 375bps (Regime Filter, F-139957)",0.99819538
+FACTORY-609f9af8970bab77,FACTORY-f4bc4ad10d286feb,"Factory PDUFA Run-Up 20d 100bps (PDUFA Run-Up, F-609f9a)","Factory PDUFA Run-Up 20d 500bps (PDUFA Run-Up, F-f4bc4a)",0.99819398
+FACTORY-3b82ee277a85c752,FACTORY-25beb93c5b115751,"Factory 13D Activist Follow-On 90d 100bps (13D Activist Follow-On, F-3b82ee)","Factory 13D Activist Follow-On 90d 375bps (13D Activist Follow-On, F-25beb9)",0.99805305
+FACTORY-7a19d9d29f26229e,FACTORY-a1c67102f5531e27,"Factory LowVol Tradability 180d 100bps (LowVol Tradability, F-7a19d9)","Factory LowVol Tradability 180d 500bps (LowVol Tradability, F-a1c671)",0.99797085
+FACTORY-44336afe577baf16,FACTORY-2860db9797152544,"Factory Dollar-Bar Microstructure 90d 100bps (Dollar-Bar Microstructure, F-44336a)","Factory Dollar-Bar Microstructure 90d 500bps (Dollar-Bar Microstructure, F-2860db)",0.99791905
+FACTORY-809ae08874ff229c,FACTORY-c43a6563b2178d23,"Factory Custom Rule Builder 90d 100bps (Custom Rule Builder, F-809ae0)","Factory Custom Rule Builder 90d 500bps (Custom Rule Builder, F-c43a65)",0.99788277
+FACTORY-fcc65b33bba2a984,FACTORY-5fcd77f2c0517c34,"Factory PEAD 90d 100bps (PEAD, F-fcc65b)","Factory PEAD 90d 500bps (PEAD, F-5fcd77)",0.99787619
+FACTORY-30088dc93bd4a178,FACTORY-51163fa9f51e78ce,"Factory Form 4 Cluster Buying 45d 100bps (Form 4 Cluster Buying, F-30088d)","Factory Form 4 Cluster Buying 45d 375bps (Form 4 Cluster Buying, F-51163f)",0.9977384
+FACTORY-200d7c22024910b6,FACTORY-31b323dbb27dccd2,"Factory Form 4 Cluster Buying 20d 375bps (Form 4 Cluster Buying, F-200d7c)","Factory Form 4 Cluster Buying 20d 500bps (Form 4 Cluster Buying, F-31b323)",0.99771258
+FACTORY-d6e26b4dde83c8b0,FACTORY-5ac7948ae3836df9,"Factory PEAD 45d 100bps (PEAD, F-d6e26b)","Factory PEAD 45d 375bps (PEAD, F-5ac794)",0.9976547
+FACTORY-7d7fc107faf661dc,FACTORY-27bfb999b143a3bf,"Factory Catalyst 90d 100bps (Catalyst, F-7d7fc1)","Factory Catalyst 90d 500bps (Catalyst, F-27bfb9)",0.99754094
+FACTORY-7d7fc107faf661dc,FACTORY-5fbad472b1879679,"Factory Catalyst 90d 100bps (Catalyst, F-7d7fc1)","Factory 9:30 AM ORB 90d 500bps (9:30 AM ORB, F-5fbad4)",0.99754094
+FACTORY-58fde2142f9a24a0,FACTORY-27bfb999b143a3bf,"Factory 9:30 AM ORB 90d 100bps (9:30 AM ORB, F-58fde2)","Factory Catalyst 90d 500bps (Catalyst, F-27bfb9)",0.99754094
+FACTORY-58fde2142f9a24a0,FACTORY-5fbad472b1879679,"Factory 9:30 AM ORB 90d 100bps (9:30 AM ORB, F-58fde2)","Factory 9:30 AM ORB 90d 500bps (9:30 AM ORB, F-5fbad4)",0.99754094
+FACTORY-3e07023d857a2656,FACTORY-d90f9f26691681b5,"Factory Regime Filter 20d 375bps (Regime Filter, F-3e0702)","Factory Regime Filter 20d 500bps (Regime Filter, F-d90f9f)",0.99739881
+FACTORY-2306e8d8b69f7be8,FACTORY-036709cbb90245e8,"Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)","Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)",0.99738371
+FACTORY-2ed1639d36c6b44c,FACTORY-dc41e4a737562d2c,"Factory Mean Reversion 90d 100bps (Mean Reversion, F-2ed163)","Factory Mean Reversion 90d 500bps (Mean Reversion, F-dc41e4)",0.9972315
+FACTORY-b739667ff87eaf74,FACTORY-a11aeab2b579676d,"Factory 13D Activist Follow-On 20d 375bps (13D Activist Follow-On, F-b73966)","Factory 13D Activist Follow-On 20d 500bps (13D Activist Follow-On, F-a11aea)",0.99716327
+FACTORY-6bb21d695283dd40,FACTORY-f0ba087264e60c6a,"Factory Catalyst 20d 375bps (Catalyst, F-6bb21d)","Factory Catalyst 20d 500bps (Catalyst, F-f0ba08)",0.99715509
+FACTORY-6bb21d695283dd40,FACTORY-f2c9931106bc9c82,"Factory Catalyst 20d 375bps (Catalyst, F-6bb21d)","Factory 9:30 AM ORB 20d 500bps (9:30 AM ORB, F-f2c993)",0.99715509
+FACTORY-87e8a4bb35786483,FACTORY-f0ba087264e60c6a,"Factory 9:30 AM ORB 20d 375bps (9:30 AM ORB, F-87e8a4)","Factory Catalyst 20d 500bps (Catalyst, F-f0ba08)",0.99715509
+FACTORY-87e8a4bb35786483,FACTORY-f2c9931106bc9c82,"Factory 9:30 AM ORB 20d 375bps (9:30 AM ORB, F-87e8a4)","Factory 9:30 AM ORB 20d 500bps (9:30 AM ORB, F-f2c993)",0.99715509
+FACTORY-95688ad8c98521e1,FACTORY-dc349166892cc7df,"Factory PEAD 20d 375bps (PEAD, F-95688a)","Factory PEAD 20d 500bps (PEAD, F-dc3491)",0.99712556
+FACTORY-3649fae5bc1b7b74,FACTORY-e608af4f07ff28c5,"Factory Momentum 45d 100bps (Momentum, F-3649fa)","Factory Momentum 45d 375bps (Momentum, F-e608af)",0.99672263
+FACTORY-3d1034410d11b1be,FACTORY-c75960b30e0ccbc3,"Factory Catalyst 45d 100bps (Catalyst, F-3d1034)","Factory Catalyst 45d 375bps (Catalyst, F-c75960)",0.99664772
+FACTORY-3d1034410d11b1be,FACTORY-a1414413a37a7d80,"Factory Catalyst 45d 100bps (Catalyst, F-3d1034)","Factory 9:30 AM ORB 45d 375bps (9:30 AM ORB, F-a14144)",0.99664772
+FACTORY-5138428531b2cbc4,FACTORY-c75960b30e0ccbc3,"Factory 9:30 AM ORB 45d 100bps (9:30 AM ORB, F-513842)","Factory Catalyst 45d 375bps (Catalyst, F-c75960)",0.99664772
+FACTORY-5138428531b2cbc4,FACTORY-a1414413a37a7d80,"Factory 9:30 AM ORB 45d 100bps (9:30 AM ORB, F-513842)","Factory 9:30 AM ORB 45d 375bps (9:30 AM ORB, F-a14144)",0.99664772
+FACTORY-2fdf6c07a3bcb68d,FACTORY-187d8d55eeef6a10,"Factory Form 4 Cluster Buying 90d 100bps (Form 4 Cluster Buying, F-2fdf6c)","Factory Form 4 Cluster Buying 90d 500bps (Form 4 Cluster Buying, F-187d8d)",0.99662959
+FACTORY-91da581313704e54,FACTORY-1cbd0d3c3b95022d,"Factory Regime Filter 45d 100bps (Regime Filter, F-91da58)","Factory Regime Filter 45d 375bps (Regime Filter, F-1cbd0d)",0.99662907
+FACTORY-2c22961973d6b9d9,FACTORY-1412a8ffeea876e6,"Factory 13D Activist Follow-On 45d 100bps (13D Activist Follow-On, F-2c2296)","Factory 13D Activist Follow-On 45d 375bps (13D Activist Follow-On, F-1412a8)",0.99652294
+FACTORY-d2621bbbf56dff40,FACTORY-4365a19489b27c36,"Factory Momentum 20d 375bps (Momentum, F-d2621b)","Factory Momentum 20d 500bps (Momentum, F-4365a1)",0.99647113
+FACTORY-4374f4a63472e9d1,FACTORY-07d58dc6d8516cd2,"Factory Momentum 90d 100bps (Momentum, F-4374f4)","Factory Momentum 90d 500bps (Momentum, F-07d58d)",0.99630335
+FACTORY-1ae9c3303191d694,FACTORY-5ef159f89339a4f8,"Factory Regime Filter 90d 100bps (Regime Filter, F-1ae9c3)","Factory Regime Filter 90d 500bps (Regime Filter, F-5ef159)",0.99609735
+FACTORY-706cdbf4b53724c8,FACTORY-ace14c640db8e8f8,"Factory Dollar-Bar Microstructure 45d 100bps (Dollar-Bar Microstructure, F-706cdb)","Factory Dollar-Bar Microstructure 45d 375bps (Dollar-Bar Microstructure, F-ace14c)",0.99601161
+FACTORY-b0100b2bcad2ded2,FACTORY-17d25540b5e54179,"Factory Mean Reversion 20d 375bps (Mean Reversion, F-b0100b)","Factory Mean Reversion 20d 500bps (Mean Reversion, F-17d255)",0.99595756
+FACTORY-bda4a6a967022002,FACTORY-919303c9f4bda3a1,"Factory LowVol Tradability 90d 100bps (LowVol Tradability, F-bda4a6)","Factory LowVol Tradability 90d 375bps (LowVol Tradability, F-919303)",0.99590803
+FACTORY-d028fe234d674df1,FACTORY-6d11f16258c0abf7,"Factory LowVol Tradability 20d 375bps (LowVol Tradability, F-d028fe)","Factory LowVol Tradability 20d 500bps (LowVol Tradability, F-6d11f1)",0.99585494
+FACTORY-3b82ee277a85c752,FACTORY-941cc6d3fdd9affc,"Factory 13D Activist Follow-On 90d 100bps (13D Activist Follow-On, F-3b82ee)","Factory 13D Activist Follow-On 90d 500bps (13D Activist Follow-On, F-941cc6)",0.99577966
+FACTORY-ef2dfa466e3b0e52,FACTORY-ae163c98647d7bea,"Factory Dollar-Bar Microstructure 20d 375bps (Dollar-Bar Microstructure, F-ef2dfa)","Factory Dollar-Bar Microstructure 20d 500bps (Dollar-Bar Microstructure, F-ae163c)",0.99549467
+FACTORY-30088dc93bd4a178,FACTORY-6ad3e5a321c70687,"Factory Form 4 Cluster Buying 45d 100bps (Form 4 Cluster Buying, F-30088d)","Factory Form 4 Cluster Buying 45d 500bps (Form 4 Cluster Buying, F-6ad3e5)",0.99521119
+FACTORY-115ab24aa842c356,FACTORY-214e36d619e8364b,"Factory Mean Reversion 20d 375bps (Mean Reversion, F-115ab2)","Factory Mean Reversion 20d 500bps (Mean Reversion, F-214e36)",0.99512561
+FACTORY-d6e26b4dde83c8b0,FACTORY-8c83bf25f1c86fc7,"Factory PEAD 45d 100bps (PEAD, F-d6e26b)","Factory PEAD 45d 500bps (PEAD, F-8c83bf)",0.99497616
+FACTORY-0971e80d69e19c37,FACTORY-7b5e4a28452607cf,"Factory Catalyst 20d 375bps (Catalyst, F-0971e8)","Factory Catalyst 20d 500bps (Catalyst, F-7b5e4a)",0.99491361
+FACTORY-7913b08e73e03618,FACTORY-7b5e4a28452607cf,"Factory 9:30 AM ORB 20d 375bps (9:30 AM ORB, F-7913b0)","Factory Catalyst 20d 500bps (Catalyst, F-7b5e4a)",0.99491361
+FACTORY-014d208df652e32d,FACTORY-9166cc2a2cf7438b,"Factory Form 4 Cluster Buying 20d 375bps (Form 4 Cluster Buying, F-014d20)","Factory Form 4 Cluster Buying 20d 500bps (Form 4 Cluster Buying, F-9166cc)",0.99396036
+FACTORY-8c53f735cf806348,FACTORY-b9eeca42dc0b6ac1,"Factory Catalyst 5d 375bps (Catalyst, F-8c53f7)","Factory Catalyst 5d 500bps (Catalyst, F-b9eeca)",0.99395795
+FACTORY-8c53f735cf806348,FACTORY-2833589a22eb1996,"Factory Catalyst 5d 375bps (Catalyst, F-8c53f7)","Factory 9:30 AM ORB 5d 500bps (9:30 AM ORB, F-283358)",0.99395795
+FACTORY-936855ed5bd59a5a,FACTORY-b9eeca42dc0b6ac1,"Factory 9:30 AM ORB 5d 375bps (9:30 AM ORB, F-936855)","Factory Catalyst 5d 500bps (Catalyst, F-b9eeca)",0.99395795
+FACTORY-936855ed5bd59a5a,FACTORY-2833589a22eb1996,"Factory 9:30 AM ORB 5d 375bps (9:30 AM ORB, F-936855)","Factory 9:30 AM ORB 5d 500bps (9:30 AM ORB, F-283358)",0.99395795
+FACTORY-8947ce22b80b9ee1,FACTORY-2799e503bee9bc50,"Factory PEAD 5d 375bps (PEAD, F-8947ce)","Factory PEAD 5d 500bps (PEAD, F-2799e5)",0.99391831
+FACTORY-01ccbce77e85e306,FACTORY-504e005cf35929de,"Factory 13D Activist Follow-On 5d 375bps (13D Activist Follow-On, F-01ccbc)","Factory 13D Activist Follow-On 5d 500bps (13D Activist Follow-On, F-504e00)",0.993906
+FACTORY-4478d675ccfafd31,FACTORY-37c572af2456505a,"Factory Mean Reversion 45d 100bps (Mean Reversion, F-4478d6)","Factory Mean Reversion 45d 375bps (Mean Reversion, F-37c572)",0.99347275
+FACTORY-d1893fa9808889ff,FACTORY-f100658fbcbfd0d9,"Factory PEAD 5d 375bps (PEAD, F-d1893f)","Factory PEAD 5d 500bps (PEAD, F-f10065)",0.99321501
+FACTORY-f9d708e9710586da,FACTORY-8713d4958c02e25f,"Factory Custom Rule Builder 5d 375bps (Custom Rule Builder, F-f9d708)","Factory Custom Rule Builder 5d 500bps (Custom Rule Builder, F-8713d4)",0.99306285
+FACTORY-3649fae5bc1b7b74,FACTORY-e18fa0f3988ad341,"Factory Momentum 45d 100bps (Momentum, F-3649fa)","Factory Momentum 45d 500bps (Momentum, F-e18fa0)",0.992999
+FACTORY-91da581313704e54,FACTORY-9424b27321e327f5,"Factory Regime Filter 45d 100bps (Regime Filter, F-91da58)","Factory Regime Filter 45d 500bps (Regime Filter, F-9424b2)",0.99285668
+FACTORY-3d1034410d11b1be,FACTORY-56417e8834fedfe5,"Factory Catalyst 45d 100bps (Catalyst, F-3d1034)","Factory Catalyst 45d 500bps (Catalyst, F-56417e)",0.99276926
+FACTORY-3d1034410d11b1be,FACTORY-8d1b34609a4f06c7,"Factory Catalyst 45d 100bps (Catalyst, F-3d1034)","Factory 9:30 AM ORB 45d 500bps (9:30 AM ORB, F-8d1b34)",0.99276926
+FACTORY-5138428531b2cbc4,FACTORY-56417e8834fedfe5,"Factory 9:30 AM ORB 45d 100bps (9:30 AM ORB, F-513842)","Factory Catalyst 45d 500bps (Catalyst, F-56417e)",0.99276926
+FACTORY-5138428531b2cbc4,FACTORY-8d1b34609a4f06c7,"Factory 9:30 AM ORB 45d 100bps (9:30 AM ORB, F-513842)","Factory 9:30 AM ORB 45d 500bps (9:30 AM ORB, F-8d1b34)",0.99276926
+FACTORY-2c22961973d6b9d9,FACTORY-5b404f42d9bf8050,"Factory 13D Activist Follow-On 45d 100bps (13D Activist Follow-On, F-2c2296)","Factory 13D Activist Follow-On 45d 500bps (13D Activist Follow-On, F-5b404f)",0.99262692
+FACTORY-206f18f4951cd8c9,FACTORY-5ab39e4570644761,"Factory LowVol Tradability 45d 100bps (LowVol Tradability, F-206f18)","Factory LowVol Tradability 45d 375bps (LowVol Tradability, F-5ab39e)",0.99258628
+FACTORY-012e1765b0c286d8,FACTORY-9a7d8827f22d3bcc,"Factory PDUFA Run-Up 5d 100bps (PDUFA Run-Up, F-012e17)","Factory PDUFA Run-Up 5d 375bps (PDUFA Run-Up, F-9a7d88)",0.99241644
+FACTORY-242ddc7a506aa7ba,FACTORY-8af0d52dca5654af,"Factory Catalyst 5d 375bps (Catalyst, F-242ddc)","Factory Catalyst 5d 500bps (Catalyst, F-8af0d5)",0.99214871
+FACTORY-242ddc7a506aa7ba,FACTORY-d3a7487f53385ea9,"Factory Catalyst 5d 375bps (Catalyst, F-242ddc)","Factory 9:30 AM ORB 5d 500bps (9:30 AM ORB, F-d3a748)",0.99214871
+FACTORY-832e69dd8d7cef92,FACTORY-8af0d52dca5654af,"Factory 9:30 AM ORB 5d 375bps (9:30 AM ORB, F-832e69)","Factory Catalyst 5d 500bps (Catalyst, F-8af0d5)",0.99214871
+FACTORY-832e69dd8d7cef92,FACTORY-d3a7487f53385ea9,"Factory 9:30 AM ORB 5d 375bps (9:30 AM ORB, F-832e69)","Factory 9:30 AM ORB 5d 500bps (9:30 AM ORB, F-d3a748)",0.99214871
+FACTORY-48339998c1f9883a,FACTORY-005e7108e32c5c35,"Factory PEAD 20d 375bps (PEAD, F-483399)","Factory PEAD 20d 500bps (PEAD, F-005e71)",0.99158085
+FACTORY-eecffd9fc1c8db58,FACTORY-70556db6df05f38a,"Factory 13D Activist Follow-On 5d 375bps (13D Activist Follow-On, F-eecffd)","Factory 13D Activist Follow-On 5d 500bps (13D Activist Follow-On, F-70556d)",0.99151118
+FACTORY-706cdbf4b53724c8,FACTORY-7a0b6cc0e47e9913,"Factory Dollar-Bar Microstructure 45d 100bps (Dollar-Bar Microstructure, F-706cdb)","Factory Dollar-Bar Microstructure 45d 500bps (Dollar-Bar Microstructure, F-7a0b6c)",0.99142319
+FACTORY-1ccb2e9a10bbb66a,FACTORY-c0803ca9f67aa76d,"Factory Custom Rule Builder 20d 100bps (Custom Rule Builder, F-1ccb2e)","Factory Custom Rule Builder 20d 375bps (Custom Rule Builder, F-c0803c)",0.99135189
+FACTORY-bda4a6a967022002,FACTORY-0c7844dc82468698,"Factory LowVol Tradability 90d 100bps (LowVol Tradability, F-bda4a6)","Factory LowVol Tradability 90d 500bps (LowVol Tradability, F-0c7844)",0.99131889
+e8cde4045a54b14a,64880f270f8f6861,"My falsifiable strategy (Custom Rule Builder, e8cde4)","My falsifiable strategy (Custom Rule Builder, 64880f)",0.99130972
+FACTORY-2fa84d3e324d0ad1,FACTORY-cd913686ce1f399c,"Factory Form 4 Cluster Buying 5d 375bps (Form 4 Cluster Buying, F-2fa84d)","Factory Form 4 Cluster Buying 5d 500bps (Form 4 Cluster Buying, F-cd9136)",0.9903588
+FACTORY-40d2b4dfba0a074d,FACTORY-03a53d17c324dec6,"Factory Mean Reversion 5d 375bps (Mean Reversion, F-40d2b4)","Factory Mean Reversion 5d 500bps (Mean Reversion, F-03a53d)",0.99010547
+FACTORY-0a068c8a27ef583b,FACTORY-e8820a84c0d6faf6,"Factory LowVol Tradability 5d 375bps (LowVol Tradability, F-0a068c)","Factory LowVol Tradability 5d 500bps (LowVol Tradability, F-e8820a)",0.99005697
+FACTORY-511e400b5c4a876b,FACTORY-24c6670e8a410cae,"Factory Momentum 20d 375bps (Momentum, F-511e40)","Factory Momentum 20d 500bps (Momentum, F-24c667)",0.98997062
+FACTORY-cb9267a22681d28d,FACTORY-c28eec485c97ab60,"Factory Momentum 5d 375bps (Momentum, F-cb9267)","Factory Momentum 5d 500bps (Momentum, F-c28eec)",0.98979602
+FACTORY-72fadb6d71c63049,FACTORY-bccbea39bed3c806,"Factory Dollar-Bar Microstructure 5d 375bps (Dollar-Bar Microstructure, F-72fadb)","Factory Dollar-Bar Microstructure 5d 500bps (Dollar-Bar Microstructure, F-bccbea)",0.98971395
+FACTORY-eeb9cda10c3c0728,FACTORY-200d7c22024910b6,"Factory Form 4 Cluster Buying 20d 100bps (Form 4 Cluster Buying, F-eeb9cd)","Factory Form 4 Cluster Buying 20d 375bps (Form 4 Cluster Buying, F-200d7c)",0.98888422
+FACTORY-e1db06c5156f7149,FACTORY-688a5013e817d0da,"Factory Mean Reversion 5d 375bps (Mean Reversion, F-e1db06)","Factory Mean Reversion 5d 500bps (Mean Reversion, F-688a50)",0.98840893
+FACTORY-dea4cd8697c22ed5,FACTORY-0a70bc00edb3ff6b,"Factory Regime Filter 5d 375bps (Regime Filter, F-dea4cd)","Factory Regime Filter 5d 500bps (Regime Filter, F-0a70bc)",0.98760447
+FACTORY-582e3b9b11091a1b,FACTORY-95688ad8c98521e1,"Factory PEAD 20d 100bps (PEAD, F-582e3b)","Factory PEAD 20d 375bps (PEAD, F-95688a)",0.98650957
+FACTORY-f497e801a04a00ac,FACTORY-6bb21d695283dd40,"Factory Catalyst 20d 100bps (Catalyst, F-f497e8)","Factory Catalyst 20d 375bps (Catalyst, F-6bb21d)",0.98642311
+FACTORY-f497e801a04a00ac,FACTORY-87e8a4bb35786483,"Factory Catalyst 20d 100bps (Catalyst, F-f497e8)","Factory 9:30 AM ORB 20d 375bps (9:30 AM ORB, F-87e8a4)",0.98642311
+FACTORY-9d39f00e50a7ff49,FACTORY-6bb21d695283dd40,"Factory 9:30 AM ORB 20d 100bps (9:30 AM ORB, F-9d39f0)","Factory Catalyst 20d 375bps (Catalyst, F-6bb21d)",0.98642311
+FACTORY-9d39f00e50a7ff49,FACTORY-87e8a4bb35786483,"Factory 9:30 AM ORB 20d 100bps (9:30 AM ORB, F-9d39f0)","Factory 9:30 AM ORB 20d 375bps (9:30 AM ORB, F-87e8a4)",0.98642311
+FACTORY-6e4f085c13e95091,FACTORY-fbbacd667432317c,"Factory Momentum 5d 375bps (Momentum, F-6e4f08)","Factory Momentum 5d 500bps (Momentum, F-fbbacd)",0.98612958
+FACTORY-4f2398b6e0f737a6,FACTORY-de5ef61019341a9d,"Factory Dollar-Bar Microstructure 5d 375bps (Dollar-Bar Microstructure, F-4f2398)","Factory Dollar-Bar Microstructure 5d 500bps (Dollar-Bar Microstructure, F-de5ef6)",0.98602501
+FACTORY-a48667d59c0341c7,FACTORY-3e07023d857a2656,"Factory Regime Filter 20d 100bps (Regime Filter, F-a48667)","Factory Regime Filter 20d 375bps (Regime Filter, F-3e0702)",0.98601999
+FACTORY-4478d675ccfafd31,FACTORY-f13e649972324e6d,"Factory Mean Reversion 45d 100bps (Mean Reversion, F-4478d6)","Factory Mean Reversion 45d 500bps (Mean Reversion, F-f13e64)",0.98580169
+FACTORY-71fd1cd246f2c826,FACTORY-b739667ff87eaf74,"Factory 13D Activist Follow-On 20d 100bps (13D Activist Follow-On, F-71fd1c)","Factory 13D Activist Follow-On 20d 375bps (13D Activist Follow-On, F-b73966)",0.98491591
+FACTORY-6ee5b751639cff9d,FACTORY-29518f44dcd8afd3,"Factory Regime Filter 5d 375bps (Regime Filter, F-6ee5b7)","Factory Regime Filter 5d 500bps (Regime Filter, F-29518f)",0.98483935
+FACTORY-a8ba3464fded3edb,FACTORY-da380bbc5f5e93d8,"Factory LowVol Tradability 5d 375bps (LowVol Tradability, F-a8ba34)","Factory LowVol Tradability 5d 500bps (LowVol Tradability, F-da380b)",0.98475542
+FACTORY-f186683398e16f3a,FACTORY-13d69783791ca4de,"Factory Custom Rule Builder 5d 375bps (Custom Rule Builder, F-f18668)","Factory Custom Rule Builder 5d 500bps (Custom Rule Builder, F-13d697)",0.9843627
+FACTORY-206f18f4951cd8c9,FACTORY-e166b064509b48f3,"Factory LowVol Tradability 45d 100bps (LowVol Tradability, F-206f18)","Factory LowVol Tradability 45d 500bps (LowVol Tradability, F-e166b0)",0.98427401
+FACTORY-012e1765b0c286d8,FACTORY-0b46f79e504f2627,"Factory PDUFA Run-Up 5d 100bps (PDUFA Run-Up, F-012e17)","Factory PDUFA Run-Up 5d 500bps (PDUFA Run-Up, F-0b46f7)",0.98386969
+FACTORY-efba882cb8ce39ad,FACTORY-d2621bbbf56dff40,"Factory Momentum 20d 100bps (Momentum, F-efba88)","Factory Momentum 20d 375bps (Momentum, F-d2621b)",0.9825038
+FACTORY-4c63f4888d4676d6,FACTORY-c44fa114a55b4e7e,"Factory Form 4 Cluster Buying 5d 375bps (Form 4 Cluster Buying, F-4c63f4)","Factory Form 4 Cluster Buying 5d 500bps (Form 4 Cluster Buying, F-c44fa1)",0.98236299
+FACTORY-1ccb2e9a10bbb66a,FACTORY-29dc34ee3138d683,"Factory Custom Rule Builder 20d 100bps (Custom Rule Builder, F-1ccb2e)","Factory Custom Rule Builder 20d 500bps (Custom Rule Builder, F-29dc34)",0.98190845
+FACTORY-d5a39d7a88bc24cf,FACTORY-b0100b2bcad2ded2,"Factory Mean Reversion 20d 100bps (Mean Reversion, F-d5a39d)","Factory Mean Reversion 20d 375bps (Mean Reversion, F-b0100b)",0.98080234
+FACTORY-7719d5fc2dc12422,FACTORY-d028fe234d674df1,"Factory LowVol Tradability 20d 100bps (LowVol Tradability, F-7719d5)","Factory LowVol Tradability 20d 375bps (LowVol Tradability, F-d028fe)",0.97828527
+FACTORY-54f51ccfae2851ab,FACTORY-ef2dfa466e3b0e52,"Factory Dollar-Bar Microstructure 20d 100bps (Dollar-Bar Microstructure, F-54f51c)","Factory Dollar-Bar Microstructure 20d 375bps (Dollar-Bar Microstructure, F-ef2dfa)",0.97790255
+FACTORY-eeb9cda10c3c0728,FACTORY-31b323dbb27dccd2,"Factory Form 4 Cluster Buying 20d 100bps (Form 4 Cluster Buying, F-eeb9cd)","Factory Form 4 Cluster Buying 20d 500bps (Form 4 Cluster Buying, F-31b323)",0.97657112
+FACTORY-48f166c1c0802b66,FACTORY-0971e80d69e19c37,"Factory Catalyst 20d 100bps (Catalyst, F-48f166)","Factory Catalyst 20d 375bps (Catalyst, F-0971e8)",0.97614379
+FACTORY-48f166c1c0802b66,FACTORY-7913b08e73e03618,"Factory Catalyst 20d 100bps (Catalyst, F-48f166)","Factory 9:30 AM ORB 20d 375bps (9:30 AM ORB, F-7913b0)",0.97614379
+FACTORY-18898b7dda64c53e,FACTORY-0971e80d69e19c37,"Factory 9:30 AM ORB 20d 100bps (9:30 AM ORB, F-18898b)","Factory Catalyst 20d 375bps (Catalyst, F-0971e8)",0.97614379
+FACTORY-18898b7dda64c53e,FACTORY-7913b08e73e03618,"Factory 9:30 AM ORB 20d 100bps (9:30 AM ORB, F-18898b)","Factory 9:30 AM ORB 20d 375bps (9:30 AM ORB, F-7913b0)",0.97614379
+FACTORY-8f5d4e1caeb5c929,FACTORY-115ab24aa842c356,"Factory Mean Reversion 20d 100bps (Mean Reversion, F-8f5d4e)","Factory Mean Reversion 20d 375bps (Mean Reversion, F-115ab2)",0.97594051
+FACTORY-a48667d59c0341c7,FACTORY-d90f9f26691681b5,"Factory Regime Filter 20d 100bps (Regime Filter, F-a48667)","Factory Regime Filter 20d 500bps (Regime Filter, F-d90f9f)",0.97144459
+FACTORY-582e3b9b11091a1b,FACTORY-dc349166892cc7df,"Factory PEAD 20d 100bps (PEAD, F-582e3b)","Factory PEAD 20d 500bps (PEAD, F-dc3491)",0.97127061
+FACTORY-f497e801a04a00ac,FACTORY-f0ba087264e60c6a,"Factory Catalyst 20d 100bps (Catalyst, F-f497e8)","Factory Catalyst 20d 500bps (Catalyst, F-f0ba08)",0.97123808
+FACTORY-f497e801a04a00ac,FACTORY-f2c9931106bc9c82,"Factory Catalyst 20d 100bps (Catalyst, F-f497e8)","Factory 9:30 AM ORB 20d 500bps (9:30 AM ORB, F-f2c993)",0.97123808
+FACTORY-9d39f00e50a7ff49,FACTORY-f0ba087264e60c6a,"Factory 9:30 AM ORB 20d 100bps (9:30 AM ORB, F-9d39f0)","Factory Catalyst 20d 500bps (Catalyst, F-f0ba08)",0.97123808
+FACTORY-9d39f00e50a7ff49,FACTORY-f2c9931106bc9c82,"Factory 9:30 AM ORB 20d 100bps (9:30 AM ORB, F-9d39f0)","Factory 9:30 AM ORB 20d 500bps (9:30 AM ORB, F-f2c993)",0.97123808
+FACTORY-0893167e5b3cd58e,FACTORY-014d208df652e32d,"Factory Form 4 Cluster Buying 20d 100bps (Form 4 Cluster Buying, F-089316)","Factory Form 4 Cluster Buying 20d 375bps (Form 4 Cluster Buying, F-014d20)",0.97077878
+FACTORY-37370ef762fec428,FACTORY-1cb350f28a1d4597,"Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, F-37370e)","Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, F-1cb350)",0.97022605
+FACTORY-37370ef762fec428,FACTORY-fce8300bed43d2aa,"Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, F-37370e)","Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, F-fce830)",0.9700458
+FACTORY-37370ef762fec428,FACTORY-b156c56670aac97e,"Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, F-37370e)","Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, F-b156c5)",0.96957335
+FACTORY-3a4646fedbd66e5c,FACTORY-1cb350f28a1d4597,"Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, F-3a4646)","Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, F-1cb350)",0.96954192
+FACTORY-3a4646fedbd66e5c,FACTORY-fce8300bed43d2aa,"Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, F-3a4646)","Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, F-fce830)",0.96924008
+FACTORY-84018bc09d7b34aa,FACTORY-1cb350f28a1d4597,"Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, F-84018b)","Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, F-1cb350)",0.96916417
+FACTORY-71fd1cd246f2c826,FACTORY-a11aeab2b579676d,"Factory 13D Activist Follow-On 20d 100bps (13D Activist Follow-On, F-71fd1c)","Factory 13D Activist Follow-On 20d 500bps (13D Activist Follow-On, F-a11aea)",0.96909791
+FACTORY-84018bc09d7b34aa,FACTORY-fce8300bed43d2aa,"Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, F-84018b)","Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, F-fce830)",0.96892667
+FACTORY-8c126ce3235c7b20,FACTORY-1cb350f28a1d4597,"Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, F-8c126c)","Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, F-1cb350)",0.96860111
+FACTORY-3a4646fedbd66e5c,FACTORY-b156c56670aac97e,"Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, F-3a4646)","Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, F-b156c5)",0.96850228
+FACTORY-8c126ce3235c7b20,FACTORY-fce8300bed43d2aa,"Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, F-8c126c)","Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, F-fce830)",0.96833737
+FACTORY-84018bc09d7b34aa,FACTORY-b156c56670aac97e,"Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, F-84018b)","Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, F-b156c5)",0.96832933
+FACTORY-9e5b3dc1b0a6b383,FACTORY-1cb350f28a1d4597,"Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, F-9e5b3d)","Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, F-1cb350)",0.9678097
+FACTORY-8c126ce3235c7b20,FACTORY-b156c56670aac97e,"Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, F-8c126c)","Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, F-b156c5)",0.96768278
+FACTORY-9e5b3dc1b0a6b383,FACTORY-fce8300bed43d2aa,"Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, F-9e5b3d)","Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, F-fce830)",0.96743674
+FACTORY-0584cabbb54594ec,FACTORY-d29d63f253ebe744,"Factory LowVol Tradability 20d 100bps (LowVol Tradability, F-0584ca)","Factory LowVol Tradability 20d 375bps (LowVol Tradability, F-d29d63)",0.96726608
+FACTORY-cd77d4a8eb310124,FACTORY-1cb350f28a1d4597,"Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, F-cd77d4)","Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, F-1cb350)",0.96689739
+FACTORY-9e5b3dc1b0a6b383,FACTORY-b156c56670aac97e,"Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, F-9e5b3d)","Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, F-b156c5)",0.96654384
+FACTORY-cd77d4a8eb310124,FACTORY-fce8300bed43d2aa,"Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, F-cd77d4)","Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, F-fce830)",0.96649181
+FACTORY-cd77d4a8eb310124,FACTORY-b156c56670aac97e,"Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, F-cd77d4)","Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, F-b156c5)",0.96552777
+FACTORY-d56c84f26c9de3df,FACTORY-98998cc2ab40632e,"Factory Regime Filter 20d 100bps (Regime Filter, F-d56c84)","Factory Regime Filter 20d 375bps (Regime Filter, F-98998c)",0.96455794
+FACTORY-efba882cb8ce39ad,FACTORY-4365a19489b27c36,"Factory Momentum 20d 100bps (Momentum, F-efba88)","Factory Momentum 20d 500bps (Momentum, F-4365a1)",0.96340417
+FACTORY-7beb5d7a8b8038c1,FACTORY-8c53f735cf806348,"Factory Catalyst 5d 100bps (Catalyst, F-7beb5d)","Factory Catalyst 5d 375bps (Catalyst, F-8c53f7)",0.96010193
+FACTORY-7beb5d7a8b8038c1,FACTORY-936855ed5bd59a5a,"Factory Catalyst 5d 100bps (Catalyst, F-7beb5d)","Factory 9:30 AM ORB 5d 375bps (9:30 AM ORB, F-936855)",0.96010193
+FACTORY-1429370489f690ad,FACTORY-8c53f735cf806348,"Factory 9:30 AM ORB 5d 100bps (9:30 AM ORB, F-142937)","Factory Catalyst 5d 375bps (Catalyst, F-8c53f7)",0.96010193
+FACTORY-1429370489f690ad,FACTORY-936855ed5bd59a5a,"Factory 9:30 AM ORB 5d 100bps (9:30 AM ORB, F-142937)","Factory 9:30 AM ORB 5d 375bps (9:30 AM ORB, F-936855)",0.96010193
+FACTORY-b0c7f10acd2e2fd1,FACTORY-48339998c1f9883a,"Factory PEAD 20d 100bps (PEAD, F-b0c7f1)","Factory PEAD 20d 375bps (PEAD, F-483399)",0.95937559
+FACTORY-d5a39d7a88bc24cf,FACTORY-17d25540b5e54179,"Factory Mean Reversion 20d 100bps (Mean Reversion, F-d5a39d)","Factory Mean Reversion 20d 500bps (Mean Reversion, F-17d255)",0.95932122
+FACTORY-0a8b76d8e9c965be,FACTORY-8947ce22b80b9ee1,"Factory PEAD 5d 100bps (PEAD, F-0a8b76)","Factory PEAD 5d 375bps (PEAD, F-8947ce)",0.95814929
+FACTORY-7719d5fc2dc12422,FACTORY-6d11f16258c0abf7,"Factory LowVol Tradability 20d 100bps (LowVol Tradability, F-7719d5)","Factory LowVol Tradability 20d 500bps (LowVol Tradability, F-6d11f1)",0.95537846
+FACTORY-8e82b9153214d439,FACTORY-01ccbce77e85e306,"Factory 13D Activist Follow-On 5d 100bps (13D Activist Follow-On, F-8e82b9)","Factory 13D Activist Follow-On 5d 375bps (13D Activist Follow-On, F-01ccbc)",0.95523924
+FACTORY-54f51ccfae2851ab,FACTORY-ae163c98647d7bea,"Factory Dollar-Bar Microstructure 20d 100bps (Dollar-Bar Microstructure, F-54f51c)","Factory Dollar-Bar Microstructure 20d 500bps (Dollar-Bar Microstructure, F-ae163c)",0.95367409
+FACTORY-3f5b5e2af7a3e0ce,FACTORY-f9d708e9710586da,"Factory Custom Rule Builder 5d 100bps (Custom Rule Builder, F-3f5b5e)","Factory Custom Rule Builder 5d 375bps (Custom Rule Builder, F-f9d708)",0.95366143
+FACTORY-37370ef762fec428,FACTORY-3a4646fedbd66e5c,"Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, F-37370e)","Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, F-3a4646)",0.95238414
+FACTORY-84018bc09d7b34aa,FACTORY-3a4646fedbd66e5c,"Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, F-84018b)","Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, F-3a4646)",0.95229211
+FACTORY-8c126ce3235c7b20,FACTORY-3a4646fedbd66e5c,"Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, F-8c126c)","Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, F-3a4646)",0.95217525
+FACTORY-8c126ce3235c7b20,FACTORY-9e5b3dc1b0a6b383,"Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, F-8c126c)","Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, F-9e5b3d)",0.95166654
+FACTORY-84018bc09d7b34aa,FACTORY-9e5b3dc1b0a6b383,"Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, F-84018b)","Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, F-9e5b3d)",0.95165126
+FACTORY-37370ef762fec428,FACTORY-9e5b3dc1b0a6b383,"Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, F-37370e)","Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, F-9e5b3d)",0.95145531
+FACTORY-8c126ce3235c7b20,FACTORY-cd77d4a8eb310124,"Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, F-8c126c)","Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, F-cd77d4)",0.9513182
+FACTORY-84018bc09d7b34aa,FACTORY-cd77d4a8eb310124,"Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, F-84018b)","Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, F-cd77d4)",0.95124222
+FACTORY-37370ef762fec428,FACTORY-cd77d4a8eb310124,"Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, F-37370e)","Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, F-cd77d4)",0.95091401
+FACTORY-a7e09015bc37f943,FACTORY-f5a25236baf342cd,"Factory Dollar-Bar Microstructure 20d 100bps (Dollar-Bar Microstructure, F-a7e090)","Factory Dollar-Bar Microstructure 20d 375bps (Dollar-Bar Microstructure, F-f5a252)",0.95067953
+FACTORY-809ae08874ff229c,FACTORY-4c337763d226e0e4,"Factory Custom Rule Builder 90d 100bps (Custom Rule Builder, F-809ae0)","Factory Custom Rule Builder 180d 100bps (Custom Rule Builder, F-4c3377)",0.94983464
+FACTORY-f9ae921135d93340,FACTORY-4c337763d226e0e4,"Factory Custom Rule Builder 90d 375bps (Custom Rule Builder, F-f9ae92)","Factory Custom Rule Builder 180d 100bps (Custom Rule Builder, F-4c3377)",0.9497917
+FACTORY-8f5d4e1caeb5c929,FACTORY-214e36d619e8364b,"Factory Mean Reversion 20d 100bps (Mean Reversion, F-8f5d4e)","Factory Mean Reversion 20d 500bps (Mean Reversion, F-214e36)",0.94968157
+FACTORY-48f166c1c0802b66,FACTORY-7b5e4a28452607cf,"Factory Catalyst 20d 100bps (Catalyst, F-48f166)","Factory Catalyst 20d 500bps (Catalyst, F-7b5e4a)",0.94930734
+FACTORY-18898b7dda64c53e,FACTORY-7b5e4a28452607cf,"Factory 9:30 AM ORB 20d 100bps (9:30 AM ORB, F-18898b)","Factory Catalyst 20d 500bps (Catalyst, F-7b5e4a)",0.94930734
+FACTORY-c43a6563b2178d23,FACTORY-4c337763d226e0e4,"Factory Custom Rule Builder 90d 500bps (Custom Rule Builder, F-c43a65)","Factory Custom Rule Builder 180d 100bps (Custom Rule Builder, F-4c3377)",0.94912774
+FACTORY-198fb8b93bd75fa6,FACTORY-9984f12dca8c403a,"Factory 13D Activist Follow-On 20d 100bps (13D Activist Follow-On, F-198fb8)","Factory 13D Activist Follow-On 20d 375bps (13D Activist Follow-On, F-9984f1)",0.94895627
+FACTORY-f9ae921135d93340,FACTORY-0ea2260f8186ba11,"Factory Custom Rule Builder 90d 375bps (Custom Rule Builder, F-f9ae92)","Factory Custom Rule Builder 180d 375bps (Custom Rule Builder, F-0ea226)",0.94848989
+FACTORY-c43a6563b2178d23,FACTORY-0ea2260f8186ba11,"Factory Custom Rule Builder 90d 500bps (Custom Rule Builder, F-c43a65)","Factory Custom Rule Builder 180d 375bps (Custom Rule Builder, F-0ea226)",0.94832157
+FACTORY-c43a6563b2178d23,FACTORY-a3adc8024085df55,"Factory Custom Rule Builder 90d 500bps (Custom Rule Builder, F-c43a65)","Factory Custom Rule Builder 180d 500bps (Custom Rule Builder, F-a3adc8)",0.94772604
+FACTORY-f9ae921135d93340,FACTORY-a3adc8024085df55,"Factory Custom Rule Builder 90d 375bps (Custom Rule Builder, F-f9ae92)","Factory Custom Rule Builder 180d 500bps (Custom Rule Builder, F-a3adc8)",0.94766441
+FACTORY-809ae08874ff229c,FACTORY-0ea2260f8186ba11,"Factory Custom Rule Builder 90d 100bps (Custom Rule Builder, F-809ae0)","Factory Custom Rule Builder 180d 375bps (Custom Rule Builder, F-0ea226)",0.94748173
+FACTORY-809ae08874ff229c,FACTORY-a3adc8024085df55,"Factory Custom Rule Builder 90d 100bps (Custom Rule Builder, F-809ae0)","Factory Custom Rule Builder 180d 500bps (Custom Rule Builder, F-a3adc8)",0.94616889
+FACTORY-171e0565d482ba59,FACTORY-511e400b5c4a876b,"Factory Momentum 20d 100bps (Momentum, F-171e05)","Factory Momentum 20d 375bps (Momentum, F-511e40)",0.94561699
+FACTORY-856e9c303c706b2e,FACTORY-ecad2c3432587025,"Factory Custom Rule Builder 20d 100bps (Custom Rule Builder, F-856e9c)","Factory Custom Rule Builder 20d 375bps (Custom Rule Builder, F-ecad2c)",0.94417228
+FACTORY-b2571eb4e48ee3fb,FACTORY-d1893fa9808889ff,"Factory PEAD 5d 100bps (PEAD, F-b2571e)","Factory PEAD 5d 375bps (PEAD, F-d1893f)",0.93887517
+FACTORY-0893167e5b3cd58e,FACTORY-9166cc2a2cf7438b,"Factory Form 4 Cluster Buying 20d 100bps (Form 4 Cluster Buying, F-089316)","Factory Form 4 Cluster Buying 20d 500bps (Form 4 Cluster Buying, F-9166cc)",0.93858072
+FACTORY-9aa27ed14e743eb8,FACTORY-40d2b4dfba0a074d,"Factory Mean Reversion 5d 100bps (Mean Reversion, F-9aa27e)","Factory Mean Reversion 5d 375bps (Mean Reversion, F-40d2b4)",0.93738114
+FACTORY-673b8aef9706882d,FACTORY-242ddc7a506aa7ba,"Factory Catalyst 5d 100bps (Catalyst, F-673b8a)","Factory Catalyst 5d 375bps (Catalyst, F-242ddc)",0.93656223
+FACTORY-673b8aef9706882d,FACTORY-832e69dd8d7cef92,"Factory Catalyst 5d 100bps (Catalyst, F-673b8a)","Factory 9:30 AM ORB 5d 375bps (9:30 AM ORB, F-832e69)",0.93656223
+FACTORY-8dd755e2f8762126,FACTORY-242ddc7a506aa7ba,"Factory 9:30 AM ORB 5d 100bps (9:30 AM ORB, F-8dd755)","Factory Catalyst 5d 375bps (Catalyst, F-242ddc)",0.93656223
+FACTORY-8dd755e2f8762126,FACTORY-832e69dd8d7cef92,"Factory 9:30 AM ORB 5d 100bps (9:30 AM ORB, F-8dd755)","Factory 9:30 AM ORB 5d 375bps (9:30 AM ORB, F-832e69)",0.93656223
+FACTORY-8413ce13dec443e3,FACTORY-2fa84d3e324d0ad1,"Factory Form 4 Cluster Buying 5d 100bps (Form 4 Cluster Buying, F-8413ce)","Factory Form 4 Cluster Buying 5d 375bps (Form 4 Cluster Buying, F-2fa84d)",0.93368427
+FACTORY-35eb7c5efc5da071,FACTORY-72fadb6d71c63049,"Factory Dollar-Bar Microstructure 5d 100bps (Dollar-Bar Microstructure, F-35eb7c)","Factory Dollar-Bar Microstructure 5d 375bps (Dollar-Bar Microstructure, F-72fadb)",0.93090296
+FACTORY-633e2bb05655049f,FACTORY-cb9267a22681d28d,"Factory Momentum 5d 100bps (Momentum, F-633e2b)","Factory Momentum 5d 375bps (Momentum, F-cb9267)",0.92682618
+FACTORY-7beb5d7a8b8038c1,FACTORY-b9eeca42dc0b6ac1,"Factory Catalyst 5d 100bps (Catalyst, F-7beb5d)","Factory Catalyst 5d 500bps (Catalyst, F-b9eeca)",0.92360609
+FACTORY-7beb5d7a8b8038c1,FACTORY-2833589a22eb1996,"Factory Catalyst 5d 100bps (Catalyst, F-7beb5d)","Factory 9:30 AM ORB 5d 500bps (9:30 AM ORB, F-283358)",0.92360609
+FACTORY-1429370489f690ad,FACTORY-b9eeca42dc0b6ac1,"Factory 9:30 AM ORB 5d 100bps (9:30 AM ORB, F-142937)","Factory Catalyst 5d 500bps (Catalyst, F-b9eeca)",0.92360609
+FACTORY-1429370489f690ad,FACTORY-2833589a22eb1996,"Factory 9:30 AM ORB 5d 100bps (9:30 AM ORB, F-142937)","Factory 9:30 AM ORB 5d 500bps (9:30 AM ORB, F-283358)",0.92360609
+FACTORY-171ac28e5b423f68,FACTORY-0a068c8a27ef583b,"Factory LowVol Tradability 5d 100bps (LowVol Tradability, F-171ac2)","Factory LowVol Tradability 5d 375bps (LowVol Tradability, F-0a068c)",0.92223789
+FACTORY-0a8b76d8e9c965be,FACTORY-2799e503bee9bc50,"Factory PEAD 5d 100bps (PEAD, F-0a8b76)","Factory PEAD 5d 500bps (PEAD, F-2799e5)",0.9207982
+FACTORY-8e82b9153214d439,FACTORY-504e005cf35929de,"Factory 13D Activist Follow-On 5d 100bps (13D Activist Follow-On, F-8e82b9)","Factory 13D Activist Follow-On 5d 500bps (13D Activist Follow-On, F-504e00)",0.9168079
+FACTORY-609f9af8970bab77,FACTORY-37370ef762fec428,"Factory PDUFA Run-Up 20d 100bps (PDUFA Run-Up, F-609f9a)","Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, F-37370e)",0.91623574
+FACTORY-7b72bd081c7f1f96,FACTORY-37370ef762fec428,"Factory PDUFA Run-Up 20d 375bps (PDUFA Run-Up, F-7b72bd)","Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, F-37370e)",0.91547153
+FACTORY-08078fc67cfbc038,FACTORY-eecffd9fc1c8db58,"Factory 13D Activist Follow-On 5d 100bps (13D Activist Follow-On, F-08078f)","Factory 13D Activist Follow-On 5d 375bps (13D Activist Follow-On, F-eecffd)",0.91531229
+FACTORY-609f9af8970bab77,FACTORY-84018bc09d7b34aa,"Factory PDUFA Run-Up 20d 100bps (PDUFA Run-Up, F-609f9a)","Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, F-84018b)",0.91499865
+FACTORY-7b72bd081c7f1f96,FACTORY-84018bc09d7b34aa,"Factory PDUFA Run-Up 20d 375bps (PDUFA Run-Up, F-7b72bd)","Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, F-84018b)",0.91485207
+FACTORY-b0c7f10acd2e2fd1,FACTORY-005e7108e32c5c35,"Factory PEAD 20d 100bps (PEAD, F-b0c7f1)","Factory PEAD 20d 500bps (PEAD, F-005e71)",0.91476546
+FACTORY-5d7bb4d4fecbd758,FACTORY-e1db06c5156f7149,"Factory Mean Reversion 5d 100bps (Mean Reversion, F-5d7bb4)","Factory Mean Reversion 5d 375bps (Mean Reversion, F-e1db06)",0.91469486
+FACTORY-f4bc4ad10d286feb,FACTORY-37370ef762fec428,"Factory PDUFA Run-Up 20d 500bps (PDUFA Run-Up, F-f4bc4a)","Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, F-37370e)",0.91458901
+FACTORY-7b72bd081c7f1f96,FACTORY-8c126ce3235c7b20,"Factory PDUFA Run-Up 20d 375bps (PDUFA Run-Up, F-7b72bd)","Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, F-8c126c)",0.9144962
+FACTORY-609f9af8970bab77,FACTORY-8c126ce3235c7b20,"Factory PDUFA Run-Up 20d 100bps (PDUFA Run-Up, F-609f9a)","Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, F-8c126c)",0.91435947
+FACTORY-f4bc4ad10d286feb,FACTORY-84018bc09d7b34aa,"Factory PDUFA Run-Up 20d 500bps (PDUFA Run-Up, F-f4bc4a)","Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, F-84018b)",0.91425802
+FACTORY-f4bc4ad10d286feb,FACTORY-8c126ce3235c7b20,"Factory PDUFA Run-Up 20d 500bps (PDUFA Run-Up, F-f4bc4a)","Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, F-8c126c)",0.91403452
+FACTORY-1ccb2e9a10bbb66a,FACTORY-036709cbb90245e8,"Factory Custom Rule Builder 20d 100bps (Custom Rule Builder, F-1ccb2e)","Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)",0.91320282
+FACTORY-3f5b5e2af7a3e0ce,FACTORY-8713d4958c02e25f,"Factory Custom Rule Builder 5d 100bps (Custom Rule Builder, F-3f5b5e)","Factory Custom Rule Builder 5d 500bps (Custom Rule Builder, F-8713d4)",0.91166662
+FACTORY-1ccb2e9a10bbb66a,FACTORY-45ebfdbb131f6cbd,"Factory Custom Rule Builder 20d 100bps (Custom Rule Builder, F-1ccb2e)","Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)",0.91149316
+FACTORY-988575baf49a4912,FACTORY-dea4cd8697c22ed5,"Factory Regime Filter 5d 100bps (Regime Filter, F-988575)","Factory Regime Filter 5d 375bps (Regime Filter, F-dea4cd)",0.90950124
+FACTORY-1ccb2e9a10bbb66a,FACTORY-2306e8d8b69f7be8,"Factory Custom Rule Builder 20d 100bps (Custom Rule Builder, F-1ccb2e)","Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)",0.90613381
+FACTORY-609f9af8970bab77,FACTORY-b156c56670aac97e,"Factory PDUFA Run-Up 20d 100bps (PDUFA Run-Up, F-609f9a)","Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, F-b156c5)",0.89602271
+FACTORY-609f9af8970bab77,FACTORY-fce8300bed43d2aa,"Factory PDUFA Run-Up 20d 100bps (PDUFA Run-Up, F-609f9a)","Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, F-fce830)",0.89588633
+FACTORY-609f9af8970bab77,FACTORY-1cb350f28a1d4597,"Factory PDUFA Run-Up 20d 100bps (PDUFA Run-Up, F-609f9a)","Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, F-1cb350)",0.89579044
+FACTORY-c0803ca9f67aa76d,FACTORY-036709cbb90245e8,"Factory Custom Rule Builder 20d 375bps (Custom Rule Builder, F-c0803c)","Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)",0.89542917
+FACTORY-4374f4a63472e9d1,FACTORY-e62a48e2d142923e,"Factory Momentum 90d 100bps (Momentum, F-4374f4)","Factory Momentum 180d 100bps (Momentum, F-e62a48)",0.89455294
+FACTORY-4374f4a63472e9d1,FACTORY-3f1e95ca9e8549c1,"Factory Momentum 90d 100bps (Momentum, F-4374f4)","Factory Momentum 180d 375bps (Momentum, F-3f1e95)",0.8926987
+FACTORY-7b72bd081c7f1f96,FACTORY-1cb350f28a1d4597,"Factory PDUFA Run-Up 20d 375bps (PDUFA Run-Up, F-7b72bd)","Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, F-1cb350)",0.89259132
+FACTORY-7b72bd081c7f1f96,FACTORY-fce8300bed43d2aa,"Factory PDUFA Run-Up 20d 375bps (PDUFA Run-Up, F-7b72bd)","Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, F-fce830)",0.89253611
+FACTORY-b2571eb4e48ee3fb,FACTORY-f100658fbcbfd0d9,"Factory PEAD 5d 100bps (PEAD, F-b2571e)","Factory PEAD 5d 500bps (PEAD, F-f10065)",0.89247032
+FACTORY-7b72bd081c7f1f96,FACTORY-b156c56670aac97e,"Factory PDUFA Run-Up 20d 375bps (PDUFA Run-Up, F-7b72bd)","Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, F-b156c5)",0.89234294
+FACTORY-4374f4a63472e9d1,FACTORY-2886d4ef6f931734,"Factory Momentum 90d 100bps (Momentum, F-4374f4)","Factory Momentum 180d 500bps (Momentum, F-2886d4)",0.89148329
+FACTORY-c0803ca9f67aa76d,FACTORY-45ebfdbb131f6cbd,"Factory Custom Rule Builder 20d 375bps (Custom Rule Builder, F-c0803c)","Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)",0.89075915
+FACTORY-f4bc4ad10d286feb,FACTORY-1cb350f28a1d4597,"Factory PDUFA Run-Up 20d 500bps (PDUFA Run-Up, F-f4bc4a)","Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, F-1cb350)",0.89058612
+FACTORY-f4bc4ad10d286feb,FACTORY-fce8300bed43d2aa,"Factory PDUFA Run-Up 20d 500bps (PDUFA Run-Up, F-f4bc4a)","Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, F-fce830)",0.89046046
+FACTORY-171e0565d482ba59,FACTORY-24c6670e8a410cae,"Factory Momentum 20d 100bps (Momentum, F-171e05)","Factory Momentum 20d 500bps (Momentum, F-24c667)",0.89017932
+FACTORY-f4bc4ad10d286feb,FACTORY-b156c56670aac97e,"Factory PDUFA Run-Up 20d 500bps (PDUFA Run-Up, F-f4bc4a)","Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, F-b156c5)",0.89011367
+FACTORY-8f8cac315a45ff9e,FACTORY-e62a48e2d142923e,"Factory Momentum 90d 375bps (Momentum, F-8f8cac)","Factory Momentum 180d 100bps (Momentum, F-e62a48)",0.89008373
+FACTORY-8f8cac315a45ff9e,FACTORY-3f1e95ca9e8549c1,"Factory Momentum 90d 375bps (Momentum, F-8f8cac)","Factory Momentum 180d 375bps (Momentum, F-3f1e95)",0.89003917
+394fda88ef8296bd,55727f67f28b0c3c,"My falsifiable strategy (Momentum, 394fda)","My falsifiable strategy (PDUFA Run-Up, 55727f)",0.88985878
+394fda88ef8296bd,6c6bb20cdb419497,"My falsifiable strategy (Momentum, 394fda)","My falsifiable strategy (PDUFA Run-Up, 6c6bb2)",0.88985878
+394fda88ef8296bd,f14bfb46255e825b,"My falsifiable strategy (Momentum, 394fda)","My falsifiable strategy (PDUFA Run-Up, f14bfb)",0.88985878
+FACTORY-8f8cac315a45ff9e,FACTORY-2886d4ef6f931734,"Factory Momentum 90d 375bps (Momentum, F-8f8cac)","Factory Momentum 180d 500bps (Momentum, F-2886d4)",0.8896728
+FACTORY-07d58dc6d8516cd2,FACTORY-2886d4ef6f931734,"Factory Momentum 90d 500bps (Momentum, F-07d58d)","Factory Momentum 180d 500bps (Momentum, F-2886d4)",0.88774645
+FACTORY-07d58dc6d8516cd2,FACTORY-3f1e95ca9e8549c1,"Factory Momentum 90d 500bps (Momentum, F-07d58d)","Factory Momentum 180d 375bps (Momentum, F-3f1e95)",0.88770735
+FACTORY-07d58dc6d8516cd2,FACTORY-e62a48e2d142923e,"Factory Momentum 90d 500bps (Momentum, F-07d58d)","Factory Momentum 180d 100bps (Momentum, F-e62a48)",0.88688853
+FACTORY-673b8aef9706882d,FACTORY-8af0d52dca5654af,"Factory Catalyst 5d 100bps (Catalyst, F-673b8a)","Factory Catalyst 5d 500bps (Catalyst, F-8af0d5)",0.88537399
+FACTORY-673b8aef9706882d,FACTORY-d3a7487f53385ea9,"Factory Catalyst 5d 100bps (Catalyst, F-673b8a)","Factory 9:30 AM ORB 5d 500bps (9:30 AM ORB, F-d3a748)",0.88537399
+FACTORY-8dd755e2f8762126,FACTORY-8af0d52dca5654af,"Factory 9:30 AM ORB 5d 100bps (9:30 AM ORB, F-8dd755)","Factory Catalyst 5d 500bps (Catalyst, F-8af0d5)",0.88537399
+FACTORY-8dd755e2f8762126,FACTORY-d3a7487f53385ea9,"Factory 9:30 AM ORB 5d 100bps (9:30 AM ORB, F-8dd755)","Factory 9:30 AM ORB 5d 500bps (9:30 AM ORB, F-d3a748)",0.88537399
+FACTORY-29dc34ee3138d683,FACTORY-036709cbb90245e8,"Factory Custom Rule Builder 20d 500bps (Custom Rule Builder, F-29dc34)","Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)",0.88243094
+FACTORY-9aa27ed14e743eb8,FACTORY-03a53d17c324dec6,"Factory Mean Reversion 5d 100bps (Mean Reversion, F-9aa27e)","Factory Mean Reversion 5d 500bps (Mean Reversion, F-03a53d)",0.87923019
+FACTORY-c0803ca9f67aa76d,FACTORY-2306e8d8b69f7be8,"Factory Custom Rule Builder 20d 375bps (Custom Rule Builder, F-c0803c)","Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)",0.87898799
+FACTORY-29dc34ee3138d683,FACTORY-45ebfdbb131f6cbd,"Factory Custom Rule Builder 20d 500bps (Custom Rule Builder, F-29dc34)","Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)",0.87645929
+FACTORY-8413ce13dec443e3,FACTORY-cd913686ce1f399c,"Factory Form 4 Cluster Buying 5d 100bps (Form 4 Cluster Buying, F-8413ce)","Factory Form 4 Cluster Buying 5d 500bps (Form 4 Cluster Buying, F-cd9136)",0.87507666
+FACTORY-fcc65b33bba2a984,FACTORY-0391e93ebbeb1f98,"Factory PEAD 90d 100bps (PEAD, F-fcc65b)","Factory PEAD 180d 100bps (PEAD, F-0391e9)",0.86938603
+FACTORY-fcc65b33bba2a984,FACTORY-9504b7bcf75908ef,"Factory PEAD 90d 100bps (PEAD, F-fcc65b)","Factory PEAD 180d 375bps (PEAD, F-9504b7)",0.86923154
+FACTORY-35eb7c5efc5da071,FACTORY-bccbea39bed3c806,"Factory Dollar-Bar Microstructure 5d 100bps (Dollar-Bar Microstructure, F-35eb7c)","Factory Dollar-Bar Microstructure 5d 500bps (Dollar-Bar Microstructure, F-bccbea)",0.86907243
+FACTORY-fcc65b33bba2a984,FACTORY-99796a89a76bfa4c,"Factory PEAD 90d 100bps (PEAD, F-fcc65b)","Factory PEAD 180d 500bps (PEAD, F-99796a)",0.86895999
+FACTORY-2306e8d8b69f7be8,FACTORY-a3adc8024085df55,"Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)","Factory Custom Rule Builder 180d 500bps (Custom Rule Builder, F-a3adc8)",0.86862704
+FACTORY-609f9af8970bab77,FACTORY-3a4646fedbd66e5c,"Factory PDUFA Run-Up 20d 100bps (PDUFA Run-Up, F-609f9a)","Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, F-3a4646)",0.86761503
+FACTORY-7b72bd081c7f1f96,FACTORY-3a4646fedbd66e5c,"Factory PDUFA Run-Up 20d 375bps (PDUFA Run-Up, F-7b72bd)","Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, F-3a4646)",0.86684909
+FACTORY-f4bc4ad10d286feb,FACTORY-3a4646fedbd66e5c,"Factory PDUFA Run-Up 20d 500bps (PDUFA Run-Up, F-f4bc4a)","Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, F-3a4646)",0.86599371
+FACTORY-2306e8d8b69f7be8,FACTORY-0ea2260f8186ba11,"Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)","Factory Custom Rule Builder 180d 375bps (Custom Rule Builder, F-0ea226)",0.86559843
+FACTORY-609f9af8970bab77,FACTORY-9e5b3dc1b0a6b383,"Factory PDUFA Run-Up 20d 100bps (PDUFA Run-Up, F-609f9a)","Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, F-9e5b3d)",0.86534015
+FACTORY-7b72bd081c7f1f96,FACTORY-9e5b3dc1b0a6b383,"Factory PDUFA Run-Up 20d 375bps (PDUFA Run-Up, F-7b72bd)","Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, F-9e5b3d)",0.86533296
+FACTORY-f4bc4ad10d286feb,FACTORY-9e5b3dc1b0a6b383,"Factory PDUFA Run-Up 20d 500bps (PDUFA Run-Up, F-f4bc4a)","Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, F-9e5b3d)",0.86483239
+FACTORY-7b72bd081c7f1f96,FACTORY-cd77d4a8eb310124,"Factory PDUFA Run-Up 20d 375bps (PDUFA Run-Up, F-7b72bd)","Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, F-cd77d4)",0.86453226
+FACTORY-8c7853c5ae904d13,FACTORY-99796a89a76bfa4c,"Factory PEAD 90d 375bps (PEAD, F-8c7853)","Factory PEAD 180d 500bps (PEAD, F-99796a)",0.86444576
+FACTORY-8c7853c5ae904d13,FACTORY-9504b7bcf75908ef,"Factory PEAD 90d 375bps (PEAD, F-8c7853)","Factory PEAD 180d 375bps (PEAD, F-9504b7)",0.86421689
+FACTORY-f4bc4ad10d286feb,FACTORY-cd77d4a8eb310124,"Factory PDUFA Run-Up 20d 500bps (PDUFA Run-Up, F-f4bc4a)","Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, F-cd77d4)",0.86419473
+FACTORY-609f9af8970bab77,FACTORY-cd77d4a8eb310124,"Factory PDUFA Run-Up 20d 100bps (PDUFA Run-Up, F-609f9a)","Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, F-cd77d4)",0.86419091
+FACTORY-633e2bb05655049f,FACTORY-c28eec485c97ab60,"Factory Momentum 5d 100bps (Momentum, F-633e2b)","Factory Momentum 5d 500bps (Momentum, F-c28eec)",0.86386461
+FACTORY-8c7853c5ae904d13,FACTORY-0391e93ebbeb1f98,"Factory PEAD 90d 375bps (PEAD, F-8c7853)","Factory PEAD 180d 100bps (PEAD, F-0391e9)",0.86329481
+FACTORY-29dc34ee3138d683,FACTORY-2306e8d8b69f7be8,"Factory Custom Rule Builder 20d 500bps (Custom Rule Builder, F-29dc34)","Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)",0.86187823
+FACTORY-5fcd77f2c0517c34,FACTORY-99796a89a76bfa4c,"Factory PEAD 90d 500bps (PEAD, F-5fcd77)","Factory PEAD 180d 500bps (PEAD, F-99796a)",0.86175203
+FACTORY-5fcd77f2c0517c34,FACTORY-9504b7bcf75908ef,"Factory PEAD 90d 500bps (PEAD, F-5fcd77)","Factory PEAD 180d 375bps (PEAD, F-9504b7)",0.86128952
+FACTORY-58ad0155348a2440,FACTORY-4f2398b6e0f737a6,"Factory Dollar-Bar Microstructure 5d 100bps (Dollar-Bar Microstructure, F-58ad01)","Factory Dollar-Bar Microstructure 5d 375bps (Dollar-Bar Microstructure, F-4f2398)",0.86059412
+FACTORY-5fcd77f2c0517c34,FACTORY-0391e93ebbeb1f98,"Factory PEAD 90d 500bps (PEAD, F-5fcd77)","Factory PEAD 180d 100bps (PEAD, F-0391e9)",0.85986511
+FACTORY-171ac28e5b423f68,FACTORY-e8820a84c0d6faf6,"Factory LowVol Tradability 5d 100bps (LowVol Tradability, F-171ac2)","Factory LowVol Tradability 5d 500bps (LowVol Tradability, F-e8820a)",0.85868298
+FACTORY-2306e8d8b69f7be8,FACTORY-4c337763d226e0e4,"Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)","Factory Custom Rule Builder 180d 100bps (Custom Rule Builder, F-4c3377)",0.85863372
+FACTORY-9b84bf90cdccb0ca,FACTORY-f186683398e16f3a,"Factory Custom Rule Builder 5d 100bps (Custom Rule Builder, F-9b84bf)","Factory Custom Rule Builder 5d 375bps (Custom Rule Builder, F-f18668)",0.85673571
+FACTORY-08078fc67cfbc038,FACTORY-70556db6df05f38a,"Factory 13D Activist Follow-On 5d 100bps (13D Activist Follow-On, F-08078f)","Factory 13D Activist Follow-On 5d 500bps (13D Activist Follow-On, F-70556d)",0.85517691
+FACTORY-32cddb18e173d6a5,FACTORY-6e4f085c13e95091,"Factory Momentum 5d 100bps (Momentum, F-32cddb)","Factory Momentum 5d 375bps (Momentum, F-6e4f08)",0.8547649
+FACTORY-45ebfdbb131f6cbd,FACTORY-a3adc8024085df55,"Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)","Factory Custom Rule Builder 180d 500bps (Custom Rule Builder, F-a3adc8)",0.85356894
+FACTORY-2306e8d8b69f7be8,FACTORY-c43a6563b2178d23,"Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)","Factory Custom Rule Builder 90d 500bps (Custom Rule Builder, F-c43a65)",0.85092397
+FACTORY-45ebfdbb131f6cbd,FACTORY-0ea2260f8186ba11,"Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)","Factory Custom Rule Builder 180d 375bps (Custom Rule Builder, F-0ea226)",0.85000815
+FACTORY-036709cbb90245e8,FACTORY-a3adc8024085df55,"Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)","Factory Custom Rule Builder 180d 500bps (Custom Rule Builder, F-a3adc8)",0.84595387
+FACTORY-2306e8d8b69f7be8,FACTORY-f9ae921135d93340,"Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)","Factory Custom Rule Builder 90d 375bps (Custom Rule Builder, F-f9ae92)",0.84590289
+FACTORY-76753375415f5dd7,FACTORY-a8ba3464fded3edb,"Factory LowVol Tradability 5d 100bps (LowVol Tradability, F-767533)","Factory LowVol Tradability 5d 375bps (LowVol Tradability, F-a8ba34)",0.84527722
+FACTORY-45e90ef62971498a,FACTORY-4c63f4888d4676d6,"Factory Form 4 Cluster Buying 5d 100bps (Form 4 Cluster Buying, F-45e90e)","Factory Form 4 Cluster Buying 5d 375bps (Form 4 Cluster Buying, F-4c63f4)",0.84330544
+FACTORY-5d7bb4d4fecbd758,FACTORY-688a5013e817d0da,"Factory Mean Reversion 5d 100bps (Mean Reversion, F-5d7bb4)","Factory Mean Reversion 5d 500bps (Mean Reversion, F-688a50)",0.84273727
+FACTORY-036709cbb90245e8,FACTORY-0ea2260f8186ba11,"Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)","Factory Custom Rule Builder 180d 375bps (Custom Rule Builder, F-0ea226)",0.84215171
+FACTORY-7d7fc107faf661dc,FACTORY-6a8afca3951761f9,"Factory Catalyst 90d 100bps (Catalyst, F-7d7fc1)","Factory Catalyst 180d 100bps (Catalyst, F-6a8afc)",0.84205936
+FACTORY-7d7fc107faf661dc,FACTORY-048d754979815760,"Factory Catalyst 90d 100bps (Catalyst, F-7d7fc1)","Factory 9:30 AM ORB 180d 100bps (9:30 AM ORB, F-048d75)",0.84205936
+FACTORY-58fde2142f9a24a0,FACTORY-6a8afca3951761f9,"Factory 9:30 AM ORB 90d 100bps (9:30 AM ORB, F-58fde2)","Factory Catalyst 180d 100bps (Catalyst, F-6a8afc)",0.84205936
+FACTORY-58fde2142f9a24a0,FACTORY-048d754979815760,"Factory 9:30 AM ORB 90d 100bps (9:30 AM ORB, F-58fde2)","Factory 9:30 AM ORB 180d 100bps (9:30 AM ORB, F-048d75)",0.84205936
+FACTORY-45ebfdbb131f6cbd,FACTORY-4c337763d226e0e4,"Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)","Factory Custom Rule Builder 180d 100bps (Custom Rule Builder, F-4c3377)",0.84190406
+FACTORY-2fdf6c07a3bcb68d,FACTORY-5e3bba4315fd435f,"Factory Form 4 Cluster Buying 90d 100bps (Form 4 Cluster Buying, F-2fdf6c)","Factory Form 4 Cluster Buying 180d 100bps (Form 4 Cluster Buying, F-5e3bba)",0.84187443
+FACTORY-2fdf6c07a3bcb68d,FACTORY-06a5bea953601da8,"Factory Form 4 Cluster Buying 90d 100bps (Form 4 Cluster Buying, F-2fdf6c)","Factory Form 4 Cluster Buying 180d 375bps (Form 4 Cluster Buying, F-06a5be)",0.84143532
+FACTORY-7d7fc107faf661dc,FACTORY-3f31720278715f4a,"Factory Catalyst 90d 100bps (Catalyst, F-7d7fc1)","Factory Catalyst 180d 375bps (Catalyst, F-3f3172)",0.84115318
+FACTORY-7d7fc107faf661dc,FACTORY-c3d425ca8fa3db00,"Factory Catalyst 90d 100bps (Catalyst, F-7d7fc1)","Factory 9:30 AM ORB 180d 375bps (9:30 AM ORB, F-c3d425)",0.84115318
+FACTORY-58fde2142f9a24a0,FACTORY-3f31720278715f4a,"Factory 9:30 AM ORB 90d 100bps (9:30 AM ORB, F-58fde2)","Factory Catalyst 180d 375bps (Catalyst, F-3f3172)",0.84115318
+FACTORY-58fde2142f9a24a0,FACTORY-c3d425ca8fa3db00,"Factory 9:30 AM ORB 90d 100bps (9:30 AM ORB, F-58fde2)","Factory 9:30 AM ORB 180d 375bps (9:30 AM ORB, F-c3d425)",0.84115318
+FACTORY-2fdf6c07a3bcb68d,FACTORY-dbcb37c9ddbb6896,"Factory Form 4 Cluster Buying 90d 100bps (Form 4 Cluster Buying, F-2fdf6c)","Factory Form 4 Cluster Buying 180d 500bps (Form 4 Cluster Buying, F-dbcb37)",0.84091372
+FACTORY-7d7fc107faf661dc,FACTORY-1a986d424d0dcdde,"Factory Catalyst 90d 100bps (Catalyst, F-7d7fc1)","Factory Catalyst 180d 500bps (Catalyst, F-1a986d)",0.84053674
+FACTORY-7d7fc107faf661dc,FACTORY-553b10663e17fb26,"Factory Catalyst 90d 100bps (Catalyst, F-7d7fc1)","Factory 9:30 AM ORB 180d 500bps (9:30 AM ORB, F-553b10)",0.84053674
+FACTORY-58fde2142f9a24a0,FACTORY-1a986d424d0dcdde,"Factory 9:30 AM ORB 90d 100bps (9:30 AM ORB, F-58fde2)","Factory Catalyst 180d 500bps (Catalyst, F-1a986d)",0.84053674
+FACTORY-58fde2142f9a24a0,FACTORY-553b10663e17fb26,"Factory 9:30 AM ORB 90d 100bps (9:30 AM ORB, F-58fde2)","Factory 9:30 AM ORB 180d 500bps (9:30 AM ORB, F-553b10)",0.84053674
+FACTORY-f3a11def315430dd,FACTORY-dbcb37c9ddbb6896,"Factory Form 4 Cluster Buying 90d 375bps (Form 4 Cluster Buying, F-f3a11d)","Factory Form 4 Cluster Buying 180d 500bps (Form 4 Cluster Buying, F-dbcb37)",0.83791755
+FACTORY-f3a11def315430dd,FACTORY-06a5bea953601da8,"Factory Form 4 Cluster Buying 90d 375bps (Form 4 Cluster Buying, F-f3a11d)","Factory Form 4 Cluster Buying 180d 375bps (Form 4 Cluster Buying, F-06a5be)",0.83762534
+FACTORY-f3a11def315430dd,FACTORY-5e3bba4315fd435f,"Factory Form 4 Cluster Buying 90d 375bps (Form 4 Cluster Buying, F-f3a11d)","Factory Form 4 Cluster Buying 180d 100bps (Form 4 Cluster Buying, F-5e3bba)",0.83629978
+FACTORY-187d8d55eeef6a10,FACTORY-dbcb37c9ddbb6896,"Factory Form 4 Cluster Buying 90d 500bps (Form 4 Cluster Buying, F-187d8d)","Factory Form 4 Cluster Buying 180d 500bps (Form 4 Cluster Buying, F-dbcb37)",0.83563928
+FACTORY-dbcae1b95fd38612,FACTORY-3f31720278715f4a,"Factory Catalyst 90d 375bps (Catalyst, F-dbcae1)","Factory Catalyst 180d 375bps (Catalyst, F-3f3172)",0.83514823
+FACTORY-dbcae1b95fd38612,FACTORY-c3d425ca8fa3db00,"Factory Catalyst 90d 375bps (Catalyst, F-dbcae1)","Factory 9:30 AM ORB 180d 375bps (9:30 AM ORB, F-c3d425)",0.83514823
+FACTORY-1e6fb3ffd92f62a9,FACTORY-3f31720278715f4a,"Factory 9:30 AM ORB 90d 375bps (9:30 AM ORB, F-1e6fb3)","Factory Catalyst 180d 375bps (Catalyst, F-3f3172)",0.83514823
+FACTORY-1e6fb3ffd92f62a9,FACTORY-c3d425ca8fa3db00,"Factory 9:30 AM ORB 90d 375bps (9:30 AM ORB, F-1e6fb3)","Factory 9:30 AM ORB 180d 375bps (9:30 AM ORB, F-c3d425)",0.83514823
+FACTORY-dbcae1b95fd38612,FACTORY-1a986d424d0dcdde,"Factory Catalyst 90d 375bps (Catalyst, F-dbcae1)","Factory Catalyst 180d 500bps (Catalyst, F-1a986d)",0.835067
+FACTORY-dbcae1b95fd38612,FACTORY-553b10663e17fb26,"Factory Catalyst 90d 375bps (Catalyst, F-dbcae1)","Factory 9:30 AM ORB 180d 500bps (9:30 AM ORB, F-553b10)",0.835067
+FACTORY-1e6fb3ffd92f62a9,FACTORY-1a986d424d0dcdde,"Factory 9:30 AM ORB 90d 375bps (9:30 AM ORB, F-1e6fb3)","Factory Catalyst 180d 500bps (Catalyst, F-1a986d)",0.835067
+FACTORY-1e6fb3ffd92f62a9,FACTORY-553b10663e17fb26,"Factory 9:30 AM ORB 90d 375bps (9:30 AM ORB, F-1e6fb3)","Factory 9:30 AM ORB 180d 500bps (9:30 AM ORB, F-553b10)",0.835067
+FACTORY-187d8d55eeef6a10,FACTORY-06a5bea953601da8,"Factory Form 4 Cluster Buying 90d 500bps (Form 4 Cluster Buying, F-187d8d)","Factory Form 4 Cluster Buying 180d 375bps (Form 4 Cluster Buying, F-06a5be)",0.83497117
+FACTORY-dbcae1b95fd38612,FACTORY-6a8afca3951761f9,"Factory Catalyst 90d 375bps (Catalyst, F-dbcae1)","Factory Catalyst 180d 100bps (Catalyst, F-6a8afc)",0.83490468
+FACTORY-dbcae1b95fd38612,FACTORY-048d754979815760,"Factory Catalyst 90d 375bps (Catalyst, F-dbcae1)","Factory 9:30 AM ORB 180d 100bps (9:30 AM ORB, F-048d75)",0.83490468
+FACTORY-1e6fb3ffd92f62a9,FACTORY-6a8afca3951761f9,"Factory 9:30 AM ORB 90d 375bps (9:30 AM ORB, F-1e6fb3)","Factory Catalyst 180d 100bps (Catalyst, F-6a8afc)",0.83490468
+FACTORY-1e6fb3ffd92f62a9,FACTORY-048d754979815760,"Factory 9:30 AM ORB 90d 375bps (9:30 AM ORB, F-1e6fb3)","Factory 9:30 AM ORB 180d 100bps (9:30 AM ORB, F-048d75)",0.83490468
+FACTORY-45ebfdbb131f6cbd,FACTORY-c43a6563b2178d23,"Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)","Factory Custom Rule Builder 90d 500bps (Custom Rule Builder, F-c43a65)",0.8347537
+FACTORY-2306e8d8b69f7be8,FACTORY-809ae08874ff229c,"Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)","Factory Custom Rule Builder 90d 100bps (Custom Rule Builder, F-809ae0)",0.83401747
+FACTORY-036709cbb90245e8,FACTORY-4c337763d226e0e4,"Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)","Factory Custom Rule Builder 180d 100bps (Custom Rule Builder, F-4c3377)",0.83353127
+FACTORY-988575baf49a4912,FACTORY-0a70bc00edb3ff6b,"Factory Regime Filter 5d 100bps (Regime Filter, F-988575)","Factory Regime Filter 5d 500bps (Regime Filter, F-0a70bc)",0.83297777
+FACTORY-187d8d55eeef6a10,FACTORY-5e3bba4315fd435f,"Factory Form 4 Cluster Buying 90d 500bps (Form 4 Cluster Buying, F-187d8d)","Factory Form 4 Cluster Buying 180d 100bps (Form 4 Cluster Buying, F-5e3bba)",0.83283122
+FACTORY-27bfb999b143a3bf,FACTORY-1a986d424d0dcdde,"Factory Catalyst 90d 500bps (Catalyst, F-27bfb9)","Factory Catalyst 180d 500bps (Catalyst, F-1a986d)",0.8318441
+FACTORY-27bfb999b143a3bf,FACTORY-553b10663e17fb26,"Factory Catalyst 90d 500bps (Catalyst, F-27bfb9)","Factory 9:30 AM ORB 180d 500bps (9:30 AM ORB, F-553b10)",0.8318441
+FACTORY-5fbad472b1879679,FACTORY-1a986d424d0dcdde,"Factory 9:30 AM ORB 90d 500bps (9:30 AM ORB, F-5fbad4)","Factory Catalyst 180d 500bps (Catalyst, F-1a986d)",0.8318441
+FACTORY-5fbad472b1879679,FACTORY-553b10663e17fb26,"Factory 9:30 AM ORB 90d 500bps (9:30 AM ORB, F-5fbad4)","Factory 9:30 AM ORB 180d 500bps (9:30 AM ORB, F-553b10)",0.8318441
+FACTORY-27bfb999b143a3bf,FACTORY-3f31720278715f4a,"Factory Catalyst 90d 500bps (Catalyst, F-27bfb9)","Factory Catalyst 180d 375bps (Catalyst, F-3f3172)",0.8316741
+FACTORY-27bfb999b143a3bf,FACTORY-c3d425ca8fa3db00,"Factory Catalyst 90d 500bps (Catalyst, F-27bfb9)","Factory 9:30 AM ORB 180d 375bps (9:30 AM ORB, F-c3d425)",0.8316741
+FACTORY-5fbad472b1879679,FACTORY-3f31720278715f4a,"Factory 9:30 AM ORB 90d 500bps (9:30 AM ORB, F-5fbad4)","Factory Catalyst 180d 375bps (Catalyst, F-3f3172)",0.8316741
+FACTORY-5fbad472b1879679,FACTORY-c3d425ca8fa3db00,"Factory 9:30 AM ORB 90d 500bps (9:30 AM ORB, F-5fbad4)","Factory 9:30 AM ORB 180d 375bps (9:30 AM ORB, F-c3d425)",0.8316741
+FACTORY-27bfb999b143a3bf,FACTORY-6a8afca3951761f9,"Factory Catalyst 90d 500bps (Catalyst, F-27bfb9)","Factory Catalyst 180d 100bps (Catalyst, F-6a8afc)",0.8308912
+FACTORY-27bfb999b143a3bf,FACTORY-048d754979815760,"Factory Catalyst 90d 500bps (Catalyst, F-27bfb9)","Factory 9:30 AM ORB 180d 100bps (9:30 AM ORB, F-048d75)",0.8308912
+FACTORY-5fbad472b1879679,FACTORY-6a8afca3951761f9,"Factory 9:30 AM ORB 90d 500bps (9:30 AM ORB, F-5fbad4)","Factory Catalyst 180d 100bps (Catalyst, F-6a8afc)",0.8308912
+FACTORY-5fbad472b1879679,FACTORY-048d754979815760,"Factory 9:30 AM ORB 90d 500bps (9:30 AM ORB, F-5fbad4)","Factory 9:30 AM ORB 180d 100bps (9:30 AM ORB, F-048d75)",0.8308912
+FACTORY-45ebfdbb131f6cbd,FACTORY-f9ae921135d93340,"Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)","Factory Custom Rule Builder 90d 375bps (Custom Rule Builder, F-f9ae92)",0.82876555
+FACTORY-036709cbb90245e8,FACTORY-c43a6563b2178d23,"Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)","Factory Custom Rule Builder 90d 500bps (Custom Rule Builder, F-c43a65)",0.82664359
+FACTORY-a48667d59c0341c7,FACTORY-9424b27321e327f5,"Factory Regime Filter 20d 100bps (Regime Filter, F-a48667)","Factory Regime Filter 45d 500bps (Regime Filter, F-9424b2)",0.82476821
+FACTORY-1ae9c3303191d694,FACTORY-a26c47e6385e2c63,"Factory Regime Filter 90d 100bps (Regime Filter, F-1ae9c3)","Factory Regime Filter 180d 100bps (Regime Filter, F-a26c47)",0.82189077
+FACTORY-a48667d59c0341c7,FACTORY-1cbd0d3c3b95022d,"Factory Regime Filter 20d 100bps (Regime Filter, F-a48667)","Factory Regime Filter 45d 375bps (Regime Filter, F-1cbd0d)",0.82169177
+FACTORY-2ed1639d36c6b44c,FACTORY-06b51d2083257b36,"Factory Mean Reversion 90d 100bps (Mean Reversion, F-2ed163)","Factory Mean Reversion 180d 500bps (Mean Reversion, F-06b51d)",0.82110862
+FACTORY-d6e26b4dde83c8b0,FACTORY-5fcd77f2c0517c34,"Factory PEAD 45d 100bps (PEAD, F-d6e26b)","Factory PEAD 90d 500bps (PEAD, F-5fcd77)",0.82086031
+FACTORY-036709cbb90245e8,FACTORY-f9ae921135d93340,"Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)","Factory Custom Rule Builder 90d 375bps (Custom Rule Builder, F-f9ae92)",0.82021644
+FACTORY-2ed1639d36c6b44c,FACTORY-e021ad4521158745,"Factory Mean Reversion 90d 100bps (Mean Reversion, F-2ed163)","Factory Mean Reversion 180d 375bps (Mean Reversion, F-e021ad)",0.82018416
+FACTORY-d6e26b4dde83c8b0,FACTORY-8c7853c5ae904d13,"Factory PEAD 45d 100bps (PEAD, F-d6e26b)","Factory PEAD 90d 375bps (PEAD, F-8c7853)",0.819853
+FACTORY-1ae9c3303191d694,FACTORY-f084a7400225c73b,"Factory Regime Filter 90d 100bps (Regime Filter, F-1ae9c3)","Factory Regime Filter 180d 375bps (Regime Filter, F-f084a7)",0.81909046
+FACTORY-1399577a8d1d5dca,FACTORY-a26c47e6385e2c63,"Factory Regime Filter 90d 375bps (Regime Filter, F-139957)","Factory Regime Filter 180d 100bps (Regime Filter, F-a26c47)",0.8180085
+FACTORY-2ed1639d36c6b44c,FACTORY-fab94445f0b51fdf,"Factory Mean Reversion 90d 100bps (Mean Reversion, F-2ed163)","Factory Mean Reversion 180d 100bps (Mean Reversion, F-fab944)",0.81768158
+FACTORY-1ae9c3303191d694,FACTORY-cc3e48f7613e805e,"Factory Regime Filter 90d 100bps (Regime Filter, F-1ae9c3)","Factory Regime Filter 180d 500bps (Regime Filter, F-cc3e48)",0.81750642
+FACTORY-1399577a8d1d5dca,FACTORY-f084a7400225c73b,"Factory Regime Filter 90d 375bps (Regime Filter, F-139957)","Factory Regime Filter 180d 375bps (Regime Filter, F-f084a7)",0.81706224
+FACTORY-d6e26b4dde83c8b0,FACTORY-fcc65b33bba2a984,"Factory PEAD 45d 100bps (PEAD, F-d6e26b)","Factory PEAD 90d 100bps (PEAD, F-fcc65b)",0.81650984
+FACTORY-1399577a8d1d5dca,FACTORY-cc3e48f7613e805e,"Factory Regime Filter 90d 375bps (Regime Filter, F-139957)","Factory Regime Filter 180d 500bps (Regime Filter, F-cc3e48)",0.81633741
+FACTORY-5362cd2ae855e220,FACTORY-6ee5b751639cff9d,"Factory Regime Filter 5d 100bps (Regime Filter, F-5362cd)","Factory Regime Filter 5d 375bps (Regime Filter, F-6ee5b7)",0.81614412
+FACTORY-5ef159f89339a4f8,FACTORY-a26c47e6385e2c63,"Factory Regime Filter 90d 500bps (Regime Filter, F-5ef159)","Factory Regime Filter 180d 100bps (Regime Filter, F-a26c47)",0.81515707
+FACTORY-5ef159f89339a4f8,FACTORY-f084a7400225c73b,"Factory Regime Filter 90d 500bps (Regime Filter, F-5ef159)","Factory Regime Filter 180d 375bps (Regime Filter, F-f084a7)",0.81508535
+FACTORY-45ebfdbb131f6cbd,FACTORY-809ae08874ff229c,"Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)","Factory Custom Rule Builder 90d 100bps (Custom Rule Builder, F-809ae0)",0.81485023
+FACTORY-5ef159f89339a4f8,FACTORY-cc3e48f7613e805e,"Factory Regime Filter 90d 500bps (Regime Filter, F-5ef159)","Factory Regime Filter 180d 500bps (Regime Filter, F-cc3e48)",0.81476616
+FACTORY-37370ef762fec428,FACTORY-036709cbb90245e8,"Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, F-37370e)","Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)",0.81333103
+FACTORY-84018bc09d7b34aa,FACTORY-036709cbb90245e8,"Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, F-84018b)","Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)",0.81326809
+FACTORY-37370ef762fec428,FACTORY-45ebfdbb131f6cbd,"Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, F-37370e)","Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)",0.81319801
+FACTORY-8c126ce3235c7b20,FACTORY-036709cbb90245e8,"Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, F-8c126c)","Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)",0.81317547
+FACTORY-84018bc09d7b34aa,FACTORY-45ebfdbb131f6cbd,"Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, F-84018b)","Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)",0.81305191
+FACTORY-45ebfdbb131f6cbd,FACTORY-8c126ce3235c7b20,"Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)","Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, F-8c126c)",0.81292115
+FACTORY-37370ef762fec428,FACTORY-2306e8d8b69f7be8,"Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, F-37370e)","Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)",0.81144964
+FACTORY-2306e8d8b69f7be8,FACTORY-84018bc09d7b34aa,"Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)","Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, F-84018b)",0.81112261
+FACTORY-a48667d59c0341c7,FACTORY-91da581313704e54,"Factory Regime Filter 20d 100bps (Regime Filter, F-a48667)","Factory Regime Filter 45d 100bps (Regime Filter, F-91da58)",0.81092087
+FACTORY-2306e8d8b69f7be8,FACTORY-8c126ce3235c7b20,"Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)","Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, F-8c126c)",0.81090901
+FACTORY-663f068161cceb04,FACTORY-06b51d2083257b36,"Factory Mean Reversion 90d 375bps (Mean Reversion, F-663f06)","Factory Mean Reversion 180d 500bps (Mean Reversion, F-06b51d)",0.80937281
+FACTORY-5ac7948ae3836df9,FACTORY-5fcd77f2c0517c34,"Factory PEAD 45d 375bps (PEAD, F-5ac794)","Factory PEAD 90d 500bps (PEAD, F-5fcd77)",0.80861111
+FACTORY-663f068161cceb04,FACTORY-e021ad4521158745,"Factory Mean Reversion 90d 375bps (Mean Reversion, F-663f06)","Factory Mean Reversion 180d 375bps (Mean Reversion, F-e021ad)",0.80779578
+FACTORY-5ac7948ae3836df9,FACTORY-8c7853c5ae904d13,"Factory PEAD 45d 375bps (PEAD, F-5ac794)","Factory PEAD 90d 375bps (PEAD, F-8c7853)",0.80623887
+FACTORY-44336afe577baf16,FACTORY-80a6a5b9f8587535,"Factory Dollar-Bar Microstructure 90d 100bps (Dollar-Bar Microstructure, F-44336a)","Factory Dollar-Bar Microstructure 180d 500bps (Dollar-Bar Microstructure, F-80a6a5)",0.8061821
+FACTORY-44336afe577baf16,FACTORY-6965d33db9c8fb5b,"Factory Dollar-Bar Microstructure 90d 100bps (Dollar-Bar Microstructure, F-44336a)","Factory Dollar-Bar Microstructure 180d 375bps (Dollar-Bar Microstructure, F-6965d3)",0.80589871
+FACTORY-3e07023d857a2656,FACTORY-9424b27321e327f5,"Factory Regime Filter 20d 375bps (Regime Filter, F-3e0702)","Factory Regime Filter 45d 500bps (Regime Filter, F-9424b2)",0.80544014
+FACTORY-30088dc93bd4a178,FACTORY-187d8d55eeef6a10,"Factory Form 4 Cluster Buying 45d 100bps (Form 4 Cluster Buying, F-30088d)","Factory Form 4 Cluster Buying 90d 500bps (Form 4 Cluster Buying, F-187d8d)",0.80540297
+FACTORY-036709cbb90245e8,FACTORY-809ae08874ff229c,"Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)","Factory Custom Rule Builder 90d 100bps (Custom Rule Builder, F-809ae0)",0.80538078
+FACTORY-17d25540b5e54179,FACTORY-214e36d619e8364b,"Factory Mean Reversion 20d 500bps (Mean Reversion, F-17d255)","Factory Mean Reversion 20d 500bps (Mean Reversion, F-214e36)",0.80537204
+FACTORY-3b82ee277a85c752,FACTORY-778a7498ad44efbb,"Factory 13D Activist Follow-On 90d 100bps (13D Activist Follow-On, F-3b82ee)","Factory 13D Activist Follow-On 180d 100bps (13D Activist Follow-On, F-778a74)",0.80530463
+FACTORY-44336afe577baf16,FACTORY-119d99f730b677f6,"Factory Dollar-Bar Microstructure 90d 100bps (Dollar-Bar Microstructure, F-44336a)","Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, F-119d99)",0.80480007
+FACTORY-e608af4f07ff28c5,FACTORY-8c126ce3235c7b20,"Factory Momentum 45d 375bps (Momentum, F-e608af)","Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, F-8c126c)",0.80443338
+FACTORY-e608af4f07ff28c5,FACTORY-84018bc09d7b34aa,"Factory Momentum 45d 375bps (Momentum, F-e608af)","Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, F-84018b)",0.80440311
+FACTORY-e18fa0f3988ad341,FACTORY-8c126ce3235c7b20,"Factory Momentum 45d 500bps (Momentum, F-e18fa0)","Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, F-8c126c)",0.80436965
+FACTORY-efba882cb8ce39ad,FACTORY-e608af4f07ff28c5,"Factory Momentum 20d 100bps (Momentum, F-efba88)","Factory Momentum 45d 375bps (Momentum, F-e608af)",0.80430739
+FACTORY-84018bc09d7b34aa,FACTORY-e18fa0f3988ad341,"Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, F-84018b)","Factory Momentum 45d 500bps (Momentum, F-e18fa0)",0.80426514
+FACTORY-37370ef762fec428,FACTORY-e608af4f07ff28c5,"Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, F-37370e)","Factory Momentum 45d 375bps (Momentum, F-e608af)",0.80419966
+FACTORY-17d25540b5e54179,FACTORY-115ab24aa842c356,"Factory Mean Reversion 20d 500bps (Mean Reversion, F-17d255)","Factory Mean Reversion 20d 375bps (Mean Reversion, F-115ab2)",0.80408222
+FACTORY-663f068161cceb04,FACTORY-fab94445f0b51fdf,"Factory Mean Reversion 90d 375bps (Mean Reversion, F-663f06)","Factory Mean Reversion 180d 100bps (Mean Reversion, F-fab944)",0.80390175
+FACTORY-37370ef762fec428,FACTORY-e18fa0f3988ad341,"Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, F-37370e)","Factory Momentum 45d 500bps (Momentum, F-e18fa0)",0.80389984
+FACTORY-30088dc93bd4a178,FACTORY-f3a11def315430dd,"Factory Form 4 Cluster Buying 45d 100bps (Form 4 Cluster Buying, F-30088d)","Factory Form 4 Cluster Buying 90d 375bps (Form 4 Cluster Buying, F-f3a11d)",0.8038801
+FACTORY-efba882cb8ce39ad,FACTORY-e18fa0f3988ad341,"Factory Momentum 20d 100bps (Momentum, F-efba88)","Factory Momentum 45d 500bps (Momentum, F-e18fa0)",0.80350454
+FACTORY-dc41e4a737562d2c,FACTORY-06b51d2083257b36,"Factory Mean Reversion 90d 500bps (Mean Reversion, F-dc41e4)","Factory Mean Reversion 180d 500bps (Mean Reversion, F-06b51d)",0.8031884
+FACTORY-efba882cb8ce39ad,FACTORY-3649fae5bc1b7b74,"Factory Momentum 20d 100bps (Momentum, F-efba88)","Factory Momentum 45d 100bps (Momentum, F-3649fa)",0.80219024
+FACTORY-8c83bf25f1c86fc7,FACTORY-5fcd77f2c0517c34,"Factory PEAD 45d 500bps (PEAD, F-8c83bf)","Factory PEAD 90d 500bps (PEAD, F-5fcd77)",0.80163643
+FACTORY-3b82ee277a85c752,FACTORY-0574d7be5b9a847c,"Factory 13D Activist Follow-On 90d 100bps (13D Activist Follow-On, F-3b82ee)","Factory 13D Activist Follow-On 180d 375bps (13D Activist Follow-On, F-0574d7)",0.80146253
+FACTORY-b0100b2bcad2ded2,FACTORY-115ab24aa842c356,"Factory Mean Reversion 20d 375bps (Mean Reversion, F-b0100b)","Factory Mean Reversion 20d 375bps (Mean Reversion, F-115ab2)",0.80136172
+FACTORY-dc41e4a737562d2c,FACTORY-e021ad4521158745,"Factory Mean Reversion 90d 500bps (Mean Reversion, F-dc41e4)","Factory Mean Reversion 180d 375bps (Mean Reversion, F-e021ad)",0.80130852
+FACTORY-3649fae5bc1b7b74,FACTORY-37370ef762fec428,"Factory Momentum 45d 100bps (Momentum, F-3649fa)","Factory PDUFA Run-Up 45d 100bps (PDUFA Run-Up, F-37370e)",0.80099518
+FACTORY-25beb93c5b115751,FACTORY-778a7498ad44efbb,"Factory 13D Activist Follow-On 90d 375bps (13D Activist Follow-On, F-25beb9)","Factory 13D Activist Follow-On 180d 100bps (13D Activist Follow-On, F-778a74)",0.80095413
+FACTORY-3649fae5bc1b7b74,FACTORY-84018bc09d7b34aa,"Factory Momentum 45d 100bps (Momentum, F-3649fa)","Factory PDUFA Run-Up 45d 375bps (PDUFA Run-Up, F-84018b)",0.80084766
+FACTORY-3649fae5bc1b7b74,FACTORY-8c126ce3235c7b20,"Factory Momentum 45d 100bps (Momentum, F-3649fa)","Factory PDUFA Run-Up 45d 500bps (PDUFA Run-Up, F-8c126c)",0.80071722
+FACTORY-d5a39d7a88bc24cf,FACTORY-8f5d4e1caeb5c929,"Factory Mean Reversion 20d 100bps (Mean Reversion, F-d5a39d)","Factory Mean Reversion 20d 100bps (Mean Reversion, F-8f5d4e)",0.8002816
+FACTORY-8226fabb047803a9,FACTORY-80a6a5b9f8587535,"Factory Dollar-Bar Microstructure 90d 375bps (Dollar-Bar Microstructure, F-8226fa)","Factory Dollar-Bar Microstructure 180d 500bps (Dollar-Bar Microstructure, F-80a6a5)",0.80025254
+FACTORY-5ac7948ae3836df9,FACTORY-fcc65b33bba2a984,"Factory PEAD 45d 375bps (PEAD, F-5ac794)","Factory PEAD 90d 100bps (PEAD, F-fcc65b)",0.79999385
+FACTORY-8226fabb047803a9,FACTORY-6965d33db9c8fb5b,"Factory Dollar-Bar Microstructure 90d 375bps (Dollar-Bar Microstructure, F-8226fa)","Factory Dollar-Bar Microstructure 180d 375bps (Dollar-Bar Microstructure, F-6965d3)",0.79941959
+FACTORY-3b82ee277a85c752,FACTORY-9883de58e44f5ae7,"Factory 13D Activist Follow-On 90d 100bps (13D Activist Follow-On, F-3b82ee)","Factory 13D Activist Follow-On 180d 500bps (13D Activist Follow-On, F-9883de)",0.79930037
+FACTORY-25beb93c5b115751,FACTORY-0574d7be5b9a847c,"Factory 13D Activist Follow-On 90d 375bps (13D Activist Follow-On, F-25beb9)","Factory 13D Activist Follow-On 180d 375bps (13D Activist Follow-On, F-0574d7)",0.7992018
+FACTORY-30088dc93bd4a178,FACTORY-2fdf6c07a3bcb68d,"Factory Form 4 Cluster Buying 45d 100bps (Form 4 Cluster Buying, F-30088d)","Factory Form 4 Cluster Buying 90d 100bps (Form 4 Cluster Buying, F-2fdf6c)",0.79873244
+FACTORY-8c83bf25f1c86fc7,FACTORY-8c7853c5ae904d13,"Factory PEAD 45d 500bps (PEAD, F-8c83bf)","Factory PEAD 90d 375bps (PEAD, F-8c7853)",0.79863438
+FACTORY-25beb93c5b115751,FACTORY-9883de58e44f5ae7,"Factory 13D Activist Follow-On 90d 375bps (13D Activist Follow-On, F-25beb9)","Factory 13D Activist Follow-On 180d 500bps (13D Activist Follow-On, F-9883de)",0.79801335
+FACTORY-941cc6d3fdd9affc,FACTORY-778a7498ad44efbb,"Factory 13D Activist Follow-On 90d 500bps (13D Activist Follow-On, F-941cc6)","Factory 13D Activist Follow-On 180d 100bps (13D Activist Follow-On, F-778a74)",0.79781145
+FACTORY-51163fa9f51e78ce,FACTORY-187d8d55eeef6a10,"Factory Form 4 Cluster Buying 45d 375bps (Form 4 Cluster Buying, F-51163f)","Factory Form 4 Cluster Buying 90d 500bps (Form 4 Cluster Buying, F-187d8d)",0.79732549
+FACTORY-8226fabb047803a9,FACTORY-119d99f730b677f6,"Factory Dollar-Bar Microstructure 90d 375bps (Dollar-Bar Microstructure, F-8226fa)","Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, F-119d99)",0.79713486
+FACTORY-941cc6d3fdd9affc,FACTORY-0574d7be5b9a847c,"Factory 13D Activist Follow-On 90d 500bps (13D Activist Follow-On, F-941cc6)","Factory 13D Activist Follow-On 180d 375bps (13D Activist Follow-On, F-0574d7)",0.79704958
+FACTORY-2860db9797152544,FACTORY-80a6a5b9f8587535,"Factory Dollar-Bar Microstructure 90d 500bps (Dollar-Bar Microstructure, F-2860db)","Factory Dollar-Bar Microstructure 180d 500bps (Dollar-Bar Microstructure, F-80a6a5)",0.79698991
+FACTORY-dc41e4a737562d2c,FACTORY-fab94445f0b51fdf,"Factory Mean Reversion 90d 500bps (Mean Reversion, F-dc41e4)","Factory Mean Reversion 180d 100bps (Mean Reversion, F-fab944)",0.79676918
+FACTORY-941cc6d3fdd9affc,FACTORY-9883de58e44f5ae7,"Factory 13D Activist Follow-On 90d 500bps (13D Activist Follow-On, F-941cc6)","Factory 13D Activist Follow-On 180d 500bps (13D Activist Follow-On, F-9883de)",0.79632313
+FACTORY-3e07023d857a2656,FACTORY-1cbd0d3c3b95022d,"Factory Regime Filter 20d 375bps (Regime Filter, F-3e0702)","Factory Regime Filter 45d 375bps (Regime Filter, F-1cbd0d)",0.79619352
+FACTORY-2860db9797152544,FACTORY-6965d33db9c8fb5b,"Factory Dollar-Bar Microstructure 90d 500bps (Dollar-Bar Microstructure, F-2860db)","Factory Dollar-Bar Microstructure 180d 375bps (Dollar-Bar Microstructure, F-6965d3)",0.79590387
+FACTORY-b0100b2bcad2ded2,FACTORY-214e36d619e8364b,"Factory Mean Reversion 20d 375bps (Mean Reversion, F-b0100b)","Factory Mean Reversion 20d 500bps (Mean Reversion, F-214e36)",0.79445687
+FACTORY-45ebfdbb131f6cbd,FACTORY-1cb350f28a1d4597,"Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)","Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, F-1cb350)",0.79436938
+FACTORY-036709cbb90245e8,FACTORY-1cb350f28a1d4597,"Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)","Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, F-1cb350)",0.79434463
+FACTORY-45ebfdbb131f6cbd,FACTORY-fce8300bed43d2aa,"Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)","Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, F-fce830)",0.7941447
+FACTORY-036709cbb90245e8,FACTORY-fce8300bed43d2aa,"Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)","Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, F-fce830)",0.79410704
+FACTORY-51163fa9f51e78ce,FACTORY-f3a11def315430dd,"Factory Form 4 Cluster Buying 45d 375bps (Form 4 Cluster Buying, F-51163f)","Factory Form 4 Cluster Buying 90d 375bps (Form 4 Cluster Buying, F-f3a11d)",0.79410685
+FACTORY-45ebfdbb131f6cbd,FACTORY-b156c56670aac97e,"Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)","Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, F-b156c5)",0.79358958
+FACTORY-036709cbb90245e8,FACTORY-b156c56670aac97e,"Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)","Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, F-b156c5)",0.79352375
+FACTORY-2860db9797152544,FACTORY-119d99f730b677f6,"Factory Dollar-Bar Microstructure 90d 500bps (Dollar-Bar Microstructure, F-2860db)","Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, F-119d99)",0.79307323
+FACTORY-2306e8d8b69f7be8,FACTORY-1cb350f28a1d4597,"Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)","Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, F-1cb350)",0.79299846
+FACTORY-2306e8d8b69f7be8,FACTORY-fce8300bed43d2aa,"Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)","Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, F-fce830)",0.7928023
+FACTORY-6ad3e5a321c70687,FACTORY-187d8d55eeef6a10,"Factory Form 4 Cluster Buying 45d 500bps (Form 4 Cluster Buying, F-6ad3e5)","Factory Form 4 Cluster Buying 90d 500bps (Form 4 Cluster Buying, F-187d8d)",0.79244846
+FACTORY-2306e8d8b69f7be8,FACTORY-b156c56670aac97e,"Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)","Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, F-b156c5)",0.79230954
+FACTORY-8c83bf25f1c86fc7,FACTORY-fcc65b33bba2a984,"Factory PEAD 45d 500bps (PEAD, F-8c83bf)","Factory PEAD 90d 100bps (PEAD, F-fcc65b)",0.79105225
+FACTORY-d90f9f26691681b5,FACTORY-9424b27321e327f5,"Factory Regime Filter 20d 500bps (Regime Filter, F-d90f9f)","Factory Regime Filter 45d 500bps (Regime Filter, F-9424b2)",0.79011302
+FACTORY-d2621bbbf56dff40,FACTORY-e18fa0f3988ad341,"Factory Momentum 20d 375bps (Momentum, F-d2621b)","Factory Momentum 45d 500bps (Momentum, F-e18fa0)",0.78931149
+FACTORY-b0100b2bcad2ded2,FACTORY-8f5d4e1caeb5c929,"Factory Mean Reversion 20d 375bps (Mean Reversion, F-b0100b)","Factory Mean Reversion 20d 100bps (Mean Reversion, F-8f5d4e)",0.78871141
+FACTORY-6ad3e5a321c70687,FACTORY-f3a11def315430dd,"Factory Form 4 Cluster Buying 45d 500bps (Form 4 Cluster Buying, F-6ad3e5)","Factory Form 4 Cluster Buying 90d 375bps (Form 4 Cluster Buying, F-f3a11d)",0.78846185
+FACTORY-51163fa9f51e78ce,FACTORY-2fdf6c07a3bcb68d,"Factory Form 4 Cluster Buying 45d 375bps (Form 4 Cluster Buying, F-51163f)","Factory Form 4 Cluster Buying 90d 100bps (Form 4 Cluster Buying, F-2fdf6c)",0.78531356
+FACTORY-d2621bbbf56dff40,FACTORY-e608af4f07ff28c5,"Factory Momentum 20d 375bps (Momentum, F-d2621b)","Factory Momentum 45d 375bps (Momentum, F-e608af)",0.78314714
+FACTORY-582e3b9b11091a1b,FACTORY-d6e26b4dde83c8b0,"Factory PEAD 20d 100bps (PEAD, F-582e3b)","Factory PEAD 45d 100bps (PEAD, F-d6e26b)",0.78305058
+FACTORY-e608af4f07ff28c5,FACTORY-1cb350f28a1d4597,"Factory Momentum 45d 375bps (Momentum, F-e608af)","Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, F-1cb350)",0.78240883
+FACTORY-582e3b9b11091a1b,FACTORY-5ac7948ae3836df9,"Factory PEAD 20d 100bps (PEAD, F-582e3b)","Factory PEAD 45d 375bps (PEAD, F-5ac794)",0.78209743
+FACTORY-e608af4f07ff28c5,FACTORY-fce8300bed43d2aa,"Factory Momentum 45d 375bps (Momentum, F-e608af)","Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, F-fce830)",0.78204082
+FACTORY-e18fa0f3988ad341,FACTORY-1cb350f28a1d4597,"Factory Momentum 45d 500bps (Momentum, F-e18fa0)","Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, F-1cb350)",0.7816418
+FACTORY-e18fa0f3988ad341,FACTORY-fce8300bed43d2aa,"Factory Momentum 45d 500bps (Momentum, F-e18fa0)","Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, F-fce830)",0.7812347
+FACTORY-e608af4f07ff28c5,FACTORY-b156c56670aac97e,"Factory Momentum 45d 375bps (Momentum, F-e608af)","Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, F-b156c5)",0.78117382
+FACTORY-582e3b9b11091a1b,FACTORY-8c83bf25f1c86fc7,"Factory PEAD 20d 100bps (PEAD, F-582e3b)","Factory PEAD 45d 500bps (PEAD, F-8c83bf)",0.78040864
+FACTORY-3649fae5bc1b7b74,FACTORY-1cb350f28a1d4597,"Factory Momentum 45d 100bps (Momentum, F-3649fa)","Factory PDUFA Run-Up 180d 500bps (PDUFA Run-Up, F-1cb350)",0.78031911
+FACTORY-e18fa0f3988ad341,FACTORY-b156c56670aac97e,"Factory Momentum 45d 500bps (Momentum, F-e18fa0)","Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, F-b156c5)",0.78028243
+FACTORY-3649fae5bc1b7b74,FACTORY-fce8300bed43d2aa,"Factory Momentum 45d 100bps (Momentum, F-3649fa)","Factory PDUFA Run-Up 180d 375bps (PDUFA Run-Up, F-fce830)",0.78003741
+FACTORY-3649fae5bc1b7b74,FACTORY-b156c56670aac97e,"Factory Momentum 45d 100bps (Momentum, F-3649fa)","Factory PDUFA Run-Up 180d 100bps (PDUFA Run-Up, F-b156c5)",0.77935896
+FACTORY-03a53d17c324dec6,FACTORY-688a5013e817d0da,"Factory Mean Reversion 5d 500bps (Mean Reversion, F-03a53d)","Factory Mean Reversion 5d 500bps (Mean Reversion, F-688a50)",0.77907731
+FACTORY-d90f9f26691681b5,FACTORY-1cbd0d3c3b95022d,"Factory Regime Filter 20d 500bps (Regime Filter, F-d90f9f)","Factory Regime Filter 45d 375bps (Regime Filter, F-1cbd0d)",0.77827725
+FACTORY-6ad3e5a321c70687,FACTORY-2fdf6c07a3bcb68d,"Factory Form 4 Cluster Buying 45d 500bps (Form 4 Cluster Buying, F-6ad3e5)","Factory Form 4 Cluster Buying 90d 100bps (Form 4 Cluster Buying, F-2fdf6c)",0.77802035
+aeb3c97678fffc03,0dc08daefa67c12e,"My falsifiable strategy (Catalyst, aeb3c9)","9:15 (9:30 AM ORB, 0dc08d)",0.77549929
+ef3f1ebb21d03d5c,0dc08daefa67c12e,"My falsifiable strategy (9:30 AM ORB, ef3f1e)","9:15 (9:30 AM ORB, 0dc08d)",0.77549929
+0dc08daefa67c12e,ee5692c4832db94b,"9:15 (9:30 AM ORB, 0dc08d)","9:15 (9:30 AM ORB, ee5692)",0.77549929
+FACTORY-4365a19489b27c36,FACTORY-e18fa0f3988ad341,"Factory Momentum 20d 500bps (Momentum, F-4365a1)","Factory Momentum 45d 500bps (Momentum, F-e18fa0)",0.77390564
+FACTORY-17d25540b5e54179,FACTORY-8f5d4e1caeb5c929,"Factory Mean Reversion 20d 500bps (Mean Reversion, F-17d255)","Factory Mean Reversion 20d 100bps (Mean Reversion, F-8f5d4e)",0.77321891
+FACTORY-d5a39d7a88bc24cf,FACTORY-115ab24aa842c356,"Factory Mean Reversion 20d 100bps (Mean Reversion, F-d5a39d)","Factory Mean Reversion 20d 375bps (Mean Reversion, F-115ab2)",0.77303875
+FACTORY-3e07023d857a2656,FACTORY-91da581313704e54,"Factory Regime Filter 20d 375bps (Regime Filter, F-3e0702)","Factory Regime Filter 45d 100bps (Regime Filter, F-91da58)",0.77203374
+FACTORY-036709cbb90245e8,FACTORY-3a4646fedbd66e5c,"Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)","Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, F-3a4646)",0.77168919
+FACTORY-45ebfdbb131f6cbd,FACTORY-3a4646fedbd66e5c,"Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)","Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, F-3a4646)",0.77133309
+FACTORY-036709cbb90245e8,FACTORY-9e5b3dc1b0a6b383,"Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)","Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, F-9e5b3d)",0.77095213
+FACTORY-036709cbb90245e8,FACTORY-cd77d4a8eb310124,"Factory Custom Rule Builder 45d 500bps (Custom Rule Builder, F-036709)","Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, F-cd77d4)",0.77052067
+FACTORY-45ebfdbb131f6cbd,FACTORY-9e5b3dc1b0a6b383,"Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)","Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, F-9e5b3d)",0.77049232
+FACTORY-45ebfdbb131f6cbd,FACTORY-cd77d4a8eb310124,"Factory Custom Rule Builder 45d 375bps (Custom Rule Builder, F-45ebfd)","Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, F-cd77d4)",0.77001328
+FACTORY-95688ad8c98521e1,FACTORY-8c83bf25f1c86fc7,"Factory PEAD 20d 375bps (PEAD, F-95688a)","Factory PEAD 45d 500bps (PEAD, F-8c83bf)",0.76980602
+FACTORY-2306e8d8b69f7be8,FACTORY-3a4646fedbd66e5c,"Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)","Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, F-3a4646)",0.76917383
+bcfc1ff3b7cf8a4a,dcfbeec9cf4c5190,"My falsifiable strategy (Momentum, bcfc1f)","strategia folle (PDUFA Run-Up, dcfbee)",0.76877595
+FACTORY-2306e8d8b69f7be8,FACTORY-9e5b3dc1b0a6b383,"Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)","Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, F-9e5b3d)",0.76810864
+FACTORY-03a53d17c324dec6,FACTORY-e1db06c5156f7149,"Factory Mean Reversion 5d 500bps (Mean Reversion, F-03a53d)","Factory Mean Reversion 5d 375bps (Mean Reversion, F-e1db06)",0.7678958
+FACTORY-2306e8d8b69f7be8,FACTORY-cd77d4a8eb310124,"Factory Custom Rule Builder 45d 100bps (Custom Rule Builder, F-2306e8)","Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, F-cd77d4)",0.7675268
+FACTORY-95688ad8c98521e1,FACTORY-5ac7948ae3836df9,"Factory PEAD 20d 375bps (PEAD, F-95688a)","Factory PEAD 45d 375bps (PEAD, F-5ac794)",0.76635197
+FACTORY-d2621bbbf56dff40,FACTORY-3649fae5bc1b7b74,"Factory Momentum 20d 375bps (Momentum, F-d2621b)","Factory Momentum 45d 100bps (Momentum, F-3649fa)",0.76606436
+FACTORY-3649fae5bc1b7b74,FACTORY-2886d4ef6f931734,"Factory Momentum 45d 100bps (Momentum, F-3649fa)","Factory Momentum 180d 500bps (Momentum, F-2886d4)",0.76496708
+FACTORY-4365a19489b27c36,FACTORY-e608af4f07ff28c5,"Factory Momentum 20d 500bps (Momentum, F-4365a1)","Factory Momentum 45d 375bps (Momentum, F-e608af)",0.76467166
+FACTORY-3649fae5bc1b7b74,FACTORY-07d58dc6d8516cd2,"Factory Momentum 45d 100bps (Momentum, F-3649fa)","Factory Momentum 90d 500bps (Momentum, F-07d58d)",0.76421487
+FACTORY-58ad0155348a2440,FACTORY-de5ef61019341a9d,"Factory Dollar-Bar Microstructure 5d 100bps (Dollar-Bar Microstructure, F-58ad01)","Factory Dollar-Bar Microstructure 5d 500bps (Dollar-Bar Microstructure, F-de5ef6)",0.76372074
+FACTORY-eeb9cda10c3c0728,FACTORY-30088dc93bd4a178,"Factory Form 4 Cluster Buying 20d 100bps (Form 4 Cluster Buying, F-eeb9cd)","Factory Form 4 Cluster Buying 45d 100bps (Form 4 Cluster Buying, F-30088d)",0.76220781
+FACTORY-200d7c22024910b6,FACTORY-6ad3e5a321c70687,"Factory Form 4 Cluster Buying 20d 375bps (Form 4 Cluster Buying, F-200d7c)","Factory Form 4 Cluster Buying 45d 500bps (Form 4 Cluster Buying, F-6ad3e5)",0.76209898
+FACTORY-e18fa0f3988ad341,FACTORY-3a4646fedbd66e5c,"Factory Momentum 45d 500bps (Momentum, F-e18fa0)","Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, F-3a4646)",0.76206
+FACTORY-3649fae5bc1b7b74,FACTORY-3f1e95ca9e8549c1,"Factory Momentum 45d 100bps (Momentum, F-3649fa)","Factory Momentum 180d 375bps (Momentum, F-3f1e95)",0.76188103
+FACTORY-e18fa0f3988ad341,FACTORY-9e5b3dc1b0a6b383,"Factory Momentum 45d 500bps (Momentum, F-e18fa0)","Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, F-9e5b3d)",0.76185147
+FACTORY-e608af4f07ff28c5,FACTORY-3a4646fedbd66e5c,"Factory Momentum 45d 375bps (Momentum, F-e608af)","Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, F-3a4646)",0.76183153
+FACTORY-e18fa0f3988ad341,FACTORY-cd77d4a8eb310124,"Factory Momentum 45d 500bps (Momentum, F-e18fa0)","Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, F-cd77d4)",0.76166388
+FACTORY-91da581313704e54,FACTORY-5ef159f89339a4f8,"Factory Regime Filter 45d 100bps (Regime Filter, F-91da58)","Factory Regime Filter 90d 500bps (Regime Filter, F-5ef159)",0.76160408
+FACTORY-e608af4f07ff28c5,FACTORY-9e5b3dc1b0a6b383,"Factory Momentum 45d 375bps (Momentum, F-e608af)","Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, F-9e5b3d)",0.76142026
+FACTORY-e608af4f07ff28c5,FACTORY-cd77d4a8eb310124,"Factory Momentum 45d 375bps (Momentum, F-e608af)","Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, F-cd77d4)",0.76113959
+FACTORY-200d7c22024910b6,FACTORY-51163fa9f51e78ce,"Factory Form 4 Cluster Buying 20d 375bps (Form 4 Cluster Buying, F-200d7c)","Factory Form 4 Cluster Buying 45d 375bps (Form 4 Cluster Buying, F-51163f)",0.76060917
+FACTORY-31b323dbb27dccd2,FACTORY-6ad3e5a321c70687,"Factory Form 4 Cluster Buying 20d 500bps (Form 4 Cluster Buying, F-31b323)","Factory Form 4 Cluster Buying 45d 500bps (Form 4 Cluster Buying, F-6ad3e5)",0.75973512
+FACTORY-3649fae5bc1b7b74,FACTORY-8f8cac315a45ff9e,"Factory Momentum 45d 100bps (Momentum, F-3649fa)","Factory Momentum 90d 375bps (Momentum, F-8f8cac)",0.75969267
+FACTORY-eeb9cda10c3c0728,FACTORY-51163fa9f51e78ce,"Factory Form 4 Cluster Buying 20d 100bps (Form 4 Cluster Buying, F-eeb9cd)","Factory Form 4 Cluster Buying 45d 375bps (Form 4 Cluster Buying, F-51163f)",0.75803252
+FACTORY-dc349166892cc7df,FACTORY-8c83bf25f1c86fc7,"Factory PEAD 20d 500bps (PEAD, F-dc3491)","Factory PEAD 45d 500bps (PEAD, F-8c83bf)",0.75787957
+FACTORY-3649fae5bc1b7b74,FACTORY-3a4646fedbd66e5c,"Factory Momentum 45d 100bps (Momentum, F-3649fa)","Factory PDUFA Run-Up 90d 100bps (PDUFA Run-Up, F-3a4646)",0.75768756
+FACTORY-1ccb2e9a10bbb66a,FACTORY-f4bc4ad10d286feb,"Factory Custom Rule Builder 20d 100bps (Custom Rule Builder, F-1ccb2e)","Factory PDUFA Run-Up 20d 500bps (PDUFA Run-Up, F-f4bc4a)",0.75732587
+FACTORY-1ccb2e9a10bbb66a,FACTORY-7b72bd081c7f1f96,"Factory Custom Rule Builder 20d 100bps (Custom Rule Builder, F-1ccb2e)","Factory PDUFA Run-Up 20d 375bps (PDUFA Run-Up, F-7b72bd)",0.75728767
+FACTORY-3649fae5bc1b7b74,FACTORY-9e5b3dc1b0a6b383,"Factory Momentum 45d 100bps (Momentum, F-3649fa)","Factory PDUFA Run-Up 90d 375bps (PDUFA Run-Up, F-9e5b3d)",0.75683983
+FACTORY-91da581313704e54,FACTORY-1399577a8d1d5dca,"Factory Regime Filter 45d 100bps (Regime Filter, F-91da58)","Factory Regime Filter 90d 375bps (Regime Filter, F-139957)",0.75678492
+FACTORY-32cddb18e173d6a5,FACTORY-fbbacd667432317c,"Factory Momentum 5d 100bps (Momentum, F-32cddb)","Factory Momentum 5d 500bps (Momentum, F-fbbacd)",0.75676418
+FACTORY-3649fae5bc1b7b74,FACTORY-cd77d4a8eb310124,"Factory Momentum 45d 100bps (Momentum, F-3649fa)","Factory PDUFA Run-Up 90d 500bps (PDUFA Run-Up, F-cd77d4)",0.75635923
+FACTORY-95688ad8c98521e1,FACTORY-d6e26b4dde83c8b0,"Factory PEAD 20d 375bps (PEAD, F-95688a)","Factory PEAD 45d 100bps (PEAD, F-d6e26b)",0.75628025
+FACTORY-609f9af8970bab77,FACTORY-1ccb2e9a10bbb66a,"Factory PDUFA Run-Up 20d 100bps (PDUFA Run-Up, F-609f9a)","Factory Custom Rule Builder 20d 100bps (Custom Rule Builder, F-1ccb2e)",0.75627298
+FACTORY-31b323dbb27dccd2,FACTORY-51163fa9f51e78ce,"Factory Form 4 Cluster Buying 20d 500bps (Form 4 Cluster Buying, F-31b323)","Factory Form 4 Cluster Buying 45d 375bps (Form 4 Cluster Buying, F-51163f)",0.75619693
+FACTORY-eeb9cda10c3c0728,FACTORY-6ad3e5a321c70687,"Factory Form 4 Cluster Buying 20d 100bps (Form 4 Cluster Buying, F-eeb9cd)","Factory Form 4 Cluster Buying 45d 500bps (Form 4 Cluster Buying, F-6ad3e5)",0.75499275
+FACTORY-200d7c22024910b6,FACTORY-30088dc93bd4a178,"Factory Form 4 Cluster Buying 20d 375bps (Form 4 Cluster Buying, F-200d7c)","Factory Form 4 Cluster Buying 45d 100bps (Form 4 Cluster Buying, F-30088d)",0.75483662
+FACTORY-3649fae5bc1b7b74,FACTORY-e62a48e2d142923e,"Factory Momentum 45d 100bps (Momentum, F-3649fa)","Factory Momentum 180d 100bps (Momentum, F-e62a48)",0.75466402
+FACTORY-40d2b4dfba0a074d,FACTORY-e1db06c5156f7149,"Factory Mean Reversion 5d 375bps (Mean Reversion, F-40d2b4)","Factory Mean Reversion 5d 375bps (Mean Reversion, F-e1db06)",0.75323295
+FACTORY-7b72bd081c7f1f96,FACTORY-e608af4f07ff28c5,"Factory PDUFA Run-Up 20d 375bps (PDUFA Run-Up, F-7b72bd)","Factory Momentum 45d 375bps (Momentum, F-e608af)",0.75307405
+FACTORY-f4bc4ad10d286feb,FACTORY-e608af4f07ff28c5,"Factory PDUFA Run-Up 20d 500bps (PDUFA Run-Up, F-f4bc4a)","Factory Momentum 45d 375bps (Momentum, F-e608af)",0.75286735
+FACTORY-609f9af8970bab77,FACTORY-e608af4f07ff28c5,"Factory PDUFA Run-Up 20d 100bps (PDUFA Run-Up, F-609f9a)","Factory Momentum 45d 375bps (Momentum, F-e608af)",0.75258954
+FACTORY-7b72bd081c7f1f96,FACTORY-e18fa0f3988ad341,"Factory PDUFA Run-Up 20d 375bps (PDUFA Run-Up, F-7b72bd)","Factory Momentum 45d 500bps (Momentum, F-e18fa0)",0.7525478
+FACTORY-f4bc4ad10d286feb,FACTORY-e18fa0f3988ad341,"Factory PDUFA Run-Up 20d 500bps (PDUFA Run-Up, F-f4bc4a)","Factory Momentum 45d 500bps (Momentum, F-e18fa0)",0.7525413
+FACTORY-9b84bf90cdccb0ca,FACTORY-13d69783791ca4de,"Factory Custom Rule Builder 5d 100bps (Custom Rule Builder, F-9b84bf)","Factory Custom Rule Builder 5d 500bps (Custom Rule Builder, F-13d697)",0.75248649
+FACTORY-dc349166892cc7df,FACTORY-5ac7948ae3836df9,"Factory PEAD 20d 500bps (PEAD, F-dc3491)","Factory PEAD 45d 375bps (PEAD, F-5ac794)",0.75207676
+FACTORY-609f9af8970bab77,FACTORY-e18fa0f3988ad341,"Factory PDUFA Run-Up 20d 100bps (PDUFA Run-Up, F-609f9a)","Factory Momentum 45d 500bps (Momentum, F-e18fa0)",0.75163478
+FACTORY-609f9af8970bab77,FACTORY-3649fae5bc1b7b74,"Factory PDUFA Run-Up 20d 100bps (PDUFA Run-Up, F-609f9a)","Factory Momentum 45d 100bps (Momentum, F-3649fa)",0.75104867
+FACTORY-7b72bd081c7f1f96,FACTORY-3649fae5bc1b7b74,"Factory PDUFA Run-Up 20d 375bps (PDUFA Run-Up, F-7b72bd)","Factory Momentum 45d 100bps (Momentum, F-3649fa)",0.75060417
+FACTORY-3d1034410d11b1be,FACTORY-7d7fc107faf661dc,"Factory Catalyst 45d 100bps (Catalyst, F-3d1034)","Factory Catalyst 90d 100bps (Catalyst, F-7d7fc1)",0.75053176
+FACTORY-3d1034410d11b1be,FACTORY-58fde2142f9a24a0,"Factory Catalyst 45d 100bps (Catalyst, F-3d1034)","Factory 9:30 AM ORB 90d 100bps (9:30 AM ORB, F-58fde2)",0.75053176
+FACTORY-5138428531b2cbc4,FACTORY-7d7fc107faf661dc,"Factory 9:30 AM ORB 45d 100bps (9:30 AM ORB, F-513842)","Factory Catalyst 90d 100bps (Catalyst, F-7d7fc1)",0.75053176
+FACTORY-5138428531b2cbc4,FACTORY-58fde2142f9a24a0,"Factory 9:30 AM ORB 45d 100bps (9:30 AM ORB, F-513842)","Factory 9:30 AM ORB 90d 100bps (9:30 AM ORB, F-58fde2)",0.75053176
+FACTORY-3d1034410d11b1be,FACTORY-dbcae1b95fd38612,"Factory Catalyst 45d 100bps (Catalyst, F-3d1034)","Factory Catalyst 90d 375bps (Catalyst, F-dbcae1)",0.75042857
+FACTORY-3d1034410d11b1be,FACTORY-1e6fb3ffd92f62a9,"Factory Catalyst 45d 100bps (Catalyst, F-3d1034)","Factory 9:30 AM ORB 90d 375bps (9:30 AM ORB, F-1e6fb3)",0.75042857
+FACTORY-5138428531b2cbc4,FACTORY-dbcae1b95fd38612,"Factory 9:30 AM ORB 45d 100bps (9:30 AM ORB, F-513842)","Factory Catalyst 90d 375bps (Catalyst, F-dbcae1)",0.75042857
+FACTORY-5138428531b2cbc4,FACTORY-1e6fb3ffd92f62a9,"Factory 9:30 AM ORB 45d 100bps (9:30 AM ORB, F-513842)","Factory 9:30 AM ORB 90d 375bps (9:30 AM ORB, F-1e6fb3)",0.75042857

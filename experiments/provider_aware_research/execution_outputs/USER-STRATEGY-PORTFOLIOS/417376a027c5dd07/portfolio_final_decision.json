@@ -1,0 +1,12 @@
+{
+  "blockers": [],
+  "decision": "PORTFOLIO_RESEARCH_BASKET_CANDIDATE_ONLY",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "net_return_sum": 59.04932218,
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "runner_mode": "diagnostic_local_portfolio_composer"
+}

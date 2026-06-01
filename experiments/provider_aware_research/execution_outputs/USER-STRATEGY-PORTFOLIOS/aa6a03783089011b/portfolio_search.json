@@ -1,0 +1,69 @@
+{
+  "best_basket_component_ids": [
+    "dcfbeec9cf4c5190",
+    "bcfc1ff3b7cf8a4a",
+    "9c7fb1982851f609"
+  ],
+  "best_component_labels": [
+    "strategia folle (PDUFA Run-Up, dcfbee)",
+    "My falsifiable strategy (Momentum, bcfc1f)",
+    "My falsifiable strategy (Mean Reversion, 9c7fb1)"
+  ],
+  "best_summary": {
+    "average_abs_correlation": 0.31505729,
+    "component_count": 3,
+    "ex_best_net_return": 15.8563925,
+    "max_drawdown": -3.863992,
+    "stressed_net_return": 3.93086,
+    "top_component_contribution": 0.47865938,
+    "total_net_return": 12.16586,
+    "train_net_return": 14.288412,
+    "validation_net_return": -2.122552
+  },
+  "evaluated_candidate_count": 1,
+  "excluded_component_ids": [],
+  "exhaustive_within_search_pool": true,
+  "objective": "maximize validation-weighted robust score after duplicate removal, cost stress, contribution concentration, and correlation penalties",
+  "optimization_allowed": false,
+  "overfit_controls": {
+    "dedupe_before_search": true,
+    "diagnostic_only": true,
+    "max_candidates": 5000,
+    "max_search_pool_size": 12,
+    "max_subset_size": 7,
+    "no_market_data_download": true,
+    "no_provider_query": true,
+    "promotion_locked_false": true,
+    "why_not_full_optimization": "A fully flexible optimizer would overfit saved dry-run artifacts and manufacture fake edge."
+  },
+  "promotion_allowed": false,
+  "search_performed": true,
+  "search_pool_component_ids": [
+    "dcfbeec9cf4c5190",
+    "bcfc1ff3b7cf8a4a",
+    "9c7fb1982851f609"
+  ],
+  "selection_rule": "predeclared_robust_score_no_promotion",
+  "top_candidates": [
+    {
+      "component_ids": [
+        "dcfbeec9cf4c5190",
+        "bcfc1ff3b7cf8a4a",
+        "9c7fb1982851f609"
+      ],
+      "robust_score": 2.40371275,
+      "summary": {
+        "average_abs_correlation": 0.31505729,
+        "component_count": 3,
+        "ex_best_net_return": 15.8563925,
+        "max_drawdown": -3.863992,
+        "stressed_net_return": 3.93086,
+        "top_component_contribution": 0.47865938,
+        "total_net_return": 12.16586,
+        "train_net_return": 14.288412,
+        "validation_net_return": -2.122552
+      }
+    }
+  ],
+  "truncated": false
+}

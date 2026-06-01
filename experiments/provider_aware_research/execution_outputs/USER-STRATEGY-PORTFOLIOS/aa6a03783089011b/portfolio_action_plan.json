@@ -1,0 +1,22 @@
+[
+  {
+    "action": "Reduce the top contributor weight or add genuinely different components before rerunning.",
+    "severity": "block",
+    "title": "Failed because return is too concentrated"
+  },
+  {
+    "action": "Start by removing either My falsifiable strategy (Momentum, bcfc1f) or strategia folle (PDUFA Run-Up, dcfbee), then rerun. They appear to be overlapping bets.",
+    "severity": "warn",
+    "title": "1 highly correlated component pair(s)"
+  },
+  {
+    "action": "Remove or cap strategia folle (PDUFA Run-Up, dcfbee), then add at least two components from different sleeves before rerunning.",
+    "severity": "block",
+    "title": "One component dominates the portfolio"
+  },
+  {
+    "action": "Resolve PIT, delisted, or proxy-data warnings before interpreting this as real strategy evidence.",
+    "severity": "warn",
+    "title": "Data quality keeps this diagnostic-only"
+  }
+]

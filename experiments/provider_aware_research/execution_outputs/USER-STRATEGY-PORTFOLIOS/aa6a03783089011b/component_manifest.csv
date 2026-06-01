@@ -1,0 +1,4 @@
+component_id,strategy_name,template,analysis_mode,decision,trade_count,net_return_sum,bias_warnings,weight,sleeve
+bcfc1ff3b7cf8a4a,My falsifiable strategy,Momentum,Trading,REJECTED_OUTLIER_DEPENDENCY,450,21.178782,PROXY_DATA_SCOPE_NOT_PROMOTABLE,0.2,tactical
+9c7fb1982851f609,My falsifiable strategy,Mean Reversion,Trading,REJECTED_OUTLIER_DEPENDENCY,350,10.534003,PROXY_DATA_SCOPE_NOT_PROMOTABLE,0.2,core
+dcfbeec9cf4c5190,strategia folle,PDUFA Run-Up,Trading,RESEARCH_CANDIDATE_ONLY,120,29.116515,PROXY_DATA_SCOPE_NOT_PROMOTABLE,0.2,convex
