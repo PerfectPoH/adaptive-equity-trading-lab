@@ -1,0 +1,15 @@
+{
+  "decision_id": "PUBLIC-CATALYST-HYBRID-PANEL-EXPANSION-GATE-001",
+  "created_at_local": "2026-06-01",
+  "decision": "CATALYST_PANEL_EXPANSION_GATE_DEFINED_NO_RUN",
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "provider_query_performed": false,
+  "web_scraping_performed": false,
+  "market_data_download_performed": false,
+  "backtest_performed": false,
+  "summary": "The first public Catalyst micro-backtest was exploratory and positive in longer labeled windows, but the next valid step is panel expansion, not parameter selection. This gate freezes 30/60/90 day diagnostics, requires 30-50 manually audited PIT events, logs rejected discoveries, and forces negative/delisted retention checks.",
+  "next_valid_action": "PUBLIC-CATALYST-HYBRID-PANEL-EXPANSION-RUN-001"
+}
+

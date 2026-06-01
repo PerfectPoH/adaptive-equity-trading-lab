@@ -1,0 +1,13 @@
+column,required,description
+candidate_id,true,Stable discovered candidate identifier.
+discovery_source,true,Where the event was found.
+discovery_url,true,URL or search trail.
+symbol_or_company,true,Ticker or company name found during discovery.
+event_hint,true,Short description of the catalyst candidate.
+accepted_into_panel,true,true or false.
+rejection_reason,false,Required when accepted_into_panel is false.
+pit_failure_reason,false,Pre-event proof issue if any.
+negative_or_failure_event,true,true if candidate is negative delayed failed unresolved or not a success.
+delisted_or_mapping_issue,true,true if candidate has delisting acquisition rename or symbol ambiguity.
+notes,false,Short audit note.
+

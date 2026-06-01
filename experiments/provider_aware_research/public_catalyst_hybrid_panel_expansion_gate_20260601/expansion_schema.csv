@@ -1,0 +1,25 @@
+column,required,description
+event_id,true,Stable local event identifier.
+symbol,true,Trading symbol at event discovery time if known.
+company_name,true,Company or sponsor name.
+cik,false,SEC CIK when available.
+drug_or_asset,true,Drug candidate product or asset name.
+indication,true,Disease or target indication.
+event_type,true,PDUFA AdCom trial_readout CRL delay extension withdrawal approval unknown.
+event_date,true,Expected or actual event date.
+event_date_precision,true,exact month quarter half_year unknown.
+discovery_source,true,Calendar source search path or manual discovery path.
+discovery_url,true,URL used to discover the event candidate.
+pre_event_proof_url,true,Issuer SEC archived page or other pre-event proof.
+pre_event_proof_published_date,true,Date proof was published or archived.
+pit_proof_status,true,pass partial fail.
+outcome_status,true,approved rejected CRL delayed withdrawn failed missed unresolved unknown.
+outcome_date,false,Outcome date if known.
+outcome_source_url,false,URL proving outcome if known.
+negative_retention_flag,true,true if event is negative delayed unresolved or otherwise not a success-only record.
+delisted_or_acquired_status,true,active delisted acquired merged renamed unknown.
+date_aware_symbol_mapping_status,true,pass partial fail unknown.
+admissibility_label,true,admissible_event exploratory_only reject.
+rejection_reason,false,Required for rejected discovered events.
+notes,false,Short audit note.
+

@@ -1,0 +1,7 @@
+decision,status,rule
+EXPANSION_GATE_ONLY,NO_RUN,This gate defines the expansion protocol but authorizes no collection or backtest by itself.
+EXPANSION_PASS,NEXT_GATE_ALLOWED,Expanded panel has at least 30 admissible PIT events and passes negative retention delisted mapping and attrition logging checks.
+EXPANSION_PARTIAL,ARCHIVE_CURRENT_FORM,Panel has useful events but fails minimum count or retention constraints.
+EXPANSION_FAIL,ARCHIVE_CURRENT_FORM,Panel cannot prove PIT dates or produces success-only biased coverage.
+RERUN_ALLOWED_ONLY_AFTER_PASS,NEXT_GATE_REQUIRED,Only after EXPANSION_PASS may the lab create a separate micro-backtest rerun gate.
+

@@ -1,0 +1,28 @@
+{
+  "gate_id": "PUBLIC-CATALYST-HYBRID-PANEL-EXPANSION-GATE-001",
+  "created_at_local": "2026-06-01",
+  "parent_decision": "PUBLIC_CATALYST_HYBRID_MICRO_BACKTEST_COMPLETE_EXPLORATORY_ONLY",
+  "purpose": "Define a non-promotable expansion protocol for the public hybrid Catalyst event panel.",
+  "authorized": false,
+  "event_collection_authorized_now": false,
+  "provider_query_authorized": false,
+  "web_scraping_authorized": false,
+  "market_data_download_authorized": false,
+  "backtest_authorized": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "current_panel_events": 12,
+  "minimum_expanded_panel_events": 30,
+  "target_expanded_panel_events": 50,
+  "minimum_non_success_or_unresolved_share": 0.35,
+  "minimum_delisted_acquired_or_name_change_events": 5,
+  "window_policy": {
+    "windows_days": [30, 60, 90],
+    "interpretation": "labeled diagnostics only",
+    "optimization_allowed": false,
+    "single_window_selection_allowed": false
+  },
+  "next_valid_action": "Create PUBLIC-CATALYST-HYBRID-PANEL-EXPANSION-RUN-001 before collecting any new events."
+}
+

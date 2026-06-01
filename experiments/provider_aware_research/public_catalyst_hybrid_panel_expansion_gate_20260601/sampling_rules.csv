@@ -1,0 +1,12 @@
+rule_id,rule,reason
+EXP-CAT-001,The next run must log every discovered candidate event whether accepted or rejected.,Measures source attrition and selection bias.
+EXP-CAT-002,Expanded admissible panel must contain at least 30 events before any rerun.,Avoids 12-event anecdote risk.
+EXP-CAT-003,Target panel is 30-50 events; stopping below 50 requires a blocker reason.,Prevents stopping when the panel looks favorable.
+EXP-CAT-004,At least 35 percent of accepted rows must be non-success unresolved or negative if available.,Prevents winner-only curation.
+EXP-CAT-005,At least 5 rows must involve delisted acquired renamed or date-aware mapping complications if discoverable.,Forces explicit survivorship stress.
+EXP-CAT-006,No accepted row may lack pre-event proof dated before event date.,Preserves point-in-time integrity.
+EXP-CAT-007,Rows with partial PIT proof stay exploratory_only and cannot enter the micro-backtest rerun.,Prevents contaminated events entering returns.
+EXP-CAT-008,30d 60d and 90d windows remain frozen labeled diagnostics.,Prevents choosing the previous best window.
+EXP-CAT-009,No market data joins are allowed during expansion.,Separates event construction from performance inspection.
+EXP-CAT-010,No parameter or source search may be guided by realized stock returns.,Prevents hidden p-hacking.
+
