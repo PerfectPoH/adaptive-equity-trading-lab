@@ -29,6 +29,7 @@ PORTFOLIO_EXTERNAL_DATA_GATE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY
 PORTFOLIO_MANUAL_COMPOSITE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-MANUAL-COMPOSITE-001"
 PORTFOLIO_CANDIDATE_COMPARISON_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-CANDIDATE-COMPARISON-001"
 PORTFOLIO_PRIMARY_RESEARCH_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-CANDIDATE-002-PRIMARY-RESEARCH"
+PORTFOLIO_TRUE_BACKTEST_SPEC_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC"
 DELISTED_DATA_SOURCE_GATE_DIR = Path("experiments/provider_aware_research/delisted_data_source_gate_20260525")
 ORB_930_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "ORB-930-CROSS-ASSET-BACKTEST-001"
 WORKBENCH_CONFIGURED_LARGECAP_SYMBOLS = {
@@ -3382,6 +3383,194 @@ def load_portfolio_candidate_primary_research_state(*, root: Path = Path(".")) -
     if not candidates:
         return None
     return json.loads(candidates[0].read_text(encoding="utf-8"))
+
+
+def build_portfolio_candidate_true_backtest_spec(primary_state: dict[str, Any]) -> dict[str, Any]:
+    """Create the executable true-backtest contract without running a backtest."""
+
+    selected = dict(primary_state.get("selected_candidate", {}))
+    manifest = dict(primary_state.get("manual_manifest", {}))
+    sleeves = list(manifest.get("sleeves", []))
+    if not sleeves:
+        sleeves = [
+            {"template": template, "weight": 1.0 / max(1, len(selected.get("component_templates", [])))}
+            for template in selected.get("component_templates", [])
+        ]
+    required_fields = [
+        "survivorship_free_universe",
+        "point_in_time_membership",
+        "listing_and_delisting_dates",
+        "delisted_symbol_prices",
+        "split_dividend_adjusted_ohlcv",
+        "tradability_and_liquidity_history",
+        "benchmark_panel",
+        "raw_payload_retention_manifest",
+    ]
+    component_rules = {
+        "Momentum": "Generate continuation ranks only from point-in-time historical prices available before entry.",
+        "Mean Reversion": "Generate dislocation/reclaim candidates from adjusted OHLCV without using future recovery labels.",
+        "Catalyst": "Require a point-in-time event timestamp and a separate direction source before any event sleeve trade.",
+        "Dollar-Bar Microstructure": "Use traded-dollar sampling only when the source data resolution supports reconstruction without survivorship leakage.",
+    }
+    return {
+        "spec_id": "PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC",
+        "status": "PORTFOLIO_CANDIDATE_002_TRUE_BACKTEST_SPEC_COMPLETE",
+        "created_at_utc": datetime.now(timezone.utc).isoformat(),
+        "selected_candidate_id": primary_state.get("selected_candidate_id", "PORTFOLIO-CANDIDATE-002"),
+        "strategy_name": manifest.get("strategy_name", "Multi-Horizon Reversion Momentum Catalyst Basket"),
+        "scope": "true_backtest_contract_only",
+        "proxy_return_reuse_allowed": False,
+        "provider_query_allowed": False,
+        "market_data_download_allowed": False,
+        "portfolio_backtest_allowed": False,
+        "portfolio_backtest_performed": False,
+        "frozen_sleeves": sleeves,
+        "component_rule_contract": [
+            {
+                "template": sleeve.get("template", "UNKNOWN"),
+                "weight": sleeve.get("weight", 0.0),
+                "rule": component_rules.get(str(sleeve.get("template", "")), "Keep the sleeve rule frozen and preregistered before execution."),
+            }
+            for sleeve in sleeves
+        ],
+        "data_contract": {
+            "required_fields": required_fields,
+            "forbidden_sources": ["active_only_symbol_lists", "survivor_only_price_panels", "workbench_proxy_trade_lists"],
+            "admissible_source_classes": ["CRSP_WRDS", "Norgate_Data", "licensed_survivorship_free_provider"],
+            "minimum_history": "At least one complete train/validation/test chronology with delisted symbols retained.",
+            "raw_payload_policy": "Retain provider manifest, query bounds, and immutable raw payload hashes before deriving trades.",
+        },
+        "benchmark_contract": {
+            "benchmarks": ["SPY", "IWM", "equal_weight_admissible_universe"],
+            "required_metrics": ["total_return", "cagr", "max_drawdown", "time_underwater", "benchmark_relative_return", "ex_best_sleeve_return"],
+        },
+        "execution_contract": {
+            "weights": "Frozen semantic sleeve weights; no Sharpe/return optimization on historical outcomes.",
+            "chronology": "Train/validation/test split must be fixed before trade generation.",
+            "costs": "Use declared component costs or stricter costs; no post-hoc cost relaxation.",
+            "promotion": "Promotion remains forbidden until a separate final decision passes after true-data validation.",
+        },
+        "anti_overfit_controls": [
+            "no_proxy_return_reuse",
+            "no_same_sample_model_selection",
+            "no_parameter_sweep_after_candidate_selection",
+            "benchmark_relative_requirement",
+            "ex_best_sleeve_survival_required",
+        ],
+        "final_decision": {
+            "decision": "PORTFOLIO_CANDIDATE_002_TRUE_BACKTEST_SPEC_ONLY",
+            "blockers": ["data_bundle_missing", "external_data_contract_gate"],
+            "promotion_allowed": False,
+            "paper_trading_allowed": False,
+            "live_trading_allowed": False,
+            "provider_query_allowed": False,
+            "market_data_download_allowed": False,
+            "provider_query_performed": False,
+            "market_data_download_performed": False,
+            "portfolio_backtest_performed": False,
+            "runner_mode": "true_backtest_spec_only",
+        },
+    }
+
+
+def build_portfolio_candidate_true_backtest_harness(
+    spec: dict[str, Any],
+    *,
+    data_bundle_manifest: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Validate whether the true-backtest harness may run; never consumes proxy P&L."""
+
+    data_bundle_manifest = data_bundle_manifest or {}
+    required = list(spec.get("data_contract", {}).get("required_fields", []))
+    covered = set(data_bundle_manifest.get("covered_fields", []))
+    missing = [field for field in required if field not in covered]
+    proxy_return_reuse_detected = bool(data_bundle_manifest.get("uses_workbench_proxy_trade_lists", False))
+    blockers = []
+    if missing:
+        blockers.append("data_bundle_missing")
+    if proxy_return_reuse_detected:
+        blockers.append("proxy_return_reuse_blocker")
+    if not data_bundle_manifest.get("provider_entitlement_verified", False):
+        blockers.append("provider_entitlement_unverified")
+    status = "READY_FOR_TRUE_BACKTEST_RUN" if not blockers else "BLOCKED_TRUE_BACKTEST_DATA_BUNDLE_REQUIRED"
+    return {
+        "harness_id": f"{spec.get('spec_id', 'PORTFOLIO-CANDIDATE-002')}-HARNESS",
+        "status": status,
+        "created_at_utc": datetime.now(timezone.utc).isoformat(),
+        "spec_id": spec.get("spec_id", "UNKNOWN"),
+        "selected_candidate_id": spec.get("selected_candidate_id", "UNKNOWN"),
+        "provider_query_performed": False,
+        "market_data_download_performed": False,
+        "portfolio_backtest_performed": False,
+        "proxy_return_reuse_detected": proxy_return_reuse_detected,
+        "missing_data_contract_fields": missing,
+        "execution_plan": [
+            {"step": "load_admissible_data_bundle", "allowed_now": not missing, "description": "Load only a PIT/survivorship-free bundle with raw payload manifest."},
+            {"step": "derive_trades_from_raw_data", "allowed_now": not blockers, "description": "Regenerate sleeve trades from frozen rules; never load Workbench proxy trade lists."},
+            {"step": "apply_costs_and_benchmarks", "allowed_now": not blockers, "description": "Apply fixed costs and compare against SPY, IWM, and equal-weight admissible universe."},
+            {"step": "run_robustness_gates", "allowed_now": not blockers, "description": "Check drawdown, concentration, ex-best-sleeve, benchmark-relative return, and time underwater."},
+        ],
+        "final_decision": {
+            "decision": "PORTFOLIO_TRUE_BACKTEST_HARNESS_READY" if not blockers else "PORTFOLIO_TRUE_BACKTEST_HARNESS_BLOCKED",
+            "blockers": blockers,
+            "promotion_allowed": False,
+            "paper_trading_allowed": False,
+            "live_trading_allowed": False,
+            "provider_query_performed": False,
+            "market_data_download_performed": False,
+            "portfolio_backtest_performed": False,
+            "runner_mode": "true_backtest_harness_gate",
+        },
+    }
+
+
+def persist_portfolio_candidate_true_backtest_spec(
+    spec: dict[str, Any],
+    harness: dict[str, Any],
+    *,
+    root: Path = Path("."),
+) -> dict[str, str]:
+    output_dir = Path(root) / PORTFOLIO_TRUE_BACKTEST_SPEC_OUTPUT_DIR / str(spec.get("spec_id", "unknown"))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    spec_path = output_dir / "true_backtest_spec.json"
+    harness_path = output_dir / "true_backtest_harness.json"
+    final_decision_path = output_dir / "final_decision.json"
+    markdown_path = output_dir / "true_backtest_spec_report.md"
+    spec_path.write_text(json.dumps(_json_safe(spec), indent=2, sort_keys=True), encoding="utf-8")
+    harness_path.write_text(json.dumps(_json_safe(harness), indent=2, sort_keys=True), encoding="utf-8")
+    final_decision_path.write_text(json.dumps(_json_safe(harness.get("final_decision", {})), indent=2, sort_keys=True), encoding="utf-8")
+    markdown_lines = [
+        "# Candidate 002 True Backtest Spec",
+        "",
+        f"- status: `{spec.get('status')}`",
+        f"- harness status: `{harness.get('status')}`",
+        f"- selected candidate: `{spec.get('selected_candidate_id')}`",
+        f"- proxy return reuse allowed: `{str(spec.get('proxy_return_reuse_allowed', False)).lower()}`",
+        f"- portfolio backtest performed: `{str(harness.get('portfolio_backtest_performed', False)).lower()}`",
+        "",
+        "## Frozen Sleeves",
+        "",
+        *[
+            f"- `{sleeve.get('template', 'UNKNOWN')}` weight `{float(sleeve.get('weight', 0.0)):.4f}`"
+            for sleeve in spec.get("frozen_sleeves", [])
+        ],
+        "",
+        "## Data Contract",
+        "",
+        *[f"- `{field}`" for field in spec.get("data_contract", {}).get("required_fields", [])],
+        "",
+        "## Harness Blockers",
+        "",
+        *[f"- `{blocker}`" for blocker in harness.get("final_decision", {}).get("blockers", [])],
+    ]
+    markdown_path.write_text("\n".join(markdown_lines), encoding="utf-8")
+    return {
+        "output_dir": str(output_dir),
+        "spec_path": str(spec_path),
+        "harness_path": str(harness_path),
+        "final_decision_path": str(final_decision_path),
+        "markdown_path": str(markdown_path),
+    }
 
 
 def build_portfolio_lab_preview(

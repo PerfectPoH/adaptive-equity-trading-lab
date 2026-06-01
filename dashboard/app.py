@@ -54,6 +54,8 @@ from dashboard.lab_dashboard_data import (
     build_portfolio_external_data_backtest_gate,
     build_portfolio_manual_composite_trial,
     build_portfolio_candidate_primary_research_state,
+    build_portfolio_candidate_true_backtest_harness,
+    build_portfolio_candidate_true_backtest_spec,
     build_separate_portfolio_trial_dry_run,
     build_strategy_factory_components,
     display_safe_records,
@@ -70,6 +72,7 @@ from dashboard.lab_dashboard_data import (
     persist_portfolio_external_data_backtest_gate,
     persist_portfolio_manual_composite_trial,
     persist_portfolio_candidate_primary_research_state,
+    persist_portfolio_candidate_true_backtest_spec,
     persist_separate_portfolio_trial_dry_run,
     portfolio_lab_component_table,
 )
@@ -2878,6 +2881,45 @@ def render_portfolio_lab() -> None:
             st.warning("Remaining blockers: " + ", ".join(primary_state.get("remaining_blockers", [])))
             if primary_paths:
                 st.caption(f"Primary research state: {primary_paths.get('state_path', '')}")
+            if st.button("Create true-backtest spec and harness", type="secondary", width="stretch"):
+                spec = build_portfolio_candidate_true_backtest_spec(primary_state)
+                harness = build_portfolio_candidate_true_backtest_harness(spec)
+                spec_paths = persist_portfolio_candidate_true_backtest_spec(spec, harness, root=REPO_ROOT)
+                st.session_state["portfolio_lab_true_backtest_spec"] = {"spec": spec, "harness": harness, "paths": spec_paths}
+                st.rerun()
+        spec_state = st.session_state.get("portfolio_lab_true_backtest_spec")
+        spec_path = (
+            REPO_ROOT
+            / "experiments/provider_aware_research/execution_outputs/PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC/PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC/true_backtest_spec.json"
+        )
+        harness_path = (
+            REPO_ROOT
+            / "experiments/provider_aware_research/execution_outputs/PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC/PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC/true_backtest_harness.json"
+        )
+        if spec_state is None and spec_path.exists() and harness_path.exists():
+            spec_state = {
+                "spec": json.loads(spec_path.read_text(encoding="utf-8")),
+                "harness": json.loads(harness_path.read_text(encoding="utf-8")),
+                "paths": {"spec_path": str(spec_path), "harness_path": str(harness_path)},
+            }
+        if spec_state:
+            spec = spec_state.get("spec", {})
+            harness = spec_state.get("harness", {})
+            st.markdown("**True-backtest harness**")
+            st.warning(
+                f"{harness.get('status', 'UNKNOWN')}. The harness will not reuse proxy Workbench returns; "
+                "it waits for a PIT/survivorship-free bundle before deriving trades from raw data."
+            )
+            harness_cols = st.columns(4)
+            with harness_cols[0]:
+                metric_card("Sleeves", len(spec.get("frozen_sleeves", [])), "Frozen, no tuning")
+            with harness_cols[1]:
+                metric_card("Required fields", len(spec.get("data_contract", {}).get("required_fields", [])), "Data contract")
+            with harness_cols[2]:
+                metric_card("Missing fields", len(harness.get("missing_data_contract_fields", [])), "Blocks execution")
+            with harness_cols[3]:
+                metric_card("Proxy reuse", "OFF", "No dry-run P&L")
+            st.caption(f"Spec file: {spec_state.get('paths', {}).get('spec_path', '')}")
         with st.expander("Open search controls and top candidates"):
             st.json(
                 {

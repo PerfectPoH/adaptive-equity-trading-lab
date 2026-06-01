@@ -36,6 +36,8 @@ from dashboard.lab_dashboard_data import (
     build_portfolio_manual_composite_trial,
     build_portfolio_candidate_comparison,
     build_portfolio_candidate_primary_research_state,
+    build_portfolio_candidate_true_backtest_harness,
+    build_portfolio_candidate_true_backtest_spec,
     display_safe_records,
     delisted_data_source_gate_payload,
     load_portfolio_lab_components,
@@ -55,6 +57,7 @@ from dashboard.lab_dashboard_data import (
     persist_portfolio_manual_composite_trial,
     persist_portfolio_candidate_comparison,
     persist_portfolio_candidate_primary_research_state,
+    persist_portfolio_candidate_true_backtest_spec,
     write_workbench_phase_report,
     build_strategy_chart_story,
     classify_strategy_status,
@@ -982,6 +985,56 @@ def test_candidate_002_primary_research_state_blocks_execution_until_data_gate(t
 
     paths = persist_portfolio_candidate_primary_research_state(state, root=tmp_path)
     assert Path(paths["state_path"]).exists()
+    assert Path(paths["final_decision_path"]).exists()
+    assert Path(paths["markdown_path"]).exists()
+
+
+def test_candidate_002_true_backtest_spec_and_harness_do_not_reuse_proxy_returns(tmp_path: Path) -> None:
+    state = {
+        "state_id": "PORTFOLIO-CANDIDATE-002-PRIMARY-RESEARCH-STATE",
+        "status": "PORTFOLIO_CANDIDATE_002_SELECTED_FOR_DATA_GATE_REVIEW",
+        "selected_candidate_id": "PORTFOLIO-CANDIDATE-002",
+        "selected_candidate": {
+            "component_count": 4,
+            "component_templates": ["Catalyst", "Dollar-Bar Microstructure", "Mean Reversion", "Momentum"],
+            "total_net_return": 453.04,
+            "validation_net_return": 302.81,
+        },
+        "manual_manifest": {
+            "strategy_name": "Multi-Horizon Reversion Momentum Catalyst Basket",
+            "sleeves": [
+                {"template": "Momentum", "weight": 0.25},
+                {"template": "Mean Reversion", "weight": 0.25},
+                {"template": "Catalyst", "weight": 0.25},
+                {"template": "Dollar-Bar Microstructure", "weight": 0.25},
+            ],
+        },
+    }
+
+    spec = build_portfolio_candidate_true_backtest_spec(state)
+
+    assert spec["status"] == "PORTFOLIO_CANDIDATE_002_TRUE_BACKTEST_SPEC_COMPLETE"
+    assert spec["selected_candidate_id"] == "PORTFOLIO-CANDIDATE-002"
+    assert spec["proxy_return_reuse_allowed"] is False
+    assert spec["provider_query_allowed"] is False
+    assert spec["market_data_download_allowed"] is False
+    assert spec["portfolio_backtest_performed"] is False
+    assert spec["benchmark_contract"]["benchmarks"] == ["SPY", "IWM", "equal_weight_admissible_universe"]
+    assert "delisted_symbol_prices" in spec["data_contract"]["required_fields"]
+    assert "Catalyst" in [sleeve["template"] for sleeve in spec["frozen_sleeves"]]
+    assert spec["final_decision"]["decision"] == "PORTFOLIO_CANDIDATE_002_TRUE_BACKTEST_SPEC_ONLY"
+
+    harness = build_portfolio_candidate_true_backtest_harness(spec)
+
+    assert harness["status"] == "BLOCKED_TRUE_BACKTEST_DATA_BUNDLE_REQUIRED"
+    assert harness["portfolio_backtest_performed"] is False
+    assert harness["proxy_return_reuse_detected"] is False
+    assert "data_bundle_missing" in harness["final_decision"]["blockers"]
+    assert harness["execution_plan"][0]["step"] == "load_admissible_data_bundle"
+
+    paths = persist_portfolio_candidate_true_backtest_spec(spec, harness, root=tmp_path)
+    assert Path(paths["spec_path"]).exists()
+    assert Path(paths["harness_path"]).exists()
     assert Path(paths["final_decision_path"]).exists()
     assert Path(paths["markdown_path"]).exists()
 

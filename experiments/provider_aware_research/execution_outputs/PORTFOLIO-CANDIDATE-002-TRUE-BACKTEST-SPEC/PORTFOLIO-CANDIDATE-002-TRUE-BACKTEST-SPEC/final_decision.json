@@ -1,0 +1,14 @@
+{
+  "blockers": [
+    "data_bundle_missing",
+    "provider_entitlement_unverified"
+  ],
+  "decision": "PORTFOLIO_TRUE_BACKTEST_HARNESS_BLOCKED",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "runner_mode": "true_backtest_harness_gate"
+}

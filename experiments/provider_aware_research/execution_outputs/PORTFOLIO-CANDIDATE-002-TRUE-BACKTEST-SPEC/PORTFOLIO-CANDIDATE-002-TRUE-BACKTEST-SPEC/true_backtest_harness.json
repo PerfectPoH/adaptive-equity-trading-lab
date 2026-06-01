@@ -1,0 +1,57 @@
+{
+  "created_at_utc": "2026-06-01T10:59:31.721652+00:00",
+  "execution_plan": [
+    {
+      "allowed_now": false,
+      "description": "Load only a PIT/survivorship-free bundle with raw payload manifest.",
+      "step": "load_admissible_data_bundle"
+    },
+    {
+      "allowed_now": false,
+      "description": "Regenerate sleeve trades from frozen rules; never load Workbench proxy trade lists.",
+      "step": "derive_trades_from_raw_data"
+    },
+    {
+      "allowed_now": false,
+      "description": "Apply fixed costs and compare against SPY, IWM, and equal-weight admissible universe.",
+      "step": "apply_costs_and_benchmarks"
+    },
+    {
+      "allowed_now": false,
+      "description": "Check drawdown, concentration, ex-best-sleeve, benchmark-relative return, and time underwater.",
+      "step": "run_robustness_gates"
+    }
+  ],
+  "final_decision": {
+    "blockers": [
+      "data_bundle_missing",
+      "provider_entitlement_unverified"
+    ],
+    "decision": "PORTFOLIO_TRUE_BACKTEST_HARNESS_BLOCKED",
+    "live_trading_allowed": false,
+    "market_data_download_performed": false,
+    "paper_trading_allowed": false,
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false,
+    "provider_query_performed": false,
+    "runner_mode": "true_backtest_harness_gate"
+  },
+  "harness_id": "PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC-HARNESS",
+  "market_data_download_performed": false,
+  "missing_data_contract_fields": [
+    "survivorship_free_universe",
+    "point_in_time_membership",
+    "listing_and_delisting_dates",
+    "delisted_symbol_prices",
+    "split_dividend_adjusted_ohlcv",
+    "tradability_and_liquidity_history",
+    "benchmark_panel",
+    "raw_payload_retention_manifest"
+  ],
+  "portfolio_backtest_performed": false,
+  "provider_query_performed": false,
+  "proxy_return_reuse_detected": false,
+  "selected_candidate_id": "PORTFOLIO-CANDIDATE-002",
+  "spec_id": "PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC",
+  "status": "BLOCKED_TRUE_BACKTEST_DATA_BUNDLE_REQUIRED"
+}

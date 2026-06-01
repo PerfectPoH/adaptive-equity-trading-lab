@@ -1,0 +1,133 @@
+{
+  "anti_overfit_controls": [
+    "no_proxy_return_reuse",
+    "no_same_sample_model_selection",
+    "no_parameter_sweep_after_candidate_selection",
+    "benchmark_relative_requirement",
+    "ex_best_sleeve_survival_required"
+  ],
+  "benchmark_contract": {
+    "benchmarks": [
+      "SPY",
+      "IWM",
+      "equal_weight_admissible_universe"
+    ],
+    "required_metrics": [
+      "total_return",
+      "cagr",
+      "max_drawdown",
+      "time_underwater",
+      "benchmark_relative_return",
+      "ex_best_sleeve_return"
+    ]
+  },
+  "component_rule_contract": [
+    {
+      "rule": "Generate continuation ranks only from point-in-time historical prices available before entry.",
+      "template": "Momentum",
+      "weight": 0.25
+    },
+    {
+      "rule": "Generate dislocation/reclaim candidates from adjusted OHLCV without using future recovery labels.",
+      "template": "Mean Reversion",
+      "weight": 0.25
+    },
+    {
+      "rule": "Require a point-in-time event timestamp and a separate direction source before any event sleeve trade.",
+      "template": "Catalyst",
+      "weight": 0.25
+    },
+    {
+      "rule": "Use traded-dollar sampling only when the source data resolution supports reconstruction without survivorship leakage.",
+      "template": "Dollar-Bar Microstructure",
+      "weight": 0.25
+    }
+  ],
+  "created_at_utc": "2026-06-01T10:59:31.721652+00:00",
+  "data_contract": {
+    "admissible_source_classes": [
+      "CRSP_WRDS",
+      "Norgate_Data",
+      "licensed_survivorship_free_provider"
+    ],
+    "forbidden_sources": [
+      "active_only_symbol_lists",
+      "survivor_only_price_panels",
+      "workbench_proxy_trade_lists"
+    ],
+    "minimum_history": "At least one complete train/validation/test chronology with delisted symbols retained.",
+    "raw_payload_policy": "Retain provider manifest, query bounds, and immutable raw payload hashes before deriving trades.",
+    "required_fields": [
+      "survivorship_free_universe",
+      "point_in_time_membership",
+      "listing_and_delisting_dates",
+      "delisted_symbol_prices",
+      "split_dividend_adjusted_ohlcv",
+      "tradability_and_liquidity_history",
+      "benchmark_panel",
+      "raw_payload_retention_manifest"
+    ]
+  },
+  "execution_contract": {
+    "chronology": "Train/validation/test split must be fixed before trade generation.",
+    "costs": "Use declared component costs or stricter costs; no post-hoc cost relaxation.",
+    "promotion": "Promotion remains forbidden until a separate final decision passes after true-data validation.",
+    "weights": "Frozen semantic sleeve weights; no Sharpe/return optimization on historical outcomes."
+  },
+  "final_decision": {
+    "blockers": [
+      "data_bundle_missing",
+      "external_data_contract_gate"
+    ],
+    "decision": "PORTFOLIO_CANDIDATE_002_TRUE_BACKTEST_SPEC_ONLY",
+    "live_trading_allowed": false,
+    "market_data_download_allowed": false,
+    "market_data_download_performed": false,
+    "paper_trading_allowed": false,
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false,
+    "provider_query_allowed": false,
+    "provider_query_performed": false,
+    "runner_mode": "true_backtest_spec_only"
+  },
+  "frozen_sleeves": [
+    {
+      "failure_mode": "Outlier dependency and regime decay.",
+      "name": "Momentum sleeve",
+      "rule": "Hold diversified continuation candidates only through the frozen multi-day horizon.",
+      "template": "Momentum",
+      "weight": 0.25
+    },
+    {
+      "failure_mode": "False reversion and cost drag.",
+      "name": "Mean-reversion sleeve",
+      "rule": "Buy diversified dislocations after confirmation; do not average down into unresolved continuation.",
+      "template": "Mean Reversion",
+      "weight": 0.25
+    },
+    {
+      "failure_mode": "Unspecified component fragility.",
+      "name": "Catalyst sleeve",
+      "rule": "Keep the component rule frozen and treat it as one bounded sleeve inside the composite.",
+      "template": "Catalyst",
+      "weight": 0.25
+    },
+    {
+      "failure_mode": "Cleaner sampling without tradable direction.",
+      "name": "Dollar-bar microstructure sleeve",
+      "rule": "Use traded-dollar sampling as a stabilizer, not as standalone promotion evidence.",
+      "template": "Dollar-Bar Microstructure",
+      "weight": 0.25
+    }
+  ],
+  "market_data_download_allowed": false,
+  "portfolio_backtest_allowed": false,
+  "portfolio_backtest_performed": false,
+  "provider_query_allowed": false,
+  "proxy_return_reuse_allowed": false,
+  "scope": "true_backtest_contract_only",
+  "selected_candidate_id": "PORTFOLIO-CANDIDATE-002",
+  "spec_id": "PORTFOLIO-CANDIDATE-002-TRUE-BACKTEST-SPEC",
+  "status": "PORTFOLIO_CANDIDATE_002_TRUE_BACKTEST_SPEC_COMPLETE",
+  "strategy_name": "Multi-Horizon Reversion Momentum Catalyst Basket"
+}
