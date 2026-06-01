@@ -28,6 +28,7 @@ PORTFOLIO_FROZEN_RECIPE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORT
 PORTFOLIO_EXTERNAL_DATA_GATE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "USER-STRATEGY-PORTFOLIO-EXTERNAL-DATA-GATES"
 PORTFOLIO_MANUAL_COMPOSITE_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-MANUAL-COMPOSITE-001"
 PORTFOLIO_CANDIDATE_COMPARISON_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-CANDIDATE-COMPARISON-001"
+PORTFOLIO_PRIMARY_RESEARCH_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "PORTFOLIO-CANDIDATE-002-PRIMARY-RESEARCH"
 DELISTED_DATA_SOURCE_GATE_DIR = Path("experiments/provider_aware_research/delisted_data_source_gate_20260525")
 ORB_930_OUTPUT_DIR = EXECUTION_OUTPUTS_DIR / "ORB-930-CROSS-ASSET-BACKTEST-001"
 WORKBENCH_CONFIGURED_LARGECAP_SYMBOLS = {
@@ -3271,6 +3272,116 @@ def persist_portfolio_candidate_comparison(comparison: dict[str, Any], *, root: 
         "final_decision_path": str(final_decision_path),
         "markdown_path": str(markdown_path),
     }
+
+
+def build_portfolio_candidate_primary_research_state(
+    comparison: dict[str, Any],
+    *,
+    manual: dict[str, Any] | None = None,
+    data_gate: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Freeze Candidate 002 as a research-review target without turning search into evidence."""
+
+    selected_id = str(comparison.get("winner_for_research_review", "PORTFOLIO-CANDIDATE-002"))
+    selected_key = "candidate_002" if selected_id == "PORTFOLIO-CANDIDATE-002" else "candidate_001"
+    selected = dict(comparison.get(selected_key, {}))
+    blockers = list(dict.fromkeys(["external_data_contract_gate", "iterative_search_after_candidate_001"]))
+    manual_manifest = dict((manual or {}).get("manual_manifest", {}))
+    data_gate_decision = dict((data_gate or {}).get("final_decision", {}))
+    factory_scope_status = "removed_by_manual_manifest" if manual_manifest else "not_removed"
+    if factory_scope_status != "removed_by_manual_manifest" and "factory_generated_scope_gate" not in blockers:
+        blockers.append("factory_generated_scope_gate")
+    return {
+        "state_id": "PORTFOLIO-CANDIDATE-002-PRIMARY-RESEARCH-STATE",
+        "status": "PORTFOLIO_CANDIDATE_002_SELECTED_FOR_DATA_GATE_REVIEW",
+        "created_at_utc": datetime.now(timezone.utc).isoformat(),
+        "selected_candidate_id": selected_id,
+        "selection_scope": "primary_research_review_only",
+        "selection_reason": (
+            "Candidate 002 is selected for manual data-gate review because it improved validation net "
+            "and reduced drawdown versus Candidate 001, despite lower total local/proxy net return."
+        ),
+        "promotion_allowed": False,
+        "paper_trading_allowed": False,
+        "live_trading_allowed": False,
+        "provider_query_allowed": False,
+        "market_data_download_allowed": False,
+        "portfolio_backtest_allowed": False,
+        "selected_candidate": selected,
+        "comparison_deltas": comparison.get("deltas", {}),
+        "factory_scope_status": factory_scope_status,
+        "manual_manifest": manual_manifest,
+        "data_gate_decision": data_gate_decision,
+        "remaining_blockers": blockers,
+        "required_next_step": "Resolve the external PIT/survivorship-free data contract before any true portfolio backtest.",
+        "anti_overfit_disclosures": [
+            *list(comparison.get("anti_overfit_disclosures", [])),
+            "selected_for_review_not_promotion",
+            "same_sample_search_cannot_validate_alpha",
+        ],
+        "final_decision": {
+            "decision": "PORTFOLIO_CANDIDATE_002_SELECTED_FOR_DATA_GATE_REVIEW",
+            "blockers": blockers,
+            "promotion_allowed": False,
+            "paper_trading_allowed": False,
+            "live_trading_allowed": False,
+            "provider_query_performed": False,
+            "market_data_download_performed": False,
+            "portfolio_backtest_performed": False,
+            "runner_mode": "primary_research_selection_only",
+        },
+    }
+
+
+def persist_portfolio_candidate_primary_research_state(state: dict[str, Any], *, root: Path = Path(".")) -> dict[str, str]:
+    output_dir = Path(root) / PORTFOLIO_PRIMARY_RESEARCH_OUTPUT_DIR / str(state.get("state_id", "unknown"))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    state_path = output_dir / "primary_research_state.json"
+    final_decision_path = output_dir / "final_decision.json"
+    markdown_path = output_dir / "primary_research_report.md"
+    state_path.write_text(json.dumps(_json_safe(state), indent=2, sort_keys=True), encoding="utf-8")
+    final_decision_path.write_text(json.dumps(_json_safe(state.get("final_decision", {})), indent=2, sort_keys=True), encoding="utf-8")
+    selected = state.get("selected_candidate", {})
+    deltas = state.get("comparison_deltas", {})
+    markdown_lines = [
+        "# Portfolio Candidate 002 Primary Research State",
+        "",
+        f"- status: `{state.get('status')}`",
+        f"- selected candidate: `{state.get('selected_candidate_id')}`",
+        f"- component count: `{selected.get('component_count', 0)}`",
+        f"- validation delta vs Candidate 001: `{deltas.get('validation_net_return_delta', 0.0)}`",
+        f"- drawdown improvement vs Candidate 001: `{deltas.get('max_drawdown_improvement', 0.0)}`",
+        f"- promotion allowed: `{str(state.get('promotion_allowed', False)).lower()}`",
+        f"- provider query allowed: `{str(state.get('provider_query_allowed', False)).lower()}`",
+        f"- portfolio backtest allowed: `{str(state.get('portfolio_backtest_allowed', False)).lower()}`",
+        "",
+        "## Remaining Blockers",
+        "",
+        *[f"- `{blocker}`" for blocker in state.get("remaining_blockers", [])],
+        "",
+        "## Interpretation",
+        "",
+        str(state.get("selection_reason", "")),
+        "",
+        str(state.get("required_next_step", "")),
+    ]
+    markdown_path.write_text("\n".join(markdown_lines), encoding="utf-8")
+    return {
+        "output_dir": str(output_dir),
+        "state_path": str(state_path),
+        "final_decision_path": str(final_decision_path),
+        "markdown_path": str(markdown_path),
+    }
+
+
+def load_portfolio_candidate_primary_research_state(*, root: Path = Path(".")) -> dict[str, Any] | None:
+    base_dir = Path(root) / PORTFOLIO_PRIMARY_RESEARCH_OUTPUT_DIR
+    if not base_dir.exists():
+        return None
+    candidates = sorted(base_dir.glob("*/primary_research_state.json"), key=lambda path: path.stat().st_mtime, reverse=True)
+    if not candidates:
+        return None
+    return json.loads(candidates[0].read_text(encoding="utf-8"))
 
 
 def build_portfolio_lab_preview(

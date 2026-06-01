@@ -1,0 +1,14 @@
+{
+  "blockers": [
+    "external_data_contract_gate",
+    "iterative_search_after_candidate_001"
+  ],
+  "decision": "PORTFOLIO_CANDIDATE_002_SELECTED_FOR_DATA_GATE_REVIEW",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "runner_mode": "primary_research_selection_only"
+}

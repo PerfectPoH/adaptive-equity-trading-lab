@@ -35,6 +35,7 @@ from dashboard.lab_dashboard_data import (
     build_portfolio_external_data_backtest_gate,
     build_portfolio_manual_composite_trial,
     build_portfolio_candidate_comparison,
+    build_portfolio_candidate_primary_research_state,
     display_safe_records,
     delisted_data_source_gate_payload,
     load_portfolio_lab_components,
@@ -53,6 +54,7 @@ from dashboard.lab_dashboard_data import (
     persist_portfolio_external_data_backtest_gate,
     persist_portfolio_manual_composite_trial,
     persist_portfolio_candidate_comparison,
+    persist_portfolio_candidate_primary_research_state,
     write_workbench_phase_report,
     build_strategy_chart_story,
     classify_strategy_status,
@@ -933,6 +935,54 @@ def test_candidate_comparison_flags_iterative_search_and_no_promotion(tmp_path: 
 
     paths = persist_portfolio_candidate_comparison(comparison, root=tmp_path)
     assert Path(paths["comparison_path"]).exists()
+    assert Path(paths["markdown_path"]).exists()
+
+
+def test_candidate_002_primary_research_state_blocks_execution_until_data_gate(tmp_path: Path) -> None:
+    candidate_001 = {
+        "candidate_id": "PORTFOLIO-CANDIDATE-001",
+        "component_count": 3,
+        "total_net_return": 475.33,
+        "max_drawdown": -14.11,
+        "validation_net_return": 217.51,
+        "component_ids": ["A", "B", "C"],
+    }
+    candidate_002 = {
+        "candidate_id": "PORTFOLIO-CANDIDATE-002",
+        "component_count": 4,
+        "total_net_return": 453.04,
+        "max_drawdown": -13.61,
+        "validation_net_return": 302.81,
+        "component_ids": ["D", "E", "F", "G"],
+        "component_templates": ["Catalyst", "Dollar-Bar Microstructure", "Mean Reversion", "Momentum"],
+        "blockers": ["factory_generated_scope_gate", "iterative_search_after_candidate_001"],
+    }
+    comparison = build_portfolio_candidate_comparison(candidate_001, candidate_002)
+    manual = {
+        "manual_manifest": {
+            "strategy_name": "Multi-Horizon Reversion Momentum Catalyst Basket",
+            "sleeves": [{"template": "Momentum", "weight": 0.25}],
+        }
+    }
+
+    state = build_portfolio_candidate_primary_research_state(comparison, manual=manual)
+
+    assert state["status"] == "PORTFOLIO_CANDIDATE_002_SELECTED_FOR_DATA_GATE_REVIEW"
+    assert state["selected_candidate_id"] == "PORTFOLIO-CANDIDATE-002"
+    assert state["factory_scope_status"] == "removed_by_manual_manifest"
+    assert state["promotion_allowed"] is False
+    assert state["paper_trading_allowed"] is False
+    assert state["live_trading_allowed"] is False
+    assert state["provider_query_allowed"] is False
+    assert state["market_data_download_allowed"] is False
+    assert state["portfolio_backtest_allowed"] is False
+    assert "external_data_contract_gate" in state["remaining_blockers"]
+    assert "iterative_search_after_candidate_001" in state["remaining_blockers"]
+    assert state["final_decision"]["decision"] == "PORTFOLIO_CANDIDATE_002_SELECTED_FOR_DATA_GATE_REVIEW"
+
+    paths = persist_portfolio_candidate_primary_research_state(state, root=tmp_path)
+    assert Path(paths["state_path"]).exists()
+    assert Path(paths["final_decision_path"]).exists()
     assert Path(paths["markdown_path"]).exists()
 
 

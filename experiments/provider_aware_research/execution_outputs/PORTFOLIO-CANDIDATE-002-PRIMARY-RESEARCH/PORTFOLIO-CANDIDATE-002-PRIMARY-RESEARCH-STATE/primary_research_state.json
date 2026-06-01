@@ -1,0 +1,147 @@
+{
+  "anti_overfit_disclosures": [
+    "iterative_search_after_candidate_001",
+    "same_sample_candidate_comparison",
+    "diagnostic_only_not_model_selection_evidence",
+    "requires_external_data_gate_before_true_backtest",
+    "selected_for_review_not_promotion",
+    "same_sample_search_cannot_validate_alpha"
+  ],
+  "comparison_deltas": {
+    "component_count_delta": 1,
+    "component_overlap_ratio": 0.0,
+    "max_drawdown_improvement": 0.50262853,
+    "total_net_return_delta": -22.29138691,
+    "validation_net_return_delta": 85.29754394
+  },
+  "created_at_utc": "2026-06-01T10:45:47.771846+00:00",
+  "data_gate_decision": {
+    "blockers": [
+      "external_data_contract_gate",
+      "factory_generated_scope_gate"
+    ],
+    "decision": "PORTFOLIO_TRUE_BACKTEST_BLOCKED_DATA_GATE",
+    "live_trading_allowed": false,
+    "market_data_download_allowed": false,
+    "market_data_download_performed": false,
+    "paper_trading_allowed": false,
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false,
+    "provider_query_allowed": false,
+    "provider_query_performed": false,
+    "runner_mode": "external_data_backtest_gate_only"
+  },
+  "factory_scope_status": "removed_by_manual_manifest",
+  "final_decision": {
+    "blockers": [
+      "external_data_contract_gate",
+      "iterative_search_after_candidate_001"
+    ],
+    "decision": "PORTFOLIO_CANDIDATE_002_SELECTED_FOR_DATA_GATE_REVIEW",
+    "live_trading_allowed": false,
+    "market_data_download_performed": false,
+    "paper_trading_allowed": false,
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false,
+    "provider_query_performed": false,
+    "runner_mode": "primary_research_selection_only"
+  },
+  "live_trading_allowed": false,
+  "manual_manifest": {
+    "falsification_criteria": [
+      "Archive if external-data/PIT gate cannot be satisfied.",
+      "Archive if validation net turns negative under the true data source.",
+      "Archive if one sleeve contributes more than 40% of positive contribution under true data.",
+      "Archive if ex-best-sleeve net return is non-positive under true data.",
+      "Archive if benchmark-relative return is not positive after costs."
+    ],
+    "human_authored": true,
+    "hypothesis": "A fixed-weight basket combining reversion, continuation, and dollar-sampled microstructure may be more robust than a single setup, but only if it survives a survivorship-free/PIT data gate.",
+    "required_data": [
+      "survivorship_free_universe",
+      "point_in_time_membership",
+      "delisted_symbol_prices",
+      "adjusted_ohlcv",
+      "benchmark_panel"
+    ],
+    "sleeves": [
+      {
+        "failure_mode": "Outlier dependency and regime decay.",
+        "name": "Momentum sleeve",
+        "rule": "Hold diversified continuation candidates only through the frozen multi-day horizon.",
+        "template": "Momentum",
+        "weight": 0.25
+      },
+      {
+        "failure_mode": "False reversion and cost drag.",
+        "name": "Mean-reversion sleeve",
+        "rule": "Buy diversified dislocations after confirmation; do not average down into unresolved continuation.",
+        "template": "Mean Reversion",
+        "weight": 0.25
+      },
+      {
+        "failure_mode": "Unspecified component fragility.",
+        "name": "Catalyst sleeve",
+        "rule": "Keep the component rule frozen and treat it as one bounded sleeve inside the composite.",
+        "template": "Catalyst",
+        "weight": 0.25
+      },
+      {
+        "failure_mode": "Cleaner sampling without tradable direction.",
+        "name": "Dollar-bar microstructure sleeve",
+        "rule": "Use traded-dollar sampling as a stabilizer, not as standalone promotion evidence.",
+        "template": "Dollar-Bar Microstructure",
+        "weight": 0.25
+      }
+    ],
+    "source_factory_recipe_id": "e832f14bb7290f18",
+    "source_trial_id": "PORTFOLIO-FROZEN-RECIPE-CANDIDATE-002-E832F14BB7290F18",
+    "strategy_name": "Multi-Horizon Reversion Momentum Catalyst Basket",
+    "trial_id": "PORTFOLIO-MANUAL-COMPOSITE-002-E832F14BB7290F18",
+    "weight_policy": {
+      "max_component_weight": 0.4,
+      "optimization_allowed": false,
+      "policy": "equal_weight",
+      "reason": "Weights are semantic and frozen; they are not fitted to historical Sharpe or net return."
+    }
+  },
+  "market_data_download_allowed": false,
+  "paper_trading_allowed": false,
+  "portfolio_backtest_allowed": false,
+  "promotion_allowed": false,
+  "provider_query_allowed": false,
+  "remaining_blockers": [
+    "external_data_contract_gate",
+    "iterative_search_after_candidate_001"
+  ],
+  "required_next_step": "Resolve the external PIT/survivorship-free data contract before any true portfolio backtest.",
+  "selected_candidate": {
+    "blockers": [
+      "factory_generated_scope_gate",
+      "iterative_search_after_candidate_001"
+    ],
+    "candidate_id": "PORTFOLIO-CANDIDATE-002",
+    "component_count": 4,
+    "component_ids": [
+      "FACTORY-e62a48e2d142923e",
+      "FACTORY-fab94445f0b51fdf",
+      "FACTORY-6a8afca3951761f9",
+      "FACTORY-119d99f730b677f6"
+    ],
+    "component_templates": [
+      "Catalyst",
+      "Dollar-Bar Microstructure",
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "max_drawdown": -13.611672,
+    "source_id": "e832f14bb7290f18",
+    "total_net_return": 453.040628,
+    "validation_net_return": 302.81306575
+  },
+  "selected_candidate_id": "PORTFOLIO-CANDIDATE-002",
+  "selection_reason": "Candidate 002 is selected for manual data-gate review because it improved validation net and reduced drawdown versus Candidate 001, despite lower total local/proxy net return.",
+  "selection_scope": "primary_research_review_only",
+  "state_id": "PORTFOLIO-CANDIDATE-002-PRIMARY-RESEARCH-STATE",
+  "status": "PORTFOLIO_CANDIDATE_002_SELECTED_FOR_DATA_GATE_REVIEW"
+}

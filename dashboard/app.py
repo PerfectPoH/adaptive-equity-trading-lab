@@ -53,11 +53,13 @@ from dashboard.lab_dashboard_data import (
     build_portfolio_frozen_recipe_trial,
     build_portfolio_external_data_backtest_gate,
     build_portfolio_manual_composite_trial,
+    build_portfolio_candidate_primary_research_state,
     build_separate_portfolio_trial_dry_run,
     build_strategy_factory_components,
     display_safe_records,
     load_workbench_strategy_cards,
     load_workbench_strategy_packages,
+    load_portfolio_candidate_primary_research_state,
     load_portfolio_lab_components,
     inspect_workbench_strategy_package,
     materialize_factory_components_as_workbench_runs,
@@ -67,6 +69,7 @@ from dashboard.lab_dashboard_data import (
     persist_portfolio_frozen_recipe_trial,
     persist_portfolio_external_data_backtest_gate,
     persist_portfolio_manual_composite_trial,
+    persist_portfolio_candidate_primary_research_state,
     persist_separate_portfolio_trial_dry_run,
     portfolio_lab_component_table,
 )
@@ -2838,6 +2841,43 @@ def render_portfolio_lab() -> None:
                         "minimum_backtest_contract": data_gate.get("minimum_backtest_contract", {}),
                     }
                 )
+        comparison_path = (
+            REPO_ROOT
+            / "experiments/provider_aware_research/execution_outputs/PORTFOLIO-CANDIDATE-COMPARISON-001/PORTFOLIO-CANDIDATE-COMPARISON-001/candidate_comparison.json"
+        )
+        if comparison_path.exists():
+            if st.button("Select Candidate 002 for data-gate review", type="secondary", width="stretch"):
+                comparison = json.loads(comparison_path.read_text(encoding="utf-8"))
+                manual = st.session_state.get("portfolio_lab_manual_composite_result", {}).get("trial")
+                data_gate = st.session_state.get("portfolio_lab_external_data_gate_result", {}).get("gate")
+                state = build_portfolio_candidate_primary_research_state(comparison, manual=manual, data_gate=data_gate)
+                state_paths = persist_portfolio_candidate_primary_research_state(state, root=REPO_ROOT)
+                st.session_state["portfolio_lab_primary_research_state"] = {"state": state, "paths": state_paths}
+                st.rerun()
+        primary_state = st.session_state.get("portfolio_lab_primary_research_state", {}).get("state")
+        primary_paths = st.session_state.get("portfolio_lab_primary_research_state", {}).get("paths", {})
+        if primary_state is None:
+            primary_state = load_portfolio_candidate_primary_research_state(root=REPO_ROOT)
+        if primary_state:
+            selected = primary_state.get("selected_candidate", {})
+            deltas = primary_state.get("comparison_deltas", {})
+            st.markdown("**Primary research candidate**")
+            st.info(
+                f"{primary_state.get('selected_candidate_id', 'Candidate')} is selected for data-gate review only. "
+                "This is not a promotion, not a backtest, and not paper/live trading permission."
+            )
+            candidate_cols = st.columns(4)
+            with candidate_cols[0]:
+                metric_card("Components", selected.get("component_count", 0), "Frozen hypothesis mix")
+            with candidate_cols[1]:
+                metric_card("Validation delta", f"{float(deltas.get('validation_net_return_delta', 0.0)):.2f}", "Vs Candidate 001")
+            with candidate_cols[2]:
+                metric_card("DD improvement", f"{float(deltas.get('max_drawdown_improvement', 0.0)):.2f}", "Less local pain")
+            with candidate_cols[3]:
+                metric_card("Next gate", "DATA", "External PIT contract")
+            st.warning("Remaining blockers: " + ", ".join(primary_state.get("remaining_blockers", [])))
+            if primary_paths:
+                st.caption(f"Primary research state: {primary_paths.get('state_path', '')}")
         with st.expander("Open search controls and top candidates"):
             st.json(
                 {
