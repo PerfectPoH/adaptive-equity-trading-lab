@@ -68,3 +68,32 @@ def test_micro_backtest_archives_when_price_coverage_is_below_gate() -> None:
     assert "price_covered_events_below_8" in summary["blockers"]
     assert summary["promotion_allowed"] is False
     assert summary["parameter_sweep_performed"] is False
+
+
+def test_micro_backtest_excludes_events_and_exits_after_as_of_date() -> None:
+    frames = {"AAA": _frame(10.0, 0.05, periods=260)}
+    events = pd.DataFrame(
+        [
+            {
+                "event_id": "MATURE",
+                "symbol": "AAA",
+                "event_date": "2025-05-15",
+                "pit_proof_status": "pass",
+                "admissibility_label": "admissible_event",
+                "outcome_status": "approved",
+            },
+            {
+                "event_id": "FUTURE",
+                "symbol": "AAA",
+                "event_date": "2025-10-15",
+                "pit_proof_status": "pass",
+                "admissibility_label": "admissible_event",
+                "outcome_status": "unresolved",
+            },
+        ]
+    )
+
+    trades = build_micro_backtest(events, frames, windows=(30,), cost_bps=500, as_of_date="2025-06-01")
+
+    assert {trade["event_id"] for trade in trades} == {"MATURE"}
+    assert all(trade["exit_date"] <= "2025-06-01" for trade in trades)

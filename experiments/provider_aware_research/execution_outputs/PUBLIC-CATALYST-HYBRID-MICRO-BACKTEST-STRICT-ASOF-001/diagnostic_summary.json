@@ -1,0 +1,50 @@
+{
+  "backtest_performed": true,
+  "blockers": [
+    "manual_panel_non_promotable",
+    "coverage_completeness_not_proven",
+    "delisted_retention_not_proven"
+  ],
+  "by_window": {
+    "30": {
+      "gross_return_sum": 0.22676656399128492,
+      "median_net_return": -0.04510200656190207,
+      "net_return_sum": -0.7232334360087154,
+      "trade_count": 19,
+      "win_rate": 0.3684210526315789
+    },
+    "60": {
+      "gross_return_sum": 2.5051078007203733,
+      "median_net_return": 0.06185184566251416,
+      "net_return_sum": 1.5551078007203734,
+      "trade_count": 19,
+      "win_rate": 0.7368421052631579
+    },
+    "90": {
+      "gross_return_sum": 3.714409337596371,
+      "median_net_return": 0.07124849939976001,
+      "net_return_sum": 2.7644093375963705,
+      "trade_count": 19,
+      "win_rate": 0.6842105263157895
+    }
+  },
+  "decision": "PUBLIC_CATALYST_HYBRID_MICRO_BACKTEST_COMPLETE_EXPLORATORY_ONLY",
+  "event_count": 34,
+  "financial_performance_claimed": false,
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "max_drawdown": -0.8972412151365152,
+  "paper_trading_allowed": false,
+  "parameter_sweep_performed": false,
+  "price_covered_event_count": 19,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "trade_count": 57,
+  "weighted_net_return_sum": 1.1987612341026765,
+  "win_rate": 0.5964912280701754,
+  "windows": [
+    30,
+    60,
+    90
+  ]
+}

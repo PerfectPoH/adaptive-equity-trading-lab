@@ -23,8 +23,10 @@ def build_micro_backtest(
     *,
     windows: Iterable[int] = WINDOWS,
     cost_bps: int = 500,
+    as_of_date: str | pd.Timestamp | None = None,
 ) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
+    as_of = pd.Timestamp(as_of_date).normalize() if as_of_date is not None else None
     for _, event in events.iterrows():
         if str(event.get("admissibility_label")) != "admissible_event":
             continue
@@ -35,8 +37,10 @@ def build_micro_backtest(
         if frame is None or frame.empty:
             continue
         event_date = pd.Timestamp(str(event["event_date"])).normalize()
+        if as_of is not None and event_date > as_of:
+            continue
         for window in windows:
-            trade = _trade_for_event(event, frame, event_date, int(window), cost_bps=cost_bps)
+            trade = _trade_for_event(event, frame, event_date, int(window), cost_bps=cost_bps, as_of_date=as_of)
             if trade:
                 rows.append(trade)
     return rows
@@ -134,12 +138,13 @@ def run_public_catalyst_hybrid_micro_backtest(
     output_dir: str | Path = OUTPUT_DIR,
     cost_bps: int = 500,
     minimum_price_covered_events: int = 8,
+    as_of_date: str | pd.Timestamp | None = None,
 ) -> dict[str, Any]:
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
     events = pd.read_csv(panel_path)
     frames, price_manifest = load_norgate_local_frames(events["symbol"].astype(str).tolist())
-    trades = build_micro_backtest(events, frames, windows=WINDOWS, cost_bps=cost_bps)
+    trades = build_micro_backtest(events, frames, windows=WINDOWS, cost_bps=cost_bps, as_of_date=as_of_date)
     summary = summarize_micro_backtest(
         trades,
         event_count=len(events),
@@ -156,6 +161,7 @@ def run_public_catalyst_hybrid_micro_backtest(
         "backtest_performed": True,
         "price_manifest": price_manifest,
         "summary": summary,
+        "as_of_date": str(pd.Timestamp(as_of_date).date()) if as_of_date is not None else None,
     }
     _write_csv(output / "trade_log.csv", trades)
     _write_json(output / "diagnostic_summary.json", summary)
@@ -172,6 +178,7 @@ def _trade_for_event(
     window: int,
     *,
     cost_bps: int,
+    as_of_date: pd.Timestamp | None = None,
 ) -> dict[str, Any] | None:
     event_pos = frame.index.searchsorted(event_date, side="left")
     if event_pos >= len(frame):
@@ -182,6 +189,8 @@ def _trade_for_event(
         return None
     entry_date = frame.index[entry_pos]
     exit_date = frame.index[exit_pos]
+    if as_of_date is not None and exit_date > as_of_date:
+        return None
     entry_price = float(frame.loc[entry_date, "Open"])
     exit_price = float(frame.loc[exit_date, "Close"])
     if entry_price <= 0 or exit_price <= 0:

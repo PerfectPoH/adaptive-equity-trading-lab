@@ -1,0 +1,41 @@
+{
+  "failures": {
+    "DCPH": "ValueError",
+    "KRTX": "ValueError",
+    "ORCA-PRIVATE": "ValueError",
+    "SAVA": "ValueError",
+    "TLX.AX": "ValueError"
+  },
+  "loaded_symbols": [
+    "AGIO",
+    "AQST",
+    "ASND",
+    "ATRA",
+    "BBIO",
+    "CAPR",
+    "CING",
+    "COGT",
+    "DNLI",
+    "FBIO",
+    "GKOS",
+    "IONS",
+    "KALV",
+    "MIST",
+    "MNKD",
+    "OTLK",
+    "PTCT",
+    "RARE",
+    "REPL",
+    "SNDX",
+    "SUPN",
+    "SVRA",
+    "TNXP",
+    "UNCY",
+    "VERA",
+    "VRDN",
+    "VRTX"
+  ],
+  "market_data_download_performed": false,
+  "provider_query_performed": false,
+  "source": "local_norgate_database"
+}
