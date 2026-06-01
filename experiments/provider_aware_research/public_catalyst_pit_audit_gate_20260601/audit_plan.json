@@ -1,0 +1,45 @@
+{
+  "gate_id": "PUBLIC-CATALYST-PIT-AUDIT-GATE-001",
+  "created_at_local": "2026-06-01",
+  "purpose": "Define the admissibility audit for public or freemium biotech/PDUFA catalyst sources before any Catalyst sleeve backtest.",
+  "provider_query_authorized": false,
+  "web_scraping_authorized": false,
+  "market_data_download_authorized": false,
+  "backtest_authorized": false,
+  "promotion_allowed": false,
+  "audit_steps": [
+    {
+      "step": 1,
+      "name": "Source inventory",
+      "action": "List public official and third-party catalyst sources without scraping bulk data."
+    },
+    {
+      "step": 2,
+      "name": "Timestamp proof sample",
+      "action": "For a tiny future/past sample, verify whether source pages or archived pages prove the date was known before the event."
+    },
+    {
+      "step": 3,
+      "name": "Negative outcome retention",
+      "action": "Check whether failed, delayed, withdrawn, or missed events remain visible after the outcome."
+    },
+    {
+      "step": 4,
+      "name": "Delisted/acquired retention",
+      "action": "Check whether sponsors that no longer trade remain in historical source records."
+    },
+    {
+      "step": 5,
+      "name": "Decision",
+      "action": "Either label the source non-promotable discovery-only or approve a bounded Catalyst exploratory panel."
+    }
+  ],
+  "minimum_pass": [
+    "PIT-CAT-001",
+    "PIT-CAT-002",
+    "PIT-CAT-003",
+    "PIT-CAT-004",
+    "PIT-CAT-006"
+  ]
+}
+

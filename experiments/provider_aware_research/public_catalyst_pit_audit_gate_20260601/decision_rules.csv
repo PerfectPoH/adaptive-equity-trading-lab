@@ -1,0 +1,7 @@
+decision,status,rule
+official_context_only,NO_BACKTEST,FDA/openFDA or ClinicalTrials.gov can verify context but cannot alone create a PIT tradable PDUFA calendar.
+third_party_pending_audit,NO_BACKTEST,Public PDUFA calendars remain discovery-only until timestamp retention and negative-event checks pass.
+source_passes_pit_audit,EXPLORATORY_ONLY,If a source passes PIT audit it can feed a bounded exploratory Catalyst panel but not promotion without broader history and delisted coverage.
+source_fails_pit_audit,ARCHIVE_SOURCE,If pre-event timestamp or negative-retention fails the source is archived for trading research and kept only as qualitative context.
+commercial_required,BLOCKED_IF_PUBLIC_FAILS,If no public source passes the PIT audit the Catalyst sleeve remains blocked until Citeline/BioMedTracker/Evaluate or equivalent commercial data is available.
+

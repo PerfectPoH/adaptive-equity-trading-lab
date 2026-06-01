@@ -1,0 +1,25 @@
+{
+  "decision_id": "PUBLIC-CATALYST-PIT-AUDIT-GATE-001",
+  "created_at_local": "2026-06-01",
+  "decision": "PUBLIC_CATALYST_PIT_AUDIT_DEFINED_NO_QUERY_AUTHORIZED",
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "provider_query_performed": false,
+  "web_scraping_performed": false,
+  "market_data_download_performed": false,
+  "backtest_performed": false,
+  "summary": "The Catalyst sleeve may not use public or freemium biotech/PDUFA sources until a separate audit proves pre-event timestamp availability, negative outcome retention, delisted/acquired retention, identifier stability, and event-type clarity.",
+  "next_valid_action": "Run a tiny manual source audit against the candidate matrix; do not scrape bulk pages or backtest until the audit passes.",
+  "candidate_sources": [
+    "FDA openFDA Drugs@FDA",
+    "ClinicalTrials.gov API",
+    "SEC EDGAR",
+    "Company press releases with archive proof",
+    "BioPharmCatalyst/BPIQ",
+    "PDUFA.BIO",
+    "Dan Sfera biotech calendar",
+    "Internet Archive"
+  ]
+}
+

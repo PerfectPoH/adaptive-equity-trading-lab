@@ -1,0 +1,10 @@
+check_id,check_name,pass_condition,fail_condition,why_it_matters
+PIT-CAT-001,pre_event_timestamp,Each event has an archived source timestamp strictly before the event date,Only post-event record exists,Prevents look-ahead bias.
+PIT-CAT-002,outcome_blind_calendar,Calendar date can be observed before knowing FDA/trial outcome,Event appears only after outcome,Prevents outcome-selection bias.
+PIT-CAT-003,negative_event_retention,Failed delayed withdrawn and missed catalysts remain in source history,Only approvals/successes remain,Prevents survivorship and winner bias.
+PIT-CAT-004,delisted_company_retention,Delisted acquired bankrupt or renamed sponsors remain mappable,Only current tickers remain,Prevents survivorship bias.
+PIT-CAT-005,identifier_stability,Company can be mapped by ticker CIK name and date-aware symbol history,Only current ticker string is available,Prevents symbol mapping errors.
+PIT-CAT-006,event_type_clarity,Source distinguishes PDUFA AdCom trial readout approval CRL delay and withdrawal,Ambiguous catalyst labels,Prevents mixing incompatible regimes.
+PIT-CAT-007,access_reproducibility,Source can be exported scraped reproducibly or archived with stable URL snapshots,Manual screenshots only,Prevents unrepeatable research.
+PIT-CAT-008,coverage_completeness_sample,Random sample includes both winners and losers across multiple years,Only current/future curated list exists,Prevents biased historical panel.
+
