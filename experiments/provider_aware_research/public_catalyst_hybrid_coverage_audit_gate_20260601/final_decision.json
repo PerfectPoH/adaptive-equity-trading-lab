@@ -1,0 +1,10 @@
+{
+  "gate_id": "PUBLIC-CATALYST-HYBRID-COVERAGE-AUDIT-GATE-001",
+  "decision": "PUBLIC_CATALYST_HYBRID_COVERAGE_AUDIT_GATE_DEFINED_NO_RUN",
+  "decision_timestamp": "2026-06-01T00:00:00+02:00",
+  "provider_query_performed": false,
+  "market_data_download_performed": false,
+  "backtest_performed": false,
+  "promotion_allowed": false,
+  "next_action": "PUBLIC-CATALYST-HYBRID-COVERAGE-AUDIT-001"
+}
