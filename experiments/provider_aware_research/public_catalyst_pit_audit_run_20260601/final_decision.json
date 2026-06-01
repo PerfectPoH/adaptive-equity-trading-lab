@@ -1,0 +1,25 @@
+{
+  "decision_id": "PUBLIC-CATALYST-PIT-AUDIT-RUN-001",
+  "created_at_local": "2026-06-01",
+  "decision": "PUBLIC_CATALYST_PIT_AUDIT_PARTIAL_NO_SOURCE_PROMOTABLE",
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "provider_query_performed": true,
+  "provider_query_scope": "Manual public web/documentation inspection only; no bulk scraping.",
+  "market_data_download_performed": false,
+  "backtest_performed": false,
+  "summary": "Public and freemium biotech catalyst sources are useful for discovery and event-level timestamp proof, but no observed free/public source passed the full point-in-time completeness and retention contract needed for a promotable Catalyst sleeve.",
+  "source_outcome": {
+    "official_sources": "Verification/context only.",
+    "company_pr_and_sec_filings": "Event-level PIT proof only.",
+    "third_party_calendars": "Discovery/trial candidates, non-promotable pending export and retention audit."
+  },
+  "next_valid_action": "PUBLIC-CATALYST-HYBRID-EVENT-PANEL-GATE-001",
+  "blocked_actions": [
+    "No Catalyst sleeve backtest from public calendars alone.",
+    "No promotion from third-party calendar pages without PIT completeness audit.",
+    "No assumption that current/future calendar pages contain delisted or failed historical events."
+  ]
+}
+

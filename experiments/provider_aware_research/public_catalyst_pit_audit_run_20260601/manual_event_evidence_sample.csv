@@ -1,0 +1,7 @@
+event_or_source,date_or_claim,pre_event_proof_observed,source_url,interpretation
+Agios PYRUKYND thalassemia PDUFA,Company release dated 2025-01-08 disclosed PDUFA goal date 2025-09-07,YES_event_level_company_PR,https://investor.agios.com/news-releases/news-release-details/fda-accepts-agios-supplemental-new-drug-application-pyrukyndr,Single-event PIT proof exists but does not provide complete universe.
+Liquidia YUTREPIA PDUFA,SEC-linked exhibit disclosed PDUFA goal date 2025-05-24,YES_event_level_SEC_exhibit,https://fintel.io/doc/sec-liquidia-corp-1819576-ex991-2025-march-28-20175-2307,SEC/issuer filings can anchor individual event dates.
+BPIQ historical PDUFA report,Page states historical table includes extensions CRLs and AdCom votes,PARTIAL_claim_not_full_free_export,https://app.bpiq.com/pdufa-calendar/historical-report,Potentially strongest freemium route but needs export/trial audit.
+CatalystAlert source model,Page claims every date is linked to official source and tracks 27079 events,PARTIAL_claim_not_audit_pass,https://catalystalert.io/,Potential discovery source; still needs PIT/export/negative retention verification.
+PDUFA.BIO source model,Page claims 2200+ historical FDA decisions and CSV export workflow,PARTIAL_claim_not_audit_pass,https://www.pdufa.bio/,Potential trial candidate; calendar access/provenance needs audit.
+
