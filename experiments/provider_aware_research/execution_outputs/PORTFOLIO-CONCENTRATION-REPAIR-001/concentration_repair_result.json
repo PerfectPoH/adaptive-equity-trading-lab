@@ -1,0 +1,2586 @@
+{
+  "base_component_ids": [
+    "a42078cbf0a2ea94",
+    "28fb7b03aa56a91e",
+    "9474fe601e0f2bd2"
+  ],
+  "best_conservative_repair": {
+    "blockers": [
+      "factory_generated_scope_gate"
+    ],
+    "component_ids": [
+      "a42078cbf0a2ea94",
+      "28fb7b03aa56a91e",
+      "9474fe601e0f2bd2",
+      "acc065823d9dcfb7"
+    ],
+    "component_labels": [
+      "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+      "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+      "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+      "My falsifiable strategy (Momentum, acc065)"
+    ],
+    "final_decision": {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+      "live_trading_allowed": false,
+      "market_data_download_performed": false,
+      "net_return_sum": 385.1595325,
+      "paper_trading_allowed": false,
+      "portfolio_backtest_performed": false,
+      "promotion_allowed": false,
+      "provider_query_performed": false,
+      "runner_mode": "diagnostic_local_portfolio_composer"
+    },
+    "gate_status": {
+      "component_concentration_gate": {
+        "status": "PASS",
+        "value": 0.36291214
+      },
+      "component_count_gate": {
+        "status": "PASS",
+        "value": 4
+      },
+      "correlation_gate": {
+        "status": "PASS",
+        "value": 0.09213137
+      },
+      "cost_stress_gate": {
+        "status": "PASS",
+        "value": {
+          "extra_cost_drag_per_period": 0.01,
+          "stressed_net_return": 371.6295325
+        }
+      },
+      "data_contract_gate": {
+        "status": "WARN",
+        "value": [
+          "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+          "FACTORY_GENERATED_NOT_PREREGISTERED",
+          "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+          "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+        ]
+      },
+      "drawdown_gate": {
+        "status": "WARN",
+        "value": -13.19355375
+      },
+      "ex_best_component_gate": {
+        "status": "PASS",
+        "value": {
+          "best_component": "28fb7b03aa56a91e",
+          "ex_best_net_return": 327.17394733
+        }
+      },
+      "factory_generated_scope_gate": {
+        "status": "BLOCK",
+        "value": {
+          "factory_generated_component_count": 3,
+          "factory_generated_component_ids": [
+            "28fb7b03aa56a91e",
+            "9474fe601e0f2bd2",
+            "a42078cbf0a2ea94"
+          ]
+        }
+      },
+      "strategy_family_concentration_gate": {
+        "status": "WARN",
+        "value": 0.75
+      }
+    },
+    "passes_repair_constraints": true,
+    "policy": "equal_weight",
+    "policy_label": "primary_equal_weight",
+    "repair_constraint_panel": {
+      "correlation_not_warn": true,
+      "cost_stress_not_blocked": true,
+      "ex_best_not_blocked": true,
+      "top_component_contribution_lte_40": true,
+      "total_net_positive": true,
+      "validation_net_positive": true
+    },
+    "repair_type": "base_plus_extra_repair",
+    "robust_repair_score": 312.85778285,
+    "summary": {
+      "component_count": 4,
+      "high_correlation_pair_count": 0,
+      "max_drawdown": -13.19355375,
+      "max_drawdown_pct": -1319.3554,
+      "period_count": 1353,
+      "policy": "equal_weight",
+      "portfolio_signature": "13c756e0eab4ab5a",
+      "time_underwater_ratio": 0.45380636,
+      "top_component_contribution": 0.36291214,
+      "total_net_return": 385.1595325
+    },
+    "train_net_return": 170.175128,
+    "validation_net_return": 214.9844045
+  },
+  "best_global_comparison": {
+    "blockers": [
+      "factory_generated_scope_gate"
+    ],
+    "component_ids": [
+      "28fb7b03aa56a91e",
+      "a42078cbf0a2ea94",
+      "9474fe601e0f2bd2"
+    ],
+    "component_labels": [
+      "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+      "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+      "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)"
+    ],
+    "final_decision": {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+      "live_trading_allowed": false,
+      "market_data_download_performed": false,
+      "net_return_sum": 475.33201491,
+      "paper_trading_allowed": false,
+      "portfolio_backtest_performed": false,
+      "promotion_allowed": false,
+      "provider_query_performed": false,
+      "runner_mode": "diagnostic_local_portfolio_composer"
+    },
+    "gate_status": {
+      "component_concentration_gate": {
+        "status": "PASS",
+        "value": 0.39208824
+      },
+      "component_count_gate": {
+        "status": "PASS",
+        "value": 3
+      },
+      "correlation_gate": {
+        "status": "PASS",
+        "value": 0.10519082
+      },
+      "cost_stress_gate": {
+        "status": "PASS",
+        "value": {
+          "extra_cost_drag_per_period": 0.005,
+          "stressed_net_return": 469.43201497
+        }
+      },
+      "data_contract_gate": {
+        "status": "WARN",
+        "value": [
+          "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+          "FACTORY_GENERATED_NOT_PREREGISTERED",
+          "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+          "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+        ]
+      },
+      "drawdown_gate": {
+        "status": "WARN",
+        "value": -14.11430053
+      },
+      "ex_best_component_gate": {
+        "status": "PASS",
+        "value": {
+          "best_component": "28fb7b03aa56a91e",
+          "ex_best_net_return": 433.4398855
+        }
+      },
+      "factory_generated_scope_gate": {
+        "status": "BLOCK",
+        "value": {
+          "factory_generated_component_count": 3,
+          "factory_generated_component_ids": [
+            "28fb7b03aa56a91e",
+            "9474fe601e0f2bd2",
+            "a42078cbf0a2ea94"
+          ]
+        }
+      },
+      "strategy_family_concentration_gate": {
+        "status": "WARN",
+        "value": 0.66666666
+      }
+    },
+    "passes_repair_constraints": true,
+    "policy": "equal_weight",
+    "policy_label": "primary_equal_weight",
+    "repair_constraint_panel": {
+      "correlation_not_warn": true,
+      "cost_stress_not_blocked": true,
+      "ex_best_not_blocked": true,
+      "top_component_contribution_lte_40": true,
+      "total_net_positive": true,
+      "validation_net_positive": true
+    },
+    "repair_type": "bounded_global_comparison",
+    "robust_repair_score": 350.03092288,
+    "summary": {
+      "component_count": 3,
+      "high_correlation_pair_count": 0,
+      "max_drawdown": -14.11430053,
+      "max_drawdown_pct": -1411.4301,
+      "period_count": 1180,
+      "policy": "equal_weight",
+      "portfolio_signature": "37f83a6bf8dbf468",
+      "time_underwater_ratio": 0.43728814,
+      "top_component_contribution": 0.39208824,
+      "total_net_return": 475.33201491
+    },
+    "train_net_return": 257.81649309,
+    "validation_net_return": 217.51552181
+  },
+  "created_at_utc": "2026-06-01T23:05:33+00:00",
+  "eligible_template_policy": "price_based_or_locally_testable_only",
+  "excluded_templates": [
+    "13D Activist Follow-On",
+    "Catalyst",
+    "Form 4 Cluster Buying",
+    "PDUFA Run-Up",
+    "PEAD"
+  ],
+  "final_decision": {
+    "blockers": [
+      "factory_lineage_or_proxy_data_gate",
+      "same_sample_repair_search_gate"
+    ],
+    "decision": "PORTFOLIO_CONCENTRATION_REPAIR_CANDIDATE_DIAGNOSTIC_ONLY",
+    "live_trading_allowed": false,
+    "market_data_download_performed": false,
+    "paper_trading_allowed": false,
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false,
+    "provider_query_performed": false,
+    "runner_mode": "bounded_concentration_repair_diagnostic"
+  },
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "paper_trading_allowed": false,
+  "passing_conservative_count": 8,
+  "passing_global_count": 11,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "run_id": "PORTFOLIO-CONCENTRATION-REPAIR-001",
+  "search_controls": {
+    "conservative_evaluations": 14,
+    "conservative_search": "base three components must remain; add one to three eligible components",
+    "global_comparison": "bounded comparison only; not promotion evidence",
+    "global_evaluations": 42,
+    "global_pool_size": 6,
+    "max_extra_pool_size": 3,
+    "primary_policy": "equal_weight with max_component_weight 0.40",
+    "weight_optimization_allowed": false
+  },
+  "source_trial_id": "PORTFOLIO-TRIAL-BE157D0F875DB00D",
+  "status": "PORTFOLIO_CONCENTRATION_REPAIR_COMPLETE",
+  "top_conservative_candidates": [
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "a42078cbf0a2ea94",
+        "28fb7b03aa56a91e",
+        "9474fe601e0f2bd2",
+        "acc065823d9dcfb7"
+      ],
+      "component_labels": [
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+        "My falsifiable strategy (Momentum, acc065)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 385.1595325,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.36291214
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 4
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.09213137
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.01,
+            "stressed_net_return": 371.6295325
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -13.19355375
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "28fb7b03aa56a91e",
+            "ex_best_net_return": 327.17394733
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "WARN",
+          "value": 0.75
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "equal_weight",
+      "policy_label": "primary_equal_weight",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "base_plus_extra_repair",
+      "robust_repair_score": 312.85778285,
+      "summary": {
+        "component_count": 4,
+        "high_correlation_pair_count": 0,
+        "max_drawdown": -13.19355375,
+        "max_drawdown_pct": -1319.3554,
+        "period_count": 1353,
+        "policy": "equal_weight",
+        "portfolio_signature": "13c756e0eab4ab5a",
+        "time_underwater_ratio": 0.45380636,
+        "top_component_contribution": 0.36291214,
+        "total_net_return": 385.1595325
+      },
+      "train_net_return": 170.175128,
+      "validation_net_return": 214.9844045
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "a42078cbf0a2ea94",
+        "28fb7b03aa56a91e",
+        "9474fe601e0f2bd2",
+        "a0cc249592a067f4"
+      ],
+      "component_labels": [
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+        "My falsifiable strategy (Mean Reversion, a0cc24)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 378.9756165,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.36883395
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 4
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.06262635
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.01,
+            "stressed_net_return": 366.0156165
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -16.13443525
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "28fb7b03aa56a91e",
+            "ex_best_net_return": 318.928726
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "PASS",
+          "value": 0.5
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "equal_weight",
+      "policy_label": "primary_equal_weight",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "base_plus_extra_repair",
+      "robust_repair_score": 304.92421635,
+      "summary": {
+        "component_count": 4,
+        "high_correlation_pair_count": 0,
+        "max_drawdown": -16.13443525,
+        "max_drawdown_pct": -1613.4435,
+        "period_count": 1296,
+        "policy": "equal_weight",
+        "portfolio_signature": "ad253850af5973bc",
+        "time_underwater_ratio": 0.42669753,
+        "top_component_contribution": 0.36883395,
+        "total_net_return": 378.9756165
+      },
+      "train_net_return": 167.14011025,
+      "validation_net_return": 211.83550625
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "a42078cbf0a2ea94",
+        "28fb7b03aa56a91e",
+        "9474fe601e0f2bd2",
+        "8b09c4b58c06f591"
+      ],
+      "component_labels": [
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+        "My falsifiable strategy (Mean Reversion, 8b09c4)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 415.506402,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.33640654
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 4
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.23585149
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.005,
+            "stressed_net_return": 409.606402
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -9.9828505
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "28fb7b03aa56a91e",
+            "ex_best_net_return": 367.63644
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "PASS",
+          "value": 0.5
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "equal_weight",
+      "policy_label": "primary_equal_weight",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "base_plus_extra_repair",
+      "robust_repair_score": 299.4482167,
+      "summary": {
+        "component_count": 4,
+        "high_correlation_pair_count": 1,
+        "max_drawdown": -9.9828505,
+        "max_drawdown_pct": -998.2851,
+        "period_count": 1180,
+        "policy": "equal_weight",
+        "portfolio_signature": "e48e8e2ee5fe2138",
+        "time_underwater_ratio": 0.45254237,
+        "top_component_contribution": 0.33640654,
+        "total_net_return": 415.506402
+      },
+      "train_net_return": 236.470769,
+      "validation_net_return": 179.035633
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "a42078cbf0a2ea94",
+        "28fb7b03aa56a91e",
+        "9474fe601e0f2bd2",
+        "8b09c4b58c06f591",
+        "acc065823d9dcfb7"
+      ],
+      "component_labels": [
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+        "My falsifiable strategy (Mean Reversion, 8b09c4)",
+        "My falsifiable strategy (Momentum, acc065)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 355.3335358,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.31469942
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 5
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.17508594
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.009,
+            "stressed_net_return": 343.1565358
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -10.072543
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "28fb7b03aa56a91e",
+            "ex_best_net_return": 304.38784775
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "WARN",
+          "value": 0.6
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "equal_weight",
+      "policy_label": "primary_equal_weight",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "base_plus_extra_repair",
+      "robust_repair_score": 288.53306332,
+      "summary": {
+        "component_count": 5,
+        "high_correlation_pair_count": 1,
+        "max_drawdown": -10.072543,
+        "max_drawdown_pct": -1007.2543,
+        "period_count": 1353,
+        "policy": "equal_weight",
+        "portfolio_signature": "7512cc827db297ce",
+        "time_underwater_ratio": 0.47228381,
+        "top_component_contribution": 0.31469942,
+        "total_net_return": 355.3335358
+      },
+      "train_net_return": 159.7432958,
+      "validation_net_return": 195.59024
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "a42078cbf0a2ea94",
+        "28fb7b03aa56a91e",
+        "9474fe601e0f2bd2",
+        "8b09c4b58c06f591",
+        "a0cc249592a067f4"
+      ],
+      "component_labels": [
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+        "My falsifiable strategy (Mean Reversion, 8b09c4)",
+        "My falsifiable strategy (Mean Reversion, a0cc24)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 350.386403,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.31914269
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 5
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.1512996
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.009,
+            "stressed_net_return": 338.722403
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -12.4252482
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "28fb7b03aa56a91e",
+            "ex_best_net_return": 298.20393175
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "WARN",
+          "value": 0.6
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "equal_weight",
+      "policy_label": "primary_equal_weight",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "base_plus_extra_repair",
+      "robust_repair_score": 282.18621012,
+      "summary": {
+        "component_count": 5,
+        "high_correlation_pair_count": 1,
+        "max_drawdown": -12.4252482,
+        "max_drawdown_pct": -1242.5248,
+        "period_count": 1296,
+        "policy": "equal_weight",
+        "portfolio_signature": "85f8fb2fda53003d",
+        "time_underwater_ratio": 0.45061728,
+        "top_component_contribution": 0.31914269,
+        "total_net_return": 350.386403
+      },
+      "train_net_return": 157.3152816,
+      "validation_net_return": 193.0711214
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "a42078cbf0a2ea94",
+        "28fb7b03aa56a91e",
+        "9474fe601e0f2bd2",
+        "acc065823d9dcfb7",
+        "a0cc249592a067f4"
+      ],
+      "component_labels": [
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+        "My falsifiable strategy (Momentum, acc065)",
+        "My falsifiable strategy (Mean Reversion, a0cc24)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 326.1089074,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.34290157
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 5
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.06641023
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.013,
+            "stressed_net_return": 307.1809074
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -15.0238088
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "28fb7b03aa56a91e",
+            "ex_best_net_return": 267.85706225
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "WARN",
+          "value": 0.6
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "equal_weight",
+      "policy_label": "primary_equal_weight",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "base_plus_extra_repair",
+      "robust_repair_score": 278.03222968,
+      "summary": {
+        "component_count": 5,
+        "high_correlation_pair_count": 0,
+        "max_drawdown": -15.0238088,
+        "max_drawdown_pct": -1502.3809,
+        "period_count": 1456,
+        "policy": "equal_weight",
+        "portfolio_signature": "b831abe739c7bfc2",
+        "time_underwater_ratio": 0.44574176,
+        "top_component_contribution": 0.34290157,
+        "total_net_return": 326.1089074
+      },
+      "train_net_return": 122.843313,
+      "validation_net_return": 203.2655944
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "a42078cbf0a2ea94",
+        "28fb7b03aa56a91e",
+        "9474fe601e0f2bd2",
+        "8b09c4b58c06f591",
+        "acc065823d9dcfb7",
+        "a0cc249592a067f4"
+      ],
+      "component_labels": [
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+        "My falsifiable strategy (Mean Reversion, 8b09c4)",
+        "My falsifiable strategy (Momentum, acc065)",
+        "My falsifiable strategy (Mean Reversion, a0cc24)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 311.09568722,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.29954144
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 6
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.1264488
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.01166667,
+            "stressed_net_return": 294.10902022
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -12.11792424
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "28fb7b03aa56a91e",
+            "ex_best_net_return": 261.4915596
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "PASS",
+          "value": 0.50000001
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "equal_weight",
+      "policy_label": "primary_equal_weight",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "base_plus_extra_repair",
+      "robust_repair_score": 270.21626608,
+      "summary": {
+        "component_count": 6,
+        "high_correlation_pair_count": 1,
+        "max_drawdown": -12.11792424,
+        "max_drawdown_pct": -1211.7924,
+        "period_count": 1456,
+        "policy": "equal_weight",
+        "portfolio_signature": "306579c42af31dce",
+        "time_underwater_ratio": 0.4635989,
+        "top_component_contribution": 0.29954144,
+        "total_net_return": 311.09568722
+      },
+      "train_net_return": 113.72579292,
+      "validation_net_return": 197.36989429
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "a42078cbf0a2ea94",
+        "28fb7b03aa56a91e",
+        "9474fe601e0f2bd2",
+        "8b09c4b58c06f591",
+        "a0cc249592a067f4"
+      ],
+      "component_labels": [
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+        "My falsifiable strategy (Mean Reversion, 8b09c4)",
+        "My falsifiable strategy (Mean Reversion, a0cc24)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 320.74169688,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.38041952
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 5
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.1512996
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.01,
+            "stressed_net_return": 307.78169688
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -11.3568645
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "a42078cbf0a2ea94",
+            "ex_best_net_return": 264.96706117
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "WARN",
+          "value": 0.75
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "sleeve_allocation",
+      "policy_label": "secondary_sleeve_cap_40",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "base_plus_extra_repair",
+      "robust_repair_score": 252.72112884,
+      "summary": {
+        "component_count": 5,
+        "high_correlation_pair_count": 1,
+        "max_drawdown": -11.3568645,
+        "max_drawdown_pct": -1135.6865,
+        "period_count": 1296,
+        "policy": "sleeve_allocation",
+        "portfolio_signature": "4a394f5c85c3b124",
+        "time_underwater_ratio": 0.46296296,
+        "top_component_contribution": 0.38041952,
+        "total_net_return": 320.74169688
+      },
+      "train_net_return": 151.01505345,
+      "validation_net_return": 169.72664327
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate",
+        "component_concentration_gate"
+      ],
+      "component_ids": [
+        "a42078cbf0a2ea94",
+        "28fb7b03aa56a91e",
+        "9474fe601e0f2bd2",
+        "acc065823d9dcfb7"
+      ],
+      "component_labels": [
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+        "My falsifiable strategy (Momentum, acc065)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate",
+          "component_concentration_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 405.7407468,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "BLOCK",
+          "value": 0.48116006
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 4
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.09213137
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.009,
+            "stressed_net_return": 393.5637468
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -12.3334222
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "a42078cbf0a2ea94",
+            "ex_best_net_return": 350.85750867
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "WARN",
+          "value": 0.6
+        }
+      },
+      "passes_repair_constraints": false,
+      "policy": "sleeve_allocation",
+      "policy_label": "secondary_sleeve_cap_40",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": false,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "base_plus_extra_repair",
+      "robust_repair_score": 317.19457404,
+      "summary": {
+        "component_count": 4,
+        "high_correlation_pair_count": 0,
+        "max_drawdown": -12.3334222,
+        "max_drawdown_pct": -1233.3422,
+        "period_count": 1353,
+        "policy": "sleeve_allocation",
+        "portfolio_signature": "566cf2f8693a320b",
+        "time_underwater_ratio": 0.46415373,
+        "top_component_contribution": 0.48116006,
+        "total_net_return": 405.7407468
+      },
+      "train_net_return": 186.5561174,
+      "validation_net_return": 219.1846294
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate",
+        "component_concentration_gate"
+      ],
+      "component_ids": [
+        "a42078cbf0a2ea94",
+        "28fb7b03aa56a91e",
+        "9474fe601e0f2bd2",
+        "8b09c4b58c06f591",
+        "acc065823d9dcfb7"
+      ],
+      "component_labels": [
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+        "My falsifiable strategy (Mean Reversion, 8b09c4)",
+        "My falsifiable strategy (Momentum, acc065)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate",
+          "component_concentration_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 359.25005603,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "BLOCK",
+          "value": 0.50946297
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 5
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.17508594
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.00666667,
+            "stressed_net_return": 350.23005619
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -14.49074524
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "a42078cbf0a2ea94",
+            "ex_best_net_return": 281.96073176
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "WARN",
+          "value": 0.75
+        }
+      },
+      "passes_repair_constraints": false,
+      "policy": "sleeve_allocation",
+      "policy_label": "secondary_sleeve_cap_40",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": false,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "base_plus_extra_repair",
+      "robust_repair_score": 266.05951773,
+      "summary": {
+        "component_count": 5,
+        "high_correlation_pair_count": 1,
+        "max_drawdown": -14.49074524,
+        "max_drawdown_pct": -1449.0745,
+        "period_count": 1353,
+        "policy": "sleeve_allocation",
+        "portfolio_signature": "fdf1ca6e3be7d415",
+        "time_underwater_ratio": 0.48928307,
+        "top_component_contribution": 0.50946297,
+        "total_net_return": 359.25005603
+      },
+      "train_net_return": 174.50438406,
+      "validation_net_return": 184.74567195
+    }
+  ],
+  "top_global_candidates": [
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "28fb7b03aa56a91e",
+        "a42078cbf0a2ea94",
+        "9474fe601e0f2bd2"
+      ],
+      "component_labels": [
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 475.33201491,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.39208824
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 3
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.10519082
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.005,
+            "stressed_net_return": 469.43201497
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -14.11430053
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "28fb7b03aa56a91e",
+            "ex_best_net_return": 433.4398855
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "WARN",
+          "value": 0.66666666
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "equal_weight",
+      "policy_label": "primary_equal_weight",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "bounded_global_comparison",
+      "robust_repair_score": 350.03092288,
+      "summary": {
+        "component_count": 3,
+        "high_correlation_pair_count": 0,
+        "max_drawdown": -14.11430053,
+        "max_drawdown_pct": -1411.4301,
+        "period_count": 1180,
+        "policy": "equal_weight",
+        "portfolio_signature": "37f83a6bf8dbf468",
+        "time_underwater_ratio": 0.43728814,
+        "top_component_contribution": 0.39208824,
+        "total_net_return": 475.33201491
+      },
+      "train_net_return": 257.81649309,
+      "validation_net_return": 217.51552181
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "28fb7b03aa56a91e",
+        "a42078cbf0a2ea94",
+        "9474fe601e0f2bd2",
+        "acc065823d9dcfb7"
+      ],
+      "component_labels": [
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+        "My falsifiable strategy (Momentum, acc065)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 385.1595325,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.36291214
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 4
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.09213137
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.01,
+            "stressed_net_return": 371.6295325
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -13.19355375
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "28fb7b03aa56a91e",
+            "ex_best_net_return": 327.17394733
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "WARN",
+          "value": 0.75
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "equal_weight",
+      "policy_label": "primary_equal_weight",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "bounded_global_comparison",
+      "robust_repair_score": 312.85778285,
+      "summary": {
+        "component_count": 4,
+        "high_correlation_pair_count": 0,
+        "max_drawdown": -13.19355375,
+        "max_drawdown_pct": -1319.3554,
+        "period_count": 1353,
+        "policy": "equal_weight",
+        "portfolio_signature": "399278a37e6b95c2",
+        "time_underwater_ratio": 0.45380636,
+        "top_component_contribution": 0.36291214,
+        "total_net_return": 385.1595325
+      },
+      "train_net_return": 170.175128,
+      "validation_net_return": 214.9844045
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "28fb7b03aa56a91e",
+        "a42078cbf0a2ea94",
+        "9474fe601e0f2bd2",
+        "a0cc249592a067f4"
+      ],
+      "component_labels": [
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+        "My falsifiable strategy (Mean Reversion, a0cc24)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 378.9756165,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.36883395
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 4
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.06262635
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.01,
+            "stressed_net_return": 366.0156165
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -16.13443525
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "28fb7b03aa56a91e",
+            "ex_best_net_return": 318.928726
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "PASS",
+          "value": 0.5
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "equal_weight",
+      "policy_label": "primary_equal_weight",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "bounded_global_comparison",
+      "robust_repair_score": 304.92421635,
+      "summary": {
+        "component_count": 4,
+        "high_correlation_pair_count": 0,
+        "max_drawdown": -16.13443525,
+        "max_drawdown_pct": -1613.4435,
+        "period_count": 1296,
+        "policy": "equal_weight",
+        "portfolio_signature": "2b7dd36e013704cd",
+        "time_underwater_ratio": 0.42669753,
+        "top_component_contribution": 0.36883395,
+        "total_net_return": 378.9756165
+      },
+      "train_net_return": 167.14011025,
+      "validation_net_return": 211.83550625
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "28fb7b03aa56a91e",
+        "a42078cbf0a2ea94",
+        "9474fe601e0f2bd2",
+        "8b09c4b58c06f591"
+      ],
+      "component_labels": [
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+        "My falsifiable strategy (Mean Reversion, 8b09c4)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 415.506402,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.33640654
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 4
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.23585149
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.005,
+            "stressed_net_return": 409.606402
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -9.9828505
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "28fb7b03aa56a91e",
+            "ex_best_net_return": 367.63644
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "PASS",
+          "value": 0.5
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "equal_weight",
+      "policy_label": "primary_equal_weight",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "bounded_global_comparison",
+      "robust_repair_score": 299.4482167,
+      "summary": {
+        "component_count": 4,
+        "high_correlation_pair_count": 1,
+        "max_drawdown": -9.9828505,
+        "max_drawdown_pct": -998.2851,
+        "period_count": 1180,
+        "policy": "equal_weight",
+        "portfolio_signature": "18186539380477e5",
+        "time_underwater_ratio": 0.45254237,
+        "top_component_contribution": 0.33640654,
+        "total_net_return": 415.506402
+      },
+      "train_net_return": 236.470769,
+      "validation_net_return": 179.035633
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "28fb7b03aa56a91e",
+        "a42078cbf0a2ea94",
+        "9474fe601e0f2bd2",
+        "8b09c4b58c06f591",
+        "acc065823d9dcfb7"
+      ],
+      "component_labels": [
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+        "My falsifiable strategy (Mean Reversion, 8b09c4)",
+        "My falsifiable strategy (Momentum, acc065)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 355.3335358,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.31469942
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 5
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.17508594
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.009,
+            "stressed_net_return": 343.1565358
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -10.072543
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "28fb7b03aa56a91e",
+            "ex_best_net_return": 304.38784775
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "WARN",
+          "value": 0.6
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "equal_weight",
+      "policy_label": "primary_equal_weight",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "bounded_global_comparison",
+      "robust_repair_score": 288.53306332,
+      "summary": {
+        "component_count": 5,
+        "high_correlation_pair_count": 1,
+        "max_drawdown": -10.072543,
+        "max_drawdown_pct": -1007.2543,
+        "period_count": 1353,
+        "policy": "equal_weight",
+        "portfolio_signature": "eefd51f757f9d56f",
+        "time_underwater_ratio": 0.47228381,
+        "top_component_contribution": 0.31469942,
+        "total_net_return": 355.3335358
+      },
+      "train_net_return": 159.7432958,
+      "validation_net_return": 195.59024
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "28fb7b03aa56a91e",
+        "a42078cbf0a2ea94",
+        "9474fe601e0f2bd2",
+        "8b09c4b58c06f591",
+        "a0cc249592a067f4"
+      ],
+      "component_labels": [
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+        "My falsifiable strategy (Mean Reversion, 8b09c4)",
+        "My falsifiable strategy (Mean Reversion, a0cc24)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 350.386403,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.31914269
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 5
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.1512996
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.009,
+            "stressed_net_return": 338.722403
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -12.4252482
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "28fb7b03aa56a91e",
+            "ex_best_net_return": 298.20393175
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "WARN",
+          "value": 0.6
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "equal_weight",
+      "policy_label": "primary_equal_weight",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "bounded_global_comparison",
+      "robust_repair_score": 282.18621012,
+      "summary": {
+        "component_count": 5,
+        "high_correlation_pair_count": 1,
+        "max_drawdown": -12.4252482,
+        "max_drawdown_pct": -1242.5248,
+        "period_count": 1296,
+        "policy": "equal_weight",
+        "portfolio_signature": "46243bd184e7ce98",
+        "time_underwater_ratio": 0.45061728,
+        "top_component_contribution": 0.31914269,
+        "total_net_return": 350.386403
+      },
+      "train_net_return": 157.3152816,
+      "validation_net_return": 193.0711214
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "28fb7b03aa56a91e",
+        "a42078cbf0a2ea94",
+        "9474fe601e0f2bd2",
+        "acc065823d9dcfb7",
+        "a0cc249592a067f4"
+      ],
+      "component_labels": [
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+        "My falsifiable strategy (Momentum, acc065)",
+        "My falsifiable strategy (Mean Reversion, a0cc24)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 326.1089074,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.34290157
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 5
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.06641023
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.013,
+            "stressed_net_return": 307.1809074
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -15.0238088
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "28fb7b03aa56a91e",
+            "ex_best_net_return": 267.85706225
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "WARN",
+          "value": 0.6
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "equal_weight",
+      "policy_label": "primary_equal_weight",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "bounded_global_comparison",
+      "robust_repair_score": 278.03222968,
+      "summary": {
+        "component_count": 5,
+        "high_correlation_pair_count": 0,
+        "max_drawdown": -15.0238088,
+        "max_drawdown_pct": -1502.3809,
+        "period_count": 1456,
+        "policy": "equal_weight",
+        "portfolio_signature": "8c03e523b25cf0d1",
+        "time_underwater_ratio": 0.44574176,
+        "top_component_contribution": 0.34290157,
+        "total_net_return": 326.1089074
+      },
+      "train_net_return": 122.843313,
+      "validation_net_return": 203.2655944
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "28fb7b03aa56a91e",
+        "a42078cbf0a2ea94",
+        "9474fe601e0f2bd2",
+        "8b09c4b58c06f591",
+        "acc065823d9dcfb7",
+        "a0cc249592a067f4"
+      ],
+      "component_labels": [
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "Factory Dollar-Bar Microstructure 180d 100bps (Dollar-Bar Microstructure, 9474fe)",
+        "My falsifiable strategy (Mean Reversion, 8b09c4)",
+        "My falsifiable strategy (Momentum, acc065)",
+        "My falsifiable strategy (Mean Reversion, a0cc24)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 311.09568722,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.29954144
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 6
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.1264488
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.01166667,
+            "stressed_net_return": 294.10902022
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -12.11792424
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "28fb7b03aa56a91e",
+            "ex_best_net_return": 261.4915596
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 3,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "9474fe601e0f2bd2",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "PASS",
+          "value": 0.50000001
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "equal_weight",
+      "policy_label": "primary_equal_weight",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "bounded_global_comparison",
+      "robust_repair_score": 270.21626608,
+      "summary": {
+        "component_count": 6,
+        "high_correlation_pair_count": 1,
+        "max_drawdown": -12.11792424,
+        "max_drawdown_pct": -1211.7924,
+        "period_count": 1456,
+        "policy": "equal_weight",
+        "portfolio_signature": "6fdbe0ca265b2ba2",
+        "time_underwater_ratio": 0.4635989,
+        "top_component_contribution": 0.29954144,
+        "total_net_return": 311.09568722
+      },
+      "train_net_return": 113.72579292,
+      "validation_net_return": 197.36989429
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "28fb7b03aa56a91e",
+        "a42078cbf0a2ea94",
+        "8b09c4b58c06f591",
+        "acc065823d9dcfb7"
+      ],
+      "component_labels": [
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "My falsifiable strategy (Mean Reversion, 8b09c4)",
+        "My falsifiable strategy (Momentum, acc065)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 349.463378,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.39998203
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 4
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.17466155
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.01,
+            "stressed_net_return": 337.443378
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -9.2713015
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "28fb7b03aa56a91e",
+            "ex_best_net_return": 279.57907467
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 2,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "PASS",
+          "value": 0.5
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "equal_weight",
+      "policy_label": "primary_equal_weight",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "bounded_global_comparison",
+      "robust_repair_score": 269.7489751,
+      "summary": {
+        "component_count": 4,
+        "high_correlation_pair_count": 1,
+        "max_drawdown": -9.2713015,
+        "max_drawdown_pct": -927.1301,
+        "period_count": 1202,
+        "policy": "equal_weight",
+        "portfolio_signature": "0fad08865a423018",
+        "time_underwater_ratio": 0.4750416,
+        "top_component_contribution": 0.39998203,
+        "total_net_return": 349.463378
+      },
+      "train_net_return": 175.41972125,
+      "validation_net_return": 174.04365675
+    },
+    {
+      "blockers": [
+        "factory_generated_scope_gate"
+      ],
+      "component_ids": [
+        "28fb7b03aa56a91e",
+        "a42078cbf0a2ea94",
+        "8b09c4b58c06f591",
+        "acc065823d9dcfb7",
+        "a0cc249592a067f4"
+      ],
+      "component_labels": [
+        "Factory Momentum 180d 100bps (Momentum, 28fb7b)",
+        "Factory Mean Reversion 180d 100bps (Mean Reversion, a42078)",
+        "My falsifiable strategy (Mean Reversion, 8b09c4)",
+        "My falsifiable strategy (Momentum, acc065)",
+        "My falsifiable strategy (Mean Reversion, a0cc24)"
+      ],
+      "final_decision": {
+        "blockers": [
+          "factory_generated_scope_gate"
+        ],
+        "decision": "PORTFOLIO_FACTORY_DIAGNOSTIC_ONLY",
+        "live_trading_allowed": false,
+        "market_data_download_performed": false,
+        "net_return_sum": 297.5519838,
+        "paper_trading_allowed": false,
+        "portfolio_backtest_performed": false,
+        "promotion_allowed": false,
+        "provider_query_performed": false,
+        "runner_mode": "diagnostic_local_portfolio_composer"
+      },
+      "gate_status": {
+        "component_concentration_gate": {
+          "status": "PASS",
+          "value": 0.37581083
+        },
+        "component_count_gate": {
+          "status": "PASS",
+          "value": 5
+        },
+        "correlation_gate": {
+          "status": "PASS",
+          "value": 0.11596332
+        },
+        "cost_stress_gate": {
+          "status": "PASS",
+          "value": {
+            "extra_cost_drag_per_period": 0.013,
+            "stressed_net_return": 280.3009838
+          }
+        },
+        "data_contract_gate": {
+          "status": "WARN",
+          "value": [
+            "DRAWNDOWN_TOO_SMOOTH_FOR_EVENT_BASKET",
+            "FACTORY_GENERATED_NOT_PREREGISTERED",
+            "FACTORY_SELECTED_AFTER_SEARCH_NOT_PROMOTABLE",
+            "PROXY_DATA_SCOPE_NOT_PROMOTABLE"
+          ]
+        },
+        "drawdown_gate": {
+          "status": "WARN",
+          "value": -11.4295744
+        },
+        "ex_best_component_gate": {
+          "status": "PASS",
+          "value": {
+            "best_component": "28fb7b03aa56a91e",
+            "ex_best_net_return": 232.16090775
+          }
+        },
+        "factory_generated_scope_gate": {
+          "status": "BLOCK",
+          "value": {
+            "factory_generated_component_count": 2,
+            "factory_generated_component_ids": [
+              "28fb7b03aa56a91e",
+              "a42078cbf0a2ea94"
+            ]
+          }
+        },
+        "strategy_family_concentration_gate": {
+          "status": "WARN",
+          "value": 0.6
+        }
+      },
+      "passes_repair_constraints": true,
+      "policy": "equal_weight",
+      "policy_label": "primary_equal_weight",
+      "repair_constraint_panel": {
+        "correlation_not_warn": true,
+        "cost_stress_not_blocked": true,
+        "ex_best_not_blocked": true,
+        "top_component_contribution_lte_40": true,
+        "total_net_positive": true,
+        "validation_net_positive": true
+      },
+      "repair_type": "bounded_global_comparison",
+      "robust_repair_score": 239.88440424,
+      "summary": {
+        "component_count": 5,
+        "high_correlation_pair_count": 1,
+        "max_drawdown": -11.4295744,
+        "max_drawdown_pct": -1142.9574,
+        "period_count": 1327,
+        "policy": "equal_weight",
+        "portfolio_signature": "768d73bccb5fdcf7",
+        "time_underwater_ratio": 0.46043708,
+        "top_component_contribution": 0.37581083,
+        "total_net_return": 297.5519838
+      },
+      "train_net_return": 132.1855024,
+      "validation_net_return": 165.3664814
+    }
+  ]
+}

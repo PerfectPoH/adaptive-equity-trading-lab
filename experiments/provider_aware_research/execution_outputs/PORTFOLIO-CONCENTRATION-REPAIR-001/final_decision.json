@@ -1,0 +1,14 @@
+{
+  "blockers": [
+    "factory_lineage_or_proxy_data_gate",
+    "same_sample_repair_search_gate"
+  ],
+  "decision": "PORTFOLIO_CONCENTRATION_REPAIR_CANDIDATE_DIAGNOSTIC_ONLY",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "runner_mode": "bounded_concentration_repair_diagnostic"
+}
