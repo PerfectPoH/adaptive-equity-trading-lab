@@ -1,0 +1,46 @@
+{
+  "allowed_install_commands": [
+    "python -m pip install torch --index-url https://download.pytorch.org/whl/cpu",
+    "python -m pip install transformers huggingface_hub"
+  ],
+  "allowed_packages": [
+    "torch",
+    "transformers",
+    "huggingface_hub"
+  ],
+  "created_at_utc": "2026-06-02T15:48:21.164920+00:00",
+  "dependency_install_allowed": true,
+  "final_decision": {
+    "decision": "CANDIDATE_006_KRONOS_DEPENDENCY_INSTALL_GATE_APPROVED_NO_MODEL_DOWNLOAD",
+    "dependency_install_performed": false,
+    "inference_performed": false,
+    "model_download_performed": false,
+    "next_allowed_action": "install_candidate_006_kronos_dependencies_once",
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false
+  },
+  "financial_performance_claim_allowed": false,
+  "fine_tuning_allowed": false,
+  "forbidden_actions": [
+    "git clone Kronos repository",
+    "download Hugging Face Kronos model weights or tokenizers",
+    "run Kronos inference",
+    "fine-tune Kronos",
+    "run a portfolio backtest",
+    "generate trading signals",
+    "promotion, paper trading, or live trading"
+  ],
+  "gate_id": "CANDIDATE-006-KRONOS-DEPENDENCY-INSTALL-GATE-001",
+  "inference_allowed": false,
+  "linked_dependency_plan": "experiments/provider_aware_research/execution_outputs/CANDIDATE-006-KRONOS-COMPATIBILITY-AUDIT-001/dependency_plan.json",
+  "live_trading_allowed": false,
+  "model_download_allowed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "portfolio_backtest_allowed": false,
+  "promotion_allowed": false,
+  "purpose": "Authorize installing minimal local ML dependencies needed for a future Kronos inference smoke test, without downloading Kronos code or model weights.",
+  "repo_clone_allowed": false,
+  "status": "APPROVED_DEPENDENCY_INSTALL_ONLY_NO_MODEL_DOWNLOAD",
+  "target_environment": ".venv-lab"
+}

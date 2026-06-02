@@ -1,0 +1,9 @@
+{
+  "decision": "CANDIDATE_006_KRONOS_DEPENDENCY_INSTALL_GATE_APPROVED_NO_MODEL_DOWNLOAD",
+  "dependency_install_performed": false,
+  "inference_performed": false,
+  "model_download_performed": false,
+  "next_allowed_action": "install_candidate_006_kronos_dependencies_once",
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false
+}
