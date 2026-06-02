@@ -1,0 +1,84 @@
+{
+  "allowed_provider_queries": [
+    "norgatedata.database_symbols for US Equities and US Equities Delisted",
+    "norgatedata.first_quoted_date and norgatedata.last_quoted_date for trial-selected symbols",
+    "norgatedata.price_timeseries daily adjusted OHLCV for trial-selected symbols and benchmarks"
+  ],
+  "benchmark_contract": {
+    "benchmarks": [
+      "SPY",
+      "IWM"
+    ],
+    "purpose": "Relative diagnostic only; not a promotion gate."
+  },
+  "candidate_label": "PORTFOLIO-CANDIDATE-003-MANUAL-COMPOSITE",
+  "component_contract": [
+    {
+      "component_id": "9474fe601e0f2bd2",
+      "daily_micro_backtest_status": "disabled_idle",
+      "disable_reason": "Norgate trial access is daily OHLCV; dollar-bar/tick reconstruction is unavailable.",
+      "role": "sampling/noise-control sleeve",
+      "strategy_name": "Factory Dollar-Bar Microstructure 180d 100bps",
+      "template": "Dollar-Bar Microstructure",
+      "weight": 0.25
+    },
+    {
+      "component_id": "28fb7b03aa56a91e",
+      "daily_micro_backtest_status": "active",
+      "role": "continuation sleeve and breadth diversifier",
+      "strategy_name": "Factory Momentum 180d 100bps",
+      "template": "Momentum",
+      "weight": 0.25
+    },
+    {
+      "component_id": "a42078cbf0a2ea94",
+      "daily_micro_backtest_status": "active",
+      "role": "core dislocation/recovery sleeve",
+      "strategy_name": "Factory Mean Reversion 180d 100bps",
+      "template": "Mean Reversion",
+      "weight": 0.25
+    },
+    {
+      "component_id": "acc065823d9dcfb7",
+      "daily_micro_backtest_status": "active",
+      "role": "continuation sleeve and breadth diversifier",
+      "strategy_name": "My falsifiable strategy",
+      "template": "Momentum",
+      "weight": 0.25
+    }
+  ],
+  "disabled_weight_policy": {
+    "disabled_weight_is_not_redistributed": true,
+    "idle_weight": 0.25,
+    "reason": "Redistributing the disabled dollar-bar sleeve after seeing data would alter the frozen candidate."
+  },
+  "execution_contract": {
+    "backtest_runs_allowed": 1,
+    "candidate_component_replacement_allowed": false,
+    "combination_search_allowed": false,
+    "cost_bps": 100,
+    "live_trading_allowed": false,
+    "paper_trading_allowed": false,
+    "parameter_sweep_allowed": false,
+    "promotion_allowed": false,
+    "short_selling_allowed": false,
+    "weight_optimization_allowed": false
+  },
+  "falsification_notes": [
+    "Archive if the active daily sleeves cannot generate a completed trial panel.",
+    "Archive if validation net is non-positive in the trial-limited window.",
+    "Archive if a single active sleeve dominates positive contribution above 40%.",
+    "Archive if ex-best-active-sleeve net is non-positive.",
+    "Keep the result non-promotable because the Norgate trial is expected to provide only two years of history."
+  ],
+  "market_scope": {
+    "active_database": "US Equities",
+    "delisted_database": "US Equities Delisted",
+    "selection_method": "deterministic common-like symbols from local Norgate active and delisted databases, filtered by listing metadata and adjusted daily price availability during the two-year trial window",
+    "symbol_count_target": {
+      "active": 30,
+      "delisted": 30
+    }
+  },
+  "trial_id": "NORGATE-CANDIDATE-003-MICRO-BACKTEST-001"
+}

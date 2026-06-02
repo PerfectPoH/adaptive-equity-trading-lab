@@ -1,0 +1,16 @@
+{
+  "blockers": [
+    "trial_history_window_limited",
+    "daily_only_dollar_bar_sleeve_disabled",
+    "promotion_locked"
+  ],
+  "decision": "NORGATE_CANDIDATE_003_MICRO_BACKTEST_GATE_APPROVED_TRIAL_LIMITED",
+  "financial_performance_claimed": false,
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "next_allowed_action": "run_candidate_003_micro_backtest_once",
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false
+}

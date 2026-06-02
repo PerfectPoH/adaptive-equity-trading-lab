@@ -1,0 +1,40 @@
+{
+  "backtest_allowed": true,
+  "created_at_utc": "2026-06-02T10:21:49.8424680Z",
+  "created_date": "2026-06-02",
+  "data_source": "Norgate Data trial",
+  "final_decision": {
+    "blockers": [
+      "trial_history_window_limited",
+      "daily_only_dollar_bar_sleeve_disabled",
+      "promotion_locked"
+    ],
+    "decision": "NORGATE_CANDIDATE_003_MICRO_BACKTEST_GATE_APPROVED_TRIAL_LIMITED",
+    "financial_performance_claimed": false,
+    "live_trading_allowed": false,
+    "market_data_download_performed": false,
+    "next_allowed_action": "run_candidate_003_micro_backtest_once",
+    "paper_trading_allowed": false,
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false,
+    "provider_query_performed": false
+  },
+  "gate_id": "NORGATE-CANDIDATE-003-MICRO-BACKTEST-GATE-001",
+  "linked_candidate": "PORTFOLIO-CANDIDATE-003-MANUAL-COMPOSITE",
+  "linked_data_gate": "experiments/provider_aware_research/execution_outputs/USER-STRATEGY-PORTFOLIO-EXTERNAL-DATA-GATES/d9721368030f5898/portfolio_external_data_backtest_gate.json",
+  "linked_manual_composite": "experiments/provider_aware_research/execution_outputs/PORTFOLIO-MANUAL-COMPOSITE-001/manual-d9721368030f5898/manual_composite_manifest.json",
+  "linked_schema_probe": "NORGATE-CANDIDATE-003-SCHEMA-PROBE-001",
+  "live_trading_allowed": false,
+  "market_data_download_allowed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "portfolio_backtest_allowed": true,
+  "promotion_allowed": false,
+  "provider_query_allowed": true,
+  "purpose": "Authorize exactly one trial-limited Candidate 003 micro-backtest on locally installed Norgate data after the schema probe confirmed active, delisted, listing-date, and adjusted daily price access.",
+  "raw_payload_retention_required": true,
+  "short_selling_allowed": false,
+  "status": "APPROVED_SINGLE_MICRO_BACKTEST_TRIAL_LIMITED_NOT_PROMOTION",
+  "trial_history_limit": "2_years_expected_from_trial_terms",
+  "trial_id": "NORGATE-CANDIDATE-003-MICRO-BACKTEST-001"
+}
