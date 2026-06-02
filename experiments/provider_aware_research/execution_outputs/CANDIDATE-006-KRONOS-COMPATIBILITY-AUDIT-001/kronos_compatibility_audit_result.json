@@ -1,15 +1,12 @@
 {
-  "blockers": [
-    "torch_missing_for_future_inference",
-    "transformers_missing_for_future_model_loading"
-  ],
-  "created_at_utc": "2026-06-02T15:45:07.816773+00:00",
+  "blockers": [],
+  "created_at_utc": "2026-06-02T15:54:05.700394+00:00",
   "decision": "CANDIDATE_006_KRONOS_COMPATIBILITY_AUDIT_COMPLETE_NO_MODEL_DOWNLOAD",
   "dependency_install_performed": false,
   "dependency_presence": {
     "huggingface_hub": {
-      "available": false,
-      "origin": null
+      "available": true,
+      "origin": "C:\\Users\\barak\\Documents\\Codici Scuola\\adaptive-equity-trading-lab\\.venv-lab\\Lib\\site-packages\\huggingface_hub\\__init__.py"
     },
     "numpy": {
       "available": true,
@@ -24,12 +21,12 @@
       "version": "3.12.13"
     },
     "torch": {
-      "available": false,
-      "origin": null
+      "available": true,
+      "origin": "C:\\Users\\barak\\Documents\\Codici Scuola\\adaptive-equity-trading-lab\\.venv-lab\\Lib\\site-packages\\torch\\__init__.py"
     },
     "transformers": {
-      "available": false,
-      "origin": null
+      "available": true,
+      "origin": "C:\\Users\\barak\\Documents\\Codici Scuola\\adaptive-equity-trading-lab\\.venv-lab\\Lib\\site-packages\\transformers\\__init__.py"
     }
   },
   "external_query_performed": true,

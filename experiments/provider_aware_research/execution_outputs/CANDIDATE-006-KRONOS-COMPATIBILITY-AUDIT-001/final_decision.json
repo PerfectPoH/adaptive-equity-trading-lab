@@ -1,8 +1,5 @@
 {
-  "blockers": [
-    "torch_missing_for_future_inference",
-    "transformers_missing_for_future_model_loading"
-  ],
+  "blockers": [],
   "decision": "CANDIDATE_006_KRONOS_COMPATIBILITY_AUDIT_COMPLETE_NO_MODEL_DOWNLOAD",
   "external_query_performed": true,
   "git_clone_performed": false,

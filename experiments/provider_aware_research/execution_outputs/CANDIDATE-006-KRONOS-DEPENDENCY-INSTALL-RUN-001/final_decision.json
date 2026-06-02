@@ -1,0 +1,13 @@
+{
+  "run_id": "CANDIDATE-006-KRONOS-DEPENDENCY-INSTALL-RUN-001",
+  "decision": "CANDIDATE_006_KRONOS_DEPENDENCY_INSTALL_COMPLETE_NO_MODEL_DOWNLOAD",
+  "promotion": false,
+  "dependency_install_performed": true,
+  "git_clone_performed": false,
+  "model_download_performed": false,
+  "kronos_inference_performed": false,
+  "fine_tuning_performed": false,
+  "backtest_performed": false,
+  "signal_generation_performed": false,
+  "next_allowed_action": "Separate Kronos inference smoke gate required."
+}

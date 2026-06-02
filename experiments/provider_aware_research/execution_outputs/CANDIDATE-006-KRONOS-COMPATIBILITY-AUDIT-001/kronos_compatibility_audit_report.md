@@ -12,9 +12,9 @@ Scope: compatibility audit only. No clone, model download, inference, fine-tunin
 ## Local Dependencies
 
 - python: available=`True` version/origin=`3.12.13`
-- torch: available=`False` version/origin=`None`
-- transformers: available=`False` version/origin=`None`
-- huggingface_hub: available=`False` version/origin=`None`
+- torch: available=`True` version/origin=`C:\Users\barak\Documents\Codici Scuola\adaptive-equity-trading-lab\.venv-lab\Lib\site-packages\torch\__init__.py`
+- transformers: available=`True` version/origin=`C:\Users\barak\Documents\Codici Scuola\adaptive-equity-trading-lab\.venv-lab\Lib\site-packages\transformers\__init__.py`
+- huggingface_hub: available=`True` version/origin=`C:\Users\barak\Documents\Codici Scuola\adaptive-equity-trading-lab\.venv-lab\Lib\site-packages\huggingface_hub\__init__.py`
 - pandas: available=`True` version/origin=`C:\Users\barak\Documents\Codici Scuola\adaptive-equity-trading-lab\.venv-lab\Lib\site-packages\pandas\__init__.py`
 - numpy: available=`True` version/origin=`C:\Users\barak\Documents\Codici Scuola\adaptive-equity-trading-lab\.venv-lab\Lib\site-packages\numpy\__init__.py`
 
@@ -25,8 +25,7 @@ Scope: compatibility audit only. No clone, model download, inference, fine-tunin
 
 ## Blockers
 
-- `torch_missing_for_future_inference`
-- `transformers_missing_for_future_model_loading`
+- None for compatibility. A separate smoke gate is still required before any inference.
 
 ## Next Allowed Action
 
