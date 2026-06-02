@@ -1,0 +1,50 @@
+{
+  "gate_id": "CANDIDATE-006-KRONOS-INFERENCE-SMOKE-GATE-001",
+  "created_at_utc": "2026-06-02T16:05:00Z",
+  "status": "APPROVED_KRONOS_INFERENCE_SMOKE_ONLY",
+  "purpose": "Authorize a single bounded Kronos-mini inference smoke test to verify that Kronos can produce a forecast-shaped feature artifact from local OHLCV data.",
+  "linked_candidate": "CANDIDATE-006-KRONOS-ADAPTER",
+  "linked_prior_gate": "candidate_006_kronos_dependency_install_gate_20260602",
+  "external_repo": "https://github.com/shiyu-coder/Kronos",
+  "allowed_actions": [
+    "shallow clone shiyu-coder/Kronos into .external/kronos only",
+    "download Kronos-mini and its tokenizer from Hugging Face only",
+    "run one CPU inference smoke test on one local OHLCV sample",
+    "write forecast schema, feature summary, and audit artifacts"
+  ],
+  "allowed_models": {
+    "tokenizer": "NeoQuasar/Kronos-Tokenizer-2k",
+    "model": "NeoQuasar/Kronos-mini"
+  },
+  "runtime_constraints": {
+    "device": "cpu",
+    "max_symbols": 1,
+    "lookback_rows": 32,
+    "pred_len": 5,
+    "sample_count": 1,
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "timeout_seconds": 300
+  },
+  "data_scope": {
+    "source": "local_existing_snapshot_or_synthetic_fallback",
+    "provider_query_allowed": false,
+    "market_data_download_allowed": false,
+    "future_return_label_allowed": false
+  },
+  "forbidden_actions": [
+    "fine-tune Kronos",
+    "run batch inference across symbols",
+    "run a portfolio backtest",
+    "use forecast output as a trading signal",
+    "optimize thresholds on forecast output",
+    "claim alpha or financial performance",
+    "paper trade",
+    "live trade",
+    "promote strategy"
+  ],
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_006_kronos_inference_smoke_once"
+}
