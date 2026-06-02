@@ -1,0 +1,14 @@
+{
+  "blockers": [
+    "torch_missing_for_future_inference",
+    "transformers_missing_for_future_model_loading"
+  ],
+  "decision": "CANDIDATE_006_KRONOS_COMPATIBILITY_AUDIT_COMPLETE_NO_MODEL_DOWNLOAD",
+  "external_query_performed": true,
+  "git_clone_performed": false,
+  "inference_performed": false,
+  "model_download_performed": false,
+  "next_allowed_action": "create_candidate_006_kronos_inference_smoke_gate_if_dependencies_available",
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false
+}

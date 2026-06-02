@@ -1,0 +1,100 @@
+{
+  "blockers": [
+    "torch_missing_for_future_inference",
+    "transformers_missing_for_future_model_loading"
+  ],
+  "created_at_utc": "2026-06-02T15:45:07.816773+00:00",
+  "decision": "CANDIDATE_006_KRONOS_COMPATIBILITY_AUDIT_COMPLETE_NO_MODEL_DOWNLOAD",
+  "dependency_install_performed": false,
+  "dependency_presence": {
+    "huggingface_hub": {
+      "available": false,
+      "origin": null
+    },
+    "numpy": {
+      "available": true,
+      "origin": "C:\\Users\\barak\\Documents\\Codici Scuola\\adaptive-equity-trading-lab\\.venv-lab\\Lib\\site-packages\\numpy\\__init__.py"
+    },
+    "pandas": {
+      "available": true,
+      "origin": "C:\\Users\\barak\\Documents\\Codici Scuola\\adaptive-equity-trading-lab\\.venv-lab\\Lib\\site-packages\\pandas\\__init__.py"
+    },
+    "python": {
+      "available": true,
+      "version": "3.12.13"
+    },
+    "torch": {
+      "available": false,
+      "origin": null
+    },
+    "transformers": {
+      "available": false,
+      "origin": null
+    }
+  },
+  "external_query_performed": true,
+  "external_query_scope": "git ls-remote metadata only",
+  "feature_contract": {
+    "allowed_features": [
+      "kronos_forecast_return_mean",
+      "kronos_forecast_return_median",
+      "kronos_forecast_return_std",
+      "kronos_probability_up",
+      "kronos_forecast_drawdown_proxy",
+      "kronos_sample_path_agreement"
+    ],
+    "candidate_006_use": "Overlay Candidate 005 recovery breadth ranking only after a separate smoke/inference gate.",
+    "contract_id": "CANDIDATE-006-KRONOS-FEATURE-CONTRACT-001",
+    "forbidden_uses": [
+      "direct live trading signal",
+      "model confidence calibrated on test PnL",
+      "future realized return used as an input feature",
+      "fine-tuning on active-only survivorship-biased data",
+      "promotion without separate Kronos overlay backtest gate"
+    ],
+    "optional_input_columns": [
+      "volume",
+      "amount"
+    ],
+    "required_input_columns": [
+      "open",
+      "high",
+      "low",
+      "close"
+    ],
+    "role": "feature_generator_only"
+  },
+  "financial_performance_claimed": false,
+  "fine_tuning_performed": false,
+  "git_clone_performed": false,
+  "inference_performed": false,
+  "linked_gate": "experiments\\provider_aware_research\\candidate_006_kronos_compatibility_gate_20260602\\gate_manifest.json",
+  "live_trading_allowed": false,
+  "model_download_performed": false,
+  "next_allowed_action": "create_candidate_006_kronos_inference_smoke_gate_if_dependencies_available",
+  "paper_trading_allowed": false,
+  "parameter_sweep_performed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "repo_check": {
+    "head_count": 1,
+    "returncode": 0,
+    "status": "reachable",
+    "stderr": ""
+  },
+  "run_id": "CANDIDATE-006-KRONOS-COMPATIBILITY-AUDIT-001",
+  "schema_check": {
+    "columns": [
+      "open",
+      "high",
+      "low",
+      "close",
+      "volume",
+      "amount"
+    ],
+    "normalization_passed": true,
+    "optional_columns_present": true,
+    "required_columns_present": true,
+    "rows": 5
+  }
+}

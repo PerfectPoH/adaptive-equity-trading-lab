@@ -1,0 +1,30 @@
+{
+  "allowed_features": [
+    "kronos_forecast_return_mean",
+    "kronos_forecast_return_median",
+    "kronos_forecast_return_std",
+    "kronos_probability_up",
+    "kronos_forecast_drawdown_proxy",
+    "kronos_sample_path_agreement"
+  ],
+  "candidate_006_use": "Overlay Candidate 005 recovery breadth ranking only after a separate smoke/inference gate.",
+  "contract_id": "CANDIDATE-006-KRONOS-FEATURE-CONTRACT-001",
+  "forbidden_uses": [
+    "direct live trading signal",
+    "model confidence calibrated on test PnL",
+    "future realized return used as an input feature",
+    "fine-tuning on active-only survivorship-biased data",
+    "promotion without separate Kronos overlay backtest gate"
+  ],
+  "optional_input_columns": [
+    "volume",
+    "amount"
+  ],
+  "required_input_columns": [
+    "open",
+    "high",
+    "low",
+    "close"
+  ],
+  "role": "feature_generator_only"
+}

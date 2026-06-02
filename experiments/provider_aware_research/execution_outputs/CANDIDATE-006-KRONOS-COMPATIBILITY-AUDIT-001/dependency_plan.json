@@ -1,0 +1,33 @@
+{
+  "decision": "KRONOS_ADAPTER_READY_DEPENDENCIES_BLOCK_INFERENCE",
+  "dependency_requirements": [
+    {
+      "package": "torch",
+      "purpose": "future Kronos model inference",
+      "status": "missing"
+    },
+    {
+      "package": "transformers",
+      "purpose": "future Hugging Face model loading",
+      "status": "missing"
+    },
+    {
+      "package": "huggingface_hub",
+      "purpose": "future model/tokenizer retrieval",
+      "status": "missing"
+    }
+  ],
+  "inference_performed": false,
+  "model_download_performed": false,
+  "next_allowed_action": "create_candidate_006_dependency_install_gate_if_user_approves",
+  "plan_id": "CANDIDATE-006-KRONOS-DEPENDENCY-PLAN-001",
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "safe_next_steps": [
+    "Create a dependency installation gate before any pip install.",
+    "Prefer CPU-only Kronos-mini smoke before any GPU or larger model.",
+    "Keep first inference to one symbol and one forecast path only.",
+    "Do not connect Kronos output to Candidate 005 until inference smoke output schema is archived."
+  ],
+  "source_run_id": "CANDIDATE-006-KRONOS-COMPATIBILITY-AUDIT-001"
+}
