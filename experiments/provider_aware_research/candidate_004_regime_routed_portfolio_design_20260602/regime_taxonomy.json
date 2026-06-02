@@ -1,0 +1,90 @@
+{
+  "inputs": [
+    "SPY adjusted daily OHLCV",
+    "IWM adjusted daily OHLCV",
+    "candidate representative universe daily returns"
+  ],
+  "regimes": [
+    {
+      "allowed_sleeves": [
+        "Momentum",
+        "Defensive/Low-Vol"
+      ],
+      "blocked_sleeves": [
+        "Mean Reversion if recent drawdown stress is absent"
+      ],
+      "definition": "SPY > 60d SMA and IWM > 60d SMA; 20d realized vol <= 60d median vol",
+      "label": "TREND_UP_LOW_VOL"
+    },
+    {
+      "allowed_sleeves": [
+        "Momentum with reduced exposure",
+        "Cash"
+      ],
+      "blocked_sleeves": [
+        "Mean Reversion until volatility stabilizes"
+      ],
+      "definition": "SPY > 60d SMA and IWM > 60d SMA; 20d realized vol > 60d median vol",
+      "label": "TREND_UP_HIGH_VOL"
+    },
+    {
+      "allowed_sleeves": [
+        "Mean Reversion",
+        "Defensive/Low-Vol"
+      ],
+      "blocked_sleeves": [
+        "Momentum"
+      ],
+      "definition": "SPY and IWM within +/-3% of 60d SMA; 20d realized vol <= 60d median vol",
+      "label": "RANGE_LOW_VOL"
+    },
+    {
+      "allowed_sleeves": [
+        "Cash",
+        "Mean Reversion only after panic-extension confirmation"
+      ],
+      "blocked_sleeves": [
+        "Momentum"
+      ],
+      "definition": "SPY and IWM within +/-3% of 60d SMA; 20d realized vol > 60d median vol",
+      "label": "RANGE_HIGH_VOL"
+    },
+    {
+      "allowed_sleeves": [
+        "Cash",
+        "Defensive/Low-Vol"
+      ],
+      "blocked_sleeves": [
+        "Momentum",
+        "Mean Reversion unless separate capitulation gate exists"
+      ],
+      "definition": "SPY or IWM drawdown from 60d high <= -8%",
+      "label": "DRAWDOWN_STRESS"
+    },
+    {
+      "allowed_sleeves": [
+        "Mean Reversion",
+        "Defensive/Low-Vol"
+      ],
+      "blocked_sleeves": [
+        "Momentum until trend confirmation"
+      ],
+      "definition": "After DRAWDOWN_STRESS, SPY and IWM close above 10d SMA for 3 sessions",
+      "label": "RECOVERY_BOUNCE"
+    },
+    {
+      "allowed_sleeves": [
+        "Cash"
+      ],
+      "blocked_sleeves": [
+        "Momentum",
+        "Mean Reversion",
+        "Defensive/Low-Vol entries"
+      ],
+      "definition": "IWM under 60d SMA and SPY under 60d SMA",
+      "label": "RISK_OFF"
+    }
+  ],
+  "taxonomy_id": "CANDIDATE-004-REGIME-TAXONOMY-001",
+  "threshold_policy": "fixed_ex_ante_no_optimization"
+}

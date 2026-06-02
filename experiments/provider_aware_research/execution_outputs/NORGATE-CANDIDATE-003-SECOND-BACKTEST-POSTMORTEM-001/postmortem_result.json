@@ -1,0 +1,48 @@
+{
+  "created_at_utc": "2026-06-02T11:03:02.398178+00:00",
+  "decision": "CANDIDATE_003_ARCHIVE_RESEARCH_LEAD_ONLY",
+  "evidence": {
+    "accepted_total_non_benchmark": 282,
+    "benchmark_relative": {
+      "IWM": 0.046279773976304506,
+      "SPY": 0.018066399514174714
+    },
+    "best_symbol": "TERN-202605",
+    "best_symbol_weighted_net_return": 0.6320192643237862,
+    "component_contributions": {
+      "28fb7b03aa56a91e": 0.32846305509876816,
+      "a42078cbf0a2ea94": -0.16671241444495458,
+      "acc065823d9dcfb7": 0.32846305509876816
+    },
+    "ex_best_symbol_weighted_net_return": -0.14180556857120452,
+    "frames_loaded_non_benchmark": 282,
+    "gross_return_sum": 2.5708547830103265,
+    "max_drawdown": -0.7856366063270992,
+    "total_trades": 61,
+    "weighted_net_return_sum": 0.4902136957525817,
+    "win_rate": 0.3770491803278688
+  },
+  "failure_modes": [
+    "outlier_dependency_ex_best_symbol_nonpositive",
+    "weak_distribution_win_rate_below_half",
+    "duplicated_momentum_component_correlation_risk",
+    "daily_only_dollar_bar_sleeve_disabled",
+    "trial_history_window_limited"
+  ],
+  "linked_run": "experiments\\provider_aware_research\\execution_outputs\\NORGATE-CANDIDATE-003-SECOND-BACKTEST-001\\norgate_candidate_003_second_backtest_result.json",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "next_allowed_action": "write_candidate_004_regime_routed_design_and_gate",
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": false,
+  "postmortem_id": "NORGATE-CANDIDATE-003-SECOND-BACKTEST-POSTMORTEM-001",
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "research_leads": [
+    "Portfolio sleeve composition may beat benchmarks on trial window when representative active+delisted panel is used.",
+    "Raw momentum sleeve shows useful gross contribution but duplicated momentum is not diversification.",
+    "Mean reversion sleeve loses in this window and needs regime gating before reuse.",
+    "Cash/no-trade sleeve is needed because some regimes should intentionally disable all active sleeves."
+  ],
+  "scope": "existing_second_backtest_artifacts_only_no_provider_query_no_backtest"
+}

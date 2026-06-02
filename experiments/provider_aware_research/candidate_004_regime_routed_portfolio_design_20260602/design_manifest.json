@@ -1,0 +1,47 @@
+{
+  "anti_overfit_rules": [
+    "No regime threshold optimization.",
+    "No sleeve weight optimization.",
+    "No symbol replacement after results.",
+    "No use of Candidate 004 backtest results to redefine regimes.",
+    "Discovery/validation split required before any promotion language.",
+    "Trial-limited Norgate results remain non-promotable."
+  ],
+  "candidate_name": "Candidate 004 Regime-Routed Portfolio",
+  "created_at_utc": "2026-06-02T11:03:02.413954+00:00",
+  "design_id": "CANDIDATE-004-REGIME-ROUTED-PORTFOLIO-DESIGN-001",
+  "hypothesis": "A portfolio of non-duplicated daily-compatible sleeves may be more robust if a frozen market-regime router decides which sleeve is allowed before trades are generated.",
+  "live_trading_allowed": false,
+  "next_allowed_action": "create_candidate_004_regime_attribution_gate",
+  "paper_trading_allowed": false,
+  "portfolio_backtest_allowed": false,
+  "promotion_allowed": false,
+  "sleeves": [
+    {
+      "candidate_003_change": "dedupe duplicate momentum components",
+      "name": "Momentum",
+      "role": "continuation in confirmed trend regimes",
+      "weight_cap": 0.25
+    },
+    {
+      "candidate_003_change": "regime-gated because standalone contribution was negative",
+      "name": "Mean Reversion",
+      "role": "recovery/range sleeve only in allowed regimes",
+      "weight_cap": 0.25
+    },
+    {
+      "candidate_003_change": "replaces disabled dollar-bar sleeve",
+      "name": "Defensive/Low-Vol",
+      "role": "daily-compatible stabilizer when risk is high or trend is quiet",
+      "weight_cap": 0.25
+    },
+    {
+      "candidate_003_change": "new capital-preservation sleeve",
+      "name": "Cash/No-Trade",
+      "role": "explicit no-position sleeve for hostile regimes",
+      "weight_cap": 0.25
+    }
+  ],
+  "source_postmortem": "experiments\\provider_aware_research\\execution_outputs\\NORGATE-CANDIDATE-003-SECOND-BACKTEST-POSTMORTEM-001\\postmortem_result.json",
+  "status": "DESIGN_COMPLETE_GATE_REQUIRED_BEFORE_BACKTEST"
+}

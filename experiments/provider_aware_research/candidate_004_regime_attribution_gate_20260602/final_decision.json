@@ -1,0 +1,9 @@
+{
+  "decision": "CANDIDATE_004_REGIME_ATTRIBUTION_GATE_APPROVED_NO_BACKTEST",
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_004_regime_attribution_diagnostic_once",
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false
+}
