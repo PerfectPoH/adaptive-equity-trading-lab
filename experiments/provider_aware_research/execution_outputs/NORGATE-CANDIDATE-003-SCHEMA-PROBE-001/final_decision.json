@@ -1,0 +1,15 @@
+{
+  "blockers": [
+    "trial_history_window_limited",
+    "candidate_backtest_gate_still_required"
+  ],
+  "decision": "NORGATE_CANDIDATE_003_SCHEMA_PROBE_PASS_TRIAL_LIMITED",
+  "financial_performance_claimed": false,
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "next_allowed_action": "create_candidate_003_micro_backtest_gate",
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": true
+}

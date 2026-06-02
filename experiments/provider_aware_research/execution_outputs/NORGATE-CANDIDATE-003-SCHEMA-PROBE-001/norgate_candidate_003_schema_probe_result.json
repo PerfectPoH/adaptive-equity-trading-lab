@@ -1,0 +1,280 @@
+{
+  "candidate_components": [
+    {
+      "component_id": "9474fe601e0f2bd2",
+      "role": "sampling/noise-control sleeve",
+      "strategy_name": "Factory Dollar-Bar Microstructure 180d 100bps",
+      "template": "Dollar-Bar Microstructure",
+      "weight": 0.25
+    },
+    {
+      "component_id": "28fb7b03aa56a91e",
+      "role": "continuation sleeve and breadth diversifier",
+      "strategy_name": "Factory Momentum 180d 100bps",
+      "template": "Momentum",
+      "weight": 0.25
+    },
+    {
+      "component_id": "a42078cbf0a2ea94",
+      "role": "core dislocation/recovery sleeve",
+      "strategy_name": "Factory Mean Reversion 180d 100bps",
+      "template": "Mean Reversion",
+      "weight": 0.25
+    },
+    {
+      "component_id": "acc065823d9dcfb7",
+      "role": "continuation sleeve and breadth diversifier",
+      "strategy_name": "My falsifiable strategy",
+      "template": "Momentum",
+      "weight": 0.25
+    }
+  ],
+  "created_at_utc": "2026-06-02T10:12:48+00:00",
+  "evidence": {
+    "adjusted_daily_price_function_available": true,
+    "delisted_prices_previously_accessible": true,
+    "historical_constituent_watchlists_available": true,
+    "listing_and_delisting_metadata_available": true,
+    "price_schema_supports_pandas_dataframe": true,
+    "trial_history_limit": "2_years_expected_from_trial_terms",
+    "trial_history_limit_recorded": true,
+    "us_active_symbols_discoverable": true,
+    "us_delisted_database_available": true,
+    "us_delisted_symbols_discoverable": true,
+    "us_equities_database_available": true
+  },
+  "final_decision": {
+    "blockers": [
+      "trial_history_window_limited",
+      "candidate_backtest_gate_still_required"
+    ],
+    "decision": "NORGATE_CANDIDATE_003_SCHEMA_PROBE_PASS_TRIAL_LIMITED",
+    "financial_performance_claimed": false,
+    "live_trading_allowed": false,
+    "market_data_download_performed": false,
+    "next_allowed_action": "create_candidate_003_micro_backtest_gate",
+    "paper_trading_allowed": false,
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false,
+    "provider_query_performed": true
+  },
+  "financial_performance_claimed": false,
+  "linked_candidate": "PORTFOLIO-CANDIDATE-003-MANUAL-COMPOSITE",
+  "linked_data_gate_path": "experiments\\provider_aware_research\\execution_outputs\\USER-STRATEGY-PORTFOLIO-EXTERNAL-DATA-GATES\\d9721368030f5898\\portfolio_external_data_backtest_gate.json",
+  "linked_manual_manifest_path": "experiments\\provider_aware_research\\execution_outputs\\PORTFOLIO-MANUAL-COMPOSITE-001\\manual-d9721368030f5898\\manual_composite_manifest.json",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "missing_evidence": [],
+  "norgate": {
+    "active_metadata_sample": [
+      {
+        "assetid": 131684,
+        "first_quoted_date": "2024-06-01",
+        "last_quoted_date": null,
+        "security_name": "Agilent Technologies Inc Common",
+        "symbol": "A"
+      },
+      {
+        "assetid": 2214917,
+        "first_quoted_date": "2024-06-01",
+        "last_quoted_date": null,
+        "security_name": "Alcoa Corp Common",
+        "symbol": "AA"
+      },
+      {
+        "assetid": 2730624,
+        "first_quoted_date": "2024-06-01",
+        "last_quoted_date": null,
+        "security_name": "Alternative Access First Priority CLO Bond ETF",
+        "symbol": "AAA"
+      }
+    ],
+    "active_symbol_sample": [
+      "A",
+      "AA",
+      "AAA",
+      "AAAA",
+      "AAAC",
+      "AAAIF",
+      "AAAU",
+      "AABB"
+    ],
+    "databases_sample": [
+      "AU Equities",
+      "AU Equities Delisted",
+      "AU ETOs",
+      "AU Indices",
+      "AU Warrants",
+      "CA Equities",
+      "CA Equities Delisted",
+      "CA Indices",
+      "Cash Commodities",
+      "Continuous Futures",
+      "Economic",
+      "Forex Spot",
+      "Futures",
+      "US Equities",
+      "US Equities Delisted",
+      "US Indices",
+      "World Indices"
+    ],
+    "delisted_metadata_sample": [
+      {
+        "assetid": 2852843,
+        "first_quoted_date": "2024-06-01",
+        "last_quoted_date": "2024-08-15",
+        "security_name": "Armada Acquisition Corp I Unit",
+        "symbol": "AACIU-202408"
+      },
+      {
+        "assetid": 3310789,
+        "first_quoted_date": "2024-06-01",
+        "last_quoted_date": "2025-09-24",
+        "security_name": "Ares Acquisition Corp II Unit",
+        "symbol": "AACT.U-202509"
+      },
+      {
+        "assetid": 3586237,
+        "first_quoted_date": "2024-08-01",
+        "last_quoted_date": "2026-01-26",
+        "security_name": "AA Mission Acquisition Corp Unit",
+        "symbol": "AAM.U-202601"
+      }
+    ],
+    "delisted_symbol_sample": [
+      "AACIU-202408",
+      "AACT.U-202509",
+      "AAM.U-202601",
+      "AAM-202602",
+      "AAN-202410",
+      "ABMC-202506",
+      "ACABU-202411",
+      "ACACU-202409"
+    ],
+    "function_signatures": {
+      "assetid": "(symbol: str)",
+      "database_symbols": "(databasename: str)",
+      "databases": "()",
+      "first_quoted_date": "(symbol, datetimeformat='iso', format='', tz='UTC')",
+      "index_constituent_timeseries": "(symbol, indexname: str, padding_setting=<PaddingType.NONE: 0>, start_date='1800-01-01', end_date: str = '2999-01-01', limit: int = -1, timeseriesformat: str = 'numpy-recarray', pandas_dataframe=None, numpy_ndarray=None, numpy_recarray=None, datetimeformat: str = '', timezone: str = '', format: str = '')",
+      "last_quoted_date": "(symbol, datetimeformat='iso', format='', tz='UTC')",
+      "price_timeseries": "(symbol, stock_price_adjustment_setting=<StockPriceAdjustmentType.TOTALRETURN: 3>, padding_setting=<PaddingType.NONE: 0>, start_date: str = '1800-01-01', end_date: str = '2999-01-01', limit: int = -1, timeseriesformat: str = 'numpy-recarray', fields=None, datetimeformat: str = '', timezone: str = '', interval: str = 'D', format: str = '')",
+      "security_name": "(symbol)",
+      "watchlist_symbols": "(watchlistname: str)",
+      "watchlists": "()"
+    },
+    "historical_watchlists_sample": [
+      "All Ordinaries Current & Past",
+      "All Ordinaries excl S&P ASX 100 Current & Past",
+      "All Ordinaries excl S&P ASX 200 Current & Past",
+      "All Ordinaries excl S&P ASX 300 Current & Past",
+      "Dow Jones Industrial Average Current & Past",
+      "Nasdaq 100 + Next Generation 100 Superset Current & Past",
+      "Nasdaq 100 + Q-50 Superset Current & Past",
+      "Nasdaq 100 Current & Past",
+      "Nasdaq 100 Technology Sector Current & Past",
+      "Nasdaq Biotechnology Current & Past",
+      "Nasdaq Composite Current & Past",
+      "Nasdaq Internet Current & Past",
+      "Nasdaq Next Generation 100 Current & Past",
+      "Nasdaq Q-50 Current & Past",
+      "NYSE Composite Current & Past",
+      "Russell 1000 + 2000 + Micro Cap Superset Current & Past",
+      "Russell 1000 Current & Past",
+      "Russell 2000 + Micro Cap Superset Current & Past",
+      "Russell 2000 bottom 1000 Current & Past",
+      "Russell 2000 Current & Past"
+    ],
+    "package_available": true,
+    "required_function_presence": {
+      "assetid": true,
+      "database_symbols": true,
+      "databases": true,
+      "first_quoted_date": true,
+      "index_constituent_timeseries": true,
+      "last_quoted_date": true,
+      "price_timeseries": true,
+      "security_name": true,
+      "watchlist_symbols": true,
+      "watchlists": true
+    },
+    "version": "1.0.74",
+    "watchlists_sample": [
+      "All Ordinaries Current & Past",
+      "All Ordinaries excl S&P ASX 100 Current & Past",
+      "All Ordinaries excl S&P ASX 100",
+      "All Ordinaries excl S&P ASX 200 Current & Past",
+      "All Ordinaries excl S&P ASX 200",
+      "All Ordinaries excl S&P ASX 300 Current & Past",
+      "All Ordinaries excl S&P ASX 300",
+      "All Ordinaries",
+      "Dow Jones Industrial Average Current & Past",
+      "Dow Jones Industrial Average",
+      "Nasdaq 100 + Next Generation 100 Superset Current & Past",
+      "Nasdaq 100 + Next Generation 100 Superset",
+      "Nasdaq 100 + Q-50 Superset Current & Past",
+      "Nasdaq 100 + Q-50 Superset",
+      "Nasdaq 100 Current & Past",
+      "Nasdaq 100 Technology Sector Current & Past",
+      "Nasdaq 100 Technology Sector",
+      "Nasdaq 100",
+      "Nasdaq Biotechnology Current & Past",
+      "Nasdaq Biotechnology",
+      "Nasdaq Composite Current & Past",
+      "Nasdaq Composite",
+      "Nasdaq Internet Current & Past",
+      "Nasdaq Internet",
+      "Nasdaq Next Generation 100 Current & Past",
+      "Nasdaq Next Generation 100",
+      "Nasdaq Q-50 Current & Past",
+      "Nasdaq Q-50",
+      "NYSE Composite Current & Past",
+      "NYSE Composite",
+      "Russell 1000 + 2000 + Micro Cap Superset Current & Past",
+      "Russell 1000 + 2000 + Micro Cap Superset",
+      "Russell 1000 Current & Past",
+      "Russell 1000",
+      "Russell 2000 + Micro Cap Superset Current & Past",
+      "Russell 2000 + Micro Cap Superset",
+      "Russell 2000 bottom 1000 Current & Past",
+      "Russell 2000 bottom 1000",
+      "Russell 2000 Current & Past",
+      "Russell 2000"
+    ]
+  },
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": false,
+  "previous_general_probe_decision": "NORGATE_DATA_PROBE_PASS_TRIAL_LIMITED",
+  "previous_general_probe_evidence": {
+    "historical_constituent_watchlists_available": true,
+    "local_database_accessible": true,
+    "python_package_available": true,
+    "trial_history_limit": "2_years_expected_from_trial_terms",
+    "trial_history_limit_recorded": true,
+    "us_active_adjusted_daily_prices_available": true,
+    "us_delisted_database_available": true,
+    "us_delisted_listing_or_delisting_dates_available": true,
+    "us_delisted_prices_accessible": true,
+    "us_delisted_symbols_discoverable": true,
+    "us_equities_database_available": true
+  },
+  "probe_id": "NORGATE-CANDIDATE-003-SCHEMA-PROBE-001",
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "required_evidence": {
+    "adjusted_daily_price_function_available": true,
+    "delisted_prices_previously_accessible": true,
+    "historical_constituent_watchlists_available": true,
+    "listing_and_delisting_metadata_available": true,
+    "price_schema_supports_pandas_dataframe": true,
+    "python_package_available": true,
+    "trial_history_limit_recorded": true,
+    "us_active_symbols_discoverable": true,
+    "us_delisted_database_available": true,
+    "us_delisted_symbols_discoverable": true,
+    "us_equities_database_available": true
+  },
+  "scope": "schema_and_metadata_only_no_candidate_backtest",
+  "source_data_gate_decision": "PORTFOLIO_CANDIDATE_003_TRUE_BACKTEST_BLOCKED_DATA_GATE",
+  "source_data_gate_status": "BLOCKED_EXTERNAL_DATA_CONTRACT_REQUIRED"
+}
