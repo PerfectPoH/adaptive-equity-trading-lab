@@ -1,0 +1,12 @@
+{
+  "blockers": [
+    "kronos_runtime_error"
+  ],
+  "decision": "CANDIDATE_006_KRONOS_INFERENCE_SMOKE_BLOCKED_RUNTIME_ERROR",
+  "git_clone_performed": true,
+  "inference_performed": false,
+  "model_download_performed": true,
+  "next_allowed_action": "Archive smoke result, then create a separate Kronos overlay feature gate before any portfolio connection.",
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false
+}
