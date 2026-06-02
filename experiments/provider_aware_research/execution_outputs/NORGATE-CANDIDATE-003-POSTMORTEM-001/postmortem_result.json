@@ -1,0 +1,48 @@
+{
+  "blockers_confirmed": [
+    "trial_history_window_limited",
+    "alphabetical_symbol_selection_bias",
+    "micro_panel_too_small_for_candidate_validation",
+    "outlier_dependency_ex_best_symbol_nonpositive",
+    "weak_distribution_win_rate_below_half",
+    "daily_only_dollar_bar_sleeve_disabled"
+  ],
+  "candidate": "PORTFOLIO-CANDIDATE-003-MANUAL-COMPOSITE",
+  "decision": "NORGATE_CANDIDATE_003_POSTMORTEM_COMPLETE_NO_RERUN",
+  "diagnostic_scope": "existing_artifacts_only_no_provider_query_no_backtest",
+  "evidence": {
+    "accepted_symbols_excluding_benchmarks": 17,
+    "accepted_symbols_including_benchmarks": 19,
+    "active_symbols_after_filter": 5,
+    "benchmark_total_returns": {
+      "IWM": 0.4439339217762772,
+      "SPY": 0.472147296238407
+    },
+    "best_symbol": "AAL",
+    "best_symbol_trades": 8,
+    "best_symbol_weighted_net_return": 0.1289779673646039,
+    "delisted_symbols_after_filter": 12,
+    "ex_best_symbol_weighted_net_return": -0.023539510291263166,
+    "gross_return_sum": 0.8517538282933631,
+    "max_drawdown": -0.19770622227213375,
+    "raw_active_symbols_requested": 30,
+    "raw_delisted_symbols_requested": 30,
+    "rejection_counts": {
+      "median_turnover_below_threshold": 25,
+      "minimum_price_below_threshold": 18
+    },
+    "symbol_concentration_top1": 1.223253554202615,
+    "total_trades": 43,
+    "weighted_net_return_sum": 0.10543845707334074,
+    "win_rate": 0.37209302325581395
+  },
+  "interpretation": "The micro-backtest cannot validate Candidate 003. The local weighted net is positive, but the result dies after removing AAL. The panel is also too small and alphabetically biased because the loader selected the first common-like symbols that survived price and row checks, then tradability removed most of them. This is evidence against promotion, not a clean final falsification of the portfolio concept.",
+  "next_allowed_actions": [
+    "create_representative_norgate_universe_gate_without_parameter_sweep",
+    "or_archive_candidate_003_until_full_history_provider_is_available"
+  ],
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false
+}
