@@ -1,0 +1,26 @@
+{
+  "gate_id": "CANDIDATE-006-KRONOS-EINOPS-REPAIR-GATE-001",
+  "created_at_utc": "2026-06-02T16:12:00Z",
+  "status": "APPROVED_KRONOS_EINOPS_REPAIR_ONLY",
+  "purpose": "Authorize installing the missing Kronos model import dependency observed during the bounded inference smoke test.",
+  "source_blocked_run": "CANDIDATE-006-KRONOS-INFERENCE-SMOKE-001",
+  "observed_blocker": "No module named 'einops'",
+  "approved_install_commands": [
+    ".venv-lab\\Scripts\\python.exe -m pip install einops==0.8.1"
+  ],
+  "forbidden_actions": [
+    "install full Kronos requirements without a separate gate",
+    "fine-tune Kronos",
+    "run batch inference across symbols",
+    "run a portfolio backtest",
+    "optimize thresholds on forecast output",
+    "claim alpha or financial performance",
+    "paper trade",
+    "live trade",
+    "promote strategy"
+  ],
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "install_einops_once_then_rerun_candidate_006_kronos_inference_smoke_once"
+}
