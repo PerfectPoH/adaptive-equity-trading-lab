@@ -1,0 +1,9 @@
+{
+  "decision": "CANDIDATE_006_KRONOS_COMPATIBILITY_GATE_APPROVED_NO_MODEL_DOWNLOAD",
+  "external_query_performed": false,
+  "inference_performed": false,
+  "model_download_performed": false,
+  "next_allowed_action": "run_candidate_006_kronos_compatibility_audit_once",
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false
+}

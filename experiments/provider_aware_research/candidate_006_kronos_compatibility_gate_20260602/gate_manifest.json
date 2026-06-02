@@ -1,0 +1,71 @@
+{
+  "adapter_contract": {
+    "allowed_features": [
+      "kronos_forecast_return_mean",
+      "kronos_forecast_return_median",
+      "kronos_forecast_return_std",
+      "kronos_probability_up",
+      "kronos_forecast_drawdown_proxy",
+      "kronos_sample_path_agreement"
+    ],
+    "candidate_006_hypothesis": "Kronos may only be tested as an overlay that reranks or filters Candidate 005 recovery breadth baskets; it must improve robustness without increasing benchmark beta or outlier dependency.",
+    "forbidden_features": [
+      "realized_future_return_as_input",
+      "post_entry_pnl_as_label_for_filtering",
+      "model_confidence_calibrated_on_test_pnl"
+    ],
+    "input_data_source": "Norgate OHLCV only unless separate data gate approves another source",
+    "optional_columns": [
+      "volume",
+      "amount"
+    ],
+    "required_columns": [
+      "open",
+      "high",
+      "low",
+      "close"
+    ],
+    "role": "feature_generator_only"
+  },
+  "allowed_external_queries": [
+    "git ls-remote metadata check for shiyu-coder/Kronos only",
+    "local Python dependency presence checks only"
+  ],
+  "compatibility_audit_allowed": true,
+  "created_at_utc": "2026-06-02T15:42:44.541554+00:00",
+  "external_repo": "https://github.com/shiyu-coder/Kronos",
+  "final_decision": {
+    "decision": "CANDIDATE_006_KRONOS_COMPATIBILITY_GATE_APPROVED_NO_MODEL_DOWNLOAD",
+    "external_query_performed": false,
+    "inference_performed": false,
+    "model_download_performed": false,
+    "next_allowed_action": "run_candidate_006_kronos_compatibility_audit_once",
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false
+  },
+  "financial_performance_claim_allowed": false,
+  "fine_tuning_allowed": false,
+  "forbidden_actions": [
+    "git clone Kronos repository",
+    "download Hugging Face Kronos model weights or tokenizers",
+    "install dependencies automatically",
+    "run Kronos inference",
+    "fine-tune Kronos",
+    "generate trading signals",
+    "run a portfolio backtest",
+    "parameter sweep or prompt/model selection sweep",
+    "promotion, paper trading, or live trading"
+  ],
+  "gate_id": "CANDIDATE-006-KRONOS-COMPATIBILITY-GATE-001",
+  "inference_allowed": false,
+  "linked_candidate_005_postmortem": "experiments/provider_aware_research/execution_outputs/CANDIDATE-005-RECOVERY-BREADTH-BACKTEST-001/postmortem_result.json",
+  "live_trading_allowed": false,
+  "model_download_allowed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "portfolio_backtest_allowed": false,
+  "promotion_allowed": false,
+  "purpose": "Authorize a bounded compatibility audit for integrating Kronos as a feature generator, not as a trading strategy.",
+  "repo_metadata_query_allowed": true,
+  "status": "APPROVED_COMPATIBILITY_AUDIT_ONLY_NO_MODEL_DOWNLOAD"
+}
