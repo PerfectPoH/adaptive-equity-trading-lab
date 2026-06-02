@@ -1,0 +1,40 @@
+{
+  "backtest_allowed": true,
+  "created_at_utc": "2026-06-02T10:48:00Z",
+  "created_date": "2026-06-02",
+  "data_source": "Norgate Data trial",
+  "final_decision": {
+    "blockers": [
+      "trial_history_window_limited",
+      "daily_only_dollar_bar_sleeve_disabled",
+      "promotion_locked"
+    ],
+    "decision": "NORGATE_CANDIDATE_003_SECOND_BACKTEST_GATE_APPROVED_TRIAL_LIMITED",
+    "financial_performance_claimed": false,
+    "live_trading_allowed": false,
+    "market_data_download_performed": false,
+    "next_allowed_action": "run_candidate_003_second_backtest_once",
+    "paper_trading_allowed": false,
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false,
+    "provider_query_performed": false
+  },
+  "gate_id": "NORGATE-CANDIDATE-003-SECOND-BACKTEST-GATE-001",
+  "linked_candidate": "PORTFOLIO-CANDIDATE-003-MANUAL-COMPOSITE",
+  "linked_micro_backtest": "experiments/provider_aware_research/execution_outputs/NORGATE-CANDIDATE-003-MICRO-BACKTEST-001/final_decision.json",
+  "linked_representative_universe": "experiments/provider_aware_research/execution_outputs/NORGATE-CANDIDATE-003-REPRESENTATIVE-UNIVERSE-001/final_decision.json",
+  "linked_representative_universe_symbols": "experiments/provider_aware_research/execution_outputs/NORGATE-CANDIDATE-003-REPRESENTATIVE-UNIVERSE-001/representative_universe_symbols.csv",
+  "live_trading_allowed": false,
+  "market_data_download_allowed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "portfolio_backtest_allowed": true,
+  "promotion_allowed": false,
+  "provider_query_allowed": true,
+  "purpose": "Authorize exactly one Candidate 003 second backtest on the frozen representative Norgate universe after the universe build passed minimum panel requirements.",
+  "raw_payload_retention_required": true,
+  "run_id": "NORGATE-CANDIDATE-003-SECOND-BACKTEST-001",
+  "short_selling_allowed": false,
+  "status": "APPROVED_SINGLE_SECOND_BACKTEST_TRIAL_LIMITED_NOT_PROMOTION",
+  "trial_history_limit": "2_years_expected_from_trial_terms"
+}
