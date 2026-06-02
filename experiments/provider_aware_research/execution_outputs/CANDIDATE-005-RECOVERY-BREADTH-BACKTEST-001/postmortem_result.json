@@ -1,0 +1,17 @@
+{
+  "decision": "CANDIDATE_005_ARCHIVE_CURRENT_FORM_RESEARCH_LEAD_ONLY",
+  "findings": [
+    "Breadth basket directly addressed Candidate 004 top1 dependency by moving from 14 to 37 trades.",
+    "Ex-best-symbol weighted net improved from Candidate 004 negative to 0.094271.",
+    "Top-symbol concentration remained too high at 0.360, with best symbol FCEL.",
+    "Weighted net remained positive at 0.147262, win rate 0.595, max drawdown -0.029436.",
+    "Benchmark-relative interpretation remained negative versus both SPY and IWM in the trial window.",
+    "Candidate 005 is a better research lead than Candidate 004, but still not promotable under trial-limited history."
+  ],
+  "next_allowed_action": "design_candidate_006_benchmark_aware_recovery_breadth_or_wait_for_long_history_data",
+  "parameter_sweep_performed": false,
+  "portfolio_backtest_performed": false,
+  "postmortem_id": "CANDIDATE-005-RECOVERY-BREADTH-BACKTEST-POSTMORTEM-001",
+  "promotion_allowed": false,
+  "source_run_id": "CANDIDATE-005-RECOVERY-BREADTH-BACKTEST-001"
+}
