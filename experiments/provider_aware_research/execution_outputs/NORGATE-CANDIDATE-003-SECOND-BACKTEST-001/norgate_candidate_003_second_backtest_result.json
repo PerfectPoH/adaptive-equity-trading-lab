@@ -1,0 +1,206 @@
+{
+  "benchmark": {
+    "IWM": {
+      "total_return": 0.4439339217762772
+    },
+    "SPY": {
+      "total_return": 0.472147296238407
+    }
+  },
+  "benchmark_relative": {
+    "IWM": 0.046279773976304506,
+    "SPY": 0.018066399514174714
+  },
+  "component_contributions": {
+    "28fb7b03aa56a91e": 0.32846305509876816,
+    "a42078cbf0a2ea94": -0.16671241444495458,
+    "acc065823d9dcfb7": 0.32846305509876816
+  },
+  "component_summaries": [
+    {
+      "component_id": "9474fe601e0f2bd2",
+      "daily_backtest_status": "disabled_idle",
+      "generated_trades": 0,
+      "status": "disabled_idle",
+      "template": "Dollar-Bar Microstructure",
+      "weight": 0.25,
+      "weighted_net_return_sum": 0.0
+    },
+    {
+      "component_id": "28fb7b03aa56a91e",
+      "daily_backtest_status": "active",
+      "generated_trades": 21,
+      "status": "active",
+      "template": "Momentum",
+      "weight": 0.25,
+      "weighted_net_return_sum": 0.32846305509876816
+    },
+    {
+      "component_id": "a42078cbf0a2ea94",
+      "daily_backtest_status": "active",
+      "generated_trades": 19,
+      "status": "active",
+      "template": "Mean Reversion",
+      "weight": 0.25,
+      "weighted_net_return_sum": -0.16671241444495455
+    },
+    {
+      "component_id": "acc065823d9dcfb7",
+      "daily_backtest_status": "active",
+      "generated_trades": 21,
+      "status": "active",
+      "template": "Momentum",
+      "weight": 0.25,
+      "weighted_net_return_sum": 0.32846305509876816
+    }
+  ],
+  "contract": {
+    "anti_overfit_constraints": {
+      "accepted_universe_rebuild_allowed": false,
+      "benchmark_change_allowed": false,
+      "cost_bps_change_allowed": false,
+      "holding_period_change_allowed": false,
+      "lookback_change_allowed": false,
+      "parameter_sweep_allowed": false,
+      "post_result_symbol_replacement_allowed": false,
+      "ranker_change_allowed": false,
+      "sleeve_weight_change_allowed": false,
+      "strategy_component_change_allowed": false,
+      "tradability_threshold_change_allowed": false
+    },
+    "candidate_label": "PORTFOLIO-CANDIDATE-003-MANUAL-COMPOSITE",
+    "cost_bps": 100,
+    "disabled_sleeve_policy": {
+      "disabled_weight_is_not_redistributed": true,
+      "dollar_bar_microstructure_status": "disabled_idle",
+      "idle_weight": 0.25,
+      "reason": "Norgate daily OHLCV cannot reconstruct dollar bars."
+    },
+    "frozen_component_contract": [
+      {
+        "component_id": "9474fe601e0f2bd2",
+        "daily_backtest_status": "disabled_idle",
+        "template": "Dollar-Bar Microstructure",
+        "weight": 0.25
+      },
+      {
+        "component_id": "28fb7b03aa56a91e",
+        "daily_backtest_status": "active",
+        "template": "Momentum",
+        "weight": 0.25
+      },
+      {
+        "component_id": "a42078cbf0a2ea94",
+        "daily_backtest_status": "active",
+        "template": "Mean Reversion",
+        "weight": 0.25
+      },
+      {
+        "component_id": "acc065823d9dcfb7",
+        "daily_backtest_status": "active",
+        "template": "Momentum",
+        "weight": 0.25
+      }
+    ],
+    "frozen_inputs": {
+      "representative_universe_result": "experiments/provider_aware_research/execution_outputs/NORGATE-CANDIDATE-003-REPRESENTATIVE-UNIVERSE-001/representative_universe_result.json",
+      "representative_universe_symbols": "experiments/provider_aware_research/execution_outputs/NORGATE-CANDIDATE-003-REPRESENTATIVE-UNIVERSE-001/representative_universe_symbols.csv"
+    },
+    "hard_archive_conditions": [
+      "Archive if ex-best-symbol weighted net return is non-positive.",
+      "Archive if win rate remains below 50%.",
+      "Archive if max single-symbol trade share exceeds 10%.",
+      "Archive if accepted symbol panel is rebuilt or changed.",
+      "Archive if any backtest parameter differs from the frozen contract.",
+      "Archive if benchmark-relative interpretation is negative or unavailable."
+    ],
+    "permitted_provider_queries": [
+      "norgatedata.price_timeseries daily adjusted OHLCV for accepted symbols from the frozen representative_universe_symbols.csv only",
+      "norgatedata.price_timeseries daily adjusted OHLCV for SPY and IWM benchmarks"
+    ],
+    "run_id": "NORGATE-CANDIDATE-003-SECOND-BACKTEST-001",
+    "trial_limitation": {
+      "financial_performance_claim_allowed": false,
+      "promotion_allowed": false,
+      "trial_limited": true
+    }
+  },
+  "created_at_utc": "2026-06-02T10:54:13.570866+00:00",
+  "final_decision": {
+    "blockers": [
+      "trial_history_window_limited",
+      "promotion_locked_until_long_history_oos_gate",
+      "Dollar-Bar Microstructure:daily_bars_cannot_reconstruct_dollar_bars",
+      "outlier_dependency_ex_best_symbol_nonpositive",
+      "weak_distribution_win_rate_below_half",
+      "duplicated_momentum_component_correlation_risk"
+    ],
+    "decision": "NORGATE_CANDIDATE_003_SECOND_BACKTEST_ARCHIVE_NO_PROMOTION",
+    "financial_performance_claimed": false,
+    "live_trading_allowed": false,
+    "market_data_download_performed": false,
+    "next_allowed_action": "review_second_backtest_postmortem",
+    "paper_trading_allowed": false,
+    "portfolio_backtest_performed": true,
+    "promotion_allowed": false,
+    "provider_query_performed": true,
+    "trial_limited": true
+  },
+  "financial_performance_claimed": false,
+  "linked_candidate": "PORTFOLIO-CANDIDATE-003-MANUAL-COMPOSITE",
+  "linked_gate": "experiments\\provider_aware_research\\norgate_candidate_003_second_backtest_gate_20260602\\gate_manifest.json",
+  "linked_representative_universe_symbols": "experiments\\provider_aware_research\\execution_outputs\\NORGATE-CANDIDATE-003-REPRESENTATIVE-UNIVERSE-001\\representative_universe_symbols.csv",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "max_single_symbol_trade_share": 0.08196721311475409,
+  "paper_trading_allowed": false,
+  "parameter_sweep_performed": false,
+  "price_failures": {},
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "robustness": {
+    "best_symbol": "TERN-202605",
+    "best_symbol_weighted_net_return": 0.6320192643237862,
+    "ex_best_symbol_weighted_net_return": -0.14180556857120452,
+    "symbol_concentration_top1": 1.2892729636072346
+  },
+  "run_id": "NORGATE-CANDIDATE-003-SECOND-BACKTEST-001",
+  "status": "NORGATE_CANDIDATE_003_SECOND_BACKTEST_COMPLETE_TRIAL_LIMITED",
+  "summary": {
+    "gross_return_sum": 2.5708547830103265,
+    "max_drawdown": -0.7856366063270992,
+    "total_trades": 61,
+    "weighted_net_return_sum": 0.4902136957525817,
+    "win_rate": 0.3770491803278688
+  },
+  "symbol_counts": {
+    "accepted_active": 159,
+    "accepted_delisted": 123,
+    "accepted_total_non_benchmark": 282,
+    "frames_loaded_non_benchmark": 282,
+    "price_failures": 0
+  },
+  "top_symbol_contributions": {
+    "ACDC": 0.03159091063028524,
+    "APLD": 0.05158378842555417,
+    "BDTX": -0.018983522481649192,
+    "CDTX-202601": 0.07243044916015862,
+    "CORT": 0.048732873576961155,
+    "DSGR": 0.04887145547724281,
+    "FCEL": 0.2718123591488091,
+    "FL-202509": -0.0010083920136906245,
+    "FSLY": 0.30550866489738016,
+    "GEOS": -0.008049683860997829,
+    "IIPR": -0.017731913003143526,
+    "ISSC": 0.016843358413053403,
+    "ITCI-202504": 0.00038526104105974113,
+    "NGNE": 0.12395349087934937,
+    "RDUS-202507": -0.0022808262776720057,
+    "TERN-202605": 0.6320192643237862,
+    "THRD-202507": -0.0011240345895466809,
+    "TRML-202510": -0.0019550512176390545,
+    "VERV-202507": -0.017075154310983106,
+    "YMAB-202509": 0.0008754068804854897
+  },
+  "trial_limited": true
+}

@@ -1,0 +1,20 @@
+{
+  "blockers": [
+    "trial_history_window_limited",
+    "promotion_locked_until_long_history_oos_gate",
+    "Dollar-Bar Microstructure:daily_bars_cannot_reconstruct_dollar_bars",
+    "outlier_dependency_ex_best_symbol_nonpositive",
+    "weak_distribution_win_rate_below_half",
+    "duplicated_momentum_component_correlation_risk"
+  ],
+  "decision": "NORGATE_CANDIDATE_003_SECOND_BACKTEST_ARCHIVE_NO_PROMOTION",
+  "financial_performance_claimed": false,
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "next_allowed_action": "review_second_backtest_postmortem",
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": true,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "trial_limited": true
+}
