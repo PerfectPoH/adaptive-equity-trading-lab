@@ -1,0 +1,90 @@
+{
+  "allowed_backtest_count": 1,
+  "allowed_provider_queries": [
+    "Norgate daily adjusted OHLCV for accepted representative universe symbols only",
+    "Norgate daily adjusted OHLCV for SPY and IWM benchmarks only"
+  ],
+  "cost_bps": 100,
+  "created_at_utc": "2026-06-02T11:15:51.662476+00:00",
+  "final_decision": {
+    "decision": "CANDIDATE_004_REGIME_ROUTED_BACKTEST_GATE_APPROVED_ONE_RUN_NO_PROMOTION",
+    "next_allowed_action": "run_candidate_004_regime_routed_backtest_once",
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false,
+    "provider_query_performed": false
+  },
+  "financial_performance_claim_allowed": false,
+  "forbidden_actions": [
+    "running more than one Candidate 004 backtest under this gate",
+    "changing regime thresholds after attribution",
+    "optimizing sleeve weights",
+    "adding symbols after seeing results",
+    "promoting or claiming live readiness from this trial-limited backtest"
+  ],
+  "gate_id": "CANDIDATE-004-REGIME-ROUTED-BACKTEST-GATE-001",
+  "linked_attribution": "experiments/provider_aware_research/execution_outputs/CANDIDATE-004-REGIME-ATTRIBUTION-DIAGNOSTIC-001/regime_attribution_result.json",
+  "linked_design": "experiments/provider_aware_research/candidate_004_regime_routed_portfolio_design_20260602/design_manifest.json",
+  "linked_representative_universe": "experiments/provider_aware_research/execution_outputs/NORGATE-CANDIDATE-003-REPRESENTATIVE-UNIVERSE-001/representative_universe_symbols.csv",
+  "linked_router_review": "experiments/provider_aware_research/execution_outputs/CANDIDATE-004-REGIME-ATTRIBUTION-DIAGNOSTIC-001/regime_router_review.json",
+  "live_trading_allowed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "portfolio_backtest_allowed": true,
+  "promotion_allowed": false,
+  "purpose": "Authorize exactly one trial-limited Candidate 004 regime-routed backtest using the frozen representative Norgate universe, frozen SPY/IWM regime taxonomy, and frozen router rules from the attribution review.",
+  "router_change_after_result_allowed": false,
+  "router_contract": {
+    "regime_rules_frozen": true,
+    "routes": {
+      "DRAWDOWN_STRESS": {
+        "Cash/No-Trade": 1.0,
+        "Mean Reversion": 0.0,
+        "Momentum": 0.0
+      },
+      "INSUFFICIENT_HISTORY": {
+        "Cash/No-Trade": 1.0,
+        "Mean Reversion": 0.0,
+        "Momentum": 0.0
+      },
+      "MIXED_TRANSITION": {
+        "Cash/No-Trade": 1.0,
+        "Mean Reversion": 0.0,
+        "Momentum": 0.0
+      },
+      "RANGE_HIGH_VOL": {
+        "Cash/No-Trade": 1.0,
+        "Mean Reversion": 0.0,
+        "Momentum": 0.0
+      },
+      "RANGE_LOW_VOL": {
+        "Cash/No-Trade": 1.0,
+        "Mean Reversion": 0.0,
+        "Momentum": 0.0
+      },
+      "RECOVERY_BOUNCE": {
+        "Cash/No-Trade": 0.65,
+        "Mean Reversion": 0.1,
+        "Momentum": 0.25
+      },
+      "RISK_OFF": {
+        "Cash/No-Trade": 1.0,
+        "Mean Reversion": 0.0,
+        "Momentum": 0.0
+      },
+      "TREND_UP_HIGH_VOL": {
+        "Cash/No-Trade": 1.0,
+        "Mean Reversion": 0.0,
+        "Momentum": 0.0
+      },
+      "TREND_UP_LOW_VOL": {
+        "Cash/No-Trade": 1.0,
+        "Mean Reversion": 0.0,
+        "Momentum": 0.0
+      }
+    },
+    "threshold_optimization_allowed": false,
+    "threshold_source": "candidate_004_regime_routed_portfolio_design_20260602/regime_taxonomy.json"
+  },
+  "status": "APPROVED_ONE_TRIAL_LIMITED_REGIME_ROUTED_BACKTEST",
+  "symbol_replacement_allowed": false
+}
