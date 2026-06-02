@@ -1,0 +1,8 @@
+{
+  "decision": "CANDIDATE_006_KRONOS_EINOPS_REPAIR_COMPLETE",
+  "dependency_install_performed": true,
+  "installed_package": "einops==0.8.1",
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "next_allowed_action": "Review CANDIDATE-006-KRONOS-INFERENCE-SMOKE-RERUN-002."
+}

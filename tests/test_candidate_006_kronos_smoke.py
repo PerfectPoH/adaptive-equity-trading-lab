@@ -96,6 +96,7 @@ def test_smoke_run_writes_no_promotion_artifacts(monkeypatch, tmp_path: Path) ->
         kronos_repo_dir=tmp_path / "kronos",
     )
 
+    assert result["run_id"] == "out"
     assert result["decision"] == "CANDIDATE_006_KRONOS_INFERENCE_SMOKE_COMPLETE_NO_BACKTEST"
     assert result["inference_performed"] is True
     assert result["portfolio_backtest_performed"] is False

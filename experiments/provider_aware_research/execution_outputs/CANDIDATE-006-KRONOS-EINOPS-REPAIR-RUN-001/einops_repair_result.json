@@ -1,0 +1,19 @@
+{
+  "run_id": "CANDIDATE-006-KRONOS-EINOPS-REPAIR-RUN-001",
+  "created_at_utc": "2026-06-02T16:08:00Z",
+  "linked_gate": "experiments/provider_aware_research/candidate_006_kronos_einops_repair_gate_20260602/gate_manifest.json",
+  "source_blocked_run": "CANDIDATE-006-KRONOS-INFERENCE-SMOKE-001",
+  "observed_blocker": "No module named 'einops'",
+  "dependency_install_performed": true,
+  "installed_packages": {
+    "einops": "0.8.1"
+  },
+  "forbidden_actions_respected": {
+    "full_requirements_install_performed": false,
+    "fine_tuning_performed": false,
+    "batch_inference_performed": false,
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false
+  },
+  "decision": "CANDIDATE_006_KRONOS_EINOPS_REPAIR_COMPLETE"
+}

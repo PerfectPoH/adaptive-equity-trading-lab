@@ -83,7 +83,7 @@ def run_candidate_006_kronos_inference_smoke(
             top_p=float(constraints["top_p"]),
         )
         features = summarize_kronos_forecast(input_frame, forecast)
-        result = _base_result(gate, clone_result)
+        result = _base_result(gate, clone_result, run_id=output_dir.name)
         result.update(
             {
                 "decision": "CANDIDATE_006_KRONOS_INFERENCE_SMOKE_COMPLETE_NO_BACKTEST",
@@ -98,7 +98,7 @@ def run_candidate_006_kronos_inference_smoke(
         output_dir.mkdir(parents=True, exist_ok=True)
         forecast.to_csv(output_dir / "forecast_preview.csv", index_label="timestamp")
     except Exception as exc:
-        result = _base_result(gate, clone_result)
+        result = _base_result(gate, clone_result, run_id=output_dir.name)
         result.update(
             {
                 "decision": "CANDIDATE_006_KRONOS_INFERENCE_SMOKE_BLOCKED_RUNTIME_ERROR",
@@ -195,9 +195,9 @@ def _synthetic_sample() -> pd.DataFrame:
     )
 
 
-def _base_result(gate: dict[str, Any], clone_result: dict[str, Any]) -> dict[str, Any]:
+def _base_result(gate: dict[str, Any], clone_result: dict[str, Any], *, run_id: str) -> dict[str, Any]:
     return {
-        "run_id": RUN_ID,
+        "run_id": run_id,
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "linked_gate": str(GATE_DIR / "gate_manifest.json"),
         "git_clone_performed": bool(clone_result.get("git_clone_performed")),

@@ -1,0 +1,49 @@
+{
+  "blockers": [],
+  "clone_result": {
+    "git_clone_performed": false,
+    "repo_dir": ".external\\kronos"
+  },
+  "created_at_utc": "2026-06-02T16:08:54.798435+00:00",
+  "decision": "CANDIDATE_006_KRONOS_INFERENCE_SMOKE_COMPLETE_NO_BACKTEST",
+  "feature_summary": {
+    "kronos_forecast_drawdown_proxy": -0.02488149521487748,
+    "kronos_forecast_return_mean": -0.01333027614184199,
+    "kronos_forecast_return_median": -0.012808595264640954,
+    "kronos_forecast_return_std": 0.005248605114608469,
+    "kronos_probability_up": 0.0,
+    "kronos_sample_path_agreement": 1.0
+  },
+  "financial_performance_claimed": false,
+  "fine_tuning_performed": false,
+  "forecast_rows": 5,
+  "git_clone_performed": false,
+  "inference_performed": true,
+  "input_rows": 32,
+  "linked_gate": "experiments\\provider_aware_research\\candidate_006_kronos_inference_smoke_gate_20260602\\gate_manifest.json",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "model_download_performed": true,
+  "model_repos": {
+    "model": "NeoQuasar/Kronos-mini",
+    "tokenizer": "NeoQuasar/Kronos-Tokenizer-2k"
+  },
+  "next_allowed_action": "Archive smoke result, then create a separate Kronos overlay feature gate before any portfolio connection.",
+  "paper_trading_allowed": false,
+  "parameter_sweep_performed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "run_id": "CANDIDATE-006-KRONOS-INFERENCE-SMOKE-RERUN-002",
+  "runtime_constraints": {
+    "device": "cpu",
+    "lookback_rows": 32,
+    "max_symbols": 1,
+    "pred_len": 5,
+    "sample_count": 1,
+    "temperature": 1.0,
+    "timeout_seconds": 300,
+    "top_p": 0.9
+  },
+  "signal_generation_performed": false
+}

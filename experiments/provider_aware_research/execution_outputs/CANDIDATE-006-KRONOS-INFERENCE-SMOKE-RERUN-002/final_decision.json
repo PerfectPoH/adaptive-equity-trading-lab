@@ -1,0 +1,10 @@
+{
+  "blockers": [],
+  "decision": "CANDIDATE_006_KRONOS_INFERENCE_SMOKE_COMPLETE_NO_BACKTEST",
+  "git_clone_performed": false,
+  "inference_performed": true,
+  "model_download_performed": true,
+  "next_allowed_action": "Archive smoke result, then create a separate Kronos overlay feature gate before any portfolio connection.",
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false
+}
