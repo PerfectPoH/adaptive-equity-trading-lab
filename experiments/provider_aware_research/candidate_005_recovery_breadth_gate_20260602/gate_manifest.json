@@ -1,0 +1,60 @@
+{
+  "allowed_backtest_count": 1,
+  "allowed_provider_queries": [
+    "Norgate daily adjusted OHLCV for accepted representative universe symbols only",
+    "Norgate daily adjusted OHLCV for SPY and IWM benchmarks only"
+  ],
+  "anti_overfit_constraints": {
+    "holding_period_change_allowed": false,
+    "lookback_change_allowed": false,
+    "parameter_sweep_allowed": false,
+    "post_result_rule_edit_allowed": false,
+    "regime_threshold_change_allowed": false,
+    "symbol_replacement_allowed": false,
+    "top_k_change_allowed": false,
+    "weight_optimization_allowed": false
+  },
+  "created_at_utc": "2026-06-02T11:23:29.112250+00:00",
+  "final_decision": {
+    "decision": "CANDIDATE_005_RECOVERY_BREADTH_GATE_APPROVED_ONE_RUN_NO_PROMOTION",
+    "next_allowed_action": "run_candidate_005_recovery_breadth_backtest_once",
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false,
+    "provider_query_performed": false
+  },
+  "financial_performance_claim_allowed": false,
+  "gate_id": "CANDIDATE-005-RECOVERY-BREADTH-BACKTEST-GATE-001",
+  "linked_candidate_004_postmortem": "experiments/provider_aware_research/execution_outputs/CANDIDATE-004-REGIME-ROUTED-BACKTEST-001/postmortem_result.json",
+  "linked_representative_universe": "experiments/provider_aware_research/execution_outputs/NORGATE-CANDIDATE-003-REPRESENTATIVE-UNIVERSE-001/representative_universe_symbols.csv",
+  "live_trading_allowed": false,
+  "paper_trading_allowed": false,
+  "portfolio_backtest_allowed": true,
+  "promotion_allowed": false,
+  "purpose": "Authorize exactly one trial-limited Candidate 005 backtest testing whether Candidate 004 recovery-bounce momentum can reduce single-symbol dependency by selecting a fixed breadth basket instead of one top-ranked symbol.",
+  "status": "APPROVED_ONE_TRIAL_LIMITED_RECOVERY_BREADTH_BACKTEST",
+  "strategy_contract": {
+    "active_regime": "RECOVERY_BOUNCE",
+    "basket_weight": 0.25,
+    "blocked_regimes_route_to_cash": [
+      "DRAWDOWN_STRESS",
+      "INSUFFICIENT_HISTORY",
+      "RANGE_HIGH_VOL",
+      "RANGE_LOW_VOL",
+      "RISK_OFF",
+      "TREND_UP_HIGH_VOL",
+      "TREND_UP_LOW_VOL",
+      "MIXED_TRANSITION"
+    ],
+    "cost_bps": 100,
+    "holding_days": 20,
+    "hypothesis": "A fixed top-k momentum basket inside pre-defined RECOVERY_BOUNCE regimes may preserve the risk-control benefit of Candidate 004 while reducing top-symbol dependency.",
+    "lookback_days": 20,
+    "min_candidates_per_rebalance": 5,
+    "per_trade_weight": 0.05,
+    "router_source": "Candidate 004 frozen SPY/IWM regime taxonomy",
+    "sleeve": "Momentum breadth basket",
+    "top_k": 5,
+    "tradability_min_median_turnover": 1000000.0,
+    "tradability_min_price": 1.0
+  }
+}

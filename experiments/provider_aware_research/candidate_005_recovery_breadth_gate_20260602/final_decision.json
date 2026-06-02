@@ -1,0 +1,7 @@
+{
+  "decision": "CANDIDATE_005_RECOVERY_BREADTH_GATE_APPROVED_ONE_RUN_NO_PROMOTION",
+  "next_allowed_action": "run_candidate_005_recovery_breadth_backtest_once",
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false
+}
