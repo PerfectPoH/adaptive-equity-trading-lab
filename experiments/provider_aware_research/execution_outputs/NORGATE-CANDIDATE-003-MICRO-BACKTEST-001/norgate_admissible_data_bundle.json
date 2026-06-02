@@ -1,0 +1,207 @@
+{
+  "active_symbols": [
+    "A",
+    "AA",
+    "AAAU",
+    "AAGIY",
+    "AAL"
+  ],
+  "blockers": [],
+  "bundle_id": "NORGATE-CANDIDATE-003-ADMISSIBLE-MICRO-BUNDLE-001",
+  "covered_fields": [
+    "survivorship_free_universe",
+    "point_in_time_membership",
+    "listing_and_delisting_dates",
+    "delisted_symbol_prices",
+    "split_dividend_adjusted_ohlcv",
+    "tradability_and_liquidity_history",
+    "benchmark_panel",
+    "raw_payload_retention_manifest"
+  ],
+  "delisted_symbols": [
+    "ACCD-202504",
+    "ACLX-202604",
+    "AGR-202412",
+    "AGS-202506",
+    "AHL-202602",
+    "AKRO-202512",
+    "AL-202604",
+    "ALE-202512",
+    "ALEX-202603",
+    "ALTM-202503",
+    "ALTR-202503",
+    "AMED-202508"
+  ],
+  "financial_performance_claim_allowed": false,
+  "frozen_trial_contract": {
+    "allowed_provider_queries": [
+      "norgatedata.database_symbols for US Equities and US Equities Delisted",
+      "norgatedata.first_quoted_date and norgatedata.last_quoted_date for trial-selected symbols",
+      "norgatedata.price_timeseries daily adjusted OHLCV for trial-selected symbols and benchmarks"
+    ],
+    "benchmark_contract": {
+      "benchmarks": [
+        "SPY",
+        "IWM"
+      ],
+      "purpose": "Relative diagnostic only; not a promotion gate."
+    },
+    "candidate_label": "PORTFOLIO-CANDIDATE-003-MANUAL-COMPOSITE",
+    "component_contract": [
+      {
+        "component_id": "9474fe601e0f2bd2",
+        "daily_micro_backtest_status": "disabled_idle",
+        "disable_reason": "Norgate trial access is daily OHLCV; dollar-bar/tick reconstruction is unavailable.",
+        "role": "sampling/noise-control sleeve",
+        "strategy_name": "Factory Dollar-Bar Microstructure 180d 100bps",
+        "template": "Dollar-Bar Microstructure",
+        "weight": 0.25
+      },
+      {
+        "component_id": "28fb7b03aa56a91e",
+        "daily_micro_backtest_status": "active",
+        "role": "continuation sleeve and breadth diversifier",
+        "strategy_name": "Factory Momentum 180d 100bps",
+        "template": "Momentum",
+        "weight": 0.25
+      },
+      {
+        "component_id": "a42078cbf0a2ea94",
+        "daily_micro_backtest_status": "active",
+        "role": "core dislocation/recovery sleeve",
+        "strategy_name": "Factory Mean Reversion 180d 100bps",
+        "template": "Mean Reversion",
+        "weight": 0.25
+      },
+      {
+        "component_id": "acc065823d9dcfb7",
+        "daily_micro_backtest_status": "active",
+        "role": "continuation sleeve and breadth diversifier",
+        "strategy_name": "My falsifiable strategy",
+        "template": "Momentum",
+        "weight": 0.25
+      }
+    ],
+    "disabled_weight_policy": {
+      "disabled_weight_is_not_redistributed": true,
+      "idle_weight": 0.25,
+      "reason": "Redistributing the disabled dollar-bar sleeve after seeing data would alter the frozen candidate."
+    },
+    "execution_contract": {
+      "backtest_runs_allowed": 1,
+      "candidate_component_replacement_allowed": false,
+      "combination_search_allowed": false,
+      "cost_bps": 100,
+      "live_trading_allowed": false,
+      "paper_trading_allowed": false,
+      "parameter_sweep_allowed": false,
+      "promotion_allowed": false,
+      "short_selling_allowed": false,
+      "weight_optimization_allowed": false
+    },
+    "falsification_notes": [
+      "Archive if the active daily sleeves cannot generate a completed trial panel.",
+      "Archive if validation net is non-positive in the trial-limited window.",
+      "Archive if a single active sleeve dominates positive contribution above 40%.",
+      "Archive if ex-best-active-sleeve net is non-positive.",
+      "Keep the result non-promotable because the Norgate trial is expected to provide only two years of history."
+    ],
+    "market_scope": {
+      "active_database": "US Equities",
+      "delisted_database": "US Equities Delisted",
+      "selection_method": "deterministic common-like symbols from local Norgate active and delisted databases, filtered by listing metadata and adjusted daily price availability during the two-year trial window",
+      "symbol_count_target": {
+        "active": 30,
+        "delisted": 30
+      }
+    },
+    "trial_id": "NORGATE-CANDIDATE-003-MICRO-BACKTEST-001"
+  },
+  "linked_candidate": "PORTFOLIO-CANDIDATE-003-MANUAL-COMPOSITE",
+  "linked_gate": "experiments\\provider_aware_research\\norgate_candidate_003_micro_backtest_gate_20260602\\gate_manifest.json",
+  "linked_probe": "NORGATE-CANDIDATE-003-SCHEMA-PROBE-001",
+  "live_trading_allowed": false,
+  "paper_trading_allowed": false,
+  "promotion_allowed": false,
+  "provider": "Norgate Data",
+  "raw_symbol_metadata": {
+    "active_symbols": [
+      "A",
+      "AA",
+      "AAA",
+      "AAAA",
+      "AAAC",
+      "AAAU",
+      "AABB",
+      "AABVF",
+      "AACAY",
+      "AACB",
+      "AACBR",
+      "AACBU",
+      "AACG",
+      "AACTF",
+      "AADR",
+      "AAEQ",
+      "AAFRF",
+      "AAGAF",
+      "AAGC",
+      "AAGFF",
+      "AAGH",
+      "AAGIY",
+      "AAGR",
+      "AAGRW",
+      "AAIGF",
+      "AAIRF",
+      "AAL",
+      "AALG",
+      "AAMCF",
+      "AAME"
+    ],
+    "benchmark_symbols": [
+      "SPY",
+      "IWM"
+    ],
+    "delisted_symbols": [
+      "AAM-202602",
+      "ACCD-202504",
+      "ACHL-202503",
+      "ACLX-202604",
+      "ACTV-202510",
+      "ADVM-202512",
+      "ADXS-202602",
+      "AE-202502",
+      "AFTY-202410",
+      "AGIH-202508",
+      "AGR-202412",
+      "AGS-202506",
+      "AHL-202602",
+      "AHOY-202412",
+      "AIRL-202509",
+      "AITR-202504",
+      "AKRO-202512",
+      "AKTSQ-202601",
+      "AKYA-202507",
+      "AL-202604",
+      "ALE-202512",
+      "ALEX-202603",
+      "ALLK-202505",
+      "ALTM-202503",
+      "ALTR-202503",
+      "AMDS-202506",
+      "AMDU-202601",
+      "AMED-202508",
+      "AMNA-202412",
+      "AMND-202412"
+    ]
+  },
+  "status": "NORGATE_ADMISSIBLE_DATA_BUNDLE_TRIAL_LIMITED",
+  "survivorship_free_universe": true,
+  "symbol_counts": {
+    "active": 5,
+    "delisted": 12,
+    "total": 17
+  },
+  "trial_history_limit": "2_years_expected_from_trial_terms",
+  "trial_id": "NORGATE-CANDIDATE-003-MICRO-BACKTEST-001",
+  "trial_limited": true
+}

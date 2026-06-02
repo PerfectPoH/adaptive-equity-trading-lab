@@ -1,0 +1,462 @@
+{
+  "benchmark": {
+    "IWM": {
+      "total_return": 0.4439339217762772
+    },
+    "SPY": {
+      "total_return": 0.472147296238407
+    }
+  },
+  "bundle_id": "NORGATE-CANDIDATE-003-ADMISSIBLE-MICRO-BUNDLE-001",
+  "cost_bps": 100,
+  "disabled_sleeves": {
+    "Catalyst": "missing_point_in_time_event_and_direction_source",
+    "Dollar-Bar Microstructure": "daily_bars_cannot_reconstruct_dollar_bars"
+  },
+  "final_decision": {
+    "blockers": [
+      "trial_history_window_limited",
+      "trial_history_below_full_validation_requirement",
+      "promotion_locked_until_long_history_oos_gate",
+      "Catalyst:missing_point_in_time_event_and_direction_source",
+      "Dollar-Bar Microstructure:daily_bars_cannot_reconstruct_dollar_bars",
+      "outlier_dependency_ex_best_symbol_nonpositive",
+      "weak_distribution_win_rate_below_half",
+      "daily_only_dollar_bar_sleeve_disabled"
+    ],
+    "decision": "NORGATE_CANDIDATE_003_MICRO_BACKTEST_ARCHIVE_NO_PROMOTION",
+    "financial_performance_claimed": false,
+    "market_data_download_performed": false,
+    "next_allowed_action": "review_trial_limited_result_before_any_new_gate",
+    "portfolio_backtest_performed": true,
+    "promotion_allowed": false,
+    "provider_query_performed": true,
+    "trial_limited": true
+  },
+  "financial_performance_claimed": false,
+  "frozen_sleeve_weights": {
+    "Catalyst": 0.25,
+    "Dollar-Bar Microstructure": 0.25,
+    "Mean Reversion": 0.25,
+    "Momentum": 0.25
+  },
+  "frozen_trial_contract_summary": {
+    "active_daily_weight": 0.75,
+    "component_count": 4,
+    "disabled_weight_is_not_redistributed": true,
+    "idle_daily_weight": 0.25
+  },
+  "gate_id": "NORGATE-CANDIDATE-003-MICRO-BACKTEST-GATE-001",
+  "linked_candidate": "PORTFOLIO-CANDIDATE-003-MANUAL-COMPOSITE",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "robustness": {
+    "best_symbol": "AAL",
+    "best_symbol_weighted_net_return": 0.1289779673646039,
+    "ex_best_symbol_weighted_net_return": -0.023539510291263166,
+    "symbol_concentration_top1": 1.223253554202615
+  },
+  "run_id": "NORGATE-CANDIDATE-003-MICRO-BACKTEST-001",
+  "status": "NORGATE_PORTFOLIO_TRIAL_LIMITED_COMPLETE",
+  "summary": {
+    "gross_return_sum": 0.8517538282933631,
+    "max_drawdown": -0.19770622227213375,
+    "total_trades": 43,
+    "weighted_net_return_sum": 0.10543845707334074,
+    "win_rate": 0.37209302325581395
+  },
+  "symbol_counts": {
+    "active": 5,
+    "delisted": 12,
+    "tradable_with_frames": 17
+  },
+  "tradability_filter": {
+    "accepted_symbols": [
+      "A",
+      "AA",
+      "AAAU",
+      "AAGIY",
+      "AAL",
+      "ACCD-202504",
+      "ACLX-202604",
+      "AGR-202412",
+      "AGS-202506",
+      "AHL-202602",
+      "AKRO-202512",
+      "AL-202604",
+      "ALE-202512",
+      "ALEX-202603",
+      "ALTM-202503",
+      "ALTR-202503",
+      "AMED-202508",
+      "IWM",
+      "SPY"
+    ],
+    "diagnostics": {
+      "A": {
+        "median_turnover": 231398496.0,
+        "minimum_close": 98.48164367675781,
+        "rows": 500
+      },
+      "AA": {
+        "median_turnover": 198252816.0,
+        "minimum_close": 22.284093856811523,
+        "rows": 500
+      },
+      "AAA": {
+        "median_turnover": 194710.40625,
+        "minimum_close": 22.520389556884766,
+        "rows": 500
+      },
+      "AAAA": {
+        "median_turnover": 91098.046875,
+        "minimum_close": 24.799962997436523,
+        "rows": 221
+      },
+      "AAAC": {
+        "median_turnover": 178.95626831054688,
+        "minimum_close": 19.566043853759766,
+        "rows": 117
+      },
+      "AAAU": {
+        "median_turnover": 66176164.0,
+        "minimum_close": 22.639999389648438,
+        "rows": 500
+      },
+      "AABB": {
+        "median_turnover": 152423.40625,
+        "minimum_close": 0.012395000085234642,
+        "rows": 500
+      },
+      "AABVF": {
+        "median_turnover": 150.3839111328125,
+        "minimum_close": 0.013500000350177288,
+        "rows": 161
+      },
+      "AACAY": {
+        "median_turnover": 19427.359375,
+        "minimum_close": 2.9871041774749756,
+        "rows": 493
+      },
+      "AACB": {
+        "median_turnover": 65444.60546875,
+        "minimum_close": 9.880000114440918,
+        "rows": 198
+      },
+      "AACBR": {
+        "median_turnover": 538.0599975585938,
+        "minimum_close": 0.1598999947309494,
+        "rows": 149
+      },
+      "AACBU": {
+        "median_turnover": 9299.9599609375,
+        "minimum_close": 10.0,
+        "rows": 133
+      },
+      "AACG": {
+        "median_turnover": 16337.0078125,
+        "minimum_close": 0.5024999976158142,
+        "rows": 500
+      },
+      "AACTF": {
+        "median_turnover": 73.5,
+        "minimum_close": 0.003599999938160181,
+        "rows": 403
+      },
+      "AADR": {
+        "median_turnover": 138871.0625,
+        "minimum_close": 55.92894744873047,
+        "rows": 500
+      },
+      "AAEQ": {
+        "median_turnover": 6148.3369140625,
+        "minimum_close": 45.21009826660156,
+        "rows": 118
+      },
+      "AAFRF": {
+        "median_turnover": 3649.030029296875,
+        "minimum_close": 1.130967140197754,
+        "rows": 292
+      },
+      "AAGAF": {
+        "median_turnover": 120907.046875,
+        "minimum_close": 0.23000000417232513,
+        "rows": 345
+      },
+      "AAGC": {
+        "median_turnover": 2208.050048828125,
+        "minimum_close": 0.0003499999875202775,
+        "rows": 499
+      },
+      "AAGFF": {
+        "median_turnover": 193418.25,
+        "minimum_close": 0.18310000002384186,
+        "rows": 500
+      },
+      "AAGH": {
+        "median_turnover": 426.1197509765625,
+        "minimum_close": 9.999999974752427e-07,
+        "rows": 258
+      },
+      "AAGIY": {
+        "median_turnover": 10214920.0,
+        "minimum_close": 24.591859817504883,
+        "rows": 500
+      },
+      "AAGR": {
+        "median_turnover": 1.0,
+        "minimum_close": 9.999999974752427e-07,
+        "rows": 464
+      },
+      "AAGRW": {
+        "median_turnover": 8.48874282836914,
+        "minimum_close": 9.999999974752427e-07,
+        "rows": 104
+      },
+      "AAIGF": {
+        "median_turnover": 173478.109375,
+        "minimum_close": 5.693957328796387,
+        "rows": 500
+      },
+      "AAIRF": {
+        "median_turnover": 2987.042236328125,
+        "minimum_close": 0.01850000023841858,
+        "rows": 491
+      },
+      "AAL": {
+        "median_turnover": 615816896.0,
+        "minimum_close": 9.069999694824219,
+        "rows": 500
+      },
+      "AALG": {
+        "median_turnover": 231668.4375,
+        "minimum_close": 7.173999786376953,
+        "rows": 224
+      },
+      "AAM-202602": {
+        "median_turnover": 80615.953125,
+        "minimum_close": 9.979999542236328,
+        "rows": 328
+      },
+      "AAMCF": {
+        "median_turnover": 4603.501953125,
+        "minimum_close": 2500.0,
+        "rows": 173
+      },
+      "AAME": {
+        "median_turnover": 14667.173828125,
+        "minimum_close": 1.2899999618530273,
+        "rows": 498
+      },
+      "ACCD-202504": {
+        "median_turnover": 4627320.5,
+        "minimum_close": 3.1500000953674316,
+        "rows": 212
+      },
+      "ACHL-202503": {
+        "median_turnover": 74199.4453125,
+        "minimum_close": 0.7001000046730042,
+        "rows": 200
+      },
+      "ACLX-202604": {
+        "median_turnover": 40425168.0,
+        "minimum_close": 50.779998779296875,
+        "rows": 476
+      },
+      "ACTV-202510": {
+        "median_turnover": 168707.484375,
+        "minimum_close": 26.947486877441406,
+        "rows": 351
+      },
+      "ADVM-202512": {
+        "median_turnover": 923187.1875,
+        "minimum_close": 2.049999952316284,
+        "rows": 381
+      },
+      "ADXS-202602": {
+        "median_turnover": 38.51274871826172,
+        "minimum_close": 0.0012000000569969416,
+        "rows": 250
+      },
+      "AE-202502": {
+        "median_turnover": 187848.671875,
+        "minimum_close": 22.097213745117188,
+        "rows": 169
+      },
+      "AFTY-202410": {
+        "median_turnover": 6748.7392578125,
+        "minimum_close": 13.470000267028809,
+        "rows": 91
+      },
+      "AGIH-202508": {
+        "median_turnover": 124.2195053100586,
+        "minimum_close": 23.306364059448242,
+        "rows": 291
+      },
+      "AGR-202412": {
+        "median_turnover": 19912368.0,
+        "minimum_close": 34.33611297607422,
+        "rows": 141
+      },
+      "AGS-202506": {
+        "median_turnover": 3027647.0,
+        "minimum_close": 11.25,
+        "rows": 269
+      },
+      "AHL-202602": {
+        "median_turnover": 7760143.5,
+        "minimum_close": 27.510000228881836,
+        "rows": 199
+      },
+      "AHOY-202412": {
+        "median_turnover": 2597.457275390625,
+        "minimum_close": 23.516399383544922,
+        "rows": 141
+      },
+      "AIRL-202509": {
+        "median_turnover": 3309.135498046875,
+        "minimum_close": 21.351970672607422,
+        "rows": 321
+      },
+      "AITR-202504": {
+        "median_turnover": 27513.1875,
+        "minimum_close": 10.329999923706055,
+        "rows": 156
+      },
+      "AKRO-202512": {
+        "median_turnover": 35107248.0,
+        "minimum_close": 19.190000534057617,
+        "rows": 381
+      },
+      "AKTSQ-202601": {
+        "median_turnover": 4332.234375,
+        "minimum_close": 9.999999974752427e-07,
+        "rows": 354
+      },
+      "AKYA-202507": {
+        "median_turnover": 356135.71875,
+        "minimum_close": 0.9456999897956848,
+        "rows": 273
+      },
+      "AL-202604": {
+        "median_turnover": 44016120.0,
+        "minimum_close": 39.60513687133789,
+        "rows": 462
+      },
+      "ALE-202512": {
+        "median_turnover": 24493760.0,
+        "minimum_close": 58.34099578857422,
+        "rows": 385
+      },
+      "ALEX-202603": {
+        "median_turnover": 6502550.5,
+        "minimum_close": 14.886823654174805,
+        "rows": 445
+      },
+      "ALLK-202505": {
+        "median_turnover": 284633.4375,
+        "minimum_close": 0.21699999272823334,
+        "rows": 238
+      },
+      "ALTM-202503": {
+        "median_turnover": 45110892.0,
+        "minimum_close": 2.259999990463257,
+        "rows": 189
+      },
+      "ALTR-202503": {
+        "median_turnover": 58274936.0,
+        "minimum_close": 81.55999755859375,
+        "rows": 203
+      },
+      "AMDS-202506": {
+        "median_turnover": 527724.8125,
+        "minimum_close": 0.017753081396222115,
+        "rows": 263
+      },
+      "AMDU-202601": {
+        "median_turnover": 410472.28125,
+        "minimum_close": 12.700970649719238,
+        "rows": 109
+      },
+      "AMED-202508": {
+        "median_turnover": 31543596.0,
+        "minimum_close": 83.77999877929688,
+        "rows": 301
+      },
+      "AMNA-202412": {
+        "median_turnover": 647.9357299804688,
+        "minimum_close": 41.284584045410156,
+        "rows": 130
+      },
+      "AMND-202412": {
+        "median_turnover": 505.314697265625,
+        "minimum_close": 42.540218353271484,
+        "rows": 131
+      },
+      "IWM": {
+        "median_turnover": 6979904512.0,
+        "minimum_close": 172.95628356933594,
+        "rows": 500
+      },
+      "SPY": {
+        "median_turnover": 39005323264.0,
+        "minimum_close": 490.8526306152344,
+        "rows": 500
+      }
+    },
+    "filter_id": "NORGATE-TRADABILITY-GATE-001",
+    "min_median_turnover": 1000000.0,
+    "min_price": 1.0,
+    "min_rows": 90,
+    "rejections": {
+      "AAA": "median_turnover_below_threshold",
+      "AAAA": "median_turnover_below_threshold",
+      "AAAC": "median_turnover_below_threshold",
+      "AABB": "minimum_price_below_threshold",
+      "AABVF": "minimum_price_below_threshold",
+      "AACAY": "median_turnover_below_threshold",
+      "AACB": "median_turnover_below_threshold",
+      "AACBR": "minimum_price_below_threshold",
+      "AACBU": "median_turnover_below_threshold",
+      "AACG": "minimum_price_below_threshold",
+      "AACTF": "minimum_price_below_threshold",
+      "AADR": "median_turnover_below_threshold",
+      "AAEQ": "median_turnover_below_threshold",
+      "AAFRF": "median_turnover_below_threshold",
+      "AAGAF": "minimum_price_below_threshold",
+      "AAGC": "minimum_price_below_threshold",
+      "AAGFF": "minimum_price_below_threshold",
+      "AAGH": "minimum_price_below_threshold",
+      "AAGR": "minimum_price_below_threshold",
+      "AAGRW": "minimum_price_below_threshold",
+      "AAIGF": "median_turnover_below_threshold",
+      "AAIRF": "minimum_price_below_threshold",
+      "AALG": "median_turnover_below_threshold",
+      "AAM-202602": "median_turnover_below_threshold",
+      "AAMCF": "median_turnover_below_threshold",
+      "AAME": "median_turnover_below_threshold",
+      "ACHL-202503": "minimum_price_below_threshold",
+      "ACTV-202510": "median_turnover_below_threshold",
+      "ADVM-202512": "median_turnover_below_threshold",
+      "ADXS-202602": "minimum_price_below_threshold",
+      "AE-202502": "median_turnover_below_threshold",
+      "AFTY-202410": "median_turnover_below_threshold",
+      "AGIH-202508": "median_turnover_below_threshold",
+      "AHOY-202412": "median_turnover_below_threshold",
+      "AIRL-202509": "median_turnover_below_threshold",
+      "AITR-202504": "median_turnover_below_threshold",
+      "AKTSQ-202601": "minimum_price_below_threshold",
+      "AKYA-202507": "minimum_price_below_threshold",
+      "ALLK-202505": "minimum_price_below_threshold",
+      "AMDS-202506": "minimum_price_below_threshold",
+      "AMDU-202601": "median_turnover_below_threshold",
+      "AMNA-202412": "median_turnover_below_threshold",
+      "AMND-202412": "median_turnover_below_threshold"
+    }
+  },
+  "trial_limited": true
+}
