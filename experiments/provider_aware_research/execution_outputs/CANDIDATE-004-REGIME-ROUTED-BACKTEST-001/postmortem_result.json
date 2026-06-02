@@ -1,0 +1,16 @@
+{
+  "decision": "CANDIDATE_004_ARCHIVE_CURRENT_FORM_RESEARCH_LEAD_ONLY",
+  "findings": [
+    "The regime router successfully suppressed hostile regimes and reduced trading to RECOVERY_BOUNCE only.",
+    "The routed basket produced 14 trades, weighted net 0.150406, win rate 0.571, and max drawdown -0.027512.",
+    "Robustness failed because the best symbol FCEL contributed 0.151098; ex-best-symbol net was -0.000692.",
+    "Benchmark-relative interpretation failed versus both SPY and IWM during the Norgate trial window.",
+    "The router is useful as risk control, but this trial does not prove a standalone alpha engine."
+  ],
+  "next_allowed_action": "design_candidate_005_oos_or_long_history_regime_router_only_after_data_upgrade",
+  "parameter_sweep_performed": false,
+  "portfolio_backtest_performed": false,
+  "postmortem_id": "CANDIDATE-004-REGIME-ROUTED-BACKTEST-POSTMORTEM-001",
+  "promotion_allowed": false,
+  "source_run_id": "CANDIDATE-004-REGIME-ROUTED-BACKTEST-001"
+}

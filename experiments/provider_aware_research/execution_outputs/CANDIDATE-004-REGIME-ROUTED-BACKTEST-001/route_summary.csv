@@ -1,0 +1,3 @@
+regime_label,sleeve,trade_count,weighted_net_return_sum,median_net_return,win_rate
+RECOVERY_BOUNCE,Mean Reversion,6,0.007408981197753101,-0.010110840761227913,0.5
+RECOVERY_BOUNCE,Momentum,8,0.14299725338699432,0.0012606679215452308,0.625

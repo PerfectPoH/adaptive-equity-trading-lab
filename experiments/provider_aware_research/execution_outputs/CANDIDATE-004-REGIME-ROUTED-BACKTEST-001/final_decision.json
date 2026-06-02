@@ -1,0 +1,19 @@
+{
+  "blockers": [
+    "trial_history_window_limited",
+    "promotion_locked_until_long_history_oos_gate",
+    "sample_starved_regime_router",
+    "outlier_dependency_ex_best_symbol_nonpositive",
+    "benchmark_relative_not_positive"
+  ],
+  "decision": "CANDIDATE_004_REGIME_ROUTED_BACKTEST_ARCHIVE_NO_PROMOTION",
+  "financial_performance_claimed": false,
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "next_allowed_action": "review_candidate_004_regime_routed_backtest",
+  "paper_trading_allowed": false,
+  "parameter_sweep_performed": false,
+  "portfolio_backtest_performed": true,
+  "promotion_allowed": false,
+  "provider_query_performed": true
+}
