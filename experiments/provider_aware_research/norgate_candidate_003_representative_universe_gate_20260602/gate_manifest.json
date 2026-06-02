@@ -1,0 +1,39 @@
+{
+  "created_at_utc": "2026-06-02T10:40:00Z",
+  "created_date": "2026-06-02",
+  "data_source": "Norgate Data trial",
+  "final_decision": {
+    "blockers": [
+      "trial_history_window_limited",
+      "promotion_locked",
+      "representative_panel_required_before_second_backtest"
+    ],
+    "decision": "NORGATE_CANDIDATE_003_REPRESENTATIVE_UNIVERSE_GATE_APPROVED_TRIAL_LIMITED",
+    "financial_performance_claimed": false,
+    "live_trading_allowed": false,
+    "market_data_download_performed": false,
+    "next_allowed_action": "build_candidate_003_representative_universe_once",
+    "paper_trading_allowed": false,
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false,
+    "provider_query_performed": false
+  },
+  "gate_id": "NORGATE-CANDIDATE-003-REPRESENTATIVE-UNIVERSE-GATE-001",
+  "linked_candidate": "PORTFOLIO-CANDIDATE-003-MANUAL-COMPOSITE",
+  "linked_micro_backtest": "experiments/provider_aware_research/execution_outputs/NORGATE-CANDIDATE-003-MICRO-BACKTEST-001/final_decision.json",
+  "linked_postmortem": "experiments/provider_aware_research/execution_outputs/NORGATE-CANDIDATE-003-POSTMORTEM-001/postmortem_result.json",
+  "linked_schema_probe": "NORGATE-CANDIDATE-003-SCHEMA-PROBE-001",
+  "market_data_download_allowed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_allowed": false,
+  "portfolio_backtest_allowed": false,
+  "promotion_allowed": false,
+  "provider_query_allowed": true,
+  "purpose": "Authorize one representative-universe construction pass for Candidate 003 after the first micro-backtest exposed alphabetical symbol-selection bias.",
+  "raw_payload_retention_required": true,
+  "second_backtest_allowed": false,
+  "short_selling_allowed": false,
+  "status": "APPROVED_UNIVERSE_CONSTRUCTION_ONLY_TRIAL_LIMITED_NOT_BACKTEST",
+  "trial_history_limit": "2_years_expected_from_trial_terms",
+  "universe_build_id": "NORGATE-CANDIDATE-003-REPRESENTATIVE-UNIVERSE-001"
+}

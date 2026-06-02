@@ -1,0 +1,79 @@
+{
+  "allowed_provider_queries": [
+    "norgatedata.watchlist_symbols for the frozen historical watchlist names",
+    "norgatedata.database_symbols for US Equities and US Equities Delisted only to resolve active/delisted availability",
+    "norgatedata.first_quoted_date and norgatedata.last_quoted_date for membership and delisting metadata",
+    "norgatedata.price_timeseries daily adjusted OHLCV only for preselected universe-validation symbols and benchmarks"
+  ],
+  "anti_overfit_constraints": {
+    "cost_bps_change_allowed": false,
+    "holding_period_change_allowed": false,
+    "lookback_change_allowed": false,
+    "post_result_symbol_replacement_allowed": false,
+    "ranker_change_allowed": false,
+    "second_backtest_allowed_in_this_gate": false,
+    "sleeve_weight_change_allowed": false,
+    "strategy_parameter_sweep_allowed": false
+  },
+  "candidate_label": "PORTFOLIO-CANDIDATE-003-MANUAL-COMPOSITE",
+  "construction_steps": [
+    "Load the primary historical watchlist.",
+    "Resolve each symbol against US Equities and US Equities Delisted.",
+    "Discard non-common-like units, warrants, rights, and obvious derivative tickers before prices are inspected.",
+    "Apply stable hash sampling by symbol and database bucket, not alphabetical order.",
+    "Fetch adjusted daily OHLCV only for sampled symbols.",
+    "Apply the frozen tradability filter.",
+    "Archive the universe build if minimum panel requirements are not met.",
+    "If requirements are met, create a separate second-backtest gate before any Candidate 003 rerun."
+  ],
+  "disabled_sleeve_policy": {
+    "dollar_bar_microstructure_status": "disabled_idle",
+    "reason": "Norgate daily bars cannot reconstruct dollar bars.",
+    "weight_redistribution_allowed": false
+  },
+  "frozen_watchlists": {
+    "fallback_watchlists": [
+      "Russell 2000 Current & Past",
+      "Russell 1000 + 2000 + Micro Cap Superset Current & Past",
+      "NYSE Composite Current & Past",
+      "Nasdaq Composite Current & Past"
+    ],
+    "fallback_use_policy": "Use the first available fallback only if the primary watchlist is unavailable; record the reason before universe construction.",
+    "primary_watchlist": "Russell 2000 + Micro Cap Superset Current & Past"
+  },
+  "minimum_panel_requirements": {
+    "accepted_active_symbols_min": 40,
+    "accepted_delisted_symbols_min": 40,
+    "accepted_total_symbols_min": 100,
+    "benchmark_symbols_required": [
+      "SPY",
+      "IWM"
+    ],
+    "max_single_symbol_trade_share": 0.1,
+    "raw_active_symbols_target": 250,
+    "raw_delisted_symbols_target": 250,
+    "tradability_filter": {
+      "min_median_turnover": 1000000.0,
+      "min_price": 1.0,
+      "min_rows": 90
+    }
+  },
+  "sampling_method": {
+    "bucket_fields": [
+      "active_or_delisted",
+      "first_quoted_year_bucket",
+      "symbol_hash_decile"
+    ],
+    "hash_algorithm": "sha256(symbol + '|candidate003|20260602')",
+    "ordering_rule": "sort by bucket, then stable hash; never by raw ticker order",
+    "performance_data_used_for_sampling": false,
+    "replacement_after_price_fetch_allowed": false
+  },
+  "trial_limitation": {
+    "financial_performance_claim_allowed": false,
+    "promotion_allowed": false,
+    "reason": "Norgate free trial history is expected to provide roughly two years only.",
+    "trial_limited": true
+  },
+  "universe_build_id": "NORGATE-CANDIDATE-003-REPRESENTATIVE-UNIVERSE-001"
+}
