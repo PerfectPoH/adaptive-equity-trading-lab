@@ -1,0 +1,501 @@
+{
+  "created_at_utc": "2026-06-02T11:11:17.653629+00:00",
+  "decision": "CANDIDATE_004_REGIME_ATTRIBUTION_COMPLETE_NO_BACKTEST",
+  "financial_performance_claimed": false,
+  "linked_candidate_003_backtest": "experiments\\provider_aware_research\\execution_outputs\\NORGATE-CANDIDATE-003-SECOND-BACKTEST-001\\norgate_candidate_003_second_backtest_result.json",
+  "linked_gate": "experiments\\provider_aware_research\\candidate_004_regime_attribution_gate_20260602\\gate_manifest.json",
+  "linked_taxonomy": "experiments\\provider_aware_research\\candidate_004_regime_routed_portfolio_design_20260602\\regime_taxonomy.json",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "next_allowed_action": "review_candidate_004_regime_attribution_before_backtest_gate",
+  "paper_trading_allowed": false,
+  "parameter_sweep_performed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "provider_query_scope": [
+    "SPY",
+    "IWM"
+  ],
+  "run_id": "CANDIDATE-004-REGIME-ATTRIBUTION-DIAGNOSTIC-001",
+  "summary": {
+    "recommendations": [
+      {
+        "regime_label": "DRAWDOWN_STRESS",
+        "sleeve": "Mean Reversion",
+        "suggested_candidate_004_action": "INSUFFICIENT_SAMPLE_KEEP_DIAGNOSTIC_ONLY",
+        "trade_count": 4,
+        "weighted_net_return_sum": -0.1450852379419928,
+        "win_rate": 0.25
+      },
+      {
+        "regime_label": "INSUFFICIENT_HISTORY",
+        "sleeve": "Mean Reversion",
+        "suggested_candidate_004_action": "INSUFFICIENT_SAMPLE_KEEP_DIAGNOSTIC_ONLY",
+        "trade_count": 3,
+        "weighted_net_return_sum": -0.0904435698388838,
+        "win_rate": 0.0
+      },
+      {
+        "regime_label": "RANGE_LOW_VOL",
+        "sleeve": "Mean Reversion",
+        "suggested_candidate_004_action": "INSUFFICIENT_SAMPLE_KEEP_DIAGNOSTIC_ONLY",
+        "trade_count": 1,
+        "weighted_net_return_sum": -0.0080496838609978,
+        "win_rate": 0.0
+      },
+      {
+        "regime_label": "RECOVERY_BOUNCE",
+        "sleeve": "Mean Reversion",
+        "suggested_candidate_004_action": "CANDIDATE_ALLOWED_SLEEVE",
+        "trade_count": 6,
+        "weighted_net_return_sum": 0.0185224529943828,
+        "win_rate": 0.5
+      },
+      {
+        "regime_label": "RISK_OFF",
+        "sleeve": "Mean Reversion",
+        "suggested_candidate_004_action": "INSUFFICIENT_SAMPLE_KEEP_DIAGNOSTIC_ONLY",
+        "trade_count": 1,
+        "weighted_net_return_sum": 0.0488714554772428,
+        "win_rate": 1.0
+      },
+      {
+        "regime_label": "TREND_UP_HIGH_VOL",
+        "sleeve": "Mean Reversion",
+        "suggested_candidate_004_action": "INSUFFICIENT_SAMPLE_KEEP_DIAGNOSTIC_ONLY",
+        "trade_count": 2,
+        "weighted_net_return_sum": 0.053181860781536305,
+        "win_rate": 0.5
+      },
+      {
+        "regime_label": "TREND_UP_LOW_VOL",
+        "sleeve": "Mean Reversion",
+        "suggested_candidate_004_action": "INSUFFICIENT_SAMPLE_KEEP_DIAGNOSTIC_ONLY",
+        "trade_count": 2,
+        "weighted_net_return_sum": -0.043709692056241804,
+        "win_rate": 0.5
+      },
+      {
+        "regime_label": "DRAWDOWN_STRESS",
+        "sleeve": "Momentum",
+        "suggested_candidate_004_action": "BLOCK_OR_ROUTE_TO_CASH",
+        "trade_count": 8,
+        "weighted_net_return_sum": -0.17325269779582822,
+        "win_rate": 0.0
+      },
+      {
+        "regime_label": "INSUFFICIENT_HISTORY",
+        "sleeve": "Momentum",
+        "suggested_candidate_004_action": "BLOCK_OR_ROUTE_TO_CASH",
+        "trade_count": 6,
+        "weighted_net_return_sum": -0.10302928225933838,
+        "win_rate": 0.0
+      },
+      {
+        "regime_label": "RECOVERY_BOUNCE",
+        "sleeve": "Momentum",
+        "suggested_candidate_004_action": "CANDIDATE_ALLOWED_SLEEVE",
+        "trade_count": 16,
+        "weighted_net_return_sum": 0.28599450677398863,
+        "win_rate": 0.625
+      },
+      {
+        "regime_label": "RISK_OFF",
+        "sleeve": "Momentum",
+        "suggested_candidate_004_action": "INSUFFICIENT_SAMPLE_KEEP_DIAGNOSTIC_ONLY",
+        "trade_count": 2,
+        "weighted_net_return_sum": 0.2989689641551422,
+        "win_rate": 1.0
+      },
+      {
+        "regime_label": "TREND_UP_HIGH_VOL",
+        "sleeve": "Momentum",
+        "suggested_candidate_004_action": "POSITIVE_BUT_WEAK_DISTRIBUTION_REQUIRE_CAP_OR_CONFIRMATION",
+        "trade_count": 6,
+        "weighted_net_return_sum": 0.29288932447439714,
+        "win_rate": 0.3333333333333333
+      },
+      {
+        "regime_label": "TREND_UP_LOW_VOL",
+        "sleeve": "Momentum",
+        "suggested_candidate_004_action": "INSUFFICIENT_SAMPLE_KEEP_DIAGNOSTIC_ONLY",
+        "trade_count": 4,
+        "weighted_net_return_sum": 0.055355294849175604,
+        "win_rate": 0.5
+      }
+    ],
+    "regime_count": 7,
+    "summary_by_component_regime": [
+      {
+        "best_symbol": "THRD-202507",
+        "component_id": "28fb7b03aa56a91e",
+        "component_template": "Momentum",
+        "median_net_return": -0.07988034481731295,
+        "regime_label": "DRAWDOWN_STRESS",
+        "trade_count": 4,
+        "weighted_net_return_sum": -0.08662634889791411,
+        "win_rate": 0.0
+      },
+      {
+        "best_symbol": "APLD",
+        "component_id": "a42078cbf0a2ea94",
+        "component_template": "Mean Reversion",
+        "median_net_return": -0.21200948416943216,
+        "regime_label": "DRAWDOWN_STRESS",
+        "trade_count": 4,
+        "weighted_net_return_sum": -0.1450852379419928,
+        "win_rate": 0.25
+      },
+      {
+        "best_symbol": "THRD-202507",
+        "component_id": "acc065823d9dcfb7",
+        "component_template": "Momentum",
+        "median_net_return": -0.07988034481731295,
+        "regime_label": "DRAWDOWN_STRESS",
+        "trade_count": 4,
+        "weighted_net_return_sum": -0.08662634889791411,
+        "win_rate": 0.0
+      },
+      {
+        "best_symbol": "APLD",
+        "component_id": "28fb7b03aa56a91e",
+        "component_template": "Momentum",
+        "median_net_return": -0.0464298392719972,
+        "regime_label": "INSUFFICIENT_HISTORY",
+        "trade_count": 3,
+        "weighted_net_return_sum": -0.0515146411296692,
+        "win_rate": 0.0
+      },
+      {
+        "best_symbol": "AISP",
+        "component_id": "a42078cbf0a2ea94",
+        "component_template": "Mean Reversion",
+        "median_net_return": -0.1215384079295493,
+        "regime_label": "INSUFFICIENT_HISTORY",
+        "trade_count": 3,
+        "weighted_net_return_sum": -0.0904435698388838,
+        "win_rate": 0.0
+      },
+      {
+        "best_symbol": "APLD",
+        "component_id": "acc065823d9dcfb7",
+        "component_template": "Momentum",
+        "median_net_return": -0.0464298392719972,
+        "regime_label": "INSUFFICIENT_HISTORY",
+        "trade_count": 3,
+        "weighted_net_return_sum": -0.0515146411296692,
+        "win_rate": 0.0
+      },
+      {
+        "best_symbol": "GEOS",
+        "component_id": "a42078cbf0a2ea94",
+        "component_template": "Mean Reversion",
+        "median_net_return": -0.0321987354439913,
+        "regime_label": "RANGE_LOW_VOL",
+        "trade_count": 1,
+        "weighted_net_return_sum": -0.0080496838609978,
+        "win_rate": 0.0
+      },
+      {
+        "best_symbol": "FCEL",
+        "component_id": "28fb7b03aa56a91e",
+        "component_template": "Momentum",
+        "median_net_return": 0.00126066792154515,
+        "regime_label": "RECOVERY_BOUNCE",
+        "trade_count": 8,
+        "weighted_net_return_sum": 0.14299725338699432,
+        "win_rate": 0.625
+      },
+      {
+        "best_symbol": "CORT",
+        "component_id": "a42078cbf0a2ea94",
+        "component_template": "Mean Reversion",
+        "median_net_return": -0.0101108407612279,
+        "regime_label": "RECOVERY_BOUNCE",
+        "trade_count": 6,
+        "weighted_net_return_sum": 0.0185224529943828,
+        "win_rate": 0.5
+      },
+      {
+        "best_symbol": "FCEL",
+        "component_id": "acc065823d9dcfb7",
+        "component_template": "Momentum",
+        "median_net_return": 0.00126066792154515,
+        "regime_label": "RECOVERY_BOUNCE",
+        "trade_count": 8,
+        "weighted_net_return_sum": 0.14299725338699432,
+        "win_rate": 0.625
+      },
+      {
+        "best_symbol": "FSLY",
+        "component_id": "28fb7b03aa56a91e",
+        "component_template": "Momentum",
+        "median_net_return": 0.5979379283102846,
+        "regime_label": "RISK_OFF",
+        "trade_count": 1,
+        "weighted_net_return_sum": 0.1494844820775711,
+        "win_rate": 1.0
+      },
+      {
+        "best_symbol": "DSGR",
+        "component_id": "a42078cbf0a2ea94",
+        "component_template": "Mean Reversion",
+        "median_net_return": 0.1954858219089712,
+        "regime_label": "RISK_OFF",
+        "trade_count": 1,
+        "weighted_net_return_sum": 0.0488714554772428,
+        "win_rate": 1.0
+      },
+      {
+        "best_symbol": "FSLY",
+        "component_id": "acc065823d9dcfb7",
+        "component_template": "Momentum",
+        "median_net_return": 0.5979379283102846,
+        "regime_label": "RISK_OFF",
+        "trade_count": 1,
+        "weighted_net_return_sum": 0.1494844820775711,
+        "win_rate": 1.0
+      },
+      {
+        "best_symbol": "TERN-202605",
+        "component_id": "28fb7b03aa56a91e",
+        "component_template": "Momentum",
+        "median_net_return": -0.0593370449094435,
+        "regime_label": "TREND_UP_HIGH_VOL",
+        "trade_count": 3,
+        "weighted_net_return_sum": 0.14644466223719857,
+        "win_rate": 0.3333333333333333
+      },
+      {
+        "best_symbol": "NGNE",
+        "component_id": "a42078cbf0a2ea94",
+        "component_template": "Mean Reversion",
+        "median_net_return": 0.10636372156307275,
+        "regime_label": "TREND_UP_HIGH_VOL",
+        "trade_count": 2,
+        "weighted_net_return_sum": 0.053181860781536305,
+        "win_rate": 0.5
+      },
+      {
+        "best_symbol": "TERN-202605",
+        "component_id": "acc065823d9dcfb7",
+        "component_template": "Momentum",
+        "median_net_return": -0.0593370449094435,
+        "regime_label": "TREND_UP_HIGH_VOL",
+        "trade_count": 3,
+        "weighted_net_return_sum": 0.14644466223719857,
+        "win_rate": 0.3333333333333333
+      },
+      {
+        "best_symbol": "CDTX-202601",
+        "component_id": "28fb7b03aa56a91e",
+        "component_template": "Momentum",
+        "median_net_return": 0.05535529484917551,
+        "regime_label": "TREND_UP_LOW_VOL",
+        "trade_count": 2,
+        "weighted_net_return_sum": 0.027677647424587802,
+        "win_rate": 0.5
+      },
+      {
+        "best_symbol": "KULR",
+        "component_id": "a42078cbf0a2ea94",
+        "component_template": "Mean Reversion",
+        "median_net_return": -0.0874193841124836,
+        "regime_label": "TREND_UP_LOW_VOL",
+        "trade_count": 2,
+        "weighted_net_return_sum": -0.043709692056241804,
+        "win_rate": 0.5
+      },
+      {
+        "best_symbol": "CDTX-202601",
+        "component_id": "acc065823d9dcfb7",
+        "component_template": "Momentum",
+        "median_net_return": 0.05535529484917551,
+        "regime_label": "TREND_UP_LOW_VOL",
+        "trade_count": 2,
+        "weighted_net_return_sum": 0.027677647424587802,
+        "win_rate": 0.5
+      }
+    ],
+    "summary_by_regime": [
+      {
+        "best_symbol": "APLD",
+        "median_net_return": -0.11306334454592801,
+        "regime_label": "DRAWDOWN_STRESS",
+        "trade_count": 12,
+        "weighted_net_return_sum": -0.318337935737821,
+        "win_rate": 0.08333333333333333
+      },
+      {
+        "best_symbol": "APLD",
+        "median_net_return": -0.1093377331824506,
+        "regime_label": "INSUFFICIENT_HISTORY",
+        "trade_count": 9,
+        "weighted_net_return_sum": -0.1934728520982222,
+        "win_rate": 0.0
+      },
+      {
+        "best_symbol": "GEOS",
+        "median_net_return": -0.0321987354439913,
+        "regime_label": "RANGE_LOW_VOL",
+        "trade_count": 1,
+        "weighted_net_return_sum": -0.0080496838609978,
+        "win_rate": 0.0
+      },
+      {
+        "best_symbol": "FCEL",
+        "median_net_return": 0.00126066792154515,
+        "regime_label": "RECOVERY_BOUNCE",
+        "trade_count": 22,
+        "weighted_net_return_sum": 0.30451695976837134,
+        "win_rate": 0.5909090909090909
+      },
+      {
+        "best_symbol": "FSLY",
+        "median_net_return": 0.5979379283102846,
+        "regime_label": "RISK_OFF",
+        "trade_count": 3,
+        "weighted_net_return_sum": 0.347840419632385,
+        "win_rate": 1.0
+      },
+      {
+        "best_symbol": "TERN-202605",
+        "median_net_return": -0.0593370449094435,
+        "regime_label": "TREND_UP_HIGH_VOL",
+        "trade_count": 8,
+        "weighted_net_return_sum": 0.3460711852559335,
+        "win_rate": 0.375
+      },
+      {
+        "best_symbol": "CDTX-202601",
+        "median_net_return": 0.02206510697883875,
+        "regime_label": "TREND_UP_LOW_VOL",
+        "trade_count": 6,
+        "weighted_net_return_sum": 0.0116456027929338,
+        "win_rate": 0.5
+      }
+    ],
+    "summary_by_sleeve_regime": [
+      {
+        "best_symbol": "APLD",
+        "median_net_return": -0.21200948416943216,
+        "regime_label": "DRAWDOWN_STRESS",
+        "sleeve": "Mean Reversion",
+        "trade_count": 4,
+        "weighted_net_return_sum": -0.1450852379419928,
+        "win_rate": 0.25
+      },
+      {
+        "best_symbol": "AISP",
+        "median_net_return": -0.1215384079295493,
+        "regime_label": "INSUFFICIENT_HISTORY",
+        "sleeve": "Mean Reversion",
+        "trade_count": 3,
+        "weighted_net_return_sum": -0.0904435698388838,
+        "win_rate": 0.0
+      },
+      {
+        "best_symbol": "GEOS",
+        "median_net_return": -0.0321987354439913,
+        "regime_label": "RANGE_LOW_VOL",
+        "sleeve": "Mean Reversion",
+        "trade_count": 1,
+        "weighted_net_return_sum": -0.0080496838609978,
+        "win_rate": 0.0
+      },
+      {
+        "best_symbol": "CORT",
+        "median_net_return": -0.0101108407612279,
+        "regime_label": "RECOVERY_BOUNCE",
+        "sleeve": "Mean Reversion",
+        "trade_count": 6,
+        "weighted_net_return_sum": 0.0185224529943828,
+        "win_rate": 0.5
+      },
+      {
+        "best_symbol": "DSGR",
+        "median_net_return": 0.1954858219089712,
+        "regime_label": "RISK_OFF",
+        "sleeve": "Mean Reversion",
+        "trade_count": 1,
+        "weighted_net_return_sum": 0.0488714554772428,
+        "win_rate": 1.0
+      },
+      {
+        "best_symbol": "NGNE",
+        "median_net_return": 0.10636372156307275,
+        "regime_label": "TREND_UP_HIGH_VOL",
+        "sleeve": "Mean Reversion",
+        "trade_count": 2,
+        "weighted_net_return_sum": 0.053181860781536305,
+        "win_rate": 0.5
+      },
+      {
+        "best_symbol": "KULR",
+        "median_net_return": -0.0874193841124836,
+        "regime_label": "TREND_UP_LOW_VOL",
+        "sleeve": "Mean Reversion",
+        "trade_count": 2,
+        "weighted_net_return_sum": -0.043709692056241804,
+        "win_rate": 0.5
+      },
+      {
+        "best_symbol": "THRD-202507",
+        "median_net_return": -0.07988034481731295,
+        "regime_label": "DRAWDOWN_STRESS",
+        "sleeve": "Momentum",
+        "trade_count": 8,
+        "weighted_net_return_sum": -0.17325269779582822,
+        "win_rate": 0.0
+      },
+      {
+        "best_symbol": "APLD",
+        "median_net_return": -0.0464298392719972,
+        "regime_label": "INSUFFICIENT_HISTORY",
+        "sleeve": "Momentum",
+        "trade_count": 6,
+        "weighted_net_return_sum": -0.10302928225933838,
+        "win_rate": 0.0
+      },
+      {
+        "best_symbol": "FCEL",
+        "median_net_return": 0.00126066792154515,
+        "regime_label": "RECOVERY_BOUNCE",
+        "sleeve": "Momentum",
+        "trade_count": 16,
+        "weighted_net_return_sum": 0.28599450677398863,
+        "win_rate": 0.625
+      },
+      {
+        "best_symbol": "FSLY",
+        "median_net_return": 0.5979379283102846,
+        "regime_label": "RISK_OFF",
+        "sleeve": "Momentum",
+        "trade_count": 2,
+        "weighted_net_return_sum": 0.2989689641551422,
+        "win_rate": 1.0
+      },
+      {
+        "best_symbol": "TERN-202605",
+        "median_net_return": -0.0593370449094435,
+        "regime_label": "TREND_UP_HIGH_VOL",
+        "sleeve": "Momentum",
+        "trade_count": 6,
+        "weighted_net_return_sum": 0.29288932447439714,
+        "win_rate": 0.3333333333333333
+      },
+      {
+        "best_symbol": "CDTX-202601",
+        "median_net_return": 0.05535529484917551,
+        "regime_label": "TREND_UP_LOW_VOL",
+        "sleeve": "Momentum",
+        "trade_count": 4,
+        "weighted_net_return_sum": 0.055355294849175604,
+        "win_rate": 0.5
+      }
+    ],
+    "total_mapped_trades": 61
+  },
+  "taxonomy_id": "CANDIDATE-004-REGIME-TAXONOMY-001"
+}

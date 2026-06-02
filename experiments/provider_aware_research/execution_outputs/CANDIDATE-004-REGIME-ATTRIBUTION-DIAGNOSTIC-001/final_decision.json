@@ -1,0 +1,9 @@
+{
+  "decision": "CANDIDATE_004_REGIME_ATTRIBUTION_COMPLETE_NO_BACKTEST",
+  "market_data_download_performed": false,
+  "next_allowed_action": "review_candidate_004_regime_attribution_before_backtest_gate",
+  "parameter_sweep_performed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": true
+}

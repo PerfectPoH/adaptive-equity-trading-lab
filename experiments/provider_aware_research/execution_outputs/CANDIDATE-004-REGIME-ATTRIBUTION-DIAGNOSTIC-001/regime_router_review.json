@@ -1,0 +1,59 @@
+{
+  "candidate_004_router_draft": [
+    {
+      "reason": "negative net and near-total loss rate",
+      "regime_label": "DRAWDOWN_STRESS",
+      "route": "Cash/No-Trade"
+    },
+    {
+      "reason": "no stable regime evidence",
+      "regime_label": "INSUFFICIENT_HISTORY",
+      "route": "Cash/No-Trade"
+    },
+    {
+      "reason": "only positive cell with enough mapped trades",
+      "regime_label": "RECOVERY_BOUNCE",
+      "route": "Momentum primary; Mean Reversion diagnostic secondary"
+    },
+    {
+      "reason": "positive total but weak distribution",
+      "regime_label": "TREND_UP_HIGH_VOL",
+      "route": "Momentum capped or confirmation-required only"
+    },
+    {
+      "reason": "only 6 trades total",
+      "regime_label": "TREND_UP_LOW_VOL",
+      "route": "Diagnostic only until more trades"
+    },
+    {
+      "reason": "only 1 mapped trade",
+      "regime_label": "RANGE_LOW_VOL",
+      "route": "Cash/No-Trade until evidence exists"
+    },
+    {
+      "reason": "no mapped evidence",
+      "regime_label": "RANGE_HIGH_VOL",
+      "route": "Cash/No-Trade"
+    },
+    {
+      "reason": "sample too small and ex-ante risk-off rule dominates",
+      "regime_label": "RISK_OFF",
+      "route": "Cash/No-Trade despite positive sample"
+    }
+  ],
+  "core_findings": [
+    "DRAWDOWN_STRESS is structurally hostile: 12 trades, weighted net -0.318338, win rate 8.3%. Candidate 004 should route active sleeves to Cash there.",
+    "RECOVERY_BOUNCE is the only observed regime with a usable sample and positive distribution: 22 trades, weighted net 0.304517, win rate 59.1%.",
+    "Momentum in RECOVERY_BOUNCE is the cleanest sleeve/regime cell: 16 trades, weighted net 0.285995, win rate 62.5%.",
+    "TREND_UP_HIGH_VOL is positive but fragile: 8 trades, weighted net 0.346071, median net negative, win rate 37.5%, best symbol TERN-202605.",
+    "RISK_OFF looks positive only because of 3 trades, so it must not override the ex-ante Cash rule.",
+    "INSUFFICIENT_HISTORY must route to Cash because it produced 9 trades, weighted net -0.193473, win rate 0%."
+  ],
+  "decision": "CANDIDATE_004_ROUTER_REVIEW_COMPLETE_BACKTEST_GATE_NOT_YET_APPROVED",
+  "next_allowed_action": "create_candidate_004_regime_routed_backtest_gate_if_user_approves",
+  "parameter_sweep_performed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "review_id": "CANDIDATE-004-REGIME-ROUTER-REVIEW-001",
+  "source_run_id": "CANDIDATE-004-REGIME-ATTRIBUTION-DIAGNOSTIC-001"
+}
