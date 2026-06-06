@@ -125,6 +125,21 @@ def test_run_candidate_007_norgate_dataset_builder_honors_gate_and_writes_final_
     assert (output_dir / "final_decision.json").exists()
 
 
+def test_run_candidate_007_norgate_dataset_builder_accepts_rerun_gate_status(tmp_path: Path) -> None:
+    gate_dir = tmp_path / "gate"
+    output_dir = tmp_path / "out"
+    _gate(gate_dir)
+    manifest = json.loads((gate_dir / "gate_manifest.json").read_text(encoding="utf-8"))
+    manifest["status"] = "APPROVED_NORGATE_SURVIVORSHIP_FREE_PANEL_RERUN_AFTER_VALIDATOR_TOLERANCE_FIX"
+    (gate_dir / "gate_manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+    frames = {"AAA": _frame(10), "DDD": _frame(5), "SPY": _frame(400), "IWM": _frame(200)}
+    adapter = FakeNorgateAdapter(frames, {"US Equities": ["AAA"], "US Equities Delisted": ["DDD"]})
+
+    result = run_candidate_007_norgate_dataset_builder(gate_dir=gate_dir, output_dir=output_dir, adapter=adapter)
+
+    assert result["decision"] == "CANDIDATE_007_NORGATE_DATASET_COMPLETE_DATASET_READY_NO_PROMOTION"
+
+
 def test_validate_candidate_007_dataset_allows_tiny_ohlc_rounding_tolerance(tmp_path: Path) -> None:
     pd.DataFrame(
         [

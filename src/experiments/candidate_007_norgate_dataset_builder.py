@@ -387,7 +387,11 @@ def _write_blocked_provider_result(output_dir: Path, gate_dir: Path, error: str)
 
 
 def _validate_gate(gate: dict[str, Any]) -> None:
-    if gate.get("status") != "APPROVED_NORGATE_SURVIVORSHIP_FREE_PANEL_BUILD_ONLY":
+    approved_statuses = {
+        "APPROVED_NORGATE_SURVIVORSHIP_FREE_PANEL_BUILD_ONLY",
+        "APPROVED_NORGATE_SURVIVORSHIP_FREE_PANEL_RERUN_AFTER_VALIDATOR_TOLERANCE_FIX",
+    }
+    if gate.get("status") not in approved_statuses:
         raise RuntimeError("Candidate 007 Norgate dataset gate is not approved.")
     for key in ("strategy_backtest_allowed", "kronos_inference_allowed", "portfolio_selection_allowed", "promotion_allowed", "paper_trading_allowed", "live_trading_allowed"):
         if gate.get(key):
