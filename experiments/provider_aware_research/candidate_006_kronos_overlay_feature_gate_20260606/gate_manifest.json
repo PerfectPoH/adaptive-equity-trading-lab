@@ -1,0 +1,39 @@
+{
+  "gate_id": "CANDIDATE-006-KRONOS-OVERLAY-FEATURE-GATE-001",
+  "created_at_utc": "2026-06-06T00:00:00Z",
+  "status": "APPROVED_KRONOS_OVERLAY_READINESS_DIAGNOSTIC_ONLY",
+  "purpose": "Authorize a diagnostic that checks whether archived Kronos forecast features are sufficiently broad and point-in-time aligned to be connected to Candidate 005 as a reranking/filter overlay.",
+  "linked_candidate": "CANDIDATE-006-KRONOS-ADAPTER",
+  "linked_baseline": "CANDIDATE-005-RECOVERY-BREADTH-BACKTEST-001",
+  "linked_smoke": "CANDIDATE-006-KRONOS-INFERENCE-SMOKE-RERUN-002",
+  "allowed_actions": [
+    "read archived Candidate 005 trade log",
+    "read archived Kronos smoke feature artifact",
+    "compute overlay coverage diagnostics",
+    "write readiness artifact and final decision"
+  ],
+  "forbidden_actions": [
+    "run new Kronos inference",
+    "download market data",
+    "query providers",
+    "run portfolio backtest",
+    "optimize Kronos thresholds on PnL",
+    "rerank Candidate 005 trades using realized returns",
+    "claim alpha or financial performance",
+    "paper trade",
+    "live trade",
+    "promote strategy"
+  ],
+  "coverage_contract": {
+    "minimum_symbols_covered_ratio": 0.8,
+    "minimum_trade_rows_covered_ratio": 0.8,
+    "minimum_rebalance_dates_covered_ratio": 0.8,
+    "minimum_unique_symbols": 30,
+    "minimum_unique_signal_dates": 5,
+    "single_symbol_smoke_is_never_sufficient": true
+  },
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_006_kronos_overlay_readiness_diagnostic_once"
+}
