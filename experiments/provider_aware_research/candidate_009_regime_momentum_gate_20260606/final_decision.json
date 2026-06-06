@@ -1,0 +1,13 @@
+{
+  "gate_id": "CANDIDATE-009-REGIME-MOMENTUM-GATE-001",
+  "decision": "APPROVED_ONE_POST_AUTOPSY_REGIME_MOMENTUM_BACKTEST_DIAGNOSTIC_ONLY",
+  "provider_query_allowed": false,
+  "market_data_download_allowed": false,
+  "kronos_inference_allowed": false,
+  "portfolio_search_allowed": false,
+  "parameter_sweep_allowed": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_009_regime_momentum_once"
+}
