@@ -1,0 +1,14 @@
+{
+  "blockers": [
+    "diagnostic_only_regime_atlas",
+    "same_dataset_as_prior_candidates",
+    "trial_limited_two_year_history",
+    "descriptive_ranking_not_promotable"
+  ],
+  "decision": "CANDIDATE_010_REGIME_STRATEGY_MAP_ARCHIVE_NO_PROMOTION",
+  "market_data_download_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "research_candidate_only": false
+}
