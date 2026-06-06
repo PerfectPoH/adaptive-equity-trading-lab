@@ -1,0 +1,63 @@
+{
+  "gate_id": "CANDIDATE-007-NORGATE-DATASET-GATE-001",
+  "created_at_utc": "2026-06-06T00:00:00Z",
+  "status": "APPROVED_NORGATE_SURVIVORSHIP_FREE_PANEL_BUILD_ONLY",
+  "purpose": "Authorize one bounded local Norgate dataset build for a survivorship-aware research panel. This is data engineering only, not alpha research.",
+  "provider": "Norgate Data",
+  "local_provider_only": true,
+  "target_database_names": {
+    "active": "US Equities",
+    "delisted": "US Equities Delisted"
+  },
+  "benchmark_symbols": ["SPY", "IWM"],
+  "limits": {
+    "active_symbol_limit": 250,
+    "delisted_symbol_limit": 250,
+    "min_rows": 90
+  },
+  "required_outputs": [
+    "prices.csv",
+    "security_master.csv",
+    "tradability_report.json",
+    "dataset_manifest.json",
+    "data_input_validation_report.json",
+    "candidate_007_norgate_dataset_report.md",
+    "final_decision.json"
+  ],
+  "required_quality_claims": [
+    "active_and_delisted_universe_declared_separately",
+    "trial_limited_history_declared",
+    "raw_payload_retention_policy_declared",
+    "file_hashes_recorded",
+    "promotion_locked_false"
+  ],
+  "allowed_actions": [
+    "read local Norgate symbols",
+    "read local Norgate daily price timeseries",
+    "derive bounded prices.csv",
+    "derive bounded security_master.csv",
+    "compute file hashes",
+    "write dataset artifacts"
+  ],
+  "forbidden_actions": [
+    "provider query outside local Norgate installation",
+    "download market data from internet",
+    "run strategy backtest",
+    "run Kronos inference",
+    "run portfolio selection",
+    "parameter sweep",
+    "claim alpha or financial performance",
+    "paper trade",
+    "live trade",
+    "promote strategy"
+  ],
+  "provider_query_allowed": true,
+  "internet_market_data_download_allowed": false,
+  "strategy_backtest_allowed": false,
+  "kronos_inference_allowed": false,
+  "portfolio_selection_allowed": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_007_norgate_dataset_builder_once"
+}
