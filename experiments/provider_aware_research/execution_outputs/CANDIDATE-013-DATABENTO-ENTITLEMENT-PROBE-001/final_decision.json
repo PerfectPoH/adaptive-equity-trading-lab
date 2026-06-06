@@ -1,0 +1,9 @@
+{
+  "blockers": [
+    "databento_reference_entitlement_missing"
+  ],
+  "candidate_014_backtest_allowed": false,
+  "decision": "DATABENTO_FRESH_DATA_BLOCKED_REFERENCE_ENTITLEMENT",
+  "next_allowed_action": "resolve_provider_entitlement_or_choose_provider",
+  "promotion_allowed": false
+}
