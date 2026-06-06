@@ -1,0 +1,100 @@
+{
+  "benchmark": {
+    "IWM": {
+      "oos_return": 0.3788868121679061
+    },
+    "SPY": {
+      "oos_return": 0.25942132702077325
+    }
+  },
+  "created_at_utc": "2026-06-06T18:46:29.560665+00:00",
+  "decision": "CANDIDATE_008_NORGATE_OOS_BASELINE_ARCHIVE_NO_PROMOTION",
+  "final_decision": {
+    "blockers": [
+      "diagnostic_only_no_promotion",
+      "trial_limited_two_year_history",
+      "oos_weighted_net_nonpositive",
+      "oos_ex_top3_weighted_net_nonpositive",
+      "oos_does_not_beat_spy",
+      "oos_does_not_beat_iwm"
+    ],
+    "decision": "CANDIDATE_008_NORGATE_OOS_BASELINE_ARCHIVE_NO_PROMOTION",
+    "market_data_download_performed": false,
+    "parameter_sweep_performed": false,
+    "promotion_allowed": false,
+    "provider_query_performed": false,
+    "research_candidate_only": false
+  },
+  "financial_performance_claimed": false,
+  "kronos_inference_performed": false,
+  "linked_dataset": "experiments\\provider_aware_research\\data_inputs\\CANDIDATE-007-NORGATE-DATASET-RERUN-002",
+  "linked_gate": "experiments\\provider_aware_research\\candidate_008_norgate_oos_baseline_gate_20260606\\gate_manifest.json",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "oos_split": {
+    "in_sample_end": "2025-06-02",
+    "out_of_sample_start": "2025-06-03"
+  },
+  "paper_trading_allowed": false,
+  "parameter_sweep_performed": false,
+  "portfolio_backtest_performed": true,
+  "portfolio_search_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "robustness": {
+    "oos_best_symbol": "AAOI",
+    "oos_ex_top3_weighted_net_sum": -0.2325955701789696,
+    "oos_top3_weighted_net_sum": 0.1875953276136261
+  },
+  "run_id": "CANDIDATE-008-NORGATE-OOS-BASELINE-001",
+  "strategy_contract": {
+    "cost_bps_round_trip": 500,
+    "rebalance_every_n_trading_days": 20,
+    "sleeves": {
+      "mean_reversion_5d": {
+        "holding_days": 10,
+        "lookback_days": 5,
+        "rank_direction": "lowest_return",
+        "sleeve_weight": 0.5,
+        "top_k": 5
+      },
+      "momentum_60d": {
+        "holding_days": 20,
+        "lookback_days": 60,
+        "rank_direction": "highest_return",
+        "sleeve_weight": 0.5,
+        "top_k": 5
+      }
+    },
+    "strategy_id": "CANDIDATE-008-FIXED-MOMENTUM-MEAN-REVERSION-BASELINE",
+    "tradability": {
+      "min_history_rows": 90,
+      "min_price_asof": 1.0,
+      "min_trailing_20d_median_turnover": 1000000.0
+    }
+  },
+  "summary_by_split": {
+    "is": {
+      "max_drawdown": -0.5708074167245063,
+      "median_net_return": -0.08996587333244695,
+      "trade_count": 68,
+      "weighted_net_sum": -0.4772755953645461,
+      "win_rate": 0.27941176470588236
+    },
+    "oos": {
+      "max_drawdown": -0.2587217382381713,
+      "median_net_return": -0.009830866807611208,
+      "trade_count": 89,
+      "weighted_net_sum": -0.045000242565343504,
+      "win_rate": 0.449438202247191
+    }
+  },
+  "symbol_counts": {
+    "active_symbols": 250,
+    "benchmarks": 2,
+    "delisted_symbols": 250,
+    "frames": 502,
+    "research_symbols": 500
+  },
+  "trial_limited": true
+}

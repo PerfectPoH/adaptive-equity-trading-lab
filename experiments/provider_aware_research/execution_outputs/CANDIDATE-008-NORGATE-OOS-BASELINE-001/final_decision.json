@@ -1,0 +1,16 @@
+{
+  "blockers": [
+    "diagnostic_only_no_promotion",
+    "trial_limited_two_year_history",
+    "oos_weighted_net_nonpositive",
+    "oos_ex_top3_weighted_net_nonpositive",
+    "oos_does_not_beat_spy",
+    "oos_does_not_beat_iwm"
+  ],
+  "decision": "CANDIDATE_008_NORGATE_OOS_BASELINE_ARCHIVE_NO_PROMOTION",
+  "market_data_download_performed": false,
+  "parameter_sweep_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "research_candidate_only": false
+}
