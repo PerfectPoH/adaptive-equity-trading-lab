@@ -1,0 +1,8 @@
+{
+  "decision": "APPROVED_ONE_REGIME_STRATEGY_MAP_DIAGNOSTIC_ONLY",
+  "promotion_allowed": false,
+  "provider_query_allowed": false,
+  "market_data_download_allowed": false,
+  "parameter_sweep_allowed": false,
+  "next_allowed_action": "run_candidate_010_regime_strategy_map_once"
+}
