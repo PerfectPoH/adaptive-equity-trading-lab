@@ -1,0 +1,8 @@
+{
+  "gate_id": "CANDIDATE-006-KRONOS-OVERLAY-BACKTEST-GATE-001",
+  "decision": "APPROVED_ONE_KRONOS_OVERLAY_BACKTEST_SIGN_FILTER_ONLY",
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_006_kronos_overlay_backtest_once"
+}

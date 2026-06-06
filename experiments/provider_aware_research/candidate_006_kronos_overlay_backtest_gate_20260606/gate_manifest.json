@@ -1,0 +1,40 @@
+{
+  "gate_id": "CANDIDATE-006-KRONOS-OVERLAY-BACKTEST-GATE-001",
+  "created_at_utc": "2026-06-06T00:00:00Z",
+  "status": "APPROVED_ONE_KRONOS_OVERLAY_BACKTEST_SIGN_FILTER_ONLY",
+  "purpose": "Authorize one diagnostic overlay backtest using the frozen Kronos batch features as a sign filter on Candidate 005 trades.",
+  "linked_trade_log": "experiments/provider_aware_research/execution_outputs/CANDIDATE-005-RECOVERY-BREADTH-BACKTEST-001/trade_log.csv",
+  "linked_batch_features": "experiments/provider_aware_research/execution_outputs/CANDIDATE-006-KRONOS-BATCH-FEATURES-001/kronos_batch_features.csv",
+  "linked_readiness": "experiments/provider_aware_research/execution_outputs/CANDIDATE-006-KRONOS-OVERLAY-READINESS-RERUN-002/final_decision.json",
+  "overlay_rule": {
+    "rule_id": "KRONOS_LONG_ONLY_SIGN_FILTER_001",
+    "description": "For each existing Candidate 005 long trade, keep the trade only when kronos_forecast_return_median is strictly positive. Otherwise route that trade weight to cash. Do not redistribute cash weight to surviving trades.",
+    "feature": "kronos_forecast_return_median",
+    "threshold": 0.0,
+    "operator": ">",
+    "weight_redistribution_allowed": false
+  },
+  "allowed_actions": [
+    "join Candidate 005 trade log to archived Kronos feature rows by symbol and signal_date/as_of_date",
+    "apply the frozen sign filter",
+    "compute diagnostic performance and robustness metrics",
+    "write overlay backtest artifacts"
+  ],
+  "forbidden_actions": [
+    "run new Kronos inference",
+    "query providers",
+    "download market data",
+    "change threshold",
+    "sweep thresholds",
+    "rerank top-k",
+    "redistribute rejected trade weight",
+    "fine-tune Kronos",
+    "paper trade",
+    "live trade",
+    "promote strategy"
+  ],
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_006_kronos_overlay_backtest_once"
+}
