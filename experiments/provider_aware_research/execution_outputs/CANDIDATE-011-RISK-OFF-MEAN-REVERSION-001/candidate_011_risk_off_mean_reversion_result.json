@@ -1,0 +1,115 @@
+{
+  "benchmark": {
+    "IWM": {
+      "oos_return": 0.3788868121679061
+    },
+    "SPY": {
+      "oos_return": 0.25942132702077325
+    }
+  },
+  "created_at_utc": "2026-06-06T19:33:22.028555+00:00",
+  "decision": "CANDIDATE_011_RISK_OFF_MEAN_REVERSION_ARCHIVE_NO_PROMOTION",
+  "final_decision": {
+    "blockers": [
+      "diagnostic_only_same_dataset_as_discovery",
+      "trial_limited_two_year_history",
+      "oos_trade_count_below_threshold",
+      "oos_does_not_beat_spy",
+      "oos_does_not_beat_iwm"
+    ],
+    "decision": "CANDIDATE_011_RISK_OFF_MEAN_REVERSION_ARCHIVE_NO_PROMOTION",
+    "market_data_download_performed": false,
+    "parameter_sweep_performed": false,
+    "performance_gates_passed": false,
+    "promotion_allowed": false,
+    "provider_query_performed": false,
+    "research_candidate_only": false
+  },
+  "financial_performance_claimed": false,
+  "kronos_inference_performed": false,
+  "linked_candidate_010": "experiments/provider_aware_research/execution_outputs/CANDIDATE-010-REGIME-STRATEGY-MAP-001/candidate_010_regime_strategy_map_result.json",
+  "linked_dataset": "experiments\\provider_aware_research\\data_inputs\\CANDIDATE-007-NORGATE-DATASET-RERUN-002",
+  "linked_gate": "experiments\\provider_aware_research\\candidate_011_risk_off_mean_reversion_gate_20260606\\gate_manifest.json",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "oos_split": {
+    "in_sample_end": "2025-06-02",
+    "out_of_sample_start": "2025-06-03"
+  },
+  "paper_trading_allowed": false,
+  "parameter_sweep_performed": false,
+  "performance_gates_passed": false,
+  "portfolio_backtest_performed": true,
+  "portfolio_search_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "regime_summary": [
+    {
+      "median_net_return": -0.045378577172171766,
+      "regime_label": "RISK_OFF",
+      "split": "is",
+      "trade_count": 20,
+      "weighted_net_sum": -0.0753394175357502,
+      "win_rate": 0.25
+    },
+    {
+      "median_net_return": 0.04353333624035231,
+      "regime_label": "RISK_OFF",
+      "split": "oos",
+      "trade_count": 19,
+      "weighted_net_sum": 0.06586794899032468,
+      "win_rate": 0.7368421052631579
+    }
+  ],
+  "robustness": {
+    "oos_best_symbol": "AARD",
+    "oos_ex_top3_weighted_net_sum": 0.011322359249125807,
+    "oos_top3_weighted_net_sum": 0.05454558974119886
+  },
+  "run_id": "CANDIDATE-011-RISK-OFF-MEAN-REVERSION-001",
+  "same_dataset_as_discovery": true,
+  "strategy_contract": {
+    "allowed_regimes": [
+      "RISK_OFF"
+    ],
+    "cost_bps_round_trip": 500,
+    "rebalance_every_n_trading_days": 20,
+    "sleeve": {
+      "holding_days": 10,
+      "lookback_days": 5,
+      "name": "risk_off_mean_reversion_5d",
+      "rank_direction": "lowest_return",
+      "top_k": 20
+    },
+    "strategy_id": "CANDIDATE-011-RISK-OFF-MEAN-REVERSION-BREADTH",
+    "tradability": {
+      "min_history_rows": 90,
+      "min_price_asof": 1.0,
+      "min_trailing_20d_median_turnover": 1000000.0
+    }
+  },
+  "summary_by_split": {
+    "is": {
+      "max_drawdown": 0.0,
+      "median_net_return": -0.045378577172171766,
+      "trade_count": 20,
+      "weighted_net_sum": -0.0753394175357502,
+      "win_rate": 0.25
+    },
+    "oos": {
+      "max_drawdown": 0.0,
+      "median_net_return": 0.04353333624035231,
+      "trade_count": 19,
+      "weighted_net_sum": 0.06586794899032468,
+      "win_rate": 0.7368421052631579
+    }
+  },
+  "symbol_counts": {
+    "active_symbols": 250,
+    "benchmarks": 2,
+    "delisted_symbols": 250,
+    "frames": 502,
+    "research_symbols": 500
+  },
+  "trial_limited": true
+}

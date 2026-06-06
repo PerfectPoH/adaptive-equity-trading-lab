@@ -1,0 +1,3 @@
+split,regime_label,trade_count,weighted_net_sum,median_net_return,win_rate
+is,RISK_OFF,20,-0.0753394175357502,-0.045378577172171766,0.25
+oos,RISK_OFF,19,0.06586794899032468,0.04353333624035231,0.7368421052631579
