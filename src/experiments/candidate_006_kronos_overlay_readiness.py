@@ -15,6 +15,9 @@ TRADE_LOG = Path("experiments/provider_aware_research/execution_outputs/CANDIDAT
 KRONOS_SMOKE_RESULT = Path(
     "experiments/provider_aware_research/execution_outputs/CANDIDATE-006-KRONOS-INFERENCE-SMOKE-RERUN-002/kronos_smoke_result.json"
 )
+BATCH_FEATURE_ROWS = Path(
+    "experiments/provider_aware_research/execution_outputs/CANDIDATE-006-KRONOS-BATCH-FEATURES-001/kronos_batch_features.csv"
+)
 
 
 def compute_overlay_coverage(trade_log: pd.DataFrame, feature_rows: list[dict[str, Any]]) -> dict[str, Any]:
@@ -58,11 +61,16 @@ def run_candidate_006_kronos_overlay_readiness(
     output_dir: Path = OUTPUT_DIR,
     trade_log_path: Path = TRADE_LOG,
     kronos_smoke_result_path: Path = KRONOS_SMOKE_RESULT,
+    kronos_feature_rows_path: Path | None = None,
 ) -> dict[str, Any]:
     gate = _read_json(gate_dir / "gate_manifest.json")
     _validate_gate(gate)
     trades = pd.read_csv(trade_log_path)
-    feature_rows = _feature_rows_from_smoke(kronos_smoke_result_path)
+    feature_rows = (
+        _feature_rows_from_csv(kronos_feature_rows_path)
+        if kronos_feature_rows_path is not None
+        else _feature_rows_from_smoke(kronos_smoke_result_path)
+    )
     coverage = compute_overlay_coverage(trades, feature_rows)
     blockers = _coverage_blockers(coverage, gate["coverage_contract"])
     decision = (
@@ -77,6 +85,7 @@ def run_candidate_006_kronos_overlay_readiness(
         "linked_gate": str(gate_dir / "gate_manifest.json"),
         "linked_candidate_005_trade_log": str(trade_log_path),
         "linked_kronos_smoke_result": str(kronos_smoke_result_path),
+        "linked_kronos_feature_rows": str(kronos_feature_rows_path) if kronos_feature_rows_path is not None else None,
         "provider_query_performed": False,
         "market_data_download_performed": False,
         "new_kronos_inference_performed": False,
@@ -112,6 +121,15 @@ def _feature_rows_from_smoke(path: Path) -> list[dict[str, Any]]:
     ]
 
 
+def _feature_rows_from_csv(path: Path) -> list[dict[str, Any]]:
+    rows = pd.read_csv(path)
+    required = {"symbol", "as_of_date"}
+    missing = required - set(rows.columns)
+    if missing:
+        raise ValueError(f"Kronos feature CSV missing columns: {sorted(missing)}")
+    return rows.to_dict(orient="records")
+
+
 def _coverage_blockers(coverage: dict[str, Any], contract: dict[str, Any]) -> list[str]:
     blockers: list[str] = []
     if contract.get("single_symbol_smoke_is_never_sufficient") and coverage["unique_feature_symbols"] <= 1:
@@ -138,7 +156,11 @@ def _next_action(blockers: list[str]) -> str:
 
 
 def _validate_gate(gate: dict[str, Any]) -> None:
-    if gate.get("status") != "APPROVED_KRONOS_OVERLAY_READINESS_DIAGNOSTIC_ONLY":
+    approved_statuses = {
+        "APPROVED_KRONOS_OVERLAY_READINESS_DIAGNOSTIC_ONLY",
+        "APPROVED_KRONOS_OVERLAY_READINESS_RERUN_WITH_BATCH_FEATURES_ONLY",
+    }
+    if gate.get("status") not in approved_statuses:
         raise RuntimeError("Kronos overlay readiness gate is not approved.")
     for key in ("promotion_allowed", "paper_trading_allowed", "live_trading_allowed"):
         if gate.get(key):
@@ -179,12 +201,28 @@ def _markdown_report(result: dict[str, Any]) -> str:
         "",
         "## Interpretation",
         "",
-        "The archived Kronos smoke proves the model can emit features, but it is not broad enough to touch Candidate 005.",
-        "Using one SPY forecast to rerank a 37-trade, 282-symbol recovery breadth basket would be an overfitting trap.",
+    ]
+    if result["blockers"]:
+        lines.extend(
+            [
+                "The archived Kronos feature set is not broad enough to touch Candidate 005.",
+                "Using insufficient forecasts to rerank a recovery breadth basket would be an overfitting trap.",
+            ]
+        )
+    else:
+        lines.extend(
+            [
+                "The archived Kronos feature set covers the frozen Candidate 005 trade rows and rebalance dates.",
+                "This only clears the coverage precondition. A separate gate is still required before any overlay backtest.",
+            ]
+        )
+    lines.extend(
+        [
         "",
         "## Blockers",
         "",
-    ]
+        ]
+    )
     if result["blockers"]:
         for blocker in result["blockers"]:
             lines.append(f"- `{blocker}`")

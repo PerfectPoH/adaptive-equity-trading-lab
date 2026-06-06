@@ -1,0 +1,10 @@
+{
+  "blockers": [],
+  "decision": "CANDIDATE_006_KRONOS_OVERLAY_READINESS_COMPLETE_FEATURE_COVERAGE_OK",
+  "market_data_download_performed": false,
+  "new_kronos_inference_performed": false,
+  "next_allowed_action": "Create a separate Kronos overlay backtest gate with frozen reranking rule and no threshold optimization.",
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false
+}

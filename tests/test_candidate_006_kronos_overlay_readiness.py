@@ -80,3 +80,36 @@ def test_readiness_run_is_no_backtest_and_no_promotion(tmp_path: Path) -> None:
     assert result["promotion_allowed"] is False
     assert "kronos_feature_coverage_below_contract" in result["blockers"]
     assert (tmp_path / "out" / "kronos_overlay_readiness_result.json").is_file()
+
+
+def test_readiness_accepts_batch_feature_csv_without_backtest(tmp_path: Path) -> None:
+    gate_dir = tmp_path / "gate"
+    _gate(gate_dir)
+    trade_path = tmp_path / "trade_log.csv"
+    pd.DataFrame(
+        [
+            {"symbol": "AAA", "signal_date": "2026-01-02"},
+            {"symbol": "BBB", "signal_date": "2026-01-02"},
+            {"symbol": "CCC", "signal_date": "2026-01-05"},
+        ]
+    ).to_csv(trade_path, index=False)
+    features_path = tmp_path / "batch_features.csv"
+    pd.DataFrame(
+        [
+            {"symbol": "AAA", "as_of_date": "2026-01-02", "kronos_probability_up": 0.6},
+            {"symbol": "BBB", "as_of_date": "2026-01-02", "kronos_probability_up": 0.4},
+            {"symbol": "CCC", "as_of_date": "2026-01-05", "kronos_probability_up": 0.8},
+        ]
+    ).to_csv(features_path, index=False)
+
+    result = readiness.run_candidate_006_kronos_overlay_readiness(
+        gate_dir=gate_dir,
+        output_dir=tmp_path / "out",
+        trade_log_path=trade_path,
+        kronos_feature_rows_path=features_path,
+    )
+
+    assert result["decision"] == "CANDIDATE_006_KRONOS_OVERLAY_READINESS_COMPLETE_FEATURE_COVERAGE_OK"
+    assert result["portfolio_backtest_performed"] is False
+    assert result["new_kronos_inference_performed"] is False
+    assert result["coverage"]["trade_rows_covered_ratio"] == 1.0

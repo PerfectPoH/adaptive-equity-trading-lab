@@ -1,0 +1,12 @@
+{
+  "blockers": [],
+  "decision": "CANDIDATE_006_KRONOS_BATCH_FEATURE_GENERATION_COMPLETE",
+  "network_market_data_download_performed": false,
+  "new_kronos_inference_performed": true,
+  "next_allowed_action": "Run overlay readiness diagnostic on batch features before any Kronos overlay backtest.",
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "realized_return_input_used": false,
+  "threshold_optimization_performed": false
+}

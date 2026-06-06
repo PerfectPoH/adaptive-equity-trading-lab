@@ -1,0 +1,39 @@
+{
+  "blockers": [],
+  "clone_result": {
+    "git_clone_performed": false,
+    "repo_dir": ".external\\kronos"
+  },
+  "coverage": {
+    "date_coverage_ratio": 1.0,
+    "feature_rows": 37,
+    "frozen_pairs": 37,
+    "pair_coverage_ratio": 1.0,
+    "symbol_coverage_ratio": 1.0,
+    "unique_feature_dates": 8,
+    "unique_feature_symbols": 32,
+    "unique_trade_dates": 8,
+    "unique_trade_symbols": 32
+  },
+  "created_at_utc": "2026-06-06T13:55:43.196417+00:00",
+  "decision": "CANDIDATE_006_KRONOS_BATCH_FEATURE_GENERATION_COMPLETE",
+  "financial_performance_claimed": false,
+  "fine_tuning_performed": false,
+  "frozen_pair_count": 37,
+  "git_clone_performed": false,
+  "linked_gate": "experiments\\provider_aware_research\\candidate_006_kronos_batch_feature_gate_20260606\\gate_manifest.json",
+  "linked_trade_log": "experiments\\provider_aware_research\\execution_outputs\\CANDIDATE-005-RECOVERY-BREADTH-BACKTEST-001\\trade_log.csv",
+  "live_trading_allowed": false,
+  "model_download_performed": true,
+  "network_market_data_download_performed": false,
+  "new_kronos_inference_performed": true,
+  "next_allowed_action": "Run overlay readiness diagnostic on batch features before any Kronos overlay backtest.",
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": true,
+  "provider_query_scope": "local_norgate_for_frozen_candidate_005_symbols",
+  "realized_return_input_used": false,
+  "run_id": "CANDIDATE-006-KRONOS-BATCH-FEATURES-001",
+  "threshold_optimization_performed": false
+}
