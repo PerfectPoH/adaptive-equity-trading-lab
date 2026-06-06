@@ -1,0 +1,55 @@
+{
+  "gate_id": "CANDIDATE-006-KRONOS-BATCH-FEATURE-GATE-001",
+  "created_at_utc": "2026-06-06T00:00:00Z",
+  "status": "APPROVED_KRONOS_BATCH_FEATURE_GENERATION_ONLY",
+  "purpose": "Authorize batch Kronos feature generation for the frozen Candidate 005 signal universe so overlay coverage can be checked without using realized PnL.",
+  "linked_candidate": "CANDIDATE-006-KRONOS-ADAPTER",
+  "linked_baseline_trade_log": "experiments/provider_aware_research/execution_outputs/CANDIDATE-005-RECOVERY-BREADTH-BACKTEST-001/trade_log.csv",
+  "linked_readiness_blocker": "CANDIDATE-006-KRONOS-OVERLAY-READINESS-001",
+  "allowed_actions": [
+    "read Candidate 005 trade log for symbol and signal_date only",
+    "read local Norgate OHLCV history for frozen Candidate 005 symbols only",
+    "run Kronos-mini CPU inference for each frozen symbol/signal_date pair with enough lookback history",
+    "write feature rows and coverage diagnostics"
+  ],
+  "allowed_models": {
+    "tokenizer": "NeoQuasar/Kronos-Tokenizer-2k",
+    "model": "NeoQuasar/Kronos-mini"
+  },
+  "runtime_constraints": {
+    "device": "cpu",
+    "max_symbol_date_pairs": 37,
+    "lookback_rows": 32,
+    "pred_len": 5,
+    "sample_count": 1,
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "timeout_seconds": 1800
+  },
+  "data_scope": {
+    "source": "local_norgate_existing_database",
+    "network_market_data_download_allowed": false,
+    "realized_return_columns_allowed": false,
+    "allowed_trade_log_columns": [
+      "symbol",
+      "signal_date"
+    ]
+  },
+  "forbidden_actions": [
+    "use entry_price exit_price gross_return net_return or weighted_net_return as an input",
+    "run portfolio backtest",
+    "rerank trades",
+    "optimize thresholds on forecast output",
+    "fine-tune Kronos",
+    "query nonlocal providers",
+    "download market data",
+    "claim alpha or financial performance",
+    "paper trade",
+    "live trade",
+    "promote strategy"
+  ],
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_006_kronos_batch_feature_generation_once"
+}

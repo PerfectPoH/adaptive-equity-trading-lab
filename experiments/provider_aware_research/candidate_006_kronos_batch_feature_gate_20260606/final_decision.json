@@ -1,0 +1,8 @@
+{
+  "gate_id": "CANDIDATE-006-KRONOS-BATCH-FEATURE-GATE-001",
+  "decision": "APPROVED_KRONOS_BATCH_FEATURE_GENERATION_ONLY",
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_006_kronos_batch_feature_generation_once"
+}
