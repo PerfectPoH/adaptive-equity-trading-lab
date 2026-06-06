@@ -1,0 +1,10 @@
+{
+  "decision": "CANDIDATE_007_DATASET_AUDIT_READY_FOR_BACKTEST_SPEC",
+  "kronos_inference_performed": false,
+  "market_data_download_performed": false,
+  "next_allowed_action": "Create a separate preregistered backtest spec using this dataset.",
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "readiness_blockers": [],
+  "strategy_backtest_performed": false
+}

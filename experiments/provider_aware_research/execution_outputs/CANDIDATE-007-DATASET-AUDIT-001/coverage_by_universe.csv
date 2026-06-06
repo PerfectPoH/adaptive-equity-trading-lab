@@ -1,0 +1,14 @@
+metric,value
+total_symbols,502
+research_symbols,500
+active_symbols,250
+delisted_symbols,250
+benchmark_symbols,2
+price_rows,173526
+first_date,2024-06-03
+last_date,2026-06-05
+median_rows_per_symbol,354.0
+min_rows_per_symbol,91
+max_rows_per_symbol,504
+delisted_share_of_research_universe,0.5
+trial_limited,True

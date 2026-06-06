@@ -1,0 +1,79 @@
+{
+  "coverage": {
+    "active_symbols": 250,
+    "benchmark_symbols": 2,
+    "delisted_share_of_research_universe": 0.5,
+    "delisted_symbols": 250,
+    "first_date": "2024-06-03",
+    "last_date": "2026-06-05",
+    "max_rows_per_symbol": 504,
+    "median_rows_per_symbol": 354.0,
+    "min_rows_per_symbol": 91,
+    "price_rows": 173526,
+    "required_benchmarks_present": [
+      "IWM",
+      "SPY"
+    ],
+    "research_symbols": 500,
+    "total_symbols": 502,
+    "trial_limited": true
+  },
+  "created_at_utc": "2026-06-06T15:00:09.177147+00:00",
+  "dataset_manifest_decision": "CANDIDATE_007_NORGATE_DATASET_COMPLETE_DATASET_READY_NO_PROMOTION",
+  "dataset_validation_decision": "DATA_INPUT_VALIDATION_PASS",
+  "decision": "CANDIDATE_007_DATASET_AUDIT_READY_FOR_BACKTEST_SPEC",
+  "financial_performance_claimed": false,
+  "kronos_inference_performed": false,
+  "linked_dataset": "experiments\\provider_aware_research\\data_inputs\\CANDIDATE-007-NORGATE-DATASET-RERUN-002",
+  "liquidity": {
+    "by_universe": [
+      {
+        "median_min_close": 9.01,
+        "median_rows": 504.0,
+        "median_turnover": 156279.0815,
+        "sub_dollar_symbols": 63,
+        "symbols": 250,
+        "universe_status": "active"
+      },
+      {
+        "median_min_close": 331.904455,
+        "median_rows": 504.0,
+        "median_turnover": 23005389370.625957,
+        "sub_dollar_symbols": 0,
+        "symbols": 2,
+        "universe_status": "benchmark"
+      },
+      {
+        "median_min_close": 11.219999999999999,
+        "median_rows": 266.0,
+        "median_turnover": 231017.12894999998,
+        "sub_dollar_symbols": 38,
+        "symbols": 250,
+        "universe_status": "delisted"
+      }
+    ],
+    "sub_dollar_symbol_count": 101,
+    "tradable_symbol_count_price_ge_1_turnover_ge_1m": 160
+  },
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "next_allowed_action": "Create a separate preregistered backtest spec using this dataset.",
+  "paper_trading_allowed": false,
+  "portfolio_selection_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "readiness_blockers": [],
+  "run_id": "CANDIDATE-007-DATASET-AUDIT-001",
+  "strategy_backtest_performed": false,
+  "thresholds": {
+    "min_active_symbols": 200,
+    "min_delisted_symbols": 200,
+    "min_median_rows_per_symbol": 90,
+    "min_price_rows": 100000,
+    "min_total_symbols": 400,
+    "required_benchmarks": [
+      "SPY",
+      "IWM"
+    ]
+  }
+}
