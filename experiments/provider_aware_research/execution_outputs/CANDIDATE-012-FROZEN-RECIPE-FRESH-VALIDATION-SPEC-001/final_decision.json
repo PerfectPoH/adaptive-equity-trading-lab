@@ -1,0 +1,9 @@
+{
+  "blockers": [
+    "fresh_data_gate_required_before_backtest",
+    "same_dataset_reuse_forbidden",
+    "trial_limited_discovery_not_promotable"
+  ],
+  "decision": "CANDIDATE_012_FROZEN_RECIPE_AWAITING_FRESH_DATA",
+  "promotion_allowed": false
+}

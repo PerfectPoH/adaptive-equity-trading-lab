@@ -1,0 +1,108 @@
+{
+  "created_at_utc": "2026-06-06T19:45:37.526637+00:00",
+  "execution_permissions": {
+    "backtest_allowed_now": false,
+    "live_trading_allowed": false,
+    "market_data_download_allowed": false,
+    "next_allowed_action": "create_separate_fresh_data_gate_or_wait_for_data",
+    "paper_trading_allowed": false,
+    "parameter_sweep_allowed": false,
+    "promotion_allowed": false,
+    "provider_query_allowed": false
+  },
+  "final_decision": {
+    "blockers": [
+      "fresh_data_gate_required_before_backtest",
+      "same_dataset_reuse_forbidden",
+      "trial_limited_discovery_not_promotable"
+    ],
+    "decision": "CANDIDATE_012_FROZEN_RECIPE_AWAITING_FRESH_DATA",
+    "promotion_allowed": false
+  },
+  "fresh_data_contract": {
+    "allowed_dataset_examples": [
+      "new Norgate full-history export outside the trial-limited Candidate 007 window",
+      "CRSP/WRDS survivorship-free daily equity extract",
+      "Sharadar/Nasdaq Data Link equity prices plus delisted coverage if licensing permits"
+    ],
+    "forbidden_dataset_paths": [
+      "experiments/provider_aware_research/data_inputs/CANDIDATE-007-NORGATE-DATASET-RERUN-002"
+    ],
+    "minimum_history_years": 5,
+    "must_be_survivorship_aware": true,
+    "must_document_corporate_action_policy": true,
+    "must_document_listing_dates": true,
+    "must_include_active": true,
+    "must_include_delisted": true,
+    "must_include_spy_iwm_benchmarks": true,
+    "must_use_adjusted_daily_ohlcv": true,
+    "required_status": "separate_data_gate_committed_before_backtest"
+  },
+  "frozen_recipe": {
+    "allowed_regimes": [
+      "RISK_OFF"
+    ],
+    "cost_bps_round_trip": 500,
+    "rebalance_every_n_trading_days": 20,
+    "sleeve": {
+      "holding_days": 10,
+      "lookback_days": 5,
+      "name": "risk_off_mean_reversion_5d",
+      "rank_direction": "lowest_return",
+      "top_k": 20
+    },
+    "source_strategy_id": "CANDIDATE-011-RISK-OFF-MEAN-REVERSION-BREADTH",
+    "strategy_id": "CANDIDATE-012-FROZEN-RISK-OFF-MEAN-REVERSION-5D",
+    "tradability": {
+      "min_history_rows": 90,
+      "min_price_asof": 1.0,
+      "min_trailing_20d_median_turnover": 1000000.0
+    }
+  },
+  "purpose": "Freeze the Candidate 011 RISK_OFF mean-reversion recipe and require a separate fresh-data gate before any additional backtest. This prevents sculpting Candidate 007 after discovery.",
+  "source_candidate": {
+    "decision": "CANDIDATE_011_RISK_OFF_MEAN_REVERSION_ARCHIVE_NO_PROMOTION",
+    "discovery_dataset": "experiments/provider_aware_research/data_inputs/CANDIDATE-007-NORGATE-DATASET-RERUN-002",
+    "observed_oos": {
+      "max_drawdown": 0.0,
+      "median_net_return": 0.04353333624035231,
+      "trade_count": 19,
+      "weighted_net_sum": 0.06586794899032468,
+      "win_rate": 0.7368421052631579
+    },
+    "observed_robustness": {
+      "oos_best_symbol": "AARD",
+      "oos_ex_top3_weighted_net_sum": 0.011322359249125807,
+      "oos_top3_weighted_net_sum": 0.05454558974119886
+    },
+    "result_path": "experiments\\provider_aware_research\\execution_outputs\\CANDIDATE-011-RISK-OFF-MEAN-REVERSION-001\\candidate_011_risk_off_mean_reversion_result.json",
+    "run_id": "CANDIDATE-011-RISK-OFF-MEAN-REVERSION-001"
+  },
+  "spec_id": "CANDIDATE-012-FROZEN-RECIPE-FRESH-VALIDATION-SPEC-001",
+  "status": "FROZEN_RECIPE_AWAITING_FRESH_DATA",
+  "validation_contract": {
+    "benchmarks": [
+      "cash",
+      "SPY",
+      "IWM",
+      "equal_weight_tradable_universe"
+    ],
+    "cash_is_allowed_when_regime_not_risk_off": true,
+    "no_parameter_changes": true,
+    "no_recipe_search_on_test": true,
+    "no_symbol_pruning_after_results": true,
+    "robustness_gates": {
+      "min_oos_trades": 30,
+      "require_max_single_symbol_contribution_below": 0.25,
+      "require_oos_beats_cash": true,
+      "require_oos_beats_iwm": true,
+      "require_oos_beats_spy": true,
+      "require_oos_win_rate_at_least": 0.5,
+      "require_positive_ex_top10pct_oos_net": true,
+      "require_positive_ex_top3_oos_net": true,
+      "require_positive_oos_median": true,
+      "require_positive_oos_net": true
+    },
+    "time_split": "fresh dataset must define train/validation/test before execution"
+  }
+}
