@@ -1,0 +1,8 @@
+{
+  "gate_id": "CANDIDATE-006-KRONOS-OVERLAY-READINESS-RERUN-GATE-001",
+  "decision": "APPROVED_KRONOS_OVERLAY_READINESS_RERUN_WITH_BATCH_FEATURES_ONLY",
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_006_kronos_overlay_readiness_with_batch_features_once"
+}

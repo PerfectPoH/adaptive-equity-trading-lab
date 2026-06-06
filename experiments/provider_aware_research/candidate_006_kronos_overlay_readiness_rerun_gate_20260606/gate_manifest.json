@@ -1,0 +1,39 @@
+{
+  "gate_id": "CANDIDATE-006-KRONOS-OVERLAY-READINESS-RERUN-GATE-001",
+  "created_at_utc": "2026-06-06T00:00:00Z",
+  "status": "APPROVED_KRONOS_OVERLAY_READINESS_RERUN_WITH_BATCH_FEATURES_ONLY",
+  "purpose": "Authorize rerunning overlay readiness against the archived Kronos batch feature CSV, without running new inference or a portfolio backtest.",
+  "linked_trade_log": "experiments/provider_aware_research/execution_outputs/CANDIDATE-005-RECOVERY-BREADTH-BACKTEST-001/trade_log.csv",
+  "linked_batch_features": "experiments/provider_aware_research/execution_outputs/CANDIDATE-006-KRONOS-BATCH-FEATURES-001/kronos_batch_features.csv",
+  "allowed_actions": [
+    "read Candidate 005 symbol and signal_date pairs",
+    "read archived Kronos batch feature CSV",
+    "compute coverage diagnostics",
+    "write readiness artifact"
+  ],
+  "forbidden_actions": [
+    "run new Kronos inference",
+    "query providers",
+    "download market data",
+    "run portfolio backtest",
+    "rerank trades",
+    "optimize thresholds",
+    "use realized returns",
+    "claim alpha or financial performance",
+    "paper trade",
+    "live trade",
+    "promote strategy"
+  ],
+  "coverage_contract": {
+    "minimum_symbols_covered_ratio": 0.8,
+    "minimum_trade_rows_covered_ratio": 0.8,
+    "minimum_rebalance_dates_covered_ratio": 0.8,
+    "minimum_unique_symbols": 30,
+    "minimum_unique_signal_dates": 5,
+    "single_symbol_smoke_is_never_sufficient": true
+  },
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_006_kronos_overlay_readiness_with_batch_features_once"
+}
