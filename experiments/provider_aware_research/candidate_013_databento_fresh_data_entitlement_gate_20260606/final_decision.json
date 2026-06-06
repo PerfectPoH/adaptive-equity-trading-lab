@@ -1,0 +1,8 @@
+{
+  "decision": "APPROVED_ONE_DATABENTO_FRESH_DATA_ENTITLEMENT_PROBE_ONLY",
+  "provider_query_allowed": true,
+  "market_data_download_allowed": false,
+  "backtest_allowed": false,
+  "promotion_allowed": false,
+  "next_allowed_action": "run_candidate_013_databento_entitlement_probe_once"
+}

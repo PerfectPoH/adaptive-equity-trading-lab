@@ -1,0 +1,75 @@
+{
+  "gate_id": "CANDIDATE-013-DATABENTO-FRESH-DATA-ENTITLEMENT-GATE-001",
+  "created_at_utc": "2026-06-06T00:00:00Z",
+  "status": "APPROVED_ONE_DATABENTO_FRESH_DATA_ENTITLEMENT_PROBE_ONLY",
+  "purpose": "Authorize one bounded Databento entitlement/readiness probe for Candidate 012 fresh-data validation. This checks whether the current key can access historical US equities metadata and reference/corporate-action endpoints needed for a survivorship-aware dataset, without downloading market data or running a backtest.",
+  "linked_candidate_012_spec": "experiments/provider_aware_research/execution_outputs/CANDIDATE-012-FROZEN-RECIPE-FRESH-VALIDATION-SPEC-001/fresh_validation_spec.json",
+  "allowed_probe_count": 1,
+  "provider": "Databento",
+  "api_key_source": "env-file",
+  "env_file": ".env",
+  "probe_contract": {
+    "historical_dataset_candidates": [
+      "EQUS.MINI",
+      "EQUS.SUMMARY"
+    ],
+    "historical_metadata_checks": [
+      "list_datasets",
+      "list_schemas",
+      "list_fields",
+      "get_cost_tiny_ohlcv_1d",
+      "get_record_count_tiny_ohlcv_1d"
+    ],
+    "reference_checks": [
+      "reference_client_constructible",
+      "corporate_actions_tiny_request_or_403",
+      "security_master_tiny_request_or_403",
+      "adjustment_factors_tiny_request_or_403"
+    ],
+    "tiny_cost_symbol": "AAPL",
+    "tiny_cost_start": "2026-01-02",
+    "tiny_cost_end": "2026-01-05",
+    "tiny_schema": "ohlcv-1d",
+    "retain_raw_response": false
+  },
+  "fresh_data_requirements": {
+    "minimum_history_years": 5,
+    "must_include_delisted": true,
+    "must_include_listing_dates": true,
+    "must_include_delisting_dates": true,
+    "must_include_adjustment_factors": true,
+    "must_include_security_master": true,
+    "must_include_daily_adjusted_ohlcv": true,
+    "must_document_storage_licensing": true
+  },
+  "allowed_actions": [
+    "read redacted API-key presence from env-file",
+    "call Databento historical metadata endpoints only",
+    "call Databento reference endpoints with tiny bounded requests only",
+    "record entitlement status and redacted diagnostics",
+    "write probe artifacts"
+  ],
+  "forbidden_actions": [
+    "download market data records",
+    "build candidate dataset",
+    "query all symbols",
+    "query all corporate actions",
+    "retain raw provider payload",
+    "run Candidate 012 backtest",
+    "run any backtest",
+    "run parameter sweep",
+    "claim alpha or financial performance",
+    "paper trade",
+    "live trade",
+    "promote strategy"
+  ],
+  "provider_query_allowed": true,
+  "market_data_download_allowed": false,
+  "raw_payload_retention_allowed": false,
+  "backtest_allowed": false,
+  "parameter_sweep_allowed": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_013_databento_entitlement_probe_once"
+}
