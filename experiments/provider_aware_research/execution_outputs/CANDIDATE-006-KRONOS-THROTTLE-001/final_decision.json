@@ -1,0 +1,16 @@
+{
+  "blockers": [
+    "diagnostic_only_no_promotion",
+    "single_archived_panel_only",
+    "random_same_reduced_count_baseline_not_decisively_beaten"
+  ],
+  "decision": "CANDIDATE_006_KRONOS_THROTTLE_COMPLETE_NO_PROMOTION",
+  "market_data_download_performed": false,
+  "multiplier_optimization_performed": false,
+  "new_kronos_inference_performed": false,
+  "next_allowed_action": "Review fixed throttle diagnostic; no promotion without separate OOS and benchmark-aware gate.",
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "strategy_selection_search_performed": false,
+  "threshold_optimization_performed": false
+}

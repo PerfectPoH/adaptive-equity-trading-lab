@@ -1,0 +1,73 @@
+{
+  "blockers": [
+    "diagnostic_only_no_promotion",
+    "single_archived_panel_only",
+    "random_same_reduced_count_baseline_not_decisively_beaten"
+  ],
+  "created_at_utc": "2026-06-06T14:32:11.235390+00:00",
+  "decision": "CANDIDATE_006_KRONOS_THROTTLE_COMPLETE_NO_PROMOTION",
+  "financial_performance_claimed": false,
+  "interpretation": {
+    "drawdown": "The throttle reduced local drawdown versus the unthrottled baseline.",
+    "random_baseline": "The fixed Kronos throttle did not decisively beat same-reduced-count random throttles.",
+    "return_recovery": "The half-size throttle recovered return versus the binary keep/reject overlay."
+  },
+  "linked_gate": "experiments\\provider_aware_research\\candidate_006_kronos_throttle_gate_20260606\\gate_manifest.json",
+  "linked_overlay_trade_log": "experiments\\provider_aware_research\\execution_outputs\\CANDIDATE-006-KRONOS-OVERLAY-BACKTEST-001\\overlay_trade_log.csv",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "multiplier_optimization_performed": false,
+  "new_kronos_inference_performed": false,
+  "next_allowed_action": "Review fixed throttle diagnostic; no promotion without separate OOS and benchmark-aware gate.",
+  "paper_trading_allowed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "random_same_reduced_count_baseline": {
+    "iterations": 1000,
+    "observed_net_percentile": 0.63,
+    "observed_weighted_net_sum": 0.10034097592735262,
+    "random_max_drawdown_median": -0.017433761901712412,
+    "random_max_drawdown_p05": -0.026739429257862112,
+    "random_max_drawdown_p95": -0.014698712983787526,
+    "random_weighted_net_mean": 0.09576713962111953,
+    "random_weighted_net_median": 0.09525434405037497,
+    "random_weighted_net_p05": 0.07333480772291122,
+    "random_weighted_net_p95": 0.11873527643813031,
+    "same_reduced_trade_count": 26,
+    "seed": 607
+  },
+  "reduced_weight_redistributed": false,
+  "rerank_topk_performed": false,
+  "run_id": "CANDIDATE-006-KRONOS-THROTTLE-001",
+  "strategy_selection_search_performed": false,
+  "summary": {
+    "baseline_max_drawdown": -0.029435952071681024,
+    "baseline_trade_count": 37,
+    "baseline_weighted_net_sum": 0.14726152684605037,
+    "baseline_win_rate": 0.5945945945945946,
+    "binary_overlay_max_drawdown": -0.0003614772957769002,
+    "binary_overlay_weighted_net_sum": 0.05342042500865488,
+    "drawdown_change_vs_binary_overlay": -0.014337235688010626,
+    "drawdown_improvement_vs_baseline": 0.014737239087893497,
+    "full_weight_trade_count": 11,
+    "full_weight_win_rate": 0.8181818181818182,
+    "reduced_weight_trade_count": 26,
+    "reduced_weight_win_rate": 0.5,
+    "throttle_max_drawdown": -0.014698712983787526,
+    "throttle_minus_baseline_weighted_net": -0.04692055091869775,
+    "throttle_minus_binary_overlay_weighted_net": 0.04692055091869774,
+    "throttle_weighted_net_sum": 0.10034097592735262
+  },
+  "threshold_optimization_performed": false,
+  "throttle_rule": {
+    "feature": "kronos_forecast_return_median",
+    "multiplier_sweep_allowed": false,
+    "non_positive_forecast_weight_multiplier": 0.5,
+    "operator": ">",
+    "positive_forecast_weight_multiplier": 1.0,
+    "rerank_allowed": false,
+    "threshold": 0.0,
+    "threshold_sweep_allowed": false,
+    "weight_redistribution_allowed": false
+  }
+}
