@@ -1,0 +1,18 @@
+{
+  "blockers": [
+    "single_symbol_kronos_smoke_not_overlay_admissible",
+    "kronos_feature_unique_symbol_count_below_contract",
+    "kronos_feature_unique_date_count_below_contract",
+    "kronos_symbol_coverage_below_contract",
+    "kronos_trade_row_coverage_below_contract",
+    "kronos_rebalance_date_coverage_below_contract",
+    "kronos_feature_coverage_below_contract"
+  ],
+  "decision": "CANDIDATE_006_KRONOS_OVERLAY_READINESS_BLOCKED_INSUFFICIENT_FEATURE_COVERAGE",
+  "market_data_download_performed": false,
+  "new_kronos_inference_performed": false,
+  "next_allowed_action": "Create a separate batch Kronos feature-generation gate with frozen symbol/date coverage before any overlay backtest.",
+  "portfolio_backtest_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false
+}
