@@ -1,0 +1,80 @@
+{
+  "gate_id": "CANDIDATE-011-RISK-OFF-MEAN-REVERSION-GATE-001",
+  "created_at_utc": "2026-06-06T00:00:00Z",
+  "status": "APPROVED_ONE_RISK_OFF_MEAN_REVERSION_DIAGNOSTIC_ONLY",
+  "purpose": "Authorize one fixed follow-up diagnostic for the Candidate 010 observation that mean_reversion_5d had a small positive OOS cell in RISK_OFF. This tests whether the effect survives broader breadth and stricter robustness gates, without parameter search.",
+  "linked_dataset": "experiments/provider_aware_research/data_inputs/CANDIDATE-007-NORGATE-DATASET-RERUN-002",
+  "linked_candidate_010": "experiments/provider_aware_research/execution_outputs/CANDIDATE-010-REGIME-STRATEGY-MAP-001/candidate_010_regime_strategy_map_result.json",
+  "allowed_backtest_count": 1,
+  "dataset_trial_limited": true,
+  "same_dataset_as_discovery": true,
+  "oos_split": {
+    "in_sample_end": "2025-06-02",
+    "out_of_sample_start": "2025-06-03"
+  },
+  "strategy_contract": {
+    "strategy_id": "CANDIDATE-011-RISK-OFF-MEAN-REVERSION-BREADTH",
+    "rebalance_every_n_trading_days": 20,
+    "cost_bps_round_trip": 500,
+    "allowed_regimes": [
+      "RISK_OFF"
+    ],
+    "tradability": {
+      "min_price_asof": 1.0,
+      "min_trailing_20d_median_turnover": 1000000.0,
+      "min_history_rows": 90
+    },
+    "sleeve": {
+      "name": "risk_off_mean_reversion_5d",
+      "lookback_days": 5,
+      "holding_days": 10,
+      "top_k": 20,
+      "rank_direction": "lowest_return"
+    }
+  },
+  "robustness_gates": {
+    "min_oos_trades": 20,
+    "require_positive_oos_net": true,
+    "require_positive_oos_median": true,
+    "require_oos_win_rate_at_least": 0.5,
+    "require_positive_ex_top3_oos_net": true,
+    "require_oos_beats_cash": true,
+    "require_oos_beats_spy": true,
+    "require_oos_beats_iwm": true
+  },
+  "allowed_actions": [
+    "read Candidate 007 dataset artifacts",
+    "read Candidate 010 diagnostic artifact",
+    "compute market regime map from SPY and IWM",
+    "run exactly one fixed RISK_OFF mean-reversion breadth diagnostic",
+    "compute IS/OOS summaries",
+    "compute robustness and benchmark comparisons",
+    "write diagnostic artifacts"
+  ],
+  "forbidden_actions": [
+    "query Norgate",
+    "query any provider",
+    "download market data",
+    "run Kronos inference",
+    "run portfolio search",
+    "change allowed regimes",
+    "change lookback",
+    "change holding period",
+    "change top_k",
+    "change costs",
+    "parameter sweep",
+    "claim alpha or financial performance",
+    "paper trade",
+    "live trade",
+    "promote strategy"
+  ],
+  "provider_query_allowed": false,
+  "market_data_download_allowed": false,
+  "kronos_inference_allowed": false,
+  "portfolio_search_allowed": false,
+  "parameter_sweep_allowed": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_011_risk_off_mean_reversion_once"
+}

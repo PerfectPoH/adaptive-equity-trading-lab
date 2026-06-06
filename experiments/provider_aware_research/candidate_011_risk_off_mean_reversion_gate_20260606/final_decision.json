@@ -1,0 +1,8 @@
+{
+  "decision": "APPROVED_ONE_RISK_OFF_MEAN_REVERSION_DIAGNOSTIC_ONLY",
+  "promotion_allowed": false,
+  "provider_query_allowed": false,
+  "market_data_download_allowed": false,
+  "parameter_sweep_allowed": false,
+  "next_allowed_action": "run_candidate_011_risk_off_mean_reversion_once"
+}
