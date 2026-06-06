@@ -1,0 +1,17 @@
+{
+  "blockers": [
+    "diagnostic_only_no_promotion",
+    "single_archived_panel_only",
+    "kept_trade_count_below_30",
+    "random_same_count_baseline_not_decisively_beaten",
+    "winner_capture_rate_below_50pct"
+  ],
+  "decision": "CANDIDATE_006_KRONOS_OVERLAY_ATTRIBUTION_COMPLETE_NO_PROMOTION",
+  "market_data_download_performed": false,
+  "new_kronos_inference_performed": false,
+  "next_allowed_action": "If useful, preregister a separate OOS-style Kronos sizing diagnostic; do not promote from this attribution.",
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "strategy_backtest_performed": false,
+  "threshold_optimization_performed": false
+}
