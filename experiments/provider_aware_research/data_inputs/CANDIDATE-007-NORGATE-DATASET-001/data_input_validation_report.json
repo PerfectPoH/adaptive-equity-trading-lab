@@ -1,0 +1,69 @@
+{
+  "checks": [
+    {
+      "detail": "experiments\\provider_aware_research\\data_inputs\\CANDIDATE-007-NORGATE-DATASET-001\\prices.csv",
+      "name": "required_file:prices.csv",
+      "status": "pass"
+    },
+    {
+      "detail": "experiments\\provider_aware_research\\data_inputs\\CANDIDATE-007-NORGATE-DATASET-001\\security_master.csv",
+      "name": "required_file:security_master.csv",
+      "status": "pass"
+    },
+    {
+      "detail": [],
+      "name": "prices_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "symbol",
+        "universe_status",
+        "is_delisted",
+        "first_date",
+        "last_date",
+        "row_count",
+        "provider"
+      ],
+      "name": "security_master_required_columns",
+      "status": "pass"
+    },
+    {
+      "detail": 173526,
+      "name": "prices_nonempty",
+      "status": "pass"
+    },
+    {
+      "detail": 502,
+      "name": "security_master_nonempty",
+      "status": "pass"
+    },
+    {
+      "detail": 0,
+      "name": "symbol_date_duplicates_absent",
+      "status": "pass"
+    },
+    {
+      "detail": "all OHLC > 0",
+      "name": "positive_ohlc",
+      "status": "pass"
+    },
+    {
+      "detail": "low <= open/close/high and high >= open/close/low",
+      "name": "ohlc_bounds_consistent",
+      "status": "fail"
+    },
+    {
+      "detail": 252,
+      "name": "active_symbols_present",
+      "status": "pass"
+    },
+    {
+      "detail": 250,
+      "name": "delisted_symbols_present",
+      "status": "pass"
+    }
+  ],
+  "gate_decision": "DATA_INPUT_VALIDATION_BLOCK",
+  "status": "fail"
+}

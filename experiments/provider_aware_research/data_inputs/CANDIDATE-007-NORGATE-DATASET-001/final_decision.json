@@ -1,0 +1,10 @@
+{
+  "blockers": [
+    "data_input_validation_failed"
+  ],
+  "decision": "CANDIDATE_007_NORGATE_DATASET_BLOCKED",
+  "kronos_inference_performed": false,
+  "promotion_allowed": false,
+  "strategy_backtest_performed": false,
+  "survivorship_free_claim_allowed": false
+}

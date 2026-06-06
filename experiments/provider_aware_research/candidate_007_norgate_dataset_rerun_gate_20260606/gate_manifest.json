@@ -1,0 +1,48 @@
+{
+  "gate_id": "CANDIDATE-007-NORGATE-DATASET-RERUN-GATE-002",
+  "created_at_utc": "2026-06-06T00:00:00Z",
+  "status": "APPROVED_NORGATE_SURVIVORSHIP_FREE_PANEL_RERUN_AFTER_VALIDATOR_TOLERANCE_FIX",
+  "purpose": "Authorize one rerun of Candidate 007 after the first local Norgate build was blocked by a single OHLC rounding-tolerance validation failure. No strategy research is authorized.",
+  "linked_initial_run": "experiments/provider_aware_research/data_inputs/CANDIDATE-007-NORGATE-DATASET-001",
+  "provider": "Norgate Data",
+  "local_provider_only": true,
+  "target_database_names": {
+    "active": "US Equities",
+    "delisted": "US Equities Delisted"
+  },
+  "benchmark_symbols": ["SPY", "IWM"],
+  "limits": {
+    "active_symbol_limit": 250,
+    "delisted_symbol_limit": 250,
+    "min_rows": 90
+  },
+  "allowed_actions": [
+    "read local Norgate symbols",
+    "read local Norgate daily price timeseries",
+    "derive bounded prices.csv",
+    "derive bounded security_master.csv",
+    "compute file hashes",
+    "write dataset artifacts"
+  ],
+  "forbidden_actions": [
+    "provider query outside local Norgate installation",
+    "download market data from internet",
+    "run strategy backtest",
+    "run Kronos inference",
+    "run portfolio selection",
+    "parameter sweep",
+    "claim alpha or financial performance",
+    "paper trade",
+    "live trade",
+    "promote strategy"
+  ],
+  "provider_query_allowed": true,
+  "internet_market_data_download_allowed": false,
+  "strategy_backtest_allowed": false,
+  "kronos_inference_allowed": false,
+  "portfolio_selection_allowed": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_007_norgate_dataset_builder_rerun_once"
+}

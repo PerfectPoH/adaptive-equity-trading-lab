@@ -1,0 +1,13 @@
+{
+  "gate_id": "CANDIDATE-007-NORGATE-DATASET-RERUN-GATE-002",
+  "decision": "APPROVED_NORGATE_SURVIVORSHIP_FREE_PANEL_RERUN_AFTER_VALIDATOR_TOLERANCE_FIX",
+  "provider_query_allowed": true,
+  "internet_market_data_download_allowed": false,
+  "strategy_backtest_allowed": false,
+  "kronos_inference_allowed": false,
+  "portfolio_selection_allowed": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_007_norgate_dataset_builder_rerun_once"
+}
