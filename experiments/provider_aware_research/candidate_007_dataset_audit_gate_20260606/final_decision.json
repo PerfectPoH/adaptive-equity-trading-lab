@@ -1,0 +1,13 @@
+{
+  "gate_id": "CANDIDATE-007-DATASET-AUDIT-GATE-001",
+  "decision": "APPROVED_CANDIDATE_007_DATASET_AUDIT_ONLY",
+  "provider_query_allowed": false,
+  "market_data_download_allowed": false,
+  "strategy_backtest_allowed": false,
+  "kronos_inference_allowed": false,
+  "portfolio_selection_allowed": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_007_dataset_audit_once"
+}

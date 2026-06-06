@@ -1,0 +1,45 @@
+{
+  "gate_id": "CANDIDATE-007-DATASET-AUDIT-GATE-001",
+  "created_at_utc": "2026-06-06T00:00:00Z",
+  "status": "APPROVED_CANDIDATE_007_DATASET_AUDIT_ONLY",
+  "purpose": "Authorize one audit of the already-built Candidate 007 Norgate dataset to decide whether it is ready for a separately preregistered backtest spec.",
+  "linked_dataset": "experiments/provider_aware_research/data_inputs/CANDIDATE-007-NORGATE-DATASET-RERUN-002",
+  "allowed_actions": [
+    "read Candidate 007 dataset artifacts",
+    "compute coverage diagnostics",
+    "compute active/delisted mix diagnostics",
+    "compute row-count and date-span diagnostics",
+    "compute liquidity and tradability summaries",
+    "write dataset audit artifacts"
+  ],
+  "readiness_thresholds": {
+    "min_active_symbols": 200,
+    "min_delisted_symbols": 200,
+    "min_total_symbols": 400,
+    "min_price_rows": 100000,
+    "min_median_rows_per_symbol": 90,
+    "required_benchmarks": ["SPY", "IWM"]
+  },
+  "forbidden_actions": [
+    "query Norgate",
+    "query any provider",
+    "download market data",
+    "run strategy backtest",
+    "run Kronos inference",
+    "run portfolio selection",
+    "parameter sweep",
+    "claim alpha or financial performance",
+    "paper trade",
+    "live trade",
+    "promote strategy"
+  ],
+  "provider_query_allowed": false,
+  "market_data_download_allowed": false,
+  "strategy_backtest_allowed": false,
+  "kronos_inference_allowed": false,
+  "portfolio_selection_allowed": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_007_dataset_audit_once"
+}
