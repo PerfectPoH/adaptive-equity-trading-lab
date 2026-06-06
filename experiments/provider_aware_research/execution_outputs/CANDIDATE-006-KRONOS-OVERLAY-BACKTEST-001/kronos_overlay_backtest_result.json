@@ -1,0 +1,50 @@
+{
+  "blockers": [
+    "promotion_locked_until_separate_oos_gate",
+    "single_trial_overlay_diagnostic_only",
+    "overlay_trade_count_below_30",
+    "overlay_top_symbol_concentration_above_30pct"
+  ],
+  "created_at_utc": "2026-06-06T14:04:16.359283+00:00",
+  "decision": "CANDIDATE_006_KRONOS_OVERLAY_BACKTEST_ARCHIVE_NO_PROMOTION",
+  "financial_performance_claimed": false,
+  "linked_feature_rows": "experiments\\provider_aware_research\\execution_outputs\\CANDIDATE-006-KRONOS-BATCH-FEATURES-001\\kronos_batch_features.csv",
+  "linked_gate": "experiments\\provider_aware_research\\candidate_006_kronos_overlay_backtest_gate_20260606\\gate_manifest.json",
+  "linked_trade_log": "experiments\\provider_aware_research\\execution_outputs\\CANDIDATE-005-RECOVERY-BREADTH-BACKTEST-001\\trade_log.csv",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "new_kronos_inference_performed": false,
+  "next_allowed_action": "Review overlay result; no promotion without OOS and benchmark-aware gate.",
+  "overlay_rule": {
+    "description": "For each existing Candidate 005 long trade, keep the trade only when kronos_forecast_return_median is strictly positive. Otherwise route that trade weight to cash. Do not redistribute cash weight to surviving trades.",
+    "feature": "kronos_forecast_return_median",
+    "operator": ">",
+    "rule_id": "KRONOS_LONG_ONLY_SIGN_FILTER_001",
+    "threshold": 0.0,
+    "weight_redistribution_allowed": false
+  },
+  "paper_trading_allowed": false,
+  "portfolio_backtest_performed": true,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "rejected_weight_redistributed": false,
+  "rerank_topk_performed": false,
+  "robustness": {
+    "best_symbol": "FCEL",
+    "best_symbol_overlay_weighted_net_return": 0.0302196961131196,
+    "ex_best_symbol_overlay_weighted_net_return": 0.02320072889553528,
+    "top_symbol_concentration": 0.5656955388921666
+  },
+  "run_id": "CANDIDATE-006-KRONOS-OVERLAY-BACKTEST-001",
+  "summary": {
+    "baseline_trade_count": 37,
+    "baseline_weighted_net_return_sum": 0.14726152684605037,
+    "cash_routed_trade_count": 26,
+    "max_drawdown": -0.0003614772957769002,
+    "overlay_minus_baseline_weighted_net_return": -0.0938411018373955,
+    "overlay_trade_count": 11,
+    "overlay_weighted_net_return_sum": 0.05342042500865488,
+    "overlay_win_rate": 0.8181818181818182
+  },
+  "threshold_optimization_performed": false
+}

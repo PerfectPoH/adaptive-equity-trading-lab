@@ -1,0 +1,16 @@
+{
+  "blockers": [
+    "promotion_locked_until_separate_oos_gate",
+    "single_trial_overlay_diagnostic_only",
+    "overlay_trade_count_below_30",
+    "overlay_top_symbol_concentration_above_30pct"
+  ],
+  "decision": "CANDIDATE_006_KRONOS_OVERLAY_BACKTEST_ARCHIVE_NO_PROMOTION",
+  "market_data_download_performed": false,
+  "new_kronos_inference_performed": false,
+  "next_allowed_action": "Review overlay result; no promotion without OOS and benchmark-aware gate.",
+  "portfolio_backtest_performed": true,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "threshold_optimization_performed": false
+}
