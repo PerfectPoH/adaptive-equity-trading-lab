@@ -1,0 +1,223 @@
+{
+  "api_key_diagnostics": {
+    "api_key": "REDACTED",
+    "api_key_fingerprint": "6f592453be79",
+    "api_key_source_requested": "env-file",
+    "api_key_source_resolved": "env-file",
+    "env_file": ".env",
+    "env_file_exists": true,
+    "env_file_key_fingerprint": "6f592453be79",
+    "env_file_key_present": true,
+    "environment_key_fingerprint": "",
+    "environment_key_present": false
+  },
+  "backtest_performed": false,
+  "created_at_utc": "2026-06-06T20:00:56.541868+00:00",
+  "decision": "DATABENTO_FRESH_DATA_BLOCKED_REFERENCE_ENTITLEMENT",
+  "final_decision": {
+    "blockers": [
+      "databento_reference_entitlement_missing"
+    ],
+    "candidate_014_backtest_allowed": false,
+    "decision": "DATABENTO_FRESH_DATA_BLOCKED_REFERENCE_ENTITLEMENT",
+    "next_allowed_action": "resolve_provider_entitlement_or_choose_provider",
+    "promotion_allowed": false
+  },
+  "fresh_data_requirements": {
+    "minimum_history_years": 5,
+    "must_document_storage_licensing": true,
+    "must_include_adjustment_factors": true,
+    "must_include_daily_adjusted_ohlcv": true,
+    "must_include_delisted": true,
+    "must_include_delisting_dates": true,
+    "must_include_listing_dates": true,
+    "must_include_security_master": true
+  },
+  "historical_metadata": {
+    "checks": [
+      {
+        "dataset_count": 29,
+        "name": "list_datasets",
+        "status": "PASS"
+      },
+      {
+        "available": true,
+        "dataset": "EQUS.MINI",
+        "fields": [
+          {
+            "name": "length",
+            "type": "uint8_t"
+          },
+          {
+            "name": "rtype",
+            "type": "uint8_t"
+          },
+          {
+            "name": "publisher_id",
+            "type": "uint16_t"
+          },
+          {
+            "name": "instrument_id",
+            "type": "uint32_t"
+          },
+          {
+            "name": "ts_event",
+            "type": "uint64_t"
+          },
+          {
+            "name": "open",
+            "type": "int64_t"
+          },
+          {
+            "name": "high",
+            "type": "int64_t"
+          },
+          {
+            "name": "low",
+            "type": "int64_t"
+          },
+          {
+            "name": "close",
+            "type": "int64_t"
+          },
+          {
+            "name": "volume",
+            "type": "uint64_t"
+          }
+        ],
+        "name": "dataset_candidate",
+        "schema_available": true,
+        "schemas": [
+          "mbp-1",
+          "tbbo",
+          "trades",
+          "bbo-1s",
+          "bbo-1m",
+          "ohlcv-1s",
+          "ohlcv-1m",
+          "ohlcv-1h",
+          "ohlcv-1d",
+          "definition"
+        ],
+        "status": "PASS",
+        "tiny_cost": 1.564622e-06,
+        "tiny_record_count": 1
+      },
+      {
+        "available": true,
+        "dataset": "EQUS.SUMMARY",
+        "fields": [
+          {
+            "name": "length",
+            "type": "uint8_t"
+          },
+          {
+            "name": "rtype",
+            "type": "uint8_t"
+          },
+          {
+            "name": "publisher_id",
+            "type": "uint16_t"
+          },
+          {
+            "name": "instrument_id",
+            "type": "uint32_t"
+          },
+          {
+            "name": "ts_event",
+            "type": "uint64_t"
+          },
+          {
+            "name": "open",
+            "type": "int64_t"
+          },
+          {
+            "name": "high",
+            "type": "int64_t"
+          },
+          {
+            "name": "low",
+            "type": "int64_t"
+          },
+          {
+            "name": "close",
+            "type": "int64_t"
+          },
+          {
+            "name": "volume",
+            "type": "uint64_t"
+          }
+        ],
+        "name": "dataset_candidate",
+        "schema_available": true,
+        "schemas": [
+          "ohlcv-1d",
+          "definition",
+          "statistics"
+        ],
+        "status": "PASS",
+        "tiny_cost": 1.564622e-06,
+        "tiny_record_count": 1
+      }
+    ],
+    "status": "PASS"
+  },
+  "linked_candidate_012_spec": "experiments/provider_aware_research/execution_outputs/CANDIDATE-012-FROZEN-RECIPE-FRESH-VALIDATION-SPEC-001/fresh_validation_spec.json",
+  "linked_gate": "experiments\\provider_aware_research\\candidate_013_databento_fresh_data_entitlement_rerun_gate_20260606\\gate_manifest.json",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "paper_trading_allowed": false,
+  "parameter_sweep_performed": false,
+  "probe_contract": {
+    "historical_dataset_candidates": [
+      "EQUS.MINI",
+      "EQUS.SUMMARY"
+    ],
+    "historical_metadata_checks": [
+      "list_datasets",
+      "list_schemas",
+      "list_fields",
+      "get_cost_tiny_ohlcv_1d",
+      "get_record_count_tiny_ohlcv_1d"
+    ],
+    "reference_checks": [
+      "reference_client_constructible",
+      "corporate_actions_tiny_request_or_403",
+      "security_master_tiny_request_or_403",
+      "adjustment_factors_tiny_request_or_403"
+    ],
+    "retain_raw_response": false,
+    "tiny_cost_end": "2026-01-05",
+    "tiny_cost_start": "2026-01-02",
+    "tiny_cost_symbol": "AAPL",
+    "tiny_schema": "ohlcv-1d"
+  },
+  "promotion_allowed": false,
+  "provider": "Databento",
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "reference_metadata": {
+    "checks": [
+      {
+        "endpoint": "corporate_actions",
+        "error_message": "403 license_reference_dataset_no_subscription\nA subscription is required to access the corporate actions dataset.\ndocumentation: https://databento.com/docs/portal",
+        "error_type": "BentoClientError",
+        "status": "BLOCKED_403"
+      },
+      {
+        "endpoint": "security_master",
+        "error_message": "403 license_reference_dataset_no_subscription\nA subscription is required to access the security master dataset.\ndocumentation: https://databento.com/docs/portal",
+        "error_type": "BentoClientError",
+        "status": "BLOCKED_403"
+      },
+      {
+        "endpoint": "adjustment_factors",
+        "error_message": "403 license_reference_dataset_no_subscription\nA subscription is required to access the adjustment factors dataset.\ndocumentation: https://databento.com/docs/portal",
+        "error_type": "BentoClientError",
+        "status": "BLOCKED_403"
+      }
+    ],
+    "overall_status": "BLOCKED_REFERENCE_ENTITLEMENT"
+  },
+  "run_id": "CANDIDATE-013-DATABENTO-ENTITLEMENT-PROBE-002"
+}
