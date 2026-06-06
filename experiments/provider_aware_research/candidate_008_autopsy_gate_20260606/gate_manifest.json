@@ -1,0 +1,43 @@
+{
+  "gate_id": "CANDIDATE-008-AUTOPSY-GATE-001",
+  "created_at_utc": "2026-06-06T00:00:00Z",
+  "status": "APPROVED_CANDIDATE_008_AUTOPSY_ATTRIBUTION_ONLY",
+  "purpose": "Authorize one read-only autopsy of Candidate 008 to identify whether failure came from sleeve, regime, active/delisted universe, costs, or symbol concentration.",
+  "linked_trade_log": "experiments/provider_aware_research/execution_outputs/CANDIDATE-008-NORGATE-OOS-BASELINE-001/trade_log.csv",
+  "linked_dataset": "experiments/provider_aware_research/data_inputs/CANDIDATE-007-NORGATE-DATASET-RERUN-002",
+  "linked_candidate_008_result": "experiments/provider_aware_research/execution_outputs/CANDIDATE-008-NORGATE-OOS-BASELINE-001/candidate_008_norgate_oos_baseline_result.json",
+  "allowed_actions": [
+    "read Candidate 008 trade log",
+    "read Candidate 007 dataset benchmarks and security master",
+    "map trades to market regimes",
+    "compute sleeve attribution",
+    "compute active/delisted attribution",
+    "compute gross versus cost attribution",
+    "compute symbol concentration attribution",
+    "write autopsy artifacts"
+  ],
+  "forbidden_actions": [
+    "query Norgate",
+    "query any provider",
+    "download market data",
+    "run a new strategy backtest",
+    "run Kronos inference",
+    "run portfolio search",
+    "change strategy parameters",
+    "parameter sweep",
+    "claim alpha or financial performance",
+    "paper trade",
+    "live trade",
+    "promote strategy"
+  ],
+  "provider_query_allowed": false,
+  "market_data_download_allowed": false,
+  "strategy_backtest_allowed": false,
+  "kronos_inference_allowed": false,
+  "portfolio_search_allowed": false,
+  "parameter_sweep_allowed": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_008_autopsy_once"
+}
