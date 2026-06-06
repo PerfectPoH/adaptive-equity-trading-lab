@@ -1,0 +1,11 @@
+{
+  "decision": "CANDIDATE_008_AUTOPSY_COMPLETE_NO_BACKTEST",
+  "kronos_inference_performed": false,
+  "market_data_download_performed": false,
+  "next_allowed_action": "Use this autopsy to draft, not run, a separate regime-routing hypothesis.",
+  "parameter_sweep_performed": false,
+  "portfolio_search_performed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "strategy_backtest_performed": false
+}
