@@ -1,0 +1,133 @@
+{
+  "benchmark": {
+    "IWM": {
+      "oos_return": 0.3788868121679061
+    },
+    "SPY": {
+      "oos_return": 0.25942132702077325
+    }
+  },
+  "created_at_utc": "2026-06-06T19:04:09.967885+00:00",
+  "decision": "CANDIDATE_009_REGIME_MOMENTUM_ARCHIVE_NO_PROMOTION",
+  "final_decision": {
+    "blockers": [
+      "diagnostic_only_post_autopsy_same_panel",
+      "trial_limited_two_year_history",
+      "oos_trade_count_below_threshold",
+      "oos_ex_top3_weighted_net_nonpositive",
+      "oos_does_not_beat_spy",
+      "oos_does_not_beat_iwm"
+    ],
+    "decision": "CANDIDATE_009_REGIME_MOMENTUM_ARCHIVE_NO_PROMOTION",
+    "market_data_download_performed": false,
+    "parameter_sweep_performed": false,
+    "performance_gates_passed": false,
+    "promotion_allowed": false,
+    "provider_query_performed": false,
+    "research_candidate_only": false
+  },
+  "financial_performance_claimed": false,
+  "kronos_inference_performed": false,
+  "linked_autopsy": "experiments/provider_aware_research/execution_outputs/CANDIDATE-008-AUTOPSY-001/candidate_008_autopsy_result.json",
+  "linked_dataset": "experiments\\provider_aware_research\\data_inputs\\CANDIDATE-007-NORGATE-DATASET-RERUN-002",
+  "linked_gate": "experiments\\provider_aware_research\\candidate_009_regime_momentum_gate_20260606\\gate_manifest.json",
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "oos_split": {
+    "in_sample_end": "2025-06-02",
+    "out_of_sample_start": "2025-06-03"
+  },
+  "paper_trading_allowed": false,
+  "parameter_sweep_performed": false,
+  "performance_gates_passed": false,
+  "portfolio_backtest_performed": true,
+  "portfolio_search_performed": false,
+  "post_autopsy_same_panel": true,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "robustness": {
+    "oos_best_symbol": "CDTX-202601",
+    "oos_ex_top3_weighted_net_sum": -0.09238103986086571,
+    "oos_top3_weighted_net_sum": 0.2611585862165189
+  },
+  "route_summary": [
+    {
+      "median_net_return": -0.04529411764705889,
+      "regime_label": "DRAWDOWN_STRESS",
+      "split": "is",
+      "trade_count": 5,
+      "weighted_net_sum": -0.1004025700714518,
+      "win_rate": 0.0
+    },
+    {
+      "median_net_return": 0.28907249766136567,
+      "regime_label": "DRAWDOWN_STRESS",
+      "split": "oos",
+      "trade_count": 2,
+      "weighted_net_sum": 0.11562899906454628,
+      "win_rate": 0.5
+    },
+    {
+      "median_net_return": -0.02109870642295704,
+      "regime_label": "RECOVERY_BOUNCE",
+      "split": "oos",
+      "trade_count": 8,
+      "weighted_net_sum": 0.05314854729110688,
+      "win_rate": 0.375
+    }
+  ],
+  "run_id": "CANDIDATE-009-REGIME-MOMENTUM-001",
+  "strategy_contract": {
+    "cost_bps_round_trip": 500,
+    "disabled_sleeves": {
+      "mean_reversion_5d": "disabled_by_candidate_008_autopsy_negative_contribution"
+    },
+    "rebalance_every_n_trading_days": 20,
+    "routes": {
+      "DRAWDOWN_STRESS": {
+        "momentum_60d": 1.0
+      },
+      "RECOVERY_BOUNCE": {
+        "momentum_60d": 1.0
+      }
+    },
+    "sleeves": {
+      "momentum_60d": {
+        "holding_days": 20,
+        "lookback_days": 60,
+        "rank_direction": "highest_return",
+        "top_k": 5
+      }
+    },
+    "strategy_id": "CANDIDATE-009-POST-AUTOPSY-REGIME-MOMENTUM-ONLY",
+    "tradability": {
+      "min_history_rows": 90,
+      "min_price_asof": 1.0,
+      "min_trailing_20d_median_turnover": 1000000.0
+    }
+  },
+  "summary_by_split": {
+    "is": {
+      "max_drawdown": -0.009058823529411772,
+      "median_net_return": -0.04529411764705889,
+      "trade_count": 5,
+      "weighted_net_sum": -0.1004025700714518,
+      "win_rate": 0.0
+    },
+    "oos": {
+      "max_drawdown": -0.0016833850082071944,
+      "median_net_return": -0.02109870642295704,
+      "trade_count": 10,
+      "weighted_net_sum": 0.16877754635565315,
+      "win_rate": 0.4
+    }
+  },
+  "symbol_counts": {
+    "active_symbols": 250,
+    "benchmarks": 2,
+    "delisted_symbols": 250,
+    "frames": 502,
+    "research_symbols": 500
+  },
+  "trial_limited": true
+}

@@ -1,0 +1,17 @@
+{
+  "blockers": [
+    "diagnostic_only_post_autopsy_same_panel",
+    "trial_limited_two_year_history",
+    "oos_trade_count_below_threshold",
+    "oos_ex_top3_weighted_net_nonpositive",
+    "oos_does_not_beat_spy",
+    "oos_does_not_beat_iwm"
+  ],
+  "decision": "CANDIDATE_009_REGIME_MOMENTUM_ARCHIVE_NO_PROMOTION",
+  "market_data_download_performed": false,
+  "parameter_sweep_performed": false,
+  "performance_gates_passed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "research_candidate_only": false
+}
