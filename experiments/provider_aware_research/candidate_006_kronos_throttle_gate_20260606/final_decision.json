@@ -1,0 +1,11 @@
+{
+  "gate_id": "CANDIDATE-006-KRONOS-THROTTLE-GATE-001",
+  "decision": "APPROVED_KRONOS_FIXED_HALF_SIZE_THROTTLE_DIAGNOSTIC_ONLY",
+  "provider_query_allowed": false,
+  "market_data_download_allowed": false,
+  "new_kronos_inference_allowed": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_006_kronos_throttle_once"
+}

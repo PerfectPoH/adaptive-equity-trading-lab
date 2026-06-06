@@ -1,0 +1,53 @@
+{
+  "gate_id": "CANDIDATE-006-KRONOS-THROTTLE-GATE-001",
+  "created_at_utc": "2026-06-06T00:00:00Z",
+  "status": "APPROVED_KRONOS_FIXED_HALF_SIZE_THROTTLE_DIAGNOSTIC_ONLY",
+  "purpose": "Authorize one fixed Kronos risk-throttle diagnostic on the archived Candidate 006 overlay trade log. The throttle reduces, but does not eliminate, trades with non-positive Kronos median forecast.",
+  "linked_overlay_trade_log": "experiments/provider_aware_research/execution_outputs/CANDIDATE-006-KRONOS-OVERLAY-BACKTEST-001/overlay_trade_log.csv",
+  "throttle_rule": {
+    "feature": "kronos_forecast_return_median",
+    "operator": ">",
+    "threshold": 0.0,
+    "positive_forecast_weight_multiplier": 1.0,
+    "non_positive_forecast_weight_multiplier": 0.5,
+    "weight_redistribution_allowed": false,
+    "threshold_sweep_allowed": false,
+    "multiplier_sweep_allowed": false,
+    "rerank_allowed": false
+  },
+  "allowed_actions": [
+    "read archived Kronos overlay trade log",
+    "apply exactly one fixed half-size throttle rule",
+    "compare baseline, binary filter, and fixed throttle diagnostics",
+    "compute deterministic random same-throttle baseline",
+    "write diagnostic artifacts"
+  ],
+  "random_baseline": {
+    "seed": 607,
+    "iterations": 1000,
+    "same_reduced_trade_count": true,
+    "reduced_weight_multiplier": 0.5
+  },
+  "forbidden_actions": [
+    "run new Kronos inference",
+    "query providers",
+    "download market data",
+    "change throttle threshold",
+    "sweep thresholds",
+    "sweep weight multipliers",
+    "rerank trades",
+    "redistribute reduced weight",
+    "run a new strategy selection search",
+    "claim alpha or financial performance",
+    "paper trade",
+    "live trade",
+    "promote strategy"
+  ],
+  "provider_query_allowed": false,
+  "market_data_download_allowed": false,
+  "new_kronos_inference_allowed": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_006_kronos_throttle_once"
+}
