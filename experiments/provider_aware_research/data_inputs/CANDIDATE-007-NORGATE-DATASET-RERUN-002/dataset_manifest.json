@@ -1,0 +1,34 @@
+{
+  "active_database": "US Equities",
+  "benchmark_symbols": [
+    "SPY",
+    "IWM"
+  ],
+  "blockers": [],
+  "created_at_utc": "2026-06-06T14:53:21.212636+00:00",
+  "dataset_id": "CANDIDATE-007-NORGATE-DATASET-RERUN-002",
+  "decision": "CANDIDATE_007_NORGATE_DATASET_COMPLETE_DATASET_READY_NO_PROMOTION",
+  "delisted_database": "US Equities Delisted",
+  "file_hashes": {
+    "data_input_validation_report.json": "1c01e785240fb0db1d5d6056b0537405c745a648be012fb2cdf3d617207ad427",
+    "prices.csv": "bd9af5e6bcd9682415e986fbe955bcb5a75296580a79a836f4b7c10c2690efe8",
+    "security_master.csv": "24d929472f1649c0a5fcdf2778395e90d914cf0297626497618db7beb3deb94c",
+    "tradability_report.json": "c86f13837088d97b0f7a67b398b0859d8b3ff1747ae92144c306e1ab7a1eb454"
+  },
+  "live_trading_allowed": false,
+  "min_rows": 90,
+  "paper_trading_allowed": false,
+  "promotion_allowed": false,
+  "provider": "Norgate Data",
+  "provider_scope": "local_norgate_installation",
+  "raw_payload_retention": "derived_csv_only_no_raw_vendor_payload",
+  "survivorship_free_claim_allowed": true,
+  "symbol_counts": {
+    "active": 250,
+    "benchmarks": 2,
+    "delisted": 250,
+    "total_declared": 502
+  },
+  "trial_history_limit_declared": "2_years_expected_from_trial_terms",
+  "trial_limited": true
+}

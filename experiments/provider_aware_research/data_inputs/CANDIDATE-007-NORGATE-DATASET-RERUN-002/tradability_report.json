@@ -1,0 +1,4307 @@
+{
+  "accepted_symbols": [
+    "A",
+    "AA",
+    "AAA",
+    "AAAA",
+    "AAAC",
+    "AAAU",
+    "AABB",
+    "AABVF",
+    "AACAY",
+    "AACB",
+    "AACBR",
+    "AACBU",
+    "AACG",
+    "AACTF",
+    "AADR",
+    "AAEQ",
+    "AAFRF",
+    "AAGAF",
+    "AAGC",
+    "AAGFF",
+    "AAGH",
+    "AAGIY",
+    "AAGR",
+    "AAGRW",
+    "AAIGF",
+    "AAIRF",
+    "AAL",
+    "AALG",
+    "AAM-202602",
+    "AAMCF",
+    "AAME",
+    "AAMI",
+    "AAMMF",
+    "AAMTF",
+    "AAOI",
+    "AAON",
+    "AAP",
+    "AAPB",
+    "AAPD",
+    "AAPG",
+    "AAPI",
+    "AAPJ",
+    "AAPL",
+    "AAPR",
+    "AAPT",
+    "AAPU",
+    "AAPW",
+    "AAPX",
+    "AAPY",
+    "AARD",
+    "AASP",
+    "AASZF",
+    "AAT",
+    "AATC",
+    "AATV",
+    "AAUAF",
+    "AAUC",
+    "AAUKF",
+    "AAUM",
+    "AAUS",
+    "AAVM",
+    "AAVMY",
+    "AAVVF",
+    "AAWH",
+    "AAXJ",
+    "AB",
+    "ABAT",
+    "ABBNY",
+    "ABBRF",
+    "ABBV",
+    "ABCB",
+    "ABCFF",
+    "ABCL",
+    "ABCP",
+    "ABCS",
+    "ABEO",
+    "ABEPF",
+    "ABEQ",
+    "ABEV",
+    "ABFL",
+    "ABG",
+    "ABI",
+    "ABIG",
+    "ABIT",
+    "ABLD",
+    "ABLG",
+    "ABLS",
+    "ABLV",
+    "ABLVW",
+    "ABLZF",
+    "ABM",
+    "ABMBF",
+    "ABMRF",
+    "ABNAF",
+    "ABNB",
+    "ABNG",
+    "ABNY",
+    "ABOS",
+    "ABOT",
+    "ABPO",
+    "ABPWW",
+    "ABR",
+    "ABR-D",
+    "ABR-E",
+    "ABR-F",
+    "ABSI",
+    "ABSSF",
+    "ABT",
+    "ABTC",
+    "ABTS",
+    "ABUS",
+    "ABVC",
+    "ABVEF",
+    "ABVG",
+    "ABVWF",
+    "ABVX",
+    "ABX",
+    "ABXB",
+    "ABXL",
+    "ABXXF",
+    "ACA",
+    "ACAD",
+    "ACAN",
+    "ACAZF",
+    "ACB",
+    "ACCD-202504",
+    "ACCL",
+    "ACCMF",
+    "ACCO",
+    "ACCR",
+    "ACCS",
+    "ACCYY",
+    "ACDBF",
+    "ACDC",
+    "ACDSF",
+    "ACDVF",
+    "ACDXF",
+    "ACEI",
+    "ACEL",
+    "ACEP",
+    "ACES",
+    "ACET",
+    "ACFN",
+    "ACGBF",
+    "ACGBY",
+    "ACGL",
+    "ACGLN",
+    "ACGLO",
+    "ACGP",
+    "ACGR",
+    "ACGX",
+    "ACH",
+    "ACHC",
+    "ACHFF",
+    "ACHL-202503",
+    "ACHR",
+    "ACHR_W",
+    "ACHV",
+    "ACI",
+    "ACIC",
+    "ACII",
+    "ACIO",
+    "ACIU",
+    "ACIW",
+    "ACIXF",
+    "ACKDF",
+    "ACKY",
+    "ACLC",
+    "ACLLF",
+    "ACLLY",
+    "ACLO",
+    "ACLS",
+    "ACLX-202604",
+    "ACM",
+    "ACMB",
+    "ACMIF",
+    "ACMR",
+    "ACN",
+    "ACNB",
+    "ACNDF",
+    "ACNFF",
+    "ACNT",
+    "ACOG",
+    "ACON",
+    "ACONW",
+    "ACOPF",
+    "ACOPY",
+    "ACP",
+    "ACP-A",
+    "ACR",
+    "ACR-C",
+    "ACR-D",
+    "ACRE",
+    "ACRFF",
+    "ACRG",
+    "ACRL",
+    "ACRS",
+    "ACRV",
+    "ACSAY",
+    "ACSG",
+    "ACSI",
+    "ACSV",
+    "ACT",
+    "ACTG",
+    "ACTU",
+    "ACTV-202510",
+    "ACU",
+    "ACUR",
+    "ACUT",
+    "ACV",
+    "ACVA",
+    "ACVF",
+    "ACVT",
+    "ACVU",
+    "ACWI",
+    "ACWV",
+    "ACWX",
+    "ACXAF",
+    "ACXIF",
+    "ACXP",
+    "AD",
+    "ADAG",
+    "ADAM",
+    "ADAMG",
+    "ADAMH",
+    "ADAMI",
+    "ADAML",
+    "ADAMM",
+    "ADAMN",
+    "ADAMO",
+    "ADAMZ",
+    "ADAPY",
+    "ADBE",
+    "ADBG",
+    "ADBRF",
+    "ADC",
+    "ADC-A",
+    "ADCOF",
+    "ADCT",
+    "ADDDF",
+    "ADDHY",
+    "ADDYY",
+    "ADEA",
+    "ADFI",
+    "ADFJF",
+    "ADGM",
+    "ADHC",
+    "ADHI",
+    "ADI",
+    "ADIA",
+    "ADIL",
+    "ADIV",
+    "ADM",
+    "ADMA",
+    "ADME",
+    "ADVM-202512",
+    "ADXS-202602",
+    "AE-202502",
+    "AFTY-202410",
+    "AGIH-202508",
+    "AGR-202412",
+    "AGS-202506",
+    "AHL-202602",
+    "AHOY-202412",
+    "AIRL-202509",
+    "AITR-202504",
+    "AKRO-202512",
+    "AKTSQ-202601",
+    "AKYA-202507",
+    "AL-202604",
+    "ALE-202512",
+    "ALEX-202603",
+    "ALLK-202505",
+    "ALTM-202503",
+    "ALTR-202503",
+    "AMDS-202506",
+    "AMDU-202601",
+    "AMED-202508",
+    "AMNA-202412",
+    "AMND-202412",
+    "AMPD-202502",
+    "AMPS-202504",
+    "AMTR-202412",
+    "AMWD-202605",
+    "ANSS-202507",
+    "APED-202512",
+    "APLS-202605",
+    "APLT-202602",
+    "APRD-202504",
+    "APRQ-202504",
+    "APXIF-202512",
+    "ARC-202411",
+    "ARCH-202501",
+    "AREA-202602",
+    "ARIS-202510",
+    "ARKA-202509",
+    "ARKC-202503",
+    "ARKD-202509",
+    "ARKY-202503",
+    "ARKZ-202509",
+    "ARMU-202603",
+    "ASET-202510",
+    "ATIP-202507",
+    "ATMC-202512",
+    "ATSG-202504",
+    "ATXS-202601",
+    "AURU-202602",
+    "AVDL-202602",
+    "AVDX-202510",
+    "AVGR-202502",
+    "AWEG-202512",
+    "AXDXQ-202508",
+    "AXNX-202411",
+    "AXUP-202603",
+    "AY-202412",
+    "AZEK-202506",
+    "AZN-202601",
+    "AZNH-202601",
+    "AZPN-202503",
+    "AZULQ-202601",
+    "B-202501",
+    "BACQU-202603",
+    "BALY-202502",
+    "BASE-202509",
+    "BBIP-202410",
+    "BBSA-202410",
+    "BBU-202603",
+    "BCIM-202512",
+    "BCOV-202502",
+    "BECN-202504",
+    "BEDU-202512",
+    "BERY-202504",
+    "BEST-202503",
+    "BFICQ-202503",
+    "BFIN-202512",
+    "BFK-202602",
+    "BFRE-202602",
+    "BFZ-202602",
+    "BGFV-202510",
+    "BKIV-202509",
+    "BKN-202602",
+    "BKNU-202603",
+    "BKWO-202509",
+    "BLE-202602",
+    "BLFY-202603",
+    "BLKC-202602",
+    "BLLD-202503",
+    "BLPH-202412",
+    "BLSX-202603",
+    "BLUE-202505",
+    "BMAX-202604",
+    "BMDL-202601",
+    "BMTX-202501",
+    "BNY-202602",
+    "BOED-202604",
+    "BOWN-202507",
+    "BPMC-202507",
+    "BPPTU-202510",
+    "BRDG-202508",
+    "BRFS-202509",
+    "BRKD-202604",
+    "BRKL-202508",
+    "BRRWU-202512",
+    "BRY-202512",
+    "BSCO-202412",
+    "BSCP-202512",
+    "BSJO-202412",
+    "BSJP-202512",
+    "BSMO-202412",
+    "BSMP-202512",
+    "BTA-202602",
+    "BTFX-202512",
+    "BTOP-202605",
+    "BULU-202603",
+    "BWEB-202605",
+    "BXMX-202603",
+    "BYM-202602",
+    "BYU-202411",
+    "CA-202605",
+    "CADE-202601",
+    "CBDBY-202512",
+    "CCCXU-202602",
+    "CCIRU-202508",
+    "CCRD-202510",
+    "CCRV-202508",
+    "CDMO-202502",
+    "CDTX-202601",
+    "CELT-202603",
+    "CFB-202502",
+    "CFCV-202410",
+    "CFLT-202603",
+    "CFSB-202510",
+    "CHACU-202603",
+    "CHGX-202505",
+    "CHN-202510",
+    "CHUY-202410",
+    "CHX-202507",
+    "CID-202410",
+    "CIL-202601",
+    "CIO-202601",
+    "CIVI-202601",
+    "CIXXF-202508",
+    "CIZ-202410",
+    "CKPT-202505",
+    "CLCO-202601",
+    "CLDL-202507",
+    "CLNR-202504",
+    "CMA-202601",
+    "CMAXQ-202501",
+    "CMRX-202504",
+    "CNCR-202505",
+    "CNSL-202412",
+    "CNTGF-202605",
+    "CNTTQ-202602",
+    "CONNQ-202507",
+    "COOP-202509",
+    "CORX-202601",
+    "CPTN-202501",
+    "CRAWA-202602",
+    "CRGX-202508",
+    "CRIT-202503",
+    "CRTAF-202602",
+    "CRUZ-202504",
+    "CSA-202504",
+    "CSF-202504",
+    "CSGS-202605",
+    "CTKYY-202601",
+    "CTLP-202605",
+    "CTLT-202412",
+    "CTRA-202605",
+    "CTV-202502",
+    "CUK-202605",
+    "CUTRQ-202505",
+    "CVAC-202601",
+    "CVGW-202605",
+    "CVSE-202510",
+    "CWBR-202501",
+    "CWEN.A-202604",
+    "CYBR-202602",
+    "CYTH-202503",
+    "DADA-202506",
+    "DALN-202509",
+    "DASX-202603",
+    "DAWN-202604",
+    "DAY-202602",
+    "DCAP-202506",
+    "DCF-202411",
+    "DENN-202601",
+    "DESP-202505",
+    "DFND-202512",
+    "DFS-202505",
+    "DHIL-202604",
+    "DIAX-202603",
+    "DJCB-202412",
+    "DKUP-202603",
+    "DM-202504",
+    "DMCY-202602",
+    "DMDV-202410",
+    "DMF-202506",
+    "DMKPQ-202511",
+    "DMTKQ-202508",
+    "DNB-202508",
+    "DNMRQ-202507",
+    "DOGD-202604",
+    "DRRX-202509",
+    "DVAX-202602",
+    "DVS-202603",
+    "DWAT-202506",
+    "DWCR-202507",
+    "DYCQ-202511",
+    "DYNI-202506",
+    "EATV-202505",
+    "EATZ-202604",
+    "EB-202603",
+    "EBTC-202506",
+    "ECDA-202603",
+    "EDR-202503",
+    "EEMD-202410",
+    "EFIX-202504",
+    "EGF-202503",
+    "EGIOQ-202507",
+    "EGRVF-202508",
+    "EHAB-202605",
+    "ELEV-202507",
+    "ELIS-202604",
+    "ELON-202510",
+    "ELP-202512",
+    "ELQD-202508",
+    "EM-202604",
+    "EMCC-202502",
+    "EMKR-202502",
+    "EMX-202511",
+    "ENFN-202504",
+    "ENGCQ-202506",
+    "ENLC-202501",
+    "ENPX-202604",
+    "ENV-202411",
+    "ENX-202510",
+    "ENZB-202508",
+    "EPIX-202510",
+    "IWM",
+    "SPY"
+  ],
+  "active_rejections": {
+    "AAAD": "insufficient_rows",
+    "AAAIF": "insufficient_rows",
+    "AACAF": "insufficient_rows",
+    "AACI": "insufficient_rows",
+    "AACIU": "insufficient_rows",
+    "AACIW": "insufficient_rows",
+    "AACLF": "insufficient_rows",
+    "AACO": "insufficient_rows",
+    "AACOU": "insufficient_rows",
+    "AACOW": "insufficient_rows",
+    "AACP": "insufficient_rows",
+    "AACPR": "insufficient_rows",
+    "AACPU": "insufficient_rows",
+    "AACPW": "insufficient_rows",
+    "AACS": "insufficient_rows",
+    "AADX": "insufficient_rows",
+    "AAGRY": "insufficient_rows",
+    "AAHIF": "insufficient_rows",
+    "AAIIQ": "insufficient_rows",
+    "AALBF": "insufficient_rows",
+    "AANNF": "insufficient_rows",
+    "AAOG": "insufficient_rows",
+    "AAOX": "insufficient_rows",
+    "AAQL": "insufficient_rows",
+    "AARLF": "insufficient_rows",
+    "AARTY": "insufficient_rows",
+    "AASCF": "insufficient_rows",
+    "AASLF": "insufficient_rows",
+    "AAUA": "insufficient_rows",
+    "AAVXF": "insufficient_rows",
+    "AAXBF": "insufficient_rows",
+    "AAXT": "insufficient_rows",
+    "AAYYY": "insufficient_rows",
+    "ABAKF": "insufficient_rows",
+    "ABANF": "insufficient_rows",
+    "ABBAF": "insufficient_rows",
+    "ABBB": "insufficient_rows",
+    "ABBY": "insufficient_rows",
+    "ABCCF": "insufficient_rows",
+    "ABDBY": "insufficient_rows",
+    "ABDDF": "insufficient_rows",
+    "ABDXF": "insufficient_rows",
+    "ABENU": "insufficient_rows",
+    "ABFRF": "insufficient_rows",
+    "ABFXF": "insufficient_rows",
+    "ABGSF": "insufficient_rows",
+    "ABHBY": "insufficient_rows",
+    "ABILF": "insufficient_rows",
+    "ABLE": "insufficient_rows",
+    "ABLGF": "insufficient_rows",
+    "ABLT": "insufficient_rows",
+    "ABMMF": "insufficient_rows",
+    "ABMT": "insufficient_rows",
+    "ABOIF": "insufficient_rows",
+    "ABPR": "insufficient_rows",
+    "ABRHS": "insufficient_rows",
+    "ABRMF": "insufficient_rows",
+    "ABSCF": "insufficient_rows",
+    "ABSOF": "insufficient_rows",
+    "ABTI": "insufficient_rows",
+    "ABTZY": "insufficient_rows",
+    "ABUF": "insufficient_rows",
+    "ABVN": "insufficient_rows",
+    "ABWN": "insufficient_rows",
+    "ABZPF": "insufficient_rows",
+    "ABZPY": "insufficient_rows",
+    "ABZT": "insufficient_rows",
+    "ACAA": "insufficient_rows",
+    "ACAAU": "insufficient_rows",
+    "ACAAW": "insufficient_rows",
+    "ACAGF": "insufficient_rows",
+    "ACAI": "insufficient_rows",
+    "ACASF": "insufficient_rows",
+    "ACAT": "insufficient_rows",
+    "ACBD": "insufficient_rows",
+    "ACBM": "insufficient_rows",
+    "ACCFF": "insufficient_rows",
+    "ACEEU": "insufficient_rows",
+    "ACEHF": "insufficient_rows",
+    "ACEJF": "insufficient_rows",
+    "ACFL": "insufficient_rows",
+    "ACGAF": "insufficient_rows",
+    "ACGC": "insufficient_rows",
+    "ACGCU": "insufficient_rows",
+    "ACGCW": "insufficient_rows",
+    "ACGO": "insufficient_rows",
+    "ACGYF": "insufficient_rows",
+    "ACHWS": "insufficient_rows",
+    "ACIBF": "insufficient_rows",
+    "ACIRF": "insufficient_rows",
+    "ACITF": "insufficient_rows",
+    "ACJJF": "insufficient_rows",
+    "ACKAF": "insufficient_rows",
+    "ACKAY": "insufficient_rows",
+    "ACLEW": "insufficient_rows",
+    "ACLIF": "insufficient_rows",
+    "ACMDY": "insufficient_rows",
+    "ACMLF": "insufficient_rows",
+    "ACMNF": "insufficient_rows",
+    "ACMT": "insufficient_rows",
+    "ACMTA": "insufficient_rows",
+    "ACNE": "insufficient_rows",
+    "ACNV": "insufficient_rows",
+    "ACOLF": "insufficient_rows",
+    "ACPIF": "insufficient_rows",
+    "ACPS": "insufficient_rows",
+    "ACQC": "insufficient_rows",
+    "ACRB": "insufficient_rows",
+    "ACRU": "insufficient_rows",
+    "ACRXF": "insufficient_rows",
+    "ACSAF": "insufficient_rows",
+    "ACSYF": "insufficient_rows",
+    "ACTL": "insufficient_rows",
+    "ACTPS": "insufficient_rows",
+    "ACTS": "insufficient_rows",
+    "ACTX": "insufficient_rows",
+    "ACUS": "insufficient_rows",
+    "ACVES": "insufficient_rows",
+    "ACWEF": "insufficient_rows",
+    "ACWRF": "insufficient_rows",
+    "ACYN": "insufficient_rows",
+    "ACYRS": "insufficient_rows",
+    "ACYS": "insufficient_rows",
+    "ADAC": "insufficient_rows",
+    "ADACU": "insufficient_rows",
+    "ADACW": "insufficient_rows",
+    "ADAD": "insufficient_rows",
+    "ADBGF": "insufficient_rows",
+    "ADBKF": "insufficient_rows",
+    "ADBMF": "insufficient_rows",
+    "ADBN": "insufficient_rows",
+    "ADBU": "insufficient_rows",
+    "ADCNF": "insufficient_rows",
+    "ADCV": "insufficient_rows",
+    "ADDLF": "insufficient_rows",
+    "ADDS": "insufficient_rows",
+    "ADEC": "insufficient_rows",
+    "ADERY": "insufficient_rows",
+    "ADFS": "insufficient_rows",
+    "ADHLF": "insufficient_rows",
+    "ADKCF": "insufficient_rows",
+    "ADKIL": "insufficient_rows",
+    "ADKT": "insufficient_rows",
+    "ADLI": "insufficient_rows",
+    "ADLRF": "insufficient_rows"
+  },
+  "delisted_rejections": {
+    "AACIU-202408": "insufficient_rows",
+    "AACT.U-202509": "non_common_or_derivative_symbol",
+    "AAM.U-202601": "non_common_or_derivative_symbol",
+    "AAN-202410": "insufficient_rows",
+    "ABMC-202506": "insufficient_rows",
+    "ACABU-202411": "insufficient_rows",
+    "ACACU-202409": "insufficient_rows",
+    "ACNI-202407": "insufficient_rows",
+    "ACORQ-202408": "insufficient_rows",
+    "ADRT-202410": "insufficient_rows",
+    "ADRT.U-202410": "non_common_or_derivative_symbol",
+    "ADST-202412": "insufficient_rows",
+    "ADTH-202406": "insufficient_rows",
+    "AEMB-202409": "insufficient_rows",
+    "AFAR-202407": "insufficient_rows",
+    "AFARU-202407": "insufficient_rows",
+    "AFHIF-202409": "insufficient_rows",
+    "AFT-202407": "insufficient_rows",
+    "AGRX-202408": "insufficient_rows",
+    "AHPIQ-202412": "insufficient_rows",
+    "AIF-202407": "insufficient_rows",
+    "AINC-202407": "insufficient_rows",
+    "AIRC-202406": "insufficient_rows",
+    "AITRU-202504": "insufficient_rows",
+    "AIU-202408": "insufficient_rows",
+    "AKLI-202407": "insufficient_rows",
+    "ALIM-202409": "insufficient_rows",
+    "ALMC-202406": "insufficient_rows",
+    "ALUM-202410": "insufficient_rows",
+    "AMK-202409": "insufficient_rows",
+    "APADU-202605": "insufficient_rows",
+    "APCA-202406": "insufficient_rows",
+    "APXIU-202409": "insufficient_rows",
+    "AQIS-202411": "insufficient_rows",
+    "ASLN-202407": "insufficient_rows",
+    "ASTR-202407": "insufficient_rows",
+    "ASXC-202408": "insufficient_rows",
+    "ATMCU-202512": "insufficient_rows",
+    "ATMVU-202512": "insufficient_rows",
+    "ATRI-202408": "insufficient_rows",
+    "AUDAQ-202409": "insufficient_rows",
+    "AUGX-202410": "insufficient_rows",
+    "AVHI-202409": "insufficient_rows",
+    "AVHIU-202409": "insufficient_rows",
+    "AVXT-202412": "insufficient_rows",
+    "AWCMY-202407": "insufficient_rows",
+    "AYTEF-202406": "insufficient_rows",
+    "BACA-202409": "insufficient_rows",
+    "BALTF-202406": "insufficient_rows",
+    "BBLKF-202504": "insufficient_rows",
+    "BCEL-202406": "insufficient_rows",
+    "BCSA-202411": "insufficient_rows",
+    "BCSAU-202411": "insufficient_rows",
+    "BECO-202408": "insufficient_rows",
+    "BFQUF-202502": "insufficient_rows",
+    "BFXXQ-202408": "insufficient_rows",
+    "BHACU-202412": "insufficient_rows",
+    "BITE.U-202406": "non_common_or_derivative_symbol",
+    "BLACU-202502": "insufficient_rows",
+    "BLEU-202411": "insufficient_rows",
+    "BLEUU-202409": "insufficient_rows",
+    "BNE-202409": "insufficient_rows",
+    "BNKD-202407": "insufficient_rows",
+    "BNKU-202407": "insufficient_rows",
+    "BNRE.A-202408": "insufficient_rows",
+    "BOCNU-202412": "insufficient_rows",
+    "BOWNU-202505": "insufficient_rows",
+    "BRAC-202501": "insufficient_rows",
+    "BRACU-202501": "insufficient_rows",
+    "BRDSQ-202409": "insufficient_rows",
+    "BRKHU-202501": "insufficient_rows",
+    "BSIIU-202506": "insufficient_rows",
+    "BTEC-202407": "insufficient_rows",
+    "BTEK-202408": "insufficient_rows",
+    "BTSR-202407": "insufficient_rows",
+    "BUJAU-202505": "insufficient_rows",
+    "BWAQU-202407": "insufficient_rows",
+    "CACG-202406": "insufficient_rows",
+    "CALB-202407": "insufficient_rows",
+    "CALT-202409": "insufficient_rows",
+    "CAMPQ-202407": "insufficient_rows",
+    "CANOQ-202406": "insufficient_rows",
+    "CASSQ-202406": "insufficient_rows",
+    "CATC-202407": "insufficient_rows",
+    "CBH-202408": "insufficient_rows",
+    "CEM-202409": "insufficient_rows",
+    "CERE-202407": "insufficient_rows",
+    "CETF-202407": "insufficient_rows",
+    "CETUU-202407": "insufficient_rows",
+    "CFFS-202412": "insufficient_rows",
+    "CFFSU-202412": "insufficient_rows",
+    "CHEB.U-202508": "non_common_or_derivative_symbol",
+    "CLBR.U-202507": "non_common_or_derivative_symbol",
+    "CLIA-202408": "insufficient_rows",
+    "CLOE-202501": "insufficient_rows",
+    "CLOEU-202501": "insufficient_rows",
+    "COOL-202406": "insufficient_rows",
+    "COOLU-202406": "insufficient_rows",
+    "CORRQ-202406": "insufficient_rows",
+    "COWTF-202506": "insufficient_rows",
+    "CRTUF-202601": "insufficient_rows",
+    "CRXM-202409": "insufficient_rows",
+    "CSHEF-202412": "insufficient_rows",
+    "CSLUF-202507": "insufficient_rows",
+    "CTR-202409": "insufficient_rows",
+    "CUROQ-202407": "insufficient_rows",
+    "CVII-202408": "insufficient_rows",
+    "CVIIU-202408": "insufficient_rows",
+    "CVLY-202406": "insufficient_rows",
+    "DBEH-202409": "insufficient_rows",
+    "DBSC-202604": "insufficient_rows",
+    "DCPH-202406": "insufficient_rows",
+    "DHACU-202406": "insufficient_rows",
+    "DMSLQ-202502": "insufficient_rows",
+    "DMYYU-202602": "insufficient_rows",
+    "DNQUF-202508": "insufficient_rows",
+    "DO-202409": "insufficient_rows",
+    "DOMA-202409": "insufficient_rows",
+    "DPCS-202411": "insufficient_rows",
+    "DPCSU-202411": "insufficient_rows",
+    "DPSI-202407": "insufficient_rows",
+    "DSAQ-202506": "insufficient_rows",
+    "DSAQU-202503": "insufficient_rows",
+    "DUET-202411": "insufficient_rows",
+    "DUETU-202408": "insufficient_rows",
+    "DYCQU-202511": "insufficient_rows",
+    "EBIXQ-202408": "insufficient_rows",
+    "EFUT-202409": "insufficient_rows",
+    "EGSVF-202506": "insufficient_rows",
+    "EIGRQ-202409": "insufficient_rows",
+    "EMFQ-202409": "insufficient_rows",
+    "ENGY-202501": "insufficient_rows",
+    "ENYNF-202410": "insufficient_rows"
+  },
+  "diagnostics": {
+    "A": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 231391274.69421768,
+      "min_close": 98.48164367675781,
+      "rows": 504
+    },
+    "AA": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 198866588.18667984,
+      "min_close": 22.284093856811523,
+      "rows": 504
+    },
+    "AAA": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 194745.89765262604,
+      "min_close": 22.520389556884766,
+      "rows": 504
+    },
+    "AAAA": {
+      "first_date": "2025-07-16",
+      "last_date": "2026-06-05",
+      "median_turnover": 91104.72237968445,
+      "min_close": 24.799962997436523,
+      "rows": 225
+    },
+    "AAAC": {
+      "first_date": "2025-12-11",
+      "last_date": "2026-06-05",
+      "median_turnover": 177.66842651367188,
+      "min_close": 19.566043853759766,
+      "rows": 121
+    },
+    "AAAU": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 66024882.50180054,
+      "min_close": 22.639999389648438,
+      "rows": 504
+    },
+    "AABB": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 152872.34092285857,
+      "min_close": 0.012395000085234642,
+      "rows": 504
+    },
+    "AABVF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-04",
+      "median_turnover": 147.03405028861016,
+      "min_close": 0.013500000350177288,
+      "rows": 162
+    },
+    "AACAY": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 19685.512058734894,
+      "min_close": 2.9871041774749756,
+      "rows": 497
+    },
+    "AACB": {
+      "first_date": "2025-04-07",
+      "last_date": "2026-06-04",
+      "median_turnover": 65193.70096206665,
+      "min_close": 9.880000114440918,
+      "rows": 201
+    },
+    "AACBR": {
+      "first_date": "2025-04-07",
+      "last_date": "2026-06-05",
+      "median_turnover": 564.95998737216,
+      "min_close": 0.1598999947309494,
+      "rows": 151
+    },
+    "AACBU": {
+      "first_date": "2025-02-13",
+      "last_date": "2026-06-04",
+      "median_turnover": 10168.860189437866,
+      "min_close": 10.0,
+      "rows": 136
+    },
+    "AACG": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 16410.500230789185,
+      "min_close": 0.5024999976158142,
+      "rows": 504
+    },
+    "AACTF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 75.5999967455864,
+      "min_close": 0.003599999938160181,
+      "rows": 407
+    },
+    "AADR": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 138146.50386810303,
+      "min_close": 55.92894744873047,
+      "rows": 504
+    },
+    "AAEQ": {
+      "first_date": "2025-12-10",
+      "last_date": "2026-06-05",
+      "median_turnover": 5847.649839401245,
+      "min_close": 45.21009826660156,
+      "rows": 122
+    },
+    "AAFRF": {
+      "first_date": "2024-06-07",
+      "last_date": "2026-06-04",
+      "median_turnover": 3701.2023282051086,
+      "min_close": 1.130967140197754,
+      "rows": 294
+    },
+    "AAGAF": {
+      "first_date": "2024-12-19",
+      "last_date": "2026-06-05",
+      "median_turnover": 115630.12965342402,
+      "min_close": 0.23000000417232513,
+      "rows": 349
+    },
+    "AAGC": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 2286.6791422336246,
+      "min_close": 0.0003499999875202775,
+      "rows": 503
+    },
+    "AAGFF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 192766.66338419914,
+      "min_close": 0.18310000002384186,
+      "rows": 504
+    },
+    "AAGH": {
+      "first_date": "2024-06-04",
+      "last_date": "2026-06-04",
+      "median_turnover": 425.02299296320416,
+      "min_close": 9.999999974752427e-07,
+      "rows": 260
+    },
+    "AAGIY": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 10257507.536903381,
+      "min_close": 24.591859817504883,
+      "rows": 504
+    },
+    "AAGR": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 0.9935000209952705,
+      "min_close": 9.999999974752427e-07,
+      "rows": 468
+    },
+    "AAGRW": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-19",
+      "median_turnover": 8.488742939196527,
+      "min_close": 9.999999974752427e-07,
+      "rows": 104
+    },
+    "AAIGF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 170421.39475536346,
+      "min_close": 5.693957328796387,
+      "rows": 504
+    },
+    "AAIRF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 3008.93993274495,
+      "min_close": 0.01850000023841858,
+      "rows": 495
+    },
+    "AAL": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 615952323.5283337,
+      "min_close": 9.069999694824219,
+      "rows": 504
+    },
+    "AALG": {
+      "first_date": "2025-07-11",
+      "last_date": "2026-06-05",
+      "median_turnover": 232648.8455915451,
+      "min_close": 7.173999786376953,
+      "rows": 228
+    },
+    "AAM-202602": {
+      "first_date": "2024-09-16",
+      "last_date": "2026-02-02",
+      "median_turnover": 80631.03886938095,
+      "min_close": 9.979999542236328,
+      "rows": 328
+    },
+    "AAMCF": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-11-11",
+      "median_turnover": 0.0,
+      "min_close": 2500.0,
+      "rows": 173
+    },
+    "AAME": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 14814.416782855988,
+      "min_close": 1.2899999618530273,
+      "rows": 502
+    },
+    "AAMI": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 7640299.7502298355,
+      "min_close": 21.46643829345703,
+      "rows": 504
+    },
+    "AAMMF": {
+      "first_date": "2024-06-04",
+      "last_date": "2026-06-05",
+      "median_turnover": 5141.415140647441,
+      "min_close": 0.05000000074505806,
+      "rows": 468
+    },
+    "AAMTF": {
+      "first_date": "2024-06-11",
+      "last_date": "2026-06-01",
+      "median_turnover": 965.0000266730785,
+      "min_close": 0.10180000215768814,
+      "rows": 94
+    },
+    "AAOI": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 104227838.9063158,
+      "min_close": 6.869999885559082,
+      "rows": 504
+    },
+    "AAON": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 69572403.52913666,
+      "min_close": 71.34632873535156,
+      "rows": 504
+    },
+    "AAP": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 90308449.13436508,
+      "min_close": 29.49271583557129,
+      "rows": 504
+    },
+    "AAPB": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 3797657.991217613,
+      "min_close": 14.539216995239258,
+      "rows": 504
+    },
+    "AAPD": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 17399210.943305016,
+      "min_close": 11.240300178527832,
+      "rows": 504
+    },
+    "AAPG": {
+      "first_date": "2025-01-24",
+      "last_date": "2026-06-05",
+      "median_turnover": 214433.21357536316,
+      "min_close": 17.200000762939453,
+      "rows": 337
+    },
+    "AAPI": {
+      "first_date": "2024-06-14",
+      "last_date": "2026-06-05",
+      "median_turnover": 1644.9999809265137,
+      "min_close": 0.09059999883174896,
+      "rows": 186
+    },
+    "AAPJ": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-11",
+      "median_turnover": 1138.5554712376688,
+      "min_close": 9.999999974752427e-07,
+      "rows": 234
+    },
+    "AAPL": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 11016336180.472473,
+      "min_close": 171.5137481689453,
+      "rows": 504
+    },
+    "AAPR": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 101459.21113204956,
+      "min_close": 24.899999618530273,
+      "rows": 504
+    },
+    "AAPT": {
+      "first_date": "2024-06-18",
+      "last_date": "2026-05-29",
+      "median_turnover": 0.09999999747378752,
+      "min_close": 9.999999974752427e-07,
+      "rows": 171
+    },
+    "AAPU": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 48415295.38222122,
+      "min_close": 15.28171443939209,
+      "rows": 504
+    },
+    "AAPW": {
+      "first_date": "2025-02-19",
+      "last_date": "2026-06-05",
+      "median_turnover": 555105.8838920593,
+      "min_close": 21.2890682220459,
+      "rows": 326
+    },
+    "AAPX": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 2229362.245677948,
+      "min_close": 14.255426406860352,
+      "rows": 504
+    },
+    "AAPY": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 58738.85161972046,
+      "min_close": 16.238176345825195,
+      "rows": 504
+    },
+    "AARD": {
+      "first_date": "2025-02-13",
+      "last_date": "2026-06-05",
+      "median_turnover": 1098036.965106964,
+      "min_close": 3.509999990463257,
+      "rows": 329
+    },
+    "AASP": {
+      "first_date": "2024-06-06",
+      "last_date": "2026-06-05",
+      "median_turnover": 5348.5,
+      "min_close": 0.17299999296665192,
+      "rows": 341
+    },
+    "AASZF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-28",
+      "median_turnover": 1628.000020980835,
+      "min_close": 0.0640999972820282,
+      "rows": 273
+    },
+    "AAT": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 6736909.471006393,
+      "min_close": 15.914711952209473,
+      "rows": 504
+    },
+    "AATC": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 31571.873446941376,
+      "min_close": 4.399622440338135,
+      "rows": 493
+    },
+    "AATV": {
+      "first_date": "2024-06-05",
+      "last_date": "2026-06-04",
+      "median_turnover": 999.3599653244019,
+      "min_close": 0.05999999865889549,
+      "rows": 145
+    },
+    "AAUAF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 5153.713706970215,
+      "min_close": 0.03229999914765358,
+      "rows": 504
+    },
+    "AAUC": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 778421.25,
+      "min_close": 5.850000381469727,
+      "rows": 481
+    },
+    "AAUKF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 37494.18040847778,
+      "min_close": 18.674009323120117,
+      "rows": 294
+    },
+    "AAUM": {
+      "first_date": "2025-10-01",
+      "last_date": "2026-06-05",
+      "median_turnover": 740.2170181274414,
+      "min_close": 18.59000015258789,
+      "rows": 171
+    },
+    "AAUS": {
+      "first_date": "2025-07-23",
+      "last_date": "2026-06-05",
+      "median_turnover": 11552.393188476562,
+      "min_close": 49.00595474243164,
+      "rows": 220
+    },
+    "AAVM": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 27170.32795906067,
+      "min_close": 21.15520477294922,
+      "rows": 504
+    },
+    "AAVMY": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 299027.4416589737,
+      "min_close": 13.731173515319824,
+      "rows": 504
+    },
+    "AAVVF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 305362.42963027954,
+      "min_close": 5.75,
+      "rows": 493
+    },
+    "AAWH": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 60266.07955798507,
+      "min_close": 0.28110000491142273,
+      "rows": 504
+    },
+    "AAXJ": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 38297143.42786789,
+      "min_close": 63.75703811645508,
+      "rows": 504
+    },
+    "AB": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 9034949.375811577,
+      "min_close": 27.251392364501953,
+      "rows": 504
+    },
+    "ABAT": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 5455199.467692196,
+      "min_close": 0.7599999904632568,
+      "rows": 504
+    },
+    "ABBNY": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 13246460.181001663,
+      "min_close": 45.80659103393555,
+      "rows": 504
+    },
+    "ABBRF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 509676.84446036816,
+      "min_close": 1.5199999809265137,
+      "rows": 504
+    },
+    "ABBV": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 1109485173.0488892,
+      "min_close": 149.69781494140625,
+      "rows": 504
+    },
+    "ABCB": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 26502560.035064697,
+      "min_close": 45.71395492553711,
+      "rows": 504
+    },
+    "ABCFF": {
+      "first_date": "2024-06-04",
+      "last_date": "2026-06-04",
+      "median_turnover": 309.5000916039571,
+      "min_close": 0.009999999776482582,
+      "rows": 343
+    },
+    "ABCL": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 10782793.595254421,
+      "min_close": 1.9299999475479126,
+      "rows": 504
+    },
+    "ABCP": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 3461.270062789321,
+      "min_close": 0.13770000636577606,
+      "rows": 393
+    },
+    "ABCS": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 79476.11395454407,
+      "min_close": 23.96074104309082,
+      "rows": 504
+    },
+    "ABEO": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 3837157.7167687416,
+      "min_close": 4.090000152587891,
+      "rows": 504
+    },
+    "ABEPF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 193.5000065714121,
+      "min_close": 0.009800000116229057,
+      "rows": 437
+    },
+    "ABEQ": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 238341.48643112183,
+      "min_close": 29.11485481262207,
+      "rows": 504
+    },
+    "ABEV": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 65601143.70550728,
+      "min_close": 1.650871992111206,
+      "rows": 504
+    },
+    "ABFL": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 1151236.2041244507,
+      "min_close": 56.51236343383789,
+      "rows": 504
+    },
+    "ABG": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 41197271.948394775,
+      "min_close": 176.27999877929688,
+      "rows": 504
+    },
+    "ABI": {
+      "first_date": "2025-06-26",
+      "last_date": "2026-06-05",
+      "median_turnover": 336.35521507263184,
+      "min_close": 23.764739990234375,
+      "rows": 238
+    },
+    "ABIG": {
+      "first_date": "2025-04-09",
+      "last_date": "2026-06-05",
+      "median_turnover": 61865.086824417114,
+      "min_close": 25.68568229675293,
+      "rows": 291
+    },
+    "ABIT": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 6129.350064471364,
+      "min_close": 0.003100000089034438,
+      "rows": 499
+    },
+    "ABLD": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 98846.17239189148,
+      "min_close": 23.496337890625,
+      "rows": 504
+    },
+    "ABLG": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 67227.67977333069,
+      "min_close": 23.806989669799805,
+      "rows": 504
+    },
+    "ABLS": {
+      "first_date": "2025-02-19",
+      "last_date": "2026-06-05",
+      "median_turnover": 123.18443870544434,
+      "min_close": 17.691646575927734,
+      "rows": 326
+    },
+    "ABLV": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 8843.497453987598,
+      "min_close": 0.5601000189781189,
+      "rows": 494
+    },
+    "ABLVW": {
+      "first_date": "2024-06-05",
+      "last_date": "2026-06-04",
+      "median_turnover": 113.50096080452204,
+      "min_close": 0.010599999688565731,
+      "rows": 276
+    },
+    "ABLZF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 133532.95362854004,
+      "min_close": 45.45699691772461,
+      "rows": 501
+    },
+    "ABM": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 20304518.665714264,
+      "min_close": 37.10981369018555,
+      "rows": 504
+    },
+    "ABMBF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 4343.037626065314,
+      "min_close": 0.028008000925183296,
+      "rows": 328
+    },
+    "ABMRF": {
+      "first_date": "2024-06-13",
+      "last_date": "2026-06-02",
+      "median_turnover": 13198.540338516235,
+      "min_close": 13.298442840576172,
+      "rows": 96
+    },
+    "ABNAF": {
+      "first_date": "2024-06-06",
+      "last_date": "2026-06-02",
+      "median_turnover": 216.39999747276306,
+      "min_close": 0.032999999821186066,
+      "rows": 251
+    },
+    "ABNB": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 543393425.2580414,
+      "min_close": 105.69000244140625,
+      "rows": 504
+    },
+    "ABNG": {
+      "first_date": "2025-11-17",
+      "last_date": "2026-06-05",
+      "median_turnover": 15771.16242313385,
+      "min_close": 12.517200469970703,
+      "rows": 138
+    },
+    "ABNY": {
+      "first_date": "2024-06-25",
+      "last_date": "2026-06-05",
+      "median_turnover": 109290.63352966309,
+      "min_close": 31.925418853759766,
+      "rows": 489
+    },
+    "ABOS": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 470397.4348348379,
+      "min_close": 0.9007999897003174,
+      "rows": 504
+    },
+    "ABOT": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 16538.572338104248,
+      "min_close": 28.797306060791016,
+      "rows": 504
+    },
+    "ABPO": {
+      "first_date": "2024-06-06",
+      "last_date": "2026-06-05",
+      "median_turnover": 75936.00289344788,
+      "min_close": 0.10000000149011612,
+      "rows": 462
+    },
+    "ABPWW": {
+      "first_date": "2024-06-12",
+      "last_date": "2026-06-01",
+      "median_turnover": 145.86355377361178,
+      "min_close": 0.0019000000320374966,
+      "rows": 256
+    },
+    "ABR": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 30351822.09434557,
+      "min_close": 5.25,
+      "rows": 504
+    },
+    "ABR-D": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 245727.5982890129,
+      "min_close": 14.376063346862793,
+      "rows": 504
+    },
+    "ABR-E": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 114355.81022930145,
+      "min_close": 14.390430450439453,
+      "rows": 504
+    },
+    "ABR-F": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 295835.862238884,
+      "min_close": 15.91492748260498,
+      "rows": 504
+    },
+    "ABSI": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 9368651.138922215,
+      "min_close": 2.234999895095825,
+      "rows": 504
+    },
+    "ABSSF": {
+      "first_date": "2024-06-05",
+      "last_date": "2026-06-04",
+      "median_turnover": 6374.473416805267,
+      "min_close": 2.3274428844451904,
+      "rows": 321
+    },
+    "ABT": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 745053093.2206573,
+      "min_close": 82.55999755859375,
+      "rows": 504
+    },
+    "ABTC": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 3898572.4972078204,
+      "min_close": 0.6744999885559082,
+      "rows": 504
+    },
+    "ABTS": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 40176.35455751419,
+      "min_close": 0.814300000667572,
+      "rows": 504
+    },
+    "ABUS": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 3546753.5665388107,
+      "min_close": 2.880000114440918,
+      "rows": 504
+    },
+    "ABVC": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 119529.82392984629,
+      "min_close": 0.4189999997615814,
+      "rows": 504
+    },
+    "ABVEF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 735980.4767920971,
+      "min_close": 0.07119999825954437,
+      "rows": 503
+    },
+    "ABVG": {
+      "first_date": "2024-06-24",
+      "last_date": "2026-06-05",
+      "median_turnover": 0.4749999988007403,
+      "min_close": 9.999999974752427e-07,
+      "rows": 105
+    },
+    "ABVWF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-02",
+      "median_turnover": 2634.2999411188066,
+      "min_close": 0.003000000026077032,
+      "rows": 495
+    },
+    "ABVX": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 2840657.21258235,
+      "min_close": 5.170000076293945,
+      "rows": 504
+    },
+    "ABX": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 3053764.408621311,
+      "min_close": 4.501698970794678,
+      "rows": 504
+    },
+    "ABXB": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 7902.167823791504,
+      "min_close": 17.292722702026367,
+      "rows": 504
+    },
+    "ABXL": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 126141.12644672394,
+      "min_close": 20.73665428161621,
+      "rows": 498
+    },
+    "ABXXF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 406420.33342027664,
+      "min_close": 6.0,
+      "rows": 504
+    },
+    "ACA": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 23160930.271297455,
+      "min_close": 70.47496032714844,
+      "rows": 504
+    },
+    "ACAD": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 31281269.531737804,
+      "min_close": 14.100000381469727,
+      "rows": 504
+    },
+    "ACAN": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-02",
+      "median_turnover": 27.499999850988388,
+      "min_close": 9.999999974752427e-07,
+      "rows": 365
+    },
+    "ACAZF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 22861.719051361084,
+      "min_close": 9.6253080368042,
+      "rows": 463
+    },
+    "ACB": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 4225402.355398655,
+      "min_close": 3.0799999237060547,
+      "rows": 504
+    },
+    "ACCD-202504": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-04-07",
+      "median_turnover": 4617651.161608219,
+      "min_close": 3.1500000953674316,
+      "rows": 212
+    },
+    "ACCL": {
+      "first_date": "2025-10-17",
+      "last_date": "2026-06-05",
+      "median_turnover": 53771.638027668,
+      "min_close": 1.2999999523162842,
+      "rows": 159
+    },
+    "ACCMF": {
+      "first_date": "2024-06-04",
+      "last_date": "2026-06-01",
+      "median_turnover": 4771.000003814697,
+      "min_close": 3.049999952316284,
+      "rows": 96
+    },
+    "ACCO": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 2698427.1038639545,
+      "min_close": 2.784675121307373,
+      "rows": 504
+    },
+    "ACCR": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-02",
+      "median_turnover": 28.201500731520355,
+      "min_close": 0.0006000000284984708,
+      "rows": 290
+    },
+    "ACCS": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 71750.51890087128,
+      "min_close": 6.032076835632324,
+      "rows": 503
+    },
+    "ACCYY": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 248258.82059574127,
+      "min_close": 6.746313571929932,
+      "rows": 504
+    },
+    "ACDBF": {
+      "first_date": "2024-08-12",
+      "last_date": "2026-06-05",
+      "median_turnover": 46.05044982209802,
+      "min_close": 0.019999999552965164,
+      "rows": 284
+    },
+    "ACDC": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 4960360.8046627045,
+      "min_close": 3.190000057220459,
+      "rows": 504
+    },
+    "ACDSF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-01",
+      "median_turnover": 4951.981833934784,
+      "min_close": 1.4817533493041992,
+      "rows": 371
+    },
+    "ACDVF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 1874651.4795951843,
+      "min_close": 8.949999809265137,
+      "rows": 504
+    },
+    "ACDXF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 196.49750530719757,
+      "min_close": 0.08249999582767487,
+      "rows": 135
+    },
+    "ACEI": {
+      "first_date": "2025-09-25",
+      "last_date": "2026-06-05",
+      "median_turnover": 324708.07011795044,
+      "min_close": 22.419755935668945,
+      "rows": 175
+    },
+    "ACEL": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 3039541.725710869,
+      "min_close": 9.569999694824219,
+      "rows": 504
+    },
+    "ACEP": {
+      "first_date": "2025-11-21",
+      "last_date": "2026-06-05",
+      "median_turnover": 13285.926849365234,
+      "min_close": 15.10614013671875,
+      "rows": 134
+    },
+    "ACES": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 1303517.3540363312,
+      "min_close": 20.050878524780273,
+      "rows": 504
+    },
+    "ACET": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 591565.7390351295,
+      "min_close": 6.110000133514404,
+      "rows": 504
+    },
+    "ACFN": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 94713.30047798157,
+      "min_close": 8.239999771118164,
+      "rows": 476
+    },
+    "ACGBF": {
+      "first_date": "2024-06-04",
+      "last_date": "2026-06-01",
+      "median_turnover": 1907.997775554657,
+      "min_close": 0.37213584780693054,
+      "rows": 100
+    },
+    "ACGBY": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 355147.4814391136,
+      "min_close": 9.087618827819824,
+      "rows": 504
+    },
+    "ACGL": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 163821254.25460815,
+      "min_close": 84.72000122070312,
+      "rows": 504
+    },
+    "ACGLN": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 594122.1495513916,
+      "min_close": 15.608224868774414,
+      "rows": 504
+    },
+    "ACGLO": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 396105.55975055695,
+      "min_close": 18.838666915893555,
+      "rows": 504
+    },
+    "ACGP": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 106648.37549591064,
+      "min_close": 27.974735260009766,
+      "rows": 471
+    },
+    "ACGR": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 14482.61344909668,
+      "min_close": 45.31549072265625,
+      "rows": 503
+    },
+    "ACGX": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-04",
+      "median_turnover": 451.4962552115321,
+      "min_close": 0.028200000524520874,
+      "rows": 333
+    },
+    "ACH": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 7802153.198164463,
+      "min_close": 1.909999966621399,
+      "rows": 504
+    },
+    "ACHC": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 53972214.79879379,
+      "min_close": 11.680000305175781,
+      "rows": 504
+    },
+    "ACHFF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 11380.51940202713,
+      "min_close": 0.2985999882221222,
+      "rows": 479
+    },
+    "ACHL-202503": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-03-20",
+      "median_turnover": 75295.19645828009,
+      "min_close": 0.7001000046730042,
+      "rows": 200
+    },
+    "ACHR": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 227554155.8557663,
+      "min_close": 2.9100000858306885,
+      "rows": 504
+    },
+    "ACHR_W": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 159685.81636726856,
+      "min_close": 0.15620000660419464,
+      "rows": 504
+    },
+    "ACHV": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 1179087.1668059826,
+      "min_close": 1.975000023841858,
+      "rows": 504
+    },
+    "ACI": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 98707968.06629944,
+      "min_close": 15.470000267028809,
+      "rows": 504
+    },
+    "ACIC": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 2039758.1539411545,
+      "min_close": 8.486186981201172,
+      "rows": 504
+    },
+    "ACII": {
+      "first_date": "2025-09-25",
+      "last_date": "2026-06-05",
+      "median_turnover": 602817.5394668579,
+      "min_close": 23.5911808013916,
+      "rows": 175
+    },
+    "ACIO": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 5400645.460487366,
+      "min_close": 36.03621292114258,
+      "rows": 504
+    },
+    "ACIU": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 446178.7974922657,
+      "min_close": 1.4800000190734863,
+      "rows": 504
+    },
+    "ACIW": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 31509283.8762455,
+      "min_close": 34.349998474121094,
+      "rows": 504
+    },
+    "ACIXF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-28",
+      "median_turnover": 1279.9999676644802,
+      "min_close": 0.008999999612569809,
+      "rows": 199
+    },
+    "ACKDF": {
+      "first_date": "2024-06-12",
+      "last_date": "2026-06-05",
+      "median_turnover": 2200.625,
+      "min_close": 3.763590097427368,
+      "rows": 181
+    },
+    "ACKY": {
+      "first_date": "2025-09-09",
+      "last_date": "2026-06-05",
+      "median_turnover": 694257.0910644531,
+      "min_close": 16.347225189208984,
+      "rows": 187
+    },
+    "ACLC": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 430122.78507232666,
+      "min_close": 57.864463806152344,
+      "rows": 504
+    },
+    "ACLLF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 178086.10229492188,
+      "min_close": 25.956058502197266,
+      "rows": 459
+    },
+    "ACLLY": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 81241.87340927124,
+      "min_close": 36.919708251953125,
+      "rows": 462
+    },
+    "ACLO": {
+      "first_date": "2024-11-18",
+      "last_date": "2026-06-05",
+      "median_turnover": 34650.337505340576,
+      "min_close": 46.37603759765625,
+      "rows": 382
+    },
+    "ACLS": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 48524243.81586075,
+      "min_close": 42.41999816894531,
+      "rows": 504
+    },
+    "ACLX-202604": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-04-27",
+      "median_turnover": 40472447.78039169,
+      "min_close": 50.779998779296875,
+      "rows": 476
+    },
+    "ACM": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 93496670.47496033,
+      "min_close": 69.37000274658203,
+      "rows": 504
+    },
+    "ACMB": {
+      "first_date": "2024-06-05",
+      "last_date": "2026-06-05",
+      "median_turnover": 597.5000001490116,
+      "min_close": 0.009999999776482582,
+      "rows": 218
+    },
+    "ACMIF": {
+      "first_date": "2025-07-08",
+      "last_date": "2026-06-05",
+      "median_turnover": 9336.151139080524,
+      "min_close": 0.13787999749183655,
+      "rows": 198
+    },
+    "ACMR": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 33356290.808413506,
+      "min_close": 14.100000381469727,
+      "rows": 504
+    },
+    "ACN": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 947660854.9321213,
+      "min_close": 159.63999938964844,
+      "rows": 504
+    },
+    "ACNB": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 988947.925901413,
+      "min_close": 28.479412078857422,
+      "rows": 504
+    },
+    "ACNDF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 3968.636871576309,
+      "min_close": 0.5478457808494568,
+      "rows": 324
+    },
+    "ACNFF": {
+      "first_date": "2024-06-25",
+      "last_date": "2026-06-05",
+      "median_turnover": 11993.226676940918,
+      "min_close": 16.569122314453125,
+      "rows": 105
+    },
+    "ACNT": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 511287.105029583,
+      "min_close": 8.300000190734863,
+      "rows": 504
+    },
+    "ACOG": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 311495.26270866394,
+      "min_close": 3.75,
+      "rows": 503
+    },
+    "ACON": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 134460.14650774002,
+      "min_close": 2.359999895095825,
+      "rows": 504
+    },
+    "ACONW": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 138.19340012222528,
+      "min_close": 0.019999999552965164,
+      "rows": 402
+    },
+    "ACOPF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-28",
+      "median_turnover": 4205.529641151428,
+      "min_close": 2.8030126094818115,
+      "rows": 210
+    },
+    "ACOPY": {
+      "first_date": "2024-06-04",
+      "last_date": "2026-06-03",
+      "median_turnover": 3822.9588050842285,
+      "min_close": 3.0269103050231934,
+      "rows": 162
+    },
+    "ACP": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 3295135.4546523094,
+      "min_close": 4.256453514099121,
+      "rows": 504
+    },
+    "ACP-A": {
+      "first_date": "2024-06-04",
+      "last_date": "2026-06-05",
+      "median_turnover": 41100.52674102783,
+      "min_close": 19.329072952270508,
+      "rows": 465
+    },
+    "ACR": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 383562.40753650665,
+      "min_close": 12.600000381469727,
+      "rows": 504
+    },
+    "ACR-C": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 167507.5234670639,
+      "min_close": 20.188480377197266,
+      "rows": 504
+    },
+    "ACR-D": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 86663.24423980713,
+      "min_close": 16.86322021484375,
+      "rows": 501
+    },
+    "ACRE": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 2389379.114414692,
+      "min_close": 3.0880045890808105,
+      "rows": 504
+    },
+    "ACRFF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-18",
+      "median_turnover": 20940.006103515625,
+      "min_close": 33.60822677612305,
+      "rows": 125
+    },
+    "ACRG": {
+      "first_date": "2024-06-04",
+      "last_date": "2026-06-01",
+      "median_turnover": 3905.9999465942383,
+      "min_close": 2.0,
+      "rows": 104
+    },
+    "ACRL": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 1984.659875328187,
+      "min_close": 0.0010999999940395355,
+      "rows": 464
+    },
+    "ACRS": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 1605199.609322548,
+      "min_close": 1.0099999904632568,
+      "rows": 504
+    },
+    "ACRV": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 615870.9297823906,
+      "min_close": 1.0499999523162842,
+      "rows": 504
+    },
+    "ACSAY": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 116426.38934707642,
+      "min_close": 7.556290149688721,
+      "rows": 500
+    },
+    "ACSG": {
+      "first_date": "2025-10-16",
+      "last_date": "2026-06-05",
+      "median_turnover": 28768.00552368164,
+      "min_close": 37.90480041503906,
+      "rows": 160
+    },
+    "ACSI": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 4693.775119781494,
+      "min_close": 52.11317443847656,
+      "rows": 504
+    },
+    "ACSV": {
+      "first_date": "2025-10-16",
+      "last_date": "2026-06-05",
+      "median_turnover": 9739.343515396118,
+      "min_close": 37.95969009399414,
+      "rows": 160
+    },
+    "ACT": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 10422436.234228134,
+      "min_close": 28.13974380493164,
+      "rows": 504
+    },
+    "ACTG": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 819680.7549338341,
+      "min_close": 2.8399999141693115,
+      "rows": 504
+    },
+    "ACTU": {
+      "first_date": "2024-08-13",
+      "last_date": "2026-06-05",
+      "median_turnover": 309506.407333374,
+      "min_close": 1.7200000286102295,
+      "rows": 455
+    },
+    "ACTV-202510": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-10-24",
+      "median_turnover": 168187.20413017273,
+      "min_close": 26.947486877441406,
+      "rows": 351
+    },
+    "ACU": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 440995.3084259033,
+      "min_close": 32.543540954589844,
+      "rows": 504
+    },
+    "ACUR": {
+      "first_date": "2024-06-04",
+      "last_date": "2026-05-14",
+      "median_turnover": 0.9999999747378752,
+      "min_close": 9.999999747378752e-05,
+      "rows": 121
+    },
+    "ACUT": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-04",
+      "median_turnover": 1062.2032966315746,
+      "min_close": 0.2199999988079071,
+      "rows": 354
+    },
+    "ACV": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 649052.441904068,
+      "min_close": 15.457061767578125,
+      "rows": 504
+    },
+    "ACVA": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 22877534.375221252,
+      "min_close": 4.150000095367432,
+      "rows": 504
+    },
+    "ACVF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 263987.652381897,
+      "min_close": 38.021827697753906,
+      "rows": 504
+    },
+    "ACVT": {
+      "first_date": "2025-04-30",
+      "last_date": "2026-06-05",
+      "median_turnover": 850.810302734375,
+      "min_close": 24.60234832763672,
+      "rows": 277
+    },
+    "ACVU": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 168665.33912086487,
+      "min_close": 22.208824157714844,
+      "rows": 504
+    },
+    "ACWI": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 361861168.7290573,
+      "min_close": 101.90043640136719,
+      "rows": 504
+    },
+    "ACWV": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 13259159.996315002,
+      "min_close": 99.87174987792969,
+      "rows": 504
+    },
+    "ACWX": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 68339209.04969406,
+      "min_close": 48.0270881652832,
+      "rows": 504
+    },
+    "ACXAF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 3542.5000190734863,
+      "min_close": 2.970099925994873,
+      "rows": 243
+    },
+    "ACXIF": {
+      "first_date": "2024-06-04",
+      "last_date": "2026-06-05",
+      "median_turnover": 5017.3126220703125,
+      "min_close": 102.72673034667969,
+      "rows": 249
+    },
+    "ACXP": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 138897.82296943665,
+      "min_close": 1.350000023841858,
+      "rows": 504
+    },
+    "AD": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 9494854.407138824,
+      "min_close": 28.43585777282715,
+      "rows": 504
+    },
+    "ADAG": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 78118.06550610065,
+      "min_close": 1.3899999856948853,
+      "rows": 504
+    },
+    "ADAM": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 4061962.014752388,
+      "min_close": 4.317102909088135,
+      "rows": 504
+    },
+    "ADAMG": {
+      "first_date": "2025-01-15",
+      "last_date": "2026-06-05",
+      "median_turnover": 398105.2624359131,
+      "min_close": 20.98200798034668,
+      "rows": 349
+    },
+    "ADAMH": {
+      "first_date": "2025-07-09",
+      "last_date": "2026-06-05",
+      "median_turnover": 546660.9416627884,
+      "min_close": 23.20163345336914,
+      "rows": 230
+    },
+    "ADAMI": {
+      "first_date": "2024-07-01",
+      "last_date": "2026-06-05",
+      "median_turnover": 225815.2420091629,
+      "min_close": 20.95646095275879,
+      "rows": 484
+    },
+    "ADAML": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 104176.74117279053,
+      "min_close": 16.945812225341797,
+      "rows": 498
+    },
+    "ADAMM": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 333947.39782619476,
+      "min_close": 19.22283935546875,
+      "rows": 504
+    },
+    "ADAMN": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 173200.0699148178,
+      "min_close": 17.26967430114746,
+      "rows": 504
+    },
+    "ADAMO": {
+      "first_date": "2026-01-14",
+      "last_date": "2026-06-05",
+      "median_turnover": 595947.1212673187,
+      "min_close": 24.010000228881836,
+      "rows": 99
+    },
+    "ADAMZ": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 90733.61748790741,
+      "min_close": 15.345190048217773,
+      "rows": 494
+    },
+    "ADAPY": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 455122.73622918315,
+      "min_close": 9.999999747378752e-05,
+      "rows": 504
+    },
+    "ADBE": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 1327540402.750183,
+      "min_close": 225.35000610351562,
+      "rows": 504
+    },
+    "ADBG": {
+      "first_date": "2025-03-21",
+      "last_date": "2026-06-05",
+      "median_turnover": 4640104.938071251,
+      "min_close": 3.9200000762939453,
+      "rows": 304
+    },
+    "ADBRF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 41418.9710521698,
+      "min_close": 0.6328999996185303,
+      "rows": 487
+    },
+    "ADC": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 74071466.11404419,
+      "min_close": 55.2593879699707,
+      "rows": 504
+    },
+    "ADC-A": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 221597.48583602905,
+      "min_close": 15.192720413208008,
+      "rows": 504
+    },
+    "ADCOF": {
+      "first_date": "2024-06-05",
+      "last_date": "2026-06-05",
+      "median_turnover": 657.7579915523529,
+      "min_close": 0.09000000357627869,
+      "rows": 177
+    },
+    "ADCT": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 1812107.2991736531,
+      "min_close": 1.0299999713897705,
+      "rows": 504
+    },
+    "ADDDF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 31805.750061035156,
+      "min_close": 143.82513427734375,
+      "rows": 487
+    },
+    "ADDHY": {
+      "first_date": "2024-08-07",
+      "last_date": "2026-06-05",
+      "median_turnover": 21691.50041770935,
+      "min_close": 11.969491004943848,
+      "rows": 192
+    },
+    "ADDYY": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 5392047.344055176,
+      "min_close": 74.33218383789062,
+      "rows": 504
+    },
+    "ADEA": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 7756691.529528618,
+      "min_close": 9.539304733276367,
+      "rows": 504
+    },
+    "ADFI": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 127752.74317502975,
+      "min_close": 7.89814567565918,
+      "rows": 504
+    },
+    "ADFJF": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 27779.515537261963,
+      "min_close": 3.660588026046753,
+      "rows": 407
+    },
+    "ADGM": {
+      "first_date": "2024-06-04",
+      "last_date": "2026-06-05",
+      "median_turnover": 75367.88146686554,
+      "min_close": 0.7239999771118164,
+      "rows": 489
+    },
+    "ADHC": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 9815.702658395632,
+      "min_close": 0.00044999999227002263,
+      "rows": 498
+    },
+    "ADHI": {
+      "first_date": "2024-06-04",
+      "last_date": "2026-06-03",
+      "median_turnover": 324.10799753665924,
+      "min_close": 0.0215000007301569,
+      "rows": 178
+    },
+    "ADI": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 808145516.8860397,
+      "min_close": 161.68357849121094,
+      "rows": 504
+    },
+    "ADIA": {
+      "first_date": "2024-06-27",
+      "last_date": "2026-06-05",
+      "median_turnover": 2079.999953508377,
+      "min_close": 0.0026000000070780516,
+      "rows": 373
+    },
+    "ADIL": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 119798.6409945488,
+      "min_close": 1.3600000143051147,
+      "rows": 504
+    },
+    "ADIV": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 47604.885757923126,
+      "min_close": 12.952737808227539,
+      "rows": 504
+    },
+    "ADM": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 183188786.01976585,
+      "min_close": 40.10188674926758,
+      "rows": 504
+    },
+    "ADMA": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 48286894.38207388,
+      "min_close": 7.599999904632568,
+      "rows": 504
+    },
+    "ADME": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 509672.4003753662,
+      "min_close": 40.677940368652344,
+      "rows": 504
+    },
+    "ADVM-202512": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-12-08",
+      "median_turnover": 916561.7828607559,
+      "min_close": 2.049999952316284,
+      "rows": 381
+    },
+    "ADXS-202602": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-02-03",
+      "median_turnover": 35.52015081234276,
+      "min_close": 0.0012000000569969416,
+      "rows": 250
+    },
+    "AE-202502": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-02-04",
+      "median_turnover": 187997.51448822021,
+      "min_close": 22.097213745117188,
+      "rows": 169
+    },
+    "AFTY-202410": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-10-10",
+      "median_turnover": 6740.010054588318,
+      "min_close": 13.470000267028809,
+      "rows": 91
+    },
+    "AGIH-202508": {
+      "first_date": "2024-06-04",
+      "last_date": "2025-08-18",
+      "median_turnover": 122.59212493896484,
+      "min_close": 23.306364059448242,
+      "rows": 291
+    },
+    "AGR-202412": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-12-20",
+      "median_turnover": 19918083.84449005,
+      "min_close": 34.33611297607422,
+      "rows": 141
+    },
+    "AGS-202506": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-06-30",
+      "median_turnover": 3025150.7702064514,
+      "min_close": 11.25,
+      "rows": 269
+    },
+    "AHL-202602": {
+      "first_date": "2025-05-08",
+      "last_date": "2026-02-23",
+      "median_turnover": 7765619.298156738,
+      "min_close": 27.510000228881836,
+      "rows": 199
+    },
+    "AHOY-202412": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-12-23",
+      "median_turnover": 2597.457359313965,
+      "min_close": 23.516399383544922,
+      "rows": 141
+    },
+    "AIRL-202509": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-09-12",
+      "median_turnover": 3311.275583267212,
+      "min_close": 21.351970672607422,
+      "rows": 321
+    },
+    "AITR-202504": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-04-15",
+      "median_turnover": 27554.399860858917,
+      "min_close": 10.329999923706055,
+      "rows": 156
+    },
+    "AKRO-202512": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-12-08",
+      "median_turnover": 35525132.28643417,
+      "min_close": 19.190000534057617,
+      "rows": 381
+    },
+    "AKTSQ-202601": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-01-02",
+      "median_turnover": 4246.067225067411,
+      "min_close": 9.999999974752427e-07,
+      "rows": 354
+    },
+    "AKYA-202507": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-07-07",
+      "median_turnover": 354188.58980834484,
+      "min_close": 0.9456999897956848,
+      "rows": 273
+    },
+    "AL-202604": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-04-07",
+      "median_turnover": 43982804.1580925,
+      "min_close": 39.60513687133789,
+      "rows": 462
+    },
+    "ALE-202512": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-12-12",
+      "median_turnover": 24536611.990386963,
+      "min_close": 58.34099578857422,
+      "rows": 385
+    },
+    "ALEX-202603": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-03-12",
+      "median_turnover": 6498183.1799583435,
+      "min_close": 14.886823654174805,
+      "rows": 445
+    },
+    "ALLK-202505": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-05-14",
+      "median_turnover": 281845.24673753977,
+      "min_close": 0.21699999272823334,
+      "rows": 238
+    },
+    "ALTM-202503": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-03-05",
+      "median_turnover": 45163837.21793747,
+      "min_close": 2.259999990463257,
+      "rows": 189
+    },
+    "ALTR-202503": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-03-25",
+      "median_turnover": 57663986.98590088,
+      "min_close": 81.55999755859375,
+      "rows": 203
+    },
+    "AMDS-202506": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-06-20",
+      "median_turnover": 530648.5461782031,
+      "min_close": 0.017753081396222115,
+      "rows": 263
+    },
+    "AMDU-202601": {
+      "first_date": "2025-08-20",
+      "last_date": "2026-01-26",
+      "median_turnover": 411608.53740119934,
+      "min_close": 12.700970649719238,
+      "rows": 109
+    },
+    "AMED-202508": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-08-14",
+      "median_turnover": 31508858.73069763,
+      "min_close": 83.77999877929688,
+      "rows": 301
+    },
+    "AMNA-202412": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-12-11",
+      "median_turnover": 636.0605316162109,
+      "min_close": 41.284584045410156,
+      "rows": 130
+    },
+    "AMND-202412": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-12-11",
+      "median_turnover": 490.4951629638672,
+      "min_close": 42.540218353271484,
+      "rows": 131
+    },
+    "AMPD-202502": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-02-21",
+      "median_turnover": 2439.617118835449,
+      "min_close": 19.05698013305664,
+      "rows": 179
+    },
+    "AMPS-202504": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-04-15",
+      "median_turnover": 3890514.6158902645,
+      "min_close": 2.75,
+      "rows": 218
+    },
+    "AMTR-202412": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-12-11",
+      "median_turnover": 161.57460021972656,
+      "min_close": 58.98419952392578,
+      "rows": 129
+    },
+    "AMWD-202605": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-27",
+      "median_turnover": 10133886.6488266,
+      "min_close": 34.2400016784668,
+      "rows": 497
+    },
+    "ANSS-202507": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-07-16",
+      "median_turnover": 154224843.72068787,
+      "min_close": 284.19000244140625,
+      "rows": 280
+    },
+    "APED-202512": {
+      "first_date": "2025-03-06",
+      "last_date": "2025-12-22",
+      "median_turnover": 47992.65458393097,
+      "min_close": 6.475500106811523,
+      "rows": 202
+    },
+    "APLS-202605": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-13",
+      "median_turnover": 50203540.97231197,
+      "min_close": 16.360000610351562,
+      "rows": 488
+    },
+    "APLT-202602": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-02-02",
+      "median_turnover": 2176749.442775011,
+      "min_close": 0.0925000011920929,
+      "rows": 418
+    },
+    "APRD-202504": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-04-01",
+      "median_turnover": 12079.050429344177,
+      "min_close": 22.72624397277832,
+      "rows": 208
+    },
+    "APRQ-202504": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-04-01",
+      "median_turnover": 34189.91733837128,
+      "min_close": 23.493118286132812,
+      "rows": 208
+    },
+    "APXIF-202512": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-12-05",
+      "median_turnover": 25673.410071372986,
+      "min_close": 1.0499999523162842,
+      "rows": 144
+    },
+    "ARC-202411": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-11-21",
+      "median_turnover": 361110.13083696365,
+      "min_close": 2.5011672973632812,
+      "rows": 121
+    },
+    "ARCH-202501": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-01-13",
+      "median_turnover": 42659359.4039917,
+      "min_close": 120.10601806640625,
+      "rows": 154
+    },
+    "AREA-202602": {
+      "first_date": "2024-09-05",
+      "last_date": "2026-02-19",
+      "median_turnover": 329.6040573120117,
+      "min_close": 16.286731719970703,
+      "rows": 333
+    },
+    "ARIS-202510": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-10-14",
+      "median_turnover": 13236946.297719955,
+      "min_close": 13.684261322021484,
+      "rows": 343
+    },
+    "ARKA-202509": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-09-25",
+      "median_turnover": 75965.91814041138,
+      "min_close": 35.246055603027344,
+      "rows": 330
+    },
+    "ARKC-202503": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-03-27",
+      "median_turnover": 12458.399726867676,
+      "min_close": 24.226848602294922,
+      "rows": 205
+    },
+    "ARKD-202509": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-09-25",
+      "median_turnover": 111091.60875320435,
+      "min_close": 30.396692276000977,
+      "rows": 330
+    },
+    "ARKY-202503": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-03-27",
+      "median_turnover": 38451.829765319824,
+      "min_close": 22.466182708740234,
+      "rows": 205
+    },
+    "ARKZ-202509": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-09-25",
+      "median_turnover": 86472.12254524231,
+      "min_close": 15.6738862991333,
+      "rows": 330
+    },
+    "ARMU-202603": {
+      "first_date": "2025-03-04",
+      "last_date": "2026-03-16",
+      "median_turnover": 228650.34159469604,
+      "min_close": 11.587599754333496,
+      "rows": 260
+    },
+    "ASET-202510": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-10-20",
+      "median_turnover": 12920.73450088501,
+      "min_close": 27.811805725097656,
+      "rows": 345
+    },
+    "ATIP-202507": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-07-28",
+      "median_turnover": 12770.572340011597,
+      "min_close": 0.009999999776482582,
+      "rows": 262
+    },
+    "ATMC-202512": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-12-08",
+      "median_turnover": 18491.50047302246,
+      "min_close": 11.039999961853027,
+      "rows": 141
+    },
+    "ATSG-202504": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-04-10",
+      "median_turnover": 10412459.379730225,
+      "min_close": 12.239999771118164,
+      "rows": 215
+    },
+    "ATXS-202601": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-01-22",
+      "median_turnover": 2709373.7247419357,
+      "min_close": 3.75,
+      "rows": 411
+    },
+    "AURU-202602": {
+      "first_date": "2025-10-08",
+      "last_date": "2026-02-19",
+      "median_turnover": 79827.22064781189,
+      "min_close": 9.640000343322754,
+      "rows": 92
+    },
+    "AVDL-202602": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-02-11",
+      "median_turnover": 13660906.098712921,
+      "min_close": 6.590000152587891,
+      "rows": 425
+    },
+    "AVDX-202510": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-10-14",
+      "median_turnover": 15882552.6245327,
+      "min_close": 6.889999866485596,
+      "rows": 343
+    },
+    "AVGR-202502": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-02-14",
+      "median_turnover": 56870.73765563965,
+      "min_close": 0.3910999894142151,
+      "rows": 177
+    },
+    "AWEG-202512": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-12-24",
+      "median_turnover": 217.89581298828125,
+      "min_close": 19.335651397705078,
+      "rows": 393
+    },
+    "AXDXQ-202508": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-08-20",
+      "median_turnover": 40013.76613265276,
+      "min_close": 9.999999974752427e-07,
+      "rows": 292
+    },
+    "AXNX-202411": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-11-14",
+      "median_turnover": 22151165.614952087,
+      "min_close": 66.80000305175781,
+      "rows": 116
+    },
+    "AXUP-202603": {
+      "first_date": "2025-09-16",
+      "last_date": "2026-03-16",
+      "median_turnover": 210278.44964504242,
+      "min_close": 5.869999885559082,
+      "rows": 125
+    },
+    "AY-202412": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-12-11",
+      "median_turnover": 20408125.203972816,
+      "min_close": 21.227493286132812,
+      "rows": 134
+    },
+    "AZEK-202506": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-06-30",
+      "median_turnover": 77744101.75,
+      "min_close": 36.810001373291016,
+      "rows": 269
+    },
+    "AZN-202601": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-01-30",
+      "median_turnover": 349501729.25738525,
+      "min_close": 61.8796501159668,
+      "rows": 417
+    },
+    "AZNH-202601": {
+      "first_date": "2024-10-07",
+      "last_date": "2026-01-29",
+      "median_turnover": 98955.69081115723,
+      "min_close": 39.3877067565918,
+      "rows": 329
+    },
+    "AZPN-202503": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-03-11",
+      "median_turnover": 54374484.0970459,
+      "min_close": 172.89999389648438,
+      "rows": 193
+    },
+    "AZULQ-202601": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-01-02",
+      "median_turnover": 1718717.3913066387,
+      "min_close": 0.05000000074505806,
+      "rows": 396
+    },
+    "B-202501": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-01-24",
+      "median_turnover": 16892888.139289856,
+      "min_close": 34.650001525878906,
+      "rows": 162
+    },
+    "BACQU-202603": {
+      "first_date": "2024-11-01",
+      "last_date": "2026-03-09",
+      "median_turnover": 24655.960739135742,
+      "min_close": 9.978400230407715,
+      "rows": 139
+    },
+    "BALY-202502": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-02-06",
+      "median_turnover": 4481827.859081268,
+      "min_close": 11.15999984741211,
+      "rows": 171
+    },
+    "BASE-202509": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-09-23",
+      "median_turnover": 8942087.071766853,
+      "min_close": 13.170000076293945,
+      "rows": 328
+    },
+    "BBIP-202410": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-10-18",
+      "median_turnover": 2393.3597564697266,
+      "min_close": 95.32498168945312,
+      "rows": 97
+    },
+    "BBSA-202410": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-10-18",
+      "median_turnover": 13015.877254486084,
+      "min_close": 46.64675521850586,
+      "rows": 97
+    },
+    "BBU-202603": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-03-30",
+      "median_turnover": 424788.99059677124,
+      "min_close": 16.67854881286621,
+      "rows": 457
+    },
+    "BCIM-202512": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-12-03",
+      "median_turnover": 98587.09157466888,
+      "min_close": 18.196855545043945,
+      "rows": 378
+    },
+    "BCOV-202502": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-02-03",
+      "median_turnover": 524454.4725077152,
+      "min_close": 1.9900000095367432,
+      "rows": 168
+    },
+    "BECN-202504": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-04-28",
+      "median_turnover": 66251809.83346939,
+      "min_close": 80.11000061035156,
+      "rows": 226
+    },
+    "BEDU-202512": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-12-15",
+      "median_turnover": 6063.1701538562775,
+      "min_close": 1.399999976158142,
+      "rows": 342
+    },
+    "BERY-202504": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-04-29",
+      "median_turnover": 64530594.878082275,
+      "min_close": 52.58761978149414,
+      "rows": 227
+    },
+    "BEST-202503": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-03-07",
+      "median_turnover": 39824.33347249031,
+      "min_close": 2.0408999919891357,
+      "rows": 191
+    },
+    "BFICQ-202503": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-03-17",
+      "median_turnover": 6367.480709613301,
+      "min_close": 9.999999974752427e-07,
+      "rows": 170
+    },
+    "BFIN-202512": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-12-31",
+      "median_turnover": 204283.85202026367,
+      "min_close": 9.238818168640137,
+      "rows": 397
+    },
+    "BFK-202602": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-02-06",
+      "median_turnover": 914710.1683416367,
+      "min_close": 8.700798034667969,
+      "rows": 422
+    },
+    "BFRE-202602": {
+      "first_date": "2025-03-27",
+      "last_date": "2026-02-27",
+      "median_turnover": 470.12522411346436,
+      "min_close": 21.517621994018555,
+      "rows": 232
+    },
+    "BFZ-202602": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-02-06",
+      "median_turnover": 1032152.8365941048,
+      "min_close": 9.62789249420166,
+      "rows": 422
+    },
+    "BGFV-202510": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-10-01",
+      "median_turnover": 282956.2878267169,
+      "min_close": 0.810699999332428,
+      "rows": 334
+    },
+    "BKIV-202509": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-09-12",
+      "median_turnover": 2297.881149291992,
+      "min_close": 27.535900115966797,
+      "rows": 321
+    },
+    "BKN-202602": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-02-20",
+      "median_turnover": 537136.4248046875,
+      "min_close": 9.885451316833496,
+      "rows": 431
+    },
+    "BKNU-202603": {
+      "first_date": "2025-09-17",
+      "last_date": "2026-03-16",
+      "median_turnover": 55199.21941661835,
+      "min_close": 10.979999542236328,
+      "rows": 124
+    },
+    "BKWO-202509": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-09-12",
+      "median_turnover": 1132.0890312194824,
+      "min_close": 28.402095794677734,
+      "rows": 321
+    },
+    "BLE-202602": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-02-06",
+      "median_turnover": 992009.1922912598,
+      "min_close": 9.09622573852539,
+      "rows": 422
+    },
+    "BLFY-202603": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-03-31",
+      "median_turnover": 478108.14238643646,
+      "min_close": 7.670000076293945,
+      "rows": 458
+    },
+    "BLKC-202602": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-02-23",
+      "median_turnover": 21329.134761810303,
+      "min_close": 14.380206108093262,
+      "rows": 432
+    },
+    "BLLD-202503": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-03-21",
+      "median_turnover": 3113.5911407470703,
+      "min_close": 44.790000915527344,
+      "rows": 201
+    },
+    "BLPH-202412": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-12-18",
+      "median_turnover": 109.13599649071693,
+      "min_close": 0.009999999776482582,
+      "rows": 99
+    },
+    "BLSX-202603": {
+      "first_date": "2025-10-23",
+      "last_date": "2026-03-13",
+      "median_turnover": 121856.0,
+      "min_close": 4.659999847412109,
+      "rows": 97
+    },
+    "BLUE-202505": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-05-30",
+      "median_turnover": 2841640.3489494324,
+      "min_close": 3.2899999618530273,
+      "rows": 249
+    },
+    "BMAX-202604": {
+      "first_date": "2025-03-14",
+      "last_date": "2026-04-13",
+      "median_turnover": 87830.60117149353,
+      "min_close": 22.184999465942383,
+      "rows": 271
+    },
+    "BMDL-202601": {
+      "first_date": "2024-06-21",
+      "last_date": "2026-01-29",
+      "median_turnover": 75.91775321960449,
+      "min_close": 23.20446014404297,
+      "rows": 403
+    },
+    "BMTX-202501": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-01-31",
+      "median_turnover": 279761.1951637268,
+      "min_close": 2.109999895095825,
+      "rows": 167
+    },
+    "BNY-202602": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-02-06",
+      "median_turnover": 506168.3876709938,
+      "min_close": 9.025154113769531,
+      "rows": 422
+    },
+    "BOED-202604": {
+      "first_date": "2025-04-23",
+      "last_date": "2026-04-10",
+      "median_turnover": 41992.04491043091,
+      "min_close": 15.305136680603027,
+      "rows": 243
+    },
+    "BOWN-202507": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-07-15",
+      "median_turnover": 45726.65969657898,
+      "min_close": 3.059999942779541,
+      "rows": 218
+    },
+    "BPMC-202507": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-07-17",
+      "median_turnover": 70627620.25,
+      "min_close": 79.22000122070312,
+      "rows": 281
+    },
+    "BPPTU-202510": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-10-20",
+      "median_turnover": 101490.48043209314,
+      "min_close": 0.1289999932050705,
+      "rows": 347
+    },
+    "BRDG-202508": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-08-29",
+      "median_turnover": 1902922.8060355186,
+      "min_close": 6.7963104248046875,
+      "rows": 312
+    },
+    "BRFS-202509": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-09-22",
+      "median_turnover": 8626810.943374634,
+      "min_close": 2.7609875202178955,
+      "rows": 327
+    },
+    "BRKD-202604": {
+      "first_date": "2024-12-11",
+      "last_date": "2026-04-10",
+      "median_turnover": 19942.994203567505,
+      "min_close": 20.709442138671875,
+      "rows": 332
+    },
+    "BRKL-202508": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-08-29",
+      "median_turnover": 5446309.392301559,
+      "min_close": 7.6616902351379395,
+      "rows": 312
+    },
+    "BRRWU-202512": {
+      "first_date": "2025-05-16",
+      "last_date": "2025-12-05",
+      "median_turnover": 45412.81176280975,
+      "min_close": 4.050000190734863,
+      "rows": 119
+    },
+    "BRY-202512": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-12-17",
+      "median_turnover": 3774076.219959259,
+      "min_close": 2.10491681098938,
+      "rows": 388
+    },
+    "BSCO-202412": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-12-13",
+      "median_turnover": 14188776.212841034,
+      "min_close": 20.537424087524414,
+      "rows": 136
+    },
+    "BSCP-202512": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-12-15",
+      "median_turnover": 15134099.670923233,
+      "min_close": 19.197961807250977,
+      "rows": 386
+    },
+    "BSJO-202412": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-12-13",
+      "median_turnover": 3045159.641518593,
+      "min_close": 22.092479705810547,
+      "rows": 136
+    },
+    "BSJP-202512": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-12-15",
+      "median_turnover": 4391806.325666428,
+      "min_close": 21.205345153808594,
+      "rows": 386
+    },
+    "BSMO-202412": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-12-13",
+      "median_turnover": 567929.5499229431,
+      "min_close": 24.43353271484375,
+      "rows": 136
+    },
+    "BSMP-202512": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-12-15",
+      "median_turnover": 840498.6499662399,
+      "min_close": 23.317407608032227,
+      "rows": 386
+    },
+    "BTA-202602": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-02-20",
+      "median_turnover": 294425.25278663635,
+      "min_close": 8.37605094909668,
+      "rows": 431
+    },
+    "BTFX-202512": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-12-15",
+      "median_turnover": 599385.8907432556,
+      "min_close": 18.790000915527344,
+      "rows": 386
+    },
+    "BTOP-202605": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-21",
+      "median_turnover": 46652.67283535004,
+      "min_close": 21.894418716430664,
+      "rows": 494
+    },
+    "BULU-202603": {
+      "first_date": "2025-07-31",
+      "last_date": "2026-03-16",
+      "median_turnover": 111711.92344284058,
+      "min_close": 2.2200000286102295,
+      "rows": 157
+    },
+    "BWEB-202605": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-21",
+      "median_turnover": 20624.58240890503,
+      "min_close": 39.48979949951172,
+      "rows": 494
+    },
+    "BXMX-202603": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-03-27",
+      "median_turnover": 1917931.6863059998,
+      "min_close": 10.83668327331543,
+      "rows": 456
+    },
+    "BYM-202602": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-02-06",
+      "median_turnover": 815811.1061224937,
+      "min_close": 9.664661407470703,
+      "rows": 422
+    },
+    "BYU-202411": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-11-20",
+      "median_turnover": 82729.09093737602,
+      "min_close": 0.1688999980688095,
+      "rows": 97
+    },
+    "CA-202605": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-07",
+      "median_turnover": 12335.811130523682,
+      "min_close": 23.065547943115234,
+      "rows": 484
+    },
+    "CADE-202601": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-01-30",
+      "median_turnover": 46139296.741256714,
+      "min_close": 25.696123123168945,
+      "rows": 417
+    },
+    "CBDBY-202512": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-12-22",
+      "median_turnover": 3786.2399291992188,
+      "min_close": 0.30550000071525574,
+      "rows": 369
+    },
+    "CCCXU-202602": {
+      "first_date": "2025-05-14",
+      "last_date": "2026-02-13",
+      "median_turnover": 122442.98000335693,
+      "min_close": 10.220000267028809,
+      "rows": 175
+    },
+    "CCIRU-202508": {
+      "first_date": "2024-10-11",
+      "last_date": "2025-08-14",
+      "median_turnover": 46735.9992980957,
+      "min_close": 9.979999542236328,
+      "rows": 155
+    },
+    "CCRD-202510": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-10-30",
+      "median_turnover": 610195.7605876923,
+      "min_close": 11.729999542236328,
+      "rows": 355
+    },
+    "CCRV-202508": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-08-18",
+      "median_turnover": 233383.9284210205,
+      "min_close": 18.229999542236328,
+      "rows": 303
+    },
+    "CDMO-202502": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-02-04",
+      "median_turnover": 9137560.081303596,
+      "min_close": 6.699999809265137,
+      "rows": 169
+    },
+    "CDTX-202601": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-01-06",
+      "median_turnover": 2709233.461698532,
+      "min_close": 10.170000076293945,
+      "rows": 400
+    },
+    "CELT-202603": {
+      "first_date": "2025-10-08",
+      "last_date": "2026-03-13",
+      "median_turnover": 220814.8007311821,
+      "min_close": 8.163999557495117,
+      "rows": 108
+    },
+    "CFB-202502": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-02-28",
+      "median_turnover": 3627832.228108883,
+      "min_close": 12.65999984741211,
+      "rows": 186
+    },
+    "CFCV-202410": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-10-29",
+      "median_turnover": 74.1640625,
+      "min_close": 34.961612701416016,
+      "rows": 104
+    },
+    "CFLT-202603": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-03-16",
+      "median_turnover": 119841658.70785713,
+      "min_close": 15.90999984741211,
+      "rows": 447
+    },
+    "CFSB-202510": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-10-31",
+      "median_turnover": 19649.24408698082,
+      "min_close": 6.429999828338623,
+      "rows": 310
+    },
+    "CHACU-202603": {
+      "first_date": "2025-04-25",
+      "last_date": "2026-03-26",
+      "median_turnover": 15600.0,
+      "min_close": 9.979999542236328,
+      "rows": 103
+    },
+    "CHGX-202505": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-05-01",
+      "median_turnover": 249312.5513191223,
+      "min_close": 21.15999984741211,
+      "rows": 229
+    },
+    "CHN-202510": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-10-29",
+      "median_turnover": 357638.6086640358,
+      "min_close": 9.335172653198242,
+      "rows": 354
+    },
+    "CHUY-202410": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-10-10",
+      "median_turnover": 9813437.460102081,
+      "min_close": 23.520000457763672,
+      "rows": 91
+    },
+    "CHX-202507": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-07-15",
+      "median_turnover": 62940960.80854797,
+      "min_close": 22.439054489135742,
+      "rows": 279
+    },
+    "CID-202410": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-10-22",
+      "median_turnover": 23387.982471466064,
+      "min_close": 30.93192481994629,
+      "rows": 99
+    },
+    "CIL-202601": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-01-29",
+      "median_turnover": 14674.257522583008,
+      "min_close": 39.23900604248047,
+      "rows": 416
+    },
+    "CIO-202601": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-01-08",
+      "median_turnover": 1014374.7407495975,
+      "min_close": 4.243404388427734,
+      "rows": 402
+    },
+    "CIVI-202601": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-01-29",
+      "median_turnover": 61360349.57993698,
+      "min_close": 23.138986587524414,
+      "rows": 416
+    },
+    "CIXXF-202508": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-08-14",
+      "median_turnover": 93675.13704299927,
+      "min_close": 9.89997386932373,
+      "rows": 267
+    },
+    "CIZ-202410": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-10-22",
+      "median_turnover": 113309.67750549316,
+      "min_close": 29.524866104125977,
+      "rows": 99
+    },
+    "CKPT-202505": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-05-29",
+      "median_turnover": 2137834.376739502,
+      "min_close": 1.7999999523162842,
+      "rows": 248
+    },
+    "CLCO-202601": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-01-08",
+      "median_turnover": 1258129.4338417053,
+      "min_close": 4.619999885559082,
+      "rows": 402
+    },
+    "CLDL-202507": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-07-24",
+      "median_turnover": 120000.08750343323,
+      "min_close": 7.808570861816406,
+      "rows": 286
+    },
+    "CLNR-202504": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-04-09",
+      "median_turnover": 157.54062175750732,
+      "min_close": 19.81170082092285,
+      "rows": 214
+    },
+    "CMA-202601": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-01-30",
+      "median_turnover": 107334394.05693054,
+      "min_close": 42.80788803100586,
+      "rows": 417
+    },
+    "CMAXQ-202501": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-01-29",
+      "median_turnover": 124621.43968391418,
+      "min_close": 9.999999974752427e-07,
+      "rows": 163
+    },
+    "CMRX-202504": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-04-17",
+      "median_turnover": 333818.9176568985,
+      "min_close": 0.7710000276565552,
+      "rows": 220
+    },
+    "CNCR-202505": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-05-27",
+      "median_turnover": 36365.63973712921,
+      "min_close": 8.010000228881836,
+      "rows": 246
+    },
+    "CNSL-202412": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-12-26",
+      "median_turnover": 1601428.2226045132,
+      "min_close": 4.289999961853027,
+      "rows": 144
+    },
+    "CNTGF-202605": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-22",
+      "median_turnover": 513.5640149563551,
+      "min_close": 0.009999999776482582,
+      "rows": 310
+    },
+    "CNTTQ-202602": {
+      "first_date": "2024-06-04",
+      "last_date": "2026-02-24",
+      "median_turnover": 0.0018754999952648177,
+      "min_close": 9.999999974752427e-07,
+      "rows": 328
+    },
+    "CONNQ-202507": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-07-14",
+      "median_turnover": 63.74220030289143,
+      "min_close": 9.999999974752427e-07,
+      "rows": 168
+    },
+    "COOP-202509": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-09-30",
+      "median_turnover": 64109798.68074036,
+      "min_close": 77.82968139648438,
+      "rows": 333
+    },
+    "CORX-202601": {
+      "first_date": "2024-12-05",
+      "last_date": "2026-01-23",
+      "median_turnover": 11998.388690948486,
+      "min_close": 8.64328670501709,
+      "rows": 283
+    },
+    "CPTN-202501": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-01-06",
+      "median_turnover": 43323.71951007843,
+      "min_close": 2.4000000953674316,
+      "rows": 149
+    },
+    "CRAWA-202602": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-02-05",
+      "median_turnover": 41943.59825134277,
+      "min_close": 33.0,
+      "rows": 313
+    },
+    "CRGX-202508": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-08-18",
+      "median_turnover": 3344674.243104458,
+      "min_close": 3.390000104904175,
+      "rows": 303
+    },
+    "CRIT-202503": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-03-18",
+      "median_turnover": 19705.233061790466,
+      "min_close": 15.194999694824219,
+      "rows": 198
+    },
+    "CRTAF-202602": {
+      "first_date": "2024-06-05",
+      "last_date": "2026-02-23",
+      "median_turnover": 29334.800495147705,
+      "min_close": 11.1899995803833,
+      "rows": 143
+    },
+    "CRUZ-202504": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-04-28",
+      "median_turnover": 195957.51377868652,
+      "min_close": 19.017372131347656,
+      "rows": 226
+    },
+    "CSA-202504": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-04-23",
+      "median_turnover": 47643.60626220703,
+      "min_close": 61.26758575439453,
+      "rows": 223
+    },
+    "CSF-202504": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-04-23",
+      "median_turnover": 109475.53453063965,
+      "min_close": 48.24766540527344,
+      "rows": 223
+    },
+    "CSGS-202605": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-13",
+      "median_turnover": 14133133.453258514,
+      "min_close": 38.371429443359375,
+      "rows": 488
+    },
+    "CTKYY-202601": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-01-05",
+      "median_turnover": 29.40000043809414,
+      "min_close": 0.0066999997943639755,
+      "rows": 231
+    },
+    "CTLP-202605": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-07",
+      "median_turnover": 5402532.206824303,
+      "min_close": 6.239999771118164,
+      "rows": 484
+    },
+    "CTLT-202412": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-12-17",
+      "median_turnover": 97094108.28170586,
+      "min_close": 54.279998779296875,
+      "rows": 138
+    },
+    "CTRA-202605": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-06",
+      "median_turnover": 167850816.7349968,
+      "min_close": 21.5161075592041,
+      "rows": 483
+    },
+    "CTV-202502": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-02-12",
+      "median_turnover": 616726.7105031013,
+      "min_close": 1.590000033378601,
+      "rows": 175
+    },
+    "CUK-202605": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-06",
+      "median_turnover": 39660160.500629425,
+      "min_close": 12.800333976745605,
+      "rows": 483
+    },
+    "CUTRQ-202505": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-05-01",
+      "median_turnover": 130558.62657415867,
+      "min_close": 0.0071000000461936,
+      "rows": 229
+    },
+    "CVAC-202601": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-01-05",
+      "median_turnover": 2356086.2260513306,
+      "min_close": 2.490000009536743,
+      "rows": 399
+    },
+    "CVGW-202605": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-27",
+      "median_turnover": 4785553.604278564,
+      "min_close": 18.24149513244629,
+      "rows": 497
+    },
+    "CVSE-202510": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-10-14",
+      "median_turnover": 24440.94504547119,
+      "min_close": 56.5363655090332,
+      "rows": 343
+    },
+    "CWBR-202501": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-01-06",
+      "median_turnover": 339.69299378991127,
+      "min_close": 9.999999974752427e-07,
+      "rows": 98
+    },
+    "CWEN.A-202604": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-04-30",
+      "median_turnover": 5700063.711696625,
+      "min_close": 20.061809539794922,
+      "rows": 479
+    },
+    "CYBR-202602": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-02-10",
+      "median_turnover": 191194363.6360016,
+      "min_close": 229.2899932861328,
+      "rows": 424
+    },
+    "CYTH-202503": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-03-25",
+      "median_turnover": 26149.138588428497,
+      "min_close": 0.5699999928474426,
+      "rows": 203
+    },
+    "DADA-202506": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-06-16",
+      "median_turnover": 1875931.5837715864,
+      "min_close": 1.0399999618530273,
+      "rows": 260
+    },
+    "DALN-202509": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-09-24",
+      "median_turnover": 122977.59883880615,
+      "min_close": 3.0399999618530273,
+      "rows": 329
+    },
+    "DASX-202603": {
+      "first_date": "2025-10-23",
+      "last_date": "2026-03-13",
+      "median_turnover": 129580.4961681366,
+      "min_close": 8.829999923706055,
+      "rows": 97
+    },
+    "DAWN-202604": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-04-22",
+      "median_turnover": 11651195.861571312,
+      "min_close": 5.800000190734863,
+      "rows": 473
+    },
+    "DAY-202602": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-02-03",
+      "median_turnover": 101903837.86431503,
+      "min_close": 48.31999969482422,
+      "rows": 419
+    },
+    "DCAP-202506": {
+      "first_date": "2024-07-23",
+      "last_date": "2025-06-12",
+      "median_turnover": 123.92380714416504,
+      "min_close": 17.34000015258789,
+      "rows": 224
+    },
+    "DCF-202411": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-11-20",
+      "median_turnover": 276847.4762992859,
+      "min_close": 8.502222061157227,
+      "rows": 120
+    },
+    "DENN-202601": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-01-16",
+      "median_turnover": 4052881.0459742546,
+      "min_close": 2.9100000858306885,
+      "rows": 408
+    },
+    "DESP-202505": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-05-14",
+      "median_turnover": 17950921.809824944,
+      "min_close": 9.970000267028809,
+      "rows": 238
+    },
+    "DFND-202512": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-12-12",
+      "median_turnover": 28959.739135742188,
+      "min_close": 36.53783416748047,
+      "rows": 385
+    },
+    "DFS-202505": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-05-16",
+      "median_turnover": 215042636.34049988,
+      "min_close": 119.56307220458984,
+      "rows": 240
+    },
+    "DHIL-202604": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-04-21",
+      "median_turnover": 2721280.9591064453,
+      "min_close": 114.83000183105469,
+      "rows": 472
+    },
+    "DIAX-202603": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-03-27",
+      "median_turnover": 990878.1254606247,
+      "min_close": 11.751286506652832,
+      "rows": 456
+    },
+    "DJCB-202412": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-12-11",
+      "median_turnover": 2470.7750701904297,
+      "min_close": 19.125,
+      "rows": 117
+    },
+    "DKUP-202603": {
+      "first_date": "2025-07-31",
+      "last_date": "2026-03-16",
+      "median_turnover": 27139.06775856018,
+      "min_close": 4.476200103759766,
+      "rows": 157
+    },
+    "DM-202504": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-04-01",
+      "median_turnover": 938896.5605049133,
+      "min_close": 1.9199999570846558,
+      "rows": 208
+    },
+    "DMCY-202602": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-02-17",
+      "median_turnover": 11966.286005973816,
+      "min_close": 22.424272537231445,
+      "rows": 426
+    },
+    "DMDV-202410": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-10-17",
+      "median_turnover": 1765.3349876403809,
+      "min_close": 21.82028579711914,
+      "rows": 95
+    },
+    "DMF-202506": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-06-17",
+      "median_turnover": 270982.9119286537,
+      "min_close": 6.4751877784729,
+      "rows": 261
+    },
+    "DMKPQ-202511": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-11-06",
+      "median_turnover": 0.03294549957234949,
+      "min_close": 9.999999974752427e-07,
+      "rows": 148
+    },
+    "DMTKQ-202508": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-08-12",
+      "median_turnover": 1.22929996894527,
+      "min_close": 9.999999974752427e-07,
+      "rows": 240
+    },
+    "DNB-202508": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-08-25",
+      "median_turnover": 30149744.189503193,
+      "min_close": 7.889999866485596,
+      "rows": 308
+    },
+    "DNMRQ-202507": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-07-25",
+      "median_turnover": 129283.19371795654,
+      "min_close": 0.019999999552965164,
+      "rows": 287
+    },
+    "DOGD-202604": {
+      "first_date": "2025-08-12",
+      "last_date": "2026-04-20",
+      "median_turnover": 345095.90589523315,
+      "min_close": 12.649999618530273,
+      "rows": 173
+    },
+    "DRRX-202509": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-09-10",
+      "median_turnover": 69491.31135249138,
+      "min_close": 0.4999000132083893,
+      "rows": 319
+    },
+    "DVAX-202602": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-02-09",
+      "median_turnover": 19113633.69807911,
+      "min_close": 9.359999656677246,
+      "rows": 423
+    },
+    "DVS-202603": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-03-26",
+      "median_turnover": 570502.750837326,
+      "min_close": 2.2964000701904297,
+      "rows": 455
+    },
+    "DWAT-202506": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-06-23",
+      "median_turnover": 2520.7223768234253,
+      "min_close": 9.263422012329102,
+      "rows": 264
+    },
+    "DWCR-202507": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-07-28",
+      "median_turnover": 86.4547119140625,
+      "min_close": 25.139835357666016,
+      "rows": 288
+    },
+    "DYCQ-202511": {
+      "first_date": "2024-06-04",
+      "last_date": "2025-11-19",
+      "median_turnover": 41840.65835762024,
+      "min_close": 10.170000076293945,
+      "rows": 187
+    },
+    "DYNI-202506": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-06-24",
+      "median_turnover": 50722.61379241943,
+      "min_close": 23.549299240112305,
+      "rows": 265
+    },
+    "EATV-202505": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-05-06",
+      "median_turnover": 16284.487341880798,
+      "min_close": 13.921099662780762,
+      "rows": 232
+    },
+    "EATZ-202604": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-04-30",
+      "median_turnover": 31605.206909179688,
+      "min_close": 23.043180465698242,
+      "rows": 479
+    },
+    "EB-202603": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-03-09",
+      "median_turnover": 2776947.5915441513,
+      "min_close": 1.840000033378601,
+      "rows": 442
+    },
+    "EBTC-202506": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-06-30",
+      "median_turnover": 761181.1308708191,
+      "min_close": 22.05305290222168,
+      "rows": 269
+    },
+    "ECDA-202603": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-03-16",
+      "median_turnover": 51697.603744506836,
+      "min_close": 0.010599999688565731,
+      "rows": 447
+    },
+    "EDR-202503": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-03-21",
+      "median_turnover": 54710027.059928894,
+      "min_close": 26.498348236083984,
+      "rows": 201
+    },
+    "EEMD-202410": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-10-17",
+      "median_turnover": 32726.2263879776,
+      "min_close": 17.567197799682617,
+      "rows": 96
+    },
+    "EFIX-202504": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-04-08",
+      "median_turnover": 77018.63404464722,
+      "min_close": 15.046720504760742,
+      "rows": 213
+    },
+    "EGF-202503": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-03-21",
+      "median_turnover": 22302.395078659058,
+      "min_close": 8.869868278503418,
+      "rows": 190
+    },
+    "EGIOQ-202507": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-07-01",
+      "median_turnover": 71.83739779517055,
+      "min_close": 9.999999974752427e-07,
+      "rows": 223
+    },
+    "EGRVF-202508": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-08-08",
+      "median_turnover": 9109.51512336731,
+      "min_close": 11.430000305175781,
+      "rows": 160
+    },
+    "EHAB-202605": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-05-14",
+      "median_turnover": 3451170.7428102493,
+      "min_close": 6.519999980926514,
+      "rows": 489
+    },
+    "ELEV-202507": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-07-22",
+      "median_turnover": 478764.25876903534,
+      "min_close": 0.2329999953508377,
+      "rows": 284
+    },
+    "ELIS-202604": {
+      "first_date": "2025-03-26",
+      "last_date": "2026-04-10",
+      "median_turnover": 85718.33586120605,
+      "min_close": 16.524999618530273,
+      "rows": 262
+    },
+    "ELON-202510": {
+      "first_date": "2025-02-13",
+      "last_date": "2025-10-06",
+      "median_turnover": 35679.39367675781,
+      "min_close": 9.039999961853027,
+      "rows": 162
+    },
+    "ELP-202512": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-12-24",
+      "median_turnover": 1599186.196296215,
+      "min_close": 5.230147361755371,
+      "rows": 393
+    },
+    "ELQD-202508": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-08-18",
+      "median_turnover": 2013.2756233215332,
+      "min_close": 76.38370513916016,
+      "rows": 292
+    },
+    "EM-202604": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-04-28",
+      "median_turnover": 95861.23724162579,
+      "min_close": 0.5020999908447266,
+      "rows": 477
+    },
+    "EMCC-202502": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-02-14",
+      "median_turnover": 3412.2804946899414,
+      "min_close": 22.000877380371094,
+      "rows": 177
+    },
+    "EMKR-202502": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-02-28",
+      "median_turnover": 354342.79878896475,
+      "min_close": 0.8149999976158142,
+      "rows": 186
+    },
+    "EMX-202511": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-11-12",
+      "median_turnover": 724842.0180199146,
+      "min_close": 1.600000023841858,
+      "rows": 364
+    },
+    "ENFN-202504": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-04-17",
+      "median_turnover": 4060019.4232592583,
+      "min_close": 7.889999866485596,
+      "rows": 220
+    },
+    "ENGCQ-202506": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-06-18",
+      "median_turnover": 5396.299802064896,
+      "min_close": 0.005100000184029341,
+      "rows": 257
+    },
+    "ENLC-202501": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-01-30",
+      "median_turnover": 27213430.460627556,
+      "min_close": 11.79374885559082,
+      "rows": 166
+    },
+    "ENPX-202604": {
+      "first_date": "2025-09-16",
+      "last_date": "2026-04-20",
+      "median_turnover": 474692.8672027588,
+      "min_close": 10.319999694824219,
+      "rows": 149
+    },
+    "ENV-202411": {
+      "first_date": "2024-06-03",
+      "last_date": "2024-11-22",
+      "median_turnover": 36103533.85246849,
+      "min_close": 59.939998626708984,
+      "rows": 122
+    },
+    "ENX-202510": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-10-24",
+      "median_turnover": 268754.14019966125,
+      "min_close": 8.615823745727539,
+      "rows": 351
+    },
+    "ENZB-202508": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-08-19",
+      "median_turnover": 65792.17398703098,
+      "min_close": 0.26080000400543213,
+      "rows": 304
+    },
+    "EPIX-202510": {
+      "first_date": "2024-06-03",
+      "last_date": "2025-10-08",
+      "median_turnover": 263452.7610321045,
+      "min_close": 0.1733446568250656,
+      "rows": 339
+    },
+    "IWM": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 7000752678.927521,
+      "min_close": 172.95628356933594,
+      "rows": 504
+    },
+    "SPY": {
+      "first_date": "2024-06-03",
+      "last_date": "2026-06-05",
+      "median_turnover": 39010025965.68115,
+      "min_close": 490.8526306152344,
+      "rows": 504
+    }
+  },
+  "filter_id": "CANDIDATE-007-NORGATE-DATASET-QUALITY-001",
+  "load_errors": {},
+  "min_rows": 90
+}

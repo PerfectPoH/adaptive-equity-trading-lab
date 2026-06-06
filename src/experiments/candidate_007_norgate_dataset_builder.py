@@ -76,8 +76,10 @@ def build_candidate_007_dataset(
         if not blockers
         else "CANDIDATE_007_NORGATE_DATASET_BLOCKED"
     )
+    run_id = output_dir.name
     manifest = _dataset_manifest(
         output_dir,
+        run_id,
         active_symbols,
         delisted_symbols,
         benchmark_symbols,
@@ -89,7 +91,7 @@ def build_candidate_007_dataset(
     )
     _write_json(output_dir / "dataset_manifest.json", manifest)
     result = {
-        "run_id": RUN_ID,
+        "run_id": run_id,
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "decision": decision,
         "provider": "Norgate Data",
@@ -306,6 +308,7 @@ def _tradability_report(
 
 def _dataset_manifest(
     output_dir: Path,
+    dataset_id: str,
     active_symbols: list[str],
     delisted_symbols: list[str],
     benchmark_symbols: list[str],
@@ -323,7 +326,7 @@ def _dataset_manifest(
         "data_input_validation_report.json",
     ]
     return {
-        "dataset_id": RUN_ID,
+        "dataset_id": dataset_id,
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "provider": "Norgate Data",
         "provider_scope": "local_norgate_installation",
@@ -423,7 +426,7 @@ def _sha256(path: Path) -> str:
 
 def _markdown_report(result: dict[str, Any]) -> str:
     lines = [
-        "# Candidate 007 Norgate Dataset 001",
+        f"# {result.get('run_id', RUN_ID)}",
         "",
         f"Decision: `{result['decision']}`",
         "",

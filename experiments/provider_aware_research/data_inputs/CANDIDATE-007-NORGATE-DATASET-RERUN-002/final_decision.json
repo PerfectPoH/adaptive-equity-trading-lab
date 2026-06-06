@@ -1,0 +1,8 @@
+{
+  "blockers": [],
+  "decision": "CANDIDATE_007_NORGATE_DATASET_COMPLETE_DATASET_READY_NO_PROMOTION",
+  "kronos_inference_performed": false,
+  "promotion_allowed": false,
+  "strategy_backtest_performed": false,
+  "survivorship_free_claim_allowed": true
+}

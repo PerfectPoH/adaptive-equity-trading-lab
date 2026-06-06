@@ -80,6 +80,7 @@ def test_build_candidate_007_dataset_exports_active_delisted_and_benchmarks(tmp_
     )
 
     assert result["decision"] == "CANDIDATE_007_NORGATE_DATASET_COMPLETE_DATASET_READY_NO_PROMOTION"
+    assert result["run_id"] == tmp_path.name
     assert result["symbol_counts"]["active"] == 2
     assert result["symbol_counts"]["delisted"] == 1
     assert (tmp_path / "prices.csv").exists()
@@ -89,6 +90,8 @@ def test_build_candidate_007_dataset_exports_active_delisted_and_benchmarks(tmp_
     assert set(prices["symbol"]) == {"AAA", "BBB", "DDD", "SPY", "IWM"}
     validation = validate_candidate_007_dataset(tmp_path)
     assert validation["gate_decision"] == "DATA_INPUT_VALIDATION_PASS"
+    manifest = json.loads((tmp_path / "dataset_manifest.json").read_text(encoding="utf-8"))
+    assert manifest["dataset_id"] == tmp_path.name
 
 
 def test_build_candidate_007_dataset_blocks_without_delisted_sample(tmp_path: Path) -> None:
