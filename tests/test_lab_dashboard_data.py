@@ -255,6 +255,41 @@ def test_regime_switching_portfolio_turns_off_blocked_sleeves_over_time() -> Non
     assert "mom-1" in diagnostic["dynamic_curve"][1]["blocked_component_ids"]
 
 
+def test_dynamic_regime_switching_preregistration_draft_freezes_rules_and_blocks_weak_delta() -> None:
+    components = [
+        {"component_id": "mom-1", "template": "Momentum", "strategy_name": "Momentum sleeve", "source": "saved_workbench", "trade_count": 2},
+        {"component_id": "risk-1", "template": "Regime Filter", "strategy_name": "Risk overlay", "source": "saved_workbench", "trade_count": 2},
+    ]
+    switching = {
+        "status": "REGIME_SWITCHING_PORTFOLIO_DIAGNOSTIC_ONLY",
+        "summary": {
+            "dynamic_total_net_return": 1.0,
+            "static_total_net_return": 2.0,
+            "dynamic_vs_static_delta": -1.0,
+            "dynamic_max_drawdown": -0.2,
+            "static_max_drawdown": -0.1,
+            "period_count": 2,
+            "component_count": 2,
+        },
+        "regime_usage": [{"regime_label": "DRAWDOWN_STRESS", "periods": 1}],
+    }
+
+    draft = build_portfolio_preregistration_draft(
+        components,
+        ["mom-1", "risk-1"],
+        candidate_type="dynamic_regime_switching",
+        regime_switching_diagnostic=switching,
+    )
+
+    assert draft["candidate_type"] == "dynamic_regime_switching"
+    assert draft["status"] == "DYNAMIC_REGIME_SWITCHING_DRAFT_REQUIRES_MANUAL_APPROVAL"
+    assert draft["regime_switching_contract"]["fallback_action"] == "cash_when_no_component_allowed"
+    assert draft["regime_switching_contract"]["rebalance_frequency"] == "on_regime_change_or_period_boundary"
+    assert "dynamic_underperformed_static_proxy" in draft["anti_overfit_disclosures"]
+    assert "Archive if dynamic regime switching underperforms the static baseline under true data." in draft["falsification_criteria"]
+    assert draft["promotion_allowed"] is False
+
+
 def test_orb_930_payload_reads_backtest_artifacts(tmp_path: Path) -> None:
     output_dir = tmp_path / "experiments/provider_aware_research/execution_outputs/ORB-930-CROSS-ASSET-BACKTEST-001"
     output_dir.mkdir(parents=True)

@@ -3011,6 +3011,12 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
                 "This best basket contains generated or materialized factory strategies. Read it as a hypothesis recipe: "
                 "promote nothing, approve the pre-registration draft, then rerun as a separate portfolio trial."
             )
+        draft_type = st.radio(
+            "Pre-registration type",
+            ["Static Portfolio Candidate", "Dynamic Regime-Switching Candidate"],
+            horizontal=True,
+            help="Dynamic freezes regime-router activation rules and adds dynamic-vs-static falsification gates.",
+        )
         best_actions = st.columns(3)
         with best_actions[0]:
             if st.button("Load best governed basket into selector", type="secondary", width="stretch"):
@@ -3027,6 +3033,7 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
                 st.rerun()
         with best_actions[2]:
             if st.button("Create pre-registration draft", type="primary", width="stretch"):
+                candidate_type = "dynamic_regime_switching" if draft_type == "Dynamic Regime-Switching Candidate" else "static_portfolio"
                 draft = build_portfolio_preregistration_draft(
                     components,
                     list(search.get("best_basket_component_ids", [])),
@@ -3037,6 +3044,8 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
                         "best_summary": search.get("best_summary", {}),
                         "best_component_labels": search.get("best_component_labels", []),
                     },
+                    candidate_type=candidate_type,
+                    regime_switching_diagnostic=switching if candidate_type == "dynamic_regime_switching" else None,
                 )
                 paths = persist_portfolio_preregistration_draft(draft, root=REPO_ROOT)
                 st.session_state["portfolio_lab_preregistration_result"] = {"draft": draft, "paths": paths}
@@ -3062,6 +3071,8 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
                 st.json(
                     {
                         "status": draft.get("status"),
+                        "candidate_type": draft.get("candidate_type"),
+                        "regime_switching_contract": draft.get("regime_switching_contract", {}),
                         "anti_overfit_disclosures": draft.get("anti_overfit_disclosures", []),
                         "template_mix": draft.get("template_mix", []),
                         "falsification_criteria": draft.get("falsification_criteria", []),

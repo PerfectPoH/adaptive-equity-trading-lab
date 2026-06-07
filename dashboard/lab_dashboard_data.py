@@ -3179,6 +3179,8 @@ def build_portfolio_preregistration_draft(
     selected_component_ids: list[str],
     *,
     source_search: dict[str, Any] | None = None,
+    candidate_type: str = "static_portfolio",
+    regime_switching_diagnostic: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build an auditable draft that freezes a generated portfolio idea before any real test."""
 
@@ -3208,24 +3210,53 @@ def build_portfolio_preregistration_draft(
         disclosure_flags.append("factory_generated_scope")
     if any(component["bias_warnings"] for component in selected_components):
         disclosure_flags.append("component_bias_warnings_present")
+    candidate_type = candidate_type if candidate_type in {"static_portfolio", "dynamic_regime_switching"} else "static_portfolio"
+    switching_summary = dict((regime_switching_diagnostic or {}).get("summary", {}))
+    dynamic_delta = float(switching_summary.get("dynamic_vs_static_delta", 0.0) or 0.0)
+    if candidate_type == "dynamic_regime_switching":
+        disclosure_flags.append("dynamic_regime_switching_proxy_only")
+        if dynamic_delta < 0:
+            disclosure_flags.append("dynamic_underperformed_static_proxy")
 
     signature_payload = {
         "selected_component_ids": sorted(selected),
         "source_search": source_search or {},
         "source_summary": source_summary,
+        "candidate_type": candidate_type,
+        "regime_switching_summary": switching_summary if candidate_type == "dynamic_regime_switching" else {},
     }
     draft_id = hashlib.sha256(json.dumps(signature_payload, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()[:16]
     template_mix = sorted({component["template"] for component in selected_components})
-    return {
+    falsification_criteria = [
+        "Archive if the basket fails after removing the strongest component.",
+        "Archive if cost stress at 1.5x declared costs flips the net result negative.",
+        "Archive if a single component contributes more than 40% of positive contribution.",
+        "Archive if high correlation shows the basket is a hidden duplicate bet.",
+        "Archive or keep diagnostic-only if any component still depends on factory-generated/proxy data.",
+    ]
+    if candidate_type == "dynamic_regime_switching":
+        falsification_criteria.extend(
+            [
+                "Archive if dynamic regime switching underperforms the static baseline under true data.",
+                "Archive if any regime has fewer than the predeclared minimum independent periods.",
+                "Archive if a regime route depends on post-return optimization rather than predeclared rules.",
+            ]
+        )
+    draft = {
         "draft_id": draft_id,
         "trial_id": f"PORTFOLIO-PREREG-{draft_id.upper()}",
-        "status": "PREREGISTRATION_DRAFT_REQUIRES_MANUAL_APPROVAL",
+        "status": "DYNAMIC_REGIME_SWITCHING_DRAFT_REQUIRES_MANUAL_APPROVAL" if candidate_type == "dynamic_regime_switching" else "PREREGISTRATION_DRAFT_REQUIRES_MANUAL_APPROVAL",
+        "candidate_type": candidate_type,
         "promotion_allowed": False,
         "paper_trading_allowed": False,
         "live_trading_allowed": False,
         "provider_query_allowed": False,
         "market_data_download_allowed": False,
-        "hypothesis": "A bounded basket of separately governed strategy components may be more robust than any single component after costs, duplicate removal, correlation checks, and ex-best stress.",
+        "hypothesis": (
+            "A dynamic regime-switching basket may improve robustness by activating only the strategy sleeves allowed by the current market regime."
+            if candidate_type == "dynamic_regime_switching"
+            else "A bounded basket of separately governed strategy components may be more robust than any single component after costs, duplicate removal, correlation checks, and ex-best stress."
+        ),
         "selected_components": selected_components,
         "source_summary": source_summary,
         "template_mix": template_mix,
@@ -3237,15 +3268,24 @@ def build_portfolio_preregistration_draft(
             "weight_optimization_allowed": False,
             "reason": "Weights must be explainable before the validation run; no hindsight Sharpe optimization.",
         },
-        "falsification_criteria": [
-            "Archive if the basket fails after removing the strongest component.",
-            "Archive if cost stress at 1.5x declared costs flips the net result negative.",
-            "Archive if a single component contributes more than 40% of positive contribution.",
-            "Archive if high correlation shows the basket is a hidden duplicate bet.",
-            "Archive or keep diagnostic-only if any component still depends on factory-generated/proxy data.",
-        ],
+        "falsification_criteria": falsification_criteria,
         "required_next_step": "User must manually approve this draft, then rerun as a separately pre-registered portfolio trial before interpreting candidate status.",
     }
+    if candidate_type == "dynamic_regime_switching":
+        draft["regime_switching_contract"] = {
+            "status": "DYNAMIC_REGIME_SWITCHING_CONTRACT_FROZEN",
+            "regime_source": "local_regime_map_majority_vote",
+            "activation_rule": "At each period, infer active regime before reading component returns and include only router-allowed sleeves.",
+            "blocked_postures": ["BLOCK", "OBSERVE_ONLY"],
+            "allowed_postures": ["REDUCE", "ALLOW_PROXY", "RISK_OVERLAY"],
+            "fallback_action": "cash_when_no_component_allowed",
+            "rebalance_frequency": "on_regime_change_or_period_boundary",
+            "weighting_rule": "normalize_allowed_component_posture_multipliers",
+            "optimization_allowed": False,
+            "proxy_summary": switching_summary,
+            "regime_usage": list((regime_switching_diagnostic or {}).get("regime_usage", [])),
+        }
+    return draft
 
 
 def persist_portfolio_preregistration_draft(draft: dict[str, Any], *, root: Path = Path(".")) -> dict[str, str]:
@@ -3258,6 +3298,7 @@ def persist_portfolio_preregistration_draft(draft: dict[str, Any], *, root: Path
         f"# Portfolio Pre-Registration Draft: {draft['trial_id']}",
         "",
         f"- status: `{draft['status']}`",
+        f"- candidate_type: `{draft.get('candidate_type', 'static_portfolio')}`",
         "- manual approval required: `true`",
         "- promotion_allowed: `false`",
         "- paper_trading_allowed: `false`",
@@ -3273,6 +3314,22 @@ def persist_portfolio_preregistration_draft(draft: dict[str, Any], *, root: Path
     for component in draft.get("selected_components", []):
         markdown_lines.append(
             f"- `{component['component_id']}` | {component['strategy_name']} | {component['template']} | source `{component['source']}`"
+        )
+    if draft.get("candidate_type") == "dynamic_regime_switching":
+        contract = draft.get("regime_switching_contract", {})
+        summary = contract.get("proxy_summary", {})
+        markdown_lines.extend(
+            [
+                "",
+                "## Dynamic Regime-Switching Contract",
+                "",
+                f"- activation_rule: `{contract.get('activation_rule', '')}`",
+                f"- fallback_action: `{contract.get('fallback_action', '')}`",
+                f"- rebalance_frequency: `{contract.get('rebalance_frequency', '')}`",
+                f"- weighting_rule: `{contract.get('weighting_rule', '')}`",
+                f"- optimization_allowed: `{str(contract.get('optimization_allowed', False)).lower()}`",
+                f"- dynamic_vs_static_delta_proxy: `{summary.get('dynamic_vs_static_delta', 0.0)}`",
+            ]
         )
     markdown_lines.extend(
         [
