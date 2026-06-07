@@ -380,6 +380,7 @@ def load_dashboard_payload(root: Path = Path(".")) -> dict[str, Any]:
         "data_matrix": data_matrix,
         "orb_930": orb_payload,
         "data_readiness": provider_data_readiness_payload(root),
+        "strategy_regime_router": strategy_regime_router_payload(regime_map),
     }
 
 
@@ -514,6 +515,176 @@ def provider_data_readiness_payload(root: Path = Path(".")) -> dict[str, Any]:
             "Keep improving Portfolio Lab, regime routing, and user strategy UX with proxy outputs marked non-promotable.",
         ],
     }
+
+
+def strategy_regime_router_payload(regime_map: pd.DataFrame) -> dict[str, Any]:
+    """Build a diagnostic-only map of which strategy families fit each regime."""
+
+    fallback_regimes = [
+        "DRAWDOWN_STRESS",
+        "RANGE_NORMAL",
+        "TREND_DOWN_OR_CHOP",
+        "TREND_UP_HIGH_VOL",
+        "TREND_UP_LOW_VOL",
+    ]
+    if not regime_map.empty and "regime_label" in regime_map.columns:
+        regimes = sorted(str(item) for item in regime_map["regime_label"].dropna().unique())
+    else:
+        regimes = fallback_regimes
+    if "INSUFFICIENT_HISTORY" in regimes:
+        regimes = [item for item in regimes if item != "INSUFFICIENT_HISTORY"] + ["INSUFFICIENT_HISTORY"]
+
+    profiles = {
+        "Momentum": {
+            "strategies": "XMOM, active-only momentum, factory momentum",
+            "default_failure": "outlier dependency and cost drag",
+            "rule": {
+                "TREND_UP_LOW_VOL": ("REDUCE", 0.45, "Only usable as a small sleeve; archived runs were outlier-sensitive."),
+                "TREND_UP_HIGH_VOL": ("REDUCE", 0.40, "Trend exists, but high volatility magnifies false winners and drawdown."),
+                "RANGE_NORMAL": ("BLOCK", 0.10, "Range markets usually mean-revert against delayed momentum entries."),
+                "TREND_DOWN_OR_CHOP": ("BLOCK", 0.05, "Chop and downtrend turn continuation into falling-knife exposure."),
+                "DRAWDOWN_STRESS": ("BLOCK", 0.00, "Risk engine should preserve cash during stress."),
+                "INSUFFICIENT_HISTORY": ("BLOCK", 0.00, "No regime confidence."),
+            },
+        },
+        "Mean Reversion": {
+            "strategies": "GapRev, local reversion, factory mean reversion",
+            "default_failure": "daily-gap illusion, adverse continuation, and spread damage",
+            "rule": {
+                "RANGE_NORMAL": ("ALLOW_PROXY", 0.60, "Best conceptual fit: bounded moves can revert when trend pressure is weak."),
+                "TREND_UP_LOW_VOL": ("OBSERVE_ONLY", 0.30, "May work on shallow pullbacks, but not validated enough to size normally."),
+                "TREND_UP_HIGH_VOL": ("REDUCE", 0.35, "Can catch overshoots, but volatility makes stops and costs unstable."),
+                "TREND_DOWN_OR_CHOP": ("BLOCK", 0.10, "The lab repeatedly saw continuation risk in weak tapes."),
+                "DRAWDOWN_STRESS": ("BLOCK", 0.00, "Stress regimes punish dip-buying."),
+                "INSUFFICIENT_HISTORY": ("BLOCK", 0.00, "No regime confidence."),
+            },
+        },
+        "Event Catalyst": {
+            "strategies": "SEC 8-K, PEAD, Form 4, PDUFA, 13D",
+            "default_failure": "real volatility without admissible point-in-time direction",
+            "rule": {
+                "TREND_UP_HIGH_VOL": ("OBSERVE_ONLY", 0.35, "Catalysts can explain volatility, but direction source is still missing."),
+                "TREND_UP_LOW_VOL": ("OBSERVE_ONLY", 0.30, "Use as watchlist context until PIT event data exists."),
+                "RANGE_NORMAL": ("OBSERVE_ONLY", 0.25, "Event days are distinct, but not tradable from regime alone."),
+                "TREND_DOWN_OR_CHOP": ("BLOCK", 0.05, "Negative context plus no direction source is not admissible."),
+                "DRAWDOWN_STRESS": ("BLOCK", 0.00, "Binary/event risk should not be added in stress."),
+                "INSUFFICIENT_HISTORY": ("BLOCK", 0.00, "No regime confidence."),
+            },
+        },
+        "Dollar-Bar Microstructure": {
+            "strategies": "Dollar bars, micro-reversion diagnostics",
+            "default_failure": "cleaner sampling is not standalone alpha",
+            "rule": {
+                "TREND_UP_HIGH_VOL": ("RISK_OVERLAY", 0.55, "Useful as a sampling layer when clock-time bars are distorted."),
+                "RANGE_NORMAL": ("RISK_OVERLAY", 0.50, "Useful to stabilize diagnostics before testing reversion."),
+                "TREND_UP_LOW_VOL": ("RISK_OVERLAY", 0.45, "Can improve measurement quality, not direction."),
+                "TREND_DOWN_OR_CHOP": ("RISK_OVERLAY", 0.35, "Measurement layer only; do not use as entry logic."),
+                "DRAWDOWN_STRESS": ("OBSERVE_ONLY", 0.20, "Use for diagnostics, not deployment."),
+                "INSUFFICIENT_HISTORY": ("BLOCK", 0.00, "No regime confidence."),
+            },
+        },
+        "9:30 AM ORB": {
+            "strategies": "Opening range breakout on gold, EUR/USD, bitcoin",
+            "default_failure": "false breakouts and negative median net",
+            "rule": {
+                "TREND_UP_HIGH_VOL": ("REDUCE", 0.40, "Breakouts need movement, but the archived ORB median gate failed."),
+                "RANGE_NORMAL": ("BLOCK", 0.15, "Range conditions usually mean failed breakouts."),
+                "TREND_UP_LOW_VOL": ("OBSERVE_ONLY", 0.25, "Cleaner trend context, but not enough evidence."),
+                "TREND_DOWN_OR_CHOP": ("BLOCK", 0.05, "Chop is hostile to first-breakout systems."),
+                "DRAWDOWN_STRESS": ("BLOCK", 0.00, "Do not add intraday breakout risk during stress."),
+                "INSUFFICIENT_HISTORY": ("BLOCK", 0.00, "No regime confidence."),
+            },
+        },
+        "Regime Risk Engine": {
+            "strategies": "Market-state router, cash/risk throttle",
+            "default_failure": "not alpha; only governs exposure",
+            "rule": {
+                "TREND_UP_LOW_VOL": ("RISK_OVERLAY", 0.80, "Permit only the sleeves whose own gates survive."),
+                "TREND_UP_HIGH_VOL": ("RISK_OVERLAY", 0.75, "Scale risk down and demand stronger confirmation."),
+                "RANGE_NORMAL": ("RISK_OVERLAY", 0.70, "Favor bounded/reversion experiments, still non-promotable."),
+                "TREND_DOWN_OR_CHOP": ("RISK_OVERLAY", 0.85, "Block long-only continuation and reduce gross exposure."),
+                "DRAWDOWN_STRESS": ("RISK_OVERLAY", 0.95, "Primary job is to force cash or defensive sizing."),
+                "INSUFFICIENT_HISTORY": ("RISK_OVERLAY", 0.50, "Delay decisions until enough history accumulates."),
+            },
+        },
+    }
+
+    rows: list[dict[str, Any]] = []
+    posture_rank = {
+        "BLOCK": 0,
+        "OBSERVE_ONLY": 1,
+        "REDUCE": 2,
+        "ALLOW_PROXY": 3,
+        "RISK_OVERLAY": 4,
+    }
+    for family, spec in profiles.items():
+        for regime in regimes:
+            posture, score, explanation = spec["rule"].get(
+                regime,
+                ("OBSERVE_ONLY", 0.20, "Regime label is known locally, but no specific sleeve rule has been validated."),
+            )
+            rows.append(
+                {
+                    "strategy_family": family,
+                    "strategies": spec["strategies"],
+                    "regime_label": regime,
+                    "posture": posture,
+                    "score": score,
+                    "posture_rank": posture_rank[posture],
+                    "why": explanation,
+                    "main_failure_mode": spec["default_failure"],
+                    "allowed_use": _regime_posture_allowed_use(posture),
+                }
+            )
+    matrix = pd.DataFrame(rows)
+    summary = []
+    for family, family_rows in matrix.groupby("strategy_family", sort=False):
+        best = family_rows.sort_values(["score", "posture_rank"], ascending=False).iloc[0]
+        blocked = int((family_rows["posture"] == "BLOCK").sum())
+        summary.append(
+            {
+                "strategy_family": family,
+                "best_regime": best["regime_label"],
+                "best_posture": best["posture"],
+                "blocked_regimes": blocked,
+                "operating_rule": _family_operating_rule(family),
+            }
+        )
+    return {
+        "status": "STRATEGY_REGIME_ROUTER_DIAGNOSTIC_ONLY",
+        "matrix": matrix,
+        "summary": pd.DataFrame(summary),
+        "promotion_allowed": False,
+        "backtest_performed": False,
+        "provider_query_performed": False,
+        "regimes_mapped": len(regimes),
+        "families_mapped": len(profiles),
+        "interpretation": (
+            "This is a risk-routing map derived from local artifacts and documented failure modes. "
+            "It can explain when to block, reduce, observe, or use a sleeve as an overlay, but it is not a promoted strategy."
+        ),
+    }
+
+
+def _regime_posture_allowed_use(posture: str) -> str:
+    return {
+        "BLOCK": "Do not route capital or proxy research through this family in this regime.",
+        "OBSERVE_ONLY": "Use only as context or watchlist evidence; no sizing decision.",
+        "REDUCE": "If tested, use smaller sizing and stricter gates than normal.",
+        "ALLOW_PROXY": "May be explored locally, but remains non-promotable until true data gates pass.",
+        "RISK_OVERLAY": "Can govern exposure or sampling quality; not a standalone alpha sleeve.",
+    }[posture]
+
+
+def _family_operating_rule(family: str) -> str:
+    return {
+        "Momentum": "Use only in clean uptrends and cap exposure; archived evidence is outlier-sensitive.",
+        "Mean Reversion": "Only range-like regimes are conceptually friendly; block stress dip-buying.",
+        "Event Catalyst": "Treat as volatility/risk context until PIT direction data is admissible.",
+        "Dollar-Bar Microstructure": "Use as a measurement layer before testing alpha, not as a signal.",
+        "9:30 AM ORB": "Keep as exploratory intraday research; median gate must improve before sizing.",
+        "Regime Risk Engine": "Always allowed as governance because it blocks or reduces risk rather than adding alpha.",
+    }[family]
 
 
 def strategy_rows(ledger: pd.DataFrame) -> pd.DataFrame:

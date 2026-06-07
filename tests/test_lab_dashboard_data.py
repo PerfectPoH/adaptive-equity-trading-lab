@@ -72,6 +72,7 @@ from dashboard.lab_dashboard_data import (
     load_dashboard_payload,
     project_capability_rows,
     project_lifecycle_rows,
+    strategy_regime_router_payload,
     strategy_detail,
     strategy_rows,
     validate_workbench_manifest,
@@ -145,6 +146,28 @@ def test_load_dashboard_payload_reads_final_status_artifacts(tmp_path: Path) -> 
     assert metrics["decision_count"] == 1
     assert metrics["final_policy"] == "RISK_REGIME_ENGINE_ONLY"
     assert not payload["ledger"].empty
+    assert payload["strategy_regime_router"]["status"] == "STRATEGY_REGIME_ROUTER_DIAGNOSTIC_ONLY"
+
+
+def test_strategy_regime_router_maps_families_without_promotion() -> None:
+    regime_map = pd.DataFrame(
+        [
+            {"regime_label": "RANGE_NORMAL"},
+            {"regime_label": "TREND_UP_LOW_VOL"},
+            {"regime_label": "DRAWDOWN_STRESS"},
+        ]
+    )
+
+    payload = strategy_regime_router_payload(regime_map)
+    matrix = payload["matrix"]
+    summary = payload["summary"]
+
+    assert payload["promotion_allowed"] is False
+    assert payload["backtest_performed"] is False
+    assert payload["provider_query_performed"] is False
+    assert {"Momentum", "Mean Reversion", "Regime Risk Engine"}.issubset(set(matrix["strategy_family"]))
+    assert set(matrix["posture"]).issubset({"BLOCK", "OBSERVE_ONLY", "REDUCE", "ALLOW_PROXY", "RISK_OVERLAY"})
+    assert not summary.empty
 
 
 def test_orb_930_payload_reads_backtest_artifacts(tmp_path: Path) -> None:

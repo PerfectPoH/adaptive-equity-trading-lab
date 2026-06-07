@@ -1352,6 +1352,7 @@ def render_results_and_data(payload: dict[str, object]) -> None:
     data_matrix = payload["data_matrix"]
     orb = payload.get("orb_930", {})
     data_readiness = payload.get("data_readiness", {})
+    strategy_router = payload.get("strategy_regime_router", {})
 
     c1, c2, c3 = st.columns(3)
     with c1:
@@ -1431,6 +1432,91 @@ def render_results_and_data(payload: dict[str, object]) -> None:
             st.markdown("**What this means operationally**")
             for item in next_paths:
                 st.markdown(f"- {item}")
+
+    st.markdown('<div class="results-spacer"></div>', unsafe_allow_html=True)
+    if isinstance(strategy_router, dict):
+        router_matrix = strategy_router.get("matrix", pd.DataFrame())
+        router_summary = strategy_router.get("summary", pd.DataFrame())
+        st.subheader("Strategy x Market Regime Router")
+        st.markdown(
+            f"""
+            <div class="callout amber-callout">
+            {strategy_router.get("interpretation", "Diagnostic-only regime router.")}
+            No provider query, no market-data download, no backtest, and no promotion are performed here.
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        q1, q2, q3 = st.columns(3)
+        with q1:
+            metric_card("Router status", strategy_router.get("status", "UNKNOWN"), "Risk map, not alpha")
+        with q2:
+            metric_card("Families", strategy_router.get("families_mapped", 0), "Strategy families routed")
+        with q3:
+            metric_card("Regimes", strategy_router.get("regimes_mapped", 0), "Market states mapped")
+
+        if isinstance(router_matrix, pd.DataFrame) and not router_matrix.empty:
+            posture_text = router_matrix.pivot(index="strategy_family", columns="regime_label", values="posture")
+            score_matrix = router_matrix.pivot(index="strategy_family", columns="regime_label", values="score")
+            hover_matrix = router_matrix.pivot(index="strategy_family", columns="regime_label", values="why")
+            fig = go.Figure(
+                data=go.Heatmap(
+                    z=score_matrix.to_numpy(),
+                    x=list(score_matrix.columns),
+                    y=list(score_matrix.index),
+                    text=posture_text.to_numpy(),
+                    customdata=hover_matrix.to_numpy(),
+                    texttemplate="%{text}",
+                    hovertemplate="<b>%{y}</b><br>%{x}<br>Posture: %{text}<br>%{customdata}<extra></extra>",
+                    colorscale=[
+                        [0.00, "#d12f5f"],
+                        [0.35, "#d97706"],
+                        [0.60, "#1f5eff"],
+                        [1.00, "#0f9f75"],
+                    ],
+                    zmin=0,
+                    zmax=1,
+                    showscale=False,
+                )
+            )
+            fig.update_layout(
+                height=440,
+                margin=dict(l=0, r=0, t=10, b=10),
+                xaxis_title="Market regime",
+                yaxis_title="Strategy family",
+                paper_bgcolor="rgba(255,255,255,.72)",
+                plot_bgcolor="rgba(255,255,255,.72)",
+                font=dict(color="#171717", family="Instrument Sans"),
+            )
+            fig.update_xaxes(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
+            fig.update_yaxes(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
+            st.plotly_chart(fig, width="stretch")
+            st.caption("Reading rule: red blocks capital, amber reduces sizing, blue is proxy-only exploration, green is risk overlay/governance.")
+
+            if isinstance(router_summary, pd.DataFrame) and not router_summary.empty:
+                st.markdown("**Operational routing notes**")
+                st.dataframe(
+                    router_summary[["strategy_family", "best_regime", "best_posture", "blocked_regimes", "operating_rule"]],
+                    width="stretch",
+                    hide_index=True,
+                )
+            with st.expander("Open full regime-strategy contract"):
+                st.dataframe(
+                    router_matrix[
+                        [
+                            "strategy_family",
+                            "strategies",
+                            "regime_label",
+                            "posture",
+                            "score",
+                            "why",
+                            "main_failure_mode",
+                            "allowed_use",
+                        ]
+                    ],
+                    width="stretch",
+                    hide_index=True,
+                )
 
     st.markdown('<div class="results-spacer"></div>', unsafe_allow_html=True)
     if isinstance(orb, dict) and orb.get("available"):
