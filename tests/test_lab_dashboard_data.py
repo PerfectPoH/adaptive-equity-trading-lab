@@ -28,6 +28,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_visual_diagnostics,
     build_portfolio_lab_preview,
     build_regime_aware_portfolio_component_set,
+    build_regime_switching_portfolio_diagnostic,
     infer_current_market_regime,
     build_factory_data_eligibility_report,
     build_strategy_factory_components,
@@ -212,6 +213,46 @@ def test_infer_current_market_regime_uses_latest_date_majority_vote() -> None:
     assert inferred["confidence"] == 2 / 3
     assert inferred["provider_query_performed"] is False
     assert inferred["backtest_performed"] is False
+
+
+def test_regime_switching_portfolio_turns_off_blocked_sleeves_over_time() -> None:
+    components = [
+        {
+            "component_id": "mom-1",
+            "template": "Momentum",
+            "strategy_name": "Momentum sleeve",
+            "inline_returns": [
+                {"period": "2026-01-01", "net_return": 0.10},
+                {"period": "2026-01-02", "net_return": -0.50},
+            ],
+        },
+        {
+            "component_id": "risk-1",
+            "template": "Regime Filter",
+            "strategy_name": "Risk overlay",
+            "inline_returns": [
+                {"period": "2026-01-01", "net_return": 0.0},
+                {"period": "2026-01-02", "net_return": 0.0},
+            ],
+        },
+    ]
+    regime_map = pd.DataFrame(
+        [
+            {"symbol": "SPY", "date": "2026-01-01", "regime_label": "TREND_UP_LOW_VOL"},
+            {"symbol": "SPY", "date": "2026-01-02", "regime_label": "DRAWDOWN_STRESS"},
+        ]
+    )
+    router = strategy_regime_router_payload(regime_map)
+
+    diagnostic = build_regime_switching_portfolio_diagnostic(components, regime_map, router)
+
+    assert diagnostic["status"] == "REGIME_SWITCHING_PORTFOLIO_DIAGNOSTIC_ONLY"
+    assert diagnostic["promotion_allowed"] is False
+    assert diagnostic["provider_query_performed"] is False
+    assert diagnostic["backtest_performed"] is False
+    assert diagnostic["summary"]["dynamic_total_net_return"] > diagnostic["summary"]["static_total_net_return"]
+    assert diagnostic["dynamic_curve"][1]["active_regime"] == "DRAWDOWN_STRESS"
+    assert "mom-1" in diagnostic["dynamic_curve"][1]["blocked_component_ids"]
 
 
 def test_orb_930_payload_reads_backtest_artifacts(tmp_path: Path) -> None:

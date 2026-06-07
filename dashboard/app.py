@@ -50,6 +50,7 @@ from dashboard.lab_dashboard_data import (
     build_portfolio_lab_preview,
     build_portfolio_lab_preview_from_components,
     build_regime_aware_portfolio_component_set,
+    build_regime_switching_portfolio_diagnostic,
     build_portfolio_preregistration_approval_gate,
     build_portfolio_preregistration_draft,
     build_portfolio_frozen_recipe_trial,
@@ -2888,6 +2889,73 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
             f"blocked {len(regime_filter.get('blocked_components', []))}. "
             "This is a preprocessing guard, not optimization evidence."
         )
+    switching = build_regime_switching_portfolio_diagnostic(diagnostic_base_components, payload.get("regime_map", pd.DataFrame()), strategy_router)
+    preview["regime_switching_diagnostic"] = switching
+    if switching.get("status") == "REGIME_SWITCHING_PORTFOLIO_DIAGNOSTIC_ONLY":
+        st.markdown(
+            """
+            <div class="workbench-section">
+              <div class="lab-kicker">04 / Dynamic Regime Switching</div>
+              <div class="workbench-section-title">Now the portfolio changes through time.</div>
+              <div class="workbench-section-copy">
+                This diagnostic replays the local return streams and changes eligible sleeves whenever the local regime map changes.
+                It compares that adaptive path with a static equal-weight basket on the same component set.
+              </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        switch_summary = switching.get("summary", {})
+        switch_cols = st.columns(4)
+        with switch_cols[0]:
+            metric_card("Dynamic net", f"{switch_summary.get('dynamic_total_net_return', 0.0):.2f}", "Regime-switched path")
+        with switch_cols[1]:
+            metric_card("Static net", f"{switch_summary.get('static_total_net_return', 0.0):.2f}", "Equal basket baseline")
+        with switch_cols[2]:
+            metric_card("Delta", f"{switch_summary.get('dynamic_vs_static_delta', 0.0):.2f}", "Dynamic minus static")
+        with switch_cols[3]:
+            metric_card("Dynamic DD", f"{switch_summary.get('dynamic_max_drawdown', 0.0):.2f}", "Worst local decline")
+        if float(switch_summary.get("dynamic_vs_static_delta", 0.0) or 0.0) < 0:
+            st.warning(
+                "The dynamic regime-switching path is weaker than the static proxy basket on this local surface. "
+                "That does not invalidate the router, but it means the current regime rules are defensive diagnostics, not proven return enhancement."
+            )
+        else:
+            st.info("The dynamic path beats the static proxy basket on this local surface, but it remains non-promotable until a true data gate exists.")
+        dynamic_curve = pd.DataFrame(switching.get("dynamic_curve", []))
+        static_curve = pd.DataFrame(switching.get("static_curve", []))
+        if not dynamic_curve.empty and not static_curve.empty:
+            dyn_plot = dynamic_curve[["period", "cumulative_net_return"]].copy()
+            dyn_plot["path"] = "dynamic regime-switching"
+            static_plot = static_curve[["period", "cumulative_net_return"]].copy()
+            static_plot["path"] = "static equal basket"
+            plot_frame = pd.concat([dyn_plot, static_plot], ignore_index=True)
+            fig = px.line(
+                plot_frame,
+                x="period",
+                y="cumulative_net_return",
+                color="path",
+                color_discrete_map={"dynamic regime-switching": "#0f9f75", "static equal basket": "#71717a"},
+            )
+            fig.update_layout(
+                template="plotly_white",
+                height=380,
+                margin=dict(l=0, r=0, t=10, b=10),
+                xaxis_title="Period",
+                yaxis_title="Cumulative local net",
+                paper_bgcolor="rgba(255,255,255,.72)",
+                plot_bgcolor="rgba(255,255,255,.72)",
+                font=dict(color="#171717", family="Instrument Sans"),
+                legend_title_text="Path",
+            )
+            fig.update_xaxes(tickfont=dict(color="#3f3f46"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
+            fig.update_yaxes(tickfont=dict(color="#3f3f46"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
+            st.plotly_chart(fig, width="stretch")
+        usage = pd.DataFrame(switching.get("regime_usage", []))
+        if not usage.empty:
+            with st.expander("Show dynamic regime usage"):
+                st.dataframe(usage, width="stretch", hide_index=True)
+                st.dataframe(dynamic_curve[["period", "active_regime", "portfolio_return", "cumulative_net_return", "drawdown"]], width="stretch", hide_index=True)
     if factory_lineage_count:
         st.warning(
             "Factory-generated or factory-materialized components are idea discovery only. The best basket can suggest a recipe, "

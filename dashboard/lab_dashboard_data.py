@@ -10,6 +10,7 @@ from typing import Any
 import pandas as pd
 
 from src.experiments.workbench_portfolio_engine import (
+    build_component_return_matrix,
     load_workbench_portfolio_components,
     persist_portfolio_diagnostic,
     run_portfolio_diagnostic,
@@ -811,6 +812,151 @@ def build_regime_aware_portfolio_component_set(
         "provider_query_performed": False,
         "backtest_performed": False,
     }
+
+
+def build_regime_switching_portfolio_diagnostic(
+    components: list[dict[str, Any]],
+    regime_map: pd.DataFrame,
+    strategy_router: dict[str, Any],
+) -> dict[str, Any]:
+    """Replay a local/proxy portfolio that changes sleeve eligibility by regime."""
+
+    return_matrix = build_component_return_matrix(components)
+    if return_matrix.empty:
+        return {
+            "status": "REGIME_SWITCHING_PORTFOLIO_UNAVAILABLE",
+            "summary": {
+                "dynamic_total_net_return": 0.0,
+                "static_total_net_return": 0.0,
+                "dynamic_max_drawdown": 0.0,
+                "static_max_drawdown": 0.0,
+                "period_count": 0,
+            },
+            "dynamic_curve": [],
+            "static_curve": [],
+            "regime_usage": [],
+            "promotion_allowed": False,
+            "provider_query_performed": False,
+            "backtest_performed": False,
+        }
+    regime_by_period = _regime_label_by_period(return_matrix.index, regime_map)
+    component_ids = [str(component.get("component_id")) for component in components]
+    component_by_id = {str(component.get("component_id")): component for component in components}
+    static_returns = return_matrix.reindex(columns=component_ids, fill_value=0.0).mean(axis=1)
+    dynamic_returns: list[float] = []
+    dynamic_curve: list[dict[str, Any]] = []
+    usage: dict[str, dict[str, int]] = {}
+    filter_by_regime = {
+        regime: build_regime_aware_portfolio_component_set(components, strategy_router, regime)
+        for regime in sorted(set(regime_by_period.values()))
+    }
+    for period in return_matrix.index:
+        active_regime = regime_by_period.get(str(period), "RANGE_NORMAL")
+        filtered = filter_by_regime[active_regime]
+        allowed = list(filtered.get("allowed_components", []))
+        blocked = list(filtered.get("blocked_components", []))
+        weighted_ids = [
+            (str(component.get("component_id")), float(component.get("regime_weight_multiplier", 1.0) or 0.0))
+            for component in allowed
+            if str(component.get("component_id")) in return_matrix.columns and float(component.get("regime_weight_multiplier", 1.0) or 0.0) > 0
+        ]
+        total_multiplier = sum(multiplier for _, multiplier in weighted_ids)
+        if total_multiplier > 0:
+            period_return = sum(float(return_matrix.loc[period, component_id]) * (multiplier / total_multiplier) for component_id, multiplier in weighted_ids)
+        else:
+            period_return = 0.0
+        dynamic_returns.append(period_return)
+        usage_row = usage.setdefault(active_regime, {"periods": 0, "allowed": 0, "blocked": 0})
+        usage_row["periods"] += 1
+        usage_row["allowed"] += len(allowed)
+        usage_row["blocked"] += len(blocked)
+        dynamic_curve.append(
+            {
+                "period": str(period),
+                "active_regime": active_regime,
+                "portfolio_return": round(float(period_return), 8),
+                "allowed_component_ids": [component_id for component_id, _ in weighted_ids],
+                "blocked_component_ids": [str(component.get("component_id")) for component in blocked if str(component.get("component_id")) in component_by_id],
+            }
+        )
+    dynamic = pd.Series(dynamic_returns, index=return_matrix.index, dtype=float)
+    dynamic_cumulative = dynamic.cumsum()
+    static_cumulative = static_returns.cumsum()
+    dynamic_drawdown = dynamic_cumulative - dynamic_cumulative.cummax()
+    static_drawdown = static_cumulative - static_cumulative.cummax()
+    for row in dynamic_curve:
+        period = row["period"]
+        row["cumulative_net_return"] = round(float(dynamic_cumulative.loc[period]), 8)
+        row["drawdown"] = round(float(dynamic_drawdown.loc[period]), 8)
+    static_curve = [
+        {
+            "period": str(period),
+            "portfolio_return": round(float(static_returns.loc[period]), 8),
+            "cumulative_net_return": round(float(static_cumulative.loc[period]), 8),
+            "drawdown": round(float(static_drawdown.loc[period]), 8),
+        }
+        for period in return_matrix.index
+    ]
+    regime_usage = [
+        {
+            "regime_label": regime,
+            "periods": values["periods"],
+            "average_allowed_components": round(values["allowed"] / max(values["periods"], 1), 4),
+            "average_blocked_components": round(values["blocked"] / max(values["periods"], 1), 4),
+        }
+        for regime, values in sorted(usage.items())
+    ]
+    dynamic_total = float(dynamic.sum())
+    static_total = float(static_returns.sum())
+    return {
+        "status": "REGIME_SWITCHING_PORTFOLIO_DIAGNOSTIC_ONLY",
+        "summary": {
+            "dynamic_total_net_return": round(dynamic_total, 8),
+            "static_total_net_return": round(static_total, 8),
+            "dynamic_vs_static_delta": round(dynamic_total - static_total, 8),
+            "dynamic_max_drawdown": round(float(dynamic_drawdown.min() if not dynamic_drawdown.empty else 0.0), 8),
+            "static_max_drawdown": round(float(static_drawdown.min() if not static_drawdown.empty else 0.0), 8),
+            "period_count": int(len(return_matrix)),
+            "component_count": int(len(components)),
+        },
+        "dynamic_curve": dynamic_curve,
+        "static_curve": static_curve,
+        "regime_usage": regime_usage,
+        "interpretation": (
+            "Local/proxy replay of a portfolio that changes eligible strategy sleeves by market regime. "
+            "The regime rule is applied before returns are read, so this is a governance diagnostic rather than optimization evidence."
+        ),
+        "promotion_allowed": False,
+        "provider_query_performed": False,
+        "backtest_performed": False,
+    }
+
+
+def _regime_label_by_period(periods: pd.Index, regime_map: pd.DataFrame) -> dict[str, str]:
+    if regime_map.empty or not {"date", "regime_label"}.issubset(regime_map.columns):
+        return {str(period): "RANGE_NORMAL" for period in periods}
+    frame = regime_map.copy()
+    frame["date"] = pd.to_datetime(frame["date"], errors="coerce")
+    frame = frame.dropna(subset=["date", "regime_label"])
+    if frame.empty:
+        return {str(period): "RANGE_NORMAL" for period in periods}
+    majority_by_date = (
+        frame.groupby(["date", "regime_label"], as_index=False)
+        .size()
+        .sort_values(["date", "size", "regime_label"], ascending=[True, False, True])
+        .drop_duplicates("date")
+        .sort_values("date")
+    )
+    date_labels = [(row["date"], str(row["regime_label"])) for _, row in majority_by_date.iterrows()]
+    mapping: dict[str, str] = {}
+    for period in periods:
+        parsed = pd.to_datetime(str(period), errors="coerce")
+        if pd.isna(parsed):
+            mapping[str(period)] = date_labels[-1][1]
+            continue
+        eligible = [label for date, label in date_labels if date <= parsed]
+        mapping[str(period)] = eligible[-1] if eligible else date_labels[0][1]
+    return mapping
 
 
 def _portfolio_component_strategy_family(component: dict[str, Any]) -> str:
