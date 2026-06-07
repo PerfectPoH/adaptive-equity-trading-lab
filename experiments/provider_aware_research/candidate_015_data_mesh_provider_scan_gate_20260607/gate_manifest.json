@@ -1,0 +1,40 @@
+{
+  "status": "APPROVED_DATA_MESH_PROVIDER_SCAN_NO_QUERY",
+  "run_id": "CANDIDATE-015-DATA-MESH-PROVIDER-SCAN-001",
+  "created_at_local": "2026-06-07",
+  "purpose": "Convert the proposed hybrid free-provider architecture into a governed provider matrix and micro-probe roadmap before any provider query, dataset build, or Candidate 012 backtest.",
+  "linked_candidate_012_spec": "experiments/provider_aware_research/execution_outputs/CANDIDATE-012-FROZEN-RECIPE-FRESH-VALIDATION-SPEC-001/fresh_validation_spec.json",
+  "linked_candidate_013_databento_decision": "experiments/provider_aware_research/execution_outputs/CANDIDATE-013-DATABENTO-ENTITLEMENT-PROBE-002/final_decision.json",
+  "linked_candidate_014_norgate_decision": "experiments/provider_aware_research/execution_outputs/CANDIDATE-014-NORGATE-FRESH-DATA-AUDIT-001/final_decision.json",
+  "allowed_actions": [
+    "build static provider requirements matrix",
+    "build micro-probe plan",
+    "write markdown report",
+    "write vault note"
+  ],
+  "forbidden_actions": [
+    "query provider APIs",
+    "download market data",
+    "build hybrid data mesh",
+    "build Candidate 012 dataset",
+    "run Candidate 012 backtest",
+    "run portfolio selection",
+    "run Kronos inference",
+    "paper trade",
+    "live trade",
+    "promote a strategy"
+  ],
+  "provider_query_allowed": false,
+  "market_data_download_allowed": false,
+  "internet_market_data_download_allowed": false,
+  "raw_payload_retention_allowed": false,
+  "dataset_build_allowed": false,
+  "backtest_allowed": false,
+  "portfolio_selection_allowed": false,
+  "kronos_inference_allowed": false,
+  "parameter_sweep_allowed": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_015_data_mesh_provider_scan_once"
+}
