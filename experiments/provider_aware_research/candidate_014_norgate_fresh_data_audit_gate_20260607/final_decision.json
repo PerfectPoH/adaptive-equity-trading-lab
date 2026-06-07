@@ -1,0 +1,8 @@
+{
+  "decision": "CANDIDATE_014_NORGATE_FRESH_DATA_AUDIT_GATE_APPROVED",
+  "backtest_allowed": false,
+  "provider_query_allowed": true,
+  "local_provider_only": true,
+  "promotion_allowed": false,
+  "next_allowed_action": "run_candidate_014_norgate_fresh_data_audit_once"
+}

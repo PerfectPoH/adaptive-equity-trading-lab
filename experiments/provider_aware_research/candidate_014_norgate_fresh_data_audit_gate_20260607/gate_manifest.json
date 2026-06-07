@@ -1,0 +1,53 @@
+{
+  "status": "APPROVED_NORGATE_LOCAL_FRESH_DATA_AUDIT_ONLY",
+  "run_id": "CANDIDATE-014-NORGATE-FRESH-DATA-AUDIT-001",
+  "created_at_local": "2026-06-07",
+  "provider": "Norgate Data",
+  "purpose": "Audit the local Norgate installation after the Databento Reference entitlement block to determine whether it can satisfy Candidate 012 fresh-data requirements before any dataset build or backtest.",
+  "linked_candidate_012_spec": "experiments/provider_aware_research/execution_outputs/CANDIDATE-012-FROZEN-RECIPE-FRESH-VALIDATION-SPEC-001/fresh_validation_spec.json",
+  "linked_candidate_013_decision": "experiments/provider_aware_research/execution_outputs/CANDIDATE-013-DATABENTO-ENTITLEMENT-PROBE-002/final_decision.json",
+  "target_database_names": {
+    "active": "US Equities",
+    "delisted": "US Equities Delisted"
+  },
+  "benchmark_symbols": [
+    "SPY",
+    "IWM"
+  ],
+  "limits": {
+    "active_sample_limit": 500,
+    "delisted_sample_limit": 500,
+    "min_history_years": 5,
+    "min_loaded_active_symbols": 50,
+    "min_loaded_delisted_symbols": 50
+  },
+  "allowed_actions": [
+    "read local Norgate database symbol lists",
+    "read bounded local Norgate daily price time series for coverage audit",
+    "write audit report and final decision"
+  ],
+  "forbidden_actions": [
+    "build a strategy dataset",
+    "run Candidate 012 backtest",
+    "run any portfolio selection",
+    "run Kronos inference",
+    "query any internet market-data provider",
+    "retain raw provider payload beyond bounded derived summaries",
+    "paper trade",
+    "live trade",
+    "promote a strategy"
+  ],
+  "provider_query_allowed": true,
+  "local_provider_only": true,
+  "internet_market_data_download_allowed": false,
+  "market_data_download_allowed": false,
+  "raw_payload_retention_allowed": false,
+  "strategy_backtest_allowed": false,
+  "kronos_inference_allowed": false,
+  "portfolio_selection_allowed": false,
+  "parameter_sweep_allowed": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_014_norgate_fresh_data_audit_once"
+}
