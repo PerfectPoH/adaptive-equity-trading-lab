@@ -14,6 +14,7 @@ data/news/*.csv
 experiments/runs/
 experiments/provider_aware_research/execution_outputs/USER-STRATEGY-WORKBENCH/
 *.log
+.superpowers/
 
 # Local env
 .env
