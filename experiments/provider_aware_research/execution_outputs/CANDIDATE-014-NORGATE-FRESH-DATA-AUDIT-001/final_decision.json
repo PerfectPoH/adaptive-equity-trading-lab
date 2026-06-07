@@ -1,0 +1,9 @@
+{
+  "backtest_allowed": false,
+  "blockers": [
+    "history_span_below_5_years"
+  ],
+  "decision": "CANDIDATE_014_NORGATE_FRESH_DATA_AUDIT_BLOCKED",
+  "next_allowed_action": "resolve_norgate_coverage_or_choose_provider",
+  "promotion_allowed": false
+}

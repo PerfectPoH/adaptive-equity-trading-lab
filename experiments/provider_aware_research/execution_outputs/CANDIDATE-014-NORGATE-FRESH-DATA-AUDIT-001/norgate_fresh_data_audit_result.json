@@ -1,0 +1,360 @@
+{
+  "backtest_allowed": false,
+  "blockers": [
+    "history_span_below_5_years"
+  ],
+  "coverage": {
+    "active_sample_errors": {},
+    "active_sample_summaries": [
+      {
+        "first_date": "2024-06-03",
+        "history_years": 2.0041,
+        "last_date": "2026-06-05",
+        "row_count": 504,
+        "symbol": "A"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 2.0041,
+        "last_date": "2026-06-05",
+        "row_count": 504,
+        "symbol": "AA"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 2.0041,
+        "last_date": "2026-06-05",
+        "row_count": 504,
+        "symbol": "AAA"
+      },
+      {
+        "first_date": "2025-07-16",
+        "history_years": 0.8871,
+        "last_date": "2026-06-05",
+        "row_count": 225,
+        "symbol": "AAAA"
+      },
+      {
+        "first_date": "2025-12-11",
+        "history_years": 0.4819,
+        "last_date": "2026-06-05",
+        "row_count": 121,
+        "symbol": "AAAC"
+      },
+      {
+        "first_date": "2026-06-03",
+        "history_years": 0.0055,
+        "last_date": "2026-06-05",
+        "row_count": 3,
+        "symbol": "AAAD"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 2.0041,
+        "last_date": "2026-06-05",
+        "row_count": 504,
+        "symbol": "AAAU"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 2.0041,
+        "last_date": "2026-06-05",
+        "row_count": 504,
+        "symbol": "AABB"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 2.0014,
+        "last_date": "2026-06-04",
+        "row_count": 162,
+        "symbol": "AABVF"
+      },
+      {
+        "first_date": "2024-08-01",
+        "history_years": 1.7604,
+        "last_date": "2026-05-06",
+        "row_count": 43,
+        "symbol": "AACAF"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 2.0041,
+        "last_date": "2026-06-05",
+        "row_count": 497,
+        "symbol": "AACAY"
+      },
+      {
+        "first_date": "2025-04-07",
+        "history_years": 1.1581,
+        "last_date": "2026-06-04",
+        "row_count": 201,
+        "symbol": "AACB"
+      },
+      {
+        "first_date": "2025-04-07",
+        "history_years": 1.1608,
+        "last_date": "2026-06-05",
+        "row_count": 151,
+        "symbol": "AACBR"
+      },
+      {
+        "first_date": "2025-02-13",
+        "history_years": 1.3032,
+        "last_date": "2026-06-04",
+        "row_count": 136,
+        "symbol": "AACBU"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 2.0041,
+        "last_date": "2026-06-05",
+        "row_count": 504,
+        "symbol": "AACG"
+      },
+      {
+        "first_date": "2026-03-27",
+        "history_years": 0.1916,
+        "last_date": "2026-06-05",
+        "row_count": 40,
+        "symbol": "AACI"
+      },
+      {
+        "first_date": "2026-02-18",
+        "history_years": 0.271,
+        "last_date": "2026-05-28",
+        "row_count": 54,
+        "symbol": "AACIU"
+      },
+      {
+        "first_date": "2026-03-27",
+        "history_years": 0.1916,
+        "last_date": "2026-06-05",
+        "row_count": 38,
+        "symbol": "AACIW"
+      },
+      {
+        "first_date": "2026-05-20",
+        "history_years": 0.0,
+        "last_date": "2026-05-20",
+        "row_count": 1,
+        "symbol": "AACLF"
+      },
+      {
+        "first_date": "2026-04-13",
+        "history_years": 0.1342,
+        "last_date": "2026-06-01",
+        "row_count": 21,
+        "symbol": "AACO"
+      }
+    ],
+    "active_symbol_count": 28187,
+    "benchmark_sample_errors": {},
+    "benchmark_sample_summaries": [
+      {
+        "first_date": "2024-06-03",
+        "history_years": 2.0041,
+        "last_date": "2026-06-05",
+        "row_count": 504,
+        "symbol": "SPY"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 2.0041,
+        "last_date": "2026-06-05",
+        "row_count": 504,
+        "symbol": "IWM"
+      }
+    ],
+    "benchmark_symbols_loaded": [
+      "SPY",
+      "IWM"
+    ],
+    "delisted_sample_errors": {},
+    "delisted_sample_summaries": [
+      {
+        "first_date": "2024-06-06",
+        "history_years": 0.1916,
+        "last_date": "2024-08-15",
+        "row_count": 14,
+        "symbol": "AACIU-202408"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 1.3087,
+        "last_date": "2025-09-24",
+        "row_count": 109,
+        "symbol": "AACT.U-202509"
+      },
+      {
+        "first_date": "2024-08-01",
+        "history_years": 1.4867,
+        "last_date": "2026-01-26",
+        "row_count": 116,
+        "symbol": "AAM.U-202601"
+      },
+      {
+        "first_date": "2024-09-16",
+        "history_years": 1.3799,
+        "last_date": "2026-02-02",
+        "row_count": 328,
+        "symbol": "AAM-202602"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 0.334,
+        "last_date": "2024-10-03",
+        "row_count": 86,
+        "symbol": "AAN-202410"
+      },
+      {
+        "first_date": "2024-06-20",
+        "history_years": 1.0103,
+        "last_date": "2025-06-24",
+        "row_count": 49,
+        "symbol": "ABMC-202506"
+      },
+      {
+        "first_date": "2024-06-10",
+        "history_years": 0.4244,
+        "last_date": "2024-11-12",
+        "row_count": 11,
+        "symbol": "ACABU-202411"
+      },
+      {
+        "first_date": "2024-06-27",
+        "history_years": 0.2491,
+        "last_date": "2024-09-26",
+        "row_count": 21,
+        "symbol": "ACACU-202409"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 0.8433,
+        "last_date": "2025-04-07",
+        "row_count": 212,
+        "symbol": "ACCD-202504"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 0.794,
+        "last_date": "2025-03-20",
+        "row_count": 200,
+        "symbol": "ACHL-202503"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 1.8973,
+        "last_date": "2026-04-27",
+        "row_count": 476,
+        "symbol": "ACLX-202604"
+      },
+      {
+        "first_date": "2024-07-26",
+        "history_years": 0.0,
+        "last_date": "2024-07-26",
+        "row_count": 1,
+        "symbol": "ACNI-202407"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 0.2163,
+        "last_date": "2024-08-21",
+        "row_count": 53,
+        "symbol": "ACORQ-202408"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 1.3908,
+        "last_date": "2025-10-24",
+        "row_count": 351,
+        "symbol": "ACTV-202510"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 0.3477,
+        "last_date": "2024-10-08",
+        "row_count": 50,
+        "symbol": "ADRT.U-202410"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 0.3532,
+        "last_date": "2024-10-10",
+        "row_count": 88,
+        "symbol": "ADRT-202410"
+      },
+      {
+        "first_date": "2024-12-03",
+        "history_years": 0.0,
+        "last_date": "2024-12-03",
+        "row_count": 1,
+        "symbol": "ADST-202412"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 0.0465,
+        "last_date": "2024-06-20",
+        "row_count": 13,
+        "symbol": "ADTH-202406"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 1.514,
+        "last_date": "2025-12-08",
+        "row_count": 381,
+        "symbol": "ADVM-202512"
+      },
+      {
+        "first_date": "2024-06-03",
+        "history_years": 1.6701,
+        "last_date": "2026-02-03",
+        "row_count": 250,
+        "symbol": "ADXS-202602"
+      }
+    ],
+    "delisted_symbol_count": 1351,
+    "earliest_first_date": "2024-06-03",
+    "latest_last_date": "2026-06-05",
+    "loaded_active_symbols": 485,
+    "loaded_benchmark_symbols": 2,
+    "loaded_delisted_symbols": 500,
+    "max_history_years": 2.0041,
+    "median_history_years": 1.3251
+  },
+  "created_at_utc": "2026-06-07T10:47:57.246868+00:00",
+  "decision": "CANDIDATE_014_NORGATE_FRESH_DATA_AUDIT_BLOCKED",
+  "final_decision": {
+    "backtest_allowed": false,
+    "blockers": [
+      "history_span_below_5_years"
+    ],
+    "decision": "CANDIDATE_014_NORGATE_FRESH_DATA_AUDIT_BLOCKED",
+    "next_allowed_action": "resolve_norgate_coverage_or_choose_provider",
+    "promotion_allowed": false
+  },
+  "financial_performance_claimed": false,
+  "fresh_validation_contract": {
+    "candidate_012_backtest_allowed_from_this_audit": false,
+    "linked_candidate_012_spec": "experiments\\provider_aware_research\\execution_outputs\\CANDIDATE-012-FROZEN-RECIPE-FRESH-VALIDATION-SPEC-001\\fresh_validation_spec.json",
+    "next_allowed_action": "resolve_norgate_coverage_or_choose_provider"
+  },
+  "internet_market_data_download_performed": false,
+  "kronos_inference_performed": false,
+  "limits": {
+    "active_sample_limit": 500,
+    "delisted_sample_limit": 500,
+    "min_history_years": 5,
+    "min_loaded_active_symbols": 50,
+    "min_loaded_delisted_symbols": 50
+  },
+  "live_trading_allowed": false,
+  "local_provider_only": true,
+  "market_data_download_performed": false,
+  "paper_trading_allowed": false,
+  "portfolio_selection_performed": false,
+  "promotion_allowed": false,
+  "provider": "Norgate Data",
+  "provider_query_performed": true,
+  "run_id": "CANDIDATE-014-NORGATE-FRESH-DATA-AUDIT-001",
+  "strategy_backtest_performed": false
+}
