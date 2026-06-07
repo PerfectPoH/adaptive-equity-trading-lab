@@ -1,0 +1,7 @@
+{
+  "candidate_012_backtest_allowed": false,
+  "decision": "APPROVED_FMP_MICRO_PROBE_002_GATE_ONLY",
+  "provider_query_allowed": true,
+  "raw_payload_retention_allowed": false,
+  "run_id": "CANDIDATE-018-FMP-MICRO-PROBE-002"
+}

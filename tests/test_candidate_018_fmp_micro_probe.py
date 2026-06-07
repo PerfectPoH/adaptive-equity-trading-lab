@@ -14,13 +14,13 @@ from src.experiments.candidate_018_fmp_micro_probe import (
 
 class FakeFmpClient:
     def get_json(self, endpoint: str, params: dict[str, str]) -> FmpResponse:
-        if endpoint == "/api/v3/delisted-companies":
+        if endpoint == "/stable/delisted-companies":
             return FmpResponse(status_code=200, payload=[{"symbol": "BBBY", "delistedDate": "2023-05-03"}, {"symbol": "OLD"}])
-        if endpoint in {"/api/v3/historical-price-full/AAPL", "/api/v3/historical-price-full/SPY", "/api/v3/historical-price-full/IWM", "/api/v3/historical-price-full/BBBY"}:
+        if endpoint == "/stable/historical-price-eod/full" and params.get("symbol") in {"AAPL", "SPY", "IWM", "BBBY"}:
             return FmpResponse(
                 status_code=200,
                 payload={
-                    "symbol": endpoint.rsplit("/", 1)[-1],
+                    "symbol": params["symbol"],
                     "historical": [
                         {"date": "2020-08-31", "open": 1, "high": 2, "low": 1, "close": 2, "adjClose": 2, "volume": 100},
                         {"date": "2020-09-01", "open": 2, "high": 3, "low": 2, "close": 3, "adjClose": 3, "volume": 200},

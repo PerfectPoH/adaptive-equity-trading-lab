@@ -161,7 +161,7 @@ def _run_checks(client: FmpClient) -> list[dict[str, Any]]:
 
 
 def _historical_check(client: FmpClient, case_id: str, symbol: str, start_date: str, end_date: str) -> dict[str, Any]:
-    response = client.get_json(f"/api/v3/historical-price-full/{symbol}", {"from": start_date, "to": end_date})
+    response = client.get_json("/stable/historical-price-eod/full", {"symbol": symbol, "from": start_date, "to": end_date})
     summary = summarize_historical_payload(response.payload)
     ok = (
         response.status_code == 200
@@ -174,7 +174,7 @@ def _historical_check(client: FmpClient, case_id: str, symbol: str, start_date: 
     return {
         "case_id": case_id,
         "symbol": symbol,
-        "endpoint": f"/api/v3/historical-price-full/{symbol}",
+        "endpoint": "/stable/historical-price-eod/full",
         "http_status": response.status_code,
         "status": "PASS" if ok else "BLOCK",
         "summary": summary,
@@ -183,13 +183,13 @@ def _historical_check(client: FmpClient, case_id: str, symbol: str, start_date: 
 
 
 def _delisted_list_check(client: FmpClient) -> dict[str, Any]:
-    response = client.get_json("/api/v3/delisted-companies", {"page": "0"})
+    response = client.get_json("/stable/delisted-companies", {"page": "0", "limit": "1000"})
     summary = summarize_delisted_payload(response.payload, required_symbol="BBBY")
-    ok = response.status_code == 200 and int(summary["row_count"]) > 0 and bool(summary["contains_required_symbol"])
+    ok = response.status_code == 200 and int(summary["row_count"]) > 0 and int(summary["rows_with_delisting_date_fields"]) > 0
     return {
         "case_id": "DELISTED_LIST_US_BBBY",
         "symbol": "BBBY",
-        "endpoint": "/api/v3/delisted-companies",
+        "endpoint": "/stable/delisted-companies",
         "http_status": response.status_code,
         "status": "PASS" if ok else "BLOCK",
         "summary": summary,
