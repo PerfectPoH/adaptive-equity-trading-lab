@@ -1,0 +1,7 @@
+{
+  "blockers": [],
+  "candidate_012_backtest_allowed": false,
+  "decision": "TIINGO_MICRO_PROBE_ADMISSIBLE_COMPONENT",
+  "next_allowed_action": "probe_next_provider_component",
+  "promotion_allowed": false
+}
