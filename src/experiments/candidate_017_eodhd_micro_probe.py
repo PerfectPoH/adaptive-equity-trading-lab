@@ -171,7 +171,13 @@ def _eod_check(client: EodhdClient, case_id: str, symbol: str, start_date: str, 
     summary = summarize_eod_rows(response.payload)
     ok = response.status_code == 200
     if require_rows:
-        ok = ok and int(summary["row_count"]) > 0
+        ok = (
+            ok
+            and int(summary["row_count"]) > 0
+            and summary["first_date"] is not None
+            and summary["last_date"] is not None
+            and bool(summary["has_adjusted_close"])
+        )
     return {
         "case_id": case_id,
         "symbol": symbol,

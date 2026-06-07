@@ -107,6 +107,30 @@ def test_build_eodhd_micro_probe_decision_requires_delisted_list_and_terminal_pr
     assert "eodhd_terminal_ohlcv_unverified" in decision["blockers"]
 
 
+def test_run_candidate_017_blocks_http_200_payload_without_ohlcv_dates(tmp_path: Path) -> None:
+    class HtmlLikeSuccessClient:
+        def get_json(self, endpoint: str, params: dict[str, str]) -> EodhdResponse:
+            if endpoint == "/api/exchange-symbol-list/US":
+                return EodhdResponse(status_code=200, payload=[{"Code": "BBBY"}])
+            return EodhdResponse(status_code=200, payload=[{"message": "not an OHLCV row"}])
+
+    env_path = tmp_path / ".env"
+    env_path.write_text("EODHD_API_KEY=test-secret\n", encoding="utf-8")
+    gate = tmp_path / "gate"
+    _gate(gate, env_path)
+
+    result = run_candidate_017_eodhd_micro_probe(
+        gate_dir=gate,
+        output_dir=tmp_path / "out",
+        client=HtmlLikeSuccessClient(),
+        run_id="CANDIDATE-017-EODHD-MICRO-PROBE-INVALID-OHLCV",
+    )
+
+    assert result["decision"] == "EODHD_MICRO_PROBE_COMPLETE_NOT_ADMISSIBLE"
+    assert "eodhd_terminal_ohlcv_unverified" in result["final_decision"]["blockers"]
+    assert "eodhd_active_ohlcv_unverified" in result["final_decision"]["blockers"]
+
+
 def test_run_candidate_017_blocks_without_api_key_and_writes_artifacts(tmp_path: Path) -> None:
     env_path = tmp_path / ".env"
     env_path.write_text("OTHER_KEY=x\n", encoding="utf-8")

@@ -1,0 +1,9 @@
+{
+  "blockers": [
+    "eodhd_delisted_list_unverified"
+  ],
+  "candidate_012_backtest_allowed": false,
+  "decision": "EODHD_MICRO_PROBE_COMPLETE_NOT_ADMISSIBLE",
+  "next_allowed_action": "resolve_eodhd_blockers_or_probe_fmp",
+  "promotion_allowed": false
+}

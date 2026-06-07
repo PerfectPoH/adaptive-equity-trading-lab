@@ -1,0 +1,51 @@
+{
+  "status": "APPROVED_EODHD_DATA_MESH_MICRO_PROBE_ONLY",
+  "run_id": "CANDIDATE-017-EODHD-MICRO-PROBE-004",
+  "created_at_local": "2026-06-07",
+  "provider": "EODHD",
+  "purpose": "Rerun the bounded EODHD micro-probe after reinforcing EOD OHLCV validation to reject HTTP 200 non-OHLCV payloads.",
+  "previous_validation_bug_run": "experiments/provider_aware_research/execution_outputs/CANDIDATE-017-EODHD-MICRO-PROBE-003/validation_correction_report.md",
+  "linked_candidate_015_scan": "experiments/provider_aware_research/execution_outputs/CANDIDATE-015-DATA-MESH-PROVIDER-SCAN-001/data_mesh_provider_scan.json",
+  "linked_candidate_016_tiingo_result": "experiments/provider_aware_research/execution_outputs/CANDIDATE-016-TIINGO-MICRO-PROBE-002/final_decision.json",
+  "api_key_source": "env-file",
+  "env_file": ".env",
+  "accepted_env_keys": [
+    "EODHD_API_KEY",
+    "EOD_HISTORICAL_DATA_API_KEY",
+    "EOD_API_KEY"
+  ],
+  "max_http_requests": 6,
+  "probe_cases": [
+    "DELISTED_LIST_US_BBBY",
+    "DELISTED_TERMINAL_BBBY",
+    "ACTIVE_BASELINE_AAPL"
+  ],
+  "allowed_actions": [
+    "read EODHD API key from local .env",
+    "make bounded EODHD HTTP requests if key exists",
+    "write derived summaries and final decision"
+  ],
+  "forbidden_actions": [
+    "retain raw API payloads",
+    "build a dataset",
+    "run Candidate 012 backtest",
+    "run portfolio selection",
+    "run Kronos inference",
+    "paper trade",
+    "live trade",
+    "promote a strategy"
+  ],
+  "provider_query_allowed": true,
+  "market_data_download_allowed": false,
+  "internet_market_data_download_allowed": false,
+  "raw_payload_retention_allowed": false,
+  "dataset_build_allowed": false,
+  "backtest_allowed": false,
+  "portfolio_selection_allowed": false,
+  "kronos_inference_allowed": false,
+  "parameter_sweep_allowed": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_017_eodhd_micro_probe_004_once"
+}
