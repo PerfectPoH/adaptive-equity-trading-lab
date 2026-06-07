@@ -962,6 +962,62 @@ def test_separate_portfolio_trial_requires_approval_and_remains_non_promotable(t
     assert Path(paths["final_decision_path"]).exists()
 
 
+def test_dynamic_regime_switching_trial_replays_dynamic_contract() -> None:
+    components = [
+        {
+            "component_id": "mom-1",
+            "template": "Momentum",
+            "strategy_name": "Momentum sleeve",
+            "source": "saved_workbench",
+            "trade_count": 2,
+            "inline_returns": [
+                {"period": "2026-01-01", "net_return": 0.10},
+                {"period": "2026-01-02", "net_return": -0.50},
+            ],
+        },
+        {
+            "component_id": "risk-1",
+            "template": "Regime Filter",
+            "strategy_name": "Risk overlay",
+            "source": "saved_workbench",
+            "trade_count": 2,
+            "inline_returns": [
+                {"period": "2026-01-01", "net_return": 0.0},
+                {"period": "2026-01-02", "net_return": 0.0},
+            ],
+        },
+    ]
+    regime_map = pd.DataFrame(
+        [
+            {"symbol": "SPY", "date": "2026-01-01", "regime_label": "TREND_UP_LOW_VOL"},
+            {"symbol": "SPY", "date": "2026-01-02", "regime_label": "DRAWDOWN_STRESS"},
+        ]
+    )
+    router = strategy_regime_router_payload(regime_map)
+    switching = build_regime_switching_portfolio_diagnostic(components, regime_map, router)
+    draft = build_portfolio_preregistration_draft(
+        components,
+        ["mom-1", "risk-1"],
+        candidate_type="dynamic_regime_switching",
+        regime_switching_diagnostic=switching,
+    )
+    gate = build_portfolio_preregistration_approval_gate(draft, approved_by="barak")
+
+    trial = build_separate_portfolio_trial_dry_run(
+        draft,
+        gate,
+        components,
+        regime_map=regime_map,
+        strategy_router=router,
+    )
+
+    assert trial["status"] == "DYNAMIC_REGIME_SWITCHING_TRIAL_DRY_RUN_COMPLETE"
+    assert trial["candidate_type"] == "dynamic_regime_switching"
+    assert trial["regime_switching_diagnostic"]["status"] == "REGIME_SWITCHING_PORTFOLIO_DIAGNOSTIC_ONLY"
+    assert trial["final_decision"]["decision"] == "DYNAMIC_REGIME_SWITCHING_DIAGNOSTIC_ONLY"
+    assert trial["promotion_allowed"] is False
+
+
 def test_portfolio_frozen_recipe_uses_fixed_weights_and_validation_split(tmp_path: Path) -> None:
     components = build_strategy_factory_components(max_variants=24)
     selected_ids = [component["component_id"] for component in components[:3]]

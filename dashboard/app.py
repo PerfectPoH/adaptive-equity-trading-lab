@@ -3100,7 +3100,14 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
             if st.button("Run separate portfolio trial dry-run", type="primary", width="stretch"):
                 prereg = st.session_state.get("portfolio_lab_preregistration_result", {})
                 draft = prereg.get("draft", {})
-                trial = build_separate_portfolio_trial_dry_run(draft, gate, components, policy=policy)
+                trial = build_separate_portfolio_trial_dry_run(
+                    draft,
+                    gate,
+                    components,
+                    policy=policy,
+                    regime_map=payload.get("regime_map", pd.DataFrame()),
+                    strategy_router=strategy_router,
+                )
                 trial_paths = persist_separate_portfolio_trial_dry_run(trial, root=REPO_ROOT)
                 st.session_state["portfolio_lab_separate_trial_result"] = {"trial": trial, "paths": trial_paths}
                 st.rerun()
@@ -3109,12 +3116,19 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
             trial = separate_trial.get("trial", {})
             paths = separate_trial.get("paths", {})
             final = trial.get("final_decision", {})
-            if trial.get("status") == "SEPARATE_PORTFOLIO_TRIAL_DRY_RUN_COMPLETE":
+            if trial.get("status") in {"SEPARATE_PORTFOLIO_TRIAL_DRY_RUN_COMPLETE", "DYNAMIC_REGIME_SWITCHING_TRIAL_DRY_RUN_COMPLETE"}:
                 st.success(
-                    f"Separate portfolio trial dry-run complete: {final.get('decision', 'UNKNOWN')}. "
+                    f"Separate portfolio trial dry-run complete: {final.get('decision', 'UNKNOWN')} "
+                    f"({trial.get('candidate_type', 'static_portfolio')}). "
                     "Promotion remains locked."
                 )
-                if st.button("Freeze recipe and run validation split", type="secondary", width="stretch"):
+                if trial.get("candidate_type") == "dynamic_regime_switching":
+                    switch_summary = trial.get("regime_switching_diagnostic", {}).get("summary", {})
+                    st.caption(
+                        f"Dynamic trial delta vs static proxy: {float(switch_summary.get('dynamic_vs_static_delta', 0.0)):.2f}; "
+                        f"dynamic drawdown {float(switch_summary.get('dynamic_max_drawdown', 0.0)):.2f}."
+                    )
+                if trial.get("candidate_type") != "dynamic_regime_switching" and st.button("Freeze recipe and run validation split", type="secondary", width="stretch"):
                     approval = st.session_state.get("portfolio_lab_preregistration_approval", {})
                     gate = approval.get("gate", {})
                     frozen = build_portfolio_frozen_recipe_trial(trial, gate, components)

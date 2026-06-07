@@ -3405,6 +3405,8 @@ def build_separate_portfolio_trial_dry_run(
     components: list[dict[str, Any]],
     *,
     policy: str = "sleeve_allocation",
+    regime_map: pd.DataFrame | None = None,
+    strategy_router: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     if not approval_gate or approval_gate.get("status") != "APPROVED_FOR_SEPARATE_PORTFOLIO_TRIAL_ONLY":
         return {
@@ -3421,6 +3423,46 @@ def build_separate_portfolio_trial_dry_run(
     selected_ids = [str(component.get("component_id")) for component in draft.get("selected_components", [])]
     selected = {component_id for component_id in selected_ids if component_id}
     trial_components = [component for component in components if str(component.get("component_id")) in selected]
+    if draft.get("candidate_type") == "dynamic_regime_switching":
+        switching = build_regime_switching_portfolio_diagnostic(
+            trial_components,
+            regime_map if isinstance(regime_map, pd.DataFrame) else pd.DataFrame(),
+            strategy_router if isinstance(strategy_router, dict) else {},
+        )
+        summary = dict(switching.get("summary", {}))
+        blockers = ["dynamic_underperformed_static_proxy"] if float(summary.get("dynamic_vs_static_delta", 0.0) or 0.0) < 0 else []
+        blockers.append("external_data_contract_gate")
+        return {
+            "trial_id": draft["trial_id"].replace("PORTFOLIO-PREREG-", "PORTFOLIO-TRIAL-"),
+            "draft_id": draft["draft_id"],
+            "candidate_type": "dynamic_regime_switching",
+            "status": "DYNAMIC_REGIME_SWITCHING_TRIAL_DRY_RUN_COMPLETE",
+            "promotion_allowed": False,
+            "paper_trading_allowed": False,
+            "live_trading_allowed": False,
+            "provider_query_performed": False,
+            "market_data_download_performed": False,
+            "trial_lineage": {
+                "draft_id": draft["draft_id"],
+                "approval_gate_id": approval_gate["approval_gate_id"],
+                "selected_component_ids": selected_ids,
+                "source_trial_id": draft["trial_id"],
+            },
+            "regime_switching_contract": draft.get("regime_switching_contract", {}),
+            "regime_switching_diagnostic": switching,
+            "final_decision": {
+                "decision": "DYNAMIC_REGIME_SWITCHING_DIAGNOSTIC_ONLY",
+                "trial_status": "DYNAMIC_REGIME_SWITCHING_TRIAL_DRY_RUN_COMPLETE",
+                "blockers": blockers,
+                "promotion_allowed": False,
+                "paper_trading_allowed": False,
+                "live_trading_allowed": False,
+                "provider_query_performed": False,
+                "market_data_download_performed": False,
+                "portfolio_backtest_performed": False,
+            },
+            "required_next_step": "Archive if dynamic remains weaker than static; otherwise require a new external-data/PIT gate before any stronger claim.",
+        }
     diagnostic = run_portfolio_diagnostic(trial_components, policy=policy)
     return {
         "trial_id": draft["trial_id"].replace("PORTFOLIO-PREREG-", "PORTFOLIO-TRIAL-"),
@@ -3459,12 +3501,26 @@ def persist_separate_portfolio_trial_dry_run(trial: dict[str, Any], *, root: Pat
         f"# Separate Portfolio Trial Dry-Run: {trial.get('trial_id', 'UNKNOWN')}",
         "",
         f"- status: `{trial.get('status')}`",
+        f"- candidate_type: `{trial.get('candidate_type', 'static_portfolio')}`",
         f"- decision: `{trial.get('final_decision', {}).get('decision', 'UNKNOWN')}`",
         f"- promotion_allowed: `{str(trial.get('promotion_allowed', False)).lower()}`",
         f"- blockers: `{', '.join(trial.get('final_decision', {}).get('blockers', []))}`",
         "",
         "This artifact is a dry-run only. It does not authorize paper trading, live trading, provider queries, or promotion.",
     ]
+    if trial.get("candidate_type") == "dynamic_regime_switching":
+        summary = trial.get("regime_switching_diagnostic", {}).get("summary", {})
+        markdown_lines.extend(
+            [
+                "",
+                "## Dynamic Regime-Switching Diagnostic",
+                "",
+                f"- dynamic_total_net_return: `{summary.get('dynamic_total_net_return', 0.0)}`",
+                f"- static_total_net_return: `{summary.get('static_total_net_return', 0.0)}`",
+                f"- dynamic_vs_static_delta: `{summary.get('dynamic_vs_static_delta', 0.0)}`",
+                f"- dynamic_max_drawdown: `{summary.get('dynamic_max_drawdown', 0.0)}`",
+            ]
+        )
     markdown_path.write_text("\n".join(markdown_lines), encoding="utf-8")
     return {
         "output_dir": str(output_dir),
