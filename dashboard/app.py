@@ -210,9 +210,9 @@ def inject_theme() -> None:
           color: var(--lab-strong);
         }
         .block-container {
-          padding-top: 1.25rem;
+          padding-top: 1.05rem;
           padding-bottom: 5rem;
-          max-width: 1500px;
+          max-width: 1420px;
         }
         .lab-shell-nav {
           position: sticky;
@@ -234,8 +234,8 @@ def inject_theme() -> None:
           border: 1px solid var(--lab-line);
           border-radius: 9px;
           background: rgba(255,255,255,.72);
-          padding: 12px 14px;
-          margin-bottom: 24px;
+          padding: 14px;
+          margin-bottom: 30px;
           box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 16px 46px rgba(23,23,23,.045);
         }
         .nav-help {
@@ -267,6 +267,16 @@ def inject_theme() -> None:
           background: #2563eb;
           color: #ffffff;
           border-color: #2563eb;
+        }
+        .main-nav-card div[data-testid="stButton"] > button[kind="secondary"] {
+          background: #ffffff;
+          color: #1e293b;
+          border-color: #cbd5e1;
+        }
+        .main-nav-card div[data-testid="stButton"] > button[kind="secondary"]:hover {
+          background: #f8fafc;
+          color: #1d4ed8;
+          border-color: #93c5fd;
         }
         div[data-testid="stButton"] > button * {
           color: inherit !important;
@@ -306,6 +316,35 @@ def inject_theme() -> None:
         div[data-testid="stRadio"] [role="radiogroup"] label p {
           color: #0f172a;
           font-weight: 600;
+        }
+        div[data-testid="stTabs"] button {
+          color: #334155;
+          font-weight: 750;
+        }
+        div[data-testid="stTabs"] button[aria-selected="true"] {
+          color: var(--lab-blue);
+        }
+        div[data-testid="stExpander"] {
+          border: 1px solid var(--lab-line);
+          border-radius: 10px;
+          background: rgba(255,255,255,.74);
+          margin: 14px 0;
+        }
+        div[data-testid="stExpander"] summary p {
+          color: #0f172a;
+          font-weight: 750;
+        }
+        div[data-testid="stDataFrame"] {
+          border-radius: 10px;
+          overflow: hidden;
+          margin-top: 8px;
+          margin-bottom: 18px;
+        }
+        div[data-testid="stPlotlyChart"] {
+          border-radius: 12px;
+          overflow: hidden;
+          margin-top: 8px;
+          margin-bottom: 26px;
         }
         div[data-testid="stSlider"] [data-testid="stTickBar"] {
           color: #334155;
@@ -471,6 +510,72 @@ def inject_theme() -> None:
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
           gap: 12px;
+        }
+        .page-guide {
+          border: 1px solid var(--lab-line);
+          border-radius: 12px;
+          background: rgba(255,255,255,.82);
+          padding: 18px;
+          margin: -12px 0 30px;
+          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 54px rgba(23,23,23,.05);
+        }
+        .page-guide-title {
+          color: var(--lab-strong);
+          font-size: 22px;
+          font-weight: 850;
+          letter-spacing: -.02em;
+          margin-bottom: 6px;
+        }
+        .page-guide-copy {
+          color: var(--lab-muted);
+          line-height: 1.55;
+          max-width: 920px;
+        }
+        .guide-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 12px;
+          margin-top: 16px;
+        }
+        .guide-card {
+          border: 1px solid var(--lab-line);
+          border-left: 4px solid var(--lab-blue);
+          border-radius: 10px;
+          background: #fff;
+          padding: 14px;
+          min-height: 116px;
+        }
+        .guide-card.good { border-left-color: var(--lab-mint); }
+        .guide-card.warn { border-left-color: var(--lab-amber); }
+        .guide-card.block { border-left-color: var(--lab-rose); }
+        .guide-card.data { border-left-color: var(--lab-plum); }
+        .guide-title {
+          color: var(--lab-strong);
+          font-weight: 850;
+          margin-bottom: 6px;
+        }
+        .guide-copy {
+          color: var(--lab-ink);
+          font-size: 14px;
+          line-height: 1.45;
+        }
+        .clean-panel {
+          border: 1px solid var(--lab-line);
+          border-radius: 12px;
+          background: rgba(255,255,255,.76);
+          padding: 20px;
+          margin: 18px 0 28px;
+          box-shadow: 0 1px 0 rgba(23,23,23,.035), 0 16px 44px rgba(23,23,23,.045);
+        }
+        .section-note {
+          border: 1px solid #bfdbfe;
+          border-left: 4px solid var(--lab-blue);
+          background: #eff6ff;
+          color: #1e3a8a;
+          border-radius: 10px;
+          padding: 14px 16px;
+          margin: 12px 0 22px;
+          line-height: 1.5;
         }
         .mini-tile {
           border: 1px solid var(--lab-line);
@@ -786,8 +891,8 @@ def inject_theme() -> None:
         .badge-block { background: var(--lab-rose-soft); color: var(--lab-rose); border-color: #ffd1df; }
         .workbench-section {
           border-top: 1px solid var(--lab-line-strong);
-          padding-top: 26px;
-          margin-top: 42px;
+          padding-top: 30px;
+          margin-top: 52px;
         }
         .section-kicker {
           font-family: "IBM Plex Mono", monospace;
@@ -1037,6 +1142,32 @@ def metric_card(label: str, value: str | int | float, note: str) -> None:
     )
 
 
+def page_guide(title: str, copy: str, cards: list[tuple[str, str, str]]) -> None:
+    card_html = "".join(
+        f"""
+        <div class="guide-card {tone}">
+          <div class="guide-title">{card_title}</div>
+          <div class="guide-copy">{card_copy}</div>
+        </div>
+        """
+        for card_title, card_copy, tone in cards
+    )
+    st.markdown(
+        f"""
+        <div class="page-guide">
+          <div class="page-guide-title">{title}</div>
+          <div class="page-guide-copy">{copy}</div>
+          <div class="guide-grid">{card_html}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def section_note(text: str) -> None:
+    st.markdown(f'<div class="section-note">{text}</div>', unsafe_allow_html=True)
+
+
 def compact_component_label(component_id: str, name: str, template: str | None = None) -> str:
     clean_name = str(name or component_id).replace("Factory ", "").replace("Materialized ", "")
     clean_name = " ".join(clean_name.split())
@@ -1230,6 +1361,16 @@ def render_hero(metrics: dict[str, object]) -> None:
 def render_overview(payload: dict[str, object]) -> None:
     metrics = governance_metrics(payload)
     render_hero(metrics)
+    page_guide(
+        "What this console is",
+        "The dashboard is an audit surface for a research lab. Its job is not to sell a strategy; its job is to show what survived, what failed, and why the current mode is risk/regime research only.",
+        [
+            ("Ledger", "Every important conclusion is backed by a final decision artifact.", "data"),
+            ("Gates", "Provider access, data quality, costs, and robustness decide what can continue.", "warn"),
+            ("Zero promotion", "A strategy can look interesting and still remain locked.", "block"),
+            ("Next layer", "Workbench and Portfolio Lab turn ideas into governed contracts.", "good"),
+        ],
+    )
     c1, c2, c3, c4 = st.columns(4)
     with c1:
         metric_card("Decisions", metrics["decision_count"], "Final decision files in the ledger")
@@ -1278,7 +1419,16 @@ def render_strategy_atlas(payload: dict[str, object]) -> None:
     ledger = payload["ledger"]
     rows = strategy_rows(ledger)
     st.header("Strategy Atlas")
-    st.caption("One section per strategy: real price chart, signal anatomy, explanation, process graph, and audit trail.")
+    page_guide(
+        "How to read the strategy atlas",
+        "Each strategy gets the same treatment: what it tried to do, where it acted on a chart, why it failed or blocked, and what evidence remains useful.",
+        [
+            ("Chart first", "The candlestick panel shows the idea as a visual contract, not a backtest claim.", "data"),
+            ("Explanation", "Plain language tells you what the rule was supposed to capture.", "good"),
+            ("Verdict", "The result chart shows archive, block, diagnostic, or promotion state.", "warn"),
+            ("Audit", "Raw run rows stay collapsed unless you need the ledger trail.", "block"),
+        ],
+    )
 
     left, right = st.columns([1, 2])
     status_counts = rows.groupby("status", as_index=False).size().rename(columns={"size": "count"})
@@ -1347,6 +1497,16 @@ def render_strategy_atlas(payload: dict[str, object]) -> None:
 
 def render_results_and_data(payload: dict[str, object]) -> None:
     st.header("Results And Data Dashboard")
+    page_guide(
+        "How to read the data room",
+        "This page separates evidence from raw artifact storage. Start with readiness and regime routing, then open the raw ledgers only when you need the audit trail.",
+        [
+            ("Readiness", "Which data paths can support real research and which remain blocked.", "data"),
+            ("Regimes", "How the lab classifies market states and routes strategy families.", "good"),
+            ("Diagnostics", "ORB, delisted gates, portfolio, and microstructure checks.", "warn"),
+            ("Raw tables", "Full ledgers stay available but collapsed at the bottom.", "block"),
+        ],
+    )
     ledger = payload["ledger"]
     regime_map = payload["regime_map"]
     allocation = payload["allocation"]
@@ -1797,6 +1957,17 @@ def render_strategy_workbench() -> None:
         )
     with hero_right:
         st.iframe(color_logic_component_html(), height=330)
+
+    page_guide(
+        "How to read this page",
+        "The Workbench is a drafting room. It does not prove alpha. It turns an idea into a governed local dry-run so the lab can explain, reject, or package it without hiding the assumptions.",
+        [
+            ("1. Draft", "Name the idea, choose its family, universe, holding period, and cost model.", "data"),
+            ("2. Preview", "Read the strategy in plain English before any result is shown.", "good"),
+            ("3. Gate", "The pre-run gate says whether the dry-run is allowed and what is still blocked.", "warn"),
+            ("4. Inspect", "Charts, trade rows, robustness gates, and packages live after the verdict.", "block"),
+        ],
+    )
 
     st.markdown(
         f"""
@@ -2410,25 +2581,8 @@ def render_strategy_workbench() -> None:
                 st.markdown("**Next actions**")
                 actions_html = "".join(f"<li>{item}</li>" for item in preview["next_actions"])
                 st.markdown(f'<ul class="dryrun-list">{actions_html}</ul>', unsafe_allow_html=True)
-            st.markdown("**Dry-run audit rows**")
-            st.dataframe(pd.DataFrame(display_safe_records(preview["dry_run_rows"])), width="stretch", hide_index=True)
-            st.markdown("**Robustness gates**")
-            robustness_rows = []
-            for gate_name, gate_payload in preview.get("robustness_panel", {}).items():
-                robustness_rows.append(
-                    {
-                        "gate": gate_name,
-                        "status": gate_payload.get("status"),
-                        "value": gate_payload.get("value"),
-                        "detail": gate_payload.get("detail"),
-                    }
-                )
-            st.dataframe(pd.DataFrame(display_safe_records(robustness_rows)), width="stretch", hide_index=True)
             trade_rows = pd.DataFrame(preview.get("trade_rows", []))
             equity_curve = pd.DataFrame(preview.get("equity_curve", []))
-            if not trade_rows.empty:
-                st.markdown("**Generated local trade list**")
-                st.dataframe(trade_rows, width="stretch", hide_index=True)
             if not equity_curve.empty:
                 st.markdown("**Local equity and drawdown curve**")
                 fig = go.Figure()
@@ -2470,9 +2624,27 @@ def render_strategy_workbench() -> None:
                     margin=dict(l=10, r=10, t=34, b=10),
                 )
                 st.plotly_chart(fig, width="stretch")
-            with st.expander("Open Markdown dry-run report"):
+            with st.expander("Open audit tables, Markdown report, and export blueprint"):
+                st.markdown("**Dry-run audit rows**")
+                st.dataframe(pd.DataFrame(display_safe_records(preview["dry_run_rows"])), width="stretch", hide_index=True)
+                st.markdown("**Robustness gates**")
+                robustness_rows = []
+                for gate_name, gate_payload in preview.get("robustness_panel", {}).items():
+                    robustness_rows.append(
+                        {
+                            "gate": gate_name,
+                            "status": gate_payload.get("status"),
+                            "value": gate_payload.get("value"),
+                            "detail": gate_payload.get("detail"),
+                        }
+                    )
+                st.dataframe(pd.DataFrame(display_safe_records(robustness_rows)), width="stretch", hide_index=True)
+                if not trade_rows.empty:
+                    st.markdown("**Generated local trade list**")
+                    st.dataframe(trade_rows, width="stretch", hide_index=True)
+                st.markdown("**Markdown dry-run report**")
                 st.code(preview.get("markdown_report", ""), language="markdown")
-            with st.expander("Open exportable strategy blueprint"):
+                st.markdown("**Exportable strategy blueprint**")
                 st.json(build_workbench_strategy_blueprint(manifest, preview))
             st.markdown("**Governed strategy package**")
             st.caption("This prepares the files a real runner would need later. It does not execute a real backtest.")
@@ -2664,14 +2836,25 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
         """,
         unsafe_allow_html=True,
     )
-    factory_cols = st.columns([1, 1, 2])
-    with factory_cols[0]:
-        include_factory_generated = st.checkbox("Include generated catalog", value=True)
-    with factory_cols[1]:
-        factory_variant_limit = st.slider("Generated variants", 24, 240, 48, 24)
-    with factory_cols[2]:
-        st.caption("Generated catalog = only templates that the lab can test with currently available local/proxy data. Diagnostic only, no provider query, no promotion.")
-    run_full_catalog = st.checkbox("Run governed search on full loaded catalog", value=include_factory_generated)
+    page_guide(
+        "How to use Portfolio Lab",
+        "This page has two jobs: inspect a basket you select manually, and run a bounded factory search over locally testable strategy components. It is still a diagnostic console, not a trading system.",
+        [
+            ("Setup", "Choose whether generated components enter the catalog and whether the regime router filters them.", "data"),
+            ("Verdict", "Read the current basket summary: components, net, drawdown, and blockers.", "warn"),
+            ("Dynamic path", "Compare static allocation with regime-switching allocation through time.", "good"),
+            ("Next gate", "Only after preregistration can the lab create a dry-run, frozen recipe, or data contract.", "block"),
+        ],
+    )
+    with st.expander("1. Setup catalog and market regime", expanded=True):
+        factory_cols = st.columns([1, 1, 2])
+        with factory_cols[0]:
+            include_factory_generated = st.checkbox("Include generated catalog", value=True)
+        with factory_cols[1]:
+            factory_variant_limit = st.slider("Generated variants", 24, 240, 48, 24)
+        with factory_cols[2]:
+            section_note("Generated catalog means strategies produced from frozen templates and currently available local/proxy data. No provider query, no promotion.")
+        run_full_catalog = st.checkbox("Run governed search on full loaded catalog", value=include_factory_generated)
     strategy_router = payload.get("strategy_regime_router", {})
     current_regime = payload.get("current_market_regime", {})
     router_matrix = strategy_router.get("matrix", pd.DataFrame()) if isinstance(strategy_router, dict) else pd.DataFrame()
@@ -2693,9 +2876,7 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
             disabled=not use_regime_router,
         )
     with router_cols[2]:
-        st.caption(
-            "Regime-aware mode defaults to the latest local regime-map majority vote, then lets you override it manually."
-        )
+        section_note("Regime-aware mode defaults to the latest local regime-map majority vote, then lets you override it manually.")
     if isinstance(current_regime, dict):
         st.markdown("**Detected market regime**")
         detected_cols = st.columns(3)
@@ -3408,6 +3589,9 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
     corr = pd.DataFrame(preview["correlation_matrix"])
     high_corr = pd.DataFrame(preview.get("high_correlation_pairs", []))
 
+    section_note(
+        "Read this block from left to right: first the portfolio path, then the pain, then which sleeves did the work, then whether the basket is secretly duplicated."
+    )
     chart_cols = st.columns(2)
     with chart_cols[0]:
         st.markdown("**Portfolio equity**")
@@ -3522,16 +3706,16 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
         for action in what_if.get("action_plan", [])[:2]:
             st.caption(f"{action['title']}: {action['action']}")
 
-    st.markdown("**Allocation table**")
-    st.caption("Weights are explainable policy outputs, not optimized hindsight weights.")
-    st.dataframe(allocation, width="stretch", hide_index=True)
-
-    st.markdown("**Portfolio gates**")
-    st.caption("PASS/WARN/BLOCK rows explain why the basket remains diagnostic-only or gets archived.")
-    st.dataframe(gates, width="stretch", hide_index=True)
-
-    with st.expander("Open portfolio manifest and final decision"):
+    with st.expander("Open allocation table, gate panel, manifest, and final decision"):
+        st.markdown("**Allocation table**")
+        st.caption("Weights are explainable policy outputs, not optimized hindsight weights.")
+        st.dataframe(allocation, width="stretch", hide_index=True)
+        st.markdown("**Portfolio gates**")
+        st.caption("PASS/WARN/BLOCK rows explain why the basket remains diagnostic-only or gets archived.")
+        st.dataframe(gates, width="stretch", hide_index=True)
+        st.markdown("**Portfolio manifest**")
         st.json(preview["portfolio_manifest"])
+        st.markdown("**Final decision**")
         st.json(preview["final_decision"])
 
     if st.button("Persist portfolio diagnostic artifacts", type="primary"):
