@@ -1,0 +1,53 @@
+{
+  "status": "APPROVED_FMP_DATA_MESH_MICRO_PROBE_ONLY",
+  "run_id": "CANDIDATE-018-FMP-MICRO-PROBE-001",
+  "created_at_local": "2026-06-07",
+  "provider": "Financial Modeling Prep",
+  "purpose": "Verify whether FMP can serve as a benchmark and delisted redundancy component for the Hybrid Free Data Mesh.",
+  "linked_candidate_015_scan": "experiments/provider_aware_research/execution_outputs/CANDIDATE-015-DATA-MESH-PROVIDER-SCAN-001/data_mesh_provider_scan.json",
+  "linked_candidate_016_tiingo_result": "experiments/provider_aware_research/execution_outputs/CANDIDATE-016-TIINGO-MICRO-PROBE-002/final_decision.json",
+  "linked_candidate_017_eodhd_result": "experiments/provider_aware_research/execution_outputs/CANDIDATE-017-EODHD-MICRO-PROBE-004/final_decision.json",
+  "api_key_source": "env-file",
+  "env_file": ".env",
+  "accepted_env_keys": [
+    "FMP_API_KEY",
+    "FINANCIAL_MODELING_PREP_API_KEY",
+    "FINANCIALMODELINGPREP_API_KEY"
+  ],
+  "max_http_requests": 8,
+  "probe_cases": [
+    "ACTIVE_BASELINE_AAPL",
+    "BENCHMARK_SPY",
+    "BENCHMARK_IWM",
+    "DELISTED_LIST_US_BBBY",
+    "DELISTED_TERMINAL_BBBY"
+  ],
+  "allowed_actions": [
+    "read FMP API key from local .env",
+    "make bounded FMP HTTP requests if key exists",
+    "write derived summaries and final decision"
+  ],
+  "forbidden_actions": [
+    "retain raw API payloads",
+    "build a dataset",
+    "run Candidate 012 backtest",
+    "run portfolio selection",
+    "run Kronos inference",
+    "paper trade",
+    "live trade",
+    "promote a strategy"
+  ],
+  "provider_query_allowed": true,
+  "market_data_download_allowed": false,
+  "internet_market_data_download_allowed": false,
+  "raw_payload_retention_allowed": false,
+  "dataset_build_allowed": false,
+  "backtest_allowed": false,
+  "portfolio_selection_allowed": false,
+  "kronos_inference_allowed": false,
+  "parameter_sweep_allowed": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_018_fmp_micro_probe_once"
+}
