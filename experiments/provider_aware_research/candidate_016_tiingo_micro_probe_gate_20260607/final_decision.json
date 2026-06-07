@@ -1,0 +1,10 @@
+{
+  "decision": "CANDIDATE_016_TIINGO_MICRO_PROBE_GATE_APPROVED",
+  "provider_query_allowed": true,
+  "max_http_requests": 8,
+  "raw_payload_retention_allowed": false,
+  "dataset_build_allowed": false,
+  "backtest_allowed": false,
+  "promotion_allowed": false,
+  "next_allowed_action": "run_candidate_016_tiingo_micro_probe_once"
+}
