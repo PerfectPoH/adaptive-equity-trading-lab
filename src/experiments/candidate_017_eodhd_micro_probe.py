@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import urllib.error
@@ -300,5 +301,15 @@ def _write_json(path: Path, payload: dict[str, Any]) -> None:
     path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
 
 
+def _parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Run the bounded Candidate 017 EODHD micro-probe.")
+    parser.add_argument("--run-id", default=RUN_ID)
+    parser.add_argument("--gate-dir", type=Path, default=GATE_DIR)
+    parser.add_argument("--output-dir", type=Path, default=None)
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
-    run_candidate_017_eodhd_micro_probe()
+    args = _parse_args()
+    output_dir = args.output_dir or Path("experiments/provider_aware_research/execution_outputs") / args.run_id
+    run_candidate_017_eodhd_micro_probe(gate_dir=args.gate_dir, output_dir=output_dir, run_id=args.run_id)

@@ -1,0 +1,7 @@
+{
+  "candidate_012_backtest_allowed": false,
+  "decision": "APPROVED_EODHD_MICRO_PROBE_RERUN_GATE_ONLY",
+  "provider_query_allowed": true,
+  "raw_payload_retention_allowed": false,
+  "run_id": "CANDIDATE-017-EODHD-MICRO-PROBE-002"
+}
