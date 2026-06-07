@@ -687,6 +687,104 @@ def _family_operating_rule(family: str) -> str:
     }[family]
 
 
+def build_regime_aware_portfolio_component_set(
+    components: list[dict[str, Any]],
+    strategy_router: dict[str, Any],
+    active_regime: str,
+) -> dict[str, Any]:
+    """Filter portfolio components through the diagnostic regime router."""
+
+    matrix = strategy_router.get("matrix", pd.DataFrame()) if isinstance(strategy_router, dict) else pd.DataFrame()
+    if not isinstance(matrix, pd.DataFrame) or matrix.empty:
+        return {
+            "status": "REGIME_AWARE_COMPONENT_FILTER_UNAVAILABLE",
+            "active_regime": active_regime,
+            "allowed_components": list(components),
+            "blocked_components": [],
+            "contract_rows": [],
+            "promotion_allowed": False,
+            "provider_query_performed": False,
+            "backtest_performed": False,
+        }
+    regime_rows = matrix[matrix["regime_label"].astype(str).eq(str(active_regime))].copy()
+    posture_by_family = {
+        str(row["strategy_family"]): row.to_dict()
+        for _, row in regime_rows.iterrows()
+    }
+    allowed_components: list[dict[str, Any]] = []
+    blocked_components: list[dict[str, Any]] = []
+    contract_rows: list[dict[str, Any]] = []
+    allowed_postures = {"REDUCE", "ALLOW_PROXY", "RISK_OVERLAY"}
+    for component in components:
+        family = _portfolio_component_strategy_family(component)
+        router_row = posture_by_family.get(family, {})
+        posture = str(router_row.get("posture", "OBSERVE_ONLY"))
+        action = "ALLOW" if posture in allowed_postures else "BLOCK"
+        enriched = {
+            **component,
+            "regime_family": family,
+            "regime_posture": posture,
+            "regime_weight_multiplier": _regime_weight_multiplier(posture),
+            "regime_filter_reason": router_row.get("why", "No explicit regime rule; defaulting to observe-only."),
+        }
+        if action == "ALLOW":
+            allowed_components.append(enriched)
+        else:
+            blocked_components.append(enriched)
+        contract_rows.append(
+            {
+                "component_id": component.get("component_id"),
+                "strategy_name": component.get("strategy_name"),
+                "template": component.get("template"),
+                "strategy_family": family,
+                "active_regime": active_regime,
+                "router_posture": posture,
+                "portfolio_action": action,
+                "weight_multiplier": _regime_weight_multiplier(posture),
+                "reason": enriched["regime_filter_reason"],
+            }
+        )
+    return {
+        "status": "REGIME_AWARE_COMPONENT_FILTER_COMPLETE",
+        "active_regime": active_regime,
+        "allowed_components": allowed_components,
+        "blocked_components": blocked_components,
+        "contract_rows": contract_rows,
+        "promotion_allowed": False,
+        "provider_query_performed": False,
+        "backtest_performed": False,
+    }
+
+
+def _portfolio_component_strategy_family(component: dict[str, Any]) -> str:
+    template = str(component.get("template", "")).lower()
+    strategy_name = str(component.get("strategy_name", "")).lower()
+    haystack = f"{template} {strategy_name}"
+    if "regime" in haystack:
+        return "Regime Risk Engine"
+    if "dollar" in haystack:
+        return "Dollar-Bar Microstructure"
+    if "orb" in haystack or "9:30" in haystack or "opening range" in haystack:
+        return "9:30 AM ORB"
+    if any(token in haystack for token in ("catalyst", "pead", "form 4", "pdufa", "13d", "sec", "insider")):
+        return "Event Catalyst"
+    if any(token in haystack for token in ("mean reversion", "reversion", "gaprev", "lowvol")):
+        return "Mean Reversion"
+    if any(token in haystack for token in ("momentum", "xmom")):
+        return "Momentum"
+    return "Mean Reversion"
+
+
+def _regime_weight_multiplier(posture: str) -> float:
+    return {
+        "BLOCK": 0.0,
+        "OBSERVE_ONLY": 0.0,
+        "REDUCE": 0.5,
+        "ALLOW_PROXY": 1.0,
+        "RISK_OVERLAY": 1.0,
+    }.get(str(posture), 0.0)
+
+
 def strategy_rows(ledger: pd.DataFrame) -> pd.DataFrame:
     rows: list[dict[str, Any]] = []
     for profile in STRATEGY_PROFILES:

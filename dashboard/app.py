@@ -49,6 +49,7 @@ from dashboard.lab_dashboard_data import (
     build_factory_data_eligibility_report,
     build_portfolio_lab_preview,
     build_portfolio_lab_preview_from_components,
+    build_regime_aware_portfolio_component_set,
     build_portfolio_preregistration_approval_gate,
     build_portfolio_preregistration_draft,
     build_portfolio_frozen_recipe_trial,
@@ -2642,7 +2643,7 @@ def render_strategy_workbench() -> None:
         st.dataframe(pd.DataFrame(template_rows), width="stretch", hide_index=True)
 
 
-def render_portfolio_lab() -> None:
+def render_portfolio_lab(payload: dict[str, object]) -> None:
     st.markdown(
         """
         <div class="portfolio-hero">
@@ -2670,6 +2671,27 @@ def render_portfolio_lab() -> None:
     with factory_cols[2]:
         st.caption("Generated catalog = only templates that the lab can test with currently available local/proxy data. Diagnostic only, no provider query, no promotion.")
     run_full_catalog = st.checkbox("Run governed search on full loaded catalog", value=include_factory_generated)
+    strategy_router = payload.get("strategy_regime_router", {})
+    router_matrix = strategy_router.get("matrix", pd.DataFrame()) if isinstance(strategy_router, dict) else pd.DataFrame()
+    available_regimes = (
+        sorted(str(item) for item in router_matrix["regime_label"].dropna().unique())
+        if isinstance(router_matrix, pd.DataFrame) and not router_matrix.empty and "regime_label" in router_matrix.columns
+        else []
+    )
+    router_cols = st.columns([1, 1, 2])
+    with router_cols[0]:
+        use_regime_router = st.checkbox("Use regime router", value=True)
+    with router_cols[1]:
+        active_regime = st.selectbox(
+            "Active market regime",
+            available_regimes or ["RANGE_NORMAL"],
+            index=(available_regimes.index("RANGE_NORMAL") if "RANGE_NORMAL" in available_regimes else 0),
+            disabled=not use_regime_router,
+        )
+    with router_cols[2]:
+        st.caption(
+            "Regime-aware mode filters the basket before diagnostics: blocked and observe-only sleeves do not enter the local search."
+        )
     eligibility = cached_factory_data_eligibility_report()
     excluded_templates = eligibility.get("excluded_templates", [])
     st.markdown(
@@ -2733,7 +2755,8 @@ def render_portfolio_lab() -> None:
         key="portfolio_lab_selected_ids",
     )
     st.caption("Current basket only. Use the governed-search button below to load the suggested best basket into this selector.")
-    component_table = portfolio_lab_component_table([component for component in components if component["component_id"] in selected_ids])
+    selected_components = [component for component in components if component["component_id"] in selected_ids]
+    component_table = portfolio_lab_component_table(selected_components)
     if not component_table.empty:
         st.dataframe(component_table, width="stretch", hide_index=True)
     if run_full_catalog:
@@ -2766,15 +2789,49 @@ def render_portfolio_lab() -> None:
         st.info("Select at least three components to run a toy portfolio diagnostic.")
         return
 
-    diagnostic_selected_ids = None if run_full_catalog else selected_ids
+    diagnostic_base_components = components if run_full_catalog else selected_components
+    regime_filter = None
+    if use_regime_router:
+        regime_filter = build_regime_aware_portfolio_component_set(diagnostic_base_components, strategy_router, active_regime)
+        diagnostic_components = list(regime_filter.get("allowed_components", []))
+        blocked_count = len(regime_filter.get("blocked_components", []))
+        st.markdown("**Regime-aware component contract**")
+        c_allowed, c_blocked, c_regime = st.columns(3)
+        with c_allowed:
+            metric_card("Allowed", len(diagnostic_components), "Components entering diagnostic")
+        with c_blocked:
+            metric_card("Blocked", blocked_count, "Blocked or observe-only sleeves")
+        with c_regime:
+            metric_card("Active regime", active_regime, "Router state")
+        if blocked_count:
+            st.caption("The blocked components stay visible in the selector, but they are excluded from the diagnostic basket for this regime.")
+            with st.expander("Show regime filter contract"):
+                st.dataframe(pd.DataFrame(regime_filter.get("contract_rows", [])), width="stretch", hide_index=True)
+        if not diagnostic_components:
+            st.warning("The regime router blocked every selected component. Choose another regime, expand the catalog, or add a Regime Filter component.")
+            return
+    else:
+        diagnostic_components = components
+    diagnostic_selected_ids = None if (run_full_catalog or use_regime_router) else selected_ids
     preview = build_portfolio_lab_preview_from_components(
-        components,
+        diagnostic_components,
         diagnostic_selected_ids,
         policy=policy,
         max_component_weight=max_component_weight,
         max_rejected_weight=max_rejected_weight,
         max_convex_weight=max_convex_weight,
     )
+    if regime_filter:
+        preview["regime_router_contract"] = {
+            "status": regime_filter.get("status"),
+            "active_regime": regime_filter.get("active_regime"),
+            "allowed_component_count": len(regime_filter.get("allowed_components", [])),
+            "blocked_component_count": len(regime_filter.get("blocked_components", [])),
+            "contract_rows": regime_filter.get("contract_rows", []),
+            "promotion_allowed": False,
+            "provider_query_performed": False,
+            "backtest_performed": False,
+        }
     summary = preview["summary"]
     decision = preview["final_decision"]
     st.markdown(
@@ -2811,6 +2868,13 @@ def render_portfolio_lab() -> None:
         f"factory generated = {source_summary.get('factory_generated', 0)}, "
         f"factory materialized = {source_summary.get('factory_materialized', 0)}."
     )
+    if regime_filter:
+        st.caption(
+            f"Regime router applied: {regime_filter.get('active_regime')} | "
+            f"allowed {len(regime_filter.get('allowed_components', []))} / "
+            f"blocked {len(regime_filter.get('blocked_components', []))}. "
+            "This is a preprocessing guard, not optimization evidence."
+        )
     if factory_lineage_count:
         st.warning(
             "Factory-generated or factory-materialized components are idea discovery only. The best basket can suggest a recipe, "
@@ -3424,7 +3488,7 @@ def main() -> None:
     elif section == "Strategy Workbench":
         render_strategy_workbench()
     else:
-        render_portfolio_lab()
+        render_portfolio_lab(payload)
 
 
 if __name__ == "__main__":

@@ -27,6 +27,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_metric_glossary,
     build_workbench_visual_diagnostics,
     build_portfolio_lab_preview,
+    build_regime_aware_portfolio_component_set,
     build_factory_data_eligibility_report,
     build_strategy_factory_components,
     build_portfolio_preregistration_draft,
@@ -168,6 +169,26 @@ def test_strategy_regime_router_maps_families_without_promotion() -> None:
     assert {"Momentum", "Mean Reversion", "Regime Risk Engine"}.issubset(set(matrix["strategy_family"]))
     assert set(matrix["posture"]).issubset({"BLOCK", "OBSERVE_ONLY", "REDUCE", "ALLOW_PROXY", "RISK_OVERLAY"})
     assert not summary.empty
+
+
+def test_regime_aware_portfolio_component_set_blocks_incompatible_sleeves() -> None:
+    components = [
+        {"component_id": "mom-1", "template": "Momentum", "strategy_name": "Momentum sleeve"},
+        {"component_id": "rev-1", "template": "Mean Reversion", "strategy_name": "Reversion sleeve"},
+        {"component_id": "dol-1", "template": "Dollar-Bar Microstructure", "strategy_name": "Dollar sleeve"},
+        {"component_id": "risk-1", "template": "Regime Filter", "strategy_name": "Risk overlay"},
+    ]
+    router = strategy_regime_router_payload(pd.DataFrame([{"regime_label": "DRAWDOWN_STRESS"}]))
+
+    result = build_regime_aware_portfolio_component_set(components, router, "DRAWDOWN_STRESS")
+
+    assert result["active_regime"] == "DRAWDOWN_STRESS"
+    assert result["promotion_allowed"] is False
+    assert result["provider_query_performed"] is False
+    assert result["backtest_performed"] is False
+    assert {component["component_id"] for component in result["allowed_components"]} == {"risk-1"}
+    assert {"mom-1", "rev-1"}.issubset({row["component_id"] for row in result["blocked_components"]})
+    assert any(row["portfolio_action"] == "BLOCK" for row in result["contract_rows"])
 
 
 def test_orb_930_payload_reads_backtest_artifacts(tmp_path: Path) -> None:
