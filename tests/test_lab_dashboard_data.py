@@ -28,6 +28,7 @@ from dashboard.lab_dashboard_data import (
     build_workbench_visual_diagnostics,
     build_portfolio_lab_preview,
     build_regime_aware_portfolio_component_set,
+    infer_current_market_regime,
     build_factory_data_eligibility_report,
     build_strategy_factory_components,
     build_portfolio_preregistration_draft,
@@ -189,6 +190,28 @@ def test_regime_aware_portfolio_component_set_blocks_incompatible_sleeves() -> N
     assert {component["component_id"] for component in result["allowed_components"]} == {"risk-1"}
     assert {"mom-1", "rev-1"}.issubset({row["component_id"] for row in result["blocked_components"]})
     assert any(row["portfolio_action"] == "BLOCK" for row in result["contract_rows"])
+
+
+def test_infer_current_market_regime_uses_latest_date_majority_vote() -> None:
+    regime_map = pd.DataFrame(
+        [
+            {"symbol": "SPY", "date": "2026-01-02", "regime_label": "TREND_UP_LOW_VOL"},
+            {"symbol": "QQQ", "date": "2026-01-02", "regime_label": "RANGE_NORMAL"},
+            {"symbol": "SPY", "date": "2026-01-03", "regime_label": "DRAWDOWN_STRESS"},
+            {"symbol": "QQQ", "date": "2026-01-03", "regime_label": "DRAWDOWN_STRESS"},
+            {"symbol": "IWM", "date": "2026-01-03", "regime_label": "RANGE_NORMAL"},
+        ]
+    )
+
+    inferred = infer_current_market_regime(regime_map)
+
+    assert inferred["status"] == "CURRENT_REGIME_INFERRED_FROM_LOCAL_MAP"
+    assert inferred["regime_label"] == "DRAWDOWN_STRESS"
+    assert inferred["as_of_date"] == "2026-01-03"
+    assert inferred["symbol_count"] == 3
+    assert inferred["confidence"] == 2 / 3
+    assert inferred["provider_query_performed"] is False
+    assert inferred["backtest_performed"] is False
 
 
 def test_orb_930_payload_reads_backtest_artifacts(tmp_path: Path) -> None:

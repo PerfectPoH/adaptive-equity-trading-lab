@@ -381,6 +381,7 @@ def load_dashboard_payload(root: Path = Path(".")) -> dict[str, Any]:
         "orb_930": orb_payload,
         "data_readiness": provider_data_readiness_payload(root),
         "strategy_regime_router": strategy_regime_router_payload(regime_map),
+        "current_market_regime": infer_current_market_regime(regime_map),
     }
 
 
@@ -663,6 +664,62 @@ def strategy_regime_router_payload(regime_map: pd.DataFrame) -> dict[str, Any]:
             "This is a risk-routing map derived from local artifacts and documented failure modes. "
             "It can explain when to block, reduce, observe, or use a sleeve as an overlay, but it is not a promoted strategy."
         ),
+    }
+
+
+def infer_current_market_regime(regime_map: pd.DataFrame) -> dict[str, Any]:
+    """Infer the current market regime from the latest local regime-map date."""
+
+    if regime_map.empty or not {"date", "regime_label"}.issubset(regime_map.columns):
+        return {
+            "status": "CURRENT_REGIME_UNAVAILABLE",
+            "regime_label": "RANGE_NORMAL",
+            "as_of_date": "",
+            "confidence": 0.0,
+            "symbol_count": 0,
+            "provider_query_performed": False,
+            "backtest_performed": False,
+            "promotion_allowed": False,
+        }
+    frame = regime_map.copy()
+    frame["date"] = pd.to_datetime(frame["date"], errors="coerce")
+    frame = frame.dropna(subset=["date", "regime_label"])
+    if frame.empty:
+        return {
+            "status": "CURRENT_REGIME_UNAVAILABLE",
+            "regime_label": "RANGE_NORMAL",
+            "as_of_date": "",
+            "confidence": 0.0,
+            "symbol_count": 0,
+            "provider_query_performed": False,
+            "backtest_performed": False,
+            "promotion_allowed": False,
+        }
+    latest_date = frame["date"].max()
+    latest = frame[frame["date"].eq(latest_date)]
+    counts = latest["regime_label"].astype(str).value_counts()
+    top_label = str(counts.index[0])
+    top_count = int(counts.iloc[0])
+    symbol_count = int(len(latest))
+    confidence = float(top_count / symbol_count) if symbol_count else 0.0
+    distribution = [
+        {"regime_label": str(label), "symbol_days": int(count)}
+        for label, count in counts.items()
+    ]
+    return {
+        "status": "CURRENT_REGIME_INFERRED_FROM_LOCAL_MAP",
+        "regime_label": top_label,
+        "as_of_date": latest_date.strftime("%Y-%m-%d"),
+        "confidence": confidence,
+        "symbol_count": symbol_count,
+        "distribution": distribution,
+        "interpretation": (
+            "Latest-date majority vote across the local large-cap/ETF regime map. "
+            "This chooses the default router state before portfolio diagnostics; it is not learned from portfolio returns."
+        ),
+        "provider_query_performed": False,
+        "backtest_performed": False,
+        "promotion_allowed": False,
     }
 
 

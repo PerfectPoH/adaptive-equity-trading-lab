@@ -2672,12 +2672,15 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
         st.caption("Generated catalog = only templates that the lab can test with currently available local/proxy data. Diagnostic only, no provider query, no promotion.")
     run_full_catalog = st.checkbox("Run governed search on full loaded catalog", value=include_factory_generated)
     strategy_router = payload.get("strategy_regime_router", {})
+    current_regime = payload.get("current_market_regime", {})
     router_matrix = strategy_router.get("matrix", pd.DataFrame()) if isinstance(strategy_router, dict) else pd.DataFrame()
     available_regimes = (
         sorted(str(item) for item in router_matrix["regime_label"].dropna().unique())
         if isinstance(router_matrix, pd.DataFrame) and not router_matrix.empty and "regime_label" in router_matrix.columns
         else []
     )
+    detected_regime = str(current_regime.get("regime_label", "RANGE_NORMAL")) if isinstance(current_regime, dict) else "RANGE_NORMAL"
+    default_regime = detected_regime if detected_regime in available_regimes else ("RANGE_NORMAL" if "RANGE_NORMAL" in available_regimes else (available_regimes[0] if available_regimes else "RANGE_NORMAL"))
     router_cols = st.columns([1, 1, 2])
     with router_cols[0]:
         use_regime_router = st.checkbox("Use regime router", value=True)
@@ -2685,13 +2688,23 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
         active_regime = st.selectbox(
             "Active market regime",
             available_regimes or ["RANGE_NORMAL"],
-            index=(available_regimes.index("RANGE_NORMAL") if "RANGE_NORMAL" in available_regimes else 0),
+            index=((available_regimes or ["RANGE_NORMAL"]).index(default_regime)),
             disabled=not use_regime_router,
         )
     with router_cols[2]:
         st.caption(
-            "Regime-aware mode filters the basket before diagnostics: blocked and observe-only sleeves do not enter the local search."
+            "Regime-aware mode defaults to the latest local regime-map majority vote, then lets you override it manually."
         )
+    if isinstance(current_regime, dict):
+        st.markdown("**Detected market regime**")
+        detected_cols = st.columns(3)
+        with detected_cols[0]:
+            metric_card("Detected", current_regime.get("regime_label", "UNKNOWN"), "Latest local majority vote")
+        with detected_cols[1]:
+            metric_card("Confidence", f"{float(current_regime.get('confidence', 0.0)):.0%}", f"{current_regime.get('symbol_count', 0)} symbols")
+        with detected_cols[2]:
+            metric_card("As of", current_regime.get("as_of_date", "n/a"), "Local regime map date")
+        st.caption(str(current_regime.get("interpretation", "")))
     eligibility = cached_factory_data_eligibility_report()
     excluded_templates = eligibility.get("excluded_templates", [])
     st.markdown(
