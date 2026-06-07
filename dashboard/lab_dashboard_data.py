@@ -379,6 +379,140 @@ def load_dashboard_payload(root: Path = Path(".")) -> dict[str, Any]:
         "smallcap_microstructure": smallcap_microstructure,
         "data_matrix": data_matrix,
         "orb_930": orb_payload,
+        "data_readiness": provider_data_readiness_payload(root),
+    }
+
+
+def provider_data_readiness_payload(root: Path = Path(".")) -> dict[str, Any]:
+    """Summarize provider probe evidence without making provider calls."""
+
+    probes = [
+        {
+            "provider": "Tiingo",
+            "role": "Best verified free component",
+            "artifact": EXECUTION_OUTPUTS_DIR / "CANDIDATE-016-TIINGO-MICRO-PROBE-002" / "tiingo_micro_probe_result.json",
+            "admissibility": "component_pass",
+            "coverage": {
+                "active_ohlcv": "PASS",
+                "corporate_actions": "PASS",
+                "identity_continuity": "PASS",
+                "delisted_terminal": "PASS",
+                "benchmarks": "PASS",
+                "pit_universe": "MISSING",
+            },
+            "interpretation": "Strongest free component so far, but not a complete survivorship-free research dataset by itself.",
+            "next_action": "Use as a price component only after a separate data-build gate joins it to PIT universe membership.",
+        },
+        {
+            "provider": "EODHD",
+            "role": "Rejected delisted/terminal component",
+            "artifact": EXECUTION_OUTPUTS_DIR / "CANDIDATE-017-EODHD-MICRO-PROBE-004" / "eodhd_micro_probe_result.json",
+            "admissibility": "not_admissible",
+            "coverage": {
+                "active_ohlcv": "BLOCK",
+                "corporate_actions": "UNKNOWN",
+                "identity_continuity": "UNKNOWN",
+                "delisted_terminal": "BLOCK",
+                "benchmarks": "UNKNOWN",
+                "pit_universe": "MISSING",
+            },
+            "interpretation": "Key works, but the tested endpoints did not return valid dated adjusted OHLCV rows.",
+            "next_action": "Do not use for Candidate 012 unless entitlement/endpoint family changes and a new gate is approved.",
+        },
+        {
+            "provider": "FMP",
+            "role": "Partial delisted-list component",
+            "artifact": EXECUTION_OUTPUTS_DIR / "CANDIDATE-018-FMP-MICRO-PROBE-002" / "fmp_micro_probe_result.json",
+            "admissibility": "partial_not_admissible",
+            "coverage": {
+                "active_ohlcv": "PARTIAL",
+                "corporate_actions": "UNKNOWN",
+                "identity_continuity": "UNKNOWN",
+                "delisted_terminal": "BLOCK",
+                "benchmarks": "PARTIAL",
+                "pit_universe": "MISSING",
+            },
+            "interpretation": "Stable endpoints return some OHLCV and a delisted list, but adjusted fields, IWM, and terminal BBBY access are blocked or incomplete.",
+            "next_action": "Can inform provider research, but cannot unlock the true backtest data bundle.",
+        },
+        {
+            "provider": "Norgate Trial",
+            "role": "Best local structure, insufficient history",
+            "artifact": EXECUTION_OUTPUTS_DIR / "CANDIDATE-014-NORGATE-FRESH-DATA-AUDIT-001" / "final_decision.json",
+            "admissibility": "blocked_history_depth",
+            "coverage": {
+                "active_ohlcv": "PASS",
+                "corporate_actions": "PASS",
+                "identity_continuity": "PASS",
+                "delisted_terminal": "PASS",
+                "benchmarks": "PASS",
+                "pit_universe": "PARTIAL",
+            },
+            "interpretation": "The trial has the right kind of data, but the two-year history is below the minimum for this research phase.",
+            "next_action": "Full-history Norgate remains the cleanest retail path if capital becomes available.",
+        },
+        {
+            "provider": "Databento Historical + Reference",
+            "role": "High-quality prices, reference entitlement blocked",
+            "artifact": EXECUTION_OUTPUTS_DIR / "CANDIDATE-013-DATABENTO-FRESH-DATA-ENTITLEMENT-001" / "final_decision.json",
+            "admissibility": "blocked_reference_entitlement",
+            "coverage": {
+                "active_ohlcv": "PASS",
+                "corporate_actions": "BLOCK",
+                "identity_continuity": "BLOCK",
+                "delisted_terminal": "UNKNOWN",
+                "benchmarks": "PASS",
+                "pit_universe": "MISSING",
+            },
+            "interpretation": "Historical price access exists, but Reference data needed for the survivorship-aware contract is not entitled.",
+            "next_action": "Retry only if Reference entitlement changes.",
+        },
+    ]
+    rows = []
+    for probe in probes:
+        artifact_path = root / probe["artifact"]
+        result = load_json(artifact_path)
+        final = result.get("final_decision", result)
+        coverage = probe["coverage"]
+        pass_like = sum(1 for value in coverage.values() if value in {"PASS", "PARTIAL"})
+        hard_blocks = sum(1 for value in coverage.values() if value == "BLOCK")
+        rows.append(
+            {
+                "provider": probe["provider"],
+                "role": probe["role"],
+                "decision": final.get("decision", "ARTIFACT_MISSING"),
+                "admissibility": probe["admissibility"],
+                "coverage_score": round(pass_like / max(len(coverage), 1), 3),
+                "hard_blocks": hard_blocks,
+                "active_ohlcv": coverage["active_ohlcv"],
+                "corporate_actions": coverage["corporate_actions"],
+                "identity_continuity": coverage["identity_continuity"],
+                "delisted_terminal": coverage["delisted_terminal"],
+                "benchmarks": coverage["benchmarks"],
+                "pit_universe": coverage["pit_universe"],
+                "interpretation": probe["interpretation"],
+                "next_action": probe["next_action"],
+                "artifact": str(probe["artifact"]),
+            }
+        )
+    table = pd.DataFrame(rows)
+    free_mesh_usable = False
+    blockers = [
+        "no_free_provider_combo_satisfies_survivorship_free_pit_universe",
+        "delisted_terminal_ohlcv_not_reliably_available_across_free_components",
+        "corporate_action_and_identity_contract_not_complete_without_paid_reference_layer",
+    ]
+    return {
+        "status": "FREE_DATA_MESH_NOT_ADMISSIBLE_FOR_TRUE_BACKTEST",
+        "table": table,
+        "free_mesh_usable": free_mesh_usable,
+        "blockers": blockers,
+        "candidate_012_backtest_allowed": False,
+        "next_best_paths": [
+            "Use Tiingo only as a component in future data-build experiments, not as a standalone backtest source.",
+            "Wait for full-history Norgate, CRSP/WRDS, or a paid reference layer before Candidate 012 true backtest.",
+            "Keep improving Portfolio Lab, regime routing, and user strategy UX with proxy outputs marked non-promotable.",
+        ],
     }
 
 

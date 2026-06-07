@@ -1351,6 +1351,7 @@ def render_results_and_data(payload: dict[str, object]) -> None:
     smallcap = payload["smallcap_microstructure"]
     data_matrix = payload["data_matrix"]
     orb = payload.get("orb_930", {})
+    data_readiness = payload.get("data_readiness", {})
 
     c1, c2, c3 = st.columns(3)
     with c1:
@@ -1359,6 +1360,77 @@ def render_results_and_data(payload: dict[str, object]) -> None:
         metric_card("Regime Rows", len(regime_map), "Large-cap/ETF symbol-days mapped")
     with c3:
         metric_card("Data Upgrades", len(data_matrix), "Provider paths scored")
+
+    st.markdown('<div class="results-spacer"></div>', unsafe_allow_html=True)
+    if isinstance(data_readiness, dict):
+        st.subheader("Data Readiness")
+        st.markdown(
+            """
+            <div class="callout danger-callout">
+            The free-provider mesh is not admissible for a true survivorship-free backtest yet. The lab can inspect
+            components, but Candidate 012 remains blocked until one data bundle covers PIT universe membership,
+            delisted terminal prices, adjusted OHLCV, corporate actions, and benchmarks together.
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        r1, r2, r3 = st.columns(3)
+        readiness_table = data_readiness.get("table", pd.DataFrame())
+        with r1:
+            metric_card("Data mesh", data_readiness.get("status", "UNKNOWN"), "Current data-readiness decision")
+        with r2:
+            metric_card("Backtest allowed", "NO" if not data_readiness.get("candidate_012_backtest_allowed") else "YES", "Candidate 012 true backtest")
+        with r3:
+            metric_card("Providers checked", len(readiness_table) if isinstance(readiness_table, pd.DataFrame) else 0, "Component probes and audits")
+        if isinstance(readiness_table, pd.DataFrame) and not readiness_table.empty:
+            plot_rows = readiness_table.copy()
+            fig = px.bar(
+                plot_rows,
+                x="coverage_score",
+                y="provider",
+                orientation="h",
+                color="admissibility",
+                color_discrete_map={
+                    "component_pass": "#0f9f75",
+                    "partial_not_admissible": "#d97706",
+                    "blocked_history_depth": "#7c3aed",
+                    "blocked_reference_entitlement": "#7c3aed",
+                    "not_admissible": "#d12f5f",
+                },
+                hover_data=["decision", "hard_blocks", "role"],
+            )
+            fig.update_layout(
+                template="plotly_white",
+                height=360,
+                margin=dict(l=0, r=10, t=10, b=10),
+                xaxis_title="Coverage score (not a pass score)",
+                yaxis_title="",
+                paper_bgcolor="rgba(255,255,255,.72)",
+                plot_bgcolor="rgba(255,255,255,.72)",
+                font=dict(color="#171717", family="Instrument Sans"),
+                legend_title_text="Evidence status",
+            )
+            fig.update_xaxes(range=[0, 1], tickfont=dict(color="#3f3f46"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
+            fig.update_yaxes(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
+            st.plotly_chart(fig, width="stretch")
+            visible_cols = [
+                "provider",
+                "role",
+                "decision",
+                "active_ohlcv",
+                "corporate_actions",
+                "identity_continuity",
+                "delisted_terminal",
+                "benchmarks",
+                "pit_universe",
+                "next_action",
+            ]
+            st.dataframe(readiness_table[visible_cols], width="stretch", hide_index=True)
+        next_paths = data_readiness.get("next_best_paths", [])
+        if next_paths:
+            st.markdown("**What this means operationally**")
+            for item in next_paths:
+                st.markdown(f"- {item}")
 
     st.markdown('<div class="results-spacer"></div>', unsafe_allow_html=True)
     if isinstance(orb, dict) and orb.get("available"):
