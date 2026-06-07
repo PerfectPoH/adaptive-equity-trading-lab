@@ -1,0 +1,130 @@
+{
+  "api_key_diagnostics": {
+    "api_key": "REDACTED",
+    "api_key_fingerprint": "6219edbae06b",
+    "api_key_present": true,
+    "api_key_source_resolved": "env-file:FMP_API_KEY",
+    "env_file": ".env"
+  },
+  "backtest_performed": false,
+  "checks": [
+    {
+      "case_id": "ACTIVE_BASELINE_AAPL",
+      "endpoint": "/stable/historical-price-eod/full",
+      "error": "",
+      "http_status": 200,
+      "status": "BLOCK",
+      "summary": {
+        "first_date": "2020-08-24",
+        "has_adjusted_close": false,
+        "has_ohlcv": true,
+        "last_date": "2020-09-04",
+        "row_count": 10
+      },
+      "symbol": "AAPL"
+    },
+    {
+      "case_id": "BENCHMARK_SPY",
+      "endpoint": "/stable/historical-price-eod/full",
+      "error": "",
+      "http_status": 200,
+      "status": "BLOCK",
+      "summary": {
+        "first_date": "2018-01-02",
+        "has_adjusted_close": false,
+        "has_ohlcv": true,
+        "last_date": "2018-01-10",
+        "row_count": 7
+      },
+      "symbol": "SPY"
+    },
+    {
+      "case_id": "BENCHMARK_IWM",
+      "endpoint": "/stable/historical-price-eod/full",
+      "error": "HTTP Error 402: Payment Required",
+      "http_status": 402,
+      "status": "BLOCK",
+      "summary": {
+        "first_date": null,
+        "has_adjusted_close": false,
+        "has_ohlcv": false,
+        "last_date": null,
+        "row_count": 0
+      },
+      "symbol": "IWM"
+    },
+    {
+      "case_id": "DELISTED_LIST_US_BBBY",
+      "endpoint": "/stable/delisted-companies",
+      "error": "",
+      "http_status": 200,
+      "status": "PASS",
+      "summary": {
+        "contains_required_symbol": false,
+        "row_count": 100,
+        "rows_with_delisting_date_fields": 100,
+        "sample_symbols": [
+          "AGAE",
+          "EDAP",
+          "BTMWW",
+          "AMWD",
+          "6201.T",
+          "1726.T",
+          "ZBAI",
+          "CVGW",
+          "4384.T",
+          "D6H.DE",
+          "OTH",
+          "7925.T",
+          "6489.T",
+          "GIG",
+          "POR.V",
+          "BTM",
+          "CTBB",
+          "QVCC",
+          "BWEB",
+          "BTOP"
+        ]
+      },
+      "symbol": "BBBY"
+    },
+    {
+      "case_id": "DELISTED_TERMINAL_BBBY",
+      "endpoint": "/stable/historical-price-eod/full",
+      "error": "HTTP Error 402: Payment Required",
+      "http_status": 402,
+      "status": "BLOCK",
+      "summary": {
+        "first_date": null,
+        "has_adjusted_close": false,
+        "has_ohlcv": false,
+        "last_date": null,
+        "row_count": 0
+      },
+      "symbol": "BBBY"
+    }
+  ],
+  "created_at_utc": "2026-06-07T12:27:17.222126+00:00",
+  "dataset_build_performed": false,
+  "decision": "FMP_MICRO_PROBE_COMPLETE_NOT_ADMISSIBLE",
+  "final_decision": {
+    "blockers": [
+      "fmp_active_ohlcv_unverified",
+      "fmp_spy_benchmark_unverified",
+      "fmp_iwm_benchmark_unverified",
+      "fmp_terminal_ohlcv_unverified"
+    ],
+    "candidate_012_backtest_allowed": false,
+    "decision": "FMP_MICRO_PROBE_COMPLETE_NOT_ADMISSIBLE",
+    "next_allowed_action": "resolve_fmp_blockers_or_probe_next_provider",
+    "promotion_allowed": false
+  },
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "paper_trading_allowed": false,
+  "promotion_allowed": false,
+  "provider": "FMP",
+  "provider_query_performed": true,
+  "raw_payload_retained": false,
+  "run_id": "CANDIDATE-018-FMP-MICRO-PROBE-002"
+}

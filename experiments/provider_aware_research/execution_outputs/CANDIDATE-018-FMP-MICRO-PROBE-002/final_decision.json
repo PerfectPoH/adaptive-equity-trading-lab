@@ -1,0 +1,12 @@
+{
+  "blockers": [
+    "fmp_active_ohlcv_unverified",
+    "fmp_spy_benchmark_unverified",
+    "fmp_iwm_benchmark_unverified",
+    "fmp_terminal_ohlcv_unverified"
+  ],
+  "candidate_012_backtest_allowed": false,
+  "decision": "FMP_MICRO_PROBE_COMPLETE_NOT_ADMISSIBLE",
+  "next_allowed_action": "resolve_fmp_blockers_or_probe_next_provider",
+  "promotion_allowed": false
+}
