@@ -1,0 +1,31 @@
+{
+  "api_key_diagnostics": {
+    "api_key": "",
+    "api_key_fingerprint": "",
+    "api_key_present": false,
+    "api_key_source_resolved": "missing",
+    "env_file": ".env"
+  },
+  "backtest_performed": false,
+  "checks": [],
+  "created_at_utc": "2026-06-07T11:43:04.417347+00:00",
+  "dataset_build_performed": false,
+  "decision": "EODHD_MICRO_PROBE_BLOCKED_API_KEY_MISSING",
+  "final_decision": {
+    "blockers": [
+      "eodhd_api_key_missing"
+    ],
+    "candidate_012_backtest_allowed": false,
+    "decision": "EODHD_MICRO_PROBE_BLOCKED_API_KEY_MISSING",
+    "next_allowed_action": "add_eodhd_api_key_then_commit_rerun_gate",
+    "promotion_allowed": false
+  },
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "paper_trading_allowed": false,
+  "promotion_allowed": false,
+  "provider": "EODHD",
+  "provider_query_performed": false,
+  "raw_payload_retained": false,
+  "run_id": "CANDIDATE-017-EODHD-MICRO-PROBE-001"
+}
