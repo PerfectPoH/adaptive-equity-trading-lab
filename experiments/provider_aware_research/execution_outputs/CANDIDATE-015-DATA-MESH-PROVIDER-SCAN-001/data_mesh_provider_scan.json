@@ -1,0 +1,341 @@
+{
+  "backtest_performed": false,
+  "created_at_utc": "2026-06-07T11:14:10.636774+00:00",
+  "dataset_build_performed": false,
+  "decision": "DATA_MESH_PROVIDER_SCAN_COMPLETE_NO_QUERY",
+  "final_decision": {
+    "backtest_allowed": false,
+    "blockers": [
+      "provider_claims_unverified_by_micro_probes",
+      "hybrid_identity_reconciliation_not_built",
+      "candidate_012_fresh_data_gate_still_required"
+    ],
+    "decision": "DATA_MESH_PROVIDER_SCAN_COMPLETE_NO_QUERY",
+    "next_allowed_action": "commit_one_provider_micro_probe_gate",
+    "promotion_allowed": false,
+    "provider_query_allowed_now": false
+  },
+  "linked_blockers": {
+    "candidate_013_databento": "databento_reference_entitlement_missing",
+    "candidate_014_norgate_trial": "history_span_below_5_years"
+  },
+  "live_trading_allowed": false,
+  "market_data_download_performed": false,
+  "micro_probe_plan": [
+    {
+      "backtest_allowed": false,
+      "case_id": "ACTIVE_BASELINE_AAPL",
+      "max_symbols": 1,
+      "providers": [
+        "Tiingo",
+        "EODHD",
+        "FMP"
+      ],
+      "purpose": "Verify active OHLCV depth, adjusted fields, split/dividend metadata, and license/cache policy.",
+      "symbol": "AAPL"
+    },
+    {
+      "backtest_allowed": false,
+      "case_id": "SPLIT_AAPL_2020",
+      "event_date": "2020-08-31",
+      "max_symbols": 1,
+      "providers": [
+        "Tiingo",
+        "EODHD",
+        "FMP"
+      ],
+      "purpose": "Verify split factor handling and adjusted/raw price consistency around a known split.",
+      "symbol": "AAPL"
+    },
+    {
+      "backtest_allowed": false,
+      "case_id": "TICKER_CHANGE_FB_META",
+      "event_date": "2022-06-09",
+      "max_symbols": 2,
+      "providers": [
+        "Tiingo",
+        "SEC EDGAR",
+        "SimFin"
+      ],
+      "purpose": "Verify identity continuity across a known ticker change.",
+      "symbols": [
+        "FB",
+        "META"
+      ]
+    },
+    {
+      "backtest_allowed": false,
+      "case_id": "DELISTING_BBBY",
+      "max_symbols": 2,
+      "providers": [
+        "EODHD",
+        "FMP",
+        "SEC EDGAR",
+        "Tiingo"
+      ],
+      "purpose": "Verify delisted price continuity and terminal date handling.",
+      "symbols": [
+        "BBBY",
+        "BBBYQ"
+      ]
+    },
+    {
+      "backtest_allowed": false,
+      "case_id": "BENCHMARK_SPY_IWM",
+      "max_symbols": 2,
+      "providers": [
+        "Tiingo",
+        "FMP",
+        "EODHD"
+      ],
+      "purpose": "Verify benchmark adjusted OHLCV depth and dividend treatment.",
+      "symbols": [
+        "SPY",
+        "IWM"
+      ]
+    }
+  ],
+  "paper_trading_allowed": false,
+  "promotion_allowed": false,
+  "provider_matrix": [
+    {
+      "blockers": [
+        "subscription_required"
+      ],
+      "can_unlock": [
+        "candidate_012_true_backtest",
+        "historical_index_constituents",
+        "delisted_coverage"
+      ],
+      "candidate_012_backtest_allowed": false,
+      "next_probe": "No probe needed if subscription is active; run fresh-data build gate directly.",
+      "provider": "Norgate Data Full US Stocks Platinum",
+      "requirements_claimed": [
+        "minimum_5y_daily_ohlcv",
+        "active_symbols",
+        "delisted_symbols",
+        "listing_dates",
+        "delisting_dates",
+        "adjusted_daily_ohlcv",
+        "corporate_actions_documented",
+        "point_in_time_universe",
+        "spy_iwm_benchmarks"
+      ],
+      "role": "single-provider survivorship-aware daily equity source",
+      "status": "ADMISSIBLE_IF_SUBSCRIBED"
+    },
+    {
+      "blockers": [
+        "institutional_access_required"
+      ],
+      "can_unlock": [
+        "candidate_012_true_backtest",
+        "academic_grade_validation"
+      ],
+      "candidate_012_backtest_allowed": false,
+      "next_probe": "Verify account access and export licensing before any extraction.",
+      "provider": "CRSP/WRDS",
+      "requirements_claimed": [
+        "minimum_5y_daily_ohlcv",
+        "active_symbols",
+        "delisted_symbols",
+        "listing_dates",
+        "delisting_dates",
+        "delisting_terminal_return_policy",
+        "adjusted_daily_ohlcv",
+        "corporate_actions_documented",
+        "security_master_or_stable_id",
+        "point_in_time_universe",
+        "spy_iwm_benchmarks"
+      ],
+      "role": "institutional benchmark source for survivorship-free research",
+      "status": "ADMISSIBLE_IF_ACCESS_GRANTED"
+    },
+    {
+      "blockers": [
+        "databento_reference_entitlement_missing"
+      ],
+      "can_unlock": [
+        "price_history_if_reference_unblocked"
+      ],
+      "candidate_012_backtest_allowed": false,
+      "next_probe": "Only retry after Reference entitlement changes.",
+      "provider": "Databento Historical + Reference",
+      "requirements_claimed": [
+        "minimum_5y_daily_ohlcv",
+        "adjusted_daily_ohlcv"
+      ],
+      "role": "high-quality price source plus paid reference layer",
+      "status": "BLOCKED_REFERENCE_ENTITLEMENT"
+    },
+    {
+      "blockers": [
+        "history_span_below_5_years"
+      ],
+      "can_unlock": [
+        "adapter_validation_only"
+      ],
+      "candidate_012_backtest_allowed": false,
+      "next_probe": "No further trial probe; upgrade to full history or stop.",
+      "provider": "Norgate Trial",
+      "requirements_claimed": [
+        "active_symbols",
+        "delisted_symbols",
+        "adjusted_daily_ohlcv"
+      ],
+      "role": "local survivorship-aware trial source",
+      "status": "BLOCKED_HISTORY_DEPTH"
+    },
+    {
+      "blockers": [
+        "delisted_coverage_unverified",
+        "permanent_identity_mapping_unverified",
+        "license_cache_policy_unverified"
+      ],
+      "can_unlock": [
+        "price_component_if_delisted_and_identity_pass"
+      ],
+      "candidate_012_backtest_allowed": false,
+      "next_probe": "Bounded Tiingo active/split/ticker-change/delisted micro-probe.",
+      "provider": "Tiingo",
+      "requirements_claimed": [
+        "minimum_5y_daily_ohlcv",
+        "adjusted_daily_ohlcv",
+        "corporate_actions_documented"
+      ],
+      "role": "candidate OHLCV/corporate-action/symbology component",
+      "status": "REQUIRES_MICRO_PROBES"
+    },
+    {
+      "blockers": [
+        "terminal_return_policy_unverified",
+        "corporate_action_policy_unverified",
+        "license_cache_policy_unverified"
+      ],
+      "can_unlock": [
+        "delisted_component_if_terminal_price_passes"
+      ],
+      "candidate_012_backtest_allowed": false,
+      "next_probe": "Bounded delisted endpoint plus terminal OHLCV continuity micro-probe.",
+      "provider": "EODHD",
+      "requirements_claimed": [
+        "minimum_5y_daily_ohlcv",
+        "delisted_symbols",
+        "delisting_dates"
+      ],
+      "role": "candidate delisted-list and terminal-price component",
+      "status": "REQUIRES_MICRO_PROBES"
+    },
+    {
+      "blockers": [
+        "coverage_breadth_unverified",
+        "price_history_sufficiency_unverified",
+        "license_cache_policy_unverified"
+      ],
+      "can_unlock": [
+        "corporate_action_cross_check_if_pit_passes"
+      ],
+      "candidate_012_backtest_allowed": false,
+      "next_probe": "Bounded PIT metadata and delisted availability probe.",
+      "provider": "SimFin",
+      "requirements_claimed": [
+        "point_in_time_universe",
+        "delisted_symbols"
+      ],
+      "role": "candidate fundamentals/PIT cross-check component",
+      "status": "REQUIRES_MICRO_PROBES"
+    },
+    {
+      "blockers": [
+        "legacy_endpoint_status_unverified",
+        "delisted_quality_unverified",
+        "license_cache_policy_unverified"
+      ],
+      "can_unlock": [
+        "benchmark_or_delisted_redundancy_if_passes"
+      ],
+      "candidate_012_backtest_allowed": false,
+      "next_probe": "Bounded SPY/IWM and delisted endpoint availability probe.",
+      "provider": "Financial Modeling Prep",
+      "requirements_claimed": [
+        "spy_iwm_benchmarks",
+        "delisted_symbols"
+      ],
+      "role": "candidate benchmark/delisted redundancy component",
+      "status": "REQUIRES_MICRO_PROBES"
+    },
+    {
+      "blockers": [
+        "form25_parser_not_validated",
+        "terminal_price_not_provided",
+        "rate_limit_policy_required"
+      ],
+      "can_unlock": [
+        "delisting_event_metadata_if_parser_passes"
+      ],
+      "candidate_012_backtest_allowed": false,
+      "next_probe": "One CIK/Form 25 bounded parser probe with SEC-compliant User-Agent.",
+      "provider": "SEC EDGAR",
+      "requirements_claimed": [
+        "delisting_dates",
+        "security_master_or_stable_id"
+      ],
+      "role": "legal event source for Form 25 and CIK identity",
+      "status": "REQUIRES_MICRO_PROBES"
+    },
+    {
+      "blockers": [
+        "identity_reconciliation_unverified",
+        "delisted_terminal_return_unverified",
+        "corporate_action_policy_unverified",
+        "licensing_and_cache_policy_unverified",
+        "component_disagreement_resolution_unbuilt"
+      ],
+      "can_unlock": [
+        "candidate_012_data_build_gate_only_if_all_identity_and_price_probes_pass"
+      ],
+      "candidate_012_backtest_allowed": false,
+      "next_probe": "Do not probe the mesh directly; probe each component first.",
+      "provider": "Hybrid Free Data Mesh",
+      "requirements_claimed": [
+        "minimum_5y_daily_ohlcv",
+        "active_symbols",
+        "delisted_symbols",
+        "listing_dates",
+        "delisting_dates",
+        "delisting_terminal_return_policy",
+        "adjusted_daily_ohlcv",
+        "corporate_actions_documented",
+        "security_master_or_stable_id",
+        "point_in_time_universe",
+        "spy_iwm_benchmarks",
+        "storage_license_documented"
+      ],
+      "role": "assembled no-budget fallback only after component probes pass",
+      "status": "REQUIRES_MICRO_PROBES"
+    }
+  ],
+  "provider_query_performed": false,
+  "recommended_sequence": [
+    "Prefer Norgate Full or CRSP/WRDS if accessible; they avoid building a fragile identity-reconciliation layer.",
+    "If budget remains zero, run one gated micro-probe per free provider before any data mesh ingestion.",
+    "Only build a hybrid mesh if at least one provider proves delisted price continuity and another proves corporate-action transparency.",
+    "Do not run Candidate 012 until a separate fresh-data build gate points to an admissible dataset manifest."
+  ],
+  "requirements": [
+    "minimum_5y_daily_ohlcv",
+    "active_symbols",
+    "delisted_symbols",
+    "listing_dates",
+    "delisting_dates",
+    "delisting_terminal_return_policy",
+    "adjusted_daily_ohlcv",
+    "corporate_actions_documented",
+    "security_master_or_stable_id",
+    "point_in_time_universe",
+    "spy_iwm_benchmarks",
+    "storage_license_documented"
+  ],
+  "run_id": "CANDIDATE-015-DATA-MESH-PROVIDER-SCAN-001",
+  "scope": "provider architecture scan only"
+}

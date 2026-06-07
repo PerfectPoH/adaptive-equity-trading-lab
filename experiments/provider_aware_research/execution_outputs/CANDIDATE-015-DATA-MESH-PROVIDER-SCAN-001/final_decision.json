@@ -1,0 +1,12 @@
+{
+  "backtest_allowed": false,
+  "blockers": [
+    "provider_claims_unverified_by_micro_probes",
+    "hybrid_identity_reconciliation_not_built",
+    "candidate_012_fresh_data_gate_still_required"
+  ],
+  "decision": "DATA_MESH_PROVIDER_SCAN_COMPLETE_NO_QUERY",
+  "next_allowed_action": "commit_one_provider_micro_probe_gate",
+  "promotion_allowed": false,
+  "provider_query_allowed_now": false
+}
