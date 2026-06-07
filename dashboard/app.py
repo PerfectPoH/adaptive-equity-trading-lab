@@ -1502,6 +1502,46 @@ def render_overview(payload: dict[str, object]) -> None:
     render_strategy_tiles(payload)
 
 
+def render_mission_brief(payload: dict[str, object]) -> None:
+    metrics = governance_metrics(payload)
+    status = build_mission_status({**payload, "metrics": metrics})
+    st.markdown(
+        """
+        <div class="mission-brief-hero">
+          <div class="lab-kicker">Current mission</div>
+          <h1>Build portfolios that know when to stay quiet.</h1>
+          <p>
+            The lab no longer hunts one magic setup. It tests strategy sleeves, maps market regimes,
+            and blocks any claim that cannot survive data quality, costs, robustness, and audit gates.
+          </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    page_guide(
+        "What am I looking at?",
+        "A research control room. A block is not a crash; it is the lab refusing to turn weak evidence into a trading claim.",
+        [
+            ("Create a strategy", "Open Strategy Builder to freeze a single governed hypothesis.", "data"),
+            ("Test a portfolio", "Open Portfolio Lab to combine sleeves and inspect dynamic regimes.", "good"),
+            ("Inspect blockers", "Open Data Vault to see why true testing is still locked.", "warn"),
+            ("Read the story", "Open Project Story to understand how each failure shaped the lab.", "block"),
+        ],
+    )
+    k1, k2, k3, k4 = st.columns(4)
+    with k1:
+        metric_card("Promoted", metrics["promoted_strategy_count"], "No strategy passed promotion gates")
+    with k2:
+        metric_card("Mode", status["mode"], "Current operating posture")
+    with k3:
+        metric_card("Blocker", status["current_blocker"], status["plain_english_blocker"])
+    with k4:
+        metric_card("Next gate", status["next_gate"], "Required before stronger claims")
+    section_note(
+        "Use Mission Brief when you want orientation. Use Strategy Builder and Portfolio Lab when you want to work."
+    )
+
+
 def render_strategy_tiles(payload: dict[str, object]) -> None:
     rows = strategy_rows(payload["ledger"])
     st.subheader("Research Map")
@@ -3867,7 +3907,7 @@ def main() -> None:
     inject_theme()
     payload = load_dashboard_payload(Path("."))
     if "active_section" not in st.session_state:
-        st.session_state["active_section"] = "Command Center"
+        st.session_state["active_section"] = "Mission Brief"
     sidebar_section = sidebar_navigation(payload, st.session_state["active_section"])
     if sidebar_section != st.session_state["active_section"]:
         st.session_state["active_section"] = sidebar_section
@@ -3875,8 +3915,8 @@ def main() -> None:
     st.session_state["active_section"] = section
     shell_nav(section)
 
-    if section == "Command Center":
-        render_overview(payload)
+    if section == "Mission Brief":
+        render_mission_brief(payload)
     elif section == "Strategies":
         render_strategy_atlas(payload)
     elif section == "Results & Data":
