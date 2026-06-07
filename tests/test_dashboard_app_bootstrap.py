@@ -30,3 +30,14 @@ def test_workbench_color_logic_has_distinct_meanings() -> None:
     assert "addEventListener(\"click\"" in html
     assert "selectColor(\"Blue\")" in html
     assert "aria-pressed" in html
+
+
+def test_dashboard_app_exposes_mission_control_sections() -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(repo_root))
+    from dashboard.app import SECTIONS
+
+    assert "Mission Brief" in SECTIONS
+    assert "Strategy Builder" in SECTIONS
+    assert "Data Vault" in SECTIONS
+    assert "Command Center" not in SECTIONS

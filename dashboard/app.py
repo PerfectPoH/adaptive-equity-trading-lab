@@ -84,12 +84,18 @@ from dashboard.lab_dashboard_data import (
     portfolio_lab_component_table,
     run_portfolio_candidate_true_backtest_skeleton,
 )
+from dashboard.mission_control_ui import (
+    MISSION_SECTIONS,
+    build_mission_status,
+    mission_section_by_label,
+    mission_sidebar_html,
+)
 from src.experiments.workbench_package_runner import run_package_diagnostic
 
 
 st.set_page_config(page_title="Adaptive Equity Trading Lab", layout="wide", initial_sidebar_state="expanded")
 
-SECTIONS = ["Command Center", "Strategies", "Results & Data", "Project Anatomy", "Strategy Workbench", "Portfolio Lab"]
+SECTIONS = [section.label for section in MISSION_SECTIONS]
 COLOR_LOGIC = {
     "Blue": {
         "css": "#1f5eff",
@@ -203,6 +209,106 @@ def inject_theme() -> None:
           margin-bottom: 8px;
           padding: 8px 10px;
           background: transparent;
+        }
+        .mc-sidebar-shell {
+          display: grid;
+          gap: 16px;
+          padding: 4px 0 18px;
+        }
+        .mc-brand {
+          color: #0f172a;
+          font-size: 18px;
+          font-weight: 900;
+          line-height: 1.1;
+        }
+        .mc-brand span {
+          display: block;
+          color: #64748b;
+          font-size: 12px;
+          font-weight: 700;
+          margin-top: 5px;
+        }
+        .mc-nav-group {
+          display: grid;
+          gap: 8px;
+        }
+        .mc-nav-label {
+          color: #64748b;
+          font-family: "IBM Plex Mono", monospace;
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: .06em;
+          margin-top: 6px;
+          text-transform: uppercase;
+        }
+        .mc-nav-item {
+          background: transparent;
+          border: 1px solid transparent;
+          border-radius: 12px;
+          padding: 10px 11px;
+        }
+        .mc-nav-item.active {
+          background: #eff6ff;
+          border-color: #bfdbfe;
+        }
+        .mc-nav-item strong {
+          color: #0f172a;
+          display: block;
+          font-size: 14px;
+        }
+        .mc-nav-item.active strong {
+          color: #1d4ed8;
+        }
+        .mc-nav-item span {
+          color: #64748b;
+          display: block;
+          font-size: 12px;
+          line-height: 1.35;
+          margin-top: 3px;
+        }
+        .mc-status-card {
+          background: #0f172a;
+          border-radius: 16px;
+          color: #ffffff;
+          padding: 14px;
+        }
+        .mc-status-card span,
+        .mc-status-card small,
+        .mc-status-card em {
+          color: #cbd5e1;
+          display: block;
+          font-size: 12px;
+          font-style: normal;
+          line-height: 1.4;
+        }
+        .mc-status-card strong {
+          color: #ffffff;
+          display: block;
+          font-size: 21px;
+          line-height: 1.05;
+          margin: 6px 0;
+          overflow-wrap: anywhere;
+        }
+        .mission-brief-hero {
+          background: linear-gradient(135deg, rgba(37,99,235,.96), rgba(15,23,42,.98) 58%, rgba(217,119,6,.78));
+          border: 1px solid #1e293b;
+          border-radius: 24px;
+          box-shadow: 0 24px 70px rgba(15,23,42,.15);
+          color: #ffffff;
+          padding: 36px;
+        }
+        .mission-brief-hero h1 {
+          color: #ffffff;
+          font-size: clamp(42px, 5vw, 68px);
+          letter-spacing: -.04em;
+          line-height: .95;
+          margin: 10px 0 14px;
+        }
+        .mission-brief-hero p {
+          color: #dbeafe !important;
+          font-size: 17px;
+          line-height: 1.58;
+          max-width: 880px;
         }
         h1, h2, h3 {
           font-family: "Instrument Sans", system-ui, sans-serif;
@@ -1104,8 +1210,8 @@ def main_navigation(current_section: str) -> str:
         """,
         unsafe_allow_html=True,
     )
-    selected = current_section if current_section in SECTIONS else "Command Center"
-    columns = st.columns([1.15, 0.9, 1.05, 1.05, 1.25, 1.05])
+    selected = current_section if current_section in SECTIONS else SECTIONS[0]
+    columns = st.columns([1] * len(SECTIONS))
     for column, section_name in zip(columns, SECTIONS):
         with column:
             button_type = "primary" if section_name == selected else "secondary"
@@ -3726,15 +3832,18 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
 
 def sidebar_navigation(payload: dict[str, object], current_section: str) -> str:
     metrics = governance_metrics(payload)
-    st.sidebar.markdown("### Adaptive Lab")
-    st.sidebar.caption("Research console")
+    status = build_mission_status({**payload, "metrics": metrics})
+    section_meta = mission_section_by_label(current_section)
+    st.sidebar.markdown(
+        mission_sidebar_html(section_meta.label, status),
+        unsafe_allow_html=True,
+    )
     section = st.sidebar.radio(
         "Navigate",
         SECTIONS,
         index=SECTIONS.index(current_section) if current_section in SECTIONS else 0,
         label_visibility="collapsed",
     )
-    st.sidebar.markdown("---")
     st.sidebar.markdown(
         f"""
         <div class="sidebar-tile">
@@ -3751,7 +3860,6 @@ def sidebar_navigation(payload: dict[str, object], current_section: str) -> str:
         """,
         unsafe_allow_html=True,
     )
-    st.sidebar.caption("Navigation is in the sidebar so the Streamlit header cannot cover section controls.")
     return section
 
 
