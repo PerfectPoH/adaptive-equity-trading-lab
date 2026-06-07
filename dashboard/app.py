@@ -1641,18 +1641,19 @@ def render_strategy_atlas(payload: dict[str, object]) -> None:
                 st.dataframe(runs[existing], width="stretch", hide_index=True)
 
 
-def render_results_and_data(payload: dict[str, object]) -> None:
+def render_results_and_data(payload: dict[str, object], *, show_guide: bool = True) -> None:
     st.header("Results And Data Dashboard")
-    page_guide(
-        "How to read the data room",
-        "This page separates evidence from raw artifact storage. Start with readiness and regime routing, then open the raw ledgers only when you need the audit trail.",
-        [
-            ("Readiness", "Which data paths can support real research and which remain blocked.", "data"),
-            ("Regimes", "How the lab classifies market states and routes strategy families.", "good"),
-            ("Diagnostics", "ORB, delisted gates, portfolio, and microstructure checks.", "warn"),
-            ("Raw tables", "Full ledgers stay available but collapsed at the bottom.", "block"),
-        ],
-    )
+    if show_guide:
+        page_guide(
+            "How to read the data room",
+            "This page separates evidence from raw artifact storage. Start with readiness and regime routing, then open the raw ledgers only when you need the audit trail.",
+            [
+                ("Readiness", "Which data paths can support real research and which remain blocked.", "data"),
+                ("Regimes", "How the lab classifies market states and routes strategy families.", "good"),
+                ("Diagnostics", "ORB, delisted gates, portfolio, and microstructure checks.", "warn"),
+                ("Raw tables", "Full ledgers stay available but collapsed at the bottom.", "block"),
+            ],
+        )
     ledger = payload["ledger"]
     regime_map = payload["regime_map"]
     allocation = payload["allocation"]
@@ -2083,6 +2084,62 @@ def render_lab_explainer(payload: dict[str, object]) -> None:
         "The next phase can become a user-facing strategy workbench: users define rules, choose data assumptions, run the same governance gates, "
         "and inspect results without bypassing PIT, cost, robustness, or promotion controls. This dashboard intentionally stops before that builder."
     )
+
+
+def render_project_story(payload: dict[str, object]) -> None:
+    page_guide(
+        "The life of the project",
+        "This page explains why the lab became a fortress: each failed strategy removed one illusion and added one guardrail.",
+        [
+            ("Ideas", "Momentum, SEC 8-K, PEAD, Form 4, ORB, Kronos, and portfolio sleeves.", "data"),
+            ("Failures", "Archived ideas are preserved as evidence, not hidden.", "block"),
+            ("Capabilities", "Every failure left infrastructure behind.", "good"),
+            ("Next phase", "Dynamic regime portfolios wait for admissible data.", "warn"),
+        ],
+    )
+    render_lab_explainer(payload)
+
+
+def render_regime_playbook(payload: dict[str, object]) -> None:
+    page_guide(
+        "Which strategy works when?",
+        "The regime playbook explains which strategy families are allowed, reduced, blocked, or observe-only in each market state.",
+        [
+            ("Regime", "Current market state from the local regime map.", "data"),
+            ("Routing", "How each strategy family changes weight by regime.", "good"),
+            ("Failure modes", "When a sleeve should stay quiet.", "warn"),
+            ("Audit", "Full router matrix remains inspectable.", "block"),
+        ],
+    )
+    render_results_and_data(payload, show_guide=False)
+
+
+def render_data_vault(payload: dict[str, object]) -> None:
+    page_guide(
+        "Why data is the current blocker",
+        "This page focuses on provider readiness, PIT coverage, delisted symbols, and true-backtest admissibility.",
+        [
+            ("Required fields", "What a real test must have before execution.", "data"),
+            ("Provider map", "Norgate, EODHD, FMP, Databento, and remaining gaps.", "good"),
+            ("Blocked claims", "No proxy P&L can become promotion.", "block"),
+            ("Next gate", "Attach a complete admissible bundle.", "warn"),
+        ],
+    )
+    render_results_and_data(payload, show_guide=False)
+
+
+def render_decision_ledger(payload: dict[str, object]) -> None:
+    page_guide(
+        "Every decision remains auditable",
+        "This page is intentionally raw-heavy. It is where final decisions, provider logs, and artifact paths are inspected.",
+        [
+            ("Final decisions", "The ledger of archive/block/diagnostic states.", "data"),
+            ("Provider rows", "Which runs touched external sources.", "warn"),
+            ("Promotion lock", "No hidden green-light path.", "block"),
+            ("Artifacts", "Raw tables stay available for review.", "good"),
+        ],
+    )
+    render_results_and_data(payload, show_guide=False)
 
 
 def render_strategy_workbench() -> None:
@@ -3917,16 +3974,20 @@ def main() -> None:
 
     if section == "Mission Brief":
         render_mission_brief(payload)
-    elif section == "Strategies":
-        render_strategy_atlas(payload)
-    elif section == "Results & Data":
-        render_results_and_data(payload)
-    elif section == "Project Anatomy":
-        render_lab_explainer(payload)
-    elif section == "Strategy Workbench":
+    elif section == "Project Story":
+        render_project_story(payload)
+    elif section == "Strategy Builder":
         render_strategy_workbench()
-    else:
+    elif section == "Portfolio Lab":
         render_portfolio_lab(payload)
+    elif section == "Regime Playbook":
+        render_regime_playbook(payload)
+    elif section == "Data Vault":
+        render_data_vault(payload)
+    elif section == "Decision Ledger":
+        render_decision_ledger(payload)
+    else:
+        render_mission_brief(payload)
 
 
 if __name__ == "__main__":
