@@ -1,0 +1,9 @@
+{
+  "blockers": [
+    "eodhd_api_key_missing"
+  ],
+  "candidate_012_backtest_allowed": false,
+  "decision": "EODHD_MICRO_PROBE_BLOCKED_API_KEY_MISSING",
+  "next_allowed_action": "add_eodhd_api_key_then_commit_rerun_gate",
+  "promotion_allowed": false
+}
