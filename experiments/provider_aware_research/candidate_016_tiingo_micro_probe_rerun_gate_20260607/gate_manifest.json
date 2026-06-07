@@ -1,0 +1,47 @@
+{
+  "status": "APPROVED_TIINGO_DATA_MESH_MICRO_PROBE_ONLY",
+  "run_id": "CANDIDATE-016-TIINGO-MICRO-PROBE-002",
+  "created_at_local": "2026-06-07",
+  "provider": "Tiingo",
+  "purpose": "Authorize one rerun of Candidate 016 after TIINGO_API_KEY was added locally. This rerun preserves the original bounded micro-probe scope and writes to a separate output directory.",
+  "linked_initial_block": "experiments/provider_aware_research/execution_outputs/CANDIDATE-016-TIINGO-MICRO-PROBE-001/final_decision.json",
+  "linked_original_gate": "experiments/provider_aware_research/candidate_016_tiingo_micro_probe_gate_20260607/gate_manifest.json",
+  "api_key_source": "env-file",
+  "env_file": ".env",
+  "max_http_requests": 8,
+  "probe_cases": [
+    "ACTIVE_BASELINE_AAPL",
+    "SPLIT_AAPL_2020",
+    "TICKER_CHANGE_FB_META",
+    "DELISTING_BBBY",
+    "BENCHMARK_SPY_IWM"
+  ],
+  "allowed_actions": [
+    "read TIINGO_API_KEY from local .env",
+    "make bounded Tiingo HTTP requests if key exists",
+    "write derived summaries and final decision to CANDIDATE-016-TIINGO-MICRO-PROBE-002"
+  ],
+  "forbidden_actions": [
+    "retain raw API payloads",
+    "build a dataset",
+    "run Candidate 012 backtest",
+    "run portfolio selection",
+    "run Kronos inference",
+    "paper trade",
+    "live trade",
+    "promote a strategy"
+  ],
+  "provider_query_allowed": true,
+  "market_data_download_allowed": false,
+  "internet_market_data_download_allowed": false,
+  "raw_payload_retention_allowed": false,
+  "dataset_build_allowed": false,
+  "backtest_allowed": false,
+  "portfolio_selection_allowed": false,
+  "kronos_inference_allowed": false,
+  "parameter_sweep_allowed": false,
+  "promotion_allowed": false,
+  "paper_trading_allowed": false,
+  "live_trading_allowed": false,
+  "next_allowed_action": "run_candidate_016_tiingo_micro_probe_rerun_once"
+}

@@ -115,10 +115,12 @@ def test_run_candidate_016_redacts_key_and_retains_no_raw_payload(tmp_path: Path
         gate_dir=gate,
         output_dir=tmp_path / "out",
         client=FakeTiingoClient(),
+        run_id="CANDIDATE-016-TIINGO-MICRO-PROBE-TEST",
     )
 
     text = json.dumps(result)
     assert "test-secret" not in text
+    assert result["run_id"] == "CANDIDATE-016-TIINGO-MICRO-PROBE-TEST"
     assert result["provider_query_performed"] is True
     assert result["raw_payload_retained"] is False
     assert result["checks"][0]["status"] == "PASS"

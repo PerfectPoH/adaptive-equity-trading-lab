@@ -115,6 +115,7 @@ def run_candidate_016_tiingo_micro_probe(
     gate_dir: Path = GATE_DIR,
     output_dir: Path = OUTPUT_DIR,
     client: TiingoClient | None = None,
+    run_id: str = RUN_ID,
 ) -> dict[str, Any]:
     gate = _read_json(gate_dir / "gate_manifest.json")
     _validate_gate(gate)
@@ -122,13 +123,13 @@ def run_candidate_016_tiingo_micro_probe(
     api_key = api_key_info["api_key"]
     if not api_key:
         decision = build_tiingo_micro_probe_decision(api_key_present=False, checks=[])
-        result = _base_result(api_key_info=api_key_info, checks=[], provider_query_performed=False, decision=decision)
+        result = _base_result(api_key_info=api_key_info, checks=[], provider_query_performed=False, decision=decision, run_id=run_id)
         _persist(output_dir, result)
         return result
     tiingo = client or UrlLibTiingoClient(api_key)
     checks = _run_checks(tiingo)
     decision = build_tiingo_micro_probe_decision(api_key_present=True, checks=checks)
-    result = _base_result(api_key_info=api_key_info, checks=checks, provider_query_performed=True, decision=decision)
+    result = _base_result(api_key_info=api_key_info, checks=checks, provider_query_performed=True, decision=decision, run_id=run_id)
     _persist(output_dir, result)
     return result
 
@@ -218,9 +219,10 @@ def _base_result(
     checks: list[dict[str, Any]],
     provider_query_performed: bool,
     decision: dict[str, Any],
+    run_id: str,
 ) -> dict[str, Any]:
     return {
-        "run_id": RUN_ID,
+        "run_id": run_id,
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "provider": "Tiingo",
         "decision": decision["decision"],
