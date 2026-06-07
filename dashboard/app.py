@@ -1735,7 +1735,8 @@ def render_results_and_data(payload: dict[str, object], *, show_guide: bool = Tr
                 "pit_universe",
                 "next_action",
             ]
-            st.dataframe(readiness_table[visible_cols], width="stretch", hide_index=True)
+            with st.expander("Audit details: provider readiness rows"):
+                st.dataframe(readiness_table[visible_cols], width="stretch", hide_index=True)
         next_paths = data_readiness.get("next_best_paths", [])
         if next_paths:
             st.markdown("**What this means operationally**")
@@ -1918,15 +1919,20 @@ def render_results_and_data(payload: dict[str, object], *, show_guide: bool = Tr
         metric_card("Admissible sources", len(delisted_gate["admissible_sources"]), ", ".join(delisted_gate["admissible_sources"]) or "none")
     with g3:
         metric_card("Candidate status", delisted_gate["manifest"].get("current_candidate_status", "unknown"), "No capital deployment")
-    gate_cols = st.columns([1.25, 1])
-    with gate_cols[0]:
-        matrix = delisted_gate["candidate_source_matrix"]
-        if not matrix.empty:
-            st.dataframe(matrix[["provider", "delisted_symbols", "survivorship_free_prices", "pit_membership", "gate_status", "notes"]], width="stretch", hide_index=True)
-    with gate_cols[1]:
-        requirements = delisted_gate["unlock_requirements"]
-        if not requirements.empty:
-            st.dataframe(requirements[["requirement_id", "failure_action"]], width="stretch", hide_index=True)
+    matrix = delisted_gate["candidate_source_matrix"]
+    requirements = delisted_gate["unlock_requirements"]
+    with st.expander("Audit details: delisted source matrix and unlock requirements"):
+        gate_cols = st.columns([1.25, 1])
+        with gate_cols[0]:
+            if not matrix.empty:
+                st.dataframe(
+                    matrix[["provider", "delisted_symbols", "survivorship_free_prices", "pit_membership", "gate_status", "notes"]],
+                    width="stretch",
+                    hide_index=True,
+                )
+        with gate_cols[1]:
+            if not requirements.empty:
+                st.dataframe(requirements[["requirement_id", "failure_action"]], width="stretch", hide_index=True)
     st.markdown('<div class="results-spacer"></div>', unsafe_allow_html=True)
     c1, c2 = st.columns([1.2, 1])
     with c1:
@@ -1995,7 +2001,9 @@ def render_results_and_data(payload: dict[str, object], *, show_guide: bool = Tr
 
     st.subheader("Data Upgrade Matrix")
     if not data_matrix.empty:
-        st.dataframe(data_matrix, width="stretch", hide_index=True)
+        st.caption("Provider capability rows are audit material: open them when you need to inspect the data contract.")
+        with st.expander("Audit details: provider data upgrade matrix"):
+            st.dataframe(data_matrix, width="stretch", hide_index=True)
 
     with st.expander("Open raw decision ledger"):
         st.dataframe(ledger, width="stretch", hide_index=True)
@@ -2071,13 +2079,15 @@ def render_lab_explainer(payload: dict[str, object]) -> None:
 
     rules = payload["operating_rules"]
     st.subheader("Operating Rules")
-    r1, r2 = st.columns(2)
-    with r1:
-        st.markdown("**Allowed**")
-        st.json(rules.get("allowed_actions", {}))
-    with r2:
-        st.markdown("**Forbidden**")
-        st.json(rules.get("forbidden_actions", {}))
+    st.write("The lab separates allowed research actions from forbidden trading or promotion actions.")
+    with st.expander("Audit details: allowed and forbidden action rules"):
+        r1, r2 = st.columns(2)
+        with r1:
+            st.markdown("**Allowed**")
+            st.json(rules.get("allowed_actions", {}))
+        with r2:
+            st.markdown("**Forbidden**")
+            st.json(rules.get("forbidden_actions", {}))
 
     st.subheader("Next Product Layer")
     st.write(
@@ -3940,22 +3950,6 @@ def sidebar_navigation(payload: dict[str, object], current_section: str) -> str:
         SECTIONS,
         index=SECTIONS.index(current_section) if current_section in SECTIONS else 0,
         label_visibility="collapsed",
-    )
-    st.sidebar.markdown(
-        f"""
-        <div class="sidebar-tile">
-          <div class="sidebar-label">Promoted</div>
-          <div class="sidebar-value">{metrics["promoted_strategy_count"]}</div>
-          <div class="sidebar-note">No strategy passed promotion gates.</div>
-        </div>
-        <div style="height:10px;"></div>
-        <div class="sidebar-tile">
-          <div class="sidebar-label">Final mode</div>
-          <div class="sidebar-value" style="font-size:20px;">{metrics["final_policy"]}</div>
-          <div class="sidebar-note">Research posture after closure.</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
     )
     return section
 

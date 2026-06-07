@@ -88,6 +88,7 @@ def mission_sidebar_html(active_label: str, status: dict[str, Any]) -> str:
         "<span>Current mode</span>"
         f'<strong>{escape(str(status.get("mode", "UNKNOWN")))}</strong>'
         f'<em>{escape(str(status.get("plain_english_blocker", "")))}</em>'
+        f'<small>Promoted: {escape(str(status.get("promoted", 0)))} | Blocker: {escape(str(status.get("current_blocker", "UNKNOWN")))}</small>'
         f'<small>Next: {escape(str(status.get("next_gate", "Review gate")))}</small>'
         "</div></div>"
     )
