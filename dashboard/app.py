@@ -2110,6 +2110,287 @@ def render_project_story(payload: dict[str, object]) -> None:
     render_lab_explainer(payload)
 
 
+def render_regime_playbook_panel(payload: dict[str, object]) -> None:
+    regime_map = payload["regime_map"]
+    strategy_router = payload.get("strategy_regime_router", {})
+    router_matrix = strategy_router.get("matrix", pd.DataFrame()) if isinstance(strategy_router, dict) else pd.DataFrame()
+    router_summary = strategy_router.get("summary", pd.DataFrame()) if isinstance(strategy_router, dict) else pd.DataFrame()
+
+    st.subheader("Market Regime Router")
+    st.markdown(
+        f"""
+        <div class="callout amber-callout">
+        {strategy_router.get("interpretation", "Diagnostic-only regime router.") if isinstance(strategy_router, dict) else "Diagnostic-only regime router."}
+        This page answers one question only: which strategy families should be full-size, reduced, observe-only, or blocked in each market state.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    q1, q2, q3 = st.columns(3)
+    with q1:
+        metric_card("Router status", strategy_router.get("status", "UNKNOWN") if isinstance(strategy_router, dict) else "UNKNOWN", "Risk map, not alpha")
+    with q2:
+        metric_card("Families", strategy_router.get("families_mapped", 0) if isinstance(strategy_router, dict) else 0, "Strategy sleeves routed")
+    with q3:
+        metric_card("Regimes", strategy_router.get("regimes_mapped", 0) if isinstance(strategy_router, dict) else 0, "Market states mapped")
+
+    if isinstance(router_matrix, pd.DataFrame) and not router_matrix.empty:
+        posture_text = router_matrix.pivot(index="strategy_family", columns="regime_label", values="posture")
+        score_matrix = router_matrix.pivot(index="strategy_family", columns="regime_label", values="score")
+        hover_matrix = router_matrix.pivot(index="strategy_family", columns="regime_label", values="why")
+        fig = go.Figure(
+            data=go.Heatmap(
+                z=score_matrix.to_numpy(),
+                x=list(score_matrix.columns),
+                y=list(score_matrix.index),
+                text=posture_text.to_numpy(),
+                customdata=hover_matrix.to_numpy(),
+                texttemplate="%{text}",
+                hovertemplate="<b>%{y}</b><br>%{x}<br>Posture: %{text}<br>%{customdata}<extra></extra>",
+                colorscale=[
+                    [0.00, "#d12f5f"],
+                    [0.35, "#d97706"],
+                    [0.60, "#1f5eff"],
+                    [1.00, "#0f9f75"],
+                ],
+                zmin=0,
+                zmax=1,
+                showscale=False,
+            )
+        )
+        fig.update_layout(
+            height=440,
+            margin=dict(l=0, r=0, t=10, b=10),
+            xaxis_title="Market regime",
+            yaxis_title="Strategy family",
+            paper_bgcolor="rgba(255,255,255,.72)",
+            plot_bgcolor="rgba(255,255,255,.72)",
+            font=dict(color="#171717", family="Instrument Sans"),
+        )
+        fig.update_xaxes(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
+        fig.update_yaxes(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
+        st.plotly_chart(fig, width="stretch")
+        st.caption("Reading rule: red blocks capital, amber reduces sizing, blue is proxy-only exploration, green is risk overlay/governance.")
+
+    if isinstance(router_summary, pd.DataFrame) and not router_summary.empty:
+        st.markdown("**Operational routing notes**")
+        st.caption("This table is the playbook: one row per strategy family, best regime, failure mode, and operating rule.")
+        st.dataframe(
+            router_summary[["strategy_family", "best_regime", "best_posture", "blocked_regimes", "operating_rule"]],
+            width="stretch",
+            hide_index=True,
+        )
+
+    if isinstance(regime_map, pd.DataFrame) and not regime_map.empty and "regime_label" in regime_map.columns:
+        st.markdown("**Observed local regime mix**")
+        regime_counts = regime_map.groupby("regime_label", as_index=False).size()
+        fig = px.bar(
+            regime_counts,
+            x="regime_label",
+            y="size",
+            color="regime_label",
+            color_discrete_sequence=["#1f5eff", "#0f9f75", "#d97706", "#7c3aed", "#d12f5f", "#71717a"],
+        )
+        fig.update_layout(
+            template="plotly_white",
+            height=360,
+            margin=dict(l=0, r=0, t=10, b=10),
+            showlegend=False,
+            xaxis_title="",
+            yaxis_title="Symbol-days",
+            paper_bgcolor="rgba(255,255,255,.72)",
+            plot_bgcolor="rgba(255,255,255,.72)",
+            font=dict(color="#171717", family="Instrument Sans"),
+        )
+        st.plotly_chart(fig, width="stretch")
+
+    with st.expander("Audit details: full regime-strategy contract"):
+        if isinstance(router_matrix, pd.DataFrame) and not router_matrix.empty:
+            st.dataframe(
+                router_matrix[
+                    [
+                        "strategy_family",
+                        "strategies",
+                        "regime_label",
+                        "posture",
+                        "score",
+                        "why",
+                        "main_failure_mode",
+                        "allowed_use",
+                    ]
+                ],
+                width="stretch",
+                hide_index=True,
+            )
+        if isinstance(regime_map, pd.DataFrame) and not regime_map.empty:
+            st.dataframe(regime_map, width="stretch", hide_index=True)
+
+
+def render_data_vault_panel(payload: dict[str, object]) -> None:
+    data_readiness = payload.get("data_readiness", {})
+    data_matrix = payload["data_matrix"]
+
+    st.subheader("Admissible Data Gate")
+    st.markdown(
+        """
+        <div class="callout danger-callout">
+        This page is only about data admissibility. A strategy can look good in proxy mode and still remain locked
+        until one bundle covers PIT membership, delisted symbols, adjusted OHLCV, corporate actions, and benchmarks.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    readiness_table = data_readiness.get("table", pd.DataFrame()) if isinstance(data_readiness, dict) else pd.DataFrame()
+    r1, r2, r3 = st.columns(3)
+    with r1:
+        metric_card("Data mesh", data_readiness.get("status", "UNKNOWN") if isinstance(data_readiness, dict) else "UNKNOWN", "Current data-readiness decision")
+    with r2:
+        allowed = data_readiness.get("candidate_012_backtest_allowed") if isinstance(data_readiness, dict) else False
+        metric_card("Backtest allowed", "YES" if allowed else "NO", "True-test gate")
+    with r3:
+        metric_card("Providers checked", len(readiness_table) if isinstance(readiness_table, pd.DataFrame) else 0, "Provider/component probes")
+
+    if isinstance(readiness_table, pd.DataFrame) and not readiness_table.empty:
+        fig = px.bar(
+            readiness_table,
+            x="coverage_score",
+            y="provider",
+            orientation="h",
+            color="admissibility",
+            color_discrete_map={
+                "component_pass": "#0f9f75",
+                "partial_not_admissible": "#d97706",
+                "blocked_history_depth": "#7c3aed",
+                "blocked_reference_entitlement": "#7c3aed",
+                "not_admissible": "#d12f5f",
+            },
+            hover_data=["decision", "hard_blocks", "role"],
+        )
+        fig.update_layout(
+            template="plotly_white",
+            height=380,
+            margin=dict(l=0, r=10, t=10, b=10),
+            xaxis_title="Coverage score (not a pass score)",
+            yaxis_title="",
+            paper_bgcolor="rgba(255,255,255,.72)",
+            plot_bgcolor="rgba(255,255,255,.72)",
+            font=dict(color="#171717", family="Instrument Sans"),
+            legend_title_text="Evidence status",
+        )
+        fig.update_xaxes(range=[0, 1], tickfont=dict(color="#3f3f46"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
+        fig.update_yaxes(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
+        st.plotly_chart(fig, width="stretch")
+
+        visible_cols = [
+            "provider",
+            "role",
+            "decision",
+            "active_ohlcv",
+            "corporate_actions",
+            "identity_continuity",
+            "delisted_terminal",
+            "benchmarks",
+            "pit_universe",
+            "next_action",
+        ]
+        with st.expander("Audit details: provider readiness rows"):
+            st.dataframe(readiness_table[visible_cols], width="stretch", hide_index=True)
+
+    next_paths = data_readiness.get("next_best_paths", []) if isinstance(data_readiness, dict) else []
+    if next_paths:
+        st.markdown("**Next admissible data paths**")
+        for item in next_paths:
+            st.markdown(f"- {item}")
+
+    delisted_gate = delisted_data_source_gate_payload()
+    st.subheader("Delisted Coverage Requirement")
+    g1, g2, g3 = st.columns(3)
+    with g1:
+        metric_card("Gate status", delisted_gate["manifest"].get("status", "missing"), "Source contract only")
+    with g2:
+        metric_card("Admissible sources", len(delisted_gate["admissible_sources"]), ", ".join(delisted_gate["admissible_sources"]) or "none")
+    with g3:
+        metric_card("Candidate status", delisted_gate["manifest"].get("current_candidate_status", "unknown"), "No capital deployment")
+
+    with st.expander("Audit details: delisted source matrix and unlock requirements"):
+        gate_cols = st.columns([1.25, 1])
+        matrix = delisted_gate["candidate_source_matrix"]
+        requirements = delisted_gate["unlock_requirements"]
+        with gate_cols[0]:
+            if not matrix.empty:
+                st.dataframe(
+                    matrix[["provider", "delisted_symbols", "survivorship_free_prices", "pit_membership", "gate_status", "notes"]],
+                    width="stretch",
+                    hide_index=True,
+                )
+        with gate_cols[1]:
+            if not requirements.empty:
+                st.dataframe(requirements[["requirement_id", "failure_action"]], width="stretch", hide_index=True)
+
+    st.subheader("Provider Upgrade Matrix")
+    st.caption("This is the provider capability map, not a performance report.")
+    with st.expander("Audit details: provider data upgrade matrix"):
+        if not data_matrix.empty:
+            st.dataframe(data_matrix, width="stretch", hide_index=True)
+
+
+def render_decision_ledger_panel(payload: dict[str, object]) -> None:
+    ledger = payload["ledger"]
+    metrics = governance_metrics(payload)
+
+    st.subheader("Final Decision Ledger")
+    st.markdown(
+        """
+        <div class="callout">
+        This page is the audit trail. It does not explain regimes or providers first; it answers what the lab decided,
+        which runs touched external sources, and where the raw evidence lives.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    c1, c2, c3, c4 = st.columns(4)
+    with c1:
+        metric_card("Decisions", metrics["decision_count"], "Final decision artifacts")
+    with c2:
+        metric_card("Provider queries", metrics["provider_query_rows"], "Rows that touched providers")
+    with c3:
+        metric_card("Promoted", metrics["promoted_strategy_count"], "Promotion gates passed")
+    with c4:
+        metric_card("Final mode", metrics["final_policy"], "Current posture")
+
+    if not ledger.empty:
+        counts = ledger.groupby("decision", as_index=False).size().sort_values("size", ascending=False).head(14)
+        fig = px.bar(counts, x="size", y="decision", orientation="h", color="size", color_continuous_scale=["#eef3ff", "#1f5eff"])
+        fig.update_layout(
+            template="plotly_white",
+            height=520,
+            margin=dict(l=0, r=10, t=10, b=10),
+            coloraxis_showscale=False,
+            yaxis_title="",
+            xaxis_title="Count",
+            paper_bgcolor="rgba(255,255,255,.72)",
+            plot_bgcolor="rgba(255,255,255,.72)",
+            font=dict(color="#171717", family="Instrument Sans"),
+        )
+        st.plotly_chart(fig, width="stretch")
+
+        if "provider_query_performed" in ledger.columns:
+            provider_rows = ledger[ledger["provider_query_performed"].astype(str).str.lower().isin(["true", "1", "yes"])]
+            st.markdown("**Provider-query rows**")
+            st.caption("These rows are the ones that crossed from local artifact reading into external provider interaction.")
+            if provider_rows.empty:
+                st.info("No provider-query rows in the current ledger view.")
+            else:
+                visible = [column for column in ["run_id", "decision", "provider_query_performed", "market_data_download_performed", "backtest_performed", "promotion_allowed"] if column in provider_rows.columns]
+                st.dataframe(provider_rows[visible], width="stretch", hide_index=True)
+
+    with st.expander("Audit details: raw decision ledger"):
+        st.dataframe(ledger, width="stretch", hide_index=True)
+
+
 def render_regime_playbook(payload: dict[str, object]) -> None:
     page_guide(
         "Which strategy works when?",
@@ -2121,7 +2402,7 @@ def render_regime_playbook(payload: dict[str, object]) -> None:
             ("Audit", "Full router matrix remains inspectable.", "block"),
         ],
     )
-    render_results_and_data(payload, show_guide=False)
+    render_regime_playbook_panel(payload)
 
 
 def render_data_vault(payload: dict[str, object]) -> None:
@@ -2135,7 +2416,7 @@ def render_data_vault(payload: dict[str, object]) -> None:
             ("Next gate", "Attach a complete admissible bundle.", "warn"),
         ],
     )
-    render_results_and_data(payload, show_guide=False)
+    render_data_vault_panel(payload)
 
 
 def render_decision_ledger(payload: dict[str, object]) -> None:
@@ -2149,7 +2430,7 @@ def render_decision_ledger(payload: dict[str, object]) -> None:
             ("Artifacts", "Raw tables stay available for review.", "good"),
         ],
     )
-    render_results_and_data(payload, show_guide=False)
+    render_decision_ledger_panel(payload)
 
 
 def render_strategy_workbench() -> None:

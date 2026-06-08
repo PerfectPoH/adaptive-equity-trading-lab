@@ -3,6 +3,7 @@ from __future__ import annotations
 import subprocess
 import sys
 from pathlib import Path
+import inspect
 
 
 def test_dashboard_app_bootstraps_repo_root_when_run_from_dashboard_dir() -> None:
@@ -41,3 +42,19 @@ def test_dashboard_app_exposes_mission_control_sections() -> None:
     assert "Strategy Builder" in SECTIONS
     assert "Data Vault" in SECTIONS
     assert "Command Center" not in SECTIONS
+
+
+def test_mission_control_routes_do_not_clone_full_data_dashboard() -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(repo_root))
+    from dashboard import app
+
+    focused_routes = [
+        app.render_regime_playbook,
+        app.render_data_vault,
+        app.render_decision_ledger,
+    ]
+
+    for route in focused_routes:
+        source = inspect.getsource(route)
+        assert "render_results_and_data" not in source
