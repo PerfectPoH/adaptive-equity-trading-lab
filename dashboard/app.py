@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from html import escape
 import json
 import math
 from pathlib import Path
@@ -164,12 +165,15 @@ def inject_theme() -> None:
             linear-gradient(90deg, rgba(231,226,216,.55) 1px, transparent 1px),
             var(--lab-bg);
           background-size: auto, auto, 72px 72px;
+          background-position: 0 0, 0 0, 0 0;
           color: var(--lab-ink);
           font-family: "Instrument Sans", system-ui, sans-serif;
+          animation: labGridDrift 28s linear infinite;
         }
         section[data-testid="stSidebar"] {
           background: rgba(251, 250, 247, .94);
           border-right: 1px solid var(--lab-line);
+          min-width: 310px;
         }
         section[data-testid="stSidebar"] * {
           color: var(--lab-ink);
@@ -203,12 +207,28 @@ def inject_theme() -> None:
           line-height: 1.35;
         }
         section[data-testid="stSidebar"] [role="radiogroup"] label {
-          border: 0;
-          border-bottom: 1px solid transparent;
+          border: 1px solid var(--lab-line);
           border-radius: 8px;
           margin-bottom: 8px;
-          padding: 8px 10px;
-          background: transparent;
+          padding: 9px 11px;
+          background: rgba(255,255,255,.72);
+          cursor: pointer;
+          transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+        }
+        section[data-testid="stSidebar"] [role="radiogroup"] label:hover {
+          background: #ffffff;
+          border-color: #93c5fd;
+          box-shadow: 0 10px 28px rgba(37,99,235,.10);
+          transform: translateX(2px);
+        }
+        section[data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) {
+          background: #2563eb;
+          border-color: #2563eb;
+          box-shadow: 0 16px 34px rgba(37,99,235,.22);
+        }
+        section[data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) p,
+        section[data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) span {
+          color: #ffffff !important;
         }
         .mc-sidebar-shell {
           display: grid;
@@ -320,6 +340,9 @@ def inject_theme() -> None:
           padding-bottom: 5rem;
           max-width: 1420px;
         }
+        .block-container > div {
+          animation: labFadeUp .42s ease both;
+        }
         .lab-shell-nav {
           position: sticky;
           top: 0;
@@ -368,6 +391,7 @@ def inject_theme() -> None:
           background: #eff6ff;
           color: #1d4ed8;
           border-color: #2563eb;
+          transform: translateY(-1px);
         }
         div[data-testid="stButton"] > button[kind="primary"] {
           background: #2563eb;
@@ -447,10 +471,124 @@ def inject_theme() -> None:
           margin-bottom: 18px;
         }
         div[data-testid="stPlotlyChart"] {
+          background: #ffffff;
+          border: 1px solid var(--lab-line);
           border-radius: 12px;
+          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 42px rgba(23,23,23,.055);
           overflow: hidden;
           margin-top: 8px;
           margin-bottom: 26px;
+          padding: 10px;
+          transition: transform .18s ease, box-shadow .18s ease;
+        }
+        div[data-testid="stPlotlyChart"]:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 26px 58px rgba(23,23,23,.08);
+        }
+        div[data-testid="stPlotlyChart"] .modebar {
+          display: none !important;
+        }
+        div[data-testid="stPlotlyChart"] .main-svg {
+          background: #ffffff !important;
+        }
+        div[data-testid="stPlotlyChart"] .xtick text,
+        div[data-testid="stPlotlyChart"] .ytick text,
+        div[data-testid="stPlotlyChart"] .gtitle,
+        div[data-testid="stPlotlyChart"] .xtitle,
+        div[data-testid="stPlotlyChart"] .ytitle,
+        div[data-testid="stPlotlyChart"] .legendtext,
+        div[data-testid="stPlotlyChart"] .annotation-text {
+          fill: #0f172a !important;
+          opacity: 1 !important;
+        }
+        div[data-testid="stPlotlyChart"] .gridlayer path {
+          stroke: #d5dbe5 !important;
+          opacity: .85 !important;
+        }
+        .router-matrix-shell {
+          background: #ffffff;
+          border: 1px solid var(--lab-line);
+          border-radius: 14px;
+          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 42px rgba(23,23,23,.055);
+          margin: 10px 0 22px;
+          overflow-x: auto;
+          padding: 14px;
+        }
+        .router-matrix {
+          display: grid;
+          grid-template-columns: minmax(150px, .9fr) repeat(var(--regime-count), minmax(92px, 1fr));
+          gap: 8px;
+          min-width: min(100%, 760px);
+        }
+        .router-corner,
+        .router-header,
+        .router-family,
+        .router-cell {
+          border-radius: 10px;
+          min-height: 54px;
+          padding: 10px;
+        }
+        .router-corner,
+        .router-header {
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          color: #334155;
+          font-family: "IBM Plex Mono", monospace;
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: .04em;
+          overflow-wrap: anywhere;
+          text-transform: uppercase;
+        }
+        .router-family {
+          align-items: center;
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          color: #0f172a;
+          display: flex;
+          font-weight: 800;
+          line-height: 1.2;
+        }
+        .router-cell {
+          border: 1px solid transparent;
+          box-shadow: inset 0 1px 0 rgba(255,255,255,.36);
+          color: #ffffff;
+          display: grid;
+          gap: 4px;
+          transition: transform .18s ease, box-shadow .18s ease;
+        }
+        .router-cell:hover {
+          box-shadow: 0 16px 34px rgba(15,23,42,.16);
+          transform: translateY(-2px);
+        }
+        .router-cell strong {
+          color: #ffffff;
+          font-family: "IBM Plex Mono", monospace;
+          font-size: 12px;
+          letter-spacing: .02em;
+          line-height: 1.15;
+          overflow-wrap: anywhere;
+        }
+        .router-cell small {
+          color: rgba(255,255,255,.86);
+          font-size: 11px;
+          line-height: 1.25;
+        }
+        .router-cell.block {
+          background: linear-gradient(135deg, #be123c, #d12f5f);
+        }
+        .router-cell.reduce {
+          background: linear-gradient(135deg, #b45309, #d97706);
+        }
+        .router-cell.proxy {
+          background: linear-gradient(135deg, #1d4ed8, #1f5eff);
+        }
+        .router-cell.overlay,
+        .router-cell.allow {
+          background: linear-gradient(135deg, #047857, #0f9f75);
+        }
+        .router-cell.observe {
+          background: linear-gradient(135deg, #6d28d9, #7c3aed);
         }
         div[data-testid="stSlider"] [data-testid="stTickBar"] {
           color: #334155;
@@ -1027,6 +1165,25 @@ def inject_theme() -> None:
           padding: 12px;
           background: #fff;
         }
+        @keyframes labFadeUp {
+          from { opacity: 0; transform: translateY(12px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes labGridDrift {
+          from { background-position: 0 0, 0 0, 0 0; }
+          to { background-position: 18px 10px, -14px 8px, 72px 72px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          html, body, [data-testid="stAppViewContainer"],
+          .block-container > div,
+          div[data-testid="stPlotlyChart"],
+          div[data-testid="stButton"] > button,
+          section[data-testid="stSidebar"] [role="radiogroup"] label {
+            animation: none !important;
+            transition: none !important;
+            transform: none !important;
+          }
+        }
         @media (max-width: 768px) {
           .lab-hero { padding: 24px; min-height: 260px; }
           .lab-title { font-size: 42px; }
@@ -1272,6 +1429,69 @@ def page_guide(title: str, copy: str, cards: list[tuple[str, str, str]]) -> None
 
 def section_note(text: str) -> None:
     st.markdown(f'<div class="section-note">{text}</div>', unsafe_allow_html=True)
+
+
+def router_cell_class(posture: object) -> str:
+    normalized = str(posture or "").upper()
+    if "BLOCK" in normalized:
+        return "block"
+    if "REDUCE" in normalized:
+        return "reduce"
+    if "OVERLAY" in normalized:
+        return "overlay"
+    if "OBSERVE" in normalized:
+        return "observe"
+    if "ALLOW" in normalized or "PROXY" in normalized:
+        return "proxy"
+    return "proxy"
+
+
+def humanize_router_label(value: object) -> str:
+    return " ".join(str(value or "").replace("_", " ").split())
+
+
+def render_router_matrix(router_matrix: pd.DataFrame) -> None:
+    regimes = [str(regime) for regime in router_matrix["regime_label"].drop_duplicates().tolist()]
+    families = [str(family) for family in router_matrix["strategy_family"].drop_duplicates().tolist()]
+    lookup = {
+        (str(row["strategy_family"]), str(row["regime_label"])): row
+        for _, row in router_matrix.iterrows()
+    }
+    cells: list[str] = ['<div class="router-corner">Strategy family</div>']
+    cells.extend(f'<div class="router-header">{escape(humanize_router_label(regime))}</div>' for regime in regimes)
+    for family in families:
+        cells.append(f'<div class="router-family">{escape(family)}</div>')
+        for regime in regimes:
+            row = lookup.get((family, regime))
+            if row is None:
+                posture = "NO DATA"
+                score = ""
+                why = "No router row for this family/regime pair."
+            else:
+                posture = str(row.get("posture", "UNKNOWN"))
+                score_value = row.get("score", "")
+                try:
+                    score_number = float(score_value)
+                except (TypeError, ValueError):
+                    score = ""
+                else:
+                    score = f"score {score_number:.2f}" if not math.isnan(score_number) else ""
+                why = str(row.get("why", ""))
+            class_name = router_cell_class(posture)
+            cells.append(
+                f'<div class="router-cell {class_name}" title="{escape(why)}">'
+                f"<strong>{escape(humanize_router_label(posture))}</strong><small>{escape(score)}</small></div>"
+            )
+    st.markdown(
+        f"""
+        <div class="router-matrix-shell">
+          <div class="router-matrix" style="--regime-count: {max(len(regimes), 1)};">
+            {''.join(cells)}
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 def compact_component_label(component_id: str, name: str, template: str | None = None) -> str:
@@ -2136,41 +2356,7 @@ def render_regime_playbook_panel(payload: dict[str, object]) -> None:
         metric_card("Regimes", strategy_router.get("regimes_mapped", 0) if isinstance(strategy_router, dict) else 0, "Market states mapped")
 
     if isinstance(router_matrix, pd.DataFrame) and not router_matrix.empty:
-        posture_text = router_matrix.pivot(index="strategy_family", columns="regime_label", values="posture")
-        score_matrix = router_matrix.pivot(index="strategy_family", columns="regime_label", values="score")
-        hover_matrix = router_matrix.pivot(index="strategy_family", columns="regime_label", values="why")
-        fig = go.Figure(
-            data=go.Heatmap(
-                z=score_matrix.to_numpy(),
-                x=list(score_matrix.columns),
-                y=list(score_matrix.index),
-                text=posture_text.to_numpy(),
-                customdata=hover_matrix.to_numpy(),
-                texttemplate="%{text}",
-                hovertemplate="<b>%{y}</b><br>%{x}<br>Posture: %{text}<br>%{customdata}<extra></extra>",
-                colorscale=[
-                    [0.00, "#d12f5f"],
-                    [0.35, "#d97706"],
-                    [0.60, "#1f5eff"],
-                    [1.00, "#0f9f75"],
-                ],
-                zmin=0,
-                zmax=1,
-                showscale=False,
-            )
-        )
-        fig.update_layout(
-            height=440,
-            margin=dict(l=0, r=0, t=10, b=10),
-            xaxis_title="Market regime",
-            yaxis_title="Strategy family",
-            paper_bgcolor="rgba(255,255,255,.72)",
-            plot_bgcolor="rgba(255,255,255,.72)",
-            font=dict(color="#171717", family="Instrument Sans"),
-        )
-        fig.update_xaxes(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
-        fig.update_yaxes(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
-        st.plotly_chart(fig, width="stretch")
+        render_router_matrix(router_matrix)
         st.caption("Reading rule: red blocks capital, amber reduces sizing, blue is proxy-only exploration, green is risk overlay/governance.")
 
     if isinstance(router_summary, pd.DataFrame) and not router_summary.empty:
@@ -2190,19 +2376,23 @@ def render_regime_playbook_panel(payload: dict[str, object]) -> None:
             x="regime_label",
             y="size",
             color="regime_label",
+            text="size",
             color_discrete_sequence=["#1f5eff", "#0f9f75", "#d97706", "#7c3aed", "#d12f5f", "#71717a"],
         )
+        fig.update_traces(textposition="outside", textfont=dict(color="#0f172a", size=13, family="IBM Plex Mono"))
         fig.update_layout(
             template="plotly_white",
             height=360,
-            margin=dict(l=0, r=0, t=10, b=10),
+            margin=dict(l=10, r=10, t=26, b=60),
             showlegend=False,
             xaxis_title="",
             yaxis_title="Symbol-days",
-            paper_bgcolor="rgba(255,255,255,.72)",
-            plot_bgcolor="rgba(255,255,255,.72)",
+            paper_bgcolor="#ffffff",
+            plot_bgcolor="#ffffff",
             font=dict(color="#171717", family="Instrument Sans"),
         )
+        fig.update_xaxes(tickfont=dict(color="#0f172a", size=12), title_font=dict(color="#0f172a"), gridcolor="#d5dbe5")
+        fig.update_yaxes(tickfont=dict(color="#0f172a", size=12), title_font=dict(color="#0f172a"), gridcolor="#d5dbe5")
         st.plotly_chart(fig, width="stretch")
 
     with st.expander("Audit details: full regime-strategy contract"):
@@ -2363,18 +2553,21 @@ def render_decision_ledger_panel(payload: dict[str, object]) -> None:
 
     if not ledger.empty:
         counts = ledger.groupby("decision", as_index=False).size().sort_values("size", ascending=False).head(14)
-        fig = px.bar(counts, x="size", y="decision", orientation="h", color="size", color_continuous_scale=["#eef3ff", "#1f5eff"])
+        fig = px.bar(counts, x="size", y="decision", orientation="h", color="size", text="size", color_continuous_scale=["#93c5fd", "#2563eb"])
+        fig.update_traces(textposition="outside", textfont=dict(color="#0f172a", size=12, family="IBM Plex Mono"), cliponaxis=False)
         fig.update_layout(
             template="plotly_white",
             height=520,
-            margin=dict(l=0, r=10, t=10, b=10),
+            margin=dict(l=18, r=52, t=18, b=28),
             coloraxis_showscale=False,
             yaxis_title="",
             xaxis_title="Count",
-            paper_bgcolor="rgba(255,255,255,.72)",
-            plot_bgcolor="rgba(255,255,255,.72)",
+            paper_bgcolor="#ffffff",
+            plot_bgcolor="#ffffff",
             font=dict(color="#171717", family="Instrument Sans"),
         )
+        fig.update_xaxes(tickfont=dict(color="#0f172a", size=12), title_font=dict(color="#0f172a"), gridcolor="#d5dbe5")
+        fig.update_yaxes(tickfont=dict(color="#0f172a", size=12), title_font=dict(color="#0f172a"), gridcolor="#d5dbe5")
         st.plotly_chart(fig, width="stretch")
 
         if "provider_query_performed" in ledger.columns:
@@ -4226,13 +4419,23 @@ def sidebar_navigation(payload: dict[str, object], current_section: str) -> str:
         mission_sidebar_html(section_meta.label, status),
         unsafe_allow_html=True,
     )
-    section = st.sidebar.radio(
-        "Navigate",
-        SECTIONS,
-        index=SECTIONS.index(current_section) if current_section in SECTIONS else 0,
-        label_visibility="collapsed",
-    )
-    return section
+    selected_section = current_section if current_section in SECTIONS else SECTIONS[0]
+    active_group = ""
+    for section in MISSION_SECTIONS:
+        if section.group != active_group:
+            active_group = section.group
+            st.sidebar.markdown(f'<div class="mc-nav-label">{active_group}</div>', unsafe_allow_html=True)
+        button_type = "primary" if section.label == selected_section else "secondary"
+        if st.sidebar.button(
+            section.label,
+            type=button_type,
+            width="stretch",
+            key=f"sidebar_nav_{section.label}",
+            help=section.description,
+        ):
+            selected_section = section.label
+        st.sidebar.caption(section.description)
+    return selected_section
 
 
 def main() -> None:
@@ -4243,9 +4446,8 @@ def main() -> None:
     sidebar_section = sidebar_navigation(payload, st.session_state["active_section"])
     if sidebar_section != st.session_state["active_section"]:
         st.session_state["active_section"] = sidebar_section
-    section = main_navigation(st.session_state["active_section"])
+    section = st.session_state["active_section"] if st.session_state["active_section"] in SECTIONS else "Mission Brief"
     st.session_state["active_section"] = section
-    shell_nav(section)
 
     if section == "Mission Brief":
         render_mission_brief(payload)

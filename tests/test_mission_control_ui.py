@@ -50,7 +50,7 @@ def test_build_mission_status_translates_payload_to_plain_language() -> None:
     assert status["next_gate"] == "Attach admissible data bundle"
 
 
-def test_mission_sidebar_html_contains_status_and_sections() -> None:
+def test_mission_sidebar_html_contains_status_without_fake_navigation() -> None:
     html = mission_sidebar_html(
         active_label="Portfolio Lab",
         status={
@@ -63,7 +63,6 @@ def test_mission_sidebar_html_contains_status_and_sections() -> None:
     )
 
     assert "Adaptive Lab" in html
-    assert "Portfolio Lab" in html
-    assert "Mission Brief" in html
-    assert "active" in html
     assert "Attach admissible data bundle" in html
+    assert "Portfolio Lab" not in html
+    assert "Mission Brief" not in html

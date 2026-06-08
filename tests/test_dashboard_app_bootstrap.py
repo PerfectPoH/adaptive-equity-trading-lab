@@ -58,3 +58,15 @@ def test_mission_control_routes_do_not_clone_full_data_dashboard() -> None:
     for route in focused_routes:
         source = inspect.getsource(route)
         assert "render_results_and_data" not in source
+
+
+def test_dashboard_main_uses_sidebar_not_horizontal_navigation() -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(repo_root))
+    from dashboard import app
+
+    source = inspect.getsource(app.main)
+
+    assert "sidebar_navigation" in source
+    assert "main_navigation" not in source
+    assert "shell_nav" not in source

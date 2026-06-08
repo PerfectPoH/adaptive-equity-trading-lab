@@ -59,31 +59,9 @@ def build_mission_status(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def mission_sidebar_html(active_label: str, status: dict[str, Any]) -> str:
-    grouped: dict[str, list[MissionSection]] = {}
-    for section in MISSION_SECTIONS:
-        grouped.setdefault(section.group, []).append(section)
-
-    groups_html = []
-    for group, sections in grouped.items():
-        items = []
-        for section in sections:
-            active = " active" if section.label == active_label else ""
-            items.append(
-                f'<div class="mc-nav-item{active}">'
-                f'<strong>{escape(section.label)}</strong>'
-                f'<span>{escape(section.description)}</span>'
-                "</div>"
-            )
-        groups_html.append(
-            f'<div class="mc-nav-group"><div class="mc-nav-label">{escape(group)}</div>'
-            + "".join(items)
-            + "</div>"
-        )
-
     return (
         '<div class="mc-sidebar-shell">'
         '<div class="mc-brand">Adaptive Lab<span>Research operating system</span></div>'
-        + "".join(groups_html)
         + '<div class="mc-status-card">'
         "<span>Current mode</span>"
         f'<strong>{escape(str(status.get("mode", "UNKNOWN")))}</strong>'
