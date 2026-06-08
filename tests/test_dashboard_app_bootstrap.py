@@ -68,6 +68,8 @@ def test_dashboard_main_uses_internal_rail_not_streamlit_sidebar() -> None:
     source = inspect.getsource(app.main)
 
     assert "mission_rail_navigation" in source
+    assert "collapsed_mission_rail_toggle" in source
+    assert "mission_rail_open" in source
     assert "sidebar_navigation" not in source
     assert "main_navigation" not in source
     assert "shell_nav" not in source
@@ -82,3 +84,15 @@ def test_mission_rail_navigation_is_not_streamlit_sidebar_bound() -> None:
 
     assert "st.sidebar" not in source
     assert "st.button" in source
+
+
+def test_collapsed_mission_rail_uses_separate_toggle_state_key() -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(repo_root))
+    from dashboard import app
+
+    source = inspect.getsource(app.collapsed_mission_rail_toggle)
+
+    assert "mission_rail_open_button" in source
+    assert 'key="mission_rail_open"' not in source
+    assert "set_mission_rail_open" in source

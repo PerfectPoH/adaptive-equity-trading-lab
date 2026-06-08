@@ -232,19 +232,26 @@ def inject_theme() -> None:
           color: #ffffff !important;
         }
         .mc-sidebar-shell {
+          background:
+            radial-gradient(circle at 18% 8%, rgba(31,94,255,.20), transparent 28%),
+            radial-gradient(circle at 90% 34%, rgba(217,119,6,.18), transparent 30%),
+            #0b1120;
+          border: 1px solid rgba(148,163,184,.18);
+          border-radius: 22px;
+          box-shadow: 0 24px 70px rgba(2,6,23,.28);
           display: grid;
           gap: 16px;
-          padding: 4px 0 18px;
+          padding: 20px 18px;
         }
         .mc-brand {
-          color: #0f172a;
+          color: #ffffff;
           font-size: 18px;
           font-weight: 900;
           line-height: 1.1;
         }
         .mc-brand span {
           display: block;
-          color: #64748b;
+          color: #94a3b8;
           font-size: 12px;
           font-weight: 700;
           margin-top: 5px;
@@ -254,7 +261,7 @@ def inject_theme() -> None:
           gap: 8px;
         }
         .mc-nav-label {
-          color: #64748b;
+          color: #93c5fd;
           font-family: "IBM Plex Mono", monospace;
           font-size: 11px;
           font-weight: 800;
@@ -288,7 +295,8 @@ def inject_theme() -> None:
           margin-top: 3px;
         }
         .mc-status-card {
-          background: #0f172a;
+          background: rgba(15,23,42,.76);
+          border: 1px solid rgba(148,163,184,.18);
           border-radius: 16px;
           color: #ffffff;
           padding: 14px;
@@ -364,6 +372,16 @@ def inject_theme() -> None:
           min-height: calc(100vh - 42px);
           padding: 8px 0 28px;
         }
+        .rail-toggle-note {
+          color: #64748b;
+          font-family: "IBM Plex Mono", monospace;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: .04em;
+          margin-top: 8px;
+          text-align: center;
+          text-transform: uppercase;
+        }
         .mission-rail-caption {
           border-top: 1px solid var(--lab-line);
           color: #64748b;
@@ -371,6 +389,59 @@ def inject_theme() -> None:
           line-height: 1.35;
           margin-top: 18px;
           padding-top: 14px;
+        }
+        div[data-testid="stColumn"]:has(.mc-sidebar-shell) {
+          background: #0b1120;
+          border: 1px solid rgba(148,163,184,.16);
+          border-radius: 24px;
+          box-shadow: 0 28px 80px rgba(2,6,23,.24);
+          max-height: calc(100vh - 42px);
+          overflow-y: auto;
+          padding: 14px 12px 18px;
+          position: sticky;
+          top: 14px;
+        }
+        div[data-testid="stColumn"]:has(.mc-sidebar-shell) div[data-testid="stCaptionContainer"] p,
+        div[data-testid="stColumn"]:has(.mc-sidebar-shell) div[data-testid="stMarkdownContainer"] p {
+          color: #94a3b8 !important;
+        }
+        div[data-testid="stColumn"]:has(.mc-sidebar-shell) div[data-testid="stButton"] > button {
+          background: rgba(15,23,42,.76) !important;
+          border: 1px solid rgba(148,163,184,.20) !important;
+          border-radius: 14px !important;
+          box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+          color: #e5efff !important;
+          min-height: 46px;
+          position: relative;
+          transition: background .22s ease, border-color .22s ease, box-shadow .22s ease, transform .22s ease;
+        }
+        div[data-testid="stColumn"]:has(.mc-sidebar-shell) div[data-testid="stButton"] > button:hover {
+          background: #111c34 !important;
+          border-color: rgba(96,165,250,.70) !important;
+          box-shadow: 0 0 0 1px rgba(59,130,246,.28), 0 20px 42px rgba(37,99,235,.25);
+          transform: translateX(4px) translateY(-1px);
+        }
+        div[data-testid="stColumn"]:has(.mc-sidebar-shell) div[data-testid="stButton"] > button[kind="primary"] {
+          background: linear-gradient(135deg, #2563eb, #7c3aed) !important;
+          border-color: rgba(191,219,254,.76) !important;
+          box-shadow: 0 18px 44px rgba(37,99,235,.34);
+          color: #ffffff !important;
+        }
+        div[data-testid="stColumn"]:has(.rail-toggle-note) div[data-testid="stButton"] > button {
+          aspect-ratio: 1 / 1;
+          background: #0b1120 !important;
+          border: 1px solid rgba(148,163,184,.22) !important;
+          border-radius: 12px !important;
+          box-shadow: 0 16px 38px rgba(2,6,23,.28);
+          color: #ffffff !important;
+          min-height: 54px;
+          padding: 0 !important;
+          transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        }
+        div[data-testid="stColumn"]:has(.rail-toggle-note) div[data-testid="stButton"] > button:hover {
+          border-color: #60a5fa !important;
+          box-shadow: 0 0 0 1px rgba(96,165,250,.22), 0 24px 52px rgba(37,99,235,.24);
+          transform: translateY(-2px);
         }
         .main-nav-card {
           border: 1px solid var(--lab-line);
@@ -423,6 +494,45 @@ def inject_theme() -> None:
         }
         div[data-testid="stButton"] > button * {
           color: inherit !important;
+        }
+        div[class*="st-key-mission_rail_open_button"] button {
+          aspect-ratio: 1 / 1;
+          background: #0b1120 !important;
+          border: 1px solid rgba(148,163,184,.28) !important;
+          border-radius: 12px !important;
+          box-shadow: 0 16px 38px rgba(2,6,23,.32);
+          color: #ffffff !important;
+          min-height: 54px;
+          padding: 0 !important;
+          transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        }
+        div[class*="st-key-mission_rail_open_button"] button:hover {
+          border-color: #60a5fa !important;
+          box-shadow: 0 0 0 1px rgba(96,165,250,.22), 0 24px 52px rgba(37,99,235,.28);
+          transform: translateY(-2px);
+        }
+        div[class*="st-key-mission_rail_close"] button,
+        div[class*="st-key-mission_rail_nav_"] button {
+          background: rgba(15,23,42,.76) !important;
+          border: 1px solid rgba(148,163,184,.22) !important;
+          border-radius: 14px !important;
+          box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+          color: #e5efff !important;
+          min-height: 46px;
+          transition: background .22s ease, border-color .22s ease, box-shadow .22s ease, transform .22s ease;
+        }
+        div[class*="st-key-mission_rail_close"] button:hover,
+        div[class*="st-key-mission_rail_nav_"] button:hover {
+          background: #111c34 !important;
+          border-color: rgba(96,165,250,.74) !important;
+          box-shadow: 0 0 0 1px rgba(59,130,246,.30), 0 20px 42px rgba(37,99,235,.26);
+          transform: translateX(4px) translateY(-1px);
+        }
+        div[class*="st-key-mission_rail_nav_"] button[kind="primary"] {
+          background: linear-gradient(135deg, #2563eb, #7c3aed) !important;
+          border-color: rgba(191,219,254,.76) !important;
+          box-shadow: 0 18px 44px rgba(37,99,235,.34);
+          color: #ffffff !important;
         }
         div[data-testid="stSelectbox"] label,
         div[data-testid="stTextInput"] label,
@@ -1391,6 +1501,10 @@ def main_navigation(current_section: str) -> str:
 
 def set_active_section(section_name: str) -> None:
     st.session_state["active_section"] = section_name
+
+
+def set_mission_rail_open(is_open: bool) -> None:
+    st.session_state["mission_rail_open"] = is_open
 
 
 @st.cache_data(show_spinner=False)
@@ -4428,6 +4542,14 @@ def mission_rail_navigation(payload: dict[str, object], current_section: str) ->
     metrics = governance_metrics(payload)
     status = build_mission_status({**payload, "metrics": metrics})
     section_meta = mission_section_by_label(current_section)
+    st.button(
+        "Close",
+        key="mission_rail_close",
+        width="stretch",
+        help="Hide navigation rail",
+        on_click=set_mission_rail_open,
+        args=(False,),
+    )
     st.markdown(
         mission_sidebar_html(section_meta.label, status),
         unsafe_allow_html=True,
@@ -4455,6 +4577,18 @@ def mission_rail_navigation(payload: dict[str, object], current_section: str) ->
     return selected_section
 
 
+def collapsed_mission_rail_toggle() -> None:
+    st.markdown('<div class="rail-toggle-note">Menu</div>', unsafe_allow_html=True)
+    st.button(
+        "Menu",
+        key="mission_rail_open_button",
+        width="stretch",
+        help="Open navigation rail",
+        on_click=set_mission_rail_open,
+        args=(True,),
+    )
+
+
 def render_active_section(section: str, payload: dict[str, object]) -> None:
     if section == "Mission Brief":
         render_mission_brief(payload)
@@ -4479,10 +4613,17 @@ def main() -> None:
     payload = load_dashboard_payload(Path("."))
     if "active_section" not in st.session_state:
         st.session_state["active_section"] = "Mission Brief"
+    if "mission_rail_open" not in st.session_state:
+        st.session_state["mission_rail_open"] = False
     current_section = st.session_state["active_section"] if st.session_state["active_section"] in SECTIONS else "Mission Brief"
-    rail_column, content_column = st.columns([0.22, 0.78], gap="large")
+    rail_open = bool(st.session_state["mission_rail_open"])
+    rail_column, content_column = st.columns([0.25, 0.75] if rail_open else [0.075, 0.925], gap="large")
     with rail_column:
-        selected_section = mission_rail_navigation(payload, current_section)
+        if rail_open:
+            selected_section = mission_rail_navigation(payload, current_section)
+        else:
+            collapsed_mission_rail_toggle()
+            selected_section = current_section
     if selected_section != st.session_state["active_section"]:
         st.session_state["active_section"] = selected_section
     section = st.session_state["active_section"] if st.session_state["active_section"] in SECTIONS else "Mission Brief"
