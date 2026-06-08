@@ -60,13 +60,25 @@ def test_mission_control_routes_do_not_clone_full_data_dashboard() -> None:
         assert "render_results_and_data" not in source
 
 
-def test_dashboard_main_uses_sidebar_not_horizontal_navigation() -> None:
+def test_dashboard_main_uses_internal_rail_not_streamlit_sidebar() -> None:
     repo_root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(repo_root))
     from dashboard import app
 
     source = inspect.getsource(app.main)
 
-    assert "sidebar_navigation" in source
+    assert "mission_rail_navigation" in source
+    assert "sidebar_navigation" not in source
     assert "main_navigation" not in source
     assert "shell_nav" not in source
+
+
+def test_mission_rail_navigation_is_not_streamlit_sidebar_bound() -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(repo_root))
+    from dashboard import app
+
+    source = inspect.getsource(app.mission_rail_navigation)
+
+    assert "st.sidebar" not in source
+    assert "st.button" in source

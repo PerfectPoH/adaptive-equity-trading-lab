@@ -1,6 +1,7 @@
 from dashboard.mission_control_ui import (
     MISSION_SECTIONS,
     build_mission_status,
+    humanize_status_label,
     mission_section_by_label,
     mission_sidebar_html,
 )
@@ -64,5 +65,11 @@ def test_mission_sidebar_html_contains_status_without_fake_navigation() -> None:
 
     assert "Adaptive Lab" in html
     assert "Attach admissible data bundle" in html
+    assert "Risk Regime Engine Only" in html
+    assert "RISK_REGIME_ENGINE_ONLY" not in html
     assert "Portfolio Lab" not in html
     assert "Mission Brief" not in html
+
+
+def test_humanize_status_label_keeps_ui_readable() -> None:
+    assert humanize_status_label("RISK_REGIME_ENGINE_ONLY") == "Risk Regime Engine Only"

@@ -58,13 +58,17 @@ def build_mission_status(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def humanize_status_label(value: Any) -> str:
+    return " ".join(str(value or "UNKNOWN").replace("_", " ").split()).title()
+
+
 def mission_sidebar_html(active_label: str, status: dict[str, Any]) -> str:
     return (
         '<div class="mc-sidebar-shell">'
         '<div class="mc-brand">Adaptive Lab<span>Research operating system</span></div>'
         + '<div class="mc-status-card">'
         "<span>Current mode</span>"
-        f'<strong>{escape(str(status.get("mode", "UNKNOWN")))}</strong>'
+        f'<strong>{escape(humanize_status_label(status.get("mode", "UNKNOWN")))}</strong>'
         f'<em>{escape(str(status.get("plain_english_blocker", "")))}</em>'
         f'<small>Promoted: {escape(str(status.get("promoted", 0)))} | Blocker: {escape(str(status.get("current_blocker", "UNKNOWN")))}</small>'
         f'<small>Next: {escape(str(status.get("next_gate", "Review gate")))}</small>'

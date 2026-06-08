@@ -88,6 +88,7 @@ from dashboard.lab_dashboard_data import (
 from dashboard.mission_control_ui import (
     MISSION_SECTIONS,
     build_mission_status,
+    humanize_status_label,
     mission_section_by_label,
     mission_sidebar_html,
 )
@@ -170,10 +171,10 @@ def inject_theme() -> None:
           font-family: "Instrument Sans", system-ui, sans-serif;
           animation: labGridDrift 28s linear infinite;
         }
-        section[data-testid="stSidebar"] {
-          background: rgba(251, 250, 247, .94);
-          border-right: 1px solid var(--lab-line);
-          min-width: 310px;
+        section[data-testid="stSidebar"],
+        [data-testid="stSidebarCollapsedControl"] {
+          display: none !important;
+          visibility: hidden !important;
         }
         section[data-testid="stSidebar"] * {
           color: var(--lab-ink);
@@ -338,7 +339,7 @@ def inject_theme() -> None:
         .block-container {
           padding-top: 1.05rem;
           padding-bottom: 5rem;
-          max-width: 1420px;
+          max-width: 1760px;
         }
         .block-container > div {
           animation: labFadeUp .42s ease both;
@@ -358,6 +359,18 @@ def inject_theme() -> None:
           padding: 12px 14px;
           margin-bottom: 22px;
           box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 16px 46px rgba(23,23,23,.055);
+        }
+        .mission-rail-spacer {
+          min-height: calc(100vh - 42px);
+          padding: 8px 0 28px;
+        }
+        .mission-rail-caption {
+          border-top: 1px solid var(--lab-line);
+          color: #64748b;
+          font-size: 12px;
+          line-height: 1.35;
+          margin-top: 18px;
+          padding-top: 14px;
         }
         .main-nav-card {
           border: 1px solid var(--lab-line);
@@ -1675,7 +1688,7 @@ def render_hero(metrics: dict[str, object]) -> None:
           <div class="lab-title">A quant lab that turned failed alpha into a risk machine.</div>
           <div class="lab-subtitle">
             Every strategy below has a real chart demonstration, a thesis, a governance path, and a final verdict.
-            The current state is <strong>{metrics["final_policy"]}</strong>: no live deployment, no hidden promotion,
+            The current state is <strong>{humanize_status_label(metrics["final_policy"])}</strong>: no live deployment, no hidden promotion,
             and no strategy allowed past the cost and robustness gates.
           </div>
         </div>
@@ -1705,7 +1718,7 @@ def render_overview(payload: dict[str, object]) -> None:
     with c3:
         metric_card("Provider Queries", metrics["provider_query_rows"], "Rows that touched external providers")
     with c4:
-        metric_card("Final Mode", metrics["final_policy"], "Research posture after closure")
+        metric_card("Final Mode", humanize_status_label(metrics["final_policy"]), "Research posture after closure")
 
     phase = payload["phase_summary"]
     blockers = phase.get("primary_blockers", [])
@@ -1752,7 +1765,7 @@ def render_mission_brief(payload: dict[str, object]) -> None:
     with k1:
         metric_card("Promoted", metrics["promoted_strategy_count"], "No strategy passed promotion gates")
     with k2:
-        metric_card("Mode", status["mode"], "Current operating posture")
+        metric_card("Mode", humanize_status_label(status["mode"]), "Current operating posture")
     with k3:
         metric_card("Blocker", status["current_blocker"], status["plain_english_blocker"])
     with k4:
@@ -2549,7 +2562,7 @@ def render_decision_ledger_panel(payload: dict[str, object]) -> None:
     with c3:
         metric_card("Promoted", metrics["promoted_strategy_count"], "Promotion gates passed")
     with c4:
-        metric_card("Final mode", metrics["final_policy"], "Current posture")
+        metric_card("Final mode", humanize_status_label(metrics["final_policy"]), "Current posture")
 
     if not ledger.empty:
         counts = ledger.groupby("decision", as_index=False).size().sort_values("size", ascending=False).head(14)
@@ -4411,11 +4424,11 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
         st.json(paths)
 
 
-def sidebar_navigation(payload: dict[str, object], current_section: str) -> str:
+def mission_rail_navigation(payload: dict[str, object], current_section: str) -> str:
     metrics = governance_metrics(payload)
     status = build_mission_status({**payload, "metrics": metrics})
     section_meta = mission_section_by_label(current_section)
-    st.sidebar.markdown(
+    st.markdown(
         mission_sidebar_html(section_meta.label, status),
         unsafe_allow_html=True,
     )
@@ -4424,31 +4437,25 @@ def sidebar_navigation(payload: dict[str, object], current_section: str) -> str:
     for section in MISSION_SECTIONS:
         if section.group != active_group:
             active_group = section.group
-            st.sidebar.markdown(f'<div class="mc-nav-label">{active_group}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="mc-nav-label">{active_group}</div>', unsafe_allow_html=True)
         button_type = "primary" if section.label == selected_section else "secondary"
-        if st.sidebar.button(
+        if st.button(
             section.label,
             type=button_type,
             width="stretch",
-            key=f"sidebar_nav_{section.label}",
+            key=f"mission_rail_nav_{section.label}",
             help=section.description,
         ):
             selected_section = section.label
-        st.sidebar.caption(section.description)
+        st.caption(section.description)
+    st.markdown(
+        '<div class="mission-rail-caption">Navigation is part of the app canvas, so it stays available even when the native Streamlit sidebar is closed.</div>',
+        unsafe_allow_html=True,
+    )
     return selected_section
 
 
-def main() -> None:
-    inject_theme()
-    payload = load_dashboard_payload(Path("."))
-    if "active_section" not in st.session_state:
-        st.session_state["active_section"] = "Mission Brief"
-    sidebar_section = sidebar_navigation(payload, st.session_state["active_section"])
-    if sidebar_section != st.session_state["active_section"]:
-        st.session_state["active_section"] = sidebar_section
-    section = st.session_state["active_section"] if st.session_state["active_section"] in SECTIONS else "Mission Brief"
-    st.session_state["active_section"] = section
-
+def render_active_section(section: str, payload: dict[str, object]) -> None:
     if section == "Mission Brief":
         render_mission_brief(payload)
     elif section == "Project Story":
@@ -4465,6 +4472,22 @@ def main() -> None:
         render_decision_ledger(payload)
     else:
         render_mission_brief(payload)
+
+
+def main() -> None:
+    inject_theme()
+    payload = load_dashboard_payload(Path("."))
+    if "active_section" not in st.session_state:
+        st.session_state["active_section"] = "Mission Brief"
+    current_section = st.session_state["active_section"] if st.session_state["active_section"] in SECTIONS else "Mission Brief"
+    rail_column, content_column = st.columns([0.22, 0.78], gap="large")
+    with rail_column:
+        selected_section = mission_rail_navigation(payload, current_section)
+    if selected_section != st.session_state["active_section"]:
+        st.session_state["active_section"] = selected_section
+    section = st.session_state["active_section"] if st.session_state["active_section"] in SECTIONS else "Mission Brief"
+    with content_column:
+        render_active_section(section, payload)
 
 
 if __name__ == "__main__":
