@@ -62,3 +62,29 @@ parametri, nessun provider a pagamento. Il download yfinance per ETF/large-cap
 correnti e' ammesso previa conferma owner al momento dell'esecuzione.
 
 Vedi [[Stato-Corrente]], [[Roadmap-Master]], [[Regole-Quant]].
+
+---
+
+## Emendamento 001 (2026-06-11, PRIMA dell'esecuzione)
+
+Dichiarato prima di qualsiasi run OOS, come richiesto da questa spec:
+
+1. **Regole causali al posto del ranking ex-post.** Le entry factory usavano
+   ranking del segnale sull'intera storia (soglia nota ex-post). Il true
+   backtest usa soglie ROLLING causali (quantile su finestra 252d trailing):
+   - Momentum 90/180: entra se il 21d trailing return >= quantile rolling 0.90.
+   - Mean Reversion 180: entra se il 2d return <= quantile rolling 0.10.
+   - Dollar-Bar 180 (proxy daily): entra se il pct-change del dollar volume
+     >= quantile rolling 0.90 in un giorno negativo.
+2. **Motore dedicato** con gli stessi invarianti del backtester small-cap
+   (entry next-open, cash reale, no leva) invece dell'adapter: meno rischio
+   di comportamenti ereditati non pertinenti all'universo ETF.
+3. **Costi 100 bps round-trip** (come le varianti factory vincitrici),
+   PIU' conservativi dei 10 bps della spec originale.
+4. **Exit solo a timeout** (fedele alle regole validate: la factory non ha stop).
+5. **Sizing**: 10% dell'equity per posizione, max 10 concorrenti, no leva.
+6. **Difesa**: exposure scaling del regime classifier all'entry
+   (HIGH_VOL 0.25, TREND_DOWN 0.50). Il routing per-regime delle famiglie
+   NON e' incluso in v1 (label set diverso); dichiarato come limite.
+7. **Dati**: yfinance auto-adjusted, download autorizzato dall'owner in chat
+   il 2026-06-11. Universo: SPY QQQ IWM + 9 settoriali SPDR + 8 large-cap correnti.

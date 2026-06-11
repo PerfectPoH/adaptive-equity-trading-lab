@@ -32,8 +32,9 @@ tags: [stato, snapshot, operativo]
 
 ## Prossimo passo canonico
 
-1. [[TRIAL-TRUE-ETF-001-Spec]] - true backtest capital-aware su universo
-   ETF/large-cap ammissibile con dati gratuiti (spec congelata, da implementare).
+1. TRIAL-TRUE-ETF-002: holding 90d per portare N >= 100 trade (eseguito il 001:
+   3/5 gate, vedi [[Report-True-ETF-Backtest-2026-06-11]] - Sharpe reale 0.08,
+   difesa classifier peggiorativa su dati reali).
 2. Replica mensile automatica del protocollo congelato (gia' schedulata).
 3. Decisione owner sul data bundle (Norgate/Sharadar) solo se serve small-cap.
 

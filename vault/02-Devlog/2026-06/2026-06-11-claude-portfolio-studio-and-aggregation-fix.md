@@ -121,3 +121,12 @@ nel router. Vedi [[Report-Kronos-Defense-Duel-2026-06-11]].
 - Igiene vault: 0 note orfane (da 133), indici aggiornati (+58 devlog, +111
   report), creata [[Stato-Corrente]] e linkata in cima all'INDEX.
 - Spec congelata del prossimo gate: [[TRIAL-TRUE-ETF-001-Spec]].
+
+## TRIAL-TRUE-ETF-001: primo true backtest su dati reali
+
+Download autorizzato (20 simboli ETF/large-cap), regole causali, capitale
+reale. 3/5 gate: batte SPY risk-adjusted, robusto ex-top3 e ai costi; FAIL su
+DSR (Sharpe reale 0.08 vs 0.35 proxy) e N trade (40 < 100). La difesa
+classifier su dati reali peggiora il risk-adjusted: il risultato HOUSE non si
+trasferisce. Vedi [[Report-True-ETF-Backtest-2026-06-11]]. Prossimo:
+TRIAL-TRUE-ETF-002 con holding 90d per N >= 100.
