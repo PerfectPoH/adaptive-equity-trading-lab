@@ -25,3 +25,7 @@ experiments/provider_aware_research/execution_outputs/USER-STRATEGY-WORKBENCH/
 .idea/
 Thumbs.db
 Desktop.ini
+
+# Backup e file di lavoro locali
+*.bak_pre_redesign
+streamlit*.log
