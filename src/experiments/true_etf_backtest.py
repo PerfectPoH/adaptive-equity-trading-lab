@@ -29,6 +29,7 @@ class TrueEtfConfig:
     meanrev_quantile: float = 0.10
     dollarbar_quantile: float = 0.90
     holdings: tuple[int, ...] = (90, 180)
+    active_holding: int = 180
     cost_bps_round_trip: float = 100.0
     position_fraction: float = 0.10
     max_positions: int = 10
@@ -160,7 +161,11 @@ def run_true_etf_backtest(
             if symbol in held or date not in sig.index:
                 continue
             row = sig.loc[date]
-            for rule, holding in (("momentum", config.holdings[1]), ("meanrev", config.holdings[1]), ("dollarbar", config.holdings[1])):
+            for rule, holding in (
+                ("momentum", config.active_holding),
+                ("meanrev", config.active_holding),
+                ("dollarbar", config.active_holding),
+            ):
                 if bool(row[rule]):
                     pending_entries.append({"symbol": symbol, "rule": f"{rule}_{holding}d", "holding": holding, "exposure_scale": scale_today})
                     break

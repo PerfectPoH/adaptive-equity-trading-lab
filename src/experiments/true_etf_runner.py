@@ -47,10 +47,17 @@ def download_universe() -> dict[str, pd.DataFrame]:
 
 
 def main() -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--holding", type=int, default=180)
+    parser.add_argument("--dsr-trials", type=float, default=2.0)
+    parser.add_argument("--trial-id", default="TRIAL-TRUE-ETF-001")
+    args = parser.parse_args()
     print("FASE A: download universo autorizzato (yfinance, auto-adjusted)...", flush=True)
     panels = download_universe()
     spy = panels["SPY"]
-    cfg = TrueEtfConfig()
+    cfg = TrueEtfConfig(active_holding=args.holding, dsr_trial_count=args.dsr_trials)
     print("FASE B: backtest capital-aware (costi base e raddoppiati)...", flush=True)
     base = run_true_etf_backtest(panels, spy, cfg, apply_defense=True)
     double = run_true_etf_backtest(panels, spy, cfg, apply_defense=True, cost_multiplier=2.0)
@@ -65,7 +72,9 @@ def main() -> int:
         "max_drawdown": round(float((curve_u / curve_u.cummax() - 1.0).min()), 6),
     }
 
-    out_dir = Path("experiments/runs") / f"true_etf_001_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    gates["trial_id"] = args.trial_id
+    slug = args.trial_id.lower().replace("trial-true-etf-", "true_etf_")
+    out_dir = Path("experiments/runs") / f"{slug}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
     out_dir.mkdir(parents=True, exist_ok=True)
     base["equity"].to_csv(out_dir / "equity_curve.csv")
     base["trades"].to_csv(out_dir / "trade_log.csv", index=False)

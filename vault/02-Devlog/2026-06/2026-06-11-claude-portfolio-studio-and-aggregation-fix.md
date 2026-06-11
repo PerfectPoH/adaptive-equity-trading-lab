@@ -130,3 +130,11 @@ DSR (Sharpe reale 0.08 vs 0.35 proxy) e N trade (40 < 100). La difesa
 classifier su dati reali peggiora il risk-adjusted: il risultato HOUSE non si
 trasferisce. Vedi [[Report-True-ETF-Backtest-2026-06-11]]. Prossimo:
 TRIAL-TRUE-ETF-002 con holding 90d per N >= 100.
+
+## TRIAL-TRUE-ETF-002 e archivio del candidato
+
+Holding 90d: 2/5 gate, perde anche vs SPY. Candidato TRUE-ETF archiviato per
+regola del lab (N insufficiente al 180d, risk-adjusted distrutto al 90d).
+Vedi [[Report-True-ETF-002-Archive-Decision-2026-06-11]]. Restano due strade,
+entrambe decisione owner: universo ETF ampliato (003, trial_count=4) o data
+bundle small-cap.

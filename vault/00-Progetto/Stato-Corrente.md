@@ -32,11 +32,13 @@ tags: [stato, snapshot, operativo]
 
 ## Prossimo passo canonico
 
-1. TRIAL-TRUE-ETF-002: holding 90d per portare N >= 100 trade (eseguito il 001:
-   3/5 gate, vedi [[Report-True-ETF-Backtest-2026-06-11]] - Sharpe reale 0.08,
-   difesa classifier peggiorativa su dati reali).
+1. DECISIONE OWNER dopo l'archivio TRUE-ETF
+   ([[Report-True-ETF-002-Archive-Decision-2026-06-11]]):
+   (a) TRIAL-TRUE-ETF-003 con universo ETF ampliato (~50, trial_count=4,
+   ultima cartuccia gratuita) oppure (b) data bundle a pagamento per le
+   small-cap. Niente altro e' ammesso su questo candidato.
 2. Replica mensile automatica del protocollo congelato (gia' schedulata).
-3. Decisione owner sul data bundle (Norgate/Sharadar) solo se serve small-cap.
+3. La pipeline true-backtest (regole causali + 5 gate) resta pronta e provata.
 
 ## Da NON fare
 
