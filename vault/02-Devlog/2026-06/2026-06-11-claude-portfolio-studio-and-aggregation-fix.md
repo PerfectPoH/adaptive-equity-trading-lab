@@ -165,3 +165,13 @@ P-value (1+c)/(n+1), f-string portabile, companion gate honest-baselines nella
 replica mensile, e metrica membership_blend_static: la decomposizione dice
 membership +32.7pp (l'asset reale), timing +8.5pp non significativo (p=0.119).
 Vedi addendum in [[Report-Honest-Baselines-Trial-2026-06-11]].
+
+## RISK-044 chiuso: estensione causale degli stream
+
+`stream_extension.py`: refresh yfinance dei simboli vivi, entry post-freeze
+con soglie rolling causali (mai restating del passato), trade chiusi appesi
+allo stream, pendenti tracciati. Validato: 32 componenti estesi, 195 trade
+nuovi, 270 pendenti. Scoperta chiave: i basket member 90/180d chiudono i
+primi trade post-freeze a settembre 2026/febbraio 2027 - aggiunta la regola
+di conteggio mesi al criterio (contano solo i mesi in cui i valori si
+muovono). Il conteggio dei 6 mesi PUO' partire dal run di luglio.

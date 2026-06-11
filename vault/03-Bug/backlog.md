@@ -801,4 +801,8 @@ timeout off-by-one (audit B6)
   price panel large-cap/ETF e rigenerazione delle entry SOLO sui nuovi mesi
   (soglie rolling causali, mai ricalcolate sul passato). Da chiudere prima
   del 2026-07-01.
-- Stato: aperto. Vedi [[Criterio-Preregistrato-Membership-2026-06]].
+- Stato: CHIUSO 2026-06-11. `src/experiments/stream_extension.py` +
+  `--extend-streams` nel companion gate, validato end-to-end (32 estesi,
+  195 trade nuovi, 270 pendenti). Regola di conteggio mesi aggiunta al
+  criterio (Emendamento 001). Resta dichiarato il forward-fill della regime
+  map per i periodi nuovi.

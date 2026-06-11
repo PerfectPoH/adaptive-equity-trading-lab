@@ -56,3 +56,26 @@ aperto, i report mensili contano come VERIFICA DI RIPRODUCIBILITA', non come
 evidenza nuova, e il conteggio dei 6 mesi NON parte.
 
 Vedi [[Stato-Corrente]], [[Report-External-Audit-2026-06-11]].
+
+---
+
+## Emendamento 001 (2026-06-11, stesso giorno, PRIMA del primo report mensile)
+
+RISK-044 implementato e validato end-to-end (`stream_extension.py`,
+flag `--extend-streams` nel companion gate). Coverage del primo run:
+32 componenti estesi, 195 trade nuovi chiusi, 270 pendenti, 76 congelati
+(template non causale o eventi: restano onestamente fermi).
+
+Precisazioni operative scoperte alla validazione:
+
+1. **Regola di conteggio mesi**: un mese CONTA per il criterio 5/6 solo se
+   `membership_blend_static` O `unconditional_top5` cambiano rispetto al mese
+   precedente (= almeno un trade chiuso e' entrato nei loro stream). I mesi
+   senza variazione non contano ne' a favore ne' contro. Motivo: i basket
+   member principali hanno holding 90/180d - i loro primi trade post-freeze
+   chiudono ~settembre 2026 (90d) e ~febbraio 2027 (180d).
+2. **Regime map forward-fill**: le label di regime per i periodi nuovi sono
+   il forward-fill dell'ultima label nota (2026-05-08). Limite dichiarato;
+   un refresh causale della regime map e' lavoro futuro separato.
+3. I trade pendenti vengono tracciati (`pending_open_trades`) e compaiono
+   nei report mensili come "pipeline in maturazione".

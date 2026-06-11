@@ -194,6 +194,7 @@ def run_honest_baselines_trial(
 
 
 def main() -> int:
+    import argparse
     import json
     from datetime import datetime
     from pathlib import Path
@@ -208,9 +209,28 @@ def main() -> int:
         load_portfolio_lab_components,
     )
 
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--extend-streams", action="store_true", help="RISK-044: estende gli stream con dati freschi (causale)")
+    args = parser.parse_args()
+
     components = load_portfolio_lab_components(limit=60) + build_strategy_factory_components(max_variants=48)
+    extension_coverage = None
+    if args.extend_streams:
+        from src.experiments.stream_extension import component_recipe, extend_components, refresh_panel
+
+        symbols: set[str] = set()
+        for component in components:
+            recipe = component_recipe(component)
+            if recipe:
+                symbols.update(recipe.symbols)
+        print(f"RISK-044: refresh panel per {len(symbols)} simboli...", flush=True)
+        panels = refresh_panel(symbols)
+        components, extension_coverage = extend_components(components, panels)
+        print(f"RISK-044 coverage: {extension_coverage}", flush=True)
     payload = load_dashboard_payload(Path("."))
     result = run_honest_baselines_trial(components, payload["strategy_regime_router"]["matrix"], payload["regime_map"])
+    if extension_coverage is not None:
+        result["stream_extension_coverage"] = extension_coverage
     out_dir = Path("experiments/runs") / f"honest_baselines_008_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "result.json").write_text(json.dumps(result, indent=2, default=str), encoding="utf-8")
