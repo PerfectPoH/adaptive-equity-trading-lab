@@ -790,3 +790,15 @@ timeout off-by-one (audit B6)
   al cash investibile; benchmark total-return (Adj Close) quando disponibile;
   timeout allineato (uscita all'Open dello stesso giorno del Close label).
   Rerun verificato: 20260611_161603.
+
+### RISK-044 - Refresh dati per la replica mensile (prerequisito del criterio membership)
+
+- Priorita: P1 (blocca il conteggio dei 6 mesi del criterio preregistrato).
+- Sintomo: stream componenti da artifact/price file fermi al 2026-05-08:
+  le repliche mensili sarebbero identiche e il criterio passerebbe per
+  costruzione.
+- Azione: estensione causale degli stream con dati freschi - refresh del
+  price panel large-cap/ETF e rigenerazione delle entry SOLO sui nuovi mesi
+  (soglie rolling causali, mai ricalcolate sul passato). Da chiudere prima
+  del 2026-07-01.
+- Stato: aperto. Vedi [[Criterio-Preregistrato-Membership-2026-06]].

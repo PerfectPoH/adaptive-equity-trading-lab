@@ -37,8 +37,13 @@ tags: [stato, snapshot, operativo]
    (a) data bundle a pagamento (Norgate/Sharadar) per small-cap/eventi con
    PIT veri; (b) fermare il programma alpha e tenere lab + replica mensile.
 2. Routing per regime: claim ridimensionato da audit + permutation test
-   (p=0.115, [[Report-Honest-Baselines-Trial-2026-06-11]]): selezione si'
-   (+20pp su baseline onesta), timing non dimostrato.
+   ([[Report-Honest-Baselines-Trial-2026-06-11]]): MEMBERSHIP +32.7pp
+   (ipotesi principale), TIMING +8.5pp non significativo (p=0.119).
+   Criterio di successo PREREGISTRATO per la membership:
+   [[Criterio-Preregistrato-Membership-2026-06]] (6 mesi, 5/6 positivi,
+   delta cumulato >0, DSR a multiplicita' di famiglia). PREREQUISITO
+   BLOCCANTE: RISK-044 (refresh dati) entro il 2026-07-01, altrimenti il
+   conteggio non parte.
 3. Igiene in corso: RISK-041 (fix look-ahead MVP) in lavorazione,
    RISK-042 (trial counter) CHIUSO e cablato.
 
