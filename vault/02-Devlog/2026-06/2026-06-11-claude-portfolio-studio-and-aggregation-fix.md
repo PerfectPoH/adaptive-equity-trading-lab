@@ -138,3 +138,14 @@ regola del lab (N insufficiente al 180d, risk-adjusted distrutto al 90d).
 Vedi [[Report-True-ETF-002-Archive-Decision-2026-06-11]]. Restano due strade,
 entrambe decisione owner: universo ETF ampliato (003, trial_count=4) o data
 bundle small-cap.
+
+## Risposta all'audit + chiusura famiglia TRUE-ETF + igiene
+
+- Audit esterno verificato e archiviato ([[Report-External-Audit-2026-06-11]]).
+- TRIAL-STUDIO-OOS-008 ([[Report-Honest-Baselines-Trial-2026-06-11]]):
+  selezione +20pp su baseline onesta, TIMING di regime non dimostrato (p=0.115).
+- TRIAL-TRUE-ETF-003 su 55 ETF: 2/5 gate, famiglia CHIUSA
+  ([[Report-True-ETF-Family-Closure-2026-06-11]]).
+- RISK-041 CHIUSO: look-ahead entry_bar_exit_touch rimosso dai default,
+  rerun MVP 20260611_160809 senza skip ambigui.
+- RISK-042 CHIUSO: trial counter di programma cablato (133 run reali).

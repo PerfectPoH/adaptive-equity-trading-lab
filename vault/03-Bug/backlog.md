@@ -763,7 +763,11 @@ Update: GapRev intraday data-contract gate added in [[Report-GapRev-Intraday-Dat
   non implementabile live cosi' com'e'. 57 segnali saltati nel run default.
 - Azione: sostituire con stop/TP attivi dal giorno di entry con regola
   conservativa stop-first; rerun baseline MVP per quantificare l'impatto.
-- Stato: aperto (da audit esterno 2026-06-11, verificato).
+- Stato: CHIUSO 2026-06-11. Default `skip_entry_bar_exit_touch=False` in
+  label_builder ed execution (flag opzionale conservato e testato). Rerun
+  `20260611_160809`: skip entry_bar_exit_touch eliminati (top skip ora
+  gap_too_large, 6 casi), mean strategy 4.70% vs B&H 48.0% - il controllo
+  negativo resta negativo, ora senza look-ahead e implementabile.
 
 ### RISK-042 - Trial counter di programma non collegato al DSR (audit B3/D3)
 
@@ -772,7 +776,9 @@ Update: GapRev intraday data-contract gate added in [[Report-GapRev-Intraday-Dat
   experiments/runs/) e passare quel numero al DSR; collegare
   effective_trial_count. I verdetti DSR_PASS a trial_count=2 vanno riletti
   con multiplicita' di programma.
-- Stato: aperto.
+- Stato: CHIUSO 2026-06-11. `src/validation/program_trial_counter.py` +
+  riporto automatico nel runner true_etf (famiglia e programma: 133 run).
+  Estendere agli altri runner quando vengono riusati.
 
 ### RISK-043 - MVP: sizing su equity fissa, benchmark senza dividendi,
 timeout off-by-one (audit B6)

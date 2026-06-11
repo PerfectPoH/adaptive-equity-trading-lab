@@ -88,3 +88,26 @@ Dichiarato prima di qualsiasi run OOS, come richiesto da questa spec:
    NON e' incluso in v1 (label set diverso); dichiarato come limite.
 7. **Dati**: yfinance auto-adjusted, download autorizzato dall'owner in chat
    il 2026-06-11. Universo: SPY QQQ IWM + 9 settoriali SPDR + 8 large-cap correnti.
+
+---
+
+## Emendamento 002 (2026-06-11, PRIMA dell'esecuzione di TRUE-ETF-003)
+
+Dopo l'archivio del candidato su universo ristretto
+([[Report-True-ETF-002-Archive-Decision-2026-06-11]]), ultima variante
+gratuita dichiarata:
+
+1. **Universo ampliato a 50 ETF correnti** (survivorship-light: gli ETF non
+   delistano quasi mai e questi sono tutti vivi e liquidi oggi), storia dal
+   2018: broad (SPY QQQ IWM DIA MDY RSP VTI VOO VEA VWO), settori SPDR
+   (XLF XLK XLE XLV XLI XLP XLU XLY XLB XLRE XLC), industrie (SMH XBI IBB
+   KRE XME XOP ITB XHB IYT IYR), internazionali (EFA EEM FXI EWJ EWZ INDA
+   EWY EWT EWG EWU EWC EWA), bond/commodity/valute (TLT IEF SHY AGG HYG
+   LQD TIP GLD SLV GDX USO DBC UUP).
+2. **Regole, holding (180d) e costi IDENTICI al trial 001.** Nessun altro
+   parametro toccato. Niente large-cap singole: solo ETF.
+3. **Multiplicita'**: DSR dichiarata a trial_count=4 (quarta configurazione
+   della famiglia), PIU' riporto automatico a multiplicita' di famiglia e
+   di programma dal trial counter (RISK-042, ora cablato).
+4. Questo e' l'ULTIMO tentativo della famiglia TRUE-ETF su dati gratuiti:
+   qualunque esito, dopo si passa alla decisione data bundle.

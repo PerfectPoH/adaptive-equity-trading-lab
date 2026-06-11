@@ -32,13 +32,15 @@ tags: [stato, snapshot, operativo]
 
 ## Prossimo passo canonico
 
-1. DECISIONE OWNER dopo l'archivio TRUE-ETF
-   ([[Report-True-ETF-002-Archive-Decision-2026-06-11]]):
-   (a) TRIAL-TRUE-ETF-003 con universo ETF ampliato (~50, trial_count=4,
-   ultima cartuccia gratuita) oppure (b) data bundle a pagamento per le
-   small-cap. Niente altro e' ammesso su questo candidato.
-2. Replica mensile automatica del protocollo congelato (gia' schedulata).
-3. La pipeline true-backtest (regole causali + 5 gate) resta pronta e provata.
+1. FAMIGLIA TRUE-ETF CHIUSA ([[Report-True-ETF-Family-Closure-2026-06-11]]):
+   3 configurazioni, nessuna passa. Restano DUE strade, decisione owner:
+   (a) data bundle a pagamento (Norgate/Sharadar) per small-cap/eventi con
+   PIT veri; (b) fermare il programma alpha e tenere lab + replica mensile.
+2. Routing per regime: claim ridimensionato da audit + permutation test
+   (p=0.115, [[Report-Honest-Baselines-Trial-2026-06-11]]): selezione si'
+   (+20pp su baseline onesta), timing non dimostrato.
+3. Igiene in corso: RISK-041 (fix look-ahead MVP) in lavorazione,
+   RISK-042 (trial counter) CHIUSO e cablato.
 
 ## Da NON fare
 

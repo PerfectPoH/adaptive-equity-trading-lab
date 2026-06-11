@@ -47,7 +47,7 @@ def test_entry_bar_exit_touch_skips_execution() -> None:
         index=idx,
     )
     labeled = build_trade_labels(frame, max_gap_threshold=0.10)
-    executed = add_execution_columns(labeled, equity=100_000, max_gap_threshold=0.10)
+    executed = add_execution_columns(labeled, equity=100_000, max_gap_threshold=0.10, skip_entry_bar_exit_touch=True)
     plan = planned_trade_for_signal(executed, 1)
 
     assert plan["valid"] is False

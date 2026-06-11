@@ -46,7 +46,7 @@ def test_same_day_stop_and_take_profit_is_conservative_zero() -> None:
 def test_entry_bar_exit_touch_skips_label() -> None:
     frame = base_frame()
     frame.loc[frame.index[1], "High"] = 107
-    labeled = build_trade_labels(frame, timeout_bars=3, max_gap_threshold=0.20)
+    labeled = build_trade_labels(frame, skip_entry_bar_exit_touch=True, timeout_bars=3, max_gap_threshold=0.20)
 
     assert pd.isna(labeled["label"].iloc[0])
     assert bool(labeled["label_executable"].iloc[0]) is False

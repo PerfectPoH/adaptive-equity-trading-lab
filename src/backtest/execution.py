@@ -11,7 +11,7 @@ def add_execution_columns(
     risk_fraction: float = 0.01,
     risk_fraction_column: str = "risk_fraction",
     max_gap_threshold: float = 0.05,
-    skip_entry_bar_exit_touch: bool = True,
+    skip_entry_bar_exit_touch: bool = False,
 ) -> pd.DataFrame:
     data = frame.copy().sort_index()
 

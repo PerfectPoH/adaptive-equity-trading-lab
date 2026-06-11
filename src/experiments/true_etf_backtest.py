@@ -19,6 +19,13 @@ from src.validation.deflated_sharpe import deflated_sharpe_ratio_from_returns
 
 ETF_UNIVERSE = ["SPY", "QQQ", "IWM", "XLF", "XLK", "XLE", "XLV", "XLI", "XLP", "XLU", "XLY", "XLB"]
 LARGECAP_UNIVERSE = ["AAPL", "MSFT", "NVDA", "AMD", "TSLA", "META", "AMZN", "GOOGL"]
+ETF50_UNIVERSE = [
+    "SPY", "QQQ", "IWM", "DIA", "MDY", "RSP", "VTI", "VOO", "VEA", "VWO",
+    "XLF", "XLK", "XLE", "XLV", "XLI", "XLP", "XLU", "XLY", "XLB", "XLRE", "XLC",
+    "SMH", "XBI", "IBB", "KRE", "XME", "XOP", "ITB", "XHB", "IYT", "IYR",
+    "EFA", "EEM", "FXI", "EWJ", "EWZ", "INDA", "EWY", "EWT", "EWG", "EWU", "EWC", "EWA",
+    "TLT", "IEF", "SHY", "AGG", "HYG", "LQD", "TIP", "GLD", "SLV", "GDX", "USO", "DBC", "UUP",
+]
 
 
 @dataclass(frozen=True)

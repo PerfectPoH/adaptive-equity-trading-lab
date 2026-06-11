@@ -9,7 +9,7 @@ def build_trade_labels(
     take_profit_atr_multiple: float = 3.0,
     timeout_bars: int = 10,
     max_gap_threshold: float = 0.05,
-    skip_entry_bar_exit_touch: bool = True,
+    skip_entry_bar_exit_touch: bool = False,
 ) -> pd.DataFrame:
     data = frame.copy().sort_index()
     n = len(data)

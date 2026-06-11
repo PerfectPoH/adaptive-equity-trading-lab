@@ -14,6 +14,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from src.experiments.true_etf_backtest import (  # noqa: E402
+    ETF50_UNIVERSE,
     ETF_UNIVERSE,
     LARGECAP_UNIVERSE,
     TrueEtfConfig,
@@ -24,12 +25,12 @@ from src.experiments.true_etf_backtest import (  # noqa: E402
 DATA_DIR = Path("data/snapshots/true_etf_001")
 
 
-def download_universe() -> dict[str, pd.DataFrame]:
+def download_universe(universe: str = "base") -> dict[str, pd.DataFrame]:
     import yfinance as yf
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     panels: dict[str, pd.DataFrame] = {}
-    symbols = [*ETF_UNIVERSE, *LARGECAP_UNIVERSE]
+    symbols = ETF50_UNIVERSE if universe == "etf50" else [*ETF_UNIVERSE, *LARGECAP_UNIVERSE]
     for symbol in symbols:
         path = DATA_DIR / f"{symbol}.csv"
         if path.exists():
@@ -53,9 +54,10 @@ def main() -> int:
     parser.add_argument("--holding", type=int, default=180)
     parser.add_argument("--dsr-trials", type=float, default=2.0)
     parser.add_argument("--trial-id", default="TRIAL-TRUE-ETF-001")
+    parser.add_argument("--universe", default="base", choices=["base", "etf50"])
     args = parser.parse_args()
     print("FASE A: download universo autorizzato (yfinance, auto-adjusted)...", flush=True)
-    panels = download_universe()
+    panels = download_universe(args.universe)
     spy = panels["SPY"]
     cfg = TrueEtfConfig(active_holding=args.holding, dsr_trial_count=args.dsr_trials)
     print("FASE B: backtest capital-aware (costi base e raddoppiati)...", flush=True)
@@ -63,6 +65,22 @@ def main() -> int:
     double = run_true_etf_backtest(panels, spy, cfg, apply_defense=True, cost_multiplier=2.0)
     undefended = run_true_etf_backtest(panels, spy, cfg, apply_defense=False)
     gates = evaluate_oos_gates(base, double, spy, cfg)
+    # RISK-042: multiplicita' onesta dal trial counter di programma
+    from src.validation.deflated_sharpe import deflated_sharpe_ratio_from_returns
+    from src.validation.program_trial_counter import program_trial_count, program_wide_trial_count
+
+    eq_oos = base["equity"][base["equity"].index >= pd.Timestamp(cfg.oos_start)]
+    daily = (eq_oos["equity"] / eq_oos["equity"].iloc[0]).pct_change().fillna(0.0).to_numpy()
+    family_n = program_trial_count("true_etf")
+    program_n = program_wide_trial_count()
+    gates["statistical_gate"]["dsr_at_family_count"] = {
+        "trial_count": family_n,
+        "dsr": round(deflated_sharpe_ratio_from_returns(daily, trial_count=family_n, sharpe_std=cfg.dsr_sharpe_std).dsr, 6),
+    }
+    gates["statistical_gate"]["dsr_at_program_count"] = {
+        "trial_count": program_n,
+        "dsr": round(deflated_sharpe_ratio_from_returns(daily, trial_count=program_n, sharpe_std=cfg.dsr_sharpe_std).dsr, 6),
+    }
 
     eq_u = undefended["equity"]
     oos_u = eq_u[eq_u.index >= pd.Timestamp(cfg.oos_start)]
