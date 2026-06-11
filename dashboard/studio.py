@@ -29,6 +29,10 @@ from dashboard.lab_dashboard_data import (  # noqa: E402
     load_dashboard_payload,
     load_portfolio_lab_components,
 )
+from src.experiments.honest_baselines_trial import (  # noqa: E402
+    HonestBaselinesConfig,
+    run_honest_baselines_trial,
+)
 from src.experiments.regime_portfolio_studio import (  # noqa: E402
     component_strategy_family,
     run_regime_studio,
@@ -292,6 +296,15 @@ def run_studio_cached(saved_limit: int, factory_variants: int, policy: str) -> d
     return run_regime_studio(catalog, context["router_matrix"], context["regime_map"], policy=policy)
 
 
+@st.cache_data(show_spinner="Calcolo baseline oneste e permutation test... (prima volta ~1 min)")
+def honest_baselines_cached(saved_limit: int, factory_variants: int) -> dict:
+    catalog = load_catalog(saved_limit, factory_variants)
+    context = load_market_context()
+    return run_honest_baselines_trial(
+        catalog, context["router_matrix"], context["regime_map"], HonestBaselinesConfig()
+    )
+
+
 @st.cache_data(show_spinner=False)
 def strategy_table(saved_limit: int, factory_variants: int) -> pd.DataFrame:
     rows = []
@@ -546,15 +559,38 @@ def page_composer(saved_limit: int, factory_variants: int) -> None:
         st.warning("Composizione non disponibile: servono stream con date reali.")
         return
     mode = str(summary.get("aggregation_mode", "additive"))
+    honest = honest_baselines_cached(saved_limit, factory_variants)
+    hr = honest.get("results", {})
+    perm = honest.get("permutation", {})
     c1, c2, c3, c4 = st.columns(4)
     with c1:
         tile("Dynamic", fmt_net(summary.get("dynamic_total"), mode), "Portfolio regime-switching", tone=tone_of(summary.get("dynamic_total")))
     with c2:
-        tile("Static", fmt_net(summary.get("static_total"), mode), "Baseline equal-weight, sempre investita", tone=tone_of(summary.get("static_total")))
+        tile(
+            "Static onesta",
+            fmt_net(hr.get("static_cost_matched"), "compounded"),
+            "Equal-weight solo componenti a costi reali (<=100bps), dedup",
+            tone=tone_of(hr.get("static_cost_matched")),
+        )
     with c3:
-        tile("Delta", fmt_net(summary.get("dynamic_vs_static_delta"), mode), "Il valore aggiunto (o tolto) dal regime switching", tone=tone_of(summary.get("dynamic_vs_static_delta")))
+        tile(
+            "Top-5 senza routing",
+            fmt_net(hr.get("unconditional_top5"), "compounded"),
+            "Selezione semplice, nessun regime switching",
+            tone=tone_of(hr.get("unconditional_top5")),
+        )
     with c4:
-        tile("Max DD dynamic", fmt_net(summary.get("dynamic_max_drawdown"), mode, signed=False), f"Static: {fmt_net(summary.get('static_max_drawdown'), mode, signed=False)}", tone=tone_of(summary.get("dynamic_max_drawdown")))
+        tile("Max DD dynamic", fmt_net(summary.get("dynamic_max_drawdown"), mode, signed=False), f"Static onesta vs legacy: la legacy ({fmt_net(hr.get('static_all_legacy'), 'compounded')}) e' gonfiata dai cost tier", tone=tone_of(summary.get("dynamic_max_drawdown")))
+    p_value = perm.get("p_value")
+    if p_value is not None:
+        if float(p_value) <= 0.05:
+            st.success(f"Permutation test ({perm.get('n', 0)} shift delle label di regime): p = {p_value}. Il TIMING di regime e' statisticamente supportato su questo campione.")
+        else:
+            st.warning(
+                f"Permutation test ({perm.get('n', 0)} shift delle label di regime): p = {p_value}. "
+                "Il valore viene dalla SELEZIONE dei componenti, non dal timing di regime "
+                "(verdetto TRIAL-STUDIO-OOS-008, audit 2026-06-11). La vecchia baseline 'static' era gonfiata dai cost tier."
+            )
 
     curves = composition.get("curves")
     if isinstance(curves, pd.DataFrame) and not curves.empty:

@@ -8,6 +8,7 @@ from src.backtest.metrics import stats_to_summary
 
 class PrecomputedSignalStrategy(Strategy):
     timeout_bars = 10
+    initial_cash = 100_000.0
 
     def init(self) -> None:
         pass
@@ -32,6 +33,15 @@ class PrecomputedSignalStrategy(Strategy):
         if not stop_loss < entry_price < take_profit:
             return
 
+        # RISK-043: il rischio segue l'equity corrente, non i 100k iniziali.
+        # La size precomputata incorpora gia' risk_fraction e distanza di stop:
+        # la riscaliamo sull'equity corrente e la cappiamo al cash investibile.
+        scaled = int(size * (float(self.equity) / float(self.initial_cash)))
+        affordable = int((float(self.equity) * 0.99) / entry_price)
+        size = max(0, min(scaled, affordable))
+        if size <= 0:
+            return
+
         # Use the precomputed next-open entry as a marketable limit so
         # backtesting.py validates contingent exits against the intended fill.
         self.buy(size=size, limit=entry_price, sl=stop_loss, tp=take_profit)
@@ -42,9 +52,10 @@ class PrecomputedSignalStrategy(Strategy):
 
         current_bar = len(self.data) - 1
         for trade in list(self.trades):
-            # The label checks bars from entry through the timeout horizon.
-            # Closing here exits at the next market price after that window.
-            if current_bar - trade.entry_bar >= self.timeout_bars - 1:
+            # RISK-043: la label esce al Close di entry+timeout-1; chiudendo
+            # un bar prima il fill avviene all'Open dello STESSO giorno del
+            # Close della label (prima era l'Open del giorno successivo).
+            if current_bar - trade.entry_bar >= self.timeout_bars - 2:
                 trade.close()
 
 
@@ -72,6 +83,7 @@ def run_backtest(
         raise ValueError(f"Backtest frame missing columns: {missing}")
 
     data = frame.copy().dropna(subset=["Open", "High", "Low", "Close", "Volume"])
+    PrecomputedSignalStrategy.initial_cash = float(cash)
     bt = Backtest(
         data,
         PrecomputedSignalStrategy,

@@ -6,10 +6,13 @@ import pandas as pd
 
 
 def buy_and_hold_return(frame: pd.DataFrame) -> float:
-    data = frame.dropna(subset=["Close"])
+    # RISK-043: total return (Adj Close, dividendi inclusi) quando disponibile,
+    # altrimenti price return su Close. Confronto onesto col benchmark.
+    column = "Adj Close" if "Adj Close" in frame.columns else "Close"
+    data = frame.dropna(subset=[column])
     if len(data) < 2:
         return float("nan")
-    return float((data["Close"].iloc[-1] / data["Close"].iloc[0]) - 1)
+    return float((data[column].iloc[-1] / data[column].iloc[0]) - 1)
 
 
 def stats_to_summary(stats: pd.Series, frame: pd.DataFrame) -> dict[str, float | bool]:

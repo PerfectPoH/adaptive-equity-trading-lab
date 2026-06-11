@@ -149,3 +149,12 @@ bundle small-cap.
 - RISK-041 CHIUSO: look-ahead entry_bar_exit_touch rimosso dai default,
   rerun MVP 20260611_160809 senza skip ambigui.
 - RISK-042 CHIUSO: trial counter di programma cablato (133 run reali).
+
+## RISK-043 chiuso + sito allineato alla scienza
+
+- MVP: sizing dal cash corrente (riscalato e cappato), benchmark total-return
+  (Adj Close), timeout label/runner allineati. Rerun 20260611_161603 pulito.
+- Studio Composer: la baseline static gonfiata sostituita con le baseline
+  oneste del TRIAL-008 (cost-matched + top-5 unconditional) e il verdetto del
+  permutation test mostrato in pagina. Il sito ora racconta la stessa storia
+  del vault.

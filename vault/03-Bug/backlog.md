@@ -786,4 +786,7 @@ timeout off-by-one (audit B6)
 - Priorita: P2.
 - Azione: sizing dal cash corrente; benchmark su Adj Close/total return;
   allineare exit label/runner.
-- Stato: aperto.
+- Stato: CHIUSO 2026-06-11. Sizing riscalato sull'equity corrente e cappato
+  al cash investibile; benchmark total-return (Adj Close) quando disponibile;
+  timeout allineato (uscita all'Open dello stesso giorno del Close label).
+  Rerun verificato: 20260611_161603.

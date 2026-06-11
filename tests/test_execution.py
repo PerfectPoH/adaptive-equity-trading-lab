@@ -102,7 +102,9 @@ def test_backtest_closes_trade_after_timeout_window() -> None:
 
     assert len(trades) == 1
     assert int(trades.iloc[0]["EntryBar"]) == 2
-    assert int(trades.iloc[0]["ExitBar"]) == 5
+    # RISK-043: la label esce al Close del bar 4 (entry+timeout-1); il runner
+    # ora esce all'Open dello stesso bar 4, non all'Open del bar 5.
+    assert int(trades.iloc[0]["ExitBar"]) == 4
 
 
 def test_execution_uses_row_level_risk_fraction_when_available() -> None:
