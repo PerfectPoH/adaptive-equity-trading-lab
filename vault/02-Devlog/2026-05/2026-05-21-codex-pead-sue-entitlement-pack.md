@@ -12,6 +12,3 @@ Decision: READY_FOR_SUE_PROVIDER_ENTITLEMENT_VERIFICATION
 
 ## Interpretation
 PEAD remains scientifically blocked until a point-in-time SUE or consensus provider is verified. This pack defines the exact questions, pass/fail criteria, and one-call probe shape needed to unlock that gate without using returns, daily gaps, or scraped pages as proxies.
-
-
-Vedi [[Devlog-Index]] e [[Stato-Corrente]].

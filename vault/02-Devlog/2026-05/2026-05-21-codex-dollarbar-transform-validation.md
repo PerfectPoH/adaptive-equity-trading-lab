@@ -27,6 +27,3 @@ Distribution-only validation of static average-dollar bars versus rolling EMA do
 - DBAR-010 CRMD delta=-14.870338 sample_ratio=0.382688 verdict=FAIL_DISTRIBUTION_STABILITY_GATE
 - DBAR-011 IOVA delta=-18.878711 sample_ratio=0.529172 verdict=FAIL_DISTRIBUTION_STABILITY_GATE
 - DBAR-012 IOVA delta=-0.814129 sample_ratio=0.47018 verdict=FAIL_DISTRIBUTION_STABILITY_GATE
-
-
-Vedi [[Devlog-Index]] e [[Stato-Corrente]].

@@ -16,6 +16,3 @@ Diagnostic-only analysis of existing trade-log artifacts. No new provider query,
 ## Interpretation
 
 The harness prioritizes median trade quality and positive PnL after removing the top three winners. It is designed to make outlier-dependent ideas fail before they receive any new execution budget.
-
-
-Vedi [[Devlog-Index]] e [[Stato-Corrente]].

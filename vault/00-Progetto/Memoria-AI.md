@@ -121,6 +121,20 @@ il vecchio +169% era edge o era gonfiato dal sizing quasi all-in?
 - Non committare snapshot pesanti, cache o ambienti virtuali.
 - Non mischiare modifiche a Soresina con questo repo.
 
+### Baseline e confronti (lezioni audit 2026-06-11)
+
+- Non confrontare un portfolio con una baseline che contiene varianti
+  deliberatamente cost-crippled: il gate diventa una corsa truccata
+  (~52pp su 72.5pp del delta Studio erano artefatto dei cost tier).
+- Dedup obbligatorio per hash dello stream prima di selezione, baseline,
+  correlazioni e sharpe_std del DSR (12 duplicati trovati su 108).
+- Un claim di REGIME TIMING richiede il permutation test delle label
+  (shift circolari): batterlo a p<=0.05 e' l'unica prova di skill di timing.
+  Risultato 2026-06-11: p=0.115, timing NON confermato; selezione si' (+20pp
+  su baseline onesta).
+- La multiplicita' dichiarata nel DSR deve venire da un trial counter di
+  programma, non da una costante.
+
 ### Vault
 
 - Il vault deve restare leggibile da umani.

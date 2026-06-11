@@ -1,7 +1,7 @@
 {
   "conclusion": "Current earnings-calendar/report-time provider access is unavailable; PEAD execution must remain blocked.",
   "endpoint_reviewed": "companies/{identifier}/upcoming_earnings",
-  "evidence_source": "experiments\\provider_aware_research\\execution_outputs\\XMOM-EARNINGS-SINGLE-PROBE-001\\single_probe_execution_manifest.json",
+  "evidence_source": "experiments/provider_aware_research/execution_outputs/XMOM-EARNINGS-SINGLE-PROBE-001/single_probe_execution_manifest.json",
   "network_call_performed_now": false,
   "provider_detail": "Forbidden",
   "provider_error": "HTTP_ERROR_403",

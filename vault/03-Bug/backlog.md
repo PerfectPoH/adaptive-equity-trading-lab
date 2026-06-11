@@ -753,3 +753,31 @@ Update: Research notes for future hypothesis generation archived in [[Report-Qua
 Update: `TRIAL-GAPREV-001` opened as spec-only gap-down reversion branch in [[Report-Gap-Down-Reversion-Preregistration-2026-05-21]]. Validator passes 43/43 and targeted tests pass 5/5. All execution paths remain blocked; next allowed work is an intraday data-contract gate, not a backtest.
 
 Update: GapRev intraday data-contract gate added in [[Report-GapRev-Intraday-Data-Contract-Gate-2026-05-21]]. Validator passes 35/35 and targeted tests pass 5/5. No provider selected, no query/download/extractor/backtest authorized. Next allowed work: provider-selection gate for intraday bars and spread/quote proxy.
+
+### RISK-041 - entry_bar_exit_touch e' un look-ahead nel MVP (audit B5)
+
+- Priorita: P1.
+- Sintomo: label builder ed execution saltano i trade se High/Low del giorno
+  di entry tocca TP/SL: informazione intraday non disponibile all'open.
+- Impatto: rimuove anche gli stop-out immediati (bias favorevole); strategia
+  non implementabile live cosi' com'e'. 57 segnali saltati nel run default.
+- Azione: sostituire con stop/TP attivi dal giorno di entry con regola
+  conservativa stop-first; rerun baseline MVP per quantificare l'impatto.
+- Stato: aperto (da audit esterno 2026-06-11, verificato).
+
+### RISK-042 - Trial counter di programma non collegato al DSR (audit B3/D3)
+
+- Priorita: P1.
+- Azione: contare i run reali per famiglia di trial (directory in
+  experiments/runs/) e passare quel numero al DSR; collegare
+  effective_trial_count. I verdetti DSR_PASS a trial_count=2 vanno riletti
+  con multiplicita' di programma.
+- Stato: aperto.
+
+### RISK-043 - MVP: sizing su equity fissa, benchmark senza dividendi,
+timeout off-by-one (audit B6)
+
+- Priorita: P2.
+- Azione: sizing dal cash corrente; benchmark su Adj Close/total return;
+  allineare exit label/runner.
+- Stato: aperto.
