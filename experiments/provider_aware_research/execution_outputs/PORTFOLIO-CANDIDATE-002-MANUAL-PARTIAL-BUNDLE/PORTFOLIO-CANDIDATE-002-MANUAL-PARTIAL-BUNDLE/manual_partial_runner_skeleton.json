@@ -19,7 +19,7 @@
     "status": "ADMISSIBLE_DATA_BUNDLE_BLOCKED",
     "validation_id": "PORTFOLIO-CANDIDATE-002-MANUAL-PARTIAL-BUNDLE-VALIDATION"
   },
-  "created_at_utc": "2026-06-01T11:37:10.331042+00:00",
+  "created_at_utc": "2026-06-01T12:01:41.770813+00:00",
   "final_decision": {
     "blockers": [
       "data_bundle_missing",

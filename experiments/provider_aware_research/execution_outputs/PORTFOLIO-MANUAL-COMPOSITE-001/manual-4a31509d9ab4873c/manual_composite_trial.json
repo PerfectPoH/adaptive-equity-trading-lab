@@ -1,0 +1,84 @@
+{
+  "final_decision": {
+    "blockers": [
+      "external_data_contract_gate"
+    ],
+    "decision": "PORTFOLIO_MANUAL_COMPOSITE_DATA_GATE_ONLY",
+    "live_trading_allowed": false,
+    "market_data_download_allowed": false,
+    "market_data_download_performed": false,
+    "paper_trading_allowed": false,
+    "portfolio_backtest_performed": false,
+    "promotion_allowed": false,
+    "provider_query_allowed": false,
+    "provider_query_performed": false,
+    "runner_mode": "manual_composite_manifest_only"
+  },
+  "inherited_validation": {
+    "interpretation": "Descriptive only; not promotion evidence.",
+    "source": "frozen_recipe_proxy_validation_only",
+    "train_net_return": 283.19678184,
+    "validation_max_drawdown": -5.14857728,
+    "validation_net_return": 192.13523322
+  },
+  "live_trading_allowed": false,
+  "manual_composite_id": "manual-4a31509d9ab4873c",
+  "manual_manifest": {
+    "falsification_criteria": [
+      "Archive if external-data/PIT gate cannot be satisfied.",
+      "Archive if validation net turns negative under the true data source.",
+      "Archive if one sleeve contributes more than 40% of positive contribution under true data.",
+      "Archive if ex-best-sleeve net return is non-positive under true data.",
+      "Archive if benchmark-relative return is not positive after costs."
+    ],
+    "human_authored": true,
+    "hypothesis": "A fixed-weight basket combining reversion, continuation, and dollar-sampled microstructure may be more robust than a single setup, but only if it survives a survivorship-free/PIT data gate.",
+    "required_data": [
+      "survivorship_free_universe",
+      "point_in_time_membership",
+      "delisted_symbol_prices",
+      "adjusted_ohlcv",
+      "benchmark_panel"
+    ],
+    "sleeves": [
+      {
+        "failure_mode": "False reversion and cost drag.",
+        "name": "Mean-reversion sleeve",
+        "rule": "Buy diversified dislocations after confirmation; do not average down into unresolved continuation.",
+        "template": "Mean Reversion",
+        "weight": 0.3333333333333333
+      },
+      {
+        "failure_mode": "Outlier dependency and regime decay.",
+        "name": "Momentum sleeve",
+        "rule": "Hold diversified continuation candidates only through the frozen multi-day horizon.",
+        "template": "Momentum",
+        "weight": 0.3333333333333333
+      },
+      {
+        "failure_mode": "Cleaner sampling without tradable direction.",
+        "name": "Dollar-bar microstructure sleeve",
+        "rule": "Use traded-dollar sampling as a stabilizer, not as standalone promotion evidence.",
+        "template": "Dollar-Bar Microstructure",
+        "weight": 0.3333333333333333
+      }
+    ],
+    "source_factory_recipe_id": "4a31509d9ab4873c",
+    "source_trial_id": "PORTFOLIO-FROZEN-RECIPE-4A31509D9AB4873C",
+    "strategy_name": "Multi-Horizon Reversion Momentum Basket",
+    "trial_id": "PORTFOLIO-MANUAL-COMPOSITE-001-4A31509D9AB4873C",
+    "weight_policy": {
+      "max_component_weight": 0.4,
+      "optimization_allowed": false,
+      "policy": "equal_weight",
+      "reason": "Weights are semantic and frozen; they are not fitted to historical Sharpe or net return."
+    }
+  },
+  "market_data_download_performed": false,
+  "paper_trading_allowed": false,
+  "promotion_allowed": false,
+  "provider_query_performed": false,
+  "required_next_step": "Create or satisfy the external-data/PIT gate before any true backtest.",
+  "status": "PORTFOLIO_MANUAL_COMPOSITE_DRY_RUN_COMPLETE",
+  "trial_id": "PORTFOLIO-MANUAL-COMPOSITE-001-4A31509D9AB4873C"
+}

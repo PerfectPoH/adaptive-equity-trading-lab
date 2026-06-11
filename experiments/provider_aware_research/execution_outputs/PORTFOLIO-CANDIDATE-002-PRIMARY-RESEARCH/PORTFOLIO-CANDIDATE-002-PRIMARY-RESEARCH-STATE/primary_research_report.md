@@ -13,6 +13,7 @@
 
 - `external_data_contract_gate`
 - `iterative_search_after_candidate_001`
+- `factory_generated_scope_gate`
 
 ## Interpretation
 

@@ -8,10 +8,10 @@
 
 ## Frozen Sleeves
 
-- `Momentum` weight `0.2500`
-- `Mean Reversion` weight `0.2500`
 - `Catalyst` weight `0.2500`
 - `Dollar-Bar Microstructure` weight `0.2500`
+- `Mean Reversion` weight `0.2500`
+- `Momentum` weight `0.2500`
 
 ## Data Contract
 

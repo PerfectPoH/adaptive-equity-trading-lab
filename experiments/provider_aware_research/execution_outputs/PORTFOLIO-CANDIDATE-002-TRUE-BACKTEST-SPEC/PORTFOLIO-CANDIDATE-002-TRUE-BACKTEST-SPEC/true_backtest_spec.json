@@ -23,16 +23,6 @@
   },
   "component_rule_contract": [
     {
-      "rule": "Generate continuation ranks only from point-in-time historical prices available before entry.",
-      "template": "Momentum",
-      "weight": 0.25
-    },
-    {
-      "rule": "Generate dislocation/reclaim candidates from adjusted OHLCV without using future recovery labels.",
-      "template": "Mean Reversion",
-      "weight": 0.25
-    },
-    {
       "rule": "Require a point-in-time event timestamp and a separate direction source before any event sleeve trade.",
       "template": "Catalyst",
       "weight": 0.25
@@ -41,9 +31,19 @@
       "rule": "Use traded-dollar sampling only when the source data resolution supports reconstruction without survivorship leakage.",
       "template": "Dollar-Bar Microstructure",
       "weight": 0.25
+    },
+    {
+      "rule": "Generate dislocation/reclaim candidates from adjusted OHLCV without using future recovery labels.",
+      "template": "Mean Reversion",
+      "weight": 0.25
+    },
+    {
+      "rule": "Generate continuation ranks only from point-in-time historical prices available before entry.",
+      "template": "Momentum",
+      "weight": 0.25
     }
   ],
-  "created_at_utc": "2026-06-01T10:59:31.721652+00:00",
+  "created_at_utc": "2026-06-01T12:01:34.928639+00:00",
   "data_contract": {
     "admissible_source_classes": [
       "CRSP_WRDS",
@@ -92,31 +92,19 @@
   },
   "frozen_sleeves": [
     {
-      "failure_mode": "Outlier dependency and regime decay.",
-      "name": "Momentum sleeve",
-      "rule": "Hold diversified continuation candidates only through the frozen multi-day horizon.",
-      "template": "Momentum",
-      "weight": 0.25
-    },
-    {
-      "failure_mode": "False reversion and cost drag.",
-      "name": "Mean-reversion sleeve",
-      "rule": "Buy diversified dislocations after confirmation; do not average down into unresolved continuation.",
-      "template": "Mean Reversion",
-      "weight": 0.25
-    },
-    {
-      "failure_mode": "Unspecified component fragility.",
-      "name": "Catalyst sleeve",
-      "rule": "Keep the component rule frozen and treat it as one bounded sleeve inside the composite.",
       "template": "Catalyst",
       "weight": 0.25
     },
     {
-      "failure_mode": "Cleaner sampling without tradable direction.",
-      "name": "Dollar-bar microstructure sleeve",
-      "rule": "Use traded-dollar sampling as a stabilizer, not as standalone promotion evidence.",
       "template": "Dollar-Bar Microstructure",
+      "weight": 0.25
+    },
+    {
+      "template": "Mean Reversion",
+      "weight": 0.25
+    },
+    {
+      "template": "Momentum",
       "weight": 0.25
     }
   ],

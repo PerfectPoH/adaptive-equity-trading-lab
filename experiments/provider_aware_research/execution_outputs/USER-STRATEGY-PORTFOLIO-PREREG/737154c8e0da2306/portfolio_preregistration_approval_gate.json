@@ -7,8 +7,8 @@
     "component_bias_warnings_present"
   ],
   "approval_gate_id": "PORTFOLIO-PREREG-APPROVAL-737154c8e0da2306",
-  "approval_note": "User approved the selected Portfolio Lab pre-registration draft for a separate diagnostic dry-run. Promotion remains locked false.",
-  "approved_at_utc": "2026-06-01T22:43:04+00:00",
+  "approval_note": "Approved from Portfolio Lab UI for separate dry-run only.",
+  "approved_at_utc": "2026-06-01T22:52:27+00:00",
   "approved_by": "local_user",
   "blocked_actions": [
     "paper_trading",

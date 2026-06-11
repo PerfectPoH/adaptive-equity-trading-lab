@@ -1,0 +1,51 @@
+{
+  "falsification_criteria": [
+    "Archive if external-data/PIT gate cannot be satisfied.",
+    "Archive if validation net turns negative under the true data source.",
+    "Archive if one sleeve contributes more than 40% of positive contribution under true data.",
+    "Archive if ex-best-sleeve net return is non-positive under true data.",
+    "Archive if benchmark-relative return is not positive after costs."
+  ],
+  "human_authored": true,
+  "hypothesis": "A fixed-weight basket combining reversion, continuation, and dollar-sampled microstructure may be more robust than a single setup, but only if it survives a survivorship-free/PIT data gate.",
+  "required_data": [
+    "survivorship_free_universe",
+    "point_in_time_membership",
+    "delisted_symbol_prices",
+    "adjusted_ohlcv",
+    "benchmark_panel"
+  ],
+  "sleeves": [
+    {
+      "failure_mode": "False reversion and cost drag.",
+      "name": "Mean-reversion sleeve",
+      "rule": "Buy diversified dislocations after confirmation; do not average down into unresolved continuation.",
+      "template": "Mean Reversion",
+      "weight": 0.3333333333333333
+    },
+    {
+      "failure_mode": "Outlier dependency and regime decay.",
+      "name": "Momentum sleeve",
+      "rule": "Hold diversified continuation candidates only through the frozen multi-day horizon.",
+      "template": "Momentum",
+      "weight": 0.3333333333333333
+    },
+    {
+      "failure_mode": "Cleaner sampling without tradable direction.",
+      "name": "Dollar-bar microstructure sleeve",
+      "rule": "Use traded-dollar sampling as a stabilizer, not as standalone promotion evidence.",
+      "template": "Dollar-Bar Microstructure",
+      "weight": 0.3333333333333333
+    }
+  ],
+  "source_factory_recipe_id": "4a31509d9ab4873c",
+  "source_trial_id": "PORTFOLIO-FROZEN-RECIPE-4A31509D9AB4873C",
+  "strategy_name": "Multi-Horizon Reversion Momentum Basket",
+  "trial_id": "PORTFOLIO-MANUAL-COMPOSITE-001-4A31509D9AB4873C",
+  "weight_policy": {
+    "max_component_weight": 0.4,
+    "optimization_allowed": false,
+    "policy": "equal_weight",
+    "reason": "Weights are semantic and frozen; they are not fitted to historical Sharpe or net return."
+  }
+}

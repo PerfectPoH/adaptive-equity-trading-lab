@@ -10,7 +10,7 @@
     "benchmark_panel",
     "raw_payload_retention_manifest"
   ],
-  "created_at_utc": "2026-06-01T11:16:52.373241+00:00",
+  "created_at_utc": "2026-06-01T12:02:13.306856+00:00",
   "interpretation": "This bundle only proves the harness wiring. It is not evidence of alpha or tradability.",
   "is_synthetic": true,
   "provider": "synthetic_mock_bundle",
