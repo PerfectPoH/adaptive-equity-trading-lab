@@ -99,18 +99,102 @@ def _component_source_from_result(result: dict[str, Any], warning_ids: list[str]
     return str(result.get("source", "saved_workbench") or "saved_workbench")
 
 
-def build_component_return_matrix(components: list[dict[str, Any]]) -> pd.DataFrame:
-    """Align saved component return streams into a common local diagnostic matrix."""
+def build_component_return_matrix(
+    components: list[dict[str, Any]],
+    *,
+    require_real_dates: bool = True,
+) -> pd.DataFrame:
+    """Align saved component return streams into a common diagnostic matrix.
+
+    Missing periods are left as ``NaN`` — a component that didn't exist on a
+    given date is *not* the same as a component that returned 0%. All
+    downstream aggregators must use NaN-aware operations
+    (``_active_period_mean``, ``_compound_cumulative_returns``).
+
+    When ``require_real_dates`` is ``True`` (the default) any component whose
+    index is composed exclusively of synthetic ``step-XXXXX`` placeholders is
+    excluded: such components have no real time alignment and contaminate
+    baseline comparisons.
+    """
 
     series_by_component: dict[str, pd.Series] = {}
     for component in components:
         series = _component_return_series(component)
-        if not series.empty:
-            series_by_component[str(component["component_id"])] = series
+        if series.empty:
+            continue
+        if require_real_dates and not _has_real_date_index(series):
+            continue
+        series_by_component[str(component["component_id"])] = series
     if not series_by_component:
         return pd.DataFrame()
-    matrix = pd.DataFrame(series_by_component).fillna(0.0)
+    matrix = pd.DataFrame(series_by_component)
     return matrix.sort_index()
+
+
+def _has_real_date_index(series: pd.Series) -> bool:
+    """Return True if at least one index entry parses as a real date.
+
+    Synthetic placeholders look like ``step-00001`` and have no calendar
+    meaning; matrices made only of those cannot be aligned with anything.
+    """
+
+    if series.empty:
+        return False
+    # Reject obvious non-dates (synthetic step markers and similar
+    # placeholders) without invoking pandas' slow generic date parser.
+    import re
+
+    pattern = re.compile(r"^\d{4}-\d{2}-\d{2}")
+    return any(pattern.match(str(idx)) for idx in series.index)
+
+
+def _compound_cumulative_returns(returns: pd.Series) -> pd.Series:
+    """Compound a stream of period returns into a cumulative net curve.
+
+    Uses ``(1 + r).cumprod() - 1`` rather than ``cumsum()`` so the curve has
+    a portfolio-accounting interpretation. NaN periods are treated as cash
+    (return = 0) so the cumulative line never breaks.
+    """
+
+    if returns.empty:
+        return returns
+    filled = returns.fillna(0.0).astype(float)
+    return (1.0 + filled).cumprod() - 1.0
+
+
+# Above this threshold a per-period value cannot be a plausible fractional
+# return of a portfolio sleeve; the stream is additive proxy units and
+# compounding it would explode into nonsense (see 2026-06-10 screenshot bug).
+COMPOUNDING_MAX_ABS_RETURN = 0.5
+
+
+def _aggregate_curve(returns: pd.Series) -> tuple[pd.Series, str]:
+    """Build the cumulative curve with an honest aggregation mode.
+
+    Returns ``(curve, mode)`` where mode is ``"compounded"`` when every
+    period return is a plausible fraction, else ``"additive"`` (cumsum of
+    proxy stream units). Downstream UI must label additive values as units,
+    not percentages.
+    """
+
+    if returns.empty:
+        return returns, "compounded"
+    filled = returns.fillna(0.0).astype(float)
+    if float(filled.abs().max()) <= COMPOUNDING_MAX_ABS_RETURN:
+        return (1.0 + filled).cumprod() - 1.0, "compounded"
+    return filled.cumsum(), "additive"
+
+
+def _active_period_mean(matrix: pd.DataFrame) -> pd.Series:
+    """Per-row mean over components alive in that row.
+
+    A component is "alive" when its return for the period is finite. Rows
+    with no alive components evaluate to NaN.
+    """
+
+    if matrix.empty:
+        return pd.Series(dtype=float)
+    return matrix.mean(axis=1, skipna=True)
 
 
 def _component_return_series(component: dict[str, Any]) -> pd.Series:
@@ -196,7 +280,15 @@ def _inverse_volatility_weights(components: list[dict[str, Any]], return_matrix:
     scores: dict[str, float] = {}
     for component in components:
         component_id = str(component["component_id"])
-        volatility = float(return_matrix[component_id].std(ddof=0) or 0.0)
+        # NaN-aware: std only over the periods the component was alive.
+        if component_id in return_matrix.columns:
+            series = return_matrix[component_id].dropna()
+            raw_vol = series.std(ddof=0) if not series.empty else 0.0
+            # `std` returns NaN for length<2; treat that as zero-vol so the
+            # component receives a finite score instead of poisoning the sum.
+            volatility = float(raw_vol) if pd.notna(raw_vol) else 0.0
+        else:
+            volatility = 0.0
         scores[component_id] = 1.0 / max(volatility, 1e-6)
     total = sum(scores.values()) or 1.0
     return {component_id: score / total for component_id, score in scores.items()}
@@ -284,12 +376,23 @@ def run_portfolio_diagnostic(
         max_convex_weight=max_convex_weight,
     )
     weights = pd.Series({row["component_id"]: row["weight"] for row in allocation}, dtype=float)
-    weighted_matrix = matrix.reindex(columns=weights.index, fill_value=0.0).mul(weights, axis=1) if not matrix.empty else pd.DataFrame()
-    returns = weighted_matrix.sum(axis=1) if not weighted_matrix.empty else pd.Series(dtype=float)
-    cumulative = returns.cumsum()
+    # NaN-aware weighting: NaN returns drop out of both the numerator (sum)
+    # and the denominator (active weight). The result is the portfolio
+    # return restricted to alive components for each period.
+    aligned = matrix.reindex(columns=weights.index) if not matrix.empty else pd.DataFrame()
+    weighted_matrix = aligned.mul(weights, axis=1) if not aligned.empty else pd.DataFrame()
+    if not weighted_matrix.empty:
+        active_weight = aligned.notna().astype(float).mul(weights, axis=1).sum(axis=1)
+        # Use float NaN (not pd.NA) so downstream astype(float) stays valid.
+        denom = active_weight.where(active_weight > 0, other=float("nan"))
+        returns = weighted_matrix.sum(axis=1, skipna=True).divide(denom)
+        returns = returns.astype(float).fillna(0.0)
+    else:
+        returns = pd.Series(dtype=float)
+    cumulative, aggregation_mode = _aggregate_curve(returns)
     running_peak = cumulative.cummax()
     drawdown = cumulative - running_peak
-    contribution = weighted_matrix.sum(axis=0).sort_values(ascending=False) if not weighted_matrix.empty else pd.Series(dtype=float)
+    contribution = weighted_matrix.sum(axis=0, skipna=True).sort_values(ascending=False) if not weighted_matrix.empty else pd.Series(dtype=float)
     correlation = matrix.reindex(columns=weights.index).corr().fillna(0.0) if len(weights) > 1 else pd.DataFrame()
     gate_panel = _build_gate_panel(components, matrix, allocation, returns, drawdown, contribution, correlation)
     final_decision = _build_final_decision(gate_panel, returns, components)
@@ -332,6 +435,8 @@ def run_portfolio_diagnostic(
         "period_count": int(len(returns)),
         "policy": policy,
         "total_net_return": round(float(returns.sum() if not returns.empty else 0.0), 8),
+        "total_net_return_compounded": round(float(cumulative.iloc[-1] if not cumulative.empty else 0.0), 8),
+        "aggregation_mode": aggregation_mode,
         "max_drawdown": round(float(drawdown.min() if not drawdown.empty else 0.0), 8),
         "max_drawdown_pct": round(float((drawdown.min() if not drawdown.empty else 0.0) * 100.0), 4),
         "time_underwater_ratio": round(float((drawdown < 0).mean() if not drawdown.empty else 0.0), 8),
@@ -693,7 +798,9 @@ def _evaluate_search_basket(
     max_convex_weight: float,
 ) -> dict[str, Any]:
     subset_components = [component_by_id[component_id] for component_id in component_ids]
-    subset_matrix = matrix.reindex(columns=component_ids, fill_value=0.0)
+    # Keep NaN for missing periods; build_portfolio_allocation downstream
+    # expects volatility on real returns, not on zero-padded series.
+    subset_matrix = matrix.reindex(columns=component_ids)
     allocation = build_portfolio_allocation(
         subset_components,
         subset_matrix,
@@ -703,11 +810,14 @@ def _evaluate_search_basket(
         max_convex_weight=max_convex_weight,
     )
     weights = pd.Series({row["component_id"]: row["weight"] for row in allocation}, dtype=float)
-    weighted = subset_matrix.reindex(columns=weights.index, fill_value=0.0).mul(weights, axis=1)
-    returns = weighted.sum(axis=1)
-    cumulative = returns.cumsum()
+    aligned = subset_matrix.reindex(columns=weights.index)
+    weighted = aligned.mul(weights, axis=1)
+    active_weight = aligned.notna().astype(float).mul(weights, axis=1).sum(axis=1)
+    denom = active_weight.where(active_weight > 0, other=float("nan"))
+    returns = weighted.sum(axis=1, skipna=True).divide(denom).astype(float).fillna(0.0)
+    cumulative, aggregation_mode = _aggregate_curve(returns)
     drawdown = cumulative - cumulative.cummax()
-    contribution = weighted.sum(axis=0).sort_values(ascending=False)
+    contribution = weighted.sum(axis=0, skipna=True).sort_values(ascending=False)
     positive_total = float(contribution[contribution > 0].sum()) if not contribution.empty else 0.0
     top_share = float(contribution.iloc[0] / positive_total) if positive_total > 0 and not contribution.empty else 0.0
     corr = subset_matrix.reindex(columns=weights.index).corr().fillna(0.0) if len(weights) > 1 else pd.DataFrame()
@@ -733,8 +843,13 @@ def _evaluate_search_basket(
         "summary": {
             "component_count": len(component_ids),
             "total_net_return": round(float(returns.sum()), 8),
+            "total_net_return_compounded": round(float(cumulative.iloc[-1] if not cumulative.empty else 0.0), 8),
+            "aggregation_mode": aggregation_mode,
             "train_net_return": round(train_total, 8),
             "validation_net_return": round(validation_total, 8),
+            "validation_net_return_compounded": round(
+                float(_aggregate_curve(returns.iloc[split:])[0].iloc[-1]) if len(returns.iloc[split:]) else 0.0, 8
+            ),
             "stressed_net_return": round(stressed_total, 8),
             "ex_best_net_return": round(ex_best, 8),
             "top_component_contribution": round(top_share, 8),

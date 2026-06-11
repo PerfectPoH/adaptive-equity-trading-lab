@@ -10,6 +10,9 @@ from typing import Any
 import pandas as pd
 
 from src.experiments.workbench_portfolio_engine import (
+    _active_period_mean,
+    _aggregate_curve,
+    _compound_cumulative_returns,
     build_component_return_matrix,
     load_workbench_portfolio_components,
     persist_portfolio_diagnostic,
@@ -842,7 +845,11 @@ def build_regime_switching_portfolio_diagnostic(
     regime_by_period = _regime_label_by_period(return_matrix.index, regime_map)
     component_ids = [str(component.get("component_id")) for component in components]
     component_by_id = {str(component.get("component_id")): component for component in components}
-    static_returns = return_matrix.reindex(columns=component_ids, fill_value=0.0).mean(axis=1)
+    # Static baseline: equal weight over components ACTUALLY ALIVE in each
+    # period. Components that didn't exist in a period drop out of both the
+    # numerator and the denominator instead of being treated as 0% returns.
+    present_ids = [cid for cid in component_ids if cid in return_matrix.columns]
+    static_returns = _active_period_mean(return_matrix.reindex(columns=present_ids)).fillna(0.0)
     dynamic_returns: list[float] = []
     dynamic_curve: list[dict[str, Any]] = []
     usage: dict[str, dict[str, int]] = {}
@@ -860,9 +867,18 @@ def build_regime_switching_portfolio_diagnostic(
             for component in allowed
             if str(component.get("component_id")) in return_matrix.columns and float(component.get("regime_weight_multiplier", 1.0) or 0.0) > 0
         ]
-        total_multiplier = sum(multiplier for _, multiplier in weighted_ids)
-        if total_multiplier > 0:
-            period_return = sum(float(return_matrix.loc[period, component_id]) * (multiplier / total_multiplier) for component_id, multiplier in weighted_ids)
+        # NaN-aware weighting: only count components alive in this period.
+        alive_weighted = [
+            (component_id, multiplier)
+            for component_id, multiplier in weighted_ids
+            if pd.notna(return_matrix.loc[period, component_id])
+        ]
+        active_total = sum(multiplier for _, multiplier in alive_weighted)
+        if active_total > 0:
+            period_return = sum(
+                float(return_matrix.loc[period, component_id]) * (multiplier / active_total)
+                for component_id, multiplier in alive_weighted
+            )
         else:
             period_return = 0.0
         dynamic_returns.append(period_return)
@@ -880,8 +896,17 @@ def build_regime_switching_portfolio_diagnostic(
             }
         )
     dynamic = pd.Series(dynamic_returns, index=return_matrix.index, dtype=float)
-    dynamic_cumulative = dynamic.cumsum()
-    static_cumulative = static_returns.cumsum()
+    # Aggregazione onesta: compounded solo se gli stream sono rendimenti
+    # frazionari plausibili; additive (unita' proxy) altrimenti. La modalita'
+    # e' decisa sull'unione dei due path cosi' il confronto resta omogeneo.
+    joint = pd.concat([dynamic, static_returns]) if not dynamic.empty or not static_returns.empty else dynamic
+    _, aggregation_mode = _aggregate_curve(joint)
+    if aggregation_mode == "compounded":
+        dynamic_cumulative = _compound_cumulative_returns(dynamic)
+        static_cumulative = _compound_cumulative_returns(static_returns)
+    else:
+        dynamic_cumulative = dynamic.fillna(0.0).cumsum()
+        static_cumulative = static_returns.fillna(0.0).cumsum()
     dynamic_drawdown = dynamic_cumulative - dynamic_cumulative.cummax()
     static_drawdown = static_cumulative - static_cumulative.cummax()
     for row in dynamic_curve:
@@ -906,11 +931,14 @@ def build_regime_switching_portfolio_diagnostic(
         }
         for regime, values in sorted(usage.items())
     ]
-    dynamic_total = float(dynamic.sum())
-    static_total = float(static_returns.sum())
+    # Report compounded totals so dynamic/static delta is a portfolio
+    # return, not a sum of per-period stream values.
+    dynamic_total = float(dynamic_cumulative.iloc[-1]) if not dynamic_cumulative.empty else 0.0
+    static_total = float(static_cumulative.iloc[-1]) if not static_cumulative.empty else 0.0
     return {
         "status": "REGIME_SWITCHING_PORTFOLIO_DIAGNOSTIC_ONLY",
         "summary": {
+            "aggregation_mode": aggregation_mode,
             "dynamic_total_net_return": round(dynamic_total, 8),
             "static_total_net_return": round(static_total, 8),
             "dynamic_vs_static_delta": round(dynamic_total - static_total, 8),
@@ -4673,7 +4701,7 @@ def portfolio_lab_component_table(components: list[dict[str, Any]]) -> pd.DataFr
                 "template": component.get("template"),
                 "mode": component.get("analysis_mode"),
                 "decision": component.get("decision"),
-                "trades": component.get("trade_count"),
+                                "trades": component.get("trade_count"),
                 "net_return_sum": component.get("net_return_sum"),
                 "warnings": ", ".join(component.get("bias_warnings", [])),
             }

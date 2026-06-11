@@ -14,13 +14,13 @@ class MissionSection:
 
 
 MISSION_SECTIONS: tuple[MissionSection, ...] = (
-    MissionSection("Mission Brief", "Start here", "What the lab is doing now.", "Command Center"),
-    MissionSection("Project Story", "Start here", "Why the fortress exists.", "Project Anatomy"),
-    MissionSection("Strategy Builder", "Build", "Create one governed idea.", "Strategy Workbench"),
-    MissionSection("Portfolio Lab", "Build", "Combine strategy sleeves.", "Portfolio Lab"),
-    MissionSection("Regime Playbook", "Build", "Which sleeve works when.", "Results & Data"),
-    MissionSection("Data Vault", "Audit", "Providers, blockers, PIT, and delisted coverage.", "Results & Data"),
-    MissionSection("Decision Ledger", "Audit", "Every yes/no decision and raw artifact trail.", "Results & Data"),
+    MissionSection("Mission Brief", "Start here", "Cosa sta facendo il lab adesso.", "Command Center"),
+    MissionSection("Project Story", "Start here", "Perche' esiste questa fortezza metodologica.", "Project Anatomy"),
+    MissionSection("Strategy Builder", "Build", "Crea una strategia governata, una alla volta.", "Strategy Workbench"),
+    MissionSection("Portfolio Lab", "Build", "Combina le strategie in basket diagnostici.", "Portfolio Lab"),
+    MissionSection("Regime Playbook", "Build", "Quale famiglia funziona in quale regime.", "Results & Data"),
+    MissionSection("Data Vault", "Audit", "Provider, blocker, copertura PIT e delisted.", "Results & Data"),
+    MissionSection("Decision Ledger", "Audit", "Ogni decisione si'/no con la traccia degli artifact.", "Results & Data"),
 )
 
 
@@ -52,9 +52,9 @@ def build_mission_status(payload: dict[str, Any]) -> dict[str, Any]:
         "current_blocker": blocker,
         "current_regime": str(current_regime.get("regime_label", "UNKNOWN")),
         "next_gate": "Attach admissible data bundle" if blocker == "DATA" else "Review final decision gate",
-        "plain_english_blocker": "Missing PIT and delisted coverage keeps true claims locked."
+        "plain_english_blocker": "Senza copertura PIT e delisted, ogni conclusione vera resta bloccata."
         if blocker == "DATA"
-        else "Governance has not allowed promotion, paper trading, or live trading.",
+        else "La governance non consente promozione, paper trading o live trading.",
     }
 
 

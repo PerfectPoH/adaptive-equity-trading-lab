@@ -127,7 +127,9 @@ def test_build_component_return_matrix_aligns_component_returns(tmp_path: Path) 
 
     assert list(matrix.columns) == ["bbb222", "aaa111"]
     assert matrix.shape == (3, 2)
-    assert matrix.loc["2026-01-03", "bbb222"] == 0.0
+    # Missing periods are now NaN, not 0.0 — a component that did not exist
+    # on a given date is not the same as a component that returned 0%.
+    assert pd.isna(matrix.loc["2026-01-03", "bbb222"])
     assert round(float(matrix["aaa111"].sum()), 6) == 0.12
 
 
@@ -402,7 +404,6 @@ def test_persist_portfolio_diagnostic_writes_required_artifacts(tmp_path: Path) 
     assert expected.issubset(paths)
     for key in expected:
         assert Path(paths[key]).exists(), key
-
 
 def test_portfolio_cli_blocks_forbidden_flags(capsys) -> None:
     code = main(["--paper"])

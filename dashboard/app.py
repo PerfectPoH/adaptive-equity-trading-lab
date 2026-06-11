@@ -100,27 +100,27 @@ st.set_page_config(page_title="Adaptive Equity Trading Lab", layout="wide", init
 SECTIONS = [section.label for section in MISSION_SECTIONS]
 COLOR_LOGIC = {
     "Blue": {
-        "css": "#1f5eff",
+        "css": "#5b8cff",
         "title": "Signal and action",
         "body": "Blue marks the place where the user or strategy does something: entry logic, selected navigation, primary buttons, and live chart annotations.",
     },
     "Mint": {
-        "css": "#0f9f75",
+        "css": "#2dd4a7",
         "title": "Evidence that survived",
         "body": "Mint marks facts the lab can actually support: valid local coverage, completed checks, documented evidence, and results that are safe to inspect.",
     },
     "Amber": {
-        "css": "#d97706",
+        "css": "#f5a623",
         "title": "Risk, cost, and friction",
         "body": "Amber marks the parts that usually kill paper alpha: transaction costs, slippage, fragile assumptions, and unresolved operating risk.",
     },
     "Plum": {
-        "css": "#7c3aed",
+        "css": "#a78bfa",
         "title": "Data scope and structure",
         "body": "Plum marks the research container: universe routing, dataset scope, provider boundaries, and the difference between local data and missing coverage.",
     },
     "Rose": {
-        "css": "#d12f5f",
+        "css": "#fb7185",
         "title": "Blockers and fragility",
         "body": "Rose marks the lab saying no: PIT blockers, survivorship bias, outlier dependency, insufficient sample size, or promotion locked false.",
     },
@@ -131,1188 +131,653 @@ def inject_theme() -> None:
     st.markdown(
         """
         <style>
-        @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+        /* ---------- design tokens (dark mission-control) ---------- */
         :root {
-          --lab-bg: #fbfaf7;
-          --lab-panel: #ffffff;
-          --lab-ink: #3f3f46;
-          --lab-strong: #171717;
-          --lab-muted: #71717a;
-          --lab-blue: #1f5eff;
-          --lab-blue-2: #3b82f6;
-          --lab-blue-soft: #eef3ff;
-          --lab-amber: #d97706;
-          --lab-amber-soft: #fff7ed;
-          --lab-plum: #7c3aed;
-          --lab-plum-soft: #f3edff;
-          --lab-mint: #0f9f75;
-          --lab-mint-soft: #e9fbf4;
-          --lab-rose: #d12f5f;
-          --lab-rose-soft: #fff0f5;
-          --lab-line: #e7e2d8;
-          --lab-line-strong: #cfc7bb;
-          --lab-red: #b42318;
-          --lab-green: #0f8a4b;
-          --lab-slate: #171717;
+          --bg:         #0a0e1a;
+          --panel:      #111726;
+          --panel-2:    #161e30;
+          --ink:        #e7ecf5;
+          --ink-soft:   #c2cad8;
+          --muted:      #8b93a7;
+          --muted-soft: #5e6781;
+          --line:       rgba(148,163,184,.16);
+          --line-soft:  rgba(148,163,184,.07);
+          --accent:     #5b8cff;
+          --accent-2:   #79a2ff;
+          --accent-soft: rgba(91,140,255,.13);
+          --good:       #2dd4a7;
+          --good-soft:  rgba(45,212,167,.12);
+          --warn:       #f5a623;
+          --warn-soft:  rgba(245,166,35,.12);
+          --bad:        #fb7185;
+          --bad-soft:   rgba(251,113,133,.12);
+          --plum:       #a78bfa;
+          --plum-soft:  rgba(167,139,250,.13);
+          --space-1: 4px;
+          --space-2: 8px;
+          --space-3: 12px;
+          --space-4: 16px;
+          --space-5: 24px;
+          --space-6: 32px;
+          --space-7: 48px;
+          --radius:   10px;
+          --radius-sm: 6px;
+          --radius-lg: 14px;
+          --shadow-1: 0 1px 2px rgba(0,0,0,.35);
+          --shadow-2: 0 2px 6px rgba(0,0,0,.35);
+          --shadow-3: 0 8px 24px rgba(0,0,0,.45);
+          --glow-accent: 0 0 0 1px rgba(91,140,255,.25), 0 0 18px rgba(91,140,255,.10);
+          /* legacy aliases used by inline styles */
+          --lab-blue: var(--accent);
+          --lab-mint: var(--good);
+          --lab-amber: var(--warn);
+          --lab-rose: var(--bad);
+          --lab-rose-soft: var(--bad-soft);
+          --lab-plum: var(--plum);
+          --lab-line: var(--line);
         }
+
+        /* ---------- streamlit chrome ---------- */
         [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu, footer {
-          display: none !important;
-          visibility: hidden !important;
+          display: none !important; visibility: hidden !important;
+        }
+        section[data-testid="stSidebar"], [data-testid="stSidebarCollapsedControl"] {
+          display: none !important; visibility: hidden !important;
         }
         html, body, [data-testid="stAppViewContainer"] {
           background:
-            radial-gradient(circle at 88% 6%, rgba(31,94,255,.08), transparent 26%),
-            radial-gradient(circle at 8% 28%, rgba(15,159,117,.075), transparent 28%),
-            linear-gradient(90deg, rgba(231,226,216,.55) 1px, transparent 1px),
-            var(--lab-bg);
-          background-size: auto, auto, 72px 72px;
-          background-position: 0 0, 0 0, 0 0;
-          color: var(--lab-ink);
-          font-family: "Instrument Sans", system-ui, sans-serif;
-          animation: labGridDrift 28s linear infinite;
+            radial-gradient(1100px 500px at 85% -10%, rgba(91,140,255,.07), transparent 60%),
+            radial-gradient(900px 420px at -10% 0%, rgba(167,139,250,.05), transparent 55%),
+            var(--bg);
+          color: var(--ink);
+          font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+          font-feature-settings: 'cv02','cv03','cv04','cv11';
+          -webkit-font-smoothing: antialiased;
         }
-        section[data-testid="stSidebar"],
-        [data-testid="stSidebarCollapsedControl"] {
-          display: none !important;
-          visibility: hidden !important;
-        }
-        section[data-testid="stSidebar"] * {
-          color: var(--lab-ink);
-        }
-        section[data-testid="stSidebar"] .sidebar-tile {
-          border: 1px solid var(--lab-line);
-          border-radius: 8px;
-          background: rgba(255, 255, 255, .78);
-          padding: 14px;
-          min-height: 108px;
-          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 12px 34px rgba(23,23,23,.055);
-        }
-        section[data-testid="stSidebar"] .sidebar-label {
-          color: var(--lab-blue) !important;
-          font-family: "IBM Plex Mono", monospace;
-          font-size: 12px;
-          font-weight: 700;
-          text-transform: uppercase;
-        }
-        section[data-testid="stSidebar"] .sidebar-value {
-          color: var(--lab-strong) !important;
-          font-family: "Instrument Sans", system-ui, sans-serif;
-          font-size: 30px;
-          font-weight: 800;
-          line-height: 1.05;
-          overflow-wrap: anywhere;
-        }
-        section[data-testid="stSidebar"] .sidebar-note {
-          color: var(--lab-muted) !important;
-          font-size: 13px;
-          line-height: 1.35;
-        }
-        section[data-testid="stSidebar"] [role="radiogroup"] label {
-          border: 1px solid var(--lab-line);
-          border-radius: 8px;
-          margin-bottom: 8px;
-          padding: 9px 11px;
-          background: rgba(255,255,255,.72);
-          cursor: pointer;
-          transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
-        }
-        section[data-testid="stSidebar"] [role="radiogroup"] label:hover {
-          background: #ffffff;
-          border-color: #93c5fd;
-          box-shadow: 0 10px 28px rgba(37,99,235,.10);
-          transform: translateX(2px);
-        }
-        section[data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) {
-          background: #2563eb;
-          border-color: #2563eb;
-          box-shadow: 0 16px 34px rgba(37,99,235,.22);
-        }
-        section[data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) p,
-        section[data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) span {
-          color: #ffffff !important;
-        }
+        .block-container { padding-top: 1.5rem; padding-bottom: 4rem; max-width: 1320px; }
+        code, kbd, .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12.5px; }
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-thumb { background: rgba(148,163,184,.25); border-radius: 999px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+
+        /* ---------- left navigation rail ---------- */
         .mc-sidebar-shell {
-          background:
-            radial-gradient(circle at 18% 8%, rgba(31,94,255,.20), transparent 28%),
-            radial-gradient(circle at 90% 34%, rgba(217,119,6,.18), transparent 30%),
-            #0b1120;
-          border: 1px solid rgba(148,163,184,.18);
-          border-radius: 22px;
-          box-shadow: 0 24px 70px rgba(2,6,23,.28);
-          display: grid;
-          gap: 16px;
-          padding: 20px 18px;
+          background: linear-gradient(180deg, var(--panel-2), var(--panel));
+          border: 1px solid var(--line);
+          border-radius: var(--radius-lg);
+          padding: 18px 16px 14px;
+          box-shadow: var(--shadow-2);
+          display: flex; flex-direction: column; gap: 14px;
         }
         .mc-brand {
-          color: #ffffff;
-          font-size: 18px;
-          font-weight: 900;
-          line-height: 1.1;
+          color: var(--ink);
+          font-size: 16px;
+          font-weight: 700;
+          letter-spacing: -0.01em;
+          display: flex; flex-direction: column; gap: 2px;
         }
         .mc-brand span {
-          display: block;
-          color: #94a3b8;
-          font-size: 12px;
-          font-weight: 700;
-          margin-top: 5px;
-        }
-        .mc-nav-group {
-          display: grid;
-          gap: 8px;
-        }
-        .mc-nav-label {
-          color: #93c5fd;
-          font-family: "IBM Plex Mono", monospace;
+          color: var(--accent);
           font-size: 11px;
-          font-weight: 800;
-          letter-spacing: .06em;
-          margin-top: 6px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
-        }
-        .mc-nav-item {
-          background: transparent;
-          border: 1px solid transparent;
-          border-radius: 12px;
-          padding: 10px 11px;
-        }
-        .mc-nav-item.active {
-          background: #eff6ff;
-          border-color: #bfdbfe;
-        }
-        .mc-nav-item strong {
-          color: #0f172a;
-          display: block;
-          font-size: 14px;
-        }
-        .mc-nav-item.active strong {
-          color: #1d4ed8;
-        }
-        .mc-nav-item span {
-          color: #64748b;
-          display: block;
-          font-size: 12px;
-          line-height: 1.35;
-          margin-top: 3px;
         }
         .mc-status-card {
-          background: rgba(15,23,42,.76);
-          border: 1px solid rgba(148,163,184,.18);
-          border-radius: 16px;
-          color: #ffffff;
-          padding: 14px;
+          border: 1px solid var(--line);
+          border-radius: var(--radius);
+          padding: 12px 14px;
+          background: rgba(10,14,26,.55);
+          display: flex; flex-direction: column; gap: 4px;
         }
-        .mc-status-card span,
-        .mc-status-card small,
-        .mc-status-card em {
-          color: #cbd5e1;
-          display: block;
-          font-size: 12px;
-          font-style: normal;
-          line-height: 1.4;
+        .mc-status-card span {
+          color: var(--muted);
+          font-size: 10.5px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
         }
         .mc-status-card strong {
-          color: #ffffff;
-          display: block;
-          font-size: 21px;
-          line-height: 1.05;
-          margin: 6px 0;
-          overflow-wrap: anywhere;
-        }
-        .mission-brief-hero {
-          background: linear-gradient(135deg, rgba(37,99,235,.96), rgba(15,23,42,.98) 58%, rgba(217,119,6,.78));
-          border: 1px solid #1e293b;
-          border-radius: 24px;
-          box-shadow: 0 24px 70px rgba(15,23,42,.15);
-          color: #ffffff;
-          padding: 36px;
-        }
-        .mission-brief-hero h1 {
-          color: #ffffff;
-          font-size: clamp(42px, 5vw, 68px);
-          letter-spacing: -.04em;
-          line-height: .95;
-          margin: 10px 0 14px;
-        }
-        .mission-brief-hero p {
-          color: #dbeafe !important;
+          color: var(--ink);
           font-size: 17px;
-          line-height: 1.58;
-          max-width: 880px;
-        }
-        h1, h2, h3 {
-          font-family: "Instrument Sans", system-ui, sans-serif;
-          letter-spacing: -.025em;
-          color: var(--lab-strong);
-        }
-        .block-container {
-          padding-top: 1.05rem;
-          padding-bottom: 5rem;
-          max-width: 1760px;
-        }
-        .block-container > div {
-          animation: labFadeUp .42s ease both;
-        }
-        .lab-shell-nav {
-          position: sticky;
-          top: 0;
-          z-index: 50;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 14px;
-          border: 1px solid var(--lab-line);
-          border-radius: 9px;
-          background: rgba(255, 255, 255, .78);
-          backdrop-filter: blur(12px);
-          padding: 12px 14px;
-          margin-bottom: 22px;
-          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 16px 46px rgba(23,23,23,.055);
-        }
-        .mission-rail-spacer {
-          min-height: calc(100vh - 42px);
-          padding: 8px 0 28px;
-        }
-        .rail-toggle-note {
-          color: #64748b;
-          font-family: "IBM Plex Mono", monospace;
-          font-size: 11px;
           font-weight: 700;
-          letter-spacing: .04em;
-          margin-top: 8px;
-          text-align: center;
-          text-transform: uppercase;
+          letter-spacing: -0.01em;
         }
-        .mission-rail-caption {
-          border-top: 1px solid var(--lab-line);
-          color: #64748b;
+        .mc-status-card em {
+          color: var(--muted);
           font-size: 12px;
-          line-height: 1.35;
-          margin-top: 18px;
-          padding-top: 14px;
-        }
-        div[data-testid="stColumn"]:has(.mc-sidebar-shell) {
-          background: #0b1120;
-          border: 1px solid rgba(148,163,184,.16);
-          border-radius: 24px;
-          box-shadow: 0 28px 80px rgba(2,6,23,.24);
-          max-height: calc(100vh - 42px);
-          overflow-y: auto;
-          padding: 14px 12px 18px;
-          position: sticky;
-          top: 14px;
-        }
-        div[data-testid="stColumn"]:has(.mc-sidebar-shell) div[data-testid="stCaptionContainer"] p,
-        div[data-testid="stColumn"]:has(.mc-sidebar-shell) div[data-testid="stMarkdownContainer"] p {
-          color: #94a3b8 !important;
-        }
-        div[data-testid="stColumn"]:has(.mc-sidebar-shell) div[data-testid="stButton"] > button {
-          background: rgba(15,23,42,.76) !important;
-          border: 1px solid rgba(148,163,184,.20) !important;
-          border-radius: 14px !important;
-          box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
-          color: #e5efff !important;
-          min-height: 46px;
-          position: relative;
-          transition: background .22s ease, border-color .22s ease, box-shadow .22s ease, transform .22s ease;
-        }
-        div[data-testid="stColumn"]:has(.mc-sidebar-shell) div[data-testid="stButton"] > button:hover {
-          background: #111c34 !important;
-          border-color: rgba(96,165,250,.70) !important;
-          box-shadow: 0 0 0 1px rgba(59,130,246,.28), 0 20px 42px rgba(37,99,235,.25);
-          transform: translateX(4px) translateY(-1px);
-        }
-        div[data-testid="stColumn"]:has(.mc-sidebar-shell) div[data-testid="stButton"] > button[kind="primary"] {
-          background: linear-gradient(135deg, #2563eb, #7c3aed) !important;
-          border-color: rgba(191,219,254,.76) !important;
-          box-shadow: 0 18px 44px rgba(37,99,235,.34);
-          color: #ffffff !important;
-        }
-        div[data-testid="stColumn"]:has(.rail-toggle-note) div[data-testid="stButton"] > button {
-          aspect-ratio: 1 / 1;
-          background: #0b1120 !important;
-          border: 1px solid rgba(148,163,184,.22) !important;
-          border-radius: 12px !important;
-          box-shadow: 0 16px 38px rgba(2,6,23,.28);
-          color: #ffffff !important;
-          min-height: 54px;
-          padding: 0 !important;
-          transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-        }
-        div[data-testid="stColumn"]:has(.rail-toggle-note) div[data-testid="stButton"] > button:hover {
-          border-color: #60a5fa !important;
-          box-shadow: 0 0 0 1px rgba(96,165,250,.22), 0 24px 52px rgba(37,99,235,.24);
-          transform: translateY(-2px);
-        }
-        .main-nav-card {
-          border: 1px solid var(--lab-line);
-          border-radius: 9px;
-          background: rgba(255,255,255,.72);
-          padding: 14px;
-          margin-bottom: 30px;
-          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 16px 46px rgba(23,23,23,.045);
-        }
-        .nav-help {
-          font-family: "IBM Plex Mono", monospace;
-          font-size: 12px;
-          color: var(--lab-muted);
-          margin-bottom: 8px;
-          text-transform: uppercase;
-          font-weight: 700;
-        }
-        div[data-testid="stButton"] > button {
-          border-radius: 8px;
-          border: 1px solid var(--lab-line);
-          font-weight: 700;
-          min-height: 44px;
-          transition: background .18s ease, border-color .18s ease, transform .18s ease;
-        }
-        div[data-testid="stButton"] > button[kind="secondary"] {
-          background: #ffffff;
-          color: #0f172a;
-          border-color: #94a3b8;
-        }
-        div[data-testid="stButton"] > button[kind="secondary"]:hover {
-          background: #eff6ff;
-          color: #1d4ed8;
-          border-color: #2563eb;
-          transform: translateY(-1px);
-        }
-        div[data-testid="stButton"] > button[kind="primary"] {
-          background: #2563eb;
-          color: #ffffff;
-          border-color: #2563eb;
-        }
-        .main-nav-card div[data-testid="stButton"] > button[kind="secondary"] {
-          background: #ffffff;
-          color: #1e293b;
-          border-color: #cbd5e1;
-        }
-        .main-nav-card div[data-testid="stButton"] > button[kind="secondary"]:hover {
-          background: #f8fafc;
-          color: #1d4ed8;
-          border-color: #93c5fd;
-        }
-        div[data-testid="stButton"] > button * {
-          color: inherit !important;
-        }
-        div[class*="st-key-mission_rail_open_button"] button {
-          aspect-ratio: 1 / 1;
-          background: #0b1120 !important;
-          border: 1px solid rgba(148,163,184,.28) !important;
-          border-radius: 12px !important;
-          box-shadow: 0 16px 38px rgba(2,6,23,.32);
-          color: #ffffff !important;
-          min-height: 54px;
-          padding: 0 !important;
-          transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-        }
-        div[class*="st-key-mission_rail_open_button"] button:hover {
-          border-color: #60a5fa !important;
-          box-shadow: 0 0 0 1px rgba(96,165,250,.22), 0 24px 52px rgba(37,99,235,.28);
-          transform: translateY(-2px);
-        }
-        div[class*="st-key-mission_rail_close"] button,
-        div[class*="st-key-mission_rail_nav_"] button {
-          background: rgba(15,23,42,.76) !important;
-          border: 1px solid rgba(148,163,184,.22) !important;
-          border-radius: 14px !important;
-          box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
-          color: #e5efff !important;
-          min-height: 46px;
-          transition: background .22s ease, border-color .22s ease, box-shadow .22s ease, transform .22s ease;
-        }
-        div[class*="st-key-mission_rail_close"] button:hover,
-        div[class*="st-key-mission_rail_nav_"] button:hover {
-          background: #111c34 !important;
-          border-color: rgba(96,165,250,.74) !important;
-          box-shadow: 0 0 0 1px rgba(59,130,246,.30), 0 20px 42px rgba(37,99,235,.26);
-          transform: translateX(4px) translateY(-1px);
-        }
-        div[class*="st-key-mission_rail_nav_"] button[kind="primary"] {
-          background: linear-gradient(135deg, #2563eb, #7c3aed) !important;
-          border-color: rgba(191,219,254,.76) !important;
-          box-shadow: 0 18px 44px rgba(37,99,235,.34);
-          color: #ffffff !important;
-        }
-        div[data-testid="stSelectbox"] label,
-        div[data-testid="stTextInput"] label,
-        div[data-testid="stTextArea"] label,
-        div[data-testid="stSlider"] label,
-        div[data-testid="stRadio"] label,
-        div[data-testid="stRadio"] p,
-        div[data-testid="stMarkdownContainer"] p {
-          color: #0f172a;
-        }
-        div[data-testid="stSelectbox"] [data-baseweb="select"] > div,
-        div[data-testid="stTextInput"] input,
-        div[data-testid="stTextArea"] textarea {
-          background: #ffffff;
-          color: #0f172a;
-          border: 1px solid #cbd5e1;
-          border-radius: 8px;
-        }
-        div[data-testid="stSelectbox"] [data-baseweb="select"] svg {
-          color: #0f172a;
-          fill: #0f172a;
-        }
-        div[data-testid="stTextArea"] textarea::placeholder,
-        div[data-testid="stTextInput"] input::placeholder {
-          color: #64748b;
-          opacity: 1;
-        }
-        div[data-testid="stRadio"] [role="radiogroup"] label {
-          background: transparent;
-          border: 0;
-          color: #0f172a;
-        }
-        div[data-testid="stRadio"] [role="radiogroup"] label span,
-        div[data-testid="stRadio"] [role="radiogroup"] label p {
-          color: #0f172a;
-          font-weight: 600;
-        }
-        div[data-testid="stTabs"] button {
-          color: #334155;
-          font-weight: 750;
-        }
-        div[data-testid="stTabs"] button[aria-selected="true"] {
-          color: var(--lab-blue);
-        }
-        div[data-testid="stExpander"] {
-          border: 1px solid var(--lab-line);
-          border-radius: 10px;
-          background: rgba(255,255,255,.74);
-          margin: 14px 0;
-        }
-        div[data-testid="stExpander"] summary p {
-          color: #0f172a;
-          font-weight: 750;
-        }
-        div[data-testid="stDataFrame"] {
-          border-radius: 10px;
-          overflow: hidden;
-          margin-top: 8px;
-          margin-bottom: 18px;
-        }
-        div[data-testid="stPlotlyChart"] {
-          background: #ffffff;
-          border: 1px solid var(--lab-line);
-          border-radius: 12px;
-          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 42px rgba(23,23,23,.055);
-          overflow: hidden;
-          margin-top: 8px;
-          margin-bottom: 26px;
-          padding: 10px;
-          transition: transform .18s ease, box-shadow .18s ease;
-        }
-        div[data-testid="stPlotlyChart"]:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 26px 58px rgba(23,23,23,.08);
-        }
-        div[data-testid="stPlotlyChart"] .modebar {
-          display: none !important;
-        }
-        div[data-testid="stPlotlyChart"] .main-svg {
-          background: #ffffff !important;
-        }
-        div[data-testid="stPlotlyChart"] .xtick text,
-        div[data-testid="stPlotlyChart"] .ytick text,
-        div[data-testid="stPlotlyChart"] .gtitle,
-        div[data-testid="stPlotlyChart"] .xtitle,
-        div[data-testid="stPlotlyChart"] .ytitle,
-        div[data-testid="stPlotlyChart"] .legendtext,
-        div[data-testid="stPlotlyChart"] .annotation-text {
-          fill: #0f172a !important;
-          opacity: 1 !important;
-        }
-        div[data-testid="stPlotlyChart"] .gridlayer path {
-          stroke: #d5dbe5 !important;
-          opacity: .85 !important;
-        }
-        .router-matrix-shell {
-          background: #ffffff;
-          border: 1px solid var(--lab-line);
-          border-radius: 14px;
-          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 42px rgba(23,23,23,.055);
-          margin: 10px 0 22px;
-          overflow-x: auto;
-          padding: 14px;
-        }
-        .router-matrix {
-          display: grid;
-          grid-template-columns: minmax(150px, .9fr) repeat(var(--regime-count), minmax(92px, 1fr));
-          gap: 8px;
-          min-width: min(100%, 760px);
-        }
-        .router-corner,
-        .router-header,
-        .router-family,
-        .router-cell {
-          border-radius: 10px;
-          min-height: 54px;
-          padding: 10px;
-        }
-        .router-corner,
-        .router-header {
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
-          color: #334155;
-          font-family: "IBM Plex Mono", monospace;
-          font-size: 11px;
-          font-weight: 800;
-          letter-spacing: .04em;
-          overflow-wrap: anywhere;
-          text-transform: uppercase;
-        }
-        .router-family {
-          align-items: center;
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
-          color: #0f172a;
-          display: flex;
-          font-weight: 800;
-          line-height: 1.2;
-        }
-        .router-cell {
-          border: 1px solid transparent;
-          box-shadow: inset 0 1px 0 rgba(255,255,255,.36);
-          color: #ffffff;
-          display: grid;
-          gap: 4px;
-          transition: transform .18s ease, box-shadow .18s ease;
-        }
-        .router-cell:hover {
-          box-shadow: 0 16px 34px rgba(15,23,42,.16);
-          transform: translateY(-2px);
-        }
-        .router-cell strong {
-          color: #ffffff;
-          font-family: "IBM Plex Mono", monospace;
-          font-size: 12px;
-          letter-spacing: .02em;
-          line-height: 1.15;
-          overflow-wrap: anywhere;
-        }
-        .router-cell small {
-          color: rgba(255,255,255,.86);
-          font-size: 11px;
-          line-height: 1.25;
-        }
-        .router-cell.block {
-          background: linear-gradient(135deg, #be123c, #d12f5f);
-        }
-        .router-cell.reduce {
-          background: linear-gradient(135deg, #b45309, #d97706);
-        }
-        .router-cell.proxy {
-          background: linear-gradient(135deg, #1d4ed8, #1f5eff);
-        }
-        .router-cell.overlay,
-        .router-cell.allow {
-          background: linear-gradient(135deg, #047857, #0f9f75);
-        }
-        .router-cell.observe {
-          background: linear-gradient(135deg, #6d28d9, #7c3aed);
-        }
-        div[data-testid="stSlider"] [data-testid="stTickBar"] {
-          color: #334155;
-        }
-        .lab-brand {
-          font-family: "IBM Plex Mono", monospace;
-          font-size: 12px;
-          font-weight: 700;
-          color: var(--lab-blue);
-          text-transform: uppercase;
-        }
-        .lab-nav-state {
-          font-family: "IBM Plex Mono", monospace;
-          font-size: 12px;
-          color: var(--lab-muted);
-        }
-        .lab-hero {
-          position: relative;
-          overflow: hidden;
-          border: 1px solid #1f2937;
-          border-radius: 12px;
-          background:
-            radial-gradient(circle at 82% 18%, rgba(15,159,117,.35), transparent 25%),
-            linear-gradient(115deg, rgba(31, 94, 255, .98), rgba(23, 23, 23, .98) 55%, rgba(217, 119, 6, .78)),
-            #171717;
-          padding: 44px 42px 36px;
-          margin-bottom: 28px;
-          color: #f8fafc;
-          min-height: 320px;
-          box-shadow: 0 1px 0 rgba(23,23,23,.08), 0 24px 70px rgba(23,23,23,.14);
-        }
-        .lab-hero::after {
-          content: "";
-          position: absolute;
-          inset: auto 0 0 0;
-          height: 110px;
-          background-image:
-            linear-gradient(90deg, rgba(255,255,255,.10) 1px, transparent 1px),
-            linear-gradient(0deg, rgba(255,255,255,.08) 1px, transparent 1px);
-          background-size: 42px 28px;
-          opacity: .52;
-        }
-        .lab-kicker {
-          font-family: "IBM Plex Mono", monospace;
-          color: #bfdbfe;
-          font-size: 12px;
-          text-transform: uppercase;
-          font-weight: 700;
-          letter-spacing: .06em;
-        }
-        .lab-title {
-          position: relative;
-          z-index: 1;
-          font-family: "Instrument Sans", system-ui, sans-serif;
-          font-size: clamp(42px, 6vw, 78px);
-          letter-spacing: -.05em;
-          line-height: .92;
-          font-weight: 800;
-          max-width: 1000px;
-          margin: 12px 0;
-          color: #ffffff;
-        }
-        .lab-subtitle {
-          position: relative;
-          z-index: 1;
-          max-width: 940px;
-          color: #dbeafe;
-          font-size: 18px;
-          line-height: 1.55;
-        }
-        .metric-card, .strategy-card, .lab-section, .chart-panel {
-          border: 1px solid var(--lab-line);
-          border-radius: 9px;
-          background: rgba(255,255,255,.84);
-          padding: 18px;
-          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 16px 46px rgba(23,23,23,.055);
-        }
-        .metric-label, .strategy-family, .eyebrow {
-          color: var(--lab-muted);
-          font-family: "IBM Plex Mono", monospace;
-          font-size: 12px;
-          text-transform: uppercase;
-          font-weight: 700;
-          letter-spacing: .04em;
-        }
-        .metric-value {
-          color: var(--lab-strong);
-          font-family: "Instrument Sans", system-ui, sans-serif;
-          font-size: 32px;
-          font-weight: 800;
-          margin-top: 4px;
-          overflow-wrap: anywhere;
-          line-height: 1.1;
-        }
-        .metric-value-long {
-          font-size: 22px;
-        }
-        .metric-note, .small-muted {
-          color: var(--lab-muted);
-          font-size: 13px;
+          font-style: normal;
           line-height: 1.45;
+          font-weight: 500;
         }
-        .status-pill {
-          display: inline-flex;
-          align-items: center;
-          width: fit-content;
-          border-radius: 999px;
-          padding: 5px 10px;
-          font-family: "IBM Plex Mono", monospace;
-          font-size: 12px;
+        .mc-status-card small {
+          color: var(--muted-soft);
+          font-size: 11.5px;
+        }
+        .mc-nav-label {
+          font-size: 10.5px;
           font-weight: 700;
-          border: 1px solid var(--lab-line);
-          background: #f1f5f9;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: var(--muted-soft);
+          margin: 14px 4px 6px;
         }
-        .status-ARCHIVED { color: #92400e; background: #ffedd5; border-color: #fed7aa; }
-        .status-BLOCKED { color: #991b1b; background: #fee2e2; border-color: #fecaca; }
-        .status-DIAGNOSTIC { color: #1d4ed8; background: #dbeafe; border-color: #bfdbfe; }
-        .status-NOT-RUN { color: #475569; background: #f1f5f9; }
-        .status-PROMOTED { color: #166534; background: #dcfce7; border-color: #bbf7d0; }
-        .strategy-section {
-          border: 1px solid var(--lab-line);
-          border-radius: 12px;
+        .mc-nav-label:first-of-type { margin-top: 4px; }
+        .mission-rail-caption, .rail-toggle-note {
+          font-size: 11px;
+          color: var(--muted-soft);
+          padding: 8px 4px 0;
+        }
+        section[data-testid="stSidebar"] [role="radiogroup"] label {
+          border-radius: var(--radius-sm);
+        }
+        .stButton > button {
+          font-family: inherit;
+          font-weight: 500;
+          font-size: 13px;
+          border-radius: var(--radius-sm);
+          border: 1px solid var(--line);
+          background: var(--panel);
+          color: var(--ink-soft);
+          box-shadow: var(--shadow-1);
+          transition: background .12s ease, border-color .12s ease, transform .06s ease;
+        }
+        .stButton > button:hover {
+          background: var(--panel-2);
+          border-color: rgba(148,163,184,.35);
+          color: var(--ink);
+        }
+        .stButton > button[kind="primary"] {
+          background: linear-gradient(180deg, var(--accent-2), var(--accent));
+          border-color: rgba(91,140,255,.65);
+          color: #0a0e1a;
+          font-weight: 700;
+          box-shadow: var(--glow-accent);
+        }
+        .stButton > button[kind="primary"]:hover {
+          background: linear-gradient(180deg, #8fb1ff, var(--accent-2));
+          border-color: var(--accent-2);
+        }
+
+        /* ---------- hero blocks ---------- */
+        .lab-hero, .mission-brief-hero, .portfolio-hero {
           background:
-            linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.98)),
-            #ffffff;
-          padding: 28px;
-          margin: 32px 0;
-          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 52px rgba(23,23,23,.06);
+            radial-gradient(600px 220px at 90% -20%, rgba(91,140,255,.12), transparent 60%),
+            linear-gradient(180deg, var(--panel-2), var(--panel));
+          border: 1px solid var(--line);
+          border-radius: var(--radius-lg);
+          padding: 32px 36px 28px;
+          margin-bottom: 20px;
+          box-shadow: var(--shadow-2);
         }
-        .strategy-title {
-          font-family: "Instrument Sans", system-ui, sans-serif;
-          font-size: clamp(26px, 3vw, 40px);
-          font-weight: 800;
-          margin: 8px 0 6px;
-          color: var(--lab-strong);
+        .lab-kicker, .section-kicker {
+          color: var(--accent);
+          font-size: 11.5px;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          margin-bottom: 8px;
         }
-        .strategy-copy {
-          color: var(--lab-ink);
-          line-height: 1.58;
+        .lab-title, .mission-brief-hero h1 {
+          color: var(--ink);
+          font-size: 30px;
+          font-weight: 700;
+          line-height: 1.18;
+          letter-spacing: -0.022em;
+          margin: 0 0 10px;
+        }
+        .lab-subtitle, .mission-brief-hero p {
+          color: var(--muted);
           font-size: 15px;
-        }
-        .callout {
-          border: 1px solid #c8d7ff;
-          border-left: 4px solid var(--lab-blue);
-          background: #eff6ff;
-          padding: 14px 16px;
-          border-radius: 8px;
-          color: #1e3a8a;
-          margin: 16px 0;
-        }
-        .danger-callout {
-          border-left-color: var(--lab-red);
-          background: #fef2f2;
-          color: #7f1d1d;
-        }
-        .amber-callout {
-          border-color: #fed7aa;
-          border-left-color: var(--lab-amber);
-          background: #fff7ed;
-          color: #7c2d12;
-        }
-        .compact-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-          gap: 12px;
-        }
-        .page-guide {
-          border: 1px solid var(--lab-line);
-          border-radius: 12px;
-          background: rgba(255,255,255,.82);
-          padding: 18px;
-          margin: -12px 0 30px;
-          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 54px rgba(23,23,23,.05);
-        }
-        .page-guide-title {
-          color: var(--lab-strong);
-          font-size: 22px;
-          font-weight: 850;
-          letter-spacing: -.02em;
-          margin-bottom: 6px;
-        }
-        .page-guide-copy {
-          color: var(--lab-muted);
           line-height: 1.55;
-          max-width: 920px;
+          font-weight: 400;
+          margin: 0;
+          max-width: 780px;
+        }
+        .lab-subtitle strong, .mission-brief-hero p strong { color: var(--ink); font-weight: 600; }
+        .portfolio-hero { padding: 26px 30px; }
+        .portfolio-hero-note { color: var(--muted); font-size: 13px; margin-top: 6px; }
+
+        /* ---------- streamlit native headers ---------- */
+        h1, h2, h3, h4 { color: var(--ink); letter-spacing: -0.012em; }
+        .stMarkdown h1 { font-size: 26px; font-weight: 700; margin-top: 28px; }
+        .stMarkdown h2 { font-size: 20px; font-weight: 700; margin-top: 24px; margin-bottom: 8px; }
+        .stMarkdown h3 { font-size: 16px; font-weight: 600; margin-top: 18px; margin-bottom: 6px; }
+        .stMarkdown p, .stMarkdown li { font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
+        .stMarkdown strong { color: var(--ink); }
+        .stMarkdown hr { border: 0; border-top: 1px solid var(--line); margin: 22px 0; }
+        a, .stMarkdown a { color: var(--accent-2); }
+
+        /* ---------- page guide / callouts ---------- */
+        .page-guide {
+          background: var(--panel);
+          border: 1px solid var(--line);
+          border-left: 3px solid var(--accent);
+          border-radius: var(--radius);
+          padding: 16px 18px;
+          margin: 12px 0 18px;
+          box-shadow: var(--shadow-1);
+        }
+        .page-guide-title, .guide-title {
+          color: var(--ink);
+          font-weight: 700;
+          font-size: 14px;
+          letter-spacing: -0.005em;
+          margin-bottom: 4px;
+        }
+        .page-guide-copy, .guide-copy {
+          color: var(--muted);
+          font-size: 13px;
+          line-height: 1.5;
         }
         .guide-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-          gap: 12px;
-          margin-top: 16px;
+          gap: 10px;
+          margin-top: 12px;
         }
-        .guide-card {
-          border: 1px solid var(--lab-line);
-          border-left: 4px solid var(--lab-blue);
-          border-radius: 10px;
-          background: #fff;
-          padding: 14px;
-          min-height: 116px;
+        .guide-grid .card, .guide-grid .guide-card {
+          background: rgba(10,14,26,.5);
+          border: 1px solid var(--line);
+          border-radius: var(--radius-sm);
+          padding: 10px 12px;
         }
-        .guide-card.good { border-left-color: var(--lab-mint); }
-        .guide-card.warn { border-left-color: var(--lab-amber); }
-        .guide-card.block { border-left-color: var(--lab-rose); }
-        .guide-card.data { border-left-color: var(--lab-plum); }
-        .guide-title {
-          color: var(--lab-strong);
-          font-weight: 850;
-          margin-bottom: 6px;
+        .guide-grid .guide-card.good { border-left: 2px solid var(--good); }
+        .guide-grid .guide-card.warn { border-left: 2px solid var(--warn); }
+        .guide-grid .guide-card.block { border-left: 2px solid var(--bad); }
+        .guide-grid .guide-card.data { border-left: 2px solid var(--plum); }
+        .guide-grid .card .title, .guide-grid .guide-card .guide-title {
+          font-size: 12.5px;
+          font-weight: 600;
+          color: var(--ink);
         }
-        .guide-copy {
-          color: var(--lab-ink);
-          font-size: 14px;
-          line-height: 1.45;
+        .guide-grid .card .meaning, .guide-grid .guide-card .guide-copy {
+          font-size: 12px;
+          color: var(--muted);
+          margin-top: 2px;
         }
-        .clean-panel {
-          border: 1px solid var(--lab-line);
-          border-radius: 12px;
-          background: rgba(255,255,255,.76);
-          padding: 20px;
-          margin: 18px 0 28px;
-          box-shadow: 0 1px 0 rgba(23,23,23,.035), 0 16px 44px rgba(23,23,23,.045);
-        }
-        .section-note {
-          border: 1px solid #bfdbfe;
-          border-left: 4px solid var(--lab-blue);
-          background: #eff6ff;
-          color: #1e3a8a;
-          border-radius: 10px;
-          padding: 14px 16px;
-          margin: 12px 0 22px;
+        .callout {
+          background: var(--accent-soft);
+          border: 1px solid rgba(91,140,255,.25);
+          border-left: 3px solid var(--accent);
+          border-radius: var(--radius);
+          padding: 12px 14px;
+          margin: 12px 0;
+          color: var(--ink-soft);
+          font-size: 13px;
           line-height: 1.5;
+        }
+        .callout strong { color: var(--ink); }
+        .danger-callout {
+          background: var(--warn-soft);
+          border-color: rgba(245,166,35,.3);
+          border-left-color: var(--warn);
+        }
+
+        /* ---------- metric cards ---------- */
+        .metric-card {
+          background: linear-gradient(180deg, var(--panel-2), var(--panel));
+          border: 1px solid var(--line);
+          border-radius: var(--radius);
+          padding: 14px 16px;
+          box-shadow: var(--shadow-1);
+          height: 100%;
+        }
+        .metric-label {
+          color: var(--muted);
+          font-size: 10.5px;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          margin-bottom: 4px;
+        }
+        .metric-value {
+          color: var(--ink);
+          font-size: 24px;
+          font-weight: 700;
+          letter-spacing: -0.02em;
+          line-height: 1.15;
+          font-family: 'JetBrains Mono', ui-monospace, monospace;
+        }
+        .metric-value-long { font-size: 17px; }
+        .metric-value.pos { color: var(--good); }
+        .metric-value.neg { color: var(--bad); }
+        .metric-note {
+          color: var(--muted);
+          font-size: 12px;
+          margin-top: 4px;
+          line-height: 1.4;
+        }
+
+        /* ---------- compact tiles / mini-tiles ---------- */
+        .compact-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 10px;
+          margin-top: 8px;
         }
         .mini-tile {
-          border: 1px solid var(--lab-line);
-          border-radius: 9px;
-          background: rgba(255,255,255,.82);
-          padding: 14px;
-          min-height: 108px;
-          box-shadow: 0 1px 0 rgba(23,23,23,.035);
+          background: var(--panel);
+          border: 1px solid var(--line);
+          border-radius: var(--radius);
+          padding: 12px 14px;
+          box-shadow: var(--shadow-1);
         }
-        .lifecycle-card {
-          border: 1px solid var(--lab-line);
-          border-radius: 8px;
-          background: #ffffff;
-          padding: 18px;
-          min-height: 230px;
-          box-shadow: 0 14px 34px rgba(15, 23, 42, .05);
-        }
-        .lifecycle-phase {
-          font-family: "Exo", system-ui, sans-serif;
-          font-size: 22px;
-          font-weight: 800;
-          color: var(--lab-strong);
-          margin: 8px 0;
-        }
-        .lifecycle-source {
-          display: inline-flex;
-          border: 1px solid #bfdbfe;
-          background: #eff6ff;
-          color: #1d4ed8;
-          border-radius: 999px;
-          padding: 4px 9px;
-          font-family: "Roboto Mono", monospace;
-          font-size: 11px;
+        .eyebrow {
+          color: var(--muted);
+          font-size: 10.5px;
           font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
         }
-        .results-spacer {
-          height: 28px;
-        }
-        .capability-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 12px;
-        }
-        .capability {
-          border: 1px solid var(--lab-line);
-          border-radius: 8px;
-          background: #fff;
-          padding: 14px;
-          min-height: 120px;
-        }
-        .workbench-card {
-          border: 1px solid var(--lab-line);
-          border-radius: 10px;
-          background: rgba(255,255,255,.86);
-          padding: 22px;
-          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 54px rgba(23,23,23,.06);
-        }
-        .workbench-step {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 26px;
-          height: 26px;
-          border-radius: 999px;
-          background: var(--lab-blue);
-          color: #ffffff;
-          font-family: "IBM Plex Mono", monospace;
+        .hint, .small-muted {
+          color: var(--muted);
           font-size: 12px;
-          font-weight: 800;
-          margin-right: 8px;
-        }
-        .dryrun-report {
-          border: 1px solid #c8d7ff;
-          border-top: 4px solid var(--lab-blue);
-          border-radius: 10px;
-          background: rgba(255,255,255,.88);
-          padding: 22px;
-          margin-top: 18px;
-          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 54px rgba(31, 94, 255, .08);
-        }
-        .dryrun-title {
-          font-family: "Instrument Sans", system-ui, sans-serif;
-          color: #0f172a;
-          font-size: 26px;
-          font-weight: 800;
-          margin-bottom: 6px;
-        }
-        .dryrun-meta {
-          color: #334155;
-          font-size: 14px;
-          line-height: 1.5;
-        }
-        .dryrun-list {
-          margin: 0;
-          padding-left: 18px;
-          color: #334155;
-          line-height: 1.55;
-        }
-        .rule-card {
-          border: 1px solid var(--lab-line);
-          border-top: 4px solid var(--lab-blue);
-          border-radius: 10px;
-          background: rgba(255,255,255,.86);
-          padding: 16px;
-          min-height: 120px;
-          box-shadow: 0 1px 0 rgba(23,23,23,.035);
-        }
-        .rule-title {
-          font-family: "Instrument Sans", system-ui, sans-serif;
-          color: #0f172a;
-          font-weight: 800;
-          font-size: 18px;
-          margin-bottom: 6px;
-        }
-        .validation-pass {
-          border-top-color: var(--lab-mint);
-          border-left: 4px solid var(--lab-mint);
-          background: var(--lab-mint-soft);
-          color: #14532d;
-        }
-        .validation-warn {
-          border-top-color: var(--lab-amber);
-          border-left: 4px solid var(--lab-amber);
-          background: var(--lab-amber-soft);
-          color: #7c2d12;
-        }
-        .validation-block {
-          border-top-color: var(--lab-rose);
-          border-left: 4px solid var(--lab-rose);
-          background: var(--lab-rose-soft);
-          color: #7f1d1d;
-        }
-        .human-workbench-hero {
-          display: grid;
-          grid-template-columns: minmax(0, 1.35fr) 380px;
-          gap: 28px;
-          align-items: stretch;
-          margin: 12px 0 34px;
-        }
-        .human-workbench-copy {
-          border: 1px solid #1f2937;
-          border-radius: 12px;
-          padding: 38px;
-          min-height: 280px;
-          color: white;
-          background:
-            radial-gradient(circle at 82% 18%, rgba(15,159,117,.33), transparent 25%),
-            linear-gradient(120deg, rgba(31,94,255,.97), rgba(23,23,23,.98) 56%, rgba(217,119,6,.76)),
-            #171717;
-          box-shadow: 0 1px 0 rgba(23,23,23,.08), 0 24px 70px rgba(23,23,23,.14);
-        }
-        .human-workbench-copy h1 {
-          color: #ffffff;
-          font-size: clamp(46px, 6vw, 78px);
-          line-height: .9;
-          letter-spacing: 0;
-          margin: 12px 0 16px;
-          max-width: 820px;
-        }
-        .human-workbench-copy p {
-          color: #eff6ff !important;
-          font-size: 17px;
-          line-height: 1.62;
-          max-width: 780px;
-          text-shadow: 0 1px 14px rgba(0,0,0,.36);
-        }
-        .human-workbench-note {
-          border: 1px solid var(--lab-line);
-          border-top: 4px solid var(--lab-mint);
-          border-radius: 10px;
-          background: rgba(255,255,255,.82);
-          padding: 22px;
-          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 54px rgba(23,23,23,.06);
-        }
-        .portfolio-hero {
-          display: grid;
-          grid-template-columns: minmax(0, 1.45fr) minmax(280px, .55fr);
-          gap: 22px;
-          align-items: end;
-          border: 1px solid #1e293b;
-          border-radius: 12px;
-          padding: 42px;
-          margin: 12px 0 34px;
-          color: #fff;
-          background:
-            linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px),
-            linear-gradient(0deg, rgba(255,255,255,.07) 1px, transparent 1px),
-            radial-gradient(circle at 75% 16%, rgba(15,159,117,.30), transparent 26%),
-            linear-gradient(125deg, #1f5eff 0%, #172033 52%, #945100 100%);
-          background-size: 38px 38px, 38px 38px, auto, auto;
-          box-shadow: 0 1px 0 rgba(23,23,23,.08), 0 24px 70px rgba(23,23,23,.14);
-        }
-        .portfolio-hero h1 {
-          color: #ffffff;
-          font-size: clamp(44px, 6vw, 74px);
-          line-height: .92;
-          letter-spacing: 0;
-          margin: 12px 0 16px;
-          max-width: 900px;
-        }
-        .portfolio-hero p {
-          color: #eaf2ff !important;
-          font-size: 17px;
-          line-height: 1.58;
-          max-width: 880px;
-          text-shadow: 0 1px 14px rgba(0,0,0,.28);
-        }
-        .portfolio-hero-note {
-          border: 1px solid rgba(255,255,255,.24);
-          border-radius: 10px;
-          background: rgba(15,23,42,.36);
-          padding: 18px;
-          color: #f8fafc;
-          backdrop-filter: blur(10px);
-        }
-        .portfolio-hero-note strong {
-          display: block;
-          color: #ffffff;
-          font-size: 20px;
-          margin-bottom: 8px;
-        }
-        .portfolio-hero-note span {
-          color: #dbeafe;
           line-height: 1.45;
         }
+
+        /* ---------- strategy / portfolio cards ---------- */
+        .strategy-family, .lifecycle-phase {
+          color: var(--accent);
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        }
+        .strategy-title {
+          font-size: 18px;
+          font-weight: 700;
+          color: var(--ink);
+          letter-spacing: -0.012em;
+          margin: 2px 0 6px;
+        }
+        .strategy-copy {
+          color: var(--ink-soft);
+          font-size: 13.5px;
+          line-height: 1.55;
+        }
+
         .portfolio-proof-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-          gap: 14px;
-          margin: 14px 0 24px;
+          gap: 10px;
+          margin-top: 8px;
         }
         .portfolio-proof-card {
-          border: 1px solid var(--lab-line);
-          border-top: 4px solid var(--lab-blue);
-          border-radius: 10px;
-          background: rgba(255,255,255,.88);
-          padding: 16px;
-          min-height: 132px;
-          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 16px 44px rgba(23,23,23,.05);
+          border: 1px solid var(--line);
+          border-radius: var(--radius);
+          padding: 12px 14px;
+          background: var(--panel);
+          box-shadow: var(--shadow-1);
         }
-        .portfolio-proof-card.warn { border-top-color: var(--lab-amber); }
-        .portfolio-proof-card.good { border-top-color: var(--lab-mint); }
-        .portfolio-proof-card.block { border-top-color: var(--lab-rose); }
-        .portfolio-proof-title {
-          color: var(--lab-strong);
-          font-weight: 800;
-          font-size: 18px;
-          margin: 5px 0;
+        .portfolio-proof-card.good { border-left: 3px solid var(--good); }
+        .portfolio-proof-card.warn { border-left: 3px solid var(--warn); }
+        .portfolio-proof-card.block { border-left: 3px solid var(--bad); }
+        .portfolio-proof-title { font-weight: 700; color: var(--ink); font-size: 13.5px; }
+        .portfolio-proof-copy { color: var(--muted); font-size: 12.5px; line-height: 1.5; margin-top: 4px; }
+
+        /* ---------- workbench ---------- */
+        .workbench-card, .lifecycle-card, .rule-card {
+          background: var(--panel);
+          border: 1px solid var(--line);
+          border-radius: var(--radius);
+          padding: 14px 16px;
+          margin: 8px 0;
+          box-shadow: var(--shadow-1);
         }
-        .portfolio-proof-copy {
-          color: var(--lab-ink);
-          font-size: 14px;
-          line-height: 1.5;
-        }
-        .semantic-strip {
-          display: flex;
-          gap: 8px;
-          margin-top: 18px;
-        }
-        .semantic-strip span {
-          height: 10px;
-          flex: 1;
-          border-radius: 999px;
-        }
-        .color-meaning-card {
-          border: 1px solid var(--lab-line);
-          border-radius: 10px;
-          background: rgba(255,255,255,.86);
-          padding: 18px;
-          box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 54px rgba(23,23,23,.05);
-          margin: -18px 0 34px;
-        }
-        .color-meaning-row {
-          display: flex;
-          gap: 12px;
-          align-items: flex-start;
-        }
-        .color-dot-large {
-          width: 18px;
-          height: 18px;
-          border-radius: 999px;
-          flex: 0 0 auto;
-          box-shadow: 0 0 0 5px rgba(23,23,23,.05);
-          margin-top: 4px;
-        }
-        .color-meaning-title {
-          color: var(--lab-strong);
-          font-size: 18px;
-          font-weight: 800;
-          margin-bottom: 4px;
-        }
-        .color-meaning-body {
-          color: var(--lab-ink);
-          line-height: 1.56;
-          max-width: 820px;
-        }
-        .semantic-badge {
-          display: inline-flex;
-          align-items: center;
-          width: fit-content;
-          border-radius: 999px;
-          border: 1px solid var(--lab-line);
-          padding: 6px 10px;
-          font-family: "IBM Plex Mono", monospace;
-          font-size: 11px;
-          font-weight: 700;
-          text-transform: uppercase;
-        }
-        .badge-signal { background: var(--lab-blue-soft); color: var(--lab-blue); border-color: #c8d7ff; }
-        .badge-evidence { background: var(--lab-mint-soft); color: var(--lab-mint); border-color: #b8efd9; }
-        .badge-risk { background: var(--lab-amber-soft); color: var(--lab-amber); border-color: #fed7aa; }
-        .badge-data { background: var(--lab-plum-soft); color: var(--lab-plum); border-color: #ddd6fe; }
-        .badge-block { background: var(--lab-rose-soft); color: var(--lab-rose); border-color: #ffd1df; }
-        .workbench-section {
-          border-top: 1px solid var(--lab-line-strong);
-          padding-top: 30px;
-          margin-top: 52px;
-        }
-        .section-kicker {
-          font-family: "IBM Plex Mono", monospace;
-          color: var(--lab-muted);
-          font-size: 11px;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: .05em;
-        }
+        .workbench-section { margin: 18px 0 8px; }
         .workbench-section-title {
-          font-size: 28px;
-          font-weight: 800;
-          letter-spacing: -.03em;
-          margin: 4px 0 6px;
-          color: var(--lab-strong);
+          font-weight: 700;
+          color: var(--ink);
+          font-size: 16px;
+          letter-spacing: -0.01em;
         }
         .workbench-section-copy {
-          color: var(--lab-ink);
-          line-height: 1.62;
-          max-width: 780px;
-          margin-bottom: 18px;
+          color: var(--muted);
+          font-size: 13px;
+          line-height: 1.5;
+          margin-top: 2px;
         }
-        div[data-testid="stMetric"] {
-          border: 1px solid var(--lab-line);
-          border-radius: 8px;
-          padding: 12px;
-          background: #fff;
+        .workbench-step {
+          display: inline-block;
+          background: var(--accent-soft);
+          color: var(--accent-2);
+          font-weight: 700;
+          font-size: 11px;
+          padding: 3px 9px;
+          border-radius: 999px;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
         }
-        @keyframes labFadeUp {
-          from { opacity: 0; transform: translateY(12px); }
-          to { opacity: 1; transform: translateY(0); }
+        .rule-title { font-weight: 700; font-size: 14px; color: var(--ink); margin-bottom: 4px; }
+        .human-workbench-copy { color: var(--ink-soft); font-size: 13.5px; line-height: 1.55; }
+
+        /* ---------- router matrix ---------- */
+        .router-matrix-shell {
+          background: var(--panel);
+          border: 1px solid var(--line);
+          border-radius: var(--radius);
+          padding: 16px;
+          margin: 14px 0;
+          box-shadow: var(--shadow-1);
+          overflow-x: auto;
         }
-        @keyframes labGridDrift {
-          from { background-position: 0 0, 0 0, 0 0; }
-          to { background-position: 18px 10px, -14px 8px, 72px 72px; }
+        .router-matrix {
+          width: 100%;
+          border-collapse: separate;
+          border-spacing: 6px;
+          font-size: 12.5px;
         }
-        @media (prefers-reduced-motion: reduce) {
-          html, body, [data-testid="stAppViewContainer"],
-          .block-container > div,
-          div[data-testid="stPlotlyChart"],
-          div[data-testid="stButton"] > button,
-          section[data-testid="stSidebar"] [role="radiogroup"] label {
-            animation: none !important;
-            transition: none !important;
-            transform: none !important;
-          }
+        .router-header, .router-family {
+          background: rgba(148,163,184,.08);
+          color: var(--ink-soft);
+          font-weight: 600;
+          padding: 6px 10px;
+          border-radius: 4px;
+          text-align: left;
         }
+        .router-corner { background: transparent; }
+        .router-matrix td {
+          padding: 8px 10px;
+          border-radius: 4px;
+          color: var(--ink-soft);
+          font-weight: 500;
+        }
+        .router-matrix td.go,      .router-matrix td.proxy   { background: var(--good-soft);  color: var(--good); }
+        .router-matrix td.cut,     .router-matrix td.block   { background: var(--bad-soft);   color: var(--bad); }
+        .router-matrix td.hold,    .router-matrix td.reduce  { background: var(--warn-soft);  color: var(--warn); }
+        .router-matrix td.mute,    .router-matrix td.observe { background: rgba(148,163,184,.08); color: var(--muted); }
+        .router-matrix td.overlay  { background: var(--plum-soft); color: var(--plum); }
+
+        /* ---------- lifecycle / capability ---------- */
+        .lifecycle-source { color: var(--muted); font-size: 12px; margin-top: 4px; }
+        .capability-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 10px;
+        }
+        .capability {
+          background: var(--panel);
+          border: 1px solid var(--line);
+          border-radius: var(--radius);
+          padding: 12px 14px;
+          box-shadow: var(--shadow-1);
+        }
+
+        /* ---------- dry-run report ---------- */
+        .dryrun-report {
+          background: var(--panel);
+          border: 1px solid var(--line);
+          border-radius: var(--radius);
+          padding: 16px 18px;
+          margin: 12px 0;
+          box-shadow: var(--shadow-1);
+        }
+        .dryrun-title { font-weight: 700; color: var(--ink); font-size: 15px; }
+        .dryrun-meta { color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+        .dryrun-list { color: var(--ink-soft); font-size: 13px; line-height: 1.6; }
+
+        /* ---------- status pills ---------- */
+        .status-pill {
+          display: inline-block;
+          padding: 3px 10px;
+          border-radius: 999px;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          background: rgba(148,163,184,.1);
+          color: var(--ink-soft);
+          border: 1px solid var(--line);
+        }
+        .status-pill.status-Promoted, .status-pill.status-GO, .status-pill.status-PASS { background: var(--good-soft); color: var(--good); border-color: rgba(45,212,167,.35); }
+        .status-pill.status-Blocked, .status-pill.status-FAIL, .status-pill.status-Cut { background: var(--bad-soft); color: var(--bad); border-color: rgba(251,113,133,.35); }
+        .status-pill.status-Hold, .status-pill.status-Warning { background: var(--warn-soft); color: var(--warn); border-color: rgba(245,166,35,.35); }
+        .status-pill.status-Diagnostic-Only { background: var(--plum-soft); color: var(--plum); border-color: rgba(167,139,250,.35); }
+
+        .semantic-badge {
+          display: inline-block;
+          padding: 2px 8px;
+          border-radius: 4px;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+        }
+        .badge-evidence { background: var(--good-soft); color: var(--good); }
+
+        .dot {
+          display: inline-block;
+          width: 8px; height: 8px;
+          border-radius: 50%;
+          background: var(--muted-soft);
+          margin-right: 6px;
+        }
+        .strip {
+          height: 3px;
+          border-radius: 999px;
+          background: linear-gradient(90deg, var(--accent), var(--good));
+          margin: 6px 0 14px;
+        }
+        .section-note {
+          color: var(--muted);
+          font-size: 12.5px;
+          font-style: italic;
+          margin: 10px 0;
+          padding: 8px 12px;
+          background: rgba(148,163,184,.06);
+          border-radius: var(--radius-sm);
+          border-left: 2px solid var(--line);
+        }
+        .results-spacer { height: 12px; }
+
+        /* ---------- legacy nav (top) ---------- */
+        .lab-shell-nav, .main-nav-card {
+          background: var(--panel);
+          border: 1px solid var(--line);
+          border-radius: var(--radius);
+          padding: 10px 14px;
+          margin-bottom: 12px;
+          box-shadow: var(--shadow-1);
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+        .lab-brand {
+          font-size: 14px;
+          font-weight: 700;
+          color: var(--ink);
+          letter-spacing: -0.01em;
+        }
+        .lab-nav-state {
+          font-size: 11.5px;
+          color: var(--muted);
+          background: rgba(148,163,184,.1);
+          padding: 3px 8px;
+          border-radius: 999px;
+          font-weight: 500;
+        }
+        .nav-help {
+          font-size: 12.5px;
+          color: var(--muted);
+        }
+
+        /* ---------- streamlit data widgets ---------- */
+        [data-testid="stDataFrame"], [data-testid="stTable"] {
+          border: 1px solid var(--line);
+          border-radius: var(--radius-sm);
+          overflow: hidden;
+        }
+        [data-testid="stMetric"] {
+          background: var(--panel);
+          border: 1px solid var(--line);
+          border-radius: var(--radius);
+          padding: 12px 14px;
+          box-shadow: var(--shadow-1);
+        }
+        [data-testid="stMetricLabel"] {
+          color: var(--muted) !important;
+          font-size: 11px !important;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          font-weight: 600 !important;
+        }
+        [data-testid="stMetricValue"] {
+          color: var(--ink) !important;
+          font-weight: 700 !important;
+          letter-spacing: -0.02em;
+        }
+        .stPlotlyChart, .stAltairChart, .stVegaLiteChart {
+          background: var(--panel);
+          border: 1px solid var(--line);
+          border-radius: var(--radius);
+          padding: 8px;
+        }
+        .stTabs [data-baseweb="tab-list"] {
+          gap: 4px;
+          border-bottom: 1px solid var(--line);
+        }
+        .stTabs [data-baseweb="tab"] {
+          background: transparent;
+          color: var(--muted);
+          font-weight: 500;
+          font-size: 13px;
+          padding: 8px 14px;
+          border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+        }
+        .stTabs [aria-selected="true"] {
+          color: var(--accent-2) !important;
+          background: var(--accent-soft) !important;
+        }
+        .stSelectbox label, .stTextInput label, .stNumberInput label,
+        .stSlider label, .stRadio label, .stCheckbox label,
+        .stMultiSelect label {
+          color: var(--ink-soft) !important;
+          font-weight: 500 !important;
+          font-size: 13px !important;
+        }
+        .stCaption, [data-testid="stCaptionContainer"] {
+          color: var(--muted) !important;
+          font-size: 12px !important;
+        }
+        [data-testid="stExpander"] details {
+          background: var(--panel);
+          border: 1px solid var(--line) !important;
+          border-radius: var(--radius) !important;
+        }
+        [data-testid="stExpander"] summary { color: var(--ink-soft); }
+        [data-testid="stExpander"] summary:hover { color: var(--ink); }
+        [data-testid="stAlert"] {
+          border-radius: var(--radius);
+          border: 1px solid var(--line);
+        }
+
         @media (max-width: 768px) {
-          .lab-hero { padding: 24px; min-height: 260px; }
-          .lab-title { font-size: 42px; }
-          .lab-shell-nav { position: relative; align-items: flex-start; flex-direction: column; }
-          .human-workbench-hero { grid-template-columns: 1fr; }
-          .human-workbench-copy { padding: 26px; }
+          .lab-hero, .mission-brief-hero, .portfolio-hero { padding: 22px; }
+          .lab-title, .mission-brief-hero h1 { font-size: 24px; }
+          .lab-shell-nav { flex-direction: column; align-items: flex-start; }
         }
         </style>
         """,
@@ -1334,22 +799,22 @@ def color_logic_component_html() -> str:
         <style>
           body {{
             margin: 0;
-            font-family: "Instrument Sans", Inter, system-ui, sans-serif;
-            color: #171717;
+            font-family: "Inter", Inter, system-ui, sans-serif;
+            color: #e7ecf5;
             background: transparent;
           }}
           .card {{
             box-sizing: border-box;
             min-height: 318px;
-            border: 1px solid #d8d2c8;
-            border-top: 4px solid #0f9f75;
+            border: 1px solid rgba(148,163,184,.25);
+            border-top: 4px solid #2dd4a7;
             border-radius: 10px;
-            background: rgba(255,255,255,.88);
+            background: rgba(17,23,38,.92);
             padding: 22px;
             box-shadow: 0 1px 0 rgba(23,23,23,.04), 0 18px 54px rgba(23,23,23,.06);
           }}
           .eyebrow {{
-            color: #675f55;
+            color: #8b93a7;
             font-family: "IBM Plex Mono", ui-monospace, monospace;
             font-size: 11px;
             font-weight: 800;
@@ -1364,7 +829,7 @@ def color_logic_component_html() -> str:
           }}
           p {{
             margin: 0;
-            color: #3f3a34;
+            color: #aeb7c7;
             font-size: 15px;
             line-height: 1.55;
           }}
@@ -1389,13 +854,13 @@ def color_logic_component_html() -> str:
           }}
           button[aria-pressed="true"] {{
             outline-color: currentColor;
-            box-shadow: 0 0 0 4px rgba(255,255,255,.9), 0 10px 22px rgba(23,23,23,.14);
+            box-shadow: 0 0 0 4px rgba(10,14,26,.9), 0 10px 22px rgba(23,23,23,.14);
           }}
           .meaning {{
             display: grid;
             grid-template-columns: 18px 1fr;
             gap: 12px;
-            border-top: 1px solid #e7e2d8;
+            border-top: 1px solid rgba(148,163,184,.15);
             padding-top: 16px;
           }}
           .dot {{
@@ -1403,7 +868,7 @@ def color_logic_component_html() -> str:
             height: 18px;
             border-radius: 999px;
             margin-top: 3px;
-            box-shadow: 0 0 0 5px rgba(23,23,23,.05);
+            box-shadow: 0 0 0 5px rgba(148,163,184,.12);
           }}
           .title {{
             font-size: 17px;
@@ -1412,7 +877,7 @@ def color_logic_component_html() -> str:
           }}
           .hint {{
             margin-top: 14px;
-            color: #675f55;
+            color: #8b93a7;
             font-size: 12px;
           }}
         </style>
@@ -1517,9 +982,11 @@ def cached_factory_data_eligibility_report() -> dict[str, object]:
     return build_factory_data_eligibility_report()
 
 
-def metric_card(label: str, value: str | int | float, note: str) -> None:
+def metric_card(label: str, value: str | int | float, note: str, *, tone: str = "") -> None:
     value_text = str(value)
     value_class = "metric-value metric-value-long" if len(value_text) > 14 else "metric-value"
+    if tone:
+        value_class += f" {tone}"
     st.markdown(
         f"""
         <div class="metric-card">
@@ -1530,6 +997,59 @@ def metric_card(label: str, value: str | int | float, note: str) -> None:
         """,
         unsafe_allow_html=True,
     )
+
+
+def pct(value: object, *, signed: bool = True, decimals: int = 1) -> str:
+    """Format a fractional return (0.31 -> +31.0%) for coherent UI display."""
+
+    try:
+        number = float(value)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        return "n/d"
+    if not math.isfinite(number):
+        return "n/d"
+    if abs(number) > 100:
+        # Oltre +/-10000% il valore non e' un rendimento interpretabile:
+        # quasi sempre e' uno stream additivo compounded per errore.
+        return "fuori scala"
+    prefix = "+" if signed and number > 0 else ""
+    return f"{prefix}{number * 100:.{decimals}f}%"
+
+
+def fmt_net(value: object, mode: str, *, signed: bool = True) -> str:
+    """Format a net value honestly: % when compounded, units when additive."""
+
+    if str(mode) == "compounded":
+        return pct(value, signed=signed)
+    try:
+        number = float(value)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        return "n/d"
+    if not math.isfinite(number):
+        return "n/d"
+    if abs(number) > 1e9:
+        return "fuori scala (riavvia il server)"
+    return f"{number:+.2f} u" if signed else f"{number:.2f} u"
+
+
+def mode_note(mode: str, base: str) -> str:
+    """Append the aggregation-mode caveat to a metric note."""
+
+    if str(mode) == "compounded":
+        return base
+    return base + " - unita' additive degli stream proxy, non percentuali"
+
+
+def pct_tone(value: object) -> str:
+    """CSS tone class for positive/negative fractional values."""
+
+    try:
+        number = float(value)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        return ""
+    if not math.isfinite(number) or number == 0:
+        return ""
+    return "pos" if number > 0 else "neg"
 
 
 def page_guide(title: str, copy: str, cards: list[tuple[str, str, str]]) -> None:
@@ -1647,13 +1167,13 @@ def flow_chart(nodes: list[str]) -> go.Figure:
                 showlegend=False,
             )
         )
-    colors = ["#1f5eff"] + ["#0f9f75"] * max(len(nodes) - 2, 0) + ["#d97706"]
+    colors = ["#5b8cff"] + ["#2dd4a7"] * max(len(nodes) - 2, 0) + ["#f5a623"]
     fig.add_trace(
         go.Scatter(
             x=x,
             y=y,
             mode="markers+text",
-            marker=dict(size=30, color=colors[: len(nodes)], line=dict(color="#ffffff", width=2)),
+            marker=dict(size=30, color=colors[: len(nodes)], line=dict(color="#0a0e1a", width=2)),
             text=[f"{i + 1}" for i in range(len(nodes))],
             textfont=dict(color="white", size=12, family="IBM Plex Mono"),
             hovertext=nodes,
@@ -1667,12 +1187,12 @@ def flow_chart(nodes: list[str]) -> go.Figure:
             y=y[i] - 0.16,
             text=node,
             showarrow=False,
-            font=dict(size=11, color="#171717", family="Instrument Sans"),
+            font=dict(size=11, color="#e7ecf5", family="Inter"),
             align="center",
             width=130,
         )
     fig.update_layout(
-        template="plotly_white",
+        template="plotly_dark",
         height=260,
         margin=dict(l=20, r=20, t=20, b=40),
         paper_bgcolor="rgba(0,0,0,0)",
@@ -1695,21 +1215,21 @@ def strategy_result_chart(runs: pd.DataFrame) -> go.Figure:
         y="decision",
         orientation="h",
         color="count",
-        color_continuous_scale=["#eef3ff", "#1f5eff"],
+        color_continuous_scale=["#1a2440", "#5b8cff"],
         text="count",
     )
     fig.update_layout(
-        template="plotly_white",
+        template="plotly_dark",
         height=max(220, 52 * len(frame)),
         margin=dict(l=10, r=20, t=20, b=10),
-        paper_bgcolor="rgba(255,255,255,.72)",
-        plot_bgcolor="rgba(255,255,255,.72)",
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
         coloraxis_showscale=False,
         xaxis_title="Runs",
         yaxis_title="",
-        font=dict(family="Instrument Sans", color="#171717"),
-        xaxis=dict(tickfont=dict(color="#3f3f46"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8"),
-        yaxis=dict(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8"),
+        font=dict(family="Inter", color="#e7ecf5"),
+        xaxis=dict(tickfont=dict(color="#aeb7c7"), title_font=dict(color="#8b93a7"), gridcolor="rgba(148,163,184,.15)"),
+        yaxis=dict(tickfont=dict(color="#e7ecf5"), title_font=dict(color="#8b93a7"), gridcolor="rgba(148,163,184,.15)"),
     )
     return fig
 
@@ -1730,8 +1250,8 @@ def strategy_candlestick_chart(story: dict[str, object]) -> go.Figure:
             low=prices["low"],
             close=prices["close"],
             name="OHLC",
-            increasing_line_color="#0f9f75",
-            decreasing_line_color="#d97706",
+            increasing_line_color="#2dd4a7",
+            decreasing_line_color="#f5a623",
             increasing_fillcolor="rgba(15,159,117,.65)",
             decreasing_fillcolor="rgba(217,119,6,.65)",
         )
@@ -1751,17 +1271,17 @@ def strategy_candlestick_chart(story: dict[str, object]) -> go.Figure:
             customdata=prices["volume"],
         )
     )
-    marker_colors = {"buy": "#1f5eff", "entry": "#1f5eff", "exit": "#d97706", "block": "#d12f5f"}
+    marker_colors = {"buy": "#5b8cff", "entry": "#5b8cff", "exit": "#f5a623", "block": "#fb7185"}
     marker_symbols = {"buy": "triangle-up", "entry": "triangle-up", "exit": "circle", "block": "x"}
     for marker in markers:
-        color = marker_colors.get(str(marker["kind"]), "#f97316")
+        color = marker_colors.get(str(marker["kind"]), "#fb923c")
         symbol = marker_symbols.get(str(marker["kind"]), "diamond")
         fig.add_trace(
             go.Scatter(
                 x=[marker["date"]],
                 y=[marker["price"]],
                 mode="markers+text",
-                marker=dict(size=14, color=color, symbol=symbol, line=dict(color="#ffffff", width=1.5)),
+                marker=dict(size=14, color=color, symbol=symbol, line=dict(color="#0a0e1a", width=1.5)),
                 text=[marker["label"]],
                 textposition="top center",
                 textfont=dict(size=11, color=color, family="IBM Plex Mono"),
@@ -1771,7 +1291,7 @@ def strategy_candlestick_chart(story: dict[str, object]) -> go.Figure:
         )
     risk_box = story.get("risk_box", {})
     if isinstance(risk_box, dict):
-        for line_name, color, dash in [("stop_price", "#d12f5f", "dash"), ("take_profit_price", "#0f9f75", "dot")]:
+        for line_name, color, dash in [("stop_price", "#fb7185", "dash"), ("take_profit_price", "#2dd4a7", "dot")]:
             if line_name in risk_box:
                 fig.add_hline(
                     y=float(risk_box[line_name]),
@@ -1780,15 +1300,15 @@ def strategy_candlestick_chart(story: dict[str, object]) -> go.Figure:
                     annotation_position="right",
                 )
     fig.update_layout(
-        template="plotly_white",
-        title=dict(text=str(story["title"]), font=dict(size=16, family="Instrument Sans", color="#171717")),
+        template="plotly_dark",
+        title=dict(text=str(story["title"]), font=dict(size=16, family="Inter", color="#e7ecf5")),
         height=430,
         margin=dict(l=10, r=10, t=44, b=10),
         paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(255,255,255,.78)",
-        font=dict(family="Instrument Sans", color="#171717"),
-        xaxis=dict(rangeslider=dict(visible=False), showgrid=True, gridcolor="#e7e2d8"),
-        yaxis=dict(title="", showgrid=True, gridcolor="#e7e2d8", tickfont=dict(color="#3f3f46")),
+        plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(family="Inter", color="#e7ecf5"),
+        xaxis=dict(rangeslider=dict(visible=False), showgrid=True, gridcolor="rgba(148,163,184,.15)"),
+        yaxis=dict(title="", showgrid=True, gridcolor="rgba(148,163,184,.15)", tickfont=dict(color="#aeb7c7")),
         showlegend=False,
     )
     return fig
@@ -1798,12 +1318,11 @@ def render_hero(metrics: dict[str, object]) -> None:
     st.markdown(
         f"""
         <div class="lab-hero">
-          <div class="lab-kicker">Final Research Console / Risk Regime Engine</div>
-          <div class="lab-title">A quant lab that turned failed alpha into a risk machine.</div>
+          <div class="lab-kicker">Adaptive Equity Trading Lab</div>
+          <div class="lab-title">Research console.</div>
           <div class="lab-subtitle">
-            Every strategy below has a real chart demonstration, a thesis, a governance path, and a final verdict.
-            The current state is <strong>{humanize_status_label(metrics["final_policy"])}</strong>: no live deployment, no hidden promotion,
-            and no strategy allowed past the cost and robustness gates.
+            Current mode: <strong>{humanize_status_label(metrics["final_policy"])}</strong>.
+            No live deployment, no hidden promotion, no strategy past the cost and robustness gates.
           </div>
         </div>
         """,
@@ -1855,37 +1374,37 @@ def render_mission_brief(payload: dict[str, object]) -> None:
     st.markdown(
         """
         <div class="mission-brief-hero">
-          <div class="lab-kicker">Current mission</div>
-          <h1>Build portfolios that know when to stay quiet.</h1>
+          <div class="lab-kicker">Mission Control</div>
+          <h1>Portafogli che sanno quando stare fermi.</h1>
           <p>
-            The lab no longer hunts one magic setup. It tests strategy sleeves, maps market regimes,
-            and blocks any claim that cannot survive data quality, costs, robustness, and audit gates.
+            Strategy sleeve, regime map e quattro gate: <strong>data, cost, robustness, audit</strong>.
+            Niente viene promosso senza passarli tutti.
           </p>
         </div>
         """,
         unsafe_allow_html=True,
     )
     page_guide(
-        "What am I looking at?",
-        "A research control room. A block is not a crash; it is the lab refusing to turn weak evidence into a trading claim.",
+        "Cosa sto guardando?",
+        "Una control room di ricerca. Un blocco non e' un crash: e' il lab che rifiuta di trasformare evidenza debole in un claim di trading.",
         [
-            ("Create a strategy", "Open Strategy Builder to freeze a single governed hypothesis.", "data"),
-            ("Test a portfolio", "Open Portfolio Lab to combine sleeves and inspect dynamic regimes.", "good"),
-            ("Inspect blockers", "Open Data Vault to see why true testing is still locked.", "warn"),
-            ("Read the story", "Open Project Story to understand how each failure shaped the lab.", "block"),
+            ("Crea una strategia", "Apri Strategy Builder per congelare una singola ipotesi governata.", "data"),
+            ("Testa un portfolio", "Apri Portfolio Lab per combinare sleeve e vedere i regimi dinamici.", "good"),
+            ("Ispeziona i blocker", "Apri Data Vault per capire perche' il true backtest e' ancora bloccato.", "warn"),
+            ("Leggi la storia", "Apri Project Story: ogni fallimento documentato ha disegnato il lab.", "block"),
         ],
     )
     k1, k2, k3, k4 = st.columns(4)
     with k1:
-        metric_card("Promoted", metrics["promoted_strategy_count"], "No strategy passed promotion gates")
+        metric_card("Promoted", metrics["promoted_strategy_count"], "Strategie che hanno passato i gate di promozione")
     with k2:
-        metric_card("Mode", humanize_status_label(status["mode"]), "Current operating posture")
+        metric_card("Mode", humanize_status_label(status["mode"]), "Postura operativa corrente")
     with k3:
         metric_card("Blocker", status["current_blocker"], status["plain_english_blocker"])
     with k4:
-        metric_card("Next gate", status["next_gate"], "Required before stronger claims")
+        metric_card("Next gate", status["next_gate"], "Richiesto prima di qualsiasi claim piu' forte")
     section_note(
-        "Use Mission Brief when you want orientation. Use Strategy Builder and Portfolio Lab when you want to work."
+        "Usa Mission Brief per orientarti. Usa Strategy Builder e Portfolio Lab quando vuoi lavorare."
     )
 
 
@@ -1898,7 +1417,7 @@ def render_strategy_tiles(payload: dict[str, object]) -> None:
             f"""
             <div class="mini-tile">
               <div class="eyebrow">{row["family"]}</div>
-              <div style="font-family:Instrument Sans,system-ui,sans-serif;font-weight:800;font-size:18px;margin:6px 0;">{row["name"]}</div>
+              <div style="font-family:Inter,system-ui,sans-serif;font-weight:800;font-size:18px;margin:6px 0;">{row["name"]}</div>
               {status_badge(str(row["status"]))}
               <div class="small-muted" style="margin-top:8px;">{row["primary_decision"]}</div>
             </div>
@@ -1933,14 +1452,14 @@ def render_strategy_atlas(payload: dict[str, object]) -> None:
             hole=0.58,
             color="status",
             color_discrete_map={
-                "ARCHIVED": "#d97706",
-                "BLOCKED": "#d12f5f",
-                "DIAGNOSTIC": "#1f5eff",
-                "NOT RUN": "#71717a",
-                "PROMOTED": "#0f9f75",
+                "ARCHIVED": "#f5a623",
+                "BLOCKED": "#fb7185",
+                "DIAGNOSTIC": "#5b8cff",
+                "NOT RUN": "#8b93a7",
+                "PROMOTED": "#2dd4a7",
             },
         )
-        status_fig.update_layout(height=300, margin=dict(l=10, r=10, t=10, b=10), font=dict(family="Instrument Sans", color="#171717"), paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
+        status_fig.update_layout(height=300, margin=dict(l=10, r=10, t=10, b=10), font=dict(family="Inter", color="#e7ecf5"), paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
         st.plotly_chart(status_fig, width="stretch")
     with right:
         st.markdown(
@@ -2048,27 +1567,27 @@ def render_results_and_data(payload: dict[str, object], *, show_guide: bool = Tr
                 orientation="h",
                 color="admissibility",
                 color_discrete_map={
-                    "component_pass": "#0f9f75",
-                    "partial_not_admissible": "#d97706",
-                    "blocked_history_depth": "#7c3aed",
-                    "blocked_reference_entitlement": "#7c3aed",
-                    "not_admissible": "#d12f5f",
+                    "component_pass": "#2dd4a7",
+                    "partial_not_admissible": "#f5a623",
+                    "blocked_history_depth": "#a78bfa",
+                    "blocked_reference_entitlement": "#a78bfa",
+                    "not_admissible": "#fb7185",
                 },
                 hover_data=["decision", "hard_blocks", "role"],
             )
             fig.update_layout(
-                template="plotly_white",
+                template="plotly_dark",
                 height=360,
                 margin=dict(l=0, r=10, t=10, b=10),
                 xaxis_title="Coverage score (not a pass score)",
                 yaxis_title="",
-                paper_bgcolor="rgba(255,255,255,.72)",
-                plot_bgcolor="rgba(255,255,255,.72)",
-                font=dict(color="#171717", family="Instrument Sans"),
+                paper_bgcolor="rgba(0,0,0,0)",
+                plot_bgcolor="rgba(0,0,0,0)",
+                font=dict(color="#e7ecf5", family="Inter"),
                 legend_title_text="Evidence status",
             )
-            fig.update_xaxes(range=[0, 1], tickfont=dict(color="#3f3f46"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
-            fig.update_yaxes(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
+            fig.update_xaxes(range=[0, 1], tickfont=dict(color="#aeb7c7"), title_font=dict(color="#8b93a7"), gridcolor="rgba(148,163,184,.15)")
+            fig.update_yaxes(tickfont=dict(color="#e7ecf5"), title_font=dict(color="#8b93a7"), gridcolor="rgba(148,163,184,.15)")
             st.plotly_chart(fig, width="stretch")
             visible_cols = [
                 "provider",
@@ -2126,10 +1645,10 @@ def render_results_and_data(payload: dict[str, object], *, show_guide: bool = Tr
                     texttemplate="%{text}",
                     hovertemplate="<b>%{y}</b><br>%{x}<br>Posture: %{text}<br>%{customdata}<extra></extra>",
                     colorscale=[
-                        [0.00, "#d12f5f"],
-                        [0.35, "#d97706"],
-                        [0.60, "#1f5eff"],
-                        [1.00, "#0f9f75"],
+                        [0.00, "#fb7185"],
+                        [0.35, "#f5a623"],
+                        [0.60, "#5b8cff"],
+                        [1.00, "#2dd4a7"],
                     ],
                     zmin=0,
                     zmax=1,
@@ -2141,12 +1660,12 @@ def render_results_and_data(payload: dict[str, object], *, show_guide: bool = Tr
                 margin=dict(l=0, r=0, t=10, b=10),
                 xaxis_title="Market regime",
                 yaxis_title="Strategy family",
-                paper_bgcolor="rgba(255,255,255,.72)",
-                plot_bgcolor="rgba(255,255,255,.72)",
-                font=dict(color="#171717", family="Instrument Sans"),
+                paper_bgcolor="rgba(0,0,0,0)",
+                plot_bgcolor="rgba(0,0,0,0)",
+                font=dict(color="#e7ecf5", family="Inter"),
             )
-            fig.update_xaxes(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
-            fig.update_yaxes(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
+            fig.update_xaxes(tickfont=dict(color="#e7ecf5"), title_font=dict(color="#8b93a7"), gridcolor="rgba(148,163,184,.15)")
+            fig.update_yaxes(tickfont=dict(color="#e7ecf5"), title_font=dict(color="#8b93a7"), gridcolor="rgba(148,163,184,.15)")
             st.plotly_chart(fig, width="stretch")
             st.caption("Reading rule: red blocks capital, amber reduces sizing, blue is proxy-only exploration, green is risk overlay/governance.")
 
@@ -2211,30 +1730,30 @@ def render_results_and_data(payload: dict[str, object], *, show_guide: bool = Tr
                     y=top_summary.apply(lambda row: f"{row['symbol']} {int(row['range_minutes'])}m/{int(row['reward_r'])}R", axis=1),
                     orientation="h",
                     color="median_net_return",
-                    color_continuous_scale=["#d12f5f", "#d97706", "#0f9f75"],
+                    color_continuous_scale=["#fb7185", "#f5a623", "#2dd4a7"],
                     hover_data=["trades", "win_rate", "average_net_return"],
                 )
                 fig.update_layout(
-                    template="plotly_white",
+                    template="plotly_dark",
                     height=360,
                     margin=dict(l=0, r=0, t=20, b=10),
                     xaxis_title="Net return sum",
                     yaxis_title="Configuration",
                     paper_bgcolor="rgba(0,0,0,0)",
                     plot_bgcolor="rgba(0,0,0,0)",
-                    font=dict(color="#171717", family="Instrument Sans"),
+                    font=dict(color="#e7ecf5", family="Inter"),
                 )
-                fig.update_xaxes(tickfont=dict(color="#171717"), title_font=dict(color="#171717"), gridcolor="#e7e2d8")
-                fig.update_yaxes(tickfont=dict(color="#171717"), title_font=dict(color="#171717"), gridcolor="#e7e2d8")
-                fig.update_coloraxes(colorbar_tickfont=dict(color="#171717"), colorbar_title_font=dict(color="#171717"))
+                fig.update_xaxes(tickfont=dict(color="#e7ecf5"), title_font=dict(color="#e7ecf5"), gridcolor="rgba(148,163,184,.15)")
+                fig.update_yaxes(tickfont=dict(color="#e7ecf5"), title_font=dict(color="#e7ecf5"), gridcolor="rgba(148,163,184,.15)")
+                fig.update_coloraxes(colorbar_tickfont=dict(color="#e7ecf5"), colorbar_title_font=dict(color="#e7ecf5"))
                 st.plotly_chart(fig, width="stretch")
         with orb_cols[1]:
             if isinstance(by_symbol, pd.DataFrame) and not by_symbol.empty:
-                fig = px.pie(by_symbol, names="symbol", values="trades", hole=0.55, color_discrete_sequence=["#1f5eff", "#0f9f75", "#d97706"])
+                fig = px.pie(by_symbol, names="symbol", values="trades", hole=0.55, color_discrete_sequence=["#5b8cff", "#2dd4a7", "#f5a623"])
                 fig.update_layout(
                     height=360,
                     margin=dict(l=0, r=0, t=20, b=10),
-                    font=dict(color="#171717", family="Instrument Sans"),
+                    font=dict(color="#e7ecf5", family="Inter"),
                     paper_bgcolor="rgba(0,0,0,0)",
                     plot_bgcolor="rgba(0,0,0,0)",
                 )
@@ -2285,37 +1804,37 @@ def render_results_and_data(payload: dict[str, object], *, show_guide: bool = Tr
     with c1:
         if not ledger.empty:
             counts = ledger.groupby("decision", as_index=False).size().sort_values("size", ascending=False).head(12)
-            fig = px.bar(counts, x="size", y="decision", orientation="h", color="size", color_continuous_scale=["#eef3ff", "#1f5eff"])
+            fig = px.bar(counts, x="size", y="decision", orientation="h", color="size", color_continuous_scale=["#1a2440", "#5b8cff"])
             fig.update_layout(
-                template="plotly_white",
+                template="plotly_dark",
                 height=500,
                 margin=dict(l=0, r=10, t=10, b=10),
                 coloraxis_showscale=False,
                 yaxis_title="",
                 xaxis_title="Count",
-                paper_bgcolor="rgba(255,255,255,.72)",
-                plot_bgcolor="rgba(255,255,255,.72)",
-                font=dict(color="#171717", family="Instrument Sans"),
-                xaxis=dict(tickfont=dict(color="#3f3f46"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8"),
-                yaxis=dict(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8"),
+                paper_bgcolor="rgba(0,0,0,0)",
+                plot_bgcolor="rgba(0,0,0,0)",
+                font=dict(color="#e7ecf5", family="Inter"),
+                xaxis=dict(tickfont=dict(color="#aeb7c7"), title_font=dict(color="#8b93a7"), gridcolor="rgba(148,163,184,.15)"),
+                yaxis=dict(tickfont=dict(color="#e7ecf5"), title_font=dict(color="#8b93a7"), gridcolor="rgba(148,163,184,.15)"),
             )
             st.plotly_chart(fig, width="stretch")
     with c2:
         if not regime_map.empty and "regime_label" in regime_map.columns:
             regime_counts = regime_map.groupby("regime_label", as_index=False).size()
-            fig = px.bar(regime_counts, x="regime_label", y="size", color="regime_label", color_discrete_sequence=["#1f5eff", "#0f9f75", "#d97706", "#7c3aed", "#d12f5f", "#71717a"])
+            fig = px.bar(regime_counts, x="regime_label", y="size", color="regime_label", color_discrete_sequence=["#5b8cff", "#2dd4a7", "#f5a623", "#a78bfa", "#fb7185", "#8b93a7"])
             fig.update_layout(
-                template="plotly_white",
+                template="plotly_dark",
                 height=500,
                 margin=dict(l=0, r=0, t=10, b=10),
                 showlegend=False,
                 xaxis_title="",
                 yaxis_title="Symbol-days",
-                paper_bgcolor="rgba(255,255,255,.72)",
-                plot_bgcolor="rgba(255,255,255,.72)",
-                font=dict(color="#171717", family="Instrument Sans"),
-                xaxis=dict(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8"),
-                yaxis=dict(tickfont=dict(color="#3f3f46"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8"),
+                paper_bgcolor="rgba(0,0,0,0)",
+                plot_bgcolor="rgba(0,0,0,0)",
+                font=dict(color="#e7ecf5", family="Inter"),
+                xaxis=dict(tickfont=dict(color="#e7ecf5"), title_font=dict(color="#8b93a7"), gridcolor="rgba(148,163,184,.15)"),
+                yaxis=dict(tickfont=dict(color="#aeb7c7"), title_font=dict(color="#8b93a7"), gridcolor="rgba(148,163,184,.15)"),
             )
             st.plotly_chart(fig, width="stretch")
 
@@ -2330,7 +1849,7 @@ def render_results_and_data(payload: dict[str, object], *, show_guide: bool = Tr
                 color="realized_volatility",
                 color_continuous_scale="Blues",
             )
-            fig.update_layout(template="plotly_white", height=340, margin=dict(l=0, r=0, t=10, b=10), xaxis_title="", yaxis_title="Diagnostic weight")
+            fig.update_layout(template="plotly_dark", height=340, margin=dict(l=0, r=0, t=10, b=10), xaxis_title="", yaxis_title="Diagnostic weight")
             st.plotly_chart(fig, width="stretch")
     with m2:
         if not smallcap.empty and {"symbol", "median_dollar_volume", "median_spread_proxy"}.issubset(smallcap.columns):
@@ -2343,7 +1862,7 @@ def render_results_and_data(payload: dict[str, object], *, show_guide: bool = Tr
                 hover_name="symbol",
                 log_x=True,
             )
-            fig.update_layout(template="plotly_white", height=340, margin=dict(l=0, r=0, t=10, b=10), xaxis_title="Median dollar volume", yaxis_title="Spread proxy")
+            fig.update_layout(template="plotly_dark", height=340, margin=dict(l=0, r=0, t=10, b=10), xaxis_title="Median dollar volume", yaxis_title="Spread proxy")
             st.plotly_chart(fig, width="stretch")
 
     st.subheader("Data Upgrade Matrix")
@@ -2504,19 +2023,19 @@ def render_regime_playbook_panel(payload: dict[str, object]) -> None:
             y="size",
             color="regime_label",
             text="size",
-            color_discrete_sequence=["#1f5eff", "#0f9f75", "#d97706", "#7c3aed", "#d12f5f", "#71717a"],
+            color_discrete_sequence=["#5b8cff", "#2dd4a7", "#f5a623", "#a78bfa", "#fb7185", "#8b93a7"],
         )
         fig.update_traces(textposition="outside", textfont=dict(color="#0f172a", size=13, family="IBM Plex Mono"))
         fig.update_layout(
-            template="plotly_white",
+            template="plotly_dark",
             height=360,
             margin=dict(l=10, r=10, t=26, b=60),
             showlegend=False,
             xaxis_title="",
             yaxis_title="Symbol-days",
-            paper_bgcolor="#ffffff",
-            plot_bgcolor="#ffffff",
-            font=dict(color="#171717", family="Instrument Sans"),
+            paper_bgcolor="#0a0e1a",
+            plot_bgcolor="#0a0e1a",
+            font=dict(color="#e7ecf5", family="Inter"),
         )
         fig.update_xaxes(tickfont=dict(color="#0f172a", size=12), title_font=dict(color="#0f172a"), gridcolor="#d5dbe5")
         fig.update_yaxes(tickfont=dict(color="#0f172a", size=12), title_font=dict(color="#0f172a"), gridcolor="#d5dbe5")
@@ -2577,27 +2096,27 @@ def render_data_vault_panel(payload: dict[str, object]) -> None:
             orientation="h",
             color="admissibility",
             color_discrete_map={
-                "component_pass": "#0f9f75",
-                "partial_not_admissible": "#d97706",
-                "blocked_history_depth": "#7c3aed",
-                "blocked_reference_entitlement": "#7c3aed",
-                "not_admissible": "#d12f5f",
+                "component_pass": "#2dd4a7",
+                "partial_not_admissible": "#f5a623",
+                "blocked_history_depth": "#a78bfa",
+                "blocked_reference_entitlement": "#a78bfa",
+                "not_admissible": "#fb7185",
             },
             hover_data=["decision", "hard_blocks", "role"],
         )
         fig.update_layout(
-            template="plotly_white",
+            template="plotly_dark",
             height=380,
             margin=dict(l=0, r=10, t=10, b=10),
             xaxis_title="Coverage score (not a pass score)",
             yaxis_title="",
-            paper_bgcolor="rgba(255,255,255,.72)",
-            plot_bgcolor="rgba(255,255,255,.72)",
-            font=dict(color="#171717", family="Instrument Sans"),
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            font=dict(color="#e7ecf5", family="Inter"),
             legend_title_text="Evidence status",
         )
-        fig.update_xaxes(range=[0, 1], tickfont=dict(color="#3f3f46"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
-        fig.update_yaxes(tickfont=dict(color="#171717"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
+        fig.update_xaxes(range=[0, 1], tickfont=dict(color="#aeb7c7"), title_font=dict(color="#8b93a7"), gridcolor="rgba(148,163,184,.15)")
+        fig.update_yaxes(tickfont=dict(color="#e7ecf5"), title_font=dict(color="#8b93a7"), gridcolor="rgba(148,163,184,.15)")
         st.plotly_chart(fig, width="stretch")
 
         visible_cols = [
@@ -2683,15 +2202,15 @@ def render_decision_ledger_panel(payload: dict[str, object]) -> None:
         fig = px.bar(counts, x="size", y="decision", orientation="h", color="size", text="size", color_continuous_scale=["#93c5fd", "#2563eb"])
         fig.update_traces(textposition="outside", textfont=dict(color="#0f172a", size=12, family="IBM Plex Mono"), cliponaxis=False)
         fig.update_layout(
-            template="plotly_white",
+            template="plotly_dark",
             height=520,
             margin=dict(l=18, r=52, t=18, b=28),
             coloraxis_showscale=False,
             yaxis_title="",
             xaxis_title="Count",
-            paper_bgcolor="#ffffff",
-            plot_bgcolor="#ffffff",
-            font=dict(color="#171717", family="Instrument Sans"),
+            paper_bgcolor="#0a0e1a",
+            plot_bgcolor="#0a0e1a",
+            font=dict(color="#e7ecf5", family="Inter"),
         )
         fig.update_xaxes(tickfont=dict(color="#0f172a", size=12), title_font=dict(color="#0f172a"), gridcolor="#d5dbe5")
         fig.update_yaxes(tickfont=dict(color="#0f172a", size=12), title_font=dict(color="#0f172a"), gridcolor="#d5dbe5")
@@ -3290,11 +2809,11 @@ def render_strategy_workbench() -> None:
                         color="zone",
                         color_discrete_map={
                             "large loss": "#b42318",
-                            "loss": "#d12f5f",
-                            "small loss": "#d97706",
+                            "loss": "#fb7185",
+                            "small loss": "#f5a623",
                             "small win": "#60a5fa",
-                            "win": "#1f5eff",
-                            "large win": "#0f9f75",
+                            "win": "#5b8cff",
+                            "large win": "#2dd4a7",
                         },
                     )
                     fig.update_layout(
@@ -3302,13 +2821,13 @@ def render_strategy_workbench() -> None:
                         showlegend=False,
                         paper_bgcolor="rgba(0,0,0,0)",
                         plot_bgcolor="rgba(0,0,0,0)",
-                        font=dict(color="#171717", family="Instrument Sans"),
+                        font=dict(color="#e7ecf5", family="Inter"),
                         xaxis_title="Net return bucket",
                         yaxis_title="Trades",
                         margin=dict(l=10, r=10, t=28, b=10),
                     )
-                    fig.update_xaxes(tickfont=dict(color="#171717"), title_font=dict(color="#171717"), gridcolor="#e7e2d8")
-                    fig.update_yaxes(tickfont=dict(color="#171717"), title_font=dict(color="#171717"), gridcolor="#e7e2d8")
+                    fig.update_xaxes(tickfont=dict(color="#e7ecf5"), title_font=dict(color="#e7ecf5"), gridcolor="rgba(148,163,184,.15)")
+                    fig.update_yaxes(tickfont=dict(color="#e7ecf5"), title_font=dict(color="#e7ecf5"), gridcolor="rgba(148,163,184,.15)")
                     st.plotly_chart(fig, width="stretch")
                 else:
                     st.info("No distribution available for this dry-run.")
@@ -3323,7 +2842,7 @@ def render_strategy_workbench() -> None:
                         x="symbol",
                         y="share_of_positive_net",
                         color="net_return",
-                        color_continuous_scale=["#d97706", "#0f9f75"],
+                        color_continuous_scale=["#f5a623", "#2dd4a7"],
                         hover_data=["entry_date", "exit_date", "net_return"],
                     )
                     fig.update_layout(
@@ -3331,14 +2850,14 @@ def render_strategy_workbench() -> None:
                         showlegend=False,
                         paper_bgcolor="rgba(0,0,0,0)",
                         plot_bgcolor="rgba(0,0,0,0)",
-                        font=dict(color="#171717", family="Instrument Sans"),
+                        font=dict(color="#e7ecf5", family="Inter"),
                         xaxis_title="Symbol",
                         yaxis_title="Share of positive net",
                         margin=dict(l=10, r=10, t=28, b=10),
                     )
-                    fig.update_coloraxes(colorbar_tickfont=dict(color="#171717"), colorbar_title_font=dict(color="#171717"))
-                    fig.update_xaxes(tickfont=dict(color="#171717"), title_font=dict(color="#171717"), gridcolor="#e7e2d8")
-                    fig.update_yaxes(tickfont=dict(color="#171717"), title_font=dict(color="#171717"), gridcolor="#e7e2d8")
+                    fig.update_coloraxes(colorbar_tickfont=dict(color="#e7ecf5"), colorbar_title_font=dict(color="#e7ecf5"))
+                    fig.update_xaxes(tickfont=dict(color="#e7ecf5"), title_font=dict(color="#e7ecf5"), gridcolor="rgba(148,163,184,.15)")
+                    fig.update_yaxes(tickfont=dict(color="#e7ecf5"), title_font=dict(color="#e7ecf5"), gridcolor="rgba(148,163,184,.15)")
                     st.plotly_chart(fig, width="stretch")
                 else:
                     st.info("No winners available for this dry-run.")
@@ -3505,7 +3024,7 @@ def render_strategy_workbench() -> None:
                       <div class="rule-title">{card["strategy_name"]}</div>
                       <div class="strategy-copy"><strong>Decision:</strong> {card["decision"]}</div>
                       <div class="strategy-copy"><strong>Trades:</strong> {card["simulated_trades"]}</div>
-                      <div class="strategy-copy"><strong>Net sum:</strong> {net_pct:.2f}%</div>
+                      <div class="strategy-copy"><strong>Net (somma additiva):</strong> {net_pct:+.2f}%</div>
                       <div class="small-muted">{card["artifact_dir"]}</div>
                     </div>
                     """,
@@ -3636,28 +3155,28 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
         <div class="portfolio-hero">
           <div>
             <div class="lab-kicker">WORKBENCH-PORTFOLIO-001</div>
-            <h1>Stop hunting one perfect setup.</h1>
+            <h1>Smetti di cercare il setup perfetto.</h1>
             <p>
-              Portfolio Lab composes saved Workbench dry-runs and asks whether imperfect strategy components
-              become more robust together after costs, correlation, drawdown, and best-component removal.
+              Portfolio Lab compone i dry-run salvati del Workbench e chiede se componenti imperfetti
+              diventano piu' robusti insieme, dopo costi, correlazione, drawdown e rimozione del best component.
             </p>
           </div>
           <div class="portfolio-hero-note">
-            <strong>Research console, not a launchpad.</strong>
-            <span>Diagnostic only: no provider query, no market-data download, no paper trading, no live trading, and no promotion.</span>
+            <strong>Console di ricerca, non una rampa di lancio.</strong>
+            <span>Solo diagnostica: nessuna provider query, nessun download dati, nessun paper/live trading, nessuna promozione.</span>
           </div>
         </div>
         """,
         unsafe_allow_html=True,
     )
     page_guide(
-        "How to use Portfolio Lab",
-        "This page has two jobs: inspect a basket you select manually, and run a bounded factory search over locally testable strategy components. It is still a diagnostic console, not a trading system.",
+        "Come usare il Portfolio Lab",
+        "Due lavori: ispezionare un basket scelto a mano, e lanciare una ricerca governata sui componenti testabili localmente. E' una console diagnostica, non un trading system.",
         [
-            ("Setup", "Choose whether generated components enter the catalog and whether the regime router filters them.", "data"),
-            ("Verdict", "Read the current basket summary: components, net, drawdown, and blockers.", "warn"),
-            ("Dynamic path", "Compare static allocation with regime-switching allocation through time.", "good"),
-            ("Next gate", "Only after preregistration can the lab create a dry-run, frozen recipe, or data contract.", "block"),
+            ("Setup", "Scegli se il catalogo generato entra nella ricerca e se il regime router filtra i componenti.", "data"),
+            ("Verdict", "Leggi il riepilogo del basket: componenti, net return compounded, drawdown e blocker.", "warn"),
+            ("Dynamic path", "Confronta l'allocazione statica con quella regime-switching nel tempo.", "good"),
+            ("Next gate", "Solo dopo la preregistrazione il lab puo' creare dry-run, frozen recipe o data contract.", "block"),
         ],
     )
     with st.expander("1. Setup catalog and market regime", expanded=True):
@@ -3860,9 +3379,11 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
     with result_cols[0]:
         metric_card("Components", summary["component_count"], "Allocated components in diagnostic")
     with result_cols[1]:
-        metric_card("Net sum", f"{summary['total_net_return']:.2f}", "Weighted diagnostic return")
+        agg_mode = str(summary.get("aggregation_mode", "additive"))
+        net_c = summary.get("total_net_return_compounded", summary["total_net_return"])
+        metric_card("Net return", fmt_net(net_c, agg_mode), mode_note(agg_mode, "Coerente con la curva equity"), tone=pct_tone(net_c))
     with result_cols[2]:
-        metric_card("Max drawdown", f"{summary['max_drawdown']:.2f}", "Worst local decline")
+        metric_card("Max drawdown", fmt_net(summary["max_drawdown"], agg_mode, signed=False), mode_note(agg_mode, "Calo peggiore della curva"), tone=pct_tone(summary["max_drawdown"]))
     with result_cols[3]:
         metric_card("Decision", decision["decision"], "Promotion locked false")
 
@@ -3901,15 +3422,19 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
             unsafe_allow_html=True,
         )
         switch_summary = switching.get("summary", {})
+        switch_mode = str(switch_summary.get("aggregation_mode", "additive"))
         switch_cols = st.columns(4)
         with switch_cols[0]:
-            metric_card("Dynamic net", f"{switch_summary.get('dynamic_total_net_return', 0.0):.2f}", "Regime-switched path")
+            dyn_net = switch_summary.get("dynamic_total_net_return", 0.0)
+            metric_card("Dynamic net", fmt_net(dyn_net, switch_mode), mode_note(switch_mode, "Path regime-switched"), tone=pct_tone(dyn_net))
         with switch_cols[1]:
-            metric_card("Static net", f"{switch_summary.get('static_total_net_return', 0.0):.2f}", "Equal basket baseline")
+            sta_net = switch_summary.get("static_total_net_return", 0.0)
+            metric_card("Static net", fmt_net(sta_net, switch_mode), mode_note(switch_mode, "Baseline equal-weight sui componenti vivi"), tone=pct_tone(sta_net))
         with switch_cols[2]:
-            metric_card("Delta", f"{switch_summary.get('dynamic_vs_static_delta', 0.0):.2f}", "Dynamic minus static")
+            delta_net = switch_summary.get("dynamic_vs_static_delta", 0.0)
+            metric_card("Delta", fmt_net(delta_net, switch_mode), mode_note(switch_mode, "Dynamic meno static"), tone=pct_tone(delta_net))
         with switch_cols[3]:
-            metric_card("Dynamic DD", f"{switch_summary.get('dynamic_max_drawdown', 0.0):.2f}", "Worst local decline")
+            metric_card("Dynamic DD", fmt_net(switch_summary.get("dynamic_max_drawdown", 0.0), switch_mode, signed=False), mode_note(switch_mode, "Calo peggiore del path dinamico"), tone=pct_tone(switch_summary.get("dynamic_max_drawdown", 0.0)))
         if float(switch_summary.get("dynamic_vs_static_delta", 0.0) or 0.0) < 0:
             st.warning(
                 "The dynamic regime-switching path is weaker than the static proxy basket on this local surface. "
@@ -3930,21 +3455,21 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
                 x="period",
                 y="cumulative_net_return",
                 color="path",
-                color_discrete_map={"dynamic regime-switching": "#0f9f75", "static equal basket": "#71717a"},
+                color_discrete_map={"dynamic regime-switching": "#2dd4a7", "static equal basket": "#8b93a7"},
             )
             fig.update_layout(
-                template="plotly_white",
+                template="plotly_dark",
                 height=380,
                 margin=dict(l=0, r=0, t=10, b=10),
                 xaxis_title="Period",
                 yaxis_title="Cumulative local net",
-                paper_bgcolor="rgba(255,255,255,.72)",
-                plot_bgcolor="rgba(255,255,255,.72)",
-                font=dict(color="#171717", family="Instrument Sans"),
+                paper_bgcolor="rgba(0,0,0,0)",
+                plot_bgcolor="rgba(0,0,0,0)",
+                font=dict(color="#e7ecf5", family="Inter"),
                 legend_title_text="Path",
             )
-            fig.update_xaxes(tickfont=dict(color="#3f3f46"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
-            fig.update_yaxes(tickfont=dict(color="#3f3f46"), title_font=dict(color="#71717a"), gridcolor="#e7e2d8")
+            fig.update_xaxes(tickfont=dict(color="#aeb7c7"), title_font=dict(color="#8b93a7"), gridcolor="rgba(148,163,184,.15)")
+            fig.update_yaxes(tickfont=dict(color="#aeb7c7"), title_font=dict(color="#8b93a7"), gridcolor="rgba(148,163,184,.15)")
             st.plotly_chart(fig, width="stretch")
         usage = pd.DataFrame(switching.get("regime_usage", []))
         if not usage.empty:
@@ -3993,11 +3518,14 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
         with best_cols[0]:
             metric_card("Best components", best.get("component_count", 0), "After dedupe and bounded search")
         with best_cols[1]:
-            metric_card("Best net", f"{best.get('total_net_return', 0.0):.2f}", "Diagnostic weighted sum")
+            best_mode = str(best.get("aggregation_mode", "additive"))
+            best_net = best.get("total_net_return_compounded", best.get("total_net_return", 0.0))
+            metric_card("Best net", fmt_net(best_net, best_mode), mode_note(best_mode, "Basket migliore della ricerca governata"), tone=pct_tone(best_net))
         with best_cols[2]:
-            metric_card("Validation net", f"{best.get('validation_net_return', 0.0):.2f}", "Later half of local return path")
+            val_net = best.get("validation_net_return_compounded", best.get("validation_net_return", 0.0))
+            metric_card("Validation net", fmt_net(val_net, best_mode), mode_note(best_mode, "Meta' finale del path locale"), tone=pct_tone(val_net))
         with best_cols[3]:
-            metric_card("Ex-best", f"{best.get('ex_best_net_return', 0.0):.2f}", "After removing strongest component")
+            metric_card("Ex-best", f"{best.get('ex_best_net_return', 0.0):+.2f}", "Somma additiva senza il componente migliore (stress)", tone=pct_tone(best.get("ex_best_net_return", 0.0)))
         st.caption("Best governed basket components: " + ", ".join(search.get("best_component_labels", [])))
         best_ids = set(search.get("best_basket_component_ids", []))
         best_source_by_id = {str(component.get("component_id")): str(component.get("source", "saved_workbench")) for component in components}
@@ -4119,9 +3647,10 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
                 )
                 if trial.get("candidate_type") == "dynamic_regime_switching":
                     switch_summary = trial.get("regime_switching_diagnostic", {}).get("summary", {})
+                    trial_mode = str(switch_summary.get("aggregation_mode", "additive"))
                     st.caption(
-                        f"Dynamic trial delta vs static proxy: {float(switch_summary.get('dynamic_vs_static_delta', 0.0)):.2f}; "
-                        f"dynamic drawdown {float(switch_summary.get('dynamic_max_drawdown', 0.0)):.2f}."
+                        f"Dynamic trial delta vs static proxy: {fmt_net(switch_summary.get('dynamic_vs_static_delta', 0.0), trial_mode)}; "
+                        f"dynamic drawdown {fmt_net(switch_summary.get('dynamic_max_drawdown', 0.0), trial_mode, signed=False)}."
                     )
                 if trial.get("candidate_type") != "dynamic_regime_switching" and st.button("Freeze recipe and run validation split", type="secondary", width="stretch"):
                     approval = st.session_state.get("portfolio_lab_preregistration_approval", {})
@@ -4141,16 +3670,16 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
             final = frozen.get("final_decision", {})
             st.info(
                 f"Frozen recipe validation: {final.get('decision', 'UNKNOWN')}. "
-                f"Validation net {float(split.get('validation_net_return', 0.0)):.2f}; "
+                f"Validation net {float(split.get('validation_net_return', 0.0)):+.2f} (somma additiva degli stream); "
                 "promotion remains locked."
             )
             frozen_cols = st.columns(4)
             with frozen_cols[0]:
-                metric_card("Train net", f"{float(split.get('train_net_return', 0.0)):.2f}", "First half")
+                metric_card("Train net", f"{float(split.get('train_net_return', 0.0)):+.2f}", "Prima meta' (somma additiva)", tone=pct_tone(split.get("train_net_return", 0.0)))
             with frozen_cols[1]:
-                metric_card("Validation net", f"{float(split.get('validation_net_return', 0.0)):.2f}", "Later half")
+                metric_card("Validation net", f"{float(split.get('validation_net_return', 0.0)):+.2f}", "Meta' finale (somma additiva)", tone=pct_tone(split.get("validation_net_return", 0.0)))
             with frozen_cols[2]:
-                metric_card("Validation DD", f"{float(split.get('validation_max_drawdown', 0.0)):.2f}", "Later half pain")
+                metric_card("Validation DD", pct(split.get("validation_max_drawdown", 0.0), signed=False), "Drawdown della meta' finale", tone=pct_tone(split.get("validation_max_drawdown", 0.0)))
             with frozen_cols[3]:
                 metric_card("Max weight", f"{float(frozen.get('weight_contract', {}).get('max_component_weight', 0.0)):.0%}", "No optimization")
             st.caption(f"Frozen files: {paths.get('trial_report_path', '')} and {paths.get('final_decision_path', '')}")
@@ -4229,9 +3758,9 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
             with candidate_cols[0]:
                 metric_card("Components", selected.get("component_count", 0), "Frozen hypothesis mix")
             with candidate_cols[1]:
-                metric_card("Validation delta", f"{float(deltas.get('validation_net_return_delta', 0.0)):.2f}", "Vs Candidate 001")
+                metric_card("Validation delta", f"{float(deltas.get('validation_net_return_delta', 0.0)):+.2f}", "Vs Candidate 001 (additiva)", tone=pct_tone(deltas.get("validation_net_return_delta", 0.0)))
             with candidate_cols[2]:
-                metric_card("DD improvement", f"{float(deltas.get('max_drawdown_improvement', 0.0)):.2f}", "Less local pain")
+                metric_card("DD improvement", pct(deltas.get("max_drawdown_improvement", 0.0)), "Meno drawdown locale", tone=pct_tone(deltas.get("max_drawdown_improvement", 0.0)))
             with candidate_cols[3]:
                 metric_card("Next gate", "DATA", "External PIT contract")
             st.warning("Remaining blockers: " + ", ".join(primary_state.get("remaining_blockers", [])))
@@ -4379,14 +3908,16 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
             max_rejected_weight=max_rejected_weight,
             max_convex_weight=max_convex_weight,
         )
-        delta = float(cleaned_preview["summary"]["total_net_return"]) - float(summary["total_net_return"])
+        delta = float(cleaned_preview["summary"].get("total_net_return_compounded", cleaned_preview["summary"]["total_net_return"])) - float(summary.get("total_net_return_compounded", summary["total_net_return"]))
         clean_cols = st.columns(4)
         with clean_cols[0]:
             metric_card("Clean components", cleaned_preview["summary"]["component_count"], "After duplicate removal")
         with clean_cols[1]:
-            metric_card("Clean net", f"{cleaned_preview['summary']['total_net_return']:.2f}", f"{delta:+.2f} vs current")
+            clean_mode = str(cleaned_preview["summary"].get("aggregation_mode", "additive"))
+            clean_net = cleaned_preview["summary"].get("total_net_return_compounded", cleaned_preview["summary"]["total_net_return"])
+            metric_card("Clean net", fmt_net(clean_net, clean_mode), f"{fmt_net(delta, clean_mode)} vs basket corrente", tone=pct_tone(clean_net))
         with clean_cols[2]:
-            metric_card("Clean drawdown", f"{cleaned_preview['summary']['max_drawdown']:.2f}", "After duplicate removal")
+            metric_card("Clean drawdown", fmt_net(cleaned_preview["summary"]["max_drawdown"], clean_mode, signed=False), mode_note(clean_mode, "Dopo rimozione duplicati"), tone=pct_tone(cleaned_preview["summary"]["max_drawdown"]))
         with clean_cols[3]:
             metric_card("Clean decision", cleaned_preview["final_decision"]["decision"], "Still non-promotable")
         if cleaned_preview["final_decision"]["blockers"]:
@@ -4419,12 +3950,11 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
         st.caption("How to read it: this shows the local pain required to hold the basket through bad periods.")
         if not equity.empty:
             st.info(
-                f"Context: max drawdown is {summary['max_drawdown']:.2f} additive return units "
-                f"({summary['max_drawdown_pct']:.1f}% if one unit is read as 100%). "
-                "Because Workbench dry-runs are proxy artifacts, use this as relative pain, not account P&L."
+                f"Contesto: il max drawdown della curva e' {fmt_net(summary['max_drawdown'], agg_mode, signed=False)}. "
+                "I dry-run del Workbench sono artifact proxy: leggilo come dolore relativo, non come P&L di conto."
             )
             fig = px.area(equity, x="period", y="drawdown")
-            fig.update_traces(line_color="#d12f5f", fillcolor="rgba(209,47,95,0.25)")
+            fig.update_traces(line_color="#fb7185", fillcolor="rgba(209,47,95,0.25)")
             fig.update_layout(height=340, margin=dict(l=10, r=10, t=20, b=10), yaxis_title="Drawdown")
             st.plotly_chart(fig, width="stretch")
 
@@ -4449,7 +3979,7 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
                 y="component_label",
                 orientation="h",
                 color="sleeve",
-                color_discrete_sequence=["#2563eb", "#0f9f75", "#f97316"],
+                color_discrete_sequence=["#2563eb", "#2dd4a7", "#fb923c"],
                 hover_data=["component_id", "template"],
             )
             fig.update_layout(height=520, margin=dict(l=10, r=10, t=20, b=10), xaxis_title="Weighted contribution", yaxis_title="")
@@ -4511,11 +4041,14 @@ def render_portfolio_lab(payload: dict[str, object]) -> None:
             max_rejected_weight=max_rejected_weight,
             max_convex_weight=max_convex_weight,
         )
-        delta = float(what_if["summary"]["total_net_return"]) - float(summary["total_net_return"])
+        what_if_mode = str(what_if["summary"].get("aggregation_mode", "additive"))
+        what_if_net = what_if["summary"].get("total_net_return_compounded", what_if["summary"]["total_net_return"])
+        base_net = summary.get("total_net_return_compounded", summary["total_net_return"])
+        delta = float(what_if_net) - float(base_net)
         st.info(
-            f"Without {labels.get(what_if_remove, what_if_remove)}: decision "
-            f"{what_if['final_decision']['decision']}, net sum {what_if['summary']['total_net_return']:.2f} "
-            f"({delta:+.2f} vs current), max drawdown {what_if['summary']['max_drawdown']:.2f}."
+            f"Senza {labels.get(what_if_remove, what_if_remove)}: decision "
+            f"{what_if['final_decision']['decision']}, net return {fmt_net(what_if_net, what_if_mode)} "
+            f"({fmt_net(delta, what_if_mode)} vs basket corrente), max drawdown {fmt_net(what_if['summary']['max_drawdown'], what_if_mode, signed=False)}."
         )
         for action in what_if.get("action_plan", [])[:2]:
             st.caption(f"{action['title']}: {action['action']}")
@@ -4542,14 +4075,6 @@ def mission_rail_navigation(payload: dict[str, object], current_section: str) ->
     metrics = governance_metrics(payload)
     status = build_mission_status({**payload, "metrics": metrics})
     section_meta = mission_section_by_label(current_section)
-    st.button(
-        "Close",
-        key="mission_rail_close",
-        width="stretch",
-        help="Hide navigation rail",
-        on_click=set_mission_rail_open,
-        args=(False,),
-    )
     st.markdown(
         mission_sidebar_html(section_meta.label, status),
         unsafe_allow_html=True,
@@ -4569,11 +4094,6 @@ def mission_rail_navigation(payload: dict[str, object], current_section: str) ->
             help=section.description,
         ):
             selected_section = section.label
-        st.caption(section.description)
-    st.markdown(
-        '<div class="mission-rail-caption">Navigation is part of the app canvas, so it stays available even when the native Streamlit sidebar is closed.</div>',
-        unsafe_allow_html=True,
-    )
     return selected_section
 
 
@@ -4613,20 +4133,24 @@ def main() -> None:
     payload = load_dashboard_payload(Path("."))
     if "active_section" not in st.session_state:
         st.session_state["active_section"] = "Mission Brief"
-    if "mission_rail_open" not in st.session_state:
-        st.session_state["mission_rail_open"] = False
-    current_section = st.session_state["active_section"] if st.session_state["active_section"] in SECTIONS else "Mission Brief"
-    rail_open = bool(st.session_state["mission_rail_open"])
-    rail_column, content_column = st.columns([0.25, 0.75] if rail_open else [0.075, 0.925], gap="large")
+    # Rail is always visible - no collapsed/expanded dance.
+    st.session_state["mission_rail_open"] = True
+    current_section = (
+        st.session_state["active_section"]
+        if st.session_state["active_section"] in SECTIONS
+        else "Mission Brief"
+    )
+    rail_column, content_column = st.columns([0.22, 0.78], gap="large")
     with rail_column:
-        if rail_open:
-            selected_section = mission_rail_navigation(payload, current_section)
-        else:
-            collapsed_mission_rail_toggle()
-            selected_section = current_section
+        selected_section = mission_rail_navigation(payload, current_section)
     if selected_section != st.session_state["active_section"]:
         st.session_state["active_section"] = selected_section
-    section = st.session_state["active_section"] if st.session_state["active_section"] in SECTIONS else "Mission Brief"
+        st.rerun()
+    section = (
+        st.session_state["active_section"]
+        if st.session_state["active_section"] in SECTIONS
+        else "Mission Brief"
+    )
     with content_column:
         render_active_section(section, payload)
 

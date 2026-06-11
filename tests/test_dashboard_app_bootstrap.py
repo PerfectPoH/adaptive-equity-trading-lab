@@ -68,7 +68,8 @@ def test_dashboard_main_uses_internal_rail_not_streamlit_sidebar() -> None:
     source = inspect.getsource(app.main)
 
     assert "mission_rail_navigation" in source
-    assert "collapsed_mission_rail_toggle" in source
+    # Rail is always visible after the redesign: no collapsed toggle in main(),
+    # only the state key that keeps it pinned open.
     assert "mission_rail_open" in source
     assert "sidebar_navigation" not in source
     assert "main_navigation" not in source
