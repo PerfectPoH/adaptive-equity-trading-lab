@@ -360,7 +360,8 @@ def _update_provider_evaluation_summary(config: DatabentoProbeConfig, raw_path: 
     path = config.evaluation_dir / "provider_evaluation_summary.md"
     current = path.read_text(encoding="utf-8")
     timestamp = datetime.now(UTC).isoformat()
-    addition = f"\n## One-event micro-probe update\n\n```text\nPROVIDER_QUERY_EXECUTED\nevent_id: {config.event_id}\ndataset: {config.dataset}\nschema: {config.schema}\nsymbol: {config.symbol}\nstart: {config.start}\nend: {config.end}\nlimit: {config.limit}\nrecords_returned: {len(response)}\nexecuted_at_utc: {timestamp}\nraw_response_path: {str(raw_path).replace('\\\\', '/') if raw_path else 'RAW_RESPONSE_RETENTION_NOT_ENABLED'}\n```\n"
+    raw_path_text = str(raw_path).replace("\\", "/") if raw_path else "RAW_RESPONSE_RETENTION_NOT_ENABLED"
+    addition = f"\n## One-event micro-probe update\n\n```text\nPROVIDER_QUERY_EXECUTED\nevent_id: {config.event_id}\ndataset: {config.dataset}\nschema: {config.schema}\nsymbol: {config.symbol}\nstart: {config.start}\nend: {config.end}\nlimit: {config.limit}\nrecords_returned: {len(response)}\nexecuted_at_utc: {timestamp}\nraw_response_path: {raw_path_text}\n```\n"
     if "## One-event micro-probe update" not in current:
         path.write_text(current.rstrip() + "\n" + addition, encoding="utf-8")
 

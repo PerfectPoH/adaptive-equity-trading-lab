@@ -158,3 +158,10 @@ bundle small-cap.
   oneste del TRIAL-008 (cost-matched + top-5 unconditional) e il verdetto del
   permutation test mostrato in pagina. Il sito ora racconta la stessa storia
   del vault.
+
+## Follow-up audit chiuso
+
+P-value (1+c)/(n+1), f-string portabile, companion gate honest-baselines nella
+replica mensile, e metrica membership_blend_static: la decomposizione dice
+membership +32.7pp (l'asset reale), timing +8.5pp non significativo (p=0.119).
+Vedi addendum in [[Report-Honest-Baselines-Trial-2026-06-11]].

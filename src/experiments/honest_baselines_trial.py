@@ -133,7 +133,28 @@ def run_honest_baselines_trial(
         total, _ = _curve_total(perm_dynamic)
         permuted_totals.append(total)
     permuted = np.asarray(permuted_totals)
-    p_value = float((permuted >= dynamic_total).mean())
+    # Convenzione (1+count)/(n+1): mai p=0 spuri con n permutazioni finite.
+    p_value = float((1 + int((permuted >= dynamic_total).sum())) / (len(permuted) + 1))
+
+    # Ipotesi MEMBERSHIP separata dal timing (suggerimento audit follow-up):
+    # blend statico dei basket per-regime (media dei pesi, MAI switching).
+    blend_weights: dict[str, float] = {}
+    for basket in baskets.values():
+        for cid, w in basket.get("weights", {}).items():
+            blend_weights[cid] = blend_weights.get(cid, 0.0) + w
+    total_w = sum(blend_weights.values())
+    membership_ids = list(blend_weights)
+    if total_w > 0 and membership_ids:
+        cols = [c for c in membership_ids if c in oos.columns]
+        weights_series = pd.Series({c: blend_weights[c] / total_w for c in cols})
+        aligned = oos[cols]
+        active = aligned.notna().astype(float).mul(weights_series, axis=1).sum(axis=1)
+        membership = aligned.mul(weights_series, axis=1).sum(axis=1, skipna=True).divide(
+            active.where(active > 0)
+        ).fillna(0.0)
+    else:
+        membership = pd.Series(0.0, index=oos.index)
+    membership_total, _ = _curve_total(membership)
 
     gates = {
         "S1_beats_cost_matched_static": dynamic_total > static_cost_total,
@@ -155,7 +176,9 @@ def run_honest_baselines_trial(
             "static_all_legacy": round(static_all_total, 6),
             "static_cost_matched": round(static_cost_total, 6),
             "unconditional_top5": round(uncond_total, 6),
+            "membership_blend_static": round(membership_total, 6),
             "routing_delta_vs_unconditional": round(dynamic_total - uncond_total, 6),
+            "timing_delta_vs_membership": round(dynamic_total - membership_total, 6),
         },
         "permutation": {
             "n": cfg.permutations,

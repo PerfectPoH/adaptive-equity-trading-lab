@@ -58,3 +58,28 @@ trial counter automatico, sizing MVP, benchmark total-return).
 ## Artifact
 
 `experiments/runs/honest_baselines_008_20260611_155947/`
+
+---
+
+## Addendum (follow-up audit, stesso giorno)
+
+Correzioni applicate: p-value con convenzione `(1+c)/(n+1)` (p=0.1194, verdetto
+invariato); f-string portabile in databento_probe; companion gate aggiunto
+alla replica mensile schedulata (il protocollo congelato resta intatto, ma
+ogni replica esegue anche queste baseline).
+
+### Membership vs timing: la decomposizione finale
+
+Nuova metrica `membership_blend_static`: i basket per-regime tenuti STATICI
+(media dei pesi, mai switching).
+
+| Ipotesi | OOS | Incremento |
+|---|---|---|
+| Unconditional top-5 (niente router) | +8.4% | - |
+| **+ MEMBERSHIP del router (blend statico)** | **+41.1%** | **+32.7pp** |
+| + TIMING (switching per regime) | +49.6% | +8.5pp (p=0.119, n.s.) |
+
+L'asset reale del router e' la MEMBERSHIP: quali componenti ammette per
+regime vale +32.7pp sulla selezione semplice e si trasferisce OOS senza
+bisogno di switching. Il timing aggiunge +8.5pp non distinguibili dal caso.
+La replica mensile trattera' le due ipotesi separatamente (prompt aggiornato).
