@@ -79,3 +79,30 @@ Precisazioni operative scoperte alla validazione:
    un refresh causale della regime map e' lavoro futuro separato.
 3. I trade pendenti vengono tracciati (`pending_open_trades`) e compaiono
    nei report mensili come "pipeline in maturazione".
+
+---
+
+## Emendamento 002 (2026-06-11, audit round 3, PRIMA del primo report mensile)
+
+1. **Regola delisting (chiude il survivorship nei dati freschi)**: un simbolo
+   che sparisce produce SEMPRE un'uscita realizzata, mai un trade svanito.
+   Panel "stale" (ultimo dato >7 giorni indietro rispetto al resto): i trade
+   aperti chiudono all'ULTIMO CLOSE disponibile (`delisted_last_close`).
+   Simbolo sparito del tutto: chiusura a -100% (`symbol_vanished_total_loss`).
+2. **Entry ledger persistente** (`experiments/replica_ledger/ledger.json`,
+   tracciato in git): le entry si persistono alla prima rilevazione (data,
+   simbolo, prezzo); i run successivi maturano SOLO le uscite dal ledger e
+   non rigenerano mai entry passate - immune al re-aggiustamento retroattivo
+   di yfinance. Se il ricalcolo odierno non conferma un'entry del ledger:
+   `data_revision_warnings` nel coverage (rivelatore di revisioni fonte).
+3. **Seam check eseguito** (finestra overlap 2026-01-02 -> 2026-05-08):
+   overlap_ratio = 0.573 (248/433 entry congelate ritrovate dalle regole
+   causali su yfinance). Coerente con l'Emendamento 001 (regole causali !=
+   ranking ex-post congelato). LETTURA OBBLIGATORIA nei report: l'evidenza
+   mensile misura la VARIANTE CAUSALE della membership, non la continuazione
+   perfetta degli stream storici - e' l'unica variante implementabile.
+   Artifact: `experiments/runs/seam_check_20260611_213905/`.
+4. **Regime history refresh**: il classifier causale rigenera
+   `regime_history` dal panel SPY fresco a ogni replica
+   (`replica_support_checks`), cosi' la diagnostica timing resta viva.
+   La gamba membership non dipende dalle label OOS (blend statico).

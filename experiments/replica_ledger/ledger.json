@@ -1,0 +1,3711 @@
+{
+ "28fb7b03aa56a91e": [
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 292.67999267578125,
+   "holding": 180,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 458.7900085449219,
+   "holding": 180,
+   "status": "open",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-11",
+   "entry_price": 9.074999809265137,
+   "holding": 180,
+   "status": "open",
+   "symbol": "CRMD"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 388.4080200195313,
+   "holding": 180,
+   "status": "open",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 285.3299865722656,
+   "holding": 180,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 411.7681579589844,
+   "holding": 180,
+   "status": "open",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-05-14",
+   "entry_price": 235.465576171875,
+   "holding": 180,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 713.2899780273438,
+   "holding": 180,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 739.2999877929688,
+   "holding": 180,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 445.0,
+   "holding": 180,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "4edab439ae8b1313": [
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 292.67999267578125,
+   "holding": 90,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 458.7900085449219,
+   "holding": 90,
+   "status": "open",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-11",
+   "entry_price": 9.074999809265137,
+   "holding": 90,
+   "status": "open",
+   "symbol": "CRMD"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 388.4080200195313,
+   "holding": 90,
+   "status": "open",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 285.3299865722656,
+   "holding": 90,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 411.7681579589844,
+   "holding": 90,
+   "status": "open",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-05-14",
+   "entry_price": 235.465576171875,
+   "holding": 90,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 713.2899780273438,
+   "holding": 90,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 739.2999877929688,
+   "holding": 90,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 445.0,
+   "holding": 90,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "9474fe601e0f2bd2": [
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 312.0599975585937,
+   "holding": 180,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 380.1129455566406,
+   "holding": 180,
+   "status": "open",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 277.6000061035156,
+   "holding": 180,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 210.8942108154297,
+   "holding": 180,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 708.9299926757812,
+   "holding": 180,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 754.239990234375,
+   "holding": 180,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 391.0,
+   "holding": 180,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-03a53d17c324dec6": [
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 306.3099975585937,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.065572,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-06-08",
+   "entry_price": 301.5400085449219,
+   "holding": 5,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 83.56999969482422,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.265305,
+   "status": "closed",
+   "symbol": "AEHR"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 92.33000183105467,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.016284,
+   "status": "closed",
+   "symbol": "AEHR"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 98.4499969482422,
+   "holding": 5,
+   "status": "open",
+   "symbol": "AEHR"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 424.1000061035156,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.052358,
+   "status": "closed",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 466.3800048828125,
+   "holding": 5,
+   "status": "open",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 261.260009765625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.111395,
+   "status": "closed",
+   "symbol": "AMZN"
+  },
+  {
+   "entry_date": "2026-06-08",
+   "entry_price": 245.22000122070312,
+   "holding": 5,
+   "status": "open",
+   "symbol": "AMZN"
+  },
+  {
+   "entry_date": "2026-05-19",
+   "entry_price": 8.0600004196167,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.070347,
+   "status": "closed",
+   "symbol": "ARRY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 8.09000015258789,
+   "holding": 5,
+   "status": "open",
+   "symbol": "ARRY"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 3.289999961853028,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.080699,
+   "status": "closed",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 3.25,
+   "holding": 5,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 388.4080200195313,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.028643,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 376.1453247070313,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.084123,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 277.6000061035156,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.022911,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 281.6499938964844,
+   "holding": 5,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 598.8599853515625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.029377,
+   "status": "closed",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 600.469970703125,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.075114,
+   "status": "closed",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-06-08",
+   "entry_price": 585.3900146484375,
+   "holding": 5,
+   "status": "open",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 427.3399963378906,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.120155,
+   "status": "closed",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-06-10",
+   "entry_price": 397.3599853515625,
+   "holding": 5,
+   "status": "open",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 222.0612030029297,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.083555,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 214.5,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.115641,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-06-10",
+   "entry_price": 200.4199981689453,
+   "holding": 5,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 705.8800048828125,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.015433,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 705.0599975585938,
+   "holding": 5,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 738.6500244140625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.033835,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 737.5499877929688,
+   "holding": 5,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 422.239990234375,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.041071,
+   "status": "closed",
+   "symbol": "TSLA"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 415.8800048828125,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.066663,
+   "status": "closed",
+   "symbol": "TSLA"
+  },
+  {
+   "entry_date": "2026-06-10",
+   "entry_price": 381.5899963378906,
+   "holding": 5,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-0a068c8a27ef583b": [
+  {
+   "entry_date": "2026-05-14",
+   "entry_price": 3.609999895095825,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.015339,
+   "status": "closed",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 3.7799999713897705,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.177712,
+   "status": "closed",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-13",
+   "entry_price": 7.5,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.019833,
+   "status": "closed",
+   "symbol": "CRMD"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 3.390000104904175,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.171939,
+   "status": "closed",
+   "symbol": "IOVA"
+  },
+  {
+   "entry_date": "2026-06-02",
+   "entry_price": 291.6600036621094,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.060266,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-20",
+   "entry_price": 605.0599975585938,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.012462,
+   "status": "closed",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-05-13",
+   "entry_price": 225.56710815429688,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.04795,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-06-02",
+   "entry_price": 746.1599731445312,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.08887,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 754.5999755859375,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.0342,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-27",
+   "entry_price": 440.3599853515625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.075333,
+   "status": "closed",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-171ac28e5b423f68": [
+  {
+   "entry_date": "2026-05-14",
+   "entry_price": 3.609999895095825,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.012161,
+   "status": "closed",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 3.7799999713897705,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.150212,
+   "status": "closed",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-13",
+   "entry_price": 7.5,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.047333,
+   "status": "closed",
+   "symbol": "CRMD"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 3.390000104904175,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.199439,
+   "status": "closed",
+   "symbol": "IOVA"
+  },
+  {
+   "entry_date": "2026-06-02",
+   "entry_price": 291.6600036621094,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.032766,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-20",
+   "entry_price": 605.0599975585938,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.039962,
+   "status": "closed",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-05-13",
+   "entry_price": 225.56710815429688,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.02045,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-06-02",
+   "entry_price": 746.1599731445312,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.06137,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 754.5999755859375,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.0067,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-27",
+   "entry_price": 440.3599853515625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.047833,
+   "status": "closed",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-17d25540b5e54179": [
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 306.3099975585937,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 83.56999969482422,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AEHR"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 98.4499969482422,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AEHR"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 424.1000061035156,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 466.3800048828125,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 261.260009765625,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AMZN"
+  },
+  {
+   "entry_date": "2026-05-19",
+   "entry_price": 8.0600004196167,
+   "holding": 20,
+   "status": "open",
+   "symbol": "ARRY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 8.09000015258789,
+   "holding": 20,
+   "status": "open",
+   "symbol": "ARRY"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 3.289999961853028,
+   "holding": 20,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 3.25,
+   "holding": 20,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 388.4080200195313,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.112172,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 376.1453247070313,
+   "holding": 20,
+   "status": "open",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 277.6000061035156,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 281.6499938964844,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 598.8599853515625,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.073829,
+   "status": "closed",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 600.469970703125,
+   "holding": 20,
+   "status": "open",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 427.3399963378906,
+   "holding": 20,
+   "status": "open",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 222.0612030029297,
+   "holding": 20,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 214.5,
+   "holding": 20,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 705.8800048828125,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 705.0599975585938,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 738.6500244140625,
+   "holding": 20,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 737.5499877929688,
+   "holding": 20,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 422.239990234375,
+   "holding": 20,
+   "status": "open",
+   "symbol": "TSLA"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 415.8800048828125,
+   "holding": 20,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-206f18f4951cd8c9": [
+  {
+   "entry_date": "2026-05-14",
+   "entry_price": 3.609999895095825,
+   "holding": 45,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-13",
+   "entry_price": 7.5,
+   "holding": 45,
+   "status": "open",
+   "symbol": "CRMD"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 3.390000104904175,
+   "holding": 45,
+   "status": "open",
+   "symbol": "IOVA"
+  },
+  {
+   "entry_date": "2026-06-02",
+   "entry_price": 291.6600036621094,
+   "holding": 45,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-20",
+   "entry_price": 605.0599975585938,
+   "holding": 45,
+   "status": "open",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-05-13",
+   "entry_price": 225.56710815429688,
+   "holding": 45,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-06-02",
+   "entry_price": 746.1599731445312,
+   "holding": 45,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 754.5999755859375,
+   "holding": 45,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-27",
+   "entry_price": 440.3599853515625,
+   "holding": 45,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-35eb7c5efc5da071": [
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 312.0599975585937,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.025125,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 380.1129455566406,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.041051,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 277.6000061035156,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.017089,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 287.6700134277344,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.029536,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 210.8942108154297,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.037474,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 708.9299926757812,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.002145,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 705.0599975585938,
+   "holding": 5,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 754.239990234375,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.048197,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 391.0,
+   "holding": 5,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-3649fae5bc1b7b74": [
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 292.67999267578125,
+   "holding": 45,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 458.7900085449219,
+   "holding": 45,
+   "status": "open",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-11",
+   "entry_price": 9.074999809265137,
+   "holding": 45,
+   "status": "open",
+   "symbol": "CRMD"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 388.4080200195313,
+   "holding": 45,
+   "status": "open",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 285.3299865722656,
+   "holding": 45,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 411.7681579589844,
+   "holding": 45,
+   "status": "open",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-05-14",
+   "entry_price": 235.465576171875,
+   "holding": 45,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 713.2899780273438,
+   "holding": 45,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 739.2999877929688,
+   "holding": 45,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 445.0,
+   "holding": 45,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-40d2b4dfba0a074d": [
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 306.3099975585937,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.053072,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-06-08",
+   "entry_price": 301.5400085449219,
+   "holding": 5,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 83.56999969482422,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.277805,
+   "status": "closed",
+   "symbol": "AEHR"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 92.33000183105467,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.028784,
+   "status": "closed",
+   "symbol": "AEHR"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 98.4499969482422,
+   "holding": 5,
+   "status": "open",
+   "symbol": "AEHR"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 424.1000061035156,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.064858,
+   "status": "closed",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 466.3800048828125,
+   "holding": 5,
+   "status": "open",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 261.260009765625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.098895,
+   "status": "closed",
+   "symbol": "AMZN"
+  },
+  {
+   "entry_date": "2026-06-08",
+   "entry_price": 245.22000122070312,
+   "holding": 5,
+   "status": "open",
+   "symbol": "AMZN"
+  },
+  {
+   "entry_date": "2026-05-19",
+   "entry_price": 8.0600004196167,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.082847,
+   "status": "closed",
+   "symbol": "ARRY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 8.09000015258789,
+   "holding": 5,
+   "status": "open",
+   "symbol": "ARRY"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 3.289999961853028,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.093199,
+   "status": "closed",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 3.25,
+   "holding": 5,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 388.4080200195313,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.016143,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 376.1453247070313,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.071623,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 277.6000061035156,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.010411,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 281.6499938964844,
+   "holding": 5,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 598.8599853515625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.016877,
+   "status": "closed",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 600.469970703125,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.062614,
+   "status": "closed",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-06-08",
+   "entry_price": 585.3900146484375,
+   "holding": 5,
+   "status": "open",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 427.3399963378906,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.107655,
+   "status": "closed",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-06-10",
+   "entry_price": 397.3599853515625,
+   "holding": 5,
+   "status": "open",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 222.0612030029297,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.071055,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 214.5,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.103141,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-06-10",
+   "entry_price": 200.4199981689453,
+   "holding": 5,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 705.8800048828125,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.002933,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 705.0599975585938,
+   "holding": 5,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 738.6500244140625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.021335,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 737.5499877929688,
+   "holding": 5,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 422.239990234375,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.028571,
+   "status": "closed",
+   "symbol": "TSLA"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 415.8800048828125,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.054163,
+   "status": "closed",
+   "symbol": "TSLA"
+  },
+  {
+   "entry_date": "2026-06-10",
+   "entry_price": 381.5899963378906,
+   "holding": 5,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-4365a19489b27c36": [
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 292.67999267578125,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.057278,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-26",
+   "entry_price": 308.3299865722656,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 458.7900085449219,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.013556,
+   "status": "closed",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 518.0900268554688,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-11",
+   "entry_price": 9.074999809265137,
+   "holding": 20,
+   "status": "open",
+   "symbol": "CRMD"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 388.4080200195313,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.112172,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 285.3299865722656,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.051086,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 411.7681579589844,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.070298,
+   "status": "closed",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 460.5199890136719,
+   "holding": 20,
+   "status": "open",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-05-14",
+   "entry_price": 235.465576171875,
+   "holding": 20,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 713.2899780273438,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.057655,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-26",
+   "entry_price": 730.280029296875,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 739.2999877929688,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.053043,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 756.47998046875,
+   "holding": 20,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 445.0,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.158584,
+   "status": "closed",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-4478d675ccfafd31": [
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 306.3099975585937,
+   "holding": 45,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 83.56999969482422,
+   "holding": 45,
+   "status": "open",
+   "symbol": "AEHR"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 424.1000061035156,
+   "holding": 45,
+   "status": "open",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 261.260009765625,
+   "holding": 45,
+   "status": "open",
+   "symbol": "AMZN"
+  },
+  {
+   "entry_date": "2026-05-19",
+   "entry_price": 8.0600004196167,
+   "holding": 45,
+   "status": "open",
+   "symbol": "ARRY"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 3.289999961853028,
+   "holding": 45,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 388.4080200195313,
+   "holding": 45,
+   "status": "open",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 277.6000061035156,
+   "holding": 45,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 598.8599853515625,
+   "holding": 45,
+   "status": "open",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 427.3399963378906,
+   "holding": 45,
+   "status": "open",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 222.0612030029297,
+   "holding": 45,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 705.8800048828125,
+   "holding": 45,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 738.6500244140625,
+   "holding": 45,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 422.239990234375,
+   "holding": 45,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-54f51ccfae2851ab": [
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 312.0599975585937,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 380.1129455566406,
+   "holding": 20,
+   "status": "open",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 277.6000061035156,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 287.6700134277344,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 210.8942108154297,
+   "holding": 20,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 708.9299926757812,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 705.0599975585938,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 754.239990234375,
+   "holding": 20,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 391.0,
+   "holding": 20,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-633e2bb05655049f": [
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 292.67999267578125,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.00763,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-20",
+   "entry_price": 302.25,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.023945,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 312.510009765625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.014096,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 458.7900085449219,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.092391,
+   "status": "closed",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 420.989990234375,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.186917,
+   "status": "closed",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 518.0900268554688,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.000137,
+   "status": "closed",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-11",
+   "entry_price": 9.074999809265137,
+   "holding": 5,
+   "status": "open",
+   "symbol": "CRMD"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 388.4080200195313,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.011357,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 285.3299865722656,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.042804,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 411.7681579589844,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.016366,
+   "status": "closed",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 460.5199890136719,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.115924,
+   "status": "closed",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-05-14",
+   "entry_price": 235.465576171875,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.078847,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 713.2899780273438,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.020388,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-20",
+   "entry_price": 713.1500244140625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.02148,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 735.5999755859375,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.003189,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 739.2999877929688,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.010879,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 756.47998046875,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.035024,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 445.0,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.088674,
+   "status": "closed",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-6d11f16258c0abf7": [
+  {
+   "entry_date": "2026-05-14",
+   "entry_price": 3.609999895095825,
+   "holding": 20,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 3.7799999713897705,
+   "holding": 20,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-13",
+   "entry_price": 7.5,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": 0.16,
+   "status": "closed",
+   "symbol": "CRMD"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 3.390000104904175,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IOVA"
+  },
+  {
+   "entry_date": "2026-06-02",
+   "entry_price": 291.6600036621094,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-20",
+   "entry_price": 605.0599975585938,
+   "holding": 20,
+   "status": "open",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-05-13",
+   "entry_price": 225.56710815429688,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.145702,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-06-02",
+   "entry_price": 746.1599731445312,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 754.5999755859375,
+   "holding": 20,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-27",
+   "entry_price": 440.3599853515625,
+   "holding": 20,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-706cdbf4b53724c8": [
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 312.0599975585937,
+   "holding": 45,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 380.1129455566406,
+   "holding": 45,
+   "status": "open",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 277.6000061035156,
+   "holding": 45,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 210.8942108154297,
+   "holding": 45,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 708.9299926757812,
+   "holding": 45,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 754.239990234375,
+   "holding": 45,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 391.0,
+   "holding": 45,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-72fadb6d71c63049": [
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 312.0599975585937,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.052625,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 380.1129455566406,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.068551,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 277.6000061035156,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.010411,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 287.6700134277344,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.057036,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 210.8942108154297,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.064974,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 708.9299926757812,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.025355,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 705.0599975585938,
+   "holding": 5,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 754.239990234375,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.075697,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 391.0,
+   "holding": 5,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-7719d5fc2dc12422": [
+  {
+   "entry_date": "2026-05-14",
+   "entry_price": 3.609999895095825,
+   "holding": 20,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 3.7799999713897705,
+   "holding": 20,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-13",
+   "entry_price": 7.5,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": 0.2,
+   "status": "closed",
+   "symbol": "CRMD"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 3.390000104904175,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IOVA"
+  },
+  {
+   "entry_date": "2026-06-02",
+   "entry_price": 291.6600036621094,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-20",
+   "entry_price": 605.0599975585938,
+   "holding": 20,
+   "status": "open",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-05-13",
+   "entry_price": 225.56710815429688,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.105702,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-06-02",
+   "entry_price": 746.1599731445312,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 754.5999755859375,
+   "holding": 20,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-27",
+   "entry_price": 440.3599853515625,
+   "holding": 20,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-9aa27ed14e743eb8": [
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 306.3099975585937,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.025572,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-06-08",
+   "entry_price": 301.5400085449219,
+   "holding": 5,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 83.56999969482422,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.305305,
+   "status": "closed",
+   "symbol": "AEHR"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 92.33000183105467,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.056284,
+   "status": "closed",
+   "symbol": "AEHR"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 98.4499969482422,
+   "holding": 5,
+   "status": "open",
+   "symbol": "AEHR"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 424.1000061035156,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.092358,
+   "status": "closed",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 466.3800048828125,
+   "holding": 5,
+   "status": "open",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 261.260009765625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.071395,
+   "status": "closed",
+   "symbol": "AMZN"
+  },
+  {
+   "entry_date": "2026-06-08",
+   "entry_price": 245.22000122070312,
+   "holding": 5,
+   "status": "open",
+   "symbol": "AMZN"
+  },
+  {
+   "entry_date": "2026-05-19",
+   "entry_price": 8.0600004196167,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.110347,
+   "status": "closed",
+   "symbol": "ARRY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 8.09000015258789,
+   "holding": 5,
+   "status": "open",
+   "symbol": "ARRY"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 3.289999961853028,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.120699,
+   "status": "closed",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 3.25,
+   "holding": 5,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 388.4080200195313,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.011357,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 376.1453247070313,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.044123,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 277.6000061035156,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.017089,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 281.6499938964844,
+   "holding": 5,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 598.8599853515625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.010623,
+   "status": "closed",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 600.469970703125,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.035114,
+   "status": "closed",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-06-08",
+   "entry_price": 585.3900146484375,
+   "holding": 5,
+   "status": "open",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 427.3399963378906,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.080155,
+   "status": "closed",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-06-10",
+   "entry_price": 397.3599853515625,
+   "holding": 5,
+   "status": "open",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 222.0612030029297,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.043555,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 214.5,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.075641,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-06-10",
+   "entry_price": 200.4199981689453,
+   "holding": 5,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 705.8800048828125,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.024567,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 705.0599975585938,
+   "holding": 5,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 738.6500244140625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.006165,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 737.5499877929688,
+   "holding": 5,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 422.239990234375,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.001071,
+   "status": "closed",
+   "symbol": "TSLA"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 415.8800048828125,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.026663,
+   "status": "closed",
+   "symbol": "TSLA"
+  },
+  {
+   "entry_date": "2026-06-10",
+   "entry_price": 381.5899963378906,
+   "holding": 5,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-ae163c98647d7bea": [
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 312.0599975585937,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 380.1129455566406,
+   "holding": 20,
+   "status": "open",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 277.6000061035156,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 287.6700134277344,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 210.8942108154297,
+   "holding": 20,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 708.9299926757812,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 705.0599975585938,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 754.239990234375,
+   "holding": 20,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 391.0,
+   "holding": 20,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-b0100b2bcad2ded2": [
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 306.3099975585937,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 83.56999969482422,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AEHR"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 98.4499969482422,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AEHR"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 424.1000061035156,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 466.3800048828125,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 261.260009765625,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AMZN"
+  },
+  {
+   "entry_date": "2026-05-19",
+   "entry_price": 8.0600004196167,
+   "holding": 20,
+   "status": "open",
+   "symbol": "ARRY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 8.09000015258789,
+   "holding": 20,
+   "status": "open",
+   "symbol": "ARRY"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 3.289999961853028,
+   "holding": 20,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 3.25,
+   "holding": 20,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 388.4080200195313,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.099672,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 376.1453247070313,
+   "holding": 20,
+   "status": "open",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 277.6000061035156,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 281.6499938964844,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 598.8599853515625,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.061329,
+   "status": "closed",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 600.469970703125,
+   "holding": 20,
+   "status": "open",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 427.3399963378906,
+   "holding": 20,
+   "status": "open",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 222.0612030029297,
+   "holding": 20,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 214.5,
+   "holding": 20,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 705.8800048828125,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 705.0599975585938,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 738.6500244140625,
+   "holding": 20,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 737.5499877929688,
+   "holding": 20,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 422.239990234375,
+   "holding": 20,
+   "status": "open",
+   "symbol": "TSLA"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 415.8800048828125,
+   "holding": 20,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-bccbea39bed3c806": [
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 312.0599975585937,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.065125,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 380.1129455566406,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.081051,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 277.6000061035156,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.022911,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 287.6700134277344,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.069536,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 210.8942108154297,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.077474,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 708.9299926757812,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.037855,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 705.0599975585938,
+   "holding": 5,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 754.239990234375,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.088197,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 391.0,
+   "holding": 5,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-c28eec485c97ab60": [
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 292.67999267578125,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.03237,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-20",
+   "entry_price": 302.25,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.016055,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 312.510009765625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.054096,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 458.7900085449219,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.132391,
+   "status": "closed",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 420.989990234375,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.146917,
+   "status": "closed",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 518.0900268554688,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.040137,
+   "status": "closed",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-11",
+   "entry_price": 9.074999809265137,
+   "holding": 5,
+   "status": "open",
+   "symbol": "CRMD"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 388.4080200195313,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.028643,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 285.3299865722656,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.082804,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 411.7681579589844,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.023634,
+   "status": "closed",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 460.5199890136719,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.155924,
+   "status": "closed",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-05-14",
+   "entry_price": 235.465576171875,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.118847,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 713.2899780273438,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.060388,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-20",
+   "entry_price": 713.1500244140625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.01852,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 735.5999755859375,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.043189,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 739.2999877929688,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.050879,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 756.47998046875,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.075024,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 445.0,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.128674,
+   "status": "closed",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-cb9267a22681d28d": [
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 292.67999267578125,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.01987,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-20",
+   "entry_price": 302.25,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.003555,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 312.510009765625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.041596,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 458.7900085449219,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.119891,
+   "status": "closed",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 420.989990234375,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.159417,
+   "status": "closed",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 518.0900268554688,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.027637,
+   "status": "closed",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-11",
+   "entry_price": 9.074999809265137,
+   "holding": 5,
+   "status": "open",
+   "symbol": "CRMD"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 388.4080200195313,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.016143,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 285.3299865722656,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.070304,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 411.7681579589844,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.011134,
+   "status": "closed",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 460.5199890136719,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.143424,
+   "status": "closed",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-05-14",
+   "entry_price": 235.465576171875,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.106347,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 713.2899780273438,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.047888,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-20",
+   "entry_price": 713.1500244140625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.00602,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 735.5999755859375,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.030689,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 739.2999877929688,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.038379,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 756.47998046875,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.062524,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 445.0,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.116174,
+   "status": "closed",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-d028fe234d674df1": [
+  {
+   "entry_date": "2026-05-14",
+   "entry_price": 3.609999895095825,
+   "holding": 20,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 3.7799999713897705,
+   "holding": 20,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-13",
+   "entry_price": 7.5,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": 0.1725,
+   "status": "closed",
+   "symbol": "CRMD"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 3.390000104904175,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IOVA"
+  },
+  {
+   "entry_date": "2026-06-02",
+   "entry_price": 291.6600036621094,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-20",
+   "entry_price": 605.0599975585938,
+   "holding": 20,
+   "status": "open",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-05-13",
+   "entry_price": 225.56710815429688,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.133202,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-06-02",
+   "entry_price": 746.1599731445312,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 754.5999755859375,
+   "holding": 20,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-27",
+   "entry_price": 440.3599853515625,
+   "holding": 20,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-d2621bbbf56dff40": [
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 292.67999267578125,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.044778,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-26",
+   "entry_price": 308.3299865722656,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 458.7900085449219,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.001056,
+   "status": "closed",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 518.0900268554688,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-11",
+   "entry_price": 9.074999809265137,
+   "holding": 20,
+   "status": "open",
+   "symbol": "CRMD"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 388.4080200195313,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.099672,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 285.3299865722656,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.038586,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 411.7681579589844,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.057798,
+   "status": "closed",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 460.5199890136719,
+   "holding": 20,
+   "status": "open",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-05-14",
+   "entry_price": 235.465576171875,
+   "holding": 20,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 713.2899780273438,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.045155,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-26",
+   "entry_price": 730.280029296875,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 739.2999877929688,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.040543,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 756.47998046875,
+   "holding": 20,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 445.0,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.146084,
+   "status": "closed",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-d5a39d7a88bc24cf": [
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 306.3099975585937,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 83.56999969482422,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AEHR"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 98.4499969482422,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AEHR"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 424.1000061035156,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 466.3800048828125,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 261.260009765625,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AMZN"
+  },
+  {
+   "entry_date": "2026-05-19",
+   "entry_price": 8.0600004196167,
+   "holding": 20,
+   "status": "open",
+   "symbol": "ARRY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 8.09000015258789,
+   "holding": 20,
+   "status": "open",
+   "symbol": "ARRY"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 3.289999961853028,
+   "holding": 20,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 3.25,
+   "holding": 20,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 388.4080200195313,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.072172,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 376.1453247070313,
+   "holding": 20,
+   "status": "open",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 277.6000061035156,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 281.6499938964844,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 598.8599853515625,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.033829,
+   "status": "closed",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 600.469970703125,
+   "holding": 20,
+   "status": "open",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 427.3399963378906,
+   "holding": 20,
+   "status": "open",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 222.0612030029297,
+   "holding": 20,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 214.5,
+   "holding": 20,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 705.8800048828125,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 705.0599975585938,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 738.6500244140625,
+   "holding": 20,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 737.5499877929688,
+   "holding": 20,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 422.239990234375,
+   "holding": 20,
+   "status": "open",
+   "symbol": "TSLA"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 415.8800048828125,
+   "holding": 20,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-e8820a84c0d6faf6": [
+  {
+   "entry_date": "2026-05-14",
+   "entry_price": 3.609999895095825,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.027839,
+   "status": "closed",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 3.7799999713897705,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.190212,
+   "status": "closed",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-13",
+   "entry_price": 7.5,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.007333,
+   "status": "closed",
+   "symbol": "CRMD"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 3.390000104904175,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": 0.159439,
+   "status": "closed",
+   "symbol": "IOVA"
+  },
+  {
+   "entry_date": "2026-06-02",
+   "entry_price": 291.6600036621094,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.072766,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-20",
+   "entry_price": 605.0599975585938,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -3.8e-05,
+   "status": "closed",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-05-13",
+   "entry_price": 225.56710815429688,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.06045,
+   "status": "closed",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-06-02",
+   "entry_price": 746.1599731445312,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.10137,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 754.5999755859375,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.0467,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-27",
+   "entry_price": 440.3599853515625,
+   "exit_reason": "holding_timeout",
+   "holding": 5,
+   "net_return": -0.087833,
+   "status": "closed",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-ef2dfa466e3b0e52": [
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 312.0599975585937,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 380.1129455566406,
+   "holding": 20,
+   "status": "open",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 277.6000061035156,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 287.6700134277344,
+   "holding": 20,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 210.8942108154297,
+   "holding": 20,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 708.9299926757812,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 705.0599975585938,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 754.239990234375,
+   "holding": 20,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-06-05",
+   "entry_price": 391.0,
+   "holding": 20,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ],
+ "FACTORY-efba882cb8ce39ad": [
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 292.67999267578125,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.017278,
+   "status": "closed",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-26",
+   "entry_price": 308.3299865722656,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 458.7900085449219,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": 0.026444,
+   "status": "closed",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-05-28",
+   "entry_price": 518.0900268554688,
+   "holding": 20,
+   "status": "open",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-11",
+   "entry_price": 9.074999809265137,
+   "holding": 20,
+   "status": "open",
+   "symbol": "CRMD"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 388.4080200195313,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.072172,
+   "status": "closed",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 285.3299865722656,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.011086,
+   "status": "closed",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 411.7681579589844,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.030298,
+   "status": "closed",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 460.5199890136719,
+   "holding": 20,
+   "status": "open",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-05-14",
+   "entry_price": 235.465576171875,
+   "holding": 20,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 713.2899780273438,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.017655,
+   "status": "closed",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-26",
+   "entry_price": 730.280029296875,
+   "holding": 20,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 739.2999877929688,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.013043,
+   "status": "closed",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-29",
+   "entry_price": 756.47998046875,
+   "holding": 20,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 445.0,
+   "exit_reason": "holding_timeout",
+   "holding": 20,
+   "net_return": -0.118584,
+   "status": "closed",
+   "symbol": "TSLA"
+  }
+ ],
+ "a42078cbf0a2ea94": [
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 306.3099975585937,
+   "holding": 180,
+   "status": "open",
+   "symbol": "AAPL"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 83.56999969482422,
+   "holding": 180,
+   "status": "open",
+   "symbol": "AEHR"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 424.1000061035156,
+   "holding": 180,
+   "status": "open",
+   "symbol": "AMD"
+  },
+  {
+   "entry_date": "2026-06-01",
+   "entry_price": 261.260009765625,
+   "holding": 180,
+   "status": "open",
+   "symbol": "AMZN"
+  },
+  {
+   "entry_date": "2026-05-19",
+   "entry_price": 8.0600004196167,
+   "holding": 180,
+   "status": "open",
+   "symbol": "ARRY"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 3.289999961853028,
+   "holding": 180,
+   "status": "open",
+   "symbol": "CABA"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 388.4080200195313,
+   "holding": 180,
+   "status": "open",
+   "symbol": "GOOGL"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 277.6000061035156,
+   "holding": 180,
+   "status": "open",
+   "symbol": "IWM"
+  },
+  {
+   "entry_date": "2026-05-11",
+   "entry_price": 598.8599853515625,
+   "holding": 180,
+   "status": "open",
+   "symbol": "META"
+  },
+  {
+   "entry_date": "2026-06-03",
+   "entry_price": 427.3399963378906,
+   "holding": 180,
+   "status": "open",
+   "symbol": "MSFT"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 222.0612030029297,
+   "holding": 180,
+   "status": "open",
+   "symbol": "NVDA"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 705.8800048828125,
+   "holding": 180,
+   "status": "open",
+   "symbol": "QQQ"
+  },
+  {
+   "entry_date": "2026-05-18",
+   "entry_price": 738.6500244140625,
+   "holding": 180,
+   "status": "open",
+   "symbol": "SPY"
+  },
+  {
+   "entry_date": "2026-05-15",
+   "entry_price": 422.239990234375,
+   "holding": 180,
+   "status": "open",
+   "symbol": "TSLA"
+  }
+ ]
+}

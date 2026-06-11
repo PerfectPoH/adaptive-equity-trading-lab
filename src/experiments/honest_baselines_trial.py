@@ -224,8 +224,11 @@ def main() -> int:
             if recipe:
                 symbols.update(recipe.symbols)
         print(f"RISK-044: refresh panel per {len(symbols)} simboli...", flush=True)
-        panels = refresh_panel(symbols)
-        components, extension_coverage = extend_components(components, panels)
+        panels, panel_status = refresh_panel(symbols)
+        stale = [s for s, st in panel_status.items() if st != "ok"]
+        if stale:
+            print(f"RISK-044: simboli stale/no_data (regola delisting attiva): {stale}", flush=True)
+        components, extension_coverage = extend_components(components, panels, panel_status)
         print(f"RISK-044 coverage: {extension_coverage}", flush=True)
     payload = load_dashboard_payload(Path("."))
     result = run_honest_baselines_trial(components, payload["strategy_regime_router"]["matrix"], payload["regime_map"])

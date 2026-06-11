@@ -175,3 +175,12 @@ nuovi, 270 pendenti. Scoperta chiave: i basket member 90/180d chiudono i
 primi trade post-freeze a settembre 2026/febbraio 2027 - aggiunta la regola
 di conteggio mesi al criterio (contano solo i mesi in cui i valori si
 muovono). Il conteggio dei 6 mesi PUO' partire dal run di luglio.
+
+## Audit round 3 chiuso: delisting rule + entry ledger + seam check
+
+stream_extension riscritto: regola delisting preregistrata (stale -> ultimo
+close; sparito -> -100%), entry ledger persistente anti-restating con warning
+di revisione dati, coverage esteso. Seam check Databento->yfinance: overlap
+0.573 (lettura obbligatoria nei report). Regime history rigenerabile dal SPY
+fresco. Validato end-to-end: 195 chiusi nel ledger, 270 pendenti, 0 delisting,
+0 revisioni. Vedi Emendamento 002 in [[Criterio-Preregistrato-Membership-2026-06]].

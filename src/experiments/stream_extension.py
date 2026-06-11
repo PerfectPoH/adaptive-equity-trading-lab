@@ -1,25 +1,27 @@
 """RISK-044: estensione CAUSALE degli stream componenti per la replica mensile.
 
-Gli stream del pool sono congelati al 2026-05-08. Questo modulo li estende
-con dati freschi (yfinance, autorizzato dall'owner) generando i NUOVI trade
-solo dopo il freeze, con soglie rolling causali - il passato non viene MAI
-ricalcolato. I componenti non estendibili (template non mappato, simboli
-delisted, dati mancanti) restano congelati e vengono dichiarati nel coverage.
+Architettura post-audit (round 3, 2026-06-11):
 
-Regole causali per template (analoghe a true_etf_backtest, quantile rolling
-252d con shift(1)):
-  Momentum                  : r21 >= q90
-  Mean Reversion            : r2  <= q10
-  Dollar-Bar Microstructure : pct-change dollar volume >= q90 in giorno negativo
-  LowVol Tradability        : vol 5d <= q10
+  ENTRY LEDGER persistente (`experiments/replica_ledger/ledger.json`):
+    - alla prima rilevazione un'entry viene PERSISTITA (data, simbolo, prezzo);
+    - i run successivi maturano SOLO le uscite dal ledger, mai rigenerano
+      entry passate (immune al re-aggiustamento yfinance dell'intera storia);
+    - se il ricalcolo odierno non conferma un'entry del ledger -> warning
+      `data_revision_warnings` (rivelatore di revisioni della fonte dati).
 
-Contabilita' identica alla factory: entry al Close del giorno segnale, exit
-al Close dopo `holding` barre, net = gross - cost_bps/10000, spaziatura
-minima tra entry per simbolo = max(5, holding // 2).
+  REGOLA DELISTING preregistrata (un simbolo che sparisce produce un'uscita
+  REALIZZATA, mai un trade svanito):
+    - panel TERMINALE (ultimo dato piu' vecchio di 7 giorni rispetto al resto
+      del panel): i trade aperti oltre l'ultimo dato chiudono all'ULTIMO CLOSE;
+    - simbolo SPARITO del tutto (nessun dato scaricabile): chiusura a -100%.
+
+  Soglie causali rolling 252d con shift(1); il pre-freeze vive nel componente
+  congelato e non viene mai toccato.
 """
 
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -29,7 +31,9 @@ import pandas as pd
 
 FREEZE_DATE = pd.Timestamp("2026-05-08")
 PANEL_DIR = Path("data/snapshots/replica_panel")
+LEDGER_PATH = Path("experiments/replica_ledger/ledger.json")
 QUANTILE_WINDOW = 252
+STALE_DAYS = 7
 DELISTED_MARKER = re.compile(r"-\d{6}$")
 NAME_RECIPE = re.compile(r"Factory (?P<template>.+?) (?P<holding>\d+)d (?P<cost>\d+)bps")
 
@@ -76,8 +80,6 @@ CAUSAL_SIGNALS: dict[str, Callable[[pd.DataFrame], pd.Series]] = {
 
 
 def component_recipe(component: dict[str, Any]) -> Recipe | None:
-    """Estrae (template, holding, costi, simboli) da nome/manifest/trade list."""
-
     name = str(component.get("strategy_name", ""))
     template = str(component.get("template", ""))
     manifest = component.get("factory_manifest") or {}
@@ -101,8 +103,11 @@ def component_recipe(component: dict[str, Any]) -> Recipe | None:
     return Recipe(template, holding, cost, tuple(sorted(symbols)))
 
 
-def refresh_panel(symbols: set[str], *, panel_dir: Path = PANEL_DIR, max_age_days: int = 1) -> dict[str, pd.DataFrame]:
-    """Scarica/riusa i pannelli OHLCV (yfinance auto-adjusted, simboli vivi)."""
+def refresh_panel(
+    symbols: set[str], *, panel_dir: Path = PANEL_DIR, max_age_days: int = 1
+) -> tuple[dict[str, pd.DataFrame], dict[str, str]]:
+    """Scarica/riusa i pannelli. Ritorna (panels, status) con status in
+    {"ok", "stale", "no_data"} — "stale" = probabile delisting/halt."""
 
     import time
 
@@ -110,8 +115,10 @@ def refresh_panel(symbols: set[str], *, panel_dir: Path = PANEL_DIR, max_age_day
 
     panel_dir.mkdir(parents=True, exist_ok=True)
     panels: dict[str, pd.DataFrame] = {}
+    status: dict[str, str] = {}
     for symbol in sorted(symbols):
         if DELISTED_MARKER.search(symbol):
+            status[symbol] = "no_data"
             continue
         path = panel_dir / f"{symbol}.csv"
         fresh = path.exists() and (time.time() - path.stat().st_mtime) < max_age_days * 86400
@@ -122,104 +129,198 @@ def refresh_panel(symbols: set[str], *, panel_dir: Path = PANEL_DIR, max_age_day
             if isinstance(frame.columns, pd.MultiIndex):
                 frame.columns = frame.columns.get_level_values(0)
             if frame.empty:
+                status[symbol] = "no_data"
                 continue
             frame = frame[["Open", "High", "Low", "Close", "Volume"]].dropna()
             frame.to_csv(path)
         if len(frame) >= QUANTILE_WINDOW // 2 + 25:
             panels[symbol] = frame
-    return panels
+            status[symbol] = "ok"
+        else:
+            status[symbol] = "no_data"
+    if panels:
+        global_last = max(frame.index.max() for frame in panels.values())
+        for symbol, frame in panels.items():
+            if (global_last - frame.index.max()).days > STALE_DAYS:
+                status[symbol] = "stale"
+    return panels, status
 
 
-def causal_trades_after_freeze(
-    panel: pd.DataFrame,
-    recipe: Recipe,
-    *,
-    freeze: pd.Timestamp = FREEZE_DATE,
-) -> list[dict[str, Any]]:
-    """Nuovi trade SOLO dopo il freeze, soglie causali, contabilita' factory."""
+def detect_entries(panel: pd.DataFrame, recipe: Recipe, *, freeze: pd.Timestamp = FREEZE_DATE) -> list[dict[str, Any]]:
+    """Entry candidate post-freeze (data, prezzo al close). Nessuna maturazione qui."""
 
     signal = CAUSAL_SIGNALS[recipe.template](panel)
-    cost = recipe.cost_bps / 10_000.0
     step = max(5, recipe.holding // 2)
+    entries: list[dict[str, Any]] = []
+    last_pos = -10**9
     closes = panel["Close"].astype(float)
-    dates = panel.index
-    trades: list[dict[str, Any]] = []
-    pending = 0
-    last_entry_pos = -10**9
-    for pos, date in enumerate(dates):
+    for pos, date in enumerate(panel.index):
         if date <= freeze or not bool(signal.iloc[pos]):
             continue
-        if pos - last_entry_pos < step:
+        if pos - last_pos < step:
             continue
-        exit_pos = pos + recipe.holding
-        if exit_pos >= len(dates):
-            pending += 1
-            last_entry_pos = pos  # l'entry e' avvenuta: blocca la spaziatura
-            continue  # chiusura nelle repliche future, mai restating
-        entry = float(closes.iloc[pos])
-        exit_price = float(closes.iloc[exit_pos])
-        if entry <= 0:
-            continue
-        trades.append(
-            {
-                "period": str(pd.Timestamp(date).date()),
-                "net_return": round((exit_price / entry - 1.0) - cost, 6),
-            }
-        )
-        last_entry_pos = pos
-    return trades, pending
+        entries.append({"entry_date": str(pd.Timestamp(date).date()), "entry_price": float(closes.iloc[pos])})
+        last_pos = pos
+    return entries
+
+
+# ---------------------------------------------------------------------------
+# ledger
+# ---------------------------------------------------------------------------
+
+def load_ledger(path: Path = LEDGER_PATH) -> dict[str, list[dict[str, Any]]]:
+    if path.exists():
+        return json.loads(path.read_text(encoding="utf-8"))
+    return {}
+
+
+def save_ledger(ledger: dict[str, list[dict[str, Any]]], path: Path = LEDGER_PATH) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(ledger, indent=1, sort_keys=True), encoding="utf-8")
+
+
+def _mature_entry(
+    entry: dict[str, Any],
+    panel: pd.DataFrame | None,
+    symbol_status: str,
+    holding: int,
+    cost: float,
+) -> None:
+    """Matura un'entry del ledger IN PLACE secondo la regola preregistrata."""
+
+    entry_price = float(entry["entry_price"])
+    if symbol_status == "no_data" or panel is None:
+        # simbolo sparito del tutto: perdita totale realizzata
+        entry["status"] = "closed"
+        entry["exit_reason"] = "symbol_vanished_total_loss"
+        entry["net_return"] = round(-1.0 - cost, 6)
+        return
+    dates = panel.index
+    entry_ts = pd.Timestamp(entry["entry_date"])
+    positions = dates.searchsorted(entry_ts)
+    if positions >= len(dates) or pd.Timestamp(dates[positions]).date() != entry_ts.date():
+        # la data di entry non esiste piu' nella fonte: revisione dati
+        entry["data_revision"] = True
+        if symbol_status == "stale":
+            last_close = float(panel["Close"].iloc[-1])
+            entry["status"] = "closed"
+            entry["exit_reason"] = "delisted_last_close"
+            entry["net_return"] = round((last_close / entry_price - 1.0) - cost, 6)
+        return
+    exit_pos = int(positions) + holding
+    if exit_pos < len(dates):
+        exit_price = float(panel["Close"].iloc[exit_pos])
+        entry["status"] = "closed"
+        entry["exit_reason"] = "holding_timeout"
+        entry["net_return"] = round((exit_price / entry_price - 1.0) - cost, 6)
+    elif symbol_status == "stale":
+        last_close = float(panel["Close"].iloc[-1])
+        entry["status"] = "closed"
+        entry["exit_reason"] = "delisted_last_close"
+        entry["net_return"] = round((last_close / entry_price - 1.0) - cost, 6)
+    # altrimenti resta open: maturera' in una replica futura
 
 
 def extend_components(
     components: list[dict[str, Any]],
     panels: dict[str, pd.DataFrame],
+    panel_status: dict[str, str],
     *,
     freeze: pd.Timestamp = FREEZE_DATE,
+    ledger_path: Path = LEDGER_PATH,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    """Clona i componenti aggiungendo i trade post-freeze. Mai toccato il passato."""
+    """Ledger-driven: nuove entry persistite alla prima rilevazione, uscite
+    maturate dal ledger, passato mai rigenerato."""
 
     from src.experiments.workbench_portfolio_engine import _component_return_series
 
+    ledger = load_ledger(ledger_path)
     extended: list[dict[str, Any]] = []
-    coverage = {"extendable": 0, "frozen": 0, "new_trades": 0, "pending_open_trades": 0, "reasons": {}}
+    coverage: dict[str, Any] = {
+        "extendable": 0,
+        "frozen": 0,
+        "new_trades_closed": 0,
+        "pending_open_trades": 0,
+        "delisting_closures": 0,
+        "data_revision_warnings": 0,
+        "reasons": {},
+    }
     for component in components:
         recipe = component_recipe(component)
         if recipe is None:
-            reason = "template_o_recipe_non_mappabile"
-        else:
-            alive = [s for s in recipe.symbols if s in panels]
-            dead = [s for s in recipe.symbols if DELISTED_MARKER.search(s)]
-            missing = [s for s in recipe.symbols if s not in panels and not DELISTED_MARKER.search(s)]
-            reason = "" if alive else "nessun_simbolo_con_dati"
-        if recipe is None or reason:
             coverage["frozen"] += 1
-            coverage["reasons"][reason] = coverage["reasons"].get(reason, 0) + 1
+            coverage["reasons"]["template_o_recipe_non_mappabile"] = (
+                coverage["reasons"].get("template_o_recipe_non_mappabile", 0) + 1
+            )
             extended.append(component)
             continue
-        new_trades: list[dict[str, Any]] = []
-        pending_total = 0
-        for symbol in alive:
-            closed, pending = causal_trades_after_freeze(panels[symbol], recipe, freeze=freeze)
-            new_trades.extend(closed)
-            pending_total += pending
+        component_id = str(component.get("component_id"))
+        rows = ledger.setdefault(component_id, [])
+        known = {(r["symbol"], r["entry_date"]) for r in rows}
+        cost = recipe.cost_bps / 10_000.0
+
+        # 1) nuove entry: solo simboli con panel ok/stale, mai gia' nel ledger
+        for symbol in recipe.symbols:
+            panel = panels.get(symbol)
+            if panel is None:
+                continue
+            for candidate in detect_entries(panel, recipe, freeze=freeze):
+                key = (symbol, candidate["entry_date"])
+                if key in known:
+                    continue
+                rows.append(
+                    {
+                        "symbol": symbol,
+                        "entry_date": candidate["entry_date"],
+                        "entry_price": candidate["entry_price"],
+                        "holding": recipe.holding,
+                        "status": "open",
+                    }
+                )
+                known.add(key)
+
+        # 1b) warning revisione dati: entry open del ledger non piu' confermate oggi
+        todays = {
+            (symbol, c["entry_date"])
+            for symbol in recipe.symbols
+            if symbol in panels
+            for c in detect_entries(panels[symbol], recipe, freeze=freeze)
+        }
+        for row in rows:
+            if row["status"] == "open" and (row["symbol"], row["entry_date"]) not in todays and not row.get("data_revision"):
+                row["data_revision"] = True
+                coverage["data_revision_warnings"] += 1
+
+        # 2) maturazione dal ledger
+        for row in rows:
+            if row["status"] != "open":
+                continue
+            symbol = str(row["symbol"])
+            _mature_entry(row, panels.get(symbol), panel_status.get(symbol, "no_data"), int(row["holding"]), cost)
+            if row["status"] == "closed" and str(row.get("exit_reason", "")).startswith(("delisted", "symbol_vanished")):
+                coverage["delisting_closures"] += 1
+
+        closed = [r for r in rows if r["status"] == "closed"]
+        still_open = [r for r in rows if r["status"] == "open"]
+
         base_series = _component_return_series(component)
-        base_rows = [
-            {"period": str(period), "net_return": float(value)} for period, value in base_series.items()
-        ]
+        base_rows = [{"period": str(p), "net_return": float(v)} for p, v in base_series.items()]
         clone = dict(component)
-        clone["inline_returns"] = base_rows + sorted(new_trades, key=lambda r: r["period"])
+        clone["inline_returns"] = base_rows + sorted(
+            ({"period": r["entry_date"], "net_return": float(r["net_return"])} for r in closed),
+            key=lambda r: r["period"],
+        )
         clone["trade_list_path"] = ""
         clone["equity_curve_path"] = ""
         clone["stream_extension"] = {
             "freeze_date": str(freeze.date()),
-            "new_trades": len(new_trades),
-            "pending_open_trades": pending_total,
-            "alive_symbols": len(alive),
-            "dead_symbols": len(dead),
-            "missing_symbols": len(missing),
+            "new_trades": len(closed),
+            "pending_open_trades": len(still_open),
         }
         coverage["extendable"] += 1
-        coverage["new_trades"] += len(new_trades)
-        coverage["pending_open_trades"] += pending_total
+        coverage["new_trades_closed"] += len(closed)
+        coverage["pending_open_trades"] += len(still_open)
         extended.append(clone)
+
+    save_ledger(ledger, ledger_path)
     return extended, coverage
