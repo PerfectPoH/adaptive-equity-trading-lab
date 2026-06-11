@@ -106,3 +106,33 @@ Precisazioni operative scoperte alla validazione:
    `regime_history` dal panel SPY fresco a ogni replica
    (`replica_support_checks`), cosi' la diagnostica timing resta viva.
    La gamba membership non dipende dalle label OOS (blend statico).
+
+---
+
+## Emendamento 003 (2026-06-11, audit round 4, PRIMA del primo report mensile)
+
+Un download fallito NON e' un delisting. Senza questa regola, un singolo
+rate-limit di Yahoo avrebbe scolpito -100% falsi e PERMANENTI nel ledger
+immutabile.
+
+1. **Retry + pausa**: `refresh_panel` ritenta il download (3 tentativi,
+   backoff) e attende 0.4s tra simboli, come il downloader MVP.
+2. **Cache fallback**: download vuoto con cache CSV esistente (di qualunque
+   eta') -> si usa la cache con status `stale`: i pendenti chiudono
+   all'ultimo close. Per un delisting vero e' anche piu' accurato del -100%.
+3. **Quarantena a doppia conferma**: `no_data` senza alcuna cache -> il trade
+   resta `open` con marker `suspect_vanished`; la chiusura a -100% scatta
+   SOLO se `no_data` viene confermato anche al run successivo. Se il simbolo
+   torna, la quarantena si pulisce e la maturazione e' normale.
+4. **Maturazione sotto revisione dati**: se la data di entry non esiste piu'
+   nella fonte, si matura dalla prima barra >= entry date (prezzo di entry
+   sempre dal ledger) con flag `data_revision` - nessuna entry resta open
+   per sempre quando il panel copre entry+holding.
+
+Distribuzione attesa degli esiti: `delisted_last_close` come via normale,
+`symbol_vanished_total_loss` come eccezione documentata (simbolo mai
+scaricato con successo, confermato due volte). Coverage: nuovo campo
+`suspect_vanished_quarantine` nei report mensili.
+
+Validazione: 5/5 test (quarantena, ritorno dalla quarantena, revisione dati,
+ledger idempotente, stale); run reale idempotente sul ledger esistente.

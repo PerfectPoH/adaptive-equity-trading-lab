@@ -184,3 +184,10 @@ di revisione dati, coverage esteso. Seam check Databento->yfinance: overlap
 0.573 (lettura obbligatoria nei report). Regime history rigenerabile dal SPY
 fresco. Validato end-to-end: 195 chiusi nel ledger, 270 pendenti, 0 delisting,
 0 revisioni. Vedi Emendamento 002 in [[Criterio-Preregistrato-Membership-2026-06]].
+
+## Audit round 4: Emendamento 003
+
+Download fallito != delisting: retry+pausa, cache fallback -> stale,
+quarantena suspect_vanished con -100% solo alla seconda conferma consecutiva,
+maturazione dalla prima barra disponibile sotto revisione dati. 5/5 test,
+run reale idempotente. L'auditor sottoscrive: non c'e' piu' nulla da costruire.

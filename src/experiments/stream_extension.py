@@ -103,19 +103,45 @@ def component_recipe(component: dict[str, Any]) -> Recipe | None:
     return Recipe(template, holding, cost, tuple(sorted(symbols)))
 
 
-def refresh_panel(
-    symbols: set[str], *, panel_dir: Path = PANEL_DIR, max_age_days: int = 1
-) -> tuple[dict[str, pd.DataFrame], dict[str, str]]:
-    """Scarica/riusa i pannelli. Ritorna (panels, status) con status in
-    {"ok", "stale", "no_data"} — "stale" = probabile delisting/halt."""
+def _download_with_retry(symbol: str, *, attempts: int = 3, pause_seconds: float = 1.5) -> pd.DataFrame:
+    """Download con retry: un hiccup di rete non deve sembrare un delisting."""
 
     import time
 
     import yfinance as yf
 
+    for attempt in range(attempts):
+        try:
+            frame = yf.download(symbol, start="2024-01-01", auto_adjust=True, progress=False)
+            if isinstance(frame.columns, pd.MultiIndex):
+                frame.columns = frame.columns.get_level_values(0)
+            if not frame.empty:
+                return frame[["Open", "High", "Low", "Close", "Volume"]].dropna()
+        except Exception:
+            pass
+        if attempt < attempts - 1:
+            time.sleep(pause_seconds * (attempt + 1))
+    return pd.DataFrame()
+
+
+def refresh_panel(
+    symbols: set[str], *, panel_dir: Path = PANEL_DIR, max_age_days: int = 1
+) -> tuple[dict[str, pd.DataFrame], dict[str, str]]:
+    """Scarica/riusa i pannelli. Status in {"ok", "stale", "no_data"}.
+
+    Emendamento 003: un download vuoto NON e' prova di delisting.
+    - retry con backoff + pausa 0.4s tra simboli (anti rate-limit);
+    - su download vuoto con cache esistente (di qualunque eta') si usa la
+      cache con status "stale": i pendenti chiudono all'ultimo close;
+    - "no_data" resta solo per simboli MAI scaricati con successo.
+    """
+
+    import time
+
     panel_dir.mkdir(parents=True, exist_ok=True)
     panels: dict[str, pd.DataFrame] = {}
     status: dict[str, str] = {}
+    cache_fallback: set[str] = set()
     for symbol in sorted(symbols):
         if DELISTED_MARKER.search(symbol):
             status[symbol] = "no_data"
@@ -125,14 +151,17 @@ def refresh_panel(
         if fresh:
             frame = pd.read_csv(path, parse_dates=["Date"]).set_index("Date")
         else:
-            frame = yf.download(symbol, start="2024-01-01", auto_adjust=True, progress=False)
-            if isinstance(frame.columns, pd.MultiIndex):
-                frame.columns = frame.columns.get_level_values(0)
+            frame = _download_with_retry(symbol)
+            time.sleep(0.4)
             if frame.empty:
-                status[symbol] = "no_data"
-                continue
-            frame = frame[["Open", "High", "Low", "Close", "Volume"]].dropna()
-            frame.to_csv(path)
+                if path.exists():
+                    frame = pd.read_csv(path, parse_dates=["Date"]).set_index("Date")
+                    cache_fallback.add(symbol)
+                else:
+                    status[symbol] = "no_data"
+                    continue
+            else:
+                frame.to_csv(path)
         if len(frame) >= QUANTILE_WINDOW // 2 + 25:
             panels[symbol] = frame
             status[symbol] = "ok"
@@ -143,6 +172,9 @@ def refresh_panel(
         for symbol, frame in panels.items():
             if (global_last - frame.index.max()).days > STALE_DAYS:
                 status[symbol] = "stale"
+    for symbol in cache_fallback:
+        if status.get(symbol) == "ok":
+            status[symbol] = "stale"
     return panels, status
 
 
@@ -186,28 +218,40 @@ def _mature_entry(
     holding: int,
     cost: float,
 ) -> None:
-    """Matura un'entry del ledger IN PLACE secondo la regola preregistrata."""
+    """Matura un'entry del ledger IN PLACE secondo la regola preregistrata.
+
+    Emendamento 003: "no_data" mette in QUARANTENA (`suspect_vanished`);
+    la chiusura a -100% scatta solo alla SECONDA conferma consecutiva.
+    Nel ramo data_revision la maturazione usa la prima barra >= entry date
+    (prezzo di entry sempre dal ledger), cosi' nessuna entry resta open
+    per sempre quando il panel copre entry+holding.
+    """
 
     entry_price = float(entry["entry_price"])
     if symbol_status == "no_data" or panel is None:
-        # simbolo sparito del tutto: perdita totale realizzata
-        entry["status"] = "closed"
-        entry["exit_reason"] = "symbol_vanished_total_loss"
-        entry["net_return"] = round(-1.0 - cost, 6)
+        if entry.get("suspect_vanished"):
+            # seconda conferma consecutiva: perdita totale realizzata
+            entry["status"] = "closed"
+            entry["exit_reason"] = "symbol_vanished_total_loss"
+            entry["net_return"] = round(-1.0 - cost, 6)
+        else:
+            entry["suspect_vanished"] = True  # quarantena: resta open
         return
+    entry.pop("suspect_vanished", None)  # il simbolo e' tornato: fine quarantena
     dates = panel.index
     entry_ts = pd.Timestamp(entry["entry_date"])
-    positions = dates.searchsorted(entry_ts)
-    if positions >= len(dates) or pd.Timestamp(dates[positions]).date() != entry_ts.date():
-        # la data di entry non esiste piu' nella fonte: revisione dati
-        entry["data_revision"] = True
+    anchor = int(dates.searchsorted(entry_ts))
+    if anchor >= len(dates):
+        # entry oltre l'ultimo dato disponibile
         if symbol_status == "stale":
             last_close = float(panel["Close"].iloc[-1])
             entry["status"] = "closed"
             entry["exit_reason"] = "delisted_last_close"
             entry["net_return"] = round((last_close / entry_price - 1.0) - cost, 6)
         return
-    exit_pos = int(positions) + holding
+    if pd.Timestamp(dates[anchor]).date() != entry_ts.date():
+        entry["data_revision"] = True  # la data esatta non esiste piu': revisione fonte
+    exit_pos = anchor + holding
     if exit_pos < len(dates):
         exit_price = float(panel["Close"].iloc[exit_pos])
         entry["status"] = "closed"
@@ -242,6 +286,7 @@ def extend_components(
         "new_trades_closed": 0,
         "pending_open_trades": 0,
         "delisting_closures": 0,
+        "suspect_vanished_quarantine": 0,
         "data_revision_warnings": 0,
         "reasons": {},
     }
@@ -299,6 +344,8 @@ def extend_components(
             _mature_entry(row, panels.get(symbol), panel_status.get(symbol, "no_data"), int(row["holding"]), cost)
             if row["status"] == "closed" and str(row.get("exit_reason", "")).startswith(("delisted", "symbol_vanished")):
                 coverage["delisting_closures"] += 1
+            if row["status"] == "open" and row.get("suspect_vanished"):
+                coverage["suspect_vanished_quarantine"] += 1
 
         closed = [r for r in rows if r["status"] == "closed"]
         still_open = [r for r in rows if r["status"] == "open"]

@@ -93,10 +93,48 @@ def test_stale_symbol_closes_at_last_close_and_vanished_at_total_loss(tmp_path: 
     assert all(r["status"] == "closed" for r in led2["C1"])
     assert any(r.get("exit_reason") == "delisted_last_close" for r in led2["C1"])
     assert cov["delisting_closures"] >= 1
-    # terzo scenario: simbolo SPARITO -> -100%
+    # terzo scenario (Emendamento 003): simbolo SPARITO -> quarantena al primo
+    # run, -100% SOLO alla seconda conferma consecutiva
     ledger_path2 = tmp_path / "ledger2.json"
     extend_components([comp], {"X": panel.iloc[:cut]}, {"X": "ok"}, freeze=freeze, ledger_path=ledger_path2)
-    ext3, cov3 = extend_components([comp], {}, {"X": "no_data"}, freeze=freeze, ledger_path=ledger_path2)
-    led3 = load_ledger(ledger_path2)
-    vanished = [r for r in led3["C1"] if r.get("exit_reason") == "symbol_vanished_total_loss"]
+    ext3a, cov3a = extend_components([comp], {}, {"X": "no_data"}, freeze=freeze, ledger_path=ledger_path2)
+    led3a = load_ledger(ledger_path2)
+    assert all(r["status"] == "open" and r.get("suspect_vanished") for r in led3a["C1"]), "primo no_data = quarantena"
+    assert cov3a["suspect_vanished_quarantine"] >= 1
+    ext3b, cov3b = extend_components([comp], {}, {"X": "no_data"}, freeze=freeze, ledger_path=ledger_path2)
+    led3b = load_ledger(ledger_path2)
+    vanished = [r for r in led3b["C1"] if r.get("exit_reason") == "symbol_vanished_total_loss"]
     assert vanished and all(r["net_return"] <= -1.0 for r in vanished)
+
+
+def test_quarantine_clears_when_symbol_returns(tmp_path: Path) -> None:
+    panel = _panel()
+    freeze, cut = _freeze_and_cut(panel)
+    ledger_path = tmp_path / "ledger.json"
+    comp = _component(panel)
+    extend_components([comp], {"X": panel.iloc[:cut]}, {"X": "ok"}, freeze=freeze, ledger_path=ledger_path)
+    extend_components([comp], {}, {"X": "no_data"}, freeze=freeze, ledger_path=ledger_path)  # quarantena
+    # il simbolo torna con dati completi: la quarantena si pulisce e matura normale
+    ext, cov = extend_components([comp], {"X": panel}, {"X": "ok"}, freeze=freeze, ledger_path=ledger_path)
+    led = load_ledger(ledger_path)
+    assert not any(r.get("suspect_vanished") for r in led["C1"] if r["status"] == "open")
+    assert any(r.get("exit_reason") == "holding_timeout" for r in led["C1"])
+    assert not any(r.get("exit_reason") == "symbol_vanished_total_loss" for r in led["C1"])
+
+
+def test_data_revision_matures_from_first_available_bar(tmp_path: Path) -> None:
+    panel = _panel()
+    freeze, cut = _freeze_and_cut(panel)
+    ledger_path = tmp_path / "ledger.json"
+    comp = _component(panel)
+    extend_components([comp], {"X": panel.iloc[:cut]}, {"X": "ok"}, freeze=freeze, ledger_path=ledger_path)
+    led = load_ledger(ledger_path)
+    # simula revisione fonte: la barra dell'entry sparisce dal panel
+    entry_dates = {r["entry_date"] for r in led["C1"] if r["status"] == "open"}
+    assert entry_dates
+    revised = panel[~panel.index.strftime("%Y-%m-%d").isin(entry_dates)]
+    ext, cov = extend_components([comp], {"X": revised}, {"X": "ok"}, freeze=freeze, ledger_path=ledger_path)
+    led2 = load_ledger(ledger_path)
+    matured = [r for r in led2["C1"] if r["entry_date"] in entry_dates]
+    assert matured and all(r["status"] == "closed" for r in matured), "matura dalla prima barra >= entry"
+    assert any(r.get("data_revision") for r in matured)
