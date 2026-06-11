@@ -73,3 +73,6 @@ This is not an execution implementation. It is a safe command surface that prove
 ```text
 STOP_OR_REQUEST_EXPLICIT_EXECUTION_APPROVAL_FOR_REAL_IMPLEMENTATION
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

@@ -37,3 +37,6 @@ Decision: `DOLLARBAR_MICROREV_ARCHIVE_CURRENT_FORM`
 ## Interpretation
 
 Static dollar-bars remain a canonical data-layer representation, but this micro-reversion rule is not promoted. The run used only existing intraday artifacts and did not query providers, sweep parameters, paper trade, live trade, or promote a strategy.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

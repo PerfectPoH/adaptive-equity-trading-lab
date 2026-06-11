@@ -31,3 +31,6 @@ Diagnostic-only comparison of SEC 8-K Item 2.02 event days versus non-event days
 ## Interpretation
 
 This diagnostic tests only whether SEC acceptance timing marks distinguishable event windows. It does not infer earnings surprise or trade direction from future returns.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

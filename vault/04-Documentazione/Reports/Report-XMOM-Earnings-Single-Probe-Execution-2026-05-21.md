@@ -94,3 +94,6 @@ Blocked:
 - endpoint guessing loops;
 - extractor implementation;
 - OOS/backtest/paper/live/promotion.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

@@ -71,3 +71,6 @@ The current framework is not intended to make every strategy fail. It is intende
 ```text
 IMPLEMENT_DRY_RUN_PREFLIGHT_VALIDATOR_SPEC_ONLY
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

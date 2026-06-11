@@ -14,3 +14,6 @@ Retired branches:
 Short selling remains permanently outside the lab scope. Future SEC8K long-only
 directional work is blocked unless a separate external point-in-time direction
 source is pre-registered first.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

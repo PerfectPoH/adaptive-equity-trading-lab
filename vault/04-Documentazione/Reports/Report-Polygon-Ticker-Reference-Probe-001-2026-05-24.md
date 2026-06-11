@@ -20,3 +20,6 @@ Single bounded Polygon/Massive ticker reference call. Only derived sample and me
 ## Interpretation
 
 This probe only decides whether Polygon/Massive ticker reference metadata can seed a future universe quality probe. It does not authorize price downloads or strategy tests.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

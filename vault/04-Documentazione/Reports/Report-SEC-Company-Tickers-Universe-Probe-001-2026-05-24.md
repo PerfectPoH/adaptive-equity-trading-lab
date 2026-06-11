@@ -21,3 +21,6 @@ Single official SEC company_tickers.json call. Only derived sample and metadata 
 ## Interpretation
 
 SEC company_tickers.json can support ticker-to-CIK joins, but it is not a sufficient universe source for rare-event alpha research if it lacks point-in-time membership, delisted symbols, exchange and security-type metadata.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

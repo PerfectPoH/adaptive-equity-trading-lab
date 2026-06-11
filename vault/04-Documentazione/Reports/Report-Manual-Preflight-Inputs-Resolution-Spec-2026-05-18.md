@@ -52,3 +52,6 @@ This is not execution approval. It is a spec-only resolution of run inputs. The 
 ```text
 UPDATE_DRY_RUN_PREFLIGHT_WITH_MANUAL_INPUT_RESOLUTION_SPEC_ONLY
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

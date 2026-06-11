@@ -20,3 +20,6 @@ Bounded Polygon/Massive ticker details reference calls for ten active seed ticke
 ## Interpretation
 
 This probe only tests bounded listing-date coverage. It does not authorize PIT universe construction or broad-universe backtests.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

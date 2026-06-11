@@ -10,3 +10,6 @@ Status: MINI_PANEL_COMPLETE__NO_PROMOTION
 - Positive net trades: 2
 
 Decision: no promotion. The mini-panel remains below the 30-trade promotion gate and DSR is not claimed.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

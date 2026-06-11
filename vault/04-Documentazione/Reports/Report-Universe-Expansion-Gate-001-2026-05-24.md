@@ -16,3 +16,6 @@ Infrastructure gate only. No provider query, market-data download, strategy back
 ## Next Step
 
 Create a separate provider-specific universe-source probe with explicit endpoint, max calls, raw retention policy, and no backtest.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

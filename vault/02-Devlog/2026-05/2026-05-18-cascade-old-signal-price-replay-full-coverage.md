@@ -16,3 +16,6 @@ raw_response_retention: disabled
 ```
 
 Verdict: `OLD_SIGNAL_RETURNS_PROVIDER_SENSITIVE_FULL_COVERAGE_REPLAY / STRATEGY_PROMOTION_REMAINS_BLOCKED`.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

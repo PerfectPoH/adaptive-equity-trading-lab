@@ -33,3 +33,6 @@ Diagnostic-only Amihud illiquidity analysis on existing XMOM trade and Databento
 ## Interpretation
 
 This diagnostic asks whether pre-entry Amihud illiquidity separates toxic trades from survivors. A positive diagnostic would still require a separate preregistration before any filter or strategy run.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

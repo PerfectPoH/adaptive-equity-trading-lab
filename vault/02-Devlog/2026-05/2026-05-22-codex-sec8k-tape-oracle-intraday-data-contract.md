@@ -31,3 +31,6 @@ Targeted tests pass `5/5`; validator passes `51/51`.
 ## Decisione
 
 `SEC8K_TAPE_ORACLE_INTRADAY_DATA_CONTRACT_PASS`. The gate is valid but non-executable. Next safe step: provider-selection and bounded approval for intraday RTH coverage.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

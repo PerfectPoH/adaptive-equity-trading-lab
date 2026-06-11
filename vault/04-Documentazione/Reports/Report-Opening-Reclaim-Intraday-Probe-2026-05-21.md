@@ -10,3 +10,6 @@ Status: OPENING_RECLAIM_INTRADAY_PROBE_COMPLETE__NO_PROMOTION
 - Positive net trades: 1
 
 Decision: no promotion. This intraday-native probe avoids daily-gap triggers, but remains a small reused panel and cannot establish an edge.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

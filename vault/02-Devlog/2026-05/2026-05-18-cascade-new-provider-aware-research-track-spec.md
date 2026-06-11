@@ -11,3 +11,6 @@ NO_STRATEGY_PROMOTION
 ```
 
 Required gates include provider coverage contract, adjustment policy, PIT universe policy, halt/tradability policy, trial accounting, preregistration, negative control, provider sensitivity check, and promotion policy.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

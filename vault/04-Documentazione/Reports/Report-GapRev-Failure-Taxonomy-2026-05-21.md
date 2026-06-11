@@ -34,3 +34,6 @@ GapRev in its current form is archived. Most candidates selected from daily gaps
 - CABA 2025-09-18: RTH_SETUP_FALSE_POSITIVE_FROM_DAILY_GAP (trade_count=0, net_return=nan)
 - CABA 2022-04-04: RTH_SETUP_FALSE_POSITIVE_FROM_DAILY_GAP (trade_count=0, net_return=nan)
 - IOVA 2025-04-07: RTH_VOLUME_FILTER_FAIL (trade_count=0, net_return=nan)
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

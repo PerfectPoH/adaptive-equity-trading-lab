@@ -89,3 +89,6 @@ parameter sweep
 paper/live
 strategy promotion
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

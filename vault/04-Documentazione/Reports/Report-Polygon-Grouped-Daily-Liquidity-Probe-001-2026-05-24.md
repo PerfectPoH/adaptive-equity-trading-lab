@@ -18,3 +18,6 @@ Single Polygon grouped-daily market-data call for one date, joined to the active
 ## Interpretation
 
 This probe only measures single-day daily-bar availability and coarse liquidity. It does not create alpha evidence and does not authorize any strategy backtest.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

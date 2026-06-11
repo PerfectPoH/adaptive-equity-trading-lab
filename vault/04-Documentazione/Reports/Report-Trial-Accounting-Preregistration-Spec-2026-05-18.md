@@ -77,3 +77,6 @@ No new signal research, portfolio backtest, OOS validation, paper trading, or li
 ```text
 IMPLEMENT_RESEARCH_RUN_GATE_VALIDATOR
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

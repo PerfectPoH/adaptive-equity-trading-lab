@@ -88,3 +88,6 @@ summary: 35 passed, 0 failed
 The intraday data-contract gate is valid.
 
 The next safe step is a provider-selection gate for intraday bars and spread/quote proxy. No data pull is authorized.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

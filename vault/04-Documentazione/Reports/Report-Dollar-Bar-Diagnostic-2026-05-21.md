@@ -30,3 +30,6 @@ Diagnostic-only transformation of existing Databento intraday bar artifacts into
 ## Interpretation
 
 Dollar bars are only a data representation candidate. A positive diagnostic does not imply alpha; it only justifies a future preregistered data-transform validator.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

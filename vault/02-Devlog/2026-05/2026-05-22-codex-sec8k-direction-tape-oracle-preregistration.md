@@ -30,3 +30,6 @@ Targeted tests pass `5/5`; validator passes `51/51`.
 ## Decisione
 
 `SEC8K_DIRECTION_TAPE_ORACLE_PREREGISTRATION_PASS`. Execution remains blocked. The next safe step is a separate intraday data-contract gate for SEC8K Tape Oracle, not a backtest.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

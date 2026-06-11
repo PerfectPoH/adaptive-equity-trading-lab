@@ -30,3 +30,6 @@ Executed the five next-step diagnostics using existing local artifacts only. No 
 ## Interpretation
 
 This batch moves the lab from directional small-cap alpha hunting toward risk/regime diagnostics. It preserves the research pause on free-data small-cap directional work and creates no tradable signal.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

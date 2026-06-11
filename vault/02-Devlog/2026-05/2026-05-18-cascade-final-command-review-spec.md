@@ -10,3 +10,6 @@ NO_STRATEGY_PROMOTION
 ```
 
 Integrated final command review into dry-run preflight as the eighth component. Aggregate preflight remains blocked with unresolved approval/output/ledger/gated-runner gates.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

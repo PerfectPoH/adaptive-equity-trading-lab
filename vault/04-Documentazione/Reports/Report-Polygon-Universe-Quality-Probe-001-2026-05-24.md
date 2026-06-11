@@ -16,3 +16,6 @@ Single bounded Polygon/Massive active ticker reference call. Only derived candid
 ## Interpretation
 
 This probe only decides whether Polygon/Massive reference metadata can seed a future bounded liquidity probe. It does not create a final investable universe and does not authorize strategy tests.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

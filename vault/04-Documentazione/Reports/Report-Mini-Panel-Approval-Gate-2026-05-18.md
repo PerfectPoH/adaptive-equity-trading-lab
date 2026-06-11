@@ -56,3 +56,6 @@ mini_panel_approval_gate: pass, 36/36
 ## Interpretation
 
 This is a planning and approval gate only. It does not authorize or execute the proposed mini-panel. The existing CRMD result remains a single executed anchor; the other three candidates require a new explicit approval and bounded runner support before any provider query.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

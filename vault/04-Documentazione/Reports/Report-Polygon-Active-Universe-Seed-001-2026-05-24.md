@@ -17,3 +17,6 @@ Single bounded Polygon/Massive active ticker reference call. This creates a deri
 
 - Survivorship/delisted-symbol audit is still required before any universe backtest.
 - Liquidity/price availability probe is still required before any universe backtest.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

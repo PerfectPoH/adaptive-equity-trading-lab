@@ -84,3 +84,6 @@ Smoke check on `experiments/runs/nctrl_trial_001_2024_20260517` returned pass wi
 ## Governance
 
 This tool supports research-machine hardening. It does not reopen small-cap trials, does not validate alpha and does not authorize paper trading or production ranking.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

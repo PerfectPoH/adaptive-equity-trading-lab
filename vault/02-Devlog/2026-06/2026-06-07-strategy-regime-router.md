@@ -21,3 +21,6 @@ Operating rule:
 - RISK_OVERLAY means the component can govern exposure or measurement quality but is not standalone alpha.
 
 The router is a governance and explanation layer, not a promoted strategy.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

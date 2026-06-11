@@ -12,3 +12,6 @@ NO_NETWORK_CALL
 ```
 
 Updated credential result artifact and manual/dry-run preflight state. Aggregate dry-run preflight remains blocked because non-credential gates remain unresolved.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

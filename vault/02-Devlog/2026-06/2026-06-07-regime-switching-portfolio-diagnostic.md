@@ -32,3 +32,6 @@ The first dynamic regime-switching diagnostic did not outperform the static prox
 Anti-overfit rule:
 
 The regime switch is applied before period returns are read. The diagnostic does not tune regime rules to maximize the historical curve and cannot promote a strategy.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

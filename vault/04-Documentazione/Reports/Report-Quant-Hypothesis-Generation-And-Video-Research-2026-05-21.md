@@ -244,3 +244,6 @@ strategy promotion
 The notes are valuable and should remain in the vault as a directional map for future hypothesis generation.
 
 They do not override the current provider-access blocker from the Intrinio `HTTP_ERROR_403`, and they do not authorize any new data pull.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

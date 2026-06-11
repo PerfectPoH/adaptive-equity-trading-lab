@@ -10,3 +10,6 @@ PAPER_LIVE_TRADING_BLOCKED
 ```
 
 Evidence basis: fixed-signal Databento replay on 66 covered old trades with 6 material price/return deltas above 5% and max_abs_return_delta about 20.85%.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

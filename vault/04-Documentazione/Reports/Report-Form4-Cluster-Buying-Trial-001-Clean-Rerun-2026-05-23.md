@@ -22,3 +22,6 @@ Official SEC EDGAR Form 4 query bounded to AEHR, ARRY, CABA, CRMD and IOVA. Only
 ## Interpretation
 
 This is a long-only Form 4 cluster buying diagnostic. A positive result may only become a candidate for separate validation; it cannot promote a strategy in this run.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

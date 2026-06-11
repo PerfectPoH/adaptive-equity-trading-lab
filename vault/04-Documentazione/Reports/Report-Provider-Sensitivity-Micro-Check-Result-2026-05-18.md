@@ -63,3 +63,6 @@ The old strategy works.
 The old strategy is provider-stable.
 The old strategy can be backtested or paper traded.
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

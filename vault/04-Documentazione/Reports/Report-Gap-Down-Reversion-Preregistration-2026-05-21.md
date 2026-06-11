@@ -117,3 +117,6 @@ summary: 43 passed, 0 failed
 `TRIAL-GAPREV-001` is now a valid spec-only research branch.
 
 It is not executable. The next safe step would be a data-contract gate for intraday bars and spread/quote proxy, not a backtest.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

@@ -63,3 +63,6 @@ This is not a provider query, not a backtest, not an OOS result, and not strateg
 ```text
 STOP_OR_REQUEST_EXPLICIT_EXECUTION_APPROVAL
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

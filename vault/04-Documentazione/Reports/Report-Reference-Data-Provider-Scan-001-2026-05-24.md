@@ -23,3 +23,6 @@ Documentation scan only. No provider API query, market-data download, strategy b
 ## Next Step
 
 Preregister a single provider-specific source probe for the selected provider; do not download market data or run a strategy.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

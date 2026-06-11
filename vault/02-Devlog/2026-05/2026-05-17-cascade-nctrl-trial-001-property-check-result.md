@@ -31,3 +31,6 @@ Dopo il completamento di `RESEARCH-047`, e' stata eseguita una singola run pre-r
 ## Decisione
 
 `TRIAL-NCTRL-001` passa come property-based negative control della macchina di ricerca. Non e' una validazione strategica, non riapre track small-cap archiviati, non autorizza paper trading e non sblocca nuovi trial small-cap con dati `yfinance` daily alone.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

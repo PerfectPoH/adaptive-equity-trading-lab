@@ -10,3 +10,6 @@ real_contract_validation: 25 passed / 0 failed
 ```
 
 No provider query, backtest, or strategy run executed.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

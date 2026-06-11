@@ -154,3 +154,6 @@ A trial result is incomplete until the ledger reflects it.
 This ledger is now the baseline governance artifact for future methodology gates.
 
 The project remains blocked from new small-cap strategy trials until data/provider and methodology gates pass and this ledger is updated before any run.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

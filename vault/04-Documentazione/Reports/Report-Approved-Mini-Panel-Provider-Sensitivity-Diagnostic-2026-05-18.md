@@ -70,3 +70,6 @@ strategy_promotion: false
 ## Interpretation
 
 The mini-panel provides limited provider-sensitivity evidence for three approved new candidate checks only. Two IOVA cases returned minor price or return deltas; CABA had provider unavailability from Databento while Polygon reference lookup was OK. These results do not authorize strategy promotion, paper trading, live trading, sweeps, or any broader conclusion beyond this bounded diagnostic panel.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

@@ -42,3 +42,6 @@ Blocked actions:
 The first real Graphify scan must be a separate run after this gate exists. This
 report and `GRAPHIFY-INTEGRATION-001` authorize the integration wrapper and
 dry-run planning only; they do not authorize a graph scan in the same step.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

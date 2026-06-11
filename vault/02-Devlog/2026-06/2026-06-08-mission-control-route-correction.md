@@ -24,3 +24,6 @@ Verification:
 - Python compile checks passed.
 - Dashboard Mission Control tests passed.
 - Browser smoke checks confirmed the three routes have distinct page markers and no Streamlit traceback.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

@@ -75,3 +75,6 @@ This is still not a strategy result, not a backtest, not an OOS validation, and 
 ```text
 CREATE_EXPLICIT_EXECUTION_AUTHORIZATION_ARTIFACT_SPEC_ONLY
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

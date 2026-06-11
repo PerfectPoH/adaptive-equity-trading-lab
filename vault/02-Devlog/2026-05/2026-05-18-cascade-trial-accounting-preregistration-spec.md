@@ -12,3 +12,6 @@ NO_STRATEGY_PROMOTION
 ```
 
 Validation: preregistration validator passes 36/36 checks; pytest target passes 15/15.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

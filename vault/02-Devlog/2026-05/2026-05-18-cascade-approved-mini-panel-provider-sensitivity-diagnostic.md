@@ -21,3 +21,6 @@ IOVA 2025-12: minor_price_or_return_delta, return_delta 0.013289905083675918
 ```
 
 No raw payload files were retained and no strategy action was promoted.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

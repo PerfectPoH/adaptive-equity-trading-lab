@@ -12,3 +12,6 @@ NO_STRATEGY_PROMOTION
 ```
 
 Validation: policy validator passes 23/23 checks; pytest target passes 10/10.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

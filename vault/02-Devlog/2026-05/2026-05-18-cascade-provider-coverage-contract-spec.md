@@ -11,3 +11,6 @@ NO_STRATEGY_PROMOTION
 ```
 
 The spec defines required fields, validation checklist, enforcement policy, and template stance for current Databento Historical + Polygon Free caveated combo.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

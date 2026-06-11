@@ -14,3 +14,6 @@ NO_STRATEGY_PROMOTION
 Added `src/experiments/execution_authorization_validator.py` and `tests/test_execution_authorization_validator.py`.
 
 Validation: authorization artifact passes 36/36, preregistered plan passes 45/45, research gate passes 31/31, and focused pytest target passes 30/30.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

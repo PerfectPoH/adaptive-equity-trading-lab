@@ -62,3 +62,6 @@ targeted tests: 8/8 pass
 This closes the architecture-level validation gap identified in the quant research upgrade plan without consuming API credits or running a strategy trial. The validator proves that the current split pipeline can be checked for purge, embargo, temporal ordering and split isolation using synthetic fixtures.
 
 The result does not authorize broader data ingestion, optimization sweeps, OOS runs, strategy promotion, paper trading or live trading. It only validates the temporal split and embargo control surface.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

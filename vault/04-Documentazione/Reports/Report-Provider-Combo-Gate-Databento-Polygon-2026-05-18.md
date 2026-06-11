@@ -58,3 +58,6 @@ Polygon aggregate access: HTTP 403 observed in DJT minute probe
 ## Verdict
 
 The Databento+Polygon combination is sufficient to begin a controlled data-quality audit against the frozen DPE panel. It is not sufficient to support any strategy performance claim.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

@@ -227,3 +227,6 @@ NEXT ALLOWED WORK: EXECUTE THIS PROVIDER EVALUATION OR HARDEN TOOLING
 ```
 
 A passing provider evaluation is necessary but not sufficient to open a new small-cap trial. After provider evaluation, the project still needs a methodology gate covering multiple-testing ledger, benchmark distribution, backtester audit, and preregistered stop rules.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

@@ -13,3 +13,6 @@ NO_STRATEGY_PROMOTION
 Added `src/experiments/manual_preflight_inputs_validator.py` and `tests/test_manual_preflight_inputs_validator.py`.
 
 The artifact defines a future module path, command template, planned output directory, planned ledger row, and credential check policy while keeping execution approval not granted and trial not consumed.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

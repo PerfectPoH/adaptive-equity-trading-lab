@@ -34,3 +34,6 @@ NO_MARKET_DATA_DOWNLOAD
 ## Credential replacement update
 
 User replaced the Intrinio key and stored it locally as `INTRINIO_API_KEY` in `.env`. Presence-only preflight passed using env-file source, with no network call and no secret disclosure. Gate remains no-query pending separate one-call probe approval, output directory, and trial ledger entry.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

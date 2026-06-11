@@ -24,3 +24,6 @@ Existing daily OHLCV and archived trade logs only. No provider query, market-dat
 ## Interpretation
 
 This diagnostic maps archived failures to observable regimes. It does not rescue any strategy; it can only identify whether a future regime-conditioned preregistration is worth writing.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

@@ -16,3 +16,6 @@ Single bounded Polygon/Massive inactive ticker reference call. Only derived deli
 ## Interpretation
 
 This audit proves delisted metadata support only. It still does not authorize broad-universe backtests because PIT membership construction remains a separate required step.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

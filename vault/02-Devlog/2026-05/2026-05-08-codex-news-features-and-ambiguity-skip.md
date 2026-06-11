@@ -49,3 +49,6 @@ Milestone 2 leggera:
 2. ablation test con/senza news;
 3. tuning soglia `model_probability`;
 4. walk-forward validation.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

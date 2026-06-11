@@ -90,3 +90,6 @@ LIVE_TRADING
 RAW_PROVIDER_PAYLOAD_STORAGE
 ALL_SYMBOLS_SCREENING
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

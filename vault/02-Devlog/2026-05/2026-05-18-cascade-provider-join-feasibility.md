@@ -8,3 +8,6 @@ NOT_FEASIBLE_FOR_PERFORMANCE_DATASET
 ```
 
 Created `provider_join_feasibility_matrix.csv`, `provider_join_schema.csv`, and summary. No new API query, no raw retention, no strategy/backtest/OOS/sweep/live/paper.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

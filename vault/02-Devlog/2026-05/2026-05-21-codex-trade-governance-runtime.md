@@ -19,3 +19,6 @@ Implemented `src.execution.trade_governance` as broker-free execution governance
 `TRADE_GOVERNANCE_RUNTIME_IMPLEMENTED_SPEC_ONLY`.
 
 No provider query, broker connection, backtest, paper/live trading or strategy promotion was performed.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

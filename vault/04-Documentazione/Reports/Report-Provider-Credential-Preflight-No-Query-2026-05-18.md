@@ -64,3 +64,6 @@ This is a local environment presence checker only. Passing this preflight would 
 ```text
 RUN_CREDENTIAL_PREFLIGHT_ONLY_IF_USER_WANTS_LOCAL_ENV_INSPECTION
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

@@ -22,3 +22,6 @@ Stato corretto da imporre ora:
 - Il prossimo eventuale mini-panel deve ripartire da un vero pre-run gate separato, committato prima dell’esecuzione.
 
 Regola rinforzata: i freni devono essere applicati prima, non corretti dopo.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

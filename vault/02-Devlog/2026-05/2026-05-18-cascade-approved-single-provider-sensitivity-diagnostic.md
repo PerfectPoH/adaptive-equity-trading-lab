@@ -14,3 +14,6 @@ strategy_promotion: false
 ```
 
 Result: `provider_stable_for_selected_fields`. No raw provider payload retained.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

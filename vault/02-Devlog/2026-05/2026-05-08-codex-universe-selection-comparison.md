@@ -69,3 +69,6 @@ pytest: 45 passed
 universe_selection_comparison: completato
 dashboard localhost:8501: HTTP 200
 ```
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

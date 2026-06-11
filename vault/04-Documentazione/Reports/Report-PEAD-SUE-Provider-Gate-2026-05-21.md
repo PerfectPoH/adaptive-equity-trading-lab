@@ -12,3 +12,6 @@ Decision: BLOCKED_PIT_SUE_PROVIDER_UNAVAILABLE
 
 ## Interpretation
 The scientifically preferred PEAD path is SUE/consensus, but the lab has no validated point-in-time SUE provider entitlement. PEAD remains blocked rather than being approximated with returns, gaps, or scraped pages.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

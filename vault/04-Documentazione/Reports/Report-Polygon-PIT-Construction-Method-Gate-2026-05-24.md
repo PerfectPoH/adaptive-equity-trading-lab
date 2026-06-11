@@ -22,3 +22,6 @@ No-query method gate using archived derived metadata only. It builds a sample PI
 ## Interpretation
 
 The PIT construction method is approved only at sample level. The next step must be a separately preregistered full-universe PIT artifact build; no broad strategy backtest is authorized by this gate.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

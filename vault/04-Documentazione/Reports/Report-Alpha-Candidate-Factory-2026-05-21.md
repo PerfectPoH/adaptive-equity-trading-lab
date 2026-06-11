@@ -23,3 +23,6 @@ The lab has strong falsification infrastructure but no validated profitable stra
 - Every candidate declares its primary failure mode before any future probe.
 
 Next safe step: Implement diagnostic-only outlier-resistant candidate ranking harness on existing artifacts.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

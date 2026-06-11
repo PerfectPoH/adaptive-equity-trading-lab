@@ -27,3 +27,6 @@ Candidate 012 true backtest remains blocked until a single admissible data bundl
 ## Next posture
 
 Keep improving Portfolio Lab, regime routing, and user strategy UX with proxy outputs clearly marked non-promotable. Do not run a true performance backtest from the free mesh until a new data-build gate points to an admissible bundle.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

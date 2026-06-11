@@ -21,3 +21,6 @@ Rejected:
 - Yahoo Finance unofficial: unofficial and PIT history risk.
 - Nasdaq Data Link Zacks: entitlement uncertainty.
 - Polygon Earnings: consensus and PIT uncertainty.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

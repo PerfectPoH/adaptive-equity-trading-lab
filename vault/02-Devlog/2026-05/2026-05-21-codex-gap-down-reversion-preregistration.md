@@ -28,3 +28,6 @@ No provider query, data download, extractor implementation, parameter sweep, OOS
 ## Next
 
 The clean next gate is an intraday data-contract spec for bars, calendar, corporate actions and spread/quote proxy.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

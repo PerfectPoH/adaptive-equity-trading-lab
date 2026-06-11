@@ -22,3 +22,6 @@ Versionare i piccoli CSV archivistici e il workflow `.windsurf/workflows/review.
 ## Nota governance
 
 Versionare questi metadata non riapre i trial small-cap e non cambia il data-quality gate: restano input archivistici/metodologici, non evidenza investibile.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

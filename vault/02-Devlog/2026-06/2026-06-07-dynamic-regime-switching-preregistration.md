@@ -27,3 +27,6 @@ Additional falsification criteria:
 Current proxy disclosure:
 
 The local/proxy dynamic diagnostic underperformed the static equal basket, so dynamic drafts include `dynamic_underperformed_static_proxy` in their anti-overfit disclosures when created from this state.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

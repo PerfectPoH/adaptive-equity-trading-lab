@@ -24,3 +24,6 @@ Existing daily artifacts only. No provider query, market-data download, intraday
 ## Interpretation
 
 This diagnostic tests whether SEC 8-K Item 2.02 events are preceded by measurable daily drift. It is not a trading strategy and cannot promote without a separate trial.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

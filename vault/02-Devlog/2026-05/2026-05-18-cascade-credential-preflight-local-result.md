@@ -12,3 +12,6 @@ NO_NETWORK_CALL
 ```
 
 Recorded result artifact under `experiments/provider_aware_research/credential_preflight_result_20260518/` and updated manual/dry-run preflight artifacts. Execution remains blocked.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

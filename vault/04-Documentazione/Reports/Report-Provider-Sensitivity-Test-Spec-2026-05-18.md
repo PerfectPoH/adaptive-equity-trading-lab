@@ -116,3 +116,6 @@ Updated readiness:
 READY_FOR_USER_REVIEW_BEFORE_EXECUTION
 NOT_READY_TO_EXECUTE_WITHOUT_REVIEW
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

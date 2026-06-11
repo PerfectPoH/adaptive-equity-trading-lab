@@ -28,3 +28,6 @@ Status: TECHNICAL_CONTROLLED_RUN_COMPLETE__NO_PROMOTION
 
 ## Decision
 No promotion. This was a single-symbol, single-event, known-forensic controlled probe. It validates wiring and data handling, not a deployable edge.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

@@ -99,3 +99,6 @@ Only after the blockers above are explicitly resolved, execute the first minimal
 ## Governance consequence
 
 This preflight prepares the first real provider evaluation but does not execute it. A future provider pass remains necessary but not sufficient for any small-cap trial.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

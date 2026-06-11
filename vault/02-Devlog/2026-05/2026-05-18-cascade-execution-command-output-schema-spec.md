@@ -13,3 +13,6 @@ NO_STRATEGY_PROMOTION
 Added `src/experiments/execution_command_output_schema_validator.py` and `tests/test_execution_command_output_schema_validator.py`.
 
 Validation: schema artifact passes 40/40, execution authorization passes 36/36, research gate passes 31/31, and focused pytest target passes 20/20.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

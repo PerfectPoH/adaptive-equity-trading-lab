@@ -22,3 +22,6 @@ No provider query, extractor, parameter sweep, OOS run, paper/live workflow or p
 ## Next Safe Work
 
 If the project reopens this research branch, the cleanest next artifact would be a spec-only preregistration skeleton for `TRIAL-GAPREV-001`, because gap-down reversion is the most operationally defined of the three candidate directions.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

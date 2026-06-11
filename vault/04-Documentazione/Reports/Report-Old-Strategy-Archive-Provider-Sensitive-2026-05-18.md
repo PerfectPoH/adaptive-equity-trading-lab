@@ -85,3 +85,6 @@ performance claims from old yfinance run
 OLD_STRATEGY_TRACK_CLOSED_NOT_PROMOTABLE
 NEXT_STRATEGY_WORK_MUST_BE_NEW_PROVIDER_AWARE_RESEARCH_TRACK
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

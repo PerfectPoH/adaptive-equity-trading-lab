@@ -81,3 +81,6 @@ live trading
 PROVIDER_JOIN_LAYER_READY_FOR_METADATA_USE
 STRATEGY_DATASET_JOIN_NOT_APPROVED
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

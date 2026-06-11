@@ -22,3 +22,6 @@ Status: EVENT_SELECTION_CONTROLLED_PROBE_COMPLETE__NO_PROMOTION
 
 ## Decision
 No promotion. This is a single-event event-selection probe and cannot establish a tradable edge.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

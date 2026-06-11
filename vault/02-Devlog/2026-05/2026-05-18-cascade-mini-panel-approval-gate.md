@@ -13,3 +13,6 @@ NO_STRATEGY_PROMOTION
 ```
 
 Added validator and tests. Execution remains blocked pending separate approval, output directory, trial ledger entries, and bounded mini-panel runner support.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

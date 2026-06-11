@@ -12,3 +12,6 @@ NO_STRATEGY_PROMOTION
 ```
 
 Validation: aggregate gate passes 31/31 checks for `new_signal_research`; components pass 25/25, 23/23, and 36/36. Pytest target passes 20/20.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

@@ -50,3 +50,6 @@ paper/live: false
 The single approved diagnostic completed successfully for `CRMD`. Databento and Polygon returned comparable metadata/price fields for this one candidate. The result was classified as `provider_stable_for_selected_fields` for this selected candidate only.
 
 This does not validate the strategy, does not authorize promotion, and does not generalize beyond the single approved diagnostic run.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

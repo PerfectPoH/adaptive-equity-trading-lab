@@ -63,3 +63,6 @@ Databento Historical = OHLCV candidate
 Polygon Free = recent corporate-actions/reference cross-check
 Databento Reference or another paid/reference provider = still needed for final provider pass if full PIT/reference coverage is required
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

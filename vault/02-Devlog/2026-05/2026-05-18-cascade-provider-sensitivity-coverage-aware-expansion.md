@@ -14,3 +14,6 @@ raw_response_retention: disabled
 ```
 
 Verdict: `OLD_YFINANCE_RESULTS_PROVIDER_SENSITIVE_ON_COVERAGE_AWARE_SAMPLE / STRATEGY_PROMOTION_REMAINS_BLOCKED`.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

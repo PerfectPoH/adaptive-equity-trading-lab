@@ -68,3 +68,6 @@ During execution, the first attempt exposed a performance issue in the P5/P6 rep
 `TRIAL-NCTRL-001` passes as a methodology negative-control property check. It validates that the pipeline can generate artifacts, accounting, bootstrap baseline, random-entry diagnostics, ex-topN arithmetic checks, and benchmark sanity checks on the fixed large-cap/ETF control universe.
 
 It does not validate any investible edge, does not reopen archived small-cap strategies, and does not authorize paper trading or production ranking.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

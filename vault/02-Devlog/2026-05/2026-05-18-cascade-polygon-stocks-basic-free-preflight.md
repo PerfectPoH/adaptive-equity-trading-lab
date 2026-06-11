@@ -23,3 +23,6 @@ DPE-006 FSR delisted_ticker_details: pass rows=1
 ```
 
 Interpretation: Polygon free is useful for recent corporate-actions/reference cross-checks, but not validated as an OHLCV provider replacement.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

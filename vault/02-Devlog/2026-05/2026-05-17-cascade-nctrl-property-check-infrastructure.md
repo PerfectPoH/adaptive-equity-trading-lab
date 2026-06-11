@@ -23,3 +23,6 @@ Risultato: `43 passed`.
 ## Decisione
 
 `RESEARCH-047` e' completato come infrastruttura TDD. `TRIAL-NCTRL-001` non e' stato eseguito in questo step. Prossimo passo ammesso: preparare/eseguire una singola run del trial secondo preregistrazione, usando il nuovo accounting e report writer, senza interpretazione strategica anticipata.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

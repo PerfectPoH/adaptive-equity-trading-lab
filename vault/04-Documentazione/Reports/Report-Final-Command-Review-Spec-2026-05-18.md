@@ -51,3 +51,6 @@ trial_ledger_entry: planned_not_created
 ## Required interpretation
 
 The command is reviewed, but this is not execution approval. No provider endpoint was contacted, no output directory was created, no trial ledger entry was created, and no trial was consumed.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

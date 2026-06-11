@@ -50,3 +50,6 @@ remaining_blocker: final_execution_module = real_runner_gated
 ## Required interpretation
 
 The user approval has been recorded, and the output/ledger preparation gates are complete. No empirical execution has occurred yet. The remaining technical blocker is that the runner is still in gated-report mode and must be deliberately changed to an approved execution path before any provider query can happen.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

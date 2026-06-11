@@ -17,3 +17,6 @@ The parser treated a single malformed or wrapped SEC document as a panel-level f
 ## Reinforced Rule
 
 Malformed individual Form 4 documents must be quarantined at document scope; they must not abort the full bounded event panel.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

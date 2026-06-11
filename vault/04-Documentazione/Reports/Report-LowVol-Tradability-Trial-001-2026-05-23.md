@@ -20,3 +20,6 @@ Existing Databento daily OHLCV artifact only. No provider query, market-data dow
 ## Interpretation
 
 This is a long-only low-volatility/tradability backtest, not a fundamental-quality strategy. It can only become a candidate if it survives the 500 bps cost model, sample-size gate, median-return gate and outlier-resistance gate.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

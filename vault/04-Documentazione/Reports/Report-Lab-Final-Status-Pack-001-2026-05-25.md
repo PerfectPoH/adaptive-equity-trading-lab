@@ -23,3 +23,6 @@ Decision: `LAB_FINAL_STATUS_PACK_COMPLETE`
 - Short selling: false
 - Paper/live trading: false
 - Strategy promotion: false
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

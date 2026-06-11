@@ -103,3 +103,6 @@ real_contract_checks: 25 passed / 0 failed
 ```
 
 The validator checks required files, manifest fields, no-execution flags, contract schema fields, template required columns and populated values, validation checklist coverage, and enforcement policy use cases.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

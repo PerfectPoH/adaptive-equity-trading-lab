@@ -72,3 +72,6 @@ This dry run validates the gate mechanics only. It does not authorize:
 - paper trading;
 - live trading;
 - strategy promotion.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

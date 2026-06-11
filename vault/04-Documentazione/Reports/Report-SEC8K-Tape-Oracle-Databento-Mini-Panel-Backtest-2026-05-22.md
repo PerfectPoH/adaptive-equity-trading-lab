@@ -24,3 +24,6 @@ Bounded Databento mini-panel for SEC 8-K Tape Oracle. Raw payloads were not reta
 ## Interpretation
 
 This is the first bounded live-data expansion of the SEC8K Tape Oracle branch. The result remains non-promotable unless sample size, costs, and statistical gates pass.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

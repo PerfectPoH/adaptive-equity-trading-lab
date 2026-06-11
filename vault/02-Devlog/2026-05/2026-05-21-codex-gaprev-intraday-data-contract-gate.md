@@ -28,3 +28,6 @@ No provider query, network call, data download, extractor implementation, backte
 ## Next
 
 Create a provider-selection gate for intraday bars and spread/quote proxy.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

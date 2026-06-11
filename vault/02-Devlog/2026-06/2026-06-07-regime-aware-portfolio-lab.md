@@ -21,3 +21,6 @@ The regime filter is not optimized from the portfolio result. It is a pre-diagno
 Interpretation:
 
 This moves the lab from "best strategy in general" toward "which strategy family is even allowed in this market state," while preserving the existing no-promotion governance.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

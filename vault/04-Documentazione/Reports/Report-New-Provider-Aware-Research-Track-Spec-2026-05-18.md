@@ -89,3 +89,6 @@ IMPLEMENT_PROVIDER_COVERAGE_CONTRACT_SPEC
 ```
 
 This should remain data/methodology infrastructure only. No strategy run should be executed until the required gates pass.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

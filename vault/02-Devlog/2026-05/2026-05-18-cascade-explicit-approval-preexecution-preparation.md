@@ -12,3 +12,6 @@ NO_BACKTEST
 ```
 
 The aggregate preflight remains blocked with the single remaining blocker `real_runner_gated`. No provider query has been executed.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

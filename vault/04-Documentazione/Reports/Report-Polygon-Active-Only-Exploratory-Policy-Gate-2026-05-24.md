@@ -17,3 +17,6 @@ No-query governance gate for active-only exploratory research after the delisted
 ## Interpretation
 
 The current free Polygon stack may support explicitly caveated active-only exploratory trials, but it cannot support survivorship-free broad-universe alpha claims or promoted strategies without delisted listing-date coverage.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

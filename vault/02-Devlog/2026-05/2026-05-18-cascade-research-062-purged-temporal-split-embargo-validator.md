@@ -25,3 +25,6 @@ Validation:
 validator: 10/10 pass
 targeted tests: 8/8 pass
 ```
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

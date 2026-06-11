@@ -36,3 +36,6 @@ Diagnostic-only overlap between XMOM-001 trades and SEC 8-K Item 2.02 reaction-s
 ## Interpretation
 
 This diagnostic asks whether XMOM was accidentally exposed to SEC 8-K regimes. It is historical interpretation only and must not be used as a trading filter without a separate preregistration.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

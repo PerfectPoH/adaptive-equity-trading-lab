@@ -12,3 +12,6 @@ NO_STRATEGY_PROMOTION
 The runner requires `--dry-run`, blocks `--execute`, and rejects forbidden flags such as `--all-symbols`, `--sweep`, `--promote`, `--paper`, and `--live`.
 
 Updated manual preflight and dry-run preflight artifacts to reflect `dry_only_implemented`; execution remains blocked.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

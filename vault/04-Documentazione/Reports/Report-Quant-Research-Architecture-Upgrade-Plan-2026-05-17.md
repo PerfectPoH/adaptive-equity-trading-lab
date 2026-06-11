@@ -348,3 +348,6 @@ NOT PRODUCTION EXECUTION SYSTEM
 ```
 
 The next step should improve one falsification/control surface at a time, not perform a broad architecture rewrite.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

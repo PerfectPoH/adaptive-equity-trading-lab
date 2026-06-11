@@ -16,3 +16,6 @@ No-query policy gate combining previously archived derived listing-date samples.
 ## Interpretation
 
 The sampled Polygon details stack now supports listing dates, but this does not authorize PIT universe construction or broad-universe backtests. The next step must be a separate PIT construction method gate.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

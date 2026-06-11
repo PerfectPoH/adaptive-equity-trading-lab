@@ -23,3 +23,6 @@ preflight_checks: 38/38
 ```
 
 The preflight remains blocked because explicit user execution approval is not granted and implementation/output/ledger/credential checks remain unresolved for execution.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

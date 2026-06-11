@@ -76,3 +76,6 @@ The old result can be promoted to paper trading.
 ```text
 ARCHIVE_OLD_STRATEGY_RESULTS_AS_PROVIDER_SENSITIVE
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

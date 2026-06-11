@@ -137,3 +137,6 @@ Current provider status:
 ```text
 INTRINIO_EVALUATION_BLOCKED_BY_NO_ACTIVE_SUBSCRIPTION
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

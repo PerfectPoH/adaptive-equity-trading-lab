@@ -32,3 +32,6 @@ Targeted tests: `5/5` passed.
 ## Decision
 
 The data contract is valid but non-executable. The next safe step is a separate provider-selection and one-call/limited-scope approval gate for intraday RTH data coverage.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

@@ -23,3 +23,6 @@ Verification:
 - `python -m py_compile dashboard/app.py`
 - `pytest tests/test_dashboard_app_bootstrap.py -q`
 - Browser smoke check on `http://localhost:8502/` for Command Center, Strategy Workbench, and Portfolio Lab.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

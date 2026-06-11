@@ -168,3 +168,64 @@ Ogni devlog deve contenere:
 - decisione o prossima mossa.
 
 Vedi [[Vault-Structure]].
+
+## Voci aggiunte automaticamente (igiene vault 2026-06-11)
+
+- [[2026-05-18-cascade-adjustment-tradability-policy-spec]] - cascade adjustment tradability policy spec.
+- [[2026-05-18-cascade-approved-mini-panel-provider-sensitivity-diagnostic]] - cascade approved mini panel provider sensitivity diagnostic.
+- [[2026-05-18-cascade-approved-single-provider-sensitivity-diagnostic]] - cascade approved single provider sensitivity diagnostic.
+- [[2026-05-18-cascade-credential-preflight-env-file-pass]] - cascade credential preflight env file pass.
+- [[2026-05-18-cascade-credential-preflight-local-result]] - cascade credential preflight local result.
+- [[2026-05-18-cascade-dpe-data-quality-audit-interpretation]] - cascade dpe data quality audit interpretation.
+- [[2026-05-18-cascade-dpe-data-quality-audit-layer]] - cascade dpe data quality audit layer.
+- [[2026-05-18-cascade-dry-run-preflight-spec]] - cascade dry run preflight spec.
+- [[2026-05-18-cascade-execution-command-output-schema-spec]] - cascade execution command output schema spec.
+- [[2026-05-18-cascade-explicit-approval-preexecution-preparation]] - cascade explicit approval preexecution preparation.
+- [[2026-05-18-cascade-explicit-execution-authorization-spec]] - cascade explicit execution authorization spec.
+- [[2026-05-18-cascade-final-command-review-spec]] - cascade final command review spec.
+- [[2026-05-18-cascade-first-preregistered-provider-aware-research-plan]] - cascade first preregistered provider aware research plan.
+- [[2026-05-18-cascade-governance-calibration-falsifiability-spec]] - cascade governance calibration falsifiability spec.
+- [[2026-05-18-cascade-manual-preflight-inputs-resolution-spec]] - cascade manual preflight inputs resolution spec.
+- [[2026-05-18-cascade-mini-panel-approval-gate]] - cascade mini panel approval gate.
+- [[2026-05-18-cascade-new-provider-aware-research-track-spec]] - cascade new provider aware research track spec.
+- [[2026-05-18-cascade-old-signal-price-replay-full-coverage]] - cascade old signal price replay full coverage.
+- [[2026-05-18-cascade-old-strategy-archive-provider-sensitive]] - cascade old strategy archive provider sensitive.
+- [[2026-05-18-cascade-polygon-stocks-basic-free-preflight]] - cascade polygon stocks basic free preflight.
+- [[2026-05-18-cascade-pre-execution-output-ledger-gate]] - cascade pre execution output ledger gate.
+- [[2026-05-18-cascade-provider-combo-gate]] - cascade provider combo gate.
+- [[2026-05-18-cascade-provider-coverage-contract-spec]] - cascade provider coverage contract spec.
+- [[2026-05-18-cascade-provider-coverage-contract-validator]] - cascade provider coverage contract validator.
+- [[2026-05-18-cascade-provider-credential-preflight-no-query]] - cascade provider credential preflight no query.
+- [[2026-05-18-cascade-provider-join-feasibility]] - cascade provider join feasibility.
+- [[2026-05-18-cascade-provider-sensitivity-coverage-aware-expansion]] - cascade provider sensitivity coverage aware expansion.
+- [[2026-05-18-cascade-provider-sensitivity-diagnostic-runner-dry-only]] - cascade provider sensitivity diagnostic runner dry only.
+- [[2026-05-18-cascade-provider-sensitivity-micro-check-result]] - cascade provider sensitivity micro check result.
+- [[2026-05-18-cascade-provider-sensitivity-real-runner-gated]] - cascade provider sensitivity real runner gated.
+- [[2026-05-18-cascade-provider-sensitivity-test-spec]] - cascade provider sensitivity test spec.
+- [[2026-05-18-cascade-research-062-purged-temporal-split-embargo-validator]] - cascade research 062 purged temporal split embargo validator.
+- [[2026-05-18-cascade-research-100-intrinio-eod-trial-onboarding-gate]] - cascade research 100 intrinio eod trial onboarding gate.
+- [[2026-05-18-cascade-research-run-gate-spec]] - cascade research run gate spec.
+- [[2026-05-18-cascade-trial-accounting-preregistration-spec]] - cascade trial accounting preregistration spec.
+- [[2026-05-21-codex-gaprev-end-to-end-controlled-run]] - codex gaprev end to end controlled run.
+- [[2026-05-21-codex-gaprev-event-selection-probe]] - codex gaprev event selection probe.
+- [[2026-05-21-codex-gaprev-failure-taxonomy]] - codex gaprev failure taxonomy.
+- [[2026-05-21-codex-gaprev-mini-panel-probe]] - codex gaprev mini panel probe.
+- [[2026-05-21-codex-opening-reclaim-intraday-probe]] - codex opening reclaim intraday probe.
+- [[2026-05-21-codex-pead-earnings-only-gate]] - codex pead earnings only gate.
+- [[2026-05-21-codex-pead-sec-event-source-gate]] - codex pead sec event source gate.
+- [[2026-05-21-codex-pead-sue-provider-gate]] - codex pead sue provider gate.
+- [[2026-05-21-codex-sec-edgar-earnings-provider-probe]] - codex sec edgar earnings provider probe.
+- [[2026-06-07-auto-regime-portfolio-routing]] - auto regime portfolio routing.
+- [[2026-06-07-dashboard-clean-ui-pass]] - dashboard clean ui pass.
+- [[2026-06-07-data-mesh-provider-scan]] - data mesh provider scan.
+- [[2026-06-07-dynamic-regime-switching-preregistration]] - dynamic regime switching preregistration.
+- [[2026-06-07-dynamic-regime-switching-trial]] - dynamic regime switching trial.
+- [[2026-06-07-free-data-mesh-closure]] - free data mesh closure.
+- [[2026-06-07-mission-control-ui-revamp]] - mission control ui revamp.
+- [[2026-06-07-regime-aware-portfolio-lab]] - regime aware portfolio lab.
+- [[2026-06-07-regime-switching-portfolio-diagnostic]] - regime switching portfolio diagnostic.
+- [[2026-06-07-strategy-regime-router]] - strategy regime router.
+- [[2026-06-08-mission-control-route-correction]] - mission control route correction.
+- [[2026-06-10-claude-dashboard-dark-revamp]] - claude dashboard dark revamp.
+- [[2026-06-10-methodology-hardening-three-points]] - methodology hardening three points.
+- [[2026-06-11-claude-portfolio-studio-and-aggregation-fix]] - claude portfolio studio and aggregation fix.

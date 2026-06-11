@@ -91,3 +91,6 @@ NO_SWEEP
 NO_STRATEGY_PROMOTION
 NO_PAPER_OR_LIVE_TRADING
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

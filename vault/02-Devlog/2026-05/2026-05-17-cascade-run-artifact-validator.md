@@ -33,3 +33,6 @@ Aggiunto `tests/test_run_artifact_validator.py` con casi per run valida, file ma
 ## Governance
 
 Tooling hardening only. Nessun trial aperto, nessuna interpretazione strategica, nessun paper trading.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

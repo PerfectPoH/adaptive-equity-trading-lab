@@ -18,3 +18,6 @@ Bounded continuation for the five ticker details calls that hit provider rate li
 ## Interpretation
 
 This continuation only tests bounded listing-date coverage for rate-limited tickers. It does not authorize PIT universe construction or broad-universe backtests.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

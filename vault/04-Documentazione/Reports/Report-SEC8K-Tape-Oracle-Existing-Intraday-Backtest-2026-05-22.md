@@ -50,3 +50,6 @@ Bounded backtest on existing intraday artifacts only. No provider query, market-
 ## Interpretation
 
 The existing intraday archive contains too few SEC8K-matching events for promotion. Sample expansion requires a separate provider approval gate.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

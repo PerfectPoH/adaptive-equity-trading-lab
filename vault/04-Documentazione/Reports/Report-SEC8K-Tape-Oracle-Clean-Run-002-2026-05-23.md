@@ -24,3 +24,6 @@ Bounded Databento clean run authorized by a pre-existing gate. Raw payloads were
 ## Decision Rule
 
 If cost or sample-size gates fail, archive without DSR/CPCV escalation. DSR/CPCV is reserved for candidates that first survive cost realism and minimum trade count.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

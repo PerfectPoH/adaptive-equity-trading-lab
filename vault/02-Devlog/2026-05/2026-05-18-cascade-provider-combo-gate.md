@@ -25,3 +25,6 @@ PROVIDER_JOIN_FEASIBILITY_CHECK
 ```
 
 Blocked: backtest, OOS, sweep, live, paper trading, raw retention, ALL_SYMBOLS.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

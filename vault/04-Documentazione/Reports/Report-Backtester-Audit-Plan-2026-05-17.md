@@ -225,3 +225,6 @@ The result must include:
 This audit plan is now specified but not executed.
 
 Before any new small-cap strategy trial, the project must either execute this plan or document why the future trial does not depend on `SmallCapPortfolioBacktester` mechanics.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

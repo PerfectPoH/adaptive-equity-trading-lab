@@ -11,3 +11,6 @@ Decision: BLOCKED_PROVIDER_EARNINGS_CALENDAR_UNAVAILABLE
 
 ## Interpretation
 PEAD earnings-only is the right next hypothesis structurally, but it cannot be executed from manual catalyst logs, daily gap proxies, or earnings dates without BMO/AMC report-time quality. The gate is therefore closed until the earnings-calendar provider access problem is resolved.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

@@ -16,3 +16,6 @@ raw_response_retention: disabled
 ```
 
 Verdict: `PROVIDER_SENSITIVITY_MICRO_CHECK_CAVEATED`. No strategy promotion; no backtest/OOS/sweep/live/paper.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

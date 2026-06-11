@@ -68,3 +68,6 @@ The research run gate is an execution precondition. A passing gate does not prom
 ```text
 CREATE_FIRST_PREREGISTERED_PROVIDER_AWARE_RESEARCH_PLAN_SPEC_ONLY
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

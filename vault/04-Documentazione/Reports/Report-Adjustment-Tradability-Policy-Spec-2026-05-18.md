@@ -68,3 +68,6 @@ The current Databento/Polygon research stack may support diagnostics with caveat
 ```text
 IMPLEMENT_TRIAL_ACCOUNTING_AND_PREREGISTRATION_SPEC
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

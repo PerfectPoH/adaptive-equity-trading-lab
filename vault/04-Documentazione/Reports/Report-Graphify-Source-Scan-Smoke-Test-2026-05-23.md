@@ -67,3 +67,6 @@ The query returned the expected source area, including:
 Graphify is operational as a local repository navigation helper. This run is not
 strategy evidence and does not authorize data acquisition, backtesting, or
 promotion decisions.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

@@ -16,3 +16,6 @@ Single Polygon/Massive ticker details reference call for one active seed ticker.
 ## Interpretation
 
 This probe only tests single-ticker listing-date support. It does not authorize PIT universe construction or broad-universe backtests.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

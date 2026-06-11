@@ -491,3 +491,6 @@ Databento Historical = OHLCV historical candidate
 Polygon Stocks Basic Free = recent corporate-actions/reference cross-check
 Databento Reference = revisit only if full PIT/reference coverage justifies 300 USD/month
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

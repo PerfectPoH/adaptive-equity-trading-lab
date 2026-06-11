@@ -58,3 +58,6 @@ This is still not execution approval and not empirical evidence. The runner now 
 ```text
 IMPLEMENT_CREDENTIAL_CHECK_PREFLIGHT_NO_PROVIDER_QUERY
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

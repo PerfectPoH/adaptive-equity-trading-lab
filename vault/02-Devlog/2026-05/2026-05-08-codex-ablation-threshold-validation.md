@@ -53,3 +53,6 @@ Rispetto a threshold `0.60`, `0.55` aumenta molto la copertura e migliora il ren
 - Calibration plot.
 - Error analysis trade-level: quali setup perdono e perche'.
 - Valutare target/risk-reward diversi, non solo soglia.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

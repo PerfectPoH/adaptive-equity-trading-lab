@@ -1,7 +1,7 @@
 ---
 tipo: index
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-21
+ultimo-aggiornamento: 2026-06-11
 tags: [vault, index, obsidian, trading-lab]
 ---
 
@@ -17,6 +17,7 @@ tags: [vault, index, obsidian, trading-lab]
 
 ## Quick links
 
+- [[Stato-Corrente]] - LO STATO VIVO: policy attiva, risultato di riferimento, prossimo passo. Leggere PRIMA di tutto.
 - [[Protocollo-Collaborazione]] - ruoli, workflow, limiti operativi.
 - [[Memoria-AI]] - errori da non ripetere e best practice.
 - [[Architettura]] - struttura tecnica del sistema.

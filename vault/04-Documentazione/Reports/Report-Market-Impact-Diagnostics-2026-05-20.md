@@ -98,3 +98,6 @@ If target realism requires larger small-cap friction, calibration is needed (not
 - increase `impact_coefficient_bps` (e.g. stress test `150`, `300`, `500`);
 - lower liquidity capacity (`max_position_dollar_volume_fraction`) to force stricter sizing, or test with larger order sizing for stress scenarios;
 - compare equity/path sensitivity across these calibrated regimes before changing defaults.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

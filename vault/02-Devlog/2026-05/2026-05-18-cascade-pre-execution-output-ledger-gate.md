@@ -12,3 +12,6 @@ NO_BACKTEST
 ```
 
 Integrated the gate into dry-run preflight as a seventh component. Aggregate preflight remains blocked.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

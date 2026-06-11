@@ -26,3 +26,6 @@ Implemented a local execution-governance module for future paper/live infrastruc
 This is infrastructure, not alpha research. It does not query providers, connect to a broker, run a backtest, authorize paper/live trading, or promote any strategy.
 
 The key invariant is behavioral: a profitable protocol violation is not alpha. It is excluded from governed edge metrics so the lab cannot learn from lucky rule-breaking.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

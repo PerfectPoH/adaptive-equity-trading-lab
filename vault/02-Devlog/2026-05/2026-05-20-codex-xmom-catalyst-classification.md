@@ -53,3 +53,6 @@ no strategy promotion
 ```
 
 Prossimo lavoro ammesso: spec preregistrata, non esecuzione.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

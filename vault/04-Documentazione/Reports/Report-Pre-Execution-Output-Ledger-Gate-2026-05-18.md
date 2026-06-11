@@ -63,3 +63,6 @@ final_command_review: reviewed_gated_real_runner
 ## Required interpretation
 
 This gate improves execution readiness auditability only. It is not an execution approval and does not consume the preregistered trial.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

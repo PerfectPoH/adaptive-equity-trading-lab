@@ -48,3 +48,6 @@ Dopo la creazione del vault, Barak ha chiesto di continuare con il progetto. La 
 
 - Passare a Milestone 2 leggera: error analysis dei trade e walk-forward validation.
 - Non aggiungere News Engine o paper trading finche' la baseline non e' capita meglio.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

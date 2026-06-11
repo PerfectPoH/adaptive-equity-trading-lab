@@ -52,3 +52,6 @@ Calibration:
 2. Confrontare raw vs calibrated su test.
 3. Fare feature-regime analysis sui trade perdenti.
 4. Capire se AMD va filtrato per volatilita'/regime o se e' solo rumore del campione.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

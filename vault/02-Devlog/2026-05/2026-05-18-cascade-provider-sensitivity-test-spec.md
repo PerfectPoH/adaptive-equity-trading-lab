@@ -11,3 +11,6 @@ READY_FOR_USER_REVIEW_BEFORE_EXECUTION
 ```
 
 Reference old strategy: `breakout_continuation + open_to_close_return>=0.10 + IWM close > EMA200 + risk_fraction sizing`.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

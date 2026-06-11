@@ -18,3 +18,6 @@ Bounded Polygon/Massive ticker details calls for five delisted common-stock tick
 ## Interpretation
 
 This probe only tests delisted ticker listing-date support. It does not authorize PIT universe construction or broad-universe backtests.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

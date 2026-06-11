@@ -9,3 +9,6 @@ TRIALS_REMAIN_BLOCKED
 ```
 
 Observed: 10/10 symbol resolution and event-window availability through Databento Historical evidence; 10/10 events remain caveat; 7/10 are critical/high caveats. Added downstream warning policy.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

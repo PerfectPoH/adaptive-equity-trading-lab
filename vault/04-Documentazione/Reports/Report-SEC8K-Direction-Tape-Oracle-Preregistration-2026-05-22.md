@@ -34,3 +34,6 @@ Validator: `src.experiments.sec8k_direction_tape_oracle_preregistration_validato
 Result: `51/51` checks passed.
 
 Targeted tests: `5/5` passed.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

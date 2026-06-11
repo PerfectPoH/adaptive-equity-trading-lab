@@ -18,3 +18,6 @@ No-query robustness diagnostic on the archived active-only momentum smoke trade 
 ## Interpretation
 
 This is only an active-only robustness diagnostic. It cannot support a survivorship-free claim or strategy promotion.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

@@ -28,3 +28,6 @@ The regime is inferred before the portfolio diagnostic and is not selected from 
 Interpretation:
 
 This is the first step from "user manually chooses the market moment" toward an automatic Regime-Aware Strategy Engine.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

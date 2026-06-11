@@ -18,3 +18,6 @@ No-query governance gate transitioning the lab after the small-cap/free-data dir
 ## Interpretation
 
 The lab should stop retesting small-cap free-data directional alpha in its current form. Small-cap remains useful for diagnostics; ETF/large-cap is opened only for cleaner-data risk/regime research, not for easy-alpha claims.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

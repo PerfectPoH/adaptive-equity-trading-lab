@@ -28,3 +28,6 @@ max_trials=3
 ```
 
 Updated validator to require declared primary metric, finalized parameter values, and final/required feature statuses. Validation passes 45/45 for the real plan and 25/25 for the focused governance test target.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

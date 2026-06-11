@@ -10,3 +10,6 @@ Decision: SEC_EDGAR_EARNINGS_PROVIDER_METADATA_PASS
 - Backtest performed: false
 
 Interpretation: SEC EDGAR can supply official filing acceptance timestamps for earnings-related 8-K Item 2.02 events. This resolves the metadata-provider direction for the next PEAD gate, but does not yet authorize a PEAD backtest.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

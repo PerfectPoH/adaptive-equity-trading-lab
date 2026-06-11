@@ -30,3 +30,6 @@ Bounded multi-symbol SEC EDGAR Item 2.02 timing diagnostic on symbols already pr
 ## Interpretation
 
 This diagnostic tests whether SEC 8-K Item 2.02 acceptance timing marks high-volatility/high-volume regimes across multiple issuers. It does not infer earnings surprise or tradable direction from future returns.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

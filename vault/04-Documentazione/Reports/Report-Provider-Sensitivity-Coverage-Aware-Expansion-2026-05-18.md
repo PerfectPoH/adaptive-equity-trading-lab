@@ -68,3 +68,6 @@ ARCHIVE_OLD_STRATEGY_RESULTS_AS_PROVIDER_SENSITIVE
 ```
 
 Any future strategy work must be a new research track with a provider-aware data foundation, not a continuation of the old yfinance result as if it were stable.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

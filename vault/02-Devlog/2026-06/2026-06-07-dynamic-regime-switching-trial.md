@@ -22,3 +22,6 @@ UI change:
 Interpretation:
 
 The project now has the full governed lifecycle for a dynamic multi-regime idea: diagnostic, draft, approval gate, and separate dry-run. It is still proxy-only and non-promotable until a true survivorship-free/PIT data bundle exists.
+
+
+Vedi [[Devlog-Index]] e [[Stato-Corrente]].

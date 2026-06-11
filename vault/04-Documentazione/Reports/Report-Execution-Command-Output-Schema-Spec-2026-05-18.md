@@ -79,3 +79,6 @@ overall Databento/Polygon vs yfinance path: approximately 48% complete
 ```text
 IMPLEMENT_DRY_RUN_PREFLIGHT_VALIDATOR_SPEC_ONLY
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

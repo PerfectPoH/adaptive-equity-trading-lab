@@ -46,3 +46,6 @@ dry_run_preflight: blocked, 38/38
 This result confirms only that the current local shell environment does not expose the required Databento and Polygon credential variables. It does not test provider access, entitlement, data quality, or network connectivity.
 
 Execution remains blocked.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

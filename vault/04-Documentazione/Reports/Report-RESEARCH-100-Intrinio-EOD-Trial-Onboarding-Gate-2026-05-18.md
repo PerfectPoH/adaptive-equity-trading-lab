@@ -160,3 +160,6 @@ separate_probe_approval_missing: unresolved
 output_directory_not_created: unresolved
 trial_ledger_entry_not_created: unresolved
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

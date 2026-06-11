@@ -81,3 +81,6 @@ The empirical test remains much less complete because no Databento/Polygon/yfina
 ```text
 DEFINE_EXECUTION_COMMAND_AND_OUTPUT_ARTIFACT_SCHEMA_SPEC_ONLY
 ```
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

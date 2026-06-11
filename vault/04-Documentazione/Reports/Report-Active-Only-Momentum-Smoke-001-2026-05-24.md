@@ -18,3 +18,6 @@ Exploratory active-only momentum smoke test on archived Databento daily OHLCV. T
 ## Interpretation
 
 Use this only as a pipeline smoke test and active-only exploratory datapoint. It is not survivorship-free alpha evidence.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].

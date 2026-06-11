@@ -45,3 +45,6 @@ dry_run_preflight: blocked, 39/39
 ```
 
 Credential presence is now satisfied. Execution remains blocked by explicit approval, output directory creation, trial ledger creation, and final command review.
+
+
+Vedi [[Documentazione-Index]] e [[Stato-Corrente]].
