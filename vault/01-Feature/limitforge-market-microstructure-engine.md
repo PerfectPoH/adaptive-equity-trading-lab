@@ -652,6 +652,33 @@ La prossima fase utile per portfolio/demo e':
 CLI demo executable + exported artifacts directory
 ```
 
+Settima slice completata:
+
+```text
+runnable CLI demo + committed market-vs-limit artifact sample
+```
+
+Il motore ora espone:
+
+- `limitforge_demo`;
+- `write_market_vs_limit_demo_artifacts(...)`;
+- sample artifact directory;
+- command/event/snapshot CSV per il path market;
+- command/event/snapshot CSV per il path passive limit;
+- summary testuale con slippage e queue-risk.
+
+La cartella portfolio leggibile e':
+
+```text
+C:\Users\barak\Documents\Codici Scuola\limitforge\examples\market_vs_limit\artifacts
+```
+
+La prossima fase utile e':
+
+```text
+depth ladder/BBO export + slippage curve multi-size
+```
+
 ## Prossima azione ammessa
 
 Scrivere una design spec implementativa separata prima di creare codice:

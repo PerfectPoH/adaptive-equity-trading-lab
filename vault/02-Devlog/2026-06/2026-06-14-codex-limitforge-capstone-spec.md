@@ -465,3 +465,60 @@ Prossima mossa tecnica:
 ```text
 Add a runnable demo executable that writes command/event/snapshot artifacts for the market-vs-limit scenario.
 ```
+
+## Update - settima slice demo executable
+
+Stato aggiornato:
+
+```text
+RUNNABLE MARKET-VS-LIMIT ARTIFACT DEMO IMPLEMENTED
+```
+
+Repo:
+
+```text
+C:\Users\barak\Documents\Codici Scuola\limitforge
+```
+
+Branch:
+
+```text
+feat/mvp-core
+```
+
+Slice implementata:
+
+- API `write_market_vs_limit_demo_artifacts(output_dir)`;
+- eseguibile `limitforge_demo`;
+- export `summary.txt`;
+- export `market_commands.csv`;
+- export `market_events.csv`;
+- export `market_snapshot.csv`;
+- export `passive_commands.csv`;
+- export `passive_events.csv`;
+- export `passive_snapshot.csv`;
+- artifact sample versionati in `examples/market_vs_limit/artifacts/`.
+
+Output demo:
+
+```text
+reference_midpoint_ticks=10000
+market_filled_quantity=150
+market_average_fill_ticks=10133
+market_slippage_ticks=133
+passive_filled_quantity=0
+passive_resting_quantity=150
+```
+
+Limiti intenzionali:
+
+- depth ladder sintetico e fisso;
+- artifact CSV/testo, non archivio replay stabile;
+- nessuna UI;
+- nessun multi-size slippage curve.
+
+Prossima mossa tecnica:
+
+```text
+Add depth ladder/BBO export and a richer slippage report for multiple order sizes.
+```
