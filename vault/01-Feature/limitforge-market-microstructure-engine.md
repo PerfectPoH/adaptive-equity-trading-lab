@@ -620,6 +620,38 @@ La prossima fase utile per portfolio/demo e':
 export leggibile + scenario market-order-vs-limit-order + slippage report
 ```
 
+Sesta slice completata:
+
+```text
+readable exports + market-vs-limit demo scenario
+```
+
+Il motore ora aggiunge:
+
+- `render_commands(...)`;
+- `render_events(...)`;
+- `render_snapshot(...)`;
+- `build_market_vs_limit_demo()`;
+- misurazione slippage market order;
+- confronto con limit order passivo che evita crossing ma prende queue risk;
+- 26 test C++ verdi come target di verifica.
+
+Il primo scenario dimostrativo mostra:
+
+```text
+market average fill = 10133 ticks
+midpoint = 10000 ticks
+slippage = 133 ticks
+passive fill = 0
+passive resting quantity = 150
+```
+
+La prossima fase utile per portfolio/demo e':
+
+```text
+CLI demo executable + exported artifacts directory
+```
+
 ## Prossima azione ammessa
 
 Scrivere una design spec implementativa separata prima di creare codice:

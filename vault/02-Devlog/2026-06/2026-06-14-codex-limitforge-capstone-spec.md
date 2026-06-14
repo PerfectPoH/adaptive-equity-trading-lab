@@ -411,3 +411,57 @@ Prossima mossa tecnica:
 ```text
 Add machine-readable exports for commands/snapshots and a small demo scenario.
 ```
+
+## Update - sesta slice export e demo
+
+Stato aggiornato:
+
+```text
+READABLE EXPORTS / MARKET-VS-LIMIT DEMO IMPLEMENTED
+```
+
+Repo:
+
+```text
+C:\Users\barak\Documents\Codici Scuola\limitforge
+```
+
+Branch:
+
+```text
+feat/mvp-core
+```
+
+Slice implementata:
+
+- export testuale deterministico dei command log;
+- export testuale deterministico degli event log;
+- export testuale deterministico degli snapshot;
+- `build_market_vs_limit_demo()`;
+- confronto market buy vs passive limit buy sulla stessa profondita';
+- slippage market misurato rispetto al midpoint;
+- queue risk esplicitato per l'ordine limite passivo.
+
+Numeri demo:
+
+```text
+market buy quantity = 150
+reference midpoint = 10000 ticks
+market average fill = 10133 ticks
+market slippage = 133 ticks
+passive limit fill = 0
+passive resting quantity = 150
+```
+
+Limiti intenzionali:
+
+- export ancora stringhe deterministicamente leggibili, non formato file stabile;
+- nessun versioning dello schema;
+- nessun eseguibile demo ancora;
+- nessun binding Python.
+
+Prossima mossa tecnica:
+
+```text
+Add a runnable demo executable that writes command/event/snapshot artifacts for the market-vs-limit scenario.
+```
