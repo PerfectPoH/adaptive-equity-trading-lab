@@ -579,6 +579,26 @@ Il prossimo salto non e' ancora performance. E':
 command log + replay + snapshot checksum
 ```
 
+Quarta slice completata:
+
+```text
+96228c7 Add command log replay equivalence
+```
+
+Il motore ora ha:
+
+- command log append-only per le azioni pubbliche;
+- replay deterministico da command log;
+- verifica `same commands -> same checksum`;
+- verifica `same commands -> same event sequence`;
+- 21 test C++ verdi.
+
+Il passo successivo naturale e':
+
+```text
+snapshot object + restore + snapshot/tail replay equivalence
+```
+
 ## Prossima azione ammessa
 
 Scrivere una design spec implementativa separata prima di creare codice:

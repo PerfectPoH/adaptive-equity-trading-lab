@@ -297,3 +297,60 @@ Prossima mossa tecnica:
 ```text
 Add replay command log, snapshot checksum, and invariant tests for replay equivalence.
 ```
+
+## Update - quarta slice replay
+
+Stato aggiornato:
+
+```text
+COMMAND LOG / REPLAY EQUIVALENCE IMPLEMENTED
+```
+
+Repo:
+
+```text
+C:\Users\barak\Documents\Codici Scuola\limitforge
+```
+
+Branch:
+
+```text
+feat/mvp-core
+```
+
+Commit:
+
+```text
+96228c7 Add command log replay equivalence
+```
+
+Verifica:
+
+```text
+scripts/check-toolchain.ps1 -> READY_FOR_CPP20_MVP
+cmake --build build -> success
+limitforge_tests.exe -> 21 tests, 0 failures
+```
+
+Slice implementata:
+
+- `CommandType::{Submit, Cancel, Replace}`;
+- command log append-only per submit/cancel/replace;
+- `commands()` read-only;
+- `OrderBook::replay(commands)`;
+- replay che ricostruisce stesso state checksum;
+- replay che ricostruisce stessa sequenza eventi;
+- replay dei reject.
+
+Limiti intenzionali:
+
+- command log ancora in memoria, non serializzato;
+- replay parte da zero, non ancora da snapshot;
+- checksum copre lo stato resting e non un file snapshot;
+- niente market state machine.
+
+Prossima mossa tecnica:
+
+```text
+Add snapshot object, snapshot restore, snapshot+tail replay equivalence, and serialized command export later.
+```
