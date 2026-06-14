@@ -240,3 +240,60 @@ Prossima mossa tecnica:
 ```text
 Add replace, order-id index, per-match trade events, and deterministic replay checksum.
 ```
+
+## Update - terza slice indexed book
+
+Stato aggiornato:
+
+```text
+ORDER-ID INDEX / REPLACE / PER-MATCH EVENTS / CHECKSUM GROUNDWORK IMPLEMENTED
+```
+
+Repo:
+
+```text
+C:\Users\barak\Documents\Codici Scuola\limitforge
+```
+
+Branch:
+
+```text
+feat/mvp-core
+```
+
+Commit:
+
+```text
+9efb718 Add replace indexed orders and checksum groundwork
+```
+
+Verifica:
+
+```text
+scripts/check-toolchain.ps1 -> READY_FOR_CPP20_MVP
+cmake --build build -> success
+limitforge_tests.exe -> 19 tests, 0 failures
+```
+
+Slice implementata:
+
+- `orders_by_id` per lookup diretto degli ordini resting;
+- duplicate resting order id reject;
+- `replace(order_id, new_price, new_quantity)`;
+- replace re-entering at the back of the new price level;
+- trade event per ogni resting match, non evento aggregato;
+- `state_checksum()` deterministico sullo stato del book;
+- checksum cambia quando cambia il book.
+
+Limiti intenzionali:
+
+- replace non attraversa ancora il lato opposto come nuovo ordine aggressivo;
+- checksum copre lo stato resting, non ancora l'intero event replay;
+- non esiste ancora una funzione di replay da event log;
+- non c'e' ancora snapshot serializzato.
+
+Prossima mossa tecnica:
+
+```text
+Add replay command log, snapshot checksum, and invariant tests for replay equivalence.
+```

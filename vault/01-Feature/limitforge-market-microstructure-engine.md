@@ -558,6 +558,27 @@ La prossima soglia architetturale e':
 replace + orders_by_id index + per-match event stream + replay checksum
 ```
 
+Terza slice completata:
+
+```text
+9efb718 Add replace indexed orders and checksum groundwork
+```
+
+Il core ora aggiunge:
+
+- indice `orders_by_id`;
+- rifiuto dei duplicate resting ids;
+- replace con perdita di priorita' nella nuova price level;
+- eventi trade per singolo match;
+- checksum deterministico dello stato resting;
+- 19 test C++ verdi.
+
+Il prossimo salto non e' ancora performance. E':
+
+```text
+command log + replay + snapshot checksum
+```
+
 ## Prossima azione ammessa
 
 Scrivere una design spec implementativa separata prima di creare codice:
