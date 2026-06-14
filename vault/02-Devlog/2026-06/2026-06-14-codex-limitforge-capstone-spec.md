@@ -181,3 +181,62 @@ Prossima mossa tecnica:
 ```text
 Add price-level FIFO, symmetric sell matching, cancel order, and event emission.
 ```
+
+## Update - seconda slice order book
+
+Stato aggiornato:
+
+```text
+FIFO BOOK / CANCEL / EVENT LOG SLICE IMPLEMENTED
+```
+
+Repo:
+
+```text
+C:\Users\barak\Documents\Codici Scuola\limitforge
+```
+
+Branch:
+
+```text
+feat/mvp-core
+```
+
+Commit:
+
+```text
+31b8197 Add FIFO book queues cancel and event log
+```
+
+Verifica:
+
+```text
+scripts/check-toolchain.ps1 -> READY_FOR_CPP20_MVP
+cmake --build build -> success
+limitforge_tests.exe -> 15 tests, 0 failures
+```
+
+Slice implementata:
+
+- price levels convertiti da quantita' aggregate a code FIFO;
+- matching aggressivo simmetrico buy/sell;
+- remaining quantity interrogabile per order id;
+- cancel per ordini resting;
+- cancel reject per order id assente;
+- event log append-only in memoria;
+- eventi base: accepted, rejected, canceled, trade;
+- sequence evento distinta dalla sequence del comando.
+
+Limiti intenzionali:
+
+- cancel usa ancora scansione lineare, non `orders_by_id`;
+- trade event aggrega il fill del comando, non ancora ogni singolo match contro resting order;
+- niente replace;
+- niente snapshot/replay checksum;
+- niente market state machine.
+
+Prossima mossa tecnica:
+
+```text
+Add replace, order-id index, per-match trade events, and deterministic replay checksum.
+```

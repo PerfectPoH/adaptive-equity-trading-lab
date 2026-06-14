@@ -536,6 +536,28 @@ Non e' ancora un matching engine completo. La prossima soglia vera e':
 FIFO per price level + cancel/replace + event log append-only + deterministic replay.
 ```
 
+Seconda slice completata:
+
+```text
+31b8197 Add FIFO book queues cancel and event log
+```
+
+Il book ora ha:
+
+- price-level FIFO;
+- matching aggressivo su entrambi i lati;
+- cancel degli ordini resting;
+- remaining quantity per order id;
+- event log append-only in memoria;
+- eventi accepted/rejected/canceled/trade;
+- 15 test C++ verdi.
+
+La prossima soglia architetturale e':
+
+```text
+replace + orders_by_id index + per-match event stream + replay checksum
+```
+
 ## Prossima azione ammessa
 
 Scrivere una design spec implementativa separata prima di creare codice:
