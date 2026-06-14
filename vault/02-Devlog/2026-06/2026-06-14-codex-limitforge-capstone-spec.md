@@ -522,3 +522,58 @@ Prossima mossa tecnica:
 ```text
 Add depth ladder/BBO export and a richer slippage report for multiple order sizes.
 ```
+
+## Update - ottava slice slippage curve
+
+Stato aggiornato:
+
+```text
+DEPTH LADDER / MULTI-SIZE SLIPPAGE CURVE IMPLEMENTED
+```
+
+Repo:
+
+```text
+C:\Users\barak\Documents\Codici Scuola\limitforge
+```
+
+Branch:
+
+```text
+feat/mvp-core
+```
+
+Slice implementata:
+
+- `DepthLevel`;
+- `SlippageCurvePoint`;
+- `build_demo_depth_ladder()`;
+- `build_market_buy_slippage_curve(...)`;
+- `render_depth_ladder(...)`;
+- `render_slippage_curve(...)`;
+- artifact `depth_ladder.csv`;
+- artifact `slippage_curve.csv`;
+- visibilita' del partial fill quando la size supera la profondita' ask.
+
+Output slippage curve:
+
+```text
+requested_quantity,filled_quantity,average_fill_ticks,slippage_ticks
+50,50,10100,100
+100,100,10100,100
+150,150,10133,133
+250,200,10150,150
+```
+
+Limiti intenzionali:
+
+- profondita' sintetica e fissa;
+- nessun modello fee/rebate;
+- nessun replenishment;
+- nessun BBO time series.
+
+Prossima mossa tecnica:
+
+```text
+Add explicit execution reports with realized spread, fill ratio, and market-impact fields.
+```

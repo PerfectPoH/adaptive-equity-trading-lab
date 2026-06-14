@@ -679,6 +679,34 @@ La prossima fase utile e':
 depth ladder/BBO export + slippage curve multi-size
 ```
 
+Ottava slice completata:
+
+```text
+depth ladder export + multi-size market impact curve
+```
+
+Il demo ora produce anche:
+
+- `depth_ladder.csv`;
+- `slippage_curve.csv`;
+- curva size -> fill quality;
+- visibilita' del partial fill quando la size supera la profondita' disponibile.
+
+Curva demo:
+
+```text
+50 -> avg 10100, slippage 100
+100 -> avg 10100, slippage 100
+150 -> avg 10133, slippage 133
+250 -> filled 200/250, avg 10150, slippage 150
+```
+
+La prossima fase utile e':
+
+```text
+execution report object: fill ratio, realized spread, market impact, passive queue outcome
+```
+
 ## Prossima azione ammessa
 
 Scrivere una design spec implementativa separata prima di creare codice:
