@@ -577,3 +577,56 @@ Prossima mossa tecnica:
 ```text
 Add explicit execution reports with realized spread, fill ratio, and market-impact fields.
 ```
+
+## Update - nona slice execution report
+
+Stato aggiornato:
+
+```text
+EXECUTION REPORT OBJECT / COST DIAGNOSTIC ARTIFACT IMPLEMENTED
+```
+
+Repo:
+
+```text
+C:\Users\barak\Documents\Codici Scuola\limitforge
+```
+
+Branch:
+
+```text
+feat/mvp-core
+```
+
+Slice implementata:
+
+- `ExecutionReport`;
+- `build_market_buy_execution_report(...)`;
+- `build_passive_limit_buy_execution_report(...)`;
+- `render_execution_reports(...)`;
+- artifact `execution_report.csv`;
+- fill ratio in basis points;
+- unfilled quantity;
+- realized spread side-adjusted;
+- market impact quote-based;
+- passive queue outcome.
+
+Output report:
+
+```text
+label,side,order_type,requested_quantity,filled_quantity,unfilled_quantity,fill_ratio_bps,average_fill_ticks,realized_spread_ticks,market_impact_ticks,passive_queue_outcome
+market_buy,Buy,Market,150,150,0,10000,10133,133,100,not_passive
+passive_limit_buy,Buy,Limit,150,0,150,0,none,0,0,resting_in_queue
+```
+
+Limiti intenzionali:
+
+- realized spread misurato contro midpoint statico, non markout futuro;
+- market impact basato solo su visible quote movement;
+- queue outcome ancora label deterministica, non modello probabilistico di posizione in coda.
+
+Prossima mossa tecnica:
+
+```text
+Add post-trade markout windows and adverse-selection diagnostics.
+```

@@ -707,6 +707,34 @@ La prossima fase utile e':
 execution report object: fill ratio, realized spread, market impact, passive queue outcome
 ```
 
+Nona slice completata:
+
+```text
+execution report object + execution_report.csv
+```
+
+Il motore ora produce un report compatto per ogni scelta esecutiva:
+
+- fill ratio;
+- quantita' non eseguita;
+- average fill;
+- realized spread;
+- market impact;
+- passive queue outcome.
+
+Output demo:
+
+```text
+market_buy -> filled 150/150, avg 10133, realized_spread 133, impact 100
+passive_limit_buy -> filled 0/150, queue outcome resting_in_queue
+```
+
+La prossima fase utile e':
+
+```text
+post-trade markout + adverse selection diagnostics
+```
+
 ## Prossima azione ammessa
 
 Scrivere una design spec implementativa separata prima di creare codice:
