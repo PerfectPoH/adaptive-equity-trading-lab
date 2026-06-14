@@ -599,6 +599,27 @@ Il passo successivo naturale e':
 snapshot object + restore + snapshot/tail replay equivalence
 ```
 
+Quinta slice completata:
+
+```text
+c4d538b Add snapshot restore and tail replay
+```
+
+Il motore ora ha:
+
+- oggetto `Snapshot`;
+- restore da snapshot;
+- replay da snapshot + tail commands;
+- verifica `snapshot + tail -> same checksum`;
+- preservazione della sequence eventi dopo checkpoint;
+- 23 test C++ verdi.
+
+La prossima fase utile per portfolio/demo e':
+
+```text
+export leggibile + scenario market-order-vs-limit-order + slippage report
+```
+
 ## Prossima azione ammessa
 
 Scrivere una design spec implementativa separata prima di creare codice:

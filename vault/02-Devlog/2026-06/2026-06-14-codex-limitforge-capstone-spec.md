@@ -354,3 +354,60 @@ Prossima mossa tecnica:
 ```text
 Add snapshot object, snapshot restore, snapshot+tail replay equivalence, and serialized command export later.
 ```
+
+## Update - quinta slice snapshot
+
+Stato aggiornato:
+
+```text
+SNAPSHOT / RESTORE / SNAPSHOT+TAIL REPLAY IMPLEMENTED
+```
+
+Repo:
+
+```text
+C:\Users\barak\Documents\Codici Scuola\limitforge
+```
+
+Branch:
+
+```text
+feat/mvp-core
+```
+
+Commit:
+
+```text
+c4d538b Add snapshot restore and tail replay
+```
+
+Verifica:
+
+```text
+scripts/check-toolchain.ps1 -> READY_FOR_CPP20_MVP
+cmake --build build -> success
+limitforge_tests.exe -> 23 tests, 0 failures
+```
+
+Slice implementata:
+
+- `Snapshot` object con resting orders, next command sequence, next event sequence e checksum;
+- `snapshot()`;
+- `OrderBook::restore(snapshot)`;
+- `OrderBook::replay_from(snapshot, tail_commands)`;
+- snapshot restore ricrea stato resting;
+- snapshot + tail replay produce stesso checksum del full path;
+- tail replay preserva la sequence degli eventi successivi al checkpoint.
+
+Limiti intenzionali:
+
+- snapshot ancora in memoria, non serializzato;
+- snapshot non conserva event history pre-checkpoint;
+- nessun file format stabile;
+- nessuna compressione o schema versioning.
+
+Prossima mossa tecnica:
+
+```text
+Add machine-readable exports for commands/snapshots and a small demo scenario.
+```
