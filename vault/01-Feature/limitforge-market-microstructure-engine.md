@@ -761,6 +761,33 @@ La prossima fase utile e':
 per-trade fill records: child fill price/quantity/sequence for explainable execution reports
 ```
 
+Undicesima slice completata:
+
+```text
+child fill records + resting order attribution
+```
+
+Il motore ora mostra non solo l'average fill, ma ogni pezzo del fill:
+
+- sequence;
+- aggressor order id;
+- resting order id;
+- quantita';
+- prezzo.
+
+Output demo:
+
+```text
+5,203,201,100,10100
+6,203,202,50,10200
+```
+
+La prossima fase utile e':
+
+```text
+fee/rebate model per child fill + aggregate execution cost
+```
+
 ## Prossima azione ammessa
 
 Scrivere una design spec implementativa separata prima di creare codice:

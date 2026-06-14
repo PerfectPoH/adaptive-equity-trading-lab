@@ -684,3 +684,57 @@ Prossima mossa tecnica:
 ```text
 Add per-trade fill records so execution reports can explain every child fill, not only aggregate averages.
 ```
+
+## Update - undicesima slice child fill records
+
+Stato aggiornato:
+
+```text
+PER-TRADE CHILD FILL RECORDS IMPLEMENTED
+```
+
+Repo:
+
+```text
+C:\Users\barak\Documents\Codici Scuola\limitforge
+```
+
+Branch:
+
+```text
+feat/mvp-core
+```
+
+Slice implementata:
+
+- eventi `Trade` con `resting_order_id`;
+- export event log con `resting_order_id`;
+- artifact `child_fills.csv`;
+- attribution child fill: sequence, aggressor order id, resting order id, quantita', prezzo.
+
+Output child fills:
+
+```text
+sequence,aggressor_order_id,resting_order_id,quantity,price_ticks
+5,203,201,100,10100
+6,203,202,50,10200
+```
+
+Interpretazione:
+
+- l'ordine aggressivo `203` compra 100 quote contro il resting sell `201` a 10100;
+- poi compra 50 quote contro il resting sell `202` a 10200;
+- l'average fill 10133 ora e' spiegabile riga per riga.
+
+Limiti intenzionali:
+
+- nessun fee/rebate per child fill;
+- nessun venue id;
+- nessuna hidden liquidity;
+- child fills derivati dagli eventi, non ancora ledger separato.
+
+Prossima mossa tecnica:
+
+```text
+Add fee/rebate model per child fill and aggregate execution cost.
+```
