@@ -1,7 +1,7 @@
 ---
 tipo: devlog-index
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-05-22
+ultimo-aggiornamento: 2026-06-14
 tags: [devlog, index, cronologia]
 ---
 
@@ -229,3 +229,4 @@ Vedi [[Vault-Structure]].
 - [[2026-06-10-claude-dashboard-dark-revamp]] - claude dashboard dark revamp.
 - [[2026-06-10-methodology-hardening-three-points]] - methodology hardening three points.
 - [[2026-06-11-claude-portfolio-studio-and-aggregation-fix]] - claude portfolio studio and aggregation fix.
+- [[2026-06-14-codex-limitforge-capstone-spec]] - LimitForge capstone spec: C++20 deterministic microstructure engine with Python research layer.

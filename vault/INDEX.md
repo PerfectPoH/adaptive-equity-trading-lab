@@ -1,7 +1,7 @@
 ---
 tipo: index
 progetto: adaptive-equity-trading-lab
-ultimo-aggiornamento: 2026-06-11
+ultimo-aggiornamento: 2026-06-14
 tags: [vault, index, obsidian, trading-lab]
 ---
 
@@ -94,6 +94,7 @@ tags: [vault, index, obsidian, trading-lab]
 - [[mvp-core-pipeline]] - specifica della Milestone 1.
 - [[news-risk-engine]] - filtro news/eventi, spostato dopo MVP.
 - [[graphify-vault-memory]] - uso futuro di Graphify e vault.
+- [[limitforge-market-microstructure-engine]] - capstone systems: market microstructure engine C++20 + Python research layer.
 
 ### 02-Devlog
 
