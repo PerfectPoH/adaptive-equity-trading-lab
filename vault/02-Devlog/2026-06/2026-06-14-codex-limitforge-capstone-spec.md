@@ -121,3 +121,63 @@ Quando si decide di partire:
 2. rieseguire `.\scripts\check-toolchain.ps1` in `limitforge`;
 3. se il gate passa, seguire `docs/superpowers/plans/2026-06-14-limitforge-mvp.md`;
 4. implementare il core solo con TDD: test failing prima, poi codice.
+
+## Update - prima slice C++20
+
+Stato aggiornato:
+
+```text
+TOOLCHAIN READY / FIRST CORE SLICE IMPLEMENTED
+```
+
+Repo:
+
+```text
+C:\Users\barak\Documents\Codici Scuola\limitforge
+```
+
+Branch:
+
+```text
+feat/mvp-core
+```
+
+Commit:
+
+```text
+a04b393 Build initial deterministic order book core
+```
+
+Verifica:
+
+```text
+scripts/check-toolchain.ps1 -> READY_FOR_CPP20_MVP
+cmake --build build -> success
+limitforge_tests.exe -> 10 tests, 0 failures
+```
+
+Slice implementata:
+
+- CMake + Ninja project;
+- minimal C++ test harness;
+- integer tick/quantity types;
+- validated limit/market orders;
+- resting bid/ask book;
+- aggressive buy matching against asks;
+- partial fill and average fill price;
+- monotonic sequence numbers, including rejects;
+- initial event vocabulary.
+
+Limiti intenzionali della slice:
+
+- no cancel/replace yet;
+- no FIFO by order id inside same price level yet;
+- no sell-side aggressive matching yet;
+- no append-only event log yet;
+- no snapshot/replay checksum yet.
+
+Prossima mossa tecnica:
+
+```text
+Add price-level FIFO, symmetric sell matching, cancel order, and event emission.
+```

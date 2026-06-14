@@ -1,7 +1,7 @@
 ---
 tipo: feature-spec
 progetto: adaptive-equity-trading-lab
-stato: capstone-proposed
+stato: implementation-started
 data: 2026-06-14
 tags: [limitforge, market-microstructure, order-book, matching-engine, execution, systems, portfolio]
 ---
@@ -502,6 +502,38 @@ Questo chiude il cerchio tra finanza quantitativa e sistemi.
 LimitForge sara' progettato come core C++20 deterministico con Python research layer.
 La UI arrivera' dopo.
 Il primo obiettivo e' correttezza, replayability e execution realism, non bellezza grafica o alpha.
+```
+
+## Stato implementativo
+
+2026-06-14:
+
+```text
+repo initialized
+toolchain installed and verified
+first C++20 core slice committed
+```
+
+Commit locale:
+
+```text
+a04b393 Build initial deterministic order book core
+```
+
+La prima slice copre solo il nucleo minimo:
+
+- tipi forti per price/quantity/sequence;
+- validazione ordini;
+- resting book aggregato per prezzo;
+- matching buy aggressivo contro ask;
+- sequence number su accepted e rejected;
+- vocabolario evento iniziale;
+- 10 test C++ verdi.
+
+Non e' ancora un matching engine completo. La prossima soglia vera e':
+
+```text
+FIFO per price level + cancel/replace + event log append-only + deterministic replay.
 ```
 
 ## Prossima azione ammessa
