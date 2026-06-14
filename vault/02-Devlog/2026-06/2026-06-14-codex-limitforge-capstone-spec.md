@@ -74,17 +74,50 @@ segnale != trade realmente ottenibile
 ## Stato
 
 ```text
-SPEC RECORDED / NO CODE WRITTEN
+REPO INITIALIZED / TOOLCHAIN GATE BLOCKED
 ```
 
-Nessun codice generato. Nessun repo creato. Nessuna promessa di performance.
+Repo locale creato:
+
+```text
+C:\Users\barak\Documents\Codici Scuola\limitforge
+```
+
+Commit iniziale:
+
+```text
+10ec713 Initialize LimitForge design and toolchain gate
+```
+
+Sono stati creati solo:
+
+- README;
+- design doc;
+- toolchain gate;
+- piano implementativo TDD;
+- script `scripts/check-toolchain.ps1`.
+
+Nessun matching-engine production code e' stato scritto perche' la macchina non espone ancora una toolchain C++ valida.
+
+Toolchain probe:
+
+```text
+FOUND: git
+MISSING: cmake
+MISSING: cl
+MISSING: g++
+MISSING: clang++
+MISSING: ninja
+Status: BLOCKED_TOOLCHAIN_MISSING
+```
+
+Decisione corretta: non scrivere core C++ alla cieca senza possibilita' di compilare/testare.
 
 ## Prossima mossa
 
 Quando si decide di partire:
 
-1. creare design spec implementativa;
-2. scegliere repo/toolchain;
-3. definire event schema e checksum;
-4. impostare test framework;
-5. implementare MVP core solo dopo approvazione della spec.
+1. installare o agganciare una toolchain C++20 + CMake;
+2. rieseguire `.\scripts\check-toolchain.ps1` in `limitforge`;
+3. se il gate passa, seguire `docs/superpowers/plans/2026-06-14-limitforge-mvp.md`;
+4. implementare il core solo con TDD: test failing prima, poi codice.
