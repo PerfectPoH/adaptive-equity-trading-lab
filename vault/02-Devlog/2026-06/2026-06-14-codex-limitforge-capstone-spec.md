@@ -630,3 +630,57 @@ Prossima mossa tecnica:
 ```text
 Add post-trade markout windows and adverse-selection diagnostics.
 ```
+
+## Update - decima slice post-trade markout
+
+Stato aggiornato:
+
+```text
+POST-TRADE MARKOUT / ADVERSE-SELECTION DIAGNOSTICS IMPLEMENTED
+```
+
+Repo:
+
+```text
+C:\Users\barak\Documents\Codici Scuola\limitforge
+```
+
+Branch:
+
+```text
+feat/mvp-core
+```
+
+Slice implementata:
+
+- `PostTradeMarkout`;
+- `build_market_buy_markouts(...)`;
+- `render_markouts(...)`;
+- artifact `markout_report.csv`;
+- markout side-adjusted;
+- adverse selection in ticks.
+
+Output markout:
+
+```text
+label,horizon_steps,side,order_type,average_fill_ticks,future_midpoint_ticks,markout_ticks,adverse_selection_ticks
+market_buy,1,Buy,Market,10133,10050,-83,83
+market_buy,2,Buy,Market,10133,10200,67,0
+```
+
+Interpretazione:
+
+- horizon 1: il midpoint futuro scende sotto il fill medio, quindi adverse selection = 83 ticks;
+- horizon 2: il midpoint futuro sale sopra il fill medio, quindi markout favorevole = 67 ticks.
+
+Limiti intenzionali:
+
+- midpoint futuro sintetico e fisso;
+- horizon ordinali, non timestamp reali;
+- markout calcolato sull'average fill aggregato, non sui singoli child fills.
+
+Prossima mossa tecnica:
+
+```text
+Add per-trade fill records so execution reports can explain every child fill, not only aggregate averages.
+```

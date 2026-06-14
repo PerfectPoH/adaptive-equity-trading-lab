@@ -735,6 +735,32 @@ La prossima fase utile e':
 post-trade markout + adverse selection diagnostics
 ```
 
+Decima slice completata:
+
+```text
+post-trade markout + adverse-selection diagnostics
+```
+
+Il motore ora produce:
+
+- `PostTradeMarkout`;
+- `markout_report.csv`;
+- markout side-adjusted;
+- adverse selection ticks.
+
+Output demo:
+
+```text
+market_buy horizon 1 -> avg 10133, future mid 10050, markout -83, adverse 83
+market_buy horizon 2 -> avg 10133, future mid 10200, markout 67, adverse 0
+```
+
+La prossima fase utile e':
+
+```text
+per-trade fill records: child fill price/quantity/sequence for explainable execution reports
+```
+
 ## Prossima azione ammessa
 
 Scrivere una design spec implementativa separata prima di creare codice:
