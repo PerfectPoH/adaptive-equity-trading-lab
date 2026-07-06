@@ -380,8 +380,11 @@ def inject_theme() -> None:
           background: transparent; color: var(--soft);
           border: 1px solid var(--line); border-radius: 2px;
           font-family: var(--body); font-weight:600; font-size:13.5px;
+          white-space: nowrap;
           transition: border-color .15s ease, color .15s ease;
         }
+        /* niente ghosting degli elementi vecchi durante i rerun */
+        div[data-stale="true"] { opacity: 0 !important; }
         .stButton > button:hover { color: var(--ink); border-color: var(--ink); }
         .stButton > button[kind="primary"] {
           background: var(--ink); border: 1px solid var(--ink); color: var(--bg);
@@ -510,14 +513,14 @@ def chart_layout(fig: go.Figure, *, height: int = 380) -> go.Figure:
 # cached data layer (colonne interne in inglese, display tradotto)
 # ---------------------------------------------------------------------------
 
-@st.cache_data(show_spinner="Loading strategy catalog…")
+@st.cache_data(show_spinner="Catalogo strategie · loading…")
 def load_catalog(saved_limit: int, factory_variants: int) -> list[dict]:
     saved = load_portfolio_lab_components(limit=saved_limit)
     factory = build_strategy_factory_components(max_variants=factory_variants) if factory_variants else []
     return [*saved, *factory]
 
 
-@st.cache_data(show_spinner="Loading router & regime map…")
+@st.cache_data(show_spinner="Router e regime map · loading…")
 def load_market_context() -> dict:
     payload = load_dashboard_payload(Path("."))
     router = payload.get("strategy_regime_router", {})
@@ -531,14 +534,14 @@ def load_market_context() -> dict:
     }
 
 
-@st.cache_data(show_spinner="Optimizing per-regime baskets… (first run takes a few minutes)")
+@st.cache_data(show_spinner="Basket per regime · optimizing… (prima volta: qualche minuto)")
 def run_studio_cached(saved_limit: int, factory_variants: int, policy: str) -> dict:
     catalog = load_catalog(saved_limit, factory_variants)
     context = load_market_context()
     return run_regime_studio(catalog, context["router_matrix"], context["regime_map"], policy=policy)
 
 
-@st.cache_data(show_spinner="Computing honest baselines & permutation test… (~1 min first run)")
+@st.cache_data(show_spinner="Baseline oneste e permutation test · computing… (~1 min)")
 def honest_baselines_cached(saved_limit: int, factory_variants: int) -> dict:
     catalog = load_catalog(saved_limit, factory_variants)
     context = load_market_context()
@@ -588,7 +591,7 @@ def navigation() -> str:
         st.session_state["studio_section"] = "home"
     if "studio_lang" not in st.session_state:
         st.session_state["studio_lang"] = "it"
-    cols = st.columns([2.1, 0.75, 0.75, 0.85, 1.0, 0.85, 0.42, 0.42, 1.9])
+    cols = st.columns([2.1, 0.75, 0.75, 0.85, 1.0, 0.85, 0.55, 1.9])
     with cols[0]:
         st.markdown(
             '<div class="studio-logo">Portfolio <b>Studio</b></div>'
@@ -601,13 +604,12 @@ def navigation() -> str:
             if st.button(tr(f"nav.{section}"), key=f"nav_{section}", type=kind, width="stretch"):
                 st.session_state["studio_section"] = section
                 st.rerun()
-    for column, code in zip(cols[6:8], ["it", "en"]):
-        with column:
-            kind = "primary" if lang() == code else "secondary"
-            if st.button(code.upper(), key=f"lang_{code}", type=kind, width="stretch"):
-                st.session_state["studio_lang"] = code
-                st.rerun()
-    with cols[8]:
+    with cols[6]:
+        other = "en" if lang() == "it" else "it"
+        if st.button(other.upper(), key="lang_toggle", width="stretch", help="Italiano / English"):
+            st.session_state["studio_lang"] = other
+            st.rerun()
+    with cols[7]:
         current = load_market_context()["current_regime"]
         label = str(current.get("regime_label", "n/d"))
         color = REGIME_COLORS.get(label, "#8a877f")
