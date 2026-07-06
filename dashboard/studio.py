@@ -76,7 +76,7 @@ FAMILY_GLYPH = {
     "9:30 AM ORB": "[OR]",
 }
 
-SECTIONS = ["Home", "Strategy Arena", "Regimi", "Composer"]
+SECTIONS = ["Home", "Arena", "Regimi", "Composer", "Metodo"]
 
 
 # ---------------------------------------------------------------------------
@@ -87,124 +87,139 @@ def inject_theme() -> None:
     st.markdown(
         """
         <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
         :root {
-          --bg: #070b14;
-          --panel: rgba(17,24,40,.72);
-          --panel-solid: #101727;
-          --line: rgba(120,140,180,.16);
-          --ink: #e9eef8;
-          --ink-soft: #b9c3d6;
-          --muted: #7e8aa3;
-          --accent: #5b8cff;
-          --accent-2: #8b5cf6;
-          --good: #2dd4a7;
-          --warn: #f5a623;
-          --bad: #fb7185;
+          --bg: #15140f;
+          --panel: #1d1b15;
+          --panel-2: #211f19;
+          --line: rgba(233,230,221,.13);
+          --ink: #e9e6dd;
+          --ink-soft: #cbc7bb;
+          --muted: #a39f93;
+          --accent: #35b47a;
+          --accent-deep: #2f7d62;
+          --warn: #e0a83e;
+          --bad: #e06a6a;
           --plum: #a78bfa;
+          --blue: #5b8cff;
+          --head: 'Archivo', sans-serif;
+          --body: 'Inter', sans-serif;
         }
         [data-testid="stHeader"], #MainMenu, footer { display:none !important; }
         section[data-testid="stSidebar"], [data-testid="stSidebarCollapsedControl"] { display:none !important; }
         html, body, [data-testid="stAppViewContainer"] {
-          background:
-            radial-gradient(1200px 600px at 80% -15%, rgba(91,140,255,.14), transparent 55%),
-            radial-gradient(900px 480px at 5% 0%, rgba(139,92,246,.10), transparent 50%),
-            radial-gradient(700px 380px at 50% 110%, rgba(45,212,167,.06), transparent 55%),
-            var(--bg);
+          background: var(--bg);
           color: var(--ink);
-          font-family: 'Space Grotesk', system-ui, sans-serif;
+          font-family: var(--body);
         }
-        .block-container { padding-top: 1.2rem; padding-bottom: 5rem; max-width: 1340px; }
+        [data-testid="stAppViewContainer"]::after {
+          content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+          background-image: radial-gradient(rgba(233,230,221,.045) 1px, transparent 1px);
+          background-size: 4px 4px;
+        }
+        .block-container { padding-top: 1.1rem; padding-bottom: 5rem; max-width: 1340px; }
         code, .mono { font-family: 'JetBrains Mono', monospace; }
+        h1,h2,h3,h4 { font-family: var(--head); }
 
         /* nav */
-        .studio-nav {
-          display:flex; align-items:center; gap:14px;
-          background: var(--panel);
-          border: 1px solid var(--line);
-          backdrop-filter: blur(14px);
-          border-radius: 16px; padding: 12px 18px; margin-bottom: 14px;
-        }
-        .studio-logo { font-weight:700; font-size:17px; letter-spacing:-.01em; }
-        .studio-logo b { background: linear-gradient(90deg,#5b8cff,#8b5cf6,#2dd4a7); -webkit-background-clip:text; background-clip:text; color:transparent; }
-        .studio-tag { font-size:10.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.14em; }
+        .studio-logo { font-family:var(--head); font-weight:700; font-size:17px; letter-spacing:-.01em; text-transform:uppercase; }
+        .studio-logo b { color: var(--accent); }
+        .studio-tag { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.18em; margin-top:2px; }
 
         .stButton > button {
           background: transparent; color: var(--ink-soft);
-          border: 1px solid var(--line); border-radius: 10px;
-          font-family:'Space Grotesk'; font-weight:600; font-size:13.5px;
+          border: 1px solid var(--line); border-radius: 999px;
+          font-family: var(--body); font-weight:600; font-size:13.5px;
           transition: all .15s ease;
         }
-        .stButton > button:hover { color:#fff; border-color: rgba(91,140,255,.6); box-shadow: 0 0 14px rgba(91,140,255,.18); }
+        .stButton > button:hover { color: var(--ink); border-color: rgba(53,180,122,.55); }
         .stButton > button[kind="primary"] {
-          background: linear-gradient(135deg,#5b8cff 0%,#8b5cf6 100%);
-          border: none; color:#fff;
-          box-shadow: 0 4px 24px rgba(91,140,255,.35);
+          background: var(--accent-deep);
+          border: 1px solid rgba(53,180,122,.4); color: #f2efe7;
         }
-        .stButton > button[kind="primary"]:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(139,92,246,.45); }
+        .stButton > button[kind="primary"]:hover { background: #35906f; transform: translateY(-1px); }
 
-        /* hero */
-        @keyframes floatGlow { 0%,100% { opacity:.75 } 50% { opacity:1 } }
+        /* hero editoriale */
         .hero {
           position:relative; overflow:hidden;
-          border-radius: 22px; border: 1px solid var(--line);
-          background:
-            radial-gradient(620px 300px at 85% -30%, rgba(91,140,255,.22), transparent 60%),
-            radial-gradient(480px 260px at 12% 120%, rgba(45,212,167,.12), transparent 55%),
-            linear-gradient(160deg, rgba(20,28,48,.95), rgba(10,14,26,.98));
-          padding: 54px 56px 46px; margin-bottom: 18px;
+          border: 1px solid var(--line); border-radius: 4px;
+          background: linear-gradient(165deg, #1b1913 0%, #15140f 70%);
+          padding: 56px 58px 48px; margin-bottom: 18px;
         }
-        .hero-kicker { color: var(--accent); font-size: 12px; letter-spacing:.22em; text-transform:uppercase; font-weight:700; animation: floatGlow 4s ease-in-out infinite; }
+        .hero::before { content:""; position:absolute; left:0; top:0; bottom:0; width:5px; background: var(--accent-deep); }
+        .hero-kicker { color: var(--muted); font-size: 12px; letter-spacing:.24em; text-transform:uppercase; font-weight:600; font-family:var(--body); }
         .hero h1 {
-          font-size: 46px; line-height:1.06; letter-spacing:-.03em; margin: 14px 0 14px; font-weight:700;
+          font-family: var(--head); text-transform: uppercase;
+          font-size: 46px; line-height:1.04; letter-spacing:-.01em; margin: 16px 0 16px; font-weight:700;
         }
-        .hero h1 span { background: linear-gradient(90deg,#5b8cff 0%,#8b5cf6 45%,#2dd4a7 100%); -webkit-background-clip:text; background-clip:text; color: transparent; }
-        .hero p { color: var(--ink-soft); font-size: 16.5px; max-width: 720px; line-height: 1.6; margin:0; }
-        .hero .disclaimer { margin-top: 18px; display:inline-block; font-size: 11.5px; color: var(--warn); border:1px solid rgba(245,166,35,.35); background: rgba(245,166,35,.08); padding: 6px 12px; border-radius: 999px; letter-spacing:.04em; }
+        .hero h1 span { color: var(--accent); }
+        .hero p { color: var(--ink-soft); font-size: 16.5px; max-width: 740px; line-height: 1.65; margin:0; }
+        .hero .disclaimer { margin-top: 20px; display:inline-block; font-size: 11px; color: var(--warn); border:1px solid rgba(224,168,62,.4); background: rgba(224,168,62,.07); padding: 6px 13px; border-radius: 999px; letter-spacing:.09em; text-transform:uppercase; font-weight:600; }
 
-        /* glass cards */
+        /* cards */
         .tile {
           background: var(--panel); border: 1px solid var(--line);
-          backdrop-filter: blur(12px);
-          border-radius: 16px; padding: 18px 20px; height: 100%;
+          border-radius: 4px; border-top: 3px solid var(--line);
+          padding: 18px 20px; height: 100%;
           transition: border-color .2s ease;
         }
-        .tile:hover { border-color: rgba(91,140,255,.45); }
-        .tile .k { color: var(--muted); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; }
-        .tile .v { font-family:'JetBrains Mono'; font-size: 27px; font-weight: 700; margin-top: 6px; letter-spacing:-.02em; }
-        .tile .v.pos { color: var(--good); } .tile .v.neg { color: var(--bad); }
-        .tile .n { color: var(--muted); font-size: 12px; margin-top: 6px; line-height:1.45; }
+        .tile:hover { border-color: rgba(53,180,122,.4); }
+        .tile .k { color: var(--muted); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; font-family:var(--body); }
+        .tile .v { font-family: var(--head); font-size: 28px; font-weight: 700; margin-top: 7px; letter-spacing:-.01em; font-variant-numeric: tabular-nums; }
+        .tile .v.pos { color: var(--accent); } .tile .v.neg { color: var(--bad); }
+        .tile .n { color: var(--muted); font-size: 12px; margin-top: 6px; line-height:1.5; }
 
         .step-grid { display:grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 6px 0 4px; }
         .step {
-          border:1px solid var(--line); border-radius:16px; padding:20px;
-          background: linear-gradient(180deg, rgba(20,28,48,.65), rgba(12,17,30,.65));
+          border:1px solid var(--line); border-radius:4px; padding:22px;
+          background: var(--panel);
         }
-        .step .num { font-family:'JetBrains Mono'; color: var(--accent); font-size: 13px; font-weight:700; }
-        .step .t { font-weight:700; font-size: 16.5px; margin: 8px 0 6px; }
-        .step .d { color: var(--muted); font-size: 13px; line-height: 1.55; }
+        .step .num { font-family:var(--body); color: var(--muted); font-size: 12px; font-weight:600; letter-spacing:.14em; }
+        .step .t { font-family:var(--head); font-weight:700; font-size: 17px; margin: 9px 0 7px; text-transform:uppercase; letter-spacing:.01em; }
+        .step .d { color: var(--muted); font-size: 13px; line-height: 1.6; }
+        .step .bar { width:34px; height:3px; background: var(--accent-deep); margin-bottom:12px; }
 
-        .badge { display:inline-block; padding: 3px 11px; border-radius: 999px; font-size: 10.5px; font-weight:700; letter-spacing:.08em; text-transform: uppercase; border: 1px solid; }
-        .badge.go { color: var(--good); border-color: rgba(45,212,167,.4); background: rgba(45,212,167,.08); }
-        .badge.cut { color: var(--bad); border-color: rgba(251,113,133,.4); background: rgba(251,113,133,.08); }
-        .badge.hold { color: var(--warn); border-color: rgba(245,166,35,.4); background: rgba(245,166,35,.08); }
-        .badge.mute { color: var(--muted); border-color: var(--line); background: rgba(120,140,180,.07); }
+        .badge { display:inline-block; padding: 3px 11px; border-radius: 999px; font-size: 10.5px; font-weight:700; letter-spacing:.08em; text-transform: uppercase; border: 1px solid; font-family:var(--body); }
+        .badge.go { color: var(--accent); border-color: rgba(53,180,122,.45); background: rgba(53,180,122,.08); }
+        .badge.cut { color: var(--bad); border-color: rgba(224,106,106,.45); background: rgba(224,106,106,.08); }
+        .badge.hold { color: var(--warn); border-color: rgba(224,168,62,.45); background: rgba(224,168,62,.08); }
+        .badge.mute { color: var(--muted); border-color: var(--line); background: rgba(233,230,221,.05); }
         .badge.plum { color: var(--plum); border-color: rgba(167,139,250,.4); background: rgba(167,139,250,.08); }
-        .badge.blue { color: var(--accent); border-color: rgba(91,140,255,.4); background: rgba(91,140,255,.08); }
+        .badge.blue { color: var(--blue); border-color: rgba(91,140,255,.4); background: rgba(91,140,255,.08); }
 
-        .regime-chip { display:inline-flex; align-items:center; gap:8px; padding: 7px 14px; border-radius: 12px; border:1px solid var(--line); background: rgba(12,17,30,.6); font-size: 13px; font-weight:600; }
+        .regime-chip { display:inline-flex; align-items:center; gap:8px; padding: 7px 14px; border-radius: 999px; border:1px solid var(--line); background: var(--panel); font-size: 13px; font-weight:600; }
         .regime-dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
 
-        .section-title { font-size: 24px; font-weight: 700; letter-spacing: -.02em; margin: 4px 0 2px; }
-        .section-sub { color: var(--muted); font-size: 13.5px; margin-bottom: 12px; }
+        .section-title { font-family:var(--head); text-transform:uppercase; font-size: 25px; font-weight: 700; letter-spacing: -.01em; margin: 8px 0 2px; }
+        .section-title::before { content:""; display:inline-block; width:14px; height:14px; background:var(--accent-deep); margin-right:12px; }
+        .section-sub { color: var(--muted); font-size: 13.5px; margin: 4px 0 14px; max-width: 900px; line-height:1.55; }
 
-        [data-testid="stDataFrame"] { border:1px solid var(--line); border-radius: 12px; overflow:hidden; }
-        [data-testid="stExpander"] details { background: var(--panel); border:1px solid var(--line) !important; border-radius: 14px !important; }
-        .stPlotlyChart { background: var(--panel); border:1px solid var(--line); border-radius: 16px; padding: 10px; }
+        /* story blocks (Home / Metodo) */
+        .story { border:1px solid var(--line); border-radius:4px; background:var(--panel); padding:26px 28px; margin: 12px 0; }
+        .story .lbl { color:var(--muted); font-size:11px; letter-spacing:.2em; text-transform:uppercase; font-weight:600; margin-bottom:12px; }
+        .story p { color:var(--ink-soft); font-size:14.5px; line-height:1.7; margin:0 0 10px; max-width: 980px; }
+        .story p:last-child { margin-bottom:0; }
+        .story b { color: var(--ink); }
+        .pipe { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:6px; }
+        .pipe .node { border:1px solid var(--line); background:var(--panel-2); border-radius:999px; padding:7px 14px; font-size:12.5px; font-weight:600; color:var(--ink-soft); }
+        .pipe .node.hot { border-color: rgba(53,180,122,.5); color: var(--accent); }
+        .pipe .arr { color: var(--muted); font-size:13px; }
+        .rule-row { display:flex; gap:14px; align-items:flex-start; padding:13px 0; border-top:1px solid var(--line); }
+        .rule-row .no { font-family:var(--body); color:var(--muted); font-size:12px; font-weight:600; letter-spacing:.1em; min-width:30px; padding-top:2px; }
+        .rule-row .tt { font-weight:700; font-size:14px; color:var(--ink); font-family:var(--head); }
+        .rule-row .dd { color:var(--muted); font-size:13px; line-height:1.55; margin-top:3px; }
+
+        [data-testid="stDataFrame"] { border:1px solid var(--line); border-radius: 4px; overflow:hidden; }
+        [data-testid="stExpander"] details { background: var(--panel); border:1px solid var(--line) !important; border-radius: 4px !important; }
+        .stPlotlyChart { background: var(--panel); border:1px solid var(--line); border-radius: 4px; padding: 10px; }
         .stSelectbox label, .stMultiSelect label, .stSlider label, .stRadio label { color: var(--ink-soft) !important; font-size: 13px !important; }
         .stCaption, [data-testid="stCaptionContainer"] { color: var(--muted) !important; }
         .stTabs [data-baseweb="tab"] { color: var(--muted); }
         .stTabs [aria-selected="true"] { color: var(--accent) !important; }
+
+        .lab-footer { border-top:1px solid var(--line); margin-top:40px; padding:18px 2px 0; display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:12px; }
+        .lab-footer a { color: var(--ink-soft); text-decoration:none; border-bottom:1px solid var(--line); }
+        .lab-footer a:hover { color: var(--accent); }
         </style>
         """,
         unsafe_allow_html=True,
@@ -256,11 +271,11 @@ def chart_layout(fig: go.Figure, *, height: int = 380) -> go.Figure:
         margin=dict(l=10, r=10, t=24, b=10),
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        font=dict(family="Space Grotesk", color="#b9c3d6", size=12),
+        font=dict(family="Inter", color="#cbc7bb", size=12),
         legend=dict(orientation="h", y=1.08, x=0),
     )
-    fig.update_xaxes(gridcolor="rgba(120,140,180,.12)")
-    fig.update_yaxes(gridcolor="rgba(120,140,180,.12)")
+    fig.update_xaxes(gridcolor="rgba(233,230,221,.08)")
+    fig.update_yaxes(gridcolor="rgba(233,230,221,.08)")
     return fig
 
 
@@ -344,19 +359,19 @@ def strategy_curve(saved_limit: int, factory_variants: int, component_id: str) -
 def navigation() -> str:
     if "studio_section" not in st.session_state:
         st.session_state["studio_section"] = "Home"
-    cols = st.columns([2.4, 1, 1.4, 1, 1.3, 2.6])
+    cols = st.columns([2.3, 0.85, 0.85, 0.95, 1.15, 0.95, 2.4])
     with cols[0]:
         st.markdown(
-            '<div class="studio-logo"><b>Portfolio Studio</b></div><div class="studio-tag">Adaptive Equity Trading Lab</div>',
+            '<div class="studio-logo"><b>Portfolio Studio</b></div><div class="studio-tag">Adaptive Equity Trading Lab — abedbarakat.me</div>',
             unsafe_allow_html=True,
         )
-    for column, section in zip(cols[1:5], SECTIONS):
+    for column, section in zip(cols[1:6], SECTIONS):
         with column:
             kind = "primary" if st.session_state["studio_section"] == section else "secondary"
             if st.button(section, key=f"nav_{section}", type=kind, width="stretch"):
                 st.session_state["studio_section"] = section
                 st.rerun()
-    with cols[5]:
+    with cols[6]:
         current = load_market_context()["current_regime"]
         label = str(current.get("regime_label", "n/d"))
         color = REGIME_COLORS.get(label, "#64748b")
@@ -376,14 +391,43 @@ def page_home(saved_limit: int, factory_variants: int) -> None:
     st.markdown(
         """
         <div class="hero">
-          <div class="hero-kicker">Regime-aware portfolio engine</div>
+          <div class="hero-kicker">Adaptive Equity Trading Lab — ricerca quantitativa governata</div>
           <h1>Ogni regime di mercato ha il suo <span>portfolio migliore</span>.<br>Qui lo trovi, lo vedi, lo componi.</h1>
           <p>
+            Questo laboratorio non vende una strategia vincente: costruisce un processo che non bara.
             Lo Studio testa l'intero catalogo di strategie, chiede al regime router quali famiglie sono ammesse
             in ogni stato del mercato, trova il basket migliore per ciascun regime e li compone in un unico
             portfolio che cambia pelle quando cambia il mercato.
           </p>
-          <div class="disclaimer">DATI PROXY - DIAGNOSTICA - NESSUNA PROMOZIONE / LIVE TRADING</div>
+          <div class="disclaimer">Dati proxy · diagnostica · nessuna promozione / live trading</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        """
+        <div class="story">
+          <div class="lbl">Come funziona l'engine</div>
+          <div class="pipe">
+            <span class="node">Dati & snapshot</span><span class="arr">&rarr;</span>
+            <span class="node">Data gates</span><span class="arr">&rarr;</span>
+            <span class="node">Esperimenti preregistrati</span><span class="arr">&rarr;</span>
+            <span class="node">DSR & multiplicity budget</span><span class="arr">&rarr;</span>
+            <span class="node hot">Regime router</span><span class="arr">&rarr;</span>
+            <span class="node hot">Basket per regime</span><span class="arr">&rarr;</span>
+            <span class="node hot">Portfolio Composer</span>
+          </div>
+          <p style="margin-top:14px">
+            Ogni idea entra come <b>trial preregistrato</b>: ipotesi, metrica primaria e criteri di successo
+            dichiarati prima di vedere i risultati. I gate statistici — Deflated Sharpe Ratio, permutation test,
+            budget di molteplicit&agrave; — decidono cosa sopravvive. Il <b>regime router</b> stabilisce quali famiglie
+            di strategie possono giocare in ogni stato del mercato, e il <b>Composer</b> le assembla in un portfolio
+            regime-switching confrontato con baseline oneste.
+          </p>
+          <p>
+            Il risultato pi&ugrave; importante finora non &egrave; una strategia redditizia: &egrave; un sistema che
+            <b>rifiuta ripetutamente di promuovere prove deboli</b>. La storia completa &egrave; nella pagina Metodo.
+          </p>
         </div>
         """,
         unsafe_allow_html=True,
@@ -404,12 +448,12 @@ def page_home(saved_limit: int, factory_variants: int) -> None:
     st.markdown(
         """
         <div class="step-grid">
-          <div class="step"><div class="num">01</div><div class="t">Strategy Arena</div>
-            <div class="d">Tutte le strategie a confronto: filtra per famiglia, ordina per net, apri la curva di ognuna.</div></div>
-          <div class="step"><div class="num">02</div><div class="t">Regimi</div>
-            <div class="d">La matrice Strategia x Regime: chi e' ammesso, chi e' ridotto, chi e' bloccato quando il mercato cambia stato.</div></div>
-          <div class="step"><div class="num">03</div><div class="t">Composer</div>
-            <div class="d">Il basket migliore per ogni regime, composti in un portfolio dinamico confrontato con la baseline statica.</div></div>
+          <div class="step"><div class="num">01 — TESTA</div><div class="bar"></div><div class="t">Strategy Arena</div>
+            <div class="d">Tutte le strategie a confronto: filtra per famiglia, ordina per net, apri la curva di ognuna e leggi i suoi bias warning.</div></div>
+          <div class="step"><div class="num">02 — GOVERNA</div><div class="bar"></div><div class="t">Regimi</div>
+            <div class="d">La matrice Strategia &times; Regime: chi &egrave; ammesso, chi gioca a met&agrave; size, chi resta fuori quando il mercato cambia stato.</div></div>
+          <div class="step"><div class="num">03 — COMPONI</div><div class="bar"></div><div class="t">Composer</div>
+            <div class="d">Il basket migliore per ogni regime, composti in un portfolio dinamico confrontato con baseline oneste e permutation test.</div></div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -417,7 +461,7 @@ def page_home(saved_limit: int, factory_variants: int) -> None:
     cta1, cta2, _ = st.columns([1.2, 1.2, 3])
     with cta1:
         if st.button("Apri la Strategy Arena", type="primary", width="stretch"):
-            st.session_state["studio_section"] = "Strategy Arena"
+            st.session_state["studio_section"] = "Arena"
             st.rerun()
     with cta2:
         if st.button("Componi il portfolio", width="stretch"):
@@ -481,7 +525,7 @@ def page_arena(saved_limit: int, factory_variants: int) -> None:
         tile("Famiglia", FAMILY_GLYPH.get(row["Famiglia"], ""), row["Famiglia"])
     with d4:
         tile("Bias warning", f'{row["Warning"]}', row["Decisione"] or "diagnostic")
-    fig = go.Figure(go.Scatter(x=curve["period"], y=curve["value"], mode="lines", line=dict(color="#5b8cff", width=2.4), fill="tozeroy", fillcolor="rgba(91,140,255,.10)", name="curva"))
+    fig = go.Figure(go.Scatter(x=curve["period"], y=curve["value"], mode="lines", line=dict(color="#35b47a", width=2.4), fill="tozeroy", fillcolor="rgba(53,180,122,.10)", name="curva"))
     st.plotly_chart(chart_layout(fig, height=320), width="stretch")
     st.caption("Curva locale proxy. Sotto N~100 trade nessun risultato distingue edge da fortuna (vedi power curve PCTRL).")
 
@@ -606,8 +650,8 @@ def page_composer(saved_limit: int, factory_variants: int) -> None:
                     fillcolor=REGIME_COLORS.get(str(regime), "#64748b"), opacity=0.06, line_width=0,
                 )
                 segment_start = i
-        fig.add_trace(go.Scatter(x=rows["period"], y=rows["static"], name="Static", mode="lines", line=dict(color="#7e8aa3", width=1.8, dash="dot")))
-        fig.add_trace(go.Scatter(x=rows["period"], y=rows["dynamic"], name="Dynamic", mode="lines", line=dict(color="#2dd4a7", width=2.6)))
+        fig.add_trace(go.Scatter(x=rows["period"], y=rows["static"], name="Static", mode="lines", line=dict(color="#a39f93", width=1.8, dash="dot")))
+        fig.add_trace(go.Scatter(x=rows["period"], y=rows["dynamic"], name="Dynamic", mode="lines", line=dict(color="#35b47a", width=2.6)))
         st.plotly_chart(chart_layout(fig, height=430), width="stretch")
         legend = "  ".join(
             f'<span class="regime-chip" style="margin-right:6px"><span class="regime-dot" style="background:{REGIME_COLORS.get(r, "#64748b")}"></span>{REGIME_LABELS_IT.get(r, r)}</span>'
@@ -647,6 +691,78 @@ def page_composer(saved_limit: int, factory_variants: int) -> None:
     st.caption("Sample proxy, strategie sopravvissute a selezione, stream additivi: questo numero non autorizza nessuna decisione di capitale reale.")
 
 
+def page_method() -> None:
+    st.markdown('<div class="section-title">Metodo & garanzie</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section-sub">Le regole che ogni esperimento deve rispettare prima che un numero venga preso sul serio. '
+        "Sono cablate nel codice, non scritte su un post-it.</div>",
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        """
+        <div class="story">
+          <div class="lbl">La storia, in breve</div>
+          <p>
+            Il lab nasce come pipeline ML large-cap. Quando il backtest non ha battuto il buy-and-hold,
+            il fallimento &egrave; stato documentato e la baseline <b>declassata a controllo negativo</b> invece che ritoccata
+            finch&eacute; non "funzionasse". La track small-cap successiva ha prodotto un edge apparente da +169%:
+            l'audit del sizing lo ha smontato, riclassificandolo come <b>artefatto di leva e path</b> — archiviato, non promosso.
+          </p>
+          <p>
+            Oggi il lab gira in modalit&agrave; <b>risk &amp; regime engine</b>: zero strategie promosse, una regola di portfolio
+            preregistrata e <b>congelata</b> (2026-06-11), replica out-of-sample schedulata ogni primo del mese senza
+            possibilit&agrave; di modifica. Il valore misurato finora viene dalla <b>selezione dei componenti</b>,
+            non dal timing di regime: lo dice il permutation test, e la pagina Composer lo mostra senza trucchi.
+          </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    rules = [
+        ("Niente dati futuri", "Le feature sono point-in-time: il segnale nasce dopo il close, l'entry simulata e' al next open. Chi guarda avanti, bara."),
+        ("Split purgato + embargo", "Le ultime barre di train/validation/test vengono rimosse quando la label forward supererebbe il confine temporale."),
+        ("Test set intoccabile", "Il tuning vive su validation; la calibrazione delle probabilita' si fitta solo su validation. Il test si guarda una volta."),
+        ("Preregistrazione", "Ogni trial dichiara prima ipotesi, metrica primaria e criteri di successo. Il trial counter e il multiplicity budget impediscono di riprovare finche' esce bene."),
+        ("DSR & permutation test", "Deflated Sharpe Ratio contro il numero di tentativi, permutation test contro la fortuna. Sotto ~100 trade nessun risultato distingue edge da rumore."),
+        ("Regola degli outlier", "Se il risultato cambia segno togliendo i top 3 trade vincenti, non e' promuovibile. Punto."),
+        ("Run manifest", "Ogni run ha run_id, config hash SHA-256, git commit e host. Se non e' riproducibile, non esiste."),
+        ("Verdetti onesti", "I fallimenti restano nel vault come report: baseline large-cap = controllo negativo, small-cap EMA200 = archiviata. Nessun cherry-picking."),
+    ]
+    rows = "".join(
+        f'<div class="rule-row"><div class="no">{index:02d}</div><div><div class="tt">{title}</div><div class="dd">{text}</div></div></div>'
+        for index, (title, text) in enumerate(rules, start=1)
+    )
+    st.markdown(f'<div class="story"><div class="lbl">Le otto regole del lab</div>{rows}</div>', unsafe_allow_html=True)
+    st.markdown(
+        """
+        <div class="story">
+          <div class="lbl">Cosa NON e' questo sito</div>
+          <p>
+            Non e' un bot, non e' un servizio di segnali, non e' una prova di profittabilita'. I dati sono proxy
+            (yfinance daily, non point-in-time, survivorship bias incluso) e ogni numero che vedi e' diagnostica
+            di ricerca su quel campione. Niente qui autorizza decisioni di capitale reale — ed e' esattamente
+            il punto: il lab esiste per dimostrare il processo, non per vendere un risultato.
+          </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def footer() -> None:
+    st.markdown(
+        """
+        <div class="lab-footer">
+          <span>Adaptive Equity Trading Lab — progettato e costruito da Abed Barakat</span>
+          <span><a href="https://abedbarakat.me" target="_blank" rel="noopener">abedbarakat.me</a> ·
+          <a href="https://github.com/PerfectPoH/adaptive-equity-trading-lab" target="_blank" rel="noopener">GitHub</a> ·
+          dati proxy, nessun consiglio d'investimento</span>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 # ---------------------------------------------------------------------------
 # main
 # ---------------------------------------------------------------------------
@@ -662,12 +778,15 @@ def main() -> None:
     section = navigation()
     if section == "Home":
         page_home(saved_limit, factory_variants)
-    elif section == "Strategy Arena":
+    elif section == "Arena":
         page_arena(saved_limit, factory_variants)
     elif section == "Regimi":
         page_regimes(saved_limit, factory_variants)
+    elif section == "Metodo":
+        page_method()
     else:
         page_composer(saved_limit, factory_variants)
+    footer()
 
 
 if __name__ == "__main__":
